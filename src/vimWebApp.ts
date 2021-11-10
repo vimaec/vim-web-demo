@@ -24,6 +24,7 @@ const viewer = new Viewer({
   },
   showStats: true
 })
+
 // Make viewer accessible in console
 globalThis.viewer = viewer
 
