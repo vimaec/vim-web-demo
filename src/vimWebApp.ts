@@ -12,6 +12,7 @@ const url = params.has('model')
 const canvasId = buildUI(Viewer.stateChangeEventName)
 
 const viewer = new Viewer({
+  mouseOrbit: false,
   canvasId: canvasId,
   url: url,
   object: {
