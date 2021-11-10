@@ -278,6 +278,7 @@ const params = new URLSearchParams(window.location.search);
 const url = params.has("model") ? params.get("model") : "https://vim.azureedge.net/samples/residence.vim";
 const canvasId = buildUI(Viewer.stateChangeEventName);
 const viewer = new Viewer({
+  mouseOrbit: false,
   canvasId,
   url,
   object: {
