@@ -290,17 +290,25 @@ const viewer = new Viewer({
   },
   showStats: true
 });
+globalThis.viewer = viewer;
 if (viewer.settings.showGui) {
   settingsGui.bind(viewer.settings, (settings) => {
     viewer.settings = settings;
     viewer.ApplySettings();
   });
 }
+let stats;
 if (viewer.settings.showStats) {
-  const stats = new Stats();
+  stats = new Stats();
   stats.dom.style.top = "84px";
   stats.dom.style.left = "16px";
   document.body.appendChild(stats.dom);
+  animate();
 }
-globalThis.viewer = viewer;
+function animate() {
+  requestAnimationFrame(() => animate());
+  if (stats) {
+    stats.update();
+  }
+}
 //# sourceMappingURL=index.js.map
