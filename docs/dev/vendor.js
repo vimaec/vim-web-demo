@@ -46468,76 +46468,47 @@ function toQuaternion(rot) {
 }
 var stats_min = { exports: {} };
 (function(module, exports) {
-  (function(f, e) {
-    module.exports = e();
-  })(commonjsGlobal, function() {
-    var f = function() {
-      function e(a2) {
-        c.appendChild(a2.dom);
-        return a2;
+  !function(e, t2) {
+    module.exports = t2();
+  }(commonjsGlobal, function() {
+    var c = function() {
+      var n2 = 0, l2 = document.createElement("div");
+      function e(e2) {
+        return l2.appendChild(e2.dom), e2;
       }
-      function u2(a2) {
-        for (var d = 0; d < c.children.length; d++)
-          c.children[d].style.display = d === a2 ? "block" : "none";
-        l2 = a2;
+      function t2(e2) {
+        for (var t3 = 0; t3 < l2.children.length; t3++)
+          l2.children[t3].style.display = t3 === e2 ? "block" : "none";
+        n2 = e2;
       }
-      var l2 = 0, c = document.createElement("div");
-      c.style.cssText = "position:fixed;top:0;left:0;cursor:pointer;opacity:0.9;z-index:10000";
-      c.addEventListener("click", function(a2) {
-        a2.preventDefault();
-        u2(++l2 % c.children.length);
+      l2.style.cssText = "position:fixed;top:0;left:0;cursor:pointer;opacity:0.9;z-index:10000", l2.addEventListener("click", function(e2) {
+        e2.preventDefault(), t2(++n2 % l2.children.length);
       }, false);
-      var k = (performance || Date).now(), g = k, a = 0, r2 = e(new f.Panel("FPS", "#0ff", "#002")), h = e(new f.Panel("MS", "#0f0", "#020"));
+      var i = (performance || Date).now(), a = i, o = 0, f = e(new c.Panel("FPS", "#0ff", "#002")), r2 = e(new c.Panel("MS", "#0f0", "#020"));
       if (self.performance && self.performance.memory)
-        var t2 = e(new f.Panel("MB", "#f08", "#201"));
-      u2(0);
-      return { REVISION: 16, dom: c, addPanel: e, showPanel: u2, begin: function() {
-        k = (performance || Date).now();
+        var d = e(new c.Panel("MB", "#f08", "#201"));
+      return t2(0), { REVISION: 16, dom: l2, addPanel: e, showPanel: t2, begin: function() {
+        i = (performance || Date).now();
       }, end: function() {
-        a++;
-        var c2 = (performance || Date).now();
-        h.update(c2 - k, 200);
-        if (c2 > g + 1e3 && (r2.update(1e3 * a / (c2 - g), 100), g = c2, a = 0, t2)) {
-          var d = performance.memory;
-          t2.update(d.usedJSHeapSize / 1048576, d.jsHeapSizeLimit / 1048576);
+        o++;
+        var e2 = (performance || Date).now();
+        if (r2.update(e2 - i, 200), a + 1e3 <= e2 && (f.update(1e3 * o / (e2 - a), 100), a = e2, o = 0, d)) {
+          var t3 = performance.memory;
+          d.update(t3.usedJSHeapSize / 1048576, t3.jsHeapSizeLimit / 1048576);
         }
-        return c2;
+        return e2;
       }, update: function() {
-        k = this.end();
-      }, domElement: c, setMode: u2 };
+        i = this.end();
+      }, domElement: l2, setMode: t2 };
     };
-    f.Panel = function(e, f2, l2) {
-      var c = Infinity, k = 0, g = Math.round, a = g(window.devicePixelRatio || 1), r2 = 80 * a, h = 48 * a, t2 = 3 * a, v2 = 2 * a, d = 3 * a, m2 = 15 * a, n2 = 74 * a, p2 = 30 * a, q2 = document.createElement("canvas");
-      q2.width = r2;
-      q2.height = h;
-      q2.style.cssText = "width:80px;height:48px";
-      var b = q2.getContext("2d");
-      b.font = "bold " + 9 * a + "px Helvetica,Arial,sans-serif";
-      b.textBaseline = "top";
-      b.fillStyle = l2;
-      b.fillRect(0, 0, r2, h);
-      b.fillStyle = f2;
-      b.fillText(e, t2, v2);
-      b.fillRect(d, m2, n2, p2);
-      b.fillStyle = l2;
-      b.globalAlpha = 0.9;
-      b.fillRect(d, m2, n2, p2);
-      return { dom: q2, update: function(h2, w) {
-        c = Math.min(c, h2);
-        k = Math.max(k, h2);
-        b.fillStyle = l2;
-        b.globalAlpha = 1;
-        b.fillRect(0, 0, r2, m2);
-        b.fillStyle = f2;
-        b.fillText(g(h2) + " " + e + " (" + g(c) + "-" + g(k) + ")", t2, v2);
-        b.drawImage(q2, d + a, m2, n2 - a, p2, d, m2, n2 - a, p2);
-        b.fillRect(d + n2 - a, m2, a, p2);
-        b.fillStyle = l2;
-        b.globalAlpha = 0.9;
-        b.fillRect(d + n2 - a, m2, a, g((1 - h2 / w) * p2));
+    return c.Panel = function(n2, l2, i) {
+      var a = 1 / 0, o = 0, f = Math.round, r2 = f(window.devicePixelRatio || 1), d = 80 * r2, e = 48 * r2, c2 = 3 * r2, p2 = 2 * r2, u2 = 3 * r2, s = 15 * r2, m2 = 74 * r2, h = 30 * r2, y2 = document.createElement("canvas");
+      y2.width = d, y2.height = e, y2.style.cssText = "width:80px;height:48px";
+      var v2 = y2.getContext("2d");
+      return v2.font = "bold " + 9 * r2 + "px Helvetica,Arial,sans-serif", v2.textBaseline = "top", v2.fillStyle = i, v2.fillRect(0, 0, d, e), v2.fillStyle = l2, v2.fillText(n2, c2, p2), v2.fillRect(u2, s, m2, h), v2.fillStyle = i, v2.globalAlpha = 0.9, v2.fillRect(u2, s, m2, h), { dom: y2, update: function(e2, t2) {
+        a = Math.min(a, e2), o = Math.max(o, e2), v2.fillStyle = i, v2.globalAlpha = 1, v2.fillRect(0, 0, d, s), v2.fillStyle = l2, v2.fillText(f(e2) + " " + n2 + " (" + f(a) + "-" + f(o) + ")", c2, p2), v2.drawImage(y2, u2 + r2, s, m2 - r2, h, u2, s, m2 - r2, h), v2.fillRect(u2 + m2 - r2, s, r2, h), v2.fillStyle = i, v2.globalAlpha = 0.9, v2.fillRect(u2 + m2 - r2, s, r2, f((1 - e2 / t2) * h));
       } };
-    };
-    return f;
+    }, c;
   });
 })(stats_min);
 var Stats = stats_min.exports;
