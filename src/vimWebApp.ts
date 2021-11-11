@@ -23,29 +23,23 @@ const viewer = new Viewer({
   plane: {
     show: false
   },
-  showStats: true
 })
 
 // Make viewer accessible in console
 globalThis.viewer = viewer
 
 // Add a new DAT.gui controller
-if (viewer.settings.showGui) {
-  settingsGui.bind(viewer.settings, (settings) => {
-    viewer.settings = settings
-    viewer.ApplySettings()
-  })
-}
+settingsGui.bind(viewer.settings, (settings) => {
+  viewer.settings = settings
+  viewer.ApplySettings()
+})
 
 // Add Stats display
-let stats
-if (viewer.settings.showStats) {
-  stats = new Stats()
-  stats.dom.style.top = '84px'
-  stats.dom.style.left = '16px'
-  document.body.appendChild(stats.dom)
-  animate()
-}
+const stats = new Stats()
+stats.dom.style.top = '84px'
+stats.dom.style.left = '16px'
+document.body.appendChild(stats.dom)
+animate()
 
 function animate () {
   requestAnimationFrame(() => animate())
