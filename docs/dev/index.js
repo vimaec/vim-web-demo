@@ -288,24 +288,18 @@ const viewer = new Viewer({
   },
   plane: {
     show: false
-  },
-  showStats: true
+  }
 });
 globalThis.viewer = viewer;
-if (viewer.settings.showGui) {
-  settingsGui.bind(viewer.settings, (settings) => {
-    viewer.settings = settings;
-    viewer.ApplySettings();
-  });
-}
-let stats;
-if (viewer.settings.showStats) {
-  stats = new Stats();
-  stats.dom.style.top = "84px";
-  stats.dom.style.left = "16px";
-  document.body.appendChild(stats.dom);
-  animate();
-}
+settingsGui.bind(viewer.settings, (settings) => {
+  viewer.settings = settings;
+  viewer.ApplySettings();
+});
+const stats = new Stats();
+stats.dom.style.top = "84px";
+stats.dom.style.left = "16px";
+document.body.appendChild(stats.dom);
+animate();
 function animate() {
   requestAnimationFrame(() => animate());
   if (stats) {

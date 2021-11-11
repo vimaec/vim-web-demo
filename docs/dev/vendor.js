@@ -33329,8 +33329,6 @@ var deepmerge_1 = deepmerge;
 var cjs = deepmerge_1;
 const ViewerSettings = {
   default: {
-    showGui: true,
-    showStats: true,
     camera: {
       near: 0.1,
       far: 15e3,
@@ -33441,16 +33439,17 @@ class ViewerCamera {
     this.camera.position.copy(pos);
     this.OrbitalTarget = sphere.center;
     this.CurrentOrbitalDistance = this.OrbitalTarget.clone().sub(pos).length();
-    this.CurrentOrbitalDistance = this.TargetOrbitalDistance;
+    this.TargetOrbitalDistance = this.CurrentOrbitalDistance;
   }
   frameScene(sphere) {
     this.camera.position.copy(sphere.center.clone().add(new Vector3(0, sphere.radius, -2 * sphere.radius)));
     this.camera.lookAt(sphere.center);
     this.OrbitalTarget = sphere.center;
     this.CurrentOrbitalDistance = this.OrbitalTarget.clone().sub(this.camera.position).length();
-    this.CurrentOrbitalDistance = this.TargetOrbitalDistance;
+    this.TargetOrbitalDistance = this.CurrentOrbitalDistance;
   }
   applySettings(newSettings) {
+    this.MouseOrbit = newSettings.mouseOrbit;
     this.camera.fov = newSettings.camera.fov;
     this.camera.zoom = newSettings.camera.zoom;
     this.camera.near = newSettings.camera.near;
@@ -33490,7 +33489,8 @@ class ViewerCamera {
     euler.x = Math.max(PI_2 - maxPolarAngle, Math.min(PI_2 - minPolarAngle, euler.x));
     this.camera.quaternion.setFromEuler(euler);
     if (!this.MouseOrbit) {
-      this.OrbitalTarget = this.camera.position.clone().add(new Vector3(0, 0, 1).applyQuaternion(this.camera.quaternion).multiplyScalar(this.CurrentOrbitalDistance));
+      const offset = new Vector3(0, 0, 1).applyQuaternion(this.camera.quaternion).multiplyScalar(this.CurrentOrbitalDistance);
+      this.OrbitalTarget = this.camera.position.clone().sub(offset);
     }
   }
   getSpeedMultiplier() {
@@ -33882,12 +33882,15 @@ class InputMouse {
       this.isMouseDown = false;
     });
     __publicField(this, "onMouseClick", (position) => {
+      var _a2;
       console.time("raycast");
       const hits = this.mouseRaycast(position);
-      const [mesh, index] = this.findHitMeshIndex(hits);
+      const [mesh, index] = (_a2 = this.findHitMeshIndex(hits)) != null ? _a2 : [null, null];
       console.timeEnd("raycast");
-      if (index !== null) {
+      if (index != null) {
         this.viewer.select(mesh, index);
+      } else {
+        this.viewer.clearSelection();
       }
     });
     this.camera = camera;
@@ -33905,12 +33908,12 @@ class InputMouse {
   findHitMeshIndex(hits) {
     if (!(hits == null ? void 0 : hits.length)) {
       console.log("Raycast: No hit.");
-      return [null, null];
+      return;
     }
     const mesh = hits[0].object;
     if (!(mesh instanceof Mesh)) {
       console.log(`Raycast hit object: ${mesh} of unsupported type. Ignoring.`);
-      return [null, null];
+      return;
     }
     const [index, meshType] = mesh.userData.merged ? [Math.round(hits[0].uv.x), "Merged"] : [hits[0].instanceId, "Instanced"];
     console.log(`Raycast: Hit ${meshType} Mesh with MeshId:${mesh.id} and NodeIndex: ${index}`);
@@ -46039,8 +46042,8 @@ function getExt(fileName) {
   const extPos = fileName.lastIndexOf(".");
   return fileName.slice(extPos + 1).toLowerCase();
 }
-const loadAny = function(fileName, onFileLoaded, onProgress) {
-  const ext = getExt(fileName);
+const loadAny = function(fileName, onFileLoaded, onProgress, overrideFileExtension = null) {
+  const ext = overrideFileExtension != null ? overrideFileExtension : getExt(fileName);
   switch (ext) {
     case "3ds": {
       new TDSLoader().load(fileName, onFileLoaded);
@@ -46242,7 +46245,6 @@ class ViewerRenderer {
 }
 const _Viewer = class {
   constructor(options) {
-    __publicField(this, "stats");
     __publicField(this, "settings");
     __publicField(this, "environment");
     __publicField(this, "render");
@@ -46296,7 +46298,7 @@ const _Viewer = class {
       setTimeout(() => this.loadInScene(result2), 0);
     }, (progress) => {
       this.setState(["Downloading", progress.loaded]);
-    });
+    }, this.settings.fileExtension);
     this.ApplySettings();
     this.animate();
   }
@@ -46322,9 +46324,6 @@ const _Viewer = class {
     if (this.settings.autoResize)
       this.render.fitToCanvas();
     this.render.render();
-    if (this.stats) {
-      this.stats.update();
-    }
   }
   getViewMatrix() {
     const pos = this.settings.object.position;
