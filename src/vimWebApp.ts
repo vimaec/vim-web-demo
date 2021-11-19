@@ -1,4 +1,4 @@
-import { settingsGui } from './settingsGui'
+//import { settingsGui } from './settingsGui'
 import { buildUI } from './vimReact'
 import {Viewer} from 'vim-webgl-viewer'
 import Stats from 'stats-js'
@@ -32,11 +32,13 @@ const viewer = new Viewer({
 // Make viewer accessible in console
 globalThis.viewer = viewer
 
+/*
 // Add a new DAT.gui controller
 settingsGui.bind(viewer.settings, (settings) => {
   viewer.settings = settings
   viewer.ApplySettings()
 })
+*/
 
 // Add Stats display
 const stats = new Stats()
