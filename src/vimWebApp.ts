@@ -21,7 +21,11 @@ const viewer = new Viewer({
     position: { y: 0 }
   },
   plane: {
-    show: false
+    show: true,
+    texture:
+    'https://vimdevelopment01storage.blob.core.windows.net/textures/vim-floor-soft.png',
+    opacity: 1,
+    size: 5
   },
 })
 
