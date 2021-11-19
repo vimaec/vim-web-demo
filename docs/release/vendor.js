@@ -33231,6 +33231,145 @@ var __publicField = (obj, key, value) => {
   __defNormalProp2(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
+function mergeBufferGeometries(geometries, useGroups = false) {
+  const isIndexed = geometries[0].index !== null;
+  const attributesUsed = new Set(Object.keys(geometries[0].attributes));
+  const morphAttributesUsed = new Set(Object.keys(geometries[0].morphAttributes));
+  const attributes = {};
+  const morphAttributes = {};
+  const morphTargetsRelative = geometries[0].morphTargetsRelative;
+  const mergedGeometry = new BufferGeometry();
+  let offset = 0;
+  for (let i = 0; i < geometries.length; ++i) {
+    const geometry = geometries[i];
+    let attributesCount = 0;
+    if (isIndexed !== (geometry.index !== null)) {
+      console.error("THREE.BufferGeometryUtils: .mergeBufferGeometries() failed with geometry at index " + i + ". All geometries must have compatible attributes; make sure index attribute exists among all geometries, or in none of them.");
+      return null;
+    }
+    for (const name in geometry.attributes) {
+      if (!attributesUsed.has(name)) {
+        console.error("THREE.BufferGeometryUtils: .mergeBufferGeometries() failed with geometry at index " + i + '. All geometries must have compatible attributes; make sure "' + name + '" attribute exists among all geometries, or in none of them.');
+        return null;
+      }
+      if (attributes[name] === void 0)
+        attributes[name] = [];
+      attributes[name].push(geometry.attributes[name]);
+      attributesCount++;
+    }
+    if (attributesCount !== attributesUsed.size) {
+      console.error("THREE.BufferGeometryUtils: .mergeBufferGeometries() failed with geometry at index " + i + ". Make sure all geometries have the same number of attributes.");
+      return null;
+    }
+    if (morphTargetsRelative !== geometry.morphTargetsRelative) {
+      console.error("THREE.BufferGeometryUtils: .mergeBufferGeometries() failed with geometry at index " + i + ". .morphTargetsRelative must be consistent throughout all geometries.");
+      return null;
+    }
+    for (const name in geometry.morphAttributes) {
+      if (!morphAttributesUsed.has(name)) {
+        console.error("THREE.BufferGeometryUtils: .mergeBufferGeometries() failed with geometry at index " + i + ".  .morphAttributes must be consistent throughout all geometries.");
+        return null;
+      }
+      if (morphAttributes[name] === void 0)
+        morphAttributes[name] = [];
+      morphAttributes[name].push(geometry.morphAttributes[name]);
+    }
+    mergedGeometry.userData.mergedUserData = mergedGeometry.userData.mergedUserData || [];
+    mergedGeometry.userData.mergedUserData.push(geometry.userData);
+    if (useGroups) {
+      let count;
+      if (isIndexed) {
+        count = geometry.index.count;
+      } else if (geometry.attributes.position !== void 0) {
+        count = geometry.attributes.position.count;
+      } else {
+        console.error("THREE.BufferGeometryUtils: .mergeBufferGeometries() failed with geometry at index " + i + ". The geometry must have either an index or a position attribute");
+        return null;
+      }
+      mergedGeometry.addGroup(offset, count, i);
+      offset += count;
+    }
+  }
+  if (isIndexed) {
+    let indexOffset = 0;
+    const mergedIndex = [];
+    for (let i = 0; i < geometries.length; ++i) {
+      const index = geometries[i].index;
+      for (let j = 0; j < index.count; ++j) {
+        mergedIndex.push(index.getX(j) + indexOffset);
+      }
+      indexOffset += geometries[i].attributes.position.count;
+    }
+    mergedGeometry.setIndex(mergedIndex);
+  }
+  for (const name in attributes) {
+    const mergedAttribute = mergeBufferAttributes(attributes[name]);
+    if (!mergedAttribute) {
+      console.error("THREE.BufferGeometryUtils: .mergeBufferGeometries() failed while trying to merge the " + name + " attribute.");
+      return null;
+    }
+    mergedGeometry.setAttribute(name, mergedAttribute);
+  }
+  for (const name in morphAttributes) {
+    const numMorphTargets = morphAttributes[name][0].length;
+    if (numMorphTargets === 0)
+      break;
+    mergedGeometry.morphAttributes = mergedGeometry.morphAttributes || {};
+    mergedGeometry.morphAttributes[name] = [];
+    for (let i = 0; i < numMorphTargets; ++i) {
+      const morphAttributesToMerge = [];
+      for (let j = 0; j < morphAttributes[name].length; ++j) {
+        morphAttributesToMerge.push(morphAttributes[name][j][i]);
+      }
+      const mergedMorphAttribute = mergeBufferAttributes(morphAttributesToMerge);
+      if (!mergedMorphAttribute) {
+        console.error("THREE.BufferGeometryUtils: .mergeBufferGeometries() failed while trying to merge the " + name + " morphAttribute.");
+        return null;
+      }
+      mergedGeometry.morphAttributes[name].push(mergedMorphAttribute);
+    }
+  }
+  return mergedGeometry;
+}
+function mergeBufferAttributes(attributes) {
+  let TypedArray;
+  let itemSize;
+  let normalized;
+  let arrayLength = 0;
+  for (let i = 0; i < attributes.length; ++i) {
+    const attribute = attributes[i];
+    if (attribute.isInterleavedBufferAttribute) {
+      console.error("THREE.BufferGeometryUtils: .mergeBufferAttributes() failed. InterleavedBufferAttributes are not supported.");
+      return null;
+    }
+    if (TypedArray === void 0)
+      TypedArray = attribute.array.constructor;
+    if (TypedArray !== attribute.array.constructor) {
+      console.error("THREE.BufferGeometryUtils: .mergeBufferAttributes() failed. BufferAttribute.array must be of consistent array types across matching attributes.");
+      return null;
+    }
+    if (itemSize === void 0)
+      itemSize = attribute.itemSize;
+    if (itemSize !== attribute.itemSize) {
+      console.error("THREE.BufferGeometryUtils: .mergeBufferAttributes() failed. BufferAttribute.itemSize must be consistent across matching attributes.");
+      return null;
+    }
+    if (normalized === void 0)
+      normalized = attribute.normalized;
+    if (normalized !== attribute.normalized) {
+      console.error("THREE.BufferGeometryUtils: .mergeBufferAttributes() failed. BufferAttribute.normalized must be consistent across matching attributes.");
+      return null;
+    }
+    arrayLength += attribute.array.length;
+  }
+  const array = new TypedArray(arrayLength);
+  let offset = 0;
+  for (let i = 0; i < attributes.length; ++i) {
+    array.set(attributes[i].array, offset);
+    offset += attributes[i].array.length;
+  }
+  return new BufferAttribute(array, itemSize, normalized);
+}
 var isMergeableObject = function isMergeableObject2(value) {
   return isNonNullObject(value) && !isSpecial(value);
 };
@@ -33327,7 +33466,7 @@ deepmerge.all = function deepmergeAll(array, options) {
 };
 var deepmerge_1 = deepmerge;
 var cjs = deepmerge_1;
-const ViewerSettings = {
+const defaultSettings = {
   default: {
     camera: {
       near: 0.1,
@@ -33348,23 +33487,18 @@ const ViewerSettings = {
     },
     plane: {
       show: true,
-      material: {
-        color: { r: 153, g: 153, b: 153 },
-        specular: { r: 16, g: 16, b: 16 }
-      },
-      position: {
-        x: 0,
-        y: 0,
-        z: 0
-      }
+      texture: null,
+      opacity: 1,
+      color: { r: 255, g: 255, b: 255 },
+      size: 3
     },
     skylight: {
-      skyColor: { h: 0.6, s: 1, l: 0.6 },
+      color: { h: 0.6, s: 1, l: 0.6 },
       groundColor: { h: 0.095, s: 1, l: 0.75 },
       intensity: 0.6
     },
     sunLight: {
-      position: { x: -1 * 30, y: 1.75 * 30, z: 1 * 30 },
+      position: { x: -47, y: 22, z: -45 },
       color: { h: 0.1, s: 1, l: 0.95 },
       intensity: 1
     },
@@ -33383,6 +33517,79 @@ const ViewerSettings = {
     }
   }
 };
+class ViewerSettings {
+  constructor(raw) {
+    __publicField(this, "raw");
+    __publicField(this, "getPlaneColor", () => toRGBColor(this.raw.plane.color));
+    __publicField(this, "getBackgroundColor", () => toRGBColor(this.raw.background.color));
+    __publicField(this, "getObjectMatrix", () => new Matrix4().compose(this.getObjectPosition(), this.getObjectRotation(), this.getObjectScale()));
+    __publicField(this, "getSkylightColor", () => toHSLColor(this.raw.skylight.color));
+    __publicField(this, "getSkylightGroundColor", () => toHSLColor(this.raw.skylight.groundColor));
+    __publicField(this, "getSkylightIntensity", () => this.raw.skylight.intensity);
+    __publicField(this, "getSunlightColor", () => toHSLColor(this.raw.sunLight.color));
+    __publicField(this, "getSunlightPosition", () => toVec(this.raw.sunLight.position));
+    __publicField(this, "getSunlightIntensity", () => this.raw.sunLight.intensity);
+    __publicField(this, "getObjectPosition", () => toVec(this.raw.object.position));
+    __publicField(this, "getObjectRotation", () => toQuaternion(this.raw.object.rotation));
+    __publicField(this, "getObjectScale", () => scalarToVec(this.raw.object.scale));
+    __publicField(this, "getColor", () => toRGBColor(this.raw.object.material.color));
+    __publicField(this, "getFlatShading", () => this.raw.object.material.flatShading);
+    __publicField(this, "getEmissive", () => toRGBColor(this.raw.object.material.emissive));
+    __publicField(this, "getSpecular", () => toRGBColor(this.raw.object.material.specular));
+    __publicField(this, "getWireframe", () => this.raw.object.material.wireframe);
+    __publicField(this, "getShininess", () => this.raw.object.material.shininess);
+    this.raw = cjs(defaultSettings.default, raw, void 0);
+  }
+  updateMaterial(material) {
+    var _a2, _b2, _c, _d, _e, _f;
+    material.color = (_a2 = this.getColor()) != null ? _a2 : material.color;
+    material.flatShading = (_b2 = this.getFlatShading()) != null ? _b2 : material.flatShading;
+    material.emissive = (_c = this.getEmissive()) != null ? _c : material.emissive;
+    material.specular = (_d = this.getSpecular()) != null ? _d : material.specular;
+    material.wireframe = (_e = this.getWireframe()) != null ? _e : material.wireframe;
+    material.shininess = (_f = this.getShininess()) != null ? _f : material.shininess;
+  }
+}
+function isRGBColor(obj) {
+  return typeof obj === "object" && "r" in obj && "g" in obj && "b" in obj;
+}
+function toRGBColor(c) {
+  if (!isRGBColor(c)) {
+    throw new Error("Not a RGB color");
+  }
+  return new Color(c.r / 255, c.g / 255, c.b / 255);
+}
+function isHSLColor(obj) {
+  return typeof obj === "object" && "h" in obj && "s" in obj && "l" in obj;
+}
+function toHSLColor(obj) {
+  if (!isHSLColor(obj)) {
+    throw new Error("Not a HSL color");
+  }
+  const color = new Color();
+  color.setHSL(obj.h, obj.s, obj.l);
+  return color;
+}
+function isVector(obj) {
+  return typeof obj === "object" && "x" in obj && "y" in obj && "z" in obj;
+}
+function toVec(obj) {
+  if (!isVector(obj)) {
+    throw new Error("Not a vector");
+  }
+  return new Vector3(obj.x, obj.y, obj.z);
+}
+function scalarToVec(x) {
+  return new Vector3(x, x, x);
+}
+function toEuler(rot) {
+  return new Euler(rot.x * Math.PI / 180, rot.y * Math.PI / 180, rot.z * Math.PI / 180);
+}
+function toQuaternion(rot) {
+  const q2 = new Quaternion();
+  q2.setFromEuler(toEuler(rot));
+  return q2;
+}
 const direction = {
   forward: new Vector3(0, 0, -1),
   back: new Vector3(0, 0, 1),
@@ -33412,6 +33619,7 @@ class ViewerCamera {
     __publicField(this, "MouseMovePan", false);
     __publicField(this, "VelocityBlendFactor", 1e-4);
     this.camera = camera;
+    this.settings = settings;
     this.applySettings(settings);
     this.Rotation = new Vector2(0, 0);
     this.InputVelocity = new Vector3(0, 0, 0);
@@ -33449,11 +33657,11 @@ class ViewerCamera {
     this.TargetOrbitalDistance = this.CurrentOrbitalDistance;
   }
   applySettings(newSettings) {
-    this.MouseOrbit = newSettings.mouseOrbit;
-    this.camera.fov = newSettings.camera.fov;
-    this.camera.zoom = newSettings.camera.zoom;
-    this.camera.near = newSettings.camera.near;
-    this.camera.far = newSettings.camera.far;
+    this.MouseOrbit = newSettings.raw.mouseOrbit;
+    this.camera.fov = newSettings.raw.camera.fov;
+    this.camera.zoom = newSettings.raw.camera.zoom;
+    this.camera.near = newSettings.raw.camera.near;
+    this.camera.far = newSettings.raw.camera.far;
     this.settings = newSettings;
   }
   applyLocalImpulse(impulse) {
@@ -33474,14 +33682,14 @@ class ViewerCamera {
       this.camera.position.y = y2;
   }
   panCameraBy(pt) {
-    const speed = this.settings.camera.controls.panSpeed;
+    const speed = this.settings.raw.camera.controls.panSpeed;
     this.moveCameraBy(new Vector3(-pt.x, pt.y, 0), speed);
   }
   rotateCameraBy(pt) {
     const euler = new Euler(0, 0, 0, "YXZ");
     euler.setFromQuaternion(this.camera.quaternion);
-    euler.y += -pt.x * this.settings.camera.controls.rotateSpeed;
-    euler.x += -pt.y * this.settings.camera.controls.rotateSpeed;
+    euler.y += -pt.x * this.settings.raw.camera.controls.rotateSpeed;
+    euler.x += -pt.y * this.settings.raw.camera.controls.rotateSpeed;
     euler.z = 0;
     const PI_2 = Math.PI / 2;
     const minPolarAngle = -2 * Math.PI;
@@ -33655,7 +33863,7 @@ class InputKeyboard {
             event.preventDefault();
             break;
           case KEYS.KEY_HOME:
-            this.camera.frameScene(this.viewer.render.boundingSphere);
+            this.viewer.lookAtModel();
             event.preventDefault();
             break;
           case KEYS.KEY_ESCAPE:
@@ -33663,7 +33871,7 @@ class InputKeyboard {
             event.preventDefault();
             break;
           case KEYS.KEY_Z:
-            this.viewer.focusSelection();
+            this.viewer.lookAtSelection();
             event.preventDefault();
             break;
         }
@@ -33721,12 +33929,12 @@ class InputKeyboard {
   }
 }
 class InputTouch {
-  constructor(camera, viewer, mouse) {
+  constructor(camera, settings, mouse) {
     __publicField(this, "TouchMoveSensitivity");
     __publicField(this, "TouchRotateSensitivity");
     __publicField(this, "TapDurationMs", 500);
     __publicField(this, "camera");
-    __publicField(this, "viewer");
+    __publicField(this, "settings");
     __publicField(this, "mouse");
     __publicField(this, "touchStart");
     __publicField(this, "touchStart1");
@@ -33757,12 +33965,12 @@ class InputTouch {
       this.camera.rotateCameraBy(delta);
     });
     __publicField(this, "onDoubleDrag", (delta) => {
-      const matrix = this.viewer.getViewMatrix();
+      const matrix = this.settings.getObjectMatrix();
       const move = new Vector3(delta.x, 0, delta.y).applyMatrix4(matrix);
       this.camera.moveCameraBy(move, delta.length());
     });
     __publicField(this, "onPinchSpread", (delta) => {
-      const matrix = this.viewer.getViewMatrix();
+      const matrix = this.settings.getObjectMatrix();
       const move = new Vector3(0, delta, 0).applyMatrix4(matrix);
       this.camera.moveCameraBy(move, Math.abs(delta));
     });
@@ -33809,7 +34017,7 @@ class InputTouch {
       this.reset();
     });
     this.camera = camera;
-    this.viewer = viewer;
+    this.settings = settings;
     this.mouse = mouse;
     this.TouchMoveSensitivity = this.mouse.MouseMoveSensitivity * 20;
     this.TouchRotateSensitivity = this.mouse.MouseRotateSensitivity;
@@ -33882,15 +34090,28 @@ class InputMouse {
       this.isMouseDown = false;
     });
     __publicField(this, "onMouseClick", (position) => {
-      var _a2;
       console.time("raycast");
       const hits = this.mouseRaycast(position);
-      const [mesh, index] = (_a2 = this.findHitMeshIndex(hits)) != null ? _a2 : [null, null];
       console.timeEnd("raycast");
-      if (index != null) {
-        this.viewer.select(mesh, index);
-      } else {
+      const result2 = this.findHitMeshIndex(hits);
+      if (result2 === null) {
         this.viewer.clearSelection();
+        return;
+      }
+      if (typeof result2 === "number") {
+        const element2 = this.viewer.getElementIndexFromNodeIndex(result2);
+        if (element2)
+          this.viewer.selectByElementIndex(element2);
+        else {
+          console.error("Could not find elment for node index: " + result2);
+        }
+        return;
+      }
+      const element = this.viewer.getElementIndexFromMeshInstance(result2[0], result2[1]);
+      if (element)
+        this.viewer.selectByElementIndex(element);
+      else {
+        console.error(`Could not find element for mesh: ${result2[0]}, index: ${result2[1]}`);
       }
     });
     this.camera = camera;
@@ -33906,19 +34127,26 @@ class InputMouse {
     return raycaster.intersectObjects(this.viewer.render.meshes);
   }
   findHitMeshIndex(hits) {
-    if (!(hits == null ? void 0 : hits.length)) {
+    const hit = hits[0];
+    if (!hit) {
       console.log("Raycast: No hit.");
-      return;
+      return null;
     }
-    const mesh = hits[0].object;
-    if (!(mesh instanceof Mesh)) {
-      console.log(`Raycast hit object: ${mesh} of unsupported type. Ignoring.`);
-      return;
+    console.log(`Raycast hit. 
+Position: (${hit.point.x}, ${hit.point.y}, ${hit.point.z}) 
+ObjectId: ${hit.object.id}`);
+    if (hit.object.userData.merged && hit.uv !== void 0) {
+      const node = Math.round(hit.uv.x);
+      console.log(`Mesh is merged mesh. Hit face ${hits[0].faceIndex} coming from Node: ${node}`);
+      return node;
     }
-    const [index, meshType] = mesh.userData.merged ? [Math.round(hits[0].uv.x), "Merged"] : [hits[0].instanceId, "Instanced"];
-    console.log(`Raycast: Hit ${meshType} Mesh with MeshId:${mesh.id} and NodeIndex: ${index}`);
-    console.log(`Raycast hit. Position (${hits[0].point.x}, ${hits[0].point.y}, ${hits[0].point.z})`);
-    return [mesh, index];
+    if (hit.instanceId !== void 0) {
+      const instanceId = hit.instanceId;
+      console.log(`Mesh is Instanced. Instance Index: ${instanceId}`);
+      return [hit.object, instanceId];
+    }
+    console.log("Raycast hit unsupported object type. It might be an object not created by the vim api. Make sure such objects are not included in viewer this.viewer.render.meshes");
+    return null;
   }
 }
 class ViewerInput {
@@ -33939,7 +34167,7 @@ class ViewerInput {
     this.canvas = canvas;
     this.unregisters = [];
     this.mouse = new InputMouse(camera, canvas, viewer);
-    this.touch = new InputTouch(camera, viewer, this.mouse);
+    this.touch = new InputTouch(camera, viewer.settings, this.mouse);
     this.keyboard = new InputKeyboard(camera, viewer, this.mouse);
   }
   register() {
@@ -33958,145 +34186,6 @@ class ViewerInput {
     this.keyboard.reset();
     this.touch.reset();
   }
-}
-function mergeBufferGeometries(geometries, useGroups = false) {
-  const isIndexed = geometries[0].index !== null;
-  const attributesUsed = new Set(Object.keys(geometries[0].attributes));
-  const morphAttributesUsed = new Set(Object.keys(geometries[0].morphAttributes));
-  const attributes = {};
-  const morphAttributes = {};
-  const morphTargetsRelative = geometries[0].morphTargetsRelative;
-  const mergedGeometry = new BufferGeometry();
-  let offset = 0;
-  for (let i = 0; i < geometries.length; ++i) {
-    const geometry = geometries[i];
-    let attributesCount = 0;
-    if (isIndexed !== (geometry.index !== null)) {
-      console.error("THREE.BufferGeometryUtils: .mergeBufferGeometries() failed with geometry at index " + i + ". All geometries must have compatible attributes; make sure index attribute exists among all geometries, or in none of them.");
-      return null;
-    }
-    for (const name in geometry.attributes) {
-      if (!attributesUsed.has(name)) {
-        console.error("THREE.BufferGeometryUtils: .mergeBufferGeometries() failed with geometry at index " + i + '. All geometries must have compatible attributes; make sure "' + name + '" attribute exists among all geometries, or in none of them.');
-        return null;
-      }
-      if (attributes[name] === void 0)
-        attributes[name] = [];
-      attributes[name].push(geometry.attributes[name]);
-      attributesCount++;
-    }
-    if (attributesCount !== attributesUsed.size) {
-      console.error("THREE.BufferGeometryUtils: .mergeBufferGeometries() failed with geometry at index " + i + ". Make sure all geometries have the same number of attributes.");
-      return null;
-    }
-    if (morphTargetsRelative !== geometry.morphTargetsRelative) {
-      console.error("THREE.BufferGeometryUtils: .mergeBufferGeometries() failed with geometry at index " + i + ". .morphTargetsRelative must be consistent throughout all geometries.");
-      return null;
-    }
-    for (const name in geometry.morphAttributes) {
-      if (!morphAttributesUsed.has(name)) {
-        console.error("THREE.BufferGeometryUtils: .mergeBufferGeometries() failed with geometry at index " + i + ".  .morphAttributes must be consistent throughout all geometries.");
-        return null;
-      }
-      if (morphAttributes[name] === void 0)
-        morphAttributes[name] = [];
-      morphAttributes[name].push(geometry.morphAttributes[name]);
-    }
-    mergedGeometry.userData.mergedUserData = mergedGeometry.userData.mergedUserData || [];
-    mergedGeometry.userData.mergedUserData.push(geometry.userData);
-    if (useGroups) {
-      let count;
-      if (isIndexed) {
-        count = geometry.index.count;
-      } else if (geometry.attributes.position !== void 0) {
-        count = geometry.attributes.position.count;
-      } else {
-        console.error("THREE.BufferGeometryUtils: .mergeBufferGeometries() failed with geometry at index " + i + ". The geometry must have either an index or a position attribute");
-        return null;
-      }
-      mergedGeometry.addGroup(offset, count, i);
-      offset += count;
-    }
-  }
-  if (isIndexed) {
-    let indexOffset = 0;
-    const mergedIndex = [];
-    for (let i = 0; i < geometries.length; ++i) {
-      const index = geometries[i].index;
-      for (let j = 0; j < index.count; ++j) {
-        mergedIndex.push(index.getX(j) + indexOffset);
-      }
-      indexOffset += geometries[i].attributes.position.count;
-    }
-    mergedGeometry.setIndex(mergedIndex);
-  }
-  for (const name in attributes) {
-    const mergedAttribute = mergeBufferAttributes(attributes[name]);
-    if (!mergedAttribute) {
-      console.error("THREE.BufferGeometryUtils: .mergeBufferGeometries() failed while trying to merge the " + name + " attribute.");
-      return null;
-    }
-    mergedGeometry.setAttribute(name, mergedAttribute);
-  }
-  for (const name in morphAttributes) {
-    const numMorphTargets = morphAttributes[name][0].length;
-    if (numMorphTargets === 0)
-      break;
-    mergedGeometry.morphAttributes = mergedGeometry.morphAttributes || {};
-    mergedGeometry.morphAttributes[name] = [];
-    for (let i = 0; i < numMorphTargets; ++i) {
-      const morphAttributesToMerge = [];
-      for (let j = 0; j < morphAttributes[name].length; ++j) {
-        morphAttributesToMerge.push(morphAttributes[name][j][i]);
-      }
-      const mergedMorphAttribute = mergeBufferAttributes(morphAttributesToMerge);
-      if (!mergedMorphAttribute) {
-        console.error("THREE.BufferGeometryUtils: .mergeBufferGeometries() failed while trying to merge the " + name + " morphAttribute.");
-        return null;
-      }
-      mergedGeometry.morphAttributes[name].push(mergedMorphAttribute);
-    }
-  }
-  return mergedGeometry;
-}
-function mergeBufferAttributes(attributes) {
-  let TypedArray;
-  let itemSize;
-  let normalized;
-  let arrayLength = 0;
-  for (let i = 0; i < attributes.length; ++i) {
-    const attribute = attributes[i];
-    if (attribute.isInterleavedBufferAttribute) {
-      console.error("THREE.BufferGeometryUtils: .mergeBufferAttributes() failed. InterleavedBufferAttributes are not supported.");
-      return null;
-    }
-    if (TypedArray === void 0)
-      TypedArray = attribute.array.constructor;
-    if (TypedArray !== attribute.array.constructor) {
-      console.error("THREE.BufferGeometryUtils: .mergeBufferAttributes() failed. BufferAttribute.array must be of consistent array types across matching attributes.");
-      return null;
-    }
-    if (itemSize === void 0)
-      itemSize = attribute.itemSize;
-    if (itemSize !== attribute.itemSize) {
-      console.error("THREE.BufferGeometryUtils: .mergeBufferAttributes() failed. BufferAttribute.itemSize must be consistent across matching attributes.");
-      return null;
-    }
-    if (normalized === void 0)
-      normalized = attribute.normalized;
-    if (normalized !== attribute.normalized) {
-      console.error("THREE.BufferGeometryUtils: .mergeBufferAttributes() failed. BufferAttribute.normalized must be consistent across matching attributes.");
-      return null;
-    }
-    arrayLength += attribute.array.length;
-  }
-  const array = new TypedArray(arrayLength);
-  let offset = 0;
-  for (let i = 0; i < attributes.length; ++i) {
-    array.set(attributes[i].array, offset);
-    offset += attributes[i].array.length;
-  }
-  return new BufferAttribute(array, itemSize, normalized);
 }
 class AttributeDescriptor {
   constructor(description, association, semantic, attributeTypeIndex, dataType, dataArity) {
@@ -34209,6 +34298,20 @@ class VimG3d {
         meshRefCounts[mesh]++;
       }
       return meshRefCounts;
+    });
+    __publicField(this, "getNodesByMeshes", () => {
+      const nodesByMeshes = [];
+      for (let node = 0; node < this.instanceMeshes.length; node++) {
+        const mesh = this.instanceMeshes[node];
+        if (mesh < 0)
+          continue;
+        const nodes = nodesByMeshes[mesh];
+        if (nodes)
+          nodes.push(node);
+        else
+          nodesByMeshes[mesh] = [node];
+      }
+      return nodesByMeshes;
     });
     var _a2, _b2, _c, _d, _e, _f, _g, _h;
     this.rawG3d = g3d;
@@ -34368,32 +34471,34 @@ class Vim {
   }
 }
 __publicField(Vim, "tableElement", "Vim.Element");
+__publicField(Vim, "tableElementLegacy", "Rvt.Element");
 __publicField(Vim, "tableNode", "Vim.Node");
 class VimSceneGeometry {
-  constructor(meshes, boundingSphere, nodeIndexToMeshInstance, meshIdToNodeIndex) {
+  constructor(meshes, boundingBox, nodeIndexToMeshInstance, meshIdToNodeIndex) {
     __publicField(this, "meshes");
-    __publicField(this, "boundingSphere");
+    __publicField(this, "boundingBox");
     __publicField(this, "nodeIndexToMeshInstance");
     __publicField(this, "meshIdToNodeIndex");
     this.meshes = meshes;
-    this.boundingSphere = boundingSphere;
+    this.boundingBox = boundingBox;
     this.nodeIndexToMeshInstance = nodeIndexToMeshInstance;
     this.meshIdToNodeIndex = meshIdToNodeIndex;
-  }
-  getNodeCount() {
-    return this.nodeIndexToMeshInstance.size;
   }
   getMeshCount() {
     return this.meshes.length;
   }
-  addMesh(mesh) {
+  addMesh(mesh, nodes) {
     var _a2, _b2;
     this.meshes.push(mesh);
+    nodes.forEach((node) => {
+      this.nodeIndexToMeshInstance.set(node, [mesh, 0]);
+    });
+    this.meshIdToNodeIndex.set(mesh.id, nodes);
     if (!mesh.geometry.boundingSphere) {
       console.log("Bounding sphere undefined.");
       return;
     }
-    this.boundingSphere = (_b2 = (_a2 = this.boundingSphere) == null ? void 0 : _a2.union(mesh.geometry.boundingSphere)) != null ? _b2 : mesh.geometry.boundingSphere;
+    this.boundingBox = (_b2 = (_a2 = this.boundingBox) == null ? void 0 : _a2.union(mesh.geometry.boundingBox)) != null ? _b2 : mesh.geometry.boundingBox;
   }
 }
 class VimScene {
@@ -34401,36 +34506,66 @@ class VimScene {
     __publicField(this, "vim");
     __publicField(this, "geometry");
     __publicField(this, "geometryBuilder");
-    __publicField(this, "elementToNodes");
+    __publicField(this, "elementIndexToNodeIndices");
+    __publicField(this, "elementIdToIndex");
+    __publicField(this, "getElementIndexFromElementId", (elementId) => this.elementIdToIndex.get(elementId));
+    __publicField(this, "getElementTable", (from = this.vim.bim) => {
+      var _a2;
+      return (_a2 = from.get(Vim.tableElement)) != null ? _a2 : from.get(Vim.tableElementLegacy);
+    });
+    __publicField(this, "getNodeTable", () => this.vim.bim.get(Vim.tableNode));
     this.vim = vim;
     this.geometry = geometry;
     this.geometryBuilder = geometryBuilder;
-    this.elementToNodes = this.mapElements();
+    this.elementIndexToNodeIndices = this.mapElementIndexToNodeIndices();
+    this.elementIdToIndex = this.mapElementIdToIndex();
   }
-  mapElements() {
-    const nodeCount = this.geometry.getNodeCount();
+  mapElementIndexToNodeIndices() {
     const map2 = new Map();
-    for (let i = 0; i < nodeCount; i++) {
-      const elementId = this.getElementIdFromNodeIndex(i);
-      const nodes = map2.get(elementId);
+    const nodeElements = this.getElementTable(this.getNodeTable());
+    const nodeCount = nodeElements.length;
+    for (let node = 0; node < nodeCount; node++) {
+      const element = nodeElements[node];
+      if (element === void 0)
+        continue;
+      const nodes = map2.get(element);
       if (nodes) {
-        nodes.push(i);
+        nodes.push(node);
       } else {
-        map2.set(elementId, [i]);
+        map2.set(element, [node]);
       }
     }
     return map2;
   }
-  getNodeIndicesFromElement(elementId) {
-    return this.elementToNodes.get(elementId);
+  mapElementIdToIndex() {
+    const map2 = new Map();
+    const elementIds = this.getElementTable().get("Id");
+    for (let element = 0; element < elementIds.length; element++) {
+      const id2 = elementIds[element];
+      if (id2 < 0) {
+        console.log("ignoring element with negative id");
+        continue;
+      }
+      if (map2.has(id2)) {
+        console.error("duplicate id: " + id2);
+        continue;
+      }
+      map2.set(id2, element);
+    }
+    return map2;
   }
-  getMeshesFromElement(elementId) {
-    const nodeIndices = this.getNodeIndicesFromElement(elementId);
+  getNodeIndicesFromElementIndex(elementIndex) {
+    return this.elementIndexToNodeIndices.get(elementIndex);
+  }
+  getMeshesFromElementIndex(elementIndex) {
+    const nodeIndices = this.getNodeIndicesFromElementIndex(elementIndex);
     if (!nodeIndices || !nodeIndices.length)
-      return;
+      return null;
     const result2 = [];
     nodeIndices.forEach((i) => {
-      result2.push(this.getMeshFromNodeIndex(i));
+      const mesh = this.getMeshFromNodeIndex(i);
+      if (mesh)
+        result2.push(mesh);
     });
     return result2;
   }
@@ -34462,23 +34597,33 @@ class VimScene {
   getElementIndexFromNodeIndex(nodeIndex) {
     if (nodeIndex < 0)
       throw new Error("Invalid negative index");
-    return this.vim.bim.get(Vim.tableNode).get(Vim.tableElement)[nodeIndex];
+    const node = this.getNodeTable();
+    if (!node)
+      return;
+    const elements = this.getElementTable(node);
+    if (!elements)
+      return;
+    return elements[nodeIndex];
   }
   getElementIdFromNodeIndex(nodeIndex) {
+    var _a2;
     if (nodeIndex < 0)
       throw new Error("Invalid negative node index");
     const elementIndex = this.getElementIndexFromNodeIndex(nodeIndex);
     if (elementIndex === void 0)
       return;
-    return this.vim.bim.get(Vim.tableElement).get("Id")[elementIndex];
+    const ids = (_a2 = this.getElementTable()) == null ? void 0 : _a2.get("Id");
+    if (!ids)
+      return;
+    return ids[elementIndex];
   }
-  getElementNameFromNodeIndex(nodeIndex) {
-    if (nodeIndex < 0)
-      throw new Error("Invalid negative node index");
-    const elementIndex = this.getElementIndexFromNodeIndex(nodeIndex);
-    if (elementIndex === void 0)
+  getElementName(elementIndex) {
+    if (elementIndex < 0)
+      throw new Error("Invalid negative index.");
+    const names = this.getElementTable().get("Name");
+    if (!names)
       return;
-    const nameIndex = this.vim.bim.get(Vim.tableElement).get("Name")[elementIndex];
+    const nameIndex = names[elementIndex];
     return this.getStringFromIndex(nameIndex);
   }
   getStringFromIndex(stringIndex) {
@@ -34679,22 +34824,28 @@ class VIMLoader {
     const geometryBuilder = new BufferGeometryBuilder(vim.g3d);
     const geometry = this.timeAction("Allocating Geometry", () => geometryBuilder.createAllGeometry());
     console.log("Found # meshes " + geometry.length);
-    const meshRefCounts = this.timeAction("Counting references", () => vim.g3d.getMeshReferenceCounts());
-    const rawMeshes = this.timeAction("Allocating Meshes", () => this.allocateMeshes(geometry, meshRefCounts));
+    const nodesByMeshes = this.timeAction("Counting references", () => vim.g3d.getNodesByMeshes());
+    const rawMeshes = this.timeAction("Allocating Meshes", () => this.allocateMeshes(geometry, nodesByMeshes));
     const sceneGeometry = this.timeAction("Instantiating Shared Geometry", () => this.instantiateSharedGeometry(rawMeshes, vim.g3d));
-    const mergedMesh = this.timeAction("Merging Unique Geometry", () => this.mergeUniqueGeometry(vim.g3d, geometry, meshRefCounts));
-    sceneGeometry.addMesh(mergedMesh);
+    const merge = this.timeAction("Merging Unique Geometry", () => this.mergeUniqueGeometry(vim.g3d, geometry, nodesByMeshes));
+    if (merge !== null) {
+      const [mesh, nodes] = merge;
+      sceneGeometry.addMesh(mesh, nodes);
+    }
     console.log("Loading Completed");
     return new VimScene(vim, sceneGeometry, geometryBuilder);
   }
-  mergeUniqueGeometry(g3d, geometry, meshRefCounts) {
-    const uniques = this.getTransformedUniqueGeometry(g3d, geometry, meshRefCounts);
+  mergeUniqueGeometry(g3d, geometry, nodesByMesh) {
+    const [uniques, nodes] = this.getTransformedUniqueGeometry(g3d, geometry, nodesByMesh);
+    if (uniques.length === 0)
+      return null;
     const result2 = this.createMergedMesh(uniques);
     uniques.forEach((u2) => u2.dispose());
-    return result2;
+    return [result2, nodes];
   }
-  getTransformedUniqueGeometry(g3d, geometry, meshRefCounts) {
+  getTransformedUniqueGeometry(g3d, geometry, nodesByMesh) {
     const result2 = [];
+    const nodes = [];
     for (let i = 0; i < g3d.instanceMeshes.length; i++) {
       const meshIndex = g3d.instanceMeshes[i];
       if (meshIndex < 0)
@@ -34702,20 +34853,22 @@ class VIMLoader {
       const bufferGeometry = geometry[meshIndex];
       if (!bufferGeometry)
         continue;
-      if (meshRefCounts[meshIndex] === 1) {
+      const meshNodes = nodesByMesh[meshIndex];
+      if (meshNodes.length === 1) {
         this.addUVs(bufferGeometry, i);
         const matrix = getMatrixFromNodeIndex(g3d, i);
         bufferGeometry.applyMatrix4(matrix);
         result2.push(bufferGeometry);
+        nodes.push(meshNodes[0]);
       }
     }
-    return result2;
+    return [result2, nodes];
   }
   createMergedMesh(bufferGeometry) {
     const mergedbufferGeometry = mergeBufferGeometries(bufferGeometry);
     const mergedMesh = new InstancedMesh(mergedbufferGeometry, this.material, 1);
     mergedMesh.setMatrixAt(0, new Matrix4());
-    mergedbufferGeometry.computeBoundingSphere();
+    mergedbufferGeometry.computeBoundingBox();
     mergedMesh.userData.merged = true;
     return mergedMesh;
   }
@@ -34726,11 +34879,12 @@ class VIMLoader {
     uvs.fill(value);
     bufferGeometry.setAttribute("uv", new BufferAttribute(uvs, uvArity));
   }
-  allocateMeshes(geometries, meshRefCounts) {
+  allocateMeshes(geometries, nodesByMesh) {
+    var _a2, _b2;
     const meshCount = geometries.length;
     const meshes = new Array(meshCount);
     for (let i = 0; i < meshCount; ++i) {
-      const count = meshRefCounts[i];
+      const count = (_b2 = (_a2 = nodesByMesh[i]) == null ? void 0 : _a2.length) != null ? _b2 : 0;
       if (count <= 1) {
         continue;
       }
@@ -34744,7 +34898,7 @@ class VIMLoader {
   }
   instantiateSharedGeometry(meshes, g3d) {
     const instanceCounters = new Int32Array(meshes.length);
-    let boundingSphere = null;
+    let boundingBox = null;
     const nodeIndexToMeshInstance = new Map();
     const meshIdToNodeIndex = new Map();
     const resultMeshes = [];
@@ -34766,11 +34920,11 @@ class VIMLoader {
       nodeIndexToMeshInstance.set(i, [mesh, count]);
       const matrix = getMatrixFromNodeIndex(g3d, i);
       mesh.setMatrixAt(count, matrix);
-      const sphere = mesh.geometry.boundingSphere.clone();
-      sphere.applyMatrix4(matrix);
-      boundingSphere = boundingSphere ? boundingSphere.union(sphere) : sphere;
+      const box = mesh.geometry.boundingBox.clone();
+      box.applyMatrix4(matrix);
+      boundingBox = boundingBox ? boundingBox.union(box) : box;
     }
-    return new VimSceneGeometry(resultMeshes, boundingSphere != null ? boundingSphere : new Sphere(), nodeIndexToMeshInstance, meshIdToNodeIndex);
+    return new VimSceneGeometry(resultMeshes, boundingBox != null ? boundingBox : new Box3(), nodeIndexToMeshInstance, meshIdToNodeIndex);
   }
 }
 class BufferGeometryBuilder {
@@ -34785,7 +34939,6 @@ class BufferGeometryBuilder {
       const resultMeshes = [];
       for (let mesh = 0; mesh < meshCount; mesh++) {
         const result2 = this.createBufferGeometryFromMeshIndex(mesh);
-        result2 == null ? void 0 : result2.computeBoundingSphere();
         result2 == null ? void 0 : result2.computeBoundingBox();
         resultMeshes.push(result2);
       }
@@ -34824,8 +34977,14 @@ class BufferGeometryBuilder {
     return createBufferGeometryFromArrays(this.vertexBuffer.subarray(sliceStart, sliceEnd), this.indexBuffer.subarray(0, indexCount), this.colorBuffer.subarray(sliceStart, sliceEnd));
   }
   createBufferGeometryFromInstanceIndex(instanceIndex) {
+    if (instanceIndex < 0)
+      throw new Error("Invalid negative index.");
     const meshIndex = this.g3d.instanceMeshes[instanceIndex];
+    if (meshIndex < 0)
+      return null;
     const geometry = this.createBufferGeometryFromMeshIndex(meshIndex);
+    if (!geometry)
+      return null;
     const matrix = getMatrixFromNodeIndex(this.g3d, instanceIndex);
     geometry.applyMatrix4(matrix);
     return geometry;
@@ -46096,34 +46255,84 @@ const loadAny = function(fileName, onFileLoaded, onProgress, overrideFileExtensi
 class Selection {
   constructor(viewer) {
     __publicField(this, "viewer");
-    __publicField(this, "nodeIndex", null);
+    __publicField(this, "elementIndex", null);
     __publicField(this, "boundingSphere", null);
-    __publicField(this, "geometry", null);
     __publicField(this, "highlightDisposer", null);
     this.viewer = viewer;
   }
   hasSelection() {
-    return this.nodeIndex !== null;
+    return this.elementIndex !== null;
   }
   reset() {
-    this.nodeIndex = null;
+    this.elementIndex = null;
     this.boundingSphere = null;
     this.disposeResources();
   }
   disposeResources() {
-    var _a2, _b2;
-    (_a2 = this.geometry) == null ? void 0 : _a2.dispose();
-    this.geometry = null;
-    (_b2 = this.highlightDisposer) == null ? void 0 : _b2.call(this);
+    var _a2;
+    (_a2 = this.highlightDisposer) == null ? void 0 : _a2.call(this);
     this.highlightDisposer = null;
   }
-  select(nodeIndex) {
+  select(elementIndex) {
+    var _a2, _b2;
     this.disposeResources();
-    this.nodeIndex = nodeIndex;
-    this.geometry = this.viewer.createBufferGeometryFromNodeId(nodeIndex);
-    this.geometry.computeBoundingSphere();
-    this.boundingSphere = this.geometry.boundingSphere;
-    this.highlightDisposer = this.viewer.highlight(this.geometry);
+    this.elementIndex = elementIndex;
+    this.highlightDisposer = this.viewer.highlightElementByIndex(elementIndex);
+    this.boundingSphere = (_b2 = (_a2 = this.viewer.getBoudingBoxForElementIndex(elementIndex)) == null ? void 0 : _a2.getBoundingSphere(new Sphere())) != null ? _b2 : null;
+  }
+}
+class EnvironmentPlane {
+  constructor() {
+    __publicField(this, "source");
+    __publicField(this, "mesh");
+    __publicField(this, "geometry");
+    __publicField(this, "material");
+    __publicField(this, "texture");
+    this.geometry = new PlaneGeometry();
+    this.material = new MeshBasicMaterial({ transparent: true });
+    this.mesh = new Mesh(this.geometry, this.material);
+  }
+  applySettings(settings, box) {
+    var _a2, _b2;
+    this.mesh.visible = settings.raw.plane.show;
+    this.applyTexture(settings.raw.plane.texture);
+    this.material.color.copy(settings.getPlaneColor());
+    this.material.opacity = settings.raw.plane.opacity;
+    const center = (_a2 = box == null ? void 0 : box.getCenter(new Vector3())) != null ? _a2 : new Vector3(0, 0, 0);
+    const position = new Vector3(center.x, box.min.y - settings.getObjectScale().y, center.z);
+    this.mesh.position.copy(position);
+    const rotation = settings.getObjectRotation();
+    this.mesh.quaternion.copy(rotation);
+    const sphere = box == null ? void 0 : box.getBoundingSphere(new Sphere());
+    const size = ((_b2 = sphere == null ? void 0 : sphere.radius) != null ? _b2 : 1) * settings.raw.plane.size;
+    const scale = new Vector3(1, 1, 1).multiplyScalar(size);
+    this.mesh.scale.copy(scale);
+  }
+  applyTexture(texUrl) {
+    var _a2;
+    if (texUrl === this.source)
+      return;
+    this.source = texUrl;
+    (_a2 = this.texture) == null ? void 0 : _a2.dispose();
+    this.texture = null;
+    if (!texUrl)
+      return;
+    const loader = new TextureLoader();
+    this.texture = loader.load(texUrl);
+    if (!this.texture) {
+      console.error("Failed to load texture: " + texUrl);
+      return;
+    }
+    this.material.map = this.texture;
+  }
+  dispose() {
+    var _a2, _b2, _c;
+    (_a2 = this.geometry) == null ? void 0 : _a2.dispose();
+    (_b2 = this.material) == null ? void 0 : _b2.dispose();
+    (_c = this.texture) == null ? void 0 : _c.dispose();
+    this.geometry = null;
+    this.material = null;
+    this.texture = null;
   }
 }
 class ViewerEnvironment {
@@ -46136,8 +46345,7 @@ class ViewerEnvironment {
     this.sunLight = sunLight;
   }
   static createDefault() {
-    const plane = new Mesh(new PlaneGeometry(1e3, 1e3), new MeshPhongMaterial());
-    plane.rotation.x = -Math.PI / 2;
+    const plane = new EnvironmentPlane();
     const skyLight = new HemisphereLight(16777215, 16777215, 0.6);
     skyLight.color.setHSL(0.6, 1, 0.6);
     skyLight.groundColor.setHSL(0.095, 1, 0.75);
@@ -46149,20 +46357,16 @@ class ViewerEnvironment {
     return new ViewerEnvironment(plane, skyLight, sunLight);
   }
   getElements() {
-    return [this.plane, this.skyLight, this.sunLight];
+    return [this.plane.mesh, this.skyLight, this.sunLight];
   }
-  applySettings(settings) {
-    this.plane.visible = settings.plane.show;
-    if (this.plane.material instanceof MeshPhongMaterial) {
-      updateMaterial(this.plane.material, settings.plane.material);
-    }
-    this.plane.position.copy(toVec(settings.plane.position));
-    this.skyLight.color.setHSL(settings.skylight.skyColor.h, settings.skylight.skyColor.s, settings.skylight.skyColor.l);
-    this.skyLight.groundColor.setHSL(settings.skylight.groundColor.h, settings.skylight.groundColor.s, settings.skylight.groundColor.l);
-    this.skyLight.intensity = settings.skylight.intensity;
-    this.sunLight.color.setHSL(settings.sunLight.color.h, settings.sunLight.color.s, settings.sunLight.color.l);
-    this.sunLight.position.set(settings.sunLight.position.x, settings.sunLight.position.y, settings.sunLight.position.z);
-    this.sunLight.intensity = settings.sunLight.intensity;
+  applySettings(settings, box) {
+    this.plane.applySettings(settings, box);
+    this.skyLight.color.copy(settings.getSkylightColor());
+    this.skyLight.groundColor.copy(settings.getSkylightGroundColor());
+    this.skyLight.intensity = settings.getSkylightIntensity();
+    this.sunLight.color.copy(settings.getSunlightColor());
+    this.sunLight.position.copy(settings.getSunlightPosition());
+    this.sunLight.intensity = settings.getSunlightIntensity();
   }
 }
 class ViewerRenderer {
@@ -46172,13 +46376,13 @@ class ViewerRenderer {
     __publicField(this, "scene");
     __publicField(this, "clock", new Clock());
     __publicField(this, "canvas");
-    __publicField(this, "boundingSphere");
+    __publicField(this, "boundingBox");
     __publicField(this, "meshes", []);
     this.renderer = new WebGLRenderer({
       canvas,
       antialias: true,
       precision: "highp",
-      alpha: false,
+      alpha: true,
       stencil: false,
       powerPreference: "high-performance"
     });
@@ -46187,8 +46391,11 @@ class ViewerRenderer {
     this.renderer.shadowMap.enabled = false;
     this.camera = new PerspectiveCamera();
     this.scene = new Scene();
-    this.boundingSphere = new Sphere();
+    this.boundingBox = new Box3();
     this.fitToCanvas();
+  }
+  getBoundingSphere() {
+    return this.boundingBox.getBoundingSphere(new Sphere());
   }
   render() {
     this.renderer.render(this.scene, this.camera);
@@ -46217,17 +46424,17 @@ class ViewerRenderer {
       this.meshes[i].matrix.copy(matrix);
     }
   }
-  computeBoundingSphere(matrix) {
-    this.boundingSphere = this._computeBoundingSphere(this.scene);
-    this.boundingSphere.applyMatrix4(matrix);
+  computeBoundingBox(matrix) {
+    this.boundingBox = this._computeBoundingBox(this.scene);
+    this.boundingBox.applyMatrix4(matrix);
   }
-  _computeBoundingSphere(scene) {
-    let sphere;
+  _computeBoundingBox(scene) {
+    let box;
     const grow = (geometry, matrix2) => {
       geometry.computeBoundingSphere();
-      let currentSphere = geometry.boundingSphere.clone();
-      currentSphere = currentSphere.applyMatrix4(matrix2);
-      sphere = sphere ? sphere.union(currentSphere) : currentSphere;
+      let currentBox = geometry.boundingBox.clone();
+      currentBox = currentBox.applyMatrix4(matrix2);
+      box = box ? box.union(currentBox) : currentBox;
     };
     const matrix = new Matrix4();
     scene.traverse((obj) => {
@@ -46240,7 +46447,7 @@ class ViewerRenderer {
         grow(obj.geometry, obj.matrix);
       }
     });
-    return sphere != null ? sphere : new Sphere();
+    return box != null ? box : new Box3();
   }
 }
 const _Viewer = class {
@@ -46274,15 +46481,21 @@ const _Viewer = class {
       } else if (result2 instanceof Group || result2 instanceof Object3D) {
         this.render.addToModel([result2]);
       }
-      if (!this.render.boundingSphere) {
-        this.render.computeBoundingSphere(this.getViewMatrix());
+      if (!this.render.boundingBox) {
+        this.render.computeBoundingBox(this.settings.getObjectMatrix());
       }
-      this.focusModel();
+      this.lookAtModel();
       this.ApplySettings();
       this.setState("Default");
     });
-    this.settings = cjs(ViewerSettings.default, options, void 0);
-    let canvas = document.getElementById(this.settings.canvasId);
+    __publicField(this, "getElementIndexFromElementId", (elementId) => this.vimScene.getElementIndexFromElementId(elementId));
+    __publicField(this, "getElementIndexFromNodeIndex", (nodeIndex) => this.vimScene.getElementIndexFromNodeIndex(nodeIndex));
+    __publicField(this, "getElementIndexFromMeshInstance", (mesh, index) => {
+      const nodeIndex = this.vimScene.getNodeIndexFromMesh(mesh, index);
+      return this.vimScene.getElementIndexFromNodeIndex(nodeIndex);
+    });
+    this.settings = new ViewerSettings(options);
+    let canvas = document.getElementById(this.settings.raw.canvasId);
     if (!canvas) {
       canvas = document.createElement("canvas");
       document.body.appendChild(canvas);
@@ -46293,14 +46506,22 @@ const _Viewer = class {
     this.controls = new ViewerInput(this.render.canvas, this.cameraController, this);
     this.controls.register();
     this.selection = new Selection(this);
-    loadAny(this.settings.url, (result2) => {
+    loadAny(this.settings.raw.url, (result2) => {
       this.setState("Processing");
       setTimeout(() => this.loadInScene(result2), 0);
     }, (progress) => {
       this.setState(["Downloading", progress.loaded]);
-    }, this.settings.fileExtension);
+    }, this.settings.raw.fileExtension);
     this.ApplySettings();
     this.animate();
+  }
+  animate() {
+    requestAnimationFrame(() => this.animate());
+    const timeDelta = this.render.clock.getDelta();
+    this.cameraController.frameUpdate(timeDelta);
+    if (this.settings.raw.autoResize)
+      this.render.fitToCanvas();
+    this.render.render();
   }
   onVimLoaded(vim) {
     this.vimScene = vim;
@@ -46308,29 +46529,77 @@ const _Viewer = class {
     this.render.addToModel(vim.geometry.meshes);
     console.log("Adding environement to scene");
     this.render.addToScene(this.environment.getElements());
-    const sphere = vim.geometry.boundingSphere.clone();
-    sphere.applyMatrix4(this.getViewMatrix());
-    this.render.boundingSphere = sphere;
-    this.render.updateModel(this.getViewMatrix());
+    const box = vim.geometry.boundingBox.clone();
+    box.applyMatrix4(this.settings.getObjectMatrix());
+    this.render.boundingBox = box;
+    this.render.updateModel(this.settings.getObjectMatrix());
     console.log("Everything ready");
     console.time("FirstRender");
     this.render.render();
     console.timeEnd("FirstRender");
   }
-  animate() {
-    requestAnimationFrame(() => this.animate());
-    const timeDelta = this.render.clock.getDelta();
-    this.cameraController.frameUpdate(timeDelta);
-    if (this.settings.autoResize)
-      this.render.fitToCanvas();
-    this.render.render();
+  highlightElementByIndex(elementIndex) {
+    const nodes = this.vimScene.getNodeIndicesFromElementIndex(elementIndex);
+    if (!nodes) {
+      console.error("Could not find nodes geometry for element index: " + elementIndex);
+      return () => {
+      };
+    }
+    const geometry = this.createBufferGeometryFromNodeIndices(nodes);
+    if (!geometry) {
+      console.error("Could not create geometry for element index: " + elementIndex);
+      return () => {
+      };
+    }
+    const disposer = this.highlight(geometry);
+    return () => {
+      disposer();
+      geometry.dispose();
+    };
   }
-  getViewMatrix() {
-    const pos = this.settings.object.position;
-    const rot = toQuaternion(this.settings.object.rotation);
-    const scl = scalarToVec(0.1);
-    const matrix = new Matrix4().compose(pos, rot, scl);
-    return matrix;
+  getBoudingBoxForElementIndex(elementIndex) {
+    const nodes = this.vimScene.getNodeIndicesFromElementIndex(elementIndex);
+    const geometry = this.createBufferGeometryFromNodeIndices(nodes);
+    if (!geometry) {
+      console.error("Could not create geometry for element index: " + elementIndex);
+      return null;
+    }
+    geometry.computeBoundingBox();
+    const result2 = geometry.boundingBox;
+    geometry.dispose();
+    return result2;
+  }
+  selectByElementIndex(elementIndex) {
+    console.log("Selecting element with index: " + elementIndex);
+    console.log("Bim Element Name: " + this.vimScene.getElementName(elementIndex));
+    this.selection.select(elementIndex);
+  }
+  clearSelection() {
+    this.selection.reset();
+    console.log("Cleared Selection");
+  }
+  lookAtElementIndex(elementIndex) {
+    const box = this.getBoudingBoxForElementIndex(elementIndex);
+    if (!box) {
+      console.error("Could not create geometry for element index: " + elementIndex);
+      return;
+    }
+    const sphere = box.getBoundingSphere(new Sphere());
+    this.cameraController.lookAtSphere(sphere, true);
+  }
+  lookAtSelection() {
+    if (this.selection.hasSelection()) {
+      this.cameraController.lookAtSphere(this.selection.boundingSphere);
+    } else {
+      this.cameraController.frameScene(this.render.getBoundingSphere());
+    }
+  }
+  lookAtModel() {
+    this.cameraController.frameScene(this.render.getBoundingSphere());
+  }
+  ApplySettings() {
+    this.environment.applySettings(this.settings, this.render.boundingBox);
+    this.cameraController.applySettings(this.settings);
   }
   highlight(geometry) {
     const wireframe = new WireframeGeometry(geometry);
@@ -46348,123 +46617,22 @@ const _Viewer = class {
       material.dispose();
     };
   }
-  createWorldGeometry(mesh, index) {
-    const geometry = mesh.geometry.clone();
-    let matrix = new Matrix4();
-    if (mesh instanceof InstancedMesh)
-      mesh.getMatrixAt(index, matrix);
-    else
-      matrix.copy(mesh.matrix);
-    matrix = this.getViewMatrix().multiply(matrix);
-    geometry.applyMatrix4(matrix);
+  createBufferGeometryFromNodeIndices(nodeIndices) {
+    let geometries = nodeIndices.map((nodeIndex) => {
+      const builder = new BufferGeometryBuilder(this.vimScene.vim.g3d);
+      return builder.createBufferGeometryFromInstanceIndex(nodeIndex);
+    });
+    geometries = geometries.filter((b) => b !== null);
+    if (geometries.length === 0)
+      return null;
+    const geometry = mergeBufferGeometries(geometries);
+    geometries.forEach((b) => b.dispose);
+    geometry.applyMatrix4(this.settings.getObjectMatrix());
     return geometry;
-  }
-  createBufferGeometryFromNodeId(nodeIndex) {
-    const builder = new BufferGeometryBuilder(this.vimScene.vim.g3d);
-    const geometry = builder.createBufferGeometryFromInstanceIndex(nodeIndex);
-    const matrix = this.getViewMatrix();
-    geometry.applyMatrix4(matrix);
-    return geometry;
-  }
-  selectByElementId(elementId) {
-    if (!this.vimScene)
-      return;
-    const meshes = this.vimScene.getMeshesFromElement(elementId);
-    if (meshes)
-      this.select(meshes[0][0], meshes[0][1]);
-    else
-      console.log(`Could not find mesh for elemetId ${elementId}`);
-  }
-  select(mesh, index) {
-    if (!this.vimScene)
-      return;
-    if (!mesh)
-      throw new Error("Invalid null mesh");
-    if (index < 0)
-      throw new Error("invalid negative index");
-    let nodeIndex;
-    if (mesh.userData.merged) {
-      nodeIndex = index;
-    } else {
-      nodeIndex = this.vimScene.getNodeIndexFromMesh(mesh, index);
-    }
-    if (nodeIndex === void 0) {
-      console.log("Could not find node for given mesh");
-      return;
-    }
-    this.selection.select(nodeIndex);
-    const id2 = this.vimScene.getElementIdFromNodeIndex(nodeIndex);
-    const name = this.vimScene.getElementNameFromNodeIndex(nodeIndex);
-    console.log(`Selected Element: ${id2} - ${name}`);
-  }
-  clearSelection() {
-    this.selection.reset();
-    console.log("Cleared Selection");
-  }
-  focusSelection() {
-    if (this.selection.hasSelection()) {
-      this.cameraController.lookAtSphere(this.selection.boundingSphere);
-    } else {
-      this.cameraController.frameScene(this.render.boundingSphere);
-    }
-  }
-  focusModel() {
-    this.cameraController.frameScene(this.render.boundingSphere);
-  }
-  ApplySettings() {
-    this.render.scene.background = toColor(this.settings.background.color);
-    this.environment.applySettings(this.settings);
-    this.cameraController.applySettings(this.settings);
   }
 };
 let Viewer = _Viewer;
 __publicField(Viewer, "stateChangeEventName", "viewerStateChangedEvent");
-function updateMaterial(targetMaterial, settings) {
-  if ("color" in settings)
-    targetMaterial.color = toColor(settings.color);
-  if ("flatShading" in settings) {
-    targetMaterial.flatShading = settings.flatShading;
-  }
-  if ("emissive" in settings) {
-    targetMaterial.emissive = toColor(settings.emissive);
-  }
-  if ("specular" in settings) {
-    targetMaterial.specular = toColor(settings.specular);
-  }
-  if ("wireframe" in settings)
-    targetMaterial.wireframe = settings.wireframe;
-  if ("shininess" in settings)
-    targetMaterial.shininess = settings.shininess;
-}
-function isColor(obj) {
-  return typeof obj === "object" && "r" in obj && "g" in obj && "b" in obj;
-}
-function toColor(c) {
-  if (!isColor(c)) {
-    throw new Error("Not a color");
-  }
-  return new Color(c.r / 255, c.g / 255, c.b / 255);
-}
-function isVector(obj) {
-  return typeof obj === "object" && "x" in obj && "y" in obj && "z" in obj;
-}
-function toVec(obj) {
-  if (!isVector(obj)) {
-    throw new Error("Not a vector");
-  }
-  return new Vector3(obj.x, obj.y, obj.z);
-}
-function scalarToVec(x) {
-  return new Vector3(x, x, x);
-}
-function toEuler(rot) {
-  return new Euler(rot.x * Math.PI / 180, rot.y * Math.PI / 180, rot.z * Math.PI / 180);
-}
-function toQuaternion(rot) {
-  const q2 = new Quaternion();
-  q2.setFromEuler(toEuler(rot));
-  return q2;
-}
 var stats_min = { exports: {} };
 (function(module, exports) {
   !function(e, t2) {
