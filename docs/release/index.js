@@ -74,7 +74,7 @@ function Logo() {
   })));
 }
 function FormatStateMessage(state) {
-  return state === "Default" ? "" : state === "Processing" ? "Processing" : `Downloading: ${Math.round(state[1] / 1e6)} MB`;
+  return state === "Uninitialized" || state === "Ready" ? "" : state === "Processing" ? "Processing" : `Downloading: ${Math.round(state[1] / 1e6)} MB`;
 }
 function VimLoadingBox(prop) {
   if (prop.msg === "")
@@ -85,16 +85,10 @@ function VimLoadingBox(prop) {
 }
 const params = new URLSearchParams(window.location.search);
 const url = params.has("model") ? params.get("model") : "https://vim.azureedge.net/samples/residence.vim";
-const canvasId = buildUI(Viewer.stateChangeEventName);
+const canvasId = buildUI(Viewer.stateChangeEvent);
 const viewer = new Viewer({
-  mouseOrbit: false,
   canvasId,
-  url,
-  object: {
-    scale: 0.1,
-    rotation: { x: 270 },
-    position: { y: 0 }
-  },
+  mouseOrbit: false,
   plane: {
     show: true,
     texture: "https://vimdevelopment01storage.blob.core.windows.net/textures/vim-floor-soft.png",
@@ -102,6 +96,16 @@ const viewer = new Viewer({
     size: 5
   }
 });
+viewer.loadModel({
+  url,
+  rotation: { x: 270 }
+}, (vim) => console.log("Callback: Viewer Ready!"), (progress) => {
+  if (progress === "processing")
+    console.log("Callback: Processing");
+  else {
+    console.log(`Callback: Downloading: ${progress.loaded / 1e6} MB`);
+  }
+}, (error) => console.error("Callback: Error: " + error.message));
 globalThis.viewer = viewer;
 const stats = new Stats();
 stats.dom.style.top = "84px";
