@@ -45,7 +45,7 @@ function Logo () {
 }
 
 function FormatStateMessage (state: ViewerState): string {
-  return state === 'Default'
+  return state === 'Uninitialized' || state === 'Ready'
     ? ''
     : state === 'Processing'
       ? 'Processing'
