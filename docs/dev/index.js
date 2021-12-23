@@ -47,6 +47,7 @@ const canvasId$1 = "vim-canvas";
 function buildUI(viewerEventName) {
   const ui = document.createElement("div");
   ui.className = "vim";
+  ui.style.height = "100%";
   document.body.append(ui);
   ReactDOM.render(/* @__PURE__ */ React.createElement(VimUI, {
     eventName: viewerEventName
@@ -74,10 +75,17 @@ function Logo() {
   })));
 }
 function FormatStateMessage(state) {
-  return state === "Uninitialized" || state === "Ready" ? "" : state === "Processing" ? "Processing" : `Downloading: ${Math.round(state[1] / 1e6)} MB`;
+  if (state[0] === "Downloading") {
+    return `Downloading: ${Math.round(state[1] / 1e6)} MB`;
+  }
+  if (state[0] === "Error") {
+    return "Error : " + state[1].message;
+  }
+  if (state === "Processing")
+    return "Processing";
 }
 function VimLoadingBox(prop) {
-  if (prop.msg === "")
+  if (!prop.msg)
     return null;
   return /* @__PURE__ */ React.createElement("div", {
     className: "vim-loading-box"
@@ -87,8 +95,7 @@ const params = new URLSearchParams(window.location.search);
 const url = params.has("model") ? params.get("model") : "https://vim.azureedge.net/samples/residence.vim";
 const canvasId = buildUI(Viewer.stateChangeEvent);
 const viewer = new Viewer({
-  canvasId,
-  mouseOrbit: false,
+  canvas: { id: canvasId },
   plane: {
     show: true,
     texture: "https://vimdevelopment01storage.blob.core.windows.net/textures/vim-floor-soft.png",
@@ -98,7 +105,7 @@ const viewer = new Viewer({
 });
 viewer.loadModel({
   url,
-  rotation: { x: 270 }
+  rotation: { x: 270, y: 0, z: 0 }
 }, (vim) => console.log("Callback: Viewer Ready!"), (progress) => {
   if (progress === "processing")
     console.log("Callback: Processing");
