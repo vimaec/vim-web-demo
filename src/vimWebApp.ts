@@ -9,11 +9,11 @@ const url = params.has('model')
   ? params.get('model')
   : 'https://vim.azureedge.net/samples/residence.vim'
 
+
 const canvasId = buildUI(Viewer.stateChangeEvent)
 
 const viewer = new Viewer({
-  canvasId: canvasId,
-  mouseOrbit: false,
+  canvas: {id : canvasId},
   plane: {
     show: true,
     texture:
@@ -26,7 +26,7 @@ const viewer = new Viewer({
 viewer.loadModel(
   {
     url: url,
-    rotation: { x: 270 }
+    rotation: { x: 270, y: 0, z: 0 }
   },
   (vim) => console.log('Callback: Viewer Ready!'),
   (progress) => {
