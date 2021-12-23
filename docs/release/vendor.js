@@ -7021,11 +7021,11 @@ class EventDispatcher {
   }
 }
 let _seed = 1234567;
-const DEG2RAD = Math.PI / 180;
+const DEG2RAD$1 = Math.PI / 180;
 const RAD2DEG = 180 / Math.PI;
-const _lut = [];
+const _lut$1 = [];
 for (let i = 0; i < 256; i++) {
-  _lut[i] = (i < 16 ? "0" : "") + i.toString(16);
+  _lut$1[i] = (i < 16 ? "0" : "") + i.toString(16);
 }
 const hasRandomUUID = typeof crypto !== "undefined" && "randomUUID" in crypto;
 function generateUUID() {
@@ -7036,7 +7036,7 @@ function generateUUID() {
   const d1 = Math.random() * 4294967295 | 0;
   const d2 = Math.random() * 4294967295 | 0;
   const d3 = Math.random() * 4294967295 | 0;
-  const uuid = _lut[d0 & 255] + _lut[d0 >> 8 & 255] + _lut[d0 >> 16 & 255] + _lut[d0 >> 24 & 255] + "-" + _lut[d1 & 255] + _lut[d1 >> 8 & 255] + "-" + _lut[d1 >> 16 & 15 | 64] + _lut[d1 >> 24 & 255] + "-" + _lut[d2 & 63 | 128] + _lut[d2 >> 8 & 255] + "-" + _lut[d2 >> 16 & 255] + _lut[d2 >> 24 & 255] + _lut[d3 & 255] + _lut[d3 >> 8 & 255] + _lut[d3 >> 16 & 255] + _lut[d3 >> 24 & 255];
+  const uuid = _lut$1[d0 & 255] + _lut$1[d0 >> 8 & 255] + _lut$1[d0 >> 16 & 255] + _lut$1[d0 >> 24 & 255] + "-" + _lut$1[d1 & 255] + _lut$1[d1 >> 8 & 255] + "-" + _lut$1[d1 >> 16 & 15 | 64] + _lut$1[d1 >> 24 & 255] + "-" + _lut$1[d2 & 63 | 128] + _lut$1[d2 >> 8 & 255] + "-" + _lut$1[d2 >> 16 & 255] + _lut$1[d2 >> 24 & 255] + _lut$1[d3 & 255] + _lut$1[d3 >> 8 & 255] + _lut$1[d3 >> 16 & 255] + _lut$1[d3 >> 24 & 255];
   return uuid.toUpperCase();
 }
 function clamp(value, min, max) {
@@ -7096,7 +7096,7 @@ function seededRandom(s) {
   return (_seed - 1) / 2147483646;
 }
 function degToRad(degrees) {
-  return degrees * DEG2RAD;
+  return degrees * DEG2RAD$1;
 }
 function radToDeg(radians) {
   return radians * RAD2DEG;
@@ -7146,7 +7146,7 @@ function setQuaternionFromProperEuler(q2, a, b, c, order) {
 }
 var MathUtils = /* @__PURE__ */ Object.freeze({
   __proto__: null,
-  DEG2RAD,
+  DEG2RAD: DEG2RAD$1,
   RAD2DEG,
   generateUUID,
   clamp,
@@ -13611,11 +13611,11 @@ class PerspectiveCamera extends Camera {
     this.updateProjectionMatrix();
   }
   getFocalLength() {
-    const vExtentSlope = Math.tan(DEG2RAD * 0.5 * this.fov);
+    const vExtentSlope = Math.tan(DEG2RAD$1 * 0.5 * this.fov);
     return 0.5 * this.getFilmHeight() / vExtentSlope;
   }
   getEffectiveFOV() {
-    return RAD2DEG * 2 * Math.atan(Math.tan(DEG2RAD * 0.5 * this.fov) / this.zoom);
+    return RAD2DEG * 2 * Math.atan(Math.tan(DEG2RAD$1 * 0.5 * this.fov) / this.zoom);
   }
   getFilmWidth() {
     return this.filmGauge * Math.min(this.aspect, 1);
@@ -13653,7 +13653,7 @@ class PerspectiveCamera extends Camera {
   }
   updateProjectionMatrix() {
     const near = this.near;
-    let top = near * Math.tan(DEG2RAD * 0.5 * this.fov) / this.zoom;
+    let top = near * Math.tan(DEG2RAD$1 * 0.5 * this.fov) / this.zoom;
     let height = 2 * top;
     let width = this.aspect * height;
     let left = -0.5 * width;
@@ -25656,6 +25656,73 @@ function toJSON(shapes, data) {
   }
   return data;
 }
+class SphereGeometry extends BufferGeometry {
+  constructor(radius = 1, widthSegments = 32, heightSegments = 16, phiStart = 0, phiLength = Math.PI * 2, thetaStart = 0, thetaLength = Math.PI) {
+    super();
+    this.type = "SphereGeometry";
+    this.parameters = {
+      radius,
+      widthSegments,
+      heightSegments,
+      phiStart,
+      phiLength,
+      thetaStart,
+      thetaLength
+    };
+    widthSegments = Math.max(3, Math.floor(widthSegments));
+    heightSegments = Math.max(2, Math.floor(heightSegments));
+    const thetaEnd = Math.min(thetaStart + thetaLength, Math.PI);
+    let index = 0;
+    const grid = [];
+    const vertex2 = new Vector3();
+    const normal = new Vector3();
+    const indices = [];
+    const vertices = [];
+    const normals = [];
+    const uvs = [];
+    for (let iy = 0; iy <= heightSegments; iy++) {
+      const verticesRow = [];
+      const v2 = iy / heightSegments;
+      let uOffset = 0;
+      if (iy == 0 && thetaStart == 0) {
+        uOffset = 0.5 / widthSegments;
+      } else if (iy == heightSegments && thetaEnd == Math.PI) {
+        uOffset = -0.5 / widthSegments;
+      }
+      for (let ix = 0; ix <= widthSegments; ix++) {
+        const u2 = ix / widthSegments;
+        vertex2.x = -radius * Math.cos(phiStart + u2 * phiLength) * Math.sin(thetaStart + v2 * thetaLength);
+        vertex2.y = radius * Math.cos(thetaStart + v2 * thetaLength);
+        vertex2.z = radius * Math.sin(phiStart + u2 * phiLength) * Math.sin(thetaStart + v2 * thetaLength);
+        vertices.push(vertex2.x, vertex2.y, vertex2.z);
+        normal.copy(vertex2).normalize();
+        normals.push(normal.x, normal.y, normal.z);
+        uvs.push(u2 + uOffset, 1 - v2);
+        verticesRow.push(index++);
+      }
+      grid.push(verticesRow);
+    }
+    for (let iy = 0; iy < heightSegments; iy++) {
+      for (let ix = 0; ix < widthSegments; ix++) {
+        const a = grid[iy][ix + 1];
+        const b = grid[iy][ix];
+        const c = grid[iy + 1][ix];
+        const d = grid[iy + 1][ix + 1];
+        if (iy !== 0 || thetaStart > 0)
+          indices.push(a, b, d);
+        if (iy !== heightSegments - 1 || thetaEnd < Math.PI)
+          indices.push(b, c, d);
+      }
+    }
+    this.setIndex(indices);
+    this.setAttribute("position", new Float32BufferAttribute(vertices, 3));
+    this.setAttribute("normal", new Float32BufferAttribute(normals, 3));
+    this.setAttribute("uv", new Float32BufferAttribute(uvs, 2));
+  }
+  static fromJSON(data) {
+    return new SphereGeometry(data.radius, data.widthSegments, data.heightSegments, data.phiStart, data.phiLength, data.thetaStart, data.thetaLength);
+  }
+}
 class WireframeGeometry extends BufferGeometry {
   constructor(geometry = null) {
     super();
@@ -30833,127 +30900,92 @@ deepmerge.all = function deepmergeAll(array, options) {
 };
 var deepmerge_1 = deepmerge;
 var cjs = deepmerge_1;
-const defaultViewerSettings = {
-  canvas: {
-    resizeDelay: 200
-  },
-  camera: {
-    near: 0.01,
-    far: 15e3,
-    fov: 50,
-    zoom: 1,
-    rotate: 1,
-    controls: {
-      modelReferenceSize: 1,
-      rotateSpeed: 1,
-      moveSpeed: 1
-    }
-  },
-  background: {
-    color: { r: 114, g: 100, b: 91 }
-  },
-  plane: {
-    show: true,
-    texture: null,
-    opacity: 1,
-    color: { r: 255, g: 255, b: 255 },
-    size: 3
-  },
-  skylight: {
-    color: { h: 0.6, s: 1, l: 0.6 },
-    groundColor: { h: 0.095, s: 1, l: 0.75 },
-    intensity: 0.6
-  },
-  sunLight: {
-    position: { x: -47, y: 22, z: -45 },
-    color: { h: 0.1, s: 1, l: 0.95 },
-    intensity: 1
-  }
-};
-const defaultModelSettings = {
-  scale: 0.01,
-  position: { x: 0, y: 0, z: 0 },
-  rotation: { x: 0, y: 0, z: 0 },
-  material: {
-    color: { r: 0, g: 85, b: 255 },
-    emissive: { r: 0, g: 0, b: 0 },
-    specular: { r: 17, g: 17, b: 17 },
-    flatShading: true,
-    shininess: 30,
-    wireframe: false
-  }
-};
 class ModelSettings {
   constructor(options) {
-    __publicField(this, "data");
-    __publicField(this, "getURL", () => this.data.url);
-    __publicField(this, "getObjectPosition", () => toVec(this.data.position));
-    __publicField(this, "getObjectRotation", () => toQuaternion(this.data.rotation));
-    __publicField(this, "getObjectScale", () => scalarToVec(this.data.scale));
+    __publicField(this, "options");
+    __publicField(this, "getURL", () => this.options.url);
+    __publicField(this, "getObjectPosition", () => toVec(this.options.position));
+    __publicField(this, "getObjectRotation", () => toQuaternion(this.options.rotation));
+    __publicField(this, "getObjectScale", () => scalarToVec(this.options.scale));
     __publicField(this, "getObjectMatrix", () => new Matrix4().compose(this.getObjectPosition(), this.getObjectRotation(), this.getObjectScale()));
-    __publicField(this, "getColor", () => toRGBColor(this.data.material.color));
-    __publicField(this, "getFlatShading", () => this.data.material.flatShading);
-    __publicField(this, "getEmissive", () => toRGBColor(this.data.material.emissive));
-    __publicField(this, "getSpecular", () => toRGBColor(this.data.material.specular));
-    __publicField(this, "getWireframe", () => this.data.material.wireframe);
-    __publicField(this, "getShininess", () => this.data.material.shininess);
-    this.data = cjs(defaultModelSettings, options, void 0);
-  }
-  updateMaterial(material) {
-    var _a, _b, _c, _d, _e, _f;
-    material.color = (_a = this.getColor()) != null ? _a : material.color;
-    material.flatShading = (_b = this.getFlatShading()) != null ? _b : material.flatShading;
-    material.emissive = (_c = this.getEmissive()) != null ? _c : material.emissive;
-    material.specular = (_d = this.getSpecular()) != null ? _d : material.specular;
-    material.wireframe = (_e = this.getWireframe()) != null ? _e : material.wireframe;
-    material.shininess = (_f = this.getShininess()) != null ? _f : material.shininess;
+    const fallback = {
+      url: "https://vim.azureedge.net/samples/residence.vim",
+      position: { x: 0, y: 0, z: 0 },
+      rotation: { x: 0, y: 0, z: 0 },
+      scale: 0.01
+    };
+    this.options = options ? cjs(fallback, options, void 0) : fallback;
   }
 }
 class ViewerSettings {
-  constructor(raw) {
-    __publicField(this, "raw");
-    __publicField(this, "getPlaneColor", () => toRGBColor(this.raw.plane.color));
-    __publicField(this, "getBackgroundColor", () => toRGBColor(this.raw.background.color));
-    __publicField(this, "getSkylightColor", () => toHSLColor(this.raw.skylight.color));
-    __publicField(this, "getSkylightGroundColor", () => toHSLColor(this.raw.skylight.groundColor));
-    __publicField(this, "getSkylightIntensity", () => this.raw.skylight.intensity);
-    __publicField(this, "getSunlightColor", () => toHSLColor(this.raw.sunLight.color));
-    __publicField(this, "getSunlightPosition", () => toVec(this.raw.sunLight.position));
-    __publicField(this, "getSunlightIntensity", () => this.raw.sunLight.intensity);
-    __publicField(this, "getCameraMoveSpeed", () => this.raw.camera.controls.moveSpeed);
-    __publicField(this, "getCameraRotateSpeed", () => this.raw.camera.controls.rotateSpeed);
-    __publicField(this, "getCameraReferenceModelSize", () => this.raw.camera.controls.modelReferenceSize);
-    __publicField(this, "getCanvasResizeDelay", () => this.raw.canvas.resizeDelay);
-    this.raw = cjs(defaultViewerSettings, raw, void 0);
+  constructor(options) {
+    __publicField(this, "options");
+    __publicField(this, "getCanvasResizeDelay", () => this.options.canvas.resizeDelay);
+    __publicField(this, "getCanvasId", () => this.options.canvas.id);
+    __publicField(this, "getPlaneShow", () => this.options.plane.show);
+    __publicField(this, "getPlaneColor", () => toRGBColor(this.options.plane.color));
+    __publicField(this, "getPlaneTextureUrl", () => this.options.plane.texture);
+    __publicField(this, "getPlaneOpacity", () => this.options.plane.opacity);
+    __publicField(this, "getPlaneSize", () => this.options.plane.size);
+    __publicField(this, "getSkylightColor", () => toHSLColor(this.options.skylight.skyColor));
+    __publicField(this, "getSkylightGroundColor", () => toHSLColor(this.options.skylight.groundColor));
+    __publicField(this, "getSkylightIntensity", () => this.options.skylight.intensity);
+    __publicField(this, "getSunlightColor", () => toHSLColor(this.options.sunLight.color));
+    __publicField(this, "getSunlightPosition", () => toVec(this.options.sunLight.position));
+    __publicField(this, "getSunlightIntensity", () => this.options.sunLight.intensity);
+    __publicField(this, "getCameraNear", () => this.options.camera.near);
+    __publicField(this, "getCameraFar", () => this.options.camera.far);
+    __publicField(this, "getCameraFov", () => this.options.camera.fov);
+    __publicField(this, "getCameraZoom", () => this.options.camera.zoom);
+    __publicField(this, "getCameraIsOrbit", () => this.options.camera.controls.orbit);
+    __publicField(this, "getCameraMoveSpeed", () => this.options.camera.controls.moveSpeed);
+    __publicField(this, "getCameraRotateSpeed", () => this.options.camera.controls.rotateSpeed);
+    __publicField(this, "getCameraReferenceModelSize", () => this.options.camera.controls.modelReferenceSize);
+    const fallback = {
+      canvas: {
+        id: void 0,
+        resizeDelay: 200
+      },
+      camera: {
+        near: 0.01,
+        far: 15e3,
+        fov: 50,
+        zoom: 1,
+        controls: {
+          orbit: true,
+          modelReferenceSize: 1,
+          rotateSpeed: 1,
+          moveSpeed: 1
+        }
+      },
+      plane: {
+        show: true,
+        texture: null,
+        opacity: 1,
+        color: { r: 255, g: 255, b: 255 },
+        size: 3
+      },
+      skylight: {
+        skyColor: { h: 0.6, s: 1, l: 0.6 },
+        groundColor: { h: 0.095, s: 1, l: 0.75 },
+        intensity: 0.6
+      },
+      sunLight: {
+        position: { x: -47, y: 22, z: -45 },
+        color: { h: 0.1, s: 1, l: 0.95 },
+        intensity: 1
+      }
+    };
+    this.options = options ? cjs(fallback, options, void 0) : fallback;
   }
-}
-function isRGBColor(obj) {
-  return typeof obj === "object" && "r" in obj && "g" in obj && "b" in obj;
 }
 function toRGBColor(c) {
-  if (!isRGBColor(c)) {
-    throw new Error("Not a RGB color");
-  }
   return new Color(c.r / 255, c.g / 255, c.b / 255);
 }
-function isHSLColor(obj) {
-  return typeof obj === "object" && "h" in obj && "s" in obj && "l" in obj;
-}
 function toHSLColor(obj) {
-  if (!isHSLColor(obj)) {
-    throw new Error("Not a HSL color");
-  }
-  const color = new Color();
-  color.setHSL(obj.h, obj.s, obj.l);
-  return color;
-}
-function isVector(obj) {
-  return typeof obj === "object" && "x" in obj && "y" in obj && "z" in obj;
+  return new Color().setHSL(obj.h, obj.s, obj.l);
 }
 function toVec(obj) {
-  if (!isVector(obj)) {
-    throw new Error("Not a vector");
-  }
   return new Vector3(obj.x, obj.y, obj.z);
 }
 function scalarToVec(x2) {
@@ -30963,9 +30995,80 @@ function toEuler(rot) {
   return new Euler(rot.x * Math.PI / 180, rot.y * Math.PI / 180, rot.z * Math.PI / 180);
 }
 function toQuaternion(rot) {
-  const q2 = new Quaternion();
-  q2.setFromEuler(toEuler(rot));
-  return q2;
+  return new Quaternion().setFromEuler(toEuler(toVec(rot)));
+}
+const DEG2RAD = Math.PI / 180;
+const _lut = [];
+for (let i = 0; i < 256; i++) {
+  _lut[i] = (i < 16 ? "0" : "") + i.toString(16);
+}
+class CameraGizmo {
+  constructor(camera, render) {
+    __publicField(this, "camera");
+    __publicField(this, "render");
+    __publicField(this, "scale");
+    __publicField(this, "box");
+    __publicField(this, "wireframe");
+    __publicField(this, "material");
+    __publicField(this, "materialAlways");
+    __publicField(this, "gizmos");
+    __publicField(this, "timeout");
+    this.camera = camera;
+    this.render = render;
+  }
+  show() {
+    if (!this.gizmos) {
+      this.createGizmo();
+    }
+    this.gizmos.visible = true;
+    clearTimeout(this.timeout);
+    this.timeout = setTimeout(() => this.gizmos.visible = false, 1e3);
+  }
+  update(position) {
+    var _a;
+    (_a = this.gizmos) == null ? void 0 : _a.position.copy(position);
+  }
+  applySettings(settings, factor) {
+    this.setScale(Math.tan(DEG2RAD * settings.getCameraFov() / 2) * factor / 10);
+  }
+  setScale(scale = 1) {
+    var _a;
+    (_a = this.gizmos) == null ? void 0 : _a.scale.set(scale, scale, scale);
+    this.scale = scale;
+  }
+  createGizmo() {
+    this.box = new SphereGeometry(1);
+    this.wireframe = new WireframeGeometry(this.box);
+    this.material = new LineBasicMaterial({
+      depthTest: true,
+      opacity: 0.5,
+      color: new Color(255),
+      transparent: true
+    });
+    this.materialAlways = new LineBasicMaterial({
+      depthTest: false,
+      opacity: 0.05,
+      color: new Color(255),
+      transparent: true
+    });
+    this.gizmos = new Group();
+    this.gizmos.add(new LineSegments(this.wireframe, this.material));
+    this.gizmos.add(new LineSegments(this.wireframe, this.materialAlways));
+    this.render.addToScene(this.gizmos);
+    this.setScale(this.scale);
+  }
+  dispose() {
+    this.box.dispose();
+    this.wireframe.dispose();
+    this.material.dispose();
+    this.materialAlways.dispose();
+    this.box = null;
+    this.wireframe = null;
+    this.material = null;
+    this.materialAlways = null;
+    this.render.remove(this.gizmos);
+    this.gizmos = null;
+  }
 }
 const direction = {
   forward: new Vector3(0, 0, -1),
@@ -30976,39 +31079,32 @@ const direction = {
   down: new Vector3(0, -1, 0)
 };
 class ViewerCamera {
-  constructor(camera, settings) {
-    __publicField(this, "MinOrbitalDistance", 1);
+  constructor(render, settings) {
+    __publicField(this, "gizmo");
+    __publicField(this, "MinOrbitalDistance", 0.2);
     __publicField(this, "camera");
-    __publicField(this, "Rotation");
     __publicField(this, "InputVelocity");
     __publicField(this, "Velocity");
     __publicField(this, "Impulse");
     __publicField(this, "SpeedMultiplier");
-    __publicField(this, "Orbit");
-    __publicField(this, "CenterOfInterest");
     __publicField(this, "OrbitalTarget");
     __publicField(this, "CurrentOrbitalDistance");
     __publicField(this, "TargetOrbitalDistance");
-    __publicField(this, "MouseRotate", false);
     __publicField(this, "MouseOrbit", false);
-    __publicField(this, "MouseMoveDolly", false);
-    __publicField(this, "MouseMovePan", false);
     __publicField(this, "VelocityBlendFactor", 1e-4);
     __publicField(this, "ModelSizeMultiplier", 1);
     __publicField(this, "MoveSpeed", 1);
     __publicField(this, "RotateSpeed", 1);
-    this.camera = camera;
+    this.gizmo = new CameraGizmo(this, render);
+    this.camera = render.camera;
     this.applySettings(settings);
-    this.Rotation = new Vector2(0, 0);
     this.InputVelocity = new Vector3(0, 0, 0);
     this.Velocity = new Vector3(0, 0, 0);
     this.Impulse = new Vector3(0, 0, 0);
     this.SpeedMultiplier = 0;
     this.ModelSizeMultiplier = 1;
-    this.Orbit = false;
-    this.CenterOfInterest = new Vector3(0, 0, 0);
     this.OrbitalTarget = new Vector3(0, 0, 0);
-    this.CurrentOrbitalDistance = camera.position.clone().sub(this.OrbitalTarget).length();
+    this.CurrentOrbitalDistance = this.camera.position.clone().sub(this.OrbitalTarget).length();
     this.TargetOrbitalDistance = this.CurrentOrbitalDistance;
   }
   lookAt(position) {
@@ -31036,40 +31132,52 @@ class ViewerCamera {
     this.TargetOrbitalDistance = this.CurrentOrbitalDistance;
   }
   applySettings(newSettings, modelSphere) {
-    this.MouseOrbit = newSettings.raw.mouseOrbit;
-    this.camera.fov = newSettings.raw.camera.fov;
-    this.camera.zoom = newSettings.raw.camera.zoom;
-    this.camera.near = newSettings.raw.camera.near;
-    this.camera.far = newSettings.raw.camera.far;
+    this.MouseOrbit = newSettings.getCameraIsOrbit();
+    this.camera.fov = newSettings.getCameraFov();
+    this.camera.zoom = newSettings.getCameraZoom();
+    this.camera.near = newSettings.getCameraNear();
+    this.camera.far = newSettings.getCameraFar();
     this.camera.updateProjectionMatrix();
     if (modelSphere) {
       this.ModelSizeMultiplier = modelSphere.radius / newSettings.getCameraReferenceModelSize();
     }
     this.MoveSpeed = newSettings.getCameraMoveSpeed();
     this.RotateSpeed = newSettings.getCameraRotateSpeed();
+    this.gizmo.applySettings(newSettings, this.ModelSizeMultiplier);
   }
   applyLocalImpulse(impulse) {
     const localImpulse = impulse.clone().multiplyScalar(this.getSpeedMultiplier());
     localImpulse.applyQuaternion(this.camera.quaternion);
     this.Impulse.add(localImpulse);
   }
-  moveCameraBy(dir = direction.forward, speed = 1, onlyHoriz = false) {
-    const vector = new Vector3();
-    vector.copy(dir);
+  moveCameraBy(dir = direction.forward, speed) {
+    const vector = dir.clone();
     if (speed)
       vector.multiplyScalar(speed);
     vector.applyQuaternion(this.camera.quaternion);
-    const y2 = this.camera.position.y;
-    this.camera.position.add(vector);
     this.OrbitalTarget.add(vector);
-    if (onlyHoriz)
-      this.camera.position.y = y2;
+    if (this.MouseOrbit) {
+      this.gizmo.show();
+    } else {
+      this.camera.position.add(vector);
+    }
   }
-  TruckPedestalCameraBy(pt) {
+  truckPedestalCameraBy(pt) {
     this.moveCameraBy(new Vector3(-pt.x, pt.y, 0), this.MoveSpeed * this.getSpeedMultiplier());
   }
   dollyCameraBy(amount) {
-    this.moveCameraBy(new Vector3(0, 0, amount), this.MoveSpeed * this.getSpeedMultiplier());
+    if (this.MouseOrbit) {
+      this.CurrentOrbitalDistance += amount;
+    } else {
+      this.moveCameraBy(new Vector3(0, 0, amount), this.MoveSpeed * this.getSpeedMultiplier());
+    }
+  }
+  setCameraLocalVelocity(vector) {
+    const move = vector.clone();
+    move.setZ(-move.z);
+    move.applyQuaternion(this.camera.quaternion);
+    move.multiplyScalar(this.getSpeedMultiplier());
+    this.InputVelocity.copy(move);
   }
   rotateCameraBy(pt) {
     const euler = new Euler(0, 0, 0, "YXZ");
@@ -31094,9 +31202,7 @@ class ViewerCamera {
     this.TargetOrbitalDistance = Math.max(this.TargetOrbitalDistance, this.MinOrbitalDistance);
   }
   frameUpdate(deltaTime) {
-    const targetVelocity = this.GetInputVelocity();
-    targetVelocity.multiplyScalar(this.getSpeedMultiplier());
-    targetVelocity.applyQuaternion(this.camera.quaternion);
+    const targetVelocity = this.InputVelocity.clone();
     const invBlendFactor = Math.pow(this.VelocityBlendFactor, deltaTime);
     const blendFactor = 1 - invBlendFactor;
     this.Velocity.multiplyScalar(invBlendFactor);
@@ -31106,20 +31212,30 @@ class ViewerCamera {
     const positionDelta = this.Velocity.clone().multiplyScalar(deltaTime);
     const impulse = this.Impulse.clone().multiplyScalar(blendFactor);
     positionDelta.add(impulse);
+    const orbitDelta = positionDelta.clone();
+    if (this.MouseOrbit) {
+      const inv = this.camera.quaternion.clone().invert();
+      const local = positionDelta.clone().applyQuaternion(inv);
+      orbitDelta.set(local.x, local.y, 0);
+      orbitDelta.applyQuaternion(this.camera.quaternion);
+      this.CurrentOrbitalDistance = Math.max(this.CurrentOrbitalDistance + local.z, this.MinOrbitalDistance * this.ModelSizeMultiplier);
+      this.TargetOrbitalDistance = this.CurrentOrbitalDistance;
+    }
     this.Impulse.multiplyScalar(invBlendFactor);
     this.camera.position.add(positionDelta);
-    this.OrbitalTarget.add(positionDelta);
-    if (positionDelta.length() > 0) {
-      this.GetInputVelocity();
-    }
+    this.OrbitalTarget.add(orbitDelta);
     if (this.MouseOrbit) {
       this.camera.position.set(0, 0, this.CurrentOrbitalDistance);
       this.camera.position.applyQuaternion(this.camera.quaternion);
       this.camera.position.add(this.OrbitalTarget);
+      if (this.isSignificant(positionDelta))
+        this.gizmo.show();
     }
+    this.gizmo.update(this.OrbitalTarget);
   }
-  GetInputVelocity() {
-    return this.InputVelocity.clone();
+  isSignificant(vector) {
+    const min = 0.01 * this.ModelSizeMultiplier / 60;
+    return Math.abs(vector.x) > min || Math.abs(vector.y) > min || Math.abs(vector.z) > min;
   }
 }
 const KEYS = {
@@ -31212,9 +31328,16 @@ class InputKeyboard {
     __publicField(this, "camera");
     __publicField(this, "viewer");
     __publicField(this, "mouse");
-    __publicField(this, "shftDown", false);
+    __publicField(this, "gizmo");
+    __publicField(this, "isShftPressed", false);
+    __publicField(this, "isUpPressed");
+    __publicField(this, "isDownPressed");
+    __publicField(this, "isLeftPressed");
+    __publicField(this, "isRightPressed");
+    __publicField(this, "isEPressed");
+    __publicField(this, "isQPressed");
     __publicField(this, "reset", () => {
-      this.shftDown = false;
+      this.isShftPressed = false;
     });
     __publicField(this, "onKeyUp", (event) => {
       this.onKey(event, false);
@@ -31252,57 +31375,66 @@ class InputKeyboard {
             event.preventDefault();
             break;
           case KEYS.KEY_Z:
+          case KEYS.KEY_F:
             this.viewer.lookAtSelection();
             event.preventDefault();
             break;
+          case KEYS.KEY_CTRL:
+            this.mouse.setCtrl(keyDown);
+            event.preventDefault();
+            break;
+          case KEYS.KEY_SPACE:
+            this.camera.MouseOrbit = !this.camera.MouseOrbit;
+            break;
         }
       }
-      const speed = keyDown ? this.shftDown ? this.ShiftMultiplier : 1 : 0;
       switch (event.keyCode) {
         case KEYS.KEY_W:
         case KEYS.KEY_UP:
-          this.camera.InputVelocity.z = -speed;
+          this.isUpPressed = keyDown;
+          this.applyMove();
           event.preventDefault();
           break;
         case KEYS.KEY_S:
         case KEYS.KEY_DOWN:
-          this.camera.InputVelocity.z = speed;
+          this.isDownPressed = keyDown;
+          this.applyMove();
           event.preventDefault();
           break;
         case KEYS.KEY_D:
         case KEYS.KEY_RIGHT:
-          this.camera.InputVelocity.x = speed;
+          this.isRightPressed = keyDown;
+          this.applyMove();
           event.preventDefault();
           break;
         case KEYS.KEY_A:
         case KEYS.KEY_LEFT:
-          this.camera.InputVelocity.x = -speed;
+          this.isLeftPressed = keyDown;
+          this.applyMove();
           event.preventDefault();
           break;
         case KEYS.KEY_E:
-          this.camera.InputVelocity.y = speed;
+          this.isEPressed = keyDown;
+          this.applyMove();
           event.preventDefault();
           break;
         case KEYS.KEY_Q:
-          this.camera.InputVelocity.y = -speed;
-          event.preventDefault();
-          break;
-        case KEYS.KEY_CTRL:
-          this.mouse.setCtrl(keyDown);
+          this.isQPressed = keyDown;
+          this.applyMove();
           event.preventDefault();
           break;
         case KEYS.KEY_SHIFT:
-          if (this.shftDown !== keyDown) {
-            this.shftDown = keyDown;
-            if (keyDown) {
-              this.camera.InputVelocity.multiplyScalar(this.ShiftMultiplier);
-            } else {
-              this.camera.InputVelocity.multiplyScalar(1 / this.ShiftMultiplier);
-            }
-          }
+          this.isShftPressed = keyDown;
+          this.applyMove();
           event.preventDefault();
           break;
       }
+    });
+    __publicField(this, "applyMove", () => {
+      const move = new Vector3((this.isRightPressed ? 1 : 0) - (this.isLeftPressed ? 1 : 0), (this.isEPressed ? 1 : 0) - (this.isQPressed ? 1 : 0), (this.isUpPressed ? 1 : 0) - (this.isDownPressed ? 1 : 0));
+      const speed = this.isShftPressed ? this.ShiftMultiplier : 1;
+      move.multiplyScalar(speed);
+      this.camera.setCameraLocalVelocity(move);
     });
     this.camera = camera;
     this.viewer = viewer;
@@ -31310,10 +31442,10 @@ class InputKeyboard {
   }
 }
 class InputTouch {
-  constructor(camera, viewer, mouse) {
+  constructor(camera, renderer, mouse) {
     __publicField(this, "TapDurationMs", 500);
     __publicField(this, "camera");
-    __publicField(this, "viewer");
+    __publicField(this, "renderer");
     __publicField(this, "mouse");
     __publicField(this, "touchStart");
     __publicField(this, "touchStart1");
@@ -31323,7 +31455,7 @@ class InputTouch {
       this.touchStart = this.touchStart1 = this.touchStart2 = this.touchStartTime = void 0;
     });
     __publicField(this, "onTap", (position) => {
-      this.mouse.onMouseClick(position);
+      this.mouse.onMouseClick(position, false);
     });
     __publicField(this, "onTouchStart", (event) => {
       event.preventDefault();
@@ -31344,7 +31476,7 @@ class InputTouch {
       this.camera.rotateCameraBy(delta);
     });
     __publicField(this, "onDoubleDrag", (delta) => {
-      this.camera.TruckPedestalCameraBy(delta);
+      this.camera.truckPedestalCameraBy(delta);
     });
     __publicField(this, "onPinchOrSpread", (delta) => {
       this.camera.dollyCameraBy(delta);
@@ -31357,7 +31489,8 @@ class InputTouch {
         return;
       if (event.touches.length === 1) {
         const pos = this.touchToVector(event.touches[0]);
-        const delta = pos.clone().sub(this.touchStart).multiply(new Vector2(1 / window.innerWidth, 1 / window.innerHeight));
+        const [width, height] = this.renderer.getContainerSize();
+        const delta = pos.clone().sub(this.touchStart).multiply(new Vector2(1 / width, 1 / height));
         this.touchStart = pos;
         this.onDrag(delta);
         return;
@@ -31368,10 +31501,11 @@ class InputTouch {
         const p1 = this.touchToVector(event.touches[0]);
         const p2 = this.touchToVector(event.touches[1]);
         const p3 = this.average(p1, p2);
-        const moveDelta = this.touchStart.clone().sub(p3).multiply(new Vector2(-1 / window.innerWidth, -1 / window.innerHeight));
+        const [width, height] = this.renderer.getContainerSize();
+        const moveDelta = this.touchStart.clone().sub(p3).multiply(new Vector2(-1 / width, -1 / height));
         const zoom = p1.distanceTo(p2);
         const prevZoom = this.touchStart1.distanceTo(this.touchStart2);
-        const min = Math.min(window.innerWidth, window.innerHeight);
+        const min = Math.min(width, height);
         const zoomDelta = (zoom - prevZoom) / -min;
         this.touchStart = p3;
         this.touchStart1 = p1;
@@ -31393,7 +31527,7 @@ class InputTouch {
       this.reset();
     });
     this.camera = camera;
-    this.viewer = viewer;
+    this.renderer = renderer;
     this.mouse = mouse;
   }
   isSingleTouch() {
@@ -31407,9 +31541,9 @@ class InputTouch {
   }
 }
 class InputMouse {
-  constructor(camera, canvas, viewer) {
+  constructor(camera, renderer, viewer) {
     __publicField(this, "camera");
-    __publicField(this, "canvas");
+    __publicField(this, "renderer");
     __publicField(this, "viewer");
     __publicField(this, "isMouseDown", false);
     __publicField(this, "hasMouseMoved", false);
@@ -31431,9 +31565,10 @@ class InputMouse {
       event.preventDefault();
       const deltaX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
       const deltaY = event.movementY || event.mozMovementY || event.webkitMovementY || 0;
-      const delta = new Vector2(deltaX / window.innerWidth, deltaY / window.innerHeight);
+      const [width, height] = this.renderer.getContainerSize();
+      const delta = new Vector2(deltaX / width, deltaY / height);
       if (event.buttons & 2) {
-        this.camera.TruckPedestalCameraBy(delta);
+        this.camera.truckPedestalCameraBy(delta);
       } else {
         this.camera.rotateCameraBy(delta);
       }
@@ -31455,47 +31590,42 @@ class InputMouse {
       event.preventDefault();
       this.isMouseDown = true;
       this.hasMouseMoved = false;
-      this.canvas.focus ? this.canvas.focus() : window.focus();
+      this.renderer.canvas.focus();
     });
     __publicField(this, "onMouseUp", (event) => {
       if (this.isMouseDown && !this.hasMouseMoved) {
-        this.onMouseClick(new Vector2(event.x, event.y));
+        this.onMouseClick(new Vector2(event.x, event.y), false);
       }
       this.isMouseDown = false;
       event.preventDefault();
     });
-    __publicField(this, "onMouseClick", (position) => {
+    __publicField(this, "onDoubleClick", (event) => {
+      this.onMouseClick(new Vector2(event.x, event.y), true);
+    });
+    __publicField(this, "onMouseClick", (position, double) => {
       console.time("raycast");
       const hits = this.mouseRaycast(position);
       console.timeEnd("raycast");
       const result = this.findHitMeshIndex(hits);
-      if (result === null) {
-        this.viewer.clearSelection();
-        return;
-      }
-      if (typeof result === "number") {
-        const element2 = this.viewer.getElementIndexFromNodeIndex(result);
-        if (element2)
-          this.viewer.selectByElementIndex(element2);
-        else {
-          console.error("Could not find elment for node index: " + result);
-        }
-        return;
-      }
-      const element = this.viewer.getElementIndexFromMeshInstance(result[0], result[1]);
-      if (element)
+      const [element, error] = this.getElementIndex(result);
+      if (element >= 0) {
         this.viewer.selectByElementIndex(element);
-      else {
-        console.error(`Could not find element for mesh: ${result[0]}, index: ${result[1]}`);
+        if (double)
+          this.viewer.lookAtSelection();
+      } else {
+        this.viewer.clearSelection();
+        if (error)
+          console.log(error);
       }
     });
     this.camera = camera;
-    this.canvas = canvas;
+    this.renderer = renderer;
     this.viewer = viewer;
   }
   mouseRaycast(position) {
-    const x2 = position.x / window.innerWidth * 2 - 1;
-    const y2 = -(position.y / window.innerHeight) * 2 + 1;
+    const [width, height] = this.renderer.getContainerSize();
+    const x2 = position.x / width * 2 - 1;
+    const y2 = -(position.y / height) * 2 + 1;
     const mouse = new Vector2(x2, y2);
     const raycaster = new Raycaster();
     raycaster.setFromCamera(mouse, this.camera.camera);
@@ -31523,9 +31653,23 @@ ObjectId: ${hit.object.id}`);
     console.log("Raycast hit unsupported object type. It might be an object not created by the vim api. Make sure such objects are not included in viewer this.viewer.render.meshes");
     return null;
   }
+  getElementIndex(raycast) {
+    if (raycast === null) {
+      return [-1, void 0];
+    }
+    if (typeof raycast === "number") {
+      const element2 = this.viewer.getElementIndexFromNodeIndex(raycast);
+      return element2 >= 0 ? [element2, void 0] : [-1, "Could not find elment for node index: " + raycast];
+    }
+    const element = this.viewer.getElementIndexFromMeshInstance(raycast[0], raycast[1]);
+    return element >= 0 ? [element, void 0] : [
+      -1,
+      `Could not find element for mesh: ${raycast[0]}, index: ${raycast[1]}`
+    ];
+  }
 }
 class ViewerInput {
-  constructor(canvas, camera, viewer) {
+  constructor(renderer, camera, viewer) {
     __publicField(this, "canvas");
     __publicField(this, "unregisters");
     __publicField(this, "touch");
@@ -31539,10 +31683,10 @@ class ViewerInput {
       this.unregisters.forEach((f) => f());
       this.reset();
     });
-    this.canvas = canvas;
+    this.canvas = renderer.canvas;
     this.unregisters = [];
-    this.mouse = new InputMouse(camera, canvas, viewer);
-    this.touch = new InputTouch(camera, viewer, this.mouse);
+    this.mouse = new InputMouse(camera, renderer, viewer);
+    this.touch = new InputTouch(camera, renderer, this.mouse);
     this.keyboard = new InputKeyboard(camera, viewer, this.mouse);
   }
   register() {
@@ -31551,6 +31695,7 @@ class ViewerInput {
     this.reg(this.canvas, "mousemove", this.mouse.onMouseMove);
     this.reg(this.canvas, "mouseup", this.mouse.onMouseUp);
     this.reg(this.canvas, "mouseout", this.mouse.onMouseOut);
+    this.reg(this.canvas, "dblclick", this.mouse.onDoubleClick);
     this.reg(this.canvas, "touchstart", this.touch.onTouchStart);
     this.reg(this.canvas, "touchend", this.touch.onTouchEnd);
     this.reg(this.canvas, "touchmove", this.touch.onTouchMove);
@@ -32460,19 +32605,18 @@ class EnvironmentPlane {
   }
   applySettings(settings, modelSettings, box) {
     var _a;
-    this.mesh.visible = settings.raw.plane.show;
-    this.applyTexture(settings.raw.plane.texture);
+    this.mesh.visible = settings.getPlaneShow();
+    this.applyTexture(settings.getPlaneTextureUrl());
     this.material.color.copy(settings.getPlaneColor());
-    this.material.opacity = settings.raw.plane.opacity;
+    this.material.opacity = settings.getPlaneOpacity();
     if (!box || !modelSettings)
       return;
     const center = box.getCenter(new Vector3());
     const position = new Vector3(center.x, box.min.y - modelSettings.getObjectScale().y, center.z);
     this.mesh.position.copy(position);
-    const rotation = modelSettings.getObjectRotation();
-    this.mesh.quaternion.copy(rotation);
+    this.mesh.quaternion.copy(new Quaternion().setFromEuler(new Euler(1.5 * Math.PI, 0, 0)));
     const sphere = box == null ? void 0 : box.getBoundingSphere(new Sphere());
-    const size = ((_a = sphere == null ? void 0 : sphere.radius) != null ? _a : 1) * settings.raw.plane.size;
+    const size = ((_a = sphere == null ? void 0 : sphere.radius) != null ? _a : 1) * settings.getPlaneSize();
     const scale = new Vector3(1, 1, 1).multiplyScalar(size);
     this.mesh.scale.copy(scale);
   }
@@ -32547,10 +32691,9 @@ class ViewerRenderer {
     __publicField(this, "boundingBox");
     __publicField(this, "meshes", []);
     __publicField(this, "fitToCanvas", () => {
-      const w = window.innerWidth / window.devicePixelRatio;
-      const h = window.innerHeight / window.devicePixelRatio;
-      this.renderer.setSize(w, h, false);
-      this.camera.aspect = this.canvas.width / this.canvas.height;
+      const [width, height] = this.getContainerSize();
+      this.renderer.setSize(width, height);
+      this.camera.aspect = width / height;
       this.camera.updateProjectionMatrix();
     });
     this.renderer = new WebGLRenderer({
@@ -32589,9 +32732,24 @@ class ViewerRenderer {
   render() {
     this.renderer.render(this.scene, this.camera);
   }
-  addToScene(meshes) {
+  getContainerSize() {
+    return [
+      this.canvas.parentElement.clientWidth,
+      this.canvas.parentElement.clientHeight
+    ];
+  }
+  addToScene(mesh) {
+    this.scene.add(mesh);
+  }
+  remove(mesh) {
+    this.scene.remove(mesh);
+    const i = this.meshes.indexOf(mesh);
+    if (i > 0)
+      this.meshes.splice(i, 1);
+  }
+  addManyToScene(meshes) {
     meshes.forEach((m2) => {
-      this.scene.add(m2);
+      this.addToScene(m2);
     });
   }
   addToModel(meshes) {
@@ -32677,12 +32835,12 @@ const _Viewer = class {
       return this.vimScene.getElementIndexFromNodeIndex(nodeIndex);
     });
     this.settings = new ViewerSettings(options);
-    const canvas = _Viewer.getOrCreateCanvas(this.settings.raw.canvasId);
+    const canvas = _Viewer.getOrCreateCanvas(this.settings.getCanvasId());
     this.render = new ViewerRenderer(canvas, this.settings);
-    this.cameraController = new ViewerCamera(this.render.camera, this.settings);
+    this.cameraController = new ViewerCamera(this.render, this.settings);
     this.environment = ViewerEnvironment.createDefault();
-    this.render.addToScene(this.environment.getElements());
-    this.controls = new ViewerInput(this.render.canvas, this.cameraController, this);
+    this.render.addManyToScene(this.environment.getElements());
+    this.controls = new ViewerInput(this.render, this.cameraController, this);
     this.controls.register();
     this.selection = new Selection(this);
     this.ApplySettings();
@@ -32692,8 +32850,6 @@ const _Viewer = class {
     requestAnimationFrame(() => this.animate());
     const timeDelta = this.render.clock.getDelta();
     this.cameraController.frameUpdate(timeDelta);
-    if (this.settings.raw.autoResize)
-      this.render.fitToCanvas();
     this.render.render();
   }
   loadModel(options, onLoad, onProgress, onError) {
@@ -32817,7 +32973,7 @@ const _Viewer = class {
       transparent: true
     });
     const line = new LineSegments(wireframe, material);
-    this.render.addToScene([line]);
+    this.render.addManyToScene([line]);
     return () => {
       this.render.scene.remove(line);
       wireframe.dispose();
