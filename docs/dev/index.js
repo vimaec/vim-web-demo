@@ -93,6 +93,13 @@ function VimLoadingBox(prop) {
 }
 const params = new URLSearchParams(window.location.search);
 const url = params.has("model") ? params.get("model") : "https://vim.azureedge.net/samples/residence.vim";
+let drawTransparency = true;
+let transparencyAsOpaque = false;
+if (params.has("transparency")) {
+  const t = params.get("transparency");
+  drawTransparency = t !== "false";
+  transparencyAsOpaque = t === "opaque";
+}
 const canvasId = buildUI(Viewer.stateChangeEvent);
 const viewer = new Viewer({
   canvas: { id: canvasId },
@@ -104,6 +111,8 @@ const viewer = new Viewer({
   }
 });
 viewer.loadModel({
+  drawTransparency,
+  drawTransparencyAsOpaque: transparencyAsOpaque,
   url,
   rotation: { x: 270, y: 0, z: 0 }
 }, (vim) => console.log("Callback: Viewer Ready!"), (progress) => {
