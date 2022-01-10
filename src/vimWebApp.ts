@@ -9,7 +9,15 @@ const url = params.has('model')
   ? params.get('model')
   : 'https://vim.azureedge.net/samples/residence.vim'
 
+  let drawTransparency = true
+  let transparencyAsOpaque = false
+  if (params.has('transparency')) {
+    const t = params.get('transparency')
+    drawTransparency = t !== 'false'
+    transparencyAsOpaque = t === 'opaque'
+  }
 
+// Create Viewer
 const canvasId = buildUI(Viewer.stateChangeEvent)
 
 const viewer = new Viewer({
@@ -22,9 +30,11 @@ const viewer = new Viewer({
     size: 5
   }
 })
-
+// Load Model
 viewer.loadModel(
   {
+    drawTransparency: drawTransparency,
+    drawTransparencyAsOpaque: transparencyAsOpaque,
     url: url,
     rotation: { x: 270, y: 0, z: 0 }
   },
