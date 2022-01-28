@@ -1,4 +1,4 @@
-import { R as ReactDOM, a as React, r as react, V as Viewer, S as Stats } from "./vendor.js";
+import { R as ReactDOM, a as React, r as react, V as Viewer, S as Stats, t as transparencyIsValid } from "./vendor.js";
 const p = function polyfill() {
   const relList = document.createElement("link").relList;
   if (relList && relList.supports && relList.supports("modulepreload")) {
@@ -92,13 +92,11 @@ function VimLoadingBox(prop) {
   }, /* @__PURE__ */ React.createElement("h1", null, " ", prop.msg, " "));
 }
 const params = new URLSearchParams(window.location.search);
-const url = params.has("model") ? params.get("model") : "https://vim.azureedge.net/samples/residence.vim";
-let drawTransparency = true;
-let transparencyAsOpaque = false;
+const url = params.has("vim") ? params.get("vim") : "https://vim.azureedge.net/samples/residence.vim";
+let transparency = "all";
 if (params.has("transparency")) {
   const t = params.get("transparency");
-  drawTransparency = t !== "false";
-  transparencyAsOpaque = t === "opaque";
+  transparency = transparencyIsValid(t) ? t : "all";
 }
 const canvasId = buildUI(Viewer.stateChangeEvent);
 const viewer = new Viewer({
@@ -110,10 +108,8 @@ const viewer = new Viewer({
     size: 5
   }
 });
-viewer.loadModel({
-  drawTransparency,
-  drawTransparencyAsOpaque: transparencyAsOpaque,
-  url,
+viewer.loadVim(url, {
+  transparency,
   rotation: { x: 270, y: 0, z: 0 }
 }, (vim) => console.log("Callback: Viewer Ready!"), (progress) => {
   if (progress === "processing")

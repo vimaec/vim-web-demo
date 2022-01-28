@@ -1,21 +1,20 @@
 //import { settingsGui } from './settingsGui'
 import { buildUI } from './vimReact'
 import {Viewer} from 'vim-webgl-viewer'
+import {TransparencyMode, transparencyIsValid} from 'vim-webgl-viewer'
 import Stats from 'stats-js'
 
 // Parse URL
 const params = new URLSearchParams(window.location.search)
-const url = params.has('model')
-  ? params.get('model')
+const url = params.has('vim')
+  ? params.get('vim')
   : 'https://vim.azureedge.net/samples/residence.vim'
 
-  let drawTransparency = true
-  let transparencyAsOpaque = false
-  if (params.has('transparency')) {
-    const t = params.get('transparency')
-    drawTransparency = t !== 'false'
-    transparencyAsOpaque = t === 'opaque'
-  }
+let transparency = 'all' as TransparencyMode
+if (params.has('transparency')) {
+  const t = params.get('transparency')
+  transparency = transparencyIsValid(t) ? t : 'all'
+}
 
 // Create Viewer
 const canvasId = buildUI(Viewer.stateChangeEvent)
@@ -31,11 +30,10 @@ const viewer = new Viewer({
   }
 })
 // Load Model
-viewer.loadModel(
+viewer.loadVim(
+  url,
   {
-    drawTransparency: drawTransparency,
-    drawTransparencyAsOpaque: transparencyAsOpaque,
-    url: url,
+    transparency: transparency,
     rotation: { x: 270, y: 0, z: 0 }
   },
   (vim) => console.log('Callback: Viewer Ready!'),
