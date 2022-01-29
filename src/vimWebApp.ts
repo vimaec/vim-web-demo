@@ -6,9 +6,13 @@ import Stats from 'stats-js'
 
 // Parse URL
 const params = new URLSearchParams(window.location.search)
-const url = params.has('vim')
+let url = params.has('vim')
   ? params.get('vim')
   : 'https://vim.azureedge.net/samples/residence.vim'
+
+url = params.has('model')
+? params.get('model')
+: 'https://vim.azureedge.net/samples/residence.vim'
 
 let transparency = 'all' as TransparencyMode
 if (params.has('transparency')) {

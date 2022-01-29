@@ -38260,7 +38260,8 @@ const _Viewer = class {
     requestAnimationFrame(() => this.animate());
     const timeDelta = this.renderer.clock.getDelta();
     this.camera.frameUpdate(timeDelta);
-    this.renderer.render();
+    if (this.vimScene)
+      this.renderer.render();
   }
   loadVim(source = "https://vim.azureedge.net/samples/residence.vim", options, onLoad, onProgress, onError) {
     if (this.vimSettings) {
@@ -38297,6 +38298,7 @@ const _Viewer = class {
     this.renderer.render();
     this.lookAtScene();
     this.ApplyVimSettings();
+    this.animate();
   }
   static getOrCreateCanvas(canvasId) {
     let canvas = canvasId ? document.getElementById(canvasId) : void 0;

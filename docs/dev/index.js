@@ -92,7 +92,8 @@ function VimLoadingBox(prop) {
   }, /* @__PURE__ */ React.createElement("h1", null, " ", prop.msg, " "));
 }
 const params = new URLSearchParams(window.location.search);
-const url = params.has("vim") ? params.get("vim") : "https://vim.azureedge.net/samples/residence.vim";
+let url = params.has("vim") ? params.get("vim") : "https://vim.azureedge.net/samples/residence.vim";
+url = params.has("model") ? params.get("model") : "https://vim.azureedge.net/samples/residence.vim";
 let transparency = "all";
 if (params.has("transparency")) {
   const t = params.get("transparency");
