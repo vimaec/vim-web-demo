@@ -7,7 +7,8 @@ import './style.css'
 
 const canvasId = 'vim-canvas'
 
-export function buildUI (viewerEventName: string): string {
+type Progress = 'processing'| number | string
+export function buildUI():[string, (state : Progress) => void]{
   // Create container for React
   const ui = document.createElement('div')
   ui.className = 'vim'
@@ -15,22 +16,21 @@ export function buildUI (viewerEventName: string): string {
   document.body.append(ui)
 
   // Render
-  ReactDOM.render(<VimUI eventName={viewerEventName} />, ui)
-  return canvasId
+  const obj = {state: '', set: null as (p: Progress) => void }
+  ReactDOM.render(<VimUI p={obj} />, ui)
+  return [canvasId, (str) => obj.set(str)]
 }
 
-function VimUI (props: { eventName: string }) {
-  const [msg, setProgress] = useState('')
-
-  addEventListener(props.eventName, (event: CustomEvent<ViewerState>) => {
-    setProgress(FormatStateMessage(event.detail))
-  })
+function VimUI (props: {p:any }) {
+  const [progress, setProgress] = useState<Progress>()
+  props.p.msg = progress
+  props.p.set = setProgress
 
   return (
     <>
       <canvas id={canvasId}> </canvas>
       <Logo />
-      <VimLoadingBox msg={msg} />
+      <VimLoadingBox progress={progress} />
     </>
   )
 }
@@ -45,22 +45,17 @@ function Logo () {
   )
 }
 
-function FormatStateMessage (state: ViewerState): string {
+function VimLoadingBox (prop: { progress: Progress }) {
+  const msg = 
+  prop.progress ==='processing' ? 'Processing'
+  : typeof(prop.progress) === 'number' ? `Downloading: ${Math.round(prop.progress / 1000000)} MB`
+  : typeof(prop.progress) === 'string' ? `Error: ${prop.progress}`
+  : undefined
 
-  if (state[0] === 'Downloading') {
-    return `Downloading: ${Math.round((state[1] as number) / 1000000)} MB`
-  }
-  if (state[0] === 'Error') {
-    return 'Error : ' + (state[1] as ErrorEvent).message
-  }
-  if (state === 'Processing') return 'Processing'
-}
-
-function VimLoadingBox (prop: { msg: string }) {
-  if (!prop.msg) return null
+  if (!msg) return null
   return (
     <div className="vim-loading-box">
-      <h1> {prop.msg} </h1>
+      <h1> {msg} </h1>
     </div>
   )
 }
