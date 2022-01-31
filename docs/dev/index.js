@@ -1,4 +1,4 @@
-import { r as react, R as ReactDOM, a as React, V as Viewer, S as Stats, t as transparencyIsValid } from "./vendor.js";
+import { R as ReactDOM, a as React, r as react, V as Viewer, S as Stats, t as transparencyIsValid } from "./vendor.js";
 const p = function polyfill() {
   const relList = document.createElement("link").relList;
   if (relList && relList.supports && relList.supports("modulepreload")) {
@@ -49,18 +49,20 @@ function buildUI() {
   ui.className = "vim";
   ui.style.height = "100%";
   document.body.append(ui);
-  const [msg, setProgress2] = react.exports.useState("");
+  const obj = { state: "", set: null };
   ReactDOM.render(/* @__PURE__ */ React.createElement(VimUI, {
-    msg,
-    setter: setProgress2
+    p: obj
   }), ui);
-  return [canvasId$1, setProgress2];
+  return [canvasId$1, (str) => obj.set(str)];
 }
 function VimUI(props) {
+  const [progress, setProgress2] = react.exports.useState();
+  props.p.msg = progress;
+  props.p.set = setProgress2;
   return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("canvas", {
     id: canvasId$1
   }, " "), /* @__PURE__ */ React.createElement(Logo, null), /* @__PURE__ */ React.createElement(VimLoadingBox, {
-    msg: props.msg
+    progress
   }));
 }
 function Logo() {
@@ -73,11 +75,12 @@ function Logo() {
   })));
 }
 function VimLoadingBox(prop) {
-  if (!prop.msg)
+  const msg = prop.progress === "processing" ? "Processing" : typeof prop.progress === "number" ? `Downloading: ${Math.round(prop.progress / 1e6)} MB` : typeof prop.progress === "string" ? `Error: ${prop.progress}` : void 0;
+  if (!msg)
     return null;
   return /* @__PURE__ */ React.createElement("div", {
     className: "vim-loading-box"
-  }, /* @__PURE__ */ React.createElement("h1", null, " ", prop.msg, " "));
+  }, /* @__PURE__ */ React.createElement("h1", null, " ", msg, " "));
 }
 const params = new URLSearchParams(window.location.search);
 let url = params.has("vim") ? params.get("vim") : "https://vim.azureedge.net/samples/residence.vim";
@@ -100,10 +103,7 @@ const viewer = new Viewer({
 viewer.loadVim(url, {
   transparency,
   rotation: { x: 270, y: 0, z: 0 }
-}, (result) => console.log("Callback: Viewer Ready!"), (progress) => {
-  const msg = progress === "processing" ? "Processing" : `Downloading: ${progress.loaded / 1e6} MB`;
-  setProgress(msg);
-}, (error) => console.error("Callback: Error: " + error.message));
+}, (result) => setProgress(void 0), (progress) => setProgress(progress === "processing" ? "processing" : progress.loaded), (error) => setProgress(error.message));
 globalThis.viewer = viewer;
 const stats = new Stats();
 stats.dom.style.top = "84px";
