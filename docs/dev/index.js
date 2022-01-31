@@ -1,4 +1,4 @@
-import { R as ReactDOM, a as React, r as react, V as Viewer, S as Stats, t as transparencyIsValid } from "./vendor.js";
+import { r as react, R as ReactDOM, a as React, V as Viewer, S as Stats, t as transparencyIsValid } from "./vendor.js";
 const p = function polyfill() {
   const relList = document.createElement("link").relList;
   if (relList && relList.supports && relList.supports("modulepreload")) {
@@ -44,25 +44,23 @@ p();
 var style = "";
 var urlLogo = "./logo.png";
 const canvasId$1 = "vim-canvas";
-function buildUI(viewerEventName) {
+function buildUI() {
   const ui = document.createElement("div");
   ui.className = "vim";
   ui.style.height = "100%";
   document.body.append(ui);
+  const [msg, setProgress2] = react.exports.useState("");
   ReactDOM.render(/* @__PURE__ */ React.createElement(VimUI, {
-    eventName: viewerEventName
+    msg,
+    setter: setProgress2
   }), ui);
-  return canvasId$1;
+  return [canvasId$1, setProgress2];
 }
 function VimUI(props) {
-  const [msg, setProgress] = react.exports.useState("");
-  addEventListener(props.eventName, (event) => {
-    setProgress(FormatStateMessage(event.detail));
-  });
   return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("canvas", {
     id: canvasId$1
   }, " "), /* @__PURE__ */ React.createElement(Logo, null), /* @__PURE__ */ React.createElement(VimLoadingBox, {
-    msg
+    msg: props.msg
   }));
 }
 function Logo() {
@@ -73,16 +71,6 @@ function Logo() {
   }, /* @__PURE__ */ React.createElement("img", {
     src: urlLogo
   })));
-}
-function FormatStateMessage(state) {
-  if (state[0] === "Downloading") {
-    return `Downloading: ${Math.round(state[1] / 1e6)} MB`;
-  }
-  if (state[0] === "Error") {
-    return "Error : " + state[1].message;
-  }
-  if (state === "Processing")
-    return "Processing";
 }
 function VimLoadingBox(prop) {
   if (!prop.msg)
@@ -99,7 +87,7 @@ if (params.has("transparency")) {
   const t = params.get("transparency");
   transparency = transparencyIsValid(t) ? t : "all";
 }
-const canvasId = buildUI(Viewer.stateChangeEvent);
+const [canvasId, setProgress] = buildUI();
 const viewer = new Viewer({
   canvas: { id: canvasId },
   plane: {
@@ -112,12 +100,9 @@ const viewer = new Viewer({
 viewer.loadVim(url, {
   transparency,
   rotation: { x: 270, y: 0, z: 0 }
-}, (vim) => console.log("Callback: Viewer Ready!"), (progress) => {
-  if (progress === "processing")
-    console.log("Callback: Processing");
-  else {
-    console.log(`Callback: Downloading: ${progress.loaded / 1e6} MB`);
-  }
+}, (result) => console.log("Callback: Viewer Ready!"), (progress) => {
+  const msg = progress === "processing" ? "Processing" : `Downloading: ${progress.loaded / 1e6} MB`;
+  setProgress(msg);
 }, (error) => console.error("Callback: Error: " + error.message));
 globalThis.viewer = viewer;
 const stats = new Stats();

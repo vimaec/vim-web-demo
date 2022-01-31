@@ -3,6 +3,7 @@ import { buildUI } from './vimReact'
 import {Viewer} from 'vim-webgl-viewer'
 import {TransparencyMode, transparencyIsValid} from 'vim-webgl-viewer'
 import Stats from 'stats-js'
+import { useState } from 'react'
 
 // Parse URL
 const params = new URLSearchParams(window.location.search)
@@ -21,7 +22,7 @@ if (params.has('transparency')) {
 }
 
 // Create Viewer
-const canvasId = buildUI(Viewer.stateChangeEvent)
+const [canvasId, setProgress] = buildUI()
 
 const viewer = new Viewer({
   canvas: {id : canvasId},
@@ -33,6 +34,8 @@ const viewer = new Viewer({
     size: 5
   }
 })
+
+
 // Load Model
 viewer.loadVim(
   url,
@@ -40,15 +43,13 @@ viewer.loadVim(
     transparency: transparency,
     rotation: { x: 270, y: 0, z: 0 }
   },
-  (vim) => console.log('Callback: Viewer Ready!'),
-  (progress) => {
-    if (progress === 'processing') console.log('Callback: Processing')
-    else {
-      console.log(`Callback: Downloading: ${progress.loaded / 1000000} MB`)
-    }
-  },
-  (error) => console.error('Callback: Error: ' + error.message)
-)
+  (result) => setProgress(undefined),
+  (progress) => 
+    setProgress(progress === 'processing' ? 'processing' : progress.loaded)
+  ,
+  (error) => 
+    setProgress(error.message)
+  )
 
 // Make viewer accessible in console
 globalThis.viewer = viewer
