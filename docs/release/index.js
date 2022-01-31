@@ -44,25 +44,25 @@ p();
 var style = "";
 var urlLogo = "./logo.png";
 const canvasId$1 = "vim-canvas";
-function buildUI(viewerEventName) {
+function buildUI() {
   const ui = document.createElement("div");
   ui.className = "vim";
   ui.style.height = "100%";
   document.body.append(ui);
+  const obj = { state: "", set: null };
   ReactDOM.render(/* @__PURE__ */ React.createElement(VimUI, {
-    eventName: viewerEventName
+    p: obj
   }), ui);
-  return canvasId$1;
+  return [canvasId$1, (str) => obj.set(str)];
 }
 function VimUI(props) {
-  const [msg, setProgress] = react.exports.useState("");
-  addEventListener(props.eventName, (event) => {
-    setProgress(FormatStateMessage(event.detail));
-  });
+  const [progress, setProgress2] = react.exports.useState();
+  props.p.msg = progress;
+  props.p.set = setProgress2;
   return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("canvas", {
     id: canvasId$1
   }, " "), /* @__PURE__ */ React.createElement(Logo, null), /* @__PURE__ */ React.createElement(VimLoadingBox, {
-    msg
+    progress
   }));
 }
 function Logo() {
@@ -74,22 +74,13 @@ function Logo() {
     src: urlLogo
   })));
 }
-function FormatStateMessage(state) {
-  if (state[0] === "Downloading") {
-    return `Downloading: ${Math.round(state[1] / 1e6)} MB`;
-  }
-  if (state[0] === "Error") {
-    return "Error : " + state[1].message;
-  }
-  if (state === "Processing")
-    return "Processing";
-}
 function VimLoadingBox(prop) {
-  if (!prop.msg)
+  const msg = prop.progress === "processing" ? "Processing" : typeof prop.progress === "number" ? `Downloading: ${Math.round(prop.progress / 1e6)} MB` : typeof prop.progress === "string" ? `Error: ${prop.progress}` : void 0;
+  if (!msg)
     return null;
   return /* @__PURE__ */ React.createElement("div", {
     className: "vim-loading-box"
-  }, /* @__PURE__ */ React.createElement("h1", null, " ", prop.msg, " "));
+  }, /* @__PURE__ */ React.createElement("h1", null, " ", msg, " "));
 }
 const params = new URLSearchParams(window.location.search);
 let url = params.has("vim") ? params.get("vim") : "https://vim.azureedge.net/samples/residence.vim";
@@ -99,7 +90,7 @@ if (params.has("transparency")) {
   const t = params.get("transparency");
   transparency = transparencyIsValid(t) ? t : "all";
 }
-const canvasId = buildUI(Viewer.stateChangeEvent);
+const [canvasId, setProgress] = buildUI();
 const viewer = new Viewer({
   canvas: { id: canvasId },
   plane: {
@@ -112,13 +103,7 @@ const viewer = new Viewer({
 viewer.loadVim(url, {
   transparency,
   rotation: { x: 270, y: 0, z: 0 }
-}, (vim) => console.log("Callback: Viewer Ready!"), (progress) => {
-  if (progress === "processing")
-    console.log("Callback: Processing");
-  else {
-    console.log(`Callback: Downloading: ${progress.loaded / 1e6} MB`);
-  }
-}, (error) => console.error("Callback: Error: " + error.message));
+}, (result) => setProgress(void 0), (progress) => setProgress(progress === "processing" ? "processing" : progress.loaded), (error) => setProgress(error.message));
 globalThis.viewer = viewer;
 const stats = new Stats();
 stats.dom.style.top = "84px";
