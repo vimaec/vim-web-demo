@@ -1,11 +1,11 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
-import {ViewerState} from 'vim-webgl-viewer'
 import urlLogo from './assets/logo.png'
 import './style.css'
 
 const canvasId = 'vim-canvas'
+
 
 type Progress = 'processing'| number | string
 export function buildUI():[string, (state : Progress) => void]{

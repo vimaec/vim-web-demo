@@ -1,4 +1,4 @@
-import { R as ReactDOM, a as React, r as react, V as Viewer, S as Stats, t as transparencyIsValid } from "./vendor.js";
+import { R as ReactDOM, a as React, r as react, T as Transparency, V as Viewer, S as Stats } from "./vendor.js";
 const p = function polyfill() {
   const relList = document.createElement("link").relList;
   if (relList && relList.supports && relList.supports("modulepreload")) {
@@ -88,18 +88,19 @@ url = params.has("model") ? params.get("model") : "https://vim.azureedge.net/sam
 let transparency = "all";
 if (params.has("transparency")) {
   const t = params.get("transparency");
-  transparency = transparencyIsValid(t) ? t : "all";
+  transparency = Transparency.IsValid(t) ? t : "all";
 }
 const [canvasId, setProgress] = buildUI();
 const viewer = new Viewer({
   canvas: { id: canvasId },
-  plane: {
+  groundPlane: {
     show: true,
     texture: "https://vimdevelopment01storage.blob.core.windows.net/textures/vim-floor-soft.png",
     opacity: 1,
     size: 5
   }
 });
+viewer.camera;
 viewer.loadVim(url, {
   transparency,
   rotation: { x: 270, y: 0, z: 0 }
