@@ -1,9 +1,9 @@
 //import { settingsGui } from './settingsGui'
 import { buildUI } from './vimReact'
-import {Viewer} from 'vim-webgl-viewer'
-import {TransparencyMode, transparencyIsValid} from 'vim-webgl-viewer'
+import * as VIM from 'vim-webgl-viewer/'
 import Stats from 'stats-js'
-import { useState } from 'react'
+
+
 
 // Parse URL
 const params = new URLSearchParams(window.location.search)
@@ -15,18 +15,19 @@ url = params.has('model')
 ? params.get('model')
 : 'https://vim.azureedge.net/samples/residence.vim'
 
-let transparency = 'all' as TransparencyMode
+
+let transparency = 'all' as VIM.Transparency.Mode
 if (params.has('transparency')) {
   const t = params.get('transparency')
-  transparency = transparencyIsValid(t) ? t : 'all'
+  transparency = VIM.Transparency.IsValid(t) ? t : 'all'
 }
 
 // Create Viewer
 const [canvasId, setProgress] = buildUI()
 
-const viewer = new Viewer({
+const viewer = new VIM.Viewer({
   canvas: {id : canvasId},
-  plane: {
+  groundPlane: {
     show: true,
     texture:
       'https://vimdevelopment01storage.blob.core.windows.net/textures/vim-floor-soft.png',
@@ -34,7 +35,7 @@ const viewer = new Viewer({
     size: 5
   }
 })
-
+viewer.camera
 
 // Load Model
 viewer.loadVim(
