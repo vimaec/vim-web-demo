@@ -28,7 +28,7 @@
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-prettier": "^8.4.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
@@ -41,14 +41,14 @@
     "vite": "^2.8.4"
   },
   "dependencies": {
-    "dat.gui": "^0.7.7",
+    "dat.gui": "^0.7.9",
     "deepmerge": "^4.2.2",
     "jsx": "^0.9.89",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "stats-js": "^1.0.1",
     "three": "^0.133.1",
-    "vim-webgl-viewer": "1.1.30"
+    "vim-webgl-viewer": "1.1.31"
   },
   "keywords": [
     "3d",
