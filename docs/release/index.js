@@ -49,16 +49,16 @@ function buildUI() {
   ui.className = "vim";
   ui.style.height = "100%";
   document.body.append(ui);
-  const obj = { state: "", set: null };
+  const updater = { state: "", set: null };
   ReactDOM.render(/* @__PURE__ */ React.createElement(VimUI, {
-    p: obj
+    hook: updater
   }), ui);
-  return [canvasId$1, (str) => obj.set(str)];
+  return [canvasId$1, (str) => updater.set(str)];
 }
 function VimUI(props) {
   const [progress, setProgress2] = react.exports.useState();
-  props.p.msg = progress;
-  props.p.set = setProgress2;
+  props.hook.msg = progress;
+  props.hook.set = setProgress2;
   return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("canvas", {
     id: canvasId$1
   }, " "), /* @__PURE__ */ React.createElement(Logo, null), /* @__PURE__ */ React.createElement(VimLoadingBox, {
@@ -88,7 +88,7 @@ url = params.has("model") ? params.get("model") : "https://vim.azureedge.net/sam
 let transparency = "all";
 if (params.has("transparency")) {
   const t = params.get("transparency");
-  transparency = Transparency.IsValid(t) ? t : "all";
+  transparency = Transparency.isValid(t) ? t : "all";
 }
 const [canvasId, setProgress] = buildUI();
 const viewer = new Viewer({

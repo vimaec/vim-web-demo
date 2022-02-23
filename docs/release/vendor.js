@@ -29461,7 +29461,7 @@ class InstancedInterleavedBuffer extends InterleavedBuffer {
   }
 }
 InstancedInterleavedBuffer.prototype.isInstancedInterleavedBuffer = true;
-class Raycaster {
+class Raycaster$1 {
   constructor(origin, direction, near = 0, far = Infinity) {
     this.ray = new Ray(origin, direction);
     this.near = near;
@@ -30777,7 +30777,7 @@ class CameraGizmo {
     this._gizmos = new Group();
     this._gizmos.add(new LineSegments(this._wireframe, this._material));
     this._gizmos.add(new LineSegments(this._wireframe, this._materialAlways));
-    this._renderer.addObject(this._gizmos);
+    this._renderer.add(this._gizmos);
     this.setScale(this._scale);
   }
   dispose() {
@@ -30789,7 +30789,7 @@ class CameraGizmo {
     this._wireframe = null;
     this._material = null;
     this._materialAlways = null;
-    this._renderer.removeObject(this._gizmos);
+    this._renderer.remove(this._gizmos);
     this._gizmos = null;
   }
 }
@@ -30798,28 +30798,29 @@ const _lut = [];
 for (let i = 0; i < 256; i++) {
   _lut[i] = (i < 16 ? "0" : "") + i.toString(16);
 }
-const DIRECTIONS = {
+({
   forward: new Vector3(0, 0, -1),
   back: new Vector3(0, 0, 1),
   left: new Vector3(-1, 0, 0),
   right: new Vector3(1, 0, 0),
   up: new Vector3(0, 1, 0),
   down: new Vector3(0, -1, 0)
-};
+});
 class Camera {
   constructor(renderer, settings) {
-    __publicField(this, "gizmo");
     __publicField(this, "camera");
-    __publicField(this, "inputVelocity");
-    __publicField(this, "velocity");
-    __publicField(this, "impulse");
-    __publicField(this, "speedMultiplier");
-    __publicField(this, "orbitalTarget");
-    __publicField(this, "minOrbitalDistance", 0.02);
-    __publicField(this, "currentOrbitalDistance");
-    __publicField(this, "orbitalTargetDistance");
-    __publicField(this, "lerpSecondsDuration");
-    __publicField(this, "lerpMsEndtime");
+    __publicField(this, "_renderer");
+    __publicField(this, "_gizmo");
+    __publicField(this, "_inputVelocity");
+    __publicField(this, "_velocity");
+    __publicField(this, "_");
+    __publicField(this, "speed");
+    __publicField(this, "_orbitalTarget");
+    __publicField(this, "_minOrbitalDistance", 0.02);
+    __publicField(this, "_currentOrbitalDistance");
+    __publicField(this, "_orbitalTargetDistance");
+    __publicField(this, "_lerpSecondsDuration");
+    __publicField(this, "_lerpMsEndtime");
     __publicField(this, "_orbitMode", false);
     __publicField(this, "_vimReferenceSize");
     __publicField(this, "_sceneSizeMultiplier", 1);
@@ -30829,47 +30830,69 @@ class Camera {
     __publicField(this, "_orbitSpeed", 1);
     __publicField(this, "_wheelSpeed", 0.2);
     this.camera = renderer.camera;
-    this.gizmo = new CameraGizmo(renderer);
+    this._renderer = renderer;
+    this._gizmo = new CameraGizmo(renderer);
     this.applySettings(settings);
-    this.inputVelocity = new Vector3(0, 0, 0);
-    this.velocity = new Vector3(0, 0, 0);
-    this.impulse = new Vector3(0, 0, 0);
-    this.speedMultiplier = 0;
+    this._inputVelocity = new Vector3(0, 0, 0);
+    this._velocity = new Vector3(0, 0, 0);
+    this._ = new Vector3(0, 0, 0);
+    this.speed = 0;
     this._sceneSizeMultiplier = 1;
-    this.orbitalTarget = new Vector3(0, 0, 0);
-    this.currentOrbitalDistance = this.camera.position.clone().sub(this.orbitalTarget).length();
-    this.orbitalTargetDistance = this.currentOrbitalDistance;
+    this._orbitalTarget = new Vector3(0, 0, 0);
+    this._currentOrbitalDistance = this.camera.position.clone().sub(this._orbitalTarget).length();
+    this._orbitalTargetDistance = this._currentOrbitalDistance;
+  }
+  reset() {
+    this.camera.position.set(0, 0, -5);
+    this.camera.lookAt(0, 0, 1);
+    this._inputVelocity.set(0, 0, 0);
+    this._velocity.set(0, 0, 0);
+    this._.set(0, 0, 0);
+    this._currentOrbitalDistance = 5;
+    this._orbitalTarget.set(0, 0, 0);
+    this._orbitalTargetDistance = this._currentOrbitalDistance;
+  }
+  get localVelocity() {
+    const result = this._velocity.clone();
+    result.applyQuaternion(this.camera.quaternion.clone().invert());
+    result.setZ(-result.z);
+    result.multiplyScalar(1 / this.getSpeedMultiplier());
+    return result;
+  }
+  set localVelocity(vector) {
+    const move = vector.clone();
+    move.setZ(-move.z);
+    move.applyQuaternion(this.camera.quaternion);
+    move.multiplyScalar(this.getSpeedMultiplier());
+    this._inputVelocity.copy(move);
   }
   get orbitMode() {
     return this._orbitMode;
   }
   set orbitMode(value) {
     this._orbitMode = value;
-    this.gizmo.show(value);
+    this._gizmo.show(value);
   }
-  reset() {
-    this.camera.position.set(0, 0, -5);
-    this.camera.lookAt(0, 0, 1);
-    this.inputVelocity.set(0, 0, 0);
-    this.velocity.set(0, 0, 0);
-    this.impulse.set(0, 0, 0);
-    this.currentOrbitalDistance = 5;
-    this.orbitalTarget.set(0, 0, 0);
-    this.orbitalTargetDistance = this.currentOrbitalDistance;
+  target(target) {
+    const position = target instanceof Vector3 ? target : target.getCenter();
+    this._orbitalTarget = position;
+    this._orbitalTargetDistance = this.camera.position.distanceTo(position);
+    this.startLerp(0.4);
   }
-  lookAtPosition(position) {
-    this.camera.lookAt(position);
-  }
-  frameSphere(sphere) {
-    if (!sphere) {
-      this.reset();
-      return;
+  frame(target) {
+    if (target === "all") {
+      this.frameSphere(this._renderer.getBoundingSphere());
     }
-    this.camera.position.copy(sphere.center.clone().add(new Vector3(0, sphere.radius, -2 * sphere.radius)));
-    this.camera.lookAt(sphere.center);
-    this.orbitalTarget = sphere.center;
-    this.currentOrbitalDistance = this.orbitalTarget.clone().sub(this.camera.position).length();
-    this.orbitalTargetDistance = this.currentOrbitalDistance;
+    if (target instanceof Object$1) {
+      this.frameSphere(target.getBoundingSphere());
+    }
+    if (target instanceof Sphere) {
+      this.frameSphere(target);
+    }
+  }
+  lookAt(target) {
+    const position = target instanceof Vector3 ? target : target.getCenter();
+    this.camera.lookAt(position);
   }
   applySettings(settings) {
     this.orbitMode = settings.getCameraIsOrbit();
@@ -30881,50 +30904,39 @@ class Camera {
     this._moveSpeed = settings.getCameraMoveSpeed();
     this._rotateSpeed = settings.getCameraRotateSpeed();
     this._orbitSpeed = settings.getCameraOrbitSpeed();
-    this.gizmo.applySettings(settings);
+    this._gizmo.applySettings(settings);
     this._vimReferenceSize = settings.getCameraReferenceVimSize();
   }
-  adaptToContent(sphere) {
+  adaptToContent() {
+    const sphere = this._renderer.getBoundingSphere();
     this._sceneSizeMultiplier = sphere.radius / this._vimReferenceSize;
     const gizmoSize = Math.tan(DEG2RAD * this.camera.fov / 2) * (this._sceneSizeMultiplier / 10);
-    this.gizmo.setScale(gizmoSize);
-    this.gizmo.show(this.orbitMode);
+    this._gizmo.setScale(gizmoSize);
+    this._gizmo.show(this.orbitMode);
   }
-  addLocalImpulse(impulse) {
+  addImpulse(impulse) {
     const localImpulse = impulse.clone().multiplyScalar(this.getSpeedMultiplier() * this._wheelSpeed);
     localImpulse.applyQuaternion(this.camera.quaternion);
-    this.impulse.add(localImpulse);
+    this._.add(localImpulse);
   }
-  move(vector = DIRECTIONS.forward, speed) {
+  move3(vector) {
     const v2 = vector.clone();
-    if (speed)
-      v2.multiplyScalar(speed);
     v2.applyQuaternion(this.camera.quaternion);
-    this.orbitalTarget.add(v2);
-    this.gizmo.show();
+    v2.multiplyScalar(this.getSpeedMultiplier());
+    this._orbitalTarget.add(v2);
+    this._gizmo.show();
     if (!this.orbitMode) {
       this.camera.position.add(v2);
     }
   }
-  truckPedestal(vector) {
-    this.move(new Vector3(-vector.x, vector.y, 0), this.getSpeedMultiplier());
+  move2(vector, axes) {
+    const direction = axes === "XY" ? new Vector3(-vector.x, vector.y, 0) : axes === "XZ" ? new Vector3(-vector.x, 0, vector.y) : void 0;
+    this.move3(direction);
   }
-  truckDolly(vector) {
-    this.move(new Vector3(-vector.x, 0, vector.y), this.getSpeedMultiplier());
-  }
-  dolly(amount) {
-    if (this.orbitMode) {
-      this.currentOrbitalDistance += amount;
-    } else {
-      this.move(new Vector3(0, 0, amount), this.getSpeedMultiplier());
-    }
-  }
-  setLocalVelocity(vector) {
-    const move = vector.clone();
-    move.setZ(-move.z);
-    move.applyQuaternion(this.camera.quaternion);
-    move.multiplyScalar(this.getSpeedMultiplier());
-    this.inputVelocity.copy(move);
+  move1(amount, axis) {
+    const direction = new Vector3(axis === "X" ? -amount : 0, axis === "Y" ? amount : 0, axis === "Z" ? amount : 0);
+    this._currentOrbitalDistance += direction.z;
+    this.move3(direction);
   }
   rotate(vector) {
     if (this.isLerping())
@@ -30939,25 +30951,20 @@ class Camera {
     euler.x = Math.max(-max, Math.min(max, euler.x));
     this.camera.quaternion.setFromEuler(euler);
     if (!this.orbitMode) {
-      const offset = new Vector3(0, 0, 1).applyQuaternion(this.camera.quaternion).multiplyScalar(this.currentOrbitalDistance);
-      this.orbitalTarget = this.camera.position.clone().sub(offset);
+      const offset = new Vector3(0, 0, 1).applyQuaternion(this.camera.quaternion).multiplyScalar(this._currentOrbitalDistance);
+      this._orbitalTarget = this.camera.position.clone().sub(offset);
     }
   }
-  setTarget(position) {
-    this.orbitalTarget = position;
-    this.orbitalTargetDistance = this.camera.position.distanceTo(position);
-    this.startLerp(0.4);
-  }
   update(deltaTime) {
-    const targetVelocity = this.inputVelocity.clone();
+    const targetVelocity = this._inputVelocity.clone();
     const invBlendFactor = Math.pow(this._velocityBlendFactor, deltaTime);
     const blendFactor = 1 - invBlendFactor;
-    this.velocity.multiplyScalar(invBlendFactor);
+    this._velocity.multiplyScalar(invBlendFactor);
     targetVelocity.multiplyScalar(blendFactor);
-    this.velocity.add(targetVelocity);
-    this.currentOrbitalDistance = this.currentOrbitalDistance * invBlendFactor + this.orbitalTargetDistance * blendFactor;
-    const positionDelta = this.velocity.clone().multiplyScalar(deltaTime);
-    const impulse = this.impulse.clone().multiplyScalar(blendFactor);
+    this._velocity.add(targetVelocity);
+    this._currentOrbitalDistance = this._currentOrbitalDistance * invBlendFactor + this._orbitalTargetDistance * blendFactor;
+    const positionDelta = this._velocity.clone().multiplyScalar(deltaTime);
+    const impulse = this._.clone().multiplyScalar(blendFactor);
     positionDelta.add(impulse);
     const orbitDelta = positionDelta.clone();
     if (this.orbitMode) {
@@ -30965,39 +30972,50 @@ class Camera {
       const local = positionDelta.clone().applyQuaternion(inv);
       orbitDelta.set(local.x, local.y, 0);
       orbitDelta.applyQuaternion(this.camera.quaternion);
-      this.currentOrbitalDistance = Math.max(this.currentOrbitalDistance + local.z, this.minOrbitalDistance * this._sceneSizeMultiplier);
-      this.orbitalTargetDistance = this.currentOrbitalDistance;
+      this._currentOrbitalDistance = Math.max(this._currentOrbitalDistance + local.z, this._minOrbitalDistance * this._sceneSizeMultiplier);
+      this._orbitalTargetDistance = this._currentOrbitalDistance;
     }
-    this.impulse.multiplyScalar(invBlendFactor);
+    this._.multiplyScalar(invBlendFactor);
     this.camera.position.add(positionDelta);
-    this.orbitalTarget.add(orbitDelta);
+    this._orbitalTarget.add(orbitDelta);
     if (this.orbitMode) {
-      const target = new Vector3(0, 0, this.currentOrbitalDistance);
+      const target = new Vector3(0, 0, this._currentOrbitalDistance);
       target.applyQuaternion(this.camera.quaternion);
-      target.add(this.orbitalTarget);
+      target.add(this._orbitalTarget);
       if (this.isLerping()) {
-        const frames = this.lerpSecondsDuration / deltaTime;
+        const frames = this._lerpSecondsDuration / deltaTime;
         const alpha = 1 - Math.pow(0.01, 1 / frames);
         this.camera.position.lerp(target, alpha);
-        this.gizmo.show(false);
+        this._gizmo.show(false);
       } else {
         this.camera.position.copy(target);
         if (this.isSignificant(positionDelta)) {
-          this.gizmo.show();
+          this._gizmo.show();
         }
       }
     }
-    this.gizmo.setPosition(this.orbitalTarget);
+    this._gizmo.setPosition(this._orbitalTarget);
+  }
+  frameSphere(sphere) {
+    if (!sphere) {
+      this.reset();
+      return;
+    }
+    this.camera.position.copy(sphere.center.clone().add(new Vector3(0, sphere.radius, -2 * sphere.radius)));
+    this.camera.lookAt(sphere.center);
+    this._orbitalTarget = sphere.center;
+    this._currentOrbitalDistance = this._orbitalTarget.clone().sub(this.camera.position).length();
+    this._orbitalTargetDistance = this._currentOrbitalDistance;
   }
   getSpeedMultiplier() {
-    return Math.pow(1.25, this.speedMultiplier) * this._sceneSizeMultiplier * this._moveSpeed;
+    return Math.pow(1.25, this.speed) * this._sceneSizeMultiplier * this._moveSpeed;
   }
   isLerping() {
-    return new Date().getTime() < this.lerpMsEndtime;
+    return new Date().getTime() < this._lerpMsEndtime;
   }
   startLerp(seconds) {
-    this.lerpMsEndtime = new Date().getTime() + seconds * 1e3;
-    this.lerpSecondsDuration = seconds;
+    this._lerpMsEndtime = new Date().getTime() + seconds * 1e3;
+    this._lerpSecondsDuration = seconds;
   }
   isSignificant(vector) {
     const min = 0.01 * this._sceneSizeMultiplier / 60;
@@ -31122,12 +31140,12 @@ class Keyboard {
         switch (event.keyCode) {
           case KEYS.KEY_ADD:
           case KEYS.KEY_OEM_PLUS:
-            this._camera.speedMultiplier += 1;
+            this._camera.speed += 1;
             event.preventDefault();
             break;
           case KEYS.KEY_SUBTRACT:
           case KEYS.KEY_OEM_MINUS:
-            this._camera.speedMultiplier -= 1;
+            this._camera.speed -= 1;
             event.preventDefault();
             break;
           case KEYS.KEY_F8:
@@ -31136,16 +31154,16 @@ class Keyboard {
             event.preventDefault();
             break;
           case KEYS.KEY_HOME:
-            this._viewer.frameContent();
+            this._viewer.camera.frame("all");
             event.preventDefault();
             break;
           case KEYS.KEY_ESCAPE:
-            this._viewer.selectObject(void 0);
+            this._viewer.selection.clear();
             event.preventDefault();
             break;
           case KEYS.KEY_Z:
           case KEYS.KEY_F:
-            this._viewer.frameSelection();
+            this._viewer.camera.frame(this._viewer.selection.object);
             event.preventDefault();
             break;
         }
@@ -31201,7 +31219,7 @@ class Keyboard {
       const move = new Vector3((this.isRightPressed ? 1 : 0) - (this.isLeftPressed ? 1 : 0), (this.isEPressed ? 1 : 0) - (this.isQPressed ? 1 : 0), (this.isUpPressed ? 1 : 0) - (this.isDownPressed ? 1 : 0));
       const speed = this.isShiftPressed ? this.SHIFT_MULTIPLIER : 1;
       move.multiplyScalar(speed);
-      this._camera.setLocalVelocity(move);
+      this._camera.localVelocity = move;
     });
     this._camera = camera;
     this._viewer = viewer;
@@ -31242,10 +31260,10 @@ class Touch {
       this._camera.rotate(delta);
     });
     __publicField(this, "onDoubleDrag", (delta) => {
-      this._camera.truckPedestal(delta);
+      this._camera.move2(delta, "XY");
     });
     __publicField(this, "onPinchOrSpread", (delta) => {
-      this._camera.dolly(delta);
+      this._camera.move1(delta, "Z");
     });
     __publicField(this, "onTouchMove", (event) => {
       event.preventDefault();
@@ -31306,76 +31324,10 @@ class Touch {
     return p1.clone().lerp(p2, 0.5);
   }
 }
-class HitTestResult {
-  constructor(mousePosition, intersections) {
-    __publicField(this, "mousePosition");
-    __publicField(this, "doubleClick");
-    __publicField(this, "object");
-    __publicField(this, "intersections");
-    __publicField(this, "firstHit");
-    this.mousePosition = mousePosition;
-    this.intersections = intersections;
-    this.firstHit = HitTestResult.GetFirstVimHit(intersections);
-  }
-  static GetFirstVimHit(intersections) {
-    var _a, _b;
-    for (let i = 0; i < intersections.length; i++) {
-      if (((_b = (_a = intersections[i].object) == null ? void 0 : _a.userData) == null ? void 0 : _b.index) !== void 0) {
-        return intersections[i];
-      }
-    }
-  }
-  get isHit() {
-    return !!this.firstHit;
-  }
-  get distance() {
-    return this.firstHit.distance;
-  }
-  get position() {
-    return this.firstHit.point;
-  }
-  get objectId() {
-    return this.firstHit.object.id;
-  }
-  get faceIndex() {
-    return this.firstHit.faceIndex;
-  }
-}
-class HitTester {
-  constructor(viewer) {
-    __publicField(this, "_viewer");
-    __publicField(this, "_raycaster", new Raycaster());
-    this._viewer = viewer;
-  }
-  screenRaycast(position) {
-    console.time("raycast");
-    const intersections = this.raycast(position);
-    console.timeEnd("raycast");
-    const r2 = new HitTestResult(position, intersections);
-    const hit = r2.firstHit;
-    if (hit) {
-      const vimIndex = hit.object.userData.index;
-      if (hit.object.userData.merged && hit.uv !== void 0) {
-        const instance = Math.round(hit.uv.x);
-        r2.object = this._viewer.getVim(vimIndex).getObjectFromInstance(instance);
-      } else if (hit.instanceId !== void 0) {
-        r2.object = this._viewer.getVim(vimIndex).getObjectFromMesh(hit.object, hit.instanceId);
-      }
-    }
-    return r2;
-  }
-  raycast(position) {
-    const [width, height] = this._viewer.renderer.getContainerSize();
-    const x2 = position.x / width * 2 - 1;
-    const y2 = -(position.y / height) * 2 + 1;
-    this._raycaster.setFromCamera(new Vector2(x2, y2), this._viewer.camera.camera);
-    return this._raycaster.intersectObjects(this._viewer.renderer.scene.children);
-  }
-}
 class Mouse {
   constructor(viewer, keyboard) {
     __publicField(this, "_viewer");
-    __publicField(this, "_hitTester");
+    __publicField(this, "_raycaster");
     __publicField(this, "_inputKeyboard");
     __publicField(this, "isMouseDown", false);
     __publicField(this, "hasMouseMoved", false);
@@ -31396,9 +31348,9 @@ class Mouse {
       const delta = new Vector2(deltaX / width, deltaY / height);
       this.hasMouseMoved = this.hasMouseMoved || Math.abs(deltaX) + Math.abs(deltaY) > 3;
       if (event.buttons & 2) {
-        this.camera.truckPedestal(delta);
+        this.camera.move2(delta, "XY");
       } else if (event.buttons & 4) {
-        this.camera.truckDolly(delta);
+        this.camera.move2(delta, "XZ");
       } else {
         this.camera.rotate(delta);
       }
@@ -31408,13 +31360,13 @@ class Mouse {
       event.stopPropagation();
       const scrollValue = Math.sign(event.deltaY);
       if (this._inputKeyboard.isCtrlPressed) {
-        this.camera.speedMultiplier -= scrollValue;
+        this.camera.speed -= scrollValue;
       } else if (this.camera.orbitMode) {
         const impulse = new Vector3(0, 0, scrollValue);
-        this.camera.addLocalImpulse(impulse);
+        this.camera.addImpulse(impulse);
       } else {
         const impulse = new Vector3(0, 0, scrollValue);
-        this.camera.addLocalImpulse(impulse);
+        this.camera.addImpulse(impulse);
       }
     });
     __publicField(this, "onMouseDown", (event) => {
@@ -31434,12 +31386,12 @@ class Mouse {
       this.onMouseClick(new Vector2(event.offsetX, event.offsetY), true);
     });
     __publicField(this, "onMouseClick", (position, doubleClick) => {
-      const result = this._hitTester.screenRaycast(position);
+      const result = this._raycaster.screenRaycast(position);
       result.doubleClick = doubleClick;
       this._viewer.onMouseClick(result);
     });
     this._viewer = viewer;
-    this._hitTester = new HitTester(viewer);
+    this._raycaster = this._viewer.raycaster;
     this._inputKeyboard = keyboard;
   }
   get camera() {
@@ -31450,7 +31402,7 @@ class Mouse {
   }
 }
 class Input {
-  constructor(viewer) {
+  constructor(viewer, camera) {
     __publicField(this, "_canvas");
     __publicField(this, "_unregisters");
     __publicField(this, "_touch");
@@ -31466,9 +31418,9 @@ class Input {
     });
     this._canvas = viewer.renderer.canvas;
     this._unregisters = [];
-    this._keyboard = new Keyboard(viewer.camera, viewer);
+    this._keyboard = new Keyboard(camera, viewer);
     this._mouse = new Mouse(viewer, this._keyboard);
-    this._touch = new Touch(viewer.camera, viewer.renderer, this._mouse);
+    this._touch = new Touch(camera, viewer.renderer, this._mouse);
   }
   register() {
     this.reg(this._canvas, "mousedown", this._mouse.onMouseDown);
@@ -31492,35 +31444,29 @@ class Input {
 }
 class Selection {
   constructor(viewer) {
-    __publicField(this, "viewer");
-    __publicField(this, "object");
-    __publicField(this, "_boundingSphere");
-    __publicField(this, "_highlightDisposer");
-    this.viewer = viewer;
+    __publicField(this, "_viewer");
+    __publicField(this, "_object");
+    __publicField(this, "_highligt");
+    this._viewer = viewer;
   }
-  getBoundingSphere(target = new Sphere()) {
-    return target.copy(this._boundingSphere);
-  }
-  hasSelection() {
-    return this.object !== void 0;
-  }
-  clear() {
-    this.object = void 0;
-    this._boundingSphere = null;
-    this.disposeResources();
-  }
-  disposeResources() {
-    var _a;
-    (_a = this._highlightDisposer) == null ? void 0 : _a.call(this);
-    this._highlightDisposer = null;
+  get object() {
+    return this._object;
   }
   select(object) {
     this.clear();
-    this.object = object;
-    const wireframe = object.createWireframe();
-    this.viewer.renderer.addObject(wireframe);
-    this._highlightDisposer = () => this.viewer.renderer.removeObject(wireframe);
-    this._boundingSphere = object.getBoundingSphere();
+    if (object) {
+      this._object = object;
+      this._highligt = object.createWireframe();
+      this._viewer.renderer.add(this._highligt);
+    }
+  }
+  clear() {
+    this._object = void 0;
+    if (this._highligt) {
+      this._highligt.geometry.dispose();
+      this._viewer.renderer.remove(this._highligt);
+      this._highligt = void 0;
+    }
   }
 }
 class GroundPlane {
@@ -31582,19 +31528,22 @@ class GroundPlane {
 }
 class Environment {
   constructor(settings) {
-    __publicField(this, "groundPlane");
     __publicField(this, "skyLight");
     __publicField(this, "sunLight");
-    this.groundPlane = new GroundPlane();
+    __publicField(this, "_groundPlane");
+    this._groundPlane = new GroundPlane();
     this.skyLight = new HemisphereLight();
     this.sunLight = new DirectionalLight();
     this.applySettings(settings);
   }
+  get groundPlane() {
+    return this._groundPlane.mesh;
+  }
   getObjects() {
-    return [this.groundPlane.mesh, this.skyLight, this.sunLight];
+    return [this._groundPlane.mesh, this.skyLight, this.sunLight];
   }
   applySettings(settings) {
-    this.groundPlane.applyViewerSettings(settings);
+    this._groundPlane.applyViewerSettings(settings);
     this.skyLight.color.copy(settings.getSkylightColor());
     this.skyLight.groundColor.copy(settings.getSkylightGroundColor());
     this.skyLight.intensity = settings.getSkylightIntensity();
@@ -31603,15 +31552,492 @@ class Environment {
     this.sunLight.intensity = settings.getSunlightIntensity();
   }
   adaptToContent(box) {
-    this.groundPlane.adaptToContent(box);
+    this._groundPlane.adaptToContent(box);
+  }
+}
+var Transparency;
+(function(Transparency2) {
+  function isValid(value) {
+    return ["all", "opaqueOnly", "transparentOnly", "allAsOpaque"].includes(value);
+  }
+  Transparency2.isValid = isValid;
+  function requiresAlpha(mode) {
+    return mode === "all" || mode === "transparentOnly";
+  }
+  Transparency2.requiresAlpha = requiresAlpha;
+  function match(mode, transparent) {
+    return mode === "allAsOpaque" || mode === "all" || !transparent && mode === "opaqueOnly" || transparent && mode === "transparentOnly";
+  }
+  Transparency2.match = match;
+})(Transparency || (Transparency = {}));
+var Geometry;
+(function(Geometry2) {
+  function createGeometryFromInstances(g3d, instances) {
+    const merger = Merger.createFromInstances(g3d, instances, "all");
+    return merger.toBufferGeometry();
+  }
+  Geometry2.createGeometryFromInstances = createGeometryFromInstances;
+  function createGeometryFromMesh(g3d, mesh, useAlpha) {
+    const colors = createVertexColors(g3d, mesh, useAlpha);
+    return createGeometryFromArrays(g3d.positions.subarray(g3d.getMeshVertexStart(mesh) * 3, g3d.getMeshVertexEnd(mesh) * 3), g3d.indices.subarray(g3d.getMeshIndexStart(mesh), g3d.getMeshIndexEnd(mesh)), colors, useAlpha ? 4 : 3);
+  }
+  Geometry2.createGeometryFromMesh = createGeometryFromMesh;
+  function createVertexColors(g3d, mesh, useAlpha) {
+    const colorSize = useAlpha ? 4 : 3;
+    const result = new Float32Array(g3d.getMeshVertexCount(mesh) * colorSize);
+    const subStart = g3d.getMeshSubmeshStart(mesh);
+    const subEnd = g3d.getMeshSubmeshEnd(mesh);
+    for (let submesh = subStart; submesh < subEnd; submesh++) {
+      const color = g3d.getSubmeshColor(submesh);
+      const start = g3d.getSubmeshIndexStart(submesh);
+      const end = g3d.getSubmeshIndexEnd(submesh);
+      for (let i = start; i < end; i++) {
+        const v2 = g3d.indices[i] * colorSize;
+        result[v2] = color[0];
+        result[v2 + 1] = color[1];
+        result[v2 + 2] = color[2];
+        if (useAlpha)
+          result[v2 + 3] = color[3];
+      }
+    }
+    return result;
+  }
+  class Merger {
+    constructor(g3d, transparency, instances, meshes, indexCount, vertexCount) {
+      __publicField(this, "_g3d");
+      __publicField(this, "_colorSize");
+      __publicField(this, "_meshes");
+      __publicField(this, "_indices");
+      __publicField(this, "_vertices");
+      __publicField(this, "_colors");
+      __publicField(this, "_uvs");
+      __publicField(this, "_instances");
+      __publicField(this, "_submeshes");
+      __publicField(this, "getInstances", () => this._instances);
+      __publicField(this, "getSubmeshes", () => this._submeshes);
+      this._g3d = g3d;
+      this._colorSize = Transparency.requiresAlpha(transparency) ? 4 : 3;
+      this._instances = instances;
+      this._meshes = meshes;
+      this._indices = new Uint32Array(indexCount);
+      this._vertices = new Float32Array(vertexCount * this._g3d.POSITION_SIZE);
+      this._colors = new Float32Array(vertexCount * this._colorSize);
+      this._uvs = new Float32Array(vertexCount * 2);
+      this._submeshes = new Array(this._instances.length);
+    }
+    static createFromUniqueMeshes(g3d, transparency) {
+      let vertexCount = 0;
+      let indexCount = 0;
+      const instances = [];
+      const meshes = [];
+      const meshCount = g3d.getMeshCount();
+      for (let mesh = 0; mesh < meshCount; mesh++) {
+        const meshInstances = g3d.meshInstances[mesh];
+        if (!meshInstances || meshInstances.length !== 1)
+          continue;
+        if (!Transparency.match(transparency, g3d.meshTransparent[mesh])) {
+          continue;
+        }
+        vertexCount += g3d.getMeshVertexCount(mesh);
+        indexCount += g3d.getMeshIndexCount(mesh);
+        instances.push(meshInstances[0]);
+        meshes.push(mesh);
+      }
+      return new Merger(g3d, transparency, instances, meshes, indexCount, vertexCount);
+    }
+    static createFromInstances(g3d, instances, transparency) {
+      let vertexCount = 0;
+      let indexCount = 0;
+      const instancesFiltered = [];
+      const meshes = [];
+      for (let i = 0; i < instances.length; i++) {
+        const instance = instances[i];
+        const mesh = g3d.instanceMeshes[instance];
+        if (mesh < 0)
+          continue;
+        if (!Transparency.match(transparency, g3d.meshTransparent[mesh])) {
+          continue;
+        }
+        vertexCount += g3d.getMeshVertexCount(mesh);
+        indexCount += g3d.getMeshIndexCount(mesh);
+        instancesFiltered.push(instance);
+        meshes.push(mesh);
+      }
+      return new Merger(g3d, transparency, instancesFiltered, meshes, indexCount, vertexCount);
+    }
+    merge() {
+      let index = 0;
+      let vertex2 = 0;
+      let uv = 0;
+      let offset = 0;
+      const matrix = new Matrix4();
+      const vector = new Vector3();
+      for (let i = 0; i < this._instances.length; i++) {
+        const mesh = this._meshes[i];
+        const instance = this._instances[i];
+        this._submeshes[i] = index;
+        const indexStart = this._g3d.getMeshIndexStart(mesh);
+        const indexEnd = this._g3d.getMeshIndexEnd(mesh);
+        for (let i2 = indexStart; i2 < indexEnd; i2++) {
+          this._indices[index++] = this._g3d.indices[i2] + offset;
+        }
+        const subStart = this._g3d.getMeshSubmeshStart(mesh);
+        const subEnd = this._g3d.getMeshSubmeshEnd(mesh);
+        for (let sub = subStart; sub < subEnd; sub++) {
+          const startIndex = this._g3d.getSubmeshIndexStart(sub);
+          const endIndex = this._g3d.getSubmeshIndexEnd(sub);
+          const subColor = this._g3d.getSubmeshColor(sub);
+          for (let i2 = startIndex; i2 < endIndex; i2++) {
+            const v2 = (this._g3d.indices[i2] + offset) * this._colorSize;
+            this._colors[v2] = subColor[0];
+            this._colors[v2 + 1] = subColor[1];
+            this._colors[v2 + 2] = subColor[2];
+            if (this._colorSize > 3) {
+              this._colors[v2 + 3] = subColor[3];
+            }
+          }
+        }
+        getInstanceMatrix(this._g3d, instance, matrix);
+        const vertexStart = this._g3d.getMeshVertexStart(mesh);
+        const vertexEnd = this._g3d.getMeshVertexEnd(mesh);
+        for (let p2 = vertexStart; p2 < vertexEnd; p2++) {
+          vector.fromArray(this._g3d.positions, p2 * this._g3d.POSITION_SIZE);
+          vector.applyMatrix4(matrix);
+          vector.toArray(this._vertices, vertex2);
+          vertex2 += this._g3d.POSITION_SIZE;
+          this._uvs[uv++] = instance;
+          this._uvs[uv++] = 1;
+        }
+        offset += vertexEnd - vertexStart;
+      }
+    }
+    toBufferGeometry() {
+      this.merge();
+      const geometry = createGeometryFromArrays(this._vertices, this._indices, this._colors, this._colorSize, this._uvs);
+      return geometry;
+    }
+  }
+  Geometry2.Merger = Merger;
+  function createGeometryFromArrays(vertices, indices, vertexColors = void 0, colorSize = 3, uvs = void 0) {
+    const geometry = new BufferGeometry();
+    geometry.setAttribute("position", new BufferAttribute(vertices, 3));
+    geometry.setIndex(new Uint32BufferAttribute(indices, 1));
+    if (vertexColors) {
+      geometry.setAttribute("color", new BufferAttribute(vertexColors, colorSize));
+      if (uvs) {
+        geometry.setAttribute("uv", new Float32BufferAttribute(uvs, 2));
+      }
+    }
+    return geometry;
+  }
+  Geometry2.createGeometryFromArrays = createGeometryFromArrays;
+  function getInstanceMatrix(g3d, instance, target = new Matrix4()) {
+    const matrixAsArray = g3d.getInstanceMatrix(instance);
+    target.fromArray(matrixAsArray);
+    return target;
+  }
+  Geometry2.getInstanceMatrix = getInstanceMatrix;
+})(Geometry || (Geometry = {}));
+var Materials;
+(function(Materials2) {
+  class Library {
+    constructor(opaque, transparent, wireframe) {
+      __publicField(this, "opaque");
+      __publicField(this, "transparent");
+      __publicField(this, "wireframe");
+      this.opaque = opaque != null ? opaque : createOpaque();
+      this.transparent = transparent != null ? transparent : createTransparent();
+      this.wireframe = wireframe != null ? wireframe : createWireframe();
+    }
+  }
+  Materials2.Library = Library;
+  function createBase() {
+    return new MeshPhongMaterial({
+      color: 10066329,
+      vertexColors: true,
+      flatShading: true,
+      side: DoubleSide,
+      shininess: 70
+    });
+  }
+  Materials2.createBase = createBase;
+  function createOpaque() {
+    const mat = createBase();
+    patchMaterial(mat);
+    return mat;
+  }
+  Materials2.createOpaque = createOpaque;
+  function createTransparent() {
+    const mat = createBase();
+    mat.transparent = true;
+    patchMaterial(mat);
+    return mat;
+  }
+  Materials2.createTransparent = createTransparent;
+  function patchMaterial(material) {
+    material.defines = { USE_UV: true };
+    material.onBeforeCompile = (shader) => {
+      patchShader(shader);
+      material.userData.shader = shader;
+    };
+  }
+  Materials2.patchMaterial = patchMaterial;
+  function patchShader(shader) {
+    shader.vertexShader = shader.vertexShader.replace("#include <color_pars_vertex>", `
+        #include <color_pars_vertex>
+        #ifdef USE_INSTANCING_COLOR
+        attribute float useVertexColor;
+        #endif
+        `).replace("#include <uv_vertex>", `
+        #include <uv_vertex>
+
+        #ifdef USE_INSTANCING
+          #ifdef USE_INSTANCING_COLOR
+            vUv = vec2(uv.x, useVertexColor);
+          #else
+            vUv = vec2(uv.x, 1.0);
+          #endif
+        #endif
+        `).replace("#include <color_vertex>", `
+        #include <color_vertex>
+
+        #ifdef USE_INSTANCING_COLOR
+          vColor.xyz = ((1.0f - useVertexColor) * instanceColor.xyz) + (useVertexColor * color.xyz);
+        #endif
+        `);
+    shader.fragmentShader = shader.fragmentShader.replace("#include <output_fragment>", `
+        float d = length(outgoingLight);
+        gl_FragColor = vec4(vColor.xyz * (1.0f - vUv.y) * d + outgoingLight.xyz * vUv.y , diffuseColor.a);
+      `);
+    return shader;
+  }
+  Materials2.patchShader = patchShader;
+  function createWireframe() {
+    const material = new LineBasicMaterial({
+      depthTest: false,
+      opacity: 0.5,
+      color: new Color(255),
+      transparent: true
+    });
+    return material;
+  }
+  Materials2.createWireframe = createWireframe;
+  Materials2.getDefaultLibrary = () => new Library();
+})(Materials || (Materials = {}));
+var Mesh;
+(function(Mesh2) {
+  class Builder {
+    constructor(materials = void 0) {
+      __publicField(this, "materials");
+      this.materials = materials != null ? materials : Materials.getDefaultLibrary();
+    }
+    createInstancedMeshes(g3d, transparency, instances) {
+      const result = [];
+      const set = instances ? new Set(instances) : void 0;
+      for (let mesh = 0; mesh < g3d.getMeshCount(); mesh++) {
+        let meshInstances = g3d.meshInstances[mesh];
+        if (!meshInstances)
+          continue;
+        meshInstances = set ? meshInstances.filter((i) => set.has(i)) : meshInstances;
+        if (meshInstances.length <= 1)
+          continue;
+        if (!Transparency.match(transparency, g3d.meshTransparent[mesh])) {
+          continue;
+        }
+        const useAlpha = Transparency.requiresAlpha(transparency) && g3d.meshTransparent[mesh];
+        const geometry = Geometry.createGeometryFromMesh(g3d, mesh, useAlpha);
+        const resultMesh = this.createInstancedMesh(geometry, g3d, meshInstances, useAlpha);
+        result.push(resultMesh);
+      }
+      return result;
+    }
+    createInstancedMesh(geometry, g3d, instances, useAlpha) {
+      const material = useAlpha ? this.materials.transparent : this.materials.opaque;
+      const result = new InstancedMesh(geometry, material, instances.length);
+      for (let i = 0; i < instances.length; i++) {
+        const matrix = Geometry.getInstanceMatrix(g3d, instances[i]);
+        result.setMatrixAt(i, matrix);
+      }
+      result.userData.instances = instances;
+      return result;
+    }
+    createMergedMesh(g3d, transparency, instances) {
+      const merger = instances ? Geometry.Merger.createFromInstances(g3d, instances, transparency) : Geometry.Merger.createFromUniqueMeshes(g3d, transparency);
+      const geometry = merger.toBufferGeometry();
+      const material = Transparency.requiresAlpha(transparency) ? this.materials.transparent : this.materials.opaque;
+      const mesh = new Mesh$1(geometry, material);
+      mesh.userData.merged = true;
+      mesh.userData.instances = merger.getInstances();
+      mesh.userData.submeshes = merger.getSubmeshes();
+      return mesh;
+    }
+    createWireframe(g3d, instances) {
+      const geometry = Geometry.createGeometryFromInstances(g3d, instances);
+      const wireframe = new WireframeGeometry(geometry);
+      return new LineSegments(wireframe, this.materials.wireframe);
+    }
+  }
+  Mesh2.Builder = Builder;
+  let defaultBuilder;
+  function getDefaultBuilder() {
+    return defaultBuilder != null ? defaultBuilder : defaultBuilder = new Builder();
+  }
+  Mesh2.getDefaultBuilder = getDefaultBuilder;
+})(Mesh || (Mesh = {}));
+class Scene {
+  constructor() {
+    __publicField(this, "meshes", []);
+    __publicField(this, "boundingBox", new Box3());
+    __publicField(this, "_instanceToThreeMesh", /* @__PURE__ */ new Map());
+    __publicField(this, "_threeMeshIdToInstances", /* @__PURE__ */ new Map());
+  }
+  getMeshFromInstance(instance) {
+    return this._instanceToThreeMesh.has(instance) ? this._instanceToThreeMesh.get(instance) : [];
+  }
+  getInstanceFromMesh(mesh, index) {
+    if (!mesh || index < 0)
+      return -1;
+    const instances = this._threeMeshIdToInstances.get(mesh.id);
+    if (!instances)
+      return -1;
+    return instances[index];
+  }
+  applyMatrix4(matrix) {
+    for (let m2 = 0; m2 < this.meshes.length; m2++) {
+      this.meshes[m2].matrixAutoUpdate = false;
+      this.meshes[m2].matrix.copy(matrix);
+    }
+    this.boundingBox.applyMatrix4(matrix);
+  }
+  setIndex(index) {
+    for (let m2 = 0; m2 < this.meshes.length; m2++) {
+      this.meshes[m2].userData.index = index;
+    }
+  }
+  swapInstances(mesh, indexA, indexB) {
+    const array = this._threeMeshIdToInstances.get(mesh.id);
+    if (!array)
+      throw new Error("Could not find mesh with id : " + mesh.id);
+    if (indexA === indexB)
+      return;
+    const matrixA = new Matrix4();
+    const matrixB = new Matrix4();
+    mesh.getMatrixAt(indexA, matrixA);
+    mesh.getMatrixAt(indexB, matrixB);
+    mesh.setMatrixAt(indexA, matrixB);
+    mesh.setMatrixAt(indexB, matrixA);
+    const instanceA = array[indexA];
+    const instanceB = array[indexB];
+    this._instanceToThreeMesh.get(instanceA)[1] = indexB;
+    this._instanceToThreeMesh.get(instanceB)[1] = indexA;
+    array[indexA] = instanceB;
+    array[indexB] = instanceA;
+    mesh.instanceMatrix.needsUpdate = true;
+  }
+  addMergedMesh(mesh) {
+    var _a, _b;
+    const instances = mesh.userData.instances;
+    if (!instances) {
+      throw new Error("Expected mesh to have userdata instances : number[]");
+    }
+    for (let i = 0; i < instances.length; i++) {
+      this._instanceToThreeMesh.set(instances[i], [mesh, i]);
+    }
+    mesh.geometry.computeBoundingBox();
+    const box = mesh.geometry.boundingBox;
+    this.boundingBox = (_b = (_a = this.boundingBox) == null ? void 0 : _a.union(box)) != null ? _b : box.clone();
+    this._threeMeshIdToInstances.set(mesh.id, instances);
+    this.meshes.push(mesh);
+    return this;
+  }
+  addInstancedMesh(mesh) {
+    this.registerInstancedMesh(mesh);
+    this.meshes.push(mesh);
+    return this;
+  }
+  static createFromInstancedMeshes(meshes) {
+    const scene = new Scene();
+    for (let m2 = 0; m2 < meshes.length; m2++) {
+      scene.registerInstancedMesh(meshes[m2]);
+    }
+    scene.meshes = meshes;
+    return scene;
+  }
+  registerInstancedMesh(mesh) {
+    var _a, _b;
+    const instances = mesh.userData.instances;
+    if (!instances || instances.length === 0) {
+      throw new Error("Expected mesh to have userdata instances : number[] with at least one member");
+    }
+    if (mesh.count === 0) {
+      throw new Error("Expected mesh to have at least one instance");
+    }
+    for (let i = 0; i < instances.length; i++) {
+      this._instanceToThreeMesh.set(instances[i], [mesh, i]);
+    }
+    const box = this.computeIntancedMeshBoundingBox(mesh);
+    this.boundingBox = (_b = (_a = this.boundingBox) == null ? void 0 : _a.union(box)) != null ? _b : box.clone();
+    this._threeMeshIdToInstances.set(mesh.id, instances);
+  }
+  merge(other) {
+    var _a, _b;
+    other.meshes.forEach((mesh) => this.meshes.push(mesh));
+    other._instanceToThreeMesh.forEach((value, key) => {
+      this._instanceToThreeMesh.set(key, value);
+    });
+    other._threeMeshIdToInstances.forEach((value, key) => {
+      this._threeMeshIdToInstances.set(key, value);
+    });
+    this.boundingBox = (_b = (_a = this.boundingBox) == null ? void 0 : _a.union(other.boundingBox)) != null ? _b : other.boundingBox.clone();
+    return this;
+  }
+  dispose() {
+    for (let i = 0; i < this.meshes.length; i++) {
+      this.meshes[i].geometry.dispose();
+    }
+    this.meshes.length = 0;
+  }
+  computeIntancedMeshBoundingBox(mesh) {
+    let result;
+    const matrix = new Matrix4();
+    const box = new Box3();
+    mesh.geometry.computeBoundingBox();
+    for (let i = 0; i < mesh.count; i++) {
+      mesh.getMatrixAt(i, matrix);
+      box.copy(mesh.geometry.boundingBox);
+      box.applyMatrix4(matrix);
+      result = result ? result.union(box) : box.clone();
+    }
+    return result;
+  }
+  static createFromG3d(g3d, transparency = "all", instances = void 0) {
+    const scene = new Scene();
+    const shared = Scene.createFromInstanciableMeshes(g3d, transparency, instances);
+    scene.merge(shared);
+    if (transparency !== "transparentOnly") {
+      const opaque = Scene.createFromMergeableMeshes(g3d, transparency === "allAsOpaque" ? "allAsOpaque" : "opaqueOnly", instances);
+      scene.merge(opaque);
+    }
+    if (Transparency.requiresAlpha(transparency)) {
+      const transparent = Scene.createFromMergeableMeshes(g3d, "transparentOnly", instances);
+      scene.merge(transparent);
+    }
+    return scene;
+  }
+  static createFromInstanciableMeshes(g3d, transparency, instances = void 0, builder = Mesh.getDefaultBuilder()) {
+    const meshes = builder.createInstancedMeshes(g3d, transparency, instances);
+    return Scene.createFromInstancedMeshes(meshes);
+  }
+  static createFromMergeableMeshes(g3d, transparency, instances = void 0, builder = Mesh.getDefaultBuilder()) {
+    const mesh = builder.createMergedMesh(g3d, transparency, instances);
+    return new Scene().addMergedMesh(mesh);
   }
 }
 class Renderer {
   constructor(canvas, settings) {
-    __publicField(this, "camera");
     __publicField(this, "renderer");
-    __publicField(this, "clock", new Clock());
     __publicField(this, "canvas");
+    __publicField(this, "camera");
     __publicField(this, "scene");
     __publicField(this, "_boundingBox");
     __publicField(this, "fitToCanvas", () => {
@@ -31630,25 +32056,12 @@ class Renderer {
       logarithmicDepthBuffer: true
     });
     this.canvas = this.renderer.domElement;
+    this.camera = new PerspectiveCamera();
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.shadowMap.enabled = false;
-    this.camera = new PerspectiveCamera();
     this.scene = new Scene$1();
     this.fitToCanvas();
     this.setOnResize(this.fitToCanvas, settings.getCanvasResizeDelay());
-  }
-  setOnResize(callback, timeout) {
-    let timerId;
-    window.addEventListener("resize", function() {
-      if (timerId !== void 0) {
-        clearTimeout(timerId);
-        timerId = void 0;
-      }
-      timerId = setTimeout(function() {
-        timerId = void 0;
-        callback();
-      }, timeout);
-    });
   }
   getBoundingSphere(target = new Sphere()) {
     var _a;
@@ -31666,8 +32079,25 @@ class Renderer {
       this.canvas.parentElement.clientHeight
     ];
   }
-  addObject(mesh) {
-    this.scene.add(mesh);
+  add(target) {
+    if (target instanceof Scene) {
+      this.addScene(target);
+    } else {
+      this.scene.add(target);
+    }
+  }
+  remove(target) {
+    if (target instanceof Scene) {
+      for (let i = 0; i < target.meshes.length; i++) {
+        this.scene.remove(target.meshes[i]);
+      }
+    } else {
+      this.scene.remove(target);
+    }
+  }
+  clear() {
+    this.scene.clear();
+    this._boundingBox = void 0;
   }
   addScene(scene) {
     scene.meshes.forEach((m2) => {
@@ -31675,17 +32105,84 @@ class Renderer {
     });
     this._boundingBox = this._boundingBox ? this._boundingBox.union(scene.boundingBox) : scene.boundingBox.clone();
   }
-  removeObject(mesh) {
-    this.scene.remove(mesh);
+  setOnResize(callback, timeout) {
+    let timerId;
+    window.addEventListener("resize", function() {
+      if (timerId !== void 0) {
+        clearTimeout(timerId);
+        timerId = void 0;
+      }
+      timerId = setTimeout(function() {
+        timerId = void 0;
+        callback();
+      }, timeout);
+    });
   }
-  removeScene(scene) {
-    for (let i = 0; i < scene.meshes.length; i++) {
-      this.scene.remove(scene.meshes[i]);
+}
+class RaycastResult {
+  constructor(mousePosition, intersections) {
+    __publicField(this, "mousePosition");
+    __publicField(this, "doubleClick");
+    __publicField(this, "object");
+    __publicField(this, "intersections");
+    __publicField(this, "firstHit");
+    this.mousePosition = mousePosition;
+    this.intersections = intersections;
+    this.firstHit = RaycastResult.GetFirstVimHit(intersections);
+  }
+  static GetFirstVimHit(intersections) {
+    var _a, _b;
+    for (let i = 0; i < intersections.length; i++) {
+      if (((_b = (_a = intersections[i].object) == null ? void 0 : _a.userData) == null ? void 0 : _b.index) !== void 0) {
+        return intersections[i];
+      }
     }
   }
-  clear() {
-    this.scene.clear();
-    this._boundingBox = void 0;
+  get isHit() {
+    return !!this.firstHit;
+  }
+  get distance() {
+    return this.firstHit.distance;
+  }
+  get position() {
+    return this.firstHit.point;
+  }
+  get objectId() {
+    return this.firstHit.object.id;
+  }
+  get faceIndex() {
+    return this.firstHit.faceIndex;
+  }
+}
+class Raycaster {
+  constructor(viewer) {
+    __publicField(this, "_viewer");
+    __publicField(this, "_raycaster", new Raycaster$1());
+    this._viewer = viewer;
+  }
+  screenRaycast(position) {
+    console.time("raycast");
+    const intersections = this.raycast(position);
+    console.timeEnd("raycast");
+    const r2 = new RaycastResult(position, intersections);
+    const hit = r2.firstHit;
+    if (hit) {
+      const vimIndex = hit.object.userData.index;
+      if (hit.object.userData.merged && hit.uv !== void 0) {
+        const instance = Math.round(hit.uv.x);
+        r2.object = this._viewer.getVim(vimIndex).getObjectFromInstance(instance);
+      } else if (hit.instanceId !== void 0) {
+        r2.object = this._viewer.getVim(vimIndex).getObjectFromMesh(hit.object, hit.instanceId);
+      }
+    }
+    return r2;
+  }
+  raycast(position) {
+    const [width, height] = this._viewer.renderer.getContainerSize();
+    const x2 = position.x / width * 2 - 1;
+    const y2 = -(position.y / height) * 2 + 1;
+    this._raycaster.setFromCamera(new Vector2(x2, y2), this._viewer.camera.camera);
+    return this._raycaster.intersectObjects(this._viewer.renderer.scene.children);
   }
 }
 var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
@@ -32410,14 +32907,14 @@ function baseIsSet(value) {
 var nodeIsSet = nodeUtil$1 && nodeUtil$1.isSet;
 var isSet = nodeIsSet ? baseUnary(nodeIsSet) : baseIsSet;
 var isSet$1 = isSet;
-var CLONE_DEEP_FLAG$1 = 1, CLONE_FLAT_FLAG = 2, CLONE_SYMBOLS_FLAG$2 = 4;
+var CLONE_DEEP_FLAG$1 = 1, CLONE_FLAT_FLAG = 2, CLONE_SYMBOLS_FLAG$1 = 4;
 var argsTag = "[object Arguments]", arrayTag = "[object Array]", boolTag = "[object Boolean]", dateTag = "[object Date]", errorTag = "[object Error]", funcTag = "[object Function]", genTag = "[object GeneratorFunction]", mapTag = "[object Map]", numberTag = "[object Number]", objectTag = "[object Object]", regexpTag = "[object RegExp]", setTag = "[object Set]", stringTag = "[object String]", symbolTag = "[object Symbol]", weakMapTag = "[object WeakMap]";
 var arrayBufferTag = "[object ArrayBuffer]", dataViewTag = "[object DataView]", float32Tag = "[object Float32Array]", float64Tag = "[object Float64Array]", int8Tag = "[object Int8Array]", int16Tag = "[object Int16Array]", int32Tag = "[object Int32Array]", uint8Tag = "[object Uint8Array]", uint8ClampedTag = "[object Uint8ClampedArray]", uint16Tag = "[object Uint16Array]", uint32Tag = "[object Uint32Array]";
 var cloneableTags = {};
 cloneableTags[argsTag] = cloneableTags[arrayTag] = cloneableTags[arrayBufferTag] = cloneableTags[dataViewTag] = cloneableTags[boolTag] = cloneableTags[dateTag] = cloneableTags[float32Tag] = cloneableTags[float64Tag] = cloneableTags[int8Tag] = cloneableTags[int16Tag] = cloneableTags[int32Tag] = cloneableTags[mapTag] = cloneableTags[numberTag] = cloneableTags[objectTag] = cloneableTags[regexpTag] = cloneableTags[setTag] = cloneableTags[stringTag] = cloneableTags[symbolTag] = cloneableTags[uint8Tag] = cloneableTags[uint8ClampedTag] = cloneableTags[uint16Tag] = cloneableTags[uint32Tag] = true;
 cloneableTags[errorTag] = cloneableTags[funcTag] = cloneableTags[weakMapTag] = false;
 function baseClone(value, bitmask, customizer, key, object, stack) {
-  var result, isDeep = bitmask & CLONE_DEEP_FLAG$1, isFlat = bitmask & CLONE_FLAT_FLAG, isFull = bitmask & CLONE_SYMBOLS_FLAG$2;
+  var result, isDeep = bitmask & CLONE_DEEP_FLAG$1, isFlat = bitmask & CLONE_FLAT_FLAG, isFull = bitmask & CLONE_SYMBOLS_FLAG$1;
   if (customizer) {
     result = object ? customizer(value, key, object, stack) : customizer(value);
   }
@@ -32476,197 +32973,10 @@ function baseClone(value, bitmask, customizer, key, object, stack) {
   });
   return result;
 }
-var CLONE_SYMBOLS_FLAG$1 = 4;
-function clone(value) {
-  return baseClone(value, CLONE_SYMBOLS_FLAG$1);
-}
 var CLONE_DEEP_FLAG = 1, CLONE_SYMBOLS_FLAG = 4;
 function cloneDeep(value) {
   return baseClone(value, CLONE_DEEP_FLAG | CLONE_SYMBOLS_FLAG);
 }
-var Transparency;
-(function(Transparency2) {
-  function isValid(value) {
-    return ["all", "opaqueOnly", "transparentOnly", "allAsOpaque"].includes(value);
-  }
-  Transparency2.isValid = isValid;
-  function requiresAlpha(mode) {
-    return mode === "all" || mode === "transparentOnly";
-  }
-  Transparency2.requiresAlpha = requiresAlpha;
-  function match(mode, transparent) {
-    return mode === "allAsOpaque" || mode === "all" || !transparent && mode === "opaqueOnly" || transparent && mode === "transparentOnly";
-  }
-  Transparency2.match = match;
-})(Transparency || (Transparency = {}));
-var Geometry;
-(function(Geometry2) {
-  function createGeometryFromInstances(g3d, instances) {
-    const merger = Merger.createFromInstances(g3d, instances, "all");
-    return merger.toBufferGeometry();
-  }
-  Geometry2.createGeometryFromInstances = createGeometryFromInstances;
-  function createGeometryFromMesh(g3d, mesh, useAlpha) {
-    const colors = createVertexColors(g3d, mesh, useAlpha);
-    return createGeometryFromArrays(g3d.positions.subarray(g3d.getMeshVertexStart(mesh) * 3, g3d.getMeshVertexEnd(mesh) * 3), g3d.indices.subarray(g3d.getMeshIndexStart(mesh), g3d.getMeshIndexEnd(mesh)), colors, useAlpha ? 4 : 3);
-  }
-  Geometry2.createGeometryFromMesh = createGeometryFromMesh;
-  function createVertexColors(g3d, mesh, useAlpha) {
-    const colorSize = useAlpha ? 4 : 3;
-    const result = new Float32Array(g3d.getMeshVertexCount(mesh) * colorSize);
-    const subStart = g3d.getMeshSubmeshStart(mesh);
-    const subEnd = g3d.getMeshSubmeshEnd(mesh);
-    for (let submesh = subStart; submesh < subEnd; submesh++) {
-      const color = g3d.getSubmeshColor(submesh);
-      const start = g3d.getSubmeshIndexStart(submesh);
-      const end = g3d.getSubmeshIndexEnd(submesh);
-      for (let i = start; i < end; i++) {
-        const v2 = g3d.indices[i] * colorSize;
-        result[v2] = color[0];
-        result[v2 + 1] = color[1];
-        result[v2 + 2] = color[2];
-        if (useAlpha)
-          result[v2 + 3] = color[3];
-      }
-    }
-    return result;
-  }
-  class Merger {
-    constructor(g3d, transparency, instances, meshes, indexCount, vertexCount) {
-      __publicField(this, "_g3d");
-      __publicField(this, "_colorSize");
-      __publicField(this, "_meshes");
-      __publicField(this, "_indices");
-      __publicField(this, "_vertices");
-      __publicField(this, "_colors");
-      __publicField(this, "_uvs");
-      __publicField(this, "_instances");
-      __publicField(this, "_submeshes");
-      __publicField(this, "getInstances", () => this._instances);
-      __publicField(this, "getSubmeshes", () => this._submeshes);
-      this._g3d = g3d;
-      this._colorSize = Transparency.requiresAlpha(transparency) ? 4 : 3;
-      this._instances = instances;
-      this._meshes = meshes;
-      this._indices = new Uint32Array(indexCount);
-      this._vertices = new Float32Array(vertexCount * this._g3d.POSITION_SIZE);
-      this._colors = new Float32Array(vertexCount * this._colorSize);
-      this._uvs = new Float32Array(vertexCount * 2);
-      this._submeshes = new Array(this._instances.length);
-    }
-    static createFromUniqueMeshes(g3d, transparency) {
-      let vertexCount = 0;
-      let indexCount = 0;
-      const instances = [];
-      const meshes = [];
-      const meshCount = g3d.getMeshCount();
-      for (let mesh = 0; mesh < meshCount; mesh++) {
-        const meshInstances = g3d.meshInstances[mesh];
-        if (!meshInstances || meshInstances.length !== 1)
-          continue;
-        if (!Transparency.match(transparency, g3d.meshTransparent[mesh])) {
-          continue;
-        }
-        vertexCount += g3d.getMeshVertexCount(mesh);
-        indexCount += g3d.getMeshIndexCount(mesh);
-        instances.push(meshInstances[0]);
-        meshes.push(mesh);
-      }
-      return new Merger(g3d, transparency, instances, meshes, indexCount, vertexCount);
-    }
-    static createFromInstances(g3d, instances, transparency) {
-      let vertexCount = 0;
-      let indexCount = 0;
-      const instancesFiltered = [];
-      const meshes = [];
-      for (let i = 0; i < instances.length; i++) {
-        const instance = instances[i];
-        const mesh = g3d.instanceMeshes[instance];
-        if (mesh < 0)
-          continue;
-        if (!Transparency.match(transparency, g3d.meshTransparent[mesh])) {
-          continue;
-        }
-        vertexCount += g3d.getMeshVertexCount(mesh);
-        indexCount += g3d.getMeshIndexCount(mesh);
-        instancesFiltered.push(instance);
-        meshes.push(mesh);
-      }
-      return new Merger(g3d, transparency, instancesFiltered, meshes, indexCount, vertexCount);
-    }
-    merge() {
-      let index = 0;
-      let vertex2 = 0;
-      let uv = 0;
-      let offset = 0;
-      const matrix = new Matrix4();
-      const vector = new Vector3();
-      for (let i = 0; i < this._instances.length; i++) {
-        const mesh = this._meshes[i];
-        const instance = this._instances[i];
-        this._submeshes[i] = index;
-        const indexStart = this._g3d.getMeshIndexStart(mesh);
-        const indexEnd = this._g3d.getMeshIndexEnd(mesh);
-        for (let i2 = indexStart; i2 < indexEnd; i2++) {
-          this._indices[index++] = this._g3d.indices[i2] + offset;
-        }
-        const subStart = this._g3d.getMeshSubmeshStart(mesh);
-        const subEnd = this._g3d.getMeshSubmeshEnd(mesh);
-        for (let sub = subStart; sub < subEnd; sub++) {
-          const startIndex = this._g3d.getSubmeshIndexStart(sub);
-          const endIndex = this._g3d.getSubmeshIndexEnd(sub);
-          const subColor = this._g3d.getSubmeshColor(sub);
-          for (let i2 = startIndex; i2 < endIndex; i2++) {
-            const v2 = (this._g3d.indices[i2] + offset) * this._colorSize;
-            this._colors[v2] = subColor[0];
-            this._colors[v2 + 1] = subColor[1];
-            this._colors[v2 + 2] = subColor[2];
-            if (this._colorSize > 3) {
-              this._colors[v2 + 3] = subColor[3];
-            }
-          }
-        }
-        getInstanceMatrix(this._g3d, instance, matrix);
-        const vertexStart = this._g3d.getMeshVertexStart(mesh);
-        const vertexEnd = this._g3d.getMeshVertexEnd(mesh);
-        for (let p2 = vertexStart; p2 < vertexEnd; p2++) {
-          vector.fromArray(this._g3d.positions, p2 * this._g3d.POSITION_SIZE);
-          vector.applyMatrix4(matrix);
-          vector.toArray(this._vertices, vertex2);
-          vertex2 += this._g3d.POSITION_SIZE;
-          this._uvs[uv++] = instance;
-          this._uvs[uv++] = 1;
-        }
-        offset += vertexEnd - vertexStart;
-      }
-    }
-    toBufferGeometry() {
-      this.merge();
-      const geometry = createGeometryFromArrays(this._vertices, this._indices, this._colors, this._colorSize, this._uvs);
-      return geometry;
-    }
-  }
-  Geometry2.Merger = Merger;
-  function createGeometryFromArrays(vertices, indices, vertexColors = void 0, colorSize = 3, uvs = void 0) {
-    const geometry = new BufferGeometry();
-    geometry.setAttribute("position", new BufferAttribute(vertices, 3));
-    geometry.setIndex(new Uint32BufferAttribute(indices, 1));
-    if (vertexColors) {
-      geometry.setAttribute("color", new BufferAttribute(vertexColors, colorSize));
-      if (uvs) {
-        geometry.setAttribute("uv", new Float32BufferAttribute(uvs, 2));
-      }
-    }
-    return geometry;
-  }
-  Geometry2.createGeometryFromArrays = createGeometryFromArrays;
-  function getInstanceMatrix(g3d, instance, target = new Matrix4()) {
-    const matrixAsArray = g3d.getInstanceMatrix(instance);
-    target.fromArray(matrixAsArray);
-    return target;
-  }
-  Geometry2.getInstanceMatrix = getInstanceMatrix;
-})(Geometry || (Geometry = {}));
 class VimSettings {
   constructor(options) {
     __publicField(this, "options");
@@ -32675,13 +32985,11 @@ class VimSettings {
     __publicField(this, "getRotation", () => toQuaternion(this.options.rotation));
     __publicField(this, "getScale", () => scalarToVec(this.options.scale));
     __publicField(this, "getMatrix", () => new Matrix4().compose(this.getPosition(), this.getRotation(), this.getScale()));
-    __publicField(this, "getElementIdsFilter", () => clone(this.options.elementIds));
     __publicField(this, "getTransparency", () => this.options.transparency);
     const fallback = {
       position: { x: 0, y: 0, z: 0 },
       rotation: { x: 0, y: 0, z: 0 },
       scale: 0.01,
-      elementIds: void 0,
       transparency: "all"
     };
     this.options = options ? cjs(fallback, options, void 0) : fallback;
@@ -32700,152 +33008,6 @@ function scalarToVec(x2) {
 function toEuler(rot) {
   return new Euler(rot.x * Math.PI / 180, rot.y * Math.PI / 180, rot.z * Math.PI / 180);
 }
-var Materials;
-(function(Materials2) {
-  class Library {
-    constructor(opaque, transparent, wireframe) {
-      __publicField(this, "opaque");
-      __publicField(this, "transparent");
-      __publicField(this, "wireframe");
-      this.opaque = opaque != null ? opaque : createOpaque();
-      this.transparent = transparent != null ? transparent : createTransparent();
-      this.wireframe = wireframe != null ? wireframe : createWireframe();
-    }
-  }
-  Materials2.Library = Library;
-  function createBase() {
-    return new MeshPhongMaterial({
-      color: 10066329,
-      vertexColors: true,
-      flatShading: true,
-      side: DoubleSide,
-      shininess: 70
-    });
-  }
-  Materials2.createBase = createBase;
-  function createOpaque() {
-    const mat = createBase();
-    patchMaterial(mat);
-    return mat;
-  }
-  Materials2.createOpaque = createOpaque;
-  function createTransparent() {
-    const mat = createBase();
-    mat.transparent = true;
-    patchMaterial(mat);
-    return mat;
-  }
-  Materials2.createTransparent = createTransparent;
-  function patchMaterial(material) {
-    material.defines = { USE_UV: true };
-    material.onBeforeCompile = (shader) => {
-      patchShader(shader);
-      material.userData.shader = shader;
-    };
-  }
-  Materials2.patchMaterial = patchMaterial;
-  function patchShader(shader) {
-    shader.vertexShader = shader.vertexShader.replace("#include <color_pars_vertex>", `
-        #include <color_pars_vertex>
-        #ifdef USE_INSTANCING_COLOR
-        attribute float useVertexColor;
-        #endif
-        `).replace("#include <uv_vertex>", `
-        #include <uv_vertex>
-
-        #ifdef USE_INSTANCING
-          #ifdef USE_INSTANCING_COLOR
-            vUv = vec2(uv.x, useVertexColor);
-          #else
-            vUv = vec2(uv.x, 1.0);
-          #endif
-        #endif
-        `).replace("#include <color_vertex>", `
-        #include <color_vertex>
-
-        #ifdef USE_INSTANCING_COLOR
-          vColor.xyz = ((1.0f - useVertexColor) * instanceColor.xyz) + (useVertexColor * color.xyz);
-        #endif
-        `);
-    shader.fragmentShader = shader.fragmentShader.replace("#include <output_fragment>", `
-        float d = length(outgoingLight);
-        gl_FragColor = vec4(vColor.xyz * (1.0f - vUv.y) * d + outgoingLight.xyz * vUv.y , diffuseColor.a);
-      `);
-    return shader;
-  }
-  Materials2.patchShader = patchShader;
-  function createWireframe() {
-    const material = new LineBasicMaterial({
-      depthTest: false,
-      opacity: 0.5,
-      color: new Color(255),
-      transparent: true
-    });
-    return material;
-  }
-  Materials2.createWireframe = createWireframe;
-  Materials2.getDefaultLibrary = () => new Library();
-})(Materials || (Materials = {}));
-var Mesh;
-(function(Mesh2) {
-  class Builder {
-    constructor(materials = void 0) {
-      __publicField(this, "materials");
-      this.materials = materials != null ? materials : Materials.getDefaultLibrary();
-    }
-    createInstancedMeshes(g3d, transparency, instances) {
-      const result = [];
-      const set = instances ? new Set(instances) : void 0;
-      for (let mesh = 0; mesh < g3d.getMeshCount(); mesh++) {
-        let meshInstances = g3d.meshInstances[mesh];
-        if (!meshInstances)
-          continue;
-        meshInstances = set ? meshInstances.filter((i) => set.has(i)) : meshInstances;
-        if (meshInstances.length <= 1)
-          continue;
-        if (!Transparency.match(transparency, g3d.meshTransparent[mesh])) {
-          continue;
-        }
-        const useAlpha = Transparency.requiresAlpha(transparency) && g3d.meshTransparent[mesh];
-        const geometry = Geometry.createGeometryFromMesh(g3d, mesh, useAlpha);
-        const resultMesh = this.createInstancedMesh(geometry, g3d, meshInstances, useAlpha);
-        result.push(resultMesh);
-      }
-      return result;
-    }
-    createInstancedMesh(geometry, g3d, instances, useAlpha) {
-      const material = useAlpha ? this.materials.transparent : this.materials.opaque;
-      const result = new InstancedMesh(geometry, material, instances.length);
-      for (let i = 0; i < instances.length; i++) {
-        const matrix = Geometry.getInstanceMatrix(g3d, instances[i]);
-        result.setMatrixAt(i, matrix);
-      }
-      result.userData.instances = instances;
-      return result;
-    }
-    createMergedMesh(g3d, transparency, instances) {
-      const merger = instances ? Geometry.Merger.createFromInstances(g3d, instances, transparency) : Geometry.Merger.createFromUniqueMeshes(g3d, transparency);
-      const geometry = merger.toBufferGeometry();
-      const material = Transparency.requiresAlpha(transparency) ? this.materials.transparent : this.materials.opaque;
-      const mesh = new Mesh$1(geometry, material);
-      mesh.userData.merged = true;
-      mesh.userData.instances = merger.getInstances();
-      mesh.userData.submeshes = merger.getSubmeshes();
-      return mesh;
-    }
-    createWireframe(g3d, instances) {
-      const geometry = Geometry.createGeometryFromInstances(g3d, instances);
-      const wireframe = new WireframeGeometry(geometry);
-      return new LineSegments(wireframe, this.materials.wireframe);
-    }
-  }
-  Mesh2.Builder = Builder;
-  let defaultBuilder;
-  function getDefaultBuilder() {
-    return defaultBuilder != null ? defaultBuilder : defaultBuilder = new Builder();
-  }
-  Mesh2.getDefaultBuilder = getDefaultBuilder;
-})(Mesh || (Mesh = {}));
 class Object$1 {
   constructor(vim, element, instances, meshes) {
     __publicField(this, "vim");
@@ -32861,6 +33023,16 @@ class Object$1 {
   }
   get color() {
     return this._color;
+  }
+  updateMeshes(meshes) {
+    this._meshes = meshes;
+    if (meshes) {
+      for (let i = 0; i < meshes.length; i++) {
+        if (this.color) {
+          this.changeColor(this.color);
+        }
+      }
+    }
   }
   getBimElement() {
     return this.vim.document.getElement(this.element);
@@ -32887,6 +33059,9 @@ class Object$1 {
     return wireframe;
   }
   changeColor(color = void 0) {
+    this._color = color;
+    if (!this._meshes)
+      return;
     for (let m2 = 0; m2 < this._meshes.length; m2++) {
       const [mesh, index] = this._meshes[m2];
       if (mesh.userData.merged) {
@@ -32895,7 +33070,6 @@ class Object$1 {
         this.changeInstancedMeshColor(mesh, index, color);
       }
     }
-    this._color = color;
   }
   getMergedMeshStart(mesh, index) {
     return mesh.userData.submeshes[index];
@@ -32990,6 +33164,13 @@ class Vim {
     this._elementToInstance = this.mapElementToInstance();
     this._elementIdToElement = this.mapElementIdToElement();
   }
+  filter(instances) {
+    this.scene.dispose();
+    this.scene = Scene.createFromG3d(this.document.g3d, this.settings.getTransparency(), instances);
+    for (const [element, object] of this._elementToObject.entries()) {
+      object.updateMeshes(this.getMeshesFromElement(element));
+    }
+  }
   mapElementToInstance() {
     const map = /* @__PURE__ */ new Map();
     const instanceCount = this.document.getInstanceCount();
@@ -33063,11 +33244,13 @@ class Vim {
     }
     const instances = this._elementToInstance.get(index);
     const meshes = this.getMeshesFromInstances(instances);
-    if (!meshes)
-      return;
     const result = new Object$1(this, index, instances, meshes);
     this._elementToObject.set(index, result);
     return result;
+  }
+  getMeshesFromElement(index) {
+    const instances = this._elementToInstance.get(index);
+    return this.getMeshesFromInstances(instances);
   }
   getMeshesFromInstances(instances) {
     if (!(instances == null ? void 0 : instances.length))
@@ -33639,149 +33822,6 @@ let Document = _Document;
 __publicField(Document, "TABLE_ELEMENT", "Vim.Element");
 __publicField(Document, "TABLE_ELEMENT_LEGACY", "Rvt.Element");
 __publicField(Document, "TABLE_NODE", "Vim.Node");
-class Scene {
-  constructor() {
-    __publicField(this, "meshes", []);
-    __publicField(this, "boundingBox", new Box3());
-    __publicField(this, "_instanceToThreeMesh", /* @__PURE__ */ new Map());
-    __publicField(this, "_threeMeshIdToInstances", /* @__PURE__ */ new Map());
-  }
-  getMeshFromInstance(instance) {
-    return this._instanceToThreeMesh.has(instance) ? this._instanceToThreeMesh.get(instance) : [];
-  }
-  getInstanceFromMesh(mesh, index) {
-    if (!mesh || index < 0)
-      return -1;
-    const instances = this._threeMeshIdToInstances.get(mesh.id);
-    if (!instances)
-      return -1;
-    return instances[index];
-  }
-  applyMatrix4(matrix) {
-    for (let m2 = 0; m2 < this.meshes.length; m2++) {
-      this.meshes[m2].matrixAutoUpdate = false;
-      this.meshes[m2].matrix.copy(matrix);
-    }
-    this.boundingBox.applyMatrix4(matrix);
-  }
-  setIndex(index) {
-    for (let m2 = 0; m2 < this.meshes.length; m2++) {
-      this.meshes[m2].userData.index = index;
-    }
-  }
-  swapInstances(mesh, indexA, indexB) {
-    const array = this._threeMeshIdToInstances.get(mesh.id);
-    if (!array)
-      throw new Error("Could not find mesh with id : " + mesh.id);
-    if (indexA === indexB)
-      return;
-    const matrixA = new Matrix4();
-    const matrixB = new Matrix4();
-    mesh.getMatrixAt(indexA, matrixA);
-    mesh.getMatrixAt(indexB, matrixB);
-    mesh.setMatrixAt(indexA, matrixB);
-    mesh.setMatrixAt(indexB, matrixA);
-    const instanceA = array[indexA];
-    const instanceB = array[indexB];
-    this._instanceToThreeMesh.get(instanceA)[1] = indexB;
-    this._instanceToThreeMesh.get(instanceB)[1] = indexA;
-    array[indexA] = instanceB;
-    array[indexB] = instanceA;
-    mesh.instanceMatrix.needsUpdate = true;
-  }
-  addMergedMesh(mesh) {
-    var _a, _b;
-    const instances = mesh.userData.instances;
-    if (!instances) {
-      throw new Error("Expected mesh to have userdata instances : number[]");
-    }
-    for (let i = 0; i < instances.length; i++) {
-      this._instanceToThreeMesh.set(instances[i], [mesh, i]);
-    }
-    mesh.geometry.computeBoundingBox();
-    const box = mesh.geometry.boundingBox;
-    this.boundingBox = (_b = (_a = this.boundingBox) == null ? void 0 : _a.union(box)) != null ? _b : box.clone();
-    this._threeMeshIdToInstances.set(mesh.id, instances);
-    this.meshes.push(mesh);
-    return this;
-  }
-  addInstancedMesh(mesh) {
-    this.registerInstancedMesh(mesh);
-    this.meshes.push(mesh);
-    return this;
-  }
-  static createFromInstancedMeshes(meshes) {
-    const scene = new Scene();
-    for (let m2 = 0; m2 < meshes.length; m2++) {
-      scene.registerInstancedMesh(meshes[m2]);
-    }
-    scene.meshes = meshes;
-    return scene;
-  }
-  registerInstancedMesh(mesh) {
-    var _a, _b;
-    const instances = mesh.userData.instances;
-    if (!instances || instances.length === 0) {
-      throw new Error("Expected mesh to have userdata instances : number[] with at least one member");
-    }
-    if (mesh.count === 0) {
-      throw new Error("Expected mesh to have at least one instance");
-    }
-    for (let i = 0; i < instances.length; i++) {
-      this._instanceToThreeMesh.set(instances[i], [mesh, i]);
-    }
-    const box = this.computeIntancedMeshBoundingBox(mesh);
-    this.boundingBox = (_b = (_a = this.boundingBox) == null ? void 0 : _a.union(box)) != null ? _b : box.clone();
-    this._threeMeshIdToInstances.set(mesh.id, instances);
-  }
-  merge(other) {
-    var _a, _b;
-    other.meshes.forEach((mesh) => this.meshes.push(mesh));
-    other._instanceToThreeMesh.forEach((value, key) => {
-      this._instanceToThreeMesh.set(key, value);
-    });
-    other._threeMeshIdToInstances.forEach((value, key) => {
-      this._threeMeshIdToInstances.set(key, value);
-    });
-    this.boundingBox = (_b = (_a = this.boundingBox) == null ? void 0 : _a.union(other.boundingBox)) != null ? _b : other.boundingBox.clone();
-    return this;
-  }
-  computeIntancedMeshBoundingBox(mesh) {
-    let result;
-    const matrix = new Matrix4();
-    const box = new Box3();
-    mesh.geometry.computeBoundingBox();
-    for (let i = 0; i < mesh.count; i++) {
-      mesh.getMatrixAt(i, matrix);
-      box.copy(mesh.geometry.boundingBox);
-      box.applyMatrix4(matrix);
-      result = result ? result.union(box) : box.clone();
-    }
-    return result;
-  }
-  static createFromG3d(g3d, transparency = "all", instances = void 0) {
-    const scene = new Scene();
-    const shared = Scene.createFromInstanciableMeshes(g3d, transparency, instances);
-    scene.merge(shared);
-    if (transparency !== "transparentOnly") {
-      const opaque = Scene.createFromMergeableMeshes(g3d, transparency === "allAsOpaque" ? "allAsOpaque" : "opaqueOnly", instances);
-      scene.merge(opaque);
-    }
-    if (Transparency.requiresAlpha(transparency)) {
-      const transparent = Scene.createFromMergeableMeshes(g3d, "transparentOnly", instances);
-      scene.merge(transparent);
-    }
-    return scene;
-  }
-  static createFromInstanciableMeshes(g3d, transparency, instances = void 0, builder = Mesh.getDefaultBuilder()) {
-    const meshes = builder.createInstancedMeshes(g3d, transparency, instances);
-    return Scene.createFromInstancedMeshes(meshes);
-  }
-  static createFromMergeableMeshes(g3d, transparency, instances = void 0, builder = Mesh.getDefaultBuilder()) {
-    const mesh = builder.createMergedMesh(g3d, transparency, instances);
-    return new Scene().addMergedMesh(mesh);
-  }
-}
 class Loader {
   constructor() {
     __publicField(this, "_loader");
@@ -33826,27 +33866,35 @@ class Loader {
 class Viewer {
   constructor(options) {
     __publicField(this, "settings");
-    __publicField(this, "environment");
     __publicField(this, "renderer");
     __publicField(this, "selection");
-    __publicField(this, "camera");
-    __publicField(this, "controls");
-    __publicField(this, "loader");
+    __publicField(this, "inputs");
+    __publicField(this, "raycaster");
+    __publicField(this, "_environment");
+    __publicField(this, "_camera");
+    __publicField(this, "_loader");
+    __publicField(this, "_clock", new Clock());
     __publicField(this, "_vims", []);
     __publicField(this, "onMouseClick");
-    __publicField(this, "getVim", (index = 0) => this._vims[index]);
-    this.loader = new Loader();
+    this._loader = new Loader();
     this.settings = new ViewerSettings(options);
     const canvas = Viewer.getOrCreateCanvas(this.settings.getCanvasId());
     this.renderer = new Renderer(canvas, this.settings);
-    this.camera = new Camera(this.renderer, this.settings);
-    this.environment = new Environment(this.settings);
-    this.environment.getObjects().forEach((o) => this.renderer.addObject(o));
+    this._camera = new Camera(this.renderer, this.settings);
+    this._environment = new Environment(this.settings);
+    this._environment.getObjects().forEach((o) => this.renderer.add(o));
     this.onMouseClick = this.defaultOnClick;
-    this.controls = new Input(this);
-    this.controls.register();
+    this.raycaster = new Raycaster(this);
+    this.inputs = new Input(this, this._camera);
+    this.inputs.register();
     this.selection = new Selection(this);
     this.animate();
+  }
+  get camera() {
+    return this._camera;
+  }
+  get environment() {
+    return this._environment;
   }
   static getOrCreateCanvas(canvasId) {
     let canvas = canvasId ? document.getElementById(canvasId) : void 0;
@@ -33858,10 +33906,15 @@ class Viewer {
   }
   animate() {
     requestAnimationFrame(() => this.animate());
-    const timeDelta = this.renderer.clock.getDelta();
-    this.camera.update(timeDelta);
+    this._camera.update(this._clock.getDelta());
     if (this._vims.length)
       this.renderer.render();
+  }
+  getVim(index = 0) {
+    return this._vims[index];
+  }
+  get vimCount() {
+    return this._vims.length;
   }
   addVim(vim) {
     for (let i = 0; i <= this._vims.length; i++) {
@@ -33879,88 +33932,50 @@ class Viewer {
   loadVim(source = "https://vim.azureedge.net/samples/residence.vim", options, onLoad, onProgress, onError) {
     const settings = new VimSettings(options);
     const finish = (vim) => {
-      const filter = settings.getElementIdsFilter();
-      if (filter)
-        this.filterVim(vim, filter);
-      else
-        this.onVimLoaded(vim, settings);
-      this.frameContent();
+      this.onVimLoaded(vim, settings);
+      this._camera.frame("all");
       onLoad == null ? void 0 : onLoad(vim);
     };
     if (typeof source === "string") {
-      this.loader.loadFromUrl(source, settings.getTransparency(), (vim) => finish(vim), (progress) => {
+      this._loader.loadFromUrl(source, settings.getTransparency(), (vim) => finish(vim), (progress) => {
         onProgress == null ? void 0 : onProgress(progress);
       }, (error) => {
         onError == null ? void 0 : onError(error);
       });
     } else {
-      const vim = this.loader.loadFromArrayBuffer(source, settings.getTransparency());
+      const vim = this._loader.loadFromArrayBuffer(source, settings.getTransparency());
       finish(vim);
     }
   }
   onVimLoaded(vim, settings) {
     this.addVim(vim);
     vim.applySettings(settings);
-    this.renderer.addScene(vim.scene);
-    this.environment.adaptToContent(this.renderer.getBoundingBox());
-    this.camera.adaptToContent(this.renderer.getBoundingSphere());
+    this.renderer.add(vim.scene);
+    this._environment.adaptToContent(this.renderer.getBoundingBox());
+    this._camera.adaptToContent();
   }
   unloadVim(vim) {
     var _a;
     this.removeVim(vim);
-    this.renderer.removeScene(vim.scene);
+    this.renderer.remove(vim.scene);
+    vim.scene.dispose();
     if (((_a = this.selection.object) == null ? void 0 : _a.vim) === vim)
       this.selection.clear();
   }
-  reloadVim(vim, options) {
-    const settings = new VimSettings(options);
-    const elementIds = settings.getElementIdsFilter();
-    const instances = elementIds.flatMap((id2) => {
-      var _a;
-      return (_a = vim.getObjectFromElementId(id2)) == null ? void 0 : _a.instances;
-    }).filter((i) => i !== void 0);
-    const newVim = this.loader.loadFromVim(vim.document, settings.getTransparency(), instances);
+  filterVim(vim, objects) {
+    const instances = objects == null ? void 0 : objects.flatMap((o) => o == null ? void 0 : o.instances).filter((i) => i !== void 0);
     this.unloadVim(vim);
-    this.onVimLoaded(newVim, settings);
-  }
-  filterVim(vim, includedElementIds) {
-    const options = vim.settings.getOptions();
-    options.elementIds = includedElementIds;
-    this.reloadVim(vim, options);
-  }
-  selectObject(object) {
-    if (object) {
-      console.log(`Selected Element Index: ${object.element}`);
-      this.selection.select(object);
-    } else {
-      console.log("Selection Cleared");
-      this.selection.clear();
-    }
-  }
-  lookAtObject(object) {
-    this.camera.lookAtPosition(object.getCenter());
-  }
-  frameObject(object) {
-    this.camera.frameSphere(object.getBoundingSphere());
-  }
-  frameSelection() {
-    if (this.selection.hasSelection()) {
-      this.camera.frameSphere(this.selection.getBoundingSphere());
-    } else {
-      this.frameContent();
-    }
-  }
-  frameContent() {
-    this.camera.frameSphere(this.renderer.getBoundingSphere());
+    vim.filter(instances);
+    this.onVimLoaded(vim, vim.settings);
   }
   defaultOnClick(hit) {
     console.log(hit);
     if (!hit.object)
       return;
-    this.selectObject(hit.object);
-    this.camera.setTarget(hit.object.getCenter());
+    this.selection.select(hit.object);
+    this._camera.target(hit.object.getCenter());
     if (hit.doubleClick)
-      this.frameSelection();
+      this._camera.frame(hit.object);
     console.log(hit.object.getBimElement());
   }
 }
