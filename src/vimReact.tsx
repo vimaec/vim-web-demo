@@ -16,15 +16,15 @@ export function buildUI():[string, (state : Progress) => void]{
   document.body.append(ui)
 
   // Render
-  const obj = {state: '', set: null as (p: Progress) => void }
-  ReactDOM.render(<VimUI p={obj} />, ui)
-  return [canvasId, (str) => obj.set(str)]
+  const updater = {state: '', set: null as (p: Progress) => void }
+  ReactDOM.render(<VimUI hook={updater} />, ui)
+  return [canvasId, (str) => updater.set(str)]
 }
 
-function VimUI (props: {p:any }) {
+function VimUI (props: {hook:any }) {
   const [progress, setProgress] = useState<Progress>()
-  props.p.msg = progress
-  props.p.set = setProgress
+  props.hook.msg = progress
+  props.hook.set = setProgress
 
   return (
     <>
