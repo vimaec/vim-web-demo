@@ -3,8 +3,6 @@ import { buildUI } from './vimReact'
 import * as VIM from 'vim-webgl-viewer/'
 import Stats from 'stats-js'
 
-
-
 // Parse URL
 const params = new URLSearchParams(window.location.search)
 let url = params.has('vim')
@@ -19,7 +17,7 @@ url = params.has('model')
 let transparency = 'all' as VIM.Transparency.Mode
 if (params.has('transparency')) {
   const t = params.get('transparency')
-  transparency = VIM.Transparency.IsValid(t) ? t : 'all'
+  transparency = VIM.Transparency.isValid(t) ? t : 'all'
 }
 
 // Create Viewer
