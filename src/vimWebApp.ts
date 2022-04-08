@@ -1,5 +1,5 @@
 //import { settingsGui } from './settingsGui'
-import { buildUI } from './vimReact'
+import { buildUI,Table } from './vimReact'
 import * as VIM from 'vim-webgl-viewer/'
 import Stats from 'stats-js'
 
@@ -21,10 +21,10 @@ if (params.has('transparency')) {
 }
 
 // Create Viewer
-const [canvasId, setProgress] = buildUI()
+const ui = buildUI()
 
 const viewer = new VIM.Viewer({
-  canvas: {id : canvasId},
+  canvas: {id : ui.canvas},
   groundPlane: {
     show: true,
     texture:
@@ -37,21 +37,45 @@ viewer.camera
 
 // Load Model
 viewer.loadVim(
-  url,
+  'https://vimdevelopment01storage.blob.core.windows.net/samples/residence_nozip.vim',
   {
+    position: {x:0, y: 0, z:0},
+    rotation: {x:270, y: 0, z:0},
+    scale: 1,
     transparency: transparency,
-    rotation: { x: 270, y: 0, z: 0 }
   },
-  (result) => setProgress(undefined),
   (progress) => 
-    setProgress(progress === 'processing' ? 'processing' : progress.loaded)
-  ,
-  (error) => 
-    setProgress(error.message)
+    ui.setProgress(progress.loaded)
   )
 
 // Make viewer accessible in console
 globalThis.viewer = viewer
+
+const previous = viewer.onMouseClick.bind(viewer)
+viewer.onMouseClick = (hit) => {
+  previous(hit)
+  updateTable(hit.object)
+}
+
+
+async function updateTable(object: VIM.Object){
+  if(!object){
+    ui.setTable(undefined)
+    return
+  }
+  
+  const table : Table = []
+  const bim = await object.getBimElement()
+  for(let pair of bim){
+    const value = typeof(pair[1]) === 'number'
+      ? round2(pair[1]).toString() 
+      : pair[1]
+    table.push([pair[0], value])
+  }
+  ui.setTable(table)
+}
+
+const round2 = (n) => Math.round((n + Number.EPSILON) * 100) / 100
 
 /*
 // Add a new DAT.gui controller
