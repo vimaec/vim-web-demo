@@ -40,7 +40,7 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background: radial-gradient(circle at center, #f0f0ff, #999999);
+  background: radial-gradient(circle at center, #d8d8e6, #8a8a8a);
 }
 
 .VimLoadingBox h1 {
