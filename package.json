@@ -48,7 +48,7 @@
     "react-dom": "^17.0.2",
     "stats-js": "^1.0.1",
     "three": "^0.133.1",
-    "vim-webgl-viewer": "1.2.2"
+    "vim-webgl-viewer": "1.2.7"
   },
   "keywords": [
     "3d",
