@@ -39,9 +39,7 @@ viewer.camera
 viewer.loadVim(
   url,
   {
-    position: {x: 0, y: 0, z:0},
     rotation: { x: 270, y: 0, z: 0 },
-    scale: 0.1,
     transparency: transparency,
   },
   (progress) => setProgress(progress.loaded)

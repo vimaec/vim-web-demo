@@ -31182,7 +31182,8 @@ class Camera {
     this._sceneSizeMultiplier = sphere.radius / this._vimReferenceSize;
   }
   zoom(amount) {
-    const next = this._orbitalTargetDistance + amount * this._zoomSpeed;
+    const multiplier = this._zoomSpeed * this.getSpeedMultiplier();
+    const next = this._orbitalTargetDistance + amount * multiplier;
     this._orbitalTargetDistance = Math.max(next, this._minOrbitalDistance);
     this.gizmo.show();
   }
@@ -33360,7 +33361,7 @@ class VimSettings {
     const fallback = {
       position: { x: 0, y: 0, z: 0 },
       rotation: { x: 0, y: 0, z: 0 },
-      scale: 0.01,
+      scale: 1,
       transparency: "all",
       forceDownload: false
     };
@@ -33696,18 +33697,20 @@ class G3d {
   }
 }
 class Document {
-  constructor(g3d, entities, strings, instanceToElement, elementToInstances, elementIdToElements) {
+  constructor(g3d, entities, strings, instanceToElement, elementToInstances, elementIds, elementIdToElements) {
     __publicField(this, "g3d");
     __publicField(this, "_entity");
     __publicField(this, "_strings");
     __publicField(this, "_instanceToElement");
     __publicField(this, "_elementToInstances");
+    __publicField(this, "_elementIds");
     __publicField(this, "_elementIdToElements");
     this.g3d = g3d;
     this._entity = entities;
     this._strings = strings;
     this._instanceToElement = instanceToElement;
     this._elementToInstances = elementToInstances;
+    this._elementIds = elementIds;
     this._elementIdToElements = elementIdToElements;
   }
   static async createFromBfast(bfast) {
@@ -33715,17 +33718,18 @@ class Document {
     let entity;
     let strings;
     let instanceToElement;
-    let elementIdToElement;
+    let elementIds;
     await Promise.all([
       Document.requestG3d(bfast).then((g) => g3d = g),
       Document.requestStrings(bfast).then((strs) => strings = strs),
       bfast.getBfast("entities").then((ets) => entity = ets).then((ets) => Promise.all([
         Document.requestInstanceToElement(ets).then((v2) => instanceToElement = v2),
-        Document.requestElementIdToElement(ets).then((v2) => elementIdToElement = v2)
+        Document.requestElementIds(ets).then((v2) => elementIds = v2)
       ]))
     ]);
     const elementToInstance = Document.invert(instanceToElement);
-    return new Document(g3d, entity, strings, instanceToElement, elementToInstance, elementIdToElement);
+    const elementIdToElements = Document.invert(elementIds);
+    return new Document(g3d, entity, strings, instanceToElement, elementToInstance, elementIds, elementIdToElements);
   }
   static async requestG3d(bfast) {
     const geometry = await bfast.getBfast("geometry");
@@ -33754,15 +33758,14 @@ class Document {
     }
     return result;
   }
-  static async requestElementIdToElement(entities) {
+  static async requestElementIds(entities) {
     var _a;
     const elements = await entities.getBfast("Vim.Element");
     const ids = (_a = await elements.getArray("int:Id")) != null ? _a : await elements.getArray("numeric:Id");
-    const result = Document.invert(ids);
-    return result;
+    return ids;
   }
   *getAllElements() {
-    for (let i = 0; i < this._elementToInstances.size; i++) {
+    for (let i = 0; i < this._elementIds.length; i++) {
       yield i;
     }
   }
@@ -33776,7 +33779,10 @@ class Document {
     return this._instanceToElement[instance];
   }
   getElementFromElementId(elementId) {
-    return this._elementIdToElements[elementId];
+    return this._elementIdToElements.get(elementId);
+  }
+  getElementId(element) {
+    return this._elementIds[element];
   }
   async getEntity(name, index) {
     const elements = await this._entity.getBfast(name);
@@ -33822,6 +33828,9 @@ class Object$1 {
   }
   getBimElement() {
     return this.vim.document.getElement(this.element);
+  }
+  get elementId() {
+    return this.vim.document.getElementId(this.element);
   }
   getBoundingBox() {
     if (this._boundingBox)
@@ -34645,9 +34654,7 @@ const viewer = new Viewer({
 });
 viewer.camera;
 viewer.loadVim(url, {
-  position: { x: 0, y: 0, z: 0 },
   rotation: { x: 270, y: 0, z: 0 },
-  scale: 0.1,
   transparency
 }, (progress) => setProgress(progress.loaded)).then((_) => setProgress(void 0));
 globalThis.viewer = viewer;
