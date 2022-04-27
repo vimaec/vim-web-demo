@@ -34847,11 +34847,9 @@ const viewer = new Viewer({
 });
 viewer.camera;
 viewer.loadVim("https://vimdevelopment01storage.blob.core.windows.net/samples/residence_nozip.vim", {
-  position: { x: 0, y: 0, z: 0 },
   rotation: { x: 270, y: 0, z: 0 },
-  scale: 1,
   transparency
-}, (progress) => ui.setProgress(progress.loaded)).then(() => ui.setProgress(void 0));
+}, (progress) => ui.setProgress(progress.loaded)).then((_) => ui.setProgress(void 0));
 globalThis.viewer = viewer;
 if (withBim) {
   const previous = viewer.onMouseClick.bind(viewer);

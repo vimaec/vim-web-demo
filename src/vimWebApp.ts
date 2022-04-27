@@ -43,14 +43,11 @@ viewer.camera
 viewer.loadVim(
   'https://vimdevelopment01storage.blob.core.windows.net/samples/residence_nozip.vim',
   {
-    position: {x:0, y: 0, z:0},
-    rotation: {x:270, y: 0, z:0},
-    scale: 1,
+    rotation: { x: 270, y: 0, z: 0 },
     transparency: transparency,
   },
-  (progress) => 
-    ui.setProgress(progress.loaded)
-  ).then(() => ui.setProgress(undefined))
+  (progress) => ui.setProgress(progress.loaded)
+).then(_ => ui.setProgress(undefined))
 
 // Make viewer accessible in console
 globalThis.viewer = viewer
