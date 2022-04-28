@@ -41,7 +41,7 @@ viewer.camera
 
 // Load Model
 viewer.loadVim(
-  'https://vimdevelopment01storage.blob.core.windows.net/samples/residence_nozip.vim',
+  url,
   {
     rotation: { x: 270, y: 0, z: 0 },
     transparency: transparency,
