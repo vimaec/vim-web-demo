@@ -7929,22 +7929,22 @@ class Texture extends EventDispatcher {
         image.uuid = generateUUID();
       }
       if (!isRootObject && meta.images[image.uuid] === void 0) {
-        let url;
+        let url2;
         if (Array.isArray(image)) {
-          url = [];
+          url2 = [];
           for (let i = 0, l2 = image.length; i < l2; i++) {
             if (image[i].isDataTexture) {
-              url.push(serializeImage(image[i].image));
+              url2.push(serializeImage(image[i].image));
             } else {
-              url.push(serializeImage(image[i]));
+              url2.push(serializeImage(image[i]));
             }
           }
         } else {
-          url = serializeImage(image);
+          url2 = serializeImage(image);
         }
         meta.images[image.uuid] = {
           uuid: image.uuid,
-          url
+          url: url2
         };
       }
       output.image = image.uuid;
@@ -27261,19 +27261,19 @@ class LoadingManager {
     this.onLoad = onLoad;
     this.onProgress = onProgress;
     this.onError = onError;
-    this.itemStart = function(url) {
+    this.itemStart = function(url2) {
       itemsTotal++;
       if (isLoading === false) {
         if (scope.onStart !== void 0) {
-          scope.onStart(url, itemsLoaded, itemsTotal);
+          scope.onStart(url2, itemsLoaded, itemsTotal);
         }
       }
       isLoading = true;
     };
-    this.itemEnd = function(url) {
+    this.itemEnd = function(url2) {
       itemsLoaded++;
       if (scope.onProgress !== void 0) {
-        scope.onProgress(url, itemsLoaded, itemsTotal);
+        scope.onProgress(url2, itemsLoaded, itemsTotal);
       }
       if (itemsLoaded === itemsTotal) {
         isLoading = false;
@@ -27282,16 +27282,16 @@ class LoadingManager {
         }
       }
     };
-    this.itemError = function(url) {
+    this.itemError = function(url2) {
       if (scope.onError !== void 0) {
-        scope.onError(url);
+        scope.onError(url2);
       }
     };
-    this.resolveURL = function(url) {
+    this.resolveURL = function(url2) {
       if (urlModifier) {
-        return urlModifier(url);
+        return urlModifier(url2);
       }
-      return url;
+      return url2;
     };
     this.setURLModifier = function(transform) {
       urlModifier = transform;
@@ -27334,10 +27334,10 @@ class Loader$1 {
   }
   load() {
   }
-  loadAsync(url, onProgress) {
+  loadAsync(url2, onProgress) {
     const scope = this;
     return new Promise(function(resolve, reject) {
-      scope.load(url, resolve, onProgress, reject);
+      scope.load(url2, resolve, onProgress, reject);
     });
   }
   parse() {
@@ -27368,25 +27368,25 @@ class FileLoader extends Loader$1 {
   constructor(manager) {
     super(manager);
   }
-  load(url, onLoad, onProgress, onError) {
-    if (url === void 0)
-      url = "";
+  load(url2, onLoad, onProgress, onError) {
+    if (url2 === void 0)
+      url2 = "";
     if (this.path !== void 0)
-      url = this.path + url;
-    url = this.manager.resolveURL(url);
+      url2 = this.path + url2;
+    url2 = this.manager.resolveURL(url2);
     const scope = this;
-    const cached = Cache.get(url);
+    const cached = Cache.get(url2);
     if (cached !== void 0) {
-      scope.manager.itemStart(url);
+      scope.manager.itemStart(url2);
       setTimeout(function() {
         if (onLoad)
           onLoad(cached);
-        scope.manager.itemEnd(url);
+        scope.manager.itemEnd(url2);
       }, 0);
       return cached;
     }
-    if (loading[url] !== void 0) {
-      loading[url].push({
+    if (loading[url2] !== void 0) {
+      loading[url2].push({
         onLoad,
         onProgress,
         onError
@@ -27394,7 +27394,7 @@ class FileLoader extends Loader$1 {
       return;
     }
     const dataUriRegex = /^data:(.*?)(;base64)?,(.*)$/;
-    const dataUriRegexResult = url.match(dataUriRegex);
+    const dataUriRegexResult = url2.match(dataUriRegex);
     let request;
     if (dataUriRegexResult) {
       const mimeType = dataUriRegexResult[1];
@@ -27433,51 +27433,51 @@ class FileLoader extends Loader$1 {
         setTimeout(function() {
           if (onLoad)
             onLoad(response);
-          scope.manager.itemEnd(url);
+          scope.manager.itemEnd(url2);
         }, 0);
       } catch (error) {
         setTimeout(function() {
           if (onError)
             onError(error);
-          scope.manager.itemError(url);
-          scope.manager.itemEnd(url);
+          scope.manager.itemError(url2);
+          scope.manager.itemEnd(url2);
         }, 0);
       }
     } else {
-      loading[url] = [];
-      loading[url].push({
+      loading[url2] = [];
+      loading[url2].push({
         onLoad,
         onProgress,
         onError
       });
       request = new XMLHttpRequest();
-      request.open("GET", url, true);
+      request.open("GET", url2, true);
       request.addEventListener("load", function(event) {
         const response = this.response;
-        const callbacks = loading[url];
-        delete loading[url];
+        const callbacks = loading[url2];
+        delete loading[url2];
         if (this.status === 200 || this.status === 0) {
           if (this.status === 0)
             console.warn("THREE.FileLoader: HTTP Status 0 received.");
-          Cache.add(url, response);
+          Cache.add(url2, response);
           for (let i = 0, il = callbacks.length; i < il; i++) {
             const callback = callbacks[i];
             if (callback.onLoad)
               callback.onLoad(response);
           }
-          scope.manager.itemEnd(url);
+          scope.manager.itemEnd(url2);
         } else {
           for (let i = 0, il = callbacks.length; i < il; i++) {
             const callback = callbacks[i];
             if (callback.onError)
               callback.onError(event);
           }
-          scope.manager.itemError(url);
-          scope.manager.itemEnd(url);
+          scope.manager.itemError(url2);
+          scope.manager.itemEnd(url2);
         }
       }, false);
       request.addEventListener("progress", function(event) {
-        const callbacks = loading[url];
+        const callbacks = loading[url2];
         for (let i = 0, il = callbacks.length; i < il; i++) {
           const callback = callbacks[i];
           if (callback.onProgress)
@@ -27485,26 +27485,26 @@ class FileLoader extends Loader$1 {
         }
       }, false);
       request.addEventListener("error", function(event) {
-        const callbacks = loading[url];
-        delete loading[url];
+        const callbacks = loading[url2];
+        delete loading[url2];
         for (let i = 0, il = callbacks.length; i < il; i++) {
           const callback = callbacks[i];
           if (callback.onError)
             callback.onError(event);
         }
-        scope.manager.itemError(url);
-        scope.manager.itemEnd(url);
+        scope.manager.itemError(url2);
+        scope.manager.itemEnd(url2);
       }, false);
       request.addEventListener("abort", function(event) {
-        const callbacks = loading[url];
-        delete loading[url];
+        const callbacks = loading[url2];
+        delete loading[url2];
         for (let i = 0, il = callbacks.length; i < il; i++) {
           const callback = callbacks[i];
           if (callback.onError)
             callback.onError(event);
         }
-        scope.manager.itemError(url);
-        scope.manager.itemEnd(url);
+        scope.manager.itemError(url2);
+        scope.manager.itemEnd(url2);
       }, false);
       if (this.responseType !== void 0)
         request.responseType = this.responseType;
@@ -27517,7 +27517,7 @@ class FileLoader extends Loader$1 {
       }
       request.send(null);
     }
-    scope.manager.itemStart(url);
+    scope.manager.itemStart(url2);
     return request;
   }
   setResponseType(value) {
@@ -27533,18 +27533,18 @@ class ImageLoader extends Loader$1 {
   constructor(manager) {
     super(manager);
   }
-  load(url, onLoad, onProgress, onError) {
+  load(url2, onLoad, onProgress, onError) {
     if (this.path !== void 0)
-      url = this.path + url;
-    url = this.manager.resolveURL(url);
+      url2 = this.path + url2;
+    url2 = this.manager.resolveURL(url2);
     const scope = this;
-    const cached = Cache.get(url);
+    const cached = Cache.get(url2);
     if (cached !== void 0) {
-      scope.manager.itemStart(url);
+      scope.manager.itemStart(url2);
       setTimeout(function() {
         if (onLoad)
           onLoad(cached);
-        scope.manager.itemEnd(url);
+        scope.manager.itemEnd(url2);
       }, 0);
       return cached;
     }
@@ -27552,27 +27552,27 @@ class ImageLoader extends Loader$1 {
     function onImageLoad() {
       image.removeEventListener("load", onImageLoad, false);
       image.removeEventListener("error", onImageError, false);
-      Cache.add(url, this);
+      Cache.add(url2, this);
       if (onLoad)
         onLoad(this);
-      scope.manager.itemEnd(url);
+      scope.manager.itemEnd(url2);
     }
     function onImageError(event) {
       image.removeEventListener("load", onImageLoad, false);
       image.removeEventListener("error", onImageError, false);
       if (onError)
         onError(event);
-      scope.manager.itemError(url);
-      scope.manager.itemEnd(url);
+      scope.manager.itemError(url2);
+      scope.manager.itemEnd(url2);
     }
     image.addEventListener("load", onImageLoad, false);
     image.addEventListener("error", onImageError, false);
-    if (url.substr(0, 5) !== "data:") {
+    if (url2.substr(0, 5) !== "data:") {
       if (this.crossOrigin !== void 0)
         image.crossOrigin = this.crossOrigin;
     }
-    scope.manager.itemStart(url);
-    image.src = url;
+    scope.manager.itemStart(url2);
+    image.src = url2;
     return image;
   }
 }
@@ -27607,12 +27607,12 @@ class TextureLoader extends Loader$1 {
   constructor(manager) {
     super(manager);
   }
-  load(url, onLoad, onProgress, onError) {
+  load(url2, onLoad, onProgress, onError) {
     const texture = new Texture();
     const loader = new ImageLoader(this.manager);
     loader.setCrossOrigin(this.crossOrigin);
     loader.setPath(this.path);
-    loader.load(url, function(image) {
+    loader.load(url2, function(image) {
       texture.image = image;
       texture.needsUpdate = true;
       if (onLoad !== void 0) {
@@ -28103,11 +28103,11 @@ class LoaderUtils {
       return s;
     }
   }
-  static extractUrlBase(url) {
-    const index = url.lastIndexOf("/");
+  static extractUrlBase(url2) {
+    const index = url2.lastIndexOf("/");
     if (index === -1)
       return "./";
-    return url.substr(0, index + 1);
+    return url2.substr(0, index + 1);
   }
 }
 class InstancedBufferGeometry extends BufferGeometry {
@@ -28147,42 +28147,42 @@ class ImageBitmapLoader extends Loader$1 {
     this.options = options;
     return this;
   }
-  load(url, onLoad, onProgress, onError) {
-    if (url === void 0)
-      url = "";
+  load(url2, onLoad, onProgress, onError) {
+    if (url2 === void 0)
+      url2 = "";
     if (this.path !== void 0)
-      url = this.path + url;
-    url = this.manager.resolveURL(url);
+      url2 = this.path + url2;
+    url2 = this.manager.resolveURL(url2);
     const scope = this;
-    const cached = Cache.get(url);
+    const cached = Cache.get(url2);
     if (cached !== void 0) {
-      scope.manager.itemStart(url);
+      scope.manager.itemStart(url2);
       setTimeout(function() {
         if (onLoad)
           onLoad(cached);
-        scope.manager.itemEnd(url);
+        scope.manager.itemEnd(url2);
       }, 0);
       return cached;
     }
     const fetchOptions = {};
     fetchOptions.credentials = this.crossOrigin === "anonymous" ? "same-origin" : "include";
     fetchOptions.headers = this.requestHeader;
-    fetch(url, fetchOptions).then(function(res) {
+    fetch(url2, fetchOptions).then(function(res) {
       return res.blob();
     }).then(function(blob) {
       return createImageBitmap(blob, Object.assign(scope.options, { colorSpaceConversion: "none" }));
     }).then(function(imageBitmap) {
-      Cache.add(url, imageBitmap);
+      Cache.add(url2, imageBitmap);
       if (onLoad)
         onLoad(imageBitmap);
-      scope.manager.itemEnd(url);
+      scope.manager.itemEnd(url2);
     }).catch(function(e) {
       if (onError)
         onError(e);
-      scope.manager.itemError(url);
-      scope.manager.itemEnd(url);
+      scope.manager.itemError(url2);
+      scope.manager.itemEnd(url2);
     });
-    scope.manager.itemStart(url);
+    scope.manager.itemStart(url2);
   }
 }
 ImageBitmapLoader.prototype.isImageBitmapLoader = true;
@@ -28202,14 +28202,14 @@ class AudioLoader extends Loader$1 {
   constructor(manager) {
     super(manager);
   }
-  load(url, onLoad, onProgress, onError) {
+  load(url2, onLoad, onProgress, onError) {
     const scope = this;
     const loader = new FileLoader(this.manager);
     loader.setResponseType("arraybuffer");
     loader.setPath(this.path);
     loader.setRequestHeader(this.requestHeader);
     loader.setWithCredentials(this.withCredentials);
-    loader.load(url, function(buffer) {
+    loader.load(url2, function(buffer) {
       try {
         const bufferCopy = buffer.slice(0);
         const context = AudioContext.getContext();
@@ -28222,7 +28222,7 @@ class AudioLoader extends Loader$1 {
         } else {
           console.error(e);
         }
-        scope.manager.itemError(url);
+        scope.manager.itemError(url2);
       }
     }, onProgress, onError);
   }
@@ -29886,9 +29886,9 @@ GridHelper.prototype.setColors = function() {
 SkeletonHelper.prototype.update = function() {
   console.error("THREE.SkeletonHelper: update() no longer needs to be called.");
 };
-Loader$1.prototype.extractUrlBase = function(url) {
+Loader$1.prototype.extractUrlBase = function(url2) {
   console.warn("THREE.Loader: .extractUrlBase() has been deprecated. Use THREE.LoaderUtils.extractUrlBase() instead.");
-  return LoaderUtils.extractUrlBase(url);
+  return LoaderUtils.extractUrlBase(url2);
 };
 Loader$1.Handlers = {
   add: function() {
@@ -30746,11 +30746,11 @@ CubeCamera.prototype.clear = function(renderer, color, depth, stencil) {
   return this.renderTarget.clear(renderer, color, depth, stencil);
 };
 ImageUtils.crossOrigin = void 0;
-ImageUtils.loadTexture = function(url, mapping, onLoad, onError) {
+ImageUtils.loadTexture = function(url2, mapping, onLoad, onError) {
   console.warn("THREE.ImageUtils.loadTexture has been deprecated. Use THREE.TextureLoader() instead.");
   const loader = new TextureLoader();
   loader.setCrossOrigin(this.crossOrigin);
-  const texture = loader.load(url, onLoad, void 0, onError);
+  const texture = loader.load(url2, onLoad, void 0, onError);
   if (mapping)
     texture.mapping = mapping;
   return texture;
@@ -34353,11 +34353,11 @@ class RequestLogger {
   }
 }
 class RemoteBuffer {
-  constructor(url, logger = new RequestLogger(url)) {
+  constructor(url2, logger = new RequestLogger(url2)) {
     __publicField(this, "url");
     __publicField(this, "logger");
     __publicField(this, "queue", []);
-    this.url = url;
+    this.url = url2;
     this.logger = logger;
   }
   async http(range, label) {
@@ -34827,8 +34827,8 @@ var stats_min = { exports: {} };
 })(stats_min);
 var Stats = stats_min.exports;
 const params = new URLSearchParams(window.location.search);
-params.has("vim") ? params.get("vim") : "https://vim.azureedge.net/samples/residence.vim";
-params.has("model") ? params.get("model") : "https://vim.azureedge.net/samples/residence.vim";
+let url = params.has("vim") ? params.get("vim") : "https://vim.azureedge.net/samples/residence.vim";
+url = params.has("model") ? params.get("model") : "https://vim.azureedge.net/samples/residence.vim";
 let transparency = "all";
 if (params.has("transparency")) {
   const t2 = params.get("transparency");
@@ -34846,7 +34846,7 @@ const viewer = new Viewer({
   }
 });
 viewer.camera;
-viewer.loadVim("https://vimdevelopment01storage.blob.core.windows.net/samples/residence_nozip.vim", {
+viewer.loadVim(url, {
   rotation: { x: 270, y: 0, z: 0 },
   transparency
 }, (progress) => ui.setProgress(progress.loaded)).then((_) => ui.setProgress(void 0));
