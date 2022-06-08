@@ -8,13 +8,9 @@ import 'vim-webgl-component/dist/style.css';
 
 // Parse URL
 const params = new URLSearchParams(window.location.search)
-let url = params.has('vim')
-  ? params.get('vim')
+let url = params.has('vim') || params.has('model')
+  ? params.get('vim') ?? params.get('model') 
   : 'https://vim.azureedge.net/samples/residence.vim'
-
-url = params.has('model')
-? params.get('model')
-: 'https://vim.azureedge.net/samples/residence.vim'
 
 // Parse Transparency
 let transparency = 'all' as VIM.Transparency.Mode
