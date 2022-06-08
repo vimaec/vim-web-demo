@@ -14,6 +14,7 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
+var _a;
 const p$1 = function polyfill() {
   const relList = document.createElement("link").relList;
   if (relList && relList.supports && relList.supports("modulepreload")) {
@@ -25127,8 +25128,8 @@ class Camera {
     this._targetPosition = this.camera.position;
   }
   dispose() {
-    var _a;
-    (_a = this.gizmo) == null ? void 0 : _a.dispose();
+    var _a2;
+    (_a2 = this.gizmo) == null ? void 0 : _a2.dispose();
     this.gizmo = void 0;
   }
   reset() {
@@ -25164,9 +25165,9 @@ class Camera {
     return this._orbitMode;
   }
   set orbitMode(value) {
-    var _a;
+    var _a2;
     this._orbitMode = value;
-    (_a = this.gizmo) == null ? void 0 : _a.show(value);
+    (_a2 = this.gizmo) == null ? void 0 : _a2.show(value);
   }
   target(target, duration = 0) {
     if (target instanceof Object$1 && !target.hasMesh) {
@@ -25253,7 +25254,7 @@ class Camera {
     this.move3(direction);
   }
   rotate(vector, duration = 0) {
-    var _a;
+    var _a2;
     const euler = new Euler(0, 0, 0, "YXZ");
     euler.setFromQuaternion(this.camera.quaternion);
     const factor = this.orbitMode ? -Math.PI * this._orbitSpeed : -Math.PI * this._rotateSpeed;
@@ -25272,7 +25273,7 @@ class Camera {
       if (duration <= 0) {
         this.camera.quaternion.copy(rotation);
         offset.applyQuaternion(this.camera.quaternion);
-        (_a = this.gizmo) == null ? void 0 : _a.show();
+        (_a2 = this.gizmo) == null ? void 0 : _a2.show();
       } else {
         offset.applyQuaternion(rotation);
         this.startLerp(duration, "Rotation");
@@ -25288,7 +25289,7 @@ class Camera {
     this.startLerp(duration, "Position");
   }
   frameSphere(sphere, center, duration) {
-    var _a;
+    var _a2;
     const offset = this.camera.position.clone().sub(sphere.center);
     if (center)
       offset.setY(0);
@@ -25298,7 +25299,7 @@ class Camera {
     this._orbitTarget = sphere.center;
     this.startLerp(duration, "Both");
     this.updateProjection(sphere);
-    (_a = this.gizmo) == null ? void 0 : _a.show(true);
+    (_a2 = this.gizmo) == null ? void 0 : _a2.show(true);
   }
   lookAt(position) {
     this.camera.lookAt(position);
@@ -25374,8 +25375,8 @@ class Camera {
     return progress;
   }
   update(deltaTime) {
-    var _a, _b, _c;
-    (_a = this.gizmo) == null ? void 0 : _a.setPosition(this._orbitTarget);
+    var _a2, _b, _c;
+    (_a2 = this.gizmo) == null ? void 0 : _a2.setPosition(this._orbitTarget);
     if (this.shouldLerp()) {
       if (this._lerpPosition && !this.isNearTarget()) {
         this.applyPositionLerp();
@@ -25420,7 +25421,7 @@ class Camera {
     this.lookAt(this._orbitTarget);
   }
   applyVelocity(deltaTime) {
-    var _a;
+    var _a2;
     const invBlendFactor = Math.pow(this._velocityBlendFactor, deltaTime);
     const blendFactor = 1 - invBlendFactor;
     this._velocity.multiplyScalar(invBlendFactor);
@@ -25430,7 +25431,7 @@ class Camera {
     this.camera.position.add(deltaPosition);
     this._orbitTarget.add(deltaPosition);
     if (this.isSignificant(deltaPosition)) {
-      (_a = this.gizmo) == null ? void 0 : _a.show();
+      (_a2 = this.gizmo) == null ? void 0 : _a2.show();
     }
   }
   isSignificant(vector) {
@@ -25942,22 +25943,22 @@ class GroundPlane {
     this._material.opacity = settings.getGroundPlaneOpacity();
   }
   adaptToContent(box) {
-    var _a;
+    var _a2;
     const center = box.getCenter(new Vector3());
     const position = new Vector3(center.x, box.min.y - Math.abs(box.min.y) * 0.01, center.z);
     this.mesh.position.copy(position);
     this.mesh.quaternion.copy(new Quaternion().setFromEuler(new Euler(1.5 * Math.PI, 0, 0)));
     const sphere = box == null ? void 0 : box.getBoundingSphere(new Sphere());
-    const size = ((_a = sphere == null ? void 0 : sphere.radius) != null ? _a : 1) * this._size;
+    const size = ((_a2 = sphere == null ? void 0 : sphere.radius) != null ? _a2 : 1) * this._size;
     const scale = new Vector3(1, 1, 1).multiplyScalar(size);
     this.mesh.scale.copy(scale);
   }
   applyTexture(texUrl) {
-    var _a;
+    var _a2;
     if (texUrl === this._source)
       return;
     this._source = texUrl;
-    (_a = this._texture) == null ? void 0 : _a.dispose();
+    (_a2 = this._texture) == null ? void 0 : _a2.dispose();
     this._texture = void 0;
     if (!texUrl)
       return;
@@ -25970,8 +25971,8 @@ class GroundPlane {
     this._material.map = this._texture;
   }
   dispose() {
-    var _a, _b, _c;
-    (_a = this._geometry) == null ? void 0 : _a.dispose();
+    var _a2, _b, _c;
+    (_a2 = this._geometry) == null ? void 0 : _a2.dispose();
     (_b = this._material) == null ? void 0 : _b.dispose();
     (_c = this._texture) == null ? void 0 : _c.dispose();
     this._texture = void 0;
@@ -26117,20 +26118,20 @@ class RaycastResult {
     return !!this.firstHit;
   }
   get distance() {
-    var _a;
-    return (_a = this.firstHit) == null ? void 0 : _a.distance;
+    var _a2;
+    return (_a2 = this.firstHit) == null ? void 0 : _a2.distance;
   }
   get position() {
-    var _a;
-    return (_a = this.firstHit) == null ? void 0 : _a.point;
+    var _a2;
+    return (_a2 = this.firstHit) == null ? void 0 : _a2.point;
   }
   get threeId() {
-    var _a, _b;
-    return (_b = (_a = this.firstHit) == null ? void 0 : _a.object) == null ? void 0 : _b.id;
+    var _a2, _b;
+    return (_b = (_a2 = this.firstHit) == null ? void 0 : _a2.object) == null ? void 0 : _b.id;
   }
   get faceIndex() {
-    var _a;
-    return (_a = this.firstHit) == null ? void 0 : _a.faceIndex;
+    var _a2;
+    return (_a2 = this.firstHit) == null ? void 0 : _a2.faceIndex;
   }
 }
 class Raycaster {
@@ -26192,9 +26193,9 @@ class CameraGizmo {
     this.applySettings(settings);
   }
   dispose() {
-    var _a, _b, _c, _d;
+    var _a2, _b, _c, _d;
     clearTimeout(this._timeout);
-    (_a = this._box) == null ? void 0 : _a.dispose();
+    (_a2 = this._box) == null ? void 0 : _a2.dispose();
     (_b = this._wireframe) == null ? void 0 : _b.dispose();
     (_c = this._material) == null ? void 0 : _c.dispose();
     (_d = this._materialAlways) == null ? void 0 : _d.dispose();
@@ -26236,8 +26237,8 @@ class CameraGizmo {
     }
   }
   setPosition(position) {
-    var _a;
-    (_a = this._gizmos) == null ? void 0 : _a.position.copy(position);
+    var _a2;
+    (_a2 = this._gizmos) == null ? void 0 : _a2.position.copy(position);
     this.updateScale();
   }
   setSize(size) {
@@ -26686,8 +26687,8 @@ class Scene {
     __publicField(this, "_threeMeshIdToInstances", /* @__PURE__ */ new Map());
   }
   getMeshFromInstance(instance) {
-    var _a;
-    return (_a = this._instanceToThreeMesh.get(instance)) != null ? _a : [];
+    var _a2;
+    return (_a2 = this._instanceToThreeMesh.get(instance)) != null ? _a2 : [];
   }
   getInstanceFromMesh(mesh, index) {
     if (!mesh || index < 0)
@@ -26710,7 +26711,7 @@ class Scene {
     }
   }
   addMergedMesh(mesh) {
-    var _a, _b;
+    var _a2, _b;
     const instances = mesh.userData.instances;
     if (!instances) {
       throw new Error("Expected mesh to have userdata instances : number[]");
@@ -26720,7 +26721,7 @@ class Scene {
     }
     mesh.geometry.computeBoundingBox();
     const box = mesh.geometry.boundingBox;
-    this.boundingBox = (_b = (_a = this.boundingBox) == null ? void 0 : _a.union(box)) != null ? _b : box.clone();
+    this.boundingBox = (_b = (_a2 = this.boundingBox) == null ? void 0 : _a2.union(box)) != null ? _b : box.clone();
     this._threeMeshIdToInstances.set(mesh.id, instances);
     this.meshes.push(mesh);
     return this;
@@ -26739,7 +26740,7 @@ class Scene {
     return scene;
   }
   registerInstancedMesh(mesh) {
-    var _a, _b;
+    var _a2, _b;
     const instances = mesh.userData.instances;
     if (!instances || instances.length === 0) {
       throw new Error("Expected mesh to have userdata instances : number[] with at least one member");
@@ -26751,11 +26752,11 @@ class Scene {
       this._instanceToThreeMesh.set(instances[i], [mesh, i]);
     }
     const box = this.computeIntancedMeshBoundingBox(mesh);
-    this.boundingBox = (_b = (_a = this.boundingBox) == null ? void 0 : _a.union(box)) != null ? _b : box.clone();
+    this.boundingBox = (_b = (_a2 = this.boundingBox) == null ? void 0 : _a2.union(box)) != null ? _b : box.clone();
     this._threeMeshIdToInstances.set(mesh.id, instances);
   }
   merge(other) {
-    var _a, _b;
+    var _a2, _b;
     other.meshes.forEach((mesh) => this.meshes.push(mesh));
     other._instanceToThreeMesh.forEach((value, key) => {
       this._instanceToThreeMesh.set(key, value);
@@ -26763,7 +26764,7 @@ class Scene {
     other._threeMeshIdToInstances.forEach((value, key) => {
       this._threeMeshIdToInstances.set(key, value);
     });
-    this.boundingBox = (_b = (_a = this.boundingBox) == null ? void 0 : _a.union(other.boundingBox)) != null ? _b : other.boundingBox.clone();
+    this.boundingBox = (_b = (_a2 = this.boundingBox) == null ? void 0 : _a2.union(other.boundingBox)) != null ? _b : other.boundingBox.clone();
     return this;
   }
   dispose() {
@@ -26818,8 +26819,8 @@ class RenderScene {
     this.scene = new Scene$1();
   }
   getBoundingSphere(target = new Sphere()) {
-    var _a, _b;
-    return (_b = (_a = this._boundingBox) == null ? void 0 : _a.getBoundingSphere(target)) != null ? _b : target.set(new Vector3(0, 0, 0), 1);
+    var _a2, _b;
+    return (_b = (_a2 = this._boundingBox) == null ? void 0 : _a2.getBoundingSphere(target)) != null ? _b : target.set(new Vector3(0, 0, 0), 1);
   }
   getBoundingBox(target = new Box3()) {
     return this._boundingBox ? target.copy(this._boundingBox) : target.set(new Vector3(-1, -1, -1), new Vector3(1, 1, 1));
@@ -26877,8 +26878,8 @@ class Viewport {
     return [canvas, true];
   }
   dispose() {
-    var _a;
-    (_a = this._unregisterResize) == null ? void 0 : _a.call(this);
+    var _a2;
+    (_a2 = this._unregisterResize) == null ? void 0 : _a2.call(this);
     this._unregisterResize = void 0;
     if (this._ownedCanvas)
       this.canvas.remove();
@@ -26952,8 +26953,8 @@ class GizmoOptions {
     __publicField(this, "colorXSub", "#942424");
     __publicField(this, "colorYSub", "#417a17");
     __publicField(this, "colorZSub", "#0e5490");
-    var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p;
-    this.size = (_a = init == null ? void 0 : init.size) != null ? _a : this.size;
+    var _a2, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p;
+    this.size = (_a2 = init == null ? void 0 : init.size) != null ? _a2 : this.size;
     this.padding = (_b = init == null ? void 0 : init.padding) != null ? _b : this.padding;
     this.bubbleSizePrimary = (_c = init == null ? void 0 : init.bubbleSizePrimary) != null ? _c : this.bubbleSizePrimary;
     this.bubbleSizeSecondary = (_d = init == null ? void 0 : init.bubbleSizeSecondary) != null ? _d : this.bubbleSizeSecondary;
@@ -28215,9 +28216,9 @@ class G3d {
     __publicField(this, "getMeshCount", () => this.meshSubmeshes.length);
     __publicField(this, "getInstanceCount", () => this.instanceMeshes.length);
     __publicField(this, "getMaterialCount", () => this.materialColors.length / this.COLOR_SIZE);
-    var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j;
+    var _a2, _b, _c, _d, _e, _f, _g, _h, _i, _j;
     this.rawG3d = g3d;
-    this.positions = (_a = g3d.findAttribute(VimAttributes.positions)) == null ? void 0 : _a.data;
+    this.positions = (_a2 = g3d.findAttribute(VimAttributes.positions)) == null ? void 0 : _a2.data;
     const tmp2 = (_b = g3d.findAttribute(VimAttributes.indices)) == null ? void 0 : _b.data;
     if (!tmp2)
       throw new Error("No Index Buffer Found");
@@ -28462,9 +28463,9 @@ class Document {
     return instances;
   }
   static async requestElementIds(entities) {
-    var _a;
+    var _a2;
     const elements = await entities.getBfast("Vim.Element");
-    const ids = (_a = await (elements == null ? void 0 : elements.getArray("int:Id"))) != null ? _a : await (elements == null ? void 0 : elements.getArray("numeric:Id"));
+    const ids = (_a2 = await (elements == null ? void 0 : elements.getArray("int:Id"))) != null ? _a2 : await (elements == null ? void 0 : elements.getArray("numeric:Id"));
     if (!ids) {
       throw new Error("Could not get ElementIds from VIM file.");
     }
@@ -28536,8 +28537,8 @@ class Object$1 {
     this._meshes = meshes;
   }
   get hasMesh() {
-    var _a;
-    return (_a = this._meshes) == null ? void 0 : _a.length;
+    var _a2;
+    return (_a2 = this._meshes) == null ? void 0 : _a2.length;
   }
   updateMeshes(meshes) {
     this._meshes = meshes;
@@ -28554,7 +28555,7 @@ class Object$1 {
     return this.vim.document.getElementId(this.element);
   }
   getBoundingBox() {
-    var _a;
+    var _a2;
     if (!this.instances)
       return;
     if (this._boundingBox)
@@ -28562,17 +28563,17 @@ class Object$1 {
     const geometry = Geometry.createGeometryFromInstances(this.vim.document.g3d, this.instances);
     geometry.applyMatrix4(this.vim.getMatrix());
     geometry.computeBoundingBox();
-    this._boundingBox = (_a = geometry.boundingBox) != null ? _a : void 0;
+    this._boundingBox = (_a2 = geometry.boundingBox) != null ? _a2 : void 0;
     geometry.dispose();
     return this._boundingBox;
   }
   getCenter(target = new Vector3()) {
-    var _a;
-    return (_a = this.getBoundingBox()) == null ? void 0 : _a.getCenter(target);
+    var _a2;
+    return (_a2 = this.getBoundingBox()) == null ? void 0 : _a2.getCenter(target);
   }
   getBoundingSphere(target = new Sphere()) {
-    var _a;
-    return (_a = this.getBoundingBox()) == null ? void 0 : _a.getBoundingSphere(target);
+    var _a2;
+    return (_a2 = this.getBoundingBox()) == null ? void 0 : _a2.getBoundingSphere(target);
   }
   createWireframe() {
     if (!this.instances)
@@ -28638,8 +28639,8 @@ class Object$1 {
     return index + 1 < mesh.userData.submeshes.length ? mesh.userData.submeshes[index + 1] : mesh.geometry.index.count;
   }
   applyMergedVisible(mesh, index, show) {
-    var _a;
-    const attribute = (_a = mesh.geometry.getAttribute("ignoreVertex")) != null ? _a : new Float32BufferAttribute(new Float32Array(mesh.geometry.index.count * 3), 1);
+    var _a2;
+    const attribute = (_a2 = mesh.geometry.getAttribute("ignoreVertex")) != null ? _a2 : new Float32BufferAttribute(new Float32Array(mesh.geometry.index.count * 3), 1);
     mesh.geometry.setAttribute("ignoreVertex", attribute);
     const start = this.getMergedMeshStart(mesh, index);
     const end = this.getMergedMeshEnd(mesh, index);
@@ -28917,21 +28918,21 @@ class RequestLogger {
     this.signal();
   }
   end(field) {
-    var _a;
+    var _a2;
     console.log(`${field} completed`);
     const download = this.all.get(field);
     if (!download)
       throw new Error("Failing missing download");
     download.status = "completed";
-    (_a = this.onUpdate) == null ? void 0 : _a.call(this, this);
+    (_a2 = this.onUpdate) == null ? void 0 : _a2.call(this, this);
   }
   signal() {
-    var _a;
+    var _a2;
     if (this.sleeping)
       return;
     this.sleeping = true;
     setTimeout(() => this.sleeping = false, this.delay);
-    (_a = this.onUpdate) == null ? void 0 : _a.call(this, this);
+    (_a2 = this.onUpdate) == null ? void 0 : _a2.call(this, this);
   }
 }
 class RetryRequest {
@@ -28949,8 +28950,8 @@ class RetryRequest {
     this.responseType = responseType;
   }
   send() {
-    var _a;
-    (_a = this.xhr) == null ? void 0 : _a.abort();
+    var _a2;
+    (_a2 = this.xhr) == null ? void 0 : _a2.abort();
     const xhr = new XMLHttpRequest();
     xhr.open("GET", this.url);
     xhr.responseType = this.responseType;
@@ -28958,17 +28959,17 @@ class RetryRequest {
       xhr.setRequestHeader("Range", this.range);
     }
     xhr.onprogress = (e) => {
-      var _a2;
-      (_a2 = this.onProgress) == null ? void 0 : _a2.call(this, e);
+      var _a22;
+      (_a22 = this.onProgress) == null ? void 0 : _a22.call(this, e);
     };
     xhr.onload = (e) => {
-      var _a2, _b;
-      (_a2 = this.onProgress) == null ? void 0 : _a2.call(this, e);
+      var _a22, _b;
+      (_a22 = this.onProgress) == null ? void 0 : _a22.call(this, e);
       (_b = this.onLoad) == null ? void 0 : _b.call(this, xhr.response);
     };
     xhr.onerror = (_) => {
-      var _a2;
-      (_a2 = this.onError) == null ? void 0 : _a2.call(this);
+      var _a22;
+      (_a22 = this.onError) == null ? void 0 : _a22.call(this);
     };
     xhr.send();
     this.xhr = xhr;
@@ -29289,8 +29290,8 @@ class BFast {
     return result;
   }
   async request(range, label) {
-    var _a, _b;
-    const buffer = (_b = (_a = this.local(range, label)) != null ? _a : await this.remote(range, label)) != null ? _b : await this.remote(void 0, label);
+    var _a2, _b;
+    const buffer = (_b = (_a2 = this.local(range, label)) != null ? _a2 : await this.remote(range, label)) != null ? _b : await this.remote(void 0, label);
     if (!buffer) {
       throw new Error(`Could not load vim at ${this.source}`);
     }
@@ -29308,12 +29309,12 @@ class BFast {
     return this.source.slice(r2.start, r2.end);
   }
   async remote(range, label) {
-    var _a;
+    var _a2;
     if (!(this.source instanceof RemoteBuffer))
       return;
     const r2 = range == null ? void 0 : range.offset(this.offset);
     const buffer = await this.source.http(r2, `${this.name}.${label}`);
-    if (range && ((_a = buffer == null ? void 0 : buffer.byteLength) != null ? _a : 0) < range.count) {
+    if (range && ((_a2 = buffer == null ? void 0 : buffer.byteLength) != null ? _a2 : 0) < range.count) {
       console.log("Range request request failed.");
       return;
     }
@@ -29336,7 +29337,7 @@ class Viewer {
     __publicField(this, "_vims", []);
     __publicField(this, "_disposed", false);
     __publicField(this, "_onMouseClick");
-    var _a;
+    var _a2;
     this._loader = new Loader();
     this.settings = new ViewerSettings(options);
     const scene = new RenderScene();
@@ -29345,7 +29346,7 @@ class Viewer {
     this.renderer = new Renderer(scene, this.viewport);
     this._camera.gizmo = new CameraGizmo(this.renderer, this._camera, this.settings);
     this._gizmoAxes = new GizmoAxes(this.camera);
-    (_a = this.viewport.canvas.parentElement) == null ? void 0 : _a.prepend(this._gizmoAxes.canvas);
+    (_a2 = this.viewport.canvas.parentElement) == null ? void 0 : _a2.prepend(this._gizmoAxes.canvas);
     this._gizmoAxes.canvas.style.position = "fixed";
     this._gizmoAxes.canvas.style.right = "10px";
     this._gizmoAxes.canvas.style.top = "10px";
@@ -29435,11 +29436,11 @@ class Viewer {
     this._camera.adaptToContent();
   }
   unloadVim(vim) {
-    var _a;
+    var _a2;
     this.removeVim(vim);
     this.renderer.remove(vim.scene);
     vim.dispose();
-    if (((_a = this.selection.object) == null ? void 0 : _a.vim) === vim)
+    if (((_a2 = this.selection.object) == null ? void 0 : _a2.vim) === vim)
       this.selection.clear();
   }
   clear() {
@@ -36079,8 +36080,7 @@ function checkDCE() {
 var ReactDOM = reactDom.exports;
 var style = /* @__PURE__ */ (() => '.vim-ui {\r\n  position: fixed;\r\n  width: 100%;\r\n  height: 100%;\r\n  pointer-events: none;\r\n}\r\n\r\n.vim-loading-box {\r\n  width: fit-content;\r\n  height: fit-content;\r\n  padding: 10px;\r\n  border: 1px solid #e3e3e3;\r\n  border-radius: 3px;\r\n  background-color: #f6f6f6;\r\n\r\n  font-family: "Roboto", sans-serif;\r\n\r\n  /*Centers the box*/\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  transform: translate(-50%, -50%);\r\n}\r\n\r\n.vim-logo {\r\n  position: fixed;\r\n  top: 16px;\r\n  left: 16px;\r\n}\r\n\r\n.vim-logo img {\r\n  height: 48px;\r\n  width: 128px;\r\n}\r\n\r\n/*Makes full screen and remove scrollbars*/\r\nhtml,\r\nbody {\r\n  height: 100%;\r\n  margin: 0;\r\n  padding: 0;\r\n  overflow: hidden;\r\n  background: radial-gradient(circle at center, #f0f0ff, #999999);\r\n}\r\n\r\n.VimLoadingBox h1 {\r\n  color: #050c1a;\r\n}\r\n\r\n.vim-menu {\r\n  position: fixed;\r\n  bottom: 0px;\r\n  right: 0px;\r\n  width: 5%;\r\n}\r\n\r\n/* BIM Explorer */\r\n\r\n.vim-bim-explorer {\r\n  position: fixed;\r\n  top: 0px;\r\n  left: 0px;\r\n  background-color: #f0efee;\r\n  width: 15%;\r\n  height: 100%;\r\n  padding-left: 15px;\r\n  padding-right: 15px;\r\n  font-family: "Roboto", sans-serif;\r\n  font-size: 12.65px;\r\n}\r\n\r\n/* Title */\r\n.vim-bim-explorer h1 {\r\n  text-transform: uppercase;\r\n  color: #b6b9bf;\r\n  height: 30px;\r\n  line-height: 30px;\r\n  font-size: 9.85px;\r\n}\r\n\r\n.vim-bim-explorer table {\r\n  display: block;\r\n  border-spacing: 0px;\r\n}\r\n\r\n.vim-bim-explorer tbody {\r\n  width: 100%;\r\n  display: table;\r\n}\r\n\r\n.vim-bim-explorer thead {\r\n  width: 100%;\r\n  display: table;\r\n}\r\n\r\n.vim-bim-explorer th,\r\n.vim-bim-explorer td {\r\n  padding: 10px;\r\n  text-align: left;\r\n}\r\n\r\n.vim-bim-explorer tr {\r\n  height: 30px;\r\n}\r\n\r\n/* BIM Explorer - Main*/\r\n\r\n.vim-bim-explorer .main {\r\n  background-color: white;\r\n  border-radius: 6px;\r\n}\r\n\r\n.vim-bim-explorer .main th {\r\n  width: 30%;\r\n  text-transform: uppercase;\r\n  color: #050c1a;\r\n  font-size: 9.85px;\r\n}\r\n\r\n.vim-bim-explorer .main td {\r\n  color: #56585f;\r\n}\r\n\r\n/* BIM Explorer - Details*/\r\n\r\n/* Rounding for table */\r\n.vim-bim-explorer .details thead th {\r\n  border-top-left-radius: 6px;\r\n  border-top-right-radius: 6px;\r\n}\r\n\r\n.vim-bim-explorer .details tbody tr:last-of-type th {\r\n  border-bottom-left-radius: 6px;\r\n}\r\n.vim-bim-explorer .details tbody tr:last-of-type td {\r\n  border-bottom-right-radius: 6px;\r\n}\r\n\r\n/* Details Header */\r\n.vim-bim-explorer .details thead th {\r\n  background-color: #e3e3e3;\r\n  text-transform: uppercase;\r\n  color: #8a8d95;\r\n  font-size: 9.85px;\r\n}\r\n\r\n/* Details alternating colors */\r\n.vim-bim-explorer .details tr:nth-child(odd) {\r\n  background-color: white;\r\n}\r\n.vim-bim-explorer .details tr:nth-child(even) {\r\n  background-color: #f6f6f6;\r\n}\r\n\r\n/* Details labels */\r\n.vim-bim-explorer .details tbody th {\r\n  width: 60%;\r\n  border-right-style: solid;\r\n  border-right-width: 1px;\r\n  border-right-color: #b6b9bf;\r\n  color: #050c1a;\r\n}\r\n')();
 const params = new URLSearchParams(window.location.search);
-let url = params.has("vim") ? params.get("vim") : "https://vim.azureedge.net/samples/residence.vim";
-url = params.has("model") ? params.get("model") : "https://vim.azureedge.net/samples/residence.vim";
+let url = params.has("vim") || params.has("model") ? (_a = params.get("vim")) != null ? _a : params.get("model") : "https://vim.azureedge.net/samples/residence.vim";
 let transparency = "all";
 if (params.has("transparency")) {
   const t2 = params.get("transparency");
@@ -36106,4 +36106,4 @@ function animate() {
     stats.update();
   }
 }
-//# sourceMappingURL=index.1b58aae1.js.map
+//# sourceMappingURL=index.8a569b40.js.map
