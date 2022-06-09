@@ -19,7 +19,7 @@ if (params.has('transparency')) {
   transparency = VIM.Transparency.isValid(t) ? t : 'all'
 }
 
-ReactDOM.render(<VR.VimComponent onViewerReady={onViewerReady} menu={false}/>, VR.createRoot())
+ReactDOM.render(<VR.VimComponent onViewerReady={onViewerReady} menu={true}/>, VR.createRoot())
 
 function onViewerReady(viewer : VIM.Viewer){
   viewer.loadVim(
