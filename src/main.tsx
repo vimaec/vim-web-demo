@@ -19,7 +19,7 @@ if (params.has('transparency')) {
   transparency = VIM.Transparency.isValid(t) ? t : 'all'
 }
 
-ReactDOM.render(<VR.VimComponent onViewerReady={onViewerReady}/>, VR.createRoot())
+ReactDOM.render(<VR.VimComponent onViewerReady={onViewerReady} menu={false}/>, VR.createRoot())
 
 function onViewerReady(viewer : VIM.Viewer){
   viewer.loadVim(
@@ -31,9 +31,12 @@ function onViewerReady(viewer : VIM.Viewer){
   ).then(_ => console.log("Vim Successfully loaded"))
 }
 
+// Add the FPS Counter
 const stats = new Stats()
-stats.dom.style.top = '84px'
-stats.dom.style.left = '16px'
+stats.dom.style.top = '16px'
+stats.dom.style.left = '47.5%';
+stats.dom.style.right = '47.5%';
+
 document.body.appendChild(stats.dom)
 animate()
 
