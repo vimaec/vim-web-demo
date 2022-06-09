@@ -33,9 +33,14 @@ function onViewerReady(viewer : VIM.Viewer){
 
 // Add the FPS Counter
 const stats = new Stats()
-stats.dom.style.top = '16px'
-stats.dom.style.left = '47.5%';
-stats.dom.style.right = '47.5%';
+//stats.dom.style.top = '16px'
+//stats.dom.style.left = '47.5%';
+//stats.dom.style.right = '47.5%';
+const style = stats.dom.style as CSSStyleDeclaration
+style.left = '50%'
+style.top = '16px'
+// -half width
+style.marginLeft = '-40px'
 
 document.body.appendChild(stats.dom)
 animate()
