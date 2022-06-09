@@ -15,7 +15,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "http-server ./docs -o",
+    "serve-dev": "http-server ./docs/dev -o",
+    "release": "robocopy /mir ./docs/dev ./docs/release",
     "eslint": "eslint --ext .js,.ts src --fix"
   },
   "devDependencies": {
@@ -39,7 +40,7 @@
   },
   "dependencies": {
     "react-dom": "^17.0.2",
-    "vim-webgl-component": "0.1.1-dev.11",
+    "vim-webgl-component": "0.1.1-dev.12",
     "stats-js": "^1.0.1"
   },
   "keywords": [
