@@ -36092,7 +36092,7 @@ if (params.has("transparency")) {
 }
 ReactDOM.render(/* @__PURE__ */ React.createElement(VimComponent, {
   onViewerReady,
-  menu: false
+  menu: true
 }), createRoot());
 function onViewerReady(viewer) {
   viewer.loadVim(url, {
