@@ -2,9 +2,10 @@
 import * as VIM from 'vim-webgl-viewer'
 import * as VR from  'vim-webgl-component'
 import Stats from 'stats-js'
-import ReactDOM from 'react-dom'
+import {createRoot} from 'react-dom/client'
 import React from 'react'
 import 'vim-webgl-component/dist/style.css';
+import { VimComponent, createContainer } from 'vim-webgl-component'
 
 // Parse URL
 const params = new URLSearchParams(window.location.search)
@@ -19,9 +20,11 @@ if (params.has('transparency')) {
   transparency = VIM.Transparency.isValid(t) ? t : 'all'
 }
 
-ReactDOM.render(<VR.VimComponent onViewerReady={onViewerReady} menu={true}/>, VR.createRoot())
+const viewer = new VIM.Viewer()
+const root = createRoot(createContainer(viewer))
+root.render(<VimComponent viewer = {viewer} onMount = {loadVim}/>)
 
-function onViewerReady(viewer : VIM.Viewer){
+function loadVim(){
   viewer.loadVim(
     url,
     {
