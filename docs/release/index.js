@@ -37693,11 +37693,18 @@ if (params.has("transparency")) {
   const t2 = params.get("transparency");
   transparency = Transparency$1.isValid(t2) ? t2 : "all";
 }
+let devMode = false;
+if (params.has("dev")) {
+  const t2 = params.get("dev");
+  devMode = t2 === "true";
+}
 const viewer = new Viewer();
 const root = createRoot(createContainer(viewer));
 root.render(/* @__PURE__ */ React.createElement(VimComponent, {
   viewer,
-  onMount: loadVim
+  onMount: loadVim,
+  inspector: devMode,
+  menu: devMode
 }));
 function loadVim() {
   viewer.loadVim(url, {
