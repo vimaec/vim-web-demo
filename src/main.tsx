@@ -1,6 +1,5 @@
 //import { settingsGui } from './settingsGui'
 import * as VIM from 'vim-webgl-viewer'
-import * as VR from  'vim-webgl-component'
 import Stats from 'stats-js'
 import {createRoot} from 'react-dom/client'
 import React from 'react'
@@ -18,6 +17,13 @@ let transparency = 'all' as VIM.Transparency.Mode
 if (params.has('transparency')) {
   const t = params.get('transparency')
   transparency = VIM.Transparency.isValid(t) ? t : 'all'
+}
+
+// Parse Dev mode
+let devMode = false
+if (params.has('dev')) {
+  const t = params.get('dev')
+  devMode =  t === 'true'
 }
 
 const viewer = new VIM.Viewer()
