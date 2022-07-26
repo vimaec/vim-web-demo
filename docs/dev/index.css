@@ -541,6 +541,12 @@ video {
     max-width: 1536px;
   }
 }
+.pointer-events-none {
+  pointer-events: none;
+}
+.pointer-events-auto {
+  pointer-events: auto;
+}
 .visible {
   visibility: visible;
 }
@@ -993,6 +999,12 @@ body {
 .rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-focused {
   border: none;
 }
+.bim-panel-open {
+  margin-left: 25%;
+  max-width: 75%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
 .odd\:bg-white:nth-child(odd) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -1013,8 +1025,7 @@ body {
 }
 .disabled\:opacity-50:disabled {
   opacity: 0.5;
-}
-:root {
+}:root {
   --rct-color-tree-bg: #f6f8fa;
   --rct-color-tree-focus-outline: #0366d6;
 
