@@ -23907,10 +23907,10 @@ if (typeof window !== "undefined") {
     window.__THREE__ = REVISION;
   }
 }
-var __defProp = Object.defineProperty;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __publicField = (obj, key, value) => {
-  __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+var __defProp$1 = Object.defineProperty;
+var __defNormalProp$1 = (obj, key, value) => key in obj ? __defProp$1(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __publicField$1 = (obj, key, value) => {
+  __defNormalProp$1(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
 var isMergeableObject = function isMergeableObject2(value) {
@@ -24011,38 +24011,38 @@ var deepmerge_1 = deepmerge;
 var cjs = deepmerge_1;
 class ViewerSettings {
   constructor(options) {
-    __publicField(this, "options");
-    __publicField(this, "getCanvasResizeDelay", () => this.options.canvas.resizeDelay);
-    __publicField(this, "getCanvasId", () => this.options.canvas.id);
-    __publicField(this, "getGroundPlaneVisible", () => this.options.groundPlane.visible);
-    __publicField(this, "getGroundPlaneColor", () => toRGBColor(this.options.groundPlane.color));
-    __publicField(this, "getGroundPlaneTextureUrl", () => this.options.groundPlane.texture);
-    __publicField(this, "getGroundPlaneOpacity", () => this.options.groundPlane.opacity);
-    __publicField(this, "getGroundPlaneSize", () => this.options.groundPlane.size);
-    __publicField(this, "getSkylightColor", () => toHSLColor(this.options.skylight.skyColor));
-    __publicField(this, "getSkylightGroundColor", () => toHSLColor(this.options.skylight.groundColor));
-    __publicField(this, "getSkylightIntensity", () => this.options.skylight.intensity);
-    __publicField(this, "getSunlightColor", () => toHSLColor(this.options.sunLight.color));
-    __publicField(this, "getSunlightPosition", () => toVec$1(this.options.sunLight.position));
-    __publicField(this, "getSunlightIntensity", () => this.options.sunLight.intensity);
-    __publicField(this, "getHighlightColor", () => toRGBColor(this.highlight.color));
-    __publicField(this, "getHighlightOpacity", () => this.highlight.opacity);
-    __publicField(this, "getIsolationColor", () => toRGBColor(this.isolation.color));
-    __publicField(this, "getIsolationOpacity", () => this.isolation.opacity);
-    __publicField(this, "getCameraNear", () => this.camera.near);
-    __publicField(this, "getCameraFar", () => this.camera.far);
-    __publicField(this, "getCameraFov", () => this.camera.fov);
-    __publicField(this, "getCameraZoom", () => this.camera.zoom);
-    __publicField(this, "getCameraGizmoEnable", () => this.camera.gizmo.enable);
-    __publicField(this, "getCameraGizmoSize", () => this.camera.gizmo.size);
-    __publicField(this, "getCameraGizmoColor", () => toRGBColor(this.camera.gizmo.color));
-    __publicField(this, "getCameraGizmoOpacity", () => this.camera.gizmo.opacity);
-    __publicField(this, "getCameraGizmoOpacityAlways", () => this.camera.gizmo.opacityAlways);
-    __publicField(this, "getCameraIsOrbit", () => this.cameraControls.orbit);
-    __publicField(this, "getCameraMoveSpeed", () => this.cameraControls.moveSpeed);
-    __publicField(this, "getCameraRotateSpeed", () => this.cameraControls.rotateSpeed);
-    __publicField(this, "getCameraOrbitSpeed", () => this.cameraControls.orbitSpeed);
-    __publicField(this, "getCameraReferenceVimSize", () => this.cameraControls.vimReferenceSize);
+    __publicField$1(this, "options");
+    __publicField$1(this, "getCanvasResizeDelay", () => this.options.canvas.resizeDelay);
+    __publicField$1(this, "getCanvasId", () => this.options.canvas.id);
+    __publicField$1(this, "getGroundPlaneVisible", () => this.options.groundPlane.visible);
+    __publicField$1(this, "getGroundPlaneColor", () => toRGBColor(this.options.groundPlane.color));
+    __publicField$1(this, "getGroundPlaneTextureUrl", () => this.options.groundPlane.texture);
+    __publicField$1(this, "getGroundPlaneOpacity", () => this.options.groundPlane.opacity);
+    __publicField$1(this, "getGroundPlaneSize", () => this.options.groundPlane.size);
+    __publicField$1(this, "getSkylightColor", () => toHSLColor(this.options.skylight.skyColor));
+    __publicField$1(this, "getSkylightGroundColor", () => toHSLColor(this.options.skylight.groundColor));
+    __publicField$1(this, "getSkylightIntensity", () => this.options.skylight.intensity);
+    __publicField$1(this, "getSunlightColor", () => toHSLColor(this.options.sunLight.color));
+    __publicField$1(this, "getSunlightPosition", () => toVec$1(this.options.sunLight.position));
+    __publicField$1(this, "getSunlightIntensity", () => this.options.sunLight.intensity);
+    __publicField$1(this, "getHighlightColor", () => toRGBColor(this.highlight.color));
+    __publicField$1(this, "getHighlightOpacity", () => this.highlight.opacity);
+    __publicField$1(this, "getIsolationColor", () => toRGBColor(this.isolation.color));
+    __publicField$1(this, "getIsolationOpacity", () => this.isolation.opacity);
+    __publicField$1(this, "getCameraNear", () => this.camera.near);
+    __publicField$1(this, "getCameraFar", () => this.camera.far);
+    __publicField$1(this, "getCameraFov", () => this.camera.fov);
+    __publicField$1(this, "getCameraZoom", () => this.camera.zoom);
+    __publicField$1(this, "getCameraGizmoEnable", () => this.camera.gizmo.enable);
+    __publicField$1(this, "getCameraGizmoSize", () => this.camera.gizmo.size);
+    __publicField$1(this, "getCameraGizmoColor", () => toRGBColor(this.camera.gizmo.color));
+    __publicField$1(this, "getCameraGizmoOpacity", () => this.camera.gizmo.opacity);
+    __publicField$1(this, "getCameraGizmoOpacityAlways", () => this.camera.gizmo.opacityAlways);
+    __publicField$1(this, "getCameraIsOrbit", () => this.cameraControls.orbit);
+    __publicField$1(this, "getCameraMoveSpeed", () => this.cameraControls.moveSpeed);
+    __publicField$1(this, "getCameraRotateSpeed", () => this.cameraControls.rotateSpeed);
+    __publicField$1(this, "getCameraOrbitSpeed", () => this.cameraControls.orbitSpeed);
+    __publicField$1(this, "getCameraReferenceVimSize", () => this.cameraControls.vimReferenceSize);
     const fallback = {
       canvas: {
         id: void 0,
@@ -24136,34 +24136,34 @@ function clamp$1(value, min, max) {
 });
 class Camera$1 {
   constructor(scene, viewport, settings) {
-    __publicField(this, "camera");
-    __publicField(this, "cameraPerspective");
-    __publicField(this, "cameraOrthographic");
-    __publicField(this, "gizmo");
-    __publicField(this, "_viewport");
-    __publicField(this, "_scene");
-    __publicField(this, "_targetVelocity");
-    __publicField(this, "_velocity");
-    __publicField(this, "_speed", 0);
-    __publicField(this, "_orbitMode", false);
-    __publicField(this, "_orbitTarget");
-    __publicField(this, "_minOrbitalDistance", 0.05);
-    __publicField(this, "_targetPosition");
-    __publicField(this, "defaultLerpDuration", 2);
-    __publicField(this, "_lerpStartMs", 0);
-    __publicField(this, "_lerpEndMs", 0);
-    __publicField(this, "_lockDirection", false);
-    __publicField(this, "_lerpPosition");
-    __publicField(this, "_lerpRotation");
-    __publicField(this, "_vimReferenceSize", 1);
-    __publicField(this, "_sceneSizeMultiplier", 1);
-    __publicField(this, "_velocityBlendFactor", 1e-4);
-    __publicField(this, "_moveSpeed", 0.8);
-    __publicField(this, "_rotateSpeed", 1);
-    __publicField(this, "_orbitSpeed", 1);
-    __publicField(this, "_zoomSpeed", 0.25);
-    __publicField(this, "_firstPersonSpeed", 10);
-    __publicField(this, "_minModelScrenSize", 0.05);
+    __publicField$1(this, "camera");
+    __publicField$1(this, "cameraPerspective");
+    __publicField$1(this, "cameraOrthographic");
+    __publicField$1(this, "gizmo");
+    __publicField$1(this, "_viewport");
+    __publicField$1(this, "_scene");
+    __publicField$1(this, "_targetVelocity");
+    __publicField$1(this, "_velocity");
+    __publicField$1(this, "_speed", 0);
+    __publicField$1(this, "_orbitMode", false);
+    __publicField$1(this, "_orbitTarget");
+    __publicField$1(this, "_minOrbitalDistance", 0.05);
+    __publicField$1(this, "_targetPosition");
+    __publicField$1(this, "defaultLerpDuration", 2);
+    __publicField$1(this, "_lerpStartMs", 0);
+    __publicField$1(this, "_lerpEndMs", 0);
+    __publicField$1(this, "_lockDirection", false);
+    __publicField$1(this, "_lerpPosition");
+    __publicField$1(this, "_lerpRotation");
+    __publicField$1(this, "_vimReferenceSize", 1);
+    __publicField$1(this, "_sceneSizeMultiplier", 1);
+    __publicField$1(this, "_velocityBlendFactor", 1e-4);
+    __publicField$1(this, "_moveSpeed", 0.8);
+    __publicField$1(this, "_rotateSpeed", 1);
+    __publicField$1(this, "_orbitSpeed", 1);
+    __publicField$1(this, "_zoomSpeed", 0.25);
+    __publicField$1(this, "_firstPersonSpeed", 10);
+    __publicField$1(this, "_minModelScrenSize", 0.05);
     this.cameraPerspective = new PerspectiveCamera();
     this.camera = this.cameraPerspective;
     this.camera.position.set(0, 0, -1e3);
@@ -24382,10 +24382,12 @@ class Camera$1 {
     if (this.camera instanceof PerspectiveCamera) {
       this.camera.aspect = aspect2;
     } else {
-      this.camera.left = -sphere.radius * aspect2;
-      this.camera.right = sphere.radius * aspect2;
-      this.camera.top = sphere.radius;
-      this.camera.bottom = -sphere.radius;
+      if (sphere) {
+        this.camera.left = -sphere.radius * aspect2;
+        this.camera.right = sphere.radius * aspect2;
+        this.camera.top = sphere.radius;
+        this.camera.bottom = -sphere.radius;
+      }
       this.camera.near = -this.cameraPerspective.far;
       this.camera.far = this.cameraPerspective.far;
     }
@@ -24608,17 +24610,17 @@ const KEYS = {
 };
 class Keyboard {
   constructor(viewer2) {
-    __publicField(this, "SHIFT_MULTIPLIER", 3);
-    __publicField(this, "_viewer");
-    __publicField(this, "isUpPressed", false);
-    __publicField(this, "isDownPressed", false);
-    __publicField(this, "isLeftPressed", false);
-    __publicField(this, "isRightPressed", false);
-    __publicField(this, "isEPressed", false);
-    __publicField(this, "isQPressed", false);
-    __publicField(this, "isShiftPressed", false);
-    __publicField(this, "isCtrlPressed", false);
-    __publicField(this, "reset", () => {
+    __publicField$1(this, "SHIFT_MULTIPLIER", 3);
+    __publicField$1(this, "_viewer");
+    __publicField$1(this, "isUpPressed", false);
+    __publicField$1(this, "isDownPressed", false);
+    __publicField$1(this, "isLeftPressed", false);
+    __publicField$1(this, "isRightPressed", false);
+    __publicField$1(this, "isEPressed", false);
+    __publicField$1(this, "isQPressed", false);
+    __publicField$1(this, "isShiftPressed", false);
+    __publicField$1(this, "isCtrlPressed", false);
+    __publicField$1(this, "reset", () => {
       this.isUpPressed = false;
       this.isDownPressed = false;
       this.isLeftPressed = false;
@@ -24628,13 +24630,13 @@ class Keyboard {
       this.isShiftPressed = false;
       this.isCtrlPressed = false;
     });
-    __publicField(this, "onKeyUp", (event) => {
+    __publicField$1(this, "onKeyUp", (event) => {
       this.onKey(event, false);
     });
-    __publicField(this, "onKeyDown", (event) => {
+    __publicField$1(this, "onKeyDown", (event) => {
       this.onKey(event, true);
     });
-    __publicField(this, "onKey", (event, keyDown) => {
+    __publicField$1(this, "onKey", (event, keyDown) => {
       if (!keyDown) {
         switch (event.keyCode) {
           case KEYS.KEY_O:
@@ -24721,7 +24723,7 @@ class Keyboard {
           break;
       }
     });
-    __publicField(this, "applyMove", () => {
+    __publicField$1(this, "applyMove", () => {
       const move = new Vector3((this.isRightPressed ? 1 : 0) - (this.isLeftPressed ? 1 : 0), (this.isEPressed ? 1 : 0) - (this.isQPressed ? 1 : 0), (this.isUpPressed ? 1 : 0) - (this.isDownPressed ? 1 : 0));
       const speed = this.isShiftPressed ? this.SHIFT_MULTIPLIER : 1;
       move.multiplyScalar(speed);
@@ -24741,28 +24743,28 @@ class Keyboard {
 }
 class Touch {
   constructor(viewer2, mouse) {
-    __publicField(this, "TAP_DURATION_MS", 500);
-    __publicField(this, "DOUBLE_TAP_DELAY_MS", 500);
-    __publicField(this, "TAP_MAX_MOVE_PIXEL", 5);
-    __publicField(this, "ZOOM_SPEED", 5);
-    __publicField(this, "_viewer");
-    __publicField(this, "_mouse");
-    __publicField(this, "_touch");
-    __publicField(this, "_touch1");
-    __publicField(this, "_touch2");
-    __publicField(this, "_touchStartTime");
-    __publicField(this, "_lastTapMs");
-    __publicField(this, "_touchStart");
-    __publicField(this, "reset", () => {
+    __publicField$1(this, "TAP_DURATION_MS", 500);
+    __publicField$1(this, "DOUBLE_TAP_DELAY_MS", 500);
+    __publicField$1(this, "TAP_MAX_MOVE_PIXEL", 5);
+    __publicField$1(this, "ZOOM_SPEED", 5);
+    __publicField$1(this, "_viewer");
+    __publicField$1(this, "_mouse");
+    __publicField$1(this, "_touch");
+    __publicField$1(this, "_touch1");
+    __publicField$1(this, "_touch2");
+    __publicField$1(this, "_touchStartTime");
+    __publicField$1(this, "_lastTapMs");
+    __publicField$1(this, "_touchStart");
+    __publicField$1(this, "reset", () => {
       this._touch = this._touch1 = this._touch2 = this._touchStartTime = void 0;
     });
-    __publicField(this, "onTap", (position) => {
+    __publicField$1(this, "onTap", (position) => {
       const time = new Date().getTime();
       const double = time - this._lastTapMs < this.DOUBLE_TAP_DELAY_MS;
       this._mouse.onMouseClick(position, double);
       this._lastTapMs = new Date().getTime();
     });
-    __publicField(this, "onTouchStart", (event) => {
+    __publicField$1(this, "onTouchStart", (event) => {
       event.preventDefault();
       if (!event || !event.touches || !event.touches.length) {
         return;
@@ -24778,20 +24780,20 @@ class Touch {
       }
       this._touchStart = this._touch;
     });
-    __publicField(this, "onDrag", (delta) => {
+    __publicField$1(this, "onDrag", (delta) => {
       this.camera.rotate(delta);
     });
-    __publicField(this, "onDoubleDrag", (delta) => {
+    __publicField$1(this, "onDoubleDrag", (delta) => {
       this.camera.move2(delta, "XY");
     });
-    __publicField(this, "onPinchOrSpread", (delta) => {
+    __publicField$1(this, "onPinchOrSpread", (delta) => {
       if (this.camera.orbitMode) {
         this.camera.zoom(delta * this.ZOOM_SPEED);
       } else {
         this.camera.move1(delta * this.ZOOM_SPEED, "Z");
       }
     });
-    __publicField(this, "onTouchMove", (event) => {
+    __publicField$1(this, "onTouchMove", (event) => {
       event.preventDefault();
       if (!event || !event.touches || !event.touches.length)
         return;
@@ -24827,7 +24829,7 @@ class Touch {
         }
       }
     });
-    __publicField(this, "onTouchEnd", (event) => {
+    __publicField$1(this, "onTouchEnd", (event) => {
       if (this.isSingleTouch()) {
         const touchDurationMs = new Date().getTime() - this._touchStartTime;
         const length = this._touch.clone().sub(this._touchStart).length();
@@ -24859,18 +24861,18 @@ class Touch {
 }
 class Mouse {
   constructor(viewer2, keyboard) {
-    __publicField(this, "_viewer");
-    __publicField(this, "_raycaster");
-    __publicField(this, "_inputKeyboard");
-    __publicField(this, "isMouseDown", false);
-    __publicField(this, "hasMouseMoved", false);
-    __publicField(this, "reset", () => {
+    __publicField$1(this, "_viewer");
+    __publicField$1(this, "_raycaster");
+    __publicField$1(this, "_inputKeyboard");
+    __publicField$1(this, "isMouseDown", false);
+    __publicField$1(this, "hasMouseMoved", false);
+    __publicField$1(this, "reset", () => {
       this.isMouseDown = this.hasMouseMoved = false;
     });
-    __publicField(this, "onMouseOut", (_) => {
+    __publicField$1(this, "onMouseOut", (_) => {
       this.isMouseDown = this.hasMouseMoved = false;
     });
-    __publicField(this, "onMouseMove", (event) => {
+    __publicField$1(this, "onMouseMove", (event) => {
       if (!this.isMouseDown) {
         return;
       }
@@ -24888,7 +24890,7 @@ class Mouse {
         this.camera.rotate(delta);
       }
     });
-    __publicField(this, "onMouseWheel", (event) => {
+    __publicField$1(this, "onMouseWheel", (event) => {
       event.preventDefault();
       event.stopPropagation();
       const scrollValue = Math.sign(event.deltaY);
@@ -24898,23 +24900,23 @@ class Mouse {
         this.camera.zoom(scrollValue, this.camera.defaultLerpDuration);
       }
     });
-    __publicField(this, "onMouseDown", (event) => {
+    __publicField$1(this, "onMouseDown", (event) => {
       event.preventDefault();
       this.isMouseDown = true;
       this.hasMouseMoved = false;
       this.viewport.canvas.focus();
     });
-    __publicField(this, "onMouseUp", (event) => {
+    __publicField$1(this, "onMouseUp", (event) => {
       if (this.isMouseDown && !this.hasMouseMoved) {
         this.onMouseClick(new Vector2(event.offsetX, event.offsetY), false);
       }
       this.isMouseDown = false;
       event.preventDefault();
     });
-    __publicField(this, "onDoubleClick", (event) => {
+    __publicField$1(this, "onDoubleClick", (event) => {
       this.onMouseClick(new Vector2(event.offsetX, event.offsetY), true);
     });
-    __publicField(this, "onMouseClick", (position, doubleClick) => {
+    __publicField$1(this, "onMouseClick", (position, doubleClick) => {
       const result = this._raycaster.screenRaycast(position);
       result.doubleClick = doubleClick;
       this._viewer.onMouseClick(result);
@@ -24932,18 +24934,18 @@ class Mouse {
 }
 class Input {
   constructor(viewer2) {
-    __publicField(this, "_canvas");
-    __publicField(this, "_touch");
-    __publicField(this, "_mouse");
-    __publicField(this, "_keyboard");
-    __publicField(this, "_unregistersTouch", []);
-    __publicField(this, "_unregistersMouse", []);
-    __publicField(this, "_unregistersKeyboard", []);
-    __publicField(this, "reg", (handler, type, unregisters, listener) => {
+    __publicField$1(this, "_canvas");
+    __publicField$1(this, "_touch");
+    __publicField$1(this, "_mouse");
+    __publicField$1(this, "_keyboard");
+    __publicField$1(this, "_unregistersTouch", []);
+    __publicField$1(this, "_unregistersMouse", []);
+    __publicField$1(this, "_unregistersKeyboard", []);
+    __publicField$1(this, "reg", (handler, type, unregisters, listener) => {
       handler.addEventListener(type, listener);
       unregisters.push(() => handler.removeEventListener(type, listener));
     });
-    __publicField(this, "unregister", () => {
+    __publicField$1(this, "unregister", () => {
       this.unregisterTouch();
       this.unregisterMouse();
       this.unregisterKeyboard();
@@ -25005,10 +25007,10 @@ class Input {
 }
 class Selection {
   constructor(renderer) {
-    __publicField(this, "_renderer");
-    __publicField(this, "_object");
-    __publicField(this, "_highlight");
-    __publicField(this, "onValueChanged");
+    __publicField$1(this, "_renderer");
+    __publicField$1(this, "_object");
+    __publicField$1(this, "_highlight");
+    __publicField$1(this, "onValueChanged");
     this._renderer = renderer;
   }
   get object() {
@@ -25050,12 +25052,12 @@ class Selection {
 }
 class GroundPlane {
   constructor() {
-    __publicField(this, "mesh");
-    __publicField(this, "_source");
-    __publicField(this, "_size", 1);
-    __publicField(this, "_geometry");
-    __publicField(this, "_material");
-    __publicField(this, "_texture");
+    __publicField$1(this, "mesh");
+    __publicField$1(this, "_source");
+    __publicField$1(this, "_size", 1);
+    __publicField$1(this, "_geometry");
+    __publicField$1(this, "_material");
+    __publicField$1(this, "_texture");
     this._geometry = new PlaneGeometry();
     this._material = new MeshBasicMaterial({ transparent: true });
     this.mesh = new Mesh(this._geometry, this._material);
@@ -25105,9 +25107,9 @@ class GroundPlane {
 }
 class Environment {
   constructor(settings) {
-    __publicField(this, "skyLight");
-    __publicField(this, "sunLight");
-    __publicField(this, "_groundPlane");
+    __publicField$1(this, "skyLight");
+    __publicField$1(this, "sunLight");
+    __publicField$1(this, "_groundPlane");
     this._groundPlane = new GroundPlane();
     this.skyLight = new HemisphereLight();
     this.sunLight = new DirectionalLight();
@@ -25139,11 +25141,11 @@ class Environment {
 }
 class RaycastResult {
   constructor(mousePosition, intersections) {
-    __publicField(this, "mousePosition");
-    __publicField(this, "doubleClick", false);
-    __publicField(this, "object");
-    __publicField(this, "intersections");
-    __publicField(this, "firstHit");
+    __publicField$1(this, "mousePosition");
+    __publicField$1(this, "doubleClick", false);
+    __publicField$1(this, "object");
+    __publicField$1(this, "intersections");
+    __publicField$1(this, "firstHit");
     this.mousePosition = mousePosition;
     this.intersections = intersections;
     const [hit, obj] = this.GetFirstVimHit(intersections);
@@ -25211,11 +25213,11 @@ class RaycastResult {
 }
 class Raycaster {
   constructor(viewport, camera, scene, renderer) {
-    __publicField(this, "_viewport");
-    __publicField(this, "_camera");
-    __publicField(this, "_scene");
-    __publicField(this, "_renderer");
-    __publicField(this, "_raycaster", new Raycaster$1());
+    __publicField$1(this, "_viewport");
+    __publicField$1(this, "_camera");
+    __publicField$1(this, "_scene");
+    __publicField$1(this, "_renderer");
+    __publicField$1(this, "_raycaster", new Raycaster$1());
     this._viewport = viewport;
     this._camera = camera;
     this._scene = scene;
@@ -25254,23 +25256,23 @@ class Raycaster {
 }
 class CameraGizmo {
   constructor(renderer, camera, settings) {
-    __publicField(this, "_renderer");
-    __publicField(this, "_camera");
-    __publicField(this, "_size", 0.01);
-    __publicField(this, "_fov", 50);
-    __publicField(this, "_color", new Color("blue"));
-    __publicField(this, "_opacity", 0.2);
-    __publicField(this, "_opacityAlways", 0.5);
-    __publicField(this, "_fadeDurationMs", 200);
-    __publicField(this, "_showDurationMs", 1e3);
-    __publicField(this, "_box");
-    __publicField(this, "_wireframe");
-    __publicField(this, "_material");
-    __publicField(this, "_materialAlways");
-    __publicField(this, "_gizmos");
-    __publicField(this, "_timeout");
-    __publicField(this, "_fadeEnd", 0);
-    __publicField(this, "_active", true);
+    __publicField$1(this, "_renderer");
+    __publicField$1(this, "_camera");
+    __publicField$1(this, "_size", 0.01);
+    __publicField$1(this, "_fov", 50);
+    __publicField$1(this, "_color", new Color("blue"));
+    __publicField$1(this, "_opacity", 0.2);
+    __publicField$1(this, "_opacityAlways", 0.5);
+    __publicField$1(this, "_fadeDurationMs", 200);
+    __publicField$1(this, "_showDurationMs", 1e3);
+    __publicField$1(this, "_box");
+    __publicField$1(this, "_wireframe");
+    __publicField$1(this, "_material");
+    __publicField$1(this, "_materialAlways");
+    __publicField$1(this, "_gizmos");
+    __publicField$1(this, "_timeout");
+    __publicField$1(this, "_fadeEnd", 0);
+    __publicField$1(this, "_active", true);
     this._renderer = renderer;
     this._camera = camera;
     this.applySettings(settings);
@@ -25389,12 +25391,12 @@ class CameraGizmo {
 }
 class Scene {
   constructor(builder) {
-    __publicField(this, "builder");
-    __publicField(this, "meshes", []);
-    __publicField(this, "boundingBox", new Box3());
-    __publicField(this, "_instanceToThreeMesh", /* @__PURE__ */ new Map());
-    __publicField(this, "_threeMeshIdToInstances", /* @__PURE__ */ new Map());
-    __publicField(this, "_material");
+    __publicField$1(this, "builder");
+    __publicField$1(this, "meshes", []);
+    __publicField$1(this, "boundingBox", new Box3());
+    __publicField$1(this, "_instanceToThreeMesh", /* @__PURE__ */ new Map());
+    __publicField$1(this, "_threeMeshIdToInstances", /* @__PURE__ */ new Map());
+    __publicField$1(this, "_material");
     this.builder = builder;
   }
   getMeshFromInstance(instance) {
@@ -25515,9 +25517,9 @@ class Scene {
 }
 class RenderScene {
   constructor() {
-    __publicField(this, "scene");
-    __publicField(this, "_scenes", []);
-    __publicField(this, "_boundingBox");
+    __publicField$1(this, "scene");
+    __publicField$1(this, "_scenes", []);
+    __publicField$1(this, "_boundingBox");
     this.scene = new Scene$1();
   }
   getBoundingSphere(target = new Sphere()) {
@@ -25562,10 +25564,10 @@ class RenderScene {
 }
 class Viewport {
   constructor(settings) {
-    __publicField(this, "canvas");
-    __publicField(this, "_unregisterResize");
-    __publicField(this, "_ownedCanvas");
-    __publicField(this, "_resizeCallbacks", []);
+    __publicField$1(this, "canvas");
+    __publicField$1(this, "_unregisterResize");
+    __publicField$1(this, "_ownedCanvas");
+    __publicField$1(this, "_resizeCallbacks", []);
     const [canvas, owned] = Viewport.getOrCreateCanvas(settings.getCanvasId());
     this.canvas = canvas;
     this._ownedCanvas = owned;
@@ -25605,6 +25607,9 @@ class Viewport {
   onResize(callback) {
     this._resizeCallbacks.push(callback);
   }
+  ResizeToParent() {
+    this._resizeCallbacks.forEach((cb2) => cb2());
+  }
   registerResize(timeout) {
     let timerId;
     const onResize = () => {
@@ -25623,14 +25628,14 @@ class Viewport {
 }
 class Axis {
   constructor(init) {
-    __publicField(this, "axis");
-    __publicField(this, "direction");
-    __publicField(this, "size");
-    __publicField(this, "color");
-    __publicField(this, "colorSub");
-    __publicField(this, "position");
-    __publicField(this, "label");
-    __publicField(this, "line");
+    __publicField$1(this, "axis");
+    __publicField$1(this, "direction");
+    __publicField$1(this, "size");
+    __publicField$1(this, "color");
+    __publicField$1(this, "colorSub");
+    __publicField$1(this, "position");
+    __publicField$1(this, "label");
+    __publicField$1(this, "line");
     this.axis = init.axis;
     this.direction = init.direction;
     this.size = init.size;
@@ -25643,22 +25648,22 @@ class Axis {
 }
 class GizmoOptions {
   constructor(init) {
-    __publicField(this, "size", 90);
-    __publicField(this, "padding", 8);
-    __publicField(this, "bubbleSizePrimary", 8);
-    __publicField(this, "bubbleSizeSecondary", 6);
-    __publicField(this, "lineWidth", 2);
-    __publicField(this, "fontSize", "12px");
-    __publicField(this, "fontFamily", "arial");
-    __publicField(this, "fontWeight", "bold");
-    __publicField(this, "fontColor", "#222222");
-    __publicField(this, "className", "gizmo-axis-canvas");
-    __publicField(this, "colorX", "#f73c3c");
-    __publicField(this, "colorY", "#6ccb26");
-    __publicField(this, "colorZ", "#178cf0");
-    __publicField(this, "colorXSub", "#942424");
-    __publicField(this, "colorYSub", "#417a17");
-    __publicField(this, "colorZSub", "#0e5490");
+    __publicField$1(this, "size", 90);
+    __publicField$1(this, "padding", 8);
+    __publicField$1(this, "bubbleSizePrimary", 8);
+    __publicField$1(this, "bubbleSizeSecondary", 6);
+    __publicField$1(this, "lineWidth", 2);
+    __publicField$1(this, "fontSize", "12px");
+    __publicField$1(this, "fontFamily", "arial");
+    __publicField$1(this, "fontWeight", "bold");
+    __publicField$1(this, "fontColor", "#222222");
+    __publicField$1(this, "className", "gizmo-axis-canvas");
+    __publicField$1(this, "colorX", "#f73c3c");
+    __publicField$1(this, "colorY", "#6ccb26");
+    __publicField$1(this, "colorZ", "#178cf0");
+    __publicField$1(this, "colorXSub", "#942424");
+    __publicField$1(this, "colorYSub", "#417a17");
+    __publicField$1(this, "colorZSub", "#0e5490");
     var _a2, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p;
     this.size = (_a2 = init == null ? void 0 : init.size) != null ? _a2 : this.size;
     this.padding = (_b = init == null ? void 0 : init.padding) != null ? _b : this.padding;
@@ -25680,21 +25685,21 @@ class GizmoOptions {
 }
 class GizmoAxes {
   constructor(camera, options) {
-    __publicField(this, "options");
-    __publicField(this, "axes");
-    __publicField(this, "camera");
-    __publicField(this, "canvas");
-    __publicField(this, "context");
-    __publicField(this, "rect");
-    __publicField(this, "isDragging");
-    __publicField(this, "isDragSignificant");
-    __publicField(this, "dragStart");
-    __publicField(this, "dragLast");
-    __publicField(this, "pointer");
-    __publicField(this, "center");
-    __publicField(this, "invRotMat", new Matrix4());
-    __publicField(this, "selectedAxis");
-    __publicField(this, "onTouchStart", (e) => {
+    __publicField$1(this, "options");
+    __publicField$1(this, "axes");
+    __publicField$1(this, "camera");
+    __publicField$1(this, "canvas");
+    __publicField$1(this, "context");
+    __publicField$1(this, "rect");
+    __publicField$1(this, "isDragging");
+    __publicField$1(this, "isDragSignificant");
+    __publicField$1(this, "dragStart");
+    __publicField$1(this, "dragLast");
+    __publicField$1(this, "pointer");
+    __publicField$1(this, "center");
+    __publicField$1(this, "invRotMat", new Matrix4());
+    __publicField$1(this, "selectedAxis");
+    __publicField$1(this, "onTouchStart", (e) => {
       e.preventDefault();
       if (e.touches.length > 1)
         return;
@@ -25703,25 +25708,25 @@ class GizmoAxes {
       window.addEventListener("touchmove", this.onTouchMove, false);
       window.addEventListener("touchend", this.onTouchEnd, false);
     });
-    __publicField(this, "onTouchMove", (e) => {
+    __publicField$1(this, "onTouchMove", (e) => {
       if (e.touches.length > 1)
         return;
       const touch = e.touches[0];
       this.updateDrag(touch.clientX, touch.clientY);
     });
-    __publicField(this, "onTouchEnd", (e) => {
+    __publicField$1(this, "onTouchEnd", (e) => {
       e.preventDefault();
       this.endDrag();
       this.selectedAxis = null;
       window.removeEventListener("touchmove", this.onTouchMove, false);
       window.removeEventListener("touchend", this.onTouchEnd, false);
     });
-    __publicField(this, "onPointerDown", (e) => {
+    __publicField$1(this, "onPointerDown", (e) => {
       this.initDrag(e.clientX, e.clientY);
       window.addEventListener("pointermove", this.onPointerDrag, false);
       window.addEventListener("pointerup", this.onPointerUp, false);
     });
-    __publicField(this, "onPointerUp", (event) => {
+    __publicField$1(this, "onPointerUp", (event) => {
       this.endDrag();
       if (event.pointerType !== "mouse") {
         this.pointer.set(0, 0, 0);
@@ -25729,26 +25734,26 @@ class GizmoAxes {
       window.removeEventListener("pointermove", this.onPointerDrag, false);
       window.removeEventListener("pointerup", this.onPointerUp, false);
     });
-    __publicField(this, "onPointerEnter", () => {
+    __publicField$1(this, "onPointerEnter", () => {
       this.rect = this.canvas.getBoundingClientRect();
     });
-    __publicField(this, "onPointerMove", (e) => {
+    __publicField$1(this, "onPointerMove", (e) => {
       if (this.isDragging)
         return;
       if (e) {
         this.pointer = this.toMouseVector(e, this.pointer);
       }
     });
-    __publicField(this, "onPointerDrag", (e) => {
+    __publicField$1(this, "onPointerDrag", (e) => {
       this.updateDrag(e.clientX, e.clientY);
     });
-    __publicField(this, "onMouseClick", () => {
+    __publicField$1(this, "onMouseClick", () => {
       if (this.isDragging || !this.selectedAxis)
         return;
       this.camera.orbit(this.selectedAxis.direction, this.camera.defaultLerpDuration);
       this.selectedAxis = null;
     });
-    __publicField(this, "update", () => {
+    __publicField$1(this, "update", () => {
       this.camera.camera.updateMatrix();
       this.invRotMat.extractRotation(this.camera.camera.matrix).invert();
       for (let i = 0, length = this.axes.length; i < length; i++) {
@@ -25760,7 +25765,7 @@ class GizmoAxes {
         this.pickAxes(this.pointer);
       }
     });
-    __publicField(this, "dispose", () => {
+    __publicField$1(this, "dispose", () => {
       this.canvas.removeEventListener("pointerdown", this.onPointerDown, false);
       this.canvas.removeEventListener("pointerenter", this.onPointerEnter, false);
       this.canvas.removeEventListener("pointermove", this.onPointerDrag, false);
@@ -26108,20 +26113,20 @@ class BoxHighlight extends Mesh {
 }
 class BoxInputs {
   constructor(viewer2, cube, box) {
-    __publicField(this, "viewer");
-    __publicField(this, "cube");
-    __publicField(this, "sharedBox");
-    __publicField(this, "faceNormal", new Vector3());
-    __publicField(this, "dragOrigin", new Vector3());
-    __publicField(this, "dragpPlane");
-    __publicField(this, "mouseDown");
-    __publicField(this, "raycaster", new Raycaster$1());
-    __publicField(this, "lastBox", new Box3());
-    __publicField(this, "unregisters", []);
-    __publicField(this, "onFaceEnter");
-    __publicField(this, "onBoxStretch");
-    __publicField(this, "onBoxConfirm");
-    __publicField(this, "reg", (handler, type, listener) => {
+    __publicField$1(this, "viewer");
+    __publicField$1(this, "cube");
+    __publicField$1(this, "sharedBox");
+    __publicField$1(this, "faceNormal", new Vector3());
+    __publicField$1(this, "dragOrigin", new Vector3());
+    __publicField$1(this, "dragpPlane");
+    __publicField$1(this, "mouseDown");
+    __publicField$1(this, "raycaster", new Raycaster$1());
+    __publicField$1(this, "lastBox", new Box3());
+    __publicField$1(this, "unregisters", []);
+    __publicField$1(this, "onFaceEnter");
+    __publicField$1(this, "onBoxStretch");
+    __publicField$1(this, "onBoxConfirm");
+    __publicField$1(this, "reg", (handler, type, listener) => {
       handler.addEventListener(type, listener);
       this.unregisters.push(() => handler.removeEventListener(type, listener));
     });
@@ -26230,16 +26235,16 @@ class BoxInputs {
 }
 class GizmoSection {
   constructor(viewer2) {
-    __publicField(this, "_viewer");
-    __publicField(this, "_inputs");
-    __publicField(this, "_cube");
-    __publicField(this, "_outline");
-    __publicField(this, "_highlight");
-    __publicField(this, "_normal");
-    __publicField(this, "_clip");
-    __publicField(this, "_show");
-    __publicField(this, "_interactive");
-    __publicField(this, "onBoxConfirm");
+    __publicField$1(this, "_viewer");
+    __publicField$1(this, "_inputs");
+    __publicField$1(this, "_cube");
+    __publicField$1(this, "_outline");
+    __publicField$1(this, "_highlight");
+    __publicField$1(this, "_normal");
+    __publicField$1(this, "_clip");
+    __publicField$1(this, "_show");
+    __publicField$1(this, "_interactive");
+    __publicField$1(this, "onBoxConfirm");
     this._viewer = viewer2;
     this._normal = new Vector3();
     this._cube = new BoxMesh();
@@ -26321,7 +26326,7 @@ class GizmoSection {
     this._highlight.dispose();
   }
 }
-class MeshLine extends BufferGeometry {
+class MeshLine$1 extends BufferGeometry {
   constructor() {
     super();
     this.isMeshLine = true;
@@ -26366,14 +26371,14 @@ class MeshLine extends BufferGeometry {
     });
   }
 }
-MeshLine.prototype.setMatrixWorld = function(matrixWorld) {
+MeshLine$1.prototype.setMatrixWorld = function(matrixWorld) {
   this.matrixWorld = matrixWorld;
 };
-MeshLine.prototype.setGeometry = function(g, c) {
+MeshLine$1.prototype.setGeometry = function(g, c) {
   this._geometry = g;
   this.setPoints(g.getAttribute("position").array, c);
 };
-MeshLine.prototype.setPoints = function(points, wcb) {
+MeshLine$1.prototype.setPoints = function(points, wcb) {
   if (!(points instanceof Float32Array) && !(points instanceof Array)) {
     console.error("ERROR: The BufferArray of points is not instancied correctly.");
     return;
@@ -26402,7 +26407,7 @@ MeshLine.prototype.setPoints = function(points, wcb) {
   }
   this.process();
 };
-function MeshLineRaycast(raycaster, intersects2) {
+function MeshLineRaycast$1(raycaster, intersects2) {
   const inverseMatrix = new Matrix4();
   const ray = new Ray();
   const sphere = new Sphere();
@@ -26454,17 +26459,17 @@ function MeshLineRaycast(raycaster, intersects2) {
     }
   }
 }
-MeshLine.prototype.raycast = MeshLineRaycast;
-MeshLine.prototype.compareV3 = function(a, b) {
+MeshLine$1.prototype.raycast = MeshLineRaycast$1;
+MeshLine$1.prototype.compareV3 = function(a, b) {
   const aa2 = a * 6;
   const ab2 = b * 6;
   return this.positions[aa2] === this.positions[ab2] && this.positions[aa2 + 1] === this.positions[ab2 + 1] && this.positions[aa2 + 2] === this.positions[ab2 + 2];
 };
-MeshLine.prototype.copyV3 = function(a) {
+MeshLine$1.prototype.copyV3 = function(a) {
   const aa2 = a * 6;
   return [this.positions[aa2], this.positions[aa2 + 1], this.positions[aa2 + 2]];
 };
-MeshLine.prototype.process = function() {
+MeshLine$1.prototype.process = function() {
   const l2 = this.positions.length / 6;
   this.previous = [];
   this.next = [];
@@ -26551,7 +26556,7 @@ MeshLine.prototype.process = function() {
   this.computeBoundingSphere();
   this.computeBoundingBox();
 };
-function memcpy(src, srcOffset, dst, dstOffset, length) {
+function memcpy$1(src, srcOffset, dst, dstOffset, length) {
   let i;
   src = src.subarray || src.slice ? src : src.buffer;
   dst = dst.subarray || dst.slice ? dst : dst.buffer;
@@ -26565,20 +26570,20 @@ function memcpy(src, srcOffset, dst, dstOffset, length) {
   }
   return dst;
 }
-MeshLine.prototype.advance = function(position) {
+MeshLine$1.prototype.advance = function(position) {
   const positions = this._attributes.position.array;
   const previous = this._attributes.previous.array;
   const next = this._attributes.next.array;
   const l2 = positions.length;
-  memcpy(positions, 0, previous, 0, l2);
-  memcpy(positions, 6, positions, 0, l2 - 6);
+  memcpy$1(positions, 0, previous, 0, l2);
+  memcpy$1(positions, 6, positions, 0, l2 - 6);
   positions[l2 - 6] = position.x;
   positions[l2 - 5] = position.y;
   positions[l2 - 4] = position.z;
   positions[l2 - 3] = position.x;
   positions[l2 - 2] = position.y;
   positions[l2 - 1] = position.z;
-  memcpy(positions, 6, next, 0, l2 - 6);
+  memcpy$1(positions, 6, next, 0, l2 - 6);
   next[l2 - 6] = position.x;
   next[l2 - 5] = position.y;
   next[l2 - 4] = position.z;
@@ -26708,7 +26713,7 @@ ShaderChunk.meshline_frag = [
   ShaderChunk.fog_fragment,
   "}"
 ].join("\n");
-class MeshLineMaterial extends ShaderMaterial {
+class MeshLineMaterial$1 extends ShaderMaterial {
   constructor(parameters) {
     super({
       uniforms: Object.assign({}, UniformsLib.fog, {
@@ -26884,7 +26889,7 @@ class MeshLineMaterial extends ShaderMaterial {
     this.setValues(parameters);
   }
 }
-MeshLineMaterial.prototype.copy = function(source) {
+MeshLineMaterial$1.prototype.copy = function(source) {
   ShaderMaterial.prototype.copy.call(this, source);
   this.lineWidth = source.lineWidth;
   this.map = source.map;
@@ -26906,17 +26911,17 @@ MeshLineMaterial.prototype.copy = function(source) {
 };
 class MeasureLine {
   constructor(canvasSize, start, end, color) {
-    __publicField(this, "mesh");
-    __publicField(this, "_meshLine");
-    __publicField(this, "_material");
-    __publicField(this, "_materialAlways");
-    this._material = new MeshLineMaterial({
+    __publicField$1(this, "mesh");
+    __publicField$1(this, "_meshLine");
+    __publicField$1(this, "_material");
+    __publicField$1(this, "_materialAlways");
+    this._material = new MeshLineMaterial$1({
       sizeAttenuation: 0,
       lineWidth: 5,
       resolution: canvasSize,
       color
     });
-    this._materialAlways = new MeshLineMaterial({
+    this._materialAlways = new MeshLineMaterial$1({
       lineWidth: 5,
       sizeAttenuation: 0,
       depthTest: false,
@@ -26925,7 +26930,7 @@ class MeasureLine {
       resolution: canvasSize,
       color
     });
-    this._meshLine = new MeshLine();
+    this._meshLine = new MeshLine$1();
     this._meshLine.setPoints([start, end]);
     this.mesh = new Mesh(this._meshLine, [
       this._material,
@@ -26946,9 +26951,9 @@ class MeasureLine {
 }
 class MeasureMarker {
   constructor(position = new Vector3()) {
-    __publicField(this, "mesh");
-    __publicField(this, "_material");
-    __publicField(this, "_materialAlways");
+    __publicField$1(this, "mesh");
+    __publicField$1(this, "_material");
+    __publicField$1(this, "_materialAlways");
     this._material = new MeshBasicMaterial({
       color: new Color(0, 0.75, 1)
     });
@@ -26974,21 +26979,21 @@ class MeasureMarker {
 }
 class GizmoMeasure {
   constructor(viewer2) {
-    __publicField(this, "_viewer");
-    __publicField(this, "_currentMarker");
-    __publicField(this, "_startMarker");
-    __publicField(this, "_endMarker");
-    __publicField(this, "_line");
-    __publicField(this, "_lineX");
-    __publicField(this, "_lineY");
-    __publicField(this, "_lineZ");
-    __publicField(this, "_lastRaycast");
-    __publicField(this, "removeMouseListener");
-    __publicField(this, "oldClick");
-    __publicField(this, "onAbort");
-    __publicField(this, "_startPos");
-    __publicField(this, "_endPos");
-    __publicField(this, "_measurement");
+    __publicField$1(this, "_viewer");
+    __publicField$1(this, "_currentMarker");
+    __publicField$1(this, "_startMarker");
+    __publicField$1(this, "_endMarker");
+    __publicField$1(this, "_line");
+    __publicField$1(this, "_lineX");
+    __publicField$1(this, "_lineY");
+    __publicField$1(this, "_lineZ");
+    __publicField$1(this, "_lastRaycast");
+    __publicField$1(this, "removeMouseListener");
+    __publicField$1(this, "oldClick");
+    __publicField$1(this, "onAbort");
+    __publicField$1(this, "_startPos");
+    __publicField$1(this, "_endPos");
+    __publicField$1(this, "_measurement");
     this._viewer = viewer2;
   }
   get startPoint() {
@@ -27164,79 +27169,79 @@ class GizmoMeasure {
     }
   }
 }
-var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
-var freeGlobal$1 = freeGlobal;
-var freeSelf = typeof self == "object" && self && self.Object === Object && self;
-var root$1 = freeGlobal$1 || freeSelf || Function("return this")();
-var root$1$1 = root$1;
-var Symbol$1 = root$1$1.Symbol;
-var Symbol$2 = Symbol$1;
-var objectProto$c = Object.prototype;
-var hasOwnProperty$9 = objectProto$c.hasOwnProperty;
-var nativeObjectToString$1 = objectProto$c.toString;
-var symToStringTag$1 = Symbol$2 ? Symbol$2.toStringTag : void 0;
-function getRawTag(value) {
-  var isOwn = hasOwnProperty$9.call(value, symToStringTag$1), tag = value[symToStringTag$1];
+var freeGlobal$2 = typeof global == "object" && global && global.Object === Object && global;
+var freeGlobal$1$1 = freeGlobal$2;
+var freeSelf$1 = typeof self == "object" && self && self.Object === Object && self;
+var root$2 = freeGlobal$1$1 || freeSelf$1 || Function("return this")();
+var root$1$2 = root$2;
+var Symbol$1$1 = root$1$2.Symbol;
+var Symbol$2$1 = Symbol$1$1;
+var objectProto$c$1 = Object.prototype;
+var hasOwnProperty$9$1 = objectProto$c$1.hasOwnProperty;
+var nativeObjectToString$1$1 = objectProto$c$1.toString;
+var symToStringTag$1$1 = Symbol$2$1 ? Symbol$2$1.toStringTag : void 0;
+function getRawTag$1(value) {
+  var isOwn = hasOwnProperty$9$1.call(value, symToStringTag$1$1), tag = value[symToStringTag$1$1];
   try {
-    value[symToStringTag$1] = void 0;
+    value[symToStringTag$1$1] = void 0;
     var unmasked = true;
   } catch (e) {
   }
-  var result = nativeObjectToString$1.call(value);
+  var result = nativeObjectToString$1$1.call(value);
   if (unmasked) {
     if (isOwn) {
-      value[symToStringTag$1] = tag;
+      value[symToStringTag$1$1] = tag;
     } else {
-      delete value[symToStringTag$1];
+      delete value[symToStringTag$1$1];
     }
   }
   return result;
 }
-var objectProto$b = Object.prototype;
-var nativeObjectToString = objectProto$b.toString;
-function objectToString(value) {
-  return nativeObjectToString.call(value);
+var objectProto$b$1 = Object.prototype;
+var nativeObjectToString$2 = objectProto$b$1.toString;
+function objectToString$1(value) {
+  return nativeObjectToString$2.call(value);
 }
-var nullTag = "[object Null]", undefinedTag = "[object Undefined]";
-var symToStringTag = Symbol$2 ? Symbol$2.toStringTag : void 0;
-function baseGetTag(value) {
+var nullTag$1 = "[object Null]", undefinedTag$1 = "[object Undefined]";
+var symToStringTag$2 = Symbol$2$1 ? Symbol$2$1.toStringTag : void 0;
+function baseGetTag$1(value) {
   if (value == null) {
-    return value === void 0 ? undefinedTag : nullTag;
+    return value === void 0 ? undefinedTag$1 : nullTag$1;
   }
-  return symToStringTag && symToStringTag in Object(value) ? getRawTag(value) : objectToString(value);
+  return symToStringTag$2 && symToStringTag$2 in Object(value) ? getRawTag$1(value) : objectToString$1(value);
 }
-function isObjectLike(value) {
+function isObjectLike$1(value) {
   return value != null && typeof value == "object";
 }
 var isArray = Array.isArray;
 var isArray$1 = isArray;
-function isObject(value) {
+function isObject$1(value) {
   var type = typeof value;
   return value != null && (type == "object" || type == "function");
 }
-var asyncTag = "[object AsyncFunction]", funcTag$2 = "[object Function]", genTag$1 = "[object GeneratorFunction]", proxyTag = "[object Proxy]";
-function isFunction(value) {
-  if (!isObject(value)) {
+var asyncTag$1 = "[object AsyncFunction]", funcTag$2$1 = "[object Function]", genTag$1$1 = "[object GeneratorFunction]", proxyTag$1 = "[object Proxy]";
+function isFunction$1(value) {
+  if (!isObject$1(value)) {
     return false;
   }
-  var tag = baseGetTag(value);
-  return tag == funcTag$2 || tag == genTag$1 || tag == asyncTag || tag == proxyTag;
+  var tag = baseGetTag$1(value);
+  return tag == funcTag$2$1 || tag == genTag$1$1 || tag == asyncTag$1 || tag == proxyTag$1;
 }
-var coreJsData = root$1$1["__core-js_shared__"];
-var coreJsData$1 = coreJsData;
-var maskSrcKey = function() {
-  var uid = /[^.]+$/.exec(coreJsData$1 && coreJsData$1.keys && coreJsData$1.keys.IE_PROTO || "");
+var coreJsData$2 = root$1$2["__core-js_shared__"];
+var coreJsData$1$1 = coreJsData$2;
+var maskSrcKey$1 = function() {
+  var uid = /[^.]+$/.exec(coreJsData$1$1 && coreJsData$1$1.keys && coreJsData$1$1.keys.IE_PROTO || "");
   return uid ? "Symbol(src)_1." + uid : "";
 }();
-function isMasked(func) {
-  return !!maskSrcKey && maskSrcKey in func;
+function isMasked$1(func) {
+  return !!maskSrcKey$1 && maskSrcKey$1 in func;
 }
-var funcProto$1 = Function.prototype;
-var funcToString$1 = funcProto$1.toString;
-function toSource(func) {
+var funcProto$1$1 = Function.prototype;
+var funcToString$1$1 = funcProto$1$1.toString;
+function toSource$1(func) {
   if (func != null) {
     try {
-      return funcToString$1.call(func);
+      return funcToString$1$1.call(func);
     } catch (e) {
     }
     try {
@@ -27246,34 +27251,34 @@ function toSource(func) {
   }
   return "";
 }
-var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
-var reIsHostCtor = /^\[object .+?Constructor\]$/;
-var funcProto = Function.prototype, objectProto$a = Object.prototype;
-var funcToString = funcProto.toString;
-var hasOwnProperty$8 = objectProto$a.hasOwnProperty;
-var reIsNative = RegExp("^" + funcToString.call(hasOwnProperty$8).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$");
-function baseIsNative(value) {
-  if (!isObject(value) || isMasked(value)) {
+var reRegExpChar$1 = /[\\^$.*+?()[\]{}|]/g;
+var reIsHostCtor$1 = /^\[object .+?Constructor\]$/;
+var funcProto$2 = Function.prototype, objectProto$a$1 = Object.prototype;
+var funcToString$2 = funcProto$2.toString;
+var hasOwnProperty$8$1 = objectProto$a$1.hasOwnProperty;
+var reIsNative$1 = RegExp("^" + funcToString$2.call(hasOwnProperty$8$1).replace(reRegExpChar$1, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$");
+function baseIsNative$1(value) {
+  if (!isObject$1(value) || isMasked$1(value)) {
     return false;
   }
-  var pattern = isFunction(value) ? reIsNative : reIsHostCtor;
-  return pattern.test(toSource(value));
+  var pattern = isFunction$1(value) ? reIsNative$1 : reIsHostCtor$1;
+  return pattern.test(toSource$1(value));
 }
-function getValue(object, key) {
+function getValue$1(object, key) {
   return object == null ? void 0 : object[key];
 }
-function getNative(object, key) {
-  var value = getValue(object, key);
-  return baseIsNative(value) ? value : void 0;
+function getNative$1(object, key) {
+  var value = getValue$1(object, key);
+  return baseIsNative$1(value) ? value : void 0;
 }
-var WeakMap2 = getNative(root$1$1, "WeakMap");
-var WeakMap$1 = WeakMap2;
+var WeakMap2$1 = getNative$1(root$1$2, "WeakMap");
+var WeakMap$1$1 = WeakMap2$1;
 var objectCreate = Object.create;
 var baseCreate = function() {
   function object() {
   }
   return function(proto) {
-    if (!isObject(proto)) {
+    if (!isObject$1(proto)) {
       return {};
     }
     if (objectCreate) {
@@ -27296,7 +27301,7 @@ function copyArray(source, array) {
 }
 var defineProperty = function() {
   try {
-    var func = getNative(Object, "defineProperty");
+    var func = getNative$1(Object, "defineProperty");
     func({}, "", {});
     return func;
   } catch (e) {
@@ -27365,7 +27370,7 @@ function isLength(value) {
   return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
 }
 function isArrayLike(value) {
-  return value != null && isLength(value.length) && !isFunction(value);
+  return value != null && isLength(value.length) && !isFunction$1(value);
 }
 var objectProto$8 = Object.prototype;
 function isPrototype(value) {
@@ -27379,27 +27384,27 @@ function baseTimes(n2, iteratee) {
   }
   return result;
 }
-var argsTag$2 = "[object Arguments]";
-function baseIsArguments(value) {
-  return isObjectLike(value) && baseGetTag(value) == argsTag$2;
+var argsTag$2$1 = "[object Arguments]";
+function baseIsArguments$1(value) {
+  return isObjectLike$1(value) && baseGetTag$1(value) == argsTag$2$1;
 }
-var objectProto$7 = Object.prototype;
-var hasOwnProperty$6 = objectProto$7.hasOwnProperty;
-var propertyIsEnumerable$1 = objectProto$7.propertyIsEnumerable;
-var isArguments = baseIsArguments(function() {
+var objectProto$7$1 = Object.prototype;
+var hasOwnProperty$6$1 = objectProto$7$1.hasOwnProperty;
+var propertyIsEnumerable$1$1 = objectProto$7$1.propertyIsEnumerable;
+var isArguments = baseIsArguments$1(function() {
   return arguments;
-}()) ? baseIsArguments : function(value) {
-  return isObjectLike(value) && hasOwnProperty$6.call(value, "callee") && !propertyIsEnumerable$1.call(value, "callee");
+}()) ? baseIsArguments$1 : function(value) {
+  return isObjectLike$1(value) && hasOwnProperty$6$1.call(value, "callee") && !propertyIsEnumerable$1$1.call(value, "callee");
 };
 var isArguments$1 = isArguments;
 function stubFalse() {
   return false;
 }
-var freeExports$2 = typeof exports == "object" && exports && !exports.nodeType && exports;
-var freeModule$2 = freeExports$2 && typeof module == "object" && module && !module.nodeType && module;
-var moduleExports$2 = freeModule$2 && freeModule$2.exports === freeExports$2;
-var Buffer$1 = moduleExports$2 ? root$1$1.Buffer : void 0;
-var nativeIsBuffer = Buffer$1 ? Buffer$1.isBuffer : void 0;
+var freeExports$2$1 = typeof exports == "object" && exports && !exports.nodeType && exports;
+var freeModule$2$1 = freeExports$2$1 && typeof module == "object" && module && !module.nodeType && module;
+var moduleExports$2$1 = freeModule$2$1 && freeModule$2$1.exports === freeExports$2$1;
+var Buffer$1$1 = moduleExports$2$1 ? root$1$2.Buffer : void 0;
+var nativeIsBuffer = Buffer$1$1 ? Buffer$1$1.isBuffer : void 0;
 var isBuffer = nativeIsBuffer || stubFalse;
 var isBuffer$1 = isBuffer;
 var argsTag$1 = "[object Arguments]", arrayTag$1 = "[object Array]", boolTag$2 = "[object Boolean]", dateTag$2 = "[object Date]", errorTag$1 = "[object Error]", funcTag$1 = "[object Function]", mapTag$4 = "[object Map]", numberTag$2 = "[object Number]", objectTag$2 = "[object Object]", regexpTag$2 = "[object RegExp]", setTag$4 = "[object Set]", stringTag$2 = "[object String]", weakMapTag$2 = "[object WeakMap]";
@@ -27408,29 +27413,29 @@ var typedArrayTags = {};
 typedArrayTags[float32Tag$2] = typedArrayTags[float64Tag$2] = typedArrayTags[int8Tag$2] = typedArrayTags[int16Tag$2] = typedArrayTags[int32Tag$2] = typedArrayTags[uint8Tag$2] = typedArrayTags[uint8ClampedTag$2] = typedArrayTags[uint16Tag$2] = typedArrayTags[uint32Tag$2] = true;
 typedArrayTags[argsTag$1] = typedArrayTags[arrayTag$1] = typedArrayTags[arrayBufferTag$2] = typedArrayTags[boolTag$2] = typedArrayTags[dataViewTag$3] = typedArrayTags[dateTag$2] = typedArrayTags[errorTag$1] = typedArrayTags[funcTag$1] = typedArrayTags[mapTag$4] = typedArrayTags[numberTag$2] = typedArrayTags[objectTag$2] = typedArrayTags[regexpTag$2] = typedArrayTags[setTag$4] = typedArrayTags[stringTag$2] = typedArrayTags[weakMapTag$2] = false;
 function baseIsTypedArray(value) {
-  return isObjectLike(value) && isLength(value.length) && !!typedArrayTags[baseGetTag(value)];
+  return isObjectLike$1(value) && isLength(value.length) && !!typedArrayTags[baseGetTag$1(value)];
 }
 function baseUnary(func) {
   return function(value) {
     return func(value);
   };
 }
-var freeExports$1 = typeof exports == "object" && exports && !exports.nodeType && exports;
-var freeModule$1 = freeExports$1 && typeof module == "object" && module && !module.nodeType && module;
-var moduleExports$1 = freeModule$1 && freeModule$1.exports === freeExports$1;
-var freeProcess = moduleExports$1 && freeGlobal$1.process;
-var nodeUtil = function() {
+var freeExports$1$1 = typeof exports == "object" && exports && !exports.nodeType && exports;
+var freeModule$1$1 = freeExports$1$1 && typeof module == "object" && module && !module.nodeType && module;
+var moduleExports$1$1 = freeModule$1$1 && freeModule$1$1.exports === freeExports$1$1;
+var freeProcess$1 = moduleExports$1$1 && freeGlobal$1$1.process;
+var nodeUtil$2 = function() {
   try {
-    var types = freeModule$1 && freeModule$1.require && freeModule$1.require("util").types;
+    var types = freeModule$1$1 && freeModule$1$1.require && freeModule$1$1.require("util").types;
     if (types) {
       return types;
     }
-    return freeProcess && freeProcess.binding && freeProcess.binding("util");
+    return freeProcess$1 && freeProcess$1.binding && freeProcess$1.binding("util");
   } catch (e) {
   }
 }();
-var nodeUtil$1 = nodeUtil;
-var nodeIsTypedArray = nodeUtil$1 && nodeUtil$1.isTypedArray;
+var nodeUtil$1$1 = nodeUtil$2;
+var nodeIsTypedArray = nodeUtil$1$1 && nodeUtil$1$1.isTypedArray;
 var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
 var isTypedArray$1 = isTypedArray;
 var objectProto$6 = Object.prototype;
@@ -27480,7 +27485,7 @@ function nativeKeysIn(object) {
 var objectProto$4 = Object.prototype;
 var hasOwnProperty$3 = objectProto$4.hasOwnProperty;
 function baseKeysIn(object) {
-  if (!isObject(object)) {
+  if (!isObject$1(object)) {
     return nativeKeysIn(object);
   }
   var isProto = isPrototype(object), result = [];
@@ -27494,7 +27499,7 @@ function baseKeysIn(object) {
 function keysIn(object) {
   return isArrayLike(object) ? arrayLikeKeys(object, true) : baseKeysIn(object);
 }
-var nativeCreate = getNative(Object, "create");
+var nativeCreate = getNative$1(Object, "create");
 var nativeCreate$1 = nativeCreate;
 function hashClear() {
   this.__data__ = nativeCreate$1 ? nativeCreate$1(null) : {};
@@ -27601,13 +27606,13 @@ ListCache.prototype["delete"] = listCacheDelete;
 ListCache.prototype.get = listCacheGet;
 ListCache.prototype.has = listCacheHas;
 ListCache.prototype.set = listCacheSet;
-var Map$1 = getNative(root$1$1, "Map");
-var Map$2 = Map$1;
+var Map$1$1 = getNative$1(root$1$2, "Map");
+var Map$2$1 = Map$1$1;
 function mapCacheClear() {
   this.size = 0;
   this.__data__ = {
     "hash": new Hash(),
-    "map": new (Map$2 || ListCache)(),
+    "map": new (Map$2$1 || ListCache)(),
     "string": new Hash()
   };
 }
@@ -27678,7 +27683,7 @@ function stackSet(key, value) {
   var data = this.__data__;
   if (data instanceof ListCache) {
     var pairs = data.__data__;
-    if (!Map$2 || pairs.length < LARGE_ARRAY_SIZE - 1) {
+    if (!Map$2$1 || pairs.length < LARGE_ARRAY_SIZE - 1) {
       pairs.push([key, value]);
       this.size = ++data.size;
       return this;
@@ -27704,10 +27709,10 @@ function baseAssign(object, source) {
 function baseAssignIn(object, source) {
   return object && copyObject(source, keysIn(source), object);
 }
-var freeExports = typeof exports == "object" && exports && !exports.nodeType && exports;
-var freeModule = freeExports && typeof module == "object" && module && !module.nodeType && module;
-var moduleExports = freeModule && freeModule.exports === freeExports;
-var Buffer2 = moduleExports ? root$1$1.Buffer : void 0, allocUnsafe = Buffer2 ? Buffer2.allocUnsafe : void 0;
+var freeExports$3 = typeof exports == "object" && exports && !exports.nodeType && exports;
+var freeModule$3 = freeExports$3 && typeof module == "object" && module && !module.nodeType && module;
+var moduleExports$3 = freeModule$3 && freeModule$3.exports === freeExports$3;
+var Buffer2$1 = moduleExports$3 ? root$1$2.Buffer : void 0, allocUnsafe = Buffer2$1 ? Buffer2$1.allocUnsafe : void 0;
 function cloneBuffer(buffer, isDeep) {
   if (isDeep) {
     return buffer.slice();
@@ -27768,37 +27773,37 @@ function getAllKeys(object) {
 function getAllKeysIn(object) {
   return baseGetAllKeys(object, keysIn, getSymbolsIn$1);
 }
-var DataView$1 = getNative(root$1$1, "DataView");
-var DataView$1$1 = DataView$1;
-var Promise$1 = getNative(root$1$1, "Promise");
-var Promise$2 = Promise$1;
-var Set$1 = getNative(root$1$1, "Set");
-var Set$2 = Set$1;
-var mapTag$3 = "[object Map]", objectTag$1 = "[object Object]", promiseTag = "[object Promise]", setTag$3 = "[object Set]", weakMapTag$1 = "[object WeakMap]";
-var dataViewTag$2 = "[object DataView]";
-var dataViewCtorString = toSource(DataView$1$1), mapCtorString = toSource(Map$2), promiseCtorString = toSource(Promise$2), setCtorString = toSource(Set$2), weakMapCtorString = toSource(WeakMap$1);
-var getTag = baseGetTag;
-if (DataView$1$1 && getTag(new DataView$1$1(new ArrayBuffer(1))) != dataViewTag$2 || Map$2 && getTag(new Map$2()) != mapTag$3 || Promise$2 && getTag(Promise$2.resolve()) != promiseTag || Set$2 && getTag(new Set$2()) != setTag$3 || WeakMap$1 && getTag(new WeakMap$1()) != weakMapTag$1) {
-  getTag = function(value) {
-    var result = baseGetTag(value), Ctor = result == objectTag$1 ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : "";
+var DataView$2 = getNative$1(root$1$2, "DataView");
+var DataView$1$2 = DataView$2;
+var Promise$1$1 = getNative$1(root$1$2, "Promise");
+var Promise$2$1 = Promise$1$1;
+var Set$1$1 = getNative$1(root$1$2, "Set");
+var Set$2$1 = Set$1$1;
+var mapTag$3$1 = "[object Map]", objectTag$1$1 = "[object Object]", promiseTag$1 = "[object Promise]", setTag$3$1 = "[object Set]", weakMapTag$1$1 = "[object WeakMap]";
+var dataViewTag$2$1 = "[object DataView]";
+var dataViewCtorString$1 = toSource$1(DataView$1$2), mapCtorString$1 = toSource$1(Map$2$1), promiseCtorString$1 = toSource$1(Promise$2$1), setCtorString$1 = toSource$1(Set$2$1), weakMapCtorString$1 = toSource$1(WeakMap$1$1);
+var getTag$1 = baseGetTag$1;
+if (DataView$1$2 && getTag$1(new DataView$1$2(new ArrayBuffer(1))) != dataViewTag$2$1 || Map$2$1 && getTag$1(new Map$2$1()) != mapTag$3$1 || Promise$2$1 && getTag$1(Promise$2$1.resolve()) != promiseTag$1 || Set$2$1 && getTag$1(new Set$2$1()) != setTag$3$1 || WeakMap$1$1 && getTag$1(new WeakMap$1$1()) != weakMapTag$1$1) {
+  getTag$1 = function(value) {
+    var result = baseGetTag$1(value), Ctor = result == objectTag$1$1 ? value.constructor : void 0, ctorString = Ctor ? toSource$1(Ctor) : "";
     if (ctorString) {
       switch (ctorString) {
-        case dataViewCtorString:
-          return dataViewTag$2;
-        case mapCtorString:
-          return mapTag$3;
-        case promiseCtorString:
-          return promiseTag;
-        case setCtorString:
-          return setTag$3;
-        case weakMapCtorString:
-          return weakMapTag$1;
+        case dataViewCtorString$1:
+          return dataViewTag$2$1;
+        case mapCtorString$1:
+          return mapTag$3$1;
+        case promiseCtorString$1:
+          return promiseTag$1;
+        case setCtorString$1:
+          return setTag$3$1;
+        case weakMapCtorString$1:
+          return weakMapTag$1$1;
       }
     }
     return result;
   };
 }
-var getTag$1 = getTag;
+var getTag$1$1 = getTag$1;
 var objectProto = Object.prototype;
 var hasOwnProperty = objectProto.hasOwnProperty;
 function initCloneArray(array) {
@@ -27809,7 +27814,7 @@ function initCloneArray(array) {
   }
   return result;
 }
-var Uint8Array$1 = root$1$1.Uint8Array;
+var Uint8Array$1 = root$1$2.Uint8Array;
 var Uint8Array$2 = Uint8Array$1;
 function cloneArrayBuffer(arrayBuffer) {
   var result = new arrayBuffer.constructor(arrayBuffer.byteLength);
@@ -27826,7 +27831,7 @@ function cloneRegExp(regexp) {
   result.lastIndex = regexp.lastIndex;
   return result;
 }
-var symbolProto = Symbol$2 ? Symbol$2.prototype : void 0, symbolValueOf = symbolProto ? symbolProto.valueOf : void 0;
+var symbolProto$1 = Symbol$2$1 ? Symbol$2$1.prototype : void 0, symbolValueOf = symbolProto$1 ? symbolProto$1.valueOf : void 0;
 function cloneSymbol(symbol) {
   return symbolValueOf ? Object(symbolValueOf.call(symbol)) : {};
 }
@@ -27874,16 +27879,16 @@ function initCloneObject(object) {
 }
 var mapTag$1 = "[object Map]";
 function baseIsMap(value) {
-  return isObjectLike(value) && getTag$1(value) == mapTag$1;
+  return isObjectLike$1(value) && getTag$1$1(value) == mapTag$1;
 }
-var nodeIsMap = nodeUtil$1 && nodeUtil$1.isMap;
+var nodeIsMap = nodeUtil$1$1 && nodeUtil$1$1.isMap;
 var isMap = nodeIsMap ? baseUnary(nodeIsMap) : baseIsMap;
 var isMap$1 = isMap;
 var setTag$1 = "[object Set]";
 function baseIsSet(value) {
-  return isObjectLike(value) && getTag$1(value) == setTag$1;
+  return isObjectLike$1(value) && getTag$1$1(value) == setTag$1;
 }
-var nodeIsSet = nodeUtil$1 && nodeUtil$1.isSet;
+var nodeIsSet = nodeUtil$1$1 && nodeUtil$1$1.isSet;
 var isSet = nodeIsSet ? baseUnary(nodeIsSet) : baseIsSet;
 var isSet$1 = isSet;
 var CLONE_DEEP_FLAG$1 = 1, CLONE_FLAT_FLAG = 2, CLONE_SYMBOLS_FLAG$1 = 4;
@@ -27900,7 +27905,7 @@ function baseClone(value, bitmask, customizer, key, object, stack) {
   if (result !== void 0) {
     return result;
   }
-  if (!isObject(value)) {
+  if (!isObject$1(value)) {
     return value;
   }
   var isArr = isArray$1(value);
@@ -27910,7 +27915,7 @@ function baseClone(value, bitmask, customizer, key, object, stack) {
       return copyArray(value, result);
     }
   } else {
-    var tag = getTag$1(value), isFunc = tag == funcTag || tag == genTag;
+    var tag = getTag$1$1(value), isFunc = tag == funcTag || tag == genTag;
     if (isBuffer$1(value)) {
       return cloneBuffer(value, isDeep);
     }
@@ -27956,7 +27961,7 @@ var CLONE_DEEP_FLAG = 1, CLONE_SYMBOLS_FLAG = 4;
 function cloneDeep(value) {
   return baseClone(value, CLONE_DEEP_FLAG | CLONE_SYMBOLS_FLAG);
 }
-var Transparency;
+var Transparency$1;
 ((Transparency2) => {
   function isValid(value) {
     return ["all", "opaqueOnly", "transparentOnly", "allAsOpaque"].includes(value);
@@ -27970,8 +27975,8 @@ var Transparency;
     return mode === "allAsOpaque" || mode === "all" || !transparent && mode === "opaqueOnly" || transparent && mode === "transparentOnly";
   }
   Transparency2.match = match;
-})(Transparency || (Transparency = {}));
-var Geometry;
+})(Transparency$1 || (Transparency$1 = {}));
+var Geometry$1;
 ((Geometry2) => {
   function createGeometryFromInstances(g3d, instances) {
     const merger = Merger.createFromInstances(g3d, instances, "all");
@@ -28005,18 +28010,18 @@ var Geometry;
   }
   class Merger {
     constructor(g3d, transparency2, instances, meshes, indexCount, vertexCount) {
-      __publicField(this, "_g3d");
-      __publicField(this, "_colorSize");
-      __publicField(this, "_meshes");
-      __publicField(this, "_indices");
-      __publicField(this, "_vertices");
-      __publicField(this, "_colors");
-      __publicField(this, "_instances");
-      __publicField(this, "_submeshes");
-      __publicField(this, "getInstances", () => this._instances);
-      __publicField(this, "getSubmeshes", () => this._submeshes);
+      __publicField$1(this, "_g3d");
+      __publicField$1(this, "_colorSize");
+      __publicField$1(this, "_meshes");
+      __publicField$1(this, "_indices");
+      __publicField$1(this, "_vertices");
+      __publicField$1(this, "_colors");
+      __publicField$1(this, "_instances");
+      __publicField$1(this, "_submeshes");
+      __publicField$1(this, "getInstances", () => this._instances);
+      __publicField$1(this, "getSubmeshes", () => this._submeshes);
       this._g3d = g3d;
-      this._colorSize = Transparency.requiresAlpha(transparency2) ? 4 : 3;
+      this._colorSize = Transparency$1.requiresAlpha(transparency2) ? 4 : 3;
       this._instances = instances;
       this._meshes = meshes;
       this._indices = new Uint32Array(indexCount);
@@ -28034,7 +28039,7 @@ var Geometry;
         const meshInstances = g3d.meshInstances[mesh];
         if (!meshInstances || meshInstances.length !== 1)
           continue;
-        if (!Transparency.match(transparency2, g3d.meshTransparent[mesh])) {
+        if (!Transparency$1.match(transparency2, g3d.meshTransparent[mesh])) {
           continue;
         }
         if ((g3d.instanceFlags[meshInstances[0]] & 1) > 0)
@@ -28056,7 +28061,7 @@ var Geometry;
         const mesh = g3d.instanceMeshes[instance];
         if (mesh < 0)
           continue;
-        if (!Transparency.match(transparency2, g3d.meshTransparent[mesh])) {
+        if (!Transparency$1.match(transparency2, g3d.meshTransparent[mesh])) {
           continue;
         }
         vertexCount += g3d.getMeshVertexCount(mesh);
@@ -28132,17 +28137,17 @@ var Geometry;
     return target;
   }
   Geometry2.getInstanceMatrix = getInstanceMatrix;
-})(Geometry || (Geometry = {}));
+})(Geometry$1 || (Geometry$1 = {}));
 class VimSettings {
   constructor(options) {
-    __publicField(this, "options");
-    __publicField(this, "getOptions", () => cloneDeep(this.options));
-    __publicField(this, "getPosition", () => toVec(this.options.position));
-    __publicField(this, "getRotation", () => toQuaternion(this.options.rotation));
-    __publicField(this, "getScale", () => scalarToVec(this.options.scale));
-    __publicField(this, "getMatrix", () => new Matrix4().compose(this.getPosition(), this.getRotation(), this.getScale()));
-    __publicField(this, "getTransparency", () => this.options.transparency);
-    __publicField(this, "getDownloadMode", () => this.options.download);
+    __publicField$1(this, "options");
+    __publicField$1(this, "getOptions", () => cloneDeep(this.options));
+    __publicField$1(this, "getPosition", () => toVec(this.options.position));
+    __publicField$1(this, "getRotation", () => toQuaternion(this.options.rotation));
+    __publicField$1(this, "getScale", () => scalarToVec(this.options.scale));
+    __publicField$1(this, "getMatrix", () => new Matrix4().compose(this.getPosition(), this.getRotation(), this.getScale()));
+    __publicField$1(this, "getTransparency", () => this.options.transparency);
+    __publicField$1(this, "getDownloadMode", () => this.options.download);
     const fallback = {
       position: { x: 0, y: 0, z: 0 },
       rotation: { x: 0, y: 0, z: 0 },
@@ -28151,7 +28156,7 @@ class VimSettings {
       download: "stream"
     };
     this.options = options ? cjs(fallback, options, void 0) : fallback;
-    this.options.transparency = Transparency.isValid(this.options.transparency) ? this.options.transparency : "all";
+    this.options.transparency = Transparency$1.isValid(this.options.transparency) ? this.options.transparency : "all";
   }
 }
 function toVec(obj) {
@@ -28168,12 +28173,12 @@ function toEuler(rot) {
 }
 class G3dAttributeDescriptor {
   constructor(description, association, semantic, attributeTypeIndex, dataType, dataArity) {
-    __publicField(this, "description");
-    __publicField(this, "association");
-    __publicField(this, "semantic");
-    __publicField(this, "attributeTypeIndex");
-    __publicField(this, "dataType");
-    __publicField(this, "dataArity");
+    __publicField$1(this, "description");
+    __publicField$1(this, "association");
+    __publicField$1(this, "semantic");
+    __publicField$1(this, "attributeTypeIndex");
+    __publicField$1(this, "dataType");
+    __publicField$1(this, "dataArity");
     if (!description.startsWith("g3d:")) {
       throw new Error(`${description} must start with 'g3d'`);
     }
@@ -28198,9 +28203,9 @@ class G3dAttributeDescriptor {
 }
 class G3dAttribute {
   constructor(descriptor, bytes) {
-    __publicField(this, "descriptor");
-    __publicField(this, "bytes");
-    __publicField(this, "data");
+    __publicField$1(this, "descriptor");
+    __publicField$1(this, "bytes");
+    __publicField$1(this, "data");
     this.descriptor = descriptor;
     this.bytes = bytes;
     this.data = G3dAttribute.castData(bytes, descriptor.dataType);
@@ -28235,8 +28240,8 @@ class G3dAttribute {
 }
 class AbstractG3d {
   constructor(meta, attributes) {
-    __publicField(this, "meta");
-    __publicField(this, "attributes");
+    __publicField$1(this, "meta");
+    __publicField$1(this, "attributes");
     this.meta = meta;
     this.attributes = attributes;
   }
@@ -28249,53 +28254,53 @@ class AbstractG3d {
     }
   }
   static createFromBfast(bfast) {
-    const promises = VimAttributes.all.map((a) => bfast.getBytes(a).then((bytes) => bytes ? new G3dAttribute(G3dAttributeDescriptor.fromString(a), bytes) : void 0));
+    const promises = VimAttributes$1.all.map((a) => bfast.getBytes(a).then((bytes) => bytes ? new G3dAttribute(G3dAttributeDescriptor.fromString(a), bytes) : void 0));
     return Promise.all(promises).then((attributes) => new AbstractG3d("meta", attributes.filter((a) => a !== void 0)));
   }
 }
-const _VimAttributes = class {
+const _VimAttributes$1 = class {
 };
-let VimAttributes = _VimAttributes;
-__publicField(VimAttributes, "positions", "g3d:vertex:position:0:float32:3");
-__publicField(VimAttributes, "indices", "g3d:corner:index:0:int32:1");
-__publicField(VimAttributes, "instanceMeshes", "g3d:instance:mesh:0:int32:1");
-__publicField(VimAttributes, "instanceTransforms", "g3d:instance:transform:0:float32:16");
-__publicField(VimAttributes, "instanceFlags", "g3d:instance:flags:0:uint16:1");
-__publicField(VimAttributes, "meshSubmeshes", "g3d:mesh:submeshoffset:0:int32:1");
-__publicField(VimAttributes, "submeshIndexOffsets", "g3d:submesh:indexoffset:0:int32:1");
-__publicField(VimAttributes, "submeshMaterials", "g3d:submesh:material:0:int32:1");
-__publicField(VimAttributes, "materialColors", "g3d:material:color:0:float32:4");
-__publicField(VimAttributes, "all", [
-  _VimAttributes.positions,
-  _VimAttributes.indices,
-  _VimAttributes.instanceMeshes,
-  _VimAttributes.instanceTransforms,
-  _VimAttributes.instanceFlags,
-  _VimAttributes.meshSubmeshes,
-  _VimAttributes.submeshIndexOffsets,
-  _VimAttributes.submeshMaterials,
-  _VimAttributes.materialColors
+let VimAttributes$1 = _VimAttributes$1;
+__publicField$1(VimAttributes$1, "positions", "g3d:vertex:position:0:float32:3");
+__publicField$1(VimAttributes$1, "indices", "g3d:corner:index:0:int32:1");
+__publicField$1(VimAttributes$1, "instanceMeshes", "g3d:instance:mesh:0:int32:1");
+__publicField$1(VimAttributes$1, "instanceTransforms", "g3d:instance:transform:0:float32:16");
+__publicField$1(VimAttributes$1, "instanceFlags", "g3d:instance:flags:0:uint16:1");
+__publicField$1(VimAttributes$1, "meshSubmeshes", "g3d:mesh:submeshoffset:0:int32:1");
+__publicField$1(VimAttributes$1, "submeshIndexOffsets", "g3d:submesh:indexoffset:0:int32:1");
+__publicField$1(VimAttributes$1, "submeshMaterials", "g3d:submesh:material:0:int32:1");
+__publicField$1(VimAttributes$1, "materialColors", "g3d:material:color:0:float32:4");
+__publicField$1(VimAttributes$1, "all", [
+  _VimAttributes$1.positions,
+  _VimAttributes$1.indices,
+  _VimAttributes$1.instanceMeshes,
+  _VimAttributes$1.instanceTransforms,
+  _VimAttributes$1.instanceFlags,
+  _VimAttributes$1.meshSubmeshes,
+  _VimAttributes$1.submeshIndexOffsets,
+  _VimAttributes$1.submeshMaterials,
+  _VimAttributes$1.materialColors
 ]);
 class G3d {
   constructor(g3d) {
-    __publicField(this, "positions");
-    __publicField(this, "indices");
-    __publicField(this, "instanceMeshes");
-    __publicField(this, "instanceTransforms");
-    __publicField(this, "instanceFlags");
-    __publicField(this, "meshSubmeshes");
-    __publicField(this, "submeshIndexOffset");
-    __publicField(this, "submeshMaterial");
-    __publicField(this, "materialColors");
-    __publicField(this, "meshVertexOffsets");
-    __publicField(this, "meshInstances");
-    __publicField(this, "meshTransparent");
-    __publicField(this, "rawG3d");
-    __publicField(this, "MATRIX_SIZE", 16);
-    __publicField(this, "COLOR_SIZE", 4);
-    __publicField(this, "POSITION_SIZE", 3);
-    __publicField(this, "DEFAULT_COLOR", new Float32Array([1, 1, 1, 1]));
-    __publicField(this, "computeMeshInstances", () => {
+    __publicField$1(this, "positions");
+    __publicField$1(this, "indices");
+    __publicField$1(this, "instanceMeshes");
+    __publicField$1(this, "instanceTransforms");
+    __publicField$1(this, "instanceFlags");
+    __publicField$1(this, "meshSubmeshes");
+    __publicField$1(this, "submeshIndexOffset");
+    __publicField$1(this, "submeshMaterial");
+    __publicField$1(this, "materialColors");
+    __publicField$1(this, "meshVertexOffsets");
+    __publicField$1(this, "meshInstances");
+    __publicField$1(this, "meshTransparent");
+    __publicField$1(this, "rawG3d");
+    __publicField$1(this, "MATRIX_SIZE", 16);
+    __publicField$1(this, "COLOR_SIZE", 4);
+    __publicField$1(this, "POSITION_SIZE", 3);
+    __publicField$1(this, "DEFAULT_COLOR", new Float32Array([1, 1, 1, 1]));
+    __publicField$1(this, "computeMeshInstances", () => {
       const result = [];
       for (let i = 0; i < this.instanceMeshes.length; i++) {
         const mesh = this.instanceMeshes[i];
@@ -28309,24 +28314,24 @@ class G3d {
       }
       return result;
     });
-    __publicField(this, "getVertexCount", () => this.positions.length / this.POSITION_SIZE);
-    __publicField(this, "getMeshCount", () => this.meshSubmeshes.length);
-    __publicField(this, "getInstanceCount", () => this.instanceMeshes.length);
-    __publicField(this, "getMaterialCount", () => this.materialColors.length / this.COLOR_SIZE);
+    __publicField$1(this, "getVertexCount", () => this.positions.length / this.POSITION_SIZE);
+    __publicField$1(this, "getMeshCount", () => this.meshSubmeshes.length);
+    __publicField$1(this, "getInstanceCount", () => this.instanceMeshes.length);
+    __publicField$1(this, "getMaterialCount", () => this.materialColors.length / this.COLOR_SIZE);
     var _a2, _b, _c, _d, _e, _f, _g, _h, _i, _j;
     this.rawG3d = g3d;
-    this.positions = (_a2 = g3d.findAttribute(VimAttributes.positions)) == null ? void 0 : _a2.data;
-    const tmp2 = (_b = g3d.findAttribute(VimAttributes.indices)) == null ? void 0 : _b.data;
+    this.positions = (_a2 = g3d.findAttribute(VimAttributes$1.positions)) == null ? void 0 : _a2.data;
+    const tmp2 = (_b = g3d.findAttribute(VimAttributes$1.indices)) == null ? void 0 : _b.data;
     if (!tmp2)
       throw new Error("No Index Buffer Found");
     this.indices = new Uint32Array(tmp2.buffer, tmp2.byteOffset, tmp2.length);
-    this.meshSubmeshes = (_c = g3d.findAttribute(VimAttributes.meshSubmeshes)) == null ? void 0 : _c.data;
-    this.submeshIndexOffset = (_d = g3d.findAttribute(VimAttributes.submeshIndexOffsets)) == null ? void 0 : _d.data;
-    this.submeshMaterial = (_e = g3d.findAttribute(VimAttributes.submeshMaterials)) == null ? void 0 : _e.data;
-    this.materialColors = (_f = g3d.findAttribute(VimAttributes.materialColors)) == null ? void 0 : _f.data;
-    this.instanceMeshes = (_g = g3d.findAttribute(VimAttributes.instanceMeshes)) == null ? void 0 : _g.data;
-    this.instanceTransforms = (_h = g3d.findAttribute(VimAttributes.instanceTransforms)) == null ? void 0 : _h.data;
-    this.instanceFlags = (_j = (_i = g3d.findAttribute(VimAttributes.instanceFlags)) == null ? void 0 : _i.data) != null ? _j : new Uint16Array(this.instanceMeshes.length);
+    this.meshSubmeshes = (_c = g3d.findAttribute(VimAttributes$1.meshSubmeshes)) == null ? void 0 : _c.data;
+    this.submeshIndexOffset = (_d = g3d.findAttribute(VimAttributes$1.submeshIndexOffsets)) == null ? void 0 : _d.data;
+    this.submeshMaterial = (_e = g3d.findAttribute(VimAttributes$1.submeshMaterials)) == null ? void 0 : _e.data;
+    this.materialColors = (_f = g3d.findAttribute(VimAttributes$1.materialColors)) == null ? void 0 : _f.data;
+    this.instanceMeshes = (_g = g3d.findAttribute(VimAttributes$1.instanceMeshes)) == null ? void 0 : _g.data;
+    this.instanceTransforms = (_h = g3d.findAttribute(VimAttributes$1.instanceTransforms)) == null ? void 0 : _h.data;
+    this.instanceFlags = (_j = (_i = g3d.findAttribute(VimAttributes$1.instanceFlags)) == null ? void 0 : _i.data) != null ? _j : new Uint16Array(this.instanceMeshes.length);
     this.meshVertexOffsets = this.computeMeshVertexOffsets();
     this.rebaseIndices();
     this.meshInstances = this.computeMeshInstances();
@@ -28545,17 +28550,31 @@ const objectModel = {
     columns: {
       name: "string:Name"
     }
+  },
+  workset: {
+    table: "Vim.Workset",
+    index: "index:Vim.Workset:Workset",
+    columns: {
+      name: "string:Name"
+    }
+  },
+  document: {
+    table: "Vim.BimDocument",
+    index: "index:Vim.BimDocument:BimDocument",
+    columns: {
+      name: "string:Name"
+    }
   }
 };
 class Document {
   constructor(g3d, entities, strings, instanceToElement, elementToInstances, elementIds, elementIdToElements) {
-    __publicField(this, "g3d");
-    __publicField(this, "_entities");
-    __publicField(this, "_strings");
-    __publicField(this, "_instanceToElement");
-    __publicField(this, "_elementToInstances");
-    __publicField(this, "_elementIds");
-    __publicField(this, "_elementIdToElements");
+    __publicField$1(this, "g3d");
+    __publicField$1(this, "_entities");
+    __publicField$1(this, "_strings");
+    __publicField$1(this, "_instanceToElement");
+    __publicField$1(this, "_elementToInstances");
+    __publicField$1(this, "_elementIds");
+    __publicField$1(this, "_elementIdToElements");
     this.g3d = g3d;
     this._entities = entities;
     this._strings = strings;
@@ -28670,29 +28689,43 @@ class Document {
     return this._strings[index];
   }
   async getElementsSummary(elements) {
-    const set2 = elements ? new Set(elements) : void 0;
+    const set = elements ? new Set(elements) : void 0;
     const elementTable = await this._entities.getBfast(objectModel.element.table);
     const elementNameArray = await elementTable.getArray(objectModel.element.columns.name);
     const elementIdArray = await elementTable.getArray(objectModel.element.columns.id);
+    const getElementName = (element) => this._strings[elementNameArray[element]];
     const elementCategoryArray = await elementTable.getArray(objectModel.category.index);
     const categoryTable = await this._entities.getBfast(objectModel.category.table);
     const categoryNameArray = await categoryTable.getArray(objectModel.category.columns.name);
-    const familyNameArray = await elementTable.getArray(objectModel.element.columns.familyName);
+    const getCategory = (element) => this._strings[categoryNameArray[elementCategoryArray[element]]];
     const familyInstanceTable = await this._entities.getBfast(objectModel.familyInstance.table);
-    const familyInstanceElement = await familyInstanceTable.getArray(objectModel.element.index);
+    const familyNameArray = await elementTable.getArray(objectModel.element.columns.familyName);
+    const getFamilyName = (element) => this._strings[familyNameArray[element]];
     const familyInstanceFamilyType = await familyInstanceTable.getArray(objectModel.familyType.index);
     const familyTypeTable = await this._entities.getBfast(objectModel.familyType.table);
     const familyTypeElementArray = await familyTypeTable.getArray(objectModel.element.index);
+    const getFamilyTypeName = (family) => this._strings[elementNameArray[familyTypeElementArray[familyInstanceFamilyType[family]]]];
+    const elementWorksetArray = await elementTable.getArray(objectModel.workset.index);
+    const worksetTable = await this._entities.getBfast(objectModel.workset.table);
+    const worksetNameArray = await worksetTable.getArray(objectModel.workset.columns.name);
+    const getWorkset = (element) => this._strings[worksetNameArray[elementWorksetArray[element]]];
+    const elementDocumentArray = await elementTable.getArray(objectModel.document.index);
+    const documentTable = await this._entities.getBfast(objectModel.document.table);
+    const documentNameArray = await documentTable.getArray(objectModel.document.columns.name);
+    const getDocument = (element) => this._strings[documentNameArray[elementDocumentArray[element]]];
+    const familyInstanceElement = await familyInstanceTable.getArray(objectModel.element.index);
     const summary = [];
     familyInstanceElement.forEach((e, f) => {
-      if (!set2 || set2.has(e)) {
+      if (!set || set.has(e)) {
         summary.push({
           element: e,
           id: elementIdArray[e],
-          name: this._strings[elementNameArray[e]],
-          categoryName: this._strings[categoryNameArray[elementCategoryArray[e]]],
-          familyName: this._strings[familyNameArray[e]],
-          familyTypeName: this._strings[elementNameArray[familyTypeElementArray[familyInstanceFamilyType[f]]]]
+          name: getElementName(e),
+          categoryName: getCategory(e),
+          familyName: getFamilyName(e),
+          familyTypeName: getFamilyTypeName(f),
+          workset: getWorkset(e),
+          document: getDocument(e)
         });
       }
     });
@@ -28779,14 +28812,14 @@ class Document {
 }
 class VimMaterials {
   constructor(opaque, transparent, wireframe, isolation) {
-    __publicField(this, "opaque");
-    __publicField(this, "transparent");
-    __publicField(this, "wireframe");
-    __publicField(this, "isolation");
+    __publicField$1(this, "opaque");
+    __publicField$1(this, "transparent");
+    __publicField$1(this, "wireframe");
+    __publicField$1(this, "isolation");
     this.opaque = opaque != null ? opaque : createOpaque();
     this.transparent = transparent != null ? transparent : createTransparent();
     this.wireframe = wireframe != null ? wireframe : createWireframe();
-    this.isolation = isolation != null ? isolation : createIsolation();
+    this.isolation = isolation != null ? isolation : createIsolationMaterial();
   }
   applyWireframeSettings(color, opacity) {
     this.wireframe.color = color;
@@ -28819,12 +28852,6 @@ function createTransparent() {
   const mat = createBase();
   mat.transparent = true;
   patchBaseMaterial(mat);
-  return mat;
-}
-function createIsolation() {
-  const mat = createBase();
-  mat.transparent = true;
-  patchIsolationMaterial(mat);
   return mat;
 }
 function createWireframe() {
@@ -28909,104 +28936,131 @@ function patchBaseMaterial(material) {
         `);
   };
 }
-function patchIsolationMaterial(material) {
-  material.onBeforeCompile = (shader) => {
-    material.userData.shader = shader;
-    shader.vertexShader = shader.vertexShader.replace("#include <color_pars_vertex>", `
-        #include <color_pars_vertex>
+function createIsolationMaterial() {
+  return new ShaderMaterial({
+    uniforms: {
+      opacity: { value: 0.1 },
+      fillColor: { value: new Vector3(0.5, 0.5, 0.5) }
+    },
+    vertexColors: true,
+    transparent: true,
+    clipping: true,
+    vertexShader: `
+
+      #include <common>
+      #include <logdepthbuf_pars_vertex>
+      #include <clipping_planes_pars_vertex>
         
-        // COLORING
+      // VISIBILITY
+      // Instance or vertex attribute to hide objects 
+      #ifdef USE_INSTANCING
+        attribute float ignoreInstance;
+      #else
+        attribute float ignoreVertex;
+      #endif
 
-        // attribute for color override
-        // merged meshes use it as vertex attribute
-        // instanced meshes use it as an instance attribute
-        attribute float colored;
+      // Passed to fragment to discard them
+      varying float vIgnore;
+      varying vec3 vPosition;
 
-        // There seems to be an issue where setting mehs.instanceColor
-        // doesn't properly set USE_INSTANCING_COLOR
-        // so we always use it as a fix
-        #ifndef USE_INSTANCING_COLOR
-        attribute vec3 instanceColor;
-        #endif
 
-        // Passed to fragment to ignore phong model
-        varying float vColored;
-        
+      // COLORING
+      varying vec3 vColor;
+
+      // attribute for color override
+      // merged meshes use it as vertex attribute
+      // instanced meshes use it as an instance attribute
+      attribute float colored;
+
+      // There seems to be an issue where setting mehs.instanceColor
+      // doesn't properly set USE_INSTANCING_COLOR
+      // so we always use it as a fix
+      #ifndef USE_INSTANCING_COLOR
+      attribute vec3 instanceColor;
+      #endif
+
+      void main() {
+        #include <begin_vertex>
+        #include <project_vertex>
+        #include <clipping_planes_vertex>
+        #include <logdepthbuf_vertex>
+
         // VISIBILITY
-
-        // Instance or vertex attribute to hide objects 
+        // Set frag ignore from instance or vertex attribute
         #ifdef USE_INSTANCING
-          attribute float ignoreInstance;
+          vIgnore = ignoreInstance;
         #else
-          attribute float ignoreVertex;
+          vIgnore = ignoreVertex;
         #endif
 
-        // Passed to fragment to discard them
-        varying float vIgnore;
+        // COLORING
+        vColor = color.xyz;
 
-        `).replace("#include <color_vertex>", `
-          // COLORING
-          vColor = color;
-          vColored = colored;
-
-          // colored == 1 -> instance color
-          // colored == 0 -> vertex color
-          #ifdef USE_INSTANCING
-            vColor.xyz = colored * instanceColor.xyz + (1.0f - colored) * color.xyz;
-          #endif
+        // colored == 1 -> instance color
+        // colored == 0 -> vertex color
+        #ifdef USE_INSTANCING
+          vColor.xyz = colored * instanceColor.xyz + (1.0f - colored) * color.xyz;
+        #endif
 
 
-          // VISIBILITY
-          // Set frag ignore from instance or vertex attribute
-          #ifdef USE_INSTANCING
-            vIgnore = ignoreInstance;
-          #else
-            vIgnore = ignoreVertex;
-          #endif
-        `).replace("#include <logdepthbuf_vertex>", `
         // ORDERING
         if(vIgnore > 0.0f){
           gl_Position.z = 1.0f;
         }else{
           gl_Position.z = -1.0f;
         }
-      `);
-    shader.fragmentShader = shader.fragmentShader.replace("#include <clipping_planes_pars_fragment>", `
-        #include <clipping_planes_pars_fragment>
-        varying float vIgnore;
-        varying float vColored;
-        `).replace("#include <output_fragment>", `
-        if (vIgnore > 0.0f){
-          gl_FragColor = vec4(0.25f,0.25f,0.25f, 0.1f);
-        }
-        else{
-          float d = length(outgoingLight);
-          gl_FragColor = vec4(vColored * vColor.xyz * d + (1.0f - vColored) * outgoingLight.xyz, 1.0f);
-        }
         
-        `);
-  };
+        // LIGHTING
+        vPosition = vec3(mvPosition ) / mvPosition .w;
+      }
+      `,
+    fragmentShader: `
+      #include <clipping_planes_pars_fragment>
+      varying float vIgnore;
+      uniform float opacity;
+      uniform vec3 fillColor;
+      varying vec3 vPosition;
+      varying vec3 vColor;
+
+      void main() {
+        #include <clipping_planes_fragment>
+
+        if (vIgnore > 0.0f){
+          gl_FragColor = vec4(fillColor, opacity);
+        }
+        else{ 
+          gl_FragColor = vec4(vColor.x, vColor.y, vColor.z, 1.0f);
+
+          // LIGHTING
+          vec3 normal = normalize( cross(dFdx(vPosition), dFdy(vPosition)) );
+          float light = dot(normal, normalize(vec3(1.4142f, 1.732f, 2.2360f)));
+          light = 0.5 + (light *0.5);
+          gl_FragColor.xyz *= light;
+        }
+      }
+      `
+  });
 }
 class MeshBuilder {
   constructor(materials) {
-    __publicField(this, "materials");
+    __publicField$1(this, "materials");
     this.materials = materials != null ? materials : new VimMaterials();
   }
   createInstancedMeshes(g3d, transparency2, instances) {
     const result = [];
-    const set2 = instances ? new Set(instances) : void 0;
+    const set = instances ? new Set(instances) : void 0;
     for (let mesh = 0; mesh < g3d.getMeshCount(); mesh++) {
       let meshInstances = g3d.meshInstances[mesh];
       if (!meshInstances)
         continue;
-      meshInstances = set2 ? meshInstances.filter((i) => set2.has(i)) : meshInstances.filter((i) => (g3d.instanceFlags[i] & 1) === 0);
+      meshInstances = set ? meshInstances.filter((i) => set.has(i)) : meshInstances.filter((i) => (g3d.instanceFlags[i] & 1) === 0);
       if (meshInstances.length <= 1)
         continue;
-      if (!Transparency.match(transparency2, g3d.meshTransparent[mesh])) {
+      if (!Transparency$1.match(transparency2, g3d.meshTransparent[mesh])) {
         continue;
       }
-      const useAlpha = Transparency.requiresAlpha(transparency2) && g3d.meshTransparent[mesh];
-      const geometry = Geometry.createGeometryFromMesh(g3d, mesh, useAlpha);
+      const useAlpha = Transparency$1.requiresAlpha(transparency2) && g3d.meshTransparent[mesh];
+      const geometry = Geometry$1.createGeometryFromMesh(g3d, mesh, useAlpha);
       const resultMesh = this.createInstancedMesh(geometry, g3d, meshInstances, useAlpha);
       result.push(resultMesh);
     }
@@ -29016,16 +29070,16 @@ class MeshBuilder {
     const material = useAlpha ? this.materials.transparent : this.materials.opaque;
     const result = new InstancedMesh(geometry, material, instances.length);
     for (let i = 0; i < instances.length; i++) {
-      const matrix = Geometry.getInstanceMatrix(g3d, instances[i]);
+      const matrix = Geometry$1.getInstanceMatrix(g3d, instances[i]);
       result.setMatrixAt(i, matrix);
     }
     result.userData.instances = instances;
     return result;
   }
   createMergedMesh(g3d, transparency2, instances) {
-    const merger = instances ? Geometry.Merger.createFromInstances(g3d, instances, transparency2) : Geometry.Merger.createFromUniqueMeshes(g3d, transparency2);
+    const merger = instances ? Geometry$1.Merger.createFromInstances(g3d, instances, transparency2) : Geometry$1.Merger.createFromUniqueMeshes(g3d, transparency2);
     const geometry = merger.toBufferGeometry();
-    const material = Transparency.requiresAlpha(transparency2) ? this.materials.transparent : this.materials.opaque;
+    const material = Transparency$1.requiresAlpha(transparency2) ? this.materials.transparent : this.materials.opaque;
     const mesh = new Mesh(geometry, material);
     mesh.userData.merged = true;
     mesh.userData.instances = merger.getInstances();
@@ -29033,14 +29087,14 @@ class MeshBuilder {
     return mesh;
   }
   createWireframe(g3d, instances) {
-    const geometry = Geometry.createGeometryFromInstances(g3d, instances);
+    const geometry = Geometry$1.createGeometryFromInstances(g3d, instances);
     const wireframe = new WireframeGeometry(geometry);
     return new LineSegments(wireframe, this.materials.wireframe);
   }
 }
 class SceneBuilder {
   constructor(meshBuilder) {
-    __publicField(this, "meshBuilder");
+    __publicField$1(this, "meshBuilder");
     this.meshBuilder = meshBuilder != null ? meshBuilder : new MeshBuilder();
   }
   createFromG3d(g3d, transparency2 = "all", instances = void 0) {
@@ -29051,7 +29105,7 @@ class SceneBuilder {
       const opaque = this.createFromMergeableMeshes(g3d, transparency2 === "allAsOpaque" ? "allAsOpaque" : "opaqueOnly", instances);
       scene.merge(opaque);
     }
-    if (Transparency.requiresAlpha(transparency2)) {
+    if (Transparency$1.requiresAlpha(transparency2)) {
       const transparent = this.createFromMergeableMeshes(g3d, "transparentOnly", instances);
       scene.merge(transparent);
     }
@@ -29072,13 +29126,13 @@ class SceneBuilder {
 }
 class Object$1 {
   constructor(vim, element, instances, meshes) {
-    __publicField(this, "vim");
-    __publicField(this, "element");
-    __publicField(this, "instances");
-    __publicField(this, "_color");
-    __publicField(this, "_visible", true);
-    __publicField(this, "_boundingBox");
-    __publicField(this, "_meshes");
+    __publicField$1(this, "vim");
+    __publicField$1(this, "element");
+    __publicField$1(this, "instances");
+    __publicField$1(this, "_color");
+    __publicField$1(this, "_visible", true);
+    __publicField$1(this, "_boundingBox");
+    __publicField$1(this, "_meshes");
     this.vim = vim;
     this.element = element;
     this.instances = instances;
@@ -29118,7 +29172,7 @@ class Object$1 {
       return;
     if (this._boundingBox)
       return this._boundingBox;
-    const geometry = Geometry.createGeometryFromInstances(this.vim.document.g3d, this.instances);
+    const geometry = Geometry$1.createGeometryFromInstances(this.vim.document.g3d, this.instances);
     geometry.applyMatrix4(this.vim.getMatrix());
     geometry.computeBoundingBox();
     this._boundingBox = (_a2 = geometry.boundingBox) != null ? _a2 : void 0;
@@ -29143,7 +29197,7 @@ class Object$1 {
   createGeometry() {
     if (!this.instances)
       return;
-    const geometry = Geometry.createGeometryFromInstances(this.vim.document.g3d, this.instances);
+    const geometry = Geometry$1.createGeometryFromInstances(this.vim.document.g3d, this.instances);
     geometry.applyMatrix4(this.vim.getMatrix());
     return geometry;
   }
@@ -29295,11 +29349,11 @@ class Object$1 {
 }
 class Vim {
   constructor(vim, scene, settings) {
-    __publicField(this, "document");
-    __publicField(this, "index", -1);
-    __publicField(this, "settings");
-    __publicField(this, "scene");
-    __publicField(this, "_elementToObject", /* @__PURE__ */ new Map());
+    __publicField$1(this, "document");
+    __publicField$1(this, "index", -1);
+    __publicField$1(this, "settings");
+    __publicField$1(this, "scene");
+    __publicField$1(this, "_elementToObject", /* @__PURE__ */ new Map());
     this.document = vim;
     this.scene = scene;
     this.scene.setVim(this);
@@ -29397,8 +29451,8 @@ class Vim {
 }
 class Loader {
   constructor(materials) {
-    __publicField(this, "sceneBuilder");
-    __publicField(this, "meshBuilder");
+    __publicField$1(this, "sceneBuilder");
+    __publicField$1(this, "meshBuilder");
     this.meshBuilder = new MeshBuilder(materials);
     this.sceneBuilder = new SceneBuilder(this.meshBuilder);
   }
@@ -29415,10 +29469,10 @@ class Loader {
 }
 class RemoteValue {
   constructor(getter, label) {
-    __publicField(this, "label");
-    __publicField(this, "_getter");
-    __publicField(this, "_value");
-    __publicField(this, "_request");
+    __publicField$1(this, "label");
+    __publicField$1(this, "_getter");
+    __publicField$1(this, "_value");
+    __publicField$1(this, "_request");
     this._getter = getter;
     this.label = label != null ? label : "";
   }
@@ -29439,22 +29493,22 @@ class RemoteValue {
 }
 class Request {
   constructor(field) {
-    __publicField(this, "status", "active");
-    __publicField(this, "field");
-    __publicField(this, "loaded", 0);
-    __publicField(this, "total", 0);
-    __publicField(this, "lengthComputable", true);
+    __publicField$1(this, "status", "active");
+    __publicField$1(this, "field");
+    __publicField$1(this, "loaded", 0);
+    __publicField$1(this, "total", 0);
+    __publicField$1(this, "lengthComputable", true);
     this.field = field;
   }
 }
 class RequestLogger {
   constructor(source) {
-    __publicField(this, "source");
-    __publicField(this, "all", /* @__PURE__ */ new Map());
-    __publicField(this, "lastUpdate", 0);
-    __publicField(this, "delay", 500);
-    __publicField(this, "sleeping", false);
-    __publicField(this, "onUpdate");
+    __publicField$1(this, "source");
+    __publicField$1(this, "all", /* @__PURE__ */ new Map());
+    __publicField$1(this, "lastUpdate", 0);
+    __publicField$1(this, "delay", 500);
+    __publicField$1(this, "sleeping", false);
+    __publicField$1(this, "onUpdate");
     this.source = source;
   }
   get loaded() {
@@ -29514,14 +29568,14 @@ class RequestLogger {
 }
 class RetryRequest {
   constructor(url2, range2, responseType) {
-    __publicField(this, "url");
-    __publicField(this, "range");
-    __publicField(this, "responseType");
-    __publicField(this, "msg");
-    __publicField(this, "xhr");
-    __publicField(this, "onLoad");
-    __publicField(this, "onError");
-    __publicField(this, "onProgress");
+    __publicField$1(this, "url");
+    __publicField$1(this, "range");
+    __publicField$1(this, "responseType");
+    __publicField$1(this, "msg");
+    __publicField$1(this, "xhr");
+    __publicField$1(this, "onLoad");
+    __publicField$1(this, "onError");
+    __publicField$1(this, "onProgress");
     this.url = url2;
     this.range = range2;
     this.responseType = responseType;
@@ -29554,12 +29608,12 @@ class RetryRequest {
 }
 class RemoteBuffer {
   constructor(url2, logger = new RequestLogger(url2)) {
-    __publicField(this, "url");
-    __publicField(this, "logger");
-    __publicField(this, "queue", []);
-    __publicField(this, "active", /* @__PURE__ */ new Set());
-    __publicField(this, "maxConcurency", 10);
-    __publicField(this, "encoded");
+    __publicField$1(this, "url");
+    __publicField$1(this, "logger");
+    __publicField$1(this, "queue", []);
+    __publicField$1(this, "active", /* @__PURE__ */ new Set());
+    __publicField$1(this, "maxConcurency", 10);
+    __publicField$1(this, "encoded");
     this.url = url2;
     this.logger = logger;
     this.encoded = new RemoteValue(() => this.requestEncoding());
@@ -29640,8 +29694,8 @@ class RemoteBuffer {
 }
 class Range {
   constructor(start, end) {
-    __publicField(this, "start");
-    __publicField(this, "end");
+    __publicField$1(this, "start");
+    __publicField$1(this, "end");
     this.start = start;
     this.end = end;
   }
@@ -29687,10 +29741,10 @@ function typeConstructor(type) {
 }
 class Header {
   constructor(magic, dataStart, dataEnd, numArrays) {
-    __publicField(this, "magic");
-    __publicField(this, "dataStart");
-    __publicField(this, "dataEnd");
-    __publicField(this, "numArrays");
+    __publicField$1(this, "magic");
+    __publicField$1(this, "dataStart");
+    __publicField$1(this, "dataEnd");
+    __publicField$1(this, "numArrays");
     if (magic !== 49061) {
       throw new Error("Invalid Bfast. Invalid Magic number");
     }
@@ -29729,12 +29783,12 @@ class Header {
 }
 class BFast {
   constructor(source, offset = 0, name = "") {
-    __publicField(this, "source");
-    __publicField(this, "offset");
-    __publicField(this, "name");
-    __publicField(this, "_header");
-    __publicField(this, "_ranges");
-    __publicField(this, "_children");
+    __publicField$1(this, "source");
+    __publicField$1(this, "offset");
+    __publicField$1(this, "name");
+    __publicField$1(this, "_header");
+    __publicField$1(this, "_ranges");
+    __publicField$1(this, "_children");
     this.source = source;
     this.offset = offset;
     this.name = name;
@@ -29900,17 +29954,17 @@ class BFast {
 }
 class Section {
   constructor(renderer, materials) {
-    __publicField(this, "_renderer");
-    __publicField(this, "_materials");
-    __publicField(this, "_active");
-    __publicField(this, "box", new Box3(new Vector3(-100, -100, -100), new Vector3(100, 100, 100)));
-    __publicField(this, "maxX", new Plane(new Vector3(-1, 0, 0)));
-    __publicField(this, "minX", new Plane(new Vector3(1, 0, 0)));
-    __publicField(this, "maxY", new Plane(new Vector3(0, -1, 0)));
-    __publicField(this, "minY", new Plane(new Vector3(0, 1, 0)));
-    __publicField(this, "maxZ", new Plane(new Vector3(0, 0, -1)));
-    __publicField(this, "minZ", new Plane(new Vector3(0, 0, 1)));
-    __publicField(this, "planes", [
+    __publicField$1(this, "_renderer");
+    __publicField$1(this, "_materials");
+    __publicField$1(this, "_active");
+    __publicField$1(this, "box", new Box3(new Vector3(-100, -100, -100), new Vector3(100, 100, 100)));
+    __publicField$1(this, "maxX", new Plane(new Vector3(-1, 0, 0)));
+    __publicField$1(this, "minX", new Plane(new Vector3(1, 0, 0)));
+    __publicField$1(this, "maxY", new Plane(new Vector3(0, -1, 0)));
+    __publicField$1(this, "minY", new Plane(new Vector3(0, 1, 0)));
+    __publicField$1(this, "maxZ", new Plane(new Vector3(0, 0, -1)));
+    __publicField$1(this, "minZ", new Plane(new Vector3(0, 0, 1)));
+    __publicField$1(this, "planes", [
       this.maxX,
       this.minX,
       this.maxY,
@@ -29945,12 +29999,12 @@ class Section {
 }
 class Renderer {
   constructor(scene, viewport, materials) {
-    __publicField(this, "renderer");
-    __publicField(this, "viewport");
-    __publicField(this, "scene");
-    __publicField(this, "section");
-    __publicField(this, "materials");
-    __publicField(this, "fitViewport", () => {
+    __publicField$1(this, "renderer");
+    __publicField$1(this, "viewport");
+    __publicField$1(this, "scene");
+    __publicField$1(this, "section");
+    __publicField$1(this, "materials");
+    __publicField$1(this, "fitViewport", () => {
       const [width, height] = this.viewport.getParentSize();
       this.renderer.setPixelRatio(window.devicePixelRatio);
       this.renderer.setSize(width, height);
@@ -30000,23 +30054,23 @@ class Renderer {
 }
 class Viewer {
   constructor(options) {
-    __publicField(this, "settings");
-    __publicField(this, "renderer");
-    __publicField(this, "viewport");
-    __publicField(this, "selection");
-    __publicField(this, "inputs");
-    __publicField(this, "raycaster");
-    __publicField(this, "gizmoSection");
-    __publicField(this, "gizmoMeasure");
-    __publicField(this, "_environment");
-    __publicField(this, "_camera");
-    __publicField(this, "_loader");
-    __publicField(this, "_clock", new Clock());
-    __publicField(this, "_gizmoAxes");
-    __publicField(this, "_materials");
-    __publicField(this, "_vims", []);
-    __publicField(this, "_disposed", false);
-    __publicField(this, "_onMouseClick");
+    __publicField$1(this, "settings");
+    __publicField$1(this, "renderer");
+    __publicField$1(this, "viewport");
+    __publicField$1(this, "selection");
+    __publicField$1(this, "inputs");
+    __publicField$1(this, "raycaster");
+    __publicField$1(this, "gizmoSection");
+    __publicField$1(this, "gizmoMeasure");
+    __publicField$1(this, "_environment");
+    __publicField$1(this, "_camera");
+    __publicField$1(this, "_loader");
+    __publicField$1(this, "_clock", new Clock());
+    __publicField$1(this, "_gizmoAxes");
+    __publicField$1(this, "_materials");
+    __publicField$1(this, "_vims", []);
+    __publicField$1(this, "_disposed", false);
+    __publicField$1(this, "_onMouseClick");
     var _a2;
     this.settings = new ViewerSettings(options);
     const materials = new VimMaterials();
@@ -37661,7 +37715,1218 @@ var m = reactDom.exports;
   createRoot = m.createRoot;
   m.hydrateRoot;
 }
-var style$1 = /* @__PURE__ */ (() => '/*\n! tailwindcss v3.1.6 | MIT License | https://tailwindcss.com\n*//*\n1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)\n2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)\n*/\n\n*,\n::before,\n::after {\n  box-sizing: border-box; /* 1 */\n  border-width: 0; /* 2 */\n  border-style: solid; /* 2 */\n  border-color: currentColor; /* 2 */\n}\n\n::before,\n::after {\n  --tw-content: \'\';\n}\n\n/*\n1. Use a consistent sensible line-height in all browsers.\n2. Prevent adjustments of font size after orientation changes in iOS.\n3. Use a more readable tab size.\n4. Use the user\'s configured `sans` font-family by default.\n*/\n\nhtml {\n  line-height: 1.5; /* 1 */\n  -webkit-text-size-adjust: 100%; /* 2 */\n  -moz-tab-size: 4; /* 3 */\n  -o-tab-size: 4;\n     tab-size: 4; /* 3 */\n  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */\n}\n\n/*\n1. Remove the margin in all browsers.\n2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.\n*/\n\nbody {\n  margin: 0; /* 1 */\n  line-height: inherit; /* 2 */\n}\n\n/*\n1. Add the correct height in Firefox.\n2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)\n3. Ensure horizontal rules are visible by default.\n*/\n\nhr {\n  height: 0; /* 1 */\n  color: inherit; /* 2 */\n  border-top-width: 1px; /* 3 */\n}\n\n/*\nAdd the correct text decoration in Chrome, Edge, and Safari.\n*/\n\nabbr:where([title]) {\n  -webkit-text-decoration: underline dotted;\n          text-decoration: underline dotted;\n}\n\n/*\nRemove the default font size and weight for headings.\n*/\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-size: inherit;\n  font-weight: inherit;\n}\n\n/*\nReset links to optimize for opt-in styling instead of opt-out.\n*/\n\na {\n  color: inherit;\n  text-decoration: inherit;\n}\n\n/*\nAdd the correct font weight in Edge and Safari.\n*/\n\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/*\n1. Use the user\'s configured `mono` font family by default.\n2. Correct the odd `em` font sizing in all browsers.\n*/\n\ncode,\nkbd,\nsamp,\npre {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; /* 1 */\n  font-size: 1em; /* 2 */\n}\n\n/*\nAdd the correct font size in all browsers.\n*/\n\nsmall {\n  font-size: 80%;\n}\n\n/*\nPrevent `sub` and `sup` elements from affecting the line height in all browsers.\n*/\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/*\n1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)\n2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)\n3. Remove gaps between table borders by default.\n*/\n\ntable {\n  text-indent: 0; /* 1 */\n  border-color: inherit; /* 2 */\n  border-collapse: collapse; /* 3 */\n}\n\n/*\n1. Change the font styles in all browsers.\n2. Remove the margin in Firefox and Safari.\n3. Remove default padding in all browsers.\n*/\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit; /* 1 */\n  font-size: 100%; /* 1 */\n  font-weight: inherit; /* 1 */\n  line-height: inherit; /* 1 */\n  color: inherit; /* 1 */\n  margin: 0; /* 2 */\n  padding: 0; /* 3 */\n}\n\n/*\nRemove the inheritance of text transform in Edge and Firefox.\n*/\n\nbutton,\nselect {\n  text-transform: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Remove default button styles.\n*/\n\nbutton,\n[type=\'button\'],\n[type=\'reset\'],\n[type=\'submit\'] {\n  -webkit-appearance: button; /* 1 */\n  background-color: transparent; /* 2 */\n  background-image: none; /* 2 */\n}\n\n/*\nUse the modern Firefox focus style for all focusable elements.\n*/\n\n:-moz-focusring {\n  outline: auto;\n}\n\n/*\nRemove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)\n*/\n\n:-moz-ui-invalid {\n  box-shadow: none;\n}\n\n/*\nAdd the correct vertical alignment in Chrome and Firefox.\n*/\n\nprogress {\n  vertical-align: baseline;\n}\n\n/*\nCorrect the cursor style of increment and decrement buttons in Safari.\n*/\n\n::-webkit-inner-spin-button,\n::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/*\n1. Correct the odd appearance in Chrome and Safari.\n2. Correct the outline style in Safari.\n*/\n\n[type=\'search\'] {\n  -webkit-appearance: textfield; /* 1 */\n  outline-offset: -2px; /* 2 */\n}\n\n/*\nRemove the inner padding in Chrome and Safari on macOS.\n*/\n\n::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Change font properties to `inherit` in Safari.\n*/\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button; /* 1 */\n  font: inherit; /* 2 */\n}\n\n/*\nAdd the correct display in Chrome and Safari.\n*/\n\nsummary {\n  display: list-item;\n}\n\n/*\nRemoves the default spacing and border for appropriate elements.\n*/\n\nblockquote,\ndl,\ndd,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\nhr,\nfigure,\np,\npre {\n  margin: 0;\n}\n\nfieldset {\n  margin: 0;\n  padding: 0;\n}\n\nlegend {\n  padding: 0;\n}\n\nol,\nul,\nmenu {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n\n/*\nPrevent resizing textareas horizontally by default.\n*/\n\ntextarea {\n  resize: vertical;\n}\n\n/*\n1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)\n2. Set the default placeholder color to the user\'s configured gray 400 color.\n*/\n\ninput::-moz-placeholder, textarea::-moz-placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\ninput::placeholder,\ntextarea::placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\n/*\nSet the default cursor for buttons.\n*/\n\nbutton,\n[role="button"] {\n  cursor: pointer;\n}\n\n/*\nMake sure disabled buttons don\'t get the pointer cursor.\n*/\n:disabled {\n  cursor: default;\n}\n\n/*\n1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)\n2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)\n   This can trigger a poorly considered lint error in some tools but is included by design.\n*/\n\nimg,\nsvg,\nvideo,\ncanvas,\naudio,\niframe,\nembed,\nobject {\n  display: block; /* 1 */\n  vertical-align: middle; /* 2 */\n}\n\n/*\nConstrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)\n*/\n\nimg,\nvideo {\n  max-width: 100%;\n  height: auto;\n}\n\n*, ::before, ::after {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\n\n::-webkit-backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\n\n::backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\r\n.container {\n  width: 100%;\n}\r\n@media (min-width: 640px) {\n\n  .container {\n    max-width: 640px;\n  }\n}\r\n@media (min-width: 768px) {\n\n  .container {\n    max-width: 768px;\n  }\n}\r\n@media (min-width: 1024px) {\n\n  .container {\n    max-width: 1024px;\n  }\n}\r\n@media (min-width: 1280px) {\n\n  .container {\n    max-width: 1280px;\n  }\n}\r\n@media (min-width: 1536px) {\n\n  .container {\n    max-width: 1536px;\n  }\n}\r\n.pointer-events-none {\n  pointer-events: none;\n}\r\n.pointer-events-auto {\n  pointer-events: auto;\n}\r\n.visible {\n  visibility: visible;\n}\r\n.fixed {\n  position: fixed;\n}\r\n.absolute {\n  position: absolute;\n}\r\n.left-0 {\n  left: 0px;\n}\r\n.top-0 {\n  top: 0px;\n}\r\n.bottom-16 {\n  bottom: 4rem;\n}\r\n.right-4 {\n  right: 1rem;\n}\r\n.bottom-0 {\n  bottom: 0px;\n}\r\n.right-0 {\n  right: 0px;\n}\r\n.top-2 {\n  top: 0.5rem;\n}\r\n.my-2 {\n  margin-top: 0.5rem;\n  margin-bottom: 0.5rem;\n}\r\n.mx-1 {\n  margin-left: 0.25rem;\n  margin-right: 0.25rem;\n}\r\n.mx-2 {\n  margin-left: 0.5rem;\n  margin-right: 0.5rem;\n}\r\n.my-0 {\n  margin-top: 0px;\n  margin-bottom: 0px;\n}\r\n.mb-6 {\n  margin-bottom: 1.5rem;\n}\r\n.mb-4 {\n  margin-bottom: 1rem;\n}\r\n.mr-auto {\n  margin-right: auto;\n}\r\n.mr-3 {\n  margin-right: 0.75rem;\n}\r\n.flex {\n  display: flex;\n}\r\n.inline-flex {\n  display: inline-flex;\n}\r\n.table {\n  display: table;\n}\r\n.h-full {\n  height: 100%;\n}\r\n.h-12 {\n  height: 3rem;\n}\r\n.h-8 {\n  height: 2rem;\n}\r\n.h-28 {\n  height: 7rem;\n}\r\n.w-full {\n  width: 100%;\n}\r\n.w-3\\/12 {\n  width: 25%;\n}\r\n.w-auto {\n  width: auto;\n}\r\n.w-1\\/2 {\n  width: 50%;\n}\r\n.w-12 {\n  width: 3rem;\n}\r\n.w-8 {\n  width: 2rem;\n}\r\n.rotate-180 {\n  --tw-rotate: 180deg;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\r\n.rotate-0 {\n  --tw-rotate: 0deg;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\r\n.transform {\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\r\n.flex-col {\n  flex-direction: column;\n}\r\n.items-center {\n  align-items: center;\n}\r\n.justify-end {\n  justify-content: flex-end;\n}\r\n.justify-center {\n  justify-content: center;\n}\r\n.justify-between {\n  justify-content: space-between;\n}\r\n.overflow-y-auto {\n  overflow-y: auto;\n}\r\n.rounded {\n  border-radius: 0.25rem;\n}\r\n.rounded-full {\n  border-radius: 9999px;\n}\r\n.rounded-t {\n  border-top-left-radius: 0.25rem;\n  border-top-right-radius: 0.25rem;\n}\r\n.rounded-t-md {\n  border-top-left-radius: 0.375rem;\n  border-top-right-radius: 0.375rem;\n}\r\n.rounded-b-md {\n  border-bottom-right-radius: 0.375rem;\n  border-bottom-left-radius: 0.375rem;\n}\r\n.border {\n  border-width: 1px;\n}\r\n.border-t {\n  border-top-width: 1px;\n}\r\n.border-l {\n  border-left-width: 1px;\n}\r\n.border-r {\n  border-right-width: 1px;\n}\r\n.border-b {\n  border-bottom-width: 1px;\n}\r\n.border-gray-light {\n  border-color: var(--c-light-gray);\n}\r\n.border-gray-lighter {\n  border-color: var(--c-lighter-gray);\n}\r\n.border-hover-t40 {\n  border-color: var(--c-hover-t40);\n}\r\n.bg-gray-lightest {\n  background-color: var(--c-lightest-gray);\n}\r\n.bg-gray-light {\n  background-color: var(--c-light-gray);\n}\r\n.bg-transparent {\n  background-color: transparent;\n}\r\n.bg-white {\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\n}\r\n.bg-primary-royal {\n  background-color: var(--c-primary-royal);\n}\r\n.bg-hover-t40 {\n  background-color: var(--c-hover-t40);\n}\r\n.p-6 {\n  padding: 1.5rem;\n}\r\n.p-2 {\n  padding: 0.5rem;\n}\r\n.p-1 {\n  padding: 0.25rem;\n}\r\n.py-1 {\n  padding-top: 0.25rem;\n  padding-bottom: 0.25rem;\n}\r\n.px-2 {\n  padding-left: 0.5rem;\n  padding-right: 0.5rem;\n}\r\n.py-2 {\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem;\n}\r\n.px-4 {\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\r\n.py-5 {\n  padding-top: 1.25rem;\n  padding-bottom: 1.25rem;\n}\r\n.px-12 {\n  padding-left: 3rem;\n  padding-right: 3rem;\n}\r\n.text-left {\n  text-align: left;\n}\r\n.text-xs {\n  font-size: 0.75rem;\n  line-height: 1rem;\n}\r\n.text-sm {\n  font-size: 0.875rem;\n  line-height: 1.25rem;\n}\r\n.font-bold {\n  font-weight: 700;\n}\r\n.uppercase {\n  text-transform: uppercase;\n}\r\n.text-gray-medium {\n  color: var(--c-medium-gray);\n}\r\n.text-gray-darker {\n  color: var(--c-darker-gray);\n}\r\n.text-gray {\n  color: var(--c-gray);\n}\r\n.text-primary {\n  color: var(--c-primary);\n}\r\n.text-white {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255 / var(--tw-text-opacity));\n}\r\n.opacity-75 {\n  opacity: 0.75;\n}\r\n.shadow-lg {\n  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);\n  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\r\n.filter {\n  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);\n}\r\n.transition-all {\n  transition-property: all;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\r\n\r\n:root {\r\n  --c-primary: #0590cc;\r\n  --c-primary-green: #7ebf50;\r\n  --c-primary-yellow: #ffb700;\r\n  --c-primary-pink: #d93393;\r\n  --c-primary-royal: #284ea2;\r\n  --c-primary-purple: #5e3c97;\r\n\r\n  --c-darkest-gray: #050c1a;\r\n  --c-darker-gray: #212329;\r\n  --c-dark-gray-warm: #3c3c3c;\r\n  --c-dark-gray-cool: #56585f;\r\n  --c-medium-gray: #8a8d95;\r\n  --c-gray: #b6b9bf;\r\n  --c-gray-divider: #e3e3e3;\r\n  --c-light-gray: #d1d3d8;\r\n  --c-lighter-gray: #f0efee;\r\n  --c-lightest-gray: #f6f6f6;\r\n\r\n  --c-secondary: #0076aa;\r\n  --c-secondary-green: #5e9f30;\r\n  --c-secondary-yellow: #eca500;\r\n  --c-secondary-pink: #b51873;\r\n  --c-secondary-royal: #103381;\r\n  --c-secondary-purple: #33004d;\r\n\r\n  --c-light-blue: #40a6de;\r\n  --c-light-green: #82de40;\r\n\r\n  --c-list-hover: #fff8e5;\r\n\r\n  --c-hover-t40: rgba(5, 12, 26, 0.4);\r\n\r\n  --c-white: #ffffff;\r\n}\r\n\r\nbody {\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n}\r\n.gizmo-axis-canvas {\r\n  top: 18px !important;\r\n  right: 26px !important;\r\n}\r\n.vim-loading-box {\r\n  width: -webkit-fit-content;\r\n  width: -moz-fit-content;\r\n  width: fit-content;\r\n  height: -webkit-fit-content;\r\n  height: -moz-fit-content;\r\n  height: fit-content;\r\n  padding: 10px;\r\n  border: 1px solid #e3e3e3;\r\n  border-radius: 3px;\r\n  background-color: #f6f6f6;\r\n\r\n  font-family: "Roboto", sans-serif;\r\n\r\n  /*Centers the box*/\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  transform: translate(-50%, -50%);\r\n}\r\n\r\n.vim-logo {\r\n  position: fixed;\r\n  top: 16px;\r\n  left: 16px;\r\n}\r\n\r\n.vim-logo img {\r\n  height: 48px;\r\n  width: 128px;\r\n}\r\n\r\n/*Makes full screen and remove scrollbars*/\r\nhtml,\r\nbody {\r\n  height: 100%;\r\n  margin: 0;\r\n  padding: 0;\r\n  overflow: hidden;\r\n  background: radial-gradient(circle at center, #f0f0ff, #999999);\r\n}\r\n\r\n.VimLoadingBox h1 {\r\n  color: #050c1a;\r\n}\r\n\r\n.vim-section {\r\n  position: fixed;\r\n  bottom: 0px;\r\n  right: 64px;\r\n  width: 64px;\r\n  pointer-events: all;\r\n}\r\n\r\n/* MENU */\r\n\r\n.vim-menu td {\r\n  pointer-events: all;\r\n}\r\n\r\n.vim-menu td.empty {\r\n  pointer-events: none;\r\n}\r\n\r\n.vim-menu table {\r\n  width: 64px;\r\n}\r\n\r\n.vim-menu button:focus {\r\n  outline: 0;\r\n}\r\n\r\n.vim-menu .iconButton {\r\n  color: var(--c-white);\r\n  border: none;\r\n  background-color: transparent;\r\n}\r\n.vim-menu .iconButton.active {\r\n  background-color: var(--c-primary-royal);\r\n}\r\n.vim-menu .iconButton img {\r\n  width: 42px;\r\n  height: 42px;\r\n}\r\n\r\n.vim-menu .iconButton:hover img {\r\n  transform: scale(1.1);\r\n}\r\n\r\n.vim-menu .iconButton:active img {\r\n  transform: scale(1.1);\r\n  filter: brightness(1.5);\r\n}\r\n\r\n.vim-menu .iconButton:disabled img {\r\n  filter: brightness(0.5);\r\n  transform: scale(1);\r\n}\r\n\r\n/* BIM Explorer - Main*/\r\n\r\n.submenu-item-active {\r\n  position: relative;\r\n}\r\n.submenu-item-active::before {\r\n  content: "";\r\n  display: block;\r\n  background-image: url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 256 256\'%3E%3Cpath fill=\'%230590cc\' d=\'M228.693 61.741c5.379-7.011 4.057-17.055-2.954-22.434-7.01-5.379-17.054-4.057-22.434 2.954l-.008.011L99.864 177.069l-39.607-47.203c-5.68-6.769-15.772-7.652-22.542-1.972s-7.652 15.772-1.972 22.542l52.416 62.467.006.007c.018.021.038.039.056.06.214.252.448.492.681.733.153.159.3.326.458.478s.331.291.497.437c.251.222.5.445.763.648l.062.053c.108.083.225.151.334.231.304.221.608.44.924.638.166.104.335.192.503.289.284.164.567.328.859.473.221.11.447.204.671.303.245.107.487.219.736.313.268.103.54.188.812.275.214.069.428.142.645.202.293.081.588.144.884.208.206.044.411.093.619.129.294.051.589.085.884.12.219.026.437.055.656.071.275.021.55.026.825.033.245.006.489.015.735.009.246-.005.491-.024.736-.042.274-.018.548-.036.821-.068.22-.026.437-.065.654-.101.293-.047.585-.094.876-.158.207-.045.41-.103.615-.157.292-.076.584-.152.873-.245.215-.069.425-.152.637-.23.267-.099.535-.196.798-.31.245-.105.483-.228.723-.346.219-.108.44-.211.656-.331.286-.158.562-.334.839-.511.163-.104.328-.199.488-.31.307-.211.603-.444.896-.678.106-.085.219-.157.324-.245.021-.018.039-.038.06-.056.253-.215.492-.449.733-.681.159-.153.326-.301.478-.458.152-.159.292-.332.438-.498.221-.25.444-.5.647-.761.017-.022.037-.041.054-.063L228.693 61.741Z\'/%3E%3C/svg%3E");\r\n  background-size: contain;\r\n  position: absolute;\r\n  left: 20px;\r\n  top: 12px;\r\n  width: 20px;\r\n  height: 17px;\r\n}\r\n.rct-tree-root > div > .rct-tree-items-container {\r\n  max-height: 380px;\r\n  overflow-y: auto;\r\n}\r\n.rct-tree-items-container li .rct-tree-item-title-container {\r\n  padding-top: 0.25rem;\r\n  padding-bottom: 0.25rem;\r\n}\r\n.rct-tree-items-container > li:nth-child(odd) {\r\n  background-color: var(--c-white);\r\n}\r\n.rct-tree-items-container > li:nth-child(even) {\r\n  background-color: var(--c-lightest-gray);\r\n}\r\n.vim-inspector-properties {\r\n  max-height: 500px;\r\n}\r\n.rct-tree-root-focus {\r\n  outline: none;\r\n}\r\n.rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-focused {\r\n  border: none;\r\n}\r\n.bim-panel-open {\r\n  margin-left: 25%;\r\n  max-width: 75%;\r\n  -o-object-fit: cover;\r\n     object-fit: cover;\r\n}\r\n.odd\\:bg-white:nth-child(odd) {\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\n}\r\n.hover\\:scale-110:hover {\n  --tw-scale-x: 1.1;\n  --tw-scale-y: 1.1;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\r\n.hover\\:bg-gray-lightest:hover {\n  background-color: var(--c-lightest-gray);\n}\r\n.hover\\:bg-hover-t40:hover {\n  background-color: var(--c-hover-t40);\n}\r\n.hover\\:bg-primary-royal:hover {\n  background-color: var(--c-primary-royal);\n}\r\n.disabled\\:opacity-50:disabled {\n  opacity: 0.5;\n}:root {\n  --rct-color-tree-bg: #f6f8fa;\n  --rct-color-tree-focus-outline: #0366d6;\n\n  --rct-color-focustree-item-selected-bg: #e8eaed;\n  --rct-color-focustree-item-selected-text: inherit;\n  --rct-color-focustree-item-focused-border: #0366d6;\n  --rct-color-focustree-item-draggingover-bg: #ebf0f4;\n  --rct-color-focustree-item-draggingover-color: inherit;\n\n  --rct-color-nonfocustree-item-selected-bg: #e8eaed;\n  --rct-color-nonfocustree-item-selected-text: inherit;\n  --rct-color-nonfocustree-item-focused-border: #dbdbdb;\n\n  --rct-color-search-highlight-bg: #a2aed2;\n  --rct-color-drag-between-line-bg: #0366d6;\n  --rct-color-arrow: #9aa5b3;\n\n  --rct-item-height: 22px;\n\n  --rct-color-renaming-input-submitbutton-bg: inherit;\n  --rct-color-renaming-input-submitbutton-bg-hover: #0366d6;\n  --rct-color-renaming-input-submitbutton-bg-active: #095fc1;\n\n  --rct-color-renaming-input-submitbutton-text: inherit;\n  --rct-color-renaming-input-submitbutton-text-hover: #ffffff;\n  --rct-color-renaming-input-submitbutton-text-active: #ffffff;\n}\n\n.rct-tree-root {\n  font-family: sans-serif;\n  background-color: var(--rct-color-tree-bg);\n  padding: 4px 0;\n}\n\n.rct-tree-root-focus {\n  outline: 1px solid var(--rct-color-tree-focus-outline);\n}\n\n.rct-tree-item-li {\n  font-size: 0.8rem;\n  list-style-type: none;\n  padding: 0;\n  margin: 0;\n}\n\n.rct-tree-item-title-container {\n  display: flex;\n  align-items: center;\n  border-top: 1px solid transparent;\n  border-bottom: 1px solid transparent;\n}\n\n.rct-tree-child-list {\n}\n.rct-tree-item-button {\n  flex-grow: 1;\n  display: flex;\n  align-items: center;\n  box-sizing: border-box;\n  background-color: transparent;\n  font-family: inherit;\n  font-size: inherit;\n  border: none;\n  width: 100%;\n  height: var(--rct-item-height);\n  text-align: left;\n  color: inherit;\n  outline: none;\n}\n\n.rct-tree-item-arrow {\n  width: 16px;\n}\n\n.rct-tree-item-arrow svg {\n  width: 16px;\n}\n\n.rct-tree-item-arrow-path {\n  fill: var(--rct-color-arrow);\n}\n\n.rct-tree-items-container {\n  margin: 0;\n  padding: 0;\n}\n\n.rct-tree-root:not(.rct-tree-root-focus) .rct-tree-item-title-container-selected {\n  background-color: var(--rct-color-nonfocustree-item-selected-bg);\n  color: var(--rct-color-nonfocustree-item-selected-text);\n}\n.rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-selected {\n  background-color: var(--rct-color-focustree-item-selected-bg);\n  color: var(--rct-color-focustree-item-selected-text);\n}\n.rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-focused {\n  outline: none;\n  border-color: var(--rct-color-focustree-item-focused-border);\n}\n.rct-tree-root:not(.rct-tree-root-focus) .rct-tree-item-title-container-focused {\n  outline: none;\n  border-color: var(--rct-color-nonfocustree-item-focused-border);\n}\n\n.rct-tree-item-title-container-dragging-over {\n  background-color: var(--rct-color-focustree-item-draggingover-bg);\n  color: var(--rct-color-focustree-item-draggingover-color);\n}\n\n.rct-tree-item-button-search-match {\n  font-style: italic;\n}\n\n.rct-tree-item-search-highlight {\n  background-color: var(--rct-color-search-highlight-bg);\n}\n\n.rct-tree-drag-between-line {\n  position: absolute;\n  right: 0;\n  top: -2px;\n  height: 4px;\n  background-color: var(--rct-color-drag-between-line-bg);\n}\n\n.rct-tree-drag-between-line-top {\n  top: 0px;\n}\n\n.rct-tree-drag-between-line-bottom {\n  top: -4px;\n}\n\n.rct-tree-search-input-container {\n  position: absolute;\n  top: 0;\n  right: 0;\n  width: 120px;\n}\n\n.rct-tree-search-input {\n  position: fixed;\n  width: 120px;\n}\n\n/* TODO see renaming form in multiple tree example, wraps around */\n.rct-tree-item-renaming-form {\n  flex-grow: 1;\n  display: flex;\n}\n.rct-tree-item-renaming-input {\n  flex-grow: 1;\n  background-color: inherit;\n  border: none;\n  color: inherit;\n  outline: none;\n}\n.rct-tree-item-renaming-submit-button {\n  border: none;\n  background-color: var(--rct-color-renaming-input-submitbutton-bg);\n  border-radius: 999px;\n  color: var(--rct-color-renaming-input-submitbutton-text);\n  cursor: pointer;\n}\n.rct-tree-item-renaming-submit-button:hover {\n  background-color: var(--rct-color-renaming-input-submitbutton-bg-hover);\n  color: var(--rct-color-renaming-input-submitbutton-text-hover);\n}\n.rct-tree-item-renaming-submit-button:active {\n  background-color: var(--rct-color-renaming-input-submitbutton-bg-active);\n  color: var(--rct-color-renaming-input-submitbutton-text-active);\n}\n')();
+var style$1 = /* @__PURE__ */ (() => `:root {
+  --rct-color-tree-bg: #f6f8fa;
+  --rct-color-tree-focus-outline: #0366d6;
+
+  --rct-color-focustree-item-selected-bg: #e8eaed;
+  --rct-color-focustree-item-selected-text: inherit;
+  --rct-color-focustree-item-focused-border: #0366d6;
+  --rct-color-focustree-item-draggingover-bg: #ebf0f4;
+  --rct-color-focustree-item-draggingover-color: inherit;
+
+  --rct-color-nonfocustree-item-selected-bg: #e8eaed;
+  --rct-color-nonfocustree-item-selected-text: inherit;
+  --rct-color-nonfocustree-item-focused-border: #dbdbdb;
+
+  --rct-color-search-highlight-bg: #a2aed2;
+  --rct-color-drag-between-line-bg: #0366d6;
+  --rct-color-arrow: #9aa5b3;
+
+  --rct-item-height: 22px;
+
+  --rct-color-renaming-input-submitbutton-bg: inherit;
+  --rct-color-renaming-input-submitbutton-bg-hover: #0366d6;
+  --rct-color-renaming-input-submitbutton-bg-active: #095fc1;
+
+  --rct-color-renaming-input-submitbutton-text: inherit;
+  --rct-color-renaming-input-submitbutton-text-hover: #ffffff;
+  --rct-color-renaming-input-submitbutton-text-active: #ffffff;
+}
+
+.rct-tree-root {
+  font-family: sans-serif;
+  background-color: var(--rct-color-tree-bg);
+  padding: 4px 0;
+}
+
+.rct-tree-root-focus {
+  outline: 1px solid var(--rct-color-tree-focus-outline);
+}
+
+.rct-tree-item-li {
+  font-size: 0.8rem;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.rct-tree-item-title-container {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+}
+
+.rct-tree-child-list {
+}
+.rct-tree-item-button {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  width: 100%;
+  height: var(--rct-item-height);
+  text-align: left;
+  color: inherit;
+  outline: none;
+}
+
+.rct-tree-item-arrow {
+  width: 16px;
+}
+
+.rct-tree-item-arrow svg {
+  width: 16px;
+}
+
+.rct-tree-item-arrow-path {
+  fill: var(--rct-color-arrow);
+}
+
+.rct-tree-items-container {
+  margin: 0;
+  padding: 0;
+}
+
+.rct-tree-root:not(.rct-tree-root-focus) .rct-tree-item-title-container-selected {
+  background-color: var(--rct-color-nonfocustree-item-selected-bg);
+  color: var(--rct-color-nonfocustree-item-selected-text);
+}
+.rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-selected {
+  background-color: var(--rct-color-focustree-item-selected-bg);
+  color: var(--rct-color-focustree-item-selected-text);
+}
+.rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-focused {
+  outline: none;
+  border-color: var(--rct-color-focustree-item-focused-border);
+}
+.rct-tree-root:not(.rct-tree-root-focus) .rct-tree-item-title-container-focused {
+  outline: none;
+  border-color: var(--rct-color-nonfocustree-item-focused-border);
+}
+
+.rct-tree-item-title-container-dragging-over {
+  background-color: var(--rct-color-focustree-item-draggingover-bg);
+  color: var(--rct-color-focustree-item-draggingover-color);
+}
+
+.rct-tree-item-button-search-match {
+  font-style: italic;
+}
+
+.rct-tree-item-search-highlight {
+  background-color: var(--rct-color-search-highlight-bg);
+}
+
+.rct-tree-drag-between-line {
+  position: absolute;
+  right: 0;
+  top: -2px;
+  height: 4px;
+  background-color: var(--rct-color-drag-between-line-bg);
+}
+
+.rct-tree-drag-between-line-top {
+  top: 0px;
+}
+
+.rct-tree-drag-between-line-bottom {
+  top: -4px;
+}
+
+.rct-tree-search-input-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 120px;
+}
+
+.rct-tree-search-input {
+  position: fixed;
+  width: 120px;
+}
+
+/* TODO see renaming form in multiple tree example, wraps around */
+.rct-tree-item-renaming-form {
+  flex-grow: 1;
+  display: flex;
+}
+.rct-tree-item-renaming-input {
+  flex-grow: 1;
+  background-color: inherit;
+  border: none;
+  color: inherit;
+  outline: none;
+}
+.rct-tree-item-renaming-submit-button {
+  border: none;
+  background-color: var(--rct-color-renaming-input-submitbutton-bg);
+  border-radius: 999px;
+  color: var(--rct-color-renaming-input-submitbutton-text);
+  cursor: pointer;
+}
+.rct-tree-item-renaming-submit-button:hover {
+  background-color: var(--rct-color-renaming-input-submitbutton-bg-hover);
+  color: var(--rct-color-renaming-input-submitbutton-text-hover);
+}
+.rct-tree-item-renaming-submit-button:active {
+  background-color: var(--rct-color-renaming-input-submitbutton-bg-active);
+  color: var(--rct-color-renaming-input-submitbutton-text-active);
+}
+/*
+! tailwindcss v3.1.6 | MIT License | https://tailwindcss.com
+*//*
+1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
+2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
+*/
+
+*,
+::before,
+::after {
+  box-sizing: border-box; /* 1 */
+  border-width: 0; /* 2 */
+  border-style: solid; /* 2 */
+  border-color: currentColor; /* 2 */
+}
+
+::before,
+::after {
+  --tw-content: '';
+}
+
+/*
+1. Use a consistent sensible line-height in all browsers.
+2. Prevent adjustments of font size after orientation changes in iOS.
+3. Use a more readable tab size.
+4. Use the user's configured \`sans\` font-family by default.
+*/
+
+html {
+  line-height: 1.5; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  -moz-tab-size: 4; /* 3 */
+  -o-tab-size: 4;
+     tab-size: 4; /* 3 */
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
+}
+
+/*
+1. Remove the margin in all browsers.
+2. Inherit line-height from \`html\` so users can set them as a class directly on the \`html\` element.
+*/
+
+body {
+  margin: 0; /* 1 */
+  line-height: inherit; /* 2 */
+}
+
+/*
+1. Add the correct height in Firefox.
+2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+3. Ensure horizontal rules are visible by default.
+*/
+
+hr {
+  height: 0; /* 1 */
+  color: inherit; /* 2 */
+  border-top-width: 1px; /* 3 */
+}
+
+/*
+Add the correct text decoration in Chrome, Edge, and Safari.
+*/
+
+abbr:where([title]) {
+  -webkit-text-decoration: underline dotted;
+          text-decoration: underline dotted;
+}
+
+/*
+Remove the default font size and weight for headings.
+*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/*
+Reset links to optimize for opt-in styling instead of opt-out.
+*/
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/*
+Add the correct font weight in Edge and Safari.
+*/
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/*
+1. Use the user's configured \`mono\` font family by default.
+2. Correct the odd \`em\` font sizing in all browsers.
+*/
+
+code,
+kbd,
+samp,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/*
+Add the correct font size in all browsers.
+*/
+
+small {
+  font-size: 80%;
+}
+
+/*
+Prevent \`sub\` and \`sup\` elements from affecting the line height in all browsers.
+*/
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/*
+1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+3. Remove gaps between table borders by default.
+*/
+
+table {
+  text-indent: 0; /* 1 */
+  border-color: inherit; /* 2 */
+  border-collapse: collapse; /* 3 */
+}
+
+/*
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+3. Remove default padding in all browsers.
+*/
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  font-weight: inherit; /* 1 */
+  line-height: inherit; /* 1 */
+  color: inherit; /* 1 */
+  margin: 0; /* 2 */
+  padding: 0; /* 3 */
+}
+
+/*
+Remove the inheritance of text transform in Edge and Firefox.
+*/
+
+button,
+select {
+  text-transform: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Remove default button styles.
+*/
+
+button,
+[type='button'],
+[type='reset'],
+[type='submit'] {
+  -webkit-appearance: button; /* 1 */
+  background-color: transparent; /* 2 */
+  background-image: none; /* 2 */
+}
+
+/*
+Use the modern Firefox focus style for all focusable elements.
+*/
+
+:-moz-focusring {
+  outline: auto;
+}
+
+/*
+Remove the additional \`:invalid\` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
+*/
+
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/*
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+
+progress {
+  vertical-align: baseline;
+}
+
+/*
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/*
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+
+[type='search'] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/*
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to \`inherit\` in Safari.
+*/
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/*
+Add the correct display in Chrome and Safari.
+*/
+
+summary {
+  display: list-item;
+}
+
+/*
+Removes the default spacing and border for appropriate elements.
+*/
+
+blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+figure,
+p,
+pre {
+  margin: 0;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  padding: 0;
+}
+
+ol,
+ul,
+menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+Prevent resizing textareas horizontally by default.
+*/
+
+textarea {
+  resize: vertical;
+}
+
+/*
+1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
+2. Set the default placeholder color to the user's configured gray 400 color.
+*/
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
+}
+
+input::placeholder,
+textarea::placeholder {
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
+}
+
+/*
+Set the default cursor for buttons.
+*/
+
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+/*
+Make sure disabled buttons don't get the pointer cursor.
+*/
+:disabled {
+  cursor: default;
+}
+
+/*
+1. Make replaced elements \`display: block\` by default. (https://github.com/mozdevs/cssremedy/issues/14)
+2. Add \`vertical-align: middle\` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
+   This can trigger a poorly considered lint error in some tools but is included by design.
+*/
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block; /* 1 */
+  vertical-align: middle; /* 2 */
+}
+
+/*
+Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
+*/
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+*, ::before, ::after {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+}
+
+::-webkit-backdrop {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+}
+
+::backdrop {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+}\r
+.container {
+  width: 100%;
+}\r
+@media (min-width: 640px) {
+
+  .container {
+    max-width: 640px;
+  }
+}\r
+@media (min-width: 768px) {
+
+  .container {
+    max-width: 768px;
+  }
+}\r
+@media (min-width: 1024px) {
+
+  .container {
+    max-width: 1024px;
+  }
+}\r
+@media (min-width: 1280px) {
+
+  .container {
+    max-width: 1280px;
+  }
+}\r
+@media (min-width: 1536px) {
+
+  .container {
+    max-width: 1536px;
+  }
+}\r
+.pointer-events-none {
+  pointer-events: none;
+}\r
+.pointer-events-auto {
+  pointer-events: auto;
+}\r
+.visible {
+  visibility: visible;
+}\r
+.fixed {
+  position: fixed;
+}\r
+.absolute {
+  position: absolute;
+}\r
+.left-0 {
+  left: 0px;
+}\r
+.top-0 {
+  top: 0px;
+}\r
+.bottom-16 {
+  bottom: 4rem;
+}\r
+.right-4 {
+  right: 1rem;
+}\r
+.bottom-0 {
+  bottom: 0px;
+}\r
+.right-0 {
+  right: 0px;
+}\r
+.top-2 {
+  top: 0.5rem;
+}\r
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}\r
+.mx-1 {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}\r
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}\r
+.my-0 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}\r
+.mb-6 {
+  margin-bottom: 1.5rem;
+}\r
+.mb-4 {
+  margin-bottom: 1rem;
+}\r
+.mr-auto {
+  margin-right: auto;
+}\r
+.mr-3 {
+  margin-right: 0.75rem;
+}\r
+.flex {
+  display: flex;
+}\r
+.inline-flex {
+  display: inline-flex;
+}\r
+.h-full {
+  height: 100%;
+}\r
+.h-12 {
+  height: 3rem;
+}\r
+.h-8 {
+  height: 2rem;
+}\r
+.h-28 {
+  height: 7rem;
+}\r
+.w-full {
+  width: 100%;
+}\r
+.w-3\\/12 {
+  width: 25%;
+}\r
+.w-auto {
+  width: auto;
+}\r
+.w-1\\/2 {
+  width: 50%;
+}\r
+.w-12 {
+  width: 3rem;
+}\r
+.w-8 {
+  width: 2rem;
+}\r
+.rotate-180 {
+  --tw-rotate: 180deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}\r
+.rotate-0 {
+  --tw-rotate: 0deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}\r
+.transform {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}\r
+.flex-col {
+  flex-direction: column;
+}\r
+.items-center {
+  align-items: center;
+}\r
+.justify-end {
+  justify-content: flex-end;
+}\r
+.justify-center {
+  justify-content: center;
+}\r
+.justify-between {
+  justify-content: space-between;
+}\r
+.overflow-y-auto {
+  overflow-y: auto;
+}\r
+.rounded {
+  border-radius: 0.25rem;
+}\r
+.rounded-full {
+  border-radius: 9999px;
+}\r
+.rounded-t {
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}\r
+.rounded-t-md {
+  border-top-left-radius: 0.375rem;
+  border-top-right-radius: 0.375rem;
+}\r
+.rounded-b-md {
+  border-bottom-right-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
+}\r
+.border {
+  border-width: 1px;
+}\r
+.border-t {
+  border-top-width: 1px;
+}\r
+.border-l {
+  border-left-width: 1px;
+}\r
+.border-r {
+  border-right-width: 1px;
+}\r
+.border-b {
+  border-bottom-width: 1px;
+}\r
+.border-gray-light {
+  border-color: var(--c-light-gray);
+}\r
+.border-gray-lighter {
+  border-color: var(--c-lighter-gray);
+}\r
+.border-hover-t40 {
+  border-color: var(--c-hover-t40);
+}\r
+.bg-gray-lightest {
+  background-color: var(--c-lightest-gray);
+}\r
+.bg-gray-light {
+  background-color: var(--c-light-gray);
+}\r
+.bg-transparent {
+  background-color: transparent;
+}\r
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}\r
+.bg-primary-royal {
+  background-color: var(--c-primary-royal);
+}\r
+.bg-hover-t40 {
+  background-color: var(--c-hover-t40);
+}\r
+.p-6 {
+  padding: 1.5rem;
+}\r
+.p-2 {
+  padding: 0.5rem;
+}\r
+.p-1 {
+  padding: 0.25rem;
+}\r
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}\r
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}\r
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}\r
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}\r
+.py-5 {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}\r
+.px-12 {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}\r
+.text-left {
+  text-align: left;
+}\r
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}\r
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}\r
+.font-bold {
+  font-weight: 700;
+}\r
+.uppercase {
+  text-transform: uppercase;
+}\r
+.text-gray-medium {
+  color: var(--c-medium-gray);
+}\r
+.text-gray-darker {
+  color: var(--c-darker-gray);
+}\r
+.text-gray {
+  color: var(--c-gray);
+}\r
+.text-primary {
+  color: var(--c-primary);
+}\r
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}\r
+.opacity-75 {
+  opacity: 0.75;
+}\r
+.shadow-lg {
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}\r
+.filter {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}\r
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}\r
+\r
+:root {\r
+  --c-primary: #0590cc;\r
+  --c-primary-green: #7ebf50;\r
+  --c-primary-yellow: #ffb700;\r
+  --c-primary-pink: #d93393;\r
+  --c-primary-royal: #284ea2;\r
+  --c-primary-purple: #5e3c97;\r
+\r
+  --c-darkest-gray: #050c1a;\r
+  --c-darker-gray: #212329;\r
+  --c-dark-gray-warm: #3c3c3c;\r
+  --c-dark-gray-cool: #56585f;\r
+  --c-medium-gray: #8a8d95;\r
+  --c-gray: #b6b9bf;\r
+  --c-gray-divider: #e3e3e3;\r
+  --c-light-gray: #d1d3d8;\r
+  --c-lighter-gray: #f0efee;\r
+  --c-lightest-gray: #f6f6f6;\r
+\r
+  --c-secondary: #0076aa;\r
+  --c-secondary-green: #5e9f30;\r
+  --c-secondary-yellow: #eca500;\r
+  --c-secondary-pink: #b51873;\r
+  --c-secondary-royal: #103381;\r
+  --c-secondary-purple: #33004d;\r
+\r
+  --c-light-blue: #40a6de;\r
+  --c-light-green: #82de40;\r
+\r
+  --c-list-hover: #fff8e5;\r
+\r
+  --c-hover-t40: rgba(5, 12, 26, 0.4);\r
+\r
+  --c-white: #ffffff;\r
+}\r
+\r
+body {\r
+  -webkit-font-smoothing: antialiased;\r
+  -moz-osx-font-smoothing: grayscale;\r
+  font-family: 'Roboto', sans-serif;\r
+}\r
+.gizmo-axis-canvas {\r
+  top: 18px !important;\r
+  right: 26px !important;\r
+  z-index: 9;\r
+}\r
+.vim-loading-box {\r
+  width: -webkit-fit-content;\r
+  width: -moz-fit-content;\r
+  width: fit-content;\r
+  height: -webkit-fit-content;\r
+  height: -moz-fit-content;\r
+  height: fit-content;\r
+  padding: 10px;\r
+  border: 1px solid #e3e3e3;\r
+  border-radius: 3px;\r
+  background-color: #f6f6f6;\r
+\r
+  font-family: "Roboto", sans-serif;\r
+\r
+  /*Centers the box*/\r
+  position: absolute;\r
+  top: 50%;\r
+  left: 50%;\r
+  transform: translate(-50%, -50%);\r
+}\r
+\r
+.vim-logo {\r
+  position: fixed;\r
+  top: 16px;\r
+  left: 16px;\r
+}\r
+\r
+.vim-logo img {\r
+  height: 48px;\r
+  width: 128px;\r
+}\r
+\r
+/*Makes full screen and remove scrollbars*/\r
+html,\r
+body {\r
+  height: 100%;\r
+  margin: 0;\r
+  padding: 0;\r
+  overflow: hidden;\r
+  background: radial-gradient(circle at center, #f0f0ff, #999999);\r
+}\r
+\r
+.VimLoadingBox h1 {\r
+  color: #050c1a;\r
+}\r
+\r
+.vim-section {\r
+  position: fixed;\r
+  bottom: 0px;\r
+  right: 64px;\r
+  width: 64px;\r
+  pointer-events: all;\r
+}\r
+\r
+/* MENU */\r
+\r
+.vim-menu td {\r
+  pointer-events: all;\r
+}\r
+\r
+.vim-menu td.empty {\r
+  pointer-events: none;\r
+}\r
+\r
+.vim-menu table {\r
+  width: 64px;\r
+}\r
+\r
+.vim-menu button:focus {\r
+  outline: 0;\r
+}\r
+\r
+.vim-menu .iconButton {\r
+  color: var(--c-white);\r
+  border: none;\r
+  background-color: transparent;\r
+}\r
+.vim-menu .iconButton.active {\r
+  background-color: var(--c-primary-royal);\r
+}\r
+.vim-menu .iconButton img {\r
+  width: 42px;\r
+  height: 42px;\r
+}\r
+\r
+.vim-menu .iconButton:hover img {\r
+  transform: scale(1.1);\r
+}\r
+\r
+.vim-menu .iconButton:active img {\r
+  transform: scale(1.1);\r
+  filter: brightness(1.5);\r
+}\r
+\r
+.vim-menu .iconButton:disabled img {\r
+  filter: brightness(0.5);\r
+  transform: scale(1);\r
+}\r
+\r
+/* BIM Explorer - Main*/\r
+\r
+.submenu-item-active {\r
+  position: relative;\r
+}\r
+.submenu-item-active::before {\r
+  content: "";\r
+  display: block;\r
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='%230590cc' d='M228.693 61.741c5.379-7.011 4.057-17.055-2.954-22.434-7.01-5.379-17.054-4.057-22.434 2.954l-.008.011L99.864 177.069l-39.607-47.203c-5.68-6.769-15.772-7.652-22.542-1.972s-7.652 15.772-1.972 22.542l52.416 62.467.006.007c.018.021.038.039.056.06.214.252.448.492.681.733.153.159.3.326.458.478s.331.291.497.437c.251.222.5.445.763.648l.062.053c.108.083.225.151.334.231.304.221.608.44.924.638.166.104.335.192.503.289.284.164.567.328.859.473.221.11.447.204.671.303.245.107.487.219.736.313.268.103.54.188.812.275.214.069.428.142.645.202.293.081.588.144.884.208.206.044.411.093.619.129.294.051.589.085.884.12.219.026.437.055.656.071.275.021.55.026.825.033.245.006.489.015.735.009.246-.005.491-.024.736-.042.274-.018.548-.036.821-.068.22-.026.437-.065.654-.101.293-.047.585-.094.876-.158.207-.045.41-.103.615-.157.292-.076.584-.152.873-.245.215-.069.425-.152.637-.23.267-.099.535-.196.798-.31.245-.105.483-.228.723-.346.219-.108.44-.211.656-.331.286-.158.562-.334.839-.511.163-.104.328-.199.488-.31.307-.211.603-.444.896-.678.106-.085.219-.157.324-.245.021-.018.039-.038.06-.056.253-.215.492-.449.733-.681.159-.153.326-.301.478-.458.152-.159.292-.332.438-.498.221-.25.444-.5.647-.761.017-.022.037-.041.054-.063L228.693 61.741Z'/%3E%3C/svg%3E");\r
+  background-size: contain;\r
+  position: absolute;\r
+  left: 20px;\r
+  top: 12px;\r
+  width: 20px;\r
+  height: 17px;\r
+}\r
+.rct-tree-root {\r
+  font-family: inherit;\r
+}\r
+.rct-tree-root > div > .rct-tree-items-container {\r
+  max-height: 380px;\r
+  overflow-y: auto;\r
+}\r
+.rct-tree-items-container li .rct-tree-item-title-container {\r
+  padding-top: 0.25rem;\r
+  padding-bottom: 0.25rem;\r
+}\r
+.rct-tree-items-container > li:nth-child(odd) {\r
+  background-color: var(--c-white);\r
+}\r
+.rct-tree-items-container > li:nth-child(even) {\r
+  background-color: var(--c-lightest-gray);\r
+}\r
+.vim-inspector-properties {\r
+  max-height: 500px;\r
+}\r
+.rct-tree-root-focus {\r
+  outline: none;\r
+}\r
+.rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-focused {\r
+  border: none;\r
+}\r
+.vim-bim-panel {\r
+  width: 480px;\r
+}\r
+.bim-panel-open {\r
+  margin-left: 480px;\r
+  max-width: calc(100% - 480px);\r
+  -o-object-fit: cover;\r
+     object-fit: cover;\r
+}\r
+.rct-tree-item-li {\r
+  font-size: 1rem;\r
+}\r
+.rct-tree-item-arrow svg {\r
+  width: 12px;\r
+}\r
+.odd\\:bg-white:nth-child(odd) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}\r
+.hover\\:scale-110:hover {
+  --tw-scale-x: 1.1;
+  --tw-scale-y: 1.1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}\r
+.hover\\:bg-gray-lightest:hover {
+  background-color: var(--c-lightest-gray);
+}\r
+.hover\\:bg-hover-t40:hover {
+  background-color: var(--c-hover-t40);
+}\r
+.hover\\:bg-primary-royal:hover {
+  background-color: var(--c-primary-royal);
+}\r
+.disabled\\:opacity-50:disabled {
+  opacity: 0.5;
+}`)();
 var logo = "data:image/png;base64,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";
 for (let i = 0; i < 256; i++) {
   (i < 16 ? "0" : "") + i.toString(16);
@@ -37821,6 +39086,992 @@ function MenuTop(props) {
     className: "mx-1"
   }, btnCamera)));
 }
+var __defProp = Object.defineProperty;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __publicField = (obj, key, value) => {
+  __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+  return value;
+};
+for (let i = 0; i < 256; i++) {
+  (i < 16 ? "0" : "") + i.toString(16);
+}
+({
+  forward: new Vector3(0, 0, -1),
+  back: new Vector3(0, 0, 1),
+  left: new Vector3(-1, 0, 0),
+  right: new Vector3(1, 0, 0),
+  up: new Vector3(0, 1, 0),
+  down: new Vector3(0, -1, 0)
+});
+class MeshLine extends BufferGeometry {
+  constructor() {
+    super();
+    this.isMeshLine = true;
+    this.type = "MeshLine";
+    this.positions = [];
+    this.previous = [];
+    this.next = [];
+    this.side = [];
+    this.width = [];
+    this.indices_array = [];
+    this.uvs = [];
+    this.counters = [];
+    this._points = [];
+    this._geom = null;
+    this.widthCallback = null;
+    this.matrixWorld = new Matrix4();
+    Object.defineProperties(this, {
+      geometry: {
+        enumerable: true,
+        get: function() {
+          return this;
+        }
+      },
+      geom: {
+        enumerable: true,
+        get: function() {
+          return this._geom;
+        },
+        set: function(value) {
+          this.setGeometry(value, this.widthCallback);
+        }
+      },
+      points: {
+        enumerable: true,
+        get: function() {
+          return this._points;
+        },
+        set: function(value) {
+          this.setPoints(value, this.widthCallback);
+        }
+      }
+    });
+  }
+}
+MeshLine.prototype.setMatrixWorld = function(matrixWorld) {
+  this.matrixWorld = matrixWorld;
+};
+MeshLine.prototype.setGeometry = function(g, c) {
+  this._geometry = g;
+  this.setPoints(g.getAttribute("position").array, c);
+};
+MeshLine.prototype.setPoints = function(points, wcb) {
+  if (!(points instanceof Float32Array) && !(points instanceof Array)) {
+    console.error("ERROR: The BufferArray of points is not instancied correctly.");
+    return;
+  }
+  this._points = points;
+  this.widthCallback = wcb;
+  this.positions = [];
+  this.counters = [];
+  if (points.length && points[0] instanceof Vector3) {
+    for (let j = 0; j < points.length; j++) {
+      const p2 = points[j];
+      const c = j / points.length;
+      this.positions.push(p2.x, p2.y, p2.z);
+      this.positions.push(p2.x, p2.y, p2.z);
+      this.counters.push(c);
+      this.counters.push(c);
+    }
+  } else {
+    for (let j = 0; j < points.length; j += 3) {
+      const c = j / points.length;
+      this.positions.push(points[j], points[j + 1], points[j + 2]);
+      this.positions.push(points[j], points[j + 1], points[j + 2]);
+      this.counters.push(c);
+      this.counters.push(c);
+    }
+  }
+  this.process();
+};
+function MeshLineRaycast(raycaster, intersects2) {
+  const inverseMatrix = new Matrix4();
+  const ray = new Ray();
+  const sphere = new Sphere();
+  const interRay = new Vector3();
+  const geometry = this.geometry;
+  if (!geometry.boundingSphere)
+    geometry.computeBoundingSphere();
+  sphere.copy(geometry.boundingSphere);
+  sphere.applyMatrix4(this.matrixWorld);
+  if (raycaster.ray.intersectSphere(sphere, interRay) === false) {
+    return;
+  }
+  inverseMatrix.copy(this.matrixWorld).invert();
+  ray.copy(raycaster.ray).applyMatrix4(inverseMatrix);
+  const vStart = new Vector3();
+  const vEnd = new Vector3();
+  const interSegment = new Vector3();
+  const step = this instanceof LineSegments ? 2 : 1;
+  const index = geometry.index;
+  const attributes = geometry.attributes;
+  if (index !== null) {
+    const indices = index.array;
+    const positions = attributes.position.array;
+    const widths = attributes.width.array;
+    for (let i = 0, l2 = indices.length - 1; i < l2; i += step) {
+      const a = indices[i];
+      const b = indices[i + 1];
+      vStart.fromArray(positions, a * 3);
+      vEnd.fromArray(positions, b * 3);
+      const width = widths[Math.floor(i / 3)] !== void 0 ? widths[Math.floor(i / 3)] : 1;
+      const precision = raycaster.params.Line.threshold + this.material.lineWidth * width / 2;
+      const precisionSq = precision * precision;
+      const distSq = ray.distanceSqToSegment(vStart, vEnd, interRay, interSegment);
+      if (distSq > precisionSq)
+        continue;
+      interRay.applyMatrix4(this.matrixWorld);
+      const distance = raycaster.ray.origin.distanceTo(interRay);
+      if (distance < raycaster.near || distance > raycaster.far)
+        continue;
+      intersects2.push({
+        distance,
+        point: interSegment.clone().applyMatrix4(this.matrixWorld),
+        index: i,
+        face: null,
+        faceIndex: null,
+        object: this
+      });
+      i = l2;
+    }
+  }
+}
+MeshLine.prototype.raycast = MeshLineRaycast;
+MeshLine.prototype.compareV3 = function(a, b) {
+  const aa2 = a * 6;
+  const ab2 = b * 6;
+  return this.positions[aa2] === this.positions[ab2] && this.positions[aa2 + 1] === this.positions[ab2 + 1] && this.positions[aa2 + 2] === this.positions[ab2 + 2];
+};
+MeshLine.prototype.copyV3 = function(a) {
+  const aa2 = a * 6;
+  return [this.positions[aa2], this.positions[aa2 + 1], this.positions[aa2 + 2]];
+};
+MeshLine.prototype.process = function() {
+  const l2 = this.positions.length / 6;
+  this.previous = [];
+  this.next = [];
+  this.side = [];
+  this.width = [];
+  this.indices_array = [];
+  this.uvs = [];
+  let w2;
+  let v2;
+  if (this.compareV3(0, l2 - 1)) {
+    v2 = this.copyV3(l2 - 2);
+  } else {
+    v2 = this.copyV3(0);
+  }
+  this.previous.push(v2[0], v2[1], v2[2]);
+  this.previous.push(v2[0], v2[1], v2[2]);
+  for (let j = 0; j < l2; j++) {
+    this.side.push(1);
+    this.side.push(-1);
+    if (this.widthCallback)
+      w2 = this.widthCallback(j / (l2 - 1));
+    else
+      w2 = 1;
+    this.width.push(w2);
+    this.width.push(w2);
+    this.uvs.push(j / (l2 - 1), 0);
+    this.uvs.push(j / (l2 - 1), 1);
+    if (j < l2 - 1) {
+      v2 = this.copyV3(j);
+      this.previous.push(v2[0], v2[1], v2[2]);
+      this.previous.push(v2[0], v2[1], v2[2]);
+      const n2 = j * 2;
+      this.indices_array.push(n2, n2 + 1, n2 + 2);
+      this.indices_array.push(n2 + 2, n2 + 1, n2 + 3);
+    }
+    if (j > 0) {
+      v2 = this.copyV3(j);
+      this.next.push(v2[0], v2[1], v2[2]);
+      this.next.push(v2[0], v2[1], v2[2]);
+    }
+  }
+  if (this.compareV3(l2 - 1, 0)) {
+    v2 = this.copyV3(1);
+  } else {
+    v2 = this.copyV3(l2 - 1);
+  }
+  this.next.push(v2[0], v2[1], v2[2]);
+  this.next.push(v2[0], v2[1], v2[2]);
+  if (!this._attributes || this._attributes.position.count !== this.positions.length) {
+    this._attributes = {
+      position: new BufferAttribute(new Float32Array(this.positions), 3),
+      previous: new BufferAttribute(new Float32Array(this.previous), 3),
+      next: new BufferAttribute(new Float32Array(this.next), 3),
+      side: new BufferAttribute(new Float32Array(this.side), 1),
+      width: new BufferAttribute(new Float32Array(this.width), 1),
+      uv: new BufferAttribute(new Float32Array(this.uvs), 2),
+      index: new BufferAttribute(new Uint16Array(this.indices_array), 1),
+      counters: new BufferAttribute(new Float32Array(this.counters), 1)
+    };
+  } else {
+    this._attributes.position.copyArray(new Float32Array(this.positions));
+    this._attributes.position.needsUpdate = true;
+    this._attributes.previous.copyArray(new Float32Array(this.previous));
+    this._attributes.previous.needsUpdate = true;
+    this._attributes.next.copyArray(new Float32Array(this.next));
+    this._attributes.next.needsUpdate = true;
+    this._attributes.side.copyArray(new Float32Array(this.side));
+    this._attributes.side.needsUpdate = true;
+    this._attributes.width.copyArray(new Float32Array(this.width));
+    this._attributes.width.needsUpdate = true;
+    this._attributes.uv.copyArray(new Float32Array(this.uvs));
+    this._attributes.uv.needsUpdate = true;
+    this._attributes.index.copyArray(new Uint16Array(this.indices_array));
+    this._attributes.index.needsUpdate = true;
+  }
+  this.setAttribute("position", this._attributes.position);
+  this.setAttribute("previous", this._attributes.previous);
+  this.setAttribute("next", this._attributes.next);
+  this.setAttribute("side", this._attributes.side);
+  this.setAttribute("width", this._attributes.width);
+  this.setAttribute("uv", this._attributes.uv);
+  this.setAttribute("counters", this._attributes.counters);
+  this.setIndex(this._attributes.index);
+  this.computeBoundingSphere();
+  this.computeBoundingBox();
+};
+function memcpy(src, srcOffset, dst, dstOffset, length) {
+  let i;
+  src = src.subarray || src.slice ? src : src.buffer;
+  dst = dst.subarray || dst.slice ? dst : dst.buffer;
+  src = srcOffset ? src.subarray ? src.subarray(srcOffset, length && srcOffset + length) : src.slice(srcOffset, length && srcOffset + length) : src;
+  if (dst.set) {
+    dst.set(src, dstOffset);
+  } else {
+    for (i = 0; i < src.length; i++) {
+      dst[i + dstOffset] = src[i];
+    }
+  }
+  return dst;
+}
+MeshLine.prototype.advance = function(position) {
+  const positions = this._attributes.position.array;
+  const previous = this._attributes.previous.array;
+  const next = this._attributes.next.array;
+  const l2 = positions.length;
+  memcpy(positions, 0, previous, 0, l2);
+  memcpy(positions, 6, positions, 0, l2 - 6);
+  positions[l2 - 6] = position.x;
+  positions[l2 - 5] = position.y;
+  positions[l2 - 4] = position.z;
+  positions[l2 - 3] = position.x;
+  positions[l2 - 2] = position.y;
+  positions[l2 - 1] = position.z;
+  memcpy(positions, 6, next, 0, l2 - 6);
+  next[l2 - 6] = position.x;
+  next[l2 - 5] = position.y;
+  next[l2 - 4] = position.z;
+  next[l2 - 3] = position.x;
+  next[l2 - 2] = position.y;
+  next[l2 - 1] = position.z;
+  this._attributes.position.needsUpdate = true;
+  this._attributes.previous.needsUpdate = true;
+  this._attributes.next.needsUpdate = true;
+};
+ShaderChunk.meshline_vert = [
+  "",
+  ShaderChunk.common,
+  ShaderChunk.logdepthbuf_pars_vertex,
+  ShaderChunk.fog_pars_vertex,
+  "",
+  "attribute vec3 previous;",
+  "attribute vec3 next;",
+  "attribute float side;",
+  "attribute float width;",
+  "attribute float counters;",
+  "",
+  "uniform vec2 resolution;",
+  "uniform float lineWidth;",
+  "uniform vec3 color;",
+  "uniform float opacity;",
+  "uniform float sizeAttenuation;",
+  "",
+  "varying vec2 vUV;",
+  "varying vec4 vColor;",
+  "varying float vCounters;",
+  "",
+  "vec2 fix( vec4 i, float aspect ) {",
+  "",
+  "    vec2 res = i.xy / i.w;",
+  "    res.x *= aspect;",
+  "    vCounters = counters;",
+  "    return res;",
+  "",
+  "}",
+  "",
+  "void main() {",
+  "",
+  "    float aspect = resolution.x / resolution.y;",
+  "",
+  "    vColor = vec4( color, opacity );",
+  "    vUV = uv;",
+  "",
+  "    mat4 m = projectionMatrix * modelViewMatrix;",
+  "    vec4 finalPosition = m * vec4( position, 1.0 );",
+  "    vec4 prevPos = m * vec4( previous, 1.0 );",
+  "    vec4 nextPos = m * vec4( next, 1.0 );",
+  "",
+  "    vec2 currentP = fix( finalPosition, aspect );",
+  "    vec2 prevP = fix( prevPos, aspect );",
+  "    vec2 nextP = fix( nextPos, aspect );",
+  "",
+  "    float w = lineWidth * width;",
+  "",
+  "    vec2 dir;",
+  "    if( nextP == currentP ) dir = normalize( currentP - prevP );",
+  "    else if( prevP == currentP ) dir = normalize( nextP - currentP );",
+  "    else {",
+  "        vec2 dir1 = normalize( currentP - prevP );",
+  "        vec2 dir2 = normalize( nextP - currentP );",
+  "        dir = normalize( dir1 + dir2 );",
+  "",
+  "        vec2 perp = vec2( -dir1.y, dir1.x );",
+  "        vec2 miter = vec2( -dir.y, dir.x );",
+  "        //w = clamp( w / dot( miter, perp ), 0., 4. * lineWidth * width );",
+  "",
+  "    }",
+  "",
+  "    //vec2 normal = ( cross( vec3( dir, 0. ), vec3( 0., 0., 1. ) ) ).xy;",
+  "    vec4 normal = vec4( -dir.y, dir.x, 0., 1. );",
+  "    normal.xy *= .5 * w;",
+  "    normal *= projectionMatrix;",
+  "    if( sizeAttenuation == 0. ) {",
+  "        normal.xy *= finalPosition.w;",
+  "        normal.xy /= ( vec4( resolution, 0., 1. ) * projectionMatrix ).xy;",
+  "    }",
+  "",
+  "    finalPosition.xy += normal.xy * side;",
+  "",
+  "    gl_Position = finalPosition;",
+  "",
+  ShaderChunk.logdepthbuf_vertex,
+  ShaderChunk.fog_vertex && "    vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );",
+  ShaderChunk.fog_vertex,
+  "}"
+].join("\n");
+ShaderChunk.meshline_frag = [
+  "",
+  ShaderChunk.fog_pars_fragment,
+  ShaderChunk.logdepthbuf_pars_fragment,
+  "",
+  "uniform sampler2D map;",
+  "uniform sampler2D alphaMap;",
+  "uniform float useMap;",
+  "uniform float useAlphaMap;",
+  "uniform float useDash;",
+  "uniform float dashArray;",
+  "uniform float dashOffset;",
+  "uniform float dashRatio;",
+  "uniform float visibility;",
+  "uniform float alphaTest;",
+  "uniform vec2 repeat;",
+  "",
+  "varying vec2 vUV;",
+  "varying vec4 vColor;",
+  "varying float vCounters;",
+  "",
+  "void main() {",
+  "",
+  ShaderChunk.logdepthbuf_fragment,
+  "",
+  "    vec4 c = vColor;",
+  "    if( useMap == 1. ) c *= texture2D( map, vUV * repeat );",
+  "    if( useAlphaMap == 1. ) c.a *= texture2D( alphaMap, vUV * repeat ).a;",
+  "    if( c.a < alphaTest ) discard;",
+  "    if( useDash == 1. ){",
+  "        c.a *= ceil(mod(vCounters + dashOffset, dashArray) - (dashArray * dashRatio));",
+  "    }",
+  "    gl_FragColor = c;",
+  "    gl_FragColor.a *= step(vCounters, visibility);",
+  "",
+  ShaderChunk.fog_fragment,
+  "}"
+].join("\n");
+class MeshLineMaterial extends ShaderMaterial {
+  constructor(parameters) {
+    super({
+      uniforms: Object.assign({}, UniformsLib.fog, {
+        lineWidth: { value: 1 },
+        map: { value: null },
+        useMap: { value: 0 },
+        alphaMap: { value: null },
+        useAlphaMap: { value: 0 },
+        color: { value: new Color(16777215) },
+        opacity: { value: 1 },
+        resolution: { value: new Vector2(1, 1) },
+        sizeAttenuation: { value: 1 },
+        dashArray: { value: 0 },
+        dashOffset: { value: 0 },
+        dashRatio: { value: 0.5 },
+        useDash: { value: 0 },
+        visibility: { value: 1 },
+        alphaTest: { value: 0 },
+        repeat: { value: new Vector2(1, 1) }
+      }),
+      vertexShader: ShaderChunk.meshline_vert,
+      fragmentShader: ShaderChunk.meshline_frag
+    });
+    this.isMeshLineMaterial = true;
+    this.type = "MeshLineMaterial";
+    Object.defineProperties(this, {
+      lineWidth: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.lineWidth.value;
+        },
+        set: function(value) {
+          this.uniforms.lineWidth.value = value;
+        }
+      },
+      map: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.map.value;
+        },
+        set: function(value) {
+          this.uniforms.map.value = value;
+        }
+      },
+      useMap: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.useMap.value;
+        },
+        set: function(value) {
+          this.uniforms.useMap.value = value;
+        }
+      },
+      alphaMap: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.alphaMap.value;
+        },
+        set: function(value) {
+          this.uniforms.alphaMap.value = value;
+        }
+      },
+      useAlphaMap: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.useAlphaMap.value;
+        },
+        set: function(value) {
+          this.uniforms.useAlphaMap.value = value;
+        }
+      },
+      color: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.color.value;
+        },
+        set: function(value) {
+          this.uniforms.color.value = value;
+        }
+      },
+      opacity: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.opacity.value;
+        },
+        set: function(value) {
+          this.uniforms.opacity.value = value;
+        }
+      },
+      resolution: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.resolution.value;
+        },
+        set: function(value) {
+          this.uniforms.resolution.value.copy(value);
+        }
+      },
+      sizeAttenuation: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.sizeAttenuation.value;
+        },
+        set: function(value) {
+          this.uniforms.sizeAttenuation.value = value;
+        }
+      },
+      dashArray: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.dashArray.value;
+        },
+        set: function(value) {
+          this.uniforms.dashArray.value = value;
+          this.useDash = value !== 0 ? 1 : 0;
+        }
+      },
+      dashOffset: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.dashOffset.value;
+        },
+        set: function(value) {
+          this.uniforms.dashOffset.value = value;
+        }
+      },
+      dashRatio: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.dashRatio.value;
+        },
+        set: function(value) {
+          this.uniforms.dashRatio.value = value;
+        }
+      },
+      useDash: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.useDash.value;
+        },
+        set: function(value) {
+          this.uniforms.useDash.value = value;
+        }
+      },
+      visibility: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.visibility.value;
+        },
+        set: function(value) {
+          this.uniforms.visibility.value = value;
+        }
+      },
+      alphaTest: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.alphaTest.value;
+        },
+        set: function(value) {
+          this.uniforms.alphaTest.value = value;
+        }
+      },
+      repeat: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.repeat.value;
+        },
+        set: function(value) {
+          this.uniforms.repeat.value.copy(value);
+        }
+      }
+    });
+    this.setValues(parameters);
+  }
+}
+MeshLineMaterial.prototype.copy = function(source) {
+  ShaderMaterial.prototype.copy.call(this, source);
+  this.lineWidth = source.lineWidth;
+  this.map = source.map;
+  this.useMap = source.useMap;
+  this.alphaMap = source.alphaMap;
+  this.useAlphaMap = source.useAlphaMap;
+  this.color.copy(source.color);
+  this.opacity = source.opacity;
+  this.resolution.copy(source.resolution);
+  this.sizeAttenuation = source.sizeAttenuation;
+  this.dashArray.copy(source.dashArray);
+  this.dashOffset.copy(source.dashOffset);
+  this.dashRatio.copy(source.dashRatio);
+  this.useDash = source.useDash;
+  this.visibility = source.visibility;
+  this.alphaTest = source.alphaTest;
+  this.repeat.copy(source.repeat);
+  return this;
+};
+var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
+var freeGlobal$1 = freeGlobal;
+var freeSelf = typeof self == "object" && self && self.Object === Object && self;
+var root$1 = freeGlobal$1 || freeSelf || Function("return this")();
+var root$1$1 = root$1;
+var Symbol$1 = root$1$1.Symbol;
+var Symbol$2 = Symbol$1;
+var objectProto$c = Object.prototype;
+var hasOwnProperty$9 = objectProto$c.hasOwnProperty;
+var nativeObjectToString$1 = objectProto$c.toString;
+var symToStringTag$1 = Symbol$2 ? Symbol$2.toStringTag : void 0;
+function getRawTag(value) {
+  var isOwn = hasOwnProperty$9.call(value, symToStringTag$1), tag = value[symToStringTag$1];
+  try {
+    value[symToStringTag$1] = void 0;
+    var unmasked = true;
+  } catch (e) {
+  }
+  var result = nativeObjectToString$1.call(value);
+  if (unmasked) {
+    if (isOwn) {
+      value[symToStringTag$1] = tag;
+    } else {
+      delete value[symToStringTag$1];
+    }
+  }
+  return result;
+}
+var objectProto$b = Object.prototype;
+var nativeObjectToString = objectProto$b.toString;
+function objectToString(value) {
+  return nativeObjectToString.call(value);
+}
+var nullTag = "[object Null]", undefinedTag = "[object Undefined]";
+var symToStringTag = Symbol$2 ? Symbol$2.toStringTag : void 0;
+function baseGetTag(value) {
+  if (value == null) {
+    return value === void 0 ? undefinedTag : nullTag;
+  }
+  return symToStringTag && symToStringTag in Object(value) ? getRawTag(value) : objectToString(value);
+}
+function isObjectLike(value) {
+  return value != null && typeof value == "object";
+}
+function isObject(value) {
+  var type = typeof value;
+  return value != null && (type == "object" || type == "function");
+}
+var asyncTag = "[object AsyncFunction]", funcTag$2 = "[object Function]", genTag$1 = "[object GeneratorFunction]", proxyTag = "[object Proxy]";
+function isFunction(value) {
+  if (!isObject(value)) {
+    return false;
+  }
+  var tag = baseGetTag(value);
+  return tag == funcTag$2 || tag == genTag$1 || tag == asyncTag || tag == proxyTag;
+}
+var coreJsData = root$1$1["__core-js_shared__"];
+var coreJsData$1 = coreJsData;
+var maskSrcKey = function() {
+  var uid = /[^.]+$/.exec(coreJsData$1 && coreJsData$1.keys && coreJsData$1.keys.IE_PROTO || "");
+  return uid ? "Symbol(src)_1." + uid : "";
+}();
+function isMasked(func) {
+  return !!maskSrcKey && maskSrcKey in func;
+}
+var funcProto$1 = Function.prototype;
+var funcToString$1 = funcProto$1.toString;
+function toSource(func) {
+  if (func != null) {
+    try {
+      return funcToString$1.call(func);
+    } catch (e) {
+    }
+    try {
+      return func + "";
+    } catch (e) {
+    }
+  }
+  return "";
+}
+var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
+var reIsHostCtor = /^\[object .+?Constructor\]$/;
+var funcProto = Function.prototype, objectProto$a = Object.prototype;
+var funcToString = funcProto.toString;
+var hasOwnProperty$8 = objectProto$a.hasOwnProperty;
+var reIsNative = RegExp("^" + funcToString.call(hasOwnProperty$8).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$");
+function baseIsNative(value) {
+  if (!isObject(value) || isMasked(value)) {
+    return false;
+  }
+  var pattern = isFunction(value) ? reIsNative : reIsHostCtor;
+  return pattern.test(toSource(value));
+}
+function getValue(object, key) {
+  return object == null ? void 0 : object[key];
+}
+function getNative(object, key) {
+  var value = getValue(object, key);
+  return baseIsNative(value) ? value : void 0;
+}
+var WeakMap2 = getNative(root$1$1, "WeakMap");
+var WeakMap$1 = WeakMap2;
+(function() {
+  try {
+    var func = getNative(Object, "defineProperty");
+    func({}, "", {});
+    return func;
+  } catch (e) {
+  }
+})();
+var argsTag$2 = "[object Arguments]";
+function baseIsArguments(value) {
+  return isObjectLike(value) && baseGetTag(value) == argsTag$2;
+}
+var objectProto$7 = Object.prototype;
+var hasOwnProperty$6 = objectProto$7.hasOwnProperty;
+var propertyIsEnumerable$1 = objectProto$7.propertyIsEnumerable;
+baseIsArguments(function() {
+  return arguments;
+}()) ? baseIsArguments : function(value) {
+  return isObjectLike(value) && hasOwnProperty$6.call(value, "callee") && !propertyIsEnumerable$1.call(value, "callee");
+};
+var freeExports$2 = typeof exports == "object" && exports && !exports.nodeType && exports;
+var freeModule$2 = freeExports$2 && typeof module == "object" && module && !module.nodeType && module;
+var moduleExports$2 = freeModule$2 && freeModule$2.exports === freeExports$2;
+var Buffer$1 = moduleExports$2 ? root$1$1.Buffer : void 0;
+Buffer$1 ? Buffer$1.isBuffer : void 0;
+var freeExports$1 = typeof exports == "object" && exports && !exports.nodeType && exports;
+var freeModule$1 = freeExports$1 && typeof module == "object" && module && !module.nodeType && module;
+var moduleExports$1 = freeModule$1 && freeModule$1.exports === freeExports$1;
+var freeProcess = moduleExports$1 && freeGlobal$1.process;
+var nodeUtil = function() {
+  try {
+    var types = freeModule$1 && freeModule$1.require && freeModule$1.require("util").types;
+    if (types) {
+      return types;
+    }
+    return freeProcess && freeProcess.binding && freeProcess.binding("util");
+  } catch (e) {
+  }
+}();
+var nodeUtil$1 = nodeUtil;
+nodeUtil$1 && nodeUtil$1.isTypedArray;
+getNative(Object, "create");
+var Map$1 = getNative(root$1$1, "Map");
+var Map$2 = Map$1;
+var freeExports = typeof exports == "object" && exports && !exports.nodeType && exports;
+var freeModule = freeExports && typeof module == "object" && module && !module.nodeType && module;
+var moduleExports = freeModule && freeModule.exports === freeExports;
+var Buffer2 = moduleExports ? root$1$1.Buffer : void 0;
+Buffer2 ? Buffer2.allocUnsafe : void 0;
+var DataView$1 = getNative(root$1$1, "DataView");
+var DataView$1$1 = DataView$1;
+var Promise$1 = getNative(root$1$1, "Promise");
+var Promise$2 = Promise$1;
+var Set$1 = getNative(root$1$1, "Set");
+var Set$2 = Set$1;
+var mapTag$3 = "[object Map]", objectTag$1 = "[object Object]", promiseTag = "[object Promise]", setTag$3 = "[object Set]", weakMapTag$1 = "[object WeakMap]";
+var dataViewTag$2 = "[object DataView]";
+var dataViewCtorString = toSource(DataView$1$1), mapCtorString = toSource(Map$2), promiseCtorString = toSource(Promise$2), setCtorString = toSource(Set$2), weakMapCtorString = toSource(WeakMap$1);
+var getTag = baseGetTag;
+if (DataView$1$1 && getTag(new DataView$1$1(new ArrayBuffer(1))) != dataViewTag$2 || Map$2 && getTag(new Map$2()) != mapTag$3 || Promise$2 && getTag(Promise$2.resolve()) != promiseTag || Set$2 && getTag(new Set$2()) != setTag$3 || WeakMap$1 && getTag(new WeakMap$1()) != weakMapTag$1) {
+  getTag = function(value) {
+    var result = baseGetTag(value), Ctor = result == objectTag$1 ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : "";
+    if (ctorString) {
+      switch (ctorString) {
+        case dataViewCtorString:
+          return dataViewTag$2;
+        case mapCtorString:
+          return mapTag$3;
+        case promiseCtorString:
+          return promiseTag;
+        case setCtorString:
+          return setTag$3;
+        case weakMapCtorString:
+          return weakMapTag$1;
+      }
+    }
+    return result;
+  };
+}
+root$1$1.Uint8Array;
+var symbolProto = Symbol$2 ? Symbol$2.prototype : void 0;
+symbolProto ? symbolProto.valueOf : void 0;
+nodeUtil$1 && nodeUtil$1.isMap;
+nodeUtil$1 && nodeUtil$1.isSet;
+var Transparency;
+((Transparency2) => {
+  function isValid(value) {
+    return ["all", "opaqueOnly", "transparentOnly", "allAsOpaque"].includes(value);
+  }
+  Transparency2.isValid = isValid;
+  function requiresAlpha(mode) {
+    return mode === "all" || mode === "transparentOnly";
+  }
+  Transparency2.requiresAlpha = requiresAlpha;
+  function match(mode, transparent) {
+    return mode === "allAsOpaque" || mode === "all" || !transparent && mode === "opaqueOnly" || transparent && mode === "transparentOnly";
+  }
+  Transparency2.match = match;
+})(Transparency || (Transparency = {}));
+var Geometry;
+((Geometry2) => {
+  function createGeometryFromInstances(g3d, instances) {
+    const merger = Merger.createFromInstances(g3d, instances, "all");
+    return merger.toBufferGeometry();
+  }
+  Geometry2.createGeometryFromInstances = createGeometryFromInstances;
+  function createGeometryFromMesh(g3d, mesh, useAlpha) {
+    const colors = createVertexColors(g3d, mesh, useAlpha);
+    return createGeometryFromArrays(g3d.positions.subarray(g3d.getMeshVertexStart(mesh) * 3, g3d.getMeshVertexEnd(mesh) * 3), g3d.indices.subarray(g3d.getMeshIndexStart(mesh), g3d.getMeshIndexEnd(mesh)), colors, useAlpha ? 4 : 3);
+  }
+  Geometry2.createGeometryFromMesh = createGeometryFromMesh;
+  function createVertexColors(g3d, mesh, useAlpha) {
+    const colorSize = useAlpha ? 4 : 3;
+    const result = new Float32Array(g3d.getMeshVertexCount(mesh) * colorSize);
+    const subStart = g3d.getMeshSubmeshStart(mesh);
+    const subEnd = g3d.getMeshSubmeshEnd(mesh);
+    for (let submesh = subStart; submesh < subEnd; submesh++) {
+      const color = g3d.getSubmeshColor(submesh);
+      const start = g3d.getSubmeshIndexStart(submesh);
+      const end = g3d.getSubmeshIndexEnd(submesh);
+      for (let i = start; i < end; i++) {
+        const v2 = g3d.indices[i] * colorSize;
+        result[v2] = color[0];
+        result[v2 + 1] = color[1];
+        result[v2 + 2] = color[2];
+        if (useAlpha)
+          result[v2 + 3] = color[3];
+      }
+    }
+    return result;
+  }
+  class Merger {
+    constructor(g3d, transparency2, instances, meshes, indexCount, vertexCount) {
+      __publicField(this, "_g3d");
+      __publicField(this, "_colorSize");
+      __publicField(this, "_meshes");
+      __publicField(this, "_indices");
+      __publicField(this, "_vertices");
+      __publicField(this, "_colors");
+      __publicField(this, "_instances");
+      __publicField(this, "_submeshes");
+      __publicField(this, "getInstances", () => this._instances);
+      __publicField(this, "getSubmeshes", () => this._submeshes);
+      this._g3d = g3d;
+      this._colorSize = Transparency.requiresAlpha(transparency2) ? 4 : 3;
+      this._instances = instances;
+      this._meshes = meshes;
+      this._indices = new Uint32Array(indexCount);
+      this._vertices = new Float32Array(vertexCount * this._g3d.POSITION_SIZE);
+      this._colors = new Float32Array(vertexCount * this._colorSize);
+      this._submeshes = new Array(this._instances.length);
+    }
+    static createFromUniqueMeshes(g3d, transparency2) {
+      let vertexCount = 0;
+      let indexCount = 0;
+      const instances = [];
+      const meshes = [];
+      const meshCount = g3d.getMeshCount();
+      for (let mesh = 0; mesh < meshCount; mesh++) {
+        const meshInstances = g3d.meshInstances[mesh];
+        if (!meshInstances || meshInstances.length !== 1)
+          continue;
+        if (!Transparency.match(transparency2, g3d.meshTransparent[mesh])) {
+          continue;
+        }
+        if ((g3d.instanceFlags[meshInstances[0]] & 1) > 0)
+          continue;
+        vertexCount += g3d.getMeshVertexCount(mesh);
+        indexCount += g3d.getMeshIndexCount(mesh);
+        instances.push(meshInstances[0]);
+        meshes.push(mesh);
+      }
+      return new Merger(g3d, transparency2, instances, meshes, indexCount, vertexCount);
+    }
+    static createFromInstances(g3d, instances, transparency2) {
+      let vertexCount = 0;
+      let indexCount = 0;
+      const instancesFiltered = [];
+      const meshes = [];
+      for (let i = 0; i < instances.length; i++) {
+        const instance = instances[i];
+        const mesh = g3d.instanceMeshes[instance];
+        if (mesh < 0)
+          continue;
+        if (!Transparency.match(transparency2, g3d.meshTransparent[mesh])) {
+          continue;
+        }
+        vertexCount += g3d.getMeshVertexCount(mesh);
+        indexCount += g3d.getMeshIndexCount(mesh);
+        instancesFiltered.push(instance);
+        meshes.push(mesh);
+      }
+      return new Merger(g3d, transparency2, instancesFiltered, meshes, indexCount, vertexCount);
+    }
+    merge() {
+      let index = 0;
+      let vertex2 = 0;
+      let offset = 0;
+      const matrix = new Matrix4();
+      const vector = new Vector3();
+      for (let i = 0; i < this._instances.length; i++) {
+        const mesh = this._meshes[i];
+        const instance = this._instances[i];
+        this._submeshes[i] = index;
+        const indexStart = this._g3d.getMeshIndexStart(mesh);
+        const indexEnd = this._g3d.getMeshIndexEnd(mesh);
+        for (let i2 = indexStart; i2 < indexEnd; i2++) {
+          this._indices[index++] = this._g3d.indices[i2] + offset;
+        }
+        const subStart = this._g3d.getMeshSubmeshStart(mesh);
+        const subEnd = this._g3d.getMeshSubmeshEnd(mesh);
+        for (let sub = subStart; sub < subEnd; sub++) {
+          const startIndex = this._g3d.getSubmeshIndexStart(sub);
+          const endIndex = this._g3d.getSubmeshIndexEnd(sub);
+          const subColor = this._g3d.getSubmeshColor(sub);
+          for (let i2 = startIndex; i2 < endIndex; i2++) {
+            const v2 = (this._g3d.indices[i2] + offset) * this._colorSize;
+            this._colors[v2] = subColor[0];
+            this._colors[v2 + 1] = subColor[1];
+            this._colors[v2 + 2] = subColor[2];
+            if (this._colorSize > 3) {
+              this._colors[v2 + 3] = subColor[3];
+            }
+          }
+        }
+        getInstanceMatrix(this._g3d, instance, matrix);
+        const vertexStart = this._g3d.getMeshVertexStart(mesh);
+        const vertexEnd = this._g3d.getMeshVertexEnd(mesh);
+        for (let p2 = vertexStart; p2 < vertexEnd; p2++) {
+          vector.fromArray(this._g3d.positions, p2 * this._g3d.POSITION_SIZE);
+          vector.applyMatrix4(matrix);
+          vector.toArray(this._vertices, vertex2);
+          vertex2 += this._g3d.POSITION_SIZE;
+        }
+        offset += vertexEnd - vertexStart;
+      }
+    }
+    toBufferGeometry() {
+      this.merge();
+      const geometry = createGeometryFromArrays(this._vertices, this._indices, this._colors, this._colorSize);
+      return geometry;
+    }
+  }
+  Geometry2.Merger = Merger;
+  function createGeometryFromArrays(vertices, indices, vertexColors = void 0, colorSize = 3) {
+    const geometry = new BufferGeometry();
+    geometry.setAttribute("position", new BufferAttribute(vertices, 3));
+    geometry.setIndex(new Uint32BufferAttribute(indices, 1));
+    if (vertexColors) {
+      geometry.setAttribute("color", new BufferAttribute(vertexColors, colorSize));
+    }
+    return geometry;
+  }
+  Geometry2.createGeometryFromArrays = createGeometryFromArrays;
+  function getInstanceMatrix(g3d, instance, target = new Matrix4()) {
+    const matrixAsArray = g3d.getInstanceMatrix(instance);
+    target.fromArray(matrixAsArray);
+    return target;
+  }
+  Geometry2.getInstanceMatrix = getInstanceMatrix;
+})(Geometry || (Geometry = {}));
+const _VimAttributes = class {
+};
+let VimAttributes = _VimAttributes;
+__publicField(VimAttributes, "positions", "g3d:vertex:position:0:float32:3");
+__publicField(VimAttributes, "indices", "g3d:corner:index:0:int32:1");
+__publicField(VimAttributes, "instanceMeshes", "g3d:instance:mesh:0:int32:1");
+__publicField(VimAttributes, "instanceTransforms", "g3d:instance:transform:0:float32:16");
+__publicField(VimAttributes, "instanceFlags", "g3d:instance:flags:0:uint16:1");
+__publicField(VimAttributes, "meshSubmeshes", "g3d:mesh:submeshoffset:0:int32:1");
+__publicField(VimAttributes, "submeshIndexOffsets", "g3d:submesh:indexoffset:0:int32:1");
+__publicField(VimAttributes, "submeshMaterials", "g3d:submesh:material:0:int32:1");
+__publicField(VimAttributes, "materialColors", "g3d:material:color:0:float32:4");
+__publicField(VimAttributes, "all", [
+  _VimAttributes.positions,
+  _VimAttributes.indices,
+  _VimAttributes.instanceMeshes,
+  _VimAttributes.instanceTransforms,
+  _VimAttributes.instanceFlags,
+  _VimAttributes.meshSubmeshes,
+  _VimAttributes.submeshIndexOffsets,
+  _VimAttributes.submeshMaterials,
+  _VimAttributes.materialColors
+]);
 function MenuTools(props) {
   const viewer2 = props.viewer;
   const [section, setSection] = react.exports.useState(false);
@@ -37829,9 +40080,16 @@ function MenuTools(props) {
   const measuringRef = react.exports.useRef();
   measuringRef.current = measuring;
   const onSectionButton = function() {
-    viewer2.gizmoSection.interactive = !section;
-    viewer2.gizmoSection.visible = !section;
-    setSection(!section);
+    if (measuring) {
+      onMeasureBtn();
+    }
+    const next = !section;
+    viewer2.gizmoSection.interactive = next;
+    viewer2.gizmoSection.visible = next;
+    if (next) {
+      viewer2.camera.frame(viewer2.renderer.section.box.getBoundingSphere(new Sphere()));
+    }
+    setSection(next);
   };
   const loopMeasure = () => {
     const onMouseMove = () => {
@@ -37850,6 +40108,9 @@ function MenuTools(props) {
     });
   };
   const onMeasureBtn = () => {
+    if (section) {
+      onSectionButton();
+    }
     if (measuring) {
       viewer2.gizmoMeasure.abort();
       setMeasuring(false);
@@ -40120,7 +42381,7 @@ function sort(map) {
 }
 function BimTree(props) {
   const [object, setObject] = react.exports.useState();
-  const [vim, setVim] = react.exports.useState();
+  const [elements, setElements] = react.exports.useState();
   const [filter, setFilter] = react.exports.useState();
   const [tree, setTree] = react.exports.useState();
   const [focusedItem, setFocusedItem] = react.exports.useState();
@@ -40130,10 +42391,10 @@ function BimTree(props) {
   react.exports.useEffect(() => {
     scrollToSelection(div.current);
   }, [object]);
-  if (props.object.vim !== vim || props.filter !== filter) {
-    setVim(props.object.vim);
+  if (props.elements !== elements || props.filter !== filter) {
     setFilter(props.filter);
-    toTreeData(props.object.vim.document, props.filter).then((t2) => setTree(t2));
+    setElements(props.elements);
+    toTreeData(props.elements, props.filter).then((t2) => setTree(t2));
   }
   if (!tree) {
     return /* @__PURE__ */ React.createElement("div", {
@@ -40214,12 +42475,11 @@ function scrollToSelection(div) {
     selection.scrollIntoView();
   }
 }
-async function toTreeData(document2, filter) {
-  if (!document2)
+async function toTreeData(elements, filter) {
+  if (!document)
     return;
-  const summary = await document2.getElementsSummary();
   const filterLower = filter.toLocaleLowerCase();
-  const filtered = summary.filter((s) => s.id.toString().toLocaleLowerCase().includes(filterLower) || s.name.toLocaleLowerCase().includes(filterLower) || s.categoryName.toLocaleLowerCase().includes(filterLower) || s.familyName.toLocaleLowerCase().includes(filterLower) || s.familyTypeName.toLocaleLowerCase().includes(filterLower));
+  const filtered = elements.filter((s) => s.id.toString().toLocaleLowerCase().includes(filterLower) || s.name.toLocaleLowerCase().includes(filterLower) || s.categoryName.toLocaleLowerCase().includes(filterLower) || s.familyName.toLocaleLowerCase().includes(filterLower) || s.familyTypeName.toLocaleLowerCase().includes(filterLower));
   const tree = toMapTree(filtered, [
     (e) => e.categoryName,
     (e) => e.familyName,
@@ -40274,19 +42534,33 @@ class BimTreeData {
 function range(size, startAt = 0) {
   return [...Array(size).keys()].map((i) => i + startAt);
 }
+const rejectedParameters = [
+  "Coarse Scale Fill Pattern",
+  "Coarse Scale Fill Color",
+  "Image",
+  "Type Image",
+  "Moves with nearby Element",
+  "Location Line",
+  "Show family pre-cut in plan views"
+];
+function acceptParameter(parameter) {
+  let result = true;
+  rejectedParameters.forEach((p2) => {
+    if (p2 === parameter.name) {
+      result = false;
+      return;
+    }
+  });
+  return result;
+}
 function BimParameters(props) {
   const [object, setObject] = react.exports.useState();
   const [parameters, setParameters] = react.exports.useState();
-  const [open, setOpen] = react.exports.useState();
-  const updateOpen = (group, value) => {
-    const next = new Map(open.entries()).set(group, value);
-    setOpen(next);
-  };
   if (props.object !== object) {
     setObject(props.object);
     toParameterData(props.object).then((p2) => {
       setParameters(p2);
-      setOpen(new Map(Array.from(p2.keys()).map((s) => [s, true])));
+      props.initOpen(Array.from(p2.keys()));
     });
   }
   if (!parameters) {
@@ -40296,7 +42570,7 @@ function BimParameters(props) {
   }
   return /* @__PURE__ */ React.createElement("div", {
     className: "vim-inspector-properties"
-  }, Array.from(parameters, (v2, k) => parameterTable(v2[0], v2[1], open.get(v2[0]), (b) => updateOpen(v2[0], b))));
+  }, Array.from(parameters, (v2, k) => parameterTable(v2[0], v2[1], props.getOpen(v2[0]), (b) => props.setOpen(v2[0], b))));
 }
 function parameterTable(key, parameters, open, setOpen) {
   return /* @__PURE__ */ React.createElement("div", {
@@ -40337,25 +42611,38 @@ function parameterTable(key, parameters, open, setOpen) {
   }) : null));
 }
 async function toParameterData(object) {
-  const parameters = await (object == null ? void 0 : object.getBimParameters());
-  parameters.sort((a, b) => a.group.localeCompare(b.group));
+  let parameters = await (object == null ? void 0 : object.getBimParameters());
+  parameters = parameters.filter(acceptParameter);
+  parameters = parameters.sort((a, b) => a.group.localeCompare(b.group));
   const groups = groupBy(parameters, (p2) => p2.group);
   return groups;
 }
-const set = /* @__PURE__ */ new Set(["Type", "Name", "FamilyName", "Id"]);
 function BimInspector(props) {
-  const [object, setObject] = react.exports.useState();
-  const [data, setData] = react.exports.useState();
-  if (props.object !== object) {
-    setObject(props.object);
-    toInspectorData(props.object).then((d) => setData(d));
-  }
-  if (!data) {
+  if (!props.elements || !props.object) {
     return /* @__PURE__ */ React.createElement("div", {
       className: "vim-bim-inspector"
     }, "Loading . . .");
   }
-  const mains = data.map((pair, index) => {
+  let element;
+  for (const e of props.elements) {
+    if (props.object.element === e.element) {
+      element = e;
+    }
+  }
+  if (!element) {
+    return /* @__PURE__ */ React.createElement("div", {
+      className: "vim-bim-inspector"
+    }, "Could not find element.");
+  }
+  const pairs = [
+    ["Document", element.document],
+    ["Workset", element.workset],
+    ["Category", element.categoryName],
+    ["Family Name", element.familyName],
+    ["Family Type", element.familyTypeName],
+    ["Element Id", element.id]
+  ];
+  const mains = pairs.map((pair, index) => {
     return /* @__PURE__ */ React.createElement("li", {
       className: "flex w-full",
       key: "main-tr" + index
@@ -40371,21 +42658,6 @@ function BimInspector(props) {
     className: "vim-bim-inspector mb-6"
   }, /* @__PURE__ */ React.createElement("ul", null, mains));
 }
-async function toInspectorData(object) {
-  if (!object)
-    return;
-  const table = [];
-  const bim = await object.getBimElement();
-  for (let pair of bim) {
-    const keyParts = pair[0].split(":");
-    const key = keyParts[keyParts.length - 1];
-    const value = typeof pair[1] === "number" ? round2(pair[1]).toString() : pair[1];
-    table.push([key, value]);
-  }
-  const result = table.filter((pair) => set.has(pair[0]));
-  return result;
-}
-const round2 = (n2) => Math.round((n2 + Number.EPSILON) * 100) / 100;
 function BimSearch(props) {
   const onChange = (e) => {
     props.setFilter(e.currentTarget.value);
@@ -40413,20 +42685,41 @@ function BimPanel(props) {
   const viewer2 = props.viewer;
   const [filter, setFilter] = react.exports.useState("");
   const [object, setObject] = react.exports.useState();
+  const [vim, setVim] = react.exports.useState();
+  const [elements, setElements] = react.exports.useState();
+  const [open, setOpen] = react.exports.useState();
+  const updateOpen = (group, value) => {
+    const next = new Map(open.entries()).set(group, value);
+    setOpen(next);
+  };
+  const initOpen = (keys2) => {
+    var _a2;
+    const map = new Map((_a2 = open == null ? void 0 : open.entries()) != null ? _a2 : []);
+    keys2.forEach((k) => {
+      if (!map.has(k))
+        map.set(k, true);
+    });
+    setOpen(map);
+  };
+  const getOpen = (s) => open.get(s);
   const updateFilter = (value) => {
     setFilter(value);
   };
   react.exports.useEffect(() => {
     viewer2.selection.onValueChanged = () => {
-      setObject(viewer2.selection.object);
+      const obj = viewer2.selection.object;
+      setObject(obj);
+      if (obj && obj.vim !== vim) {
+        setVim(obj.vim);
+        obj.vim.document.getElementsSummary().then((s) => setElements(s));
+      }
     };
   });
-  props.viewer.viewport.canvas.className = viewer2.viewport.canvas.className.replace(" bim-panel-open", "");
+  resizeCanvas(props.viewer, !!object);
   if (!object)
     return null;
-  viewer2.viewport.canvas.className += " bim-panel-open";
   return /* @__PURE__ */ React.createElement("div", {
-    className: "vim-bim-panel w-3/12 fixed left-0 top-0 bg-gray-lightest p-6 text-gray-darker h-full overflow-y-auto"
+    className: "vim-bim-panel fixed left-0 top-0 bg-gray-lightest p-6 text-gray-darker h-full overflow-y-auto"
   }, /* @__PURE__ */ React.createElement("h2", {
     className: "text-xs font-bold uppercase mb-6"
   }, "Project Inspector"), /* @__PURE__ */ React.createElement(BimSearch, {
@@ -40435,17 +42728,31 @@ function BimPanel(props) {
     setFilter: updateFilter
   }), /* @__PURE__ */ React.createElement(BimTree, {
     viewer: viewer2,
-    object,
-    filter
+    elements,
+    filter,
+    object
   }), /* @__PURE__ */ React.createElement("h2", {
     className: "text-xs font-bold uppercase mb-6"
   }, "Bim Inspector"), /* @__PURE__ */ React.createElement(BimInspector, {
+    elements,
     object
   }), /* @__PURE__ */ React.createElement("h2", {
     className: "text-xs font-bold uppercase text-gray-medium p-2 rounded-t border-t border-l border-r border-gray-light w-auto inline-flex"
   }, "Instance Properties"), /* @__PURE__ */ React.createElement(BimParameters, {
-    object
+    object,
+    getOpen,
+    setOpen: updateOpen,
+    initOpen
   }));
+}
+function resizeCanvas(viewer2, open) {
+  const parent = viewer2.viewport.canvas.parentElement;
+  const previous = parent.className;
+  parent.className = parent.className.replace(" bim-panel-open", "");
+  parent.className += open ? " bim-panel-open" : "";
+  if (previous !== parent.className) {
+    viewer2.viewport.ResizeToParent();
+  }
 }
 function MenuMore(props) {
   const [sectionIgnore, setSectionIgnore] = react.exports.useState(!props.viewer.gizmoSection.clip);
@@ -40595,7 +42902,7 @@ let url = params.has("vim") || params.has("model") ? (_a = params.get("vim")) !=
 let transparency = "all";
 if (params.has("transparency")) {
   const t2 = params.get("transparency");
-  transparency = Transparency.isValid(t2) ? t2 : "all";
+  transparency = Transparency$1.isValid(t2) ? t2 : "all";
 }
 if (params.has("dev")) {
   params.get("dev");
