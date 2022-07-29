@@ -24022,9 +24022,10 @@ class ViewerSettings {
     __publicField$1(this, "getSkylightColor", () => toHSLColor(this.options.skylight.skyColor));
     __publicField$1(this, "getSkylightGroundColor", () => toHSLColor(this.options.skylight.groundColor));
     __publicField$1(this, "getSkylightIntensity", () => this.options.skylight.intensity);
-    __publicField$1(this, "getSunlightColor", () => toHSLColor(this.options.sunLight.color));
-    __publicField$1(this, "getSunlightPosition", () => toVec$1(this.options.sunLight.position));
-    __publicField$1(this, "getSunlightIntensity", () => this.options.sunLight.intensity);
+    __publicField$1(this, "getSunlightCount", () => this.options.sunLights.length);
+    __publicField$1(this, "getSunlightColor", (index) => toHSLColor(this.options.sunLights[index].color));
+    __publicField$1(this, "getSunlightPosition", (index) => toVec$1(this.options.sunLights[index].position));
+    __publicField$1(this, "getSunlightIntensity", (index) => this.options.sunLights[index].intensity);
     __publicField$1(this, "getHighlightColor", () => toRGBColor(this.highlight.color));
     __publicField$1(this, "getHighlightOpacity", () => this.highlight.opacity);
     __publicField$1(this, "getIsolationColor", () => toRGBColor(this.isolation.color));
@@ -24080,11 +24081,18 @@ class ViewerSettings {
         groundColor: { h: 0.095, s: 1, l: 0.75 },
         intensity: 0.8
       },
-      sunLight: {
-        position: { x: -47, y: 22, z: -45 },
-        color: { h: 0.1, s: 1, l: 0.95 },
-        intensity: 1
-      },
+      sunLights: [
+        {
+          position: { x: -45, y: 40, z: -23 },
+          color: { h: 0.1, s: 1, l: 0.95 },
+          intensity: 0.8
+        },
+        {
+          position: { x: 45, y: 40, z: 23 },
+          color: { h: 0.1, s: 1, l: 0.95 },
+          intensity: 0.2
+        }
+      ],
       materials: {
         highlight: {
           color: { r: 106, g: 210, b: 255 },
@@ -25108,33 +25116,39 @@ class GroundPlane {
 class Environment {
   constructor(settings) {
     __publicField$1(this, "skyLight");
-    __publicField$1(this, "sunLight");
+    __publicField$1(this, "sunLights");
     __publicField$1(this, "_groundPlane");
     this._groundPlane = new GroundPlane();
     this.skyLight = new HemisphereLight();
-    this.sunLight = new DirectionalLight();
+    this.sunLights = [];
     this.applySettings(settings);
   }
   get groundPlane() {
     return this._groundPlane.mesh;
   }
   getObjects() {
-    return [this._groundPlane.mesh, this.skyLight, this.sunLight];
+    return [this._groundPlane.mesh, this.skyLight, ...this.sunLights];
   }
   applySettings(settings) {
     this._groundPlane.applyViewerSettings(settings);
     this.skyLight.color.copy(settings.getSkylightColor());
     this.skyLight.groundColor.copy(settings.getSkylightGroundColor());
     this.skyLight.intensity = settings.getSkylightIntensity();
-    this.sunLight.color.copy(settings.getSunlightColor());
-    this.sunLight.position.copy(settings.getSunlightPosition());
-    this.sunLight.intensity = settings.getSunlightIntensity();
+    const count = settings.getSunlightCount();
+    for (let i = 0; i < count; i++) {
+      if (!this.sunLights[i]) {
+        this.sunLights[i] = new DirectionalLight();
+      }
+      this.sunLights[i].color.copy(settings.getSunlightColor(i));
+      this.sunLights[i].position.copy(settings.getSunlightPosition(i));
+      this.sunLights[i].intensity = settings.getSunlightIntensity(i);
+    }
   }
   adaptToContent(box) {
     this._groundPlane.adaptToContent(box);
   }
   dispose() {
-    this.sunLight.dispose();
+    this.sunLights.forEach((s) => s.dispose());
     this.skyLight.dispose();
     this._groundPlane.dispose();
   }
@@ -28525,7 +28539,8 @@ const objectModel = {
     index: "index:Vim.ParameterDescriptor:ParameterDescriptor",
     columns: {
       name: "string:Name",
-      group: "string:Group"
+      group: "string:Group",
+      isInstance: "byte:IsInstance"
     }
   },
   familyInstance: {
@@ -28732,21 +28747,22 @@ class Document {
     return summary;
   }
   async getElementParameters(element) {
-    const elements = /* @__PURE__ */ new Set();
-    elements.add(element);
+    const result = [];
+    const instance = await this.getElementsParameters([element], true);
+    instance.forEach((i) => result.push(i));
     const familyInstance = await this.getElementFamilyInstance(element);
     if (familyInstance !== void 0) {
       const familyType = await this.getFamilyInstanceFamilyType(familyInstance);
       const family = await this.getFamilyTypeFamily(familyType);
       const familyTypeElement = await this.getFamiltyTypeElement(familyType);
-      elements.add(familyTypeElement);
       const familyElement = await this.getFamilyElement(family);
-      elements.add(familyElement);
+      const type = await this.getElementsParameters([familyTypeElement, familyElement], false);
+      type.forEach((i) => result.push(i));
     }
-    const result = await this.getElementsParameters(elements);
     return result;
   }
-  async getElementsParameters(elements) {
+  async getElementsParameters(elements, isInstance) {
+    const set = new Set(elements);
     const parameterTable2 = await this._entities.getBfast(objectModel.parameter.table);
     const parameterElement = await parameterTable2.getArray(objectModel.element.index);
     const parameterValue = await parameterTable2.getArray(objectModel.parameter.columns.value);
@@ -28756,14 +28772,15 @@ class Document {
     const parameterDescriptorGroup = await parameterDescriptor.getArray(objectModel.parameterDescriptor.columns.group);
     const result = [];
     parameterElement.forEach((e, i) => {
-      if (elements.has(e)) {
+      if (set.has(e)) {
         const value = this._strings[parameterValue[i]].split("|");
         const displayValue = value[value.length - 1];
         const d = parameterDescription[i];
         result.push({
           name: this._strings[parameterDescriptorName[d]],
           value: displayValue,
-          group: this._strings[parameterDescriptorGroup[d]]
+          group: this._strings[parameterDescriptorGroup[d]],
+          isInstance
         });
       }
     });
@@ -28840,7 +28857,7 @@ function createBase() {
     vertexColors: true,
     flatShading: true,
     side: DoubleSide,
-    shininess: 70
+    shininess: 5
   });
 }
 function createOpaque() {
@@ -28851,6 +28868,7 @@ function createOpaque() {
 function createTransparent() {
   const mat = createBase();
   mat.transparent = true;
+  mat.shininess = 70;
   patchBaseMaterial(mat);
   return mat;
 }
@@ -42558,11 +42576,17 @@ function BimParameters(props) {
   const [parameters, setParameters] = react.exports.useState();
   if (props.object !== object) {
     setObject(props.object);
-    toParameterData(props.object).then((p2) => {
-      setParameters(p2);
-      props.initOpen(Array.from(p2.keys()));
+    toParameterData(props.object).then((data) => {
+      setParameters(data);
+      props.initOpen([...data.instance.keys(), ...data.type.keys()]);
     });
   }
+  const createTitle = (value) => {
+    return /* @__PURE__ */ React.createElement("h2", {
+      key: `title-${value}`,
+      className: "text-xs font-bold uppercase text-gray-medium p-2 rounded-t border-t border-l border-r border-gray-light w-auto inline-flex"
+    }, value);
+  };
   if (!parameters) {
     return /* @__PURE__ */ React.createElement("div", {
       className: "vim-inspector-properties"
@@ -42570,7 +42594,7 @@ function BimParameters(props) {
   }
   return /* @__PURE__ */ React.createElement("div", {
     className: "vim-inspector-properties"
-  }, Array.from(parameters, (v2, k) => parameterTable(v2[0], v2[1], props.getOpen(v2[0]), (b) => props.setOpen(v2[0], b))));
+  }, parameters.instance ? createTitle("Instance Properties") : null, Array.from(parameters.instance, (v2, k) => parameterTable(v2[0], v2[1], props.getOpen(v2[0]), (b) => props.setOpen(v2[0], b))), /* @__PURE__ */ React.createElement("br", null), parameters.type ? createTitle("Type Properties") : null, Array.from(parameters.type, (v2, k) => parameterTable(v2[0], v2[1], props.getOpen(v2[0]), (b) => props.setOpen(v2[0], b))));
 }
 function parameterTable(key, parameters, open, setOpen) {
   return /* @__PURE__ */ React.createElement("div", {
@@ -42614,8 +42638,9 @@ async function toParameterData(object) {
   let parameters = await (object == null ? void 0 : object.getBimParameters());
   parameters = parameters.filter(acceptParameter);
   parameters = parameters.sort((a, b) => a.group.localeCompare(b.group));
-  const groups = groupBy(parameters, (p2) => p2.group);
-  return groups;
+  const instance = groupBy(parameters.filter((p2) => p2.isInstance), (p2) => p2.group);
+  const type = groupBy(parameters.filter((p2) => !p2.isInstance), (p2) => p2.group);
+  return { instance, type };
 }
 function BimInspector(props) {
   if (!props.elements || !props.object) {
@@ -42711,7 +42736,10 @@ function BimPanel(props) {
       setObject(obj);
       if (obj && obj.vim !== vim) {
         setVim(obj.vim);
-        obj.vim.document.getElementsSummary().then((s) => setElements(s));
+        obj.vim.document.getElementsSummary().then((s) => {
+          const filtered = s.filter((s2) => obj.vim.getObjectFromElement(s2.element).hasMesh);
+          setElements(filtered);
+        });
       }
     };
   });
@@ -42736,9 +42764,7 @@ function BimPanel(props) {
   }, "Bim Inspector"), /* @__PURE__ */ React.createElement(BimInspector, {
     elements,
     object
-  }), /* @__PURE__ */ React.createElement("h2", {
-    className: "text-xs font-bold uppercase text-gray-medium p-2 rounded-t border-t border-l border-r border-gray-light w-auto inline-flex"
-  }, "Instance Properties"), /* @__PURE__ */ React.createElement(BimParameters, {
+  }), /* @__PURE__ */ React.createElement(BimParameters, {
     object,
     getOpen,
     setOpen: updateOpen,
