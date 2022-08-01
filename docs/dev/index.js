@@ -38485,6 +38485,10 @@ video {
 .top-2 {
   top: 0.5rem;
 }\r
+.-mx-6 {
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+}\r
 .my-2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
@@ -38504,8 +38508,14 @@ video {
 .mb-6 {
   margin-bottom: 1.5rem;
 }\r
+.mb-5 {
+  margin-bottom: 1.25rem;
+}\r
 .mb-4 {
   margin-bottom: 1rem;
+}\r
+.-mr-4 {
+  margin-right: -1rem;
 }\r
 .mr-auto {
   margin-right: auto;
@@ -38578,6 +38588,11 @@ video {
 .overflow-y-auto {
   overflow-y: auto;
 }\r
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}\r
 .rounded {
   border-radius: 0.25rem;
 }\r
@@ -38610,6 +38625,9 @@ video {
 }\r
 .border-b {
   border-bottom-width: 1px;
+}\r
+.border-gray-divider {
+  border-color: var(--c-gray-divider);
 }\r
 .border-gray-light {
   border-color: var(--c-light-gray);
@@ -38660,9 +38678,9 @@ video {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }\r
-.px-4 {
-  padding-left: 1rem;
-  padding-right: 1rem;
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }\r
 .py-5 {
   padding-top: 1.25rem;
@@ -38695,6 +38713,9 @@ video {
 .text-gray-darker {
   color: var(--c-darker-gray);
 }\r
+.text-gray-light {
+  color: var(--c-light-gray);
+}\r
 .text-gray {
   color: var(--c-gray);
 }\r
@@ -38704,6 +38725,9 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}\r
+.opacity-80 {
+  opacity: 0.8;
 }\r
 .opacity-75 {
   opacity: 0.75;
@@ -38748,6 +38772,7 @@ video {
   --c-secondary-royal: #103381;\r
   --c-secondary-purple: #33004d;\r
 \r
+  --c-lightest-blue: #D9EDF9;\r
   --c-light-blue: #40a6de;\r
   --c-light-green: #82de40;\r
 \r
@@ -38893,6 +38918,8 @@ body {\r
 .rct-tree-items-container li .rct-tree-item-title-container {\r
   padding-top: 0.25rem;\r
   padding-bottom: 0.25rem;\r
+  min-height: 2.5rem;\r
+  border: none;\r
 }\r
 .rct-tree-items-container > li:nth-child(odd) {\r
   background-color: var(--c-white);\r
@@ -38902,6 +38929,7 @@ body {\r
 }\r
 .vim-inspector-properties {\r
   max-height: 500px;\r
+  overflow-y: auto;\r
 }\r
 .rct-tree-root-focus {\r
   outline: none;\r
@@ -38921,8 +38949,20 @@ body {\r
 .rct-tree-item-li {\r
   font-size: 1rem;\r
 }\r
+.rct-tree-item-arrow {\r
+  width: 20px;\r
+}\r
 .rct-tree-item-arrow svg {\r
   width: 12px;\r
+}\r
+.parameters:first-child > ul > li h3 {\r
+  border-top-right-radius: 4px;\r
+}\r
+.rct-tree-root:not(.rct-tree-root-focus) .rct-tree-item-title-container-selected, .rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-selected {\r
+  background-color: var(--c-lightest-blue);\r
+}\r
+.rct-tree-item-title-container:hover {\r
+  background-color: var(--c-list-hover);\r
 }\r
 .odd\\:bg-white:nth-child(odd) {
   --tw-bg-opacity: 1;
@@ -38941,6 +38981,9 @@ body {\r
 }\r
 .hover\\:bg-primary-royal:hover {
   background-color: var(--c-primary-royal);
+}\r
+.hover\\:opacity-100:hover {
+  opacity: 1;
 }\r
 .disabled\\:opacity-50:disabled {
   opacity: 0.5;
@@ -39059,7 +39102,7 @@ function MenuTop(props) {
   }, []);
   const btnOrbit = /* @__PURE__ */ React.createElement("button", {
     onClick: () => props.setOrbit(!props.orbit),
-    className: "rounded-full text-white h-8 w-8 flex items-center justify-center transition-all hover:scale-110 hover:bg-hover-t40",
+    className: "rounded-full text-white h-8 w-8 flex items-center justify-center transition-all opacity-80 hover:opacity-100",
     type: "button"
   }, props.orbit ? /* @__PURE__ */ React.createElement(Orbit, {
     height: "20",
@@ -39072,7 +39115,7 @@ function MenuTop(props) {
   }));
   const btnOrtho = /* @__PURE__ */ React.createElement("button", {
     onClick: () => props.setOrtho(!props.ortho),
-    className: "rounded-full text-white h-8 w-8 flex items-center justify-center transition-all hover:scale-110 hover:bg-hover-t40",
+    className: "rounded-full text-white h-8 w-8 flex items-center justify-center transition-all opacity-80 hover:opacity-100",
     type: "button"
   }, props.ortho ? /* @__PURE__ */ React.createElement(Orthographic, {
     height: "20",
@@ -42435,7 +42478,7 @@ function BimTree(props) {
     props.viewer.inputs.registerKeyboard();
   };
   return /* @__PURE__ */ React.createElement("div", {
-    className: "vim-bim-tree mb-6",
+    className: "vim-bim-tree mb-5",
     ref: div,
     tabIndex: 0,
     onFocus,
@@ -42605,7 +42648,7 @@ function parameterTable(key, parameters, open, setOpen) {
   }, /* @__PURE__ */ React.createElement("li", {
     key: "title-" + key
   }, /* @__PURE__ */ React.createElement("h3", {
-    className: "text-xs font-bold uppercase bg-gray-light px-2 py-2 rounded-t flex justify-between"
+    className: "text-xs font-bold uppercase bg-gray-light px-2 py-2 flex justify-between"
   }, /* @__PURE__ */ React.createElement("span", {
     className: "w-1/2"
   }, key), /* @__PURE__ */ React.createElement("button", {
@@ -42626,10 +42669,12 @@ function parameterTable(key, parameters, open, setOpen) {
       className: "odd:bg-white flex",
       key: "parameters-tr-" + id2
     }, /* @__PURE__ */ React.createElement("span", {
-      className: "w-1/2 border-r border-gray-light p-2",
+      className: "w-1/2 border-r border-gray-light p-2 truncate",
+      title: p2.name,
       key: "parameters-th-" + id2
     }, p2.name), /* @__PURE__ */ React.createElement("span", {
-      className: "w-1/2 text-gray-medium p-2",
+      className: "w-1/2 text-gray-medium p-2 truncate",
+      title: p2.value,
       key: "parameters-td-" + id2
     }, p2.value));
   }) : null));
@@ -42693,10 +42738,20 @@ function BimSearch(props) {
   const onBlur = () => {
     props.viewer.inputs.registerKeyboard();
   };
+  console.log("Render BimSearch Done");
   return /* @__PURE__ */ React.createElement("div", {
-    className: "vim-bim-search mb-4"
-  }, /* @__PURE__ */ React.createElement("input", {
-    className: "w-full bg-transparent border-b border-gray-light placeholder-text-gray-medium py-1 px-4",
+    className: "vim-bim-search mb-4 flex"
+  }, /* @__PURE__ */ React.createElement("svg", {
+    className: "text-gray-light -mr-4",
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "16",
+    viewBox: "0 0 256 256"
+  }, /* @__PURE__ */ React.createElement("path", {
+    fill: "currentColor",
+    id: "ICONS",
+    d: "m244.485 216.201-39.552-39.552a11.956 11.956 0 0 0-8.81-3.5C208.621 155.986 216 134.856 216 112 216 54.562 169.438 8 112 8S8 54.562 8 112s46.562 104 104 104c22.856 0 43.986-7.379 61.149-19.877a11.956 11.956 0 0 0 3.5 8.81l39.552 39.552c4.686 4.686 12.284 4.686 16.971 0l11.313-11.313c4.686-4.687 4.686-12.285 0-16.971ZM112 184c-39.701 0-72-32.299-72-72s32.299-72 72-72 72 32.299 72 72-32.299 72-72 72Z"
+  })), /* @__PURE__ */ React.createElement("input", {
+    className: "w-full bg-transparent border-b border-gray-light placeholder-text-gray-medium py-1 px-6",
     type: "search",
     name: "name",
     placeholder: "Type here to search",
@@ -42759,6 +42814,8 @@ function BimPanel(props) {
     elements,
     filter,
     object
+  }), /* @__PURE__ */ React.createElement("hr", {
+    className: "border-gray-divider mb-5 -mx-6"
   }), /* @__PURE__ */ React.createElement("h2", {
     className: "text-xs font-bold uppercase mb-6"
   }, "Bim Inspector"), /* @__PURE__ */ React.createElement(BimInspector, {
