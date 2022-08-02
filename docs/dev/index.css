@@ -750,6 +750,9 @@ video {
 .top-6 {
   top: 1.5rem;
 }
+.m-auto {
+  margin: auto;
+}
 .-mx-6 {
   margin-left: -1.5rem;
   margin-right: -1.5rem;
@@ -788,6 +791,9 @@ video {
 }
 .h-full {
   height: 100%;
+}
+.h-1\/2 {
+  height: 50%;
 }
 .h-12 {
   height: 3rem;
@@ -1149,7 +1155,31 @@ body {
   transform: scale(1);
 }
 
-/* BIM Explorer - Main*/
+/* Help Controls Widget */
+.vim-help-controls {
+  position: fixed;
+  bottom: 64px;
+  width: 100%;
+  pointer-events: none;
+}
+
+/* Tooltips */
+.__react_component_tooltip {
+  transition: opacity 0.1s ease-out !important;
+}
+
+/* Bim Panel */
+
+.vim-bim-panel {
+  height: 100%;
+  width: 480px;
+}
+.bim-panel-open {
+  margin-left: 480px;
+  max-width: calc(100% - 480px);
+  -o-object-fit: cover;
+     object-fit: cover;
+}
 
 .submenu-item-active {
   position: relative;
@@ -1169,7 +1199,7 @@ body {
   font-family: inherit;
 }
 .rct-tree-root > div > .rct-tree-items-container {
-  max-height: 380px;
+  max-height: 35vh;
   overflow-y: auto;
 }
 .rct-tree-items-container li .rct-tree-item-title-container {
@@ -1184,9 +1214,9 @@ body {
 .rct-tree-items-container > li:nth-child(even) {
   background-color: var(--c-lightest-gray);
 }
+
 .vim-inspector-properties {
   max-height: 500px;
-  overflow-y: auto;
 }
 .rct-tree-root-focus {
   outline: none;
@@ -1194,15 +1224,7 @@ body {
 .rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-focused {
   border: none;
 }
-.vim-bim-panel {
-  width: 480px;
-}
-.bim-panel-open {
-  margin-left: 480px;
-  max-width: calc(100% - 480px);
-  -o-object-fit: cover;
-     object-fit: cover;
-}
+
 .rct-tree-item-li {
   font-size: 1rem;
 }
