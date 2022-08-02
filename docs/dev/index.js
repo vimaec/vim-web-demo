@@ -40987,7 +40987,7 @@ function MenuTools(props) {
     viewer2.gizmoSection.interactive = next;
     viewer2.gizmoSection.visible = next;
     if (next) {
-      viewer2.camera.frame(viewer2.renderer.section.box.getBoundingSphere(new Sphere()));
+      viewer2.camera.frame(viewer2.renderer.section.box.getBoundingSphere(new Sphere()), true, viewer2.camera.defaultLerpDuration);
     }
     setSection(next);
   };
