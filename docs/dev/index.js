@@ -24216,10 +24216,6 @@ class Camera$1 {
     return this.camera.getWorldDirection(new Vector3());
   }
   set localVelocity(vector) {
-    if (this.camera instanceof OrthographicCamera) {
-      vector = vector.clone();
-      vector.setZ(0);
-    }
     this.cancelLerp();
     const move = vector.clone();
     move.setZ(-move.z);
@@ -24517,6 +24513,15 @@ class Camera$1 {
     const deltaPosition = this._velocity.clone().multiplyScalar(deltaTime);
     this.camera.position.add(deltaPosition);
     this._orbitTarget.add(deltaPosition);
+    if (this.orthographic) {
+      const aspect2 = this._viewport.getAspectRatio();
+      const d = -deltaPosition.z / 2;
+      this.cameraOrthographic.left -= d * aspect2;
+      this.cameraOrthographic.right += d * aspect2;
+      this.cameraOrthographic.top += d;
+      this.cameraOrthographic.bottom -= d;
+      this.cameraOrthographic.updateProjectionMatrix();
+    }
     if (this.isSignificant(deltaPosition)) {
       (_a2 = this.gizmo) == null ? void 0 : _a2.show();
     }
