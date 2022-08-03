@@ -24924,7 +24924,7 @@ class Mouse {
       this.viewport.canvas.focus();
     });
     __publicField$1(this, "onMouseUp", (event) => {
-      if (event.buttons === 1 && this.isMouseDown && !this.hasMouseMoved) {
+      if (event.button === 0 && this.isMouseDown && !this.hasMouseMoved) {
         this.onMouseClick(new Vector2(event.offsetX, event.offsetY), false);
       }
       this.isMouseDown = false;
@@ -43307,7 +43307,7 @@ function BimTree(props) {
   react.exports.useEffect(() => {
     scrollToSelection(div.current);
   }, [object]);
-  if (props.elements !== elements || props.filter !== filter) {
+  if (props.elements && (props.elements !== elements || props.filter !== filter)) {
     setFilter(props.filter);
     setElements(props.elements);
     toTreeData(props.elements, props.filter).then((t2) => setTree(t2));
@@ -43318,7 +43318,7 @@ function BimTree(props) {
       ref: div
     }, "Loading . . .");
   }
-  if (props.object !== object) {
+  if (props.object && props.object !== object) {
     setObject(props.object);
     const node = tree.getNode(props.object.element);
     const parents = node ? tree.getParents(node) : void 0;
