@@ -24172,6 +24172,7 @@ class Camera$1 {
     __publicField$1(this, "_zoomSpeed", 0.25);
     __publicField$1(this, "_firstPersonSpeed", 10);
     __publicField$1(this, "_minModelScrenSize", 0.05);
+    __publicField$1(this, "_minOrthoSize", 1);
     this.cameraPerspective = new PerspectiveCamera();
     this.camera = this.cameraPerspective;
     this.camera.position.set(0, 0, -1e3);
@@ -24297,6 +24298,8 @@ class Camera$1 {
       const Y2 = this.camera.top - this.camera.bottom + 2 * padY;
       const radius = Math.min(X2 / 2, Y2 / 2);
       if (sphere.radius / radius < this._minModelScrenSize)
+        return;
+      if (radius * 2 < this._minOrbitalDistance)
         return;
       this.camera.left -= padX;
       this.camera.right += padX;
@@ -24460,8 +24463,7 @@ class Camera$1 {
     return progress;
   }
   update(deltaTime) {
-    var _a2;
-    (_a2 = this.gizmo) == null ? void 0 : _a2.setPosition(this._orbitTarget);
+    var _a2, _b;
     if (this.shouldLerp()) {
       if (this._lerpPosition && !this.isNearTarget()) {
         this.applyPositionLerp();
@@ -24471,6 +24473,7 @@ class Camera$1 {
       } else if (!this._lockDirection) {
         this.lookAt(this._orbitTarget);
       }
+      (_a2 = this.gizmo) == null ? void 0 : _a2.setPosition(this._orbitTarget);
       return;
     }
     if (this._lerpPosition || this._lerpRotation) {
@@ -24478,6 +24481,7 @@ class Camera$1 {
     }
     this._targetPosition.copy(this.camera.position);
     this.applyVelocity(deltaTime);
+    (_b = this.gizmo) == null ? void 0 : _b.setPosition(this._orbitTarget);
   }
   isNearTarget() {
     return this.camera.position.distanceTo(this._targetPosition) < 0.1;
@@ -24504,7 +24508,7 @@ class Camera$1 {
     this.lookAt(this._orbitTarget);
   }
   applyVelocity(deltaTime) {
-    var _a2;
+    var _a2, _b;
     const invBlendFactor = Math.pow(this._velocityBlendFactor, deltaTime);
     const blendFactor = 1 - invBlendFactor;
     this._velocity.multiplyScalar(invBlendFactor);
@@ -24515,15 +24519,21 @@ class Camera$1 {
     this._orbitTarget.add(deltaPosition);
     if (this.orthographic) {
       const aspect2 = this._viewport.getAspectRatio();
-      const d = -deltaPosition.z / 2;
+      const d = -deltaPosition.dot(this.forward);
+      const dx = this.cameraOrthographic.right - this.cameraOrthographic.left + 2 * d * aspect2;
+      const dy = this.cameraOrthographic.top - this.cameraOrthographic.bottom + 2 * d * aspect2;
+      const radius = Math.min(dx, dy);
+      if (radius < this._minOrthoSize)
+        return;
       this.cameraOrthographic.left -= d * aspect2;
       this.cameraOrthographic.right += d * aspect2;
       this.cameraOrthographic.top += d;
       this.cameraOrthographic.bottom -= d;
       this.cameraOrthographic.updateProjectionMatrix();
+      (_a2 = this.gizmo) == null ? void 0 : _a2.show();
     }
     if (this.isSignificant(deltaPosition)) {
-      (_a2 = this.gizmo) == null ? void 0 : _a2.show();
+      (_b = this.gizmo) == null ? void 0 : _b.show();
     }
   }
   isSignificant(vector) {
@@ -25384,7 +25394,15 @@ class CameraGizmo {
     if (!this._gizmos)
       return;
     const dist = this._camera.camera.position.clone().distanceTo(this._gizmos.position);
-    const h = dist * Math.tan(MathUtils.degToRad(this._fov) * this._size);
+    let h = 0;
+    const cam = this._camera.camera;
+    if (cam instanceof OrthographicCamera) {
+      const dx = cam.right - cam.left;
+      const dy = cam.top - cam.bottom;
+      h = Math.min(dx, dy) * this._size;
+    } else {
+      h = dist * Math.tan(MathUtils.degToRad(this._fov) * this._size);
+    }
     this._gizmos.scale.set(h, h, h);
   }
   createGizmo() {
