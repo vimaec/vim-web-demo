@@ -24157,12 +24157,14 @@ class Camera$1 {
     __publicField$1(this, "_orbitTarget");
     __publicField$1(this, "_minOrbitalDistance", 0.05);
     __publicField$1(this, "_targetPosition");
-    __publicField$1(this, "defaultLerpDuration", 2);
     __publicField$1(this, "_lerpStartMs", 0);
     __publicField$1(this, "_lerpEndMs", 0);
     __publicField$1(this, "_lockDirection", false);
     __publicField$1(this, "_lerpPosition");
     __publicField$1(this, "_lerpRotation");
+    __publicField$1(this, "onChanged", () => {
+    });
+    __publicField$1(this, "defaultLerpDuration", 2);
     __publicField$1(this, "_vimReferenceSize", 1);
     __publicField$1(this, "_sceneSizeMultiplier", 1);
     __publicField$1(this, "_velocityBlendFactor", 1e-4);
@@ -24172,6 +24174,7 @@ class Camera$1 {
     __publicField$1(this, "_zoomSpeed", 0.25);
     __publicField$1(this, "_firstPersonSpeed", 10);
     __publicField$1(this, "_minModelScrenSize", 0.05);
+    __publicField$1(this, "_minOrthoSize", 1);
     this.cameraPerspective = new PerspectiveCamera();
     this.camera = this.cameraPerspective;
     this.camera.position.set(0, 0, -1e3);
@@ -24270,7 +24273,7 @@ class Camera$1 {
     return this._targetPosition.distanceTo(this._orbitTarget);
   }
   zoom(amount, duration = 0) {
-    var _a2;
+    var _a2, _b;
     const sphere = this._scene.getBoundingSphere();
     if (this.camera instanceof PerspectiveCamera) {
       const reverse = 1 / (1 - this._zoomSpeed) - 1;
@@ -24298,13 +24301,16 @@ class Camera$1 {
       const radius = Math.min(X2 / 2, Y2 / 2);
       if (sphere.radius / radius < this._minModelScrenSize)
         return;
+      if (radius * 2 < this._minOrbitalDistance)
+        return;
       this.camera.left -= padX;
       this.camera.right += padX;
       this.camera.bottom -= padY;
       this.camera.top += padY;
       this.camera.updateProjectionMatrix();
+      (_a2 = this.onChanged) == null ? void 0 : _a2.call(this);
     }
-    (_a2 = this.gizmo) == null ? void 0 : _a2.show();
+    (_b = this.gizmo) == null ? void 0 : _b.show();
   }
   move3(vector) {
     var _a2;
@@ -24460,8 +24466,7 @@ class Camera$1 {
     return progress;
   }
   update(deltaTime) {
-    var _a2;
-    (_a2 = this.gizmo) == null ? void 0 : _a2.setPosition(this._orbitTarget);
+    var _a2, _b;
     if (this.shouldLerp()) {
       if (this._lerpPosition && !this.isNearTarget()) {
         this.applyPositionLerp();
@@ -24471,13 +24476,15 @@ class Camera$1 {
       } else if (!this._lockDirection) {
         this.lookAt(this._orbitTarget);
       }
-      return;
+      (_a2 = this.onChanged) == null ? void 0 : _a2.call(this);
+    } else {
+      if (this._lerpPosition || this._lerpRotation) {
+        this.endLerp();
+      }
+      this._targetPosition.copy(this.camera.position);
+      this.applyVelocity(deltaTime);
     }
-    if (this._lerpPosition || this._lerpRotation) {
-      this.endLerp();
-    }
-    this._targetPosition.copy(this.camera.position);
-    this.applyVelocity(deltaTime);
+    (_b = this.gizmo) == null ? void 0 : _b.setPosition(this._orbitTarget);
   }
   isNearTarget() {
     return this.camera.position.distanceTo(this._targetPosition) < 0.1;
@@ -24504,7 +24511,7 @@ class Camera$1 {
     this.lookAt(this._orbitTarget);
   }
   applyVelocity(deltaTime) {
-    var _a2;
+    var _a2, _b, _c;
     const invBlendFactor = Math.pow(this._velocityBlendFactor, deltaTime);
     const blendFactor = 1 - invBlendFactor;
     this._velocity.multiplyScalar(invBlendFactor);
@@ -24515,15 +24522,22 @@ class Camera$1 {
     this._orbitTarget.add(deltaPosition);
     if (this.orthographic) {
       const aspect2 = this._viewport.getAspectRatio();
-      const d = -deltaPosition.z / 2;
+      const d = -deltaPosition.dot(this.forward);
+      const dx = this.cameraOrthographic.right - this.cameraOrthographic.left + 2 * d * aspect2;
+      const dy = this.cameraOrthographic.top - this.cameraOrthographic.bottom + 2 * d * aspect2;
+      const radius = Math.min(dx, dy);
+      if (radius < this._minOrthoSize)
+        return;
       this.cameraOrthographic.left -= d * aspect2;
       this.cameraOrthographic.right += d * aspect2;
       this.cameraOrthographic.top += d;
       this.cameraOrthographic.bottom -= d;
       this.cameraOrthographic.updateProjectionMatrix();
+      (_a2 = this.gizmo) == null ? void 0 : _a2.show();
     }
     if (this.isSignificant(deltaPosition)) {
-      (_a2 = this.gizmo) == null ? void 0 : _a2.show();
+      (_b = this.onChanged) == null ? void 0 : _b.call(this);
+      (_c = this.gizmo) == null ? void 0 : _c.show();
     }
   }
   isSignificant(vector) {
@@ -24539,6 +24553,31 @@ class Camera$1 {
     const current = this.camera.position.clone().add(this.forward.multiplyScalar(this.orbitDistance));
     const look = current.lerp(this._orbitTarget, this.lerpProgress());
     this.lookAt(look);
+  }
+}
+class InputHandler {
+  constructor(viewer2) {
+    __publicField$1(this, "_viewer");
+    __publicField$1(this, "_unregisters", []);
+    __publicField$1(this, "reg", (handler, type, listener) => {
+      handler.addEventListener(type, listener);
+      this._unregisters.push(() => handler.removeEventListener(type, listener));
+    });
+    this._viewer = viewer2;
+  }
+  register() {
+    if (this._unregisters.length > 0)
+      return;
+    this.addListeners();
+  }
+  addListeners() {
+  }
+  unregister() {
+    this._unregisters.forEach((f2) => f2());
+    this._unregisters.length = 0;
+    this.reset();
+  }
+  reset() {
   }
 }
 const KEYS = {
@@ -24625,10 +24664,10 @@ const KEYS = {
   KEY_Y: 89,
   KEY_Z: 90
 };
-class Keyboard {
-  constructor(viewer2) {
+class KeyboardHandler extends InputHandler {
+  constructor() {
+    super(...arguments);
     __publicField$1(this, "SHIFT_MULTIPLIER", 3);
-    __publicField$1(this, "_viewer");
     __publicField$1(this, "isUpPressed", false);
     __publicField$1(this, "isDownPressed", false);
     __publicField$1(this, "isLeftPressed", false);
@@ -24637,16 +24676,6 @@ class Keyboard {
     __publicField$1(this, "isQPressed", false);
     __publicField$1(this, "isShiftPressed", false);
     __publicField$1(this, "isCtrlPressed", false);
-    __publicField$1(this, "reset", () => {
-      this.isUpPressed = false;
-      this.isDownPressed = false;
-      this.isLeftPressed = false;
-      this.isRightPressed = false;
-      this.isEPressed = false;
-      this.isQPressed = false;
-      this.isShiftPressed = false;
-      this.isCtrlPressed = false;
-    });
     __publicField$1(this, "onKeyUp", (event) => {
       this.onKey(event, false);
     });
@@ -24746,7 +24775,20 @@ class Keyboard {
       move.multiplyScalar(speed);
       this.camera.localVelocity = move;
     });
-    this._viewer = viewer2;
+  }
+  addListeners() {
+    this.reg(document, "keydown", this.onKeyDown);
+    this.reg(document, "keyup", this.onKeyUp);
+  }
+  reset() {
+    this.isUpPressed = false;
+    this.isDownPressed = false;
+    this.isLeftPressed = false;
+    this.isRightPressed = false;
+    this.isEPressed = false;
+    this.isQPressed = false;
+    this.isShiftPressed = false;
+    this.isCtrlPressed = false;
   }
   get camera() {
     return this._viewer.camera;
@@ -24758,14 +24800,131 @@ class Keyboard {
     return this._viewer.gizmoSection;
   }
 }
-class Touch {
-  constructor(viewer2, mouse) {
+class RaycastResult {
+  constructor(intersections) {
+    __publicField$1(this, "object");
+    __publicField$1(this, "intersections");
+    __publicField$1(this, "firstHit");
+    this.intersections = intersections;
+    const [hit, obj] = this.GetFirstVimHit(intersections);
+    this.firstHit = hit;
+    this.object = obj;
+  }
+  GetFirstVimHit(intersections) {
+    for (let i2 = 0; i2 < intersections.length; i2++) {
+      const obj = this.getVimObjectFromHit(intersections[i2]);
+      if (obj == null ? void 0 : obj.visible)
+        return [intersections[i2], obj];
+    }
+    return [];
+  }
+  getVimObjectFromHit(hit) {
+    const vim = hit.object.userData.vim;
+    if (!vim)
+      return;
+    if (hit.object.userData.merged) {
+      if (!hit.faceIndex) {
+        throw new Error("Raycast hit has no face index.");
+      }
+      const index = this.binarySearch(hit.object.userData.submeshes, hit.faceIndex * 3);
+      const instance = hit.object.userData.instances[index];
+      return vim.getObjectFromInstance(instance);
+    } else if (hit.instanceId !== void 0) {
+      return vim.getObjectFromMesh(hit.object, hit.instanceId);
+    }
+  }
+  binarySearch(array, element) {
+    let m2 = 0;
+    let n2 = array.length - 1;
+    while (m2 <= n2) {
+      const k = n2 + m2 >> 1;
+      const cmp = element - array[k];
+      if (cmp > 0) {
+        m2 = k + 1;
+      } else if (cmp < 0) {
+        n2 = k - 1;
+      } else {
+        return k;
+      }
+    }
+    return m2 - 1;
+  }
+  get isHit() {
+    return !!this.firstHit;
+  }
+  get distance() {
+    var _a2;
+    return (_a2 = this.firstHit) == null ? void 0 : _a2.distance;
+  }
+  get position() {
+    var _a2;
+    return (_a2 = this.firstHit) == null ? void 0 : _a2.point;
+  }
+  get threeId() {
+    var _a2, _b;
+    return (_b = (_a2 = this.firstHit) == null ? void 0 : _a2.object) == null ? void 0 : _b.id;
+  }
+  get faceIndex() {
+    var _a2;
+    return (_a2 = this.firstHit) == null ? void 0 : _a2.faceIndex;
+  }
+}
+class Raycaster {
+  constructor(viewport, camera, scene, renderer) {
+    __publicField$1(this, "_viewport");
+    __publicField$1(this, "_camera");
+    __publicField$1(this, "_scene");
+    __publicField$1(this, "_renderer");
+    __publicField$1(this, "_raycaster", new Raycaster$1());
+    this._viewport = viewport;
+    this._camera = camera;
+    this._scene = scene;
+    this._renderer = renderer;
+  }
+  sceneRaycast(position) {
+    let intersections = this.raycast(position);
+    if (this._renderer.section.active) {
+      intersections = intersections.filter((i2) => this._renderer.section.box.containsPoint(i2.point));
+    }
+    return new RaycastResult(intersections);
+  }
+  fromPoint(position, target = new Raycaster$1()) {
+    const [width, height] = this._viewport.getSize();
+    const x2 = position.x / width * 2 - 1;
+    const y2 = -(position.y / height) * 2 + 1;
+    target.setFromCamera(new Vector2(x2, y2), this._camera.camera);
+    return target;
+  }
+  raycast(position) {
+    this._raycaster = this.fromPoint(position, this._raycaster);
+    return this._raycaster.intersectObjects(this._scene.scene.children);
+  }
+}
+class InputAction {
+  constructor(type, position, raycaster) {
+    __publicField$1(this, "position");
+    __publicField$1(this, "type");
+    __publicField$1(this, "_raycaster");
+    __publicField$1(this, "_raycast");
+    this.type = type;
+    this.position = position;
+    this._raycaster = raycaster;
+  }
+  get raycast() {
+    var _a2;
+    return (_a2 = this._raycast) != null ? _a2 : this._raycast = this._raycaster.sceneRaycast(this.position);
+  }
+  get object() {
+    return this.raycast.object;
+  }
+}
+class TouchHandler extends InputHandler {
+  constructor() {
+    super(...arguments);
     __publicField$1(this, "TAP_DURATION_MS", 500);
     __publicField$1(this, "DOUBLE_TAP_DELAY_MS", 500);
     __publicField$1(this, "TAP_MAX_MOVE_PIXEL", 5);
     __publicField$1(this, "ZOOM_SPEED", 5);
-    __publicField$1(this, "_viewer");
-    __publicField$1(this, "_mouse");
     __publicField$1(this, "_touch");
     __publicField$1(this, "_touch1");
     __publicField$1(this, "_touch2");
@@ -24776,10 +24935,12 @@ class Touch {
       this._touch = this._touch1 = this._touch2 = this._touchStartTime = void 0;
     });
     __publicField$1(this, "onTap", (position) => {
+      var _a2, _b;
       const time = new Date().getTime();
       const double = time - this._lastTapMs < this.DOUBLE_TAP_DELAY_MS;
-      this._mouse.onMouseClick(position, double);
       this._lastTapMs = new Date().getTime();
+      const action = new InputAction(double ? "double" : "main", position, this._viewer.raycaster);
+      (_b = (_a2 = this._viewer.inputs).onMainAction) == null ? void 0 : _b.call(_a2, action);
     });
     __publicField$1(this, "onTouchStart", (event) => {
       event.preventDefault();
@@ -24857,14 +25018,18 @@ class Touch {
       }
       this.reset();
     });
-    this._viewer = viewer2;
-    this._mouse = mouse;
   }
   get camera() {
     return this._viewer.camera;
   }
   get viewport() {
     return this._viewer.viewport;
+  }
+  addListeners() {
+    const canvas = this.viewport.canvas;
+    this.reg(canvas, "touchstart", this.onTouchStart);
+    this.reg(canvas, "touchend", this.onTouchEnd);
+    this.reg(canvas, "touchmove", this.onTouchMove);
   }
   isSingleTouch() {
     return this._touch !== void 0 && this._touchStartTime !== void 0 && this._touch1 === void 0 && this._touch2 === void 0;
@@ -24876,20 +25041,28 @@ class Touch {
     return p1.clone().lerp(p2, 0.5);
   }
 }
-class Mouse {
-  constructor(viewer2, keyboard) {
-    __publicField$1(this, "_viewer");
-    __publicField$1(this, "_raycaster");
-    __publicField$1(this, "_inputKeyboard");
+class MouseHandler extends InputHandler {
+  constructor() {
+    super(...arguments);
     __publicField$1(this, "isMouseDown", false);
     __publicField$1(this, "hasMouseMoved", false);
+    __publicField$1(this, "_idleTimeout");
+    __publicField$1(this, "_idleDelayMs", 200);
+    __publicField$1(this, "_lastPosition");
     __publicField$1(this, "reset", () => {
       this.isMouseDown = this.hasMouseMoved = false;
     });
     __publicField$1(this, "onMouseOut", (_) => {
       this.isMouseDown = this.hasMouseMoved = false;
     });
+    __publicField$1(this, "onMouseIdle", (position) => {
+      var _a2, _b;
+      const action = new InputAction("idle", position, this.raycaster);
+      (_b = (_a2 = this._viewer.inputs).onIdleAction) == null ? void 0 : _b.call(_a2, action);
+    });
     __publicField$1(this, "onMouseMove", (event) => {
+      this._lastPosition = new Vector2(event.offsetX, event.offsetY);
+      this.resetIdleTimeout();
       if (!this.isMouseDown) {
         return;
       }
@@ -24911,7 +25084,7 @@ class Mouse {
       event.preventDefault();
       event.stopPropagation();
       const scrollValue = Math.sign(event.deltaY);
-      if (this._inputKeyboard.isCtrlPressed) {
+      if (this.keyboard.isCtrlPressed) {
         this.camera.speed -= scrollValue;
       } else {
         this.camera.zoom(scrollValue, this.camera.defaultLerpDuration);
@@ -24934,13 +25107,10 @@ class Mouse {
       this.onMouseClick(new Vector2(event.offsetX, event.offsetY), true);
     });
     __publicField$1(this, "onMouseClick", (position, doubleClick) => {
-      const result = this._raycaster.screenRaycast(position);
-      result.doubleClick = doubleClick;
-      this._viewer.onMouseClick(result);
+      var _a2, _b;
+      const action = new InputAction(doubleClick ? "double" : "main", position, this.raycaster);
+      (_b = (_a2 = this._viewer.inputs).onMainAction) == null ? void 0 : _b.call(_a2, action);
     });
-    this._viewer = viewer2;
-    this._raycaster = this._viewer.raycaster;
-    this._inputKeyboard = keyboard;
   }
   get camera() {
     return this._viewer.camera;
@@ -24948,78 +25118,77 @@ class Mouse {
   get viewport() {
     return this._viewer.viewport;
   }
+  get canvas() {
+    return this.viewport.canvas;
+  }
+  get raycaster() {
+    return this._viewer.raycaster;
+  }
+  get keyboard() {
+    return this._viewer.inputs.keyboard;
+  }
+  addListeners() {
+    this.reg(this.canvas, "mousedown", this.onMouseDown);
+    this.reg(this.canvas, "wheel", this.onMouseWheel);
+    this.reg(this.canvas, "mousemove", this.onMouseMove);
+    this.reg(this.canvas, "mouseup", this.onMouseUp);
+    this.reg(this.canvas, "mouseout", this.onMouseOut);
+    this.reg(this.canvas, "dblclick", this.onDoubleClick);
+    this.reg(this.canvas, "contextmenu", (e) => e.preventDefault());
+  }
+  resetIdleTimeout() {
+    clearTimeout(this._idleTimeout);
+    this._idleTimeout = setTimeout(() => this.onMouseIdle(this._lastPosition), this._idleDelayMs);
+  }
 }
 class Input {
   constructor(viewer2) {
-    __publicField$1(this, "_canvas");
-    __publicField$1(this, "_touch");
-    __publicField$1(this, "_mouse");
-    __publicField$1(this, "_keyboard");
-    __publicField$1(this, "_unregistersTouch", []);
-    __publicField$1(this, "_unregistersMouse", []);
-    __publicField$1(this, "_unregistersKeyboard", []);
-    __publicField$1(this, "reg", (handler, type, unregisters, listener) => {
-      handler.addEventListener(type, listener);
-      unregisters.push(() => handler.removeEventListener(type, listener));
+    __publicField$1(this, "_viewer");
+    __publicField$1(this, "touch");
+    __publicField$1(this, "mouse");
+    __publicField$1(this, "keyboard");
+    __publicField$1(this, "onMainAction");
+    __publicField$1(this, "onIdleAction");
+    __publicField$1(this, "unregisterAll", () => {
+      this.mouse.unregister();
+      this.keyboard.unregister();
+      this.touch.unregister();
     });
-    __publicField$1(this, "unregister", () => {
-      this.unregisterTouch();
-      this.unregisterMouse();
-      this.unregisterKeyboard();
+    this._viewer = viewer2;
+    this.keyboard = new KeyboardHandler(viewer2);
+    this.mouse = new MouseHandler(viewer2);
+    this.touch = new TouchHandler(viewer2);
+    this.onMainAction = this.defaultAction;
+  }
+  registerAll() {
+    this.keyboard.register();
+    this.mouse.register();
+    this.touch.register();
+  }
+  resetAll() {
+    this.mouse.reset();
+    this.keyboard.reset();
+    this.touch.reset();
+  }
+  defaultAction(action) {
+    const camera = this._viewer.camera;
+    const selection = this._viewer.selection;
+    console.log(action);
+    if (!(action == null ? void 0 : action.object)) {
+      selection.select(void 0);
+      if (action.type === "double") {
+        camera.frame("all", false, camera.defaultLerpDuration);
+      }
+      return;
+    }
+    selection.select(action.object);
+    if (action.type === "double") {
+      camera.frame(action.object, false, camera.defaultLerpDuration);
+    }
+    action.object.getBimElement().then((e) => {
+      e.set("Index", action.object.element);
+      console.log(e);
     });
-    this._canvas = viewer2.viewport.canvas;
-    this._keyboard = new Keyboard(viewer2);
-    this._mouse = new Mouse(viewer2, this._keyboard);
-    this._touch = new Touch(viewer2, this._mouse);
-  }
-  register() {
-    this.registerKeyboard();
-    this.registerMouse();
-    this.registerTouch();
-  }
-  registerMouse() {
-    if (this._unregistersMouse.length > 0)
-      return;
-    this.reg(this._canvas, "mousedown", this._unregistersMouse, this._mouse.onMouseDown);
-    this.reg(this._canvas, "wheel", this._unregistersMouse, this._mouse.onMouseWheel);
-    this.reg(this._canvas, "mousemove", this._unregistersMouse, this._mouse.onMouseMove);
-    this.reg(this._canvas, "mouseup", this._unregistersMouse, this._mouse.onMouseUp);
-    this.reg(this._canvas, "mouseout", this._unregistersMouse, this._mouse.onMouseOut);
-    this.reg(this._canvas, "dblclick", this._unregistersMouse, this._mouse.onDoubleClick);
-    this.reg(this._canvas, "contextmenu", this._unregistersMouse, (e) => e.preventDefault());
-  }
-  registerTouch() {
-    if (this._unregistersTouch.length > 0)
-      return;
-    this.reg(this._canvas, "touchstart", this._unregistersTouch, this._touch.onTouchStart);
-    this.reg(this._canvas, "touchend", this._unregistersTouch, this._touch.onTouchEnd);
-    this.reg(this._canvas, "touchmove", this._unregistersTouch, this._touch.onTouchMove);
-  }
-  registerKeyboard() {
-    if (this._unregistersKeyboard.length > 0)
-      return;
-    this.reg(document, "keydown", this._unregistersKeyboard, this._keyboard.onKeyDown);
-    this.reg(document, "keyup", this._unregistersKeyboard, this._keyboard.onKeyUp);
-  }
-  unregisterTouch() {
-    this._unregistersTouch.forEach((f2) => f2());
-    this._unregistersTouch.length = 0;
-    this._touch.reset();
-  }
-  unregisterMouse() {
-    this._unregistersMouse.forEach((f2) => f2());
-    this._unregistersMouse.length = 0;
-    this._mouse.reset();
-  }
-  unregisterKeyboard() {
-    this._unregistersKeyboard.forEach((f2) => f2());
-    this._unregistersKeyboard.length = 0;
-    this._keyboard.reset();
-  }
-  reset() {
-    this._touch.reset();
-    this._mouse.reset();
-    this._keyboard.reset();
   }
 }
 class Selection {
@@ -25162,121 +25331,6 @@ class Environment {
     this._groundPlane.dispose();
   }
 }
-class RaycastResult {
-  constructor(mousePosition, intersections) {
-    __publicField$1(this, "mousePosition");
-    __publicField$1(this, "doubleClick", false);
-    __publicField$1(this, "object");
-    __publicField$1(this, "intersections");
-    __publicField$1(this, "firstHit");
-    this.mousePosition = mousePosition;
-    this.intersections = intersections;
-    const [hit, obj] = this.GetFirstVimHit(intersections);
-    this.firstHit = hit;
-    this.object = obj;
-  }
-  GetFirstVimHit(intersections) {
-    for (let i2 = 0; i2 < intersections.length; i2++) {
-      const obj = this.getVimObjectFromHit(intersections[i2]);
-      if (obj == null ? void 0 : obj.visible)
-        return [intersections[i2], obj];
-    }
-    return [];
-  }
-  getVimObjectFromHit(hit) {
-    const vim = hit.object.userData.vim;
-    if (!vim)
-      return;
-    if (hit.object.userData.merged) {
-      if (!hit.faceIndex) {
-        throw new Error("Raycast hit has no face index.");
-      }
-      const index = this.binarySearch(hit.object.userData.submeshes, hit.faceIndex * 3);
-      const instance = hit.object.userData.instances[index];
-      return vim.getObjectFromInstance(instance);
-    } else if (hit.instanceId !== void 0) {
-      return vim.getObjectFromMesh(hit.object, hit.instanceId);
-    }
-  }
-  binarySearch(array, element) {
-    let m2 = 0;
-    let n2 = array.length - 1;
-    while (m2 <= n2) {
-      const k = n2 + m2 >> 1;
-      const cmp = element - array[k];
-      if (cmp > 0) {
-        m2 = k + 1;
-      } else if (cmp < 0) {
-        n2 = k - 1;
-      } else {
-        return k;
-      }
-    }
-    return m2 - 1;
-  }
-  get isHit() {
-    return !!this.firstHit;
-  }
-  get distance() {
-    var _a2;
-    return (_a2 = this.firstHit) == null ? void 0 : _a2.distance;
-  }
-  get position() {
-    var _a2;
-    return (_a2 = this.firstHit) == null ? void 0 : _a2.point;
-  }
-  get threeId() {
-    var _a2, _b;
-    return (_b = (_a2 = this.firstHit) == null ? void 0 : _a2.object) == null ? void 0 : _b.id;
-  }
-  get faceIndex() {
-    var _a2;
-    return (_a2 = this.firstHit) == null ? void 0 : _a2.faceIndex;
-  }
-}
-class Raycaster {
-  constructor(viewport, camera, scene, renderer) {
-    __publicField$1(this, "_viewport");
-    __publicField$1(this, "_camera");
-    __publicField$1(this, "_scene");
-    __publicField$1(this, "_renderer");
-    __publicField$1(this, "_raycaster", new Raycaster$1());
-    this._viewport = viewport;
-    this._camera = camera;
-    this._scene = scene;
-    this._renderer = renderer;
-  }
-  screenRaycast(position) {
-    let intersections = this.raycast(position);
-    if (this._renderer.section.active) {
-      intersections = intersections.filter((i2) => this._renderer.section.box.containsPoint(i2.point));
-    }
-    const r2 = new RaycastResult(position, intersections);
-    const hit = r2.firstHit;
-    if (hit) {
-      const vim = hit.object.userData.vim;
-      if (hit.object.userData.merged && hit.uv !== void 0) {
-        const instance = Math.round(hit.uv.x);
-        r2.object = vim.getObjectFromInstance(instance);
-      } else if (hit.instanceId !== void 0) {
-        r2.object = vim.getObjectFromMesh(hit.object, hit.instanceId);
-      }
-    }
-    return r2;
-  }
-  getRaycaster(position, target) {
-    target = new Raycaster$1();
-    const [width, height] = this._viewport.getSize();
-    const x2 = position.x / width * 2 - 1;
-    const y2 = -(position.y / height) * 2 + 1;
-    target.setFromCamera(new Vector2(x2, y2), this._camera.camera);
-    return target;
-  }
-  raycast(position) {
-    this._raycaster = this.getRaycaster(position, this._raycaster);
-    return this._raycaster.intersectObjects(this._scene.scene.children);
-  }
-}
 class CameraGizmo {
   constructor(renderer, camera, settings) {
     __publicField$1(this, "_renderer");
@@ -25384,7 +25438,15 @@ class CameraGizmo {
     if (!this._gizmos)
       return;
     const dist = this._camera.camera.position.clone().distanceTo(this._gizmos.position);
-    const h = dist * Math.tan(MathUtils.degToRad(this._fov) * this._size);
+    let h = 0;
+    const cam = this._camera.camera;
+    if (cam instanceof OrthographicCamera) {
+      const dx = cam.right - cam.left;
+      const dy = cam.top - cam.bottom;
+      h = Math.min(dx, dy) * this._size;
+    } else {
+      h = dist * Math.tan(MathUtils.degToRad(this._fov) * this._size);
+    }
     this._gizmos.scale.set(h, h, h);
   }
   createGizmo() {
@@ -26198,7 +26260,7 @@ class BoxInputs {
     var _a2, _b;
     if (this.mouseDown) {
       this.mouseDown = false;
-      this.viewer.inputs.register();
+      this.viewer.inputs.registerAll();
       if (event.pointerType === "mouse") {
         this.onMouseMove(event);
       } else {
@@ -26220,12 +26282,12 @@ class BoxInputs {
     const dist = hit.point.clone().dot(this.viewer.camera.forward);
     this.dragpPlane = new Plane(this.viewer.camera.forward, -dist);
     this.mouseDown = true;
-    this.viewer.inputs.unregister();
+    this.viewer.inputs.unregisterAll();
     (_b = this.onFaceEnter) == null ? void 0 : _b.call(this, this.faceNormal);
   }
   onDrag(event) {
     var _a2;
-    this.raycaster = this.viewer.raycaster.getRaycaster(new Vector2(event.offsetX, event.offsetY), this.raycaster);
+    this.raycaster = this.viewer.raycaster.fromPoint(new Vector2(event.offsetX, event.offsetY), this.raycaster);
     const point = this.raycaster.ray.intersectPlane(this.dragpPlane, new Vector3());
     const delta = point.sub(this.dragOrigin);
     const amount = delta.dot(this.faceNormal);
@@ -26255,7 +26317,7 @@ class BoxInputs {
     return result;
   }
   raycast(position) {
-    this.raycaster = this.viewer.raycaster.getRaycaster(position, this.raycaster);
+    this.raycaster = this.viewer.raycaster.fromPoint(position, this.raycaster);
     return this.raycaster.intersectObject(this.cube);
   }
 }
@@ -27013,9 +27075,8 @@ class GizmoMeasure {
     __publicField$1(this, "_lineX");
     __publicField$1(this, "_lineY");
     __publicField$1(this, "_lineZ");
-    __publicField$1(this, "_lastRaycast");
     __publicField$1(this, "removeMouseListener");
-    __publicField$1(this, "oldClick");
+    __publicField$1(this, "oldAction");
     __publicField$1(this, "onAbort");
     __publicField$1(this, "_startPos");
     __publicField$1(this, "_endPos");
@@ -27035,24 +27096,26 @@ class GizmoMeasure {
     this._currentMarker = new MeasureMarker();
     this._currentMarker.mesh.visible = false;
     this._viewer.renderer.add(this._currentMarker.mesh);
-    this.oldClick = this._viewer.onMouseClick;
+    this.oldAction = this._viewer.inputs.onMainAction;
     onProgress == null ? void 0 : onProgress("ready");
     this.registerMouse(this.onMouseMoveReady.bind(this));
+    this._viewer.inputs.onIdleAction = this.onMouseIdleReady.bind(this);
     return new Promise((resolve, reject) => {
       this.onAbort = () => {
         onProgress == null ? void 0 : onProgress(void 0);
         reject(new Error("Aborted"));
       };
-      this._viewer.onMouseClick = (hit) => {
+      this._viewer.inputs.onMainAction = (hit) => {
         if (!hit.object)
           return;
         this.onFirstClick(hit);
         onProgress == null ? void 0 : onProgress("active");
+        this._viewer.inputs.onIdleAction = this.onMouseIdleActive.bind(this);
         this.registerMouse(this.onMouseMoveActive.bind(this));
-        this._viewer.onMouseClick = (hit2) => {
+        this._viewer.inputs.onMainAction = (hit2) => {
           this.onAbort = void 0;
-          this._viewer.onMouseClick = this.oldClick;
-          this.oldClick = void 0;
+          this._viewer.inputs.onMainAction = this.oldAction;
+          this.oldAction = void 0;
           const success = this.onSecondClick(hit2);
           if (success) {
             onProgress == null ? void 0 : onProgress("done");
@@ -27065,13 +27128,13 @@ class GizmoMeasure {
       };
     });
   }
-  onFirstClick(hit) {
+  onFirstClick(action) {
     this.reset();
-    this._startPos = hit.position;
+    this._startPos = action.raycast.position;
     this._startMarker = new MeasureMarker();
     this._startMarker.setPosition(this._startPos);
     this._viewer.renderer.add(this._startMarker.mesh);
-    this._line = new MeasureLine(new Vector2().fromArray(this._viewer.viewport.getSize()), hit.position, hit.position, new Color(1, 1, 1));
+    this._line = new MeasureLine(new Vector2().fromArray(this._viewer.viewport.getSize()), action.raycast.position, action.raycast.position, new Color(1, 1, 1));
     this._viewer.renderer.add(this._line.mesh);
   }
   registerMouse(callBack) {
@@ -27083,47 +27146,43 @@ class GizmoMeasure {
       this.removeMouseListener = void 0;
     };
   }
-  mouseRaycast(event) {
-    const time = Date.now();
-    if (time - this._lastRaycast < 20)
-      return;
-    this._lastRaycast = time;
-    const position = new Vector2(event.offsetX, event.offsetY);
-    return this._viewer.raycaster.screenRaycast(position);
-  }
-  onMouseMoveReady(event) {
-    const hit = this.mouseRaycast(event);
-    if (!hit)
-      return;
-    if (hit.object) {
-      this._currentMarker.setPosition(hit.position);
+  onMouseIdleReady(action) {
+    if (action.object) {
+      this._currentMarker.setPosition(action.raycast.position);
     }
-    this._currentMarker.mesh.visible = !!hit.object;
+    this._currentMarker.mesh.visible = !!action.object;
   }
-  onMouseMoveActive(event) {
-    const hit = this.mouseRaycast(event);
-    if (!hit)
-      return;
-    if (hit.object) {
-      this._measurement = hit.position.clone().sub(this._startPos);
-      this._line.setPoints(this._startPos, hit.position);
-      this._currentMarker.setPosition(hit.position);
+  onMouseMoveReady() {
+    this._currentMarker.mesh.visible = false;
+  }
+  onMouseIdleActive(action) {
+    const object = action.object;
+    const position = action.raycast.position;
+    if (object) {
+      this._measurement = position.clone().sub(this._startPos);
+      this._line.setPoints(this._startPos, position);
+      this._currentMarker.setPosition(position);
     } else {
       this._measurement = void 0;
     }
-    this._currentMarker.mesh.visible = !!hit.object;
-    this._line.mesh.visible = !!hit.object;
+    this._currentMarker.mesh.visible = !!object;
+    this._line.mesh.visible = !!object;
   }
-  onSecondClick(hit) {
+  onMouseMoveActive() {
+    this._currentMarker.mesh.visible = false;
+    this._line.mesh.visible = false;
+  }
+  onSecondClick(action) {
     var _a2;
-    if (!hit.object) {
+    if (!action.object) {
       this.abort();
       console.log("No point selected. Aborting measurement.");
       return false;
     }
+    this._viewer.inputs.onIdleAction = void 0;
     (_a2 = this.removeMouseListener) == null ? void 0 : _a2.call(this);
-    this._endPos = hit.position;
-    this._endMarker = new MeasureMarker(hit.position);
+    this._endPos = action.raycast.position;
+    this._endMarker = new MeasureMarker(action.raycast.position);
     this._endMarker.setPosition(this._endPos);
     this._viewer.renderer.add(this._endMarker.mesh);
     if (this._currentMarker) {
@@ -27150,19 +27209,18 @@ class GizmoMeasure {
     return true;
   }
   abort() {
-    var _a2, _b;
-    if (this.oldClick) {
-      this._viewer.onMouseClick = this.oldClick;
-      this.oldClick = void 0;
+    var _a2;
+    if (this.oldAction) {
+      this._viewer.inputs.onMainAction = this.oldAction;
+      this.oldAction = void 0;
     }
-    (_a2 = this.removeMouseListener) == null ? void 0 : _a2.call(this);
-    this.removeMouseListener = void 0;
+    this._viewer.inputs.onIdleAction = void 0;
     this.reset();
     if (this._currentMarker) {
       this._viewer.renderer.remove(this._currentMarker.mesh);
       this._currentMarker.dispose();
     }
-    (_b = this.onAbort) == null ? void 0 : _b.call(this);
+    (_a2 = this.onAbort) == null ? void 0 : _a2.call(this);
     this.onAbort = void 0;
   }
   reset() {
@@ -28009,9 +28067,13 @@ var Geometry$1;
     return merger.toBufferGeometry();
   }
   Geometry2.createGeometryFromInstances = createGeometryFromInstances;
-  function createGeometryFromMesh(g3d, mesh, useAlpha) {
-    const colors = createVertexColors(g3d, mesh, useAlpha);
-    return createGeometryFromArrays(g3d.positions.subarray(g3d.getMeshVertexStart(mesh) * 3, g3d.getMeshVertexEnd(mesh) * 3), g3d.indices.subarray(g3d.getMeshIndexStart(mesh), g3d.getMeshIndexEnd(mesh)), colors, useAlpha ? 4 : 3);
+  function createGeometryFromMesh(g3d, mesh, section, transparent) {
+    const colors = createVertexColors(g3d, mesh, transparent);
+    const positions = g3d.positions.subarray(g3d.getMeshVertexStart(mesh) * 3, g3d.getMeshVertexEnd(mesh) * 3);
+    const start = g3d.getMeshIndexStart(mesh, section);
+    const end = g3d.getMeshIndexEnd(mesh, section);
+    const indices = g3d.indices.subarray(start, end);
+    return createGeometryFromArrays(positions, indices, colors, transparent ? 4 : 3);
   }
   Geometry2.createGeometryFromMesh = createGeometryFromMesh;
   function createVertexColors(g3d, mesh, useAlpha) {
@@ -28034,6 +28096,259 @@ var Geometry$1;
     }
     return result;
   }
+  class Merger2 {
+    constructor(g3d, transparency2, instances, meshSubmeshOffsets, submeshes, indexCount, vertexCount) {
+      __publicField$1(this, "_g3d");
+      __publicField$1(this, "_colorSize");
+      __publicField$1(this, "_instances");
+      __publicField$1(this, "_submeshesOffset");
+      __publicField$1(this, "_submeshes");
+      __publicField$1(this, "_indices");
+      __publicField$1(this, "_vertices");
+      __publicField$1(this, "_colors");
+      __publicField$1(this, "_groups");
+      __publicField$1(this, "getInstances", () => this._instances);
+      __publicField$1(this, "getSubmeshes", () => this._groups);
+      this._g3d = g3d;
+      this._colorSize = Transparency$1.requiresAlpha(transparency2) ? 4 : 3;
+      this._instances = instances;
+      this._submeshesOffset = meshSubmeshOffsets;
+      this._submeshes = submeshes;
+      this._indices = new Uint32Array(indexCount);
+      this._vertices = new Float32Array(vertexCount * this._g3d.POSITION_SIZE);
+      this._colors = new Float32Array(vertexCount * this._colorSize);
+      this._groups = new Array(this._instances.length);
+    }
+    getMeshSubmeshStart(mesh) {
+      return this._submeshesOffset[mesh];
+    }
+    getMeshSubmeshEnd(mesh) {
+      return mesh < this._instances.length - 1 ? this._submeshesOffset[mesh + 1] : this._submeshes.length;
+    }
+    static createFromUniqueMeshes(g3d, transparency2) {
+      let vertexCount = 0;
+      let indexCount = 0;
+      const instances = [];
+      const meshesSubmeshOffset = [];
+      const submeshes = [];
+      const meshCount = g3d.getMeshCount();
+      for (let mesh = 0; mesh < meshCount; mesh++) {
+        const meshInstances = g3d.meshInstances[mesh];
+        if (!meshInstances || meshInstances.length !== 1)
+          continue;
+        const instance = meshInstances[0];
+        if ((g3d.instanceFlags[instance] & 1) > 0)
+          continue;
+        const subStart = g3d.getMeshSubmeshStart(mesh);
+        const subEnd = g3d.getMeshSubmeshEnd(mesh);
+        let some = false;
+        const offset = submeshes.length;
+        for (let sub = subStart; sub < subEnd; sub++) {
+          const alpha = g3d.getSubmeshAlpha(sub);
+          if (!Transparency$1.match(transparency2, alpha < 1)) {
+            continue;
+          }
+          some = true;
+          submeshes.push(sub);
+          indexCount += g3d.getSubmeshIndexCount(sub);
+        }
+        if (!some)
+          continue;
+        instances.push(instance);
+        meshesSubmeshOffset.push(offset);
+        vertexCount += g3d.getMeshVertexCount(mesh);
+      }
+      return new Merger2(g3d, transparency2, instances, meshesSubmeshOffset, submeshes, indexCount, vertexCount);
+    }
+    static createFromInstances(g3d, instances, transparency2) {
+      let vertexCount = 0;
+      let indexCount = 0;
+      const instancesFiltered = [];
+      const meshes = [];
+      for (let i2 = 0; i2 < instances.length; i2++) {
+        const instance = instances[i2];
+        const mesh = g3d.instanceMeshes[instance];
+        if (mesh < 0)
+          continue;
+        if (!Transparency$1.match(transparency2, g3d.getMeshHasTransparency(mesh))) {
+          continue;
+        }
+        vertexCount += g3d.getMeshVertexCount(mesh);
+        indexCount += g3d.getMeshIndexCount(mesh);
+        instancesFiltered.push(instance);
+        meshes.push(mesh);
+      }
+      return new Merger(g3d, transparency2, instancesFiltered, meshes, indexCount, vertexCount);
+    }
+    merge() {
+      const matrix = new Matrix4();
+      const vector = new Vector3();
+      let vertex2 = 0;
+      let index = 0;
+      let offset = 0;
+      for (let i2 = 0; i2 < this._instances.length; i2++) {
+        const instance = this._instances[i2];
+        const mesh = this._g3d.getInstanceMesh(instance);
+        getInstanceMatrix(this._g3d, instance, matrix);
+        const vertexStart = this._g3d.getMeshVertexStart(mesh);
+        const vertexEnd = this._g3d.getMeshVertexEnd(mesh);
+        for (let p2 = vertexStart; p2 < vertexEnd; p2++) {
+          vector.fromArray(this._g3d.positions, p2 * this._g3d.POSITION_SIZE);
+          vector.applyMatrix4(matrix);
+          vector.toArray(this._vertices, vertex2);
+          vertex2 += this._g3d.POSITION_SIZE;
+        }
+        const subStart = this.getMeshSubmeshStart(i2);
+        const subEnd = this.getMeshSubmeshEnd(i2);
+        for (let s = subStart; s < subEnd; s++) {
+          const sub = this._submeshes[s];
+          const start = this._g3d.getSubmeshIndexStart(sub);
+          const end = this._g3d.getSubmeshIndexEnd(sub);
+          const subColor = this._g3d.getSubmeshColor(sub);
+          for (let i22 = start; i22 < end; i22++) {
+            this._indices[index++] = this._g3d.indices[i22] + offset;
+            const v2 = (this._g3d.indices[i22] + offset) * this._colorSize;
+            this._colors[v2] = subColor[0];
+            this._colors[v2 + 1] = subColor[1];
+            this._colors[v2 + 2] = subColor[2];
+            if (this._colorSize > 3) {
+              this._colors[v2 + 3] = subColor[3];
+            }
+          }
+        }
+        offset += vertex2;
+      }
+    }
+    toBufferGeometry() {
+      this.merge();
+      const geometry = createGeometryFromArrays(this._vertices, this._indices, this._colors, this._colorSize);
+      return geometry;
+    }
+  }
+  Geometry2.Merger2 = Merger2;
+  class Merger3 {
+    constructor(g3d, transparency2, instances, acceptSubmesh, indexCount, vertexCount) {
+      __publicField$1(this, "_g3d");
+      __publicField$1(this, "_colorSize");
+      __publicField$1(this, "_instances");
+      __publicField$1(this, "_acceptSubmesh");
+      __publicField$1(this, "_indices");
+      __publicField$1(this, "_vertices");
+      __publicField$1(this, "_colors");
+      __publicField$1(this, "_groups");
+      __publicField$1(this, "getInstances", () => this._instances);
+      __publicField$1(this, "getSubmeshes", () => this._groups);
+      this._g3d = g3d;
+      this._colorSize = Transparency$1.requiresAlpha(transparency2) ? 4 : 3;
+      this._instances = instances;
+      this._acceptSubmesh = acceptSubmesh;
+      this._indices = new Uint32Array(indexCount);
+      this._vertices = new Float32Array(vertexCount * this._g3d.POSITION_SIZE);
+      this._colors = new Float32Array(vertexCount * this._colorSize);
+      this._groups = new Array(this._instances.length);
+    }
+    static createFromUniqueMeshes(g3d, transparency2) {
+      let vertexCount = 0;
+      let indexCount = 0;
+      const instances = [];
+      const acceptSubmesh = new Array(g3d.getSubmeshCount());
+      const meshCount = g3d.getMeshCount();
+      for (let mesh = 0; mesh < meshCount; mesh++) {
+        const meshInstances = g3d.meshInstances[mesh];
+        if (!meshInstances || meshInstances.length !== 1)
+          continue;
+        const instance = meshInstances[0];
+        if ((g3d.instanceFlags[instance] & 1) > 0)
+          continue;
+        const subStart = g3d.getMeshSubmeshStart(mesh);
+        const subEnd = g3d.getMeshSubmeshEnd(mesh);
+        let some = false;
+        for (let sub = subStart; sub < subEnd; sub++) {
+          const alpha = g3d.getSubmeshAlpha(sub);
+          if (!Transparency$1.match(transparency2, alpha < 1)) {
+            continue;
+          }
+          some = true;
+          acceptSubmesh[sub] = true;
+          indexCount += g3d.getSubmeshIndexCount(sub);
+        }
+        if (!some)
+          continue;
+        instances.push(instance);
+        vertexCount += g3d.getMeshVertexCount(mesh);
+      }
+      return new Merger3(g3d, transparency2, instances, acceptSubmesh, indexCount, vertexCount);
+    }
+    static createFromInstances(g3d, instances, transparency2) {
+      let vertexCount = 0;
+      let indexCount = 0;
+      const instancesFiltered = [];
+      const meshes = [];
+      for (let i2 = 0; i2 < instances.length; i2++) {
+        const instance = instances[i2];
+        const mesh = g3d.instanceMeshes[instance];
+        if (mesh < 0)
+          continue;
+        if (!Transparency$1.match(transparency2, g3d.getMeshHasTransparency(mesh))) {
+          continue;
+        }
+        vertexCount += g3d.getMeshVertexCount(mesh);
+        indexCount += g3d.getMeshIndexCount(mesh);
+        instancesFiltered.push(instance);
+        meshes.push(mesh);
+      }
+      return new Merger(g3d, transparency2, instancesFiltered, meshes, indexCount, vertexCount);
+    }
+    merge() {
+      let index = 0;
+      let vertex2 = 0;
+      let offset = 0;
+      const matrix = new Matrix4();
+      const vector = new Vector3();
+      for (let i2 = 0; i2 < this._instances.length; i2++) {
+        const instance = this._instances[i2];
+        const mesh = this._g3d.getInstanceMesh(instance);
+        this._groups[i2] = index;
+        const subStart = this._g3d.getMeshSubmeshStart(mesh);
+        const subEnd = this._g3d.getMeshSubmeshEnd(mesh);
+        for (let sub = subStart; sub < subEnd; sub++) {
+          if (!this._acceptSubmesh[sub])
+            continue;
+          const startIndex = this._g3d.getSubmeshIndexStart(sub);
+          const endIndex = this._g3d.getSubmeshIndexEnd(sub);
+          for (let i22 = startIndex; i22 < endIndex; i22++) {
+            this._indices[index++] = this._g3d.indices[i22] + offset;
+          }
+          const subColor = this._g3d.getSubmeshColor(sub);
+          for (let i22 = startIndex; i22 < endIndex; i22++) {
+            const v2 = (this._g3d.indices[i22] + offset) * this._colorSize;
+            this._colors[v2] = subColor[0];
+            this._colors[v2 + 1] = subColor[1];
+            this._colors[v2 + 2] = subColor[2];
+            if (this._colorSize > 3) {
+              this._colors[v2 + 3] = subColor[3];
+            }
+          }
+        }
+        getInstanceMatrix(this._g3d, instance, matrix);
+        const vertexStart = this._g3d.getMeshVertexStart(mesh);
+        const vertexEnd = this._g3d.getMeshVertexEnd(mesh);
+        for (let p2 = vertexStart; p2 < vertexEnd; p2++) {
+          vector.fromArray(this._g3d.positions, p2 * this._g3d.POSITION_SIZE);
+          vector.applyMatrix4(matrix);
+          vector.toArray(this._vertices, vertex2);
+          vertex2 += this._g3d.POSITION_SIZE;
+        }
+        offset += vertexEnd - vertexStart;
+      }
+    }
+    toBufferGeometry() {
+      this.merge();
+      const geometry = createGeometryFromArrays(this._vertices, this._indices, this._colors, this._colorSize);
+      return geometry;
+    }
+  }
+  Geometry2.Merger3 = Merger3;
   class Merger {
     constructor(g3d, transparency2, instances, meshes, indexCount, vertexCount) {
       __publicField$1(this, "_g3d");
@@ -28065,7 +28380,7 @@ var Geometry$1;
         const meshInstances = g3d.meshInstances[mesh];
         if (!meshInstances || meshInstances.length !== 1)
           continue;
-        if (!Transparency$1.match(transparency2, g3d.meshTransparent[mesh])) {
+        if (!Transparency$1.match(transparency2, g3d.getMeshHasTransparency(mesh))) {
           continue;
         }
         if ((g3d.instanceFlags[meshInstances[0]] & 1) > 0)
@@ -28087,7 +28402,7 @@ var Geometry$1;
         const mesh = g3d.instanceMeshes[instance];
         if (mesh < 0)
           continue;
-        if (!Transparency$1.match(transparency2, g3d.meshTransparent[mesh])) {
+        if (!Transparency$1.match(transparency2, g3d.getMeshHasTransparency(mesh))) {
           continue;
         }
         vertexCount += g3d.getMeshVertexCount(mesh);
@@ -28320,7 +28635,7 @@ class G3d {
     __publicField$1(this, "materialColors");
     __publicField$1(this, "meshVertexOffsets");
     __publicField$1(this, "meshInstances");
-    __publicField$1(this, "meshTransparent");
+    __publicField$1(this, "meshOpaqueCount");
     __publicField$1(this, "rawG3d");
     __publicField$1(this, "MATRIX_SIZE", 16);
     __publicField$1(this, "COLOR_SIZE", 4);
@@ -28361,14 +28676,15 @@ class G3d {
     this.meshVertexOffsets = this.computeMeshVertexOffsets();
     this.rebaseIndices();
     this.meshInstances = this.computeMeshInstances();
-    this.meshTransparent = this.computeMeshIsTransparent();
+    this.meshOpaqueCount = this.computeMeshOpaqueCount();
+    this.sortSubmeshes();
   }
   computeMeshVertexOffsets() {
     const result = new Int32Array(this.getMeshCount());
     for (let m2 = 0; m2 < result.length; m2++) {
       let min2 = Number.MAX_SAFE_INTEGER;
-      const start = this.getMeshIndexStart(m2);
-      const end = this.getMeshIndexEnd(m2);
+      const start = this.getMeshIndexStart(m2, "all");
+      const end = this.getMeshIndexEnd(m2, "all");
       for (let i2 = start; i2 < end; i2++) {
         min2 = Math.min(min2, this.indices[i2]);
       }
@@ -28376,40 +28692,127 @@ class G3d {
     }
     return result;
   }
+  sortSubmeshes() {
+    const submeshEnd = this.computeSubmeshEnd();
+    const meshIndexOffsets = this.computeMeshIndexOffsets();
+    const meshCount = this.getMeshCount();
+    const meshReordered = new Array(meshCount);
+    const submeshArrays = [
+      this.submeshIndexOffset,
+      this.submeshMaterial,
+      submeshEnd
+    ];
+    const largestMesh = this.reorderSubmeshes(submeshArrays, meshReordered);
+    this.reorderIndices(meshIndexOffsets, submeshEnd, meshReordered, largestMesh);
+  }
+  computeSubmeshEnd() {
+    const submeshCount = this.getSubmeshCount();
+    const result = new Int32Array(submeshCount);
+    for (let s = 0; s < submeshCount; s++) {
+      result[s] = this.getSubmeshIndexEnd(s);
+    }
+    return result;
+  }
+  computeMeshIndexOffsets() {
+    const meshCount = this.getMeshCount();
+    const result = new Int32Array(meshCount);
+    for (let m2 = 0; m2 < meshCount; m2++) {
+      result[m2] = this.getMeshIndexStart(m2, "all");
+    }
+    return result;
+  }
+  reorderSubmeshes(submeshArrays, reordered) {
+    const meshCount = this.getMeshCount();
+    let largestMesh = 0;
+    for (let m2 = 0; m2 < meshCount; m2++) {
+      const subStart = this.getMeshSubmeshStart(m2, "all");
+      const subEnd = this.getMeshSubmeshEnd(m2, "all");
+      if (subEnd - subStart <= 1) {
+        continue;
+      }
+      largestMesh = Math.max(largestMesh, this.getMeshIndexCount(m2, "all"));
+      reordered[m2] = this.Sort(subStart, subEnd, (i2) => this.getSubmeshAlpha(i2), submeshArrays);
+    }
+    return largestMesh;
+  }
+  Sort(start, end, criterion, arrays) {
+    let swapped = false;
+    while (true) {
+      let loop = false;
+      for (let i2 = start; i2 < end - 1; i2++) {
+        if (criterion(i2) < criterion(i2 + 1)) {
+          loop = true;
+          swapped = true;
+          for (let j = 0; j < arrays.length; j++) {
+            const array = arrays[j];
+            const t2 = array[i2];
+            array[i2] = array[i2 + 1];
+            array[i2 + 1] = t2;
+          }
+        }
+      }
+      if (!loop) {
+        break;
+      }
+    }
+    return swapped;
+  }
+  reorderIndices(meshIndexOffsets, submeshEnd, meshReordered, bufferSize) {
+    const meshCount = this.getMeshCount();
+    const buffer = new Float32Array(bufferSize);
+    for (let m2 = 0; m2 < meshCount; m2++) {
+      if (!meshReordered[m2])
+        continue;
+      const meshOffset = meshIndexOffsets[m2];
+      const subStart = this.getMeshSubmeshStart(m2, "all");
+      const subEnd = this.getMeshSubmeshEnd(m2, "all");
+      let index = 0;
+      for (let s = subStart; s < subEnd; s++) {
+        const start = this.submeshIndexOffset[s];
+        const end = submeshEnd[s];
+        this.submeshIndexOffset[s] = meshOffset + index;
+        for (let i2 = start; i2 < end; i2++) {
+          buffer[index++] = this.indices[i2];
+        }
+      }
+      for (let i2 = 0; i2 < index; i2++) {
+        this.indices[meshOffset + i2] = buffer[i2];
+      }
+    }
+  }
   rebaseIndices() {
     const count = this.getMeshCount();
     for (let m2 = 0; m2 < count; m2++) {
       const offset = this.meshVertexOffsets[m2];
-      const start = this.getMeshIndexStart(m2);
-      const end = this.getMeshIndexEnd(m2);
+      const start = this.getMeshIndexStart(m2, "all");
+      const end = this.getMeshIndexEnd(m2, "all");
       for (let i2 = start; i2 < end; i2++) {
         this.indices[i2] -= offset;
       }
     }
   }
-  computeMeshIsTransparent() {
-    const result = new Array(this.getMeshCount());
+  computeMeshOpaqueCount() {
+    const result = new Array(this.getMeshCount()).fill(0);
     for (let m2 = 0; m2 < result.length; m2++) {
-      const subStart = this.getMeshSubmeshStart(m2);
-      const subEnd = this.getMeshSubmeshEnd(m2);
+      const subStart = this.getMeshSubmeshStart(m2, "all");
+      const subEnd = this.getMeshSubmeshEnd(m2, "all");
       for (let s = subStart; s < subEnd; s++) {
-        const material = this.submeshMaterial[s];
-        const alpha = this.materialColors[material * this.COLOR_SIZE + this.COLOR_SIZE - 1];
-        result[m2] = result[m2] || alpha < 1;
+        const alpha = this.getSubmeshAlpha(s);
+        result[m2] += alpha === 1 ? 1 : 0;
       }
     }
     return result;
   }
-  getMeshIndexStart(mesh) {
-    const subStart = this.getMeshSubmeshStart(mesh);
-    return this.getSubmeshIndexStart(subStart);
+  getMeshIndexStart(mesh, section = "all") {
+    const sub = this.getMeshSubmeshStart(mesh, section);
+    return this.getSubmeshIndexStart(sub);
   }
-  getMeshIndexEnd(mesh) {
-    const subEnd = this.getMeshSubmeshEnd(mesh);
-    return this.getSubmeshIndexEnd(subEnd - 1);
+  getMeshIndexEnd(mesh, section = "all") {
+    const sub = this.getMeshSubmeshEnd(mesh, section);
+    return this.getSubmeshIndexEnd(sub - 1);
   }
-  getMeshIndexCount(mesh) {
-    return this.getMeshIndexEnd(mesh) - this.getMeshIndexStart(mesh);
+  getMeshIndexCount(mesh, section = "all") {
+    return this.getMeshIndexEnd(mesh, section) - this.getMeshIndexStart(mesh, section);
   }
   getMeshVertexStart(mesh) {
     return this.meshVertexOffsets[mesh];
@@ -28420,17 +28823,28 @@ class G3d {
   getMeshVertexCount(mesh) {
     return this.getMeshVertexEnd(mesh) - this.getMeshVertexStart(mesh);
   }
-  getMeshSubmeshStart(mesh) {
+  getMeshSubmeshStart(mesh, section = "all") {
+    if (section === "transparent") {
+      return this.getMeshSubmeshEnd(mesh, "opaque");
+    }
     return this.meshSubmeshes[mesh];
   }
-  getMeshSubmeshEnd(mesh) {
+  getMeshSubmeshEnd(mesh, section = "all") {
+    if (section === "opaque") {
+      return this.meshSubmeshes[mesh] + this.meshOpaqueCount[mesh];
+    }
     return mesh < this.meshSubmeshes.length - 1 ? this.meshSubmeshes[mesh + 1] : this.submeshIndexOffset.length;
   }
-  getMeshSubmeshCount(mesh) {
-    return this.getMeshSubmeshEnd(mesh) - this.getMeshSubmeshStart(mesh);
+  getMeshSubmeshCount(mesh, section = "all") {
+    const end = this.getMeshSubmeshEnd(mesh, section);
+    const start = this.getMeshSubmeshStart(mesh, section);
+    return end - start;
+  }
+  getMeshHasTransparency(mesh) {
+    return this.getMeshSubmeshCount(mesh, "transparent") > 0;
   }
   getSubmeshIndexStart(submesh) {
-    return this.submeshIndexOffset[submesh];
+    return submesh < this.submeshIndexOffset.length ? this.submeshIndexOffset[submesh] : this.indices.length;
   }
   getSubmeshIndexEnd(submesh) {
     return submesh < this.submeshIndexOffset.length - 1 ? this.submeshIndexOffset[submesh + 1] : this.indices.length;
@@ -28441,6 +28855,18 @@ class G3d {
   getSubmeshColor(submesh) {
     return this.getMaterialColor(this.submeshMaterial[submesh]);
   }
+  getSubmeshAlpha(submesh) {
+    return this.getMaterialAlpha(this.submeshMaterial[submesh]);
+  }
+  getSubmeshIsTransparent(submesh) {
+    return this.getSubmeshAlpha(submesh) < 1;
+  }
+  getSubmeshCount() {
+    return this.submeshMaterial.length;
+  }
+  getInstanceMesh(instance) {
+    return this.instanceMeshes[instance];
+  }
   getInstanceMatrix(instance) {
     return this.instanceTransforms.subarray(instance * this.MATRIX_SIZE, (instance + 1) * this.MATRIX_SIZE);
   }
@@ -28448,6 +28874,13 @@ class G3d {
     if (material < 0)
       return this.DEFAULT_COLOR;
     return this.materialColors.subarray(material * this.COLOR_SIZE, (material + 1) * this.COLOR_SIZE);
+  }
+  getMaterialAlpha(material) {
+    if (material < 0)
+      return 1;
+    const index = material * this.COLOR_SIZE + this.COLOR_SIZE - 1;
+    const result = this.materialColors[index];
+    return result;
   }
   static async createFromBfast(bfast) {
     return AbstractG3d.createFromBfast(bfast).then((g3d) => new G3d(g3d));
@@ -28523,6 +28956,14 @@ class G3d {
     }
     if (this.materialColors.length % this.COLOR_SIZE !== 0) {
       throw new Error("Invalid material color buffer, must be divisible by " + this.COLOR_SIZE);
+    }
+    console.assert(this.meshInstances.length === this.getMeshCount());
+    console.assert(this.meshOpaqueCount.length === this.getMeshCount());
+    console.assert(this.meshSubmeshes.length === this.getMeshCount());
+    console.assert(this.meshVertexOffsets.length === this.getMeshCount());
+    for (let m2 = 0; m2 < this.getMeshCount(); m2++) {
+      console.assert(this.getMeshSubmeshCount(m2, "opaque") + this.getMeshSubmeshCount(m2, "transparent") === this.getMeshSubmeshCount(m2, "all"));
+      console.assert(this.getMeshIndexCount(m2, "opaque") + this.getMeshIndexCount(m2, "transparent") === this.getMeshIndexCount(m2, "all"));
     }
   }
 }
@@ -29087,13 +29528,23 @@ class MeshBuilder {
       meshInstances = set3 ? meshInstances.filter((i2) => set3.has(i2)) : meshInstances.filter((i2) => (g3d.instanceFlags[i2] & 1) === 0);
       if (meshInstances.length <= 1)
         continue;
-      if (!Transparency$1.match(transparency2, g3d.meshTransparent[mesh])) {
-        continue;
+      const createMesh = (section, transparent) => {
+        const geometry = Geometry$1.createGeometryFromMesh(g3d, mesh, section, transparent);
+        return this.createInstancedMesh(geometry, g3d, meshInstances, transparent);
+      };
+      const opaqueSection = transparency2 === "allAsOpaque" ? "all" : "opaque";
+      const opaque = g3d.getMeshSubmeshCount(mesh, opaqueSection);
+      if (opaque > 0) {
+        const m2 = createMesh(opaqueSection, false);
+        result.push(m2);
       }
-      const useAlpha = Transparency$1.requiresAlpha(transparency2) && g3d.meshTransparent[mesh];
-      const geometry = Geometry$1.createGeometryFromMesh(g3d, mesh, useAlpha);
-      const resultMesh = this.createInstancedMesh(geometry, g3d, meshInstances, useAlpha);
-      result.push(resultMesh);
+      if (Transparency$1.requiresAlpha(transparency2)) {
+        const transparent = g3d.getMeshSubmeshCount(mesh, "transparent");
+        if (transparent > 0) {
+          const m2 = createMesh("transparent", true);
+          result.push(m2);
+        }
+      }
     }
     return result;
   }
@@ -29108,7 +29559,7 @@ class MeshBuilder {
     return result;
   }
   createMergedMesh(g3d, transparency2, instances) {
-    const merger = instances ? Geometry$1.Merger.createFromInstances(g3d, instances, transparency2) : Geometry$1.Merger.createFromUniqueMeshes(g3d, transparency2);
+    const merger = instances ? Geometry$1.Merger.createFromInstances(g3d, instances, transparency2) : Geometry$1.Merger3.createFromUniqueMeshes(g3d, transparency2);
     const geometry = merger.toBufferGeometry();
     const material = Transparency$1.requiresAlpha(transparency2) ? this.materials.transparent : this.materials.opaque;
     const mesh = new Mesh(geometry, material);
@@ -29134,11 +29585,13 @@ class SceneBuilder {
     scene.merge(shared2);
     if (transparency2 !== "transparentOnly") {
       const opaque = this.createFromMergeableMeshes(g3d, transparency2 === "allAsOpaque" ? "allAsOpaque" : "opaqueOnly", instances);
-      scene.merge(opaque);
+      if (opaque)
+        scene.merge(opaque);
     }
     if (Transparency$1.requiresAlpha(transparency2)) {
       const transparent = this.createFromMergeableMeshes(g3d, "transparentOnly", instances);
-      scene.merge(transparent);
+      if (transparent)
+        scene.merge(transparent);
     }
     return scene;
   }
@@ -29152,6 +29605,8 @@ class SceneBuilder {
   }
   createFromMergeableMeshes(g3d, transparency2, instances = void 0) {
     const mesh = this.meshBuilder.createMergedMesh(g3d, transparency2, instances);
+    if (!mesh)
+      return;
     return new Scene(this).addMergedMesh(mesh);
   }
 }
@@ -30082,6 +30537,10 @@ class Renderer {
   clear() {
     this.scene.clear();
   }
+  applyMaterialSettings(settings) {
+    this.materials.applyWireframeSettings(settings.getHighlightColor(), settings.getHighlightOpacity());
+    this.materials.applyIsolationSettings(settings.getIsolationColor(), settings.getIsolationOpacity());
+  }
 }
 class Viewer {
   constructor(options) {
@@ -30101,11 +30560,9 @@ class Viewer {
     __publicField$1(this, "_materials");
     __publicField$1(this, "_vims", []);
     __publicField$1(this, "_disposed", false);
-    __publicField$1(this, "_onMouseClick");
     var _a2;
     this.settings = new ViewerSettings(options);
     const materials = new VimMaterials();
-    this.applyMaterialSettings(materials, this.settings);
     this._loader = new Loader(materials);
     this._materials = materials;
     const scene = new RenderScene();
@@ -30115,17 +30572,18 @@ class Viewer {
     if (this.settings.getCameraGizmoEnable()) {
       this._camera.gizmo = new CameraGizmo(this.renderer, this._camera, this.settings);
     }
+    this.renderer.applyMaterialSettings(this.settings);
     this.gizmoMeasure = new GizmoMeasure(this);
     this._gizmoAxes = new GizmoAxes(this.camera);
     (_a2 = this.viewport.canvas.parentElement) == null ? void 0 : _a2.prepend(this._gizmoAxes.canvas);
     this.gizmoSection = new GizmoSection(this);
     this._environment = new Environment(this.settings);
     this._environment.getObjects().forEach((o) => this.renderer.add(o));
-    this._onMouseClick = this.defaultOnClick;
     this.selection = new Selection(this.renderer);
     this.raycaster = new Raycaster(this.viewport, this._camera, scene, this.renderer);
     this.inputs = new Input(this);
-    this.inputs.register();
+    this.inputs.registerAll();
+    this.inputs.onMainAction = this.inputs.defaultAction.bind(this);
     this.animate();
   }
   get camera() {
@@ -30137,13 +30595,6 @@ class Viewer {
   get axesCanvas() {
     return this._gizmoAxes.canvas;
   }
-  get onMouseClick() {
-    return this._onMouseClick;
-  }
-  set onMouseClick(callback) {
-    this._onMouseClick = callback != null ? callback : function(hit) {
-    };
-  }
   dispose() {
     if (this._disposed)
       return;
@@ -30152,7 +30603,7 @@ class Viewer {
     this._camera.dispose();
     this.viewport.dispose();
     this.renderer.dispose();
-    this.inputs.unregister();
+    this.inputs.unregisterAll();
     this._vims.forEach((v2) => v2 == null ? void 0 : v2.dispose());
     this._materials.dispose();
     this._disposed = true;
@@ -30196,11 +30647,11 @@ class Viewer {
     const vim = await this._loader.load(bfast, settings);
     if (buffer instanceof RemoteBuffer)
       buffer.logger.onUpdate = void 0;
-    this.onVimLoaded(vim, new VimSettings(options));
+    this.onVimLoaded(vim);
     this.camera.frame("all", true);
     return vim;
   }
-  onVimLoaded(vim, settings) {
+  onVimLoaded(vim) {
     this.addVim(vim);
     this.renderer.add(vim.scene);
     const box = this.renderer.getBoundingBox();
@@ -30225,28 +30676,6 @@ class Viewer {
     this.renderer.remove(vim.scene);
     vim.filter(instances);
     this.renderer.add(vim.scene);
-  }
-  applyMaterialSettings(materials, settings) {
-    materials.applyWireframeSettings(settings.getHighlightColor(), settings.getHighlightOpacity());
-    materials.applyIsolationSettings(settings.getIsolationColor(), settings.getIsolationOpacity());
-  }
-  defaultOnClick(hit) {
-    console.log(hit);
-    if (!(hit == null ? void 0 : hit.object)) {
-      this.selection.select(void 0);
-      if (hit.doubleClick) {
-        this.camera.frame("all", false, this.camera.defaultLerpDuration);
-      }
-      return;
-    }
-    this.selection.select(hit.object);
-    if (hit.doubleClick) {
-      this._camera.frame(hit.object, false, this.camera.defaultLerpDuration);
-    }
-    hit.object.getBimElement().then((e) => {
-      e.set("Index", hit.object.element);
-      console.log(e);
-    });
   }
 }
 var commonjsGlobal$1 = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
@@ -40807,9 +41236,13 @@ var Geometry;
     return merger.toBufferGeometry();
   }
   Geometry2.createGeometryFromInstances = createGeometryFromInstances;
-  function createGeometryFromMesh(g3d, mesh, useAlpha) {
-    const colors = createVertexColors(g3d, mesh, useAlpha);
-    return createGeometryFromArrays(g3d.positions.subarray(g3d.getMeshVertexStart(mesh) * 3, g3d.getMeshVertexEnd(mesh) * 3), g3d.indices.subarray(g3d.getMeshIndexStart(mesh), g3d.getMeshIndexEnd(mesh)), colors, useAlpha ? 4 : 3);
+  function createGeometryFromMesh(g3d, mesh, section, transparent) {
+    const colors = createVertexColors(g3d, mesh, transparent);
+    const positions = g3d.positions.subarray(g3d.getMeshVertexStart(mesh) * 3, g3d.getMeshVertexEnd(mesh) * 3);
+    const start = g3d.getMeshIndexStart(mesh, section);
+    const end = g3d.getMeshIndexEnd(mesh, section);
+    const indices = g3d.indices.subarray(start, end);
+    return createGeometryFromArrays(positions, indices, colors, transparent ? 4 : 3);
   }
   Geometry2.createGeometryFromMesh = createGeometryFromMesh;
   function createVertexColors(g3d, mesh, useAlpha) {
@@ -40832,6 +41265,259 @@ var Geometry;
     }
     return result;
   }
+  class Merger2 {
+    constructor(g3d, transparency2, instances, meshSubmeshOffsets, submeshes, indexCount, vertexCount) {
+      __publicField(this, "_g3d");
+      __publicField(this, "_colorSize");
+      __publicField(this, "_instances");
+      __publicField(this, "_submeshesOffset");
+      __publicField(this, "_submeshes");
+      __publicField(this, "_indices");
+      __publicField(this, "_vertices");
+      __publicField(this, "_colors");
+      __publicField(this, "_groups");
+      __publicField(this, "getInstances", () => this._instances);
+      __publicField(this, "getSubmeshes", () => this._groups);
+      this._g3d = g3d;
+      this._colorSize = Transparency.requiresAlpha(transparency2) ? 4 : 3;
+      this._instances = instances;
+      this._submeshesOffset = meshSubmeshOffsets;
+      this._submeshes = submeshes;
+      this._indices = new Uint32Array(indexCount);
+      this._vertices = new Float32Array(vertexCount * this._g3d.POSITION_SIZE);
+      this._colors = new Float32Array(vertexCount * this._colorSize);
+      this._groups = new Array(this._instances.length);
+    }
+    getMeshSubmeshStart(mesh) {
+      return this._submeshesOffset[mesh];
+    }
+    getMeshSubmeshEnd(mesh) {
+      return mesh < this._instances.length - 1 ? this._submeshesOffset[mesh + 1] : this._submeshes.length;
+    }
+    static createFromUniqueMeshes(g3d, transparency2) {
+      let vertexCount = 0;
+      let indexCount = 0;
+      const instances = [];
+      const meshesSubmeshOffset = [];
+      const submeshes = [];
+      const meshCount = g3d.getMeshCount();
+      for (let mesh = 0; mesh < meshCount; mesh++) {
+        const meshInstances = g3d.meshInstances[mesh];
+        if (!meshInstances || meshInstances.length !== 1)
+          continue;
+        const instance = meshInstances[0];
+        if ((g3d.instanceFlags[instance] & 1) > 0)
+          continue;
+        const subStart = g3d.getMeshSubmeshStart(mesh);
+        const subEnd = g3d.getMeshSubmeshEnd(mesh);
+        let some = false;
+        const offset = submeshes.length;
+        for (let sub = subStart; sub < subEnd; sub++) {
+          const alpha = g3d.getSubmeshAlpha(sub);
+          if (!Transparency.match(transparency2, alpha < 1)) {
+            continue;
+          }
+          some = true;
+          submeshes.push(sub);
+          indexCount += g3d.getSubmeshIndexCount(sub);
+        }
+        if (!some)
+          continue;
+        instances.push(instance);
+        meshesSubmeshOffset.push(offset);
+        vertexCount += g3d.getMeshVertexCount(mesh);
+      }
+      return new Merger2(g3d, transparency2, instances, meshesSubmeshOffset, submeshes, indexCount, vertexCount);
+    }
+    static createFromInstances(g3d, instances, transparency2) {
+      let vertexCount = 0;
+      let indexCount = 0;
+      const instancesFiltered = [];
+      const meshes = [];
+      for (let i2 = 0; i2 < instances.length; i2++) {
+        const instance = instances[i2];
+        const mesh = g3d.instanceMeshes[instance];
+        if (mesh < 0)
+          continue;
+        if (!Transparency.match(transparency2, g3d.getMeshHasTransparency(mesh))) {
+          continue;
+        }
+        vertexCount += g3d.getMeshVertexCount(mesh);
+        indexCount += g3d.getMeshIndexCount(mesh);
+        instancesFiltered.push(instance);
+        meshes.push(mesh);
+      }
+      return new Merger(g3d, transparency2, instancesFiltered, meshes, indexCount, vertexCount);
+    }
+    merge() {
+      const matrix = new Matrix4();
+      const vector = new Vector3();
+      let vertex2 = 0;
+      let index = 0;
+      let offset = 0;
+      for (let i2 = 0; i2 < this._instances.length; i2++) {
+        const instance = this._instances[i2];
+        const mesh = this._g3d.getInstanceMesh(instance);
+        getInstanceMatrix(this._g3d, instance, matrix);
+        const vertexStart = this._g3d.getMeshVertexStart(mesh);
+        const vertexEnd = this._g3d.getMeshVertexEnd(mesh);
+        for (let p2 = vertexStart; p2 < vertexEnd; p2++) {
+          vector.fromArray(this._g3d.positions, p2 * this._g3d.POSITION_SIZE);
+          vector.applyMatrix4(matrix);
+          vector.toArray(this._vertices, vertex2);
+          vertex2 += this._g3d.POSITION_SIZE;
+        }
+        const subStart = this.getMeshSubmeshStart(i2);
+        const subEnd = this.getMeshSubmeshEnd(i2);
+        for (let s = subStart; s < subEnd; s++) {
+          const sub = this._submeshes[s];
+          const start = this._g3d.getSubmeshIndexStart(sub);
+          const end = this._g3d.getSubmeshIndexEnd(sub);
+          const subColor = this._g3d.getSubmeshColor(sub);
+          for (let i22 = start; i22 < end; i22++) {
+            this._indices[index++] = this._g3d.indices[i22] + offset;
+            const v2 = (this._g3d.indices[i22] + offset) * this._colorSize;
+            this._colors[v2] = subColor[0];
+            this._colors[v2 + 1] = subColor[1];
+            this._colors[v2 + 2] = subColor[2];
+            if (this._colorSize > 3) {
+              this._colors[v2 + 3] = subColor[3];
+            }
+          }
+        }
+        offset += vertex2;
+      }
+    }
+    toBufferGeometry() {
+      this.merge();
+      const geometry = createGeometryFromArrays(this._vertices, this._indices, this._colors, this._colorSize);
+      return geometry;
+    }
+  }
+  Geometry2.Merger2 = Merger2;
+  class Merger3 {
+    constructor(g3d, transparency2, instances, acceptSubmesh, indexCount, vertexCount) {
+      __publicField(this, "_g3d");
+      __publicField(this, "_colorSize");
+      __publicField(this, "_instances");
+      __publicField(this, "_acceptSubmesh");
+      __publicField(this, "_indices");
+      __publicField(this, "_vertices");
+      __publicField(this, "_colors");
+      __publicField(this, "_groups");
+      __publicField(this, "getInstances", () => this._instances);
+      __publicField(this, "getSubmeshes", () => this._groups);
+      this._g3d = g3d;
+      this._colorSize = Transparency.requiresAlpha(transparency2) ? 4 : 3;
+      this._instances = instances;
+      this._acceptSubmesh = acceptSubmesh;
+      this._indices = new Uint32Array(indexCount);
+      this._vertices = new Float32Array(vertexCount * this._g3d.POSITION_SIZE);
+      this._colors = new Float32Array(vertexCount * this._colorSize);
+      this._groups = new Array(this._instances.length);
+    }
+    static createFromUniqueMeshes(g3d, transparency2) {
+      let vertexCount = 0;
+      let indexCount = 0;
+      const instances = [];
+      const acceptSubmesh = new Array(g3d.getSubmeshCount());
+      const meshCount = g3d.getMeshCount();
+      for (let mesh = 0; mesh < meshCount; mesh++) {
+        const meshInstances = g3d.meshInstances[mesh];
+        if (!meshInstances || meshInstances.length !== 1)
+          continue;
+        const instance = meshInstances[0];
+        if ((g3d.instanceFlags[instance] & 1) > 0)
+          continue;
+        const subStart = g3d.getMeshSubmeshStart(mesh);
+        const subEnd = g3d.getMeshSubmeshEnd(mesh);
+        let some = false;
+        for (let sub = subStart; sub < subEnd; sub++) {
+          const alpha = g3d.getSubmeshAlpha(sub);
+          if (!Transparency.match(transparency2, alpha < 1)) {
+            continue;
+          }
+          some = true;
+          acceptSubmesh[sub] = true;
+          indexCount += g3d.getSubmeshIndexCount(sub);
+        }
+        if (!some)
+          continue;
+        instances.push(instance);
+        vertexCount += g3d.getMeshVertexCount(mesh);
+      }
+      return new Merger3(g3d, transparency2, instances, acceptSubmesh, indexCount, vertexCount);
+    }
+    static createFromInstances(g3d, instances, transparency2) {
+      let vertexCount = 0;
+      let indexCount = 0;
+      const instancesFiltered = [];
+      const meshes = [];
+      for (let i2 = 0; i2 < instances.length; i2++) {
+        const instance = instances[i2];
+        const mesh = g3d.instanceMeshes[instance];
+        if (mesh < 0)
+          continue;
+        if (!Transparency.match(transparency2, g3d.getMeshHasTransparency(mesh))) {
+          continue;
+        }
+        vertexCount += g3d.getMeshVertexCount(mesh);
+        indexCount += g3d.getMeshIndexCount(mesh);
+        instancesFiltered.push(instance);
+        meshes.push(mesh);
+      }
+      return new Merger(g3d, transparency2, instancesFiltered, meshes, indexCount, vertexCount);
+    }
+    merge() {
+      let index = 0;
+      let vertex2 = 0;
+      let offset = 0;
+      const matrix = new Matrix4();
+      const vector = new Vector3();
+      for (let i2 = 0; i2 < this._instances.length; i2++) {
+        const instance = this._instances[i2];
+        const mesh = this._g3d.getInstanceMesh(instance);
+        this._groups[i2] = index;
+        const subStart = this._g3d.getMeshSubmeshStart(mesh);
+        const subEnd = this._g3d.getMeshSubmeshEnd(mesh);
+        for (let sub = subStart; sub < subEnd; sub++) {
+          if (!this._acceptSubmesh[sub])
+            continue;
+          const startIndex = this._g3d.getSubmeshIndexStart(sub);
+          const endIndex = this._g3d.getSubmeshIndexEnd(sub);
+          for (let i22 = startIndex; i22 < endIndex; i22++) {
+            this._indices[index++] = this._g3d.indices[i22] + offset;
+          }
+          const subColor = this._g3d.getSubmeshColor(sub);
+          for (let i22 = startIndex; i22 < endIndex; i22++) {
+            const v2 = (this._g3d.indices[i22] + offset) * this._colorSize;
+            this._colors[v2] = subColor[0];
+            this._colors[v2 + 1] = subColor[1];
+            this._colors[v2 + 2] = subColor[2];
+            if (this._colorSize > 3) {
+              this._colors[v2 + 3] = subColor[3];
+            }
+          }
+        }
+        getInstanceMatrix(this._g3d, instance, matrix);
+        const vertexStart = this._g3d.getMeshVertexStart(mesh);
+        const vertexEnd = this._g3d.getMeshVertexEnd(mesh);
+        for (let p2 = vertexStart; p2 < vertexEnd; p2++) {
+          vector.fromArray(this._g3d.positions, p2 * this._g3d.POSITION_SIZE);
+          vector.applyMatrix4(matrix);
+          vector.toArray(this._vertices, vertex2);
+          vertex2 += this._g3d.POSITION_SIZE;
+        }
+        offset += vertexEnd - vertexStart;
+      }
+    }
+    toBufferGeometry() {
+      this.merge();
+      const geometry = createGeometryFromArrays(this._vertices, this._indices, this._colors, this._colorSize);
+      return geometry;
+    }
+  }
+  Geometry2.Merger3 = Merger3;
   class Merger {
     constructor(g3d, transparency2, instances, meshes, indexCount, vertexCount) {
       __publicField(this, "_g3d");
@@ -40863,7 +41549,7 @@ var Geometry;
         const meshInstances = g3d.meshInstances[mesh];
         if (!meshInstances || meshInstances.length !== 1)
           continue;
-        if (!Transparency.match(transparency2, g3d.meshTransparent[mesh])) {
+        if (!Transparency.match(transparency2, g3d.getMeshHasTransparency(mesh))) {
           continue;
         }
         if ((g3d.instanceFlags[meshInstances[0]] & 1) > 0)
@@ -40885,7 +41571,7 @@ var Geometry;
         const mesh = g3d.instanceMeshes[instance];
         if (mesh < 0)
           continue;
-        if (!Transparency.match(transparency2, g3d.meshTransparent[mesh])) {
+        if (!Transparency.match(transparency2, g3d.getMeshHasTransparency(mesh))) {
           continue;
         }
         vertexCount += g3d.getMeshVertexCount(mesh);
@@ -43335,10 +44021,10 @@ function BimTree(props) {
     setSelectedItems([node]);
   }
   const onFocus = () => {
-    props.viewer.inputs.unregisterKeyboard();
+    props.viewer.inputs.keyboard.unregister();
   };
   const onBlur = () => {
-    props.viewer.inputs.registerKeyboard();
+    props.viewer.inputs.keyboard.register();
   };
   return /* @__PURE__ */ React.createElement("div", {
     className: "vim-bim-tree mb-5",
@@ -43672,10 +44358,10 @@ function BimSearch(props) {
     props.setFilter(e.currentTarget.value);
   };
   const onFocus = () => {
-    props.viewer.inputs.unregisterKeyboard();
+    props.viewer.inputs.keyboard.unregister();
   };
   const onBlur = () => {
-    props.viewer.inputs.registerKeyboard();
+    props.viewer.inputs.keyboard.register();
   };
   console.log("Render BimSearch Done");
   return /* @__PURE__ */ React.createElement("div", {
