@@ -24244,7 +24244,7 @@ class Camera$1 {
     this._orbitTarget = position;
     this.startLerp(duration, "Rotation");
   }
-  frame(target, center = false, duration = 0) {
+  frame(target, center = "none", duration = 0) {
     const sphere = target === "all" ? this._scene.getBoundingSphere() : target instanceof Object$1 ? target.getBoundingSphere() : target instanceof Sphere ? target : void 0;
     this.frameSphere(sphere, center, duration);
   }
@@ -24374,11 +24374,17 @@ class Camera$1 {
     this._targetPosition = pos.add(delta);
     this.startLerp(duration, "Position");
   }
-  frameSphere(sphere, center, duration) {
+  frameSphere(sphere, angle, duration) {
     var _a2;
     const offset = this.camera.position.clone().sub(sphere.center);
-    if (center)
+    const dist = this.camera.position.distanceTo(sphere.center);
+    if (angle === "center") {
       offset.setY(0);
+    }
+    if (typeof angle === "number") {
+      const y2 = Math.sin(angle * (Math.PI / 180)) * dist;
+      offset.setY(y2);
+    }
     offset.normalize();
     offset.multiplyScalar(sphere.radius * 3);
     this._targetPosition = sphere.center.clone().add(offset);
@@ -24704,7 +24710,7 @@ class KeyboardHandler extends InputHandler {
             event.preventDefault();
             break;
           case KEYS.KEY_HOME:
-            this.camera.frame("all", true, this.camera.defaultLerpDuration);
+            this.camera.frame("all", 45, this.camera.defaultLerpDuration);
             event.preventDefault();
             break;
           case KEYS.KEY_ESCAPE:
@@ -24714,9 +24720,9 @@ class KeyboardHandler extends InputHandler {
           case KEYS.KEY_Z:
           case KEYS.KEY_F:
             if (this.selection.object) {
-              this.camera.frame(this.selection.object, false, this.camera.defaultLerpDuration);
+              this.camera.frame(this.selection.object, "center", this.camera.defaultLerpDuration);
             } else {
-              this.camera.frame("all", false, this.camera.defaultLerpDuration);
+              this.camera.frame("all", "center", this.camera.defaultLerpDuration);
             }
             event.preventDefault();
             break;
@@ -25154,6 +25160,25 @@ class Input {
       this.keyboard.unregister();
       this.touch.unregister();
     });
+    __publicField$1(this, "defaultAction", (action) => {
+      const camera = this._viewer.camera;
+      const selection = this._viewer.selection;
+      if (!(action == null ? void 0 : action.object)) {
+        selection.select(void 0);
+        if (action.type === "double") {
+          camera.frame("all", "none", camera.defaultLerpDuration);
+        }
+        return;
+      }
+      selection.select(action.object);
+      if (action.type === "double") {
+        camera.frame(action.object, "none", camera.defaultLerpDuration);
+      }
+      action.object.getBimElement().then((e) => {
+        e.set("Index", action.object.element);
+        console.log(e);
+      });
+    });
     this._viewer = viewer2;
     this.keyboard = new KeyboardHandler(viewer2);
     this.mouse = new MouseHandler(viewer2);
@@ -25169,26 +25194,6 @@ class Input {
     this.mouse.reset();
     this.keyboard.reset();
     this.touch.reset();
-  }
-  defaultAction(action) {
-    const camera = this._viewer.camera;
-    const selection = this._viewer.selection;
-    console.log(action);
-    if (!(action == null ? void 0 : action.object)) {
-      selection.select(void 0);
-      if (action.type === "double") {
-        camera.frame("all", false, camera.defaultLerpDuration);
-      }
-      return;
-    }
-    selection.select(action.object);
-    if (action.type === "double") {
-      camera.frame(action.object, false, camera.defaultLerpDuration);
-    }
-    action.object.getBimElement().then((e) => {
-      e.set("Index", action.object.element);
-      console.log(e);
-    });
   }
 }
 class Selection {
@@ -26366,6 +26371,9 @@ class GizmoSection {
   get section() {
     return this._viewer.renderer.section;
   }
+  get box() {
+    return this.section.box;
+  }
   get clip() {
     return this._clip;
   }
@@ -27051,7 +27059,7 @@ class MeasureMarker {
       depthTest: false,
       color: new Color(0, 0.75, 1)
     });
-    const g = new SphereGeometry(0.75);
+    const g = new SphereGeometry(0.25);
     g.addGroup(0, Infinity, 0);
     g.addGroup(0, Infinity, 1);
     this.mesh = new Mesh(g, [this._material, this._materialAlways]);
@@ -27099,7 +27107,6 @@ class GizmoMeasure {
     this.oldAction = this._viewer.inputs.onMainAction;
     onProgress == null ? void 0 : onProgress("ready");
     this.registerMouse(this.onMouseMoveReady.bind(this));
-    this._viewer.inputs.onIdleAction = this.onMouseIdleReady.bind(this);
     return new Promise((resolve, reject) => {
       this.onAbort = () => {
         onProgress == null ? void 0 : onProgress(void 0);
@@ -27146,12 +27153,6 @@ class GizmoMeasure {
       this.removeMouseListener = void 0;
     };
   }
-  onMouseIdleReady(action) {
-    if (action.object) {
-      this._currentMarker.setPosition(action.raycast.position);
-    }
-    this._currentMarker.mesh.visible = !!action.object;
-  }
   onMouseMoveReady() {
     this._currentMarker.mesh.visible = false;
   }
@@ -27165,7 +27166,6 @@ class GizmoMeasure {
     } else {
       this._measurement = void 0;
     }
-    this._currentMarker.mesh.visible = !!object;
     this._line.mesh.visible = !!object;
   }
   onMouseMoveActive() {
@@ -27181,6 +27181,7 @@ class GizmoMeasure {
     }
     this._viewer.inputs.onIdleAction = void 0;
     (_a2 = this.removeMouseListener) == null ? void 0 : _a2.call(this);
+    this._line.mesh.visible = true;
     this._endPos = action.raycast.position;
     this._endMarker = new MeasureMarker(action.raycast.position);
     this._endMarker.setPosition(this._endPos);
@@ -30648,7 +30649,7 @@ class Viewer {
     if (buffer instanceof RemoteBuffer)
       buffer.logger.onUpdate = void 0;
     this.onVimLoaded(vim);
-    this.camera.frame("all", true);
+    this.camera.frame("all", "center");
     return vim;
   }
   onVimLoaded(vim) {
@@ -41686,7 +41687,7 @@ function MenuTools(props) {
     viewer2.gizmoSection.interactive = next;
     viewer2.gizmoSection.visible = next;
     if (next) {
-      viewer2.camera.frame(viewer2.renderer.section.box.getBoundingSphere(new Sphere()), true, viewer2.camera.defaultLerpDuration);
+      viewer2.camera.frame(viewer2.renderer.section.box.getBoundingSphere(new Sphere()), "none", viewer2.camera.defaultLerpDuration);
     }
     setSection(next);
   };
@@ -44054,7 +44055,7 @@ function BimTree(props) {
       const time = new Date().getTime();
       if (lastClickIndex === click && time - lastClickTime < 200) {
         console.log("ZOOM");
-        props.viewer.camera.frame(props.viewer.selection.object, true, props.viewer.camera.defaultLerpDuration);
+        props.viewer.camera.frame(props.viewer.selection.object, "center", props.viewer.camera.defaultLerpDuration);
         setLastClickIndex(-1);
       } else {
         setLastClickIndex(item.index);
@@ -44660,6 +44661,7 @@ root.render(/* @__PURE__ */ React.createElement(VimComponent, {
   onMount: loadVim
 }));
 function loadVim() {
+  globalThis.viewer = viewer;
   viewer.loadVim(url, {
     rotation: { x: 270, y: 0, z: 0 },
     transparency
@@ -44667,9 +44669,9 @@ function loadVim() {
 }
 const stats = new Stats();
 const style = stats.dom.style;
-style.left = "50%";
-style.top = "16px";
-style.marginLeft = "-40px";
+style.right = "24px";
+style.left = "auto";
+style.top = "200px";
 document.body.appendChild(stats.dom);
 animate();
 function animate() {
