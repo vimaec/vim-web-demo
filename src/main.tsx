@@ -31,6 +31,7 @@ const root = createRoot(createContainer(viewer))
 root.render(<VimComponent viewer = {viewer} onMount = {loadVim}/>)
 
 function loadVim(){
+  globalThis.viewer = viewer
   viewer.loadVim(
     url,
     {
@@ -43,10 +44,10 @@ function loadVim(){
 // Add the FPS Counter
 const stats = new Stats()
 const style = stats.dom.style as CSSStyleDeclaration
-style.left = '50%'
-style.top = '16px'
+style.right = '24px'
+style.left = 'auto'
+style.top = '200px'
 // -half width
-style.marginLeft = '-40px'
 
 document.body.appendChild(stats.dom)
 animate()
