@@ -25185,7 +25185,8 @@ class Input {
         camera.frame(action.object, "none", camera.defaultLerpDuration);
       }
       action.object.getBimElement().then((e) => {
-        e.set("Index", action.object.element);
+        var _a2;
+        e == null ? void 0 : e.set("Index", (_a2 = action.object) == null ? void 0 : _a2.element);
         console.log(e);
       });
     });
@@ -25204,6 +25205,432 @@ class Input {
     this.mouse.reset();
     this.keyboard.reset();
     this.touch.reset();
+  }
+}
+var Transparency$1;
+((Transparency2) => {
+  function isValid(value) {
+    return ["all", "opaqueOnly", "transparentOnly", "allAsOpaque"].includes(value);
+  }
+  Transparency2.isValid = isValid;
+  function requiresAlpha(mode) {
+    return mode === "all" || mode === "transparentOnly";
+  }
+  Transparency2.requiresAlpha = requiresAlpha;
+})(Transparency$1 || (Transparency$1 = {}));
+var Geometry$1;
+((Geometry2) => {
+  function createGeometryFromInstances(g3d, instances) {
+    return Geometry2.mergeInstanceMeshes(g3d, "all", false, instances).geometry;
+  }
+  Geometry2.createGeometryFromInstances = createGeometryFromInstances;
+  function createGeometryFromMesh(g3d, mesh, section, transparent) {
+    const colors = createVertexColors(g3d, mesh, transparent);
+    const positions = g3d.positions.subarray(g3d.getMeshVertexStart(mesh) * 3, g3d.getMeshVertexEnd(mesh) * 3);
+    const start = g3d.getMeshIndexStart(mesh, section);
+    const end = g3d.getMeshIndexEnd(mesh, section);
+    const indices = g3d.indices.subarray(start, end);
+    return createGeometryFromArrays(positions, indices, colors, transparent ? 4 : 3);
+  }
+  Geometry2.createGeometryFromMesh = createGeometryFromMesh;
+  function createVertexColors(g3d, mesh, useAlpha) {
+    const colorSize = useAlpha ? 4 : 3;
+    const result = new Float32Array(g3d.getMeshVertexCount(mesh) * colorSize);
+    const subStart = g3d.getMeshSubmeshStart(mesh);
+    const subEnd = g3d.getMeshSubmeshEnd(mesh);
+    for (let submesh = subStart; submesh < subEnd; submesh++) {
+      const color = g3d.getSubmeshColor(submesh);
+      const start = g3d.getSubmeshIndexStart(submesh);
+      const end = g3d.getSubmeshIndexEnd(submesh);
+      for (let i2 = start; i2 < end; i2++) {
+        const v2 = g3d.indices[i2] * colorSize;
+        result[v2] = color[0];
+        result[v2 + 1] = color[1];
+        result[v2 + 2] = color[2];
+        if (useAlpha)
+          result[v2 + 3] = color[3];
+      }
+    }
+    return result;
+  }
+  function getInstanceMatrix(g3d, instance, target = new Matrix4()) {
+    const matrixAsArray = g3d.getInstanceMatrix(instance);
+    target.fromArray(matrixAsArray);
+    return target;
+  }
+  Geometry2.getInstanceMatrix = getInstanceMatrix;
+  function createGeometryFromArrays(vertices, indices, vertexColors = void 0, colorSize = 3) {
+    const geometry = new BufferGeometry();
+    geometry.setAttribute("position", new BufferAttribute(vertices, 3));
+    geometry.setIndex(new Uint32BufferAttribute(indices, 1));
+    if (vertexColors) {
+      geometry.setAttribute("color", new BufferAttribute(vertexColors, colorSize));
+    }
+    return geometry;
+  }
+  Geometry2.createGeometryFromArrays = createGeometryFromArrays;
+  function mergeInstanceMeshes(g3d, section, transparent, instances) {
+    const info = getInstanceMergeInfo(g3d, instances, section);
+    return merge(g3d, info, transparent);
+  }
+  Geometry2.mergeInstanceMeshes = mergeInstanceMeshes;
+  function mergeUniqueMeshes(g3d, section, transparent) {
+    const info = getUniqueMeshMergeInfo(g3d, section);
+    return merge(g3d, info, transparent);
+  }
+  Geometry2.mergeUniqueMeshes = mergeUniqueMeshes;
+  function merge(g3d, info, transparent) {
+    const buffer = new MergeBuffer(info, g3d.POSITION_SIZE, transparent ? 4 : 3);
+    fillBuffers(g3d, buffer, info);
+    const geometry = buffer.toBufferGeometry();
+    return new MergeResult(geometry, info.instances, buffer.groups);
+  }
+  function getUniqueMeshMergeInfo(g3d, section) {
+    let vertexCount = 0;
+    let indexCount = 0;
+    const instances = [];
+    const meshCount = g3d.getMeshCount();
+    for (let mesh = 0; mesh < meshCount; mesh++) {
+      const meshInstances = g3d.meshInstances[mesh];
+      if (!meshInstances || meshInstances.length !== 1)
+        continue;
+      const instance = meshInstances[0];
+      if ((g3d.instanceFlags[instance] & 1) > 0)
+        continue;
+      const count = g3d.getMeshIndexCount(mesh, section);
+      if (count <= 0)
+        continue;
+      indexCount += count;
+      vertexCount += g3d.getMeshVertexCount(mesh);
+      instances.push(instance);
+    }
+    return new MergeInfo(section, instances, indexCount, vertexCount);
+  }
+  function getInstanceMergeInfo(g3d, instances, section) {
+    let vertexCount = 0;
+    let indexCount = 0;
+    const instancesFiltered = [];
+    for (let i2 = 0; i2 < instances.length; i2++) {
+      const instance = instances[i2];
+      const mesh = g3d.instanceMeshes[instance];
+      const start = g3d.getMeshIndexStart(mesh, section);
+      const end = g3d.getMeshIndexEnd(mesh, section);
+      const count = end - start;
+      if (count <= 0)
+        continue;
+      indexCount += count;
+      vertexCount += g3d.getMeshVertexCount(mesh);
+      instancesFiltered.push(instance);
+    }
+    return new MergeInfo(section, instancesFiltered, indexCount, vertexCount);
+  }
+  function fillBuffers(g3d, buffer, info) {
+    let index = 0;
+    let vertex2 = 0;
+    let offset = 0;
+    const matrix = new Matrix4();
+    const vector = new Vector3();
+    for (let i2 = 0; i2 < info.instances.length; i2++) {
+      const instance = info.instances[i2];
+      const mesh = g3d.getInstanceMesh(instance);
+      buffer.groups[i2] = index;
+      const subStart = g3d.getMeshSubmeshStart(mesh, info.section);
+      const subEnd = g3d.getMeshSubmeshEnd(mesh, info.section);
+      for (let sub = subStart; sub < subEnd; sub++) {
+        const subColor = g3d.getSubmeshColor(sub);
+        const start = g3d.getSubmeshIndexStart(sub);
+        const end = g3d.getSubmeshIndexEnd(sub);
+        for (let s = start; s < end; s++) {
+          const newIndex = g3d.indices[s] + offset;
+          buffer.indices[index++] = newIndex;
+          const v2 = newIndex * buffer.colorSize;
+          buffer.colors[v2] = subColor[0];
+          buffer.colors[v2 + 1] = subColor[1];
+          buffer.colors[v2 + 2] = subColor[2];
+          if (buffer.colorSize > 3) {
+            buffer.colors[v2 + 3] = subColor[3];
+          }
+        }
+      }
+      getInstanceMatrix(g3d, instance, matrix);
+      const vertexStart = g3d.getMeshVertexStart(mesh);
+      const vertexEnd = g3d.getMeshVertexEnd(mesh);
+      for (let p2 = vertexStart; p2 < vertexEnd; p2++) {
+        vector.fromArray(g3d.positions, p2 * g3d.POSITION_SIZE);
+        vector.applyMatrix4(matrix);
+        vector.toArray(buffer.vertices, vertex2);
+        vertex2 += g3d.POSITION_SIZE;
+      }
+      offset += vertexEnd - vertexStart;
+    }
+  }
+  class MergeInfo {
+    constructor(section, instance, indexCount, vertexCount) {
+      __publicField$1(this, "section");
+      __publicField$1(this, "instances");
+      __publicField$1(this, "indexCount");
+      __publicField$1(this, "vertexCount");
+      this.section = section;
+      this.instances = instance;
+      this.indexCount = indexCount;
+      this.vertexCount = vertexCount;
+    }
+  }
+  class MergeBuffer {
+    constructor(info, positionSize, colorSize) {
+      __publicField$1(this, "indices");
+      __publicField$1(this, "vertices");
+      __publicField$1(this, "colors");
+      __publicField$1(this, "groups");
+      __publicField$1(this, "colorSize");
+      this.indices = new Uint32Array(info.indexCount);
+      this.vertices = new Float32Array(info.vertexCount * positionSize);
+      this.colors = new Float32Array(info.vertexCount * colorSize);
+      this.groups = new Array(info.instances.length);
+      this.colorSize = colorSize;
+    }
+    toBufferGeometry() {
+      const geometry = createGeometryFromArrays(this.vertices, this.indices, this.colors, this.colorSize);
+      return geometry;
+    }
+  }
+  class MergeResult {
+    constructor(geometry, instance, submeshes) {
+      __publicField$1(this, "geometry");
+      __publicField$1(this, "instances");
+      __publicField$1(this, "submeshes");
+      this.geometry = geometry;
+      this.instances = instance;
+      this.submeshes = submeshes;
+    }
+  }
+})(Geometry$1 || (Geometry$1 = {}));
+class Object$1 {
+  constructor(vim, element, instances, meshes) {
+    __publicField$1(this, "vim");
+    __publicField$1(this, "element");
+    __publicField$1(this, "instances");
+    __publicField$1(this, "_color");
+    __publicField$1(this, "_visible", true);
+    __publicField$1(this, "_boundingBox");
+    __publicField$1(this, "_meshes");
+    this.vim = vim;
+    this.element = element;
+    this.instances = instances;
+    this._meshes = meshes;
+  }
+  get meshBuilder() {
+    return this.vim.scene.builder.meshBuilder;
+  }
+  get hasMesh() {
+    var _a2;
+    return (_a2 = this._meshes) == null ? void 0 : _a2.length;
+  }
+  updateMeshes(meshes) {
+    this._meshes = meshes;
+    if (!meshes)
+      return;
+    if (this.color) {
+      this.color = this._color;
+    }
+  }
+  getBimElement() {
+    return this.vim.document.getElement(this.element);
+  }
+  async getBimElementValue(field, resolveString) {
+    const value = await this.vim.document.getElementValue(this.element, field);
+    if (!value)
+      return;
+    return resolveString ? this.vim.document.getString(value) : value;
+  }
+  async getBimParameters() {
+    return await this.vim.document.getElementParameters(this.element);
+  }
+  get elementId() {
+    return this.vim.document.getElementId(this.element);
+  }
+  getBoundingBox() {
+    var _a2;
+    if (!this.instances)
+      return;
+    if (this._boundingBox)
+      return this._boundingBox;
+    const geometry = Geometry$1.createGeometryFromInstances(this.vim.document.g3d, this.instances);
+    geometry.applyMatrix4(this.vim.getMatrix());
+    geometry.computeBoundingBox();
+    this._boundingBox = (_a2 = geometry.boundingBox) != null ? _a2 : void 0;
+    geometry.dispose();
+    return this._boundingBox;
+  }
+  getCenter(target = new Vector3()) {
+    var _a2;
+    return (_a2 = this.getBoundingBox()) == null ? void 0 : _a2.getCenter(target);
+  }
+  getBoundingSphere(target = new Sphere()) {
+    var _a2;
+    return (_a2 = this.getBoundingBox()) == null ? void 0 : _a2.getBoundingSphere(target);
+  }
+  createWireframe() {
+    if (!this.instances)
+      return;
+    const wireframe = this.meshBuilder.createWireframe(this.vim.document.g3d, this.instances);
+    wireframe.applyMatrix4(this.vim.getMatrix());
+    return wireframe;
+  }
+  createGeometry() {
+    if (!this.instances)
+      return;
+    const geometry = Geometry$1.createGeometryFromInstances(this.vim.document.g3d, this.instances);
+    geometry.applyMatrix4(this.vim.getMatrix());
+    return geometry;
+  }
+  get color() {
+    return this._color;
+  }
+  set color(color) {
+    if (!this._color || !color ? !this._color && !color : this._color.equals(color)) {
+      return;
+    }
+    this._color = color;
+    this.applyColor(color);
+  }
+  applyColor(color) {
+    if (!this._meshes)
+      return;
+    for (let m2 = 0; m2 < this._meshes.length; m2++) {
+      const [mesh, index] = this._meshes[m2];
+      if (mesh.userData.merged) {
+        this.applyMergedColor(mesh, index, color);
+      } else {
+        this.applyInstancedColor(mesh, index, color);
+      }
+    }
+  }
+  get visible() {
+    return this._visible;
+  }
+  set visible(value) {
+    if (this._visible === value)
+      return;
+    this._visible = value;
+    this.applyVisible(value);
+  }
+  applyVisible(value) {
+    if (!this._meshes)
+      return;
+    for (let m2 = 0; m2 < this._meshes.length; m2++) {
+      const [mesh, index] = this._meshes[m2];
+      if (mesh.userData.merged) {
+        this.applyMergedVisible(mesh, index, value);
+      } else {
+        this.applyInstancedVisible(mesh, index, value);
+      }
+    }
+  }
+  getMergedMeshStart(mesh, index) {
+    return mesh.userData.submeshes[index];
+  }
+  getMergedMeshEnd(mesh, index) {
+    return index + 1 < mesh.userData.submeshes.length ? mesh.userData.submeshes[index + 1] : mesh.geometry.index.count;
+  }
+  applyMergedVisible(mesh, index, show) {
+    var _a2;
+    const positions = mesh.geometry.getAttribute("position");
+    const attribute = (_a2 = mesh.geometry.getAttribute("ignoreVertex")) != null ? _a2 : new Float32BufferAttribute(new Float32Array(positions.count), 1);
+    mesh.geometry.setAttribute("ignoreVertex", attribute);
+    const start = this.getMergedMeshStart(mesh, index);
+    const end = this.getMergedMeshEnd(mesh, index);
+    const indices = mesh.geometry.index;
+    for (let i2 = start; i2 < end; i2++) {
+      const v2 = indices.getX(i2);
+      attribute.setX(v2, show ? 0 : 1);
+    }
+    attribute.needsUpdate = true;
+  }
+  applyInstancedVisible(mesh, index, visible) {
+    let attribute = mesh.geometry.getAttribute("ignoreInstance");
+    if (!attribute) {
+      attribute = new InstancedBufferAttribute(new Float32Array(mesh.count), 1);
+      mesh.geometry.setAttribute("ignoreInstance", attribute);
+    }
+    attribute.setX(index, visible ? 0 : 1);
+    attribute.needsUpdate = true;
+  }
+  applyMergedColor(mesh, index, color) {
+    if (!color) {
+      this.resetMergedColor(mesh, index);
+      return;
+    }
+    const start = this.getMergedMeshStart(mesh, index);
+    const end = this.getMergedMeshEnd(mesh, index);
+    const colors = mesh.geometry.getAttribute("color");
+    const colored = this.getOrAddColoredAttribute(mesh);
+    const indices = mesh.geometry.index;
+    for (let i2 = start; i2 < end; i2++) {
+      const v2 = indices.getX(i2);
+      colors.setXYZ(v2, color.r, color.g, color.b);
+      colored.setX(v2, 1);
+    }
+    colors.needsUpdate = true;
+    colored.needsUpdate = true;
+  }
+  resetMergedColor(mesh, index) {
+    const colors = mesh.geometry.getAttribute("color");
+    const colored = this.getOrAddColoredAttribute(mesh);
+    const indices = mesh.geometry.index;
+    let mergedIndex = this.getMergedMeshStart(mesh, index);
+    const instance = this.vim.scene.getInstanceFromMesh(mesh, index);
+    if (!instance)
+      throw new Error("Could not reset original color.");
+    const g3d = this.vim.document.g3d;
+    const g3dMesh = g3d.instanceMeshes[instance];
+    const subStart = g3d.getMeshSubmeshStart(g3dMesh);
+    const subEnd = g3d.getMeshSubmeshEnd(g3dMesh);
+    for (let sub = subStart; sub < subEnd; sub++) {
+      const start = g3d.getSubmeshIndexStart(sub);
+      const end = g3d.getSubmeshIndexEnd(sub);
+      const color = g3d.getSubmeshColor(sub);
+      for (let i2 = start; i2 < end; i2++) {
+        const v2 = indices.getX(mergedIndex);
+        colors.setXYZ(v2, color[0], color[1], color[2]);
+        colored.setX(v2, 0);
+        mergedIndex++;
+      }
+    }
+    colors.needsUpdate = true;
+    colored.needsUpdate = true;
+  }
+  applyInstancedColor(mesh, index, color) {
+    const colors = this.getOrAddInstanceColorAttribute(mesh);
+    const colored = this.getOrAddColoredAttribute(mesh);
+    if (color) {
+      colors.setXYZ(index, color.r, color.g, color.b);
+      colored.setX(index, 1);
+    } else {
+      colored.setX(index, 0);
+    }
+    colored.needsUpdate = true;
+    colors.needsUpdate = true;
+  }
+  getOrAddInstanceColorAttribute(mesh) {
+    if (mesh.instanceColor)
+      return mesh.instanceColor;
+    const count = mesh.instanceMatrix.count;
+    const colors = new Float32Array(count * 3);
+    const attribute = new InstancedBufferAttribute(colors, 3);
+    mesh.instanceColor = attribute;
+    return attribute;
+  }
+  getOrAddColoredAttribute(mesh) {
+    const colored = mesh.geometry.getAttribute("colored");
+    if (colored) {
+      return colored;
+    }
+    const count = mesh instanceof InstancedMesh ? mesh.instanceMatrix.count : mesh.geometry.getAttribute("position").count;
+    const array = new Float32Array(count);
+    const attribute = mesh instanceof InstancedMesh ? new InstancedBufferAttribute(array, 1) : new BufferAttribute(array, 1);
+    mesh.geometry.setAttribute("colored", attribute);
+    return attribute;
   }
 }
 class Selection {
@@ -25226,11 +25653,15 @@ class Selection {
       return;
     let box;
     for (const o of this._objects) {
-      box = box ? box.union(o.getBoundingBox()) : o.getBoundingBox();
+      const other = o.getBoundingBox();
+      if (!other)
+        continue;
+      box = box ? box.union(other) : other;
     }
     return box;
   }
-  select(...object) {
+  select(object) {
+    object = object === void 0 ? [] : object instanceof Object$1 ? [object] : object;
     object = object.filter((o) => o);
     if (object.length === this._objects.size && object.every((o) => this._objects.has(o))) {
       return;
@@ -25334,7 +25765,9 @@ class Selection {
         console.error("Cannot multiselect across vim files");
         return;
       }
-      instances.push(...o.instances);
+      if (o.instances) {
+        instances.push(...o.instances);
+      }
     }
     const meshBuilder = vim.scene.builder.meshBuilder;
     this._highlight = meshBuilder.createWireframe(vim.document.g3d, instances);
@@ -25603,10 +26036,10 @@ class Scene {
   }
   getInstanceFromMesh(mesh, index) {
     if (!mesh || index < 0)
-      return -1;
+      return;
     const instances = this._threeMeshIdToInstances.get(mesh.id);
     if (!instances)
-      return -1;
+      return;
     return instances[index];
   }
   applyMatrix4(matrix) {
@@ -26330,7 +26763,7 @@ class BoxInputs {
     __publicField$1(this, "sharedBox");
     __publicField$1(this, "faceNormal", new Vector3());
     __publicField$1(this, "dragOrigin", new Vector3());
-    __publicField$1(this, "dragpPlane");
+    __publicField$1(this, "dragpPlane", new Plane());
     __publicField$1(this, "mouseDown");
     __publicField$1(this, "raycaster", new Raycaster$1());
     __publicField$1(this, "lastBox", new Box3());
@@ -26404,19 +26837,19 @@ class BoxInputs {
     this.faceNormal = hit.face.normal;
     this.dragOrigin.copy(hit.point);
     const dist = hit.point.clone().dot(this.viewer.camera.forward);
-    this.dragpPlane = new Plane(this.viewer.camera.forward, -dist);
+    this.dragpPlane.set(this.viewer.camera.forward, -dist);
     this.mouseDown = true;
     this.viewer.inputs.unregisterAll();
     (_b = this.onFaceEnter) == null ? void 0 : _b.call(this, this.faceNormal);
   }
   onDrag(event) {
-    var _a2;
+    var _a2, _b;
     this.raycaster = this.viewer.raycaster.fromPoint(new Vector2(event.offsetX, event.offsetY), this.raycaster);
-    const point = this.raycaster.ray.intersectPlane(this.dragpPlane, new Vector3());
+    const point = (_a2 = this.raycaster.ray.intersectPlane(this.dragpPlane, new Vector3())) != null ? _a2 : this.dragOrigin.clone();
     const delta = point.sub(this.dragOrigin);
     const amount = delta.dot(this.faceNormal);
     const box = this.stretch(this.faceNormal, amount);
-    (_a2 = this.onBoxStretch) == null ? void 0 : _a2.call(this, box);
+    (_b = this.onBoxStretch) == null ? void 0 : _b.call(this, box);
   }
   stretch(normal, amount) {
     const result = this.sharedBox.clone();
@@ -28180,204 +28613,6 @@ var CLONE_DEEP_FLAG = 1, CLONE_SYMBOLS_FLAG = 4;
 function cloneDeep(value) {
   return baseClone(value, CLONE_DEEP_FLAG | CLONE_SYMBOLS_FLAG);
 }
-var Transparency$1;
-((Transparency2) => {
-  function isValid(value) {
-    return ["all", "opaqueOnly", "transparentOnly", "allAsOpaque"].includes(value);
-  }
-  Transparency2.isValid = isValid;
-  function requiresAlpha(mode) {
-    return mode === "all" || mode === "transparentOnly";
-  }
-  Transparency2.requiresAlpha = requiresAlpha;
-})(Transparency$1 || (Transparency$1 = {}));
-var Geometry$1;
-((Geometry2) => {
-  function createGeometryFromInstances(g3d, instances) {
-    return Geometry2.mergeInstanceMeshes(g3d, "all", false, instances).geometry;
-  }
-  Geometry2.createGeometryFromInstances = createGeometryFromInstances;
-  function createGeometryFromMesh(g3d, mesh, section, transparent) {
-    const colors = createVertexColors(g3d, mesh, transparent);
-    const positions = g3d.positions.subarray(g3d.getMeshVertexStart(mesh) * 3, g3d.getMeshVertexEnd(mesh) * 3);
-    const start = g3d.getMeshIndexStart(mesh, section);
-    const end = g3d.getMeshIndexEnd(mesh, section);
-    const indices = g3d.indices.subarray(start, end);
-    return createGeometryFromArrays(positions, indices, colors, transparent ? 4 : 3);
-  }
-  Geometry2.createGeometryFromMesh = createGeometryFromMesh;
-  function createVertexColors(g3d, mesh, useAlpha) {
-    const colorSize = useAlpha ? 4 : 3;
-    const result = new Float32Array(g3d.getMeshVertexCount(mesh) * colorSize);
-    const subStart = g3d.getMeshSubmeshStart(mesh);
-    const subEnd = g3d.getMeshSubmeshEnd(mesh);
-    for (let submesh = subStart; submesh < subEnd; submesh++) {
-      const color = g3d.getSubmeshColor(submesh);
-      const start = g3d.getSubmeshIndexStart(submesh);
-      const end = g3d.getSubmeshIndexEnd(submesh);
-      for (let i2 = start; i2 < end; i2++) {
-        const v2 = g3d.indices[i2] * colorSize;
-        result[v2] = color[0];
-        result[v2 + 1] = color[1];
-        result[v2 + 2] = color[2];
-        if (useAlpha)
-          result[v2 + 3] = color[3];
-      }
-    }
-    return result;
-  }
-  function getInstanceMatrix(g3d, instance, target = new Matrix4()) {
-    const matrixAsArray = g3d.getInstanceMatrix(instance);
-    target.fromArray(matrixAsArray);
-    return target;
-  }
-  Geometry2.getInstanceMatrix = getInstanceMatrix;
-  function createGeometryFromArrays(vertices, indices, vertexColors = void 0, colorSize = 3) {
-    const geometry = new BufferGeometry();
-    geometry.setAttribute("position", new BufferAttribute(vertices, 3));
-    geometry.setIndex(new Uint32BufferAttribute(indices, 1));
-    if (vertexColors) {
-      geometry.setAttribute("color", new BufferAttribute(vertexColors, colorSize));
-    }
-    return geometry;
-  }
-  Geometry2.createGeometryFromArrays = createGeometryFromArrays;
-  function mergeInstanceMeshes(g3d, section, transparent, instances) {
-    const info = getInstanceMergeInfo(g3d, instances, section);
-    return merge(g3d, info, transparent);
-  }
-  Geometry2.mergeInstanceMeshes = mergeInstanceMeshes;
-  function mergeUniqueMeshes(g3d, section, transparent) {
-    const info = getUniqueMeshMergeInfo(g3d, section);
-    return merge(g3d, info, transparent);
-  }
-  Geometry2.mergeUniqueMeshes = mergeUniqueMeshes;
-  function merge(g3d, info, transparent) {
-    const buffer = new MergeBuffer(info, g3d.POSITION_SIZE, transparent ? 4 : 3);
-    fillBuffers(g3d, buffer, info);
-    const geometry = buffer.toBufferGeometry();
-    return new MergeResult(geometry, info.instances, buffer.groups);
-  }
-  function getUniqueMeshMergeInfo(g3d, section) {
-    let vertexCount = 0;
-    let indexCount = 0;
-    const instances = [];
-    const meshCount = g3d.getMeshCount();
-    for (let mesh = 0; mesh < meshCount; mesh++) {
-      const meshInstances = g3d.meshInstances[mesh];
-      if (!meshInstances || meshInstances.length !== 1)
-        continue;
-      const instance = meshInstances[0];
-      if ((g3d.instanceFlags[instance] & 1) > 0)
-        continue;
-      const count = g3d.getMeshIndexCount(mesh, section);
-      if (count <= 0)
-        continue;
-      indexCount += count;
-      vertexCount += g3d.getMeshVertexCount(mesh);
-      instances.push(instance);
-    }
-    return new MergeInfo(section, instances, indexCount, vertexCount);
-  }
-  function getInstanceMergeInfo(g3d, instances, section) {
-    let vertexCount = 0;
-    let indexCount = 0;
-    const instancesFiltered = [];
-    for (let i2 = 0; i2 < instances.length; i2++) {
-      const instance = instances[i2];
-      const mesh = g3d.instanceMeshes[instance];
-      const start = g3d.getMeshIndexStart(mesh, section);
-      const end = g3d.getMeshIndexEnd(mesh, section);
-      const count = end - start;
-      if (count <= 0)
-        continue;
-      indexCount += count;
-      vertexCount += g3d.getMeshVertexCount(mesh);
-      instancesFiltered.push(instance);
-    }
-    return new MergeInfo(section, instancesFiltered, indexCount, vertexCount);
-  }
-  function fillBuffers(g3d, buffer, info) {
-    let index = 0;
-    let vertex2 = 0;
-    let offset = 0;
-    const matrix = new Matrix4();
-    const vector = new Vector3();
-    for (let i2 = 0; i2 < info.instances.length; i2++) {
-      const instance = info.instances[i2];
-      const mesh = g3d.getInstanceMesh(instance);
-      buffer.groups[i2] = index;
-      const subStart = g3d.getMeshSubmeshStart(mesh, info.section);
-      const subEnd = g3d.getMeshSubmeshEnd(mesh, info.section);
-      for (let sub = subStart; sub < subEnd; sub++) {
-        const subColor = g3d.getSubmeshColor(sub);
-        const start = g3d.getSubmeshIndexStart(sub);
-        const end = g3d.getSubmeshIndexEnd(sub);
-        for (let s = start; s < end; s++) {
-          const newIndex = g3d.indices[s] + offset;
-          buffer.indices[index++] = newIndex;
-          const v2 = newIndex * buffer.colorSize;
-          buffer.colors[v2] = subColor[0];
-          buffer.colors[v2 + 1] = subColor[1];
-          buffer.colors[v2 + 2] = subColor[2];
-          if (buffer.colorSize > 3) {
-            buffer.colors[v2 + 3] = subColor[3];
-          }
-        }
-      }
-      getInstanceMatrix(g3d, instance, matrix);
-      const vertexStart = g3d.getMeshVertexStart(mesh);
-      const vertexEnd = g3d.getMeshVertexEnd(mesh);
-      for (let p2 = vertexStart; p2 < vertexEnd; p2++) {
-        vector.fromArray(g3d.positions, p2 * g3d.POSITION_SIZE);
-        vector.applyMatrix4(matrix);
-        vector.toArray(buffer.vertices, vertex2);
-        vertex2 += g3d.POSITION_SIZE;
-      }
-      offset += vertexEnd - vertexStart;
-    }
-  }
-  class MergeInfo {
-    constructor(section, instance, indexCount, vertexCount) {
-      __publicField$1(this, "section");
-      __publicField$1(this, "instances");
-      __publicField$1(this, "indexCount");
-      __publicField$1(this, "vertexCount");
-      this.section = section;
-      this.instances = instance;
-      this.indexCount = indexCount;
-      this.vertexCount = vertexCount;
-    }
-  }
-  class MergeBuffer {
-    constructor(info, positionSize, colorSize) {
-      __publicField$1(this, "indices");
-      __publicField$1(this, "vertices");
-      __publicField$1(this, "colors");
-      __publicField$1(this, "groups");
-      __publicField$1(this, "colorSize");
-      this.indices = new Uint32Array(info.indexCount);
-      this.vertices = new Float32Array(info.vertexCount * positionSize);
-      this.colors = new Float32Array(info.vertexCount * colorSize);
-      this.groups = new Array(info.instances.length);
-      this.colorSize = colorSize;
-    }
-    toBufferGeometry() {
-      const geometry = createGeometryFromArrays(this.vertices, this.indices, this.colors, this.colorSize);
-      return geometry;
-    }
-  }
-  class MergeResult {
-    constructor(geometry, instance, submeshes) {
-      __publicField$1(this, "geometry");
-      __publicField$1(this, "instances");
-      __publicField$1(this, "submeshes");
-      this.geometry = geometry;
-      this.instances = instance;
-      this.submeshes = submeshes;
-    }
-  }
-})(Geometry$1 || (Geometry$1 = {}));
 class VimSettings {
   constructor(options) {
     __publicField$1(this, "options");
@@ -28934,6 +29169,48 @@ const objectModel = {
     }
   }
 };
+class DocumentNoBim {
+  constructor(g3d) {
+    __publicField$1(this, "g3d");
+    this.g3d = g3d;
+  }
+  getAllElements() {
+    return [].keys();
+  }
+  hasElement(element) {
+    return false;
+  }
+  getInstancesFromElement(element) {
+    return void 0;
+  }
+  async getElement(element) {
+    return void 0;
+  }
+  async getElementValue(element, field) {
+    return void 0;
+  }
+  getElementFromInstance(instance) {
+    return void 0;
+  }
+  getElementsFromElementId(elementId) {
+    return [];
+  }
+  getElementId(element) {
+    return void 0;
+  }
+  async getEntity(name, index) {
+    return void 0;
+  }
+  getString(index) {
+    return void 0;
+  }
+  async getElementsSummary(elements) {
+    return void 0;
+  }
+  async getElementParameters(element) {
+    return void 0;
+  }
+}
 class Document {
   constructor(g3d, entities, strings, instanceToElement, elementToInstances, elementIds, elementIdToElements) {
     __publicField$1(this, "g3d");
@@ -28965,6 +29242,9 @@ class Document {
         Document.requestElementIds(ets).then((v2) => elementIds = v2)
       ]))
     ]);
+    if (!entity) {
+      return new DocumentNoBim(g3d);
+    }
     const elementToInstance = Document.invert(instanceToElement);
     const elementIdToElements = Document.invert(elementIds);
     return new Document(g3d, entity, strings, instanceToElement, elementToInstance, elementIds, elementIdToElements);
@@ -28979,18 +29259,23 @@ class Document {
   }
   static async requestStrings(bfast) {
     const buffer = await bfast.getBuffer("strings");
-    if (!buffer)
-      throw new Error("Could not get String Data from VIM file.");
+    if (!buffer) {
+      console.error("Could not get String Data from VIM file. Bim features will be disabled.");
+      return;
+    }
     const strings = new TextDecoder("utf-8").decode(buffer).split("\0");
     return strings;
   }
   static async requestEntities(bfast) {
     const entities = await bfast.getBfast(objectModel.entities);
-    if (!entities)
-      throw new Error("Could not get Entities Data from VIM file.");
+    if (!entities) {
+      console.error("Could not get String Data from VIM file. Bim features will be disabled.");
+    }
     return entities;
   }
   static async requestInstanceToElement(entities) {
+    if (!entities)
+      return;
     const nodes = await entities.getBfast(objectModel.nodes.table);
     const instances = await (nodes == null ? void 0 : nodes.getArray(objectModel.element.index));
     if (!instances) {
@@ -29000,6 +29285,8 @@ class Document {
   }
   static async requestElementIds(entities) {
     var _a2;
+    if (!entities)
+      return;
     const elements = await entities.getBfast(objectModel.element.table);
     const ids = (_a2 = await (elements == null ? void 0 : elements.getArray("int:Id"))) != null ? _a2 : await (elements == null ? void 0 : elements.getArray("numeric:Id"));
     if (!ids) {
@@ -29020,26 +29307,32 @@ class Document {
     }
     return result;
   }
-  *getAllElements() {
-    for (let i2 = 0; i2 < this._elementIds.length; i2++) {
-      yield i2;
-    }
+  hasElement(element) {
+    return element >= 0 && element < this._elementIds.length;
   }
-  getInstanceFromElement(element) {
-    return this._elementToInstances.get(element);
+  getAllElements() {
+    return this._elementIds.keys();
+  }
+  getInstancesFromElement(element) {
+    var _a2;
+    if (!this.hasElement(element))
+      return;
+    return (_a2 = this._elementToInstances.get(element)) != null ? _a2 : [];
   }
   async getElement(element) {
     return this.getEntity(objectModel.element.table, element);
   }
   async getElementValue(element, field) {
     const elements = await this._entities.getBfast(objectModel.element.table);
+    if (!elements)
+      return;
     const value = await elements.getValue(field, element);
     return value;
   }
   getElementFromInstance(instance) {
     return this._instanceToElement[instance];
   }
-  getElementFromElementId(elementId) {
+  getElementsFromElementId(elementId) {
     return this._elementIdToElements.get(elementId);
   }
   getElementId(element) {
@@ -29054,40 +29347,71 @@ class Document {
     return row;
   }
   getString(index) {
-    return this._strings[index];
+    var _a2;
+    return (_a2 = this._strings) == null ? void 0 : _a2[index];
   }
   async getElementsSummary(elements) {
     const set3 = elements ? new Set(elements) : void 0;
     const elementTable = await this._entities.getBfast(objectModel.element.table);
-    const elementNameArray = await elementTable.getArray(objectModel.element.columns.name);
-    const elementIdArray = await elementTable.getArray(objectModel.element.columns.id);
-    const getElementName = (element) => this._strings[elementNameArray[element]];
-    const elementCategoryArray = await elementTable.getArray(objectModel.category.index);
+    const elementNameArray = await (elementTable == null ? void 0 : elementTable.getArray(objectModel.element.columns.name));
+    const elementIdArray = await (elementTable == null ? void 0 : elementTable.getArray(objectModel.element.columns.id));
+    const getElementName = (element) => {
+      if (!elementNameArray)
+        return;
+      return this.getString(elementNameArray == null ? void 0 : elementNameArray[element]);
+    };
+    const elementCategoryArray = await (elementTable == null ? void 0 : elementTable.getArray(objectModel.category.index));
     const categoryTable = await this._entities.getBfast(objectModel.category.table);
-    const categoryNameArray = await categoryTable.getArray(objectModel.category.columns.name);
-    const getCategory = (element) => this._strings[categoryNameArray[elementCategoryArray[element]]];
+    const categoryNameArray = await (categoryTable == null ? void 0 : categoryTable.getArray(objectModel.category.columns.name));
+    const getCategory = (element) => {
+      if (!categoryNameArray)
+        return;
+      if (!elementCategoryArray)
+        return;
+      return this.getString(categoryNameArray[elementCategoryArray[element]]);
+    };
     const familyInstanceTable = await this._entities.getBfast(objectModel.familyInstance.table);
-    const familyNameArray = await elementTable.getArray(objectModel.element.columns.familyName);
-    const getFamilyName = (element) => this._strings[familyNameArray[element]];
-    const familyInstanceFamilyType = await familyInstanceTable.getArray(objectModel.familyType.index);
+    const familyNameArray = await (elementTable == null ? void 0 : elementTable.getArray(objectModel.element.columns.familyName));
+    const getFamilyName = (element) => familyNameArray ? this.getString(familyNameArray[element]) : void 0;
+    const familyInstanceFamilyType = await (familyInstanceTable == null ? void 0 : familyInstanceTable.getArray(objectModel.familyType.index));
     const familyTypeTable = await this._entities.getBfast(objectModel.familyType.table);
-    const familyTypeElementArray = await familyTypeTable.getArray(objectModel.element.index);
-    const getFamilyTypeName = (family) => this._strings[elementNameArray[familyTypeElementArray[familyInstanceFamilyType[family]]]];
-    const elementWorksetArray = await elementTable.getArray(objectModel.workset.index);
+    const familyTypeElementArray = await (familyTypeTable == null ? void 0 : familyTypeTable.getArray(objectModel.element.index));
+    const getFamilyTypeName = (family) => {
+      if (!elementNameArray)
+        return;
+      if (!familyTypeElementArray)
+        return;
+      if (!familyInstanceFamilyType)
+        return;
+      return this.getString(elementNameArray[familyTypeElementArray[familyInstanceFamilyType[family]]]);
+    };
+    const elementWorksetArray = await (elementTable == null ? void 0 : elementTable.getArray(objectModel.workset.index));
     const worksetTable = await this._entities.getBfast(objectModel.workset.table);
-    const worksetNameArray = await worksetTable.getArray(objectModel.workset.columns.name);
-    const getWorkset = (element) => this._strings[worksetNameArray[elementWorksetArray[element]]];
-    const elementDocumentArray = await elementTable.getArray(objectModel.document.index);
+    const worksetNameArray = await (worksetTable == null ? void 0 : worksetTable.getArray(objectModel.workset.columns.name));
+    const getWorkset = (element) => {
+      if (!worksetNameArray)
+        return;
+      if (!elementWorksetArray)
+        return;
+      return this.getString(worksetNameArray[elementWorksetArray[element]]);
+    };
+    const elementDocumentArray = await (elementTable == null ? void 0 : elementTable.getArray(objectModel.document.index));
     const documentTable = await this._entities.getBfast(objectModel.document.table);
-    const documentTitleArray = await documentTable.getArray(objectModel.document.columns.title);
-    const getDocument = (element) => this._strings[documentTitleArray[elementDocumentArray[element]]];
-    const familyInstanceElement = await familyInstanceTable.getArray(objectModel.element.index);
+    const documentTitleArray = await (documentTable == null ? void 0 : documentTable.getArray(objectModel.document.columns.title));
+    const getDocument = (element) => {
+      if (!documentTitleArray)
+        return;
+      if (!elementDocumentArray)
+        return;
+      return this.getString(documentTitleArray[elementDocumentArray[element]]);
+    };
+    const familyInstanceElement = await (familyInstanceTable == null ? void 0 : familyInstanceTable.getArray(objectModel.element.index));
     const summary = [];
-    familyInstanceElement.forEach((e, f2) => {
+    familyInstanceElement == null ? void 0 : familyInstanceElement.forEach((e, f2) => {
       if (!set3 || set3.has(e)) {
         summary.push({
           element: e,
-          id: elementIdArray[e],
+          id: elementIdArray == null ? void 0 : elementIdArray[e],
           name: getElementName(e),
           categoryName: getCategory(e),
           familyName: getFamilyName(e),
@@ -29102,37 +29426,62 @@ class Document {
   async getElementParameters(element) {
     const result = [];
     const instance = await this.getElementsParameters([element], true);
-    instance.forEach((i2) => result.push(i2));
+    instance == null ? void 0 : instance.forEach((i2) => result.push(i2));
     const familyInstance = await this.getElementFamilyInstance(element);
-    if (familyInstance !== void 0) {
-      const familyType = await this.getFamilyInstanceFamilyType(familyInstance);
-      const family = await this.getFamilyTypeFamily(familyType);
-      const familyTypeElement = await this.getFamiltyTypeElement(familyType);
-      const familyElement = await this.getFamilyElement(family);
-      const type = await this.getElementsParameters([familyTypeElement, familyElement], false);
-      type.forEach((i2) => result.push(i2));
-    }
+    const familyType = familyInstance ? await this.getFamilyInstanceFamilyType(familyInstance) : void 0;
+    const family = familyType ? await this.getFamilyTypeFamily(familyType) : void 0;
+    const familyTypeElement = familyType ? await this.getFamiltyTypeElement(familyType) : void 0;
+    const familyElement = family ? await this.getFamilyElement(family) : void 0;
+    const elements = [];
+    if (familyTypeElement)
+      elements.push(familyTypeElement);
+    if (familyElement)
+      elements.push(familyElement);
+    const type = await this.getElementsParameters(elements, false);
+    type == null ? void 0 : type.forEach((i2) => result.push(i2));
     return result;
   }
   async getElementsParameters(elements, isInstance) {
     const set3 = new Set(elements);
     const parameterTable2 = await this._entities.getBfast(objectModel.parameter.table);
-    const parameterElement = await parameterTable2.getArray(objectModel.element.index);
-    const parameterValue = await parameterTable2.getArray(objectModel.parameter.columns.value);
-    const parameterDescription = await parameterTable2.getArray(objectModel.parameterDescriptor.index);
+    const parameterElement = parameterTable2 ? await parameterTable2.getArray(objectModel.element.index) : void 0;
+    const parameterValue = parameterTable2 ? await parameterTable2.getArray(objectModel.parameter.columns.value) : void 0;
+    const getParameterDisplayValue = (index) => {
+      var _a2;
+      if (!parameterValue)
+        return;
+      const value = (_a2 = this.getString(parameterValue[index])) == null ? void 0 : _a2.split("|");
+      const displayValue = value == null ? void 0 : value[value.length - 1];
+      return displayValue;
+    };
+    const parameterDescription = parameterTable2 ? await parameterTable2.getArray(objectModel.parameterDescriptor.index) : void 0;
     const parameterDescriptor = await this._entities.getBfast(objectModel.parameterDescriptor.table);
-    const parameterDescriptorName = await parameterDescriptor.getArray(objectModel.parameterDescriptor.columns.name);
-    const parameterDescriptorGroup = await parameterDescriptor.getArray(objectModel.parameterDescriptor.columns.group);
+    const parameterDescriptorName = parameterDescriptor ? await parameterDescriptor.getArray(objectModel.parameterDescriptor.columns.name) : void 0;
+    const getParameterName = (descriptor) => {
+      if (descriptor === void 0)
+        return;
+      if (!parameterDescriptorName)
+        return;
+      return this.getString(parameterDescriptorName[descriptor]);
+    };
+    const parameterDescriptorGroup = parameterDescriptor ? await parameterDescriptor.getArray(objectModel.parameterDescriptor.columns.group) : void 0;
+    const getParameterGroup = (descriptor) => {
+      if (!descriptor)
+        return;
+      if (!parameterDescriptorGroup)
+        return;
+      return this.getString(parameterDescriptorGroup[descriptor]);
+    };
     const result = [];
+    if (!parameterElement)
+      return void 0;
     parameterElement.forEach((e, i2) => {
       if (set3.has(e)) {
-        const value = this._strings[parameterValue[i2]].split("|");
-        const displayValue = value[value.length - 1];
-        const d = parameterDescription[i2];
+        const d = parameterDescription == null ? void 0 : parameterDescription[i2];
         result.push({
-          name: this._strings[parameterDescriptorName[d]],
-          value: displayValue,
-          group: this._strings[parameterDescriptorGroup[d]],
+          name: getParameterName(d),
+          value: getParameterDisplayValue(i2),
+          group: getParameterGroup(d),
           isInstance
         });
       }
@@ -29141,9 +29490,9 @@ class Document {
   }
   async getElementFamilyInstance(element) {
     const familyInstanceTable = await this._entities.getBfast(objectModel.familyInstance.table);
-    const familyInstanceElementArray = await familyInstanceTable.getArray(objectModel.element.index);
+    const familyInstanceElementArray = familyInstanceTable ? await familyInstanceTable.getArray(objectModel.element.index) : void 0;
     let result;
-    familyInstanceElementArray.forEach((e, i2) => {
+    familyInstanceElementArray == null ? void 0 : familyInstanceElementArray.forEach((e, i2) => {
       if (e === element) {
         result = i2;
       }
@@ -29152,25 +29501,27 @@ class Document {
   }
   async getFamilyInstanceFamilyType(familyInstance) {
     const familyInstanceTable = await this._entities.getBfast(objectModel.familyInstance.table);
-    const result = await familyInstanceTable.getValue(objectModel.familyType.index, familyInstance);
+    const result = await (familyInstanceTable == null ? void 0 : familyInstanceTable.getValue(objectModel.familyType.index, familyInstance));
     return result;
   }
   async getFamilyTypeFamily(familyType) {
     const familyTypeTable = await this._entities.getBfast(objectModel.familyType.table);
-    const result = await familyTypeTable.getValue(objectModel.family.index, familyType);
+    const result = await (familyTypeTable == null ? void 0 : familyTypeTable.getValue(objectModel.family.index, familyType));
     return result;
   }
   async getFamiltyTypeElement(familyType) {
     const familyTypeTable = await this._entities.getBfast(objectModel.familyType.table);
-    const result = await familyTypeTable.getValue(objectModel.element.index, familyType);
+    const result = await (familyTypeTable == null ? void 0 : familyTypeTable.getValue(objectModel.element.index, familyType));
     return result;
   }
   async getFamilyElement(family) {
     const familyTable = await this._entities.getBfast(objectModel.family.table);
-    const result = await familyTable.getValue(objectModel.element.index, family);
+    const result = await (familyTable == null ? void 0 : familyTable.getValue(objectModel.element.index, family));
     return result;
   }
   resolveStrings(map) {
+    if (!this._strings)
+      return;
     const result = map;
     for (const key of map.keys()) {
       if (key.startsWith("string:")) {
@@ -29454,7 +29805,7 @@ class MeshBuilder {
         }
       }
     }
-    const filter = result.filter((m2) => m2 !== void 0);
+    const filter = result.filter((m2) => !!m2);
     return filter;
   }
   createInstancedMesh(geometry, g3d, instances, useAlpha) {
@@ -29525,230 +29876,6 @@ class SceneBuilder {
     return new Scene(this).addMergedMesh(mesh);
   }
 }
-class Object$1 {
-  constructor(vim, element, instances, meshes) {
-    __publicField$1(this, "vim");
-    __publicField$1(this, "element");
-    __publicField$1(this, "instances");
-    __publicField$1(this, "_color");
-    __publicField$1(this, "_visible", true);
-    __publicField$1(this, "_boundingBox");
-    __publicField$1(this, "_meshes");
-    this.vim = vim;
-    this.element = element;
-    this.instances = instances;
-    this._meshes = meshes;
-  }
-  get meshBuilder() {
-    return this.vim.scene.builder.meshBuilder;
-  }
-  get hasMesh() {
-    var _a2;
-    return (_a2 = this._meshes) == null ? void 0 : _a2.length;
-  }
-  updateMeshes(meshes) {
-    this._meshes = meshes;
-    if (!meshes)
-      return;
-    if (this.color) {
-      this.color = this._color;
-    }
-  }
-  getBimElement() {
-    return this.vim.document.getElement(this.element);
-  }
-  async getBimElementValue(field, resolveString) {
-    const value = await this.vim.document.getElementValue(this.element, field);
-    return resolveString ? this.vim.document.getString(value) : value;
-  }
-  async getBimParameters() {
-    return await this.vim.document.getElementParameters(this.element);
-  }
-  get elementId() {
-    return this.vim.document.getElementId(this.element);
-  }
-  getBoundingBox() {
-    var _a2;
-    if (!this.instances)
-      return;
-    if (this._boundingBox)
-      return this._boundingBox;
-    const geometry = Geometry$1.createGeometryFromInstances(this.vim.document.g3d, this.instances);
-    geometry.applyMatrix4(this.vim.getMatrix());
-    geometry.computeBoundingBox();
-    this._boundingBox = (_a2 = geometry.boundingBox) != null ? _a2 : void 0;
-    geometry.dispose();
-    return this._boundingBox;
-  }
-  getCenter(target = new Vector3()) {
-    var _a2;
-    return (_a2 = this.getBoundingBox()) == null ? void 0 : _a2.getCenter(target);
-  }
-  getBoundingSphere(target = new Sphere()) {
-    var _a2;
-    return (_a2 = this.getBoundingBox()) == null ? void 0 : _a2.getBoundingSphere(target);
-  }
-  createWireframe() {
-    if (!this.instances)
-      return;
-    const wireframe = this.meshBuilder.createWireframe(this.vim.document.g3d, this.instances);
-    wireframe.applyMatrix4(this.vim.getMatrix());
-    return wireframe;
-  }
-  createGeometry() {
-    if (!this.instances)
-      return;
-    const geometry = Geometry$1.createGeometryFromInstances(this.vim.document.g3d, this.instances);
-    geometry.applyMatrix4(this.vim.getMatrix());
-    return geometry;
-  }
-  get color() {
-    return this._color;
-  }
-  set color(color) {
-    if (!this._color || !color ? !this._color && !color : this._color.equals(color)) {
-      return;
-    }
-    this._color = color;
-    this.applyColor(color);
-  }
-  applyColor(color) {
-    if (!this._meshes)
-      return;
-    for (let m2 = 0; m2 < this._meshes.length; m2++) {
-      const [mesh, index] = this._meshes[m2];
-      if (mesh.userData.merged) {
-        this.applyMergedColor(mesh, index, color);
-      } else {
-        this.applyInstancedColor(mesh, index, color);
-      }
-    }
-  }
-  get visible() {
-    return this._visible;
-  }
-  set visible(value) {
-    if (this._visible === value)
-      return;
-    this._visible = value;
-    this.applyVisible(value);
-  }
-  applyVisible(value) {
-    if (!this._meshes)
-      return;
-    for (let m2 = 0; m2 < this._meshes.length; m2++) {
-      const [mesh, index] = this._meshes[m2];
-      if (mesh.userData.merged) {
-        this.applyMergedVisible(mesh, index, value);
-      } else {
-        this.applyInstancedVisible(mesh, index, value);
-      }
-    }
-  }
-  getMergedMeshStart(mesh, index) {
-    return mesh.userData.submeshes[index];
-  }
-  getMergedMeshEnd(mesh, index) {
-    return index + 1 < mesh.userData.submeshes.length ? mesh.userData.submeshes[index + 1] : mesh.geometry.index.count;
-  }
-  applyMergedVisible(mesh, index, show) {
-    var _a2;
-    const positions = mesh.geometry.getAttribute("position");
-    const attribute = (_a2 = mesh.geometry.getAttribute("ignoreVertex")) != null ? _a2 : new Float32BufferAttribute(new Float32Array(positions.count), 1);
-    mesh.geometry.setAttribute("ignoreVertex", attribute);
-    const start = this.getMergedMeshStart(mesh, index);
-    const end = this.getMergedMeshEnd(mesh, index);
-    const indices = mesh.geometry.index;
-    for (let i2 = start; i2 < end; i2++) {
-      const v2 = indices.getX(i2);
-      attribute.setX(v2, show ? 0 : 1);
-    }
-    attribute.needsUpdate = true;
-  }
-  applyInstancedVisible(mesh, index, visible) {
-    let attribute = mesh.geometry.getAttribute("ignoreInstance");
-    if (!attribute) {
-      attribute = new InstancedBufferAttribute(new Float32Array(mesh.count), 1);
-      mesh.geometry.setAttribute("ignoreInstance", attribute);
-    }
-    attribute.setX(index, visible ? 0 : 1);
-    attribute.needsUpdate = true;
-  }
-  applyMergedColor(mesh, index, color) {
-    if (!color) {
-      this.resetMergedColor(mesh, index);
-      return;
-    }
-    const start = this.getMergedMeshStart(mesh, index);
-    const end = this.getMergedMeshEnd(mesh, index);
-    const colors = mesh.geometry.getAttribute("color");
-    const colored = this.getOrAddColoredAttribute(mesh);
-    const indices = mesh.geometry.index;
-    for (let i2 = start; i2 < end; i2++) {
-      const v2 = indices.getX(i2);
-      colors.setXYZ(v2, color.r, color.g, color.b);
-      colored.setX(v2, 1);
-    }
-    colors.needsUpdate = true;
-    colored.needsUpdate = true;
-  }
-  resetMergedColor(mesh, index) {
-    const colors = mesh.geometry.getAttribute("color");
-    const colored = this.getOrAddColoredAttribute(mesh);
-    const indices = mesh.geometry.index;
-    let mergedIndex = this.getMergedMeshStart(mesh, index);
-    const instance = this.vim.scene.getInstanceFromMesh(mesh, index);
-    const g3d = this.vim.document.g3d;
-    const g3dMesh = g3d.instanceMeshes[instance];
-    const subStart = g3d.getMeshSubmeshStart(g3dMesh);
-    const subEnd = g3d.getMeshSubmeshEnd(g3dMesh);
-    for (let sub = subStart; sub < subEnd; sub++) {
-      const start = g3d.getSubmeshIndexStart(sub);
-      const end = g3d.getSubmeshIndexEnd(sub);
-      const color = g3d.getSubmeshColor(sub);
-      for (let i2 = start; i2 < end; i2++) {
-        const v2 = indices.getX(mergedIndex);
-        colors.setXYZ(v2, color[0], color[1], color[2]);
-        colored.setX(v2, 0);
-        mergedIndex++;
-      }
-    }
-    colors.needsUpdate = true;
-    colored.needsUpdate = true;
-  }
-  applyInstancedColor(mesh, index, color) {
-    const colors = this.getOrAddInstanceColorAttribute(mesh);
-    const colored = this.getOrAddColoredAttribute(mesh);
-    if (color) {
-      colors.setXYZ(index, color.r, color.g, color.b);
-      colored.setX(index, 1);
-    } else {
-      colored.setX(index, 0);
-    }
-    colored.needsUpdate = true;
-    colors.needsUpdate = true;
-  }
-  getOrAddInstanceColorAttribute(mesh) {
-    if (mesh.instanceColor)
-      return mesh.instanceColor;
-    const count = mesh.instanceMatrix.count;
-    const colors = new Float32Array(count * 3);
-    const attribute = new InstancedBufferAttribute(colors, 3);
-    mesh.instanceColor = attribute;
-    return attribute;
-  }
-  getOrAddColoredAttribute(mesh) {
-    const colored = mesh.geometry.getAttribute("colored");
-    if (colored) {
-      return colored;
-    }
-    const count = mesh instanceof InstancedMesh ? mesh.instanceMatrix.count : mesh.geometry.getAttribute("position").count;
-    const array = new Float32Array(count);
-    const attribute = mesh instanceof InstancedMesh ? new InstancedBufferAttribute(array, 1) : new BufferAttribute(array, 1);
-    mesh.geometry.setAttribute("colored", attribute);
-    return attribute;
-  }
-}
 class Vim {
   constructor(vim, scene, settings) {
     __publicField$1(this, "document");
@@ -29784,23 +29911,27 @@ class Vim {
   }
   getObjectFromMesh(mesh, index) {
     const element = this.getElementFromMesh(mesh, index);
+    if (!element)
+      return;
     return this.getObjectFromElement(element);
   }
   getObjectFromInstance(instance) {
     const element = this.document.getElementFromInstance(instance);
+    if (!element)
+      return;
     return this.getObjectFromElement(element);
   }
   getObjectsFromElementId(id2) {
-    const elements = this.document.getElementFromElementId(id2);
+    const elements = this.document.getElementsFromElementId(id2);
     return elements == null ? void 0 : elements.map((e) => this.getObjectFromElement(e));
   }
   getObjectFromElement(element) {
-    if (element === void 0)
+    if (!this.document.hasElement(element))
       return;
     if (this._elementToObject.has(element)) {
       return this._elementToObject.get(element);
     }
-    const instances = this.document.getInstanceFromElement(element);
+    const instances = this.document.getInstancesFromElement(element);
     const meshes = this.getMeshesFromInstances(instances);
     const result = new Object$1(this, element, instances, meshes);
     this._elementToObject.set(element, result);
@@ -29820,11 +29951,15 @@ class Vim {
   }
   *getAllObjects() {
     for (const e of this.document.getAllElements()) {
-      yield this.getObjectFromElement(e);
+      const obj = this.getObjectFromElement(e);
+      if (obj)
+        yield obj;
     }
   }
-  getMeshesFromElement(index) {
-    const instances = this.document.getInstanceFromElement(index);
+  getMeshesFromElement(element) {
+    const instances = this.document.getInstancesFromElement(element);
+    if (!instances)
+      return;
     return this.getMeshesFromInstances(instances);
   }
   getMeshesFromInstances(instances) {
@@ -29844,8 +29979,10 @@ class Vim {
   }
   getElementFromMesh(mesh, index) {
     if (!mesh || index < 0)
-      return -1;
+      return;
     const instance = this.scene.getInstanceFromMesh(mesh, index);
+    if (!instance)
+      return;
     return this.document.getElementFromInstance(instance);
   }
 }
@@ -48483,6 +48620,204 @@ for (let i2 = 0; i2 < 256; i2++) {
   up: new Vector3(0, 1, 0),
   down: new Vector3(0, -1, 0)
 });
+var Transparency;
+((Transparency2) => {
+  function isValid(value) {
+    return ["all", "opaqueOnly", "transparentOnly", "allAsOpaque"].includes(value);
+  }
+  Transparency2.isValid = isValid;
+  function requiresAlpha(mode) {
+    return mode === "all" || mode === "transparentOnly";
+  }
+  Transparency2.requiresAlpha = requiresAlpha;
+})(Transparency || (Transparency = {}));
+var Geometry;
+((Geometry2) => {
+  function createGeometryFromInstances(g3d, instances) {
+    return Geometry2.mergeInstanceMeshes(g3d, "all", false, instances).geometry;
+  }
+  Geometry2.createGeometryFromInstances = createGeometryFromInstances;
+  function createGeometryFromMesh(g3d, mesh, section, transparent) {
+    const colors = createVertexColors(g3d, mesh, transparent);
+    const positions = g3d.positions.subarray(g3d.getMeshVertexStart(mesh) * 3, g3d.getMeshVertexEnd(mesh) * 3);
+    const start = g3d.getMeshIndexStart(mesh, section);
+    const end = g3d.getMeshIndexEnd(mesh, section);
+    const indices = g3d.indices.subarray(start, end);
+    return createGeometryFromArrays(positions, indices, colors, transparent ? 4 : 3);
+  }
+  Geometry2.createGeometryFromMesh = createGeometryFromMesh;
+  function createVertexColors(g3d, mesh, useAlpha) {
+    const colorSize = useAlpha ? 4 : 3;
+    const result = new Float32Array(g3d.getMeshVertexCount(mesh) * colorSize);
+    const subStart = g3d.getMeshSubmeshStart(mesh);
+    const subEnd = g3d.getMeshSubmeshEnd(mesh);
+    for (let submesh = subStart; submesh < subEnd; submesh++) {
+      const color = g3d.getSubmeshColor(submesh);
+      const start = g3d.getSubmeshIndexStart(submesh);
+      const end = g3d.getSubmeshIndexEnd(submesh);
+      for (let i2 = start; i2 < end; i2++) {
+        const v2 = g3d.indices[i2] * colorSize;
+        result[v2] = color[0];
+        result[v2 + 1] = color[1];
+        result[v2 + 2] = color[2];
+        if (useAlpha)
+          result[v2 + 3] = color[3];
+      }
+    }
+    return result;
+  }
+  function getInstanceMatrix(g3d, instance, target = new Matrix4()) {
+    const matrixAsArray = g3d.getInstanceMatrix(instance);
+    target.fromArray(matrixAsArray);
+    return target;
+  }
+  Geometry2.getInstanceMatrix = getInstanceMatrix;
+  function createGeometryFromArrays(vertices, indices, vertexColors = void 0, colorSize = 3) {
+    const geometry = new BufferGeometry();
+    geometry.setAttribute("position", new BufferAttribute(vertices, 3));
+    geometry.setIndex(new Uint32BufferAttribute(indices, 1));
+    if (vertexColors) {
+      geometry.setAttribute("color", new BufferAttribute(vertexColors, colorSize));
+    }
+    return geometry;
+  }
+  Geometry2.createGeometryFromArrays = createGeometryFromArrays;
+  function mergeInstanceMeshes(g3d, section, transparent, instances) {
+    const info = getInstanceMergeInfo(g3d, instances, section);
+    return merge(g3d, info, transparent);
+  }
+  Geometry2.mergeInstanceMeshes = mergeInstanceMeshes;
+  function mergeUniqueMeshes(g3d, section, transparent) {
+    const info = getUniqueMeshMergeInfo(g3d, section);
+    return merge(g3d, info, transparent);
+  }
+  Geometry2.mergeUniqueMeshes = mergeUniqueMeshes;
+  function merge(g3d, info, transparent) {
+    const buffer = new MergeBuffer(info, g3d.POSITION_SIZE, transparent ? 4 : 3);
+    fillBuffers(g3d, buffer, info);
+    const geometry = buffer.toBufferGeometry();
+    return new MergeResult(geometry, info.instances, buffer.groups);
+  }
+  function getUniqueMeshMergeInfo(g3d, section) {
+    let vertexCount = 0;
+    let indexCount = 0;
+    const instances = [];
+    const meshCount = g3d.getMeshCount();
+    for (let mesh = 0; mesh < meshCount; mesh++) {
+      const meshInstances = g3d.meshInstances[mesh];
+      if (!meshInstances || meshInstances.length !== 1)
+        continue;
+      const instance = meshInstances[0];
+      if ((g3d.instanceFlags[instance] & 1) > 0)
+        continue;
+      const count = g3d.getMeshIndexCount(mesh, section);
+      if (count <= 0)
+        continue;
+      indexCount += count;
+      vertexCount += g3d.getMeshVertexCount(mesh);
+      instances.push(instance);
+    }
+    return new MergeInfo(section, instances, indexCount, vertexCount);
+  }
+  function getInstanceMergeInfo(g3d, instances, section) {
+    let vertexCount = 0;
+    let indexCount = 0;
+    const instancesFiltered = [];
+    for (let i2 = 0; i2 < instances.length; i2++) {
+      const instance = instances[i2];
+      const mesh = g3d.instanceMeshes[instance];
+      const start = g3d.getMeshIndexStart(mesh, section);
+      const end = g3d.getMeshIndexEnd(mesh, section);
+      const count = end - start;
+      if (count <= 0)
+        continue;
+      indexCount += count;
+      vertexCount += g3d.getMeshVertexCount(mesh);
+      instancesFiltered.push(instance);
+    }
+    return new MergeInfo(section, instancesFiltered, indexCount, vertexCount);
+  }
+  function fillBuffers(g3d, buffer, info) {
+    let index = 0;
+    let vertex2 = 0;
+    let offset = 0;
+    const matrix = new Matrix4();
+    const vector = new Vector3();
+    for (let i2 = 0; i2 < info.instances.length; i2++) {
+      const instance = info.instances[i2];
+      const mesh = g3d.getInstanceMesh(instance);
+      buffer.groups[i2] = index;
+      const subStart = g3d.getMeshSubmeshStart(mesh, info.section);
+      const subEnd = g3d.getMeshSubmeshEnd(mesh, info.section);
+      for (let sub = subStart; sub < subEnd; sub++) {
+        const subColor = g3d.getSubmeshColor(sub);
+        const start = g3d.getSubmeshIndexStart(sub);
+        const end = g3d.getSubmeshIndexEnd(sub);
+        for (let s = start; s < end; s++) {
+          const newIndex = g3d.indices[s] + offset;
+          buffer.indices[index++] = newIndex;
+          const v2 = newIndex * buffer.colorSize;
+          buffer.colors[v2] = subColor[0];
+          buffer.colors[v2 + 1] = subColor[1];
+          buffer.colors[v2 + 2] = subColor[2];
+          if (buffer.colorSize > 3) {
+            buffer.colors[v2 + 3] = subColor[3];
+          }
+        }
+      }
+      getInstanceMatrix(g3d, instance, matrix);
+      const vertexStart = g3d.getMeshVertexStart(mesh);
+      const vertexEnd = g3d.getMeshVertexEnd(mesh);
+      for (let p2 = vertexStart; p2 < vertexEnd; p2++) {
+        vector.fromArray(g3d.positions, p2 * g3d.POSITION_SIZE);
+        vector.applyMatrix4(matrix);
+        vector.toArray(buffer.vertices, vertex2);
+        vertex2 += g3d.POSITION_SIZE;
+      }
+      offset += vertexEnd - vertexStart;
+    }
+  }
+  class MergeInfo {
+    constructor(section, instance, indexCount, vertexCount) {
+      __publicField(this, "section");
+      __publicField(this, "instances");
+      __publicField(this, "indexCount");
+      __publicField(this, "vertexCount");
+      this.section = section;
+      this.instances = instance;
+      this.indexCount = indexCount;
+      this.vertexCount = vertexCount;
+    }
+  }
+  class MergeBuffer {
+    constructor(info, positionSize, colorSize) {
+      __publicField(this, "indices");
+      __publicField(this, "vertices");
+      __publicField(this, "colors");
+      __publicField(this, "groups");
+      __publicField(this, "colorSize");
+      this.indices = new Uint32Array(info.indexCount);
+      this.vertices = new Float32Array(info.vertexCount * positionSize);
+      this.colors = new Float32Array(info.vertexCount * colorSize);
+      this.groups = new Array(info.instances.length);
+      this.colorSize = colorSize;
+    }
+    toBufferGeometry() {
+      const geometry = createGeometryFromArrays(this.vertices, this.indices, this.colors, this.colorSize);
+      return geometry;
+    }
+  }
+  class MergeResult {
+    constructor(geometry, instance, submeshes) {
+      __publicField(this, "geometry");
+      __publicField(this, "instances");
+      __publicField(this, "submeshes");
+      this.geometry = geometry;
+      this.instances = instance;
+      this.submeshes = submeshes;
+    }
+  }
+})(Geometry || (Geometry = {}));
 class MeshLine extends BufferGeometry {
   constructor() {
     super();
@@ -49252,204 +49587,6 @@ var symbolProto = Symbol$2 ? Symbol$2.prototype : void 0;
 symbolProto ? symbolProto.valueOf : void 0;
 nodeUtil$1 && nodeUtil$1.isMap;
 nodeUtil$1 && nodeUtil$1.isSet;
-var Transparency;
-((Transparency2) => {
-  function isValid(value) {
-    return ["all", "opaqueOnly", "transparentOnly", "allAsOpaque"].includes(value);
-  }
-  Transparency2.isValid = isValid;
-  function requiresAlpha(mode) {
-    return mode === "all" || mode === "transparentOnly";
-  }
-  Transparency2.requiresAlpha = requiresAlpha;
-})(Transparency || (Transparency = {}));
-var Geometry;
-((Geometry2) => {
-  function createGeometryFromInstances(g3d, instances) {
-    return Geometry2.mergeInstanceMeshes(g3d, "all", false, instances).geometry;
-  }
-  Geometry2.createGeometryFromInstances = createGeometryFromInstances;
-  function createGeometryFromMesh(g3d, mesh, section, transparent) {
-    const colors = createVertexColors(g3d, mesh, transparent);
-    const positions = g3d.positions.subarray(g3d.getMeshVertexStart(mesh) * 3, g3d.getMeshVertexEnd(mesh) * 3);
-    const start = g3d.getMeshIndexStart(mesh, section);
-    const end = g3d.getMeshIndexEnd(mesh, section);
-    const indices = g3d.indices.subarray(start, end);
-    return createGeometryFromArrays(positions, indices, colors, transparent ? 4 : 3);
-  }
-  Geometry2.createGeometryFromMesh = createGeometryFromMesh;
-  function createVertexColors(g3d, mesh, useAlpha) {
-    const colorSize = useAlpha ? 4 : 3;
-    const result = new Float32Array(g3d.getMeshVertexCount(mesh) * colorSize);
-    const subStart = g3d.getMeshSubmeshStart(mesh);
-    const subEnd = g3d.getMeshSubmeshEnd(mesh);
-    for (let submesh = subStart; submesh < subEnd; submesh++) {
-      const color = g3d.getSubmeshColor(submesh);
-      const start = g3d.getSubmeshIndexStart(submesh);
-      const end = g3d.getSubmeshIndexEnd(submesh);
-      for (let i2 = start; i2 < end; i2++) {
-        const v2 = g3d.indices[i2] * colorSize;
-        result[v2] = color[0];
-        result[v2 + 1] = color[1];
-        result[v2 + 2] = color[2];
-        if (useAlpha)
-          result[v2 + 3] = color[3];
-      }
-    }
-    return result;
-  }
-  function getInstanceMatrix(g3d, instance, target = new Matrix4()) {
-    const matrixAsArray = g3d.getInstanceMatrix(instance);
-    target.fromArray(matrixAsArray);
-    return target;
-  }
-  Geometry2.getInstanceMatrix = getInstanceMatrix;
-  function createGeometryFromArrays(vertices, indices, vertexColors = void 0, colorSize = 3) {
-    const geometry = new BufferGeometry();
-    geometry.setAttribute("position", new BufferAttribute(vertices, 3));
-    geometry.setIndex(new Uint32BufferAttribute(indices, 1));
-    if (vertexColors) {
-      geometry.setAttribute("color", new BufferAttribute(vertexColors, colorSize));
-    }
-    return geometry;
-  }
-  Geometry2.createGeometryFromArrays = createGeometryFromArrays;
-  function mergeInstanceMeshes(g3d, section, transparent, instances) {
-    const info = getInstanceMergeInfo(g3d, instances, section);
-    return merge(g3d, info, transparent);
-  }
-  Geometry2.mergeInstanceMeshes = mergeInstanceMeshes;
-  function mergeUniqueMeshes(g3d, section, transparent) {
-    const info = getUniqueMeshMergeInfo(g3d, section);
-    return merge(g3d, info, transparent);
-  }
-  Geometry2.mergeUniqueMeshes = mergeUniqueMeshes;
-  function merge(g3d, info, transparent) {
-    const buffer = new MergeBuffer(info, g3d.POSITION_SIZE, transparent ? 4 : 3);
-    fillBuffers(g3d, buffer, info);
-    const geometry = buffer.toBufferGeometry();
-    return new MergeResult(geometry, info.instances, buffer.groups);
-  }
-  function getUniqueMeshMergeInfo(g3d, section) {
-    let vertexCount = 0;
-    let indexCount = 0;
-    const instances = [];
-    const meshCount = g3d.getMeshCount();
-    for (let mesh = 0; mesh < meshCount; mesh++) {
-      const meshInstances = g3d.meshInstances[mesh];
-      if (!meshInstances || meshInstances.length !== 1)
-        continue;
-      const instance = meshInstances[0];
-      if ((g3d.instanceFlags[instance] & 1) > 0)
-        continue;
-      const count = g3d.getMeshIndexCount(mesh, section);
-      if (count <= 0)
-        continue;
-      indexCount += count;
-      vertexCount += g3d.getMeshVertexCount(mesh);
-      instances.push(instance);
-    }
-    return new MergeInfo(section, instances, indexCount, vertexCount);
-  }
-  function getInstanceMergeInfo(g3d, instances, section) {
-    let vertexCount = 0;
-    let indexCount = 0;
-    const instancesFiltered = [];
-    for (let i2 = 0; i2 < instances.length; i2++) {
-      const instance = instances[i2];
-      const mesh = g3d.instanceMeshes[instance];
-      const start = g3d.getMeshIndexStart(mesh, section);
-      const end = g3d.getMeshIndexEnd(mesh, section);
-      const count = end - start;
-      if (count <= 0)
-        continue;
-      indexCount += count;
-      vertexCount += g3d.getMeshVertexCount(mesh);
-      instancesFiltered.push(instance);
-    }
-    return new MergeInfo(section, instancesFiltered, indexCount, vertexCount);
-  }
-  function fillBuffers(g3d, buffer, info) {
-    let index = 0;
-    let vertex2 = 0;
-    let offset = 0;
-    const matrix = new Matrix4();
-    const vector = new Vector3();
-    for (let i2 = 0; i2 < info.instances.length; i2++) {
-      const instance = info.instances[i2];
-      const mesh = g3d.getInstanceMesh(instance);
-      buffer.groups[i2] = index;
-      const subStart = g3d.getMeshSubmeshStart(mesh, info.section);
-      const subEnd = g3d.getMeshSubmeshEnd(mesh, info.section);
-      for (let sub = subStart; sub < subEnd; sub++) {
-        const subColor = g3d.getSubmeshColor(sub);
-        const start = g3d.getSubmeshIndexStart(sub);
-        const end = g3d.getSubmeshIndexEnd(sub);
-        for (let s = start; s < end; s++) {
-          const newIndex = g3d.indices[s] + offset;
-          buffer.indices[index++] = newIndex;
-          const v2 = newIndex * buffer.colorSize;
-          buffer.colors[v2] = subColor[0];
-          buffer.colors[v2 + 1] = subColor[1];
-          buffer.colors[v2 + 2] = subColor[2];
-          if (buffer.colorSize > 3) {
-            buffer.colors[v2 + 3] = subColor[3];
-          }
-        }
-      }
-      getInstanceMatrix(g3d, instance, matrix);
-      const vertexStart = g3d.getMeshVertexStart(mesh);
-      const vertexEnd = g3d.getMeshVertexEnd(mesh);
-      for (let p2 = vertexStart; p2 < vertexEnd; p2++) {
-        vector.fromArray(g3d.positions, p2 * g3d.POSITION_SIZE);
-        vector.applyMatrix4(matrix);
-        vector.toArray(buffer.vertices, vertex2);
-        vertex2 += g3d.POSITION_SIZE;
-      }
-      offset += vertexEnd - vertexStart;
-    }
-  }
-  class MergeInfo {
-    constructor(section, instance, indexCount, vertexCount) {
-      __publicField(this, "section");
-      __publicField(this, "instances");
-      __publicField(this, "indexCount");
-      __publicField(this, "vertexCount");
-      this.section = section;
-      this.instances = instance;
-      this.indexCount = indexCount;
-      this.vertexCount = vertexCount;
-    }
-  }
-  class MergeBuffer {
-    constructor(info, positionSize, colorSize) {
-      __publicField(this, "indices");
-      __publicField(this, "vertices");
-      __publicField(this, "colors");
-      __publicField(this, "groups");
-      __publicField(this, "colorSize");
-      this.indices = new Uint32Array(info.indexCount);
-      this.vertices = new Float32Array(info.vertexCount * positionSize);
-      this.colors = new Float32Array(info.vertexCount * colorSize);
-      this.groups = new Array(info.instances.length);
-      this.colorSize = colorSize;
-    }
-    toBufferGeometry() {
-      const geometry = createGeometryFromArrays(this.vertices, this.indices, this.colors, this.colorSize);
-      return geometry;
-    }
-  }
-  class MergeResult {
-    constructor(geometry, instance, submeshes) {
-      __publicField(this, "geometry");
-      __publicField(this, "instances");
-      __publicField(this, "submeshes");
-      this.geometry = geometry;
-      this.instances = instance;
-      this.submeshes = submeshes;
-    }
-  }
-})(Geometry || (Geometry = {}));
 const _VimAttributes = class {
 };
 let VimAttributes = _VimAttributes;
@@ -52058,7 +52195,7 @@ function selectElementsInViewer(tree, viewer2, nodes) {
     const obj = viewer2.vims[0].getObjectFromElement(element);
     objects.push(obj);
   });
-  viewer2.selection.select(...objects);
+  viewer2.selection.select(objects);
 }
 function scrollToSelection(div) {
   var _a2;
@@ -52714,7 +52851,6 @@ function TestMenu(props) {
     viewer2.gizmoSection.fitBox(viewer2.renderer.getBoundingBox());
   };
   const hasSelection = objects.length > 0;
-  console.log(hasSelection);
   return /* @__PURE__ */ React.createElement("div", {
     className: "test"
   }, /* @__PURE__ */ React.createElement(ContextMenu, {
