@@ -1,16 +1,16 @@
-var __defProp3 = Object.defineProperty;
+var __defProp2 = Object.defineProperty;
 var __getOwnPropSymbols2 = Object.getOwnPropertySymbols;
 var __hasOwnProp2 = Object.prototype.hasOwnProperty;
 var __propIsEnum2 = Object.prototype.propertyIsEnumerable;
-var __defNormalProp3 = (obj, key, value) => key in obj ? __defProp3(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __defNormalProp2 = (obj, key, value) => key in obj ? __defProp2(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __spreadValues2 = (a, b) => {
   for (var prop in b || (b = {}))
     if (__hasOwnProp2.call(b, prop))
-      __defNormalProp3(a, prop, b[prop]);
+      __defNormalProp2(a, prop, b[prop]);
   if (__getOwnPropSymbols2)
     for (var prop of __getOwnPropSymbols2(b)) {
       if (__propIsEnum2.call(b, prop))
-        __defNormalProp3(a, prop, b[prop]);
+        __defNormalProp2(a, prop, b[prop]);
     }
   return a;
 };
@@ -6792,7 +6792,7 @@ class ShaderMaterial extends Material {
   }
 }
 ShaderMaterial.prototype.isShaderMaterial = true;
-class Camera$2 extends Object3D {
+class Camera$1 extends Object3D {
   constructor() {
     super();
     this.type = "Camera";
@@ -6824,8 +6824,8 @@ class Camera$2 extends Object3D {
     return new this.constructor().copy(this);
   }
 }
-Camera$2.prototype.isCamera = true;
-class PerspectiveCamera extends Camera$2 {
+Camera$1.prototype.isCamera = true;
+class PerspectiveCamera extends Camera$1 {
   constructor(fov2 = 50, aspect2 = 1, near = 0.1, far = 2e3) {
     super();
     this.type = "PerspectiveCamera";
@@ -8815,7 +8815,7 @@ function WebGLCubeMaps(renderer) {
     dispose
   };
 }
-class OrthographicCamera extends Camera$2 {
+class OrthographicCamera extends Camera$1 {
   constructor(left = -1, right = 1, top = 1, bottom = -1, near = 0.1, far = 2e3) {
     super();
     this.type = "OrthographicCamera";
@@ -23909,7 +23909,7 @@ if (typeof window !== "undefined") {
 }
 var __defProp$1 = Object.defineProperty;
 var __defNormalProp$1 = (obj, key, value) => key in obj ? __defProp$1(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __publicField$1 = (obj, key, value) => {
+var __publicField = (obj, key, value) => {
   __defNormalProp$1(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
@@ -24011,39 +24011,39 @@ var deepmerge_1 = deepmerge;
 var cjs = deepmerge_1;
 class ViewerSettings {
   constructor(options) {
-    __publicField$1(this, "options");
-    __publicField$1(this, "getCanvasResizeDelay", () => this.options.canvas.resizeDelay);
-    __publicField$1(this, "getCanvasId", () => this.options.canvas.id);
-    __publicField$1(this, "getGroundPlaneVisible", () => this.options.groundPlane.visible);
-    __publicField$1(this, "getGroundPlaneColor", () => toRGBColor(this.options.groundPlane.color));
-    __publicField$1(this, "getGroundPlaneTextureUrl", () => this.options.groundPlane.texture);
-    __publicField$1(this, "getGroundPlaneOpacity", () => this.options.groundPlane.opacity);
-    __publicField$1(this, "getGroundPlaneSize", () => this.options.groundPlane.size);
-    __publicField$1(this, "getSkylightColor", () => toHSLColor(this.options.skylight.skyColor));
-    __publicField$1(this, "getSkylightGroundColor", () => toHSLColor(this.options.skylight.groundColor));
-    __publicField$1(this, "getSkylightIntensity", () => this.options.skylight.intensity);
-    __publicField$1(this, "getSunlightCount", () => this.options.sunLights.length);
-    __publicField$1(this, "getSunlightColor", (index) => toHSLColor(this.options.sunLights[index].color));
-    __publicField$1(this, "getSunlightPosition", (index) => toVec$1(this.options.sunLights[index].position));
-    __publicField$1(this, "getSunlightIntensity", (index) => this.options.sunLights[index].intensity);
-    __publicField$1(this, "getHighlightColor", () => toRGBColor(this.highlight.color));
-    __publicField$1(this, "getHighlightOpacity", () => this.highlight.opacity);
-    __publicField$1(this, "getIsolationColor", () => toRGBColor(this.isolation.color));
-    __publicField$1(this, "getIsolationOpacity", () => this.isolation.opacity);
-    __publicField$1(this, "getCameraNear", () => this.camera.near);
-    __publicField$1(this, "getCameraFar", () => this.camera.far);
-    __publicField$1(this, "getCameraFov", () => this.camera.fov);
-    __publicField$1(this, "getCameraZoom", () => this.camera.zoom);
-    __publicField$1(this, "getCameraGizmoEnable", () => this.camera.gizmo.enable);
-    __publicField$1(this, "getCameraGizmoSize", () => this.camera.gizmo.size);
-    __publicField$1(this, "getCameraGizmoColor", () => toRGBColor(this.camera.gizmo.color));
-    __publicField$1(this, "getCameraGizmoOpacity", () => this.camera.gizmo.opacity);
-    __publicField$1(this, "getCameraGizmoOpacityAlways", () => this.camera.gizmo.opacityAlways);
-    __publicField$1(this, "getCameraIsOrbit", () => this.cameraControls.orbit);
-    __publicField$1(this, "getCameraMoveSpeed", () => this.cameraControls.moveSpeed);
-    __publicField$1(this, "getCameraRotateSpeed", () => this.cameraControls.rotateSpeed);
-    __publicField$1(this, "getCameraOrbitSpeed", () => this.cameraControls.orbitSpeed);
-    __publicField$1(this, "getCameraReferenceVimSize", () => this.cameraControls.vimReferenceSize);
+    __publicField(this, "options");
+    __publicField(this, "getCanvasResizeDelay", () => this.options.canvas.resizeDelay);
+    __publicField(this, "getCanvasId", () => this.options.canvas.id);
+    __publicField(this, "getGroundPlaneVisible", () => this.options.groundPlane.visible);
+    __publicField(this, "getGroundPlaneColor", () => toRGBColor(this.options.groundPlane.color));
+    __publicField(this, "getGroundPlaneTextureUrl", () => this.options.groundPlane.texture);
+    __publicField(this, "getGroundPlaneOpacity", () => this.options.groundPlane.opacity);
+    __publicField(this, "getGroundPlaneSize", () => this.options.groundPlane.size);
+    __publicField(this, "getSkylightColor", () => toHSLColor(this.options.skylight.skyColor));
+    __publicField(this, "getSkylightGroundColor", () => toHSLColor(this.options.skylight.groundColor));
+    __publicField(this, "getSkylightIntensity", () => this.options.skylight.intensity);
+    __publicField(this, "getSunlightCount", () => this.options.sunLights.length);
+    __publicField(this, "getSunlightColor", (index) => toHSLColor(this.options.sunLights[index].color));
+    __publicField(this, "getSunlightPosition", (index) => toVec$1(this.options.sunLights[index].position));
+    __publicField(this, "getSunlightIntensity", (index) => this.options.sunLights[index].intensity);
+    __publicField(this, "getHighlightColor", () => toRGBColor(this.highlight.color));
+    __publicField(this, "getHighlightOpacity", () => this.highlight.opacity);
+    __publicField(this, "getIsolationColor", () => toRGBColor(this.isolation.color));
+    __publicField(this, "getIsolationOpacity", () => this.isolation.opacity);
+    __publicField(this, "getCameraNear", () => this.camera.near);
+    __publicField(this, "getCameraFar", () => this.camera.far);
+    __publicField(this, "getCameraFov", () => this.camera.fov);
+    __publicField(this, "getCameraZoom", () => this.camera.zoom);
+    __publicField(this, "getCameraGizmoEnable", () => this.camera.gizmo.enable);
+    __publicField(this, "getCameraGizmoSize", () => this.camera.gizmo.size);
+    __publicField(this, "getCameraGizmoColor", () => toRGBColor(this.camera.gizmo.color));
+    __publicField(this, "getCameraGizmoOpacity", () => this.camera.gizmo.opacity);
+    __publicField(this, "getCameraGizmoOpacityAlways", () => this.camera.gizmo.opacityAlways);
+    __publicField(this, "getCameraIsOrbit", () => this.cameraControls.orbit);
+    __publicField(this, "getCameraMoveSpeed", () => this.cameraControls.moveSpeed);
+    __publicField(this, "getCameraRotateSpeed", () => this.cameraControls.rotateSpeed);
+    __publicField(this, "getCameraOrbitSpeed", () => this.cameraControls.orbitSpeed);
+    __publicField(this, "getCameraReferenceVimSize", () => this.cameraControls.vimReferenceSize);
     const fallback = {
       canvas: {
         id: void 0,
@@ -24142,39 +24142,39 @@ function clamp$1(value, min2, max2) {
   up: new Vector3(0, 1, 0),
   down: new Vector3(0, -1, 0)
 });
-class Camera$1 {
+class Camera {
   constructor(scene, viewport, settings) {
-    __publicField$1(this, "camera");
-    __publicField$1(this, "cameraPerspective");
-    __publicField$1(this, "cameraOrthographic");
-    __publicField$1(this, "gizmo");
-    __publicField$1(this, "_viewport");
-    __publicField$1(this, "_scene");
-    __publicField$1(this, "_targetVelocity");
-    __publicField$1(this, "_velocity");
-    __publicField$1(this, "_speed", 0);
-    __publicField$1(this, "_orbitMode", false);
-    __publicField$1(this, "_orbitTarget");
-    __publicField$1(this, "_minOrbitalDistance", 0.05);
-    __publicField$1(this, "_targetPosition");
-    __publicField$1(this, "_lerpStartMs", 0);
-    __publicField$1(this, "_lerpEndMs", 0);
-    __publicField$1(this, "_lockDirection", false);
-    __publicField$1(this, "_lerpPosition");
-    __publicField$1(this, "_lerpRotation");
-    __publicField$1(this, "onChanged", () => {
+    __publicField(this, "camera");
+    __publicField(this, "cameraPerspective");
+    __publicField(this, "cameraOrthographic");
+    __publicField(this, "gizmo");
+    __publicField(this, "_viewport");
+    __publicField(this, "_scene");
+    __publicField(this, "_targetVelocity");
+    __publicField(this, "_velocity");
+    __publicField(this, "_speed", 0);
+    __publicField(this, "_orbitMode", false);
+    __publicField(this, "_orbitTarget");
+    __publicField(this, "_minOrbitalDistance", 0.05);
+    __publicField(this, "_targetPosition");
+    __publicField(this, "_lerpStartMs", 0);
+    __publicField(this, "_lerpEndMs", 0);
+    __publicField(this, "_lockDirection", false);
+    __publicField(this, "_lerpPosition");
+    __publicField(this, "_lerpRotation");
+    __publicField(this, "onChanged", () => {
     });
-    __publicField$1(this, "defaultLerpDuration", 2);
-    __publicField$1(this, "_vimReferenceSize", 1);
-    __publicField$1(this, "_sceneSizeMultiplier", 1);
-    __publicField$1(this, "_velocityBlendFactor", 1e-4);
-    __publicField$1(this, "_moveSpeed", 0.8);
-    __publicField$1(this, "_rotateSpeed", 1);
-    __publicField$1(this, "_orbitSpeed", 1);
-    __publicField$1(this, "_zoomSpeed", 0.25);
-    __publicField$1(this, "_firstPersonSpeed", 10);
-    __publicField$1(this, "_minModelScrenSize", 0.05);
-    __publicField$1(this, "_minOrthoSize", 1);
+    __publicField(this, "defaultLerpDuration", 2);
+    __publicField(this, "_vimReferenceSize", 1);
+    __publicField(this, "_sceneSizeMultiplier", 1);
+    __publicField(this, "_velocityBlendFactor", 1e-4);
+    __publicField(this, "_moveSpeed", 0.8);
+    __publicField(this, "_rotateSpeed", 1);
+    __publicField(this, "_orbitSpeed", 1);
+    __publicField(this, "_zoomSpeed", 0.25);
+    __publicField(this, "_firstPersonSpeed", 10);
+    __publicField(this, "_minModelScrenSize", 0.05);
+    __publicField(this, "_minOrthoSize", 1);
     this.cameraPerspective = new PerspectiveCamera();
     this.camera = this.cameraPerspective;
     this.camera.position.set(0, 0, -1e3);
@@ -24183,7 +24183,7 @@ class Camera$1 {
     this._scene = scene;
     this._viewport = viewport;
     this._viewport.onResize(() => {
-      this.updateProjection(this._scene.getBoundingSphere());
+      this.updateProjection(this._scene.getBoundingBox());
     });
     this.applySettings(settings);
     this._targetVelocity = new Vector3(0, 0, 0);
@@ -24218,6 +24218,9 @@ class Camera$1 {
   get forward() {
     return this.camera.getWorldDirection(new Vector3());
   }
+  get orbitPosition() {
+    return this._orbitTarget;
+  }
   set localVelocity(vector) {
     this.cancelLerp();
     const move = vector.clone();
@@ -24245,8 +24248,18 @@ class Camera$1 {
     this.startLerp(duration, "Rotation");
   }
   frame(target, center = "none", duration = 0) {
-    const sphere = target === "all" ? this._scene.getBoundingSphere() : target instanceof Object$1 ? target.getBoundingSphere() : target instanceof Sphere ? target : void 0;
-    this.frameSphere(sphere, center, duration);
+    if (target instanceof Object$1) {
+      target = target.getBoundingBox();
+    }
+    if (target === "all") {
+      target = this._scene.getBoundingBox();
+    }
+    if (target instanceof Box3) {
+      target = target.getBoundingSphere(new Sphere());
+    }
+    if (target instanceof Sphere) {
+      this.frameSphere(target, center, duration);
+    }
   }
   applySettings(settings) {
     this.orbitMode = settings.getCameraIsOrbit();
@@ -24263,7 +24276,7 @@ class Camera$1 {
     this._vimReferenceSize = settings.getCameraReferenceVimSize();
   }
   adaptToContent() {
-    const sphere = this._scene.getBoundingSphere();
+    const sphere = this._scene.getBoundingBox().getBoundingSphere(new Sphere());
     this._sceneSizeMultiplier = sphere ? sphere.radius / this._vimReferenceSize : 1;
   }
   get orbitDistance() {
@@ -24274,7 +24287,7 @@ class Camera$1 {
   }
   zoom(amount, duration = 0) {
     var _a2, _b;
-    const sphere = this._scene.getBoundingSphere();
+    const sphere = this._scene.getBoundingBox().getBoundingSphere(new Sphere());
     if (this.camera instanceof PerspectiveCamera) {
       const reverse = 1 / (1 - this._zoomSpeed) - 1;
       const factor = amount < 0 ? this._zoomSpeed : reverse;
@@ -24397,16 +24410,19 @@ class Camera$1 {
     this.camera.lookAt(position);
     this.camera.up.set(0, 1, 0);
   }
-  updateProjection(sphere) {
+  updateProjection(target) {
+    if (target instanceof Box3) {
+      target = target.getBoundingSphere(new Sphere());
+    }
     const aspect2 = this._viewport.getAspectRatio();
     if (this.camera instanceof PerspectiveCamera) {
       this.camera.aspect = aspect2;
     } else {
-      if (sphere) {
-        this.camera.left = -sphere.radius * aspect2;
-        this.camera.right = sphere.radius * aspect2;
-        this.camera.top = sphere.radius;
-        this.camera.bottom = -sphere.radius;
+      if (target) {
+        this.camera.left = -target.radius * aspect2;
+        this.camera.right = target.radius * aspect2;
+        this.camera.top = target.radius;
+        this.camera.bottom = -target.radius;
       }
       this.camera.near = -this.cameraPerspective.far;
       this.camera.far = this.cameraPerspective.far;
@@ -24426,7 +24442,7 @@ class Camera$1 {
     next.position.copy(this.camera.position);
     next.rotation.copy(this.camera.rotation);
     this.camera = next;
-    this.updateProjection(this._scene.getBoundingSphere());
+    this.updateProjection(this._scene.getBoundingBox());
   }
   getBaseMultiplier() {
     return Math.pow(1.25, this.speed);
@@ -24563,9 +24579,9 @@ class Camera$1 {
 }
 class InputHandler {
   constructor(viewer2) {
-    __publicField$1(this, "_viewer");
-    __publicField$1(this, "_unregisters", []);
-    __publicField$1(this, "reg", (handler, type, listener2) => {
+    __publicField(this, "_viewer");
+    __publicField(this, "_unregisters", []);
+    __publicField(this, "reg", (handler, type, listener2) => {
       handler.addEventListener(type, listener2);
       this._unregisters.push(() => handler.removeEventListener(type, listener2));
     });
@@ -24673,22 +24689,22 @@ const KEYS = {
 class KeyboardHandler extends InputHandler {
   constructor() {
     super(...arguments);
-    __publicField$1(this, "SHIFT_MULTIPLIER", 3);
-    __publicField$1(this, "isUpPressed", false);
-    __publicField$1(this, "isDownPressed", false);
-    __publicField$1(this, "isLeftPressed", false);
-    __publicField$1(this, "isRightPressed", false);
-    __publicField$1(this, "isEPressed", false);
-    __publicField$1(this, "isQPressed", false);
-    __publicField$1(this, "isShiftPressed", false);
-    __publicField$1(this, "isCtrlPressed", false);
-    __publicField$1(this, "onKeyUp", (event) => {
+    __publicField(this, "SHIFT_MULTIPLIER", 3);
+    __publicField(this, "isUpPressed", false);
+    __publicField(this, "isDownPressed", false);
+    __publicField(this, "isLeftPressed", false);
+    __publicField(this, "isRightPressed", false);
+    __publicField(this, "isEPressed", false);
+    __publicField(this, "isQPressed", false);
+    __publicField(this, "isShiftPressed", false);
+    __publicField(this, "isCtrlPressed", false);
+    __publicField(this, "onKeyUp", (event) => {
       this.onKey(event, false);
     });
-    __publicField$1(this, "onKeyDown", (event) => {
+    __publicField(this, "onKeyDown", (event) => {
       this.onKey(event, true);
     });
-    __publicField$1(this, "onKey", (event, keyDown) => {
+    __publicField(this, "onKey", (event, keyDown) => {
       if (!keyDown) {
         switch (event.keyCode) {
           case KEYS.KEY_O:
@@ -24720,8 +24736,7 @@ class KeyboardHandler extends InputHandler {
           case KEYS.KEY_Z:
           case KEYS.KEY_F:
             if (this.selection.count > 0) {
-              const sphere = this.selection.getBoundingBox().getBoundingSphere(new Sphere());
-              this.camera.frame(sphere, "center", this.camera.defaultLerpDuration);
+              this.camera.frame(this.selection.getBoundingBox(), "center", this.camera.defaultLerpDuration);
             } else {
               this.camera.frame("all", "center", this.camera.defaultLerpDuration);
             }
@@ -24776,7 +24791,7 @@ class KeyboardHandler extends InputHandler {
           break;
       }
     });
-    __publicField$1(this, "applyMove", () => {
+    __publicField(this, "applyMove", () => {
       const move = new Vector3((this.isRightPressed ? 1 : 0) - (this.isLeftPressed ? 1 : 0), (this.isEPressed ? 1 : 0) - (this.isQPressed ? 1 : 0), (this.isUpPressed ? 1 : 0) - (this.isDownPressed ? 1 : 0));
       const speed = this.isShiftPressed ? this.SHIFT_MULTIPLIER : 1;
       move.multiplyScalar(speed);
@@ -24809,9 +24824,9 @@ class KeyboardHandler extends InputHandler {
 }
 class RaycastResult {
   constructor(intersections) {
-    __publicField$1(this, "object");
-    __publicField$1(this, "intersections");
-    __publicField$1(this, "firstHit");
+    __publicField(this, "object");
+    __publicField(this, "intersections");
+    __publicField(this, "firstHit");
     this.intersections = intersections;
     const [hit, obj] = this.GetFirstVimHit(intersections);
     this.firstHit = hit;
@@ -24878,42 +24893,54 @@ class RaycastResult {
 }
 class Raycaster {
   constructor(viewport, camera, scene, renderer) {
-    __publicField$1(this, "_viewport");
-    __publicField$1(this, "_camera");
-    __publicField$1(this, "_scene");
-    __publicField$1(this, "_renderer");
-    __publicField$1(this, "_raycaster", new Raycaster$1());
+    __publicField(this, "_viewport");
+    __publicField(this, "_camera");
+    __publicField(this, "_scene");
+    __publicField(this, "_renderer");
+    __publicField(this, "_raycaster", new Raycaster$1());
     this._viewport = viewport;
     this._camera = camera;
     this._scene = scene;
     this._renderer = renderer;
   }
-  sceneRaycast(position) {
-    let intersections = this.raycast(position);
-    if (this._renderer.section.active) {
-      intersections = intersections.filter((i2) => this._renderer.section.box.containsPoint(i2.point));
-    }
-    return new RaycastResult(intersections);
+  raycast2(position) {
+    this._raycaster = this.fromPoint2(position, this._raycaster);
+    let hits = this._raycaster.intersectObjects(this._scene.scene.children);
+    hits = this.filterHits(hits);
+    return new RaycastResult(hits);
   }
-  fromPoint(position, target = new Raycaster$1()) {
+  filterHits(hits) {
+    return this._renderer.section.active ? hits.filter((i2) => this._renderer.section.box.containsPoint(i2.point)) : hits;
+  }
+  raycast3(position) {
+    this._raycaster = this.fromPoint3(position, this._raycaster);
+    let hits = this._raycaster.intersectObjects(this._scene.scene.children);
+    hits = this.filterHits(hits);
+    return new RaycastResult(hits);
+  }
+  raycastForward() {
+    return this.raycast3(this._camera.orbitPosition);
+  }
+  fromPoint2(position, target = new Raycaster$1()) {
     const [width, height] = this._viewport.getSize();
     const x2 = position.x / width * 2 - 1;
     const y2 = -(position.y / height) * 2 + 1;
     target.setFromCamera(new Vector2(x2, y2), this._camera.camera);
     return target;
   }
-  raycast(position) {
-    this._raycaster = this.fromPoint(position, this._raycaster);
-    return this._raycaster.intersectObjects(this._scene.scene.children);
+  fromPoint3(position, target = new Raycaster$1()) {
+    const direction = position.clone().sub(this._camera.camera.position).normalize();
+    target.set(this._camera.camera.position, direction);
+    return target;
   }
 }
 class InputAction {
   constructor(type, modifier, position, raycaster) {
-    __publicField$1(this, "position");
-    __publicField$1(this, "modifier");
-    __publicField$1(this, "type");
-    __publicField$1(this, "_raycaster");
-    __publicField$1(this, "_raycast");
+    __publicField(this, "position");
+    __publicField(this, "modifier");
+    __publicField(this, "type");
+    __publicField(this, "_raycaster");
+    __publicField(this, "_raycast");
     this.type = type;
     this.modifier = modifier;
     this.position = position;
@@ -24921,7 +24948,7 @@ class InputAction {
   }
   get raycast() {
     var _a2;
-    return (_a2 = this._raycast) != null ? _a2 : this._raycast = this._raycaster.sceneRaycast(this.position);
+    return (_a2 = this._raycast) != null ? _a2 : this._raycast = this._raycaster.raycast2(this.position);
   }
   get object() {
     return this.raycast.object;
@@ -24930,20 +24957,20 @@ class InputAction {
 class TouchHandler extends InputHandler {
   constructor() {
     super(...arguments);
-    __publicField$1(this, "TAP_DURATION_MS", 500);
-    __publicField$1(this, "DOUBLE_TAP_DELAY_MS", 500);
-    __publicField$1(this, "TAP_MAX_MOVE_PIXEL", 5);
-    __publicField$1(this, "ZOOM_SPEED", 5);
-    __publicField$1(this, "_touch");
-    __publicField$1(this, "_touch1");
-    __publicField$1(this, "_touch2");
-    __publicField$1(this, "_touchStartTime");
-    __publicField$1(this, "_lastTapMs");
-    __publicField$1(this, "_touchStart");
-    __publicField$1(this, "reset", () => {
+    __publicField(this, "TAP_DURATION_MS", 500);
+    __publicField(this, "DOUBLE_TAP_DELAY_MS", 500);
+    __publicField(this, "TAP_MAX_MOVE_PIXEL", 5);
+    __publicField(this, "ZOOM_SPEED", 5);
+    __publicField(this, "_touch");
+    __publicField(this, "_touch1");
+    __publicField(this, "_touch2");
+    __publicField(this, "_touchStartTime");
+    __publicField(this, "_lastTapMs");
+    __publicField(this, "_touchStart");
+    __publicField(this, "reset", () => {
       this._touch = this._touch1 = this._touch2 = this._touchStartTime = void 0;
     });
-    __publicField$1(this, "onTap", (position) => {
+    __publicField(this, "onTap", (position) => {
       var _a2, _b;
       const time = new Date().getTime();
       const double = time - this._lastTapMs < this.DOUBLE_TAP_DELAY_MS;
@@ -24951,7 +24978,7 @@ class TouchHandler extends InputHandler {
       const action = new InputAction(double ? "double" : "main", "none", position, this._viewer.raycaster);
       (_b = (_a2 = this._viewer.inputs).onMainAction) == null ? void 0 : _b.call(_a2, action);
     });
-    __publicField$1(this, "onTouchStart", (event) => {
+    __publicField(this, "onTouchStart", (event) => {
       event.preventDefault();
       if (!event || !event.touches || !event.touches.length) {
         return;
@@ -24967,20 +24994,20 @@ class TouchHandler extends InputHandler {
       }
       this._touchStart = this._touch;
     });
-    __publicField$1(this, "onDrag", (delta) => {
+    __publicField(this, "onDrag", (delta) => {
       this.camera.rotate(delta);
     });
-    __publicField$1(this, "onDoubleDrag", (delta) => {
+    __publicField(this, "onDoubleDrag", (delta) => {
       this.camera.move2(delta, "XY");
     });
-    __publicField$1(this, "onPinchOrSpread", (delta) => {
+    __publicField(this, "onPinchOrSpread", (delta) => {
       if (this.camera.orbitMode) {
         this.camera.zoom(delta * this.ZOOM_SPEED);
       } else {
         this.camera.move1(delta * this.ZOOM_SPEED, "Z");
       }
     });
-    __publicField$1(this, "onTouchMove", (event) => {
+    __publicField(this, "onTouchMove", (event) => {
       event.preventDefault();
       if (!event || !event.touches || !event.touches.length)
         return;
@@ -25016,7 +25043,7 @@ class TouchHandler extends InputHandler {
         }
       }
     });
-    __publicField$1(this, "onTouchEnd", (event) => {
+    __publicField(this, "onTouchEnd", (event) => {
       if (this.isSingleTouch()) {
         const touchDurationMs = new Date().getTime() - this._touchStartTime;
         const length = this._touch.clone().sub(this._touchStart).length();
@@ -25053,43 +25080,33 @@ class TouchHandler extends InputHandler {
 class MouseHandler extends InputHandler {
   constructor() {
     super(...arguments);
-    __publicField$1(this, "isMouseDown", false);
-    __publicField$1(this, "hasMouseMoved", false);
-    __publicField$1(this, "_idleTimeout");
-    __publicField$1(this, "_idleDelayMs", 200);
-    __publicField$1(this, "_lastPosition");
-    __publicField$1(this, "reset", () => {
+    __publicField(this, "_idleDelayMs", 200);
+    __publicField(this, "isMouseDown", false);
+    __publicField(this, "hasMouseMoved", false);
+    __publicField(this, "_idleTimeout");
+    __publicField(this, "_lastPosition");
+    __publicField(this, "_downPosition");
+    __publicField(this, "reset", () => {
+      this.isMouseDown = this.hasMouseMoved = false;
+      this._lastPosition = this._downPosition = void 0;
+      clearTimeout(this._idleTimeout);
+    });
+    __publicField(this, "onMouseOut", (_) => {
       this.isMouseDown = this.hasMouseMoved = false;
     });
-    __publicField$1(this, "onMouseOut", (_) => {
-      this.isMouseDown = this.hasMouseMoved = false;
-    });
-    __publicField$1(this, "onMouseIdle", (position) => {
+    __publicField(this, "onMouseIdle", (position) => {
       var _a2, _b;
       const action = new InputAction("idle", this.getModifier(), position, this.raycaster);
       (_b = (_a2 = this._viewer.inputs).onIdleAction) == null ? void 0 : _b.call(_a2, action);
     });
-    __publicField$1(this, "onMouseMove", (event) => {
+    __publicField(this, "onMouseMove", (event) => {
       this._lastPosition = new Vector2(event.offsetX, event.offsetY);
       this.resetIdleTimeout();
-      if (!this.isMouseDown) {
+      if (!this.isMouseDown)
         return;
-      }
-      event.preventDefault();
-      const deltaX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
-      const deltaY = event.movementY || event.mozMovementY || event.webkitMovementY || 0;
-      const [width, height] = this.viewport.getSize();
-      const delta = new Vector2(deltaX / width, deltaY / height);
-      this.hasMouseMoved = this.hasMouseMoved || Math.abs(deltaX) + Math.abs(deltaY) > 3;
-      if (event.buttons & 2) {
-        this.camera.move2(delta, "XY");
-      } else if (event.buttons & 4) {
-        this.camera.move2(delta, "XY");
-      } else {
-        this.camera.rotate(delta);
-      }
+      this.onMouseDrag(event);
     });
-    __publicField$1(this, "onMouseWheel", (event) => {
+    __publicField(this, "onMouseWheel", (event) => {
       event.preventDefault();
       event.stopPropagation();
       const scrollValue = Math.sign(event.deltaY);
@@ -25099,23 +25116,28 @@ class MouseHandler extends InputHandler {
         this.camera.zoom(scrollValue, this.camera.defaultLerpDuration);
       }
     });
-    __publicField$1(this, "onMouseDown", (event) => {
+    __publicField(this, "onMouseDown", (event) => {
       event.preventDefault();
+      this._downPosition = new Vector2(event.offsetX, event.offsetY);
       this.isMouseDown = true;
       this.hasMouseMoved = false;
       this.viewport.canvas.focus();
     });
-    __publicField$1(this, "onMouseUp", (event) => {
-      if (event.button === 0 && this.isMouseDown && !this.hasMouseMoved) {
+    __publicField(this, "onMouseUp", (event) => {
+      this._viewer.gizmoSelection.visible = false;
+      if (this.inputs.pointerMode === "zone" && this.hasMouseMoved) {
+        this.inputs.pointerMode = "normal";
+        this._viewer.camera.frame(this._viewer.gizmoSelection.getBoundingBox(), "none", this._viewer.camera.defaultLerpDuration);
+      } else if (event.button === 0 && this.isMouseDown && !this.hasMouseMoved) {
         this.onMouseClick(new Vector2(event.offsetX, event.offsetY), false);
       }
       this.isMouseDown = false;
       event.preventDefault();
     });
-    __publicField$1(this, "onDoubleClick", (event) => {
+    __publicField(this, "onDoubleClick", (event) => {
       this.onMouseClick(new Vector2(event.offsetX, event.offsetY), true);
     });
-    __publicField$1(this, "onMouseClick", (position, doubleClick) => {
+    __publicField(this, "onMouseClick", (position, doubleClick) => {
       var _a2, _b;
       const action = new InputAction(doubleClick ? "double" : "main", this.getModifier(), position, this.raycaster);
       (_b = (_a2 = this._viewer.inputs).onMainAction) == null ? void 0 : _b.call(_a2, action);
@@ -25133,6 +25155,9 @@ class MouseHandler extends InputHandler {
   get raycaster() {
     return this._viewer.raycaster;
   }
+  get inputs() {
+    return this._viewer.inputs;
+  }
   get keyboard() {
     return this._viewer.inputs.keyboard;
   }
@@ -25149,24 +25174,76 @@ class MouseHandler extends InputHandler {
     clearTimeout(this._idleTimeout);
     this._idleTimeout = setTimeout(() => this.onMouseIdle(this._lastPosition), this._idleDelayMs);
   }
+  onMouseDrag(event) {
+    event.preventDefault();
+    const deltaX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
+    const deltaY = event.movementY || event.mozMovementY || event.webkitMovementY || 0;
+    const [width, height] = this.viewport.getSize();
+    const delta = new Vector2(deltaX / width, deltaY / height);
+    this.hasMouseMoved = this.hasMouseMoved || Math.abs(deltaX) + Math.abs(deltaY) > 3;
+    if (event.buttons & 2 || event.buttons & 4) {
+      this.onMouseSecondaryDrag(delta);
+    } else {
+      this.onMouseMainDrag(delta);
+    }
+  }
+  onMouseMainDrag(delta) {
+    switch (this.inputs.pointerMode) {
+      case "normal":
+        this.camera.rotate(delta);
+        break;
+      case "orbit":
+        this.camera.rotate(delta);
+        break;
+      case "look":
+        this.camera.rotate(delta);
+        break;
+      case "pan":
+        this.camera.move2(delta, "XY");
+        break;
+      case "dolly":
+        this.camera.move1(delta.y, "Z");
+        break;
+      case "zone":
+        this.drawSelection();
+        break;
+      default:
+        this.camera.rotate(delta);
+    }
+  }
+  onMouseSecondaryDrag(delta) {
+    switch (this.inputs.pointerMode) {
+      case "normal":
+        this.camera.move2(delta, "XY");
+        break;
+      default:
+        this.onMouseMainDrag(delta);
+    }
+  }
   getModifier() {
     return this.keyboard.isCtrlPressed ? "ctrl" : this.keyboard.isShiftPressed ? "shift" : "none";
+  }
+  drawSelection() {
+    this._viewer.gizmoSelection.visible = true;
+    this._viewer.gizmoSelection.update(this._downPosition, this._lastPosition);
   }
 }
 class Input {
   constructor(viewer2) {
-    __publicField$1(this, "_viewer");
-    __publicField$1(this, "touch");
-    __publicField$1(this, "mouse");
-    __publicField$1(this, "keyboard");
-    __publicField$1(this, "onMainAction");
-    __publicField$1(this, "onIdleAction");
-    __publicField$1(this, "unregisterAll", () => {
+    __publicField(this, "_viewer");
+    __publicField(this, "touch");
+    __publicField(this, "mouse");
+    __publicField(this, "keyboard");
+    __publicField(this, "_mode");
+    __publicField(this, "onPointerModeChanged");
+    __publicField(this, "onMainAction");
+    __publicField(this, "onIdleAction");
+    __publicField(this, "unregisterAll", () => {
       this.mouse.unregister();
       this.keyboard.unregister();
       this.touch.unregister();
     });
-    __publicField$1(this, "defaultAction", (action) => {
+    __publicField(this, "defaultAction", (action) => {
       const camera = this._viewer.camera;
       const selection = this._viewer.selection;
       if (!(action == null ? void 0 : action.object)) {
@@ -25196,6 +25273,17 @@ class Input {
     this.touch = new TouchHandler(viewer2);
     this.onMainAction = this.defaultAction;
   }
+  get pointerMode() {
+    return this._mode;
+  }
+  set pointerMode(value) {
+    var _a2;
+    if (value === this._mode)
+      return;
+    this._viewer.camera.orbitMode = value !== "look";
+    this._mode = value;
+    (_a2 = this.onPointerModeChanged) == null ? void 0 : _a2.call(this);
+  }
   registerAll() {
     this.keyboard.register();
     this.mouse.register();
@@ -25207,7 +25295,7 @@ class Input {
     this.touch.reset();
   }
 }
-var Transparency$1;
+var Transparency;
 ((Transparency2) => {
   function isValid(value) {
     return ["all", "opaqueOnly", "transparentOnly", "allAsOpaque"].includes(value);
@@ -25217,8 +25305,8 @@ var Transparency$1;
     return mode === "all" || mode === "transparentOnly";
   }
   Transparency2.requiresAlpha = requiresAlpha;
-})(Transparency$1 || (Transparency$1 = {}));
-var Geometry$1;
+})(Transparency || (Transparency = {}));
+var Geometry;
 ((Geometry2) => {
   function createGeometryFromInstances(g3d, instances) {
     return Geometry2.mergeInstanceMeshes(g3d, "all", false, instances).geometry;
@@ -25366,10 +25454,10 @@ var Geometry$1;
   }
   class MergeInfo {
     constructor(section, instance, indexCount, vertexCount) {
-      __publicField$1(this, "section");
-      __publicField$1(this, "instances");
-      __publicField$1(this, "indexCount");
-      __publicField$1(this, "vertexCount");
+      __publicField(this, "section");
+      __publicField(this, "instances");
+      __publicField(this, "indexCount");
+      __publicField(this, "vertexCount");
       this.section = section;
       this.instances = instance;
       this.indexCount = indexCount;
@@ -25378,11 +25466,11 @@ var Geometry$1;
   }
   class MergeBuffer {
     constructor(info, positionSize, colorSize) {
-      __publicField$1(this, "indices");
-      __publicField$1(this, "vertices");
-      __publicField$1(this, "colors");
-      __publicField$1(this, "groups");
-      __publicField$1(this, "colorSize");
+      __publicField(this, "indices");
+      __publicField(this, "vertices");
+      __publicField(this, "colors");
+      __publicField(this, "groups");
+      __publicField(this, "colorSize");
       this.indices = new Uint32Array(info.indexCount);
       this.vertices = new Float32Array(info.vertexCount * positionSize);
       this.colors = new Float32Array(info.vertexCount * colorSize);
@@ -25396,24 +25484,24 @@ var Geometry$1;
   }
   class MergeResult {
     constructor(geometry, instance, submeshes) {
-      __publicField$1(this, "geometry");
-      __publicField$1(this, "instances");
-      __publicField$1(this, "submeshes");
+      __publicField(this, "geometry");
+      __publicField(this, "instances");
+      __publicField(this, "submeshes");
       this.geometry = geometry;
       this.instances = instance;
       this.submeshes = submeshes;
     }
   }
-})(Geometry$1 || (Geometry$1 = {}));
+})(Geometry || (Geometry = {}));
 class Object$1 {
   constructor(vim, element, instances, meshes) {
-    __publicField$1(this, "vim");
-    __publicField$1(this, "element");
-    __publicField$1(this, "instances");
-    __publicField$1(this, "_color");
-    __publicField$1(this, "_visible", true);
-    __publicField$1(this, "_boundingBox");
-    __publicField$1(this, "_meshes");
+    __publicField(this, "vim");
+    __publicField(this, "element");
+    __publicField(this, "instances");
+    __publicField(this, "_color");
+    __publicField(this, "_visible", true);
+    __publicField(this, "_boundingBox");
+    __publicField(this, "_meshes");
     this.vim = vim;
     this.element = element;
     this.instances = instances;
@@ -25455,7 +25543,7 @@ class Object$1 {
       return;
     if (this._boundingBox)
       return this._boundingBox;
-    const geometry = Geometry$1.createGeometryFromInstances(this.vim.document.g3d, this.instances);
+    const geometry = Geometry.createGeometryFromInstances(this.vim.document.g3d, this.instances);
     geometry.applyMatrix4(this.vim.getMatrix());
     geometry.computeBoundingBox();
     this._boundingBox = (_a2 = geometry.boundingBox) != null ? _a2 : void 0;
@@ -25465,10 +25553,6 @@ class Object$1 {
   getCenter(target = new Vector3()) {
     var _a2;
     return (_a2 = this.getBoundingBox()) == null ? void 0 : _a2.getCenter(target);
-  }
-  getBoundingSphere(target = new Sphere()) {
-    var _a2;
-    return (_a2 = this.getBoundingBox()) == null ? void 0 : _a2.getBoundingSphere(target);
   }
   createWireframe() {
     if (!this.instances)
@@ -25480,7 +25564,7 @@ class Object$1 {
   createGeometry() {
     if (!this.instances)
       return;
-    const geometry = Geometry$1.createGeometryFromInstances(this.vim.document.g3d, this.instances);
+    const geometry = Geometry.createGeometryFromInstances(this.vim.document.g3d, this.instances);
     geometry.applyMatrix4(this.vim.getMatrix());
     return geometry;
   }
@@ -25635,11 +25719,11 @@ class Object$1 {
 }
 class Selection {
   constructor(renderer) {
-    __publicField$1(this, "_renderer");
-    __publicField$1(this, "_objects", /* @__PURE__ */ new Set());
-    __publicField$1(this, "_vim");
-    __publicField$1(this, "_highlight");
-    __publicField$1(this, "onValueChanged");
+    __publicField(this, "_renderer");
+    __publicField(this, "_objects", /* @__PURE__ */ new Set());
+    __publicField(this, "_vim");
+    __publicField(this, "_highlight");
+    __publicField(this, "onValueChanged");
     this._renderer = renderer;
   }
   get vim() {
@@ -25648,17 +25732,25 @@ class Selection {
   get objects() {
     return this._objects.values();
   }
-  getBoundingBox() {
+  getBoundingBox(target = new Box3()) {
     if (this._objects.size === 0)
       return;
-    let box;
+    let initialized = false;
     for (const o of this._objects) {
       const other = o.getBoundingBox();
       if (!other)
         continue;
-      box = box ? box.union(other) : other;
+      if (!initialized) {
+        target.copy(other);
+      } else {
+        target.union(other);
+      }
+      initialized = true;
     }
-    return box;
+    if (!initialized) {
+      return;
+    }
+    return target;
   }
   select(object) {
     object = object === void 0 ? [] : object instanceof Object$1 ? [object] : object;
@@ -25785,12 +25877,12 @@ class Selection {
 }
 class GroundPlane {
   constructor() {
-    __publicField$1(this, "mesh");
-    __publicField$1(this, "_source");
-    __publicField$1(this, "_size", 1);
-    __publicField$1(this, "_geometry");
-    __publicField$1(this, "_material");
-    __publicField$1(this, "_texture");
+    __publicField(this, "mesh");
+    __publicField(this, "_source");
+    __publicField(this, "_size", 1);
+    __publicField(this, "_geometry");
+    __publicField(this, "_material");
+    __publicField(this, "_texture");
     this._geometry = new PlaneGeometry();
     this._material = new MeshBasicMaterial({ transparent: true });
     this.mesh = new Mesh(this._geometry, this._material);
@@ -25840,9 +25932,9 @@ class GroundPlane {
 }
 class Environment {
   constructor(settings) {
-    __publicField$1(this, "skyLight");
-    __publicField$1(this, "sunLights");
-    __publicField$1(this, "_groundPlane");
+    __publicField(this, "skyLight");
+    __publicField(this, "sunLights");
+    __publicField(this, "_groundPlane");
     this._groundPlane = new GroundPlane();
     this.skyLight = new HemisphereLight();
     this.sunLights = [];
@@ -25880,23 +25972,23 @@ class Environment {
 }
 class CameraGizmo {
   constructor(renderer, camera, settings) {
-    __publicField$1(this, "_renderer");
-    __publicField$1(this, "_camera");
-    __publicField$1(this, "_size", 0.01);
-    __publicField$1(this, "_fov", 50);
-    __publicField$1(this, "_color", new Color("blue"));
-    __publicField$1(this, "_opacity", 0.2);
-    __publicField$1(this, "_opacityAlways", 0.5);
-    __publicField$1(this, "_fadeDurationMs", 200);
-    __publicField$1(this, "_showDurationMs", 1e3);
-    __publicField$1(this, "_box");
-    __publicField$1(this, "_wireframe");
-    __publicField$1(this, "_material");
-    __publicField$1(this, "_materialAlways");
-    __publicField$1(this, "_gizmos");
-    __publicField$1(this, "_timeout");
-    __publicField$1(this, "_fadeEnd", 0);
-    __publicField$1(this, "_active", true);
+    __publicField(this, "_renderer");
+    __publicField(this, "_camera");
+    __publicField(this, "_size", 0.01);
+    __publicField(this, "_fov", 50);
+    __publicField(this, "_color", new Color("blue"));
+    __publicField(this, "_opacity", 0.2);
+    __publicField(this, "_opacityAlways", 0.5);
+    __publicField(this, "_fadeDurationMs", 200);
+    __publicField(this, "_showDurationMs", 1e3);
+    __publicField(this, "_box");
+    __publicField(this, "_wireframe");
+    __publicField(this, "_material");
+    __publicField(this, "_materialAlways");
+    __publicField(this, "_gizmos");
+    __publicField(this, "_timeout");
+    __publicField(this, "_fadeEnd", 0);
+    __publicField(this, "_active", true);
     this._renderer = renderer;
     this._camera = camera;
     this.applySettings(settings);
@@ -26023,13 +26115,16 @@ class CameraGizmo {
 }
 class Scene {
   constructor(builder) {
-    __publicField$1(this, "builder");
-    __publicField$1(this, "meshes", []);
-    __publicField$1(this, "boundingBox", new Box3());
-    __publicField$1(this, "_instanceToThreeMeshes", /* @__PURE__ */ new Map());
-    __publicField$1(this, "_threeMeshIdToInstances", /* @__PURE__ */ new Map());
-    __publicField$1(this, "_material");
+    __publicField(this, "builder");
+    __publicField(this, "meshes", []);
+    __publicField(this, "_boundingBox", new Box3());
+    __publicField(this, "_instanceToThreeMeshes", /* @__PURE__ */ new Map());
+    __publicField(this, "_threeMeshIdToInstances", /* @__PURE__ */ new Map());
+    __publicField(this, "_material");
     this.builder = builder;
+  }
+  getBoundingBox(target = new Box3()) {
+    return target.copy(this._boundingBox);
   }
   getMeshFromInstance(instance) {
     return this._instanceToThreeMeshes.get(instance);
@@ -26047,7 +26142,7 @@ class Scene {
       this.meshes[m2].matrixAutoUpdate = false;
       this.meshes[m2].matrix.copy(matrix);
     }
-    this.boundingBox.applyMatrix4(matrix);
+    this._boundingBox.applyMatrix4(matrix);
   }
   setVim(vim) {
     for (let m2 = 0; m2 < this.meshes.length; m2++) {
@@ -26069,7 +26164,7 @@ class Scene {
     }
     mesh.geometry.computeBoundingBox();
     const box = mesh.geometry.boundingBox;
-    this.boundingBox = (_c = (_b = this.boundingBox) == null ? void 0 : _b.union(box)) != null ? _c : box.clone();
+    this._boundingBox = (_c = (_b = this._boundingBox) == null ? void 0 : _b.union(box)) != null ? _c : box.clone();
     this._threeMeshIdToInstances.set(mesh.id, instances);
     this.meshes.push(mesh);
     return this;
@@ -26094,7 +26189,7 @@ class Scene {
       this._instanceToThreeMeshes.set(instances[i2], set3);
     }
     const box = this.computeIntancedMeshBoundingBox(mesh);
-    this.boundingBox = (_c = (_b = this.boundingBox) == null ? void 0 : _b.union(box)) != null ? _c : box.clone();
+    this._boundingBox = (_c = (_b = this._boundingBox) == null ? void 0 : _b.union(box)) != null ? _c : box.clone();
     this._threeMeshIdToInstances.set(mesh.id, instances);
   }
   merge(other) {
@@ -26111,7 +26206,7 @@ class Scene {
     other._threeMeshIdToInstances.forEach((value, key) => {
       this._threeMeshIdToInstances.set(key, value);
     });
-    this.boundingBox = (_b = (_a2 = this.boundingBox) == null ? void 0 : _a2.union(other.boundingBox)) != null ? _b : other.boundingBox.clone();
+    this._boundingBox = (_b = (_a2 = this._boundingBox) == null ? void 0 : _a2.union(other._boundingBox)) != null ? _b : other._boundingBox.clone();
     return this;
   }
   get material() {
@@ -26159,14 +26254,10 @@ class Scene {
 }
 class RenderScene {
   constructor() {
-    __publicField$1(this, "scene");
-    __publicField$1(this, "_scenes", []);
-    __publicField$1(this, "_boundingBox");
+    __publicField(this, "scene");
+    __publicField(this, "_scenes", []);
+    __publicField(this, "_boundingBox");
     this.scene = new Scene$1();
-  }
-  getBoundingSphere(target = new Sphere()) {
-    var _a2, _b;
-    return (_b = (_a2 = this._boundingBox) == null ? void 0 : _a2.getBoundingSphere(target)) != null ? _b : target.set(new Vector3(0, 0, 0), 1);
   }
   getBoundingBox(target = new Box3()) {
     return this._boundingBox ? target.copy(this._boundingBox) : target.set(new Vector3(-1, -1, -1), new Vector3(1, 1, 1));
@@ -26194,22 +26285,22 @@ class RenderScene {
     scene.meshes.forEach((m2) => {
       this.scene.add(m2);
     });
-    this._boundingBox = this._boundingBox ? this._boundingBox.union(scene.boundingBox) : scene.boundingBox.clone();
+    this._boundingBox = this._boundingBox ? this._boundingBox.union(scene.getBoundingBox()) : scene.getBoundingBox();
   }
   removeScene(scene) {
     this._scenes = this._scenes.filter((f2) => f2 !== scene);
     for (let i2 = 0; i2 < scene.meshes.length; i2++) {
       this.scene.remove(scene.meshes[i2]);
     }
-    this._boundingBox = this._scenes.length > 0 ? this._scenes.map((s) => s.boundingBox.clone()).reduce((b1, b2) => b1.union(b2)) : void 0;
+    this._boundingBox = this._scenes.length > 0 ? this._scenes.map((s) => s.getBoundingBox()).reduce((b1, b2) => b1.union(b2)) : void 0;
   }
 }
 class Viewport {
   constructor(settings) {
-    __publicField$1(this, "canvas");
-    __publicField$1(this, "_unregisterResize");
-    __publicField$1(this, "_ownedCanvas");
-    __publicField$1(this, "_resizeCallbacks", []);
+    __publicField(this, "canvas");
+    __publicField(this, "_unregisterResize");
+    __publicField(this, "_ownedCanvas");
+    __publicField(this, "_resizeCallbacks", []);
     const [canvas, owned] = Viewport.getOrCreateCanvas(settings.getCanvasId());
     this.canvas = canvas;
     this._ownedCanvas = owned;
@@ -26270,14 +26361,14 @@ class Viewport {
 }
 class Axis {
   constructor(init) {
-    __publicField$1(this, "axis");
-    __publicField$1(this, "direction");
-    __publicField$1(this, "size");
-    __publicField$1(this, "color");
-    __publicField$1(this, "colorSub");
-    __publicField$1(this, "position");
-    __publicField$1(this, "label");
-    __publicField$1(this, "line");
+    __publicField(this, "axis");
+    __publicField(this, "direction");
+    __publicField(this, "size");
+    __publicField(this, "color");
+    __publicField(this, "colorSub");
+    __publicField(this, "position");
+    __publicField(this, "label");
+    __publicField(this, "line");
     this.axis = init.axis;
     this.direction = init.direction;
     this.size = init.size;
@@ -26290,22 +26381,22 @@ class Axis {
 }
 class GizmoOptions {
   constructor(init) {
-    __publicField$1(this, "size", 96);
-    __publicField$1(this, "padding", 4);
-    __publicField$1(this, "bubbleSizePrimary", 8);
-    __publicField$1(this, "bubbleSizeSecondary", 6);
-    __publicField$1(this, "lineWidth", 2);
-    __publicField$1(this, "fontSize", "12px");
-    __publicField$1(this, "fontFamily", "arial");
-    __publicField$1(this, "fontWeight", "bold");
-    __publicField$1(this, "fontColor", "#222222");
-    __publicField$1(this, "className", "gizmo-axis-canvas");
-    __publicField$1(this, "colorX", "#f73c3c");
-    __publicField$1(this, "colorY", "#6ccb26");
-    __publicField$1(this, "colorZ", "#178cf0");
-    __publicField$1(this, "colorXSub", "#942424");
-    __publicField$1(this, "colorYSub", "#417a17");
-    __publicField$1(this, "colorZSub", "#0e5490");
+    __publicField(this, "size", 96);
+    __publicField(this, "padding", 4);
+    __publicField(this, "bubbleSizePrimary", 8);
+    __publicField(this, "bubbleSizeSecondary", 6);
+    __publicField(this, "lineWidth", 2);
+    __publicField(this, "fontSize", "12px");
+    __publicField(this, "fontFamily", "arial");
+    __publicField(this, "fontWeight", "bold");
+    __publicField(this, "fontColor", "#222222");
+    __publicField(this, "className", "gizmo-axis-canvas");
+    __publicField(this, "colorX", "#f73c3c");
+    __publicField(this, "colorY", "#6ccb26");
+    __publicField(this, "colorZ", "#178cf0");
+    __publicField(this, "colorXSub", "#942424");
+    __publicField(this, "colorYSub", "#417a17");
+    __publicField(this, "colorZSub", "#0e5490");
     var _a2, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p;
     this.size = (_a2 = init == null ? void 0 : init.size) != null ? _a2 : this.size;
     this.padding = (_b = init == null ? void 0 : init.padding) != null ? _b : this.padding;
@@ -26327,21 +26418,21 @@ class GizmoOptions {
 }
 class GizmoAxes {
   constructor(camera, options) {
-    __publicField$1(this, "options");
-    __publicField$1(this, "axes");
-    __publicField$1(this, "camera");
-    __publicField$1(this, "canvas");
-    __publicField$1(this, "context");
-    __publicField$1(this, "rect");
-    __publicField$1(this, "isDragging");
-    __publicField$1(this, "isDragSignificant");
-    __publicField$1(this, "dragStart");
-    __publicField$1(this, "dragLast");
-    __publicField$1(this, "pointer");
-    __publicField$1(this, "center");
-    __publicField$1(this, "invRotMat", new Matrix4());
-    __publicField$1(this, "selectedAxis");
-    __publicField$1(this, "onTouchStart", (e) => {
+    __publicField(this, "options");
+    __publicField(this, "axes");
+    __publicField(this, "camera");
+    __publicField(this, "canvas");
+    __publicField(this, "context");
+    __publicField(this, "rect");
+    __publicField(this, "isDragging");
+    __publicField(this, "isDragSignificant");
+    __publicField(this, "dragStart");
+    __publicField(this, "dragLast");
+    __publicField(this, "pointer");
+    __publicField(this, "center");
+    __publicField(this, "invRotMat", new Matrix4());
+    __publicField(this, "selectedAxis");
+    __publicField(this, "onTouchStart", (e) => {
       e.preventDefault();
       if (e.touches.length > 1)
         return;
@@ -26350,25 +26441,25 @@ class GizmoAxes {
       window.addEventListener("touchmove", this.onTouchMove, false);
       window.addEventListener("touchend", this.onTouchEnd, false);
     });
-    __publicField$1(this, "onTouchMove", (e) => {
+    __publicField(this, "onTouchMove", (e) => {
       if (e.touches.length > 1)
         return;
       const touch = e.touches[0];
       this.updateDrag(touch.clientX, touch.clientY);
     });
-    __publicField$1(this, "onTouchEnd", (e) => {
+    __publicField(this, "onTouchEnd", (e) => {
       e.preventDefault();
       this.endDrag();
       this.selectedAxis = null;
       window.removeEventListener("touchmove", this.onTouchMove, false);
       window.removeEventListener("touchend", this.onTouchEnd, false);
     });
-    __publicField$1(this, "onPointerDown", (e) => {
+    __publicField(this, "onPointerDown", (e) => {
       this.initDrag(e.clientX, e.clientY);
       window.addEventListener("pointermove", this.onPointerDrag, false);
       window.addEventListener("pointerup", this.onPointerUp, false);
     });
-    __publicField$1(this, "onPointerUp", (event) => {
+    __publicField(this, "onPointerUp", (event) => {
       this.endDrag();
       if (event.pointerType !== "mouse") {
         this.pointer.set(0, 0, 0);
@@ -26376,26 +26467,26 @@ class GizmoAxes {
       window.removeEventListener("pointermove", this.onPointerDrag, false);
       window.removeEventListener("pointerup", this.onPointerUp, false);
     });
-    __publicField$1(this, "onPointerEnter", () => {
+    __publicField(this, "onPointerEnter", () => {
       this.rect = this.canvas.getBoundingClientRect();
     });
-    __publicField$1(this, "onPointerMove", (e) => {
+    __publicField(this, "onPointerMove", (e) => {
       if (this.isDragging)
         return;
       if (e) {
         this.pointer = this.toMouseVector(e, this.pointer);
       }
     });
-    __publicField$1(this, "onPointerDrag", (e) => {
+    __publicField(this, "onPointerDrag", (e) => {
       this.updateDrag(e.clientX, e.clientY);
     });
-    __publicField$1(this, "onMouseClick", () => {
+    __publicField(this, "onMouseClick", () => {
       if (this.isDragging || !this.selectedAxis)
         return;
       this.camera.orbit(this.selectedAxis.direction, this.camera.defaultLerpDuration);
       this.selectedAxis = null;
     });
-    __publicField$1(this, "update", () => {
+    __publicField(this, "update", () => {
       this.camera.camera.updateMatrix();
       this.invRotMat.extractRotation(this.camera.camera.matrix).invert();
       for (let i2 = 0, length = this.axes.length; i2 < length; i2++) {
@@ -26407,7 +26498,7 @@ class GizmoAxes {
         this.pickAxes(this.pointer);
       }
     });
-    __publicField$1(this, "dispose", () => {
+    __publicField(this, "dispose", () => {
       this.canvas.removeEventListener("pointerdown", this.onPointerDown, false);
       this.canvas.removeEventListener("pointerenter", this.onPointerEnter, false);
       this.canvas.removeEventListener("pointermove", this.onPointerDrag, false);
@@ -26758,20 +26849,20 @@ class BoxHighlight extends Mesh {
 }
 class BoxInputs {
   constructor(viewer2, cube, box) {
-    __publicField$1(this, "viewer");
-    __publicField$1(this, "cube");
-    __publicField$1(this, "sharedBox");
-    __publicField$1(this, "faceNormal", new Vector3());
-    __publicField$1(this, "dragOrigin", new Vector3());
-    __publicField$1(this, "dragpPlane", new Plane());
-    __publicField$1(this, "mouseDown");
-    __publicField$1(this, "raycaster", new Raycaster$1());
-    __publicField$1(this, "lastBox", new Box3());
-    __publicField$1(this, "unregisters", []);
-    __publicField$1(this, "onFaceEnter");
-    __publicField$1(this, "onBoxStretch");
-    __publicField$1(this, "onBoxConfirm");
-    __publicField$1(this, "reg", (handler, type, listener2) => {
+    __publicField(this, "viewer");
+    __publicField(this, "cube");
+    __publicField(this, "sharedBox");
+    __publicField(this, "faceNormal", new Vector3());
+    __publicField(this, "dragOrigin", new Vector3());
+    __publicField(this, "dragpPlane", new Plane());
+    __publicField(this, "mouseDown");
+    __publicField(this, "raycaster", new Raycaster$1());
+    __publicField(this, "lastBox", new Box3());
+    __publicField(this, "unregisters", []);
+    __publicField(this, "onFaceEnter");
+    __publicField(this, "onBoxStretch");
+    __publicField(this, "onBoxConfirm");
+    __publicField(this, "reg", (handler, type, listener2) => {
       handler.addEventListener(type, listener2);
       this.unregisters.push(() => handler.removeEventListener(type, listener2));
     });
@@ -26844,7 +26935,7 @@ class BoxInputs {
   }
   onDrag(event) {
     var _a2, _b;
-    this.raycaster = this.viewer.raycaster.fromPoint(new Vector2(event.offsetX, event.offsetY), this.raycaster);
+    this.raycaster = this.viewer.raycaster.fromPoint2(new Vector2(event.offsetX, event.offsetY), this.raycaster);
     const point = (_a2 = this.raycaster.ray.intersectPlane(this.dragpPlane, new Vector3())) != null ? _a2 : this.dragOrigin.clone();
     const delta = point.sub(this.dragOrigin);
     const amount = delta.dot(this.faceNormal);
@@ -26874,23 +26965,23 @@ class BoxInputs {
     return result;
   }
   raycast(position) {
-    this.raycaster = this.viewer.raycaster.fromPoint(position, this.raycaster);
+    this.raycaster = this.viewer.raycaster.fromPoint2(position, this.raycaster);
     return this.raycaster.intersectObject(this.cube);
   }
 }
 class GizmoSection {
   constructor(viewer2) {
-    __publicField$1(this, "_viewer");
-    __publicField$1(this, "_inputs");
-    __publicField$1(this, "_cube");
-    __publicField$1(this, "_outline");
-    __publicField$1(this, "_highlight");
-    __publicField$1(this, "_normal");
-    __publicField$1(this, "_clip");
-    __publicField$1(this, "_show");
-    __publicField$1(this, "_interactive");
-    __publicField$1(this, "onStateChanged");
-    __publicField$1(this, "onBoxConfirm");
+    __publicField(this, "_viewer");
+    __publicField(this, "_inputs");
+    __publicField(this, "_cube");
+    __publicField(this, "_outline");
+    __publicField(this, "_highlight");
+    __publicField(this, "_normal");
+    __publicField(this, "_clip");
+    __publicField(this, "_show");
+    __publicField(this, "_interactive");
+    __publicField(this, "onStateChanged");
+    __publicField(this, "onBoxConfirm");
     this._viewer = viewer2;
     this._normal = new Vector3();
     this._cube = new BoxMesh();
@@ -26989,7 +27080,7 @@ class GizmoSection {
     this._highlight.dispose();
   }
 }
-class MeshLine$1 extends BufferGeometry {
+class MeshLine extends BufferGeometry {
   constructor() {
     super();
     this.isMeshLine = true;
@@ -27034,14 +27125,14 @@ class MeshLine$1 extends BufferGeometry {
     });
   }
 }
-MeshLine$1.prototype.setMatrixWorld = function(matrixWorld) {
+MeshLine.prototype.setMatrixWorld = function(matrixWorld) {
   this.matrixWorld = matrixWorld;
 };
-MeshLine$1.prototype.setGeometry = function(g, c) {
+MeshLine.prototype.setGeometry = function(g, c) {
   this._geometry = g;
   this.setPoints(g.getAttribute("position").array, c);
 };
-MeshLine$1.prototype.setPoints = function(points, wcb) {
+MeshLine.prototype.setPoints = function(points, wcb) {
   if (!(points instanceof Float32Array) && !(points instanceof Array)) {
     console.error("ERROR: The BufferArray of points is not instancied correctly.");
     return;
@@ -27070,7 +27161,7 @@ MeshLine$1.prototype.setPoints = function(points, wcb) {
   }
   this.process();
 };
-function MeshLineRaycast$1(raycaster, intersects2) {
+function MeshLineRaycast(raycaster, intersects2) {
   const inverseMatrix = new Matrix4();
   const ray = new Ray();
   const sphere = new Sphere();
@@ -27122,17 +27213,17 @@ function MeshLineRaycast$1(raycaster, intersects2) {
     }
   }
 }
-MeshLine$1.prototype.raycast = MeshLineRaycast$1;
-MeshLine$1.prototype.compareV3 = function(a, b) {
+MeshLine.prototype.raycast = MeshLineRaycast;
+MeshLine.prototype.compareV3 = function(a, b) {
   const aa2 = a * 6;
   const ab2 = b * 6;
   return this.positions[aa2] === this.positions[ab2] && this.positions[aa2 + 1] === this.positions[ab2 + 1] && this.positions[aa2 + 2] === this.positions[ab2 + 2];
 };
-MeshLine$1.prototype.copyV3 = function(a) {
+MeshLine.prototype.copyV3 = function(a) {
   const aa2 = a * 6;
   return [this.positions[aa2], this.positions[aa2 + 1], this.positions[aa2 + 2]];
 };
-MeshLine$1.prototype.process = function() {
+MeshLine.prototype.process = function() {
   const l2 = this.positions.length / 6;
   this.previous = [];
   this.next = [];
@@ -27219,7 +27310,7 @@ MeshLine$1.prototype.process = function() {
   this.computeBoundingSphere();
   this.computeBoundingBox();
 };
-function memcpy$1(src, srcOffset, dst, dstOffset, length) {
+function memcpy(src, srcOffset, dst, dstOffset, length) {
   let i2;
   src = src.subarray || src.slice ? src : src.buffer;
   dst = dst.subarray || dst.slice ? dst : dst.buffer;
@@ -27233,20 +27324,20 @@ function memcpy$1(src, srcOffset, dst, dstOffset, length) {
   }
   return dst;
 }
-MeshLine$1.prototype.advance = function(position) {
+MeshLine.prototype.advance = function(position) {
   const positions = this._attributes.position.array;
   const previous = this._attributes.previous.array;
   const next = this._attributes.next.array;
   const l2 = positions.length;
-  memcpy$1(positions, 0, previous, 0, l2);
-  memcpy$1(positions, 6, positions, 0, l2 - 6);
+  memcpy(positions, 0, previous, 0, l2);
+  memcpy(positions, 6, positions, 0, l2 - 6);
   positions[l2 - 6] = position.x;
   positions[l2 - 5] = position.y;
   positions[l2 - 4] = position.z;
   positions[l2 - 3] = position.x;
   positions[l2 - 2] = position.y;
   positions[l2 - 1] = position.z;
-  memcpy$1(positions, 6, next, 0, l2 - 6);
+  memcpy(positions, 6, next, 0, l2 - 6);
   next[l2 - 6] = position.x;
   next[l2 - 5] = position.y;
   next[l2 - 4] = position.z;
@@ -27376,7 +27467,7 @@ ShaderChunk.meshline_frag = [
   ShaderChunk.fog_fragment,
   "}"
 ].join("\n");
-class MeshLineMaterial$1 extends ShaderMaterial {
+class MeshLineMaterial extends ShaderMaterial {
   constructor(parameters) {
     super({
       uniforms: Object.assign({}, UniformsLib.fog, {
@@ -27552,7 +27643,7 @@ class MeshLineMaterial$1 extends ShaderMaterial {
     this.setValues(parameters);
   }
 }
-MeshLineMaterial$1.prototype.copy = function(source) {
+MeshLineMaterial.prototype.copy = function(source) {
   ShaderMaterial.prototype.copy.call(this, source);
   this.lineWidth = source.lineWidth;
   this.map = source.map;
@@ -27574,17 +27665,17 @@ MeshLineMaterial$1.prototype.copy = function(source) {
 };
 class MeasureLine {
   constructor(canvasSize, start, end, color) {
-    __publicField$1(this, "mesh");
-    __publicField$1(this, "_meshLine");
-    __publicField$1(this, "_material");
-    __publicField$1(this, "_materialAlways");
-    this._material = new MeshLineMaterial$1({
+    __publicField(this, "mesh");
+    __publicField(this, "_meshLine");
+    __publicField(this, "_material");
+    __publicField(this, "_materialAlways");
+    this._material = new MeshLineMaterial({
       sizeAttenuation: 0,
       lineWidth: 5,
       resolution: canvasSize,
       color
     });
-    this._materialAlways = new MeshLineMaterial$1({
+    this._materialAlways = new MeshLineMaterial({
       lineWidth: 5,
       sizeAttenuation: 0,
       depthTest: false,
@@ -27593,7 +27684,7 @@ class MeasureLine {
       resolution: canvasSize,
       color
     });
-    this._meshLine = new MeshLine$1();
+    this._meshLine = new MeshLine();
     this._meshLine.setPoints([start, end]);
     this.mesh = new Mesh(this._meshLine, [
       this._material,
@@ -27614,9 +27705,9 @@ class MeasureLine {
 }
 class MeasureMarker {
   constructor(position = new Vector3()) {
-    __publicField$1(this, "mesh");
-    __publicField$1(this, "_material");
-    __publicField$1(this, "_materialAlways");
+    __publicField(this, "mesh");
+    __publicField(this, "_material");
+    __publicField(this, "_materialAlways");
     this._material = new MeshBasicMaterial({
       color: new Color(0, 0.75, 1)
     });
@@ -27642,20 +27733,20 @@ class MeasureMarker {
 }
 class GizmoMeasure {
   constructor(viewer2) {
-    __publicField$1(this, "_viewer");
-    __publicField$1(this, "_currentMarker");
-    __publicField$1(this, "_startMarker");
-    __publicField$1(this, "_endMarker");
-    __publicField$1(this, "_line");
-    __publicField$1(this, "_lineX");
-    __publicField$1(this, "_lineY");
-    __publicField$1(this, "_lineZ");
-    __publicField$1(this, "removeMouseListener");
-    __publicField$1(this, "oldAction");
-    __publicField$1(this, "onAbort");
-    __publicField$1(this, "_startPos");
-    __publicField$1(this, "_endPos");
-    __publicField$1(this, "_measurement");
+    __publicField(this, "_viewer");
+    __publicField(this, "_currentMarker");
+    __publicField(this, "_startMarker");
+    __publicField(this, "_endMarker");
+    __publicField(this, "_line");
+    __publicField(this, "_lineX");
+    __publicField(this, "_lineY");
+    __publicField(this, "_lineZ");
+    __publicField(this, "removeMouseListener");
+    __publicField(this, "oldAction");
+    __publicField(this, "onAbort");
+    __publicField(this, "_startPos");
+    __publicField(this, "_endPos");
+    __publicField(this, "_measurement");
     this._viewer = viewer2;
   }
   get startPoint() {
@@ -27821,79 +27912,187 @@ class GizmoMeasure {
     }
   }
 }
-var freeGlobal$2 = typeof global == "object" && global && global.Object === Object && global;
-var freeGlobal$1$1 = freeGlobal$2;
-var freeSelf$1 = typeof self == "object" && self && self.Object === Object && self;
-var root$2 = freeGlobal$1$1 || freeSelf$1 || Function("return this")();
-var root$1$2 = root$2;
-var Symbol$1$2 = root$1$2.Symbol;
-var Symbol$2$1 = Symbol$1$2;
-var objectProto$c$1 = Object.prototype;
-var hasOwnProperty$9$1 = objectProto$c$1.hasOwnProperty;
-var nativeObjectToString$1$1 = objectProto$c$1.toString;
-var symToStringTag$1$1 = Symbol$2$1 ? Symbol$2$1.toStringTag : void 0;
-function getRawTag$1(value) {
-  var isOwn = hasOwnProperty$9$1.call(value, symToStringTag$1$1), tag = value[symToStringTag$1$1];
+class GizmoSelection {
+  constructor(viewer2) {
+    __publicField(this, "line");
+    __publicField(this, "viewer");
+    __publicField(this, "points");
+    this.viewer = viewer2;
+    const mat = new LineBasicMaterial({
+      depthTest: false,
+      color: new Color(0, 1, 0)
+    });
+    const vertices = new Float32Array([
+      -0.5,
+      -0.5,
+      0,
+      0.5,
+      -0.5,
+      0,
+      0.5,
+      -0.5,
+      0,
+      0.5,
+      0.5,
+      0,
+      0.5,
+      0.5,
+      0,
+      -0.5,
+      0.5,
+      0,
+      -0.5,
+      0.5,
+      0,
+      -0.5,
+      -0.5,
+      0
+    ]);
+    const geo = new BufferGeometry();
+    geo.setAttribute("position", new BufferAttribute(vertices, 3));
+    this.line = new LineSegments(geo, mat);
+    this.line.name = "GizmoSelection";
+    this.viewer.renderer.add(this.line);
+  }
+  dispose() {
+    this.viewer.renderer.remove(this.line);
+    this.line.geometry.dispose();
+    this.line.material.dispose();
+  }
+  get visible() {
+    return this.line.visible;
+  }
+  set visible(value) {
+    this.line.visible = value;
+  }
+  update(posA, posB) {
+    const plane = new Plane().setFromNormalAndCoplanarPoint(this.viewer.camera.forward, this.viewer.camera.orbitPosition);
+    const A2 = this.getIntersection(plane, posA);
+    const B2 = this.getIntersection(plane, posB);
+    const center = A2.clone().add(B2).multiplyScalar(0.5);
+    const [dx, dy] = this.getBoxSize(A2, B2);
+    this.updateRect(center, dx, dy);
+    const AB = this.getIntersection(plane, new Vector2(posA.x, posB.y));
+    const BA = this.getIntersection(plane, new Vector2(posB.x, posA.y));
+    this.points = [A2, B2, AB, BA, center];
+  }
+  getIntersection(plane, position) {
+    const raycaster = this.viewer.raycaster.fromPoint2(position);
+    return raycaster.ray.intersectPlane(plane, new Vector3());
+  }
+  updateRect(position, dx, dy) {
+    this.line.quaternion.copy(this.viewer.camera.camera.quaternion);
+    this.line.position.copy(position);
+    this.line.scale.set(dx, dy, 1);
+    this.line.updateMatrix();
+  }
+  getBoxSize(A2, B2) {
+    const cam = this.viewer.camera;
+    const up = new Vector3(0, 1, 0).applyQuaternion(cam.camera.quaternion);
+    const right = new Vector3(1, 0, 0).applyQuaternion(cam.camera.quaternion);
+    const Ax = A2.dot(right);
+    const Ay = A2.dot(up);
+    const Bx = B2.dot(right);
+    const By = B2.dot(up);
+    const dx = Math.abs(Ax - Bx);
+    const dy = Math.abs(Ay - By);
+    return [dx, dy];
+  }
+  getBoundingBox() {
+    const position = this.getClosestHit();
+    const projections = position ? this.projectPoints(position) : this.points;
+    return new Box3().setFromPoints(projections);
+  }
+  getClosestHit() {
+    const hits = this.points.map((p2) => this.viewer.raycaster.raycast3(p2)).filter((h) => h.isHit);
+    let position;
+    let dist;
+    hits.forEach((h) => {
+      if (dist === void 0 || h.distance < dist) {
+        dist = h.distance;
+        position = h.position;
+      }
+    });
+    return position;
+  }
+  projectPoints(position) {
+    const plane = new Plane().setFromNormalAndCoplanarPoint(this.viewer.camera.forward, position);
+    return this.points.map((p2) => plane.projectPoint(p2, new Vector3()));
+  }
+}
+var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
+var freeGlobal$1 = freeGlobal;
+var freeSelf = typeof self == "object" && self && self.Object === Object && self;
+var root$1 = freeGlobal$1 || freeSelf || Function("return this")();
+var root$1$1 = root$1;
+var Symbol$1$1 = root$1$1.Symbol;
+var Symbol$2 = Symbol$1$1;
+var objectProto$c = Object.prototype;
+var hasOwnProperty$9 = objectProto$c.hasOwnProperty;
+var nativeObjectToString$1 = objectProto$c.toString;
+var symToStringTag$1 = Symbol$2 ? Symbol$2.toStringTag : void 0;
+function getRawTag(value) {
+  var isOwn = hasOwnProperty$9.call(value, symToStringTag$1), tag = value[symToStringTag$1];
   try {
-    value[symToStringTag$1$1] = void 0;
+    value[symToStringTag$1] = void 0;
     var unmasked = true;
   } catch (e) {
   }
-  var result = nativeObjectToString$1$1.call(value);
+  var result = nativeObjectToString$1.call(value);
   if (unmasked) {
     if (isOwn) {
-      value[symToStringTag$1$1] = tag;
+      value[symToStringTag$1] = tag;
     } else {
-      delete value[symToStringTag$1$1];
+      delete value[symToStringTag$1];
     }
   }
   return result;
 }
-var objectProto$b$1 = Object.prototype;
-var nativeObjectToString$2 = objectProto$b$1.toString;
-function objectToString$1(value) {
-  return nativeObjectToString$2.call(value);
+var objectProto$b = Object.prototype;
+var nativeObjectToString = objectProto$b.toString;
+function objectToString(value) {
+  return nativeObjectToString.call(value);
 }
-var nullTag$1 = "[object Null]", undefinedTag$1 = "[object Undefined]";
-var symToStringTag$2 = Symbol$2$1 ? Symbol$2$1.toStringTag : void 0;
-function baseGetTag$1(value) {
+var nullTag = "[object Null]", undefinedTag = "[object Undefined]";
+var symToStringTag = Symbol$2 ? Symbol$2.toStringTag : void 0;
+function baseGetTag(value) {
   if (value == null) {
-    return value === void 0 ? undefinedTag$1 : nullTag$1;
+    return value === void 0 ? undefinedTag : nullTag;
   }
-  return symToStringTag$2 && symToStringTag$2 in Object(value) ? getRawTag$1(value) : objectToString$1(value);
+  return symToStringTag && symToStringTag in Object(value) ? getRawTag(value) : objectToString(value);
 }
-function isObjectLike$1(value) {
+function isObjectLike(value) {
   return value != null && typeof value == "object";
 }
 var isArray$1 = Array.isArray;
 var isArray$1$1 = isArray$1;
-function isObject$2(value) {
+function isObject$1(value) {
   var type = typeof value;
   return value != null && (type == "object" || type == "function");
 }
-var asyncTag$1 = "[object AsyncFunction]", funcTag$2$1 = "[object Function]", genTag$1$1 = "[object GeneratorFunction]", proxyTag$1 = "[object Proxy]";
-function isFunction$1(value) {
-  if (!isObject$2(value)) {
+var asyncTag = "[object AsyncFunction]", funcTag$2 = "[object Function]", genTag$1 = "[object GeneratorFunction]", proxyTag = "[object Proxy]";
+function isFunction(value) {
+  if (!isObject$1(value)) {
     return false;
   }
-  var tag = baseGetTag$1(value);
-  return tag == funcTag$2$1 || tag == genTag$1$1 || tag == asyncTag$1 || tag == proxyTag$1;
+  var tag = baseGetTag(value);
+  return tag == funcTag$2 || tag == genTag$1 || tag == asyncTag || tag == proxyTag;
 }
-var coreJsData$2 = root$1$2["__core-js_shared__"];
-var coreJsData$1$1 = coreJsData$2;
-var maskSrcKey$1 = function() {
-  var uid2 = /[^.]+$/.exec(coreJsData$1$1 && coreJsData$1$1.keys && coreJsData$1$1.keys.IE_PROTO || "");
+var coreJsData = root$1$1["__core-js_shared__"];
+var coreJsData$1 = coreJsData;
+var maskSrcKey = function() {
+  var uid2 = /[^.]+$/.exec(coreJsData$1 && coreJsData$1.keys && coreJsData$1.keys.IE_PROTO || "");
   return uid2 ? "Symbol(src)_1." + uid2 : "";
 }();
-function isMasked$1(func) {
-  return !!maskSrcKey$1 && maskSrcKey$1 in func;
+function isMasked(func) {
+  return !!maskSrcKey && maskSrcKey in func;
 }
-var funcProto$1$1 = Function.prototype;
-var funcToString$1$1 = funcProto$1$1.toString;
-function toSource$1(func) {
+var funcProto$1 = Function.prototype;
+var funcToString$1 = funcProto$1.toString;
+function toSource(func) {
   if (func != null) {
     try {
-      return funcToString$1$1.call(func);
+      return funcToString$1.call(func);
     } catch (e) {
     }
     try {
@@ -27903,34 +28102,34 @@ function toSource$1(func) {
   }
   return "";
 }
-var reRegExpChar$1 = /[\\^$.*+?()[\]{}|]/g;
-var reIsHostCtor$1 = /^\[object .+?Constructor\]$/;
-var funcProto$2 = Function.prototype, objectProto$a$1 = Object.prototype;
-var funcToString$2 = funcProto$2.toString;
-var hasOwnProperty$8$1 = objectProto$a$1.hasOwnProperty;
-var reIsNative$1 = RegExp("^" + funcToString$2.call(hasOwnProperty$8$1).replace(reRegExpChar$1, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$");
-function baseIsNative$1(value) {
-  if (!isObject$2(value) || isMasked$1(value)) {
+var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
+var reIsHostCtor = /^\[object .+?Constructor\]$/;
+var funcProto = Function.prototype, objectProto$a = Object.prototype;
+var funcToString = funcProto.toString;
+var hasOwnProperty$8 = objectProto$a.hasOwnProperty;
+var reIsNative = RegExp("^" + funcToString.call(hasOwnProperty$8).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$");
+function baseIsNative(value) {
+  if (!isObject$1(value) || isMasked(value)) {
     return false;
   }
-  var pattern = isFunction$1(value) ? reIsNative$1 : reIsHostCtor$1;
-  return pattern.test(toSource$1(value));
+  var pattern = isFunction(value) ? reIsNative : reIsHostCtor;
+  return pattern.test(toSource(value));
 }
-function getValue$1(object, key) {
+function getValue(object, key) {
   return object == null ? void 0 : object[key];
 }
-function getNative$1(object, key) {
-  var value = getValue$1(object, key);
-  return baseIsNative$1(value) ? value : void 0;
+function getNative(object, key) {
+  var value = getValue(object, key);
+  return baseIsNative(value) ? value : void 0;
 }
-var WeakMap2$1 = getNative$1(root$1$2, "WeakMap");
-var WeakMap$1$2 = WeakMap2$1;
+var WeakMap2 = getNative(root$1$1, "WeakMap");
+var WeakMap$1$2 = WeakMap2;
 var objectCreate$1 = Object.create;
 var baseCreate = function() {
   function object() {
   }
   return function(proto) {
-    if (!isObject$2(proto)) {
+    if (!isObject$1(proto)) {
       return {};
     }
     if (objectCreate$1) {
@@ -27953,7 +28152,7 @@ function copyArray(source, array) {
 }
 var defineProperty = function() {
   try {
-    var func = getNative$1(Object, "defineProperty");
+    var func = getNative(Object, "defineProperty");
     func({}, "", {});
     return func;
   } catch (e) {
@@ -28022,7 +28221,7 @@ function isLength(value) {
   return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
 }
 function isArrayLike(value) {
-  return value != null && isLength(value.length) && !isFunction$1(value);
+  return value != null && isLength(value.length) && !isFunction(value);
 }
 var objectProto$8 = Object.prototype;
 function isPrototype(value) {
@@ -28036,27 +28235,27 @@ function baseTimes(n2, iteratee) {
   }
   return result;
 }
-var argsTag$2$1 = "[object Arguments]";
-function baseIsArguments$1(value) {
-  return isObjectLike$1(value) && baseGetTag$1(value) == argsTag$2$1;
+var argsTag$2 = "[object Arguments]";
+function baseIsArguments(value) {
+  return isObjectLike(value) && baseGetTag(value) == argsTag$2;
 }
-var objectProto$7$1 = Object.prototype;
-var hasOwnProperty$6$1 = objectProto$7$1.hasOwnProperty;
-var propertyIsEnumerable$1$1 = objectProto$7$1.propertyIsEnumerable;
-var isArguments = baseIsArguments$1(function() {
+var objectProto$7 = Object.prototype;
+var hasOwnProperty$6 = objectProto$7.hasOwnProperty;
+var propertyIsEnumerable$1 = objectProto$7.propertyIsEnumerable;
+var isArguments = baseIsArguments(function() {
   return arguments;
-}()) ? baseIsArguments$1 : function(value) {
-  return isObjectLike$1(value) && hasOwnProperty$6$1.call(value, "callee") && !propertyIsEnumerable$1$1.call(value, "callee");
+}()) ? baseIsArguments : function(value) {
+  return isObjectLike(value) && hasOwnProperty$6.call(value, "callee") && !propertyIsEnumerable$1.call(value, "callee");
 };
 var isArguments$1 = isArguments;
 function stubFalse() {
   return false;
 }
-var freeExports$2$1 = typeof exports == "object" && exports && !exports.nodeType && exports;
-var freeModule$2$1 = freeExports$2$1 && typeof module == "object" && module && !module.nodeType && module;
-var moduleExports$2$1 = freeModule$2$1 && freeModule$2$1.exports === freeExports$2$1;
-var Buffer$1$1 = moduleExports$2$1 ? root$1$2.Buffer : void 0;
-var nativeIsBuffer = Buffer$1$1 ? Buffer$1$1.isBuffer : void 0;
+var freeExports$2 = typeof exports == "object" && exports && !exports.nodeType && exports;
+var freeModule$2 = freeExports$2 && typeof module == "object" && module && !module.nodeType && module;
+var moduleExports$2 = freeModule$2 && freeModule$2.exports === freeExports$2;
+var Buffer$1 = moduleExports$2 ? root$1$1.Buffer : void 0;
+var nativeIsBuffer = Buffer$1 ? Buffer$1.isBuffer : void 0;
 var isBuffer = nativeIsBuffer || stubFalse;
 var isBuffer$1 = isBuffer;
 var argsTag$1 = "[object Arguments]", arrayTag$1 = "[object Array]", boolTag$2 = "[object Boolean]", dateTag$2 = "[object Date]", errorTag$1 = "[object Error]", funcTag$1 = "[object Function]", mapTag$4 = "[object Map]", numberTag$2 = "[object Number]", objectTag$2 = "[object Object]", regexpTag$2 = "[object RegExp]", setTag$4 = "[object Set]", stringTag$2 = "[object String]", weakMapTag$2 = "[object WeakMap]";
@@ -28065,29 +28264,29 @@ var typedArrayTags = {};
 typedArrayTags[float32Tag$2] = typedArrayTags[float64Tag$2] = typedArrayTags[int8Tag$2] = typedArrayTags[int16Tag$2] = typedArrayTags[int32Tag$2] = typedArrayTags[uint8Tag$2] = typedArrayTags[uint8ClampedTag$2] = typedArrayTags[uint16Tag$2] = typedArrayTags[uint32Tag$2] = true;
 typedArrayTags[argsTag$1] = typedArrayTags[arrayTag$1] = typedArrayTags[arrayBufferTag$2] = typedArrayTags[boolTag$2] = typedArrayTags[dataViewTag$3] = typedArrayTags[dateTag$2] = typedArrayTags[errorTag$1] = typedArrayTags[funcTag$1] = typedArrayTags[mapTag$4] = typedArrayTags[numberTag$2] = typedArrayTags[objectTag$2] = typedArrayTags[regexpTag$2] = typedArrayTags[setTag$4] = typedArrayTags[stringTag$2] = typedArrayTags[weakMapTag$2] = false;
 function baseIsTypedArray(value) {
-  return isObjectLike$1(value) && isLength(value.length) && !!typedArrayTags[baseGetTag$1(value)];
+  return isObjectLike(value) && isLength(value.length) && !!typedArrayTags[baseGetTag(value)];
 }
 function baseUnary(func) {
   return function(value) {
     return func(value);
   };
 }
-var freeExports$1$1 = typeof exports == "object" && exports && !exports.nodeType && exports;
-var freeModule$1$1 = freeExports$1$1 && typeof module == "object" && module && !module.nodeType && module;
-var moduleExports$1$1 = freeModule$1$1 && freeModule$1$1.exports === freeExports$1$1;
-var freeProcess$1 = moduleExports$1$1 && freeGlobal$1$1.process;
-var nodeUtil$2 = function() {
+var freeExports$1 = typeof exports == "object" && exports && !exports.nodeType && exports;
+var freeModule$1 = freeExports$1 && typeof module == "object" && module && !module.nodeType && module;
+var moduleExports$1 = freeModule$1 && freeModule$1.exports === freeExports$1;
+var freeProcess = moduleExports$1 && freeGlobal$1.process;
+var nodeUtil = function() {
   try {
-    var types = freeModule$1$1 && freeModule$1$1.require && freeModule$1$1.require("util").types;
+    var types = freeModule$1 && freeModule$1.require && freeModule$1.require("util").types;
     if (types) {
       return types;
     }
-    return freeProcess$1 && freeProcess$1.binding && freeProcess$1.binding("util");
+    return freeProcess && freeProcess.binding && freeProcess.binding("util");
   } catch (e) {
   }
 }();
-var nodeUtil$1$1 = nodeUtil$2;
-var nodeIsTypedArray = nodeUtil$1$1 && nodeUtil$1$1.isTypedArray;
+var nodeUtil$1 = nodeUtil;
+var nodeIsTypedArray = nodeUtil$1 && nodeUtil$1.isTypedArray;
 var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
 var isTypedArray$1 = isTypedArray;
 var objectProto$6 = Object.prototype;
@@ -28137,7 +28336,7 @@ function nativeKeysIn(object) {
 var objectProto$4 = Object.prototype;
 var hasOwnProperty$3 = objectProto$4.hasOwnProperty;
 function baseKeysIn(object) {
-  if (!isObject$2(object)) {
+  if (!isObject$1(object)) {
     return nativeKeysIn(object);
   }
   var isProto = isPrototype(object), result = [];
@@ -28151,7 +28350,7 @@ function baseKeysIn(object) {
 function keysIn(object) {
   return isArrayLike(object) ? arrayLikeKeys(object, true) : baseKeysIn(object);
 }
-var nativeCreate = getNative$1(Object, "create");
+var nativeCreate = getNative(Object, "create");
 var nativeCreate$1 = nativeCreate;
 function hashClear() {
   this.__data__ = nativeCreate$1 ? nativeCreate$1(null) : {};
@@ -28258,13 +28457,13 @@ ListCache.prototype["delete"] = listCacheDelete;
 ListCache.prototype.get = listCacheGet;
 ListCache.prototype.has = listCacheHas;
 ListCache.prototype.set = listCacheSet;
-var Map$1$1 = getNative$1(root$1$2, "Map");
-var Map$2$1 = Map$1$1;
+var Map$1 = getNative(root$1$1, "Map");
+var Map$2 = Map$1;
 function mapCacheClear() {
   this.size = 0;
   this.__data__ = {
     "hash": new Hash(),
-    "map": new (Map$2$1 || ListCache)(),
+    "map": new (Map$2 || ListCache)(),
     "string": new Hash()
   };
 }
@@ -28335,7 +28534,7 @@ function stackSet(key, value) {
   var data2 = this.__data__;
   if (data2 instanceof ListCache) {
     var pairs = data2.__data__;
-    if (!Map$2$1 || pairs.length < LARGE_ARRAY_SIZE - 1) {
+    if (!Map$2 || pairs.length < LARGE_ARRAY_SIZE - 1) {
       pairs.push([key, value]);
       this.size = ++data2.size;
       return this;
@@ -28361,10 +28560,10 @@ function baseAssign(object, source) {
 function baseAssignIn(object, source) {
   return object && copyObject(source, keysIn(source), object);
 }
-var freeExports$3 = typeof exports == "object" && exports && !exports.nodeType && exports;
-var freeModule$3 = freeExports$3 && typeof module == "object" && module && !module.nodeType && module;
-var moduleExports$3 = freeModule$3 && freeModule$3.exports === freeExports$3;
-var Buffer2$1 = moduleExports$3 ? root$1$2.Buffer : void 0, allocUnsafe = Buffer2$1 ? Buffer2$1.allocUnsafe : void 0;
+var freeExports = typeof exports == "object" && exports && !exports.nodeType && exports;
+var freeModule = freeExports && typeof module == "object" && module && !module.nodeType && module;
+var moduleExports = freeModule && freeModule.exports === freeExports;
+var Buffer2 = moduleExports ? root$1$1.Buffer : void 0, allocUnsafe = Buffer2 ? Buffer2.allocUnsafe : void 0;
 function cloneBuffer(buffer, isDeep) {
   if (isDeep) {
     return buffer.slice();
@@ -28425,37 +28624,37 @@ function getAllKeys(object) {
 function getAllKeysIn(object) {
   return baseGetAllKeys(object, keysIn, getSymbolsIn$1);
 }
-var DataView$2 = getNative$1(root$1$2, "DataView");
-var DataView$1$2 = DataView$2;
-var Promise$1$1 = getNative$1(root$1$2, "Promise");
-var Promise$2$1 = Promise$1$1;
-var Set$1$1 = getNative$1(root$1$2, "Set");
-var Set$2$1 = Set$1$1;
-var mapTag$3$1 = "[object Map]", objectTag$1$1 = "[object Object]", promiseTag$1 = "[object Promise]", setTag$3$1 = "[object Set]", weakMapTag$1$1 = "[object WeakMap]";
-var dataViewTag$2$1 = "[object DataView]";
-var dataViewCtorString$1 = toSource$1(DataView$1$2), mapCtorString$1 = toSource$1(Map$2$1), promiseCtorString$1 = toSource$1(Promise$2$1), setCtorString$1 = toSource$1(Set$2$1), weakMapCtorString$1 = toSource$1(WeakMap$1$2);
-var getTag$1 = baseGetTag$1;
-if (DataView$1$2 && getTag$1(new DataView$1$2(new ArrayBuffer(1))) != dataViewTag$2$1 || Map$2$1 && getTag$1(new Map$2$1()) != mapTag$3$1 || Promise$2$1 && getTag$1(Promise$2$1.resolve()) != promiseTag$1 || Set$2$1 && getTag$1(new Set$2$1()) != setTag$3$1 || WeakMap$1$2 && getTag$1(new WeakMap$1$2()) != weakMapTag$1$1) {
-  getTag$1 = function(value) {
-    var result = baseGetTag$1(value), Ctor = result == objectTag$1$1 ? value.constructor : void 0, ctorString = Ctor ? toSource$1(Ctor) : "";
+var DataView$1 = getNative(root$1$1, "DataView");
+var DataView$1$1 = DataView$1;
+var Promise$1 = getNative(root$1$1, "Promise");
+var Promise$2 = Promise$1;
+var Set$1 = getNative(root$1$1, "Set");
+var Set$2 = Set$1;
+var mapTag$3 = "[object Map]", objectTag$1 = "[object Object]", promiseTag = "[object Promise]", setTag$3 = "[object Set]", weakMapTag$1 = "[object WeakMap]";
+var dataViewTag$2 = "[object DataView]";
+var dataViewCtorString = toSource(DataView$1$1), mapCtorString = toSource(Map$2), promiseCtorString = toSource(Promise$2), setCtorString = toSource(Set$2), weakMapCtorString = toSource(WeakMap$1$2);
+var getTag = baseGetTag;
+if (DataView$1$1 && getTag(new DataView$1$1(new ArrayBuffer(1))) != dataViewTag$2 || Map$2 && getTag(new Map$2()) != mapTag$3 || Promise$2 && getTag(Promise$2.resolve()) != promiseTag || Set$2 && getTag(new Set$2()) != setTag$3 || WeakMap$1$2 && getTag(new WeakMap$1$2()) != weakMapTag$1) {
+  getTag = function(value) {
+    var result = baseGetTag(value), Ctor = result == objectTag$1 ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : "";
     if (ctorString) {
       switch (ctorString) {
-        case dataViewCtorString$1:
-          return dataViewTag$2$1;
-        case mapCtorString$1:
-          return mapTag$3$1;
-        case promiseCtorString$1:
-          return promiseTag$1;
-        case setCtorString$1:
-          return setTag$3$1;
-        case weakMapCtorString$1:
-          return weakMapTag$1$1;
+        case dataViewCtorString:
+          return dataViewTag$2;
+        case mapCtorString:
+          return mapTag$3;
+        case promiseCtorString:
+          return promiseTag;
+        case setCtorString:
+          return setTag$3;
+        case weakMapCtorString:
+          return weakMapTag$1;
       }
     }
     return result;
   };
 }
-var getTag$1$1 = getTag$1;
+var getTag$1 = getTag;
 var objectProto = Object.prototype;
 var hasOwnProperty$a = objectProto.hasOwnProperty;
 function initCloneArray(array) {
@@ -28466,7 +28665,7 @@ function initCloneArray(array) {
   }
   return result;
 }
-var Uint8Array$1 = root$1$2.Uint8Array;
+var Uint8Array$1 = root$1$1.Uint8Array;
 var Uint8Array$2 = Uint8Array$1;
 function cloneArrayBuffer(arrayBuffer) {
   var result = new arrayBuffer.constructor(arrayBuffer.byteLength);
@@ -28483,7 +28682,7 @@ function cloneRegExp(regexp) {
   result.lastIndex = regexp.lastIndex;
   return result;
 }
-var symbolProto$1 = Symbol$2$1 ? Symbol$2$1.prototype : void 0, symbolValueOf = symbolProto$1 ? symbolProto$1.valueOf : void 0;
+var symbolProto = Symbol$2 ? Symbol$2.prototype : void 0, symbolValueOf = symbolProto ? symbolProto.valueOf : void 0;
 function cloneSymbol(symbol) {
   return symbolValueOf ? Object(symbolValueOf.call(symbol)) : {};
 }
@@ -28531,16 +28730,16 @@ function initCloneObject(object) {
 }
 var mapTag$1 = "[object Map]";
 function baseIsMap(value) {
-  return isObjectLike$1(value) && getTag$1$1(value) == mapTag$1;
+  return isObjectLike(value) && getTag$1(value) == mapTag$1;
 }
-var nodeIsMap = nodeUtil$1$1 && nodeUtil$1$1.isMap;
+var nodeIsMap = nodeUtil$1 && nodeUtil$1.isMap;
 var isMap = nodeIsMap ? baseUnary(nodeIsMap) : baseIsMap;
 var isMap$1 = isMap;
 var setTag$1 = "[object Set]";
 function baseIsSet(value) {
-  return isObjectLike$1(value) && getTag$1$1(value) == setTag$1;
+  return isObjectLike(value) && getTag$1(value) == setTag$1;
 }
-var nodeIsSet = nodeUtil$1$1 && nodeUtil$1$1.isSet;
+var nodeIsSet = nodeUtil$1 && nodeUtil$1.isSet;
 var isSet = nodeIsSet ? baseUnary(nodeIsSet) : baseIsSet;
 var isSet$1 = isSet;
 var CLONE_DEEP_FLAG$1 = 1, CLONE_FLAT_FLAG = 2, CLONE_SYMBOLS_FLAG$1 = 4;
@@ -28557,7 +28756,7 @@ function baseClone(value, bitmask, customizer, key, object, stack) {
   if (result !== void 0) {
     return result;
   }
-  if (!isObject$2(value)) {
+  if (!isObject$1(value)) {
     return value;
   }
   var isArr = isArray$1$1(value);
@@ -28567,7 +28766,7 @@ function baseClone(value, bitmask, customizer, key, object, stack) {
       return copyArray(value, result);
     }
   } else {
-    var tag = getTag$1$1(value), isFunc = tag == funcTag || tag == genTag;
+    var tag = getTag$1(value), isFunc = tag == funcTag || tag == genTag;
     if (isBuffer$1(value)) {
       return cloneBuffer(value, isDeep);
     }
@@ -28615,14 +28814,14 @@ function cloneDeep(value) {
 }
 class VimSettings {
   constructor(options) {
-    __publicField$1(this, "options");
-    __publicField$1(this, "getOptions", () => cloneDeep(this.options));
-    __publicField$1(this, "getPosition", () => toVec(this.options.position));
-    __publicField$1(this, "getRotation", () => toQuaternion(this.options.rotation));
-    __publicField$1(this, "getScale", () => scalarToVec(this.options.scale));
-    __publicField$1(this, "getMatrix", () => new Matrix4().compose(this.getPosition(), this.getRotation(), this.getScale()));
-    __publicField$1(this, "getTransparency", () => this.options.transparency);
-    __publicField$1(this, "getDownloadMode", () => this.options.download);
+    __publicField(this, "options");
+    __publicField(this, "getOptions", () => cloneDeep(this.options));
+    __publicField(this, "getPosition", () => toVec(this.options.position));
+    __publicField(this, "getRotation", () => toQuaternion(this.options.rotation));
+    __publicField(this, "getScale", () => scalarToVec(this.options.scale));
+    __publicField(this, "getMatrix", () => new Matrix4().compose(this.getPosition(), this.getRotation(), this.getScale()));
+    __publicField(this, "getTransparency", () => this.options.transparency);
+    __publicField(this, "getDownloadMode", () => this.options.download);
     const fallback = {
       position: { x: 0, y: 0, z: 0 },
       rotation: { x: 0, y: 0, z: 0 },
@@ -28631,7 +28830,7 @@ class VimSettings {
       download: "stream"
     };
     this.options = options ? cjs(fallback, options, void 0) : fallback;
-    this.options.transparency = Transparency$1.isValid(this.options.transparency) ? this.options.transparency : "all";
+    this.options.transparency = Transparency.isValid(this.options.transparency) ? this.options.transparency : "all";
   }
 }
 function toVec(obj) {
@@ -28648,12 +28847,12 @@ function toEuler(rot) {
 }
 class G3dAttributeDescriptor {
   constructor(description, association, semantic, attributeTypeIndex, dataType, dataArity) {
-    __publicField$1(this, "description");
-    __publicField$1(this, "association");
-    __publicField$1(this, "semantic");
-    __publicField$1(this, "attributeTypeIndex");
-    __publicField$1(this, "dataType");
-    __publicField$1(this, "dataArity");
+    __publicField(this, "description");
+    __publicField(this, "association");
+    __publicField(this, "semantic");
+    __publicField(this, "attributeTypeIndex");
+    __publicField(this, "dataType");
+    __publicField(this, "dataArity");
     if (!description.startsWith("g3d:")) {
       throw new Error(`${description} must start with 'g3d'`);
     }
@@ -28678,9 +28877,9 @@ class G3dAttributeDescriptor {
 }
 class G3dAttribute {
   constructor(descriptor, bytes) {
-    __publicField$1(this, "descriptor");
-    __publicField$1(this, "bytes");
-    __publicField$1(this, "data");
+    __publicField(this, "descriptor");
+    __publicField(this, "bytes");
+    __publicField(this, "data");
     this.descriptor = descriptor;
     this.bytes = bytes;
     this.data = G3dAttribute.castData(bytes, descriptor.dataType);
@@ -28715,8 +28914,8 @@ class G3dAttribute {
 }
 class AbstractG3d {
   constructor(meta, attributes) {
-    __publicField$1(this, "meta");
-    __publicField$1(this, "attributes");
+    __publicField(this, "meta");
+    __publicField(this, "attributes");
     this.meta = meta;
     this.attributes = attributes;
   }
@@ -28729,53 +28928,53 @@ class AbstractG3d {
     }
   }
   static createFromBfast(bfast) {
-    const promises = VimAttributes$1.all.map((a) => bfast.getBytes(a).then((bytes) => bytes ? new G3dAttribute(G3dAttributeDescriptor.fromString(a), bytes) : void 0));
+    const promises = VimAttributes.all.map((a) => bfast.getBytes(a).then((bytes) => bytes ? new G3dAttribute(G3dAttributeDescriptor.fromString(a), bytes) : void 0));
     return Promise.all(promises).then((attributes) => new AbstractG3d("meta", attributes.filter((a) => a !== void 0)));
   }
 }
-const _VimAttributes$1 = class {
+const _VimAttributes = class {
 };
-let VimAttributes$1 = _VimAttributes$1;
-__publicField$1(VimAttributes$1, "positions", "g3d:vertex:position:0:float32:3");
-__publicField$1(VimAttributes$1, "indices", "g3d:corner:index:0:int32:1");
-__publicField$1(VimAttributes$1, "instanceMeshes", "g3d:instance:mesh:0:int32:1");
-__publicField$1(VimAttributes$1, "instanceTransforms", "g3d:instance:transform:0:float32:16");
-__publicField$1(VimAttributes$1, "instanceFlags", "g3d:instance:flags:0:uint16:1");
-__publicField$1(VimAttributes$1, "meshSubmeshes", "g3d:mesh:submeshoffset:0:int32:1");
-__publicField$1(VimAttributes$1, "submeshIndexOffsets", "g3d:submesh:indexoffset:0:int32:1");
-__publicField$1(VimAttributes$1, "submeshMaterials", "g3d:submesh:material:0:int32:1");
-__publicField$1(VimAttributes$1, "materialColors", "g3d:material:color:0:float32:4");
-__publicField$1(VimAttributes$1, "all", [
-  _VimAttributes$1.positions,
-  _VimAttributes$1.indices,
-  _VimAttributes$1.instanceMeshes,
-  _VimAttributes$1.instanceTransforms,
-  _VimAttributes$1.instanceFlags,
-  _VimAttributes$1.meshSubmeshes,
-  _VimAttributes$1.submeshIndexOffsets,
-  _VimAttributes$1.submeshMaterials,
-  _VimAttributes$1.materialColors
+let VimAttributes = _VimAttributes;
+__publicField(VimAttributes, "positions", "g3d:vertex:position:0:float32:3");
+__publicField(VimAttributes, "indices", "g3d:corner:index:0:int32:1");
+__publicField(VimAttributes, "instanceMeshes", "g3d:instance:mesh:0:int32:1");
+__publicField(VimAttributes, "instanceTransforms", "g3d:instance:transform:0:float32:16");
+__publicField(VimAttributes, "instanceFlags", "g3d:instance:flags:0:uint16:1");
+__publicField(VimAttributes, "meshSubmeshes", "g3d:mesh:submeshoffset:0:int32:1");
+__publicField(VimAttributes, "submeshIndexOffsets", "g3d:submesh:indexoffset:0:int32:1");
+__publicField(VimAttributes, "submeshMaterials", "g3d:submesh:material:0:int32:1");
+__publicField(VimAttributes, "materialColors", "g3d:material:color:0:float32:4");
+__publicField(VimAttributes, "all", [
+  _VimAttributes.positions,
+  _VimAttributes.indices,
+  _VimAttributes.instanceMeshes,
+  _VimAttributes.instanceTransforms,
+  _VimAttributes.instanceFlags,
+  _VimAttributes.meshSubmeshes,
+  _VimAttributes.submeshIndexOffsets,
+  _VimAttributes.submeshMaterials,
+  _VimAttributes.materialColors
 ]);
 class G3d {
   constructor(g3d) {
-    __publicField$1(this, "positions");
-    __publicField$1(this, "indices");
-    __publicField$1(this, "instanceMeshes");
-    __publicField$1(this, "instanceTransforms");
-    __publicField$1(this, "instanceFlags");
-    __publicField$1(this, "meshSubmeshes");
-    __publicField$1(this, "submeshIndexOffset");
-    __publicField$1(this, "submeshMaterial");
-    __publicField$1(this, "materialColors");
-    __publicField$1(this, "meshVertexOffsets");
-    __publicField$1(this, "meshInstances");
-    __publicField$1(this, "meshOpaqueCount");
-    __publicField$1(this, "rawG3d");
-    __publicField$1(this, "MATRIX_SIZE", 16);
-    __publicField$1(this, "COLOR_SIZE", 4);
-    __publicField$1(this, "POSITION_SIZE", 3);
-    __publicField$1(this, "DEFAULT_COLOR", new Float32Array([1, 1, 1, 1]));
-    __publicField$1(this, "computeMeshInstances", () => {
+    __publicField(this, "positions");
+    __publicField(this, "indices");
+    __publicField(this, "instanceMeshes");
+    __publicField(this, "instanceTransforms");
+    __publicField(this, "instanceFlags");
+    __publicField(this, "meshSubmeshes");
+    __publicField(this, "submeshIndexOffset");
+    __publicField(this, "submeshMaterial");
+    __publicField(this, "materialColors");
+    __publicField(this, "meshVertexOffsets");
+    __publicField(this, "meshInstances");
+    __publicField(this, "meshOpaqueCount");
+    __publicField(this, "rawG3d");
+    __publicField(this, "MATRIX_SIZE", 16);
+    __publicField(this, "COLOR_SIZE", 4);
+    __publicField(this, "POSITION_SIZE", 3);
+    __publicField(this, "DEFAULT_COLOR", new Float32Array([1, 1, 1, 1]));
+    __publicField(this, "computeMeshInstances", () => {
       const result = [];
       for (let i2 = 0; i2 < this.instanceMeshes.length; i2++) {
         const mesh = this.instanceMeshes[i2];
@@ -28789,24 +28988,24 @@ class G3d {
       }
       return result;
     });
-    __publicField$1(this, "getVertexCount", () => this.positions.length / this.POSITION_SIZE);
-    __publicField$1(this, "getMeshCount", () => this.meshSubmeshes.length);
-    __publicField$1(this, "getInstanceCount", () => this.instanceMeshes.length);
-    __publicField$1(this, "getMaterialCount", () => this.materialColors.length / this.COLOR_SIZE);
+    __publicField(this, "getVertexCount", () => this.positions.length / this.POSITION_SIZE);
+    __publicField(this, "getMeshCount", () => this.meshSubmeshes.length);
+    __publicField(this, "getInstanceCount", () => this.instanceMeshes.length);
+    __publicField(this, "getMaterialCount", () => this.materialColors.length / this.COLOR_SIZE);
     var _a2, _b, _c, _d, _e, _f, _g, _h, _i, _j;
     this.rawG3d = g3d;
-    this.positions = (_a2 = g3d.findAttribute(VimAttributes$1.positions)) == null ? void 0 : _a2.data;
-    const tmp2 = (_b = g3d.findAttribute(VimAttributes$1.indices)) == null ? void 0 : _b.data;
+    this.positions = (_a2 = g3d.findAttribute(VimAttributes.positions)) == null ? void 0 : _a2.data;
+    const tmp2 = (_b = g3d.findAttribute(VimAttributes.indices)) == null ? void 0 : _b.data;
     if (!tmp2)
       throw new Error("No Index Buffer Found");
     this.indices = new Uint32Array(tmp2.buffer, tmp2.byteOffset, tmp2.length);
-    this.meshSubmeshes = (_c = g3d.findAttribute(VimAttributes$1.meshSubmeshes)) == null ? void 0 : _c.data;
-    this.submeshIndexOffset = (_d = g3d.findAttribute(VimAttributes$1.submeshIndexOffsets)) == null ? void 0 : _d.data;
-    this.submeshMaterial = (_e = g3d.findAttribute(VimAttributes$1.submeshMaterials)) == null ? void 0 : _e.data;
-    this.materialColors = (_f = g3d.findAttribute(VimAttributes$1.materialColors)) == null ? void 0 : _f.data;
-    this.instanceMeshes = (_g = g3d.findAttribute(VimAttributes$1.instanceMeshes)) == null ? void 0 : _g.data;
-    this.instanceTransforms = (_h = g3d.findAttribute(VimAttributes$1.instanceTransforms)) == null ? void 0 : _h.data;
-    this.instanceFlags = (_j = (_i = g3d.findAttribute(VimAttributes$1.instanceFlags)) == null ? void 0 : _i.data) != null ? _j : new Uint16Array(this.instanceMeshes.length);
+    this.meshSubmeshes = (_c = g3d.findAttribute(VimAttributes.meshSubmeshes)) == null ? void 0 : _c.data;
+    this.submeshIndexOffset = (_d = g3d.findAttribute(VimAttributes.submeshIndexOffsets)) == null ? void 0 : _d.data;
+    this.submeshMaterial = (_e = g3d.findAttribute(VimAttributes.submeshMaterials)) == null ? void 0 : _e.data;
+    this.materialColors = (_f = g3d.findAttribute(VimAttributes.materialColors)) == null ? void 0 : _f.data;
+    this.instanceMeshes = (_g = g3d.findAttribute(VimAttributes.instanceMeshes)) == null ? void 0 : _g.data;
+    this.instanceTransforms = (_h = g3d.findAttribute(VimAttributes.instanceTransforms)) == null ? void 0 : _h.data;
+    this.instanceFlags = (_j = (_i = g3d.findAttribute(VimAttributes.instanceFlags)) == null ? void 0 : _i.data) != null ? _j : new Uint16Array(this.instanceMeshes.length);
     this.meshVertexOffsets = this.computeMeshVertexOffsets();
     this.rebaseIndices();
     this.meshInstances = this.computeMeshInstances();
@@ -29171,7 +29370,7 @@ const objectModel = {
 };
 class DocumentNoBim {
   constructor(g3d) {
-    __publicField$1(this, "g3d");
+    __publicField(this, "g3d");
     this.g3d = g3d;
   }
   getAllElements() {
@@ -29213,13 +29412,13 @@ class DocumentNoBim {
 }
 class Document {
   constructor(g3d, entities, strings, instanceToElement, elementToInstances, elementIds, elementIdToElements) {
-    __publicField$1(this, "g3d");
-    __publicField$1(this, "_entities");
-    __publicField$1(this, "_strings");
-    __publicField$1(this, "_instanceToElement");
-    __publicField$1(this, "_elementToInstances");
-    __publicField$1(this, "_elementIds");
-    __publicField$1(this, "_elementIdToElements");
+    __publicField(this, "g3d");
+    __publicField(this, "_entities");
+    __publicField(this, "_strings");
+    __publicField(this, "_instanceToElement");
+    __publicField(this, "_elementToInstances");
+    __publicField(this, "_elementIds");
+    __publicField(this, "_elementIdToElements");
     this.g3d = g3d;
     this._entities = entities;
     this._strings = strings;
@@ -29533,10 +29732,10 @@ class Document {
 }
 class VimMaterials {
   constructor(opaque, transparent, wireframe, isolation) {
-    __publicField$1(this, "opaque");
-    __publicField$1(this, "transparent");
-    __publicField$1(this, "wireframe");
-    __publicField$1(this, "isolation");
+    __publicField(this, "opaque");
+    __publicField(this, "transparent");
+    __publicField(this, "wireframe");
+    __publicField(this, "isolation");
     this.opaque = opaque != null ? opaque : createOpaque();
     this.transparent = transparent != null ? transparent : createTransparent();
     this.wireframe = wireframe != null ? wireframe : createWireframe();
@@ -29765,7 +29964,7 @@ function createIsolationMaterial() {
 }
 class MeshBuilder {
   constructor(materials) {
-    __publicField$1(this, "materials");
+    __publicField(this, "materials");
     this.materials = materials != null ? materials : new VimMaterials();
   }
   createInstancedMeshes(g3d, transparency2, instances) {
@@ -29782,7 +29981,7 @@ class MeshBuilder {
         const count = g3d.getMeshSubmeshCount(mesh, section);
         if (count <= 0)
           return;
-        const geometry = Geometry$1.createGeometryFromMesh(g3d, mesh, section, transparent);
+        const geometry = Geometry.createGeometryFromMesh(g3d, mesh, section, transparent);
         return this.createInstancedMesh(geometry, g3d, meshInstances, transparent);
       };
       switch (transparency2) {
@@ -29812,14 +30011,14 @@ class MeshBuilder {
     const material = useAlpha ? this.materials.transparent : this.materials.opaque;
     const result = new InstancedMesh(geometry, material, instances.length);
     for (let i2 = 0; i2 < instances.length; i2++) {
-      const matrix = Geometry$1.getInstanceMatrix(g3d, instances[i2]);
+      const matrix = Geometry.getInstanceMatrix(g3d, instances[i2]);
       result.setMatrixAt(i2, matrix);
     }
     result.userData.instances = instances;
     return result;
   }
   createMergedMesh(g3d, section, transparent, instances) {
-    const merge = instances ? Geometry$1.mergeInstanceMeshes(g3d, section, transparent, instances) : Geometry$1.mergeUniqueMeshes(g3d, section, transparent);
+    const merge = instances ? Geometry.mergeInstanceMeshes(g3d, section, transparent, instances) : Geometry.mergeUniqueMeshes(g3d, section, transparent);
     const material = transparent ? this.materials.transparent : this.materials.opaque;
     const mesh = new Mesh(merge.geometry, material);
     mesh.userData.merged = true;
@@ -29828,14 +30027,14 @@ class MeshBuilder {
     return mesh;
   }
   createWireframe(g3d, instances) {
-    const geometry = Geometry$1.createGeometryFromInstances(g3d, instances);
+    const geometry = Geometry.createGeometryFromInstances(g3d, instances);
     const wireframe = new WireframeGeometry(geometry);
     return new LineSegments(wireframe, this.materials.wireframe);
   }
 }
 class SceneBuilder {
   constructor(meshBuilder) {
-    __publicField$1(this, "meshBuilder");
+    __publicField(this, "meshBuilder");
     this.meshBuilder = meshBuilder != null ? meshBuilder : new MeshBuilder();
   }
   createFromG3d(g3d, transparency2 = "all", instances = void 0) {
@@ -29878,11 +30077,11 @@ class SceneBuilder {
 }
 class Vim {
   constructor(vim, scene, settings) {
-    __publicField$1(this, "document");
-    __publicField$1(this, "index", -1);
-    __publicField$1(this, "settings");
-    __publicField$1(this, "scene");
-    __publicField$1(this, "_elementToObject", /* @__PURE__ */ new Map());
+    __publicField(this, "document");
+    __publicField(this, "index", -1);
+    __publicField(this, "settings");
+    __publicField(this, "scene");
+    __publicField(this, "_elementToObject", /* @__PURE__ */ new Map());
     this.document = vim;
     this.scene = scene;
     this.scene.setVim(this);
@@ -29988,8 +30187,8 @@ class Vim {
 }
 class Loader {
   constructor(materials) {
-    __publicField$1(this, "sceneBuilder");
-    __publicField$1(this, "meshBuilder");
+    __publicField(this, "sceneBuilder");
+    __publicField(this, "meshBuilder");
     this.meshBuilder = new MeshBuilder(materials);
     this.sceneBuilder = new SceneBuilder(this.meshBuilder);
   }
@@ -30006,10 +30205,10 @@ class Loader {
 }
 class RemoteValue {
   constructor(getter, label) {
-    __publicField$1(this, "label");
-    __publicField$1(this, "_getter");
-    __publicField$1(this, "_value");
-    __publicField$1(this, "_request");
+    __publicField(this, "label");
+    __publicField(this, "_getter");
+    __publicField(this, "_value");
+    __publicField(this, "_request");
     this._getter = getter;
     this.label = label != null ? label : "";
   }
@@ -30030,22 +30229,22 @@ class RemoteValue {
 }
 class Request {
   constructor(field) {
-    __publicField$1(this, "status", "active");
-    __publicField$1(this, "field");
-    __publicField$1(this, "loaded", 0);
-    __publicField$1(this, "total", 0);
-    __publicField$1(this, "lengthComputable", true);
+    __publicField(this, "status", "active");
+    __publicField(this, "field");
+    __publicField(this, "loaded", 0);
+    __publicField(this, "total", 0);
+    __publicField(this, "lengthComputable", true);
     this.field = field;
   }
 }
 class RequestLogger {
   constructor(source) {
-    __publicField$1(this, "source");
-    __publicField$1(this, "all", /* @__PURE__ */ new Map());
-    __publicField$1(this, "lastUpdate", 0);
-    __publicField$1(this, "delay", 500);
-    __publicField$1(this, "sleeping", false);
-    __publicField$1(this, "onUpdate");
+    __publicField(this, "source");
+    __publicField(this, "all", /* @__PURE__ */ new Map());
+    __publicField(this, "lastUpdate", 0);
+    __publicField(this, "delay", 500);
+    __publicField(this, "sleeping", false);
+    __publicField(this, "onUpdate");
     this.source = source;
   }
   get loaded() {
@@ -30105,14 +30304,14 @@ class RequestLogger {
 }
 class RetryRequest {
   constructor(url2, range2, responseType) {
-    __publicField$1(this, "url");
-    __publicField$1(this, "range");
-    __publicField$1(this, "responseType");
-    __publicField$1(this, "msg");
-    __publicField$1(this, "xhr");
-    __publicField$1(this, "onLoad");
-    __publicField$1(this, "onError");
-    __publicField$1(this, "onProgress");
+    __publicField(this, "url");
+    __publicField(this, "range");
+    __publicField(this, "responseType");
+    __publicField(this, "msg");
+    __publicField(this, "xhr");
+    __publicField(this, "onLoad");
+    __publicField(this, "onError");
+    __publicField(this, "onProgress");
     this.url = url2;
     this.range = range2;
     this.responseType = responseType;
@@ -30145,12 +30344,12 @@ class RetryRequest {
 }
 class RemoteBuffer {
   constructor(url2, logger = new RequestLogger(url2)) {
-    __publicField$1(this, "url");
-    __publicField$1(this, "logger");
-    __publicField$1(this, "queue", []);
-    __publicField$1(this, "active", /* @__PURE__ */ new Set());
-    __publicField$1(this, "maxConcurency", 10);
-    __publicField$1(this, "encoded");
+    __publicField(this, "url");
+    __publicField(this, "logger");
+    __publicField(this, "queue", []);
+    __publicField(this, "active", /* @__PURE__ */ new Set());
+    __publicField(this, "maxConcurency", 10);
+    __publicField(this, "encoded");
     this.url = url2;
     this.logger = logger;
     this.encoded = new RemoteValue(() => this.requestEncoding());
@@ -30231,8 +30430,8 @@ class RemoteBuffer {
 }
 class Range {
   constructor(start, end) {
-    __publicField$1(this, "start");
-    __publicField$1(this, "end");
+    __publicField(this, "start");
+    __publicField(this, "end");
     this.start = start;
     this.end = end;
   }
@@ -30278,10 +30477,10 @@ function typeConstructor(type) {
 }
 class Header {
   constructor(magic, dataStart, dataEnd, numArrays) {
-    __publicField$1(this, "magic");
-    __publicField$1(this, "dataStart");
-    __publicField$1(this, "dataEnd");
-    __publicField$1(this, "numArrays");
+    __publicField(this, "magic");
+    __publicField(this, "dataStart");
+    __publicField(this, "dataEnd");
+    __publicField(this, "numArrays");
     if (magic !== 49061) {
       throw new Error("Invalid Bfast. Invalid Magic number");
     }
@@ -30320,12 +30519,12 @@ class Header {
 }
 class BFast {
   constructor(source, offset = 0, name = "") {
-    __publicField$1(this, "source");
-    __publicField$1(this, "offset");
-    __publicField$1(this, "name");
-    __publicField$1(this, "_header");
-    __publicField$1(this, "_ranges");
-    __publicField$1(this, "_children");
+    __publicField(this, "source");
+    __publicField(this, "offset");
+    __publicField(this, "name");
+    __publicField(this, "_header");
+    __publicField(this, "_ranges");
+    __publicField(this, "_children");
     this.source = source;
     this.offset = offset;
     this.name = name;
@@ -30491,17 +30690,17 @@ class BFast {
 }
 class Section {
   constructor(renderer, materials) {
-    __publicField$1(this, "_renderer");
-    __publicField$1(this, "_materials");
-    __publicField$1(this, "_active");
-    __publicField$1(this, "box", new Box3(new Vector3(-100, -100, -100), new Vector3(100, 100, 100)));
-    __publicField$1(this, "maxX", new Plane(new Vector3(-1, 0, 0)));
-    __publicField$1(this, "minX", new Plane(new Vector3(1, 0, 0)));
-    __publicField$1(this, "maxY", new Plane(new Vector3(0, -1, 0)));
-    __publicField$1(this, "minY", new Plane(new Vector3(0, 1, 0)));
-    __publicField$1(this, "maxZ", new Plane(new Vector3(0, 0, -1)));
-    __publicField$1(this, "minZ", new Plane(new Vector3(0, 0, 1)));
-    __publicField$1(this, "planes", [
+    __publicField(this, "_renderer");
+    __publicField(this, "_materials");
+    __publicField(this, "_active");
+    __publicField(this, "box", new Box3(new Vector3(-100, -100, -100), new Vector3(100, 100, 100)));
+    __publicField(this, "maxX", new Plane(new Vector3(-1, 0, 0)));
+    __publicField(this, "minX", new Plane(new Vector3(1, 0, 0)));
+    __publicField(this, "maxY", new Plane(new Vector3(0, -1, 0)));
+    __publicField(this, "minY", new Plane(new Vector3(0, 1, 0)));
+    __publicField(this, "maxZ", new Plane(new Vector3(0, 0, -1)));
+    __publicField(this, "minZ", new Plane(new Vector3(0, 0, 1)));
+    __publicField(this, "planes", [
       this.maxX,
       this.minX,
       this.maxY,
@@ -30536,12 +30735,12 @@ class Section {
 }
 class Renderer {
   constructor(scene, viewport, materials) {
-    __publicField$1(this, "renderer");
-    __publicField$1(this, "viewport");
-    __publicField$1(this, "scene");
-    __publicField$1(this, "section");
-    __publicField$1(this, "materials");
-    __publicField$1(this, "fitViewport", () => {
+    __publicField(this, "renderer");
+    __publicField(this, "viewport");
+    __publicField(this, "scene");
+    __publicField(this, "section");
+    __publicField(this, "materials");
+    __publicField(this, "fitViewport", () => {
       const [width, height] = this.viewport.getParentSize();
       this.renderer.setPixelRatio(window.devicePixelRatio);
       this.renderer.setSize(width, height);
@@ -30570,9 +30769,6 @@ class Renderer {
     this.renderer.forceContextLoss();
     this.renderer.dispose();
   }
-  getBoundingSphere(target = new Sphere()) {
-    return this.scene.getBoundingSphere(target);
-  }
   getBoundingBox(target = new Box3()) {
     return this.scene.getBoundingBox(target);
   }
@@ -30595,22 +30791,23 @@ class Renderer {
 }
 class Viewer {
   constructor(options) {
-    __publicField$1(this, "settings");
-    __publicField$1(this, "renderer");
-    __publicField$1(this, "viewport");
-    __publicField$1(this, "selection");
-    __publicField$1(this, "inputs");
-    __publicField$1(this, "raycaster");
-    __publicField$1(this, "gizmoSection");
-    __publicField$1(this, "gizmoMeasure");
-    __publicField$1(this, "_environment");
-    __publicField$1(this, "_camera");
-    __publicField$1(this, "_loader");
-    __publicField$1(this, "_clock", new Clock());
-    __publicField$1(this, "_gizmoAxes");
-    __publicField$1(this, "_materials");
-    __publicField$1(this, "_vims", []);
-    __publicField$1(this, "_disposed", false);
+    __publicField(this, "settings");
+    __publicField(this, "renderer");
+    __publicField(this, "viewport");
+    __publicField(this, "selection");
+    __publicField(this, "inputs");
+    __publicField(this, "raycaster");
+    __publicField(this, "gizmoSection");
+    __publicField(this, "gizmoMeasure");
+    __publicField(this, "gizmoSelection");
+    __publicField(this, "_environment");
+    __publicField(this, "_camera");
+    __publicField(this, "_loader");
+    __publicField(this, "_clock", new Clock());
+    __publicField(this, "_gizmoAxes");
+    __publicField(this, "_materials");
+    __publicField(this, "_vims", []);
+    __publicField(this, "_disposed", false);
     var _a2;
     this.settings = new ViewerSettings(options);
     const materials = new VimMaterials();
@@ -30618,7 +30815,7 @@ class Viewer {
     this._materials = materials;
     const scene = new RenderScene();
     this.viewport = new Viewport(this.settings);
-    this._camera = new Camera$1(scene, this.viewport, this.settings);
+    this._camera = new Camera(scene, this.viewport, this.settings);
     this.renderer = new Renderer(scene, this.viewport, materials);
     if (this.settings.getCameraGizmoEnable()) {
       this._camera.gizmo = new CameraGizmo(this.renderer, this._camera, this.settings);
@@ -30628,6 +30825,7 @@ class Viewer {
     this._gizmoAxes = new GizmoAxes(this.camera);
     (_a2 = this.viewport.canvas.parentElement) == null ? void 0 : _a2.prepend(this._gizmoAxes.canvas);
     this.gizmoSection = new GizmoSection(this);
+    this.gizmoSelection = new GizmoSelection(this);
     this._environment = new Environment(this.settings);
     this._environment.getObjects().forEach((o) => this.renderer.add(o));
     this.selection = new Selection(this.renderer);
@@ -30657,6 +30855,7 @@ class Viewer {
     this.inputs.unregisterAll();
     this._vims.forEach((v2) => v2 == null ? void 0 : v2.dispose());
     this._materials.dispose();
+    this.gizmoSelection.dispose();
     this._disposed = true;
   }
   animate() {
@@ -38223,7 +38422,7 @@ var m = reactDom$1.exports;
   createRoot = m.createRoot;
   m.hydrateRoot;
 }
-var style$1 = /* @__PURE__ */ (() => ':root {\n  --rct-color-tree-bg: #f6f8fa;\n  --rct-color-tree-focus-outline: #0366d6;\n\n  --rct-color-focustree-item-selected-bg: #e8eaed;\n  --rct-color-focustree-item-selected-text: inherit;\n  --rct-color-focustree-item-focused-border: #0366d6;\n  --rct-color-focustree-item-draggingover-bg: #ebf0f4;\n  --rct-color-focustree-item-draggingover-color: inherit;\n\n  --rct-color-nonfocustree-item-selected-bg: #e8eaed;\n  --rct-color-nonfocustree-item-selected-text: inherit;\n  --rct-color-nonfocustree-item-focused-border: #dbdbdb;\n\n  --rct-color-search-highlight-bg: #a2aed2;\n  --rct-color-drag-between-line-bg: #0366d6;\n  --rct-color-arrow: #9aa5b3;\n\n  --rct-item-height: 22px;\n\n  --rct-color-renaming-input-submitbutton-bg: inherit;\n  --rct-color-renaming-input-submitbutton-bg-hover: #0366d6;\n  --rct-color-renaming-input-submitbutton-bg-active: #095fc1;\n\n  --rct-color-renaming-input-submitbutton-text: inherit;\n  --rct-color-renaming-input-submitbutton-text-hover: #ffffff;\n  --rct-color-renaming-input-submitbutton-text-active: #ffffff;\n}\n\n.rct-tree-root {\n  font-family: sans-serif;\n  background-color: var(--rct-color-tree-bg);\n  padding: 4px 0;\n}\n\n.rct-tree-root-focus {\n  outline: 1px solid var(--rct-color-tree-focus-outline);\n}\n\n.rct-tree-item-li {\n  font-size: 0.8rem;\n  list-style-type: none;\n  padding: 0;\n  margin: 0;\n}\n\n.rct-tree-item-title-container {\n  display: flex;\n  align-items: center;\n  border-top: 1px solid transparent;\n  border-bottom: 1px solid transparent;\n}\n\n.rct-tree-child-list {\n}\n.rct-tree-item-button {\n  flex-grow: 1;\n  display: flex;\n  align-items: center;\n  box-sizing: border-box;\n  background-color: transparent;\n  font-family: inherit;\n  font-size: inherit;\n  border: none;\n  width: 100%;\n  height: var(--rct-item-height);\n  text-align: left;\n  color: inherit;\n  outline: none;\n}\n\n.rct-tree-item-arrow {\n  width: 16px;\n}\n\n.rct-tree-item-arrow svg {\n  width: 16px;\n}\n\n.rct-tree-item-arrow-path {\n  fill: var(--rct-color-arrow);\n}\n\n.rct-tree-items-container {\n  margin: 0;\n  padding: 0;\n}\n\n.rct-tree-root:not(.rct-tree-root-focus) .rct-tree-item-title-container-selected {\n  background-color: var(--rct-color-nonfocustree-item-selected-bg);\n  color: var(--rct-color-nonfocustree-item-selected-text);\n}\n.rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-selected {\n  background-color: var(--rct-color-focustree-item-selected-bg);\n  color: var(--rct-color-focustree-item-selected-text);\n}\n.rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-focused {\n  outline: none;\n  border-color: var(--rct-color-focustree-item-focused-border);\n}\n.rct-tree-root:not(.rct-tree-root-focus) .rct-tree-item-title-container-focused {\n  outline: none;\n  border-color: var(--rct-color-nonfocustree-item-focused-border);\n}\n\n.rct-tree-item-title-container-dragging-over {\n  background-color: var(--rct-color-focustree-item-draggingover-bg);\n  color: var(--rct-color-focustree-item-draggingover-color);\n}\n\n.rct-tree-item-button-search-match {\n  font-style: italic;\n}\n\n.rct-tree-item-search-highlight {\n  background-color: var(--rct-color-search-highlight-bg);\n}\n\n.rct-tree-drag-between-line {\n  position: absolute;\n  right: 0;\n  top: -2px;\n  height: 4px;\n  background-color: var(--rct-color-drag-between-line-bg);\n}\n\n.rct-tree-drag-between-line-top {\n  top: 0px;\n}\n\n.rct-tree-drag-between-line-bottom {\n  top: -4px;\n}\n\n.rct-tree-search-input-container {\n  position: absolute;\n  top: 0;\n  right: 0;\n  width: 120px;\n}\n\n.rct-tree-search-input {\n  position: fixed;\n  width: 120px;\n}\n\n/* TODO see renaming form in multiple tree example, wraps around */\n.rct-tree-item-renaming-form {\n  flex-grow: 1;\n  display: flex;\n}\n.rct-tree-item-renaming-input {\n  flex-grow: 1;\n  background-color: inherit;\n  border: none;\n  color: inherit;\n  outline: none;\n}\n.rct-tree-item-renaming-submit-button {\n  border: none;\n  background-color: var(--rct-color-renaming-input-submitbutton-bg);\n  border-radius: 999px;\n  color: var(--rct-color-renaming-input-submitbutton-text);\n  cursor: pointer;\n}\n.rct-tree-item-renaming-submit-button:hover {\n  background-color: var(--rct-color-renaming-input-submitbutton-bg-hover);\n  color: var(--rct-color-renaming-input-submitbutton-text-hover);\n}\n.rct-tree-item-renaming-submit-button:active {\n  background-color: var(--rct-color-renaming-input-submitbutton-bg-active);\n  color: var(--rct-color-renaming-input-submitbutton-text-active);\n}\n/*\n! tailwindcss v3.1.6 | MIT License | https://tailwindcss.com\n*//*\n1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)\n2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)\n*/\n\n*,\n::before,\n::after {\n  box-sizing: border-box; /* 1 */\n  border-width: 0; /* 2 */\n  border-style: solid; /* 2 */\n  border-color: currentColor; /* 2 */\n}\n\n::before,\n::after {\n  --tw-content: \'\';\n}\n\n/*\n1. Use a consistent sensible line-height in all browsers.\n2. Prevent adjustments of font size after orientation changes in iOS.\n3. Use a more readable tab size.\n4. Use the user\'s configured `sans` font-family by default.\n*/\n\nhtml {\n  line-height: 1.5; /* 1 */\n  -webkit-text-size-adjust: 100%; /* 2 */\n  -moz-tab-size: 4; /* 3 */\n  -o-tab-size: 4;\n     tab-size: 4; /* 3 */\n  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */\n}\n\n/*\n1. Remove the margin in all browsers.\n2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.\n*/\n\nbody {\n  margin: 0; /* 1 */\n  line-height: inherit; /* 2 */\n}\n\n/*\n1. Add the correct height in Firefox.\n2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)\n3. Ensure horizontal rules are visible by default.\n*/\n\nhr {\n  height: 0; /* 1 */\n  color: inherit; /* 2 */\n  border-top-width: 1px; /* 3 */\n}\n\n/*\nAdd the correct text decoration in Chrome, Edge, and Safari.\n*/\n\nabbr:where([title]) {\n  -webkit-text-decoration: underline dotted;\n          text-decoration: underline dotted;\n}\n\n/*\nRemove the default font size and weight for headings.\n*/\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-size: inherit;\n  font-weight: inherit;\n}\n\n/*\nReset links to optimize for opt-in styling instead of opt-out.\n*/\n\na {\n  color: inherit;\n  text-decoration: inherit;\n}\n\n/*\nAdd the correct font weight in Edge and Safari.\n*/\n\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/*\n1. Use the user\'s configured `mono` font family by default.\n2. Correct the odd `em` font sizing in all browsers.\n*/\n\ncode,\nkbd,\nsamp,\npre {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; /* 1 */\n  font-size: 1em; /* 2 */\n}\n\n/*\nAdd the correct font size in all browsers.\n*/\n\nsmall {\n  font-size: 80%;\n}\n\n/*\nPrevent `sub` and `sup` elements from affecting the line height in all browsers.\n*/\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/*\n1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)\n2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)\n3. Remove gaps between table borders by default.\n*/\n\ntable {\n  text-indent: 0; /* 1 */\n  border-color: inherit; /* 2 */\n  border-collapse: collapse; /* 3 */\n}\n\n/*\n1. Change the font styles in all browsers.\n2. Remove the margin in Firefox and Safari.\n3. Remove default padding in all browsers.\n*/\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit; /* 1 */\n  font-size: 100%; /* 1 */\n  font-weight: inherit; /* 1 */\n  line-height: inherit; /* 1 */\n  color: inherit; /* 1 */\n  margin: 0; /* 2 */\n  padding: 0; /* 3 */\n}\n\n/*\nRemove the inheritance of text transform in Edge and Firefox.\n*/\n\nbutton,\nselect {\n  text-transform: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Remove default button styles.\n*/\n\nbutton,\n[type=\'button\'],\n[type=\'reset\'],\n[type=\'submit\'] {\n  -webkit-appearance: button; /* 1 */\n  background-color: transparent; /* 2 */\n  background-image: none; /* 2 */\n}\n\n/*\nUse the modern Firefox focus style for all focusable elements.\n*/\n\n:-moz-focusring {\n  outline: auto;\n}\n\n/*\nRemove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)\n*/\n\n:-moz-ui-invalid {\n  box-shadow: none;\n}\n\n/*\nAdd the correct vertical alignment in Chrome and Firefox.\n*/\n\nprogress {\n  vertical-align: baseline;\n}\n\n/*\nCorrect the cursor style of increment and decrement buttons in Safari.\n*/\n\n::-webkit-inner-spin-button,\n::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/*\n1. Correct the odd appearance in Chrome and Safari.\n2. Correct the outline style in Safari.\n*/\n\n[type=\'search\'] {\n  -webkit-appearance: textfield; /* 1 */\n  outline-offset: -2px; /* 2 */\n}\n\n/*\nRemove the inner padding in Chrome and Safari on macOS.\n*/\n\n::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Change font properties to `inherit` in Safari.\n*/\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button; /* 1 */\n  font: inherit; /* 2 */\n}\n\n/*\nAdd the correct display in Chrome and Safari.\n*/\n\nsummary {\n  display: list-item;\n}\n\n/*\nRemoves the default spacing and border for appropriate elements.\n*/\n\nblockquote,\ndl,\ndd,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\nhr,\nfigure,\np,\npre {\n  margin: 0;\n}\n\nfieldset {\n  margin: 0;\n  padding: 0;\n}\n\nlegend {\n  padding: 0;\n}\n\nol,\nul,\nmenu {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n\n/*\nPrevent resizing textareas horizontally by default.\n*/\n\ntextarea {\n  resize: vertical;\n}\n\n/*\n1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)\n2. Set the default placeholder color to the user\'s configured gray 400 color.\n*/\n\ninput::-moz-placeholder, textarea::-moz-placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\ninput::placeholder,\ntextarea::placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\n/*\nSet the default cursor for buttons.\n*/\n\nbutton,\n[role="button"] {\n  cursor: pointer;\n}\n\n/*\nMake sure disabled buttons don\'t get the pointer cursor.\n*/\n:disabled {\n  cursor: default;\n}\n\n/*\n1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)\n2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)\n   This can trigger a poorly considered lint error in some tools but is included by design.\n*/\n\nimg,\nsvg,\nvideo,\ncanvas,\naudio,\niframe,\nembed,\nobject {\n  display: block; /* 1 */\n  vertical-align: middle; /* 2 */\n}\n\n/*\nConstrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)\n*/\n\nimg,\nvideo {\n  max-width: 100%;\n  height: auto;\n}\n\n*, ::before, ::after {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\n\n::-webkit-backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\n\n::backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\r\n.container {\n  width: 100%;\n}\r\n@media (min-width: 640px) {\n\n  .container {\n    max-width: 640px;\n  }\n}\r\n@media (min-width: 768px) {\n\n  .container {\n    max-width: 768px;\n  }\n}\r\n@media (min-width: 1024px) {\n\n  .container {\n    max-width: 1024px;\n  }\n}\r\n@media (min-width: 1280px) {\n\n  .container {\n    max-width: 1280px;\n  }\n}\r\n@media (min-width: 1536px) {\n\n  .container {\n    max-width: 1536px;\n  }\n}\r\n.pointer-events-none {\n  pointer-events: none;\n}\r\n.pointer-events-auto {\n  pointer-events: auto;\n}\r\n.visible {\n  visibility: visible;\n}\r\n.fixed {\n  position: fixed;\n}\r\n.absolute {\n  position: absolute;\n}\r\n.left-0 {\n  left: 0px;\n}\r\n.top-0 {\n  top: 0px;\n}\r\n.bottom-16 {\n  bottom: 4rem;\n}\r\n.right-4 {\n  right: 1rem;\n}\r\n.bottom-0 {\n  bottom: 0px;\n}\r\n.right-6 {\n  right: 1.5rem;\n}\r\n.top-6 {\n  top: 1.5rem;\n}\r\n.m-auto {\n  margin: auto;\n}\r\n.-mx-6 {\n  margin-left: -1.5rem;\n  margin-right: -1.5rem;\n}\r\n.my-2 {\n  margin-top: 0.5rem;\n  margin-bottom: 0.5rem;\n}\r\n.mx-1 {\n  margin-left: 0.25rem;\n  margin-right: 0.25rem;\n}\r\n.mb-6 {\n  margin-bottom: 1.5rem;\n}\r\n.mb-5 {\n  margin-bottom: 1.25rem;\n}\r\n.mb-4 {\n  margin-bottom: 1rem;\n}\r\n.-mr-4 {\n  margin-right: -1rem;\n}\r\n.mr-auto {\n  margin-right: auto;\n}\r\n.mr-3 {\n  margin-right: 0.75rem;\n}\r\n.flex {\n  display: flex;\n}\r\n.inline-flex {\n  display: inline-flex;\n}\r\n.hidden {\n  display: none;\n}\r\n.h-full {\n  height: 100%;\n}\r\n.h-1\\/2 {\n  height: 50%;\n}\r\n.h-10 {\n  height: 2.5rem;\n}\r\n.h-8 {\n  height: 2rem;\n}\r\n.h-28 {\n  height: 7rem;\n}\r\n.w-full {\n  width: 100%;\n}\r\n.w-3\\/12 {\n  width: 25%;\n}\r\n.w-auto {\n  width: auto;\n}\r\n.w-1\\/2 {\n  width: 50%;\n}\r\n.w-10 {\n  width: 2.5rem;\n}\r\n.w-8 {\n  width: 2rem;\n}\r\n.shrink-0 {\n  flex-shrink: 0;\n}\r\n.rotate-180 {\n  --tw-rotate: 180deg;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\r\n.rotate-0 {\n  --tw-rotate: 0deg;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\r\n.flex-col {\n  flex-direction: column;\n}\r\n.items-center {\n  align-items: center;\n}\r\n.justify-start {\n  justify-content: flex-start;\n}\r\n.justify-end {\n  justify-content: flex-end;\n}\r\n.justify-center {\n  justify-content: center;\n}\r\n.justify-between {\n  justify-content: space-between;\n}\r\n.overflow-y-auto {\n  overflow-y: auto;\n}\r\n.truncate {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\r\n.rounded {\n  border-radius: 0.25rem;\n}\r\n.rounded-full {\n  border-radius: 9999px;\n}\r\n.rounded-t {\n  border-top-left-radius: 0.25rem;\n  border-top-right-radius: 0.25rem;\n}\r\n.rounded-t-md {\n  border-top-left-radius: 0.375rem;\n  border-top-right-radius: 0.375rem;\n}\r\n.rounded-b-md {\n  border-bottom-right-radius: 0.375rem;\n  border-bottom-left-radius: 0.375rem;\n}\r\n.border {\n  border-width: 1px;\n}\r\n.border-t {\n  border-top-width: 1px;\n}\r\n.border-l {\n  border-left-width: 1px;\n}\r\n.border-r {\n  border-right-width: 1px;\n}\r\n.border-b {\n  border-bottom-width: 1px;\n}\r\n.border-gray-divider {\n  border-color: var(--c-gray-divider);\n}\r\n.border-gray-light {\n  border-color: var(--c-light-gray);\n}\r\n.border-gray-lighter {\n  border-color: var(--c-lighter-gray);\n}\r\n.border-hover-t40 {\n  border-color: var(--c-hover-t40);\n}\r\n.bg-gray-lightest {\n  background-color: var(--c-lightest-gray);\n}\r\n.bg-gray-light {\n  background-color: var(--c-light-gray);\n}\r\n.bg-transparent {\n  background-color: transparent;\n}\r\n.bg-white {\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\n}\r\n.bg-primary-royal {\n  background-color: var(--c-primary-royal);\n}\r\n.bg-hover-t40 {\n  background-color: var(--c-hover-t40);\n}\r\n.p-6 {\n  padding: 1.5rem;\n}\r\n.p-2 {\n  padding: 0.5rem;\n}\r\n.p-1 {\n  padding: 0.25rem;\n}\r\n.py-1 {\n  padding-top: 0.25rem;\n  padding-bottom: 0.25rem;\n}\r\n.px-2 {\n  padding-left: 0.5rem;\n  padding-right: 0.5rem;\n}\r\n.py-2 {\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem;\n}\r\n.px-6 {\n  padding-left: 1.5rem;\n  padding-right: 1.5rem;\n}\r\n.py-5 {\n  padding-top: 1.25rem;\n  padding-bottom: 1.25rem;\n}\r\n.px-12 {\n  padding-left: 3rem;\n  padding-right: 3rem;\n}\r\n.text-left {\n  text-align: left;\n}\r\n.text-xs {\n  font-size: 0.75rem;\n  line-height: 1rem;\n}\r\n.text-sm {\n  font-size: 0.875rem;\n  line-height: 1.25rem;\n}\r\n.font-bold {\n  font-weight: 700;\n}\r\n.uppercase {\n  text-transform: uppercase;\n}\r\n.text-gray-medium {\n  color: var(--c-medium-gray);\n}\r\n.text-gray-darker {\n  color: var(--c-darker-gray);\n}\r\n.text-gray-light {\n  color: var(--c-light-gray);\n}\r\n.text-gray {\n  color: var(--c-gray);\n}\r\n.text-primary {\n  color: var(--c-primary);\n}\r\n.text-white {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255 / var(--tw-text-opacity));\n}\r\n.opacity-80 {\n  opacity: 0.8;\n}\r\n.opacity-75 {\n  opacity: 0.75;\n}\r\n.shadow-lg {\n  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);\n  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\r\n.filter {\n  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);\n}\r\n.transition-all {\n  transition-property: all;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\r\n\r\n:root {\r\n  --c-primary: #0590cc;\r\n  --c-primary-green: #7ebf50;\r\n  --c-primary-yellow: #ffb700;\r\n  --c-primary-pink: #d93393;\r\n  --c-primary-royal: #284ea2;\r\n  --c-primary-purple: #5e3c97;\r\n\r\n  --c-darkest-gray: #050c1a;\r\n  --c-darker-gray: #212329;\r\n  --c-dark-gray-warm: #3c3c3c;\r\n  --c-dark-gray-cool: #56585f;\r\n  --c-medium-gray: #8a8d95;\r\n  --c-gray: #b6b9bf;\r\n  --c-gray-divider: #e3e3e3;\r\n  --c-light-gray: #d1d3d8;\r\n  --c-lighter-gray: #f0efee;\r\n  --c-lightest-gray: #f6f6f6;\r\n\r\n  --c-secondary: #0076aa;\r\n  --c-secondary-green: #5e9f30;\r\n  --c-secondary-yellow: #eca500;\r\n  --c-secondary-pink: #b51873;\r\n  --c-secondary-royal: #103381;\r\n  --c-secondary-purple: #33004d;\r\n\r\n  --c-lightest-blue: #d9edf9;\r\n  --c-light-blue: #40a6de;\r\n  --c-light-green: #82de40;\r\n\r\n  --c-list-hover: #fff8e5;\r\n\r\n  --c-hover-t40: rgba(5, 12, 26, 0.4);\r\n\r\n  --c-white: #ffffff;\r\n}\r\n\r\nbody {\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n  font-family: "Roboto", sans-serif;\r\n}\r\n.gizmo-axis-canvas {\r\n  top: 24px !important;\r\n  right: 24px !important;\r\n  margin: 8px 16px 8px 16px;\r\n}\r\n.vim-loading-box {\r\n  width: -webkit-fit-content;\r\n  width: -moz-fit-content;\r\n  width: fit-content;\r\n  height: -webkit-fit-content;\r\n  height: -moz-fit-content;\r\n  height: fit-content;\r\n  padding: 10px;\r\n  border: 1px solid #e3e3e3;\r\n  border-radius: 3px;\r\n  background-color: #f6f6f6;\r\n\r\n  font-family: "Roboto", sans-serif;\r\n\r\n  /*Centers the box*/\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  transform: translate(-50%, -50%);\r\n}\r\n\r\n.react-contextmenu {\r\n  background-color: white;\r\n  border-radius: 5px;\r\n  padding: 5px;\r\n}\r\n.react-contextmenu-item {\r\n  cursor: pointer;\r\n}\r\n.react-contextmenu-item--selected {\r\n  background-color: cyan;\r\n}\r\n\r\n.checked {\r\n  font-weight: bold;\r\n}\r\n\r\n.vim-logo {\r\n  position: fixed;\r\n  top: 16px;\r\n  left: 16px;\r\n}\r\n\r\n.vim-logo img {\r\n  height: 48px;\r\n  width: 128px;\r\n}\r\n\r\n/*Makes full screen and remove scrollbars*/\r\nhtml,\r\nbody {\r\n  height: 100%;\r\n  margin: 0;\r\n  padding: 0;\r\n  overflow: hidden;\r\n  background: radial-gradient(circle at center, #f0f0ff, #999999);\r\n}\r\n\r\n.VimLoadingBox h1 {\r\n  color: #050c1a;\r\n}\r\n\r\n.vim-section {\r\n  position: fixed;\r\n  bottom: 0px;\r\n  right: 64px;\r\n  width: 64px;\r\n  pointer-events: all;\r\n}\r\n\r\n/* MENU */\r\n\r\n.vim-menu td {\r\n  pointer-events: all;\r\n}\r\n\r\n.vim-menu td.empty {\r\n  pointer-events: none;\r\n}\r\n\r\n.vim-menu table {\r\n  width: 64px;\r\n}\r\n\r\n.vim-menu button:focus {\r\n  outline: 0;\r\n}\r\n\r\n.vim-menu .iconButton {\r\n  color: var(--c-white);\r\n  border: none;\r\n  background-color: transparent;\r\n}\r\n.vim-menu .iconButton.active {\r\n  background-color: var(--c-primary-royal);\r\n}\r\n.vim-menu .iconButton img {\r\n  width: 42px;\r\n  height: 42px;\r\n}\r\n\r\n.vim-menu .iconButton:hover img {\r\n  transform: scale(1.1);\r\n}\r\n\r\n.vim-menu .iconButton:active img {\r\n  transform: scale(1.1);\r\n  filter: brightness(1.5);\r\n}\r\n\r\n.vim-menu .iconButton:disabled img {\r\n  filter: brightness(0.5);\r\n  transform: scale(1);\r\n}\r\n\r\n/* Help Controls Widget */\r\n.vim-help-controls {\r\n  position: fixed;\r\n  bottom: 64px;\r\n  width: 100%;\r\n  pointer-events: none;\r\n}\r\n\r\n/* Tooltips */\r\n.__react_component_tooltip {\r\n  transition: opacity 0.1s ease-out !important;\r\n}\r\n\r\n/* Bim Panel */\r\n\r\n.vim-bim-panel {\r\n  height: 100%;\r\n  width: 480px;\r\n}\r\n.bim-panel-open {\r\n  margin-left: 480px;\r\n  max-width: calc(100% - 480px);\r\n  -o-object-fit: cover;\r\n     object-fit: cover;\r\n}\r\n\r\n.submenu-item-active {\r\n  position: relative;\r\n}\r\n.submenu-item-active::before {\r\n  content: "";\r\n  display: block;\r\n  background-image: url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 256 256\'%3E%3Cpath fill=\'%230590cc\' d=\'M228.693 61.741c5.379-7.011 4.057-17.055-2.954-22.434-7.01-5.379-17.054-4.057-22.434 2.954l-.008.011L99.864 177.069l-39.607-47.203c-5.68-6.769-15.772-7.652-22.542-1.972s-7.652 15.772-1.972 22.542l52.416 62.467.006.007c.018.021.038.039.056.06.214.252.448.492.681.733.153.159.3.326.458.478s.331.291.497.437c.251.222.5.445.763.648l.062.053c.108.083.225.151.334.231.304.221.608.44.924.638.166.104.335.192.503.289.284.164.567.328.859.473.221.11.447.204.671.303.245.107.487.219.736.313.268.103.54.188.812.275.214.069.428.142.645.202.293.081.588.144.884.208.206.044.411.093.619.129.294.051.589.085.884.12.219.026.437.055.656.071.275.021.55.026.825.033.245.006.489.015.735.009.246-.005.491-.024.736-.042.274-.018.548-.036.821-.068.22-.026.437-.065.654-.101.293-.047.585-.094.876-.158.207-.045.41-.103.615-.157.292-.076.584-.152.873-.245.215-.069.425-.152.637-.23.267-.099.535-.196.798-.31.245-.105.483-.228.723-.346.219-.108.44-.211.656-.331.286-.158.562-.334.839-.511.163-.104.328-.199.488-.31.307-.211.603-.444.896-.678.106-.085.219-.157.324-.245.021-.018.039-.038.06-.056.253-.215.492-.449.733-.681.159-.153.326-.301.478-.458.152-.159.292-.332.438-.498.221-.25.444-.5.647-.761.017-.022.037-.041.054-.063L228.693 61.741Z\'/%3E%3C/svg%3E");\r\n  background-size: contain;\r\n  position: absolute;\r\n  left: 20px;\r\n  top: 12px;\r\n  width: 20px;\r\n  height: 17px;\r\n}\r\n.rct-tree-root {\r\n  font-family: inherit;\r\n}\r\n.rct-tree-root > div > .rct-tree-items-container {\r\n  max-height: calc(50vh - 9rem);\r\n  overflow-y: auto;\r\n}\r\n.rct-tree-items-container li .rct-tree-item-title-container {\r\n  border: none;\r\n}\r\n.rct-tree-items-container\r\n  li\r\n  .rct-tree-item-title-container\r\n  .rct-tree-item-button {\r\n  padding-top: 0.25rem;\r\n  padding-bottom: 0.25rem;\r\n  min-height: 2.5rem;\r\n}\r\n.rct-tree-items-container > li:nth-child(odd) {\r\n  background-color: var(--c-white);\r\n}\r\n.rct-tree-items-container > li:nth-child(even) {\r\n  background-color: var(--c-lightest-gray);\r\n}\r\n\r\n.vim-inspector-properties {\r\n  max-height: 500px;\r\n}\r\n.rct-tree-root-focus {\r\n  outline: none;\r\n}\r\n.rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-focused {\r\n  border: none;\r\n}\r\n\r\n.rct-tree-item-li {\r\n  font-size: 1rem;\r\n}\r\n.rct-tree-item-arrow {\r\n  width: 20px;\r\n}\r\n.rct-tree-item-arrow svg {\r\n  width: 12px;\r\n}\r\n.parameters:first-child > ul > li h3 {\r\n  border-top-right-radius: 4px;\r\n}\r\n.rct-tree-root:not(.rct-tree-root-focus)\r\n  .rct-tree-item-title-container-selected,\r\n.rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-selected {\r\n  background-color: var(--c-lightest-blue);\r\n}\r\n.rct-tree-item-title-container:hover {\r\n  background-color: var(--c-list-hover);\r\n}\r\n.odd\\:bg-white:nth-child(odd) {\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\n}\r\n.focus-within\\:border-primary-royal:focus-within {\n  border-color: var(--c-primary-royal);\n}\r\n.focus-within\\:outline-none:focus-within {\n  outline: 2px solid transparent;\n  outline-offset: 2px;\n}\r\n.hover\\:scale-110:hover {\n  --tw-scale-x: 1.1;\n  --tw-scale-y: 1.1;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\r\n.hover\\:bg-gray-lightest:hover {\n  background-color: var(--c-lightest-gray);\n}\r\n.hover\\:bg-hover-t40:hover {\n  background-color: var(--c-hover-t40);\n}\r\n.hover\\:bg-primary-royal:hover {\n  background-color: var(--c-primary-royal);\n}\r\n.hover\\:opacity-100:hover {\n  opacity: 1;\n}\r\n')();
+var style$1 = /* @__PURE__ */ (() => ':root {\n  --rct-color-tree-bg: #f6f8fa;\n  --rct-color-tree-focus-outline: #0366d6;\n\n  --rct-color-focustree-item-selected-bg: #e8eaed;\n  --rct-color-focustree-item-selected-text: inherit;\n  --rct-color-focustree-item-focused-border: #0366d6;\n  --rct-color-focustree-item-draggingover-bg: #ebf0f4;\n  --rct-color-focustree-item-draggingover-color: inherit;\n\n  --rct-color-nonfocustree-item-selected-bg: #e8eaed;\n  --rct-color-nonfocustree-item-selected-text: inherit;\n  --rct-color-nonfocustree-item-focused-border: #dbdbdb;\n\n  --rct-color-search-highlight-bg: #a2aed2;\n  --rct-color-drag-between-line-bg: #0366d6;\n  --rct-color-arrow: #9aa5b3;\n\n  --rct-item-height: 22px;\n\n  --rct-color-renaming-input-submitbutton-bg: inherit;\n  --rct-color-renaming-input-submitbutton-bg-hover: #0366d6;\n  --rct-color-renaming-input-submitbutton-bg-active: #095fc1;\n\n  --rct-color-renaming-input-submitbutton-text: inherit;\n  --rct-color-renaming-input-submitbutton-text-hover: #ffffff;\n  --rct-color-renaming-input-submitbutton-text-active: #ffffff;\n}\n\n.rct-tree-root {\n  font-family: sans-serif;\n  background-color: var(--rct-color-tree-bg);\n  padding: 4px 0;\n}\n\n.rct-tree-root-focus {\n  outline: 1px solid var(--rct-color-tree-focus-outline);\n}\n\n.rct-tree-item-li {\n  font-size: 0.8rem;\n  list-style-type: none;\n  padding: 0;\n  margin: 0;\n}\n\n.rct-tree-item-title-container {\n  display: flex;\n  align-items: center;\n  border-top: 1px solid transparent;\n  border-bottom: 1px solid transparent;\n}\n\n.rct-tree-child-list {\n}\n.rct-tree-item-button {\n  flex-grow: 1;\n  display: flex;\n  align-items: center;\n  box-sizing: border-box;\n  background-color: transparent;\n  font-family: inherit;\n  font-size: inherit;\n  border: none;\n  width: 100%;\n  height: var(--rct-item-height);\n  text-align: left;\n  color: inherit;\n  outline: none;\n}\n\n.rct-tree-item-arrow {\n  width: 16px;\n}\n\n.rct-tree-item-arrow svg {\n  width: 16px;\n}\n\n.rct-tree-item-arrow-path {\n  fill: var(--rct-color-arrow);\n}\n\n.rct-tree-items-container {\n  margin: 0;\n  padding: 0;\n}\n\n.rct-tree-root:not(.rct-tree-root-focus) .rct-tree-item-title-container-selected {\n  background-color: var(--rct-color-nonfocustree-item-selected-bg);\n  color: var(--rct-color-nonfocustree-item-selected-text);\n}\n.rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-selected {\n  background-color: var(--rct-color-focustree-item-selected-bg);\n  color: var(--rct-color-focustree-item-selected-text);\n}\n.rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-focused {\n  outline: none;\n  border-color: var(--rct-color-focustree-item-focused-border);\n}\n.rct-tree-root:not(.rct-tree-root-focus) .rct-tree-item-title-container-focused {\n  outline: none;\n  border-color: var(--rct-color-nonfocustree-item-focused-border);\n}\n\n.rct-tree-item-title-container-dragging-over {\n  background-color: var(--rct-color-focustree-item-draggingover-bg);\n  color: var(--rct-color-focustree-item-draggingover-color);\n}\n\n.rct-tree-item-button-search-match {\n  font-style: italic;\n}\n\n.rct-tree-item-search-highlight {\n  background-color: var(--rct-color-search-highlight-bg);\n}\n\n.rct-tree-drag-between-line {\n  position: absolute;\n  right: 0;\n  top: -2px;\n  height: 4px;\n  background-color: var(--rct-color-drag-between-line-bg);\n}\n\n.rct-tree-drag-between-line-top {\n  top: 0px;\n}\n\n.rct-tree-drag-between-line-bottom {\n  top: -4px;\n}\n\n.rct-tree-search-input-container {\n  position: absolute;\n  top: 0;\n  right: 0;\n  width: 120px;\n}\n\n.rct-tree-search-input {\n  position: fixed;\n  width: 120px;\n}\n\n/* TODO see renaming form in multiple tree example, wraps around */\n.rct-tree-item-renaming-form {\n  flex-grow: 1;\n  display: flex;\n}\n.rct-tree-item-renaming-input {\n  flex-grow: 1;\n  background-color: inherit;\n  border: none;\n  color: inherit;\n  outline: none;\n}\n.rct-tree-item-renaming-submit-button {\n  border: none;\n  background-color: var(--rct-color-renaming-input-submitbutton-bg);\n  border-radius: 999px;\n  color: var(--rct-color-renaming-input-submitbutton-text);\n  cursor: pointer;\n}\n.rct-tree-item-renaming-submit-button:hover {\n  background-color: var(--rct-color-renaming-input-submitbutton-bg-hover);\n  color: var(--rct-color-renaming-input-submitbutton-text-hover);\n}\n.rct-tree-item-renaming-submit-button:active {\n  background-color: var(--rct-color-renaming-input-submitbutton-bg-active);\n  color: var(--rct-color-renaming-input-submitbutton-text-active);\n}\n/*\n! tailwindcss v3.1.6 | MIT License | https://tailwindcss.com\n*//*\n1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)\n2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)\n*/\n\n*,\n::before,\n::after {\n  box-sizing: border-box; /* 1 */\n  border-width: 0; /* 2 */\n  border-style: solid; /* 2 */\n  border-color: currentColor; /* 2 */\n}\n\n::before,\n::after {\n  --tw-content: \'\';\n}\n\n/*\n1. Use a consistent sensible line-height in all browsers.\n2. Prevent adjustments of font size after orientation changes in iOS.\n3. Use a more readable tab size.\n4. Use the user\'s configured `sans` font-family by default.\n*/\n\nhtml {\n  line-height: 1.5; /* 1 */\n  -webkit-text-size-adjust: 100%; /* 2 */\n  -moz-tab-size: 4; /* 3 */\n  -o-tab-size: 4;\n     tab-size: 4; /* 3 */\n  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */\n}\n\n/*\n1. Remove the margin in all browsers.\n2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.\n*/\n\nbody {\n  margin: 0; /* 1 */\n  line-height: inherit; /* 2 */\n}\n\n/*\n1. Add the correct height in Firefox.\n2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)\n3. Ensure horizontal rules are visible by default.\n*/\n\nhr {\n  height: 0; /* 1 */\n  color: inherit; /* 2 */\n  border-top-width: 1px; /* 3 */\n}\n\n/*\nAdd the correct text decoration in Chrome, Edge, and Safari.\n*/\n\nabbr:where([title]) {\n  -webkit-text-decoration: underline dotted;\n          text-decoration: underline dotted;\n}\n\n/*\nRemove the default font size and weight for headings.\n*/\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-size: inherit;\n  font-weight: inherit;\n}\n\n/*\nReset links to optimize for opt-in styling instead of opt-out.\n*/\n\na {\n  color: inherit;\n  text-decoration: inherit;\n}\n\n/*\nAdd the correct font weight in Edge and Safari.\n*/\n\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/*\n1. Use the user\'s configured `mono` font family by default.\n2. Correct the odd `em` font sizing in all browsers.\n*/\n\ncode,\nkbd,\nsamp,\npre {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; /* 1 */\n  font-size: 1em; /* 2 */\n}\n\n/*\nAdd the correct font size in all browsers.\n*/\n\nsmall {\n  font-size: 80%;\n}\n\n/*\nPrevent `sub` and `sup` elements from affecting the line height in all browsers.\n*/\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/*\n1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)\n2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)\n3. Remove gaps between table borders by default.\n*/\n\ntable {\n  text-indent: 0; /* 1 */\n  border-color: inherit; /* 2 */\n  border-collapse: collapse; /* 3 */\n}\n\n/*\n1. Change the font styles in all browsers.\n2. Remove the margin in Firefox and Safari.\n3. Remove default padding in all browsers.\n*/\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit; /* 1 */\n  font-size: 100%; /* 1 */\n  font-weight: inherit; /* 1 */\n  line-height: inherit; /* 1 */\n  color: inherit; /* 1 */\n  margin: 0; /* 2 */\n  padding: 0; /* 3 */\n}\n\n/*\nRemove the inheritance of text transform in Edge and Firefox.\n*/\n\nbutton,\nselect {\n  text-transform: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Remove default button styles.\n*/\n\nbutton,\n[type=\'button\'],\n[type=\'reset\'],\n[type=\'submit\'] {\n  -webkit-appearance: button; /* 1 */\n  background-color: transparent; /* 2 */\n  background-image: none; /* 2 */\n}\n\n/*\nUse the modern Firefox focus style for all focusable elements.\n*/\n\n:-moz-focusring {\n  outline: auto;\n}\n\n/*\nRemove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)\n*/\n\n:-moz-ui-invalid {\n  box-shadow: none;\n}\n\n/*\nAdd the correct vertical alignment in Chrome and Firefox.\n*/\n\nprogress {\n  vertical-align: baseline;\n}\n\n/*\nCorrect the cursor style of increment and decrement buttons in Safari.\n*/\n\n::-webkit-inner-spin-button,\n::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/*\n1. Correct the odd appearance in Chrome and Safari.\n2. Correct the outline style in Safari.\n*/\n\n[type=\'search\'] {\n  -webkit-appearance: textfield; /* 1 */\n  outline-offset: -2px; /* 2 */\n}\n\n/*\nRemove the inner padding in Chrome and Safari on macOS.\n*/\n\n::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Change font properties to `inherit` in Safari.\n*/\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button; /* 1 */\n  font: inherit; /* 2 */\n}\n\n/*\nAdd the correct display in Chrome and Safari.\n*/\n\nsummary {\n  display: list-item;\n}\n\n/*\nRemoves the default spacing and border for appropriate elements.\n*/\n\nblockquote,\ndl,\ndd,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\nhr,\nfigure,\np,\npre {\n  margin: 0;\n}\n\nfieldset {\n  margin: 0;\n  padding: 0;\n}\n\nlegend {\n  padding: 0;\n}\n\nol,\nul,\nmenu {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n\n/*\nPrevent resizing textareas horizontally by default.\n*/\n\ntextarea {\n  resize: vertical;\n}\n\n/*\n1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)\n2. Set the default placeholder color to the user\'s configured gray 400 color.\n*/\n\ninput::-moz-placeholder, textarea::-moz-placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\ninput::placeholder,\ntextarea::placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\n/*\nSet the default cursor for buttons.\n*/\n\nbutton,\n[role="button"] {\n  cursor: pointer;\n}\n\n/*\nMake sure disabled buttons don\'t get the pointer cursor.\n*/\n:disabled {\n  cursor: default;\n}\n\n/*\n1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)\n2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)\n   This can trigger a poorly considered lint error in some tools but is included by design.\n*/\n\nimg,\nsvg,\nvideo,\ncanvas,\naudio,\niframe,\nembed,\nobject {\n  display: block; /* 1 */\n  vertical-align: middle; /* 2 */\n}\n\n/*\nConstrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)\n*/\n\nimg,\nvideo {\n  max-width: 100%;\n  height: auto;\n}\n\n*, ::before, ::after {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\n\n::-webkit-backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\n\n::backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\r\n.container {\n  width: 100%;\n}\r\n@media (min-width: 640px) {\n\n  .container {\n    max-width: 640px;\n  }\n}\r\n@media (min-width: 768px) {\n\n  .container {\n    max-width: 768px;\n  }\n}\r\n@media (min-width: 1024px) {\n\n  .container {\n    max-width: 1024px;\n  }\n}\r\n@media (min-width: 1280px) {\n\n  .container {\n    max-width: 1280px;\n  }\n}\r\n@media (min-width: 1536px) {\n\n  .container {\n    max-width: 1536px;\n  }\n}\r\n.pointer-events-none {\n  pointer-events: none;\n}\r\n.pointer-events-auto {\n  pointer-events: auto;\n}\r\n.visible {\n  visibility: visible;\n}\r\n.fixed {\n  position: fixed;\n}\r\n.absolute {\n  position: absolute;\n}\r\n.left-0 {\n  left: 0px;\n}\r\n.top-0 {\n  top: 0px;\n}\r\n.bottom-16 {\n  bottom: 4rem;\n}\r\n.right-4 {\n  right: 1rem;\n}\r\n.bottom-0 {\n  bottom: 0px;\n}\r\n.right-6 {\n  right: 1.5rem;\n}\r\n.top-6 {\n  top: 1.5rem;\n}\r\n.m-auto {\n  margin: auto;\n}\r\n.-mx-6 {\n  margin-left: -1.5rem;\n  margin-right: -1.5rem;\n}\r\n.my-2 {\n  margin-top: 0.5rem;\n  margin-bottom: 0.5rem;\n}\r\n.mx-1 {\n  margin-left: 0.25rem;\n  margin-right: 0.25rem;\n}\r\n.mb-6 {\n  margin-bottom: 1.5rem;\n}\r\n.mb-5 {\n  margin-bottom: 1.25rem;\n}\r\n.mb-4 {\n  margin-bottom: 1rem;\n}\r\n.-mr-4 {\n  margin-right: -1rem;\n}\r\n.flex {\n  display: flex;\n}\r\n.inline-flex {\n  display: inline-flex;\n}\r\n.hidden {\n  display: none;\n}\r\n.h-full {\n  height: 100%;\n}\r\n.h-1\\/2 {\n  height: 50%;\n}\r\n.h-10 {\n  height: 2.5rem;\n}\r\n.h-8 {\n  height: 2rem;\n}\r\n.h-28 {\n  height: 7rem;\n}\r\n.w-full {\n  width: 100%;\n}\r\n.w-3\\/12 {\n  width: 25%;\n}\r\n.w-auto {\n  width: auto;\n}\r\n.w-1\\/2 {\n  width: 50%;\n}\r\n.w-10 {\n  width: 2.5rem;\n}\r\n.w-8 {\n  width: 2rem;\n}\r\n.w-32 {\n  width: 8rem;\n}\r\n.rotate-180 {\n  --tw-rotate: 180deg;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\r\n.rotate-0 {\n  --tw-rotate: 0deg;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\r\n.flex-col {\n  flex-direction: column;\n}\r\n.items-center {\n  align-items: center;\n}\r\n.justify-center {\n  justify-content: center;\n}\r\n.justify-between {\n  justify-content: space-between;\n}\r\n.divide-x-2 > :not([hidden]) ~ :not([hidden]) {\n  --tw-divide-x-reverse: 0;\n  border-right-width: calc(2px * var(--tw-divide-x-reverse));\n  border-left-width: calc(2px * calc(1 - var(--tw-divide-x-reverse)));\n}\r\n.overflow-y-auto {\n  overflow-y: auto;\n}\r\n.truncate {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\r\n.rounded {\n  border-radius: 0.25rem;\n}\r\n.rounded-full {\n  border-radius: 9999px;\n}\r\n.rounded-t {\n  border-top-left-radius: 0.25rem;\n  border-top-right-radius: 0.25rem;\n}\r\n.rounded-t-md {\n  border-top-left-radius: 0.375rem;\n  border-top-right-radius: 0.375rem;\n}\r\n.rounded-b-md {\n  border-bottom-right-radius: 0.375rem;\n  border-bottom-left-radius: 0.375rem;\n}\r\n.border {\n  border-width: 1px;\n}\r\n.border-t {\n  border-top-width: 1px;\n}\r\n.border-l {\n  border-left-width: 1px;\n}\r\n.border-r {\n  border-right-width: 1px;\n}\r\n.border-b {\n  border-bottom-width: 1px;\n}\r\n.border-gray-divider {\n  border-color: var(--c-gray-divider);\n}\r\n.border-gray-light {\n  border-color: var(--c-light-gray);\n}\r\n.border-gray-lighter {\n  border-color: var(--c-lighter-gray);\n}\r\n.border-hover-t40 {\n  border-color: var(--c-hover-t40);\n}\r\n.bg-gray-lightest {\n  background-color: var(--c-lightest-gray);\n}\r\n.bg-gray-light {\n  background-color: var(--c-light-gray);\n}\r\n.bg-transparent {\n  background-color: transparent;\n}\r\n.bg-white {\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\n}\r\n.bg-primary-royal {\n  background-color: var(--c-primary-royal);\n}\r\n.p-6 {\n  padding: 1.5rem;\n}\r\n.p-2 {\n  padding: 0.5rem;\n}\r\n.p-1 {\n  padding: 0.25rem;\n}\r\n.py-1 {\n  padding-top: 0.25rem;\n  padding-bottom: 0.25rem;\n}\r\n.px-2 {\n  padding-left: 0.5rem;\n  padding-right: 0.5rem;\n}\r\n.py-2 {\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem;\n}\r\n.px-6 {\n  padding-left: 1.5rem;\n  padding-right: 1.5rem;\n}\r\n.py-5 {\n  padding-top: 1.25rem;\n  padding-bottom: 1.25rem;\n}\r\n.px-12 {\n  padding-left: 3rem;\n  padding-right: 3rem;\n}\r\n.text-left {\n  text-align: left;\n}\r\n.text-xs {\n  font-size: 0.75rem;\n  line-height: 1rem;\n}\r\n.font-bold {\n  font-weight: 700;\n}\r\n.uppercase {\n  text-transform: uppercase;\n}\r\n.text-gray-medium {\n  color: var(--c-medium-gray);\n}\r\n.text-gray-darker {\n  color: var(--c-darker-gray);\n}\r\n.text-gray-light {\n  color: var(--c-light-gray);\n}\r\n.text-gray {\n  color: var(--c-gray);\n}\r\n.text-primary {\n  color: var(--c-primary);\n}\r\n.text-black {\n  --tw-text-opacity: 1;\n  color: rgb(0 0 0 / var(--tw-text-opacity));\n}\r\n.opacity-80 {\n  opacity: 0.8;\n}\r\n.opacity-20 {\n  opacity: 0.2;\n}\r\n.shadow-lg {\n  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);\n  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\r\n.filter {\n  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);\n}\r\n.transition-all {\n  transition-property: all;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\r\n\r\n:root {\r\n  --c-primary: #0590cc;\r\n  --c-primary-green: #7ebf50;\r\n  --c-primary-yellow: #ffb700;\r\n  --c-primary-pink: #d93393;\r\n  --c-primary-royal: #284ea2;\r\n  --c-primary-purple: #5e3c97;\r\n\r\n  --c-darkest-gray: #050c1a;\r\n  --c-darker-gray: #212329;\r\n  --c-dark-gray-warm: #3c3c3c;\r\n  --c-dark-gray-cool: #56585f;\r\n  --c-medium-gray: #8a8d95;\r\n  --c-gray: #b6b9bf;\r\n  --c-gray-divider: #e3e3e3;\r\n  --c-light-gray: #d1d3d8;\r\n  --c-lighter-gray: #f0efee;\r\n  --c-lightest-gray: #f6f6f6;\r\n\r\n  --c-secondary: #0076aa;\r\n  --c-secondary-green: #5e9f30;\r\n  --c-secondary-yellow: #eca500;\r\n  --c-secondary-pink: #b51873;\r\n  --c-secondary-royal: #103381;\r\n  --c-secondary-purple: #33004d;\r\n\r\n  --c-lightest-blue: #d9edf9;\r\n  --c-light-blue: #40a6de;\r\n  --c-light-green: #82de40;\r\n\r\n  --c-list-hover: #fff8e5;\r\n\r\n  --c-hover-t40: rgba(5, 12, 26, 0.4);\r\n\r\n  --c-white: #ffffff;\r\n}\r\n\r\nbody {\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n  font-family: "Roboto", sans-serif;\r\n}\r\n.gizmo-axis-canvas {\r\n  top: 24px !important;\r\n  right: 24px !important;\r\n  margin: 8px 16px 8px 16px;\r\n}\r\n.vim-loading-box {\r\n  width: -webkit-fit-content;\r\n  width: -moz-fit-content;\r\n  width: fit-content;\r\n  height: -webkit-fit-content;\r\n  height: -moz-fit-content;\r\n  height: fit-content;\r\n  padding: 10px;\r\n  border: 1px solid #e3e3e3;\r\n  border-radius: 3px;\r\n  background-color: #f6f6f6;\r\n\r\n  font-family: "Roboto", sans-serif;\r\n\r\n  /*Centers the box*/\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  transform: translate(-50%, -50%);\r\n}\r\n\r\n/* Context Menu */\r\n.react-contextmenu {\r\n  background-color: white;\r\n  border-radius: 5px;\r\n  padding: 5px;\r\n}\r\n.react-contextmenu-item {\r\n  cursor: pointer;\r\n}\r\n.react-contextmenu-item--selected {\r\n  background-color: cyan;\r\n}\r\n\r\n.checked {\r\n  font-weight: bold;\r\n}\r\n\r\n.react-contextmenu-item--divider {\r\n  border-top: 1px solid black;\r\n}\r\n\r\n/* Logo */\r\n\r\n.vim-logo {\r\n  position: fixed;\r\n  top: 16px;\r\n  left: 16px;\r\n}\r\n\r\n.vim-logo img {\r\n  height: 48px;\r\n  width: 128px;\r\n}\r\n\r\n/*Makes full screen and remove scrollbars*/\r\nhtml,\r\nbody {\r\n  height: 100%;\r\n  margin: 0;\r\n  padding: 0;\r\n  overflow: hidden;\r\n  background: radial-gradient(circle at center, #f0f0ff, #999999);\r\n}\r\n\r\n.VimLoadingBox h1 {\r\n  color: #050c1a;\r\n}\r\n\r\n.vim-section {\r\n  position: fixed;\r\n  bottom: 0px;\r\n  right: 64px;\r\n  width: 64px;\r\n  pointer-events: all;\r\n}\r\n\r\n/* MENU */\r\n\r\n.vim-menu td {\r\n  pointer-events: all;\r\n}\r\n\r\n.vim-menu td.empty {\r\n  pointer-events: none;\r\n}\r\n\r\n.vim-menu table {\r\n  width: 64px;\r\n}\r\n\r\n.vim-menu button:focus {\r\n  outline: 0;\r\n}\r\n\r\n.vim-menu .iconButton {\r\n  color: var(--c-white);\r\n  border: none;\r\n  background-color: transparent;\r\n}\r\n.vim-menu .iconButton.active {\r\n  background-color: var(--c-primary-royal);\r\n}\r\n.vim-menu .iconButton img {\r\n  width: 42px;\r\n  height: 42px;\r\n}\r\n\r\n.vim-menu .iconButton:hover img {\r\n  transform: scale(1.1);\r\n}\r\n\r\n.vim-menu .iconButton:active img {\r\n  transform: scale(1.1);\r\n  filter: brightness(1.5);\r\n}\r\n\r\n.vim-menu .iconButton:disabled img {\r\n  filter: brightness(0.5);\r\n  transform: scale(1);\r\n}\r\n\r\n/* Help Controls Widget */\r\n.vim-help-controls {\r\n  position: fixed;\r\n  bottom: 64px;\r\n  width: 100%;\r\n  pointer-events: none;\r\n}\r\n\r\n/* Tooltips */\r\n.__react_component_tooltip {\r\n  transition: opacity 0.1s ease-out !important;\r\n}\r\n\r\n/* Bim Panel */\r\n\r\n.vim-bim-panel {\r\n  height: 100%;\r\n  width: 480px;\r\n}\r\n.bim-panel-open {\r\n  margin-left: 480px;\r\n  max-width: calc(100% - 480px);\r\n  -o-object-fit: cover;\r\n     object-fit: cover;\r\n}\r\n\r\n.submenu-item-active {\r\n  position: relative;\r\n}\r\n.submenu-item-active::before {\r\n  content: "";\r\n  display: block;\r\n  background-image: url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 256 256\'%3E%3Cpath fill=\'%230590cc\' d=\'M228.693 61.741c5.379-7.011 4.057-17.055-2.954-22.434-7.01-5.379-17.054-4.057-22.434 2.954l-.008.011L99.864 177.069l-39.607-47.203c-5.68-6.769-15.772-7.652-22.542-1.972s-7.652 15.772-1.972 22.542l52.416 62.467.006.007c.018.021.038.039.056.06.214.252.448.492.681.733.153.159.3.326.458.478s.331.291.497.437c.251.222.5.445.763.648l.062.053c.108.083.225.151.334.231.304.221.608.44.924.638.166.104.335.192.503.289.284.164.567.328.859.473.221.11.447.204.671.303.245.107.487.219.736.313.268.103.54.188.812.275.214.069.428.142.645.202.293.081.588.144.884.208.206.044.411.093.619.129.294.051.589.085.884.12.219.026.437.055.656.071.275.021.55.026.825.033.245.006.489.015.735.009.246-.005.491-.024.736-.042.274-.018.548-.036.821-.068.22-.026.437-.065.654-.101.293-.047.585-.094.876-.158.207-.045.41-.103.615-.157.292-.076.584-.152.873-.245.215-.069.425-.152.637-.23.267-.099.535-.196.798-.31.245-.105.483-.228.723-.346.219-.108.44-.211.656-.331.286-.158.562-.334.839-.511.163-.104.328-.199.488-.31.307-.211.603-.444.896-.678.106-.085.219-.157.324-.245.021-.018.039-.038.06-.056.253-.215.492-.449.733-.681.159-.153.326-.301.478-.458.152-.159.292-.332.438-.498.221-.25.444-.5.647-.761.017-.022.037-.041.054-.063L228.693 61.741Z\'/%3E%3C/svg%3E");\r\n  background-size: contain;\r\n  position: absolute;\r\n  left: 20px;\r\n  top: 12px;\r\n  width: 20px;\r\n  height: 17px;\r\n}\r\n.rct-tree-root {\r\n  font-family: inherit;\r\n}\r\n.rct-tree-root > div > .rct-tree-items-container {\r\n  max-height: calc(50vh - 9rem);\r\n  overflow-y: auto;\r\n}\r\n.rct-tree-items-container li .rct-tree-item-title-container {\r\n  border: none;\r\n}\r\n.rct-tree-items-container\r\n  li\r\n  .rct-tree-item-title-container\r\n  .rct-tree-item-button {\r\n  padding-top: 0.25rem;\r\n  padding-bottom: 0.25rem;\r\n  min-height: 2.5rem;\r\n}\r\n.rct-tree-items-container > li:nth-child(odd) {\r\n  background-color: var(--c-white);\r\n}\r\n.rct-tree-items-container > li:nth-child(even) {\r\n  background-color: var(--c-lightest-gray);\r\n}\r\n\r\n.vim-inspector-properties {\r\n  max-height: 500px;\r\n}\r\n.rct-tree-root-focus {\r\n  outline: none;\r\n}\r\n.rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-focused {\r\n  border: none;\r\n}\r\n\r\n.rct-tree-item-li {\r\n  font-size: 1rem;\r\n}\r\n.rct-tree-item-arrow {\r\n  width: 20px;\r\n}\r\n.rct-tree-item-arrow svg {\r\n  width: 12px;\r\n}\r\n.parameters:first-child > ul > li h3 {\r\n  border-top-right-radius: 4px;\r\n}\r\n.rct-tree-root:not(.rct-tree-root-focus)\r\n  .rct-tree-item-title-container-selected,\r\n.rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-selected {\r\n  background-color: var(--c-lightest-blue);\r\n}\r\n.rct-tree-item-title-container:hover {\r\n  background-color: var(--c-list-hover);\r\n}\r\n.odd\\:bg-white:nth-child(odd) {\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\n}\r\n.focus-within\\:border-primary-royal:focus-within {\n  border-color: var(--c-primary-royal);\n}\r\n.focus-within\\:outline-none:focus-within {\n  outline: 2px solid transparent;\n  outline-offset: 2px;\n}\r\n.hover\\:scale-110:hover {\n  --tw-scale-x: 1.1;\n  --tw-scale-y: 1.1;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\r\n.hover\\:bg-gray-lightest:hover {\n  background-color: var(--c-lightest-gray);\n}\r\n.hover\\:bg-hover-t40:hover {\n  background-color: var(--c-hover-t40);\n}\r\n.hover\\:bg-primary-royal:hover {\n  background-color: var(--c-primary-royal);\n}\r\n.hover\\:opacity-100:hover {\n  opacity: 1;\n}\r\n')();
 var __defProp = Object.defineProperty;
 var __defProps = Object.defineProperties;
 var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
@@ -39122,18 +39321,18 @@ var requireObjectCoercible = function(it) {
 var toIndexedObject = function(it) {
   return indexedObject(requireObjectCoercible(it));
 };
-var isObject$1 = function(it) {
+var isObject = function(it) {
   return typeof it === "object" ? it !== null : typeof it === "function";
 };
 var toPrimitive = function(input, PREFERRED_STRING) {
-  if (!isObject$1(input))
+  if (!isObject(input))
     return input;
   var fn, val;
-  if (PREFERRED_STRING && typeof (fn = input.toString) == "function" && !isObject$1(val = fn.call(input)))
+  if (PREFERRED_STRING && typeof (fn = input.toString) == "function" && !isObject(val = fn.call(input)))
     return val;
-  if (typeof (fn = input.valueOf) == "function" && !isObject$1(val = fn.call(input)))
+  if (typeof (fn = input.valueOf) == "function" && !isObject(val = fn.call(input)))
     return val;
-  if (!PREFERRED_STRING && typeof (fn = input.toString) == "function" && !isObject$1(val = fn.call(input)))
+  if (!PREFERRED_STRING && typeof (fn = input.toString) == "function" && !isObject(val = fn.call(input)))
     return val;
   throw TypeError("Can't convert object to primitive value");
 };
@@ -39145,7 +39344,7 @@ var has = function hasOwn(it, key) {
   return hasOwnProperty$1.call(toObject$1(it), key);
 };
 var document$1 = global_1.document;
-var EXISTS = isObject$1(document$1) && isObject$1(document$1.createElement);
+var EXISTS = isObject(document$1) && isObject(document$1.createElement);
 var documentCreateElement = function(it) {
   return EXISTS ? document$1.createElement(it) : {};
 };
@@ -39172,7 +39371,7 @@ var objectGetOwnPropertyDescriptor = {
   f: f$1
 };
 var anObject = function(it) {
-  if (!isObject$1(it)) {
+  if (!isObject(it)) {
     throw TypeError(String(it) + " is not an object");
   }
   return it;
@@ -39220,8 +39419,8 @@ if (typeof sharedStore.inspectSource != "function") {
   };
 }
 var inspectSource = sharedStore.inspectSource;
-var WeakMap$2 = global_1.WeakMap;
-var nativeWeakMap = typeof WeakMap$2 === "function" && /native code/.test(inspectSource(WeakMap$2));
+var WeakMap$1 = global_1.WeakMap;
+var nativeWeakMap = typeof WeakMap$1 === "function" && /native code/.test(inspectSource(WeakMap$1));
 var shared = createCommonjsModule(function(module2) {
   (module2.exports = function(key, value) {
     return sharedStore[key] || (sharedStore[key] = value !== void 0 ? value : {});
@@ -39250,7 +39449,7 @@ var enforce = function(it) {
 var getterFor = function(TYPE) {
   return function(it) {
     var state;
-    if (!isObject$1(it) || (state = get2(it)).type !== TYPE) {
+    if (!isObject(it) || (state = get2(it)).type !== TYPE) {
       throw TypeError("Incompatible receiver, " + TYPE + " required");
     }
     return state;
@@ -39532,12 +39731,12 @@ var nativeSymbol = !!Object.getOwnPropertySymbols && !fails(function() {
 });
 var useSymbolAsUid = nativeSymbol && !Symbol.sham && typeof Symbol.iterator == "symbol";
 var WellKnownSymbolsStore = shared("wks");
-var Symbol$1$1 = global_1.Symbol;
-var createWellKnownSymbol = useSymbolAsUid ? Symbol$1$1 : Symbol$1$1 && Symbol$1$1.withoutSetter || uid;
+var Symbol$1 = global_1.Symbol;
+var createWellKnownSymbol = useSymbolAsUid ? Symbol$1 : Symbol$1 && Symbol$1.withoutSetter || uid;
 var wellKnownSymbol = function(name) {
   if (!has(WellKnownSymbolsStore, name) || !(nativeSymbol || typeof WellKnownSymbolsStore[name] == "string")) {
-    if (nativeSymbol && has(Symbol$1$1, name)) {
-      WellKnownSymbolsStore[name] = Symbol$1$1[name];
+    if (nativeSymbol && has(Symbol$1, name)) {
+      WellKnownSymbolsStore[name] = Symbol$1[name];
     } else {
       WellKnownSymbolsStore[name] = createWellKnownSymbol("Symbol." + name);
     }
@@ -39551,7 +39750,7 @@ var arraySpeciesCreate = function(originalArray, length) {
     C2 = originalArray.constructor;
     if (typeof C2 == "function" && (C2 === Array || isArray(C2.prototype)))
       C2 = void 0;
-    else if (isObject$1(C2)) {
+    else if (isObject(C2)) {
       C2 = C2[SPECIES];
       if (C2 === null)
         C2 = void 0;
@@ -48603,1013 +48802,6 @@ ContextMenuTrigger.defaultProps = {
   disableIfShiftIsPressed: false
 };
 [...Object.keys(ContextMenuTrigger.propTypes), "children"];
-var __defProp2 = Object.defineProperty;
-var __defNormalProp2 = (obj, key, value) => key in obj ? __defProp2(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __publicField = (obj, key, value) => {
-  __defNormalProp2(obj, typeof key !== "symbol" ? key + "" : key, value);
-  return value;
-};
-for (let i2 = 0; i2 < 256; i2++) {
-  (i2 < 16 ? "0" : "") + i2.toString(16);
-}
-({
-  forward: new Vector3(0, 0, -1),
-  back: new Vector3(0, 0, 1),
-  left: new Vector3(-1, 0, 0),
-  right: new Vector3(1, 0, 0),
-  up: new Vector3(0, 1, 0),
-  down: new Vector3(0, -1, 0)
-});
-var Transparency;
-((Transparency2) => {
-  function isValid(value) {
-    return ["all", "opaqueOnly", "transparentOnly", "allAsOpaque"].includes(value);
-  }
-  Transparency2.isValid = isValid;
-  function requiresAlpha(mode) {
-    return mode === "all" || mode === "transparentOnly";
-  }
-  Transparency2.requiresAlpha = requiresAlpha;
-})(Transparency || (Transparency = {}));
-var Geometry;
-((Geometry2) => {
-  function createGeometryFromInstances(g3d, instances) {
-    return Geometry2.mergeInstanceMeshes(g3d, "all", false, instances).geometry;
-  }
-  Geometry2.createGeometryFromInstances = createGeometryFromInstances;
-  function createGeometryFromMesh(g3d, mesh, section, transparent) {
-    const colors = createVertexColors(g3d, mesh, transparent);
-    const positions = g3d.positions.subarray(g3d.getMeshVertexStart(mesh) * 3, g3d.getMeshVertexEnd(mesh) * 3);
-    const start = g3d.getMeshIndexStart(mesh, section);
-    const end = g3d.getMeshIndexEnd(mesh, section);
-    const indices = g3d.indices.subarray(start, end);
-    return createGeometryFromArrays(positions, indices, colors, transparent ? 4 : 3);
-  }
-  Geometry2.createGeometryFromMesh = createGeometryFromMesh;
-  function createVertexColors(g3d, mesh, useAlpha) {
-    const colorSize = useAlpha ? 4 : 3;
-    const result = new Float32Array(g3d.getMeshVertexCount(mesh) * colorSize);
-    const subStart = g3d.getMeshSubmeshStart(mesh);
-    const subEnd = g3d.getMeshSubmeshEnd(mesh);
-    for (let submesh = subStart; submesh < subEnd; submesh++) {
-      const color = g3d.getSubmeshColor(submesh);
-      const start = g3d.getSubmeshIndexStart(submesh);
-      const end = g3d.getSubmeshIndexEnd(submesh);
-      for (let i2 = start; i2 < end; i2++) {
-        const v2 = g3d.indices[i2] * colorSize;
-        result[v2] = color[0];
-        result[v2 + 1] = color[1];
-        result[v2 + 2] = color[2];
-        if (useAlpha)
-          result[v2 + 3] = color[3];
-      }
-    }
-    return result;
-  }
-  function getInstanceMatrix(g3d, instance, target = new Matrix4()) {
-    const matrixAsArray = g3d.getInstanceMatrix(instance);
-    target.fromArray(matrixAsArray);
-    return target;
-  }
-  Geometry2.getInstanceMatrix = getInstanceMatrix;
-  function createGeometryFromArrays(vertices, indices, vertexColors = void 0, colorSize = 3) {
-    const geometry = new BufferGeometry();
-    geometry.setAttribute("position", new BufferAttribute(vertices, 3));
-    geometry.setIndex(new Uint32BufferAttribute(indices, 1));
-    if (vertexColors) {
-      geometry.setAttribute("color", new BufferAttribute(vertexColors, colorSize));
-    }
-    return geometry;
-  }
-  Geometry2.createGeometryFromArrays = createGeometryFromArrays;
-  function mergeInstanceMeshes(g3d, section, transparent, instances) {
-    const info = getInstanceMergeInfo(g3d, instances, section);
-    return merge(g3d, info, transparent);
-  }
-  Geometry2.mergeInstanceMeshes = mergeInstanceMeshes;
-  function mergeUniqueMeshes(g3d, section, transparent) {
-    const info = getUniqueMeshMergeInfo(g3d, section);
-    return merge(g3d, info, transparent);
-  }
-  Geometry2.mergeUniqueMeshes = mergeUniqueMeshes;
-  function merge(g3d, info, transparent) {
-    const buffer = new MergeBuffer(info, g3d.POSITION_SIZE, transparent ? 4 : 3);
-    fillBuffers(g3d, buffer, info);
-    const geometry = buffer.toBufferGeometry();
-    return new MergeResult(geometry, info.instances, buffer.groups);
-  }
-  function getUniqueMeshMergeInfo(g3d, section) {
-    let vertexCount = 0;
-    let indexCount = 0;
-    const instances = [];
-    const meshCount = g3d.getMeshCount();
-    for (let mesh = 0; mesh < meshCount; mesh++) {
-      const meshInstances = g3d.meshInstances[mesh];
-      if (!meshInstances || meshInstances.length !== 1)
-        continue;
-      const instance = meshInstances[0];
-      if ((g3d.instanceFlags[instance] & 1) > 0)
-        continue;
-      const count = g3d.getMeshIndexCount(mesh, section);
-      if (count <= 0)
-        continue;
-      indexCount += count;
-      vertexCount += g3d.getMeshVertexCount(mesh);
-      instances.push(instance);
-    }
-    return new MergeInfo(section, instances, indexCount, vertexCount);
-  }
-  function getInstanceMergeInfo(g3d, instances, section) {
-    let vertexCount = 0;
-    let indexCount = 0;
-    const instancesFiltered = [];
-    for (let i2 = 0; i2 < instances.length; i2++) {
-      const instance = instances[i2];
-      const mesh = g3d.instanceMeshes[instance];
-      const start = g3d.getMeshIndexStart(mesh, section);
-      const end = g3d.getMeshIndexEnd(mesh, section);
-      const count = end - start;
-      if (count <= 0)
-        continue;
-      indexCount += count;
-      vertexCount += g3d.getMeshVertexCount(mesh);
-      instancesFiltered.push(instance);
-    }
-    return new MergeInfo(section, instancesFiltered, indexCount, vertexCount);
-  }
-  function fillBuffers(g3d, buffer, info) {
-    let index = 0;
-    let vertex2 = 0;
-    let offset = 0;
-    const matrix = new Matrix4();
-    const vector = new Vector3();
-    for (let i2 = 0; i2 < info.instances.length; i2++) {
-      const instance = info.instances[i2];
-      const mesh = g3d.getInstanceMesh(instance);
-      buffer.groups[i2] = index;
-      const subStart = g3d.getMeshSubmeshStart(mesh, info.section);
-      const subEnd = g3d.getMeshSubmeshEnd(mesh, info.section);
-      for (let sub = subStart; sub < subEnd; sub++) {
-        const subColor = g3d.getSubmeshColor(sub);
-        const start = g3d.getSubmeshIndexStart(sub);
-        const end = g3d.getSubmeshIndexEnd(sub);
-        for (let s = start; s < end; s++) {
-          const newIndex = g3d.indices[s] + offset;
-          buffer.indices[index++] = newIndex;
-          const v2 = newIndex * buffer.colorSize;
-          buffer.colors[v2] = subColor[0];
-          buffer.colors[v2 + 1] = subColor[1];
-          buffer.colors[v2 + 2] = subColor[2];
-          if (buffer.colorSize > 3) {
-            buffer.colors[v2 + 3] = subColor[3];
-          }
-        }
-      }
-      getInstanceMatrix(g3d, instance, matrix);
-      const vertexStart = g3d.getMeshVertexStart(mesh);
-      const vertexEnd = g3d.getMeshVertexEnd(mesh);
-      for (let p2 = vertexStart; p2 < vertexEnd; p2++) {
-        vector.fromArray(g3d.positions, p2 * g3d.POSITION_SIZE);
-        vector.applyMatrix4(matrix);
-        vector.toArray(buffer.vertices, vertex2);
-        vertex2 += g3d.POSITION_SIZE;
-      }
-      offset += vertexEnd - vertexStart;
-    }
-  }
-  class MergeInfo {
-    constructor(section, instance, indexCount, vertexCount) {
-      __publicField(this, "section");
-      __publicField(this, "instances");
-      __publicField(this, "indexCount");
-      __publicField(this, "vertexCount");
-      this.section = section;
-      this.instances = instance;
-      this.indexCount = indexCount;
-      this.vertexCount = vertexCount;
-    }
-  }
-  class MergeBuffer {
-    constructor(info, positionSize, colorSize) {
-      __publicField(this, "indices");
-      __publicField(this, "vertices");
-      __publicField(this, "colors");
-      __publicField(this, "groups");
-      __publicField(this, "colorSize");
-      this.indices = new Uint32Array(info.indexCount);
-      this.vertices = new Float32Array(info.vertexCount * positionSize);
-      this.colors = new Float32Array(info.vertexCount * colorSize);
-      this.groups = new Array(info.instances.length);
-      this.colorSize = colorSize;
-    }
-    toBufferGeometry() {
-      const geometry = createGeometryFromArrays(this.vertices, this.indices, this.colors, this.colorSize);
-      return geometry;
-    }
-  }
-  class MergeResult {
-    constructor(geometry, instance, submeshes) {
-      __publicField(this, "geometry");
-      __publicField(this, "instances");
-      __publicField(this, "submeshes");
-      this.geometry = geometry;
-      this.instances = instance;
-      this.submeshes = submeshes;
-    }
-  }
-})(Geometry || (Geometry = {}));
-class MeshLine extends BufferGeometry {
-  constructor() {
-    super();
-    this.isMeshLine = true;
-    this.type = "MeshLine";
-    this.positions = [];
-    this.previous = [];
-    this.next = [];
-    this.side = [];
-    this.width = [];
-    this.indices_array = [];
-    this.uvs = [];
-    this.counters = [];
-    this._points = [];
-    this._geom = null;
-    this.widthCallback = null;
-    this.matrixWorld = new Matrix4();
-    Object.defineProperties(this, {
-      geometry: {
-        enumerable: true,
-        get: function() {
-          return this;
-        }
-      },
-      geom: {
-        enumerable: true,
-        get: function() {
-          return this._geom;
-        },
-        set: function(value) {
-          this.setGeometry(value, this.widthCallback);
-        }
-      },
-      points: {
-        enumerable: true,
-        get: function() {
-          return this._points;
-        },
-        set: function(value) {
-          this.setPoints(value, this.widthCallback);
-        }
-      }
-    });
-  }
-}
-MeshLine.prototype.setMatrixWorld = function(matrixWorld) {
-  this.matrixWorld = matrixWorld;
-};
-MeshLine.prototype.setGeometry = function(g, c) {
-  this._geometry = g;
-  this.setPoints(g.getAttribute("position").array, c);
-};
-MeshLine.prototype.setPoints = function(points, wcb) {
-  if (!(points instanceof Float32Array) && !(points instanceof Array)) {
-    console.error("ERROR: The BufferArray of points is not instancied correctly.");
-    return;
-  }
-  this._points = points;
-  this.widthCallback = wcb;
-  this.positions = [];
-  this.counters = [];
-  if (points.length && points[0] instanceof Vector3) {
-    for (let j = 0; j < points.length; j++) {
-      const p2 = points[j];
-      const c = j / points.length;
-      this.positions.push(p2.x, p2.y, p2.z);
-      this.positions.push(p2.x, p2.y, p2.z);
-      this.counters.push(c);
-      this.counters.push(c);
-    }
-  } else {
-    for (let j = 0; j < points.length; j += 3) {
-      const c = j / points.length;
-      this.positions.push(points[j], points[j + 1], points[j + 2]);
-      this.positions.push(points[j], points[j + 1], points[j + 2]);
-      this.counters.push(c);
-      this.counters.push(c);
-    }
-  }
-  this.process();
-};
-function MeshLineRaycast(raycaster, intersects2) {
-  const inverseMatrix = new Matrix4();
-  const ray = new Ray();
-  const sphere = new Sphere();
-  const interRay = new Vector3();
-  const geometry = this.geometry;
-  if (!geometry.boundingSphere)
-    geometry.computeBoundingSphere();
-  sphere.copy(geometry.boundingSphere);
-  sphere.applyMatrix4(this.matrixWorld);
-  if (raycaster.ray.intersectSphere(sphere, interRay) === false) {
-    return;
-  }
-  inverseMatrix.copy(this.matrixWorld).invert();
-  ray.copy(raycaster.ray).applyMatrix4(inverseMatrix);
-  const vStart = new Vector3();
-  const vEnd = new Vector3();
-  const interSegment = new Vector3();
-  const step = this instanceof LineSegments ? 2 : 1;
-  const index = geometry.index;
-  const attributes = geometry.attributes;
-  if (index !== null) {
-    const indices = index.array;
-    const positions = attributes.position.array;
-    const widths = attributes.width.array;
-    for (let i2 = 0, l2 = indices.length - 1; i2 < l2; i2 += step) {
-      const a = indices[i2];
-      const b = indices[i2 + 1];
-      vStart.fromArray(positions, a * 3);
-      vEnd.fromArray(positions, b * 3);
-      const width = widths[Math.floor(i2 / 3)] !== void 0 ? widths[Math.floor(i2 / 3)] : 1;
-      const precision = raycaster.params.Line.threshold + this.material.lineWidth * width / 2;
-      const precisionSq = precision * precision;
-      const distSq = ray.distanceSqToSegment(vStart, vEnd, interRay, interSegment);
-      if (distSq > precisionSq)
-        continue;
-      interRay.applyMatrix4(this.matrixWorld);
-      const distance = raycaster.ray.origin.distanceTo(interRay);
-      if (distance < raycaster.near || distance > raycaster.far)
-        continue;
-      intersects2.push({
-        distance,
-        point: interSegment.clone().applyMatrix4(this.matrixWorld),
-        index: i2,
-        face: null,
-        faceIndex: null,
-        object: this
-      });
-      i2 = l2;
-    }
-  }
-}
-MeshLine.prototype.raycast = MeshLineRaycast;
-MeshLine.prototype.compareV3 = function(a, b) {
-  const aa2 = a * 6;
-  const ab2 = b * 6;
-  return this.positions[aa2] === this.positions[ab2] && this.positions[aa2 + 1] === this.positions[ab2 + 1] && this.positions[aa2 + 2] === this.positions[ab2 + 2];
-};
-MeshLine.prototype.copyV3 = function(a) {
-  const aa2 = a * 6;
-  return [this.positions[aa2], this.positions[aa2 + 1], this.positions[aa2 + 2]];
-};
-MeshLine.prototype.process = function() {
-  const l2 = this.positions.length / 6;
-  this.previous = [];
-  this.next = [];
-  this.side = [];
-  this.width = [];
-  this.indices_array = [];
-  this.uvs = [];
-  let w2;
-  let v2;
-  if (this.compareV3(0, l2 - 1)) {
-    v2 = this.copyV3(l2 - 2);
-  } else {
-    v2 = this.copyV3(0);
-  }
-  this.previous.push(v2[0], v2[1], v2[2]);
-  this.previous.push(v2[0], v2[1], v2[2]);
-  for (let j = 0; j < l2; j++) {
-    this.side.push(1);
-    this.side.push(-1);
-    if (this.widthCallback)
-      w2 = this.widthCallback(j / (l2 - 1));
-    else
-      w2 = 1;
-    this.width.push(w2);
-    this.width.push(w2);
-    this.uvs.push(j / (l2 - 1), 0);
-    this.uvs.push(j / (l2 - 1), 1);
-    if (j < l2 - 1) {
-      v2 = this.copyV3(j);
-      this.previous.push(v2[0], v2[1], v2[2]);
-      this.previous.push(v2[0], v2[1], v2[2]);
-      const n2 = j * 2;
-      this.indices_array.push(n2, n2 + 1, n2 + 2);
-      this.indices_array.push(n2 + 2, n2 + 1, n2 + 3);
-    }
-    if (j > 0) {
-      v2 = this.copyV3(j);
-      this.next.push(v2[0], v2[1], v2[2]);
-      this.next.push(v2[0], v2[1], v2[2]);
-    }
-  }
-  if (this.compareV3(l2 - 1, 0)) {
-    v2 = this.copyV3(1);
-  } else {
-    v2 = this.copyV3(l2 - 1);
-  }
-  this.next.push(v2[0], v2[1], v2[2]);
-  this.next.push(v2[0], v2[1], v2[2]);
-  if (!this._attributes || this._attributes.position.count !== this.positions.length) {
-    this._attributes = {
-      position: new BufferAttribute(new Float32Array(this.positions), 3),
-      previous: new BufferAttribute(new Float32Array(this.previous), 3),
-      next: new BufferAttribute(new Float32Array(this.next), 3),
-      side: new BufferAttribute(new Float32Array(this.side), 1),
-      width: new BufferAttribute(new Float32Array(this.width), 1),
-      uv: new BufferAttribute(new Float32Array(this.uvs), 2),
-      index: new BufferAttribute(new Uint16Array(this.indices_array), 1),
-      counters: new BufferAttribute(new Float32Array(this.counters), 1)
-    };
-  } else {
-    this._attributes.position.copyArray(new Float32Array(this.positions));
-    this._attributes.position.needsUpdate = true;
-    this._attributes.previous.copyArray(new Float32Array(this.previous));
-    this._attributes.previous.needsUpdate = true;
-    this._attributes.next.copyArray(new Float32Array(this.next));
-    this._attributes.next.needsUpdate = true;
-    this._attributes.side.copyArray(new Float32Array(this.side));
-    this._attributes.side.needsUpdate = true;
-    this._attributes.width.copyArray(new Float32Array(this.width));
-    this._attributes.width.needsUpdate = true;
-    this._attributes.uv.copyArray(new Float32Array(this.uvs));
-    this._attributes.uv.needsUpdate = true;
-    this._attributes.index.copyArray(new Uint16Array(this.indices_array));
-    this._attributes.index.needsUpdate = true;
-  }
-  this.setAttribute("position", this._attributes.position);
-  this.setAttribute("previous", this._attributes.previous);
-  this.setAttribute("next", this._attributes.next);
-  this.setAttribute("side", this._attributes.side);
-  this.setAttribute("width", this._attributes.width);
-  this.setAttribute("uv", this._attributes.uv);
-  this.setAttribute("counters", this._attributes.counters);
-  this.setIndex(this._attributes.index);
-  this.computeBoundingSphere();
-  this.computeBoundingBox();
-};
-function memcpy(src, srcOffset, dst, dstOffset, length) {
-  let i2;
-  src = src.subarray || src.slice ? src : src.buffer;
-  dst = dst.subarray || dst.slice ? dst : dst.buffer;
-  src = srcOffset ? src.subarray ? src.subarray(srcOffset, length && srcOffset + length) : src.slice(srcOffset, length && srcOffset + length) : src;
-  if (dst.set) {
-    dst.set(src, dstOffset);
-  } else {
-    for (i2 = 0; i2 < src.length; i2++) {
-      dst[i2 + dstOffset] = src[i2];
-    }
-  }
-  return dst;
-}
-MeshLine.prototype.advance = function(position) {
-  const positions = this._attributes.position.array;
-  const previous = this._attributes.previous.array;
-  const next = this._attributes.next.array;
-  const l2 = positions.length;
-  memcpy(positions, 0, previous, 0, l2);
-  memcpy(positions, 6, positions, 0, l2 - 6);
-  positions[l2 - 6] = position.x;
-  positions[l2 - 5] = position.y;
-  positions[l2 - 4] = position.z;
-  positions[l2 - 3] = position.x;
-  positions[l2 - 2] = position.y;
-  positions[l2 - 1] = position.z;
-  memcpy(positions, 6, next, 0, l2 - 6);
-  next[l2 - 6] = position.x;
-  next[l2 - 5] = position.y;
-  next[l2 - 4] = position.z;
-  next[l2 - 3] = position.x;
-  next[l2 - 2] = position.y;
-  next[l2 - 1] = position.z;
-  this._attributes.position.needsUpdate = true;
-  this._attributes.previous.needsUpdate = true;
-  this._attributes.next.needsUpdate = true;
-};
-ShaderChunk.meshline_vert = [
-  "",
-  ShaderChunk.common,
-  ShaderChunk.logdepthbuf_pars_vertex,
-  ShaderChunk.fog_pars_vertex,
-  "",
-  "attribute vec3 previous;",
-  "attribute vec3 next;",
-  "attribute float side;",
-  "attribute float width;",
-  "attribute float counters;",
-  "",
-  "uniform vec2 resolution;",
-  "uniform float lineWidth;",
-  "uniform vec3 color;",
-  "uniform float opacity;",
-  "uniform float sizeAttenuation;",
-  "",
-  "varying vec2 vUV;",
-  "varying vec4 vColor;",
-  "varying float vCounters;",
-  "",
-  "vec2 fix( vec4 i, float aspect ) {",
-  "",
-  "    vec2 res = i.xy / i.w;",
-  "    res.x *= aspect;",
-  "    vCounters = counters;",
-  "    return res;",
-  "",
-  "}",
-  "",
-  "void main() {",
-  "",
-  "    float aspect = resolution.x / resolution.y;",
-  "",
-  "    vColor = vec4( color, opacity );",
-  "    vUV = uv;",
-  "",
-  "    mat4 m = projectionMatrix * modelViewMatrix;",
-  "    vec4 finalPosition = m * vec4( position, 1.0 );",
-  "    vec4 prevPos = m * vec4( previous, 1.0 );",
-  "    vec4 nextPos = m * vec4( next, 1.0 );",
-  "",
-  "    vec2 currentP = fix( finalPosition, aspect );",
-  "    vec2 prevP = fix( prevPos, aspect );",
-  "    vec2 nextP = fix( nextPos, aspect );",
-  "",
-  "    float w = lineWidth * width;",
-  "",
-  "    vec2 dir;",
-  "    if( nextP == currentP ) dir = normalize( currentP - prevP );",
-  "    else if( prevP == currentP ) dir = normalize( nextP - currentP );",
-  "    else {",
-  "        vec2 dir1 = normalize( currentP - prevP );",
-  "        vec2 dir2 = normalize( nextP - currentP );",
-  "        dir = normalize( dir1 + dir2 );",
-  "",
-  "        vec2 perp = vec2( -dir1.y, dir1.x );",
-  "        vec2 miter = vec2( -dir.y, dir.x );",
-  "        //w = clamp( w / dot( miter, perp ), 0., 4. * lineWidth * width );",
-  "",
-  "    }",
-  "",
-  "    //vec2 normal = ( cross( vec3( dir, 0. ), vec3( 0., 0., 1. ) ) ).xy;",
-  "    vec4 normal = vec4( -dir.y, dir.x, 0., 1. );",
-  "    normal.xy *= .5 * w;",
-  "    normal *= projectionMatrix;",
-  "    if( sizeAttenuation == 0. ) {",
-  "        normal.xy *= finalPosition.w;",
-  "        normal.xy /= ( vec4( resolution, 0., 1. ) * projectionMatrix ).xy;",
-  "    }",
-  "",
-  "    finalPosition.xy += normal.xy * side;",
-  "",
-  "    gl_Position = finalPosition;",
-  "",
-  ShaderChunk.logdepthbuf_vertex,
-  ShaderChunk.fog_vertex && "    vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );",
-  ShaderChunk.fog_vertex,
-  "}"
-].join("\n");
-ShaderChunk.meshline_frag = [
-  "",
-  ShaderChunk.fog_pars_fragment,
-  ShaderChunk.logdepthbuf_pars_fragment,
-  "",
-  "uniform sampler2D map;",
-  "uniform sampler2D alphaMap;",
-  "uniform float useMap;",
-  "uniform float useAlphaMap;",
-  "uniform float useDash;",
-  "uniform float dashArray;",
-  "uniform float dashOffset;",
-  "uniform float dashRatio;",
-  "uniform float visibility;",
-  "uniform float alphaTest;",
-  "uniform vec2 repeat;",
-  "",
-  "varying vec2 vUV;",
-  "varying vec4 vColor;",
-  "varying float vCounters;",
-  "",
-  "void main() {",
-  "",
-  ShaderChunk.logdepthbuf_fragment,
-  "",
-  "    vec4 c = vColor;",
-  "    if( useMap == 1. ) c *= texture2D( map, vUV * repeat );",
-  "    if( useAlphaMap == 1. ) c.a *= texture2D( alphaMap, vUV * repeat ).a;",
-  "    if( c.a < alphaTest ) discard;",
-  "    if( useDash == 1. ){",
-  "        c.a *= ceil(mod(vCounters + dashOffset, dashArray) - (dashArray * dashRatio));",
-  "    }",
-  "    gl_FragColor = c;",
-  "    gl_FragColor.a *= step(vCounters, visibility);",
-  "",
-  ShaderChunk.fog_fragment,
-  "}"
-].join("\n");
-class MeshLineMaterial extends ShaderMaterial {
-  constructor(parameters) {
-    super({
-      uniforms: Object.assign({}, UniformsLib.fog, {
-        lineWidth: { value: 1 },
-        map: { value: null },
-        useMap: { value: 0 },
-        alphaMap: { value: null },
-        useAlphaMap: { value: 0 },
-        color: { value: new Color(16777215) },
-        opacity: { value: 1 },
-        resolution: { value: new Vector2(1, 1) },
-        sizeAttenuation: { value: 1 },
-        dashArray: { value: 0 },
-        dashOffset: { value: 0 },
-        dashRatio: { value: 0.5 },
-        useDash: { value: 0 },
-        visibility: { value: 1 },
-        alphaTest: { value: 0 },
-        repeat: { value: new Vector2(1, 1) }
-      }),
-      vertexShader: ShaderChunk.meshline_vert,
-      fragmentShader: ShaderChunk.meshline_frag
-    });
-    this.isMeshLineMaterial = true;
-    this.type = "MeshLineMaterial";
-    Object.defineProperties(this, {
-      lineWidth: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.lineWidth.value;
-        },
-        set: function(value) {
-          this.uniforms.lineWidth.value = value;
-        }
-      },
-      map: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.map.value;
-        },
-        set: function(value) {
-          this.uniforms.map.value = value;
-        }
-      },
-      useMap: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.useMap.value;
-        },
-        set: function(value) {
-          this.uniforms.useMap.value = value;
-        }
-      },
-      alphaMap: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.alphaMap.value;
-        },
-        set: function(value) {
-          this.uniforms.alphaMap.value = value;
-        }
-      },
-      useAlphaMap: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.useAlphaMap.value;
-        },
-        set: function(value) {
-          this.uniforms.useAlphaMap.value = value;
-        }
-      },
-      color: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.color.value;
-        },
-        set: function(value) {
-          this.uniforms.color.value = value;
-        }
-      },
-      opacity: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.opacity.value;
-        },
-        set: function(value) {
-          this.uniforms.opacity.value = value;
-        }
-      },
-      resolution: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.resolution.value;
-        },
-        set: function(value) {
-          this.uniforms.resolution.value.copy(value);
-        }
-      },
-      sizeAttenuation: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.sizeAttenuation.value;
-        },
-        set: function(value) {
-          this.uniforms.sizeAttenuation.value = value;
-        }
-      },
-      dashArray: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.dashArray.value;
-        },
-        set: function(value) {
-          this.uniforms.dashArray.value = value;
-          this.useDash = value !== 0 ? 1 : 0;
-        }
-      },
-      dashOffset: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.dashOffset.value;
-        },
-        set: function(value) {
-          this.uniforms.dashOffset.value = value;
-        }
-      },
-      dashRatio: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.dashRatio.value;
-        },
-        set: function(value) {
-          this.uniforms.dashRatio.value = value;
-        }
-      },
-      useDash: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.useDash.value;
-        },
-        set: function(value) {
-          this.uniforms.useDash.value = value;
-        }
-      },
-      visibility: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.visibility.value;
-        },
-        set: function(value) {
-          this.uniforms.visibility.value = value;
-        }
-      },
-      alphaTest: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.alphaTest.value;
-        },
-        set: function(value) {
-          this.uniforms.alphaTest.value = value;
-        }
-      },
-      repeat: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.repeat.value;
-        },
-        set: function(value) {
-          this.uniforms.repeat.value.copy(value);
-        }
-      }
-    });
-    this.setValues(parameters);
-  }
-}
-MeshLineMaterial.prototype.copy = function(source) {
-  ShaderMaterial.prototype.copy.call(this, source);
-  this.lineWidth = source.lineWidth;
-  this.map = source.map;
-  this.useMap = source.useMap;
-  this.alphaMap = source.alphaMap;
-  this.useAlphaMap = source.useAlphaMap;
-  this.color.copy(source.color);
-  this.opacity = source.opacity;
-  this.resolution.copy(source.resolution);
-  this.sizeAttenuation = source.sizeAttenuation;
-  this.dashArray.copy(source.dashArray);
-  this.dashOffset.copy(source.dashOffset);
-  this.dashRatio.copy(source.dashRatio);
-  this.useDash = source.useDash;
-  this.visibility = source.visibility;
-  this.alphaTest = source.alphaTest;
-  this.repeat.copy(source.repeat);
-  return this;
-};
-var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
-var freeGlobal$1 = freeGlobal;
-var freeSelf = typeof self == "object" && self && self.Object === Object && self;
-var root$1 = freeGlobal$1 || freeSelf || Function("return this")();
-var root$1$1 = root$1;
-var Symbol$1 = root$1$1.Symbol;
-var Symbol$2 = Symbol$1;
-var objectProto$c = Object.prototype;
-var hasOwnProperty$9 = objectProto$c.hasOwnProperty;
-var nativeObjectToString$1 = objectProto$c.toString;
-var symToStringTag$1 = Symbol$2 ? Symbol$2.toStringTag : void 0;
-function getRawTag(value) {
-  var isOwn = hasOwnProperty$9.call(value, symToStringTag$1), tag = value[symToStringTag$1];
-  try {
-    value[symToStringTag$1] = void 0;
-    var unmasked = true;
-  } catch (e) {
-  }
-  var result = nativeObjectToString$1.call(value);
-  if (unmasked) {
-    if (isOwn) {
-      value[symToStringTag$1] = tag;
-    } else {
-      delete value[symToStringTag$1];
-    }
-  }
-  return result;
-}
-var objectProto$b = Object.prototype;
-var nativeObjectToString = objectProto$b.toString;
-function objectToString(value) {
-  return nativeObjectToString.call(value);
-}
-var nullTag = "[object Null]", undefinedTag = "[object Undefined]";
-var symToStringTag = Symbol$2 ? Symbol$2.toStringTag : void 0;
-function baseGetTag(value) {
-  if (value == null) {
-    return value === void 0 ? undefinedTag : nullTag;
-  }
-  return symToStringTag && symToStringTag in Object(value) ? getRawTag(value) : objectToString(value);
-}
-function isObjectLike(value) {
-  return value != null && typeof value == "object";
-}
-function isObject(value) {
-  var type = typeof value;
-  return value != null && (type == "object" || type == "function");
-}
-var asyncTag = "[object AsyncFunction]", funcTag$2 = "[object Function]", genTag$1 = "[object GeneratorFunction]", proxyTag = "[object Proxy]";
-function isFunction(value) {
-  if (!isObject(value)) {
-    return false;
-  }
-  var tag = baseGetTag(value);
-  return tag == funcTag$2 || tag == genTag$1 || tag == asyncTag || tag == proxyTag;
-}
-var coreJsData = root$1$1["__core-js_shared__"];
-var coreJsData$1 = coreJsData;
-var maskSrcKey = function() {
-  var uid2 = /[^.]+$/.exec(coreJsData$1 && coreJsData$1.keys && coreJsData$1.keys.IE_PROTO || "");
-  return uid2 ? "Symbol(src)_1." + uid2 : "";
-}();
-function isMasked(func) {
-  return !!maskSrcKey && maskSrcKey in func;
-}
-var funcProto$1 = Function.prototype;
-var funcToString$1 = funcProto$1.toString;
-function toSource(func) {
-  if (func != null) {
-    try {
-      return funcToString$1.call(func);
-    } catch (e) {
-    }
-    try {
-      return func + "";
-    } catch (e) {
-    }
-  }
-  return "";
-}
-var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
-var reIsHostCtor = /^\[object .+?Constructor\]$/;
-var funcProto = Function.prototype, objectProto$a = Object.prototype;
-var funcToString = funcProto.toString;
-var hasOwnProperty$8 = objectProto$a.hasOwnProperty;
-var reIsNative = RegExp("^" + funcToString.call(hasOwnProperty$8).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$");
-function baseIsNative(value) {
-  if (!isObject(value) || isMasked(value)) {
-    return false;
-  }
-  var pattern = isFunction(value) ? reIsNative : reIsHostCtor;
-  return pattern.test(toSource(value));
-}
-function getValue(object, key) {
-  return object == null ? void 0 : object[key];
-}
-function getNative(object, key) {
-  var value = getValue(object, key);
-  return baseIsNative(value) ? value : void 0;
-}
-var WeakMap2 = getNative(root$1$1, "WeakMap");
-var WeakMap$1 = WeakMap2;
-(function() {
-  try {
-    var func = getNative(Object, "defineProperty");
-    func({}, "", {});
-    return func;
-  } catch (e) {
-  }
-})();
-var argsTag$2 = "[object Arguments]";
-function baseIsArguments(value) {
-  return isObjectLike(value) && baseGetTag(value) == argsTag$2;
-}
-var objectProto$7 = Object.prototype;
-var hasOwnProperty$6 = objectProto$7.hasOwnProperty;
-var propertyIsEnumerable$1 = objectProto$7.propertyIsEnumerable;
-baseIsArguments(function() {
-  return arguments;
-}()) ? baseIsArguments : function(value) {
-  return isObjectLike(value) && hasOwnProperty$6.call(value, "callee") && !propertyIsEnumerable$1.call(value, "callee");
-};
-var freeExports$2 = typeof exports == "object" && exports && !exports.nodeType && exports;
-var freeModule$2 = freeExports$2 && typeof module == "object" && module && !module.nodeType && module;
-var moduleExports$2 = freeModule$2 && freeModule$2.exports === freeExports$2;
-var Buffer$1 = moduleExports$2 ? root$1$1.Buffer : void 0;
-Buffer$1 ? Buffer$1.isBuffer : void 0;
-var freeExports$1 = typeof exports == "object" && exports && !exports.nodeType && exports;
-var freeModule$1 = freeExports$1 && typeof module == "object" && module && !module.nodeType && module;
-var moduleExports$1 = freeModule$1 && freeModule$1.exports === freeExports$1;
-var freeProcess = moduleExports$1 && freeGlobal$1.process;
-var nodeUtil = function() {
-  try {
-    var types = freeModule$1 && freeModule$1.require && freeModule$1.require("util").types;
-    if (types) {
-      return types;
-    }
-    return freeProcess && freeProcess.binding && freeProcess.binding("util");
-  } catch (e) {
-  }
-}();
-var nodeUtil$1 = nodeUtil;
-nodeUtil$1 && nodeUtil$1.isTypedArray;
-getNative(Object, "create");
-var Map$1 = getNative(root$1$1, "Map");
-var Map$2 = Map$1;
-var freeExports = typeof exports == "object" && exports && !exports.nodeType && exports;
-var freeModule = freeExports && typeof module == "object" && module && !module.nodeType && module;
-var moduleExports = freeModule && freeModule.exports === freeExports;
-var Buffer2 = moduleExports ? root$1$1.Buffer : void 0;
-Buffer2 ? Buffer2.allocUnsafe : void 0;
-var DataView$1 = getNative(root$1$1, "DataView");
-var DataView$1$1 = DataView$1;
-var Promise$1 = getNative(root$1$1, "Promise");
-var Promise$2 = Promise$1;
-var Set$1 = getNative(root$1$1, "Set");
-var Set$2 = Set$1;
-var mapTag$3 = "[object Map]", objectTag$1 = "[object Object]", promiseTag = "[object Promise]", setTag$3 = "[object Set]", weakMapTag$1 = "[object WeakMap]";
-var dataViewTag$2 = "[object DataView]";
-var dataViewCtorString = toSource(DataView$1$1), mapCtorString = toSource(Map$2), promiseCtorString = toSource(Promise$2), setCtorString = toSource(Set$2), weakMapCtorString = toSource(WeakMap$1);
-var getTag = baseGetTag;
-if (DataView$1$1 && getTag(new DataView$1$1(new ArrayBuffer(1))) != dataViewTag$2 || Map$2 && getTag(new Map$2()) != mapTag$3 || Promise$2 && getTag(Promise$2.resolve()) != promiseTag || Set$2 && getTag(new Set$2()) != setTag$3 || WeakMap$1 && getTag(new WeakMap$1()) != weakMapTag$1) {
-  getTag = function(value) {
-    var result = baseGetTag(value), Ctor = result == objectTag$1 ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : "";
-    if (ctorString) {
-      switch (ctorString) {
-        case dataViewCtorString:
-          return dataViewTag$2;
-        case mapCtorString:
-          return mapTag$3;
-        case promiseCtorString:
-          return promiseTag;
-        case setCtorString:
-          return setTag$3;
-        case weakMapCtorString:
-          return weakMapTag$1;
-      }
-    }
-    return result;
-  };
-}
-root$1$1.Uint8Array;
-var symbolProto = Symbol$2 ? Symbol$2.prototype : void 0;
-symbolProto ? symbolProto.valueOf : void 0;
-nodeUtil$1 && nodeUtil$1.isMap;
-nodeUtil$1 && nodeUtil$1.isSet;
-const _VimAttributes = class {
-};
-let VimAttributes = _VimAttributes;
-__publicField(VimAttributes, "positions", "g3d:vertex:position:0:float32:3");
-__publicField(VimAttributes, "indices", "g3d:corner:index:0:int32:1");
-__publicField(VimAttributes, "instanceMeshes", "g3d:instance:mesh:0:int32:1");
-__publicField(VimAttributes, "instanceTransforms", "g3d:instance:transform:0:float32:16");
-__publicField(VimAttributes, "instanceFlags", "g3d:instance:flags:0:uint16:1");
-__publicField(VimAttributes, "meshSubmeshes", "g3d:mesh:submeshoffset:0:int32:1");
-__publicField(VimAttributes, "submeshIndexOffsets", "g3d:submesh:indexoffset:0:int32:1");
-__publicField(VimAttributes, "submeshMaterials", "g3d:submesh:material:0:int32:1");
-__publicField(VimAttributes, "materialColors", "g3d:material:color:0:float32:4");
-__publicField(VimAttributes, "all", [
-  _VimAttributes.positions,
-  _VimAttributes.indices,
-  _VimAttributes.instanceMeshes,
-  _VimAttributes.instanceTransforms,
-  _VimAttributes.instanceFlags,
-  _VimAttributes.meshSubmeshes,
-  _VimAttributes.submeshIndexOffsets,
-  _VimAttributes.submeshMaterials,
-  _VimAttributes.materialColors
-]);
 for (let i2 = 0; i2 < 256; i2++) {
   (i2 < 16 ? "0" : "") + i2.toString(16);
 }
@@ -49670,16 +48862,14 @@ const Box = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("sv
   fill,
   d: "M138.483 135.324v118.658c0 1.551 1.682 2.521 3.028 1.745l96.896-55.839a16.117 16.117 0 0 0 8.076-13.961V74.25c0-1.551-1.682-2.521-3.028-1.745l-102.953 59.329a4.029 4.029 0 0 0-2.019 3.49Z"
 }));
-const Camera = ({ height, width, className, fill }) => /* @__PURE__ */ React.createElement("svg", {
+const Home = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
   height,
   width,
-  className,
   xmlns: "http://www.w3.org/2000/svg",
   viewBox: "0 0 256 256"
 }, /* @__PURE__ */ React.createElement("path", {
   fill,
-  id: "noun-walking-4952413",
-  d: "M136.693,8c-13.243,.037-23.948,10.802-23.911,24.044,.037,13.243,10.802,23.948,24.044,23.911,13.217-.037,23.912-10.761,23.912-23.978s-10.735-23.978-23.978-23.978c-.022,0-.045,0-.067,0Zm-13.867,54.936c-21.612,1.291-41.372,12.631-53.391,30.639-6.568,13.483-9.23,28.535-7.686,43.454,0,5.19,4.208,9.398,9.398,9.398s9.398-4.208,9.398-9.398c-1.308-11.482,.414-23.106,4.995-33.716,5.052-6.952,11.735-12.556,19.462-16.318-3.344,15.466-6.407,30.958-9.538,46.371l44.626,106.009c2.654,6.925,10.42,10.386,17.344,7.732,6.925-2.654,10.386-10.42,7.732-17.344-.104-.272-.217-.54-.339-.805l-35.901-85.255,4.569-19.076,3.344-13.974c9.591,17.424,31.878,22.14,47.117,25.763,5.051,1.188,10.108-1.943,11.296-6.994,1.188-5.051-1.943-10.108-6.994-11.296-11.472-1.392-22.38-5.765-31.638-12.682-3.628-3.641-6.363-8.073-7.993-12.948-2.198-6.128-3.224-12.882-5.182-18.929h0c-4.103-10.577-11.496-10.524-20.661-10.55l.04-.08Zm-30.292,84.443l-9.098,45.119-20.821,34.795c-3.996,6.247-2.171,14.551,4.076,18.547,6.247,3.996,14.551,2.171,18.547-4.076,.143-.224,.279-.452,.409-.684l22.646-37.859c1.207-2.015,1.864-4.312,1.905-6.661v-7.087l-17.717-42.108,.053,.013Z"
+  d: "M136 36c0 6.627 5.373 12 12 12h43.03l-51.515 51.515c-4.686 4.687-4.686 12.284 0 16.971 4.686 4.686 12.284 4.686 16.971 0l51.515-51.515V108c0 6.627 5.373 12 12 12s12-5.373 12-12V36c0-3.071-1.172-6.142-3.515-8.485A11.963 11.963 0 0 0 220.001 24h-72c-6.627 0-12 5.373-12 12ZM120 220c0-6.627-5.373-12-12-12H64.97l51.515-51.515c4.686-4.687 4.686-12.284 0-16.971-4.686-4.686-12.284-4.686-16.971 0l-51.515 51.515V148c0-6.627-5.373-12-12-12s-12 5.373-12 12v72c0 3.071 1.172 6.142 3.515 8.485A11.963 11.963 0 0 0 35.999 232H108c6.627 0 12-5.373 12-12Z"
 }));
 const Measure = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
   height,
@@ -49728,24 +48918,23 @@ function MenuTop(props) {
     props.viewer.viewport.canvas.addEventListener("wheel", () => setTimeout(synchSpeed));
     document.addEventListener("keyup", () => setTimeout(synchSpeed));
   }, []);
-  const btnOrbit = /* @__PURE__ */ React.createElement("button", {
-    "data-tip": props.orbit ? "Orbit" : "Free",
-    onClick: () => props.setOrbit(!props.orbit),
-    className: "rounded-full text-white h-8 w-8 flex items-center justify-center transition-all opacity-80 hover:opacity-100",
+  const onHomeBtn = () => {
+    props.viewer.camera.frame(props.viewer.renderer.getBoundingBox(), 45, props.viewer.camera.defaultLerpDuration);
+  };
+  const btnHome = /* @__PURE__ */ React.createElement("button", {
+    "data-tip": "Reset Camera",
+    onClick: onHomeBtn,
+    className: "rounded-full text-black h-8 w-8 flex items-center justify-center transition-all opacity-80 hover:opacity-100",
     type: "button"
-  }, props.orbit ? /* @__PURE__ */ React.createElement(Orbit, {
+  }, /* @__PURE__ */ React.createElement(Home, {
     height: "20",
     width: "20",
     fill: "currentColor"
-  }) : /* @__PURE__ */ React.createElement(FirstPerson, {
-    height: "20",
-    width: "20",
-    fill: "currentColor"
-  }));
+  }), " ");
   const btnOrtho = /* @__PURE__ */ React.createElement("button", {
     "data-tip": props.ortho ? "Orthographic" : "Perspective",
     onClick: () => props.setOrtho(!props.ortho),
-    className: "rounded-full text-white h-8 w-8 flex items-center justify-center transition-all opacity-80 hover:opacity-100",
+    className: "rounded-full text-black h-8 w-8 flex items-center justify-center transition-all opacity-80 hover:opacity-100",
     type: "button"
   }, props.ortho ? /* @__PURE__ */ React.createElement(Orthographic, {
     height: "20",
@@ -49756,139 +48945,222 @@ function MenuTop(props) {
     width: "20",
     fill: "currentColor"
   }));
-  const btnCamera = /* @__PURE__ */ React.createElement("div", {
-    "data-tip": "Speed",
-    className: "rounded-full text-white text-sm h-8 w-8 flex items-center justify-start transition-all opacity-75"
-  }, /* @__PURE__ */ React.createElement(Camera, {
-    className: "shrink-0",
-    height: "20",
-    width: "20",
-    fill: "currentColor"
-  }), speed);
   return /* @__PURE__ */ React.createElement("div", {
-    className: "vim-top flex flex-col fixed right-6 top-6 w-auto pointer-events-none"
+    className: "vim-top flex flex-col fixed right-6 top-6 w-32 pointer-events-none"
   }, /* @__PURE__ */ React.createElement("div", {
-    className: "border border-hover-t40 h-28 w-full rounded-t-md pointer-events-none"
+    className: "border border-hover-t40 h-28 w-full rounded-t-md pointer-events-none bg-white opacity-20"
   }, " "), /* @__PURE__ */ React.createElement("div", {
-    className: "flex bg-hover-t40 p-1 rounded-b-md pointer-events-auto"
+    className: "flex p-1 rounded-b-md pointer-events-auto justify-center bg-white opacity-20"
   }, /* @__PURE__ */ React.createElement("div", {
-    className: "mx-1"
-  }, btnOrbit), /* @__PURE__ */ React.createElement("div", {
     className: "mx-1"
   }, btnOrtho), /* @__PURE__ */ React.createElement("div", {
     className: "mx-1"
-  }, btnCamera)));
+  }, btnHome)));
 }
 function MenuTools(props) {
   const viewer2 = props.viewer;
   const [section, setSection] = react.exports.useState(false);
   const [measuring, setMeasuring] = react.exports.useState(false);
-  const [measurement, setMeasurement] = react.exports.useState();
+  react.exports.useState();
+  const [mode, setMode] = react.exports.useState(viewer2.inputs.pointerMode);
   const measuringRef = react.exports.useRef();
   measuringRef.current = measuring;
-  const onSectionButton = function() {
-    if (measuring) {
-      onMeasureBtn();
-    }
-    const next = !section;
-    viewer2.gizmoSection.interactive = next;
-    viewer2.gizmoSection.visible = next;
-    if (next) {
-      viewer2.camera.frame(viewer2.renderer.section.box.getBoundingSphere(new Sphere()), "none", viewer2.camera.defaultLerpDuration);
-    }
-    setSection(next);
+  const onModeBtn = (target) => {
+    const next = mode === target ? "normal" : target;
+    viewer2.inputs.pointerMode = next;
+    setMode(next);
   };
-  const loopMeasure = () => {
-    const onMouseMove = () => {
-      setMeasurement(props.viewer.gizmoMeasure.measurement);
-    };
-    viewer2.viewport.canvas.addEventListener("mousemove", onMouseMove);
-    viewer2.gizmoMeasure.measure().then(() => {
-      setMeasurement(viewer2.gizmoMeasure.measurement);
-    }).catch(() => {
-      setMeasurement(void 0);
-    }).finally(() => {
-      viewer2.viewport.canvas.removeEventListener("mousemove", onMouseMove);
-      if (measuringRef.current) {
-        loopMeasure();
-      }
-    });
+  react.exports.useEffect(() => {
+    viewer2.inputs.onPointerModeChanged = () => setMode(viewer2.inputs.pointerMode);
+  }, []);
+  const onOrbitBtn = () => {
+    onModeBtn("orbit");
   };
-  const onMeasureBtn = () => {
-    if (section) {
-      onSectionButton();
-    }
-    if (measuring) {
-      viewer2.gizmoMeasure.abort();
-      setMeasuring(false);
-    } else {
-      setMeasuring(true);
-      loopMeasure();
-    }
+  const onLookBtn = () => {
+    onModeBtn("look");
   };
-  const onMoreBtn = () => {
-    if (measuring) {
-      onMeasureBtn();
-    }
-    if (section) {
-      onSectionButton();
-    }
-    props.setMoreMenuVisible(!props.moreMenuVisible);
+  const onPanBtn = () => {
+    onModeBtn("pan");
   };
-  const btnSection = /* @__PURE__ */ React.createElement("button", {
-    "data-tip": "Section Box",
-    onClick: onSectionButton,
-    className: `rounded-full text-white h-10 w-10 flex items-center justify-center transition-all hover:scale-110 hover:bg-hover-t40 ${section ? "bg-primary-royal hover:bg-primary-royal" : ""}`,
+  const onDollyBtn = () => {
+    onModeBtn("dolly");
+  };
+  const onFrameRectBtn = () => {
+    onModeBtn("zone");
+  };
+  const onFrameBtn = () => {
+    const target = viewer2.selection.count > 0 ? viewer2.selection : viewer2.renderer;
+    viewer2.camera.frame(target.getBoundingBox(), "center", viewer2.camera.defaultLerpDuration);
+  };
+  const btnOrbit = /* @__PURE__ */ React.createElement("button", {
+    "data-tip": "Orbit",
+    onClick: onOrbitBtn,
+    className: `rounded-full text-black h-10 w-10 flex items-center justify-center transition-all hover:scale-110 hover:bg-hover-t40 ${mode === "orbit" ? "bg-primary-royal hover:bg-primary-royal" : ""}`,
     type: "button"
-  }, /* @__PURE__ */ React.createElement(Box, {
+  }, /* @__PURE__ */ React.createElement(Orbit, {
     height: "24",
     width: "24",
     fill: "currentColor"
   }));
-  const btnMeasure = /* @__PURE__ */ React.createElement("button", {
-    "data-tip": "Measuring Tool",
-    onClick: onMeasureBtn,
-    className: `rounded-full text-white h-10 w-10 flex items-center justify-center transition-all hover:scale-110 hover:bg-hover-t40 ${measuring ? "bg-primary-royal hover:bg-primary-royal" : ""}`,
+  const btnLook = /* @__PURE__ */ React.createElement("button", {
+    "data-tip": "First Person",
+    onClick: onLookBtn,
+    className: `rounded-full text-black h-10 w-10 flex items-center justify-center transition-all hover:scale-110 hover:bg-hover-t40 ${mode === "look" ? "bg-primary-royal hover:bg-primary-royal" : ""}`,
     type: "button"
-  }, /* @__PURE__ */ React.createElement(Measure, {
+  }, /* @__PURE__ */ React.createElement(FirstPerson, {
     height: "24",
     width: "24",
     fill: "currentColor"
   }));
-  const btnMore = /* @__PURE__ */ React.createElement("button", {
-    "data-tip": "Open Menu",
-    onClick: onMoreBtn,
-    className: `rounded-full text-white h-10 w-10 flex items-center justify-center transition-all hover:scale-110 hover:bg-hover-t40 ${props.moreMenuVisible ? "bg-primary-royal hover:bg-primary-royal" : ""}`,
+  const btnPan = /* @__PURE__ */ React.createElement("button", {
+    "data-tip": "Pan",
+    onClick: onPanBtn,
+    className: `rounded-full text-black h-10 w-10 flex items-center justify-center transition-all hover:scale-110 hover:bg-hover-t40 ${mode === "pan" ? "bg-primary-royal hover:bg-primary-royal" : ""}`,
     type: "button"
   }, /* @__PURE__ */ React.createElement(More, {
     height: "24",
     width: "24",
     fill: "currentColor"
   }));
-  const txtMeasure = /* @__PURE__ */ React.createElement("ul", {
-    className: "flex text-white mr-auto"
-  }, /* @__PURE__ */ React.createElement("li", {
-    key: "dist",
-    className: "mr-3"
-  }, /* @__PURE__ */ React.createElement("strong", null, "Dist"), ": ", measurement == null ? void 0 : measurement.length().toFixed(2)), /* @__PURE__ */ React.createElement("li", {
-    key: "x",
-    className: "mr-3"
-  }, /* @__PURE__ */ React.createElement("strong", null, "X"), ": ", measurement == null ? void 0 : measurement.x.toFixed(2)), /* @__PURE__ */ React.createElement("li", {
-    key: "y",
-    className: "mr-3"
-  }, /* @__PURE__ */ React.createElement("strong", null, "Y"), ": ", measurement == null ? void 0 : measurement.y.toFixed(2)), /* @__PURE__ */ React.createElement("li", {
-    key: "z",
-    className: "mr-3"
-  }, /* @__PURE__ */ React.createElement("strong", null, "Z"), ": ", measurement == null ? void 0 : measurement.z.toFixed(2)));
+  const btnDolly = /* @__PURE__ */ React.createElement("button", {
+    "data-tip": "Dolly",
+    onClick: onDollyBtn,
+    className: `rounded-full text-black h-10 w-10 flex items-center justify-center transition-all hover:scale-110 hover:bg-hover-t40 ${mode === "dolly" ? "bg-primary-royal hover:bg-primary-royal" : ""}`,
+    type: "button"
+  }, /* @__PURE__ */ React.createElement(More, {
+    height: "24",
+    width: "24",
+    fill: "currentColor"
+  }));
+  const btnFrameRect = /* @__PURE__ */ React.createElement("button", {
+    "data-tip": "Frame Rectangle",
+    onClick: onFrameRectBtn,
+    className: `rounded-full text-black h-10 w-10 flex items-center justify-center transition-all hover:scale-110 hover:bg-hover-t40 ${mode === "zone" ? "bg-primary-royal hover:bg-primary-royal" : ""}`,
+    type: "button"
+  }, /* @__PURE__ */ React.createElement(Box, {
+    height: "24",
+    width: "24",
+    fill: "currentColor"
+  }));
+  const btnFrame = /* @__PURE__ */ React.createElement("button", {
+    "data-tip": "Frame",
+    onClick: onFrameBtn,
+    className: `rounded-full text-black h-10 w-10 flex items-center justify-center transition-all hover:scale-110 hover:bg-hover-t40`,
+    type: "button"
+  }, /* @__PURE__ */ React.createElement(Box, {
+    height: "24",
+    width: "24",
+    fill: "currentColor"
+  }));
+  const btnFullScreen = /* @__PURE__ */ React.createElement("button", {
+    "data-tip": "Full Screen",
+    onClick: () => console.log("Full Screen"),
+    className: `rounded-full text-black h-10 w-10 flex items-center justify-center transition-all hover:scale-110 hover:bg-hover-t40`,
+    type: "button"
+  }, /* @__PURE__ */ React.createElement(Perspective, {
+    height: "24",
+    width: "24",
+    fill: "currentColor"
+  }));
+  const btnSection = /* @__PURE__ */ React.createElement("button", {
+    "data-tip": "Section Box",
+    onClick: () => console.log("Section Box"),
+    className: `rounded-full text-black h-10 w-10 flex items-center justify-center transition-all hover:scale-110 hover:bg-hover-t40 ${section ? "bg-primary-royal hover:bg-primary-royal" : ""}`,
+    type: "button"
+  }, /* @__PURE__ */ React.createElement(Box, {
+    height: "24",
+    width: "24",
+    fill: "currentColor"
+  }));
+  const btnMystery = /* @__PURE__ */ React.createElement("button", {
+    "data-tip": "Mystery",
+    onClick: () => console.log("Mystery"),
+    className: `rounded-full text-black h-10 w-10 flex items-center justify-center transition-all hover:scale-110 hover:bg-hover-t40`,
+    type: "button"
+  }, /* @__PURE__ */ React.createElement(Orthographic, {
+    height: "24",
+    width: "24",
+    fill: "currentColor"
+  }));
+  const btnMeasure = /* @__PURE__ */ React.createElement("button", {
+    "data-tip": "Measuring Tool",
+    onClick: () => console.log("Measuring Tool"),
+    className: `rounded-full text-black h-10 w-10 flex items-center justify-center transition-all hover:scale-110 hover:bg-hover-t40 ${measuring ? "bg-primary-royal hover:bg-primary-royal" : ""}`,
+    type: "button"
+  }, /* @__PURE__ */ React.createElement(Measure, {
+    height: "24",
+    width: "24",
+    fill: "currentColor"
+  }));
+  const btnTreeView = /* @__PURE__ */ React.createElement("button", {
+    "data-tip": "Tree view",
+    onClick: () => console.log("Full Screen"),
+    className: `rounded-full text-black h-10 w-10 flex items-center justify-center transition-all hover:scale-110 hover:bg-hover-t40`,
+    type: "button"
+  }, /* @__PURE__ */ React.createElement(More, {
+    height: "24",
+    width: "24",
+    fill: "currentColor"
+  }));
+  const btnSettings = /* @__PURE__ */ React.createElement("button", {
+    "data-tip": "Settings",
+    onClick: () => console.log("Settings"),
+    className: `rounded-full text-black h-10 w-10 flex items-center justify-center transition-all hover:scale-110 hover:bg-hover-t40`,
+    type: "button"
+  }, /* @__PURE__ */ React.createElement(More, {
+    height: "24",
+    width: "24",
+    fill: "currentColor"
+  }));
+  const btnHelp = /* @__PURE__ */ React.createElement("button", {
+    "data-tip": "Help",
+    onClick: () => console.log("Help"),
+    className: `rounded-full text-black h-10 w-10 flex items-center justify-center transition-all hover:scale-110 hover:bg-hover-t40`,
+    type: "button"
+  }, /* @__PURE__ */ React.createElement(More, {
+    height: "24",
+    width: "24",
+    fill: "currentColor"
+  }));
   return /* @__PURE__ */ React.createElement("div", {
-    className: `vim-menu flex items-center justify-end w-full fixed px-2 bottom-0 py-2 ${measuring ? "bg-hover-t40" : ""}`
-  }, measuring ? txtMeasure : "", /* @__PURE__ */ React.createElement("div", {
+    className: "vim-menu flex items-center justify-center w-full fixed px-2 bottom-0 py-2 divide-x-2 bg-white"
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: "vim-menu-section flex items-center"
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: "mx-1"
+  }, btnOrbit), /* @__PURE__ */ React.createElement("div", {
+    className: "mx-1"
+  }, btnLook), /* @__PURE__ */ React.createElement("div", {
+    className: "mx-1"
+  }, btnPan), /* @__PURE__ */ React.createElement("div", {
+    className: "mx-1"
+  }, btnDolly), /* @__PURE__ */ React.createElement("div", {
+    className: "mx-1"
+  }, btnFrameRect), /* @__PURE__ */ React.createElement("div", {
+    className: "mx-1"
+  }, btnFrame), /* @__PURE__ */ React.createElement("div", {
+    className: "mx-1"
+  }, btnFullScreen)), /* @__PURE__ */ React.createElement("div", {
+    className: "divider"
+  }), /* @__PURE__ */ React.createElement("div", {
+    className: "vim-menu-section flex items-center"
+  }, /* @__PURE__ */ React.createElement("div", {
     className: "mx-1"
   }, btnSection), /* @__PURE__ */ React.createElement("div", {
     className: "mx-1"
-  }, btnMeasure), /* @__PURE__ */ React.createElement("div", {
+  }, btnMystery), /* @__PURE__ */ React.createElement("div", {
     className: "mx-1"
-  }, btnMore));
+  }, btnMeasure)), /* @__PURE__ */ React.createElement("div", {
+    className: "divider"
+  }), /* @__PURE__ */ React.createElement("div", {
+    className: "vim-menu-section flex items-center"
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: "mx-1"
+  }, btnTreeView), /* @__PURE__ */ React.createElement("div", {
+    className: "mx-1"
+  }, btnSettings), /* @__PURE__ */ React.createElement("div", {
+    className: "mx-1"
+  }, btnHelp)));
 }
 function LoadingBox(props) {
   const [progress, setProgress] = react.exports.useState();
@@ -52163,8 +51435,7 @@ function BimTree(props) {
       const click = item.index;
       const time = new Date().getTime();
       if (lastClickIndex === click && time - lastClickTime < 200) {
-        const sphere = props.viewer.selection.getBoundingBox().getBoundingSphere(new Sphere());
-        props.viewer.camera.frame(sphere, "center", props.viewer.camera.defaultLerpDuration);
+        props.viewer.camera.frame(props.viewer.selection.getBoundingBox(), "center", props.viewer.camera.defaultLerpDuration);
         setLastClickIndex(-1);
       } else {
         setLastClickIndex(item.index);
@@ -52669,6 +51940,126 @@ const MenuMore = React.forwardRef((props, ref) => {
     onClick: closeAnd(() => window.open(urlSupport))
   }, "Support Center"))));
 });
+const VIM_CONTEXT_MENU_ID = "vim-context-menu-id";
+function VimContextMenu(props) {
+  const viewer2 = props.viewer;
+  const someHidden = () => {
+    for (const vim of viewer2.vims) {
+      for (const obj of vim.getAllObjects()) {
+        if (!obj.visible) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+  const [objects, setObject] = react.exports.useState([]);
+  const [hidden, setHidden] = react.exports.useState(someHidden());
+  const [ghost, setGhost] = react.exports.useState(true);
+  const [section, setSection] = react.exports.useState(false);
+  react.exports.useEffect(() => {
+    const old = viewer2.selection.onValueChanged;
+    viewer2.selection.onValueChanged = () => {
+      old == null ? void 0 : old();
+      setObject([...viewer2.selection.objects]);
+    };
+    viewer2.gizmoSection.onBoxConfirm = () => {
+      const clipping = !viewer2.gizmoSection.box.containsBox(viewer2.renderer.getBoundingBox());
+      setSection(clipping);
+    };
+  }, []);
+  const onFrameBtn = () => {
+    viewer2.camera.frame(viewer2.selection.getBoundingBox(), "center", viewer2.camera.defaultLerpDuration);
+  };
+  const onHideBtn = () => {
+    for (const obj of objects) {
+      obj.visible = false;
+    }
+    viewer2.selection.clear();
+    setHidden(true);
+  };
+  const onIsolateBtn = () => {
+    const set3 = new Set(objects);
+    const vim = viewer2.selection.vim;
+    for (const obj of vim.getAllObjects()) {
+      obj.visible = set3.has(obj);
+      if (obj.visible)
+        console.log(obj);
+    }
+    vim.scene.material = ghost ? viewer2.renderer.materials.isolation : void 0;
+    setHidden(true);
+  };
+  const onShowAllBtn = () => {
+    viewer2.vims.forEach((v2) => {
+      for (const obj of v2.getAllObjects()) {
+        obj.visible = true;
+      }
+      v2.scene.material = void 0;
+    });
+    setHidden(false);
+  };
+  const onResetBtn = () => {
+    viewer2.camera.frame(viewer2.renderer.getBoundingBox(), 45, viewer2.camera.defaultLerpDuration);
+  };
+  const onGhostBtn = () => {
+    const next = !ghost;
+    const mat = next ? viewer2.renderer.materials.isolation : void 0;
+    viewer2.vims.forEach((v2) => {
+      v2.scene.material = mat;
+    });
+    setGhost(next);
+  };
+  const onResetSectionBtn = () => {
+    viewer2.gizmoSection.fitBox(viewer2.renderer.getBoundingBox());
+  };
+  const onClearSelectionBtn = () => {
+    viewer2.selection.clear();
+  };
+  const onShowControls = () => {
+    console.log("Show Controls");
+  };
+  const hasSelection = objects.length > 0;
+  return /* @__PURE__ */ React.createElement("div", {
+    className: "vim-context-menu"
+  }, /* @__PURE__ */ React.createElement(ContextMenu, {
+    id: VIM_CONTEXT_MENU_ID
+  }, /* @__PURE__ */ React.createElement(MenuItem, {
+    onClick: onShowControls
+  }, "Show Controls"), /* @__PURE__ */ React.createElement(MenuItem, {
+    divider: true
+  }), /* @__PURE__ */ React.createElement(MenuItem, {
+    data: { foo: "bar" },
+    onClick: onResetBtn
+  }, "Reset Camera"), /* @__PURE__ */ React.createElement(MenuItem, {
+    data: { foo: "bar" },
+    onClick: onFrameBtn
+  }, "Zoom to Fit"), section ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(MenuItem, {
+    divider: true
+  }), /* @__PURE__ */ React.createElement(MenuItem, {
+    data: { foo: "bar" },
+    onClick: onResetSectionBtn
+  }, "Reset Section Box")) : null, hasSelection ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(MenuItem, {
+    divider: true
+  }), /* @__PURE__ */ React.createElement(MenuItem, {
+    data: { foo: "bar" },
+    onClick: onIsolateBtn
+  }, "Isolate Object"), /* @__PURE__ */ React.createElement(MenuItem, {
+    data: { foo: "bar" },
+    onClick: onHideBtn
+  }, "Hide Object"), /* @__PURE__ */ React.createElement(MenuItem, {
+    data: { foo: "bar" },
+    onClick: onClearSelectionBtn
+  }, "Clear Selection")) : null, hidden ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(MenuItem, {
+    divider: true
+  }), /* @__PURE__ */ React.createElement(MenuItem, {
+    data: { foo: "bar" },
+    onClick: onShowAllBtn
+  }, "Show All"), /* @__PURE__ */ React.createElement(MenuItem, {
+    className: ghost ? "checked" : "",
+    data: { foo: "bar" },
+    onClick: onGhostBtn
+  }, "Display Ghosts")) : null));
+}
 function createContainer(viewer2) {
   const root2 = document.createElement("div");
   root2.className = "vim-component";
@@ -52709,11 +52100,10 @@ function VimComponent(props) {
     setOrbit(props.viewer.camera.orbitMode);
   };
   const onContextMenu = (click) => {
-    console.log("CONTEXT MENU");
     let showMenuConfig = {
       position: { x: click.clientX, y: click.clientY },
       target: window,
-      id: "TEST"
+      id: VIM_CONTEXT_MENU_ID
     };
     showMenu(showMenuConfig);
   };
@@ -52757,7 +52147,7 @@ function VimComponent(props) {
     viewer: props.viewer
   }) : null, /* @__PURE__ */ React.createElement(ReactTooltip, {
     delayShow: 200
-  }), /* @__PURE__ */ React.createElement(TestMenu, {
+  }), /* @__PURE__ */ React.createElement(VimContextMenu, {
     viewer: props.viewer
   }));
 }
@@ -52778,113 +52168,12 @@ function HelpControls() {
     src: imageHelpControls
   }));
 }
-function TestMenu(props) {
-  const viewer2 = props.viewer;
-  const someHidden = () => {
-    for (const vim of viewer2.vims) {
-      for (const obj of vim.getAllObjects()) {
-        if (!obj.visible) {
-          return true;
-        }
-      }
-    }
-    return false;
-  };
-  const [objects, setObject] = react.exports.useState([]);
-  const [hidden, setHidden] = react.exports.useState(someHidden());
-  const [ghost, setGhost] = react.exports.useState(false);
-  const [section, setSection] = react.exports.useState(false);
-  react.exports.useEffect(() => {
-    const old = viewer2.selection.onValueChanged;
-    viewer2.selection.onValueChanged = () => {
-      old == null ? void 0 : old();
-      setObject([...viewer2.selection.objects]);
-    };
-    viewer2.gizmoSection.onBoxConfirm = () => {
-      const clipping = !viewer2.gizmoSection.box.containsBox(viewer2.renderer.getBoundingBox());
-      setSection(clipping);
-    };
-  }, []);
-  const onFrameBtn = () => {
-    const sphere = viewer2.selection.getBoundingBox().getBoundingSphere(new Sphere());
-    viewer2.camera.frame(sphere, "center", viewer2.camera.defaultLerpDuration);
-  };
-  const onHideBtn = () => {
-    for (const obj of objects) {
-      obj.visible = false;
-    }
-    viewer2.selection.clear();
-    setHidden(true);
-  };
-  const onIsolateBtn = () => {
-    const set3 = new Set(objects);
-    const vim = viewer2.selection.vim;
-    for (const obj of vim.getAllObjects()) {
-      obj.visible = set3.has(obj);
-      if (obj.visible)
-        console.log(obj);
-    }
-    vim.scene.material = ghost ? viewer2.renderer.materials.isolation : void 0;
-    setHidden(true);
-  };
-  const onShowAllBtn = () => {
-    viewer2.vims.forEach((v2) => {
-      for (const obj of v2.getAllObjects()) {
-        obj.visible = true;
-      }
-      v2.scene.material = void 0;
-    });
-    setHidden(false);
-  };
-  const onResetBtn = () => {
-    viewer2.camera.frame(viewer2.renderer.getBoundingSphere(), 45, viewer2.camera.defaultLerpDuration);
-  };
-  const onGhostBtn = () => {
-    const next = !ghost;
-    const mat = next ? viewer2.renderer.materials.isolation : void 0;
-    viewer2.vims.forEach((v2) => {
-      v2.scene.material = mat;
-    });
-    setGhost(next);
-  };
-  const onResetSectionBtn = () => {
-    viewer2.gizmoSection.fitBox(viewer2.renderer.getBoundingBox());
-  };
-  const hasSelection = objects.length > 0;
-  return /* @__PURE__ */ React.createElement("div", {
-    className: "test"
-  }, /* @__PURE__ */ React.createElement(ContextMenu, {
-    id: "TEST"
-  }, /* @__PURE__ */ React.createElement(MenuItem, {
-    data: { foo: "bar" },
-    onClick: onResetBtn
-  }, "Reset Camera"), section ? /* @__PURE__ */ React.createElement(MenuItem, {
-    data: { foo: "bar" },
-    onClick: onResetSectionBtn
-  }, "Reset Section Box") : null, /* @__PURE__ */ React.createElement(MenuItem, {
-    className: ghost ? "checked" : "",
-    data: { foo: "bar" },
-    onClick: onGhostBtn
-  }, "Display Ghosts"), hasSelection ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(MenuItem, {
-    data: { foo: "bar" },
-    onClick: onFrameBtn
-  }, "Frame"), /* @__PURE__ */ React.createElement(MenuItem, {
-    data: { foo: "bar" },
-    onClick: onHideBtn
-  }, "Hide"), /* @__PURE__ */ React.createElement(MenuItem, {
-    data: { foo: "bar" },
-    onClick: onIsolateBtn
-  }, "Isolate")) : null, hidden ? /* @__PURE__ */ React.createElement(MenuItem, {
-    data: { foo: "bar" },
-    onClick: onShowAllBtn
-  }, "Show All") : null));
-}
 const params = new URLSearchParams(window.location.search);
 let url = params.has("vim") || params.has("model") ? (_a = params.get("vim")) != null ? _a : params.get("model") : "https://vim.azureedge.net/samples/residence.vim";
 let transparency = "all";
 if (params.has("transparency")) {
   const t2 = params.get("transparency");
-  transparency = Transparency$1.isValid(t2) ? t2 : "all";
+  transparency = Transparency.isValid(t2) ? t2 : "all";
 }
 if (params.has("dev")) {
   params.get("dev");

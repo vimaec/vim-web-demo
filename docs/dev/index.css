@@ -777,12 +777,6 @@ video {
 .-mr-4 {
   margin-right: -1rem;
 }
-.mr-auto {
-  margin-right: auto;
-}
-.mr-3 {
-  margin-right: 0.75rem;
-}
 .flex {
   display: flex;
 }
@@ -825,8 +819,8 @@ video {
 .w-8 {
   width: 2rem;
 }
-.shrink-0 {
-  flex-shrink: 0;
+.w-32 {
+  width: 8rem;
 }
 .rotate-180 {
   --tw-rotate: 180deg;
@@ -842,17 +836,16 @@ video {
 .items-center {
   align-items: center;
 }
-.justify-start {
-  justify-content: flex-start;
-}
-.justify-end {
-  justify-content: flex-end;
-}
 .justify-center {
   justify-content: center;
 }
 .justify-between {
   justify-content: space-between;
+}
+.divide-x-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-x-reverse: 0;
+  border-right-width: calc(2px * var(--tw-divide-x-reverse));
+  border-left-width: calc(2px * calc(1 - var(--tw-divide-x-reverse)));
 }
 .overflow-y-auto {
   overflow-y: auto;
@@ -923,9 +916,6 @@ video {
 .bg-primary-royal {
   background-color: var(--c-primary-royal);
 }
-.bg-hover-t40 {
-  background-color: var(--c-hover-t40);
-}
 .p-6 {
   padding: 1.5rem;
 }
@@ -966,10 +956,6 @@ video {
   font-size: 0.75rem;
   line-height: 1rem;
 }
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
 .font-bold {
   font-weight: 700;
 }
@@ -991,15 +977,15 @@ video {
 .text-primary {
   color: var(--c-primary);
 }
-.text-white {
+.text-black {
   --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 .opacity-80 {
   opacity: 0.8;
 }
-.opacity-75 {
-  opacity: 0.75;
+.opacity-20 {
+  opacity: 0.2;
 }
 .shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -1083,6 +1069,7 @@ body {
   transform: translate(-50%, -50%);
 }
 
+/* Context Menu */
 .react-contextmenu {
   background-color: white;
   border-radius: 5px;
@@ -1098,6 +1085,12 @@ body {
 .checked {
   font-weight: bold;
 }
+
+.react-contextmenu-item--divider {
+  border-top: 1px solid black;
+}
+
+/* Logo */
 
 .vim-logo {
   position: fixed;
