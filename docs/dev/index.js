@@ -1,16 +1,16 @@
-var __defProp2 = Object.defineProperty;
+var __defProp3 = Object.defineProperty;
 var __getOwnPropSymbols2 = Object.getOwnPropertySymbols;
 var __hasOwnProp2 = Object.prototype.hasOwnProperty;
 var __propIsEnum2 = Object.prototype.propertyIsEnumerable;
-var __defNormalProp2 = (obj, key, value) => key in obj ? __defProp2(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __defNormalProp3 = (obj, key, value) => key in obj ? __defProp3(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __spreadValues2 = (a, b) => {
   for (var prop in b || (b = {}))
     if (__hasOwnProp2.call(b, prop))
-      __defNormalProp2(a, prop, b[prop]);
+      __defNormalProp3(a, prop, b[prop]);
   if (__getOwnPropSymbols2)
     for (var prop of __getOwnPropSymbols2(b)) {
       if (__propIsEnum2.call(b, prop))
-        __defNormalProp2(a, prop, b[prop]);
+        __defNormalProp3(a, prop, b[prop]);
     }
   return a;
 };
@@ -2560,9 +2560,9 @@ class Box3 {
   clone() {
     return new this.constructor().copy(this);
   }
-  copy(box2) {
-    this.min.copy(box2.min);
-    this.max.copy(box2.max);
+  copy(box) {
+    this.min.copy(box.min);
+    this.max.copy(box.max);
     return this;
   }
   makeEmpty() {
@@ -2614,14 +2614,14 @@ class Box3 {
   containsPoint(point) {
     return point.x < this.min.x || point.x > this.max.x || point.y < this.min.y || point.y > this.max.y || point.z < this.min.z || point.z > this.max.z ? false : true;
   }
-  containsBox(box2) {
-    return this.min.x <= box2.min.x && box2.max.x <= this.max.x && this.min.y <= box2.min.y && box2.max.y <= this.max.y && this.min.z <= box2.min.z && box2.max.z <= this.max.z;
+  containsBox(box) {
+    return this.min.x <= box.min.x && box.max.x <= this.max.x && this.min.y <= box.min.y && box.max.y <= this.max.y && this.min.z <= box.min.z && box.max.z <= this.max.z;
   }
   getParameter(point, target) {
     return target.set((point.x - this.min.x) / (this.max.x - this.min.x), (point.y - this.min.y) / (this.max.y - this.min.y), (point.z - this.min.z) / (this.max.z - this.min.z));
   }
-  intersectsBox(box2) {
-    return box2.max.x < this.min.x || box2.min.x > this.max.x || box2.max.y < this.min.y || box2.min.y > this.max.y || box2.max.z < this.min.z || box2.min.z > this.max.z ? false : true;
+  intersectsBox(box) {
+    return box.max.x < this.min.x || box.min.x > this.max.x || box.max.y < this.min.y || box.min.y > this.max.y || box.max.z < this.min.z || box.min.z > this.max.z ? false : true;
   }
   intersectsSphere(sphere) {
     this.clampPoint(sphere.center, _vector$b);
@@ -2716,16 +2716,16 @@ class Box3 {
     target.radius = this.getSize(_vector$b).length() * 0.5;
     return target;
   }
-  intersect(box2) {
-    this.min.max(box2.min);
-    this.max.min(box2.max);
+  intersect(box) {
+    this.min.max(box.min);
+    this.max.min(box.max);
     if (this.isEmpty())
       this.makeEmpty();
     return this;
   }
-  union(box2) {
-    this.min.min(box2.min);
-    this.max.max(box2.max);
+  union(box) {
+    this.min.min(box.min);
+    this.max.max(box.max);
     return this;
   }
   applyMatrix4(matrix) {
@@ -2747,8 +2747,8 @@ class Box3 {
     this.max.add(offset);
     return this;
   }
-  equals(box2) {
-    return box2.min.equals(this.min) && box2.max.equals(this.max);
+  equals(box) {
+    return box.min.equals(this.min) && box.max.equals(this.max);
   }
 }
 Box3.prototype.isBox3 = true;
@@ -2838,8 +2838,8 @@ class Sphere {
     const radiusSum = this.radius + sphere.radius;
     return sphere.center.distanceToSquared(this.center) <= radiusSum * radiusSum;
   }
-  intersectsBox(box2) {
-    return box2.intersectsSphere(this);
+  intersectsBox(box) {
+    return box.intersectsSphere(this);
   }
   intersectsPlane(plane) {
     return Math.abs(plane.distanceToPoint(this.center)) <= this.radius;
@@ -3055,23 +3055,23 @@ class Ray {
     }
     return false;
   }
-  intersectBox(box2, target) {
+  intersectBox(box, target) {
     let tmin, tmax, tymin, tymax, tzmin, tzmax;
     const invdirx = 1 / this.direction.x, invdiry = 1 / this.direction.y, invdirz = 1 / this.direction.z;
     const origin = this.origin;
     if (invdirx >= 0) {
-      tmin = (box2.min.x - origin.x) * invdirx;
-      tmax = (box2.max.x - origin.x) * invdirx;
+      tmin = (box.min.x - origin.x) * invdirx;
+      tmax = (box.max.x - origin.x) * invdirx;
     } else {
-      tmin = (box2.max.x - origin.x) * invdirx;
-      tmax = (box2.min.x - origin.x) * invdirx;
+      tmin = (box.max.x - origin.x) * invdirx;
+      tmax = (box.min.x - origin.x) * invdirx;
     }
     if (invdiry >= 0) {
-      tymin = (box2.min.y - origin.y) * invdiry;
-      tymax = (box2.max.y - origin.y) * invdiry;
+      tymin = (box.min.y - origin.y) * invdiry;
+      tymax = (box.max.y - origin.y) * invdiry;
     } else {
-      tymin = (box2.max.y - origin.y) * invdiry;
-      tymax = (box2.min.y - origin.y) * invdiry;
+      tymin = (box.max.y - origin.y) * invdiry;
+      tymax = (box.min.y - origin.y) * invdiry;
     }
     if (tmin > tymax || tymin > tmax)
       return null;
@@ -3080,11 +3080,11 @@ class Ray {
     if (tymax < tmax || tmax !== tmax)
       tmax = tymax;
     if (invdirz >= 0) {
-      tzmin = (box2.min.z - origin.z) * invdirz;
-      tzmax = (box2.max.z - origin.z) * invdirz;
+      tzmin = (box.min.z - origin.z) * invdirz;
+      tzmax = (box.max.z - origin.z) * invdirz;
     } else {
-      tzmin = (box2.max.z - origin.z) * invdirz;
-      tzmax = (box2.min.z - origin.z) * invdirz;
+      tzmin = (box.max.z - origin.z) * invdirz;
+      tzmax = (box.min.z - origin.z) * invdirz;
     }
     if (tmin > tzmax || tzmin > tmax)
       return null;
@@ -3096,8 +3096,8 @@ class Ray {
       return null;
     return this.at(tmin >= 0 ? tmin : tmax, target);
   }
-  intersectsBox(box2) {
-    return this.intersectBox(box2, _vector$a) !== null;
+  intersectsBox(box) {
+    return this.intersectBox(box, _vector$a) !== null;
   }
   intersectTriangle(a, b, c, backfaceCulling, target) {
     _edge1.subVectors(b, a);
@@ -4550,8 +4550,8 @@ class Triangle {
   isFrontFacing(direction) {
     return Triangle.isFrontFacing(this.a, this.b, this.c, direction);
   }
-  intersectsBox(box2) {
-    return box2.intersectsTriangle(this);
+  intersectsBox(box) {
+    return box.intersectsTriangle(this);
   }
   closestPointToPoint(p2, target) {
     const a = this.a, b = this.b, c = this.c;
@@ -7185,8 +7185,8 @@ class Plane {
     const endSign = this.distanceToPoint(line.end);
     return startSign < 0 && endSign > 0 || endSign < 0 && startSign > 0;
   }
-  intersectsBox(box2) {
-    return box2.intersectsPlane(this);
+  intersectsBox(box) {
+    return box.intersectsPlane(this);
   }
   intersectsSphere(sphere) {
     return sphere.intersectsPlane(this);
@@ -7276,13 +7276,13 @@ class Frustum {
     }
     return true;
   }
-  intersectsBox(box2) {
+  intersectsBox(box) {
     const planes = this.planes;
     for (let i2 = 0; i2 < 6; i2++) {
       const plane = planes[i2];
-      _vector$7.x = plane.normal.x > 0 ? box2.max.x : box2.min.x;
-      _vector$7.y = plane.normal.y > 0 ? box2.max.y : box2.min.y;
-      _vector$7.z = plane.normal.z > 0 ? box2.max.z : box2.min.z;
+      _vector$7.x = plane.normal.x > 0 ? box.max.x : box.min.x;
+      _vector$7.y = plane.normal.y > 0 ? box.max.y : box.min.y;
+      _vector$7.z = plane.normal.z > 0 ? box.max.z : box.min.z;
       if (plane.distanceToPoint(_vector$7) < 0) {
         return false;
       }
@@ -23031,9 +23031,9 @@ Box3.prototype.empty = function() {
   console.warn("THREE.Box3: .empty() has been renamed to .isEmpty().");
   return this.isEmpty();
 };
-Box3.prototype.isIntersectionBox = function(box2) {
+Box3.prototype.isIntersectionBox = function(box) {
   console.warn("THREE.Box3: .isIntersectionBox() has been renamed to .intersectsBox().");
-  return this.intersectsBox(box2);
+  return this.intersectsBox(box);
 };
 Box3.prototype.isIntersectionSphere = function(sphere) {
   console.warn("THREE.Box3: .isIntersectionSphere() has been renamed to .intersectsSphere().");
@@ -23153,9 +23153,9 @@ Quaternion.prototype.inverse = function() {
   console.warn("THREE.Quaternion: .inverse() has been renamed to invert().");
   return this.invert();
 };
-Ray.prototype.isIntersectionBox = function(box2) {
+Ray.prototype.isIntersectionBox = function(box) {
   console.warn("THREE.Ray: .isIntersectionBox() has been renamed to .intersectsBox().");
-  return this.intersectsBox(box2);
+  return this.intersectsBox(box);
 };
 Ray.prototype.isIntersectionPlane = function(plane) {
   console.warn("THREE.Ray: .isIntersectionPlane() has been renamed to .intersectsPlane().");
@@ -23909,7 +23909,7 @@ if (typeof window !== "undefined") {
 }
 var __defProp$1 = Object.defineProperty;
 var __defNormalProp$1 = (obj, key, value) => key in obj ? __defProp$1(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __publicField = (obj, key, value) => {
+var __publicField$1 = (obj, key, value) => {
   __defNormalProp$1(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
@@ -24011,39 +24011,39 @@ var deepmerge_1 = deepmerge;
 var cjs = deepmerge_1;
 class ViewerSettings {
   constructor(options) {
-    __publicField(this, "options");
-    __publicField(this, "getCanvasResizeDelay", () => this.options.canvas.resizeDelay);
-    __publicField(this, "getCanvasId", () => this.options.canvas.id);
-    __publicField(this, "getGroundPlaneVisible", () => this.options.groundPlane.visible);
-    __publicField(this, "getGroundPlaneColor", () => toRGBColor(this.options.groundPlane.color));
-    __publicField(this, "getGroundPlaneTextureUrl", () => this.options.groundPlane.texture);
-    __publicField(this, "getGroundPlaneOpacity", () => this.options.groundPlane.opacity);
-    __publicField(this, "getGroundPlaneSize", () => this.options.groundPlane.size);
-    __publicField(this, "getSkylightColor", () => toHSLColor(this.options.skylight.skyColor));
-    __publicField(this, "getSkylightGroundColor", () => toHSLColor(this.options.skylight.groundColor));
-    __publicField(this, "getSkylightIntensity", () => this.options.skylight.intensity);
-    __publicField(this, "getSunlightCount", () => this.options.sunLights.length);
-    __publicField(this, "getSunlightColor", (index) => toHSLColor(this.options.sunLights[index].color));
-    __publicField(this, "getSunlightPosition", (index) => toVec$1(this.options.sunLights[index].position));
-    __publicField(this, "getSunlightIntensity", (index) => this.options.sunLights[index].intensity);
-    __publicField(this, "getHighlightColor", () => toRGBColor(this.highlight.color));
-    __publicField(this, "getHighlightOpacity", () => this.highlight.opacity);
-    __publicField(this, "getIsolationColor", () => toRGBColor(this.isolation.color));
-    __publicField(this, "getIsolationOpacity", () => this.isolation.opacity);
-    __publicField(this, "getCameraNear", () => this.camera.near);
-    __publicField(this, "getCameraFar", () => this.camera.far);
-    __publicField(this, "getCameraFov", () => this.camera.fov);
-    __publicField(this, "getCameraZoom", () => this.camera.zoom);
-    __publicField(this, "getCameraGizmoEnable", () => this.camera.gizmo.enable);
-    __publicField(this, "getCameraGizmoSize", () => this.camera.gizmo.size);
-    __publicField(this, "getCameraGizmoColor", () => toRGBColor(this.camera.gizmo.color));
-    __publicField(this, "getCameraGizmoOpacity", () => this.camera.gizmo.opacity);
-    __publicField(this, "getCameraGizmoOpacityAlways", () => this.camera.gizmo.opacityAlways);
-    __publicField(this, "getCameraIsOrbit", () => this.cameraControls.orbit);
-    __publicField(this, "getCameraMoveSpeed", () => this.cameraControls.moveSpeed);
-    __publicField(this, "getCameraRotateSpeed", () => this.cameraControls.rotateSpeed);
-    __publicField(this, "getCameraOrbitSpeed", () => this.cameraControls.orbitSpeed);
-    __publicField(this, "getCameraReferenceVimSize", () => this.cameraControls.vimReferenceSize);
+    __publicField$1(this, "options");
+    __publicField$1(this, "getCanvasResizeDelay", () => this.options.canvas.resizeDelay);
+    __publicField$1(this, "getCanvasId", () => this.options.canvas.id);
+    __publicField$1(this, "getGroundPlaneVisible", () => this.options.groundPlane.visible);
+    __publicField$1(this, "getGroundPlaneColor", () => toRGBColor(this.options.groundPlane.color));
+    __publicField$1(this, "getGroundPlaneTextureUrl", () => this.options.groundPlane.texture);
+    __publicField$1(this, "getGroundPlaneOpacity", () => this.options.groundPlane.opacity);
+    __publicField$1(this, "getGroundPlaneSize", () => this.options.groundPlane.size);
+    __publicField$1(this, "getSkylightColor", () => toHSLColor(this.options.skylight.skyColor));
+    __publicField$1(this, "getSkylightGroundColor", () => toHSLColor(this.options.skylight.groundColor));
+    __publicField$1(this, "getSkylightIntensity", () => this.options.skylight.intensity);
+    __publicField$1(this, "getSunlightCount", () => this.options.sunLights.length);
+    __publicField$1(this, "getSunlightColor", (index) => toHSLColor(this.options.sunLights[index].color));
+    __publicField$1(this, "getSunlightPosition", (index) => toVec$1(this.options.sunLights[index].position));
+    __publicField$1(this, "getSunlightIntensity", (index) => this.options.sunLights[index].intensity);
+    __publicField$1(this, "getHighlightColor", () => toRGBColor(this.highlight.color));
+    __publicField$1(this, "getHighlightOpacity", () => this.highlight.opacity);
+    __publicField$1(this, "getIsolationColor", () => toRGBColor(this.isolation.color));
+    __publicField$1(this, "getIsolationOpacity", () => this.isolation.opacity);
+    __publicField$1(this, "getCameraNear", () => this.camera.near);
+    __publicField$1(this, "getCameraFar", () => this.camera.far);
+    __publicField$1(this, "getCameraFov", () => this.camera.fov);
+    __publicField$1(this, "getCameraZoom", () => this.camera.zoom);
+    __publicField$1(this, "getCameraGizmoEnable", () => this.camera.gizmo.enable);
+    __publicField$1(this, "getCameraGizmoSize", () => this.camera.gizmo.size);
+    __publicField$1(this, "getCameraGizmoColor", () => toRGBColor(this.camera.gizmo.color));
+    __publicField$1(this, "getCameraGizmoOpacity", () => this.camera.gizmo.opacity);
+    __publicField$1(this, "getCameraGizmoOpacityAlways", () => this.camera.gizmo.opacityAlways);
+    __publicField$1(this, "getCameraIsOrbit", () => this.cameraControls.orbit);
+    __publicField$1(this, "getCameraMoveSpeed", () => this.cameraControls.moveSpeed);
+    __publicField$1(this, "getCameraRotateSpeed", () => this.cameraControls.rotateSpeed);
+    __publicField$1(this, "getCameraOrbitSpeed", () => this.cameraControls.orbitSpeed);
+    __publicField$1(this, "getCameraReferenceVimSize", () => this.cameraControls.vimReferenceSize);
     const fallback = {
       canvas: {
         id: void 0,
@@ -24144,37 +24144,37 @@ function clamp$1(value, min2, max2) {
 });
 class Camera {
   constructor(scene, viewport, settings2) {
-    __publicField(this, "camera");
-    __publicField(this, "cameraPerspective");
-    __publicField(this, "cameraOrthographic");
-    __publicField(this, "gizmo");
-    __publicField(this, "_viewport");
-    __publicField(this, "_scene");
-    __publicField(this, "_targetVelocity");
-    __publicField(this, "_velocity");
-    __publicField(this, "_speed", 0);
-    __publicField(this, "_orbitMode", false);
-    __publicField(this, "_orbitTarget");
-    __publicField(this, "_minOrbitalDistance", 0.05);
-    __publicField(this, "_targetPosition");
-    __publicField(this, "_lerpStartMs", 0);
-    __publicField(this, "_lerpEndMs", 0);
-    __publicField(this, "_lockDirection", false);
-    __publicField(this, "_lerpPosition");
-    __publicField(this, "_lerpRotation");
-    __publicField(this, "onChanged", () => {
+    __publicField$1(this, "camera");
+    __publicField$1(this, "cameraPerspective");
+    __publicField$1(this, "cameraOrthographic");
+    __publicField$1(this, "gizmo");
+    __publicField$1(this, "_viewport");
+    __publicField$1(this, "_scene");
+    __publicField$1(this, "_targetVelocity");
+    __publicField$1(this, "_velocity");
+    __publicField$1(this, "_speed", 0);
+    __publicField$1(this, "_orbitMode", false);
+    __publicField$1(this, "_orbitTarget");
+    __publicField$1(this, "_minOrbitalDistance", 0.05);
+    __publicField$1(this, "_targetPosition");
+    __publicField$1(this, "_lerpStartMs", 0);
+    __publicField$1(this, "_lerpEndMs", 0);
+    __publicField$1(this, "_lockDirection", false);
+    __publicField$1(this, "_lerpPosition");
+    __publicField$1(this, "_lerpRotation");
+    __publicField$1(this, "onChanged", () => {
     });
-    __publicField(this, "defaultLerpDuration", 2);
-    __publicField(this, "_vimReferenceSize", 1);
-    __publicField(this, "_sceneSizeMultiplier", 1);
-    __publicField(this, "_velocityBlendFactor", 1e-4);
-    __publicField(this, "_moveSpeed", 0.8);
-    __publicField(this, "_rotateSpeed", 1);
-    __publicField(this, "_orbitSpeed", 1);
-    __publicField(this, "_zoomSpeed", 0.25);
-    __publicField(this, "_firstPersonSpeed", 10);
-    __publicField(this, "_minModelScrenSize", 0.05);
-    __publicField(this, "_minOrthoSize", 1);
+    __publicField$1(this, "defaultLerpDuration", 2);
+    __publicField$1(this, "_vimReferenceSize", 1);
+    __publicField$1(this, "_sceneSizeMultiplier", 1);
+    __publicField$1(this, "_velocityBlendFactor", 1e-4);
+    __publicField$1(this, "_moveSpeed", 0.8);
+    __publicField$1(this, "_rotateSpeed", 1);
+    __publicField$1(this, "_orbitSpeed", 1);
+    __publicField$1(this, "_zoomSpeed", 0.25);
+    __publicField$1(this, "_firstPersonSpeed", 10);
+    __publicField$1(this, "_minModelScrenSize", 0.05);
+    __publicField$1(this, "_minOrthoSize", 1);
     this.cameraPerspective = new PerspectiveCamera();
     this.camera = this.cameraPerspective;
     this.camera.position.set(0, 0, -1e3);
@@ -24579,9 +24579,9 @@ class Camera {
 }
 class InputHandler {
   constructor(viewer2) {
-    __publicField(this, "_viewer");
-    __publicField(this, "_unregisters", []);
-    __publicField(this, "reg", (handler, type, listener2) => {
+    __publicField$1(this, "_viewer");
+    __publicField$1(this, "_unregisters", []);
+    __publicField$1(this, "reg", (handler, type, listener2) => {
       handler.addEventListener(type, listener2);
       this._unregisters.push(() => handler.removeEventListener(type, listener2));
     });
@@ -24689,22 +24689,22 @@ const KEYS = {
 class KeyboardHandler extends InputHandler {
   constructor() {
     super(...arguments);
-    __publicField(this, "SHIFT_MULTIPLIER", 3);
-    __publicField(this, "isUpPressed", false);
-    __publicField(this, "isDownPressed", false);
-    __publicField(this, "isLeftPressed", false);
-    __publicField(this, "isRightPressed", false);
-    __publicField(this, "isEPressed", false);
-    __publicField(this, "isQPressed", false);
-    __publicField(this, "isShiftPressed", false);
-    __publicField(this, "isCtrlPressed", false);
-    __publicField(this, "onKeyUp", (event) => {
+    __publicField$1(this, "SHIFT_MULTIPLIER", 3);
+    __publicField$1(this, "isUpPressed", false);
+    __publicField$1(this, "isDownPressed", false);
+    __publicField$1(this, "isLeftPressed", false);
+    __publicField$1(this, "isRightPressed", false);
+    __publicField$1(this, "isEPressed", false);
+    __publicField$1(this, "isQPressed", false);
+    __publicField$1(this, "isShiftPressed", false);
+    __publicField$1(this, "isCtrlPressed", false);
+    __publicField$1(this, "onKeyUp", (event) => {
       this.onKey(event, false);
     });
-    __publicField(this, "onKeyDown", (event) => {
+    __publicField$1(this, "onKeyDown", (event) => {
       this.onKey(event, true);
     });
-    __publicField(this, "onKey", (event, keyDown) => {
+    __publicField$1(this, "onKey", (event, keyDown) => {
       if (!keyDown) {
         switch (event.keyCode) {
           case KEYS.KEY_O:
@@ -24722,7 +24722,7 @@ class KeyboardHandler extends InputHandler {
             break;
           case KEYS.KEY_F8:
           case KEYS.KEY_SPACE:
-            this.camera.orbitMode = !this.camera.orbitMode;
+            this._viewer.inputs.pointerMode = this._viewer.inputs.altPointerMode;
             event.preventDefault();
             break;
           case KEYS.KEY_HOME:
@@ -24791,7 +24791,7 @@ class KeyboardHandler extends InputHandler {
           break;
       }
     });
-    __publicField(this, "applyMove", () => {
+    __publicField$1(this, "applyMove", () => {
       const move = new Vector3((this.isRightPressed ? 1 : 0) - (this.isLeftPressed ? 1 : 0), (this.isEPressed ? 1 : 0) - (this.isQPressed ? 1 : 0), (this.isUpPressed ? 1 : 0) - (this.isDownPressed ? 1 : 0));
       const speed = this.isShiftPressed ? this.SHIFT_MULTIPLIER : 1;
       move.multiplyScalar(speed);
@@ -24824,9 +24824,9 @@ class KeyboardHandler extends InputHandler {
 }
 class RaycastResult {
   constructor(intersections) {
-    __publicField(this, "object");
-    __publicField(this, "intersections");
-    __publicField(this, "firstHit");
+    __publicField$1(this, "object");
+    __publicField$1(this, "intersections");
+    __publicField$1(this, "firstHit");
     this.intersections = intersections;
     const [hit, obj] = this.GetFirstVimHit(intersections);
     this.firstHit = hit;
@@ -24893,11 +24893,11 @@ class RaycastResult {
 }
 class Raycaster {
   constructor(viewport, camera, scene, renderer) {
-    __publicField(this, "_viewport");
-    __publicField(this, "_camera");
-    __publicField(this, "_scene");
-    __publicField(this, "_renderer");
-    __publicField(this, "_raycaster", new Raycaster$1());
+    __publicField$1(this, "_viewport");
+    __publicField$1(this, "_camera");
+    __publicField$1(this, "_scene");
+    __publicField$1(this, "_renderer");
+    __publicField$1(this, "_raycaster", new Raycaster$1());
     this._viewport = viewport;
     this._camera = camera;
     this._scene = scene;
@@ -24936,11 +24936,11 @@ class Raycaster {
 }
 class InputAction {
   constructor(type, modifier, position, raycaster) {
-    __publicField(this, "position");
-    __publicField(this, "modifier");
-    __publicField(this, "type");
-    __publicField(this, "_raycaster");
-    __publicField(this, "_raycast");
+    __publicField$1(this, "position");
+    __publicField$1(this, "modifier");
+    __publicField$1(this, "type");
+    __publicField$1(this, "_raycaster");
+    __publicField$1(this, "_raycast");
     this.type = type;
     this.modifier = modifier;
     this.position = position;
@@ -24957,20 +24957,20 @@ class InputAction {
 class TouchHandler extends InputHandler {
   constructor() {
     super(...arguments);
-    __publicField(this, "TAP_DURATION_MS", 500);
-    __publicField(this, "DOUBLE_TAP_DELAY_MS", 500);
-    __publicField(this, "TAP_MAX_MOVE_PIXEL", 5);
-    __publicField(this, "ZOOM_SPEED", 5);
-    __publicField(this, "_touch");
-    __publicField(this, "_touch1");
-    __publicField(this, "_touch2");
-    __publicField(this, "_touchStartTime");
-    __publicField(this, "_lastTapMs");
-    __publicField(this, "_touchStart");
-    __publicField(this, "reset", () => {
+    __publicField$1(this, "TAP_DURATION_MS", 500);
+    __publicField$1(this, "DOUBLE_TAP_DELAY_MS", 500);
+    __publicField$1(this, "TAP_MAX_MOVE_PIXEL", 5);
+    __publicField$1(this, "ZOOM_SPEED", 5);
+    __publicField$1(this, "_touch");
+    __publicField$1(this, "_touch1");
+    __publicField$1(this, "_touch2");
+    __publicField$1(this, "_touchStartTime");
+    __publicField$1(this, "_lastTapMs");
+    __publicField$1(this, "_touchStart");
+    __publicField$1(this, "reset", () => {
       this._touch = this._touch1 = this._touch2 = this._touchStartTime = void 0;
     });
-    __publicField(this, "onTap", (position) => {
+    __publicField$1(this, "onTap", (position) => {
       var _a2, _b;
       const time = new Date().getTime();
       const double = time - this._lastTapMs < this.DOUBLE_TAP_DELAY_MS;
@@ -24978,7 +24978,7 @@ class TouchHandler extends InputHandler {
       const action = new InputAction(double ? "double" : "main", "none", position, this._viewer.raycaster);
       (_b = (_a2 = this._viewer.inputs).onMainAction) == null ? void 0 : _b.call(_a2, action);
     });
-    __publicField(this, "onTouchStart", (event) => {
+    __publicField$1(this, "onTouchStart", (event) => {
       event.preventDefault();
       if (!event || !event.touches || !event.touches.length) {
         return;
@@ -24994,20 +24994,20 @@ class TouchHandler extends InputHandler {
       }
       this._touchStart = this._touch;
     });
-    __publicField(this, "onDrag", (delta) => {
+    __publicField$1(this, "onDrag", (delta) => {
       this.camera.rotate(delta);
     });
-    __publicField(this, "onDoubleDrag", (delta) => {
+    __publicField$1(this, "onDoubleDrag", (delta) => {
       this.camera.move2(delta, "XY");
     });
-    __publicField(this, "onPinchOrSpread", (delta) => {
+    __publicField$1(this, "onPinchOrSpread", (delta) => {
       if (this.camera.orbitMode) {
         this.camera.zoom(delta * this.ZOOM_SPEED);
       } else {
         this.camera.move1(delta * this.ZOOM_SPEED, "Z");
       }
     });
-    __publicField(this, "onTouchMove", (event) => {
+    __publicField$1(this, "onTouchMove", (event) => {
       event.preventDefault();
       if (!event || !event.touches || !event.touches.length)
         return;
@@ -25043,7 +25043,7 @@ class TouchHandler extends InputHandler {
         }
       }
     });
-    __publicField(this, "onTouchEnd", (event) => {
+    __publicField$1(this, "onTouchEnd", (event) => {
       if (this.isSingleTouch()) {
         const touchDurationMs = new Date().getTime() - this._touchStartTime;
         const length = this._touch.clone().sub(this._touchStart).length();
@@ -25080,33 +25080,33 @@ class TouchHandler extends InputHandler {
 class MouseHandler extends InputHandler {
   constructor() {
     super(...arguments);
-    __publicField(this, "_idleDelayMs", 200);
-    __publicField(this, "isMouseDown", false);
-    __publicField(this, "hasMouseMoved", false);
-    __publicField(this, "_idleTimeout");
-    __publicField(this, "_lastPosition");
-    __publicField(this, "_downPosition");
-    __publicField(this, "reset", () => {
+    __publicField$1(this, "_idleDelayMs", 200);
+    __publicField$1(this, "isMouseDown", false);
+    __publicField$1(this, "hasMouseMoved", false);
+    __publicField$1(this, "_idleTimeout");
+    __publicField$1(this, "_lastPosition");
+    __publicField$1(this, "_downPosition");
+    __publicField$1(this, "reset", () => {
       this.isMouseDown = this.hasMouseMoved = false;
       this._lastPosition = this._downPosition = void 0;
       clearTimeout(this._idleTimeout);
     });
-    __publicField(this, "onMouseOut", (_) => {
+    __publicField$1(this, "onMouseOut", (_) => {
       this.isMouseDown = this.hasMouseMoved = false;
     });
-    __publicField(this, "onMouseIdle", (position) => {
+    __publicField$1(this, "onMouseIdle", (position) => {
       var _a2, _b;
       const action = new InputAction("idle", this.getModifier(), position, this.raycaster);
       (_b = (_a2 = this._viewer.inputs).onIdleAction) == null ? void 0 : _b.call(_a2, action);
     });
-    __publicField(this, "onMouseMove", (event) => {
+    __publicField$1(this, "onMouseMove", (event) => {
       this._lastPosition = new Vector2(event.offsetX, event.offsetY);
       this.resetIdleTimeout();
       if (!this.isMouseDown)
         return;
       this.onMouseDrag(event);
     });
-    __publicField(this, "onMouseWheel", (event) => {
+    __publicField$1(this, "onMouseWheel", (event) => {
       event.preventDefault();
       event.stopPropagation();
       const scrollValue = Math.sign(event.deltaY);
@@ -25116,14 +25116,14 @@ class MouseHandler extends InputHandler {
         this.camera.zoom(scrollValue, this.camera.defaultLerpDuration);
       }
     });
-    __publicField(this, "onMouseDown", (event) => {
+    __publicField$1(this, "onMouseDown", (event) => {
       event.preventDefault();
       this._downPosition = new Vector2(event.offsetX, event.offsetY);
       this.isMouseDown = true;
       this.hasMouseMoved = false;
       this.viewport.canvas.focus();
     });
-    __publicField(this, "onMouseUp", (event) => {
+    __publicField$1(this, "onMouseUp", (event) => {
       this._viewer.gizmoSelection.visible = false;
       event.preventDefault();
       if (!this.isMouseDown)
@@ -25137,10 +25137,10 @@ class MouseHandler extends InputHandler {
       }
       this.isMouseDown = false;
     });
-    __publicField(this, "onDoubleClick", (event) => {
+    __publicField$1(this, "onDoubleClick", (event) => {
       this.onMouseClick(new Vector2(event.offsetX, event.offsetY), true);
     });
-    __publicField(this, "onMouseClick", (position, doubleClick) => {
+    __publicField$1(this, "onMouseClick", (position, doubleClick) => {
       var _a2, _b;
       const action = new InputAction(doubleClick ? "double" : "main", this.getModifier(), position, this.raycaster);
       (_b = (_a2 = this._viewer.inputs).onMainAction) == null ? void 0 : _b.call(_a2, action);
@@ -25192,9 +25192,6 @@ class MouseHandler extends InputHandler {
   }
   onMouseMainDrag(delta) {
     switch (this.inputs.pointerMode) {
-      case "normal":
-        this.camera.rotate(delta);
-        break;
       case "orbit":
         this.camera.rotate(delta);
         break;
@@ -25215,22 +25212,15 @@ class MouseHandler extends InputHandler {
     }
   }
   onMouseSecondaryDrag(delta) {
-    switch (this.inputs.pointerMode) {
-      case "normal":
-        this.camera.move2(delta, "XY");
-        break;
-      default:
-        this.onMouseMainDrag(delta);
-    }
+    this.camera.move2(delta, "XY");
   }
   onRectEnd() {
-    this.inputs.pointerMode = "normal";
-    const box2 = this._viewer.gizmoSelection.getBoundingBox();
-    const center = box2.getCenter(new Vector3());
-    const size = box2.getSize(new Vector3());
+    const box = this._viewer.gizmoSelection.getBoundingBox();
+    const center = box.getCenter(new Vector3());
+    const size = box.getSize(new Vector3());
     size.multiplyScalar(0.5);
-    box2.setFromCenterAndSize(center, size);
-    this._viewer.camera.frame(box2, "none", this._viewer.camera.defaultLerpDuration);
+    box.setFromCenterAndSize(center, size);
+    this._viewer.camera.frame(box, "none", this._viewer.camera.defaultLerpDuration);
   }
   getModifier() {
     return this.keyboard.isCtrlPressed ? "ctrl" : this.keyboard.isShiftPressed ? "shift" : "none";
@@ -25242,20 +25232,21 @@ class MouseHandler extends InputHandler {
 }
 class Input {
   constructor(viewer2) {
-    __publicField(this, "_viewer");
-    __publicField(this, "touch");
-    __publicField(this, "mouse");
-    __publicField(this, "keyboard");
-    __publicField(this, "_mode");
-    __publicField(this, "onPointerModeChanged");
-    __publicField(this, "onMainAction");
-    __publicField(this, "onIdleAction");
-    __publicField(this, "unregisterAll", () => {
+    __publicField$1(this, "_viewer");
+    __publicField$1(this, "touch");
+    __publicField$1(this, "mouse");
+    __publicField$1(this, "keyboard");
+    __publicField$1(this, "_mode");
+    __publicField$1(this, "_altMode");
+    __publicField$1(this, "onPointerModeChanged");
+    __publicField$1(this, "onMainAction");
+    __publicField$1(this, "onIdleAction");
+    __publicField$1(this, "unregisterAll", () => {
       this.mouse.unregister();
       this.keyboard.unregister();
       this.touch.unregister();
     });
-    __publicField(this, "defaultAction", (action) => {
+    __publicField$1(this, "defaultAction", (action) => {
       const camera = this._viewer.camera;
       const selection = this._viewer.selection;
       if (!(action == null ? void 0 : action.object)) {
@@ -25284,6 +25275,11 @@ class Input {
     this.mouse = new MouseHandler(viewer2);
     this.touch = new TouchHandler(viewer2);
     this.onMainAction = this.defaultAction;
+    this.pointerMode = "orbit";
+    this._altMode = "look";
+  }
+  get altPointerMode() {
+    return this._altMode;
   }
   get pointerMode() {
     return this._mode;
@@ -25292,6 +25288,12 @@ class Input {
     var _a2;
     if (value === this._mode)
       return;
+    if (value === "look")
+      this._altMode = "orbit";
+    else if (value === "orbit")
+      this._altMode = "look";
+    else
+      this._altMode = this._mode;
     this._viewer.camera.orbitMode = value !== "look";
     this._mode = value;
     (_a2 = this.onPointerModeChanged) == null ? void 0 : _a2.call(this);
@@ -25307,7 +25309,7 @@ class Input {
     this.touch.reset();
   }
 }
-var Transparency;
+var Transparency$1;
 ((Transparency2) => {
   function isValid(value) {
     return ["all", "opaqueOnly", "transparentOnly", "allAsOpaque"].includes(value);
@@ -25317,8 +25319,8 @@ var Transparency;
     return mode === "all" || mode === "transparentOnly";
   }
   Transparency2.requiresAlpha = requiresAlpha;
-})(Transparency || (Transparency = {}));
-var Geometry;
+})(Transparency$1 || (Transparency$1 = {}));
+var Geometry$1;
 ((Geometry2) => {
   function createGeometryFromInstances(g3d, instances) {
     return Geometry2.mergeInstanceMeshes(g3d, "all", false, instances).geometry;
@@ -25466,10 +25468,10 @@ var Geometry;
   }
   class MergeInfo {
     constructor(section, instance, indexCount, vertexCount) {
-      __publicField(this, "section");
-      __publicField(this, "instances");
-      __publicField(this, "indexCount");
-      __publicField(this, "vertexCount");
+      __publicField$1(this, "section");
+      __publicField$1(this, "instances");
+      __publicField$1(this, "indexCount");
+      __publicField$1(this, "vertexCount");
       this.section = section;
       this.instances = instance;
       this.indexCount = indexCount;
@@ -25478,11 +25480,11 @@ var Geometry;
   }
   class MergeBuffer {
     constructor(info, positionSize, colorSize) {
-      __publicField(this, "indices");
-      __publicField(this, "vertices");
-      __publicField(this, "colors");
-      __publicField(this, "groups");
-      __publicField(this, "colorSize");
+      __publicField$1(this, "indices");
+      __publicField$1(this, "vertices");
+      __publicField$1(this, "colors");
+      __publicField$1(this, "groups");
+      __publicField$1(this, "colorSize");
       this.indices = new Uint32Array(info.indexCount);
       this.vertices = new Float32Array(info.vertexCount * positionSize);
       this.colors = new Float32Array(info.vertexCount * colorSize);
@@ -25496,24 +25498,24 @@ var Geometry;
   }
   class MergeResult {
     constructor(geometry, instance, submeshes) {
-      __publicField(this, "geometry");
-      __publicField(this, "instances");
-      __publicField(this, "submeshes");
+      __publicField$1(this, "geometry");
+      __publicField$1(this, "instances");
+      __publicField$1(this, "submeshes");
       this.geometry = geometry;
       this.instances = instance;
       this.submeshes = submeshes;
     }
   }
-})(Geometry || (Geometry = {}));
+})(Geometry$1 || (Geometry$1 = {}));
 class Object$1 {
   constructor(vim, element, instances, meshes) {
-    __publicField(this, "vim");
-    __publicField(this, "element");
-    __publicField(this, "instances");
-    __publicField(this, "_color");
-    __publicField(this, "_visible", true);
-    __publicField(this, "_boundingBox");
-    __publicField(this, "_meshes");
+    __publicField$1(this, "vim");
+    __publicField$1(this, "element");
+    __publicField$1(this, "instances");
+    __publicField$1(this, "_color");
+    __publicField$1(this, "_visible", true);
+    __publicField$1(this, "_boundingBox");
+    __publicField$1(this, "_meshes");
     this.vim = vim;
     this.element = element;
     this.instances = instances;
@@ -25555,7 +25557,7 @@ class Object$1 {
       return;
     if (this._boundingBox)
       return this._boundingBox;
-    const geometry = Geometry.createGeometryFromInstances(this.vim.document.g3d, this.instances);
+    const geometry = Geometry$1.createGeometryFromInstances(this.vim.document.g3d, this.instances);
     geometry.applyMatrix4(this.vim.getMatrix());
     geometry.computeBoundingBox();
     this._boundingBox = (_a2 = geometry.boundingBox) != null ? _a2 : void 0;
@@ -25576,7 +25578,7 @@ class Object$1 {
   createGeometry() {
     if (!this.instances)
       return;
-    const geometry = Geometry.createGeometryFromInstances(this.vim.document.g3d, this.instances);
+    const geometry = Geometry$1.createGeometryFromInstances(this.vim.document.g3d, this.instances);
     geometry.applyMatrix4(this.vim.getMatrix());
     return geometry;
   }
@@ -25731,11 +25733,11 @@ class Object$1 {
 }
 class Selection {
   constructor(renderer) {
-    __publicField(this, "_renderer");
-    __publicField(this, "_objects", /* @__PURE__ */ new Set());
-    __publicField(this, "_vim");
-    __publicField(this, "_highlight");
-    __publicField(this, "onValueChanged");
+    __publicField$1(this, "_renderer");
+    __publicField$1(this, "_objects", /* @__PURE__ */ new Set());
+    __publicField$1(this, "_vim");
+    __publicField$1(this, "_highlight");
+    __publicField$1(this, "onValueChanged");
     this._renderer = renderer;
   }
   get vim() {
@@ -25889,12 +25891,12 @@ class Selection {
 }
 class GroundPlane {
   constructor() {
-    __publicField(this, "mesh");
-    __publicField(this, "_source");
-    __publicField(this, "_size", 1);
-    __publicField(this, "_geometry");
-    __publicField(this, "_material");
-    __publicField(this, "_texture");
+    __publicField$1(this, "mesh");
+    __publicField$1(this, "_source");
+    __publicField$1(this, "_size", 1);
+    __publicField$1(this, "_geometry");
+    __publicField$1(this, "_material");
+    __publicField$1(this, "_texture");
     this._geometry = new PlaneGeometry();
     this._material = new MeshBasicMaterial({ transparent: true });
     this.mesh = new Mesh(this._geometry, this._material);
@@ -25906,13 +25908,13 @@ class GroundPlane {
     this._material.color.copy(settings2.getGroundPlaneColor());
     this._material.opacity = settings2.getGroundPlaneOpacity();
   }
-  adaptToContent(box2) {
+  adaptToContent(box) {
     var _a2;
-    const center = box2.getCenter(new Vector3());
-    const position = new Vector3(center.x, box2.min.y - Math.abs(box2.min.y) * 0.01, center.z);
+    const center = box.getCenter(new Vector3());
+    const position = new Vector3(center.x, box.min.y - Math.abs(box.min.y) * 0.01, center.z);
     this.mesh.position.copy(position);
     this.mesh.quaternion.copy(new Quaternion().setFromEuler(new Euler(1.5 * Math.PI, 0, 0)));
-    const sphere = box2 == null ? void 0 : box2.getBoundingSphere(new Sphere());
+    const sphere = box == null ? void 0 : box.getBoundingSphere(new Sphere());
     const size = ((_a2 = sphere == null ? void 0 : sphere.radius) != null ? _a2 : 1) * this._size;
     const scale = new Vector3(1, 1, 1).multiplyScalar(size);
     this.mesh.scale.copy(scale);
@@ -25944,9 +25946,9 @@ class GroundPlane {
 }
 class Environment {
   constructor(settings2) {
-    __publicField(this, "skyLight");
-    __publicField(this, "sunLights");
-    __publicField(this, "_groundPlane");
+    __publicField$1(this, "skyLight");
+    __publicField$1(this, "sunLights");
+    __publicField$1(this, "_groundPlane");
     this._groundPlane = new GroundPlane();
     this.skyLight = new HemisphereLight();
     this.sunLights = [];
@@ -25973,8 +25975,8 @@ class Environment {
       this.sunLights[i2].intensity = settings2.getSunlightIntensity(i2);
     }
   }
-  adaptToContent(box2) {
-    this._groundPlane.adaptToContent(box2);
+  adaptToContent(box) {
+    this._groundPlane.adaptToContent(box);
   }
   dispose() {
     this.sunLights.forEach((s) => s.dispose());
@@ -25984,23 +25986,23 @@ class Environment {
 }
 class CameraGizmo {
   constructor(renderer, camera, settings2) {
-    __publicField(this, "_renderer");
-    __publicField(this, "_camera");
-    __publicField(this, "_size", 0.01);
-    __publicField(this, "_fov", 50);
-    __publicField(this, "_color", new Color("blue"));
-    __publicField(this, "_opacity", 0.2);
-    __publicField(this, "_opacityAlways", 0.5);
-    __publicField(this, "_fadeDurationMs", 200);
-    __publicField(this, "_showDurationMs", 1e3);
-    __publicField(this, "_box");
-    __publicField(this, "_wireframe");
-    __publicField(this, "_material");
-    __publicField(this, "_materialAlways");
-    __publicField(this, "_gizmos");
-    __publicField(this, "_timeout");
-    __publicField(this, "_fadeEnd", 0);
-    __publicField(this, "_active", true);
+    __publicField$1(this, "_renderer");
+    __publicField$1(this, "_camera");
+    __publicField$1(this, "_size", 0.01);
+    __publicField$1(this, "_fov", 50);
+    __publicField$1(this, "_color", new Color("blue"));
+    __publicField$1(this, "_opacity", 0.2);
+    __publicField$1(this, "_opacityAlways", 0.5);
+    __publicField$1(this, "_fadeDurationMs", 200);
+    __publicField$1(this, "_showDurationMs", 1e3);
+    __publicField$1(this, "_box");
+    __publicField$1(this, "_wireframe");
+    __publicField$1(this, "_material");
+    __publicField$1(this, "_materialAlways");
+    __publicField$1(this, "_gizmos");
+    __publicField$1(this, "_timeout");
+    __publicField$1(this, "_fadeEnd", 0);
+    __publicField$1(this, "_active", true);
     this._renderer = renderer;
     this._camera = camera;
     this.applySettings(settings2);
@@ -26127,12 +26129,12 @@ class CameraGizmo {
 }
 class Scene {
   constructor(builder) {
-    __publicField(this, "builder");
-    __publicField(this, "meshes", []);
-    __publicField(this, "_boundingBox", new Box3());
-    __publicField(this, "_instanceToThreeMeshes", /* @__PURE__ */ new Map());
-    __publicField(this, "_threeMeshIdToInstances", /* @__PURE__ */ new Map());
-    __publicField(this, "_material");
+    __publicField$1(this, "builder");
+    __publicField$1(this, "meshes", []);
+    __publicField$1(this, "_boundingBox", new Box3());
+    __publicField$1(this, "_instanceToThreeMeshes", /* @__PURE__ */ new Map());
+    __publicField$1(this, "_threeMeshIdToInstances", /* @__PURE__ */ new Map());
+    __publicField$1(this, "_material");
     this.builder = builder;
   }
   getBoundingBox(target = new Box3()) {
@@ -26175,8 +26177,8 @@ class Scene {
       this._instanceToThreeMeshes.set(instances[i2], set3);
     }
     mesh.geometry.computeBoundingBox();
-    const box2 = mesh.geometry.boundingBox;
-    this._boundingBox = (_c = (_b = this._boundingBox) == null ? void 0 : _b.union(box2)) != null ? _c : box2.clone();
+    const box = mesh.geometry.boundingBox;
+    this._boundingBox = (_c = (_b = this._boundingBox) == null ? void 0 : _b.union(box)) != null ? _c : box.clone();
     this._threeMeshIdToInstances.set(mesh.id, instances);
     this.meshes.push(mesh);
     return this;
@@ -26200,8 +26202,8 @@ class Scene {
       set3.push([mesh, i2]);
       this._instanceToThreeMeshes.set(instances[i2], set3);
     }
-    const box2 = this.computeIntancedMeshBoundingBox(mesh);
-    this._boundingBox = (_c = (_b = this._boundingBox) == null ? void 0 : _b.union(box2)) != null ? _c : box2.clone();
+    const box = this.computeIntancedMeshBoundingBox(mesh);
+    this._boundingBox = (_c = (_b = this._boundingBox) == null ? void 0 : _b.union(box)) != null ? _c : box.clone();
     this._threeMeshIdToInstances.set(mesh.id, instances);
   }
   merge(other) {
@@ -26253,22 +26255,22 @@ class Scene {
   computeIntancedMeshBoundingBox(mesh) {
     let result;
     const matrix = new Matrix4();
-    const box2 = new Box3();
+    const box = new Box3();
     mesh.geometry.computeBoundingBox();
     for (let i2 = 0; i2 < mesh.count; i2++) {
       mesh.getMatrixAt(i2, matrix);
-      box2.copy(mesh.geometry.boundingBox);
-      box2.applyMatrix4(matrix);
-      result = result ? result.union(box2) : box2.clone();
+      box.copy(mesh.geometry.boundingBox);
+      box.applyMatrix4(matrix);
+      result = result ? result.union(box) : box.clone();
     }
     return result;
   }
 }
 class RenderScene {
   constructor() {
-    __publicField(this, "scene");
-    __publicField(this, "_scenes", []);
-    __publicField(this, "_boundingBox");
+    __publicField$1(this, "scene");
+    __publicField$1(this, "_scenes", []);
+    __publicField$1(this, "_boundingBox");
     this.scene = new Scene$1();
   }
   getBoundingBox(target = new Box3()) {
@@ -26309,10 +26311,10 @@ class RenderScene {
 }
 class Viewport {
   constructor(settings2) {
-    __publicField(this, "canvas");
-    __publicField(this, "_unregisterResize");
-    __publicField(this, "_ownedCanvas");
-    __publicField(this, "_resizeCallbacks", []);
+    __publicField$1(this, "canvas");
+    __publicField$1(this, "_unregisterResize");
+    __publicField$1(this, "_ownedCanvas");
+    __publicField$1(this, "_resizeCallbacks", []);
     const [canvas, owned] = Viewport.getOrCreateCanvas(settings2.getCanvasId());
     this.canvas = canvas;
     this._ownedCanvas = owned;
@@ -26373,14 +26375,14 @@ class Viewport {
 }
 class Axis {
   constructor(init) {
-    __publicField(this, "axis");
-    __publicField(this, "direction");
-    __publicField(this, "size");
-    __publicField(this, "color");
-    __publicField(this, "colorSub");
-    __publicField(this, "position");
-    __publicField(this, "label");
-    __publicField(this, "line");
+    __publicField$1(this, "axis");
+    __publicField$1(this, "direction");
+    __publicField$1(this, "size");
+    __publicField$1(this, "color");
+    __publicField$1(this, "colorSub");
+    __publicField$1(this, "position");
+    __publicField$1(this, "label");
+    __publicField$1(this, "line");
     this.axis = init.axis;
     this.direction = init.direction;
     this.size = init.size;
@@ -26393,22 +26395,22 @@ class Axis {
 }
 class GizmoOptions {
   constructor(init) {
-    __publicField(this, "size", 96);
-    __publicField(this, "padding", 4);
-    __publicField(this, "bubbleSizePrimary", 8);
-    __publicField(this, "bubbleSizeSecondary", 6);
-    __publicField(this, "lineWidth", 2);
-    __publicField(this, "fontSize", "12px");
-    __publicField(this, "fontFamily", "arial");
-    __publicField(this, "fontWeight", "bold");
-    __publicField(this, "fontColor", "#222222");
-    __publicField(this, "className", "gizmo-axis-canvas");
-    __publicField(this, "colorX", "#f73c3c");
-    __publicField(this, "colorY", "#6ccb26");
-    __publicField(this, "colorZ", "#178cf0");
-    __publicField(this, "colorXSub", "#942424");
-    __publicField(this, "colorYSub", "#417a17");
-    __publicField(this, "colorZSub", "#0e5490");
+    __publicField$1(this, "size", 96);
+    __publicField$1(this, "padding", 4);
+    __publicField$1(this, "bubbleSizePrimary", 8);
+    __publicField$1(this, "bubbleSizeSecondary", 6);
+    __publicField$1(this, "lineWidth", 2);
+    __publicField$1(this, "fontSize", "12px");
+    __publicField$1(this, "fontFamily", "arial");
+    __publicField$1(this, "fontWeight", "bold");
+    __publicField$1(this, "fontColor", "#222222");
+    __publicField$1(this, "className", "gizmo-axis-canvas");
+    __publicField$1(this, "colorX", "#f73c3c");
+    __publicField$1(this, "colorY", "#6ccb26");
+    __publicField$1(this, "colorZ", "#178cf0");
+    __publicField$1(this, "colorXSub", "#942424");
+    __publicField$1(this, "colorYSub", "#417a17");
+    __publicField$1(this, "colorZSub", "#0e5490");
     var _a2, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p;
     this.size = (_a2 = init == null ? void 0 : init.size) != null ? _a2 : this.size;
     this.padding = (_b = init == null ? void 0 : init.padding) != null ? _b : this.padding;
@@ -26430,21 +26432,21 @@ class GizmoOptions {
 }
 class GizmoAxes {
   constructor(camera, options) {
-    __publicField(this, "options");
-    __publicField(this, "axes");
-    __publicField(this, "camera");
-    __publicField(this, "canvas");
-    __publicField(this, "context");
-    __publicField(this, "rect");
-    __publicField(this, "isDragging");
-    __publicField(this, "isDragSignificant");
-    __publicField(this, "dragStart");
-    __publicField(this, "dragLast");
-    __publicField(this, "pointer");
-    __publicField(this, "center");
-    __publicField(this, "invRotMat", new Matrix4());
-    __publicField(this, "selectedAxis");
-    __publicField(this, "onTouchStart", (e) => {
+    __publicField$1(this, "options");
+    __publicField$1(this, "axes");
+    __publicField$1(this, "camera");
+    __publicField$1(this, "canvas");
+    __publicField$1(this, "context");
+    __publicField$1(this, "rect");
+    __publicField$1(this, "isDragging");
+    __publicField$1(this, "isDragSignificant");
+    __publicField$1(this, "dragStart");
+    __publicField$1(this, "dragLast");
+    __publicField$1(this, "pointer");
+    __publicField$1(this, "center");
+    __publicField$1(this, "invRotMat", new Matrix4());
+    __publicField$1(this, "selectedAxis");
+    __publicField$1(this, "onTouchStart", (e) => {
       e.preventDefault();
       if (e.touches.length > 1)
         return;
@@ -26453,25 +26455,25 @@ class GizmoAxes {
       window.addEventListener("touchmove", this.onTouchMove, false);
       window.addEventListener("touchend", this.onTouchEnd, false);
     });
-    __publicField(this, "onTouchMove", (e) => {
+    __publicField$1(this, "onTouchMove", (e) => {
       if (e.touches.length > 1)
         return;
       const touch = e.touches[0];
       this.updateDrag(touch.clientX, touch.clientY);
     });
-    __publicField(this, "onTouchEnd", (e) => {
+    __publicField$1(this, "onTouchEnd", (e) => {
       e.preventDefault();
       this.endDrag();
       this.selectedAxis = null;
       window.removeEventListener("touchmove", this.onTouchMove, false);
       window.removeEventListener("touchend", this.onTouchEnd, false);
     });
-    __publicField(this, "onPointerDown", (e) => {
+    __publicField$1(this, "onPointerDown", (e) => {
       this.initDrag(e.clientX, e.clientY);
       window.addEventListener("pointermove", this.onPointerDrag, false);
       window.addEventListener("pointerup", this.onPointerUp, false);
     });
-    __publicField(this, "onPointerUp", (event) => {
+    __publicField$1(this, "onPointerUp", (event) => {
       this.endDrag();
       if (event.pointerType !== "mouse") {
         this.pointer.set(0, 0, 0);
@@ -26479,26 +26481,26 @@ class GizmoAxes {
       window.removeEventListener("pointermove", this.onPointerDrag, false);
       window.removeEventListener("pointerup", this.onPointerUp, false);
     });
-    __publicField(this, "onPointerEnter", () => {
+    __publicField$1(this, "onPointerEnter", () => {
       this.rect = this.canvas.getBoundingClientRect();
     });
-    __publicField(this, "onPointerMove", (e) => {
+    __publicField$1(this, "onPointerMove", (e) => {
       if (this.isDragging)
         return;
       if (e) {
         this.pointer = this.toMouseVector(e, this.pointer);
       }
     });
-    __publicField(this, "onPointerDrag", (e) => {
+    __publicField$1(this, "onPointerDrag", (e) => {
       this.updateDrag(e.clientX, e.clientY);
     });
-    __publicField(this, "onMouseClick", () => {
+    __publicField$1(this, "onMouseClick", () => {
       if (this.isDragging || !this.selectedAxis)
         return;
       this.camera.orbit(this.selectedAxis.direction, this.camera.defaultLerpDuration);
       this.selectedAxis = null;
     });
-    __publicField(this, "update", () => {
+    __publicField$1(this, "update", () => {
       this.camera.camera.updateMatrix();
       this.invRotMat.extractRotation(this.camera.camera.matrix).invert();
       for (let i2 = 0, length = this.axes.length; i2 < length; i2++) {
@@ -26510,7 +26512,7 @@ class GizmoAxes {
         this.pickAxes(this.pointer);
       }
     });
-    __publicField(this, "dispose", () => {
+    __publicField$1(this, "dispose", () => {
       this.canvas.removeEventListener("pointerdown", this.onPointerDown, false);
       this.canvas.removeEventListener("pointerenter", this.onPointerEnter, false);
       this.canvas.removeEventListener("pointermove", this.onPointerDrag, false);
@@ -26765,9 +26767,9 @@ class BoxOutline extends LineSegments {
     geo.setIndex(indices);
     super(geo, mat);
   }
-  fitBox(box2) {
-    this.scale.set(box2.max.x - box2.min.x, box2.max.y - box2.min.y, box2.max.z - box2.min.z);
-    this.position.set((box2.max.x + box2.min.x) / 2, (box2.max.y + box2.min.y) / 2, (box2.max.z + box2.min.z) / 2);
+  fitBox(box) {
+    this.scale.set(box.max.x - box.min.x, box.max.y - box.min.y, box.max.z - box.min.z);
+    this.position.set((box.max.x + box.min.x) / 2, (box.max.y + box.min.y) / 2, (box.max.z + box.min.z) / 2);
   }
   dispose() {
     this.geometry.dispose();
@@ -26785,9 +26787,9 @@ class BoxMesh extends Mesh {
     });
     super(geo, mat);
   }
-  fitBox(box2) {
-    this.scale.set(box2.max.x - box2.min.x, box2.max.y - box2.min.y, box2.max.z - box2.min.z);
-    this.position.set((box2.max.x + box2.min.x) / 2, (box2.max.y + box2.min.y) / 2, (box2.max.z + box2.min.z) / 2);
+  fitBox(box) {
+    this.scale.set(box.max.x - box.min.x, box.max.y - box.min.y, box.max.z - box.min.z);
+    this.position.set((box.max.x + box.min.x) / 2, (box.max.y + box.min.y) / 2, (box.max.z + box.min.z) / 2);
   }
   dispose() {
     this.geometry.dispose();
@@ -26807,49 +26809,49 @@ class BoxHighlight extends Mesh {
     });
     super(geo, mat);
   }
-  highlight(box2, normal) {
+  highlight(box, normal) {
     this.visible = false;
     const positions = this.geometry.getAttribute("position");
     if (normal.x > 0.1) {
-      positions.setXYZ(0, box2.max.x, box2.max.y, box2.max.z);
-      positions.setXYZ(1, box2.max.x, box2.min.y, box2.max.z);
-      positions.setXYZ(2, box2.max.x, box2.min.y, box2.min.z);
-      positions.setXYZ(3, box2.max.x, box2.max.y, box2.min.z);
+      positions.setXYZ(0, box.max.x, box.max.y, box.max.z);
+      positions.setXYZ(1, box.max.x, box.min.y, box.max.z);
+      positions.setXYZ(2, box.max.x, box.min.y, box.min.z);
+      positions.setXYZ(3, box.max.x, box.max.y, box.min.z);
       this.visible = true;
     }
     if (normal.x < -0.1) {
-      positions.setXYZ(0, box2.min.x, box2.max.y, box2.max.z);
-      positions.setXYZ(1, box2.min.x, box2.min.y, box2.max.z);
-      positions.setXYZ(2, box2.min.x, box2.min.y, box2.min.z);
-      positions.setXYZ(3, box2.min.x, box2.max.y, box2.min.z);
+      positions.setXYZ(0, box.min.x, box.max.y, box.max.z);
+      positions.setXYZ(1, box.min.x, box.min.y, box.max.z);
+      positions.setXYZ(2, box.min.x, box.min.y, box.min.z);
+      positions.setXYZ(3, box.min.x, box.max.y, box.min.z);
       this.visible = true;
     }
     if (normal.y > 0.1) {
-      positions.setXYZ(0, box2.max.x, box2.max.y, box2.max.z);
-      positions.setXYZ(1, box2.min.x, box2.max.y, box2.max.z);
-      positions.setXYZ(2, box2.min.x, box2.max.y, box2.min.z);
-      positions.setXYZ(3, box2.max.x, box2.max.y, box2.min.z);
+      positions.setXYZ(0, box.max.x, box.max.y, box.max.z);
+      positions.setXYZ(1, box.min.x, box.max.y, box.max.z);
+      positions.setXYZ(2, box.min.x, box.max.y, box.min.z);
+      positions.setXYZ(3, box.max.x, box.max.y, box.min.z);
       this.visible = true;
     }
     if (normal.y < -0.1) {
-      positions.setXYZ(0, box2.max.x, box2.min.y, box2.max.z);
-      positions.setXYZ(1, box2.min.x, box2.min.y, box2.max.z);
-      positions.setXYZ(2, box2.min.x, box2.min.y, box2.min.z);
-      positions.setXYZ(3, box2.max.x, box2.min.y, box2.min.z);
+      positions.setXYZ(0, box.max.x, box.min.y, box.max.z);
+      positions.setXYZ(1, box.min.x, box.min.y, box.max.z);
+      positions.setXYZ(2, box.min.x, box.min.y, box.min.z);
+      positions.setXYZ(3, box.max.x, box.min.y, box.min.z);
       this.visible = true;
     }
     if (normal.z > 0.1) {
-      positions.setXYZ(0, box2.max.x, box2.max.y, box2.max.z);
-      positions.setXYZ(1, box2.min.x, box2.max.y, box2.max.z);
-      positions.setXYZ(2, box2.min.x, box2.min.y, box2.max.z);
-      positions.setXYZ(3, box2.max.x, box2.min.y, box2.max.z);
+      positions.setXYZ(0, box.max.x, box.max.y, box.max.z);
+      positions.setXYZ(1, box.min.x, box.max.y, box.max.z);
+      positions.setXYZ(2, box.min.x, box.min.y, box.max.z);
+      positions.setXYZ(3, box.max.x, box.min.y, box.max.z);
       this.visible = true;
     }
     if (normal.z < -0.1) {
-      positions.setXYZ(0, box2.max.x, box2.max.y, box2.min.z);
-      positions.setXYZ(1, box2.min.x, box2.max.y, box2.min.z);
-      positions.setXYZ(2, box2.min.x, box2.min.y, box2.min.z);
-      positions.setXYZ(3, box2.max.x, box2.min.y, box2.min.z);
+      positions.setXYZ(0, box.max.x, box.max.y, box.min.z);
+      positions.setXYZ(1, box.min.x, box.max.y, box.min.z);
+      positions.setXYZ(2, box.min.x, box.min.y, box.min.z);
+      positions.setXYZ(3, box.max.x, box.min.y, box.min.z);
       this.visible = true;
     }
     positions.needsUpdate = true;
@@ -26860,27 +26862,27 @@ class BoxHighlight extends Mesh {
   }
 }
 class BoxInputs {
-  constructor(viewer2, cube, box2) {
-    __publicField(this, "viewer");
-    __publicField(this, "cube");
-    __publicField(this, "sharedBox");
-    __publicField(this, "faceNormal", new Vector3());
-    __publicField(this, "dragOrigin", new Vector3());
-    __publicField(this, "dragpPlane", new Plane());
-    __publicField(this, "mouseDown");
-    __publicField(this, "raycaster", new Raycaster$1());
-    __publicField(this, "lastBox", new Box3());
-    __publicField(this, "unregisters", []);
-    __publicField(this, "onFaceEnter");
-    __publicField(this, "onBoxStretch");
-    __publicField(this, "onBoxConfirm");
-    __publicField(this, "reg", (handler, type, listener2) => {
+  constructor(viewer2, cube, box) {
+    __publicField$1(this, "viewer");
+    __publicField$1(this, "cube");
+    __publicField$1(this, "sharedBox");
+    __publicField$1(this, "faceNormal", new Vector3());
+    __publicField$1(this, "dragOrigin", new Vector3());
+    __publicField$1(this, "dragpPlane", new Plane());
+    __publicField$1(this, "mouseDown");
+    __publicField$1(this, "raycaster", new Raycaster$1());
+    __publicField$1(this, "lastBox", new Box3());
+    __publicField$1(this, "unregisters", []);
+    __publicField$1(this, "onFaceEnter");
+    __publicField$1(this, "onBoxStretch");
+    __publicField$1(this, "onBoxConfirm");
+    __publicField$1(this, "reg", (handler, type, listener2) => {
       handler.addEventListener(type, listener2);
       this.unregisters.push(() => handler.removeEventListener(type, listener2));
     });
     this.viewer = viewer2;
     this.cube = cube;
-    this.sharedBox = box2;
+    this.sharedBox = box;
   }
   register() {
     if (this.unregister.length > 0)
@@ -26951,8 +26953,8 @@ class BoxInputs {
     const point = (_a2 = this.raycaster.ray.intersectPlane(this.dragpPlane, new Vector3())) != null ? _a2 : this.dragOrigin.clone();
     const delta = point.sub(this.dragOrigin);
     const amount = delta.dot(this.faceNormal);
-    const box2 = this.stretch(this.faceNormal, amount);
-    (_b = this.onBoxStretch) == null ? void 0 : _b.call(this, box2);
+    const box = this.stretch(this.faceNormal, amount);
+    (_b = this.onBoxStretch) == null ? void 0 : _b.call(this, box);
   }
   stretch(normal, amount) {
     const result = this.sharedBox.clone();
@@ -26983,17 +26985,17 @@ class BoxInputs {
 }
 class GizmoSection {
   constructor(viewer2) {
-    __publicField(this, "_viewer");
-    __publicField(this, "_inputs");
-    __publicField(this, "_cube");
-    __publicField(this, "_outline");
-    __publicField(this, "_highlight");
-    __publicField(this, "_normal");
-    __publicField(this, "_clip");
-    __publicField(this, "_show");
-    __publicField(this, "_interactive");
-    __publicField(this, "onStateChanged");
-    __publicField(this, "onBoxConfirm");
+    __publicField$1(this, "_viewer");
+    __publicField$1(this, "_inputs");
+    __publicField$1(this, "_cube");
+    __publicField$1(this, "_outline");
+    __publicField$1(this, "_highlight");
+    __publicField$1(this, "_normal");
+    __publicField$1(this, "_clip");
+    __publicField$1(this, "_show");
+    __publicField$1(this, "_interactive");
+    __publicField$1(this, "onStateChanged");
+    __publicField$1(this, "onBoxConfirm");
     this._viewer = viewer2;
     this._normal = new Vector3();
     this._cube = new BoxMesh();
@@ -27008,13 +27010,13 @@ class GizmoSection {
       if (this.visible)
         this._highlight.highlight(this.section.box, normal);
     };
-    this._inputs.onBoxStretch = (box2) => {
-      this.renderer.section.fitBox(box2);
+    this._inputs.onBoxStretch = (box) => {
+      this.renderer.section.fitBox(box);
       this.update();
     };
-    this._inputs.onBoxConfirm = (box2) => {
+    this._inputs.onBoxConfirm = (box) => {
       var _a2;
-      return (_a2 = this.onBoxConfirm) == null ? void 0 : _a2.call(this, box2);
+      return (_a2 = this.onBoxConfirm) == null ? void 0 : _a2.call(this, box);
     };
     this.clip = false;
     this.visible = false;
@@ -27071,11 +27073,11 @@ class GizmoSection {
       this.update();
     (_a2 = this.onStateChanged) == null ? void 0 : _a2.call(this);
   }
-  fitBox(box2) {
+  fitBox(box) {
     var _a2;
-    this._cube.fitBox(box2);
-    this._outline.fitBox(box2);
-    this.renderer.section.fitBox(box2);
+    this._cube.fitBox(box);
+    this._outline.fitBox(box);
+    this.renderer.section.fitBox(box);
     (_a2 = this.onBoxConfirm) == null ? void 0 : _a2.call(this, this.box);
   }
   update() {
@@ -27092,7 +27094,7 @@ class GizmoSection {
     this._highlight.dispose();
   }
 }
-class MeshLine extends BufferGeometry {
+class MeshLine$1 extends BufferGeometry {
   constructor() {
     super();
     this.isMeshLine = true;
@@ -27137,14 +27139,14 @@ class MeshLine extends BufferGeometry {
     });
   }
 }
-MeshLine.prototype.setMatrixWorld = function(matrixWorld) {
+MeshLine$1.prototype.setMatrixWorld = function(matrixWorld) {
   this.matrixWorld = matrixWorld;
 };
-MeshLine.prototype.setGeometry = function(g, c) {
+MeshLine$1.prototype.setGeometry = function(g, c) {
   this._geometry = g;
   this.setPoints(g.getAttribute("position").array, c);
 };
-MeshLine.prototype.setPoints = function(points, wcb) {
+MeshLine$1.prototype.setPoints = function(points, wcb) {
   if (!(points instanceof Float32Array) && !(points instanceof Array)) {
     console.error("ERROR: The BufferArray of points is not instancied correctly.");
     return;
@@ -27173,7 +27175,7 @@ MeshLine.prototype.setPoints = function(points, wcb) {
   }
   this.process();
 };
-function MeshLineRaycast(raycaster, intersects2) {
+function MeshLineRaycast$1(raycaster, intersects2) {
   const inverseMatrix = new Matrix4();
   const ray = new Ray();
   const sphere = new Sphere();
@@ -27225,17 +27227,17 @@ function MeshLineRaycast(raycaster, intersects2) {
     }
   }
 }
-MeshLine.prototype.raycast = MeshLineRaycast;
-MeshLine.prototype.compareV3 = function(a, b) {
+MeshLine$1.prototype.raycast = MeshLineRaycast$1;
+MeshLine$1.prototype.compareV3 = function(a, b) {
   const aa2 = a * 6;
   const ab2 = b * 6;
   return this.positions[aa2] === this.positions[ab2] && this.positions[aa2 + 1] === this.positions[ab2 + 1] && this.positions[aa2 + 2] === this.positions[ab2 + 2];
 };
-MeshLine.prototype.copyV3 = function(a) {
+MeshLine$1.prototype.copyV3 = function(a) {
   const aa2 = a * 6;
   return [this.positions[aa2], this.positions[aa2 + 1], this.positions[aa2 + 2]];
 };
-MeshLine.prototype.process = function() {
+MeshLine$1.prototype.process = function() {
   const l2 = this.positions.length / 6;
   this.previous = [];
   this.next = [];
@@ -27322,7 +27324,7 @@ MeshLine.prototype.process = function() {
   this.computeBoundingSphere();
   this.computeBoundingBox();
 };
-function memcpy(src, srcOffset, dst, dstOffset, length) {
+function memcpy$1(src, srcOffset, dst, dstOffset, length) {
   let i2;
   src = src.subarray || src.slice ? src : src.buffer;
   dst = dst.subarray || dst.slice ? dst : dst.buffer;
@@ -27336,20 +27338,20 @@ function memcpy(src, srcOffset, dst, dstOffset, length) {
   }
   return dst;
 }
-MeshLine.prototype.advance = function(position) {
+MeshLine$1.prototype.advance = function(position) {
   const positions = this._attributes.position.array;
   const previous = this._attributes.previous.array;
   const next = this._attributes.next.array;
   const l2 = positions.length;
-  memcpy(positions, 0, previous, 0, l2);
-  memcpy(positions, 6, positions, 0, l2 - 6);
+  memcpy$1(positions, 0, previous, 0, l2);
+  memcpy$1(positions, 6, positions, 0, l2 - 6);
   positions[l2 - 6] = position.x;
   positions[l2 - 5] = position.y;
   positions[l2 - 4] = position.z;
   positions[l2 - 3] = position.x;
   positions[l2 - 2] = position.y;
   positions[l2 - 1] = position.z;
-  memcpy(positions, 6, next, 0, l2 - 6);
+  memcpy$1(positions, 6, next, 0, l2 - 6);
   next[l2 - 6] = position.x;
   next[l2 - 5] = position.y;
   next[l2 - 4] = position.z;
@@ -27479,7 +27481,7 @@ ShaderChunk.meshline_frag = [
   ShaderChunk.fog_fragment,
   "}"
 ].join("\n");
-class MeshLineMaterial extends ShaderMaterial {
+class MeshLineMaterial$1 extends ShaderMaterial {
   constructor(parameters) {
     super({
       uniforms: Object.assign({}, UniformsLib.fog, {
@@ -27655,7 +27657,7 @@ class MeshLineMaterial extends ShaderMaterial {
     this.setValues(parameters);
   }
 }
-MeshLineMaterial.prototype.copy = function(source) {
+MeshLineMaterial$1.prototype.copy = function(source) {
   ShaderMaterial.prototype.copy.call(this, source);
   this.lineWidth = source.lineWidth;
   this.map = source.map;
@@ -27677,17 +27679,17 @@ MeshLineMaterial.prototype.copy = function(source) {
 };
 class MeasureLine {
   constructor(canvasSize, start, end, color) {
-    __publicField(this, "mesh");
-    __publicField(this, "_meshLine");
-    __publicField(this, "_material");
-    __publicField(this, "_materialAlways");
-    this._material = new MeshLineMaterial({
+    __publicField$1(this, "mesh");
+    __publicField$1(this, "_meshLine");
+    __publicField$1(this, "_material");
+    __publicField$1(this, "_materialAlways");
+    this._material = new MeshLineMaterial$1({
       sizeAttenuation: 0,
       lineWidth: 5,
       resolution: canvasSize,
       color
     });
-    this._materialAlways = new MeshLineMaterial({
+    this._materialAlways = new MeshLineMaterial$1({
       lineWidth: 5,
       sizeAttenuation: 0,
       depthTest: false,
@@ -27696,7 +27698,7 @@ class MeasureLine {
       resolution: canvasSize,
       color
     });
-    this._meshLine = new MeshLine();
+    this._meshLine = new MeshLine$1();
     this._meshLine.setPoints([start, end]);
     this.mesh = new Mesh(this._meshLine, [
       this._material,
@@ -27717,9 +27719,9 @@ class MeasureLine {
 }
 class MeasureMarker {
   constructor(position = new Vector3()) {
-    __publicField(this, "mesh");
-    __publicField(this, "_material");
-    __publicField(this, "_materialAlways");
+    __publicField$1(this, "mesh");
+    __publicField$1(this, "_material");
+    __publicField$1(this, "_materialAlways");
     this._material = new MeshBasicMaterial({
       color: new Color(0, 0.75, 1)
     });
@@ -27745,20 +27747,20 @@ class MeasureMarker {
 }
 class GizmoMeasure {
   constructor(viewer2) {
-    __publicField(this, "_viewer");
-    __publicField(this, "_currentMarker");
-    __publicField(this, "_startMarker");
-    __publicField(this, "_endMarker");
-    __publicField(this, "_line");
-    __publicField(this, "_lineX");
-    __publicField(this, "_lineY");
-    __publicField(this, "_lineZ");
-    __publicField(this, "removeMouseListener");
-    __publicField(this, "oldAction");
-    __publicField(this, "onAbort");
-    __publicField(this, "_startPos");
-    __publicField(this, "_endPos");
-    __publicField(this, "_measurement");
+    __publicField$1(this, "_viewer");
+    __publicField$1(this, "_currentMarker");
+    __publicField$1(this, "_startMarker");
+    __publicField$1(this, "_endMarker");
+    __publicField$1(this, "_line");
+    __publicField$1(this, "_lineX");
+    __publicField$1(this, "_lineY");
+    __publicField$1(this, "_lineZ");
+    __publicField$1(this, "removeMouseListener");
+    __publicField$1(this, "oldAction");
+    __publicField$1(this, "onAbort");
+    __publicField$1(this, "_startPos");
+    __publicField$1(this, "_endPos");
+    __publicField$1(this, "_measurement");
     this._viewer = viewer2;
   }
   get startPoint() {
@@ -27926,9 +27928,9 @@ class GizmoMeasure {
 }
 class GizmoSelection {
   constructor(viewer2) {
-    __publicField(this, "line");
-    __publicField(this, "viewer");
-    __publicField(this, "points");
+    __publicField$1(this, "line");
+    __publicField$1(this, "viewer");
+    __publicField$1(this, "points");
     this.viewer = viewer2;
     const mat = new LineBasicMaterial({
       depthTest: false,
@@ -28033,79 +28035,79 @@ class GizmoSelection {
     return this.points.map((p2) => plane.projectPoint(p2, new Vector3()));
   }
 }
-var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
-var freeGlobal$1 = freeGlobal;
-var freeSelf = typeof self == "object" && self && self.Object === Object && self;
-var root$1 = freeGlobal$1 || freeSelf || Function("return this")();
-var root$1$1 = root$1;
-var Symbol$1$1 = root$1$1.Symbol;
-var Symbol$2 = Symbol$1$1;
-var objectProto$c = Object.prototype;
-var hasOwnProperty$9 = objectProto$c.hasOwnProperty;
-var nativeObjectToString$1 = objectProto$c.toString;
-var symToStringTag$1 = Symbol$2 ? Symbol$2.toStringTag : void 0;
-function getRawTag(value) {
-  var isOwn = hasOwnProperty$9.call(value, symToStringTag$1), tag = value[symToStringTag$1];
+var freeGlobal$2 = typeof global == "object" && global && global.Object === Object && global;
+var freeGlobal$1$1 = freeGlobal$2;
+var freeSelf$1 = typeof self == "object" && self && self.Object === Object && self;
+var root$2 = freeGlobal$1$1 || freeSelf$1 || Function("return this")();
+var root$1$2 = root$2;
+var Symbol$1$2 = root$1$2.Symbol;
+var Symbol$2$1 = Symbol$1$2;
+var objectProto$c$1 = Object.prototype;
+var hasOwnProperty$9$1 = objectProto$c$1.hasOwnProperty;
+var nativeObjectToString$1$1 = objectProto$c$1.toString;
+var symToStringTag$1$1 = Symbol$2$1 ? Symbol$2$1.toStringTag : void 0;
+function getRawTag$1(value) {
+  var isOwn = hasOwnProperty$9$1.call(value, symToStringTag$1$1), tag = value[symToStringTag$1$1];
   try {
-    value[symToStringTag$1] = void 0;
+    value[symToStringTag$1$1] = void 0;
     var unmasked = true;
   } catch (e) {
   }
-  var result = nativeObjectToString$1.call(value);
+  var result = nativeObjectToString$1$1.call(value);
   if (unmasked) {
     if (isOwn) {
-      value[symToStringTag$1] = tag;
+      value[symToStringTag$1$1] = tag;
     } else {
-      delete value[symToStringTag$1];
+      delete value[symToStringTag$1$1];
     }
   }
   return result;
 }
-var objectProto$b = Object.prototype;
-var nativeObjectToString = objectProto$b.toString;
-function objectToString(value) {
-  return nativeObjectToString.call(value);
+var objectProto$b$1 = Object.prototype;
+var nativeObjectToString$2 = objectProto$b$1.toString;
+function objectToString$1(value) {
+  return nativeObjectToString$2.call(value);
 }
-var nullTag = "[object Null]", undefinedTag = "[object Undefined]";
-var symToStringTag = Symbol$2 ? Symbol$2.toStringTag : void 0;
-function baseGetTag(value) {
+var nullTag$1 = "[object Null]", undefinedTag$1 = "[object Undefined]";
+var symToStringTag$2 = Symbol$2$1 ? Symbol$2$1.toStringTag : void 0;
+function baseGetTag$1(value) {
   if (value == null) {
-    return value === void 0 ? undefinedTag : nullTag;
+    return value === void 0 ? undefinedTag$1 : nullTag$1;
   }
-  return symToStringTag && symToStringTag in Object(value) ? getRawTag(value) : objectToString(value);
+  return symToStringTag$2 && symToStringTag$2 in Object(value) ? getRawTag$1(value) : objectToString$1(value);
 }
-function isObjectLike(value) {
+function isObjectLike$1(value) {
   return value != null && typeof value == "object";
 }
 var isArray$1 = Array.isArray;
 var isArray$1$1 = isArray$1;
-function isObject$1(value) {
+function isObject$2(value) {
   var type = typeof value;
   return value != null && (type == "object" || type == "function");
 }
-var asyncTag = "[object AsyncFunction]", funcTag$2 = "[object Function]", genTag$1 = "[object GeneratorFunction]", proxyTag = "[object Proxy]";
-function isFunction(value) {
-  if (!isObject$1(value)) {
+var asyncTag$1 = "[object AsyncFunction]", funcTag$2$1 = "[object Function]", genTag$1$1 = "[object GeneratorFunction]", proxyTag$1 = "[object Proxy]";
+function isFunction$1(value) {
+  if (!isObject$2(value)) {
     return false;
   }
-  var tag = baseGetTag(value);
-  return tag == funcTag$2 || tag == genTag$1 || tag == asyncTag || tag == proxyTag;
+  var tag = baseGetTag$1(value);
+  return tag == funcTag$2$1 || tag == genTag$1$1 || tag == asyncTag$1 || tag == proxyTag$1;
 }
-var coreJsData = root$1$1["__core-js_shared__"];
-var coreJsData$1 = coreJsData;
-var maskSrcKey = function() {
-  var uid2 = /[^.]+$/.exec(coreJsData$1 && coreJsData$1.keys && coreJsData$1.keys.IE_PROTO || "");
+var coreJsData$2 = root$1$2["__core-js_shared__"];
+var coreJsData$1$1 = coreJsData$2;
+var maskSrcKey$1 = function() {
+  var uid2 = /[^.]+$/.exec(coreJsData$1$1 && coreJsData$1$1.keys && coreJsData$1$1.keys.IE_PROTO || "");
   return uid2 ? "Symbol(src)_1." + uid2 : "";
 }();
-function isMasked(func) {
-  return !!maskSrcKey && maskSrcKey in func;
+function isMasked$1(func) {
+  return !!maskSrcKey$1 && maskSrcKey$1 in func;
 }
-var funcProto$1 = Function.prototype;
-var funcToString$1 = funcProto$1.toString;
-function toSource(func) {
+var funcProto$1$1 = Function.prototype;
+var funcToString$1$1 = funcProto$1$1.toString;
+function toSource$1(func) {
   if (func != null) {
     try {
-      return funcToString$1.call(func);
+      return funcToString$1$1.call(func);
     } catch (e) {
     }
     try {
@@ -28115,34 +28117,34 @@ function toSource(func) {
   }
   return "";
 }
-var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
-var reIsHostCtor = /^\[object .+?Constructor\]$/;
-var funcProto = Function.prototype, objectProto$a = Object.prototype;
-var funcToString = funcProto.toString;
-var hasOwnProperty$8 = objectProto$a.hasOwnProperty;
-var reIsNative = RegExp("^" + funcToString.call(hasOwnProperty$8).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$");
-function baseIsNative(value) {
-  if (!isObject$1(value) || isMasked(value)) {
+var reRegExpChar$1 = /[\\^$.*+?()[\]{}|]/g;
+var reIsHostCtor$1 = /^\[object .+?Constructor\]$/;
+var funcProto$2 = Function.prototype, objectProto$a$1 = Object.prototype;
+var funcToString$2 = funcProto$2.toString;
+var hasOwnProperty$8$1 = objectProto$a$1.hasOwnProperty;
+var reIsNative$1 = RegExp("^" + funcToString$2.call(hasOwnProperty$8$1).replace(reRegExpChar$1, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$");
+function baseIsNative$1(value) {
+  if (!isObject$2(value) || isMasked$1(value)) {
     return false;
   }
-  var pattern = isFunction(value) ? reIsNative : reIsHostCtor;
-  return pattern.test(toSource(value));
+  var pattern = isFunction$1(value) ? reIsNative$1 : reIsHostCtor$1;
+  return pattern.test(toSource$1(value));
 }
-function getValue(object, key) {
+function getValue$1(object, key) {
   return object == null ? void 0 : object[key];
 }
-function getNative(object, key) {
-  var value = getValue(object, key);
-  return baseIsNative(value) ? value : void 0;
+function getNative$1(object, key) {
+  var value = getValue$1(object, key);
+  return baseIsNative$1(value) ? value : void 0;
 }
-var WeakMap2 = getNative(root$1$1, "WeakMap");
-var WeakMap$1$2 = WeakMap2;
+var WeakMap2$1 = getNative$1(root$1$2, "WeakMap");
+var WeakMap$1$2 = WeakMap2$1;
 var objectCreate$1 = Object.create;
 var baseCreate = function() {
   function object() {
   }
   return function(proto) {
-    if (!isObject$1(proto)) {
+    if (!isObject$2(proto)) {
       return {};
     }
     if (objectCreate$1) {
@@ -28165,7 +28167,7 @@ function copyArray(source, array) {
 }
 var defineProperty = function() {
   try {
-    var func = getNative(Object, "defineProperty");
+    var func = getNative$1(Object, "defineProperty");
     func({}, "", {});
     return func;
   } catch (e) {
@@ -28234,7 +28236,7 @@ function isLength(value) {
   return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
 }
 function isArrayLike(value) {
-  return value != null && isLength(value.length) && !isFunction(value);
+  return value != null && isLength(value.length) && !isFunction$1(value);
 }
 var objectProto$8 = Object.prototype;
 function isPrototype(value) {
@@ -28248,27 +28250,27 @@ function baseTimes(n2, iteratee) {
   }
   return result;
 }
-var argsTag$2 = "[object Arguments]";
-function baseIsArguments(value) {
-  return isObjectLike(value) && baseGetTag(value) == argsTag$2;
+var argsTag$2$1 = "[object Arguments]";
+function baseIsArguments$1(value) {
+  return isObjectLike$1(value) && baseGetTag$1(value) == argsTag$2$1;
 }
-var objectProto$7 = Object.prototype;
-var hasOwnProperty$6 = objectProto$7.hasOwnProperty;
-var propertyIsEnumerable$1 = objectProto$7.propertyIsEnumerable;
-var isArguments = baseIsArguments(function() {
+var objectProto$7$1 = Object.prototype;
+var hasOwnProperty$6$1 = objectProto$7$1.hasOwnProperty;
+var propertyIsEnumerable$1$1 = objectProto$7$1.propertyIsEnumerable;
+var isArguments = baseIsArguments$1(function() {
   return arguments;
-}()) ? baseIsArguments : function(value) {
-  return isObjectLike(value) && hasOwnProperty$6.call(value, "callee") && !propertyIsEnumerable$1.call(value, "callee");
+}()) ? baseIsArguments$1 : function(value) {
+  return isObjectLike$1(value) && hasOwnProperty$6$1.call(value, "callee") && !propertyIsEnumerable$1$1.call(value, "callee");
 };
 var isArguments$1 = isArguments;
 function stubFalse() {
   return false;
 }
-var freeExports$2 = typeof exports == "object" && exports && !exports.nodeType && exports;
-var freeModule$2 = freeExports$2 && typeof module == "object" && module && !module.nodeType && module;
-var moduleExports$2 = freeModule$2 && freeModule$2.exports === freeExports$2;
-var Buffer$1 = moduleExports$2 ? root$1$1.Buffer : void 0;
-var nativeIsBuffer = Buffer$1 ? Buffer$1.isBuffer : void 0;
+var freeExports$2$1 = typeof exports == "object" && exports && !exports.nodeType && exports;
+var freeModule$2$1 = freeExports$2$1 && typeof module == "object" && module && !module.nodeType && module;
+var moduleExports$2$1 = freeModule$2$1 && freeModule$2$1.exports === freeExports$2$1;
+var Buffer$1$1 = moduleExports$2$1 ? root$1$2.Buffer : void 0;
+var nativeIsBuffer = Buffer$1$1 ? Buffer$1$1.isBuffer : void 0;
 var isBuffer = nativeIsBuffer || stubFalse;
 var isBuffer$1 = isBuffer;
 var argsTag$1 = "[object Arguments]", arrayTag$1 = "[object Array]", boolTag$2 = "[object Boolean]", dateTag$2 = "[object Date]", errorTag$1 = "[object Error]", funcTag$1 = "[object Function]", mapTag$4 = "[object Map]", numberTag$2 = "[object Number]", objectTag$2 = "[object Object]", regexpTag$2 = "[object RegExp]", setTag$4 = "[object Set]", stringTag$2 = "[object String]", weakMapTag$2 = "[object WeakMap]";
@@ -28277,29 +28279,29 @@ var typedArrayTags = {};
 typedArrayTags[float32Tag$2] = typedArrayTags[float64Tag$2] = typedArrayTags[int8Tag$2] = typedArrayTags[int16Tag$2] = typedArrayTags[int32Tag$2] = typedArrayTags[uint8Tag$2] = typedArrayTags[uint8ClampedTag$2] = typedArrayTags[uint16Tag$2] = typedArrayTags[uint32Tag$2] = true;
 typedArrayTags[argsTag$1] = typedArrayTags[arrayTag$1] = typedArrayTags[arrayBufferTag$2] = typedArrayTags[boolTag$2] = typedArrayTags[dataViewTag$3] = typedArrayTags[dateTag$2] = typedArrayTags[errorTag$1] = typedArrayTags[funcTag$1] = typedArrayTags[mapTag$4] = typedArrayTags[numberTag$2] = typedArrayTags[objectTag$2] = typedArrayTags[regexpTag$2] = typedArrayTags[setTag$4] = typedArrayTags[stringTag$2] = typedArrayTags[weakMapTag$2] = false;
 function baseIsTypedArray(value) {
-  return isObjectLike(value) && isLength(value.length) && !!typedArrayTags[baseGetTag(value)];
+  return isObjectLike$1(value) && isLength(value.length) && !!typedArrayTags[baseGetTag$1(value)];
 }
 function baseUnary(func) {
   return function(value) {
     return func(value);
   };
 }
-var freeExports$1 = typeof exports == "object" && exports && !exports.nodeType && exports;
-var freeModule$1 = freeExports$1 && typeof module == "object" && module && !module.nodeType && module;
-var moduleExports$1 = freeModule$1 && freeModule$1.exports === freeExports$1;
-var freeProcess = moduleExports$1 && freeGlobal$1.process;
-var nodeUtil = function() {
+var freeExports$1$1 = typeof exports == "object" && exports && !exports.nodeType && exports;
+var freeModule$1$1 = freeExports$1$1 && typeof module == "object" && module && !module.nodeType && module;
+var moduleExports$1$1 = freeModule$1$1 && freeModule$1$1.exports === freeExports$1$1;
+var freeProcess$1 = moduleExports$1$1 && freeGlobal$1$1.process;
+var nodeUtil$2 = function() {
   try {
-    var types = freeModule$1 && freeModule$1.require && freeModule$1.require("util").types;
+    var types = freeModule$1$1 && freeModule$1$1.require && freeModule$1$1.require("util").types;
     if (types) {
       return types;
     }
-    return freeProcess && freeProcess.binding && freeProcess.binding("util");
+    return freeProcess$1 && freeProcess$1.binding && freeProcess$1.binding("util");
   } catch (e) {
   }
 }();
-var nodeUtil$1 = nodeUtil;
-var nodeIsTypedArray = nodeUtil$1 && nodeUtil$1.isTypedArray;
+var nodeUtil$1$1 = nodeUtil$2;
+var nodeIsTypedArray = nodeUtil$1$1 && nodeUtil$1$1.isTypedArray;
 var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
 var isTypedArray$1 = isTypedArray;
 var objectProto$6 = Object.prototype;
@@ -28349,7 +28351,7 @@ function nativeKeysIn(object) {
 var objectProto$4 = Object.prototype;
 var hasOwnProperty$3 = objectProto$4.hasOwnProperty;
 function baseKeysIn(object) {
-  if (!isObject$1(object)) {
+  if (!isObject$2(object)) {
     return nativeKeysIn(object);
   }
   var isProto = isPrototype(object), result = [];
@@ -28363,7 +28365,7 @@ function baseKeysIn(object) {
 function keysIn(object) {
   return isArrayLike(object) ? arrayLikeKeys(object, true) : baseKeysIn(object);
 }
-var nativeCreate = getNative(Object, "create");
+var nativeCreate = getNative$1(Object, "create");
 var nativeCreate$1 = nativeCreate;
 function hashClear() {
   this.__data__ = nativeCreate$1 ? nativeCreate$1(null) : {};
@@ -28470,13 +28472,13 @@ ListCache.prototype["delete"] = listCacheDelete;
 ListCache.prototype.get = listCacheGet;
 ListCache.prototype.has = listCacheHas;
 ListCache.prototype.set = listCacheSet;
-var Map$1 = getNative(root$1$1, "Map");
-var Map$2 = Map$1;
+var Map$1$1 = getNative$1(root$1$2, "Map");
+var Map$2$1 = Map$1$1;
 function mapCacheClear() {
   this.size = 0;
   this.__data__ = {
     "hash": new Hash(),
-    "map": new (Map$2 || ListCache)(),
+    "map": new (Map$2$1 || ListCache)(),
     "string": new Hash()
   };
 }
@@ -28547,7 +28549,7 @@ function stackSet(key, value) {
   var data2 = this.__data__;
   if (data2 instanceof ListCache) {
     var pairs = data2.__data__;
-    if (!Map$2 || pairs.length < LARGE_ARRAY_SIZE - 1) {
+    if (!Map$2$1 || pairs.length < LARGE_ARRAY_SIZE - 1) {
       pairs.push([key, value]);
       this.size = ++data2.size;
       return this;
@@ -28573,10 +28575,10 @@ function baseAssign(object, source) {
 function baseAssignIn(object, source) {
   return object && copyObject(source, keysIn(source), object);
 }
-var freeExports = typeof exports == "object" && exports && !exports.nodeType && exports;
-var freeModule = freeExports && typeof module == "object" && module && !module.nodeType && module;
-var moduleExports = freeModule && freeModule.exports === freeExports;
-var Buffer2 = moduleExports ? root$1$1.Buffer : void 0, allocUnsafe = Buffer2 ? Buffer2.allocUnsafe : void 0;
+var freeExports$3 = typeof exports == "object" && exports && !exports.nodeType && exports;
+var freeModule$3 = freeExports$3 && typeof module == "object" && module && !module.nodeType && module;
+var moduleExports$3 = freeModule$3 && freeModule$3.exports === freeExports$3;
+var Buffer2$1 = moduleExports$3 ? root$1$2.Buffer : void 0, allocUnsafe = Buffer2$1 ? Buffer2$1.allocUnsafe : void 0;
 function cloneBuffer(buffer, isDeep) {
   if (isDeep) {
     return buffer.slice();
@@ -28637,37 +28639,37 @@ function getAllKeys(object) {
 function getAllKeysIn(object) {
   return baseGetAllKeys(object, keysIn, getSymbolsIn$1);
 }
-var DataView$1 = getNative(root$1$1, "DataView");
-var DataView$1$1 = DataView$1;
-var Promise$1 = getNative(root$1$1, "Promise");
-var Promise$2 = Promise$1;
-var Set$1 = getNative(root$1$1, "Set");
-var Set$2 = Set$1;
-var mapTag$3 = "[object Map]", objectTag$1 = "[object Object]", promiseTag = "[object Promise]", setTag$3 = "[object Set]", weakMapTag$1 = "[object WeakMap]";
-var dataViewTag$2 = "[object DataView]";
-var dataViewCtorString = toSource(DataView$1$1), mapCtorString = toSource(Map$2), promiseCtorString = toSource(Promise$2), setCtorString = toSource(Set$2), weakMapCtorString = toSource(WeakMap$1$2);
-var getTag = baseGetTag;
-if (DataView$1$1 && getTag(new DataView$1$1(new ArrayBuffer(1))) != dataViewTag$2 || Map$2 && getTag(new Map$2()) != mapTag$3 || Promise$2 && getTag(Promise$2.resolve()) != promiseTag || Set$2 && getTag(new Set$2()) != setTag$3 || WeakMap$1$2 && getTag(new WeakMap$1$2()) != weakMapTag$1) {
-  getTag = function(value) {
-    var result = baseGetTag(value), Ctor = result == objectTag$1 ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : "";
+var DataView$2 = getNative$1(root$1$2, "DataView");
+var DataView$1$2 = DataView$2;
+var Promise$1$1 = getNative$1(root$1$2, "Promise");
+var Promise$2$1 = Promise$1$1;
+var Set$1$1 = getNative$1(root$1$2, "Set");
+var Set$2$1 = Set$1$1;
+var mapTag$3$1 = "[object Map]", objectTag$1$1 = "[object Object]", promiseTag$1 = "[object Promise]", setTag$3$1 = "[object Set]", weakMapTag$1$1 = "[object WeakMap]";
+var dataViewTag$2$1 = "[object DataView]";
+var dataViewCtorString$1 = toSource$1(DataView$1$2), mapCtorString$1 = toSource$1(Map$2$1), promiseCtorString$1 = toSource$1(Promise$2$1), setCtorString$1 = toSource$1(Set$2$1), weakMapCtorString$1 = toSource$1(WeakMap$1$2);
+var getTag$1 = baseGetTag$1;
+if (DataView$1$2 && getTag$1(new DataView$1$2(new ArrayBuffer(1))) != dataViewTag$2$1 || Map$2$1 && getTag$1(new Map$2$1()) != mapTag$3$1 || Promise$2$1 && getTag$1(Promise$2$1.resolve()) != promiseTag$1 || Set$2$1 && getTag$1(new Set$2$1()) != setTag$3$1 || WeakMap$1$2 && getTag$1(new WeakMap$1$2()) != weakMapTag$1$1) {
+  getTag$1 = function(value) {
+    var result = baseGetTag$1(value), Ctor = result == objectTag$1$1 ? value.constructor : void 0, ctorString = Ctor ? toSource$1(Ctor) : "";
     if (ctorString) {
       switch (ctorString) {
-        case dataViewCtorString:
-          return dataViewTag$2;
-        case mapCtorString:
-          return mapTag$3;
-        case promiseCtorString:
-          return promiseTag;
-        case setCtorString:
-          return setTag$3;
-        case weakMapCtorString:
-          return weakMapTag$1;
+        case dataViewCtorString$1:
+          return dataViewTag$2$1;
+        case mapCtorString$1:
+          return mapTag$3$1;
+        case promiseCtorString$1:
+          return promiseTag$1;
+        case setCtorString$1:
+          return setTag$3$1;
+        case weakMapCtorString$1:
+          return weakMapTag$1$1;
       }
     }
     return result;
   };
 }
-var getTag$1 = getTag;
+var getTag$1$1 = getTag$1;
 var objectProto = Object.prototype;
 var hasOwnProperty$a = objectProto.hasOwnProperty;
 function initCloneArray(array) {
@@ -28678,7 +28680,7 @@ function initCloneArray(array) {
   }
   return result;
 }
-var Uint8Array$1 = root$1$1.Uint8Array;
+var Uint8Array$1 = root$1$2.Uint8Array;
 var Uint8Array$2 = Uint8Array$1;
 function cloneArrayBuffer(arrayBuffer) {
   var result = new arrayBuffer.constructor(arrayBuffer.byteLength);
@@ -28695,7 +28697,7 @@ function cloneRegExp(regexp) {
   result.lastIndex = regexp.lastIndex;
   return result;
 }
-var symbolProto = Symbol$2 ? Symbol$2.prototype : void 0, symbolValueOf = symbolProto ? symbolProto.valueOf : void 0;
+var symbolProto$1 = Symbol$2$1 ? Symbol$2$1.prototype : void 0, symbolValueOf = symbolProto$1 ? symbolProto$1.valueOf : void 0;
 function cloneSymbol(symbol) {
   return symbolValueOf ? Object(symbolValueOf.call(symbol)) : {};
 }
@@ -28743,16 +28745,16 @@ function initCloneObject(object) {
 }
 var mapTag$1 = "[object Map]";
 function baseIsMap(value) {
-  return isObjectLike(value) && getTag$1(value) == mapTag$1;
+  return isObjectLike$1(value) && getTag$1$1(value) == mapTag$1;
 }
-var nodeIsMap = nodeUtil$1 && nodeUtil$1.isMap;
+var nodeIsMap = nodeUtil$1$1 && nodeUtil$1$1.isMap;
 var isMap = nodeIsMap ? baseUnary(nodeIsMap) : baseIsMap;
 var isMap$1 = isMap;
 var setTag$1 = "[object Set]";
 function baseIsSet(value) {
-  return isObjectLike(value) && getTag$1(value) == setTag$1;
+  return isObjectLike$1(value) && getTag$1$1(value) == setTag$1;
 }
-var nodeIsSet = nodeUtil$1 && nodeUtil$1.isSet;
+var nodeIsSet = nodeUtil$1$1 && nodeUtil$1$1.isSet;
 var isSet = nodeIsSet ? baseUnary(nodeIsSet) : baseIsSet;
 var isSet$1 = isSet;
 var CLONE_DEEP_FLAG$1 = 1, CLONE_FLAT_FLAG = 2, CLONE_SYMBOLS_FLAG$1 = 4;
@@ -28769,7 +28771,7 @@ function baseClone(value, bitmask, customizer, key, object, stack) {
   if (result !== void 0) {
     return result;
   }
-  if (!isObject$1(value)) {
+  if (!isObject$2(value)) {
     return value;
   }
   var isArr = isArray$1$1(value);
@@ -28779,7 +28781,7 @@ function baseClone(value, bitmask, customizer, key, object, stack) {
       return copyArray(value, result);
     }
   } else {
-    var tag = getTag$1(value), isFunc = tag == funcTag || tag == genTag;
+    var tag = getTag$1$1(value), isFunc = tag == funcTag || tag == genTag;
     if (isBuffer$1(value)) {
       return cloneBuffer(value, isDeep);
     }
@@ -28827,14 +28829,14 @@ function cloneDeep(value) {
 }
 class VimSettings {
   constructor(options) {
-    __publicField(this, "options");
-    __publicField(this, "getOptions", () => cloneDeep(this.options));
-    __publicField(this, "getPosition", () => toVec(this.options.position));
-    __publicField(this, "getRotation", () => toQuaternion(this.options.rotation));
-    __publicField(this, "getScale", () => scalarToVec(this.options.scale));
-    __publicField(this, "getMatrix", () => new Matrix4().compose(this.getPosition(), this.getRotation(), this.getScale()));
-    __publicField(this, "getTransparency", () => this.options.transparency);
-    __publicField(this, "getDownloadMode", () => this.options.download);
+    __publicField$1(this, "options");
+    __publicField$1(this, "getOptions", () => cloneDeep(this.options));
+    __publicField$1(this, "getPosition", () => toVec(this.options.position));
+    __publicField$1(this, "getRotation", () => toQuaternion(this.options.rotation));
+    __publicField$1(this, "getScale", () => scalarToVec(this.options.scale));
+    __publicField$1(this, "getMatrix", () => new Matrix4().compose(this.getPosition(), this.getRotation(), this.getScale()));
+    __publicField$1(this, "getTransparency", () => this.options.transparency);
+    __publicField$1(this, "getDownloadMode", () => this.options.download);
     const fallback = {
       position: { x: 0, y: 0, z: 0 },
       rotation: { x: 0, y: 0, z: 0 },
@@ -28843,7 +28845,7 @@ class VimSettings {
       download: "stream"
     };
     this.options = options ? cjs(fallback, options, void 0) : fallback;
-    this.options.transparency = Transparency.isValid(this.options.transparency) ? this.options.transparency : "all";
+    this.options.transparency = Transparency$1.isValid(this.options.transparency) ? this.options.transparency : "all";
   }
 }
 function toVec(obj) {
@@ -28860,12 +28862,12 @@ function toEuler(rot) {
 }
 class G3dAttributeDescriptor {
   constructor(description, association, semantic, attributeTypeIndex, dataType, dataArity) {
-    __publicField(this, "description");
-    __publicField(this, "association");
-    __publicField(this, "semantic");
-    __publicField(this, "attributeTypeIndex");
-    __publicField(this, "dataType");
-    __publicField(this, "dataArity");
+    __publicField$1(this, "description");
+    __publicField$1(this, "association");
+    __publicField$1(this, "semantic");
+    __publicField$1(this, "attributeTypeIndex");
+    __publicField$1(this, "dataType");
+    __publicField$1(this, "dataArity");
     if (!description.startsWith("g3d:")) {
       throw new Error(`${description} must start with 'g3d'`);
     }
@@ -28890,9 +28892,9 @@ class G3dAttributeDescriptor {
 }
 class G3dAttribute {
   constructor(descriptor, bytes) {
-    __publicField(this, "descriptor");
-    __publicField(this, "bytes");
-    __publicField(this, "data");
+    __publicField$1(this, "descriptor");
+    __publicField$1(this, "bytes");
+    __publicField$1(this, "data");
     this.descriptor = descriptor;
     this.bytes = bytes;
     this.data = G3dAttribute.castData(bytes, descriptor.dataType);
@@ -28927,8 +28929,8 @@ class G3dAttribute {
 }
 class AbstractG3d {
   constructor(meta, attributes) {
-    __publicField(this, "meta");
-    __publicField(this, "attributes");
+    __publicField$1(this, "meta");
+    __publicField$1(this, "attributes");
     this.meta = meta;
     this.attributes = attributes;
   }
@@ -28941,53 +28943,53 @@ class AbstractG3d {
     }
   }
   static createFromBfast(bfast) {
-    const promises = VimAttributes.all.map((a) => bfast.getBytes(a).then((bytes) => bytes ? new G3dAttribute(G3dAttributeDescriptor.fromString(a), bytes) : void 0));
+    const promises = VimAttributes$1.all.map((a) => bfast.getBytes(a).then((bytes) => bytes ? new G3dAttribute(G3dAttributeDescriptor.fromString(a), bytes) : void 0));
     return Promise.all(promises).then((attributes) => new AbstractG3d("meta", attributes.filter((a) => a !== void 0)));
   }
 }
-const _VimAttributes = class {
+const _VimAttributes$1 = class {
 };
-let VimAttributes = _VimAttributes;
-__publicField(VimAttributes, "positions", "g3d:vertex:position:0:float32:3");
-__publicField(VimAttributes, "indices", "g3d:corner:index:0:int32:1");
-__publicField(VimAttributes, "instanceMeshes", "g3d:instance:mesh:0:int32:1");
-__publicField(VimAttributes, "instanceTransforms", "g3d:instance:transform:0:float32:16");
-__publicField(VimAttributes, "instanceFlags", "g3d:instance:flags:0:uint16:1");
-__publicField(VimAttributes, "meshSubmeshes", "g3d:mesh:submeshoffset:0:int32:1");
-__publicField(VimAttributes, "submeshIndexOffsets", "g3d:submesh:indexoffset:0:int32:1");
-__publicField(VimAttributes, "submeshMaterials", "g3d:submesh:material:0:int32:1");
-__publicField(VimAttributes, "materialColors", "g3d:material:color:0:float32:4");
-__publicField(VimAttributes, "all", [
-  _VimAttributes.positions,
-  _VimAttributes.indices,
-  _VimAttributes.instanceMeshes,
-  _VimAttributes.instanceTransforms,
-  _VimAttributes.instanceFlags,
-  _VimAttributes.meshSubmeshes,
-  _VimAttributes.submeshIndexOffsets,
-  _VimAttributes.submeshMaterials,
-  _VimAttributes.materialColors
+let VimAttributes$1 = _VimAttributes$1;
+__publicField$1(VimAttributes$1, "positions", "g3d:vertex:position:0:float32:3");
+__publicField$1(VimAttributes$1, "indices", "g3d:corner:index:0:int32:1");
+__publicField$1(VimAttributes$1, "instanceMeshes", "g3d:instance:mesh:0:int32:1");
+__publicField$1(VimAttributes$1, "instanceTransforms", "g3d:instance:transform:0:float32:16");
+__publicField$1(VimAttributes$1, "instanceFlags", "g3d:instance:flags:0:uint16:1");
+__publicField$1(VimAttributes$1, "meshSubmeshes", "g3d:mesh:submeshoffset:0:int32:1");
+__publicField$1(VimAttributes$1, "submeshIndexOffsets", "g3d:submesh:indexoffset:0:int32:1");
+__publicField$1(VimAttributes$1, "submeshMaterials", "g3d:submesh:material:0:int32:1");
+__publicField$1(VimAttributes$1, "materialColors", "g3d:material:color:0:float32:4");
+__publicField$1(VimAttributes$1, "all", [
+  _VimAttributes$1.positions,
+  _VimAttributes$1.indices,
+  _VimAttributes$1.instanceMeshes,
+  _VimAttributes$1.instanceTransforms,
+  _VimAttributes$1.instanceFlags,
+  _VimAttributes$1.meshSubmeshes,
+  _VimAttributes$1.submeshIndexOffsets,
+  _VimAttributes$1.submeshMaterials,
+  _VimAttributes$1.materialColors
 ]);
 class G3d {
   constructor(g3d) {
-    __publicField(this, "positions");
-    __publicField(this, "indices");
-    __publicField(this, "instanceMeshes");
-    __publicField(this, "instanceTransforms");
-    __publicField(this, "instanceFlags");
-    __publicField(this, "meshSubmeshes");
-    __publicField(this, "submeshIndexOffset");
-    __publicField(this, "submeshMaterial");
-    __publicField(this, "materialColors");
-    __publicField(this, "meshVertexOffsets");
-    __publicField(this, "meshInstances");
-    __publicField(this, "meshOpaqueCount");
-    __publicField(this, "rawG3d");
-    __publicField(this, "MATRIX_SIZE", 16);
-    __publicField(this, "COLOR_SIZE", 4);
-    __publicField(this, "POSITION_SIZE", 3);
-    __publicField(this, "DEFAULT_COLOR", new Float32Array([1, 1, 1, 1]));
-    __publicField(this, "computeMeshInstances", () => {
+    __publicField$1(this, "positions");
+    __publicField$1(this, "indices");
+    __publicField$1(this, "instanceMeshes");
+    __publicField$1(this, "instanceTransforms");
+    __publicField$1(this, "instanceFlags");
+    __publicField$1(this, "meshSubmeshes");
+    __publicField$1(this, "submeshIndexOffset");
+    __publicField$1(this, "submeshMaterial");
+    __publicField$1(this, "materialColors");
+    __publicField$1(this, "meshVertexOffsets");
+    __publicField$1(this, "meshInstances");
+    __publicField$1(this, "meshOpaqueCount");
+    __publicField$1(this, "rawG3d");
+    __publicField$1(this, "MATRIX_SIZE", 16);
+    __publicField$1(this, "COLOR_SIZE", 4);
+    __publicField$1(this, "POSITION_SIZE", 3);
+    __publicField$1(this, "DEFAULT_COLOR", new Float32Array([1, 1, 1, 1]));
+    __publicField$1(this, "computeMeshInstances", () => {
       const result = [];
       for (let i2 = 0; i2 < this.instanceMeshes.length; i2++) {
         const mesh = this.instanceMeshes[i2];
@@ -29001,24 +29003,24 @@ class G3d {
       }
       return result;
     });
-    __publicField(this, "getVertexCount", () => this.positions.length / this.POSITION_SIZE);
-    __publicField(this, "getMeshCount", () => this.meshSubmeshes.length);
-    __publicField(this, "getInstanceCount", () => this.instanceMeshes.length);
-    __publicField(this, "getMaterialCount", () => this.materialColors.length / this.COLOR_SIZE);
+    __publicField$1(this, "getVertexCount", () => this.positions.length / this.POSITION_SIZE);
+    __publicField$1(this, "getMeshCount", () => this.meshSubmeshes.length);
+    __publicField$1(this, "getInstanceCount", () => this.instanceMeshes.length);
+    __publicField$1(this, "getMaterialCount", () => this.materialColors.length / this.COLOR_SIZE);
     var _a2, _b, _c, _d, _e, _f, _g, _h, _i, _j;
     this.rawG3d = g3d;
-    this.positions = (_a2 = g3d.findAttribute(VimAttributes.positions)) == null ? void 0 : _a2.data;
-    const tmp2 = (_b = g3d.findAttribute(VimAttributes.indices)) == null ? void 0 : _b.data;
+    this.positions = (_a2 = g3d.findAttribute(VimAttributes$1.positions)) == null ? void 0 : _a2.data;
+    const tmp2 = (_b = g3d.findAttribute(VimAttributes$1.indices)) == null ? void 0 : _b.data;
     if (!tmp2)
       throw new Error("No Index Buffer Found");
     this.indices = new Uint32Array(tmp2.buffer, tmp2.byteOffset, tmp2.length);
-    this.meshSubmeshes = (_c = g3d.findAttribute(VimAttributes.meshSubmeshes)) == null ? void 0 : _c.data;
-    this.submeshIndexOffset = (_d = g3d.findAttribute(VimAttributes.submeshIndexOffsets)) == null ? void 0 : _d.data;
-    this.submeshMaterial = (_e = g3d.findAttribute(VimAttributes.submeshMaterials)) == null ? void 0 : _e.data;
-    this.materialColors = (_f = g3d.findAttribute(VimAttributes.materialColors)) == null ? void 0 : _f.data;
-    this.instanceMeshes = (_g = g3d.findAttribute(VimAttributes.instanceMeshes)) == null ? void 0 : _g.data;
-    this.instanceTransforms = (_h = g3d.findAttribute(VimAttributes.instanceTransforms)) == null ? void 0 : _h.data;
-    this.instanceFlags = (_j = (_i = g3d.findAttribute(VimAttributes.instanceFlags)) == null ? void 0 : _i.data) != null ? _j : new Uint16Array(this.instanceMeshes.length);
+    this.meshSubmeshes = (_c = g3d.findAttribute(VimAttributes$1.meshSubmeshes)) == null ? void 0 : _c.data;
+    this.submeshIndexOffset = (_d = g3d.findAttribute(VimAttributes$1.submeshIndexOffsets)) == null ? void 0 : _d.data;
+    this.submeshMaterial = (_e = g3d.findAttribute(VimAttributes$1.submeshMaterials)) == null ? void 0 : _e.data;
+    this.materialColors = (_f = g3d.findAttribute(VimAttributes$1.materialColors)) == null ? void 0 : _f.data;
+    this.instanceMeshes = (_g = g3d.findAttribute(VimAttributes$1.instanceMeshes)) == null ? void 0 : _g.data;
+    this.instanceTransforms = (_h = g3d.findAttribute(VimAttributes$1.instanceTransforms)) == null ? void 0 : _h.data;
+    this.instanceFlags = (_j = (_i = g3d.findAttribute(VimAttributes$1.instanceFlags)) == null ? void 0 : _i.data) != null ? _j : new Uint16Array(this.instanceMeshes.length);
     this.meshVertexOffsets = this.computeMeshVertexOffsets();
     this.rebaseIndices();
     this.meshInstances = this.computeMeshInstances();
@@ -29383,7 +29385,7 @@ const objectModel = {
 };
 class DocumentNoBim {
   constructor(g3d) {
-    __publicField(this, "g3d");
+    __publicField$1(this, "g3d");
     this.g3d = g3d;
   }
   getAllElements() {
@@ -29425,13 +29427,13 @@ class DocumentNoBim {
 }
 class Document {
   constructor(g3d, entities, strings, instanceToElement, elementToInstances, elementIds, elementIdToElements) {
-    __publicField(this, "g3d");
-    __publicField(this, "_entities");
-    __publicField(this, "_strings");
-    __publicField(this, "_instanceToElement");
-    __publicField(this, "_elementToInstances");
-    __publicField(this, "_elementIds");
-    __publicField(this, "_elementIdToElements");
+    __publicField$1(this, "g3d");
+    __publicField$1(this, "_entities");
+    __publicField$1(this, "_strings");
+    __publicField$1(this, "_instanceToElement");
+    __publicField$1(this, "_elementToInstances");
+    __publicField$1(this, "_elementIds");
+    __publicField$1(this, "_elementIdToElements");
     this.g3d = g3d;
     this._entities = entities;
     this._strings = strings;
@@ -29745,10 +29747,10 @@ class Document {
 }
 class VimMaterials {
   constructor(opaque, transparent, wireframe, isolation) {
-    __publicField(this, "opaque");
-    __publicField(this, "transparent");
-    __publicField(this, "wireframe");
-    __publicField(this, "isolation");
+    __publicField$1(this, "opaque");
+    __publicField$1(this, "transparent");
+    __publicField$1(this, "wireframe");
+    __publicField$1(this, "isolation");
     this.opaque = opaque != null ? opaque : createOpaque();
     this.transparent = transparent != null ? transparent : createTransparent();
     this.wireframe = wireframe != null ? wireframe : createWireframe();
@@ -29977,7 +29979,7 @@ function createIsolationMaterial() {
 }
 class MeshBuilder {
   constructor(materials) {
-    __publicField(this, "materials");
+    __publicField$1(this, "materials");
     this.materials = materials != null ? materials : new VimMaterials();
   }
   createInstancedMeshes(g3d, transparency2, instances) {
@@ -29994,7 +29996,7 @@ class MeshBuilder {
         const count = g3d.getMeshSubmeshCount(mesh, section);
         if (count <= 0)
           return;
-        const geometry = Geometry.createGeometryFromMesh(g3d, mesh, section, transparent);
+        const geometry = Geometry$1.createGeometryFromMesh(g3d, mesh, section, transparent);
         return this.createInstancedMesh(geometry, g3d, meshInstances, transparent);
       };
       switch (transparency2) {
@@ -30024,14 +30026,14 @@ class MeshBuilder {
     const material = useAlpha ? this.materials.transparent : this.materials.opaque;
     const result = new InstancedMesh(geometry, material, instances.length);
     for (let i2 = 0; i2 < instances.length; i2++) {
-      const matrix = Geometry.getInstanceMatrix(g3d, instances[i2]);
+      const matrix = Geometry$1.getInstanceMatrix(g3d, instances[i2]);
       result.setMatrixAt(i2, matrix);
     }
     result.userData.instances = instances;
     return result;
   }
   createMergedMesh(g3d, section, transparent, instances) {
-    const merge = instances ? Geometry.mergeInstanceMeshes(g3d, section, transparent, instances) : Geometry.mergeUniqueMeshes(g3d, section, transparent);
+    const merge = instances ? Geometry$1.mergeInstanceMeshes(g3d, section, transparent, instances) : Geometry$1.mergeUniqueMeshes(g3d, section, transparent);
     const material = transparent ? this.materials.transparent : this.materials.opaque;
     const mesh = new Mesh(merge.geometry, material);
     mesh.userData.merged = true;
@@ -30040,14 +30042,14 @@ class MeshBuilder {
     return mesh;
   }
   createWireframe(g3d, instances) {
-    const geometry = Geometry.createGeometryFromInstances(g3d, instances);
+    const geometry = Geometry$1.createGeometryFromInstances(g3d, instances);
     const wireframe = new WireframeGeometry(geometry);
     return new LineSegments(wireframe, this.materials.wireframe);
   }
 }
 class SceneBuilder {
   constructor(meshBuilder) {
-    __publicField(this, "meshBuilder");
+    __publicField$1(this, "meshBuilder");
     this.meshBuilder = meshBuilder != null ? meshBuilder : new MeshBuilder();
   }
   createFromG3d(g3d, transparency2 = "all", instances = void 0) {
@@ -30090,11 +30092,11 @@ class SceneBuilder {
 }
 class Vim {
   constructor(vim, scene, settings2) {
-    __publicField(this, "document");
-    __publicField(this, "index", -1);
-    __publicField(this, "settings");
-    __publicField(this, "scene");
-    __publicField(this, "_elementToObject", /* @__PURE__ */ new Map());
+    __publicField$1(this, "document");
+    __publicField$1(this, "index", -1);
+    __publicField$1(this, "settings");
+    __publicField$1(this, "scene");
+    __publicField$1(this, "_elementToObject", /* @__PURE__ */ new Map());
     this.document = vim;
     this.scene = scene;
     this.scene.setVim(this);
@@ -30149,13 +30151,13 @@ class Vim {
     this._elementToObject.set(element, result);
     return result;
   }
-  getObjectsInBox(box2) {
+  getObjectsInBox(box) {
     const result = [];
     for (const obj of this.getAllObjects()) {
       const b = obj.getBoundingBox();
       if (!b)
         continue;
-      if (box2.containsBox(b)) {
+      if (box.containsBox(b)) {
         result.push(obj);
       }
     }
@@ -30200,8 +30202,8 @@ class Vim {
 }
 class Loader {
   constructor(materials) {
-    __publicField(this, "sceneBuilder");
-    __publicField(this, "meshBuilder");
+    __publicField$1(this, "sceneBuilder");
+    __publicField$1(this, "meshBuilder");
     this.meshBuilder = new MeshBuilder(materials);
     this.sceneBuilder = new SceneBuilder(this.meshBuilder);
   }
@@ -30218,10 +30220,10 @@ class Loader {
 }
 class RemoteValue {
   constructor(getter, label) {
-    __publicField(this, "label");
-    __publicField(this, "_getter");
-    __publicField(this, "_value");
-    __publicField(this, "_request");
+    __publicField$1(this, "label");
+    __publicField$1(this, "_getter");
+    __publicField$1(this, "_value");
+    __publicField$1(this, "_request");
     this._getter = getter;
     this.label = label != null ? label : "";
   }
@@ -30242,22 +30244,22 @@ class RemoteValue {
 }
 class Request {
   constructor(field) {
-    __publicField(this, "status", "active");
-    __publicField(this, "field");
-    __publicField(this, "loaded", 0);
-    __publicField(this, "total", 0);
-    __publicField(this, "lengthComputable", true);
+    __publicField$1(this, "status", "active");
+    __publicField$1(this, "field");
+    __publicField$1(this, "loaded", 0);
+    __publicField$1(this, "total", 0);
+    __publicField$1(this, "lengthComputable", true);
     this.field = field;
   }
 }
 class RequestLogger {
   constructor(source) {
-    __publicField(this, "source");
-    __publicField(this, "all", /* @__PURE__ */ new Map());
-    __publicField(this, "lastUpdate", 0);
-    __publicField(this, "delay", 500);
-    __publicField(this, "sleeping", false);
-    __publicField(this, "onUpdate");
+    __publicField$1(this, "source");
+    __publicField$1(this, "all", /* @__PURE__ */ new Map());
+    __publicField$1(this, "lastUpdate", 0);
+    __publicField$1(this, "delay", 500);
+    __publicField$1(this, "sleeping", false);
+    __publicField$1(this, "onUpdate");
     this.source = source;
   }
   get loaded() {
@@ -30317,14 +30319,14 @@ class RequestLogger {
 }
 class RetryRequest {
   constructor(url2, range2, responseType) {
-    __publicField(this, "url");
-    __publicField(this, "range");
-    __publicField(this, "responseType");
-    __publicField(this, "msg");
-    __publicField(this, "xhr");
-    __publicField(this, "onLoad");
-    __publicField(this, "onError");
-    __publicField(this, "onProgress");
+    __publicField$1(this, "url");
+    __publicField$1(this, "range");
+    __publicField$1(this, "responseType");
+    __publicField$1(this, "msg");
+    __publicField$1(this, "xhr");
+    __publicField$1(this, "onLoad");
+    __publicField$1(this, "onError");
+    __publicField$1(this, "onProgress");
     this.url = url2;
     this.range = range2;
     this.responseType = responseType;
@@ -30357,12 +30359,12 @@ class RetryRequest {
 }
 class RemoteBuffer {
   constructor(url2, logger = new RequestLogger(url2)) {
-    __publicField(this, "url");
-    __publicField(this, "logger");
-    __publicField(this, "queue", []);
-    __publicField(this, "active", /* @__PURE__ */ new Set());
-    __publicField(this, "maxConcurency", 10);
-    __publicField(this, "encoded");
+    __publicField$1(this, "url");
+    __publicField$1(this, "logger");
+    __publicField$1(this, "queue", []);
+    __publicField$1(this, "active", /* @__PURE__ */ new Set());
+    __publicField$1(this, "maxConcurency", 10);
+    __publicField$1(this, "encoded");
     this.url = url2;
     this.logger = logger;
     this.encoded = new RemoteValue(() => this.requestEncoding());
@@ -30443,8 +30445,8 @@ class RemoteBuffer {
 }
 class Range {
   constructor(start, end) {
-    __publicField(this, "start");
-    __publicField(this, "end");
+    __publicField$1(this, "start");
+    __publicField$1(this, "end");
     this.start = start;
     this.end = end;
   }
@@ -30490,10 +30492,10 @@ function typeConstructor(type) {
 }
 class Header {
   constructor(magic, dataStart, dataEnd, numArrays) {
-    __publicField(this, "magic");
-    __publicField(this, "dataStart");
-    __publicField(this, "dataEnd");
-    __publicField(this, "numArrays");
+    __publicField$1(this, "magic");
+    __publicField$1(this, "dataStart");
+    __publicField$1(this, "dataEnd");
+    __publicField$1(this, "numArrays");
     if (magic !== 49061) {
       throw new Error("Invalid Bfast. Invalid Magic number");
     }
@@ -30532,12 +30534,12 @@ class Header {
 }
 class BFast {
   constructor(source, offset = 0, name = "") {
-    __publicField(this, "source");
-    __publicField(this, "offset");
-    __publicField(this, "name");
-    __publicField(this, "_header");
-    __publicField(this, "_ranges");
-    __publicField(this, "_children");
+    __publicField$1(this, "source");
+    __publicField$1(this, "offset");
+    __publicField$1(this, "name");
+    __publicField$1(this, "_header");
+    __publicField$1(this, "_ranges");
+    __publicField$1(this, "_children");
     this.source = source;
     this.offset = offset;
     this.name = name;
@@ -30703,17 +30705,17 @@ class BFast {
 }
 class Section {
   constructor(renderer, materials) {
-    __publicField(this, "_renderer");
-    __publicField(this, "_materials");
-    __publicField(this, "_active");
-    __publicField(this, "box", new Box3(new Vector3(-100, -100, -100), new Vector3(100, 100, 100)));
-    __publicField(this, "maxX", new Plane(new Vector3(-1, 0, 0)));
-    __publicField(this, "minX", new Plane(new Vector3(1, 0, 0)));
-    __publicField(this, "maxY", new Plane(new Vector3(0, -1, 0)));
-    __publicField(this, "minY", new Plane(new Vector3(0, 1, 0)));
-    __publicField(this, "maxZ", new Plane(new Vector3(0, 0, -1)));
-    __publicField(this, "minZ", new Plane(new Vector3(0, 0, 1)));
-    __publicField(this, "planes", [
+    __publicField$1(this, "_renderer");
+    __publicField$1(this, "_materials");
+    __publicField$1(this, "_active");
+    __publicField$1(this, "box", new Box3(new Vector3(-100, -100, -100), new Vector3(100, 100, 100)));
+    __publicField$1(this, "maxX", new Plane(new Vector3(-1, 0, 0)));
+    __publicField$1(this, "minX", new Plane(new Vector3(1, 0, 0)));
+    __publicField$1(this, "maxY", new Plane(new Vector3(0, -1, 0)));
+    __publicField$1(this, "minY", new Plane(new Vector3(0, 1, 0)));
+    __publicField$1(this, "maxZ", new Plane(new Vector3(0, 0, -1)));
+    __publicField$1(this, "minZ", new Plane(new Vector3(0, 0, 1)));
+    __publicField$1(this, "planes", [
       this.maxX,
       this.minX,
       this.maxY,
@@ -30724,14 +30726,14 @@ class Section {
     this._renderer = renderer;
     this._materials = materials;
   }
-  fitBox(box2) {
-    this.maxX.constant = box2.max.x;
-    this.minX.constant = -box2.min.x;
-    this.maxY.constant = box2.max.y;
-    this.minY.constant = -box2.min.y;
-    this.maxZ.constant = box2.max.z;
-    this.minZ.constant = -box2.min.z;
-    this.box.copy(box2);
+  fitBox(box) {
+    this.maxX.constant = box.max.x;
+    this.minX.constant = -box.min.x;
+    this.maxY.constant = box.max.y;
+    this.minY.constant = -box.min.y;
+    this.maxZ.constant = box.max.z;
+    this.minZ.constant = -box.min.z;
+    this.box.copy(box);
   }
   set active(value) {
     const p2 = value ? this.planes : void 0;
@@ -30748,12 +30750,12 @@ class Section {
 }
 class Renderer {
   constructor(scene, viewport, materials) {
-    __publicField(this, "renderer");
-    __publicField(this, "viewport");
-    __publicField(this, "scene");
-    __publicField(this, "section");
-    __publicField(this, "materials");
-    __publicField(this, "fitViewport", () => {
+    __publicField$1(this, "renderer");
+    __publicField$1(this, "viewport");
+    __publicField$1(this, "scene");
+    __publicField$1(this, "section");
+    __publicField$1(this, "materials");
+    __publicField$1(this, "fitViewport", () => {
       const [width, height] = this.viewport.getParentSize();
       this.renderer.setPixelRatio(window.devicePixelRatio);
       this.renderer.setSize(width, height);
@@ -30804,23 +30806,23 @@ class Renderer {
 }
 class Viewer {
   constructor(options) {
-    __publicField(this, "settings");
-    __publicField(this, "renderer");
-    __publicField(this, "viewport");
-    __publicField(this, "selection");
-    __publicField(this, "inputs");
-    __publicField(this, "raycaster");
-    __publicField(this, "gizmoSection");
-    __publicField(this, "gizmoMeasure");
-    __publicField(this, "gizmoSelection");
-    __publicField(this, "_environment");
-    __publicField(this, "_camera");
-    __publicField(this, "_loader");
-    __publicField(this, "_clock", new Clock());
-    __publicField(this, "_gizmoAxes");
-    __publicField(this, "_materials");
-    __publicField(this, "_vims", []);
-    __publicField(this, "_disposed", false);
+    __publicField$1(this, "settings");
+    __publicField$1(this, "renderer");
+    __publicField$1(this, "viewport");
+    __publicField$1(this, "selection");
+    __publicField$1(this, "inputs");
+    __publicField$1(this, "raycaster");
+    __publicField$1(this, "gizmoSection");
+    __publicField$1(this, "gizmoMeasure");
+    __publicField$1(this, "gizmoSelection");
+    __publicField$1(this, "_environment");
+    __publicField$1(this, "_camera");
+    __publicField$1(this, "_loader");
+    __publicField$1(this, "_clock", new Clock());
+    __publicField$1(this, "_gizmoAxes");
+    __publicField$1(this, "_materials");
+    __publicField$1(this, "_vims", []);
+    __publicField$1(this, "_disposed", false);
     var _a2;
     this.settings = new ViewerSettings(options);
     const materials = new VimMaterials();
@@ -30911,17 +30913,17 @@ class Viewer {
     if (buffer instanceof RemoteBuffer)
       buffer.logger.onUpdate = void 0;
     this.onVimLoaded(vim);
-    this.camera.frame("all", "center");
+    this.camera.frame("all", 45);
     return vim;
   }
   onVimLoaded(vim) {
     this.addVim(vim);
     this.renderer.add(vim.scene);
-    const box2 = this.renderer.getBoundingBox();
-    if (box2)
-      this._environment.adaptToContent(box2);
+    const box = this.renderer.getBoundingBox();
+    if (box)
+      this._environment.adaptToContent(box);
     this._camera.adaptToContent();
-    this.gizmoSection.fitBox(box2);
+    this.gizmoSection.fitBox(box);
   }
   unloadVim(vim) {
     this.removeVim(vim);
@@ -39334,18 +39336,18 @@ var requireObjectCoercible = function(it) {
 var toIndexedObject = function(it) {
   return indexedObject(requireObjectCoercible(it));
 };
-var isObject = function(it) {
+var isObject$1 = function(it) {
   return typeof it === "object" ? it !== null : typeof it === "function";
 };
 var toPrimitive = function(input, PREFERRED_STRING) {
-  if (!isObject(input))
+  if (!isObject$1(input))
     return input;
   var fn, val;
-  if (PREFERRED_STRING && typeof (fn = input.toString) == "function" && !isObject(val = fn.call(input)))
+  if (PREFERRED_STRING && typeof (fn = input.toString) == "function" && !isObject$1(val = fn.call(input)))
     return val;
-  if (typeof (fn = input.valueOf) == "function" && !isObject(val = fn.call(input)))
+  if (typeof (fn = input.valueOf) == "function" && !isObject$1(val = fn.call(input)))
     return val;
-  if (!PREFERRED_STRING && typeof (fn = input.toString) == "function" && !isObject(val = fn.call(input)))
+  if (!PREFERRED_STRING && typeof (fn = input.toString) == "function" && !isObject$1(val = fn.call(input)))
     return val;
   throw TypeError("Can't convert object to primitive value");
 };
@@ -39357,7 +39359,7 @@ var has = function hasOwn(it, key) {
   return hasOwnProperty$1.call(toObject$1(it), key);
 };
 var document$1 = global_1.document;
-var EXISTS = isObject(document$1) && isObject(document$1.createElement);
+var EXISTS = isObject$1(document$1) && isObject$1(document$1.createElement);
 var documentCreateElement = function(it) {
   return EXISTS ? document$1.createElement(it) : {};
 };
@@ -39384,7 +39386,7 @@ var objectGetOwnPropertyDescriptor = {
   f: f$1
 };
 var anObject = function(it) {
-  if (!isObject(it)) {
+  if (!isObject$1(it)) {
     throw TypeError(String(it) + " is not an object");
   }
   return it;
@@ -39432,8 +39434,8 @@ if (typeof sharedStore.inspectSource != "function") {
   };
 }
 var inspectSource = sharedStore.inspectSource;
-var WeakMap$1 = global_1.WeakMap;
-var nativeWeakMap = typeof WeakMap$1 === "function" && /native code/.test(inspectSource(WeakMap$1));
+var WeakMap$2 = global_1.WeakMap;
+var nativeWeakMap = typeof WeakMap$2 === "function" && /native code/.test(inspectSource(WeakMap$2));
 var shared = createCommonjsModule(function(module2) {
   (module2.exports = function(key, value) {
     return sharedStore[key] || (sharedStore[key] = value !== void 0 ? value : {});
@@ -39462,7 +39464,7 @@ var enforce = function(it) {
 var getterFor = function(TYPE) {
   return function(it) {
     var state;
-    if (!isObject(it) || (state = get2(it)).type !== TYPE) {
+    if (!isObject$1(it) || (state = get2(it)).type !== TYPE) {
       throw TypeError("Incompatible receiver, " + TYPE + " required");
     }
     return state;
@@ -39744,12 +39746,12 @@ var nativeSymbol = !!Object.getOwnPropertySymbols && !fails(function() {
 });
 var useSymbolAsUid = nativeSymbol && !Symbol.sham && typeof Symbol.iterator == "symbol";
 var WellKnownSymbolsStore = shared("wks");
-var Symbol$1 = global_1.Symbol;
-var createWellKnownSymbol = useSymbolAsUid ? Symbol$1 : Symbol$1 && Symbol$1.withoutSetter || uid;
+var Symbol$1$1 = global_1.Symbol;
+var createWellKnownSymbol = useSymbolAsUid ? Symbol$1$1 : Symbol$1$1 && Symbol$1$1.withoutSetter || uid;
 var wellKnownSymbol = function(name) {
   if (!has(WellKnownSymbolsStore, name) || !(nativeSymbol || typeof WellKnownSymbolsStore[name] == "string")) {
-    if (nativeSymbol && has(Symbol$1, name)) {
-      WellKnownSymbolsStore[name] = Symbol$1[name];
+    if (nativeSymbol && has(Symbol$1$1, name)) {
+      WellKnownSymbolsStore[name] = Symbol$1$1[name];
     } else {
       WellKnownSymbolsStore[name] = createWellKnownSymbol("Symbol." + name);
     }
@@ -39763,7 +39765,7 @@ var arraySpeciesCreate = function(originalArray, length) {
     C2 = originalArray.constructor;
     if (typeof C2 == "function" && (C2 === Array || isArray(C2.prototype)))
       C2 = void 0;
-    else if (isObject(C2)) {
+    else if (isObject$1(C2)) {
       C2 = C2[SPECIES];
       if (C2 === null)
         C2 = void 0;
@@ -48814,37 +48816,1119 @@ ContextMenuTrigger.defaultProps = {
   disableIfShiftIsPressed: false
 };
 [...Object.keys(ContextMenuTrigger.propTypes), "children"];
+var __defProp2 = Object.defineProperty;
+var __defNormalProp2 = (obj, key, value) => key in obj ? __defProp2(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __publicField = (obj, key, value) => {
+  __defNormalProp2(obj, typeof key !== "symbol" ? key + "" : key, value);
+  return value;
+};
+for (let i2 = 0; i2 < 256; i2++) {
+  (i2 < 16 ? "0" : "") + i2.toString(16);
+}
+({
+  forward: new Vector3(0, 0, -1),
+  back: new Vector3(0, 0, 1),
+  left: new Vector3(-1, 0, 0),
+  right: new Vector3(1, 0, 0),
+  up: new Vector3(0, 1, 0),
+  down: new Vector3(0, -1, 0)
+});
+var Transparency;
+((Transparency2) => {
+  function isValid(value) {
+    return ["all", "opaqueOnly", "transparentOnly", "allAsOpaque"].includes(value);
+  }
+  Transparency2.isValid = isValid;
+  function requiresAlpha(mode) {
+    return mode === "all" || mode === "transparentOnly";
+  }
+  Transparency2.requiresAlpha = requiresAlpha;
+})(Transparency || (Transparency = {}));
+var Geometry;
+((Geometry2) => {
+  function createGeometryFromInstances(g3d, instances) {
+    return Geometry2.mergeInstanceMeshes(g3d, "all", false, instances).geometry;
+  }
+  Geometry2.createGeometryFromInstances = createGeometryFromInstances;
+  function createGeometryFromMesh(g3d, mesh, section, transparent) {
+    const colors = createVertexColors(g3d, mesh, transparent);
+    const positions = g3d.positions.subarray(g3d.getMeshVertexStart(mesh) * 3, g3d.getMeshVertexEnd(mesh) * 3);
+    const start = g3d.getMeshIndexStart(mesh, section);
+    const end = g3d.getMeshIndexEnd(mesh, section);
+    const indices = g3d.indices.subarray(start, end);
+    return createGeometryFromArrays(positions, indices, colors, transparent ? 4 : 3);
+  }
+  Geometry2.createGeometryFromMesh = createGeometryFromMesh;
+  function createVertexColors(g3d, mesh, useAlpha) {
+    const colorSize = useAlpha ? 4 : 3;
+    const result = new Float32Array(g3d.getMeshVertexCount(mesh) * colorSize);
+    const subStart = g3d.getMeshSubmeshStart(mesh);
+    const subEnd = g3d.getMeshSubmeshEnd(mesh);
+    for (let submesh = subStart; submesh < subEnd; submesh++) {
+      const color = g3d.getSubmeshColor(submesh);
+      const start = g3d.getSubmeshIndexStart(submesh);
+      const end = g3d.getSubmeshIndexEnd(submesh);
+      for (let i2 = start; i2 < end; i2++) {
+        const v2 = g3d.indices[i2] * colorSize;
+        result[v2] = color[0];
+        result[v2 + 1] = color[1];
+        result[v2 + 2] = color[2];
+        if (useAlpha)
+          result[v2 + 3] = color[3];
+      }
+    }
+    return result;
+  }
+  function getInstanceMatrix(g3d, instance, target = new Matrix4()) {
+    const matrixAsArray = g3d.getInstanceMatrix(instance);
+    target.fromArray(matrixAsArray);
+    return target;
+  }
+  Geometry2.getInstanceMatrix = getInstanceMatrix;
+  function createGeometryFromArrays(vertices, indices, vertexColors = void 0, colorSize = 3) {
+    const geometry = new BufferGeometry();
+    geometry.setAttribute("position", new BufferAttribute(vertices, 3));
+    geometry.setIndex(new Uint32BufferAttribute(indices, 1));
+    if (vertexColors) {
+      geometry.setAttribute("color", new BufferAttribute(vertexColors, colorSize));
+    }
+    return geometry;
+  }
+  Geometry2.createGeometryFromArrays = createGeometryFromArrays;
+  function mergeInstanceMeshes(g3d, section, transparent, instances) {
+    const info = getInstanceMergeInfo(g3d, instances, section);
+    return merge(g3d, info, transparent);
+  }
+  Geometry2.mergeInstanceMeshes = mergeInstanceMeshes;
+  function mergeUniqueMeshes(g3d, section, transparent) {
+    const info = getUniqueMeshMergeInfo(g3d, section);
+    return merge(g3d, info, transparent);
+  }
+  Geometry2.mergeUniqueMeshes = mergeUniqueMeshes;
+  function merge(g3d, info, transparent) {
+    const buffer = new MergeBuffer(info, g3d.POSITION_SIZE, transparent ? 4 : 3);
+    fillBuffers(g3d, buffer, info);
+    const geometry = buffer.toBufferGeometry();
+    return new MergeResult(geometry, info.instances, buffer.groups);
+  }
+  function getUniqueMeshMergeInfo(g3d, section) {
+    let vertexCount = 0;
+    let indexCount = 0;
+    const instances = [];
+    const meshCount = g3d.getMeshCount();
+    for (let mesh = 0; mesh < meshCount; mesh++) {
+      const meshInstances = g3d.meshInstances[mesh];
+      if (!meshInstances || meshInstances.length !== 1)
+        continue;
+      const instance = meshInstances[0];
+      if ((g3d.instanceFlags[instance] & 1) > 0)
+        continue;
+      const count = g3d.getMeshIndexCount(mesh, section);
+      if (count <= 0)
+        continue;
+      indexCount += count;
+      vertexCount += g3d.getMeshVertexCount(mesh);
+      instances.push(instance);
+    }
+    return new MergeInfo(section, instances, indexCount, vertexCount);
+  }
+  function getInstanceMergeInfo(g3d, instances, section) {
+    let vertexCount = 0;
+    let indexCount = 0;
+    const instancesFiltered = [];
+    for (let i2 = 0; i2 < instances.length; i2++) {
+      const instance = instances[i2];
+      const mesh = g3d.instanceMeshes[instance];
+      const start = g3d.getMeshIndexStart(mesh, section);
+      const end = g3d.getMeshIndexEnd(mesh, section);
+      const count = end - start;
+      if (count <= 0)
+        continue;
+      indexCount += count;
+      vertexCount += g3d.getMeshVertexCount(mesh);
+      instancesFiltered.push(instance);
+    }
+    return new MergeInfo(section, instancesFiltered, indexCount, vertexCount);
+  }
+  function fillBuffers(g3d, buffer, info) {
+    let index = 0;
+    let vertex2 = 0;
+    let offset = 0;
+    const matrix = new Matrix4();
+    const vector = new Vector3();
+    for (let i2 = 0; i2 < info.instances.length; i2++) {
+      const instance = info.instances[i2];
+      const mesh = g3d.getInstanceMesh(instance);
+      buffer.groups[i2] = index;
+      const subStart = g3d.getMeshSubmeshStart(mesh, info.section);
+      const subEnd = g3d.getMeshSubmeshEnd(mesh, info.section);
+      for (let sub = subStart; sub < subEnd; sub++) {
+        const subColor = g3d.getSubmeshColor(sub);
+        const start = g3d.getSubmeshIndexStart(sub);
+        const end = g3d.getSubmeshIndexEnd(sub);
+        for (let s = start; s < end; s++) {
+          const newIndex = g3d.indices[s] + offset;
+          buffer.indices[index++] = newIndex;
+          const v2 = newIndex * buffer.colorSize;
+          buffer.colors[v2] = subColor[0];
+          buffer.colors[v2 + 1] = subColor[1];
+          buffer.colors[v2 + 2] = subColor[2];
+          if (buffer.colorSize > 3) {
+            buffer.colors[v2 + 3] = subColor[3];
+          }
+        }
+      }
+      getInstanceMatrix(g3d, instance, matrix);
+      const vertexStart = g3d.getMeshVertexStart(mesh);
+      const vertexEnd = g3d.getMeshVertexEnd(mesh);
+      for (let p2 = vertexStart; p2 < vertexEnd; p2++) {
+        vector.fromArray(g3d.positions, p2 * g3d.POSITION_SIZE);
+        vector.applyMatrix4(matrix);
+        vector.toArray(buffer.vertices, vertex2);
+        vertex2 += g3d.POSITION_SIZE;
+      }
+      offset += vertexEnd - vertexStart;
+    }
+  }
+  class MergeInfo {
+    constructor(section, instance, indexCount, vertexCount) {
+      __publicField(this, "section");
+      __publicField(this, "instances");
+      __publicField(this, "indexCount");
+      __publicField(this, "vertexCount");
+      this.section = section;
+      this.instances = instance;
+      this.indexCount = indexCount;
+      this.vertexCount = vertexCount;
+    }
+  }
+  class MergeBuffer {
+    constructor(info, positionSize, colorSize) {
+      __publicField(this, "indices");
+      __publicField(this, "vertices");
+      __publicField(this, "colors");
+      __publicField(this, "groups");
+      __publicField(this, "colorSize");
+      this.indices = new Uint32Array(info.indexCount);
+      this.vertices = new Float32Array(info.vertexCount * positionSize);
+      this.colors = new Float32Array(info.vertexCount * colorSize);
+      this.groups = new Array(info.instances.length);
+      this.colorSize = colorSize;
+    }
+    toBufferGeometry() {
+      const geometry = createGeometryFromArrays(this.vertices, this.indices, this.colors, this.colorSize);
+      return geometry;
+    }
+  }
+  class MergeResult {
+    constructor(geometry, instance, submeshes) {
+      __publicField(this, "geometry");
+      __publicField(this, "instances");
+      __publicField(this, "submeshes");
+      this.geometry = geometry;
+      this.instances = instance;
+      this.submeshes = submeshes;
+    }
+  }
+})(Geometry || (Geometry = {}));
+class MeshLine extends BufferGeometry {
+  constructor() {
+    super();
+    this.isMeshLine = true;
+    this.type = "MeshLine";
+    this.positions = [];
+    this.previous = [];
+    this.next = [];
+    this.side = [];
+    this.width = [];
+    this.indices_array = [];
+    this.uvs = [];
+    this.counters = [];
+    this._points = [];
+    this._geom = null;
+    this.widthCallback = null;
+    this.matrixWorld = new Matrix4();
+    Object.defineProperties(this, {
+      geometry: {
+        enumerable: true,
+        get: function() {
+          return this;
+        }
+      },
+      geom: {
+        enumerable: true,
+        get: function() {
+          return this._geom;
+        },
+        set: function(value) {
+          this.setGeometry(value, this.widthCallback);
+        }
+      },
+      points: {
+        enumerable: true,
+        get: function() {
+          return this._points;
+        },
+        set: function(value) {
+          this.setPoints(value, this.widthCallback);
+        }
+      }
+    });
+  }
+}
+MeshLine.prototype.setMatrixWorld = function(matrixWorld) {
+  this.matrixWorld = matrixWorld;
+};
+MeshLine.prototype.setGeometry = function(g, c) {
+  this._geometry = g;
+  this.setPoints(g.getAttribute("position").array, c);
+};
+MeshLine.prototype.setPoints = function(points, wcb) {
+  if (!(points instanceof Float32Array) && !(points instanceof Array)) {
+    console.error("ERROR: The BufferArray of points is not instancied correctly.");
+    return;
+  }
+  this._points = points;
+  this.widthCallback = wcb;
+  this.positions = [];
+  this.counters = [];
+  if (points.length && points[0] instanceof Vector3) {
+    for (let j = 0; j < points.length; j++) {
+      const p2 = points[j];
+      const c = j / points.length;
+      this.positions.push(p2.x, p2.y, p2.z);
+      this.positions.push(p2.x, p2.y, p2.z);
+      this.counters.push(c);
+      this.counters.push(c);
+    }
+  } else {
+    for (let j = 0; j < points.length; j += 3) {
+      const c = j / points.length;
+      this.positions.push(points[j], points[j + 1], points[j + 2]);
+      this.positions.push(points[j], points[j + 1], points[j + 2]);
+      this.counters.push(c);
+      this.counters.push(c);
+    }
+  }
+  this.process();
+};
+function MeshLineRaycast(raycaster, intersects2) {
+  const inverseMatrix = new Matrix4();
+  const ray = new Ray();
+  const sphere = new Sphere();
+  const interRay = new Vector3();
+  const geometry = this.geometry;
+  if (!geometry.boundingSphere)
+    geometry.computeBoundingSphere();
+  sphere.copy(geometry.boundingSphere);
+  sphere.applyMatrix4(this.matrixWorld);
+  if (raycaster.ray.intersectSphere(sphere, interRay) === false) {
+    return;
+  }
+  inverseMatrix.copy(this.matrixWorld).invert();
+  ray.copy(raycaster.ray).applyMatrix4(inverseMatrix);
+  const vStart = new Vector3();
+  const vEnd = new Vector3();
+  const interSegment = new Vector3();
+  const step = this instanceof LineSegments ? 2 : 1;
+  const index = geometry.index;
+  const attributes = geometry.attributes;
+  if (index !== null) {
+    const indices = index.array;
+    const positions = attributes.position.array;
+    const widths = attributes.width.array;
+    for (let i2 = 0, l2 = indices.length - 1; i2 < l2; i2 += step) {
+      const a = indices[i2];
+      const b = indices[i2 + 1];
+      vStart.fromArray(positions, a * 3);
+      vEnd.fromArray(positions, b * 3);
+      const width = widths[Math.floor(i2 / 3)] !== void 0 ? widths[Math.floor(i2 / 3)] : 1;
+      const precision = raycaster.params.Line.threshold + this.material.lineWidth * width / 2;
+      const precisionSq = precision * precision;
+      const distSq = ray.distanceSqToSegment(vStart, vEnd, interRay, interSegment);
+      if (distSq > precisionSq)
+        continue;
+      interRay.applyMatrix4(this.matrixWorld);
+      const distance = raycaster.ray.origin.distanceTo(interRay);
+      if (distance < raycaster.near || distance > raycaster.far)
+        continue;
+      intersects2.push({
+        distance,
+        point: interSegment.clone().applyMatrix4(this.matrixWorld),
+        index: i2,
+        face: null,
+        faceIndex: null,
+        object: this
+      });
+      i2 = l2;
+    }
+  }
+}
+MeshLine.prototype.raycast = MeshLineRaycast;
+MeshLine.prototype.compareV3 = function(a, b) {
+  const aa2 = a * 6;
+  const ab2 = b * 6;
+  return this.positions[aa2] === this.positions[ab2] && this.positions[aa2 + 1] === this.positions[ab2 + 1] && this.positions[aa2 + 2] === this.positions[ab2 + 2];
+};
+MeshLine.prototype.copyV3 = function(a) {
+  const aa2 = a * 6;
+  return [this.positions[aa2], this.positions[aa2 + 1], this.positions[aa2 + 2]];
+};
+MeshLine.prototype.process = function() {
+  const l2 = this.positions.length / 6;
+  this.previous = [];
+  this.next = [];
+  this.side = [];
+  this.width = [];
+  this.indices_array = [];
+  this.uvs = [];
+  let w2;
+  let v2;
+  if (this.compareV3(0, l2 - 1)) {
+    v2 = this.copyV3(l2 - 2);
+  } else {
+    v2 = this.copyV3(0);
+  }
+  this.previous.push(v2[0], v2[1], v2[2]);
+  this.previous.push(v2[0], v2[1], v2[2]);
+  for (let j = 0; j < l2; j++) {
+    this.side.push(1);
+    this.side.push(-1);
+    if (this.widthCallback)
+      w2 = this.widthCallback(j / (l2 - 1));
+    else
+      w2 = 1;
+    this.width.push(w2);
+    this.width.push(w2);
+    this.uvs.push(j / (l2 - 1), 0);
+    this.uvs.push(j / (l2 - 1), 1);
+    if (j < l2 - 1) {
+      v2 = this.copyV3(j);
+      this.previous.push(v2[0], v2[1], v2[2]);
+      this.previous.push(v2[0], v2[1], v2[2]);
+      const n2 = j * 2;
+      this.indices_array.push(n2, n2 + 1, n2 + 2);
+      this.indices_array.push(n2 + 2, n2 + 1, n2 + 3);
+    }
+    if (j > 0) {
+      v2 = this.copyV3(j);
+      this.next.push(v2[0], v2[1], v2[2]);
+      this.next.push(v2[0], v2[1], v2[2]);
+    }
+  }
+  if (this.compareV3(l2 - 1, 0)) {
+    v2 = this.copyV3(1);
+  } else {
+    v2 = this.copyV3(l2 - 1);
+  }
+  this.next.push(v2[0], v2[1], v2[2]);
+  this.next.push(v2[0], v2[1], v2[2]);
+  if (!this._attributes || this._attributes.position.count !== this.positions.length) {
+    this._attributes = {
+      position: new BufferAttribute(new Float32Array(this.positions), 3),
+      previous: new BufferAttribute(new Float32Array(this.previous), 3),
+      next: new BufferAttribute(new Float32Array(this.next), 3),
+      side: new BufferAttribute(new Float32Array(this.side), 1),
+      width: new BufferAttribute(new Float32Array(this.width), 1),
+      uv: new BufferAttribute(new Float32Array(this.uvs), 2),
+      index: new BufferAttribute(new Uint16Array(this.indices_array), 1),
+      counters: new BufferAttribute(new Float32Array(this.counters), 1)
+    };
+  } else {
+    this._attributes.position.copyArray(new Float32Array(this.positions));
+    this._attributes.position.needsUpdate = true;
+    this._attributes.previous.copyArray(new Float32Array(this.previous));
+    this._attributes.previous.needsUpdate = true;
+    this._attributes.next.copyArray(new Float32Array(this.next));
+    this._attributes.next.needsUpdate = true;
+    this._attributes.side.copyArray(new Float32Array(this.side));
+    this._attributes.side.needsUpdate = true;
+    this._attributes.width.copyArray(new Float32Array(this.width));
+    this._attributes.width.needsUpdate = true;
+    this._attributes.uv.copyArray(new Float32Array(this.uvs));
+    this._attributes.uv.needsUpdate = true;
+    this._attributes.index.copyArray(new Uint16Array(this.indices_array));
+    this._attributes.index.needsUpdate = true;
+  }
+  this.setAttribute("position", this._attributes.position);
+  this.setAttribute("previous", this._attributes.previous);
+  this.setAttribute("next", this._attributes.next);
+  this.setAttribute("side", this._attributes.side);
+  this.setAttribute("width", this._attributes.width);
+  this.setAttribute("uv", this._attributes.uv);
+  this.setAttribute("counters", this._attributes.counters);
+  this.setIndex(this._attributes.index);
+  this.computeBoundingSphere();
+  this.computeBoundingBox();
+};
+function memcpy(src, srcOffset, dst, dstOffset, length) {
+  let i2;
+  src = src.subarray || src.slice ? src : src.buffer;
+  dst = dst.subarray || dst.slice ? dst : dst.buffer;
+  src = srcOffset ? src.subarray ? src.subarray(srcOffset, length && srcOffset + length) : src.slice(srcOffset, length && srcOffset + length) : src;
+  if (dst.set) {
+    dst.set(src, dstOffset);
+  } else {
+    for (i2 = 0; i2 < src.length; i2++) {
+      dst[i2 + dstOffset] = src[i2];
+    }
+  }
+  return dst;
+}
+MeshLine.prototype.advance = function(position) {
+  const positions = this._attributes.position.array;
+  const previous = this._attributes.previous.array;
+  const next = this._attributes.next.array;
+  const l2 = positions.length;
+  memcpy(positions, 0, previous, 0, l2);
+  memcpy(positions, 6, positions, 0, l2 - 6);
+  positions[l2 - 6] = position.x;
+  positions[l2 - 5] = position.y;
+  positions[l2 - 4] = position.z;
+  positions[l2 - 3] = position.x;
+  positions[l2 - 2] = position.y;
+  positions[l2 - 1] = position.z;
+  memcpy(positions, 6, next, 0, l2 - 6);
+  next[l2 - 6] = position.x;
+  next[l2 - 5] = position.y;
+  next[l2 - 4] = position.z;
+  next[l2 - 3] = position.x;
+  next[l2 - 2] = position.y;
+  next[l2 - 1] = position.z;
+  this._attributes.position.needsUpdate = true;
+  this._attributes.previous.needsUpdate = true;
+  this._attributes.next.needsUpdate = true;
+};
+ShaderChunk.meshline_vert = [
+  "",
+  ShaderChunk.common,
+  ShaderChunk.logdepthbuf_pars_vertex,
+  ShaderChunk.fog_pars_vertex,
+  "",
+  "attribute vec3 previous;",
+  "attribute vec3 next;",
+  "attribute float side;",
+  "attribute float width;",
+  "attribute float counters;",
+  "",
+  "uniform vec2 resolution;",
+  "uniform float lineWidth;",
+  "uniform vec3 color;",
+  "uniform float opacity;",
+  "uniform float sizeAttenuation;",
+  "",
+  "varying vec2 vUV;",
+  "varying vec4 vColor;",
+  "varying float vCounters;",
+  "",
+  "vec2 fix( vec4 i, float aspect ) {",
+  "",
+  "    vec2 res = i.xy / i.w;",
+  "    res.x *= aspect;",
+  "    vCounters = counters;",
+  "    return res;",
+  "",
+  "}",
+  "",
+  "void main() {",
+  "",
+  "    float aspect = resolution.x / resolution.y;",
+  "",
+  "    vColor = vec4( color, opacity );",
+  "    vUV = uv;",
+  "",
+  "    mat4 m = projectionMatrix * modelViewMatrix;",
+  "    vec4 finalPosition = m * vec4( position, 1.0 );",
+  "    vec4 prevPos = m * vec4( previous, 1.0 );",
+  "    vec4 nextPos = m * vec4( next, 1.0 );",
+  "",
+  "    vec2 currentP = fix( finalPosition, aspect );",
+  "    vec2 prevP = fix( prevPos, aspect );",
+  "    vec2 nextP = fix( nextPos, aspect );",
+  "",
+  "    float w = lineWidth * width;",
+  "",
+  "    vec2 dir;",
+  "    if( nextP == currentP ) dir = normalize( currentP - prevP );",
+  "    else if( prevP == currentP ) dir = normalize( nextP - currentP );",
+  "    else {",
+  "        vec2 dir1 = normalize( currentP - prevP );",
+  "        vec2 dir2 = normalize( nextP - currentP );",
+  "        dir = normalize( dir1 + dir2 );",
+  "",
+  "        vec2 perp = vec2( -dir1.y, dir1.x );",
+  "        vec2 miter = vec2( -dir.y, dir.x );",
+  "        //w = clamp( w / dot( miter, perp ), 0., 4. * lineWidth * width );",
+  "",
+  "    }",
+  "",
+  "    //vec2 normal = ( cross( vec3( dir, 0. ), vec3( 0., 0., 1. ) ) ).xy;",
+  "    vec4 normal = vec4( -dir.y, dir.x, 0., 1. );",
+  "    normal.xy *= .5 * w;",
+  "    normal *= projectionMatrix;",
+  "    if( sizeAttenuation == 0. ) {",
+  "        normal.xy *= finalPosition.w;",
+  "        normal.xy /= ( vec4( resolution, 0., 1. ) * projectionMatrix ).xy;",
+  "    }",
+  "",
+  "    finalPosition.xy += normal.xy * side;",
+  "",
+  "    gl_Position = finalPosition;",
+  "",
+  ShaderChunk.logdepthbuf_vertex,
+  ShaderChunk.fog_vertex && "    vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );",
+  ShaderChunk.fog_vertex,
+  "}"
+].join("\n");
+ShaderChunk.meshline_frag = [
+  "",
+  ShaderChunk.fog_pars_fragment,
+  ShaderChunk.logdepthbuf_pars_fragment,
+  "",
+  "uniform sampler2D map;",
+  "uniform sampler2D alphaMap;",
+  "uniform float useMap;",
+  "uniform float useAlphaMap;",
+  "uniform float useDash;",
+  "uniform float dashArray;",
+  "uniform float dashOffset;",
+  "uniform float dashRatio;",
+  "uniform float visibility;",
+  "uniform float alphaTest;",
+  "uniform vec2 repeat;",
+  "",
+  "varying vec2 vUV;",
+  "varying vec4 vColor;",
+  "varying float vCounters;",
+  "",
+  "void main() {",
+  "",
+  ShaderChunk.logdepthbuf_fragment,
+  "",
+  "    vec4 c = vColor;",
+  "    if( useMap == 1. ) c *= texture2D( map, vUV * repeat );",
+  "    if( useAlphaMap == 1. ) c.a *= texture2D( alphaMap, vUV * repeat ).a;",
+  "    if( c.a < alphaTest ) discard;",
+  "    if( useDash == 1. ){",
+  "        c.a *= ceil(mod(vCounters + dashOffset, dashArray) - (dashArray * dashRatio));",
+  "    }",
+  "    gl_FragColor = c;",
+  "    gl_FragColor.a *= step(vCounters, visibility);",
+  "",
+  ShaderChunk.fog_fragment,
+  "}"
+].join("\n");
+class MeshLineMaterial extends ShaderMaterial {
+  constructor(parameters) {
+    super({
+      uniforms: Object.assign({}, UniformsLib.fog, {
+        lineWidth: { value: 1 },
+        map: { value: null },
+        useMap: { value: 0 },
+        alphaMap: { value: null },
+        useAlphaMap: { value: 0 },
+        color: { value: new Color(16777215) },
+        opacity: { value: 1 },
+        resolution: { value: new Vector2(1, 1) },
+        sizeAttenuation: { value: 1 },
+        dashArray: { value: 0 },
+        dashOffset: { value: 0 },
+        dashRatio: { value: 0.5 },
+        useDash: { value: 0 },
+        visibility: { value: 1 },
+        alphaTest: { value: 0 },
+        repeat: { value: new Vector2(1, 1) }
+      }),
+      vertexShader: ShaderChunk.meshline_vert,
+      fragmentShader: ShaderChunk.meshline_frag
+    });
+    this.isMeshLineMaterial = true;
+    this.type = "MeshLineMaterial";
+    Object.defineProperties(this, {
+      lineWidth: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.lineWidth.value;
+        },
+        set: function(value) {
+          this.uniforms.lineWidth.value = value;
+        }
+      },
+      map: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.map.value;
+        },
+        set: function(value) {
+          this.uniforms.map.value = value;
+        }
+      },
+      useMap: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.useMap.value;
+        },
+        set: function(value) {
+          this.uniforms.useMap.value = value;
+        }
+      },
+      alphaMap: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.alphaMap.value;
+        },
+        set: function(value) {
+          this.uniforms.alphaMap.value = value;
+        }
+      },
+      useAlphaMap: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.useAlphaMap.value;
+        },
+        set: function(value) {
+          this.uniforms.useAlphaMap.value = value;
+        }
+      },
+      color: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.color.value;
+        },
+        set: function(value) {
+          this.uniforms.color.value = value;
+        }
+      },
+      opacity: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.opacity.value;
+        },
+        set: function(value) {
+          this.uniforms.opacity.value = value;
+        }
+      },
+      resolution: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.resolution.value;
+        },
+        set: function(value) {
+          this.uniforms.resolution.value.copy(value);
+        }
+      },
+      sizeAttenuation: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.sizeAttenuation.value;
+        },
+        set: function(value) {
+          this.uniforms.sizeAttenuation.value = value;
+        }
+      },
+      dashArray: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.dashArray.value;
+        },
+        set: function(value) {
+          this.uniforms.dashArray.value = value;
+          this.useDash = value !== 0 ? 1 : 0;
+        }
+      },
+      dashOffset: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.dashOffset.value;
+        },
+        set: function(value) {
+          this.uniforms.dashOffset.value = value;
+        }
+      },
+      dashRatio: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.dashRatio.value;
+        },
+        set: function(value) {
+          this.uniforms.dashRatio.value = value;
+        }
+      },
+      useDash: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.useDash.value;
+        },
+        set: function(value) {
+          this.uniforms.useDash.value = value;
+        }
+      },
+      visibility: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.visibility.value;
+        },
+        set: function(value) {
+          this.uniforms.visibility.value = value;
+        }
+      },
+      alphaTest: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.alphaTest.value;
+        },
+        set: function(value) {
+          this.uniforms.alphaTest.value = value;
+        }
+      },
+      repeat: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.repeat.value;
+        },
+        set: function(value) {
+          this.uniforms.repeat.value.copy(value);
+        }
+      }
+    });
+    this.setValues(parameters);
+  }
+}
+MeshLineMaterial.prototype.copy = function(source) {
+  ShaderMaterial.prototype.copy.call(this, source);
+  this.lineWidth = source.lineWidth;
+  this.map = source.map;
+  this.useMap = source.useMap;
+  this.alphaMap = source.alphaMap;
+  this.useAlphaMap = source.useAlphaMap;
+  this.color.copy(source.color);
+  this.opacity = source.opacity;
+  this.resolution.copy(source.resolution);
+  this.sizeAttenuation = source.sizeAttenuation;
+  this.dashArray.copy(source.dashArray);
+  this.dashOffset.copy(source.dashOffset);
+  this.dashRatio.copy(source.dashRatio);
+  this.useDash = source.useDash;
+  this.visibility = source.visibility;
+  this.alphaTest = source.alphaTest;
+  this.repeat.copy(source.repeat);
+  return this;
+};
+var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
+var freeGlobal$1 = freeGlobal;
+var freeSelf = typeof self == "object" && self && self.Object === Object && self;
+var root$1 = freeGlobal$1 || freeSelf || Function("return this")();
+var root$1$1 = root$1;
+var Symbol$1 = root$1$1.Symbol;
+var Symbol$2 = Symbol$1;
+var objectProto$c = Object.prototype;
+var hasOwnProperty$9 = objectProto$c.hasOwnProperty;
+var nativeObjectToString$1 = objectProto$c.toString;
+var symToStringTag$1 = Symbol$2 ? Symbol$2.toStringTag : void 0;
+function getRawTag(value) {
+  var isOwn = hasOwnProperty$9.call(value, symToStringTag$1), tag = value[symToStringTag$1];
+  try {
+    value[symToStringTag$1] = void 0;
+    var unmasked = true;
+  } catch (e) {
+  }
+  var result = nativeObjectToString$1.call(value);
+  if (unmasked) {
+    if (isOwn) {
+      value[symToStringTag$1] = tag;
+    } else {
+      delete value[symToStringTag$1];
+    }
+  }
+  return result;
+}
+var objectProto$b = Object.prototype;
+var nativeObjectToString = objectProto$b.toString;
+function objectToString(value) {
+  return nativeObjectToString.call(value);
+}
+var nullTag = "[object Null]", undefinedTag = "[object Undefined]";
+var symToStringTag = Symbol$2 ? Symbol$2.toStringTag : void 0;
+function baseGetTag(value) {
+  if (value == null) {
+    return value === void 0 ? undefinedTag : nullTag;
+  }
+  return symToStringTag && symToStringTag in Object(value) ? getRawTag(value) : objectToString(value);
+}
+function isObjectLike(value) {
+  return value != null && typeof value == "object";
+}
+function isObject(value) {
+  var type = typeof value;
+  return value != null && (type == "object" || type == "function");
+}
+var asyncTag = "[object AsyncFunction]", funcTag$2 = "[object Function]", genTag$1 = "[object GeneratorFunction]", proxyTag = "[object Proxy]";
+function isFunction(value) {
+  if (!isObject(value)) {
+    return false;
+  }
+  var tag = baseGetTag(value);
+  return tag == funcTag$2 || tag == genTag$1 || tag == asyncTag || tag == proxyTag;
+}
+var coreJsData = root$1$1["__core-js_shared__"];
+var coreJsData$1 = coreJsData;
+var maskSrcKey = function() {
+  var uid2 = /[^.]+$/.exec(coreJsData$1 && coreJsData$1.keys && coreJsData$1.keys.IE_PROTO || "");
+  return uid2 ? "Symbol(src)_1." + uid2 : "";
+}();
+function isMasked(func) {
+  return !!maskSrcKey && maskSrcKey in func;
+}
+var funcProto$1 = Function.prototype;
+var funcToString$1 = funcProto$1.toString;
+function toSource(func) {
+  if (func != null) {
+    try {
+      return funcToString$1.call(func);
+    } catch (e) {
+    }
+    try {
+      return func + "";
+    } catch (e) {
+    }
+  }
+  return "";
+}
+var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
+var reIsHostCtor = /^\[object .+?Constructor\]$/;
+var funcProto = Function.prototype, objectProto$a = Object.prototype;
+var funcToString = funcProto.toString;
+var hasOwnProperty$8 = objectProto$a.hasOwnProperty;
+var reIsNative = RegExp("^" + funcToString.call(hasOwnProperty$8).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$");
+function baseIsNative(value) {
+  if (!isObject(value) || isMasked(value)) {
+    return false;
+  }
+  var pattern = isFunction(value) ? reIsNative : reIsHostCtor;
+  return pattern.test(toSource(value));
+}
+function getValue(object, key) {
+  return object == null ? void 0 : object[key];
+}
+function getNative(object, key) {
+  var value = getValue(object, key);
+  return baseIsNative(value) ? value : void 0;
+}
+var WeakMap2 = getNative(root$1$1, "WeakMap");
+var WeakMap$1 = WeakMap2;
+(function() {
+  try {
+    var func = getNative(Object, "defineProperty");
+    func({}, "", {});
+    return func;
+  } catch (e) {
+  }
+})();
+var argsTag$2 = "[object Arguments]";
+function baseIsArguments(value) {
+  return isObjectLike(value) && baseGetTag(value) == argsTag$2;
+}
+var objectProto$7 = Object.prototype;
+var hasOwnProperty$6 = objectProto$7.hasOwnProperty;
+var propertyIsEnumerable$1 = objectProto$7.propertyIsEnumerable;
+baseIsArguments(function() {
+  return arguments;
+}()) ? baseIsArguments : function(value) {
+  return isObjectLike(value) && hasOwnProperty$6.call(value, "callee") && !propertyIsEnumerable$1.call(value, "callee");
+};
+var freeExports$2 = typeof exports == "object" && exports && !exports.nodeType && exports;
+var freeModule$2 = freeExports$2 && typeof module == "object" && module && !module.nodeType && module;
+var moduleExports$2 = freeModule$2 && freeModule$2.exports === freeExports$2;
+var Buffer$1 = moduleExports$2 ? root$1$1.Buffer : void 0;
+Buffer$1 ? Buffer$1.isBuffer : void 0;
+var freeExports$1 = typeof exports == "object" && exports && !exports.nodeType && exports;
+var freeModule$1 = freeExports$1 && typeof module == "object" && module && !module.nodeType && module;
+var moduleExports$1 = freeModule$1 && freeModule$1.exports === freeExports$1;
+var freeProcess = moduleExports$1 && freeGlobal$1.process;
+var nodeUtil = function() {
+  try {
+    var types = freeModule$1 && freeModule$1.require && freeModule$1.require("util").types;
+    if (types) {
+      return types;
+    }
+    return freeProcess && freeProcess.binding && freeProcess.binding("util");
+  } catch (e) {
+  }
+}();
+var nodeUtil$1 = nodeUtil;
+nodeUtil$1 && nodeUtil$1.isTypedArray;
+getNative(Object, "create");
+var Map$1 = getNative(root$1$1, "Map");
+var Map$2 = Map$1;
+var freeExports = typeof exports == "object" && exports && !exports.nodeType && exports;
+var freeModule = freeExports && typeof module == "object" && module && !module.nodeType && module;
+var moduleExports = freeModule && freeModule.exports === freeExports;
+var Buffer2 = moduleExports ? root$1$1.Buffer : void 0;
+Buffer2 ? Buffer2.allocUnsafe : void 0;
+var DataView$1 = getNative(root$1$1, "DataView");
+var DataView$1$1 = DataView$1;
+var Promise$1 = getNative(root$1$1, "Promise");
+var Promise$2 = Promise$1;
+var Set$1 = getNative(root$1$1, "Set");
+var Set$2 = Set$1;
+var mapTag$3 = "[object Map]", objectTag$1 = "[object Object]", promiseTag = "[object Promise]", setTag$3 = "[object Set]", weakMapTag$1 = "[object WeakMap]";
+var dataViewTag$2 = "[object DataView]";
+var dataViewCtorString = toSource(DataView$1$1), mapCtorString = toSource(Map$2), promiseCtorString = toSource(Promise$2), setCtorString = toSource(Set$2), weakMapCtorString = toSource(WeakMap$1);
+var getTag = baseGetTag;
+if (DataView$1$1 && getTag(new DataView$1$1(new ArrayBuffer(1))) != dataViewTag$2 || Map$2 && getTag(new Map$2()) != mapTag$3 || Promise$2 && getTag(Promise$2.resolve()) != promiseTag || Set$2 && getTag(new Set$2()) != setTag$3 || WeakMap$1 && getTag(new WeakMap$1()) != weakMapTag$1) {
+  getTag = function(value) {
+    var result = baseGetTag(value), Ctor = result == objectTag$1 ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : "";
+    if (ctorString) {
+      switch (ctorString) {
+        case dataViewCtorString:
+          return dataViewTag$2;
+        case mapCtorString:
+          return mapTag$3;
+        case promiseCtorString:
+          return promiseTag;
+        case setCtorString:
+          return setTag$3;
+        case weakMapCtorString:
+          return weakMapTag$1;
+      }
+    }
+    return result;
+  };
+}
+root$1$1.Uint8Array;
+var symbolProto = Symbol$2 ? Symbol$2.prototype : void 0;
+symbolProto ? symbolProto.valueOf : void 0;
+nodeUtil$1 && nodeUtil$1.isMap;
+nodeUtil$1 && nodeUtil$1.isSet;
+const _VimAttributes = class {
+};
+let VimAttributes = _VimAttributes;
+__publicField(VimAttributes, "positions", "g3d:vertex:position:0:float32:3");
+__publicField(VimAttributes, "indices", "g3d:corner:index:0:int32:1");
+__publicField(VimAttributes, "instanceMeshes", "g3d:instance:mesh:0:int32:1");
+__publicField(VimAttributes, "instanceTransforms", "g3d:instance:transform:0:float32:16");
+__publicField(VimAttributes, "instanceFlags", "g3d:instance:flags:0:uint16:1");
+__publicField(VimAttributes, "meshSubmeshes", "g3d:mesh:submeshoffset:0:int32:1");
+__publicField(VimAttributes, "submeshIndexOffsets", "g3d:submesh:indexoffset:0:int32:1");
+__publicField(VimAttributes, "submeshMaterials", "g3d:submesh:material:0:int32:1");
+__publicField(VimAttributes, "materialColors", "g3d:material:color:0:float32:4");
+__publicField(VimAttributes, "all", [
+  _VimAttributes.positions,
+  _VimAttributes.indices,
+  _VimAttributes.instanceMeshes,
+  _VimAttributes.instanceTransforms,
+  _VimAttributes.instanceFlags,
+  _VimAttributes.meshSubmeshes,
+  _VimAttributes.submeshIndexOffsets,
+  _VimAttributes.submeshMaterials,
+  _VimAttributes.materialColors
+]);
 for (let i2 = 0; i2 < 256; i2++) {
   (i2 < 16 ? "0" : "") + i2.toString(16);
 }
 function clamp(value, min2, max2) {
   return Math.max(min2, Math.min(max2, value));
 }
+const settings = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
+  height,
+  width,
+  viewBox: "0 0 256 256"
+}, /* @__PURE__ */ React.createElement("path", {
+  d: "M110.325,241.773c-2.567,7.495-10.811,11.566-18.271,9.145l-7.218-2.346c-7.522-2.44-11.739-10.548-9.41-18.133l.849-2.764c1.939-6.314-.798-14.567-6.152-18.465l-1.461-1.066c-5.339-3.882-14.046-3.953-19.452-.162l-2.369,1.662c-6.48,4.553-15.542,3.001-20.158-3.341l-4.466-6.136c-4.652-6.397-3.246-15.472,3.037-20.195l2.314-1.741c5.28-3.965,7.913-12.249,5.864-18.552l-.557-1.722c-2.038-6.279-9.043-11.455-15.646-11.563l-2.894-.047c-7.913-.13-14.334-6.709-14.334-14.552v-7.593c0-7.909,6.476-14.425,14.334-14.552l2.894-.047c6.602-.107,13.6-5.264,15.646-11.566l.557-1.718c2.041-6.279-.584-14.587-5.864-18.555l-2.314-1.738c-6.33-4.758-7.649-13.852-3.037-20.195l4.466-6.14c4.656-6.393,13.73-7.854,20.158-3.341l2.369,1.662c5.406,3.795,14.093,3.736,19.452-.162l1.461-1.062c5.335-3.882,8.091-12.151,6.152-18.465l-.849-2.768c-2.326-7.57,1.951-15.708,9.41-18.129l7.218-2.346c7.522-2.444,15.7,1.639,18.271,9.142l.94,2.74c2.144,6.247,9.209,11.313,15.835,11.313h1.805c6.602,0,13.69-5.066,15.831-11.313l.94-2.74c2.571-7.491,10.816-11.563,18.275-9.141l7.218,2.346c7.522,2.44,11.739,10.544,9.41,18.129l-.849,2.768c-1.939,6.314,.798,14.567,6.152,18.465l1.461,1.062c5.339,3.886,14.046,3.957,19.448,.162l2.369-1.662c6.48-4.549,15.546-2.997,20.158,3.341l4.47,6.14c4.652,6.397,3.246,15.472-3.037,20.195l-2.314,1.738c-5.28,3.969-7.913,12.253-5.868,18.555l.561,1.718c2.038,6.282,9.043,11.459,15.646,11.566l2.891,.047c7.917,.126,14.334,6.709,14.334,14.552v7.593c0,7.905-6.476,14.425-14.334,14.552l-2.891,.047c-6.602,.107-13.6,5.26-15.646,11.563l-.561,1.722c-2.038,6.279,.588,14.587,5.868,18.552l2.314,1.741c6.33,4.758,7.649,13.852,3.037,20.195l-4.47,6.136c-4.652,6.397-13.726,7.858-20.158,3.341l-2.369-1.662c-5.402-3.791-14.09-3.736-19.448,.162l-1.461,1.066c-5.335,3.882-8.091,12.151-6.152,18.465l.849,2.764c2.326,7.574-1.951,15.712-9.41,18.133l-7.218,2.346c-7.522,2.44-15.7-1.639-18.275-9.145l-.94-2.736c-2.14-6.247-9.205-11.313-15.831-11.313h-1.805c-6.602,0-13.69,5.066-15.835,11.313l-.94,2.736Zm17.674-45.77c37.559,0,68.002-30.443,68.002-68.002s-30.443-67.998-68.002-67.998-67.998,30.443-67.998,67.998,30.443,68.002,67.998,68.002Z"
+}));
+const help = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
+  height,
+  width,
+  viewBox: "0 0 256 256"
+}, /* @__PURE__ */ React.createElement("path", {
+  d: "M128 0C57.308 0 0 57.308 0 128s57.308 128 128 128 128-57.308 128-128S198.692 0 128 0Zm0 232c-57.346 0-104-46.654-104-104S70.654 24 128 24s104 46.654 104 104-46.654 104-104 104Z"
+}), /* @__PURE__ */ React.createElement("path", {
+  d: "M124.365 160.615c-8.46 1.295-15.374 8.209-16.669 16.669-2.079 13.576 9.446 25.101 23.021 23.021 8.46-1.295 15.374-8.209 16.669-16.669 2.079-13.576-9.446-25.101-23.021-23.021ZM163.386 68.844a52.951 52.951 0 0 0-33.074-12.25c-17.985-.747-34.607 7.896-45.516 21.957-3.202 4.128-2.75 9.046 1.601 13.371 3.147 3.129 6.892 5.802 6.892 5.802a10.286 10.286 0 0 0 14.183-1.691l.484-.593a24.146 24.146 0 0 1 20.212-10.412c8.988 0 19.032 5.926 19.032 13.781 0 5.114-3.414 8.161-9.31 11.713l-7.809 4.456a30.622 30.622 0 0 0-19.201 27.423v1.118a8.773 8.773 0 0 0 8.773 8.774h15.771a8.773 8.773 0 0 0 8.773-8.774c0-4.486 4.9-7.319 11.117-10.902a37.039 37.039 0 0 0 23.519-33.533 39.43 39.43 0 0 0-15.45-30.241Z"
+}));
+const trash = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
+  height,
+  width,
+  viewBox: "0 0 256 256"
+}, /* @__PURE__ */ React.createElement("path", {
+  d: "M117.317 197.644v-95.33c0-5.467-3.715-10.632-9.129-11.395-6.591-.929-12.238 4.163-12.238 10.574v95.329c0 5.468 3.715 10.633 9.129 11.396 6.591.929 12.238-4.163 12.238-10.574ZM160.05 197.644v-95.33c0-5.467-3.715-10.632-9.129-11.395-6.591-.929-12.238 4.163-12.238 10.574v95.329c0 5.468 3.715 10.633 9.129 11.396 6.591.929 12.238-4.163 12.238-10.574ZM232 42.734h-39.68V10.995C192.32 4.923 187.397 0 181.325 0H74.995C68.923 0 64 4.923 64 10.995v31.739H24c-8.837 0-16 7.163-16 16v.05c0 8.837 7.163 16 16 16h208c8.837 0 16-7.163 16-16v-.05c0-8.837-7.163-16-16-16Zm-66.389-14.025v14.025H90.709V28.709a2 2 0 0 1 2-2h70.902a2 2 0 0 1 2 2Z"
+}), /* @__PURE__ */ React.createElement("path", {
+  d: "M183.95 207.924c0 8.85-7.175 16.025-16.025 16.025H88.076c-8.85 0-16.025-7.175-16.025-16.025V98.81a8 8 0 0 0-8-8h-16.05a8 8 0 0 0-8 8v114.456c0 23.601 19.133 42.734 42.734 42.734h90.532c23.601 0 42.734-19.133 42.734-42.734V98.81a8 8 0 0 0-8-8h-16.05a8 8 0 0 0-8 8v109.115Z"
+}));
+const checkmark = ({ height, width, fill }) => {
+  return /* @__PURE__ */ React.createElement("svg", {
+    height,
+    width,
+    viewBox: "0 0 256 256"
+  }, /* @__PURE__ */ React.createElement("path", {
+    d: "M228.693 61.741c5.379-7.011 4.057-17.055-2.954-22.434-7.01-5.379-17.054-4.057-22.434 2.954l-.008.011L99.864 177.069l-39.607-47.203c-5.68-6.769-15.772-7.652-22.542-1.972s-7.652 15.772-1.972 22.542l52.416 62.467.006.007c.018.021.038.039.056.06.214.252.448.492.681.733.153.159.3.326.458.478s.331.291.497.437c.251.222.5.445.763.648l.062.053c.108.083.225.151.334.231.304.221.608.44.924.638.166.104.335.192.503.289.284.164.567.328.859.473.221.11.447.204.671.303.245.107.487.219.736.313.268.103.54.188.812.275.214.069.428.142.645.202.293.081.588.144.884.208.206.044.411.093.619.129.294.051.589.085.884.12.219.026.437.055.656.071.275.021.55.026.825.033.245.006.489.015.735.009.246-.005.491-.024.736-.042.274-.018.548-.036.821-.068.22-.026.437-.065.654-.101.293-.047.585-.094.876-.158.207-.045.41-.103.615-.157.292-.076.584-.152.873-.245.215-.069.425-.152.637-.23.267-.099.535-.196.798-.31.245-.105.483-.228.723-.346.219-.108.44-.211.656-.331.286-.158.562-.334.839-.511.163-.104.328-.199.488-.31.307-.211.603-.444.896-.678.106-.085.219-.157.324-.245.021-.018.039-.038.06-.056.253-.215.492-.449.733-.681.159-.153.326-.301.478-.458.152-.159.292-.332.438-.498.221-.25.444-.5.647-.761.017-.022.037-.041.054-.063L228.693 61.741Z"
+  }));
+};
+const undo = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
+  height,
+  width,
+  viewBox: "0 0 256 256"
+}, /* @__PURE__ */ React.createElement("path", {
+  d: "M167.055,76.799H56.971l27.112-27.112c4.687-4.687,4.687-12.285,0-16.971h0c-4.686-4.687-12.284-4.687-16.97,0L19.515,80.313c-4.686,4.687-4.686,12.285,0,16.971h0s0,0,0,0l47.598,47.598c4.686,4.686,12.284,4.686,16.97,0s4.687-12.284,0-16.971l-27.112-27.113h111.029c12.742,0,24.774,5.015,33.879,14.121,9.106,9.105,14.121,21.138,14.121,33.879s-5.015,24.774-14.121,33.879c-9.105,9.106-21.138,14.121-33.879,14.121h-60c-6.627,0-12,5.373-12,12h0c0,6.627,5.373,12,12,12h60c39.925,0,72.531-32.933,71.994-72.975-.531-39.538-33.397-71.025-72.938-71.025Z"
+}));
+const close = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
+  height,
+  width,
+  viewBox: "0 0 256 256"
+}, /* @__PURE__ */ React.createElement("path", {
+  d: "m150.627 128 68.686-68.687c6.249-6.248 6.249-16.379 0-22.627-6.248-6.249-16.379-6.249-22.627 0l-68.687 68.686-68.686-68.685c-6.248-6.249-16.379-6.249-22.627 0-6.249 6.248-6.249 16.379 0 22.627l68.686 68.687-68.685 68.686c-6.249 6.248-6.249 16.379 0 22.627 6.248 6.249 16.379 6.249 22.627 0l68.687-68.686 68.687 68.686c6.248 6.249 16.379 6.249 22.627 0 6.249-6.248 6.249-16.379 0-22.627L150.629 128Z"
+}));
+const home = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
+  height,
+  width,
+  viewBox: "0 0 256 256"
+}, /* @__PURE__ */ React.createElement("path", {
+  fill: "none",
+  d: "M0 0h256v256H0z"
+}), /* @__PURE__ */ React.createElement("path", {
+  d: "M247.312 97.494 140.194 15.107C136.599 12.342 132.3 10.96 128 10.96s-8.6 1.382-12.194 4.147L8.688 97.494c-5.254 4.039-6.24 11.573-2.201 16.827s11.573 6.24 16.827 2.201l.687-.528v109.731c0 11.046 8.954 20 20 20h49.16c11.046 0 20-8.954 20-20v-51.726a8 8 0 0 1 8-8h16a8 8 0 0 1 8 8v51.726c0 11.046 8.954 20 20 20h46.84c11.046 0 20-8.954 20-20v-109.73l.687.528c5.254 4.039 12.789 3.053 16.827-2.201s3.054-12.788-2.201-16.827ZM208 221.726h-38.84V166c0-13.255-10.745-24-24-24h-32c-13.255 0-24 10.745-24 24v55.726H48V97.547l80-61.541 80 61.542v124.179Z"
+}));
+const fullsScreen = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
+  height,
+  width,
+  viewBox: "0 0 256 256"
+}, /* @__PURE__ */ React.createElement("path", {
+  d: "M136,36c0,6.627,5.373,12,12,12h43.03s-51.515,51.515-51.515,51.515c-4.686,4.687-4.686,12.284,0,16.971,4.686,4.686,12.284,4.686,16.971,0l51.515-51.515v43.029c0,6.627,5.373,12,12,12,6.627,0,12-5.373,12-12V36c0-3.071-1.172-6.142-3.515-8.485-2.343-2.343-5.414-3.515-8.485-3.515h-72c-6.627,0-12,5.373-12,12Z"
+}), /* @__PURE__ */ React.createElement("path", {
+  d: "M120,220c0-6.627-5.373-12-12-12h-43.03s51.515-51.515,51.515-51.515c4.686-4.687,4.686-12.284,0-16.971-4.686-4.686-12.284-4.686-16.971,0l-51.515,51.515v-43.029c0-6.627-5.373-12-12-12s-12,5.373-12,12v72c0,3.071,1.172,6.142,3.515,8.485,2.343,2.343,5.414,3.515,8.485,3.515H108c6.627,0,12-5.373,12-12Z"
+}));
+const treeView = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
+  height,
+  width,
+  viewBox: "0 0 256 256"
+}, /* @__PURE__ */ React.createElement("path", {
+  d: "M160 140h17.834c5.097 16.228 20.256 28 38.166 28 22.091 0 40-17.909 40-40s-17.909-40-40-40c-17.91 0-33.069 11.772-38.166 28H160V52h17.834C182.931 68.228 198.09 80 216 80c22.091 0 40-17.909 40-40S238.091 0 216 0c-17.91 0-33.069 11.772-38.166 28H156c-11 0-20 9-20 20v68h-24V92c0-11-9-20-20-20H20C9 72 0 81 0 92v72c0 11 9 20 20 20h72c11 0 20-9 20-20v-24h24v68c0 11 9 20 20 20h21.834c5.097 16.228 20.256 28 38.166 28 22.091 0 40-17.909 40-40s-17.909-40-40-40c-17.91 0-33.069 11.772-38.166 28H160v-64Zm56-28c8.822 0 16 7.178 16 16s-7.178 16-16 16-16-7.178-16-16 7.178-16 16-16Zm0-88c8.822 0 16 7.178 16 16s-7.178 16-16 16-16-7.178-16-16 7.178-16 16-16ZM88 160H24V96h64v64Zm128 40c8.822 0 16 7.178 16 16s-7.178 16-16 16-16-7.178-16-16 7.178-16 16-16Z"
+}));
 const orbit = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
   height,
   width,
-  xmlns: "http://www.w3.org/2000/svg",
   viewBox: "0 0 256 256"
 }, /* @__PURE__ */ React.createElement("path", {
-  fill,
-  d: "M128 156c-15.44 0-28-12.561-28-28s12.56-28 28-28 28 12.561 28 28-12.56 28-28 28Z"
+  fill: "none",
+  d: "M0 0h256v256H0z"
 }), /* @__PURE__ */ React.createElement("path", {
-  fill,
-  d: "M128 256c-24.647 0-47.276-25.88-59.058-67.54l-.31-1.093-1.093-.309C25.88 175.276 0 152.646 0 128c0-11.335 5.58-22.567 16.139-32.481l3.217-3.021-4.387-.48c-5.26-.575-9.143-5.205-8.658-10.322a9.42 9.42 0 0 1 9.407-8.569c.302 0 .605.014.911.044l25.583 2.435c6.773.644 11.759 6.679 11.114 13.452l-2.435 25.58a9.418 9.418 0 0 1-9.407 8.57c-.301 0-.605-.014-.911-.044-6.104-.581-8.363-5.811-8.442-10.112l-.089-4.817-3.388 3.427c-5.454 5.518-8.337 11.168-8.337 16.339 0 9.505 9.803 20.387 26.221 29.11 4.201 2.232 8.904 4.335 13.977 6.252l3.209 1.212-.479-3.397c-1.522-10.791-2.294-21.953-2.294-33.178C60.952 57.421 91.03 0 128 0c24.647 0 47.276 25.88 59.058 67.54l.31 1.093 1.093.309c41.66 11.782 67.54 34.412 67.54 59.058 0 36.97-57.421 67.048-128 67.048-11.228 0-22.39-.772-33.178-2.294l-3.397-.479 1.212 3.209c1.918 5.075 4.022 9.777 6.252 13.977 8.723 16.419 19.605 26.221 29.11 26.221 4.96 0 10.383-2.663 15.684-7.7l3.616-3.437-4.988-.067c-4.781-.064-8.743-3.443-9.422-8.036-.761-5.163 2.82-9.983 7.983-10.744l25.423-3.748a12.457 12.457 0 0 1 1.816-.133c6.064 0 11.305 4.532 12.19 10.541l3.747 25.422c.761 5.163-2.819 9.984-7.982 10.745-.502.074-1.003.112-1.487.112-5.382 0-8.592-4.561-9.385-9.08l-.723-4.122-2.792 3.118c-10.22 11.415-21.867 17.448-33.681 17.448Zm0-174.73c-14.083 0-27.933 1.331-41.162 3.955l-1.332.264-.265 1.333C82.606 100.093 81.27 113.947 81.27 128s1.335 27.898 3.969 41.164l.265 1.332 1.332.265c13.269 2.633 27.118 3.969 41.164 3.969s27.911-1.337 41.184-3.973l1.332-.264.265-1.333c2.621-13.209 3.949-27.058 3.949-41.16s-1.335-27.898-3.969-41.164l-.265-1.332-1.332-.265C155.895 82.606 142.046 81.27 128 81.27Zm64.754 13.553c1.522 10.791 2.294 21.953 2.294 33.178s-.777 22.337-2.308 33.182l-.479 3.397 3.209-1.212c5.081-1.92 9.788-4.025 13.991-6.257 16.419-8.723 26.221-19.605 26.221-29.11s-9.803-20.387-26.221-29.11c-4.201-2.232-8.904-4.335-13.977-6.252l-3.209-1.212.479 3.397ZM128 20.317c-9.505 0-20.387 9.803-29.11 26.221-2.231 4.201-4.335 8.906-6.255 13.984l-1.212 3.209 3.397-.479c10.819-1.527 21.983-2.301 33.181-2.301s22.39.772 33.178 2.294l3.397.479-1.212-3.209c-1.918-5.075-4.022-9.777-6.252-13.977-8.723-16.419-19.605-26.221-29.11-26.221Z"
+  d: "M128 60.602c-.531 0-1.061.002-1.591.006-7.079.05-12.565 6.208-11.833 13.249.64 6.151 5.849 10.797 12.033 10.751.463-.003.926-.005 1.39-.005 29.699 0 58.4 6.563 78.743 18.006 16.051 9.029 25.257 19.961 25.257 29.994s-9.206 20.965-25.257 29.994c-20.343 11.443-49.044 18.006-78.743 18.006s-58.4-6.563-78.743-18.006c-16.051-9.028-25.257-19.961-25.257-29.994s9.206-20.965 25.257-29.994c2.522-1.419 5.189-2.751 7.957-4.015l-1.947 5.262c-1.787 4.831-1.549 11.646 5.003 14.956.328.166.661.314.997.446 5.46 2.136 11.577-.208 14.225-5.453l13.87-27.458c3.673-7.271.745-16.173-6.525-19.845L55.374 52.631a11.58 11.58 0 0 0-.996-.446c-5.459-2.135-11.576.209-14.225 5.452-2.772 5.493-.462 12.349 5.151 15.284l4.682 2.448.046.146C19.615 88.676 0 109.346 0 132.602c0 39.764 57.308 72 128 72s128-32.236 128-72-57.308-72-128-72Z"
+}), /* @__PURE__ */ React.createElement("path", {
+  "fill-rule": "evenodd",
+  d: "M128 160.602c-15.44 0-28-12.561-28-28s12.56-28 28-28 28 12.561 28 28-12.56 28-28 28Z"
 }));
 const look = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
   height,
   width,
-  xmlns: "http://www.w3.org/2000/svg",
   viewBox: "0 0 256 256"
 }, /* @__PURE__ */ React.createElement("path", {
-  fill,
-  d: "m223.658 209.952-54.829-29.907c10.414-15.208 16.168-33.38 16.168-52.045s-5.753-36.837-16.167-52.046l54.829-29.906c7.757-4.231 10.615-13.95 6.384-21.707-4.23-7.757-13.946-10.616-21.708-6.384L32.336 113.955a15.999 15.999 0 0 0 0 28.092l175.998 95.997a15.922 15.922 0 0 0 7.647 1.957c5.666 0 11.157-3.017 14.06-8.341 4.231-7.758 1.373-17.476-6.384-21.707Zm-76.054-122.42c8.599 11.632 13.393 25.84 13.393 40.468s-4.793 28.836-13.393 40.468L73.412 128l74.193-40.468Z"
+  fill: "none",
+  d: "M0 0h256v256H0z"
+}), /* @__PURE__ */ React.createElement("path", {
+  d: "m221.08 221.465-60.889-33.212c13.199-17.151 20.56-38.386 20.56-60.253s-7.36-43.102-20.56-60.253l60.889-33.212c5.818-3.174 7.962-10.463 4.789-16.281-3.174-5.818-10.463-7.961-16.281-4.789l-190.668 104a12.002 12.002 0 0 0 0 21.07l190.667 104a11.999 11.999 0 0 0 16.281-4.789c3.173-5.818 1.029-13.107-4.789-16.281ZM49.727 128l89.041-48.567a74.846 74.846 0 0 1 6.321 8.582c-.113-.003-.225-.014-.338-.014-13.255 0-24 17.909-24 40s10.745 40 24 40c.113 0 .225-.012.338-.014a74.846 74.846 0 0 1-6.321 8.582l-89.041-48.567Z"
 }));
 const perspective = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
   height,
   width,
-  xmlns: "http://www.w3.org/2000/svg",
   viewBox: "0 0 256 256"
 }, /* @__PURE__ */ React.createElement("path", {
   fill,
@@ -48853,53 +49937,17 @@ const perspective = ({ height, width, fill }) => /* @__PURE__ */ React.createEle
 const orthographic = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
   height,
   width,
-  xmlns: "http://www.w3.org/2000/svg",
   viewBox: "0 0 256 256"
 }, /* @__PURE__ */ React.createElement("path", {
-  fill,
-  d: "M194 116h-3.14c-4.881-25.719-25.141-45.979-50.86-50.86V62c0-4.4-3.6-8-8-8h-8c-4.4 0-8 3.6-8 8v3.14C90.281 70.021 70.021 90.281 65.14 116H62c-4.4 0-8 3.6-8 8v8c0 4.4 3.6 8 8 8h3.14c4.881 25.719 25.141 45.979 50.86 50.86V194c0 4.4 3.6 8 8 8h8c4.4 0 8-3.6 8-8v-3.14c25.719-4.881 45.979-25.141 50.86-50.86H194c4.4 0 8-3.6 8-8v-8c0-4.4-3.6-8-8-8Zm-54 50.159V162c0-4.4-3.6-8-8-8h-8c-4.4 0-8 3.6-8 8v4.159c-12.421-3.915-22.244-13.738-26.159-26.159H94c4.4 0 8-3.6 8-8v-8c0-4.4-3.6-8-8-8h-4.158C93.757 103.579 103.58 93.756 116 89.841V94c0 4.4 3.6 8 8 8h8c4.4 0 8-3.6 8-8v-4.159c12.421 3.915 22.244 13.738 26.159 26.159H162c-4.4 0-8 3.6-8 8v8c0 4.4 3.6 8 8 8h4.159c-3.915 12.421-13.738 22.244-26.159 26.159Z"
+  fill: "none",
+  d: "M0 0h256v256H0z"
 }), /* @__PURE__ */ React.createElement("path", {
-  fill,
-  d: "M248 116h-4.615C237.785 61.518 194.481 18.214 140 12.615V8c0-4.4-3.6-8-8-8h-8c-4.4 0-8 3.6-8 8v4.615C61.519 18.214 18.214 61.518 12.615 116H8c-4.4 0-8 3.6-8 8v8c0 4.4 3.6 8 8 8h4.615c5.6 54.482 48.904 97.786 103.385 103.385V248c0 4.4 3.6 8 8 8h8c4.4 0 8-3.6 8-8v-4.615c54.481-5.6 97.786-48.904 103.385-103.385H248c4.4 0 8-3.6 8-8v-8c0-4.4-3.6-8-8-8ZM140 219.218V216c0-4.4-3.6-8-8-8h-8c-4.4 0-8 3.6-8 8v3.218C74.849 213.834 42.167 181.151 36.782 140H40c4.4 0 8-3.6 8-8v-8c0-4.4-3.6-8-8-8h-3.218C42.166 74.849 74.849 42.167 116 36.783v3.218c0 4.4 3.6 8 8 8h8c4.4 0 8-3.6 8-8v-3.218c41.151 5.384 73.833 38.067 79.218 79.218H216c-4.4 0-8 3.6-8 8v8c0 4.4 3.6 8 8 8h3.218c-5.384 41.151-38.067 73.833-79.218 79.218Z"
-}));
-const box = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
-  height,
-  width,
-  xmlns: "http://www.w3.org/2000/svg",
-  viewBox: "0 0 256 256"
-}, /* @__PURE__ */ React.createElement("path", {
-  fill,
-  d: "m110.051 2.173-92.41 53.253a16.213 16.213 0 0 0-8.125 14.047V175.98a16.215 16.215 0 0 0 8.125 14.047l95.112 54.792c1.354.78 3.047-.195 3.047-1.756V121.339l105.613-60.862c1.354-.78 1.354-2.731 0-3.512L126.301 2.173a16.278 16.278 0 0 0-16.25 0ZM95.488 211.458l-65.659-37.82V82.577l65.66 37.82v91.062Zm10.266-107.741L40.096 65.898l78.08-44.996 65.66 37.819-78.081 44.996Z"
-}), /* @__PURE__ */ React.createElement("path", {
-  fill,
-  d: "M138.483 135.324v118.658c0 1.551 1.682 2.521 3.028 1.745l96.896-55.839a16.117 16.117 0 0 0 8.076-13.961V74.25c0-1.551-1.682-2.521-3.028-1.745l-102.953 59.329a4.029 4.029 0 0 0-2.019 3.49Z"
-}));
-const home = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
-  height,
-  width,
-  xmlns: "http://www.w3.org/2000/svg",
-  viewBox: "0 0 256 256"
-}, /* @__PURE__ */ React.createElement("path", {
-  fill,
-  d: "M136 36c0 6.627 5.373 12 12 12h43.03l-51.515 51.515c-4.686 4.687-4.686 12.284 0 16.971 4.686 4.686 12.284 4.686 16.971 0l51.515-51.515V108c0 6.627 5.373 12 12 12s12-5.373 12-12V36c0-3.071-1.172-6.142-3.515-8.485A11.963 11.963 0 0 0 220.001 24h-72c-6.627 0-12 5.373-12 12ZM120 220c0-6.627-5.373-12-12-12H64.97l51.515-51.515c4.686-4.687 4.686-12.284 0-16.971-4.686-4.686-12.284-4.686-16.971 0l-51.515 51.515V148c0-6.627-5.373-12-12-12s-12 5.373-12 12v72c0 3.071 1.172 6.142 3.515 8.485A11.963 11.963 0 0 0 35.999 232H108c6.627 0 12-5.373 12-12Z"
-}));
-const measure = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
-  height,
-  width,
-  xmlns: "http://www.w3.org/2000/svg",
-  viewBox: "0 0 256 256"
-}, /* @__PURE__ */ React.createElement("path", {
-  fill,
-  d: "M118.464 79.224C98.5 69.487 74.337 77.807 64.6 97.771c-9.737 19.964-1.417 44.127 18.547 53.864 19.964 9.737 44.127 1.417 53.864-18.547 9.737-19.964 1.417-44.127-18.547-53.864Zm-27.181 55.73c-10.783-5.259-15.261-18.264-10.002-29.047s18.264-15.261 29.047-10.002c10.783 5.259 15.261 18.264 10.002 29.047-5.259 10.783-18.264 15.261-29.047 10.002Z"
-}), /* @__PURE__ */ React.createElement("path", {
-  fill,
-  d: "M250.342 162.614c-4.999-2.438-11.028-.362-13.466 4.637l-3.532 7.241-14.481-7.063h-.002l-21.722-10.595-14.482-7.064 13.252-27.171c12.279-25.176 5.849-54.232-16.333-69.89l2.089-4.284c4.856-9.956.683-22.076-9.273-26.932L132.566 2.068c-9.956-4.856-22.076-.683-26.932 9.273l-2.089 4.284c-25.995-7.839-54.661 4.1-66.94 29.275L5.703 108.26c-13.632 27.949-1.984 61.778 25.966 75.409L134.863 234a6.033 6.033 0 0 0 8.067-2.778l2.645-5.422 59.739 29.137c4.999 2.438 11.028.362 13.466-4.637l32.668-66.98 3.532-7.241c2.438-4.999.362-11.028-4.637-13.466ZM120.117 18.405c.957-1.963 3.424-2.812 5.386-1.855l39.826 19.424c1.963.957 2.812 3.424 1.855 5.386l-1.766 3.621-47.067-22.956 1.766-3.621Zm40.817 120.769-31.777 65.153-86.893-42.38c-15.93-7.77-22.607-27.161-14.837-43.091l30.902-63.359c7.77-15.93 27.161-22.607 43.091-14.837l59.739 29.137c15.93 7.77 20.797 26.278 13.027 42.208l-13.252 27.171Zm44.157 93.246-50.687-24.722 19.424-39.826 7.241 3.532-8.829 18.103a8.056 8.056 0 1 0 14.482 7.064l8.829-18.103 7.241 3.532-8.829 18.103a8.056 8.056 0 1 0 14.482 7.064l8.829-18.103 7.241 3.532-19.424 39.826Z"
+  d: "M238.851 77.857v-2.31a20.002 20.002 0 0 0-10-17.321L138 5.774a19.991 19.991 0 0 0-20 0L27.149 58.226a20 20 0 0 0-10 17.321v104.906a20.002 20.002 0 0 0 10 17.321L118 250.227a19.991 19.991 0 0 0 20 0l90.851-52.453a20 20 0 0 0 10-17.321V77.857ZM128 27.713l74.852 43.216L128 114.145 53.148 70.929 128 27.713ZM41.149 91.714 116 134.929v86.43l-74.851-43.215v-86.43Zm173.702 86.43L140 221.359v-86.43l74.851-43.215v86.43Z"
 }));
 const collapse = ({ height, width, fill, className }) => /* @__PURE__ */ React.createElement("svg", {
   height,
   width,
   className,
-  xmlns: "http://www.w3.org/2000/svg",
   viewBox: "0 0 256 256"
 }, /* @__PURE__ */ React.createElement("path", {
   fill,
@@ -48908,7 +49956,6 @@ const collapse = ({ height, width, fill, className }) => /* @__PURE__ */ React.c
 const pan = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
   height,
   width,
-  xmlns: "http://www.w3.org/2000/svg",
   viewBox: "0 0 256 256"
 }, /* @__PURE__ */ React.createElement("path", {
   fill,
@@ -48917,192 +49964,120 @@ const pan = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("sv
 const zoom = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
   height,
   width,
-  xmlns: "http://www.w3.org/2000/svg",
   viewBox: "0 0 256 256"
 }, /* @__PURE__ */ React.createElement("path", {
   fill,
   id: "Path_15078",
   d: "M127.995,10c-.714,0-1.428,.033-2.137,.101s-1.417,.168-2.116,.302-1.38,.303-2.058,.505c-.673,.201-1.334,.437-1.982,.708l-54.032,22.533c-1.975,.805-3.791,1.954-5.363,3.395-1.377,1.262-2.474,2.799-3.219,4.511-.692,1.598-.977,3.343-.829,5.078,.177,1.813,.813,3.55,1.85,5.048,.755,1.105,1.672,2.091,2.72,2.925,1.09,.868,2.286,1.595,3.558,2.162,1.332,.597,2.726,1.047,4.156,1.339,1.483,.306,2.994,.46,4.509,.46,.73,0,1.463-.036,2.196-.107s1.466-.178,2.193-.323c.73-.144,1.452-.326,2.164-.544,.716-.22,1.42-.477,2.108-.771l28.901-12.348-9.857,153.04-42.33-21.972c-.749-.389-1.523-.729-2.316-1.019-.789-.289-1.595-.529-2.414-.719-.817-.189-1.643-.331-2.476-.425-.833-.094-1.67-.141-2.508-.14-1.627,0-3.248,.173-4.839,.515-1.582,.338-3.124,.846-4.598,1.513-1.465,.662-2.85,1.489-4.126,2.467-1.276,.976-2.421,2.111-3.41,3.378-1.425,1.804-2.445,3.894-2.989,6.127-.496,2.076-.514,4.238-.053,6.323,.476,2.111,1.419,4.088,2.759,5.786,1.478,1.86,3.329,3.389,5.434,4.49l80.749,43.116c.794,.422,1.614,.794,2.456,1.112,.84,.318,1.7,.584,2.573,.797,3.51,.849,7.171,.849,10.681,0,.873-.213,1.732-.479,2.573-.797,.841-.318,1.662-.689,2.456-1.112l80.733-43.116c2.105-1.101,3.955-2.631,5.433-4.49,1.34-1.698,2.283-3.676,2.759-5.786,.462-2.084,.443-4.246-.053-6.323-.545-2.234-1.564-4.323-2.989-6.127-.989-1.266-2.134-2.401-3.41-3.378-1.277-.977-2.661-1.805-4.126-2.467-1.474-.667-3.016-1.174-4.598-1.513-1.59-.342-3.211-.514-4.838-.515-.838,0-1.676,.046-2.508,.14-.833,.093-1.66,.235-2.476,.425-.819,.19-1.625,.429-2.414,.717-.793,.29-1.567,.631-2.316,1.02l-42.327,21.972-9.885-153.046,28.903,12.348c.689,.294,1.392,.552,2.108,.771,.712,.218,1.434,.399,2.165,.544,.728,.145,1.46,.252,2.192,.323s1.467,.107,2.196,.107c1.515,0,3.026-.153,4.51-.46,1.43-.293,2.824-.742,4.156-1.339,1.272-.568,2.467-1.295,3.557-2.162,1.048-.833,1.965-1.819,2.72-2.925,1.038-1.497,1.676-3.235,1.853-5.048,.148-1.731-.135-3.472-.824-5.068-.748-1.713-1.847-3.25-3.226-4.511-1.574-1.44-3.39-2.589-5.365-3.395l-54.024-22.537c-.648-.271-1.309-.507-1.982-.708-.671-.201-1.361-.37-2.06-.505s-1.401-.236-2.111-.302-1.423-.101-2.134-.101"
 }));
-const frameRect = ({ height, width, fill }) => {
-  return /* @__PURE__ */ React.createElement("svg", {
-    height,
-    width,
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 256 256"
-  }, /* @__PURE__ */ React.createElement("path", {
-    fill: "none",
-    d: "M0 0h256v256H0z"
-  }), /* @__PURE__ */ React.createElement("rect", {
-    width: "40",
-    height: "24",
-    x: "148",
-    y: "6.979",
-    rx: "10",
-    ry: "10"
-  }), /* @__PURE__ */ React.createElement("path", {
-    d: "M216 6.979h-10c-5.5 0-10 4.5-10 10v4c0 5.5 4.5 10 10 10a6 6 0 016 6c0 5.5 4.5 10 10 10h4c5.5 0 10-4.5 10-10v-10c0-11-9-20-20-20z"
-  }), /* @__PURE__ */ React.createElement("rect", {
-    width: "24",
-    height: "40",
-    x: "212",
-    y: "54.979",
-    rx: "10",
-    ry: "10"
-  }), /* @__PURE__ */ React.createElement("rect", {
-    width: "40",
-    height: "24",
-    x: "52",
-    y: "6.979",
-    rx: "10",
-    ry: "10"
-  }), /* @__PURE__ */ React.createElement("rect", {
-    width: "40",
-    height: "24",
-    x: "52",
-    y: "214.979",
-    rx: "10",
-    ry: "10"
-  }), /* @__PURE__ */ React.createElement("rect", {
-    width: "40",
-    height: "24",
-    x: "100",
-    y: "6.979",
-    rx: "10",
-    ry: "10"
-  }), /* @__PURE__ */ React.createElement("path", {
-    d: "M24 6.979h10c5.5 0 10 4.5 10 10v4c0 5.5-4.5 10-10 10a6 6 0 00-6 6c0 5.5-4.5 10-10 10h-4c-5.5 0-10-4.5-10-10v-10c0-11 9-20 20-20z"
-  }), /* @__PURE__ */ React.createElement("rect", {
-    width: "24",
-    height: "40",
-    x: "4",
-    y: "54.979",
-    rx: "10",
-    ry: "10"
-  }), /* @__PURE__ */ React.createElement("rect", {
-    width: "24",
-    height: "40",
-    x: "4",
-    y: "102.979",
-    rx: "10",
-    ry: "10"
-  }), /* @__PURE__ */ React.createElement("rect", {
-    width: "24",
-    height: "40",
-    x: "4",
-    y: "150.979",
-    rx: "10",
-    ry: "10"
-  }), /* @__PURE__ */ React.createElement("path", {
-    d: "M14 198.979h4c5.5 0 10 4.5 10 10a6 6 0 006 6c5.5 0 10 4.5 10 10v4c0 5.5-4.5 10-10 10H24c-11 0-20-9-20-20v-10c0-5.5 4.5-10 10-10zM188 154.979h-12v-12c0-4.4-3.6-8-8-8h-8c-4.4 0-8 3.6-8 8v12h-12c-4.4 0-8 3.6-8 8v8c0 4.4 3.6 8 8 8h12v12c0 4.4 3.6 8 8 8h8c4.4 0 8-3.6 8-8v-12h12c4.4 0 8-3.6 8-8v-8c0-4.4-3.6-8-8-8z"
-  }), /* @__PURE__ */ React.createElement("path", {
-    d: "M252.5 229.872l-17.706-17.706A83.578 83.578 0 00248 166.979c0-46.392-37.608-84-84-84s-84 37.608-84 84 37.608 84 84 84c18.179 0 34.995-5.794 48.742-15.61l17.13 17.13c4.667 4.667 12.304 4.667 16.971 0l5.657-5.657c4.667-4.667 4.667-12.304 0-16.971zm-141.955-62.893c0-29.475 23.98-53.455 53.455-53.455s53.455 23.98 53.455 53.455-23.98 53.455-53.455 53.455-53.455-23.98-53.455-53.455z"
-  }));
-};
-const frameSelection = ({ height, width, fill }) => {
-  return /* @__PURE__ */ React.createElement("svg", {
-    height,
-    width,
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 256 256"
-  }, /* @__PURE__ */ React.createElement("path", {
-    d: "M32,52c.032-11.032,8.968-19.968,20-20h28c4.418,0,8-3.582,8-8v-8c0-4.418-3.582-8-8-8h-28c-24.289,.027-43.973,19.711-44,44v28c0,4.418,3.582,8,8,8h8c4.418,0,8-3.582,8-8v-28Z"
-  }), /* @__PURE__ */ React.createElement("path", {
-    d: "M32,204v-28c0-4.418-3.582-8-8-8h-8c-4.418,0-8,3.582-8,8v28c.027,24.289,19.711,43.973,44,44h28c4.418,0,8-3.582,8-8v-8c0-4.418-3.582-8-8-8h-28c-11.032-.032-19.968-8.968-20-20Z"
-  }), /* @__PURE__ */ React.createElement("path", {
-    d: "M224,204c-.032,11.032-8.968,19.968-20,20h-28c-4.418,0-8,3.582-8,8v8c0,4.418,3.582,8,8,8h28c24.289-.027,43.973-19.711,44-44v-28c0-4.418-3.582-8-8-8h-8c-4.418,0-8,3.582-8,8v28Z"
-  }), /* @__PURE__ */ React.createElement("path", {
-    d: "M204,8h-28c-4.418,0-8,3.582-8,8v8c0,4.418,3.582,8,8,8h28c11.032,.032,19.968,8.968,20,20v28c0,4.418,3.582,8,8,8h8c4.418,0,8-3.582,8-8v-28c-.027-24.289-19.711-43.973-44-44Z"
-  }), /* @__PURE__ */ React.createElement("path", {
-    d: "M77.018,162.384l45.779,22.8c1.607,.801,3.406,1.225,5.203,1.225s3.596-.424,5.203-1.225l45.779-22.8c2.766-1.041,4.554-3.595,4.585-6.554l4.461-61.767,.005-.145c0-3.036-1.847-5.656-4.759-6.694l-53.103-17.293c-.702-.226-1.434-.341-2.172-.34-.738,0-1.47,.114-2.179,.343l-53.148,17.308c-2.859,1.021-4.706,3.641-4.706,6.677v.072l4.466,61.839c.031,2.959,1.819,5.513,4.585,6.554Zm89.894-12.383l-29.278,14.302v-45.521l31.595-12.086-2.316,43.305Zm-38.911-65.139l29.611,9.827-29.611,9.827-29.611-9.827,29.611-9.827Z"
-  }));
-};
-const fullsScreen = ({ height, width, fill }) => {
-  return /* @__PURE__ */ React.createElement("svg", {
-    height,
-    width,
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 256 256"
-  }, /* @__PURE__ */ React.createElement("path", {
-    d: "M136,36c0,6.627,5.373,12,12,12h43.03s-51.515,51.515-51.515,51.515c-4.686,4.687-4.686,12.284,0,16.971,4.686,4.686,12.284,4.686,16.971,0l51.515-51.515v43.029c0,6.627,5.373,12,12,12,6.627,0,12-5.373,12-12V36c0-3.071-1.172-6.142-3.515-8.485-2.343-2.343-5.414-3.515-8.485-3.515h-72c-6.627,0-12,5.373-12,12Z"
-  }), /* @__PURE__ */ React.createElement("path", {
-    d: "M120,220c0-6.627-5.373-12-12-12h-43.03s51.515-51.515,51.515-51.515c4.686-4.687,4.686-12.284,0-16.971-4.686-4.686-12.284-4.686-16.971,0l-51.515,51.515v-43.029c0-6.627-5.373-12-12-12s-12,5.373-12,12v72c0,3.071,1.172,6.142,3.515,8.485,2.343,2.343,5.414,3.515,8.485,3.515H108c6.627,0,12-5.373,12-12Z"
-  }));
-};
-const treeView = ({ height, width, fill }) => {
-  return /* @__PURE__ */ React.createElement("svg", {
-    height,
-    width,
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 256 256"
-  }, /* @__PURE__ */ React.createElement("path", {
-    d: "M160 140h17.834c5.097 16.228 20.256 28 38.166 28 22.091 0 40-17.909 40-40s-17.909-40-40-40c-17.91 0-33.069 11.772-38.166 28H160V52h17.834C182.931 68.228 198.09 80 216 80c22.091 0 40-17.909 40-40S238.091 0 216 0c-17.91 0-33.069 11.772-38.166 28H156c-11 0-20 9-20 20v68h-24V92c0-11-9-20-20-20H20C9 72 0 81 0 92v72c0 11 9 20 20 20h72c11 0 20-9 20-20v-24h24v68c0 11 9 20 20 20h21.834c5.097 16.228 20.256 28 38.166 28 22.091 0 40-17.909 40-40s-17.909-40-40-40c-17.91 0-33.069 11.772-38.166 28H160v-64Zm56-28c8.822 0 16 7.178 16 16s-7.178 16-16 16-16-7.178-16-16 7.178-16 16-16Zm0-88c8.822 0 16 7.178 16 16s-7.178 16-16 16-16-7.178-16-16 7.178-16 16-16ZM88 160H24V96h64v64Zm128 40c8.822 0 16 7.178 16 16s-7.178 16-16 16-16-7.178-16-16 7.178-16 16-16Z"
-  }));
-};
-const settings = ({ height, width, fill }) => {
-  return /* @__PURE__ */ React.createElement("svg", {
-    height,
-    width,
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 256 256"
-  }, /* @__PURE__ */ React.createElement("path", {
-    d: "M110.325,241.773c-2.567,7.495-10.811,11.566-18.271,9.145l-7.218-2.346c-7.522-2.44-11.739-10.548-9.41-18.133l.849-2.764c1.939-6.314-.798-14.567-6.152-18.465l-1.461-1.066c-5.339-3.882-14.046-3.953-19.452-.162l-2.369,1.662c-6.48,4.553-15.542,3.001-20.158-3.341l-4.466-6.136c-4.652-6.397-3.246-15.472,3.037-20.195l2.314-1.741c5.28-3.965,7.913-12.249,5.864-18.552l-.557-1.722c-2.038-6.279-9.043-11.455-15.646-11.563l-2.894-.047c-7.913-.13-14.334-6.709-14.334-14.552v-7.593c0-7.909,6.476-14.425,14.334-14.552l2.894-.047c6.602-.107,13.6-5.264,15.646-11.566l.557-1.718c2.041-6.279-.584-14.587-5.864-18.555l-2.314-1.738c-6.33-4.758-7.649-13.852-3.037-20.195l4.466-6.14c4.656-6.393,13.73-7.854,20.158-3.341l2.369,1.662c5.406,3.795,14.093,3.736,19.452-.162l1.461-1.062c5.335-3.882,8.091-12.151,6.152-18.465l-.849-2.768c-2.326-7.57,1.951-15.708,9.41-18.129l7.218-2.346c7.522-2.444,15.7,1.639,18.271,9.142l.94,2.74c2.144,6.247,9.209,11.313,15.835,11.313h1.805c6.602,0,13.69-5.066,15.831-11.313l.94-2.74c2.571-7.491,10.816-11.563,18.275-9.141l7.218,2.346c7.522,2.44,11.739,10.544,9.41,18.129l-.849,2.768c-1.939,6.314,.798,14.567,6.152,18.465l1.461,1.062c5.339,3.886,14.046,3.957,19.448,.162l2.369-1.662c6.48-4.549,15.546-2.997,20.158,3.341l4.47,6.14c4.652,6.397,3.246,15.472-3.037,20.195l-2.314,1.738c-5.28,3.969-7.913,12.253-5.868,18.555l.561,1.718c2.038,6.282,9.043,11.459,15.646,11.566l2.891,.047c7.917,.126,14.334,6.709,14.334,14.552v7.593c0,7.905-6.476,14.425-14.334,14.552l-2.891,.047c-6.602,.107-13.6,5.26-15.646,11.563l-.561,1.722c-2.038,6.279,.588,14.587,5.868,18.552l2.314,1.741c6.33,4.758,7.649,13.852,3.037,20.195l-4.47,6.136c-4.652,6.397-13.726,7.858-20.158,3.341l-2.369-1.662c-5.402-3.791-14.09-3.736-19.448,.162l-1.461,1.066c-5.335,3.882-8.091,12.151-6.152,18.465l.849,2.764c2.326,7.574-1.951,15.712-9.41,18.133l-7.218,2.346c-7.522,2.44-15.7-1.639-18.275-9.145l-.94-2.736c-2.14-6.247-9.205-11.313-15.831-11.313h-1.805c-6.602,0-13.69,5.066-15.835,11.313l-.94,2.736Zm17.674-45.77c37.559,0,68.002-30.443,68.002-68.002s-30.443-67.998-68.002-67.998-67.998,30.443-67.998,67.998,30.443,68.002,67.998,68.002Z"
-  }));
-};
-const help = ({ height, width, fill }) => {
-  return /* @__PURE__ */ React.createElement("svg", {
-    height,
-    width,
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 256 256"
-  }, /* @__PURE__ */ React.createElement("path", {
-    d: "M128 0C57.308 0 0 57.308 0 128s57.308 128 128 128 128-57.308 128-128S198.692 0 128 0Zm0 232c-57.346 0-104-46.654-104-104S70.654 24 128 24s104 46.654 104 104-46.654 104-104 104Z"
-  }), /* @__PURE__ */ React.createElement("path", {
-    d: "M124.365 160.615c-8.46 1.295-15.374 8.209-16.669 16.669-2.079 13.576 9.446 25.101 23.021 23.021 8.46-1.295 15.374-8.209 16.669-16.669 2.079-13.576-9.446-25.101-23.021-23.021ZM163.386 68.844a52.951 52.951 0 0 0-33.074-12.25c-17.985-.747-34.607 7.896-45.516 21.957-3.202 4.128-2.75 9.046 1.601 13.371 3.147 3.129 6.892 5.802 6.892 5.802a10.286 10.286 0 0 0 14.183-1.691l.484-.593a24.146 24.146 0 0 1 20.212-10.412c8.988 0 19.032 5.926 19.032 13.781 0 5.114-3.414 8.161-9.31 11.713l-7.809 4.456a30.622 30.622 0 0 0-19.201 27.423v1.118a8.773 8.773 0 0 0 8.773 8.774h15.771a8.773 8.773 0 0 0 8.773-8.774c0-4.486 4.9-7.319 11.117-10.902a37.039 37.039 0 0 0 23.519-33.533 39.43 39.43 0 0 0-15.45-30.241Z"
-  }));
-};
-const trash = ({ height, width, fill }) => {
-  return /* @__PURE__ */ React.createElement("svg", {
-    height,
-    width,
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 256 256"
-  }, /* @__PURE__ */ React.createElement("path", {
-    d: "M117.317 197.644v-95.33c0-5.467-3.715-10.632-9.129-11.395-6.591-.929-12.238 4.163-12.238 10.574v95.329c0 5.468 3.715 10.633 9.129 11.396 6.591.929 12.238-4.163 12.238-10.574ZM160.05 197.644v-95.33c0-5.467-3.715-10.632-9.129-11.395-6.591-.929-12.238 4.163-12.238 10.574v95.329c0 5.468 3.715 10.633 9.129 11.396 6.591.929 12.238-4.163 12.238-10.574ZM232 42.734h-39.68V10.995C192.32 4.923 187.397 0 181.325 0H74.995C68.923 0 64 4.923 64 10.995v31.739H24c-8.837 0-16 7.163-16 16v.05c0 8.837 7.163 16 16 16h208c8.837 0 16-7.163 16-16v-.05c0-8.837-7.163-16-16-16Zm-66.389-14.025v14.025H90.709V28.709a2 2 0 0 1 2-2h70.902a2 2 0 0 1 2 2Z"
-  }), /* @__PURE__ */ React.createElement("path", {
-    d: "M183.95 207.924c0 8.85-7.175 16.025-16.025 16.025H88.076c-8.85 0-16.025-7.175-16.025-16.025V98.81a8 8 0 0 0-8-8h-16.05a8 8 0 0 0-8 8v114.456c0 23.601 19.133 42.734 42.734 42.734h90.532c23.601 0 42.734-19.133 42.734-42.734V98.81a8 8 0 0 0-8-8h-16.05a8 8 0 0 0-8 8v109.115Z"
-  }));
-};
-const checkmark = ({ height, width, fill }) => {
-  return /* @__PURE__ */ React.createElement("svg", {
-    height,
-    width,
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 256 256"
-  }, /* @__PURE__ */ React.createElement("path", {
-    d: "M228.693 61.741c5.379-7.011 4.057-17.055-2.954-22.434-7.01-5.379-17.054-4.057-22.434 2.954l-.008.011L99.864 177.069l-39.607-47.203c-5.68-6.769-15.772-7.652-22.542-1.972s-7.652 15.772-1.972 22.542l52.416 62.467.006.007c.018.021.038.039.056.06.214.252.448.492.681.733.153.159.3.326.458.478s.331.291.497.437c.251.222.5.445.763.648l.062.053c.108.083.225.151.334.231.304.221.608.44.924.638.166.104.335.192.503.289.284.164.567.328.859.473.221.11.447.204.671.303.245.107.487.219.736.313.268.103.54.188.812.275.214.069.428.142.645.202.293.081.588.144.884.208.206.044.411.093.619.129.294.051.589.085.884.12.219.026.437.055.656.071.275.021.55.026.825.033.245.006.489.015.735.009.246-.005.491-.024.736-.042.274-.018.548-.036.821-.068.22-.026.437-.065.654-.101.293-.047.585-.094.876-.158.207-.045.41-.103.615-.157.292-.076.584-.152.873-.245.215-.069.425-.152.637-.23.267-.099.535-.196.798-.31.245-.105.483-.228.723-.346.219-.108.44-.211.656-.331.286-.158.562-.334.839-.511.163-.104.328-.199.488-.31.307-.211.603-.444.896-.678.106-.085.219-.157.324-.245.021-.018.039-.038.06-.056.253-.215.492-.449.733-.681.159-.153.326-.301.478-.458.152-.159.292-.332.438-.498.221-.25.444-.5.647-.761.017-.022.037-.041.054-.063L228.693 61.741Z"
-  }));
-};
-const undo = ({ height, width, fill }) => {
-  return /* @__PURE__ */ React.createElement("svg", {
-    height,
-    width,
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 256 256"
-  }, /* @__PURE__ */ React.createElement("path", {
-    d: "M167.055,76.799H56.971l27.112-27.112c4.687-4.687,4.687-12.285,0-16.971h0c-4.686-4.687-12.284-4.687-16.97,0L19.515,80.313c-4.686,4.687-4.686,12.285,0,16.971h0s0,0,0,0l47.598,47.598c4.686,4.686,12.284,4.686,16.97,0s4.687-12.284,0-16.971l-27.112-27.113h111.029c12.742,0,24.774,5.015,33.879,14.121,9.106,9.105,14.121,21.138,14.121,33.879s-5.015,24.774-14.121,33.879c-9.105,9.106-21.138,14.121-33.879,14.121h-60c-6.627,0-12,5.373-12,12h0c0,6.627,5.373,12,12,12h60c39.925,0,72.531-32.933,71.994-72.975-.531-39.538-33.397-71.025-72.938-71.025Z"
-  }));
-};
-const close = ({ height, width, fill }) => {
-  return /* @__PURE__ */ React.createElement("svg", {
-    height,
-    width,
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 256 256"
-  }, /* @__PURE__ */ React.createElement("path", {
-    d: "m150.627 128 68.686-68.687c6.249-6.248 6.249-16.379 0-22.627-6.248-6.249-16.379-6.249-22.627 0l-68.687 68.686-68.686-68.685c-6.248-6.249-16.379-6.249-22.627 0-6.249 6.248-6.249 16.379 0 22.627l68.686 68.687-68.685 68.686c-6.249 6.248-6.249 16.379 0 22.627 6.248 6.249 16.379 6.249 22.627 0l68.687-68.686 68.687 68.686c6.248 6.249 16.379 6.249 22.627 0 6.249-6.248 6.249-16.379 0-22.627L150.629 128Z"
-  }));
-};
+const frameRect = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
+  height,
+  width,
+  viewBox: "0 0 256 256"
+}, /* @__PURE__ */ React.createElement("path", {
+  fill: "none",
+  d: "M0 0h256v256H0z"
+}), /* @__PURE__ */ React.createElement("rect", {
+  width: "40",
+  height: "24",
+  x: "148",
+  y: "6.979",
+  rx: "10",
+  ry: "10"
+}), /* @__PURE__ */ React.createElement("path", {
+  d: "M216 6.979h-10c-5.5 0-10 4.5-10 10v4c0 5.5 4.5 10 10 10a6 6 0 016 6c0 5.5 4.5 10 10 10h4c5.5 0 10-4.5 10-10v-10c0-11-9-20-20-20z"
+}), /* @__PURE__ */ React.createElement("rect", {
+  width: "24",
+  height: "40",
+  x: "212",
+  y: "54.979",
+  rx: "10",
+  ry: "10"
+}), /* @__PURE__ */ React.createElement("rect", {
+  width: "40",
+  height: "24",
+  x: "52",
+  y: "6.979",
+  rx: "10",
+  ry: "10"
+}), /* @__PURE__ */ React.createElement("rect", {
+  width: "40",
+  height: "24",
+  x: "52",
+  y: "214.979",
+  rx: "10",
+  ry: "10"
+}), /* @__PURE__ */ React.createElement("rect", {
+  width: "40",
+  height: "24",
+  x: "100",
+  y: "6.979",
+  rx: "10",
+  ry: "10"
+}), /* @__PURE__ */ React.createElement("path", {
+  d: "M24 6.979h10c5.5 0 10 4.5 10 10v4c0 5.5-4.5 10-10 10a6 6 0 00-6 6c0 5.5-4.5 10-10 10h-4c-5.5 0-10-4.5-10-10v-10c0-11 9-20 20-20z"
+}), /* @__PURE__ */ React.createElement("rect", {
+  width: "24",
+  height: "40",
+  x: "4",
+  y: "54.979",
+  rx: "10",
+  ry: "10"
+}), /* @__PURE__ */ React.createElement("rect", {
+  width: "24",
+  height: "40",
+  x: "4",
+  y: "102.979",
+  rx: "10",
+  ry: "10"
+}), /* @__PURE__ */ React.createElement("rect", {
+  width: "24",
+  height: "40",
+  x: "4",
+  y: "150.979",
+  rx: "10",
+  ry: "10"
+}), /* @__PURE__ */ React.createElement("path", {
+  d: "M14 198.979h4c5.5 0 10 4.5 10 10a6 6 0 006 6c5.5 0 10 4.5 10 10v4c0 5.5-4.5 10-10 10H24c-11 0-20-9-20-20v-10c0-5.5 4.5-10 10-10zM188 154.979h-12v-12c0-4.4-3.6-8-8-8h-8c-4.4 0-8 3.6-8 8v12h-12c-4.4 0-8 3.6-8 8v8c0 4.4 3.6 8 8 8h12v12c0 4.4 3.6 8 8 8h8c4.4 0 8-3.6 8-8v-12h12c4.4 0 8-3.6 8-8v-8c0-4.4-3.6-8-8-8z"
+}), /* @__PURE__ */ React.createElement("path", {
+  d: "M252.5 229.872l-17.706-17.706A83.578 83.578 0 00248 166.979c0-46.392-37.608-84-84-84s-84 37.608-84 84 37.608 84 84 84c18.179 0 34.995-5.794 48.742-15.61l17.13 17.13c4.667 4.667 12.304 4.667 16.971 0l5.657-5.657c4.667-4.667 4.667-12.304 0-16.971zm-141.955-62.893c0-29.475 23.98-53.455 53.455-53.455s53.455 23.98 53.455 53.455-23.98 53.455-53.455 53.455-53.455-23.98-53.455-53.455z"
+}));
+const frameSelection = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
+  height,
+  width,
+  viewBox: "0 0 256 256"
+}, /* @__PURE__ */ React.createElement("path", {
+  d: "M32,52c.032-11.032,8.968-19.968,20-20h28c4.418,0,8-3.582,8-8v-8c0-4.418-3.582-8-8-8h-28c-24.289,.027-43.973,19.711-44,44v28c0,4.418,3.582,8,8,8h8c4.418,0,8-3.582,8-8v-28Z"
+}), /* @__PURE__ */ React.createElement("path", {
+  d: "M32,204v-28c0-4.418-3.582-8-8-8h-8c-4.418,0-8,3.582-8,8v28c.027,24.289,19.711,43.973,44,44h28c4.418,0,8-3.582,8-8v-8c0-4.418-3.582-8-8-8h-28c-11.032-.032-19.968-8.968-20-20Z"
+}), /* @__PURE__ */ React.createElement("path", {
+  d: "M224,204c-.032,11.032-8.968,19.968-20,20h-28c-4.418,0-8,3.582-8,8v8c0,4.418,3.582,8,8,8h28c24.289-.027,43.973-19.711,44-44v-28c0-4.418-3.582-8-8-8h-8c-4.418,0-8,3.582-8,8v28Z"
+}), /* @__PURE__ */ React.createElement("path", {
+  d: "M204,8h-28c-4.418,0-8,3.582-8,8v8c0,4.418,3.582,8,8,8h28c11.032,.032,19.968,8.968,20,20v28c0,4.418,3.582,8,8,8h8c4.418,0,8-3.582,8-8v-28c-.027-24.289-19.711-43.973-44-44Z"
+}), /* @__PURE__ */ React.createElement("path", {
+  d: "M77.018,162.384l45.779,22.8c1.607,.801,3.406,1.225,5.203,1.225s3.596-.424,5.203-1.225l45.779-22.8c2.766-1.041,4.554-3.595,4.585-6.554l4.461-61.767,.005-.145c0-3.036-1.847-5.656-4.759-6.694l-53.103-17.293c-.702-.226-1.434-.341-2.172-.34-.738,0-1.47,.114-2.179,.343l-53.148,17.308c-2.859,1.021-4.706,3.641-4.706,6.677v.072l4.466,61.839c.031,2.959,1.819,5.513,4.585,6.554Zm89.894-12.383l-29.278,14.302v-45.521l31.595-12.086-2.316,43.305Zm-38.911-65.139l29.611,9.827-29.611,9.827-29.611-9.827,29.611-9.827Z"
+}));
+const measure = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
+  height,
+  width,
+  viewBox: "0 0 256 256"
+}, /* @__PURE__ */ React.createElement("path", {
+  fill: "none",
+  d: "M0 0h256v256H0z"
+}), /* @__PURE__ */ React.createElement("path", {
+  d: "M248 8H8c-4.4 0-8 3.6-8 8v128c0 4.4 3.6 8 8 8h240c4.4 0 8-3.6 8-8V16c0-4.4-3.6-8-8-8Zm-16 120h-16V92c0-6.627-5.373-12-12-12s-12 5.373-12 12v36h-14V68c0-6.627-5.373-12-12-12s-12 5.373-12 12v60h-14V92c0-6.627-5.373-12-12-12s-12 5.373-12 12v36h-14V68c0-6.627-5.373-12-12-12s-12 5.373-12 12v60H64V92c0-6.627-5.373-12-12-12s-12 5.373-12 12v36H24V32h208v96ZM244 168c-6.627 0-12 5.373-12 12v56c0 6.627 5.373 12 12 12s12-5.373 12-12v-56c0-6.627-5.373-12-12-12ZM12 168c-6.627 0-12 5.373-12 12v56c0 6.627 5.373 12 12 12s12-5.373 12-12v-56c0-6.627-5.373-12-12-12ZM192.494 171.539c-4.686-4.686-12.284-4.686-16.97 0-4.687 4.686-4.687 12.284 0 16.971l7.505 7.506L72.97 196l7.49-7.49c4.687-4.686 4.687-12.284 0-16.971s-12.284-4.686-16.971 0l-27.976 27.976c-2.171 2.171-3.515 5.172-3.515 8.485s1.343 6.314 3.515 8.485l27.991 27.991c4.686 4.686 12.284 4.686 16.97 0 4.687-4.686 4.687-12.284 0-16.971l-7.505-7.506 110.059.016-7.49 7.49c-4.686 4.686-4.686 12.284 0 16.971 4.687 4.686 12.284 4.686 16.971 0l27.976-27.975c2.171-2.172 3.515-5.172 3.515-8.485s-1.343-6.314-3.515-8.485l-27.991-27.991Z"
+}));
+const sectionBox = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
+  height,
+  width,
+  viewBox: "0 0 256 256"
+}, /* @__PURE__ */ React.createElement("path", {
+  fill,
+  d: "m110.051 2.173-92.41 53.253a16.213 16.213 0 0 0-8.125 14.047V175.98a16.215 16.215 0 0 0 8.125 14.047l95.112 54.792c1.354.78 3.047-.195 3.047-1.756V121.339l105.613-60.862c1.354-.78 1.354-2.731 0-3.512L126.301 2.173a16.278 16.278 0 0 0-16.25 0ZM95.488 211.458l-65.659-37.82V82.577l65.66 37.82v91.062Zm10.266-107.741L40.096 65.898l78.08-44.996 65.66 37.819-78.081 44.996Z"
+}), /* @__PURE__ */ React.createElement("path", {
+  fill,
+  d: "M138.483 135.324v118.658c0 1.551 1.682 2.521 3.028 1.745l96.896-55.839a16.117 16.117 0 0 0 8.076-13.961V74.25c0-1.551-1.682-2.521-3.028-1.745l-102.953 59.329a4.029 4.029 0 0 0-2.019 3.49Z"
+}));
 function MenuTop(props) {
   const [speed, setSpeed] = react.exports.useState();
   const synchSpeed = () => {
@@ -49190,34 +50165,19 @@ function TabCamera(viewer2) {
     viewer2.inputs.onPointerModeChanged = () => setMode(viewer2.inputs.pointerMode);
   }, []);
   const onModeBtn = (target) => {
-    const next = mode === target ? "normal" : target;
+    const next = mode === target ? viewer2.inputs.altPointerMode : target;
     viewer2.inputs.pointerMode = next;
     setMode(next);
   };
-  const onOrbitBtn = () => {
-    onModeBtn("orbit");
-  };
-  const onLookBtn = () => {
-    onModeBtn("look");
-  };
-  const onPanBtn = () => {
-    onModeBtn("pan");
-  };
-  const onZoomBtn = () => {
-    onModeBtn("dolly");
-  };
-  const onFrameRectBtn = () => {
-    onModeBtn("zone");
-  };
   const onFrameBtn = () => {
     const target = viewer2.selection.count > 0 ? viewer2.selection : viewer2.renderer;
-    viewer2.camera.frame(target.getBoundingBox(), "center", viewer2.camera.defaultLerpDuration);
+    viewer2.camera.frame(target.getBoundingBox(), "none", viewer2.camera.defaultLerpDuration);
   };
-  const btnOrbit = toggleButton("Orbit", onOrbitBtn, orbit, () => mode === "orbit");
-  const btnLook = toggleButton("Look", onLookBtn, look, () => mode === "orbit");
-  const btnPan = toggleButton("Pan", onPanBtn, pan, () => mode === "pan");
-  const btnZoom = toggleButton("Zoom", onZoomBtn, zoom, () => mode === "dolly");
-  const btnFrameRect = toggleButton("Frame Rectangle", onFrameRectBtn, frameRect, () => mode === "zone");
+  const btnOrbit = toggleButton("Orbit", () => onModeBtn("orbit"), orbit, () => mode === "orbit");
+  const btnLook = toggleButton("Look", () => onModeBtn("look"), look, () => mode === "look");
+  const btnPan = toggleButton("Pan", () => onModeBtn("pan"), pan, () => mode === "pan");
+  const btnZoom = toggleButton("Zoom", () => onModeBtn("dolly"), zoom, () => mode === "dolly");
+  const btnFrameRect = toggleButton("Frame Rectangle", () => onModeBtn("zone"), frameRect, () => mode === "zone");
   const btnFrame = actionButton("Frame Selection", onFrameBtn, frameSelection);
   const btnFullScreen = actionButton("Full Screen", () => console.log("Full Screen"), fullsScreen);
   return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", {
@@ -49280,8 +50240,8 @@ function TabTools(viewer2) {
   const onMeasureUndoBtn = () => {
     viewer2.gizmoMeasure.abort();
   };
-  const btnSection = actionButton("Section Box", onSectionBtn, box);
-  actionButton("Mystery", () => console.log("Mystery"), box);
+  const btnSection = actionButton("Section Box", onSectionBtn, sectionBox);
+  actionButton("Mystery", () => console.log("Mystery"), sectionBox);
   const btnMeasure = actionButton("Measuring Tool", onMeasureBtn, measure);
   const toolsTab = /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", {
     className: "mx-1"
@@ -52229,7 +53189,7 @@ class Settings {
   constructor() {
     this.useIsolationMaterial = true;
     this.showInspectorOnSelect = true;
-    this.showGroundPlane = false;
+    this.showGroundPlane = true;
   }
   clone() {
     return Object.assign(new Settings(), this);
@@ -52300,6 +53260,7 @@ function VimComponent(props) {
   };
   react.exports.useEffect(() => {
     props.onMount();
+    props.viewer.camera.rotate(new Vector2(-0.25, 0));
     props.viewer.viewport.canvas.tabIndex = 0;
     props.viewer.gizmoSection.clip = true;
     document.addEventListener("keyup", () => setTimeout(synchOrbit));
@@ -52383,7 +53344,7 @@ let url = params.has("vim") || params.has("model") ? (_a = params.get("vim")) !=
 let transparency = "all";
 if (params.has("transparency")) {
   const t2 = params.get("transparency");
-  transparency = Transparency.isValid(t2) ? t2 : "all";
+  transparency = Transparency$1.isValid(t2) ? t2 : "all";
 }
 if (params.has("dev")) {
   params.get("dev");
