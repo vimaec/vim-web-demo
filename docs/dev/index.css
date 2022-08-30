@@ -759,12 +759,19 @@ video {
 .top-6 {
   top: 1.5rem;
 }
+.z-0 {
+  z-index: 0;
+}
 .m-1 {
   margin: 0.25rem;
 }
 .-mx-6 {
   margin-left: -1.5rem;
   margin-right: -1.5rem;
+}
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 .mx-1 {
   margin-left: 0.25rem;
@@ -797,6 +804,9 @@ video {
 }
 .hidden {
   display: none;
+}
+.\!hidden {
+  display: none !important;
 }
 .h-1\/2 {
   height: 50%;
@@ -941,9 +951,6 @@ video {
 .bg-transparent {
   background-color: transparent;
 }
-.bg-primary-royal {
-  background-color: var(--c-primary-royal);
-}
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -983,9 +990,9 @@ video {
   padding-left: 10%;
   padding-right: 10%;
 }
-.py-\[40\%\] {
-  padding-top: 40%;
-  padding-bottom: 40%;
+.py-\[30\%\] {
+  padding-top: 30%;
+  padding-bottom: 30%;
 }
 .py-5 {
   padding-top: 1.25rem;
@@ -1002,6 +1009,10 @@ video {
   font-size: 0.75rem;
   line-height: 1rem;
 }
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
 .font-bold {
   font-weight: 700;
 }
@@ -1013,6 +1024,10 @@ video {
 }
 .text-gray-light {
   color: var(--c-light-gray);
+}
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 .text-black {
   --tw-text-opacity: 1;
@@ -1089,11 +1104,33 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-family: "Roboto", sans-serif;
 }
+
+/* Toast Notification */
+.vim-menu-toast {
+  position: absolute;
+  width: 100px;
+  top: 10%;
+  left: calc(50% - 50px);
+  opacity: 0.75;
+  background-color: #050c1a;
+  border-radius: 5px;
+}
+
+/* Axes Gizmo*/
 .gizmo-axis-canvas {
+  z-index: 1;
   top: 24px !important;
   right: 24px !important;
   margin: 8px 16px 8px 16px;
+  filter: saturate(0%);
+  transition: all 0.2s ease;
 }
+
+.gizmo-axis-canvas:hover {
+  filter: saturate(100%);
+  transition: all 0.2s ease;
+}
+
 .vim-loading-box {
   width: -webkit-fit-content;
   width: -moz-fit-content;
@@ -1329,9 +1366,6 @@ body {
 }
 .hover\:bg-hover-t40:hover {
   background-color: var(--c-hover-t40);
-}
-.hover\:bg-primary-royal:hover {
-  background-color: var(--c-primary-royal);
 }
 .hover\:bg-gray-lightest:hover {
   background-color: var(--c-lightest-gray);
