@@ -29370,6 +29370,7 @@ class G3d$1 {
   }
 }
 const objectModel$1 = {
+  header: "header",
   entities: "entities",
   nodes: {
     table: "Vim.Node"
@@ -29438,8 +29439,10 @@ const objectModel$1 = {
   }
 };
 class DocumentNoBim$1 {
-  constructor(g3d) {
+  constructor(header, g3d) {
+    __publicField$1(this, "header");
     __publicField$1(this, "g3d");
+    this.header = header;
     this.g3d = g3d;
   }
   getAllElements() {
@@ -29480,7 +29483,8 @@ class DocumentNoBim$1 {
   }
 }
 class Document$1 {
-  constructor(g3d, entities, strings, instanceToElement, elementToInstances, elementIds, elementIdToElements) {
+  constructor(header, g3d, entities, strings, instanceToElement, elementToInstances, elementIds, elementIdToElements) {
+    __publicField$1(this, "header");
     __publicField$1(this, "g3d");
     __publicField$1(this, "_entities");
     __publicField$1(this, "_strings");
@@ -29488,6 +29492,7 @@ class Document$1 {
     __publicField$1(this, "_elementToInstances");
     __publicField$1(this, "_elementIds");
     __publicField$1(this, "_elementIdToElements");
+    this.header = header;
     this.g3d = g3d;
     this._entities = entities;
     this._strings = strings;
@@ -29497,12 +29502,14 @@ class Document$1 {
     this._elementIdToElements = elementIdToElements;
   }
   static async createFromBfast(bfast, streamG3d = false) {
+    let header;
     let g3d;
     let entity;
     let strings;
     let instanceToElement;
     let elementIds;
     await Promise.all([
+      Document$1.requestHeader(bfast).then((h) => header = h),
       Document$1.requestG3d(bfast, streamG3d).then((g) => g3d = g),
       Document$1.requestStrings(bfast).then((strs) => strings = strs),
       Document$1.requestEntities(bfast).then((ets) => entity = ets).then((ets) => Promise.all([
@@ -29511,11 +29518,24 @@ class Document$1 {
       ]))
     ]);
     if (!entity) {
-      return new DocumentNoBim$1(g3d);
+      return new DocumentNoBim$1(header, g3d);
     }
     const elementToInstance = Document$1.invert(instanceToElement);
     const elementIdToElements = Document$1.invert(elementIds);
-    return new Document$1(g3d, entity, strings, instanceToElement, elementToInstance, elementIds, elementIdToElements);
+    return new Document$1(header, g3d, entity, strings, instanceToElement, elementToInstance, elementIds, elementIdToElements);
+  }
+  static async requestHeader(bfast) {
+    const header = await bfast.getBuffer(objectModel$1.header);
+    const pairs = new TextDecoder("utf-8").decode(header).split("\n");
+    const map = new Map(pairs.map((p2) => p2.split("=")).map((p2) => [p2[0], p2[1]]));
+    return {
+      vim: map.get("vim"),
+      id: map.get("id"),
+      revision: map.get("revision"),
+      generator: map.get("generator"),
+      created: map.get("created"),
+      schema: map.get("schema")
+    };
   }
   static async requestG3d(bfast, streamG3d) {
     const geometry = streamG3d ? await bfast.getBfast("geometry") : await bfast.getLocalBfast("geometry");
@@ -30146,6 +30166,7 @@ class SceneBuilder$1 {
 }
 class Vim$1 {
   constructor(vim, scene, settings2) {
+    __publicField$1(this, "source");
     __publicField$1(this, "document");
     __publicField$1(this, "index", -1);
     __publicField$1(this, "settings");
@@ -30544,7 +30565,7 @@ function typeConstructor$1(type) {
       return Int32Array;
   }
 }
-class Header$1 {
+class BFastHeader$1 {
   constructor(magic, dataStart, dataEnd, numArrays) {
     __publicField$1(this, "magic");
     __publicField$1(this, "dataStart");
@@ -30583,7 +30604,7 @@ class Header$1 {
     return new this(array[0], array[2], array[4], array[6]);
   }
   static createFromBuffer(array) {
-    return Header$1.createFromArray(new Uint32Array(array));
+    return BFastHeader$1.createFromArray(new Uint32Array(array));
   }
 }
 class BFast$1 {
@@ -30722,7 +30743,7 @@ class BFast$1 {
     const buffer = await this.request(new Range$1(0, 32), "Header");
     if (!buffer)
       throw new Error("Could not get BFAST Header");
-    const result = Header$1.createFromBuffer(buffer);
+    const result = BFastHeader$1.createFromBuffer(buffer);
     return result;
   }
   async request(range2, label) {
@@ -30956,7 +30977,9 @@ class Viewer$1 {
   }
   async loadVim(source, options, onProgress) {
     let buffer;
+    let url2;
     if (typeof source === "string") {
+      url2 = source;
       buffer = new RemoteBuffer$1(source);
       buffer.logger.onUpdate = (log) => onProgress == null ? void 0 : onProgress(log);
     } else
@@ -30964,6 +30987,7 @@ class Viewer$1 {
     const settings2 = new VimSettings$1(options);
     const bfast = new BFast$1(buffer, 0, "vim");
     const vim = await this._loader.load(bfast, settings2);
+    vim.source = url2;
     if (buffer instanceof RemoteBuffer$1)
       buffer.logger.onUpdate = void 0;
     this.onVimLoaded(vim);
@@ -54333,6 +54357,7 @@ class G3d {
   }
 }
 const objectModel = {
+  header: "header",
   entities: "entities",
   nodes: {
     table: "Vim.Node"
@@ -54401,8 +54426,10 @@ const objectModel = {
   }
 };
 class DocumentNoBim {
-  constructor(g3d) {
+  constructor(header, g3d) {
+    __publicField(this, "header");
     __publicField(this, "g3d");
+    this.header = header;
     this.g3d = g3d;
   }
   getAllElements() {
@@ -54443,7 +54470,8 @@ class DocumentNoBim {
   }
 }
 class Document {
-  constructor(g3d, entities, strings, instanceToElement, elementToInstances, elementIds, elementIdToElements) {
+  constructor(header, g3d, entities, strings, instanceToElement, elementToInstances, elementIds, elementIdToElements) {
+    __publicField(this, "header");
     __publicField(this, "g3d");
     __publicField(this, "_entities");
     __publicField(this, "_strings");
@@ -54451,6 +54479,7 @@ class Document {
     __publicField(this, "_elementToInstances");
     __publicField(this, "_elementIds");
     __publicField(this, "_elementIdToElements");
+    this.header = header;
     this.g3d = g3d;
     this._entities = entities;
     this._strings = strings;
@@ -54460,12 +54489,14 @@ class Document {
     this._elementIdToElements = elementIdToElements;
   }
   static async createFromBfast(bfast, streamG3d = false) {
+    let header;
     let g3d;
     let entity;
     let strings;
     let instanceToElement;
     let elementIds;
     await Promise.all([
+      Document.requestHeader(bfast).then((h) => header = h),
       Document.requestG3d(bfast, streamG3d).then((g) => g3d = g),
       Document.requestStrings(bfast).then((strs) => strings = strs),
       Document.requestEntities(bfast).then((ets) => entity = ets).then((ets) => Promise.all([
@@ -54474,11 +54505,24 @@ class Document {
       ]))
     ]);
     if (!entity) {
-      return new DocumentNoBim(g3d);
+      return new DocumentNoBim(header, g3d);
     }
     const elementToInstance = Document.invert(instanceToElement);
     const elementIdToElements = Document.invert(elementIds);
-    return new Document(g3d, entity, strings, instanceToElement, elementToInstance, elementIds, elementIdToElements);
+    return new Document(header, g3d, entity, strings, instanceToElement, elementToInstance, elementIds, elementIdToElements);
+  }
+  static async requestHeader(bfast) {
+    const header = await bfast.getBuffer(objectModel.header);
+    const pairs = new TextDecoder("utf-8").decode(header).split("\n");
+    const map = new Map(pairs.map((p2) => p2.split("=")).map((p2) => [p2[0], p2[1]]));
+    return {
+      vim: map.get("vim"),
+      id: map.get("id"),
+      revision: map.get("revision"),
+      generator: map.get("generator"),
+      created: map.get("created"),
+      schema: map.get("schema")
+    };
   }
   static async requestG3d(bfast, streamG3d) {
     const geometry = streamG3d ? await bfast.getBfast("geometry") : await bfast.getLocalBfast("geometry");
@@ -55109,6 +55153,7 @@ class SceneBuilder {
 }
 class Vim {
   constructor(vim, scene, settings2) {
+    __publicField(this, "source");
     __publicField(this, "document");
     __publicField(this, "index", -1);
     __publicField(this, "settings");
@@ -55507,7 +55552,7 @@ function typeConstructor(type) {
       return Int32Array;
   }
 }
-class Header {
+class BFastHeader {
   constructor(magic, dataStart, dataEnd, numArrays) {
     __publicField(this, "magic");
     __publicField(this, "dataStart");
@@ -55546,7 +55591,7 @@ class Header {
     return new this(array[0], array[2], array[4], array[6]);
   }
   static createFromBuffer(array) {
-    return Header.createFromArray(new Uint32Array(array));
+    return BFastHeader.createFromArray(new Uint32Array(array));
   }
 }
 class BFast {
@@ -55685,7 +55730,7 @@ class BFast {
     const buffer = await this.request(new Range(0, 32), "Header");
     if (!buffer)
       throw new Error("Could not get BFAST Header");
-    const result = Header.createFromBuffer(buffer);
+    const result = BFastHeader.createFromBuffer(buffer);
     return result;
   }
   async request(range2, label) {
@@ -55919,7 +55964,9 @@ class Viewer {
   }
   async loadVim(source, options, onProgress) {
     let buffer;
+    let url2;
     if (typeof source === "string") {
+      url2 = source;
       buffer = new RemoteBuffer(source);
       buffer.logger.onUpdate = (log) => onProgress == null ? void 0 : onProgress(log);
     } else
@@ -55927,6 +55974,7 @@ class Viewer {
     const settings2 = new VimSettings(options);
     const bfast = new BFast(buffer, 0, "vim");
     const vim = await this._loader.load(bfast, settings2);
+    vim.source = url2;
     if (buffer instanceof RemoteBuffer)
       buffer.logger.onUpdate = void 0;
     this.onVimLoaded(vim);
@@ -56006,14 +56054,6 @@ const checkmark = ({ height, width, fill }) => {
     d: "M228.693 61.741c5.379-7.011 4.057-17.055-2.954-22.434-7.01-5.379-17.054-4.057-22.434 2.954l-.008.011L99.864 177.069l-39.607-47.203c-5.68-6.769-15.772-7.652-22.542-1.972s-7.652 15.772-1.972 22.542l52.416 62.467.006.007c.018.021.038.039.056.06.214.252.448.492.681.733.153.159.3.326.458.478s.331.291.497.437c.251.222.5.445.763.648l.062.053c.108.083.225.151.334.231.304.221.608.44.924.638.166.104.335.192.503.289.284.164.567.328.859.473.221.11.447.204.671.303.245.107.487.219.736.313.268.103.54.188.812.275.214.069.428.142.645.202.293.081.588.144.884.208.206.044.411.093.619.129.294.051.589.085.884.12.219.026.437.055.656.071.275.021.55.026.825.033.245.006.489.015.735.009.246-.005.491-.024.736-.042.274-.018.548-.036.821-.068.22-.026.437-.065.654-.101.293-.047.585-.094.876-.158.207-.045.41-.103.615-.157.292-.076.584-.152.873-.245.215-.069.425-.152.637-.23.267-.099.535-.196.798-.31.245-.105.483-.228.723-.346.219-.108.44-.211.656-.331.286-.158.562-.334.839-.511.163-.104.328-.199.488-.31.307-.211.603-.444.896-.678.106-.085.219-.157.324-.245.021-.018.039-.038.06-.056.253-.215.492-.449.733-.681.159-.153.326-.301.478-.458.152-.159.292-.332.438-.498.221-.25.444-.5.647-.761.017-.022.037-.041.054-.063L228.693 61.741Z"
   }));
 };
-const undo = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
-  height,
-  width,
-  viewBox: "0 0 256 256"
-}, /* @__PURE__ */ React.createElement("path", {
-  fill,
-  d: "M167.055,76.799H56.971l27.112-27.112c4.687-4.687,4.687-12.285,0-16.971h0c-4.686-4.687-12.284-4.687-16.97,0L19.515,80.313c-4.686,4.687-4.686,12.285,0,16.971h0s0,0,0,0l47.598,47.598c4.686,4.686,12.284,4.686,16.97,0s4.687-12.284,0-16.971l-27.112-27.113h111.029c12.742,0,24.774,5.015,33.879,14.121,9.106,9.105,14.121,21.138,14.121,33.879s-5.015,24.774-14.121,33.879c-9.105,9.106-21.138,14.121-33.879,14.121h-60c-6.627,0-12,5.373-12,12h0c0,6.627,5.373,12,12,12h60c39.925,0,72.531-32.933,71.994-72.975-.531-39.538-33.397-71.025-72.938-71.025Z"
-}));
 const close = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
   height,
   width,
@@ -56232,6 +56272,20 @@ const frameSelection = ({ height, width, fill }) => /* @__PURE__ */ React.create
   fill,
   d: "M77.018,162.384l45.779,22.8c1.607,.801,3.406,1.225,5.203,1.225s3.596-.424,5.203-1.225l45.779-22.8c2.766-1.041,4.554-3.595,4.585-6.554l4.461-61.767,.005-.145c0-3.036-1.847-5.656-4.759-6.694l-53.103-17.293c-.702-.226-1.434-.341-2.172-.34-.738,0-1.47,.114-2.179,.343l-53.148,17.308c-2.859,1.021-4.706,3.641-4.706,6.677v.072l4.466,61.839c.031,2.959,1.819,5.513,4.585,6.554Zm89.894-12.383l-29.278,14.302v-45.521l31.595-12.086-2.316,43.305Zm-38.911-65.139l29.611,9.827-29.611,9.827-29.611-9.827,29.611-9.827Z"
 }));
+const toggleIsolation = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
+  height,
+  width,
+  viewBox: "0 0 256 256"
+}, /* @__PURE__ */ React.createElement("path", {
+  fill: "none",
+  d: "M0 0h256v256H0z"
+}), /* @__PURE__ */ React.createElement("path", {
+  fill,
+  d: "M252 48V24c0-11-9-20-20-20h-24c-11 0-20 9-20 20H68c0-11-9-20-20-20H24C13 4 4 13 4 24v24c0 11 9 20 20 20v120c-11 0-20 9-20 20v24c0 11 9 20 20 20h24c11 0 20-9 20-20h120c0 11 9 20 20 20h24c11 0 20-9 20-20v-24c0-11-9-20-20-20V68c11 0 20-9 20-20Zm-40-20h16v16h-16V28ZM28 28h16v16H28V28Zm16 200H28v-16h16v16Zm184 0h-16v-16h16v16Zm-20-40c-11 0-20 9-20 20H68c0-11-9-20-20-20V68c11 0 20-9 20-20h120c0 11 9 20 20 20v120Z"
+}), /* @__PURE__ */ React.createElement("path", {
+  fill,
+  d: "m183.274 87.225-53.103-17.293a7.053 7.053 0 0 0-2.172-.34c-.738 0-1.47.114-2.179.343L72.672 87.243c-2.859 1.021-4.706 3.641-4.706 6.677v.072l4.466 61.839c.031 2.959 1.819 5.513 4.585 6.554l45.779 22.8c1.607.801 3.406 1.225 5.203 1.225s3.596-.424 5.203-1.225l45.779-22.8c2.766-1.041 4.554-3.595 4.585-6.554l4.461-61.767.005-.145c0-3.036-1.847-5.656-4.759-6.694ZM128 104.517 98.389 94.69 128 84.863l29.611 9.827L128 104.517Zm38.911 45.484-29.278 14.302v-45.521l31.595-12.086-2.316 43.305Z"
+}));
 const measure = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
   height,
   width,
@@ -56240,6 +56294,7 @@ const measure = ({ height, width, fill }) => /* @__PURE__ */ React.createElement
   fill: "none",
   d: "M0 0h256v256H0z"
 }), /* @__PURE__ */ React.createElement("path", {
+  fill,
   d: "M248 8H8c-4.4 0-8 3.6-8 8v128c0 4.4 3.6 8 8 8h240c4.4 0 8-3.6 8-8V16c0-4.4-3.6-8-8-8Zm-16 120h-16V92c0-6.627-5.373-12-12-12s-12 5.373-12 12v36h-14V68c0-6.627-5.373-12-12-12s-12 5.373-12 12v60h-14V92c0-6.627-5.373-12-12-12s-12 5.373-12 12v36h-14V68c0-6.627-5.373-12-12-12s-12 5.373-12 12v60H64V92c0-6.627-5.373-12-12-12s-12 5.373-12 12v36H24V32h208v96ZM244 168c-6.627 0-12 5.373-12 12v56c0 6.627 5.373 12 12 12s12-5.373 12-12v-56c0-6.627-5.373-12-12-12ZM12 168c-6.627 0-12 5.373-12 12v56c0 6.627 5.373 12 12 12s12-5.373 12-12v-56c0-6.627-5.373-12-12-12ZM192.494 171.539c-4.686-4.686-12.284-4.686-16.97 0-4.687 4.686-4.687 12.284 0 16.971l7.505 7.506L72.97 196l7.49-7.49c4.687-4.686 4.687-12.284 0-16.971s-12.284-4.686-16.971 0l-27.976 27.976c-2.171 2.171-3.515 5.172-3.515 8.485s1.343 6.314 3.515 8.485l27.991 27.991c4.686 4.686 12.284 4.686 16.97 0 4.687-4.686 4.687-12.284 0-16.971l-7.505-7.506 110.059.016-7.49 7.49c-4.686 4.686-4.686 12.284 0 16.971 4.687 4.686 12.284 4.686 16.971 0l27.976-27.975c2.171-2.172 3.515-5.172 3.515-8.485s-1.343-6.314-3.515-8.485l-27.991-27.991Z"
 }));
 const sectionBox = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
@@ -56252,6 +56307,74 @@ const sectionBox = ({ height, width, fill }) => /* @__PURE__ */ React.createElem
 }), /* @__PURE__ */ React.createElement("path", {
   fill,
   d: "M138.483 135.324v118.658c0 1.551 1.682 2.521 3.028 1.745l96.896-55.839a16.117 16.117 0 0 0 8.076-13.961V74.25c0-1.551-1.682-2.521-3.028-1.745l-102.953 59.329a4.029 4.029 0 0 0-2.019 3.49Z"
+}));
+const sectionBoxClip = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
+  height,
+  width,
+  viewBox: "0 0 256 256"
+}, /* @__PURE__ */ React.createElement("path", {
+  fill: "none",
+  d: "M0 0h256v256H0z"
+}), /* @__PURE__ */ React.createElement("rect", {
+  fill,
+  width: "32",
+  height: "24",
+  x: "170",
+  y: "33",
+  rx: "10",
+  ry: "10"
+}), /* @__PURE__ */ React.createElement("rect", {
+  fill,
+  width: "32",
+  height: "24",
+  x: "170",
+  y: "199",
+  rx: "10",
+  ry: "10"
+}), /* @__PURE__ */ React.createElement("path", {
+  fill,
+  d: "M146 33.064h-2V11.997C144 5.371 138.627 0 132 0h-8c-6.627 0-12 5.371-12 11.997v21.067H32c-17.645 0-32 14.351-32 31.991v125.964c0 17.639 14.355 31.991 32 31.991h80v20.994c0 6.625 5.373 11.997 12 11.997h8c6.627 0 12-5.371 12-11.997V223.01h2c5.5 0 10-4.499 10-9.997v-3.999c0-5.498-4.5-9.997-10-9.997h-2V57.057h2c5.5 0 10-4.499 10-9.997v-3.999c0-5.498-4.5-9.997-10-9.997ZM32 199.016c-4.337 0-8-3.662-8-7.998V65.055c0-4.335 3.663-7.998 8-7.998h80v141.959H32ZM236 33h-10c-5.5 0-10 4.5-10 10v4c0 5.5 4.5 10 10 10a6 6 0 0 1 6 6c0 5.5 4.5 10 10 10h4c5.5 0 10-4.5 10-10V53c0-11-9-20-20-20Z"
+}), /* @__PURE__ */ React.createElement("rect", {
+  fill,
+  width: "24",
+  height: "32",
+  x: "232",
+  y: "87",
+  rx: "10",
+  ry: "10"
+}), /* @__PURE__ */ React.createElement("rect", {
+  fill,
+  width: "24",
+  height: "32",
+  x: "232",
+  y: "137",
+  rx: "10",
+  ry: "10"
+}), /* @__PURE__ */ React.createElement("path", {
+  fill,
+  d: "M246 183h-4c-5.5 0-10 4.5-10 10a6 6 0 0 1-6 6c-5.5 0-10 4.5-10 10v4c0 5.5 4.5 10 10 10h10c11 0 20-9 20-20v-10c0-5.5-4.5-10-10-10Z"
+}));
+const sectionBoxNoClip = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
+  height,
+  width,
+  viewBox: "0 0 256 256"
+}, /* @__PURE__ */ React.createElement("path", {
+  fill: "none",
+  d: "M0 0h256v256H0z"
+}), /* @__PURE__ */ React.createElement("path", {
+  fill,
+  d: "M224 33h-80V11.963c0-6.627-5.373-12-12-12h-8c-6.627 0-12 5.373-12 12V33H32C14.355 33 0 47.355 0 65v126c0 17.645 14.355 32 32 32h80v21.037c0 6.627 5.373 12 12 12h8c6.627 0 12-5.373 12-12V223h80c17.645 0 32-14.355 32-32V65c0-17.645-14.355-32-32-32ZM32 199c-4.337 0-8-3.663-8-8V65c0-4.337 3.663-8 8-8h80v142H32Zm200-8c0 4.337-3.663 8-8 8h-80V57h80c4.337 0 8 3.663 8 8v126Z"
+}));
+const sectionBoxReset = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
+  height,
+  width,
+  viewBox: "0 0 256 256"
+}, /* @__PURE__ */ React.createElement("path", {
+  fill: "none",
+  d: "M0 0h256v256H0z"
+}), /* @__PURE__ */ React.createElement("path", {
+  fill,
+  d: "M250.744 223.115c-.002-.19.003-.379-.008-.571a12.236 12.236 0 0 0-.118-1.098c-.004-.026-.004-.052-.008-.078l-6.96-43.944c-1.037-6.547-7.185-11.013-13.731-9.976a11.966 11.966 0 0 0-7.833 4.799 11.963 11.963 0 0 0-2.145 8.932l2.427 15.326-22.708-16.498v-62.372a16 16 0 0 0-8-13.856L140 73.953V46.974l10.972 10.972c2.344 2.343 5.415 3.515 8.487 3.515s6.143-1.172 8.486-3.516c4.687-4.687 4.687-12.286 0-16.972l-31.46-31.46c-.019-.019-.039-.034-.058-.053a12.229 12.229 0 0 0-.819-.74c-.148-.122-.305-.228-.457-.342-.161-.12-.318-.245-.486-.357-.177-.119-.362-.222-.544-.331-.154-.092-.304-.188-.463-.273-.184-.098-.373-.182-.561-.27-.168-.079-.333-.163-.505-.234-.181-.075-.366-.136-.55-.202-.186-.066-.369-.138-.558-.195-.184-.055-.37-.096-.555-.143-.195-.049-.387-.104-.585-.143-.21-.042-.423-.066-.636-.097-.176-.025-.348-.059-.526-.076a12.166 12.166 0 0 0-2.368 0c-.178.018-.351.051-.526.076-.212.03-.425.055-.635.097-.2.04-.393.095-.589.144-.144.036-.289.063-.432.105l-.051.013c-.023.007-.045.017-.068.024-.191.058-.375.129-.562.196-.183.065-.367.126-.547.2-.174.072-.34.157-.51.237-.186.087-.373.17-.555.267-.161.086-.314.185-.471.278-.18.107-.362.209-.537.326-.17.114-.33.24-.493.362-.15.112-.304.217-.45.337-.286.235-.559.484-.821.743-.018.018-.038.033-.056.051l-31.46 31.46c-4.687 4.687-4.687 12.286 0 16.973 2.344 2.344 5.415 3.515 8.487 3.515s6.143-1.172 8.486-3.515l10.972-10.972v26.979l-51.66 29.826a16 16 0 0 0-8 13.856v62.475l-22.655 16.46 2.427-15.326c.518-3.274-.339-6.447-2.145-8.932s-4.559-4.281-7.833-4.799c-6.546-1.037-12.694 3.429-13.731 9.976l-6.96 43.944c-.004.026-.005.052-.008.078-.055.364-.096.73-.118 1.098-.011.192-.005.381-.008.571-.002.201-.011.402-.003.603.008.213.033.423.052.634.017.179.026.357.051.535.029.206.072.408.111.612.035.182.064.365.108.546.045.191.105.376.16.564.055.189.105.379.17.566.063.181.14.356.211.533.075.186.144.374.229.558.09.195.195.382.295.571.083.157.157.316.247.47.401.683.867 1.324 1.392 1.916.119.134.247.254.371.381.149.154.294.311.451.457.149.138.308.262.463.392.113.095.221.197.338.288.014.01.026.023.041.034.019.015.041.027.06.041.159.121.325.227.489.339.161.11.318.223.483.325.161.098.327.183.492.273.179.099.356.202.542.292.165.08.334.146.501.217.192.083.382.17.58.242.192.071.388.125.583.186.179.056.354.119.537.167.358.093.719.168 1.083.228.025.004.049.012.074.016l43.944 6.96c6.547 1.037 12.694-3.429 13.731-9.976a11.963 11.963 0 0 0-2.145-8.932 11.97 11.97 0 0 0-7.832-4.8l-15.326-2.427 22.838-16.593 49.369 28.503a15.989 15.989 0 0 0 16 0l49.448-28.549 22.812 16.574-15.326 2.427a11.962 11.962 0 0 0-7.832 4.8 11.963 11.963 0 0 0-2.145 8.932c1.037 6.547 7.185 11.013 13.731 9.976l43.944-6.96c.025-.004.049-.012.074-.016.364-.06.726-.135 1.083-.228.183-.048.358-.111.537-.167.195-.061.391-.115.583-.186.197-.073.387-.16.579-.242.167-.072.337-.138.501-.217.186-.09.363-.193.542-.292.165-.09.331-.175.492-.273.166-.102.323-.215.483-.325.164-.112.33-.219.489-.339l.06-.041c.014-.011.027-.024.041-.034.117-.091.225-.192.338-.288.155-.129.313-.253.463-.392.157-.145.302-.303.451-.457.124-.127.252-.247.371-.381a12.12 12.12 0 0 0 1.392-1.916c.09-.154.165-.313.247-.47.101-.19.206-.376.295-.571.084-.184.154-.371.229-.558.071-.177.147-.352.211-.533.064-.187.115-.377.17-.566.055-.188.115-.373.16-.564.043-.181.073-.364.108-.546.039-.204.082-.406.11-.612.025-.178.035-.356.051-.535.019-.211.044-.421.052-.634.008-.201 0-.402-.003-.603ZM91.443 115.843 128 94.737l36.556 21.105L128 136.947l-36.557-21.105Zm-11.104 21.302L116 157.733v40.145l-35.661-20.589v-40.144ZM140 197.877v-40.145l35.661-20.589v40.145L140 197.877Z"
 }));
 function MenuTop(props) {
   const [speed, setSpeed] = react.exports.useState();
@@ -56326,12 +56449,8 @@ function ControlBar(props) {
   }, /* @__PURE__ */ React.createElement("div", {
     className: "vim-menu-section flex items-center"
   }, TabCamera(props.viewer)), /* @__PURE__ */ React.createElement("div", {
-    className: "divider"
-  }), /* @__PURE__ */ React.createElement("div", {
     className: "vim-menu-section flex items-center"
-  }, TabTools(props.viewer)), /* @__PURE__ */ React.createElement("div", {
-    className: "divider"
-  }), /* @__PURE__ */ React.createElement("div", {
+  }, TabTools(props.viewer, props.toggleIsolation)), /* @__PURE__ */ React.createElement("div", {
     className: "vim-menu-section flex items-center"
   }, TabSettings(props)));
 }
@@ -56372,13 +56491,15 @@ function TabCamera(viewer2) {
     className: "mx-1"
   }, btnFullScreen));
 }
-function TabTools(viewer2) {
+function TabTools(viewer2, toggleIsolation$1) {
   const [measuring, setMeasuring] = react.exports.useState(false);
   const [measurement, setMeasurement] = react.exports.useState();
   const [section, setSection] = react.exports.useState(false);
+  const [clip, setClip] = react.exports.useState(viewer2.gizmoSection.clip);
   const measuringRef = react.exports.useRef();
   measuringRef.current = measuring;
   const onSectionBtn = () => {
+    ReactTooltip.hide();
     if (measuring) {
       onMeasureBtn();
     }
@@ -56391,6 +56512,7 @@ function TabTools(viewer2) {
     setSection(next);
   };
   const onMeasureBtn = () => {
+    ReactTooltip.hide();
     if (section) {
       onSectionBtn();
     }
@@ -56402,46 +56524,51 @@ function TabTools(viewer2) {
       loopMeasure(viewer2, () => measuringRef.current, (m2) => setMeasurement(m2));
     }
   };
-  const onSectionDeleteBtn = () => {
+  const onResetSectionBtn = () => {
     viewer2.gizmoSection.fitBox(viewer2.renderer.getBoundingBox());
-    onSectionBtn();
   };
-  const onSectionUndoBtn = () => {
-    viewer2.gizmoSection.fitBox(viewer2.renderer.getBoundingBox());
+  const onSectionClip = () => {
+    viewer2.gizmoSection.clip = true;
+    setClip(true);
+  };
+  const onSectionNoClip = () => {
+    viewer2.gizmoSection.clip = false;
+    setClip(false);
   };
   const onMeasureDeleteBtn = () => {
+    ReactTooltip.hide();
     viewer2.gizmoMeasure.abort();
     onMeasureBtn();
   };
-  const onMeasureUndoBtn = () => {
-    viewer2.gizmoMeasure.abort();
+  const onToggleIsolationBtn = () => {
+    toggleIsolation$1();
   };
   const btnSection = actionButton("Sectioning Mode", onSectionBtn, sectionBox);
-  actionButton("Toggle Isolation", () => console.log("Toggle Isolation"), sectionBox);
+  const btnIsolation = actionButton("Toggle Isolation", onToggleIsolationBtn, toggleIsolation);
   const btnMeasure = actionButton("Measuring Mode", onMeasureBtn, measure);
   const toolsTab = /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", {
     className: "mx-1"
   }, btnSection), /* @__PURE__ */ React.createElement("div", {
     className: "mx-1"
+  }, btnIsolation), /* @__PURE__ */ React.createElement("div", {
+    className: "mx-1"
   }, btnMeasure));
   const btnMeasureDelete = actionButton("Delete", onMeasureDeleteBtn, trash);
-  const btnMeasureUndo = actionButton("Undo", onMeasureUndoBtn, undo);
   const btnMeasureConfirm = actionButton("Done", onMeasureBtn, checkmark);
   const measureTab = /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", {
     className: "mx-1"
   }, btnMeasureDelete), /* @__PURE__ */ React.createElement("div", {
     className: "mx-1"
-  }, btnMeasureUndo), /* @__PURE__ */ React.createElement("div", {
-    className: "mx-1"
   }, btnMeasureConfirm));
-  const btnSectionDelete = actionButton("Delete", onSectionDeleteBtn, trash);
-  const btnSectionUndo = actionButton("Undo", onSectionUndoBtn, undo);
+  const btnSectionDelete = actionButton("Reset Section Box", onResetSectionBtn, sectionBoxReset);
+  const btnSectionClip = actionButton("Hide Section", onSectionClip, sectionBoxClip);
+  const btnSectionNoClip = actionButton("Show Section", onSectionNoClip, sectionBoxNoClip);
   const btnSectionConfirm = actionButton("Done", onSectionBtn, checkmark);
   const sectionTab = /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", {
     className: "mx-1"
   }, btnSectionDelete), /* @__PURE__ */ React.createElement("div", {
     className: "mx-1"
-  }, btnSectionUndo), /* @__PURE__ */ React.createElement("div", {
+  }, clip ? btnSectionNoClip : btnSectionClip), /* @__PURE__ */ React.createElement("div", {
     className: "mx-1"
   }, btnSectionConfirm));
   return measuring ? measureTab : section ? sectionTab : toolsTab;
@@ -59158,32 +59285,55 @@ function BimPanel(props) {
     className: "text-xs font-bold uppercase mb-6"
   }, "Bim Inspector"), /* @__PURE__ */ React.createElement("div", {
     className: "vim-bim-lower h-1/2 overflow-y-auto"
-  }, /* @__PURE__ */ React.createElement(BimInspector, {
+  }, last ? /* @__PURE__ */ React.createElement(BimInspector, {
     elements,
     object: last
-  }), /* @__PURE__ */ React.createElement(BimParameters, {
+  }) : /* @__PURE__ */ React.createElement(BimDocumentPanel, {
+    vim: viewer2.vims[0]
+  }), last ? /* @__PURE__ */ React.createElement(BimParameters, {
     object: last,
     getOpen,
     setOpen: updateOpen,
     initOpen
-  })));
+  }) : null));
+}
+function BimDocumentPanel(props) {
+  const [vim, setVim] = react.exports.useState();
+  const [revit, setRevit] = react.exports.useState(-1);
+  if (vim !== props.vim) {
+    setVim(props.vim);
+  }
+  const pairs = [
+    ["Document", props.vim.source],
+    ["Created on", props.vim.document.header.created],
+    ["Created by", props.vim.document.header.generator],
+    ["BIM Count", [...props.vim.document.getAllElements()].length],
+    ["Node Count", props.vim.document.g3d.getInstanceCount()],
+    ["Mesh Count", props.vim.document.g3d.getMeshCount()],
+    ["Revit Files", revit >= 0 ? revit : "N/A"]
+  ];
+  const mains = pairs.map((pair, index) => {
+    return /* @__PURE__ */ React.createElement("li", {
+      className: "flex w-full",
+      key: "main-tr" + index
+    }, /* @__PURE__ */ React.createElement("span", {
+      className: "text-gray-medium w-3/12 py-1",
+      key: "main-th" + index
+    }, pair[0]), /* @__PURE__ */ React.createElement("span", {
+      className: "py-1",
+      key: "main-td" + index
+    }, pair[1]));
+  });
+  return /* @__PURE__ */ React.createElement("div", {
+    className: "vim-bim-inspector mb-6"
+  }, /* @__PURE__ */ React.createElement("ul", null, mains));
 }
 const VIM_CONTEXT_MENU_ID = "vim-context-menu-id";
 function VimContextMenu(props) {
   const viewer2 = props.viewer;
-  const someHidden = () => {
-    for (const vim of viewer2.vims) {
-      for (const obj of vim.getAllObjects()) {
-        if (!obj.visible) {
-          return true;
-        }
-      }
-    }
-    return false;
-  };
   const [objects, setObject] = react.exports.useState([]);
-  const [hidden, setHidden] = react.exports.useState(someHidden());
   const [section, setSection] = react.exports.useState(false);
+  console.log("VimContextMenu hidden: " + props.hidden);
   react.exports.useEffect(() => {
     const old = viewer2.selection.onValueChanged;
     viewer2.selection.onValueChanged = () => {
@@ -59202,6 +59352,7 @@ function VimContextMenu(props) {
   const onHideBtn = (e) => {
     if (objects.length === 0)
       return;
+    props.resetIsolation();
     for (const obj of objects) {
       obj.visible = false;
     }
@@ -59210,12 +59361,13 @@ function VimContextMenu(props) {
     props.viewer.environment.groundPlane.visible = false;
     viewer2.selection.clear();
     viewer2.camera.frame(getVisibleBoundingBox(vim), "none", viewer2.camera.defaultLerpDuration);
-    setHidden(true);
+    props.setHidden(true);
     e.stopPropagation();
   };
   const onIsolateBtn = (e) => {
     if (objects.length === 0)
       return;
+    props.resetIsolation();
     const set3 = new Set(objects);
     const vim = viewer2.selection.vim;
     for (const obj of vim.getAllObjects()) {
@@ -59224,7 +59376,7 @@ function VimContextMenu(props) {
     vim.scene.material = props.settings.useIsolationMaterial ? viewer2.renderer.materials.isolation : void 0;
     viewer2.environment.groundPlane.visible = false;
     viewer2.camera.frame(getVisibleBoundingBox(vim), "none", viewer2.camera.defaultLerpDuration);
-    setHidden(true);
+    props.setHidden(true);
     e.stopPropagation();
   };
   const onShowAllBtn = (e) => {
@@ -59236,7 +59388,7 @@ function VimContextMenu(props) {
     });
     viewer2.environment.groundPlane.visible = props.settings.showGroundPlane;
     viewer2.camera.frame(viewer2.renderer.getBoundingBox());
-    setHidden(false);
+    props.setHidden(false);
     e.stopPropagation();
   };
   const onResetBtn = (e) => {
@@ -59290,7 +59442,7 @@ function VimContextMenu(props) {
   }, "Hide Object"), /* @__PURE__ */ React.createElement(MenuItem, {
     data: { foo: "bar" },
     onClick: onClearSelectionBtn
-  }, "Clear Selection")) : null, hidden ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(MenuItem, {
+  }, "Clear Selection")) : null, props.hidden ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(MenuItem, {
     divider: true
   }), /* @__PURE__ */ React.createElement(MenuItem, {
     data: { foo: "bar" },
@@ -59411,26 +59563,30 @@ function createContainer(viewer2) {
   ui2.className = "vim-ui";
   ui2.style.height = "100%";
   root2.append(ui2);
+  viewer2.camera.rotate(new Vector2(-0.25, 0));
+  viewer2.viewport.canvas.tabIndex = 0;
+  viewer2.gizmoSection.clip = true;
   return ui2;
 }
 function VimComponent(props) {
+  const viewer2 = props.viewer;
   const useLogo = props.logo === void 0 ? true : props.logo;
   props.bimPanel === void 0 ? true : props.bimPanel;
   const useMenu = props.menu === void 0 ? true : props.menu;
   const useMenuTop = props.menuTop === void 0 ? true : props.menuTop;
   const useLoading = props.loading === void 0 ? true : props.loading;
-  const [ortho, setOrtho] = react.exports.useState(props.viewer.camera.orthographic);
-  const [orbit2, setOrbit] = react.exports.useState(props.viewer.camera.orbitMode);
-  react.exports.useState(false);
+  const [ortho, setOrtho] = react.exports.useState(viewer2.camera.orthographic);
+  const [orbit2, setOrbit] = react.exports.useState(viewer2.camera.orbitMode);
   const [helpVisible, setHelpVisible] = react.exports.useState(false);
   const [sideContent, setSideContent] = react.exports.useState("none");
   const [settings2, setSettings] = react.exports.useState(new Settings());
   const [toast, setToast] = react.exports.useState();
+  const [isolation, setIsolation] = react.exports.useState();
+  const [hidden, setHidden] = react.exports.useState(!getAllVisible(viewer2));
   const toastTimeout = react.exports.useRef(0);
   const toastSpeed = react.exports.useRef(0);
   let sideContentRef = react.exports.useRef(sideContent);
   let settingsRef = react.exports.useRef(settings2);
-  const viewer2 = props.viewer;
   const updateOrtho = (b) => {
     setOrtho(b);
     props.viewer.camera.orthographic = b;
@@ -59441,6 +59597,26 @@ function VimComponent(props) {
   };
   const synchOrbit = () => {
     setOrbit(props.viewer.camera.orbitMode);
+  };
+  const resetIsolation = () => {
+    setIsolation(void 0);
+  };
+  const toggleIsolation2 = () => {
+    if (!isolation) {
+      if (getAllVisible(viewer2)) {
+        toGhost(viewer2);
+      } else {
+        setIsolation(getVisibleObjects(viewer2));
+        showAll(viewer2);
+      }
+    } else {
+      toGhost(viewer2);
+      isolation.forEach((o) => {
+        o.visible = true;
+      });
+      resetIsolation();
+    }
+    setHidden(!getAllVisible(viewer2));
   };
   const onContextMenu = (position) => {
     let showMenuConfig = {
@@ -59466,9 +59642,6 @@ function VimComponent(props) {
   };
   react.exports.useEffect(() => {
     props.onMount();
-    props.viewer.camera.rotate(new Vector2(-0.25, 0));
-    props.viewer.viewport.canvas.tabIndex = 0;
-    props.viewer.gizmoSection.clip = true;
     document.addEventListener("keyup", () => setTimeout(synchOrbit));
     props.viewer.inputs.onContextMenu = onContextMenu;
     props.viewer.camera.onChanged = () => {
@@ -59520,7 +59693,8 @@ function VimComponent(props) {
     helpVisible,
     setHelpVisible,
     sideContent,
-    setSideContent
+    setSideContent,
+    toggleIsolation: toggleIsolation2
   }) : null, useMenuTop ? /* @__PURE__ */ React.createElement(MenuTop, {
     viewer: props.viewer,
     orbit: orbit2,
@@ -59536,7 +59710,10 @@ function VimComponent(props) {
     viewer: props.viewer,
     settings: settings2,
     helpVisible,
-    setHelpVisible
+    setHelpVisible,
+    resetIsolation,
+    hidden,
+    setHidden
   }), /* @__PURE__ */ React.createElement(MenuToast, {
     config: toast
   }));
@@ -59578,6 +59755,72 @@ function MenuToast(props) {
   }, /* @__PURE__ */ React.createElement("h1", {
     className: "text-lg font-bold text-white mx-2"
   }, "Speed: ", props.config.speed + 25));
+}
+function toGhost(source) {
+  const vimToGhost = (vim) => {
+    for (const obj of vim.getAllObjects()) {
+      obj.visible = false;
+    }
+    vim.scene.material = vim.scene.builder.meshBuilder.materials.isolation;
+  };
+  if (source instanceof Viewer) {
+    for (const vim of source.vims) {
+      vimToGhost(vim);
+    }
+  } else {
+    vimToGhost(source);
+  }
+}
+function showAll(source) {
+  const vimShowAll = (vim) => {
+    for (const obj of vim.getAllObjects()) {
+      obj.visible = true;
+    }
+    vim.scene.material = void 0;
+  };
+  if (source instanceof Viewer) {
+    for (const vim of source.vims) {
+      vimShowAll(vim);
+    }
+  } else {
+    vimShowAll(source);
+  }
+}
+function getVisibleObjects(source) {
+  const all = [];
+  const vimAllObjects = (vim) => {
+    for (const obj of vim.getAllObjects()) {
+      if (obj.visible) {
+        all.push(obj);
+      }
+    }
+  };
+  if (source instanceof Viewer) {
+    for (const vim of source.vims) {
+      vimAllObjects(vim);
+    }
+  } else {
+    vimAllObjects(source);
+  }
+  return all;
+}
+function getAllVisible(source) {
+  const vimAllVisible = (vim) => {
+    for (const obj of vim.getAllObjects()) {
+      if (!obj.visible)
+        return false;
+    }
+    return true;
+  };
+  if (source instanceof Viewer) {
+    for (const vim of source.vims) {
+      if (!vimAllVisible(vim))
+        return false;
+    }
+    return true;
+  } else {
+    return vimAllVisible(source);
+  }
 }
 function getVisibleBoundingBox(source) {
   let box;
