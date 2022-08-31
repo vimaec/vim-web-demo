@@ -1,10 +1,9 @@
 //import { settingsGui } from './settingsGui'
-import * as VIM from 'vim-webgl-viewer'
 import Stats from 'stats-js'
 import {createRoot} from 'react-dom/client'
 import React from 'react'
 import 'vim-webgl-component/dist/style.css';
-import { VimComponent, createContainer } from 'vim-webgl-component'
+import {VIM, VimComponent, createContainer } from 'vim-webgl-component'
 
 // Parse URL
 const params = new URLSearchParams(window.location.search)
