@@ -7551,7 +7551,7 @@ var m = reactDom$1.exports;
   createRoot = m.createRoot;
   m.hydrateRoot;
 }
-var style$1 = /* @__PURE__ */ (() => ':root {\n  --rct-color-tree-bg: #f6f8fa;\n  --rct-color-tree-focus-outline: #0366d6;\n\n  --rct-color-focustree-item-selected-bg: #e8eaed;\n  --rct-color-focustree-item-selected-text: inherit;\n  --rct-color-focustree-item-focused-border: #0366d6;\n  --rct-color-focustree-item-draggingover-bg: #ebf0f4;\n  --rct-color-focustree-item-draggingover-color: inherit;\n\n  --rct-color-nonfocustree-item-selected-bg: #e8eaed;\n  --rct-color-nonfocustree-item-selected-text: inherit;\n  --rct-color-nonfocustree-item-focused-border: #dbdbdb;\n\n  --rct-color-search-highlight-bg: #a2aed2;\n  --rct-color-drag-between-line-bg: #0366d6;\n  --rct-color-arrow: #9aa5b3;\n\n  --rct-item-height: 22px;\n\n  --rct-color-renaming-input-submitbutton-bg: inherit;\n  --rct-color-renaming-input-submitbutton-bg-hover: #0366d6;\n  --rct-color-renaming-input-submitbutton-bg-active: #095fc1;\n\n  --rct-color-renaming-input-submitbutton-text: inherit;\n  --rct-color-renaming-input-submitbutton-text-hover: #ffffff;\n  --rct-color-renaming-input-submitbutton-text-active: #ffffff;\n}\n\n.rct-tree-root {\n  font-family: sans-serif;\n  background-color: var(--rct-color-tree-bg);\n  padding: 4px 0;\n}\n\n.rct-tree-root-focus {\n  outline: 1px solid var(--rct-color-tree-focus-outline);\n}\n\n.rct-tree-item-li {\n  font-size: 0.8rem;\n  list-style-type: none;\n  padding: 0;\n  margin: 0;\n}\n\n.rct-tree-item-title-container {\n  display: flex;\n  align-items: center;\n  border-top: 1px solid transparent;\n  border-bottom: 1px solid transparent;\n}\n\n.rct-tree-child-list {\n}\n.rct-tree-item-button {\n  flex-grow: 1;\n  display: flex;\n  align-items: center;\n  box-sizing: border-box;\n  background-color: transparent;\n  font-family: inherit;\n  font-size: inherit;\n  border: none;\n  width: 100%;\n  height: var(--rct-item-height);\n  text-align: left;\n  color: inherit;\n  outline: none;\n}\n\n.rct-tree-item-arrow {\n  width: 16px;\n}\n\n.rct-tree-item-arrow svg {\n  width: 16px;\n}\n\n.rct-tree-item-arrow-path {\n  fill: var(--rct-color-arrow);\n}\n\n.rct-tree-items-container {\n  margin: 0;\n  padding: 0;\n}\n\n.rct-tree-root:not(.rct-tree-root-focus) .rct-tree-item-title-container-selected {\n  background-color: var(--rct-color-nonfocustree-item-selected-bg);\n  color: var(--rct-color-nonfocustree-item-selected-text);\n}\n.rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-selected {\n  background-color: var(--rct-color-focustree-item-selected-bg);\n  color: var(--rct-color-focustree-item-selected-text);\n}\n.rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-focused {\n  outline: none;\n  border-color: var(--rct-color-focustree-item-focused-border);\n}\n.rct-tree-root:not(.rct-tree-root-focus) .rct-tree-item-title-container-focused {\n  outline: none;\n  border-color: var(--rct-color-nonfocustree-item-focused-border);\n}\n\n.rct-tree-item-title-container-dragging-over {\n  background-color: var(--rct-color-focustree-item-draggingover-bg);\n  color: var(--rct-color-focustree-item-draggingover-color);\n}\n\n.rct-tree-item-button-search-match {\n  font-style: italic;\n}\n\n.rct-tree-item-search-highlight {\n  background-color: var(--rct-color-search-highlight-bg);\n}\n\n.rct-tree-drag-between-line {\n  position: absolute;\n  right: 0;\n  top: -2px;\n  height: 4px;\n  background-color: var(--rct-color-drag-between-line-bg);\n}\n\n.rct-tree-drag-between-line-top {\n  top: 0px;\n}\n\n.rct-tree-drag-between-line-bottom {\n  top: -4px;\n}\n\n.rct-tree-search-input-container {\n  position: absolute;\n  top: 0;\n  right: 0;\n  width: 120px;\n}\n\n.rct-tree-search-input {\n  position: fixed;\n  width: 120px;\n}\n\n/* TODO see renaming form in multiple tree example, wraps around */\n.rct-tree-item-renaming-form {\n  flex-grow: 1;\n  display: flex;\n}\n.rct-tree-item-renaming-input {\n  flex-grow: 1;\n  background-color: inherit;\n  border: none;\n  color: inherit;\n  outline: none;\n}\n.rct-tree-item-renaming-submit-button {\n  border: none;\n  background-color: var(--rct-color-renaming-input-submitbutton-bg);\n  border-radius: 999px;\n  color: var(--rct-color-renaming-input-submitbutton-text);\n  cursor: pointer;\n}\n.rct-tree-item-renaming-submit-button:hover {\n  background-color: var(--rct-color-renaming-input-submitbutton-bg-hover);\n  color: var(--rct-color-renaming-input-submitbutton-text-hover);\n}\n.rct-tree-item-renaming-submit-button:active {\n  background-color: var(--rct-color-renaming-input-submitbutton-bg-active);\n  color: var(--rct-color-renaming-input-submitbutton-text-active);\n}\n/*\n! tailwindcss v3.1.6 | MIT License | https://tailwindcss.com\n*//*\n1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)\n2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)\n*/\n\n*,\n::before,\n::after {\n  box-sizing: border-box; /* 1 */\n  border-width: 0; /* 2 */\n  border-style: solid; /* 2 */\n  border-color: currentColor; /* 2 */\n}\n\n::before,\n::after {\n  --tw-content: \'\';\n}\n\n/*\n1. Use a consistent sensible line-height in all browsers.\n2. Prevent adjustments of font size after orientation changes in iOS.\n3. Use a more readable tab size.\n4. Use the user\'s configured `sans` font-family by default.\n*/\n\nhtml {\n  line-height: 1.5; /* 1 */\n  -webkit-text-size-adjust: 100%; /* 2 */\n  -moz-tab-size: 4; /* 3 */\n  -o-tab-size: 4;\n     tab-size: 4; /* 3 */\n  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */\n}\n\n/*\n1. Remove the margin in all browsers.\n2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.\n*/\n\nbody {\n  margin: 0; /* 1 */\n  line-height: inherit; /* 2 */\n}\n\n/*\n1. Add the correct height in Firefox.\n2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)\n3. Ensure horizontal rules are visible by default.\n*/\n\nhr {\n  height: 0; /* 1 */\n  color: inherit; /* 2 */\n  border-top-width: 1px; /* 3 */\n}\n\n/*\nAdd the correct text decoration in Chrome, Edge, and Safari.\n*/\n\nabbr:where([title]) {\n  -webkit-text-decoration: underline dotted;\n          text-decoration: underline dotted;\n}\n\n/*\nRemove the default font size and weight for headings.\n*/\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-size: inherit;\n  font-weight: inherit;\n}\n\n/*\nReset links to optimize for opt-in styling instead of opt-out.\n*/\n\na {\n  color: inherit;\n  text-decoration: inherit;\n}\n\n/*\nAdd the correct font weight in Edge and Safari.\n*/\n\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/*\n1. Use the user\'s configured `mono` font family by default.\n2. Correct the odd `em` font sizing in all browsers.\n*/\n\ncode,\nkbd,\nsamp,\npre {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; /* 1 */\n  font-size: 1em; /* 2 */\n}\n\n/*\nAdd the correct font size in all browsers.\n*/\n\nsmall {\n  font-size: 80%;\n}\n\n/*\nPrevent `sub` and `sup` elements from affecting the line height in all browsers.\n*/\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/*\n1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)\n2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)\n3. Remove gaps between table borders by default.\n*/\n\ntable {\n  text-indent: 0; /* 1 */\n  border-color: inherit; /* 2 */\n  border-collapse: collapse; /* 3 */\n}\n\n/*\n1. Change the font styles in all browsers.\n2. Remove the margin in Firefox and Safari.\n3. Remove default padding in all browsers.\n*/\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit; /* 1 */\n  font-size: 100%; /* 1 */\n  font-weight: inherit; /* 1 */\n  line-height: inherit; /* 1 */\n  color: inherit; /* 1 */\n  margin: 0; /* 2 */\n  padding: 0; /* 3 */\n}\n\n/*\nRemove the inheritance of text transform in Edge and Firefox.\n*/\n\nbutton,\nselect {\n  text-transform: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Remove default button styles.\n*/\n\nbutton,\n[type=\'button\'],\n[type=\'reset\'],\n[type=\'submit\'] {\n  -webkit-appearance: button; /* 1 */\n  background-color: transparent; /* 2 */\n  background-image: none; /* 2 */\n}\n\n/*\nUse the modern Firefox focus style for all focusable elements.\n*/\n\n:-moz-focusring {\n  outline: auto;\n}\n\n/*\nRemove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)\n*/\n\n:-moz-ui-invalid {\n  box-shadow: none;\n}\n\n/*\nAdd the correct vertical alignment in Chrome and Firefox.\n*/\n\nprogress {\n  vertical-align: baseline;\n}\n\n/*\nCorrect the cursor style of increment and decrement buttons in Safari.\n*/\n\n::-webkit-inner-spin-button,\n::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/*\n1. Correct the odd appearance in Chrome and Safari.\n2. Correct the outline style in Safari.\n*/\n\n[type=\'search\'] {\n  -webkit-appearance: textfield; /* 1 */\n  outline-offset: -2px; /* 2 */\n}\n\n/*\nRemove the inner padding in Chrome and Safari on macOS.\n*/\n\n::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Change font properties to `inherit` in Safari.\n*/\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button; /* 1 */\n  font: inherit; /* 2 */\n}\n\n/*\nAdd the correct display in Chrome and Safari.\n*/\n\nsummary {\n  display: list-item;\n}\n\n/*\nRemoves the default spacing and border for appropriate elements.\n*/\n\nblockquote,\ndl,\ndd,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\nhr,\nfigure,\np,\npre {\n  margin: 0;\n}\n\nfieldset {\n  margin: 0;\n  padding: 0;\n}\n\nlegend {\n  padding: 0;\n}\n\nol,\nul,\nmenu {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n\n/*\nPrevent resizing textareas horizontally by default.\n*/\n\ntextarea {\n  resize: vertical;\n}\n\n/*\n1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)\n2. Set the default placeholder color to the user\'s configured gray 400 color.\n*/\n\ninput::-moz-placeholder, textarea::-moz-placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\ninput::placeholder,\ntextarea::placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\n/*\nSet the default cursor for buttons.\n*/\n\nbutton,\n[role="button"] {\n  cursor: pointer;\n}\n\n/*\nMake sure disabled buttons don\'t get the pointer cursor.\n*/\n:disabled {\n  cursor: default;\n}\n\n/*\n1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)\n2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)\n   This can trigger a poorly considered lint error in some tools but is included by design.\n*/\n\nimg,\nsvg,\nvideo,\ncanvas,\naudio,\niframe,\nembed,\nobject {\n  display: block; /* 1 */\n  vertical-align: middle; /* 2 */\n}\n\n/*\nConstrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)\n*/\n\nimg,\nvideo {\n  max-width: 100%;\n  height: auto;\n}\n\n*, ::before, ::after {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\n\n::-webkit-backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\n\n::backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\r\n.container {\n  width: 100%;\n}\r\n@media (min-width: 640px) {\n\n  .container {\n    max-width: 640px;\n  }\n}\r\n@media (min-width: 768px) {\n\n  .container {\n    max-width: 768px;\n  }\n}\r\n@media (min-width: 1024px) {\n\n  .container {\n    max-width: 1024px;\n  }\n}\r\n@media (min-width: 1280px) {\n\n  .container {\n    max-width: 1280px;\n  }\n}\r\n@media (min-width: 1536px) {\n\n  .container {\n    max-width: 1536px;\n  }\n}\r\n.pointer-events-none {\n  pointer-events: none;\n}\r\n.pointer-events-auto {\n  pointer-events: auto;\n}\r\n.visible {\n  visibility: visible;\n}\r\n.\\!visible {\n  visibility: visible !important;\n}\r\n.fixed {\n  position: fixed;\n}\r\n.absolute {\n  position: absolute;\n}\r\n.inset-0 {\n  top: 0px;\n  right: 0px;\n  bottom: 0px;\n  left: 0px;\n}\r\n.bottom-0 {\n  bottom: 0px;\n}\r\n.bottom-16 {\n  bottom: 4rem;\n}\r\n.right-4 {\n  right: 1rem;\n}\r\n.left-0 {\n  left: 0px;\n}\r\n.top-0 {\n  top: 0px;\n}\r\n.right-6 {\n  right: 1.5rem;\n}\r\n.top-6 {\n  top: 1.5rem;\n}\r\n.z-0 {\n  z-index: 0;\n}\r\n.m-1 {\n  margin: 0.25rem;\n}\r\n.-mx-6 {\n  margin-left: -1.5rem;\n  margin-right: -1.5rem;\n}\r\n.mx-2 {\n  margin-left: 0.5rem;\n  margin-right: 0.5rem;\n}\r\n.mx-1 {\n  margin-left: 0.25rem;\n  margin-right: 0.25rem;\n}\r\n.my-2 {\n  margin-top: 0.5rem;\n  margin-bottom: 0.5rem;\n}\r\n.mb-6 {\n  margin-bottom: 1.5rem;\n}\r\n.mb-5 {\n  margin-bottom: 1.25rem;\n}\r\n.mb-4 {\n  margin-bottom: 1rem;\n}\r\n.-mr-4 {\n  margin-right: -1rem;\n}\r\n.block {\n  display: block;\n}\r\n.flex {\n  display: flex;\n}\r\n.inline-flex {\n  display: inline-flex;\n}\r\n.hidden {\n  display: none;\n}\r\n.\\!hidden {\n  display: none !important;\n}\r\n.h-1\\/2 {\n  height: 50%;\n}\r\n.h-10 {\n  height: 2.5rem;\n}\r\n.h-4 {\n  height: 1rem;\n}\r\n.h-2 {\n  height: 0.5rem;\n}\r\n.h-6 {\n  height: 1.5rem;\n}\r\n.h-full {\n  height: 100%;\n}\r\n.h-8 {\n  height: 2rem;\n}\r\n.h-28 {\n  height: 7rem;\n}\r\n.w-full {\n  width: 100%;\n}\r\n.w-3\\/12 {\n  width: 25%;\n}\r\n.w-auto {\n  width: auto;\n}\r\n.w-1\\/2 {\n  width: 50%;\n}\r\n.w-10 {\n  width: 2.5rem;\n}\r\n.w-4 {\n  width: 1rem;\n}\r\n.w-40 {\n  width: 10rem;\n}\r\n.w-max {\n  width: -webkit-max-content;\n  width: -moz-max-content;\n  width: max-content;\n}\r\n.w-8 {\n  width: 2rem;\n}\r\n.w-32 {\n  width: 8rem;\n}\r\n.rotate-180 {\n  --tw-rotate: 180deg;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\r\n.rotate-0 {\n  --tw-rotate: 0deg;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\r\n.flex-col {\n  flex-direction: column;\n}\r\n.items-center {\n  align-items: center;\n}\r\n.justify-center {\n  justify-content: center;\n}\r\n.justify-between {\n  justify-content: space-between;\n}\r\n.divide-x-2 > :not([hidden]) ~ :not([hidden]) {\n  --tw-divide-x-reverse: 0;\n  border-right-width: calc(2px * var(--tw-divide-x-reverse));\n  border-left-width: calc(2px * calc(1 - var(--tw-divide-x-reverse)));\n}\r\n.overflow-y-auto {\n  overflow-y: auto;\n}\r\n.truncate {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\r\n.rounded-full {\n  border-radius: 9999px;\n}\r\n.rounded-xl {\n  border-radius: 0.75rem;\n}\r\n.rounded {\n  border-radius: 0.25rem;\n}\r\n.rounded-t {\n  border-top-left-radius: 0.25rem;\n  border-top-right-radius: 0.25rem;\n}\r\n.rounded-t-md {\n  border-top-left-radius: 0.375rem;\n  border-top-right-radius: 0.375rem;\n}\r\n.rounded-b-md {\n  border-bottom-right-radius: 0.375rem;\n  border-bottom-left-radius: 0.375rem;\n}\r\n.border {\n  border-width: 1px;\n}\r\n.border-t {\n  border-top-width: 1px;\n}\r\n.border-l {\n  border-left-width: 1px;\n}\r\n.border-r {\n  border-right-width: 1px;\n}\r\n.border-b {\n  border-bottom-width: 1px;\n}\r\n.border-gray-divider {\n  border-color: var(--c-gray-divider);\n}\r\n.border-gray-light {\n  border-color: var(--c-light-gray);\n}\r\n.border-gray-lighter {\n  border-color: var(--c-lighter-gray);\n}\r\n.border-hover-t40 {\n  border-color: var(--c-hover-t40);\n}\r\n.bg-gray-light {\n  background-color: var(--c-light-gray);\n}\r\n.bg-transparent {\n  background-color: transparent;\n}\r\n.bg-white {\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\n}\r\n.bg-white\\/50 {\n  background-color: rgb(255 255 255 / 0.5);\n}\r\n.bg-gray-lightest {\n  background-color: var(--c-lightest-gray);\n}\r\n.p-2 {\n  padding: 0.5rem;\n}\r\n.p-6 {\n  padding: 1.5rem;\n}\r\n.p-1 {\n  padding: 0.25rem;\n}\r\n.py-1 {\n  padding-top: 0.25rem;\n  padding-bottom: 0.25rem;\n}\r\n.px-2 {\n  padding-left: 0.5rem;\n  padding-right: 0.5rem;\n}\r\n.py-2 {\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem;\n}\r\n.px-6 {\n  padding-left: 1.5rem;\n  padding-right: 1.5rem;\n}\r\n.px-\\[10\\%\\] {\n  padding-left: 10%;\n  padding-right: 10%;\n}\r\n.py-\\[30\\%\\] {\n  padding-top: 30%;\n  padding-bottom: 30%;\n}\r\n.py-5 {\n  padding-top: 1.25rem;\n  padding-bottom: 1.25rem;\n}\r\n.px-12 {\n  padding-left: 3rem;\n  padding-right: 3rem;\n}\r\n.text-left {\n  text-align: left;\n}\r\n.text-xs {\n  font-size: 0.75rem;\n  line-height: 1rem;\n}\r\n.text-lg {\n  font-size: 1.125rem;\n  line-height: 1.75rem;\n}\r\n.font-bold {\n  font-weight: 700;\n}\r\n.uppercase {\n  text-transform: uppercase;\n}\r\n.text-gray-medium {\n  color: var(--c-medium-gray);\n}\r\n.text-gray-light {\n  color: var(--c-light-gray);\n}\r\n.text-white {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255 / var(--tw-text-opacity));\n}\r\n.text-black {\n  --tw-text-opacity: 1;\n  color: rgb(0 0 0 / var(--tw-text-opacity));\n}\r\n.text-gray {\n  color: var(--c-gray);\n}\r\n.text-primary {\n  color: var(--c-primary);\n}\r\n.text-gray-darker {\n  color: var(--c-darker-gray);\n}\r\n.opacity-80 {\n  opacity: 0.8;\n}\r\n.opacity-20 {\n  opacity: 0.2;\n}\r\n.shadow-lg {\n  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);\n  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\r\n.filter {\n  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);\n}\r\n.transition-all {\n  transition-property: all;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\r\n\r\n:root {\r\n  --c-primary: #0590cc;\r\n  --c-primary-green: #7ebf50;\r\n  --c-primary-yellow: #ffb700;\r\n  --c-primary-pink: #d93393;\r\n  --c-primary-royal: #284ea2;\r\n  --c-primary-purple: #5e3c97;\r\n\r\n  --c-darkest-gray: #050c1a;\r\n  --c-darker-gray: #212329;\r\n  --c-dark-gray-warm: #3c3c3c;\r\n  --c-dark-gray-cool: #56585f;\r\n  --c-medium-gray: #8a8d95;\r\n  --c-gray: #b6b9bf;\r\n  --c-gray-divider: #e3e3e3;\r\n  --c-light-gray: #d1d3d8;\r\n  --c-lighter-gray: #f0efee;\r\n  --c-lightest-gray: #f6f6f6;\r\n\r\n  --c-secondary: #0076aa;\r\n  --c-secondary-green: #5e9f30;\r\n  --c-secondary-yellow: #eca500;\r\n  --c-secondary-pink: #b51873;\r\n  --c-secondary-royal: #103381;\r\n  --c-secondary-purple: #33004d;\r\n\r\n  --c-lightest-blue: #d9edf9;\r\n  --c-light-blue: #40a6de;\r\n  --c-light-green: #82de40;\r\n\r\n  --c-list-hover: #fff8e5;\r\n\r\n  --c-hover-t40: rgba(5, 12, 26, 0.4);\r\n\r\n  --c-white: #ffffff;\r\n}\r\n\r\nbody {\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n  font-family: "Roboto", sans-serif;\r\n}\r\n\r\n/* Toast Notification */\r\n.vim-menu-toast {\r\n  position: absolute;\r\n  width: 100px;\r\n  top: 10%;\r\n  left: calc(50% - 50px);\r\n  opacity: 0.75;\r\n  background-color: #050c1a;\r\n  border-radius: 5px;\r\n}\r\n\r\n/* Axes Gizmo*/\r\n.gizmo-axis-canvas {\r\n  z-index: 1;\r\n  top: 24px !important;\r\n  right: 24px !important;\r\n  margin: 8px 16px 8px 16px;\r\n  filter: saturate(0%);\r\n  transition: all 0.2s ease;\r\n}\r\n\r\n.gizmo-axis-canvas:hover {\r\n  filter: saturate(100%);\r\n  transition: all 0.2s ease;\r\n}\r\n\r\n.vim-loading-box {\r\n  width: -webkit-fit-content;\r\n  width: -moz-fit-content;\r\n  width: fit-content;\r\n  height: -webkit-fit-content;\r\n  height: -moz-fit-content;\r\n  height: fit-content;\r\n  padding: 10px;\r\n  border: 1px solid #e3e3e3;\r\n  border-radius: 3px;\r\n  background-color: #f6f6f6;\r\n\r\n  font-family: "Roboto", sans-serif;\r\n\r\n  /*Centers the box*/\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  transform: translate(-50%, -50%);\r\n}\r\n\r\n/* Context Menu */\r\n.react-contextmenu {\r\n  background-color: white;\r\n  border-radius: 5px;\r\n  padding: 5px;\r\n}\r\n.react-contextmenu-item {\r\n  cursor: pointer;\r\n}\r\n.react-contextmenu-item--selected {\r\n  background-color: cyan;\r\n}\r\n\r\n.checked {\r\n  font-weight: bold;\r\n}\r\n\r\n.react-contextmenu-item--divider {\r\n  border-top: 1px solid black;\r\n}\r\n\r\n/* Logo */\r\n\r\n.vim-logo {\r\n  position: fixed;\r\n  top: 16px;\r\n  left: 16px;\r\n}\r\n\r\n.vim-logo img {\r\n  height: 48px;\r\n  width: 128px;\r\n}\r\n\r\n/*Makes full screen and remove scrollbars*/\r\nhtml,\r\nbody {\r\n  height: 100%;\r\n  margin: 0;\r\n  padding: 0;\r\n  overflow: hidden;\r\n  background: radial-gradient(circle at center, #f0f0ff, #999999);\r\n}\r\n\r\n.VimLoadingBox h1 {\r\n  color: #050c1a;\r\n}\r\n\r\n.vim-section {\r\n  position: fixed;\r\n  bottom: 0px;\r\n  right: 64px;\r\n  width: 64px;\r\n  pointer-events: all;\r\n}\r\n\r\n/* MENU */\r\n\r\n.vim-menu td {\r\n  pointer-events: all;\r\n}\r\n\r\n.vim-menu td.empty {\r\n  pointer-events: none;\r\n}\r\n\r\n.vim-menu table {\r\n  width: 64px;\r\n}\r\n\r\n.vim-menu button:focus {\r\n  outline: 0;\r\n}\r\n\r\n.vim-menu .iconButton {\r\n  color: var(--c-white);\r\n  border: none;\r\n  background-color: transparent;\r\n}\r\n.vim-menu .iconButton.active {\r\n  background-color: var(--c-primary-royal);\r\n}\r\n.vim-menu .iconButton img {\r\n  width: 42px;\r\n  height: 42px;\r\n}\r\n\r\n.vim-menu .iconButton:hover img {\r\n  transform: scale(1.1);\r\n}\r\n\r\n.vim-menu .iconButton:active img {\r\n  transform: scale(1.1);\r\n  filter: brightness(1.5);\r\n}\r\n\r\n.vim-menu .iconButton:disabled img {\r\n  filter: brightness(0.5);\r\n  transform: scale(1);\r\n}\r\n\r\n/* Help Controls Widget */\r\n.vim-help-controls {\r\n  position: fixed;\r\n  bottom: 64px;\r\n  width: 100%;\r\n  pointer-events: none;\r\n}\r\n\r\n/* Tooltips */\r\n.__react_component_tooltip {\r\n  transition: opacity 0.1s ease-out !important;\r\n}\r\n\r\n/* Bim Panel */\r\n\r\n.vim-bim-panel {\r\n  height: 100%;\r\n  width: 480px;\r\n}\r\n.bim-panel-open {\r\n  margin-left: 480px;\r\n  max-width: calc(100% - 480px);\r\n  -o-object-fit: cover;\r\n     object-fit: cover;\r\n}\r\n\r\n.submenu-item-active {\r\n  position: relative;\r\n}\r\n.submenu-item-active::before {\r\n  content: "";\r\n  display: block;\r\n  background-image: url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 256 256\'%3E%3Cpath fill=\'%230590cc\' d=\'M228.693 61.741c5.379-7.011 4.057-17.055-2.954-22.434-7.01-5.379-17.054-4.057-22.434 2.954l-.008.011L99.864 177.069l-39.607-47.203c-5.68-6.769-15.772-7.652-22.542-1.972s-7.652 15.772-1.972 22.542l52.416 62.467.006.007c.018.021.038.039.056.06.214.252.448.492.681.733.153.159.3.326.458.478s.331.291.497.437c.251.222.5.445.763.648l.062.053c.108.083.225.151.334.231.304.221.608.44.924.638.166.104.335.192.503.289.284.164.567.328.859.473.221.11.447.204.671.303.245.107.487.219.736.313.268.103.54.188.812.275.214.069.428.142.645.202.293.081.588.144.884.208.206.044.411.093.619.129.294.051.589.085.884.12.219.026.437.055.656.071.275.021.55.026.825.033.245.006.489.015.735.009.246-.005.491-.024.736-.042.274-.018.548-.036.821-.068.22-.026.437-.065.654-.101.293-.047.585-.094.876-.158.207-.045.41-.103.615-.157.292-.076.584-.152.873-.245.215-.069.425-.152.637-.23.267-.099.535-.196.798-.31.245-.105.483-.228.723-.346.219-.108.44-.211.656-.331.286-.158.562-.334.839-.511.163-.104.328-.199.488-.31.307-.211.603-.444.896-.678.106-.085.219-.157.324-.245.021-.018.039-.038.06-.056.253-.215.492-.449.733-.681.159-.153.326-.301.478-.458.152-.159.292-.332.438-.498.221-.25.444-.5.647-.761.017-.022.037-.041.054-.063L228.693 61.741Z\'/%3E%3C/svg%3E");\r\n  background-size: contain;\r\n  position: absolute;\r\n  left: 20px;\r\n  top: 12px;\r\n  width: 20px;\r\n  height: 17px;\r\n}\r\n.rct-tree-root {\r\n  font-family: inherit;\r\n}\r\n.rct-tree-root > div > .rct-tree-items-container {\r\n  max-height: calc(50vh - 9rem);\r\n  overflow-y: auto;\r\n}\r\n.rct-tree-items-container li .rct-tree-item-title-container {\r\n  border: none;\r\n}\r\n.rct-tree-items-container\r\n  li\r\n  .rct-tree-item-title-container\r\n  .rct-tree-item-button {\r\n  padding-top: 0.25rem;\r\n  padding-bottom: 0.25rem;\r\n  min-height: 2.5rem;\r\n}\r\n.rct-tree-items-container > li:nth-child(odd) {\r\n  background-color: var(--c-white);\r\n}\r\n.rct-tree-items-container > li:nth-child(even) {\r\n  background-color: var(--c-lightest-gray);\r\n}\r\n\r\n.vim-inspector-properties {\r\n  max-height: 500px;\r\n}\r\n.rct-tree-root-focus {\r\n  outline: none;\r\n}\r\n.rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-focused {\r\n  border: none;\r\n}\r\n\r\n.rct-tree-item-li {\r\n  font-size: 1rem;\r\n}\r\n.rct-tree-item-arrow {\r\n  width: 20px;\r\n}\r\n.rct-tree-item-arrow svg {\r\n  width: 12px;\r\n}\r\n.parameters:first-child > ul > li h3 {\r\n  border-top-right-radius: 4px;\r\n}\r\n.rct-tree-root:not(.rct-tree-root-focus)\r\n  .rct-tree-item-title-container-selected,\r\n.rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-selected {\r\n  background-color: var(--c-lightest-blue);\r\n}\r\n.rct-tree-item-title-container:hover {\r\n  background-color: var(--c-list-hover);\r\n}\r\n.odd\\:bg-white:nth-child(odd) {\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\n}\r\n.focus-within\\:border-primary-royal:focus-within {\n  border-color: var(--c-primary-royal);\n}\r\n.focus-within\\:outline-none:focus-within {\n  outline: 2px solid transparent;\n  outline-offset: 2px;\n}\r\n.hover\\:scale-110:hover {\n  --tw-scale-x: 1.1;\n  --tw-scale-y: 1.1;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\r\n.hover\\:bg-hover-t40:hover {\n  background-color: var(--c-hover-t40);\n}\r\n.hover\\:bg-gray-lightest:hover {\n  background-color: var(--c-lightest-gray);\n}\r\n.hover\\:opacity-100:hover {\n  opacity: 1;\n}\r\n')();
+var style$1 = /* @__PURE__ */ (() => ':root {\n  --rct-color-tree-bg: #f6f8fa;\n  --rct-color-tree-focus-outline: #0366d6;\n\n  --rct-color-focustree-item-selected-bg: #e8eaed;\n  --rct-color-focustree-item-selected-text: inherit;\n  --rct-color-focustree-item-focused-border: #0366d6;\n  --rct-color-focustree-item-draggingover-bg: #ebf0f4;\n  --rct-color-focustree-item-draggingover-color: inherit;\n\n  --rct-color-nonfocustree-item-selected-bg: #e8eaed;\n  --rct-color-nonfocustree-item-selected-text: inherit;\n  --rct-color-nonfocustree-item-focused-border: #dbdbdb;\n\n  --rct-color-search-highlight-bg: #a2aed2;\n  --rct-color-drag-between-line-bg: #0366d6;\n  --rct-color-arrow: #9aa5b3;\n\n  --rct-item-height: 22px;\n\n  --rct-color-renaming-input-submitbutton-bg: inherit;\n  --rct-color-renaming-input-submitbutton-bg-hover: #0366d6;\n  --rct-color-renaming-input-submitbutton-bg-active: #095fc1;\n\n  --rct-color-renaming-input-submitbutton-text: inherit;\n  --rct-color-renaming-input-submitbutton-text-hover: #ffffff;\n  --rct-color-renaming-input-submitbutton-text-active: #ffffff;\n}\n\n.rct-tree-root {\n  font-family: sans-serif;\n  background-color: var(--rct-color-tree-bg);\n  padding: 4px 0;\n}\n\n.rct-tree-root-focus {\n  outline: 1px solid var(--rct-color-tree-focus-outline);\n}\n\n.rct-tree-item-li {\n  font-size: 0.8rem;\n  list-style-type: none;\n  padding: 0;\n  margin: 0;\n}\n\n.rct-tree-item-title-container {\n  display: flex;\n  align-items: center;\n  border-top: 1px solid transparent;\n  border-bottom: 1px solid transparent;\n}\n\n.rct-tree-child-list {\n}\n.rct-tree-item-button {\n  flex-grow: 1;\n  display: flex;\n  align-items: center;\n  box-sizing: border-box;\n  background-color: transparent;\n  font-family: inherit;\n  font-size: inherit;\n  border: none;\n  width: 100%;\n  height: var(--rct-item-height);\n  text-align: left;\n  color: inherit;\n  outline: none;\n}\n\n.rct-tree-item-arrow {\n  width: 16px;\n}\n\n.rct-tree-item-arrow svg {\n  width: 16px;\n}\n\n.rct-tree-item-arrow-path {\n  fill: var(--rct-color-arrow);\n}\n\n.rct-tree-items-container {\n  margin: 0;\n  padding: 0;\n}\n\n.rct-tree-root:not(.rct-tree-root-focus) .rct-tree-item-title-container-selected {\n  background-color: var(--rct-color-nonfocustree-item-selected-bg);\n  color: var(--rct-color-nonfocustree-item-selected-text);\n}\n.rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-selected {\n  background-color: var(--rct-color-focustree-item-selected-bg);\n  color: var(--rct-color-focustree-item-selected-text);\n}\n.rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-focused {\n  outline: none;\n  border-color: var(--rct-color-focustree-item-focused-border);\n}\n.rct-tree-root:not(.rct-tree-root-focus) .rct-tree-item-title-container-focused {\n  outline: none;\n  border-color: var(--rct-color-nonfocustree-item-focused-border);\n}\n\n.rct-tree-item-title-container-dragging-over {\n  background-color: var(--rct-color-focustree-item-draggingover-bg);\n  color: var(--rct-color-focustree-item-draggingover-color);\n}\n\n.rct-tree-item-button-search-match {\n  font-style: italic;\n}\n\n.rct-tree-item-search-highlight {\n  background-color: var(--rct-color-search-highlight-bg);\n}\n\n.rct-tree-drag-between-line {\n  position: absolute;\n  right: 0;\n  top: -2px;\n  height: 4px;\n  background-color: var(--rct-color-drag-between-line-bg);\n}\n\n.rct-tree-drag-between-line-top {\n  top: 0px;\n}\n\n.rct-tree-drag-between-line-bottom {\n  top: -4px;\n}\n\n.rct-tree-search-input-container {\n  position: absolute;\n  top: 0;\n  right: 0;\n  width: 120px;\n}\n\n.rct-tree-search-input {\n  position: fixed;\n  width: 120px;\n}\n\n/* TODO see renaming form in multiple tree example, wraps around */\n.rct-tree-item-renaming-form {\n  flex-grow: 1;\n  display: flex;\n}\n.rct-tree-item-renaming-input {\n  flex-grow: 1;\n  background-color: inherit;\n  border: none;\n  color: inherit;\n  outline: none;\n}\n.rct-tree-item-renaming-submit-button {\n  border: none;\n  background-color: var(--rct-color-renaming-input-submitbutton-bg);\n  border-radius: 999px;\n  color: var(--rct-color-renaming-input-submitbutton-text);\n  cursor: pointer;\n}\n.rct-tree-item-renaming-submit-button:hover {\n  background-color: var(--rct-color-renaming-input-submitbutton-bg-hover);\n  color: var(--rct-color-renaming-input-submitbutton-text-hover);\n}\n.rct-tree-item-renaming-submit-button:active {\n  background-color: var(--rct-color-renaming-input-submitbutton-bg-active);\n  color: var(--rct-color-renaming-input-submitbutton-text-active);\n}\n/*\n! tailwindcss v3.1.6 | MIT License | https://tailwindcss.com\n*//*\n1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)\n2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)\n*/\n\n*,\n::before,\n::after {\n  box-sizing: border-box; /* 1 */\n  border-width: 0; /* 2 */\n  border-style: solid; /* 2 */\n  border-color: currentColor; /* 2 */\n}\n\n::before,\n::after {\n  --tw-content: \'\';\n}\n\n/*\n1. Use a consistent sensible line-height in all browsers.\n2. Prevent adjustments of font size after orientation changes in iOS.\n3. Use a more readable tab size.\n4. Use the user\'s configured `sans` font-family by default.\n*/\n\nhtml {\n  line-height: 1.5; /* 1 */\n  -webkit-text-size-adjust: 100%; /* 2 */\n  -moz-tab-size: 4; /* 3 */\n  -o-tab-size: 4;\n     tab-size: 4; /* 3 */\n  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */\n}\n\n/*\n1. Remove the margin in all browsers.\n2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.\n*/\n\nbody {\n  margin: 0; /* 1 */\n  line-height: inherit; /* 2 */\n}\n\n/*\n1. Add the correct height in Firefox.\n2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)\n3. Ensure horizontal rules are visible by default.\n*/\n\nhr {\n  height: 0; /* 1 */\n  color: inherit; /* 2 */\n  border-top-width: 1px; /* 3 */\n}\n\n/*\nAdd the correct text decoration in Chrome, Edge, and Safari.\n*/\n\nabbr:where([title]) {\n  -webkit-text-decoration: underline dotted;\n          text-decoration: underline dotted;\n}\n\n/*\nRemove the default font size and weight for headings.\n*/\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-size: inherit;\n  font-weight: inherit;\n}\n\n/*\nReset links to optimize for opt-in styling instead of opt-out.\n*/\n\na {\n  color: inherit;\n  text-decoration: inherit;\n}\n\n/*\nAdd the correct font weight in Edge and Safari.\n*/\n\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/*\n1. Use the user\'s configured `mono` font family by default.\n2. Correct the odd `em` font sizing in all browsers.\n*/\n\ncode,\nkbd,\nsamp,\npre {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; /* 1 */\n  font-size: 1em; /* 2 */\n}\n\n/*\nAdd the correct font size in all browsers.\n*/\n\nsmall {\n  font-size: 80%;\n}\n\n/*\nPrevent `sub` and `sup` elements from affecting the line height in all browsers.\n*/\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/*\n1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)\n2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)\n3. Remove gaps between table borders by default.\n*/\n\ntable {\n  text-indent: 0; /* 1 */\n  border-color: inherit; /* 2 */\n  border-collapse: collapse; /* 3 */\n}\n\n/*\n1. Change the font styles in all browsers.\n2. Remove the margin in Firefox and Safari.\n3. Remove default padding in all browsers.\n*/\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit; /* 1 */\n  font-size: 100%; /* 1 */\n  font-weight: inherit; /* 1 */\n  line-height: inherit; /* 1 */\n  color: inherit; /* 1 */\n  margin: 0; /* 2 */\n  padding: 0; /* 3 */\n}\n\n/*\nRemove the inheritance of text transform in Edge and Firefox.\n*/\n\nbutton,\nselect {\n  text-transform: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Remove default button styles.\n*/\n\nbutton,\n[type=\'button\'],\n[type=\'reset\'],\n[type=\'submit\'] {\n  -webkit-appearance: button; /* 1 */\n  background-color: transparent; /* 2 */\n  background-image: none; /* 2 */\n}\n\n/*\nUse the modern Firefox focus style for all focusable elements.\n*/\n\n:-moz-focusring {\n  outline: auto;\n}\n\n/*\nRemove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)\n*/\n\n:-moz-ui-invalid {\n  box-shadow: none;\n}\n\n/*\nAdd the correct vertical alignment in Chrome and Firefox.\n*/\n\nprogress {\n  vertical-align: baseline;\n}\n\n/*\nCorrect the cursor style of increment and decrement buttons in Safari.\n*/\n\n::-webkit-inner-spin-button,\n::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/*\n1. Correct the odd appearance in Chrome and Safari.\n2. Correct the outline style in Safari.\n*/\n\n[type=\'search\'] {\n  -webkit-appearance: textfield; /* 1 */\n  outline-offset: -2px; /* 2 */\n}\n\n/*\nRemove the inner padding in Chrome and Safari on macOS.\n*/\n\n::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Change font properties to `inherit` in Safari.\n*/\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button; /* 1 */\n  font: inherit; /* 2 */\n}\n\n/*\nAdd the correct display in Chrome and Safari.\n*/\n\nsummary {\n  display: list-item;\n}\n\n/*\nRemoves the default spacing and border for appropriate elements.\n*/\n\nblockquote,\ndl,\ndd,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\nhr,\nfigure,\np,\npre {\n  margin: 0;\n}\n\nfieldset {\n  margin: 0;\n  padding: 0;\n}\n\nlegend {\n  padding: 0;\n}\n\nol,\nul,\nmenu {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n\n/*\nPrevent resizing textareas horizontally by default.\n*/\n\ntextarea {\n  resize: vertical;\n}\n\n/*\n1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)\n2. Set the default placeholder color to the user\'s configured gray 400 color.\n*/\n\ninput::-moz-placeholder, textarea::-moz-placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\ninput::placeholder,\ntextarea::placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\n/*\nSet the default cursor for buttons.\n*/\n\nbutton,\n[role="button"] {\n  cursor: pointer;\n}\n\n/*\nMake sure disabled buttons don\'t get the pointer cursor.\n*/\n:disabled {\n  cursor: default;\n}\n\n/*\n1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)\n2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)\n   This can trigger a poorly considered lint error in some tools but is included by design.\n*/\n\nimg,\nsvg,\nvideo,\ncanvas,\naudio,\niframe,\nembed,\nobject {\n  display: block; /* 1 */\n  vertical-align: middle; /* 2 */\n}\n\n/*\nConstrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)\n*/\n\nimg,\nvideo {\n  max-width: 100%;\n  height: auto;\n}\n\n*, ::before, ::after {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\n\n::-webkit-backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\n\n::backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\r\n.container {\n  width: 100%;\n}\r\n@media (min-width: 640px) {\n\n  .container {\n    max-width: 640px;\n  }\n}\r\n@media (min-width: 768px) {\n\n  .container {\n    max-width: 768px;\n  }\n}\r\n@media (min-width: 1024px) {\n\n  .container {\n    max-width: 1024px;\n  }\n}\r\n@media (min-width: 1280px) {\n\n  .container {\n    max-width: 1280px;\n  }\n}\r\n@media (min-width: 1536px) {\n\n  .container {\n    max-width: 1536px;\n  }\n}\r\n.pointer-events-none {\n  pointer-events: none;\n}\r\n.pointer-events-auto {\n  pointer-events: auto;\n}\r\n.visible {\n  visibility: visible;\n}\r\n.\\!visible {\n  visibility: visible !important;\n}\r\n.fixed {\n  position: fixed;\n}\r\n.absolute {\n  position: absolute;\n}\r\n.inset-0 {\n  top: 0px;\n  right: 0px;\n  bottom: 0px;\n  left: 0px;\n}\r\n.bottom-0 {\n  bottom: 0px;\n}\r\n.bottom-16 {\n  bottom: 4rem;\n}\r\n.right-4 {\n  right: 1rem;\n}\r\n.left-0 {\n  left: 0px;\n}\r\n.top-0 {\n  top: 0px;\n}\r\n.right-6 {\n  right: 1.5rem;\n}\r\n.top-6 {\n  top: 1.5rem;\n}\r\n.z-0 {\n  z-index: 0;\n}\r\n.m-1 {\n  margin: 0.25rem;\n}\r\n.-mx-6 {\n  margin-left: -1.5rem;\n  margin-right: -1.5rem;\n}\r\n.mx-2 {\n  margin-left: 0.5rem;\n  margin-right: 0.5rem;\n}\r\n.mx-1 {\n  margin-left: 0.25rem;\n  margin-right: 0.25rem;\n}\r\n.my-2 {\n  margin-top: 0.5rem;\n  margin-bottom: 0.5rem;\n}\r\n.mb-6 {\n  margin-bottom: 1.5rem;\n}\r\n.mb-5 {\n  margin-bottom: 1.25rem;\n}\r\n.mb-4 {\n  margin-bottom: 1rem;\n}\r\n.-mr-4 {\n  margin-right: -1rem;\n}\r\n.block {\n  display: block;\n}\r\n.flex {\n  display: flex;\n}\r\n.inline-flex {\n  display: inline-flex;\n}\r\n.table {\n  display: table;\n}\r\n.hidden {\n  display: none;\n}\r\n.\\!hidden {\n  display: none !important;\n}\r\n.h-1\\/2 {\n  height: 50%;\n}\r\n.h-10 {\n  height: 2.5rem;\n}\r\n.h-4 {\n  height: 1rem;\n}\r\n.h-2 {\n  height: 0.5rem;\n}\r\n.h-6 {\n  height: 1.5rem;\n}\r\n.h-full {\n  height: 100%;\n}\r\n.h-8 {\n  height: 2rem;\n}\r\n.h-28 {\n  height: 7rem;\n}\r\n.w-auto {\n  width: auto;\n}\r\n.w-1\\/2 {\n  width: 50%;\n}\r\n.w-3\\/12 {\n  width: 25%;\n}\r\n.w-full {\n  width: 100%;\n}\r\n.w-10 {\n  width: 2.5rem;\n}\r\n.w-4 {\n  width: 1rem;\n}\r\n.w-40 {\n  width: 10rem;\n}\r\n.w-max {\n  width: -webkit-max-content;\n  width: -moz-max-content;\n  width: max-content;\n}\r\n.w-8 {\n  width: 2rem;\n}\r\n.w-32 {\n  width: 8rem;\n}\r\n.rotate-180 {\n  --tw-rotate: 180deg;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\r\n.rotate-0 {\n  --tw-rotate: 0deg;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\r\n.flex-col {\n  flex-direction: column;\n}\r\n.items-center {\n  align-items: center;\n}\r\n.justify-center {\n  justify-content: center;\n}\r\n.justify-between {\n  justify-content: space-between;\n}\r\n.divide-x-2 > :not([hidden]) ~ :not([hidden]) {\n  --tw-divide-x-reverse: 0;\n  border-right-width: calc(2px * var(--tw-divide-x-reverse));\n  border-left-width: calc(2px * calc(1 - var(--tw-divide-x-reverse)));\n}\r\n.overflow-y-auto {\n  overflow-y: auto;\n}\r\n.truncate {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\r\n.rounded-full {\n  border-radius: 9999px;\n}\r\n.rounded-xl {\n  border-radius: 0.75rem;\n}\r\n.rounded {\n  border-radius: 0.25rem;\n}\r\n.rounded-t {\n  border-top-left-radius: 0.25rem;\n  border-top-right-radius: 0.25rem;\n}\r\n.rounded-t-md {\n  border-top-left-radius: 0.375rem;\n  border-top-right-radius: 0.375rem;\n}\r\n.rounded-b-md {\n  border-bottom-right-radius: 0.375rem;\n  border-bottom-left-radius: 0.375rem;\n}\r\n.border {\n  border-width: 1px;\n}\r\n.border-t {\n  border-top-width: 1px;\n}\r\n.border-l {\n  border-left-width: 1px;\n}\r\n.border-r {\n  border-right-width: 1px;\n}\r\n.border-b {\n  border-bottom-width: 1px;\n}\r\n.border-gray-light {\n  border-color: var(--c-light-gray);\n}\r\n.border-gray-divider {\n  border-color: var(--c-gray-divider);\n}\r\n.border-gray-lighter {\n  border-color: var(--c-lighter-gray);\n}\r\n.border-hover-t40 {\n  border-color: var(--c-hover-t40);\n}\r\n.bg-gray-light {\n  background-color: var(--c-light-gray);\n}\r\n.bg-transparent {\n  background-color: transparent;\n}\r\n.bg-white {\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\n}\r\n.bg-white\\/50 {\n  background-color: rgb(255 255 255 / 0.5);\n}\r\n.bg-gray-lightest {\n  background-color: var(--c-lightest-gray);\n}\r\n.p-2 {\n  padding: 0.5rem;\n}\r\n.p-6 {\n  padding: 1.5rem;\n}\r\n.p-1 {\n  padding: 0.25rem;\n}\r\n.px-2 {\n  padding-left: 0.5rem;\n  padding-right: 0.5rem;\n}\r\n.py-2 {\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem;\n}\r\n.py-1 {\n  padding-top: 0.25rem;\n  padding-bottom: 0.25rem;\n}\r\n.px-6 {\n  padding-left: 1.5rem;\n  padding-right: 1.5rem;\n}\r\n.px-\\[10\\%\\] {\n  padding-left: 10%;\n  padding-right: 10%;\n}\r\n.py-\\[30\\%\\] {\n  padding-top: 30%;\n  padding-bottom: 30%;\n}\r\n.py-5 {\n  padding-top: 1.25rem;\n  padding-bottom: 1.25rem;\n}\r\n.px-12 {\n  padding-left: 3rem;\n  padding-right: 3rem;\n}\r\n.text-left {\n  text-align: left;\n}\r\n.text-xs {\n  font-size: 0.75rem;\n  line-height: 1rem;\n}\r\n.text-lg {\n  font-size: 1.125rem;\n  line-height: 1.75rem;\n}\r\n.font-bold {\n  font-weight: 700;\n}\r\n.uppercase {\n  text-transform: uppercase;\n}\r\n.text-gray-medium {\n  color: var(--c-medium-gray);\n}\r\n.text-gray-light {\n  color: var(--c-light-gray);\n}\r\n.text-white {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255 / var(--tw-text-opacity));\n}\r\n.text-black {\n  --tw-text-opacity: 1;\n  color: rgb(0 0 0 / var(--tw-text-opacity));\n}\r\n.text-gray {\n  color: var(--c-gray);\n}\r\n.text-primary {\n  color: var(--c-primary);\n}\r\n.text-gray-darker {\n  color: var(--c-darker-gray);\n}\r\n.opacity-80 {\n  opacity: 0.8;\n}\r\n.opacity-20 {\n  opacity: 0.2;\n}\r\n.shadow-lg {\n  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);\n  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\r\n.filter {\n  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);\n}\r\n.transition-all {\n  transition-property: all;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\r\n\r\n:root {\r\n  --c-primary: #0590cc;\r\n  --c-primary-green: #7ebf50;\r\n  --c-primary-yellow: #ffb700;\r\n  --c-primary-pink: #d93393;\r\n  --c-primary-royal: #284ea2;\r\n  --c-primary-purple: #5e3c97;\r\n\r\n  --c-darkest-gray: #050c1a;\r\n  --c-darker-gray: #212329;\r\n  --c-dark-gray-warm: #3c3c3c;\r\n  --c-dark-gray-cool: #56585f;\r\n  --c-medium-gray: #8a8d95;\r\n  --c-gray: #b6b9bf;\r\n  --c-gray-divider: #e3e3e3;\r\n  --c-light-gray: #d1d3d8;\r\n  --c-lighter-gray: #f0efee;\r\n  --c-lightest-gray: #f6f6f6;\r\n\r\n  --c-secondary: #0076aa;\r\n  --c-secondary-green: #5e9f30;\r\n  --c-secondary-yellow: #eca500;\r\n  --c-secondary-pink: #b51873;\r\n  --c-secondary-royal: #103381;\r\n  --c-secondary-purple: #33004d;\r\n\r\n  --c-lightest-blue: #d9edf9;\r\n  --c-light-blue: #40a6de;\r\n  --c-light-green: #82de40;\r\n\r\n  --c-list-hover: #fff8e5;\r\n\r\n  --c-hover-t40: rgba(5, 12, 26, 0.4);\r\n\r\n  --c-white: #ffffff;\r\n}\r\n\r\nbody {\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n  font-family: "Roboto", sans-serif;\r\n}\r\n\r\n/* Toast Notification */\r\n.vim-menu-toast {\r\n  position: absolute;\r\n  width: 100px;\r\n  top: 10%;\r\n  left: calc(50% - 50px);\r\n  opacity: 0.75;\r\n  background-color: #050c1a;\r\n  border-radius: 5px;\r\n}\r\n\r\n/* Axes Gizmo*/\r\n.gizmo-axis-canvas {\r\n  z-index: 1;\r\n  top: 24px !important;\r\n  right: 24px !important;\r\n  margin: 8px 16px 8px 16px;\r\n  filter: saturate(0%);\r\n  transition: all 0.2s ease;\r\n}\r\n\r\n.gizmo-axis-canvas:hover {\r\n  filter: saturate(100%);\r\n  transition: all 0.2s ease;\r\n}\r\n\r\n.vim-loading-box {\r\n  width: -webkit-fit-content;\r\n  width: -moz-fit-content;\r\n  width: fit-content;\r\n  height: -webkit-fit-content;\r\n  height: -moz-fit-content;\r\n  height: fit-content;\r\n  padding: 10px;\r\n  border: 1px solid #e3e3e3;\r\n  border-radius: 3px;\r\n  background-color: #f6f6f6;\r\n\r\n  font-family: "Roboto", sans-serif;\r\n\r\n  /*Centers the box*/\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  transform: translate(-50%, -50%);\r\n}\r\n\r\n/* Context Menu */\r\n.react-contextmenu {\r\n  background-color: white;\r\n  border-radius: 5px;\r\n  padding: 5px;\r\n}\r\n.react-contextmenu-item {\r\n  cursor: pointer;\r\n}\r\n.react-contextmenu-item--selected {\r\n  background-color: cyan;\r\n}\r\n\r\n.checked {\r\n  font-weight: bold;\r\n}\r\n\r\n.react-contextmenu-item--divider {\r\n  border-top: 1px solid black;\r\n}\r\n\r\n/* Logo */\r\n\r\n.vim-logo {\r\n  position: fixed;\r\n  top: 16px;\r\n  left: 16px;\r\n}\r\n\r\n.vim-logo img {\r\n  height: 48px;\r\n  width: 128px;\r\n}\r\n\r\n/*Makes full screen and remove scrollbars*/\r\nhtml,\r\nbody {\r\n  height: 100%;\r\n  margin: 0;\r\n  padding: 0;\r\n  overflow: hidden;\r\n  background: radial-gradient(circle at center, #f0f0ff, #999999);\r\n}\r\n\r\n.VimLoadingBox h1 {\r\n  color: #050c1a;\r\n}\r\n\r\n.vim-section {\r\n  position: fixed;\r\n  bottom: 0px;\r\n  right: 64px;\r\n  width: 64px;\r\n  pointer-events: all;\r\n}\r\n\r\n/* MENU */\r\n\r\n.vim-menu td {\r\n  pointer-events: all;\r\n}\r\n\r\n.vim-menu td.empty {\r\n  pointer-events: none;\r\n}\r\n\r\n.vim-menu table {\r\n  width: 64px;\r\n}\r\n\r\n.vim-menu button:focus {\r\n  outline: 0;\r\n}\r\n\r\n.vim-menu .iconButton {\r\n  color: var(--c-white);\r\n  border: none;\r\n  background-color: transparent;\r\n}\r\n.vim-menu .iconButton.active {\r\n  background-color: var(--c-primary-royal);\r\n}\r\n.vim-menu .iconButton img {\r\n  width: 42px;\r\n  height: 42px;\r\n}\r\n\r\n.vim-menu .iconButton:hover img {\r\n  transform: scale(1.1);\r\n}\r\n\r\n.vim-menu .iconButton:active img {\r\n  transform: scale(1.1);\r\n  filter: brightness(1.5);\r\n}\r\n\r\n.vim-menu .iconButton:disabled img {\r\n  filter: brightness(0.5);\r\n  transform: scale(1);\r\n}\r\n\r\n/* Help Controls Widget */\r\n.vim-help-controls {\r\n  position: fixed;\r\n  bottom: 64px;\r\n  width: 100%;\r\n  pointer-events: none;\r\n}\r\n\r\n/* Tooltips */\r\n.__react_component_tooltip {\r\n  transition: opacity 0.1s ease-out !important;\r\n}\r\n\r\n/* Bim Panel */\r\n\r\n.vim-bim-panel {\r\n  height: 100%;\r\n  width: 480px;\r\n}\r\n.bim-panel-open {\r\n  margin-left: 480px;\r\n  max-width: calc(100% - 480px);\r\n  -o-object-fit: cover;\r\n     object-fit: cover;\r\n}\r\n\r\n.submenu-item-active {\r\n  position: relative;\r\n}\r\n.submenu-item-active::before {\r\n  content: "";\r\n  display: block;\r\n  background-image: url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 256 256\'%3E%3Cpath fill=\'%230590cc\' d=\'M228.693 61.741c5.379-7.011 4.057-17.055-2.954-22.434-7.01-5.379-17.054-4.057-22.434 2.954l-.008.011L99.864 177.069l-39.607-47.203c-5.68-6.769-15.772-7.652-22.542-1.972s-7.652 15.772-1.972 22.542l52.416 62.467.006.007c.018.021.038.039.056.06.214.252.448.492.681.733.153.159.3.326.458.478s.331.291.497.437c.251.222.5.445.763.648l.062.053c.108.083.225.151.334.231.304.221.608.44.924.638.166.104.335.192.503.289.284.164.567.328.859.473.221.11.447.204.671.303.245.107.487.219.736.313.268.103.54.188.812.275.214.069.428.142.645.202.293.081.588.144.884.208.206.044.411.093.619.129.294.051.589.085.884.12.219.026.437.055.656.071.275.021.55.026.825.033.245.006.489.015.735.009.246-.005.491-.024.736-.042.274-.018.548-.036.821-.068.22-.026.437-.065.654-.101.293-.047.585-.094.876-.158.207-.045.41-.103.615-.157.292-.076.584-.152.873-.245.215-.069.425-.152.637-.23.267-.099.535-.196.798-.31.245-.105.483-.228.723-.346.219-.108.44-.211.656-.331.286-.158.562-.334.839-.511.163-.104.328-.199.488-.31.307-.211.603-.444.896-.678.106-.085.219-.157.324-.245.021-.018.039-.038.06-.056.253-.215.492-.449.733-.681.159-.153.326-.301.478-.458.152-.159.292-.332.438-.498.221-.25.444-.5.647-.761.017-.022.037-.041.054-.063L228.693 61.741Z\'/%3E%3C/svg%3E");\r\n  background-size: contain;\r\n  position: absolute;\r\n  left: 20px;\r\n  top: 12px;\r\n  width: 20px;\r\n  height: 17px;\r\n}\r\n.rct-tree-root {\r\n  font-family: inherit;\r\n}\r\n.rct-tree-root > div > .rct-tree-items-container {\r\n  max-height: calc(50vh - 9rem);\r\n  overflow-y: auto;\r\n}\r\n.rct-tree-items-container li .rct-tree-item-title-container {\r\n  border: none;\r\n}\r\n.rct-tree-items-container\r\n  li\r\n  .rct-tree-item-title-container\r\n  .rct-tree-item-button {\r\n  padding-top: 0.25rem;\r\n  padding-bottom: 0.25rem;\r\n  min-height: 2.5rem;\r\n}\r\n.rct-tree-items-container > li:nth-child(odd) {\r\n  background-color: var(--c-white);\r\n}\r\n.rct-tree-items-container > li:nth-child(even) {\r\n  background-color: var(--c-lightest-gray);\r\n}\r\n\r\n.vim-inspector-properties {\r\n  max-height: 500px;\r\n}\r\n.rct-tree-root-focus {\r\n  outline: none;\r\n}\r\n.rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-focused {\r\n  border: none;\r\n}\r\n\r\n.rct-tree-item-li {\r\n  font-size: 1rem;\r\n}\r\n.rct-tree-item-arrow {\r\n  width: 20px;\r\n}\r\n.rct-tree-item-arrow svg {\r\n  width: 12px;\r\n}\r\n.parameters:first-child > ul > li h3 {\r\n  border-top-right-radius: 4px;\r\n}\r\n.rct-tree-root:not(.rct-tree-root-focus)\r\n  .rct-tree-item-title-container-selected,\r\n.rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-selected {\r\n  background-color: var(--c-lightest-blue);\r\n}\r\n.rct-tree-item-title-container:hover {\r\n  background-color: var(--c-list-hover);\r\n}\r\n.odd\\:bg-white:nth-child(odd) {\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\n}\r\n.focus-within\\:border-primary-royal:focus-within {\n  border-color: var(--c-primary-royal);\n}\r\n.focus-within\\:outline-none:focus-within {\n  outline: 2px solid transparent;\n  outline-offset: 2px;\n}\r\n.hover\\:scale-110:hover {\n  --tw-scale-x: 1.1;\n  --tw-scale-y: 1.1;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\r\n.hover\\:bg-hover-t40:hover {\n  background-color: var(--c-hover-t40);\n}\r\n.hover\\:bg-gray-lightest:hover {\n  background-color: var(--c-lightest-gray);\n}\r\n.hover\\:opacity-100:hover {\n  opacity: 1;\n}\r\n')();
 /**
  * @license
  * Copyright 2010-2021 Three.js Authors
@@ -52078,8 +52078,29 @@ class G3d {
 const objectModel = {
   header: "header",
   entities: "entities",
-  nodes: {
-    table: "Vim.Node"
+  bimDocument: {
+    table: "Vim.BimDocument",
+    columns: {
+      title: "string:Title",
+      version: "string:Version",
+      author: "string:Author",
+      date: "string:IssueDate"
+    }
+  },
+  category: {
+    table: "Vim.Category",
+    index: "index:Vim.Category:Category",
+    columns: {
+      name: "string:Name"
+    }
+  },
+  document: {
+    table: "Vim.BimDocument",
+    index: "index:Vim.BimDocument:BimDocument",
+    columns: {
+      name: "string:Name",
+      title: "string:Title"
+    }
   },
   element: {
     table: "Vim.Element",
@@ -52088,21 +52109,6 @@ const objectModel = {
       name: "string:Name",
       familyName: "string:FamilyName",
       id: "int:Id"
-    }
-  },
-  parameter: {
-    table: "Vim.Parameter",
-    columns: {
-      value: "string:Value"
-    }
-  },
-  parameterDescriptor: {
-    table: "Vim.ParameterDescriptor",
-    index: "index:Vim.ParameterDescriptor:ParameterDescriptor",
-    columns: {
-      name: "string:Name",
-      group: "string:Group",
-      isInstance: "byte:IsInstance"
     }
   },
   familyInstance: {
@@ -52121,11 +52127,22 @@ const objectModel = {
     index: "index:Vim.Family:Family",
     columns: {}
   },
-  category: {
-    table: "Vim.Category",
-    index: "index:Vim.Category:Category",
+  nodes: {
+    table: "Vim.Node"
+  },
+  parameter: {
+    table: "Vim.Parameter",
     columns: {
-      name: "string:Name"
+      value: "string:Value"
+    }
+  },
+  parameterDescriptor: {
+    table: "Vim.ParameterDescriptor",
+    index: "index:Vim.ParameterDescriptor:ParameterDescriptor",
+    columns: {
+      name: "string:Name",
+      group: "string:Group",
+      isInstance: "byte:IsInstance"
     }
   },
   workset: {
@@ -52133,14 +52150,6 @@ const objectModel = {
     index: "index:Vim.Workset:Workset",
     columns: {
       name: "string:Name"
-    }
-  },
-  document: {
-    table: "Vim.BimDocument",
-    index: "index:Vim.BimDocument:BimDocument",
-    columns: {
-      name: "string:Name",
-      title: "string:Title"
     }
   }
 };
@@ -52187,12 +52196,15 @@ class DocumentNoBim {
   async getElementParameters(element) {
     return void 0;
   }
+  getBimDocumentSummary() {
+    return void 0;
+  }
 }
 class Document {
   constructor(header, g3d, entities, strings, instanceToElement, elementToInstances, elementIds, elementIdToElements) {
     __publicField(this, "header");
     __publicField(this, "g3d");
-    __publicField(this, "_entities");
+    __publicField(this, "entities");
     __publicField(this, "_strings");
     __publicField(this, "_instanceToElement");
     __publicField(this, "_elementToInstances");
@@ -52200,7 +52212,7 @@ class Document {
     __publicField(this, "_elementIdToElements");
     this.header = header;
     this.g3d = g3d;
-    this._entities = entities;
+    this.entities = entities;
     this._strings = strings;
     this._instanceToElement = instanceToElement;
     this._elementToInstances = elementToInstances;
@@ -52317,7 +52329,7 @@ class Document {
     return this.getEntity(objectModel.element.table, element);
   }
   async getElementValue(element, field) {
-    const elements = await this._entities.getBfast(objectModel.element.table);
+    const elements = await this.entities.getBfast(objectModel.element.table);
     if (!elements)
       return;
     const value = await elements.getValue(field, element);
@@ -52333,7 +52345,7 @@ class Document {
     return this._elementIds[element];
   }
   async getEntity(name, index) {
-    const elements = await this._entities.getBfast(name);
+    const elements = await this.entities.getBfast(name);
     const row = await (elements == null ? void 0 : elements.getRow(index));
     if (!row)
       return;
@@ -52346,7 +52358,7 @@ class Document {
   }
   async getElementsSummary(elements) {
     const set3 = elements ? new Set(elements) : void 0;
-    const elementTable = await this._entities.getBfast(objectModel.element.table);
+    const elementTable = await this.entities.getBfast(objectModel.element.table);
     const elementNameArray = await (elementTable == null ? void 0 : elementTable.getArray(objectModel.element.columns.name));
     const elementIdArray = await (elementTable == null ? void 0 : elementTable.getArray(objectModel.element.columns.id));
     const getElementName = (element) => {
@@ -52355,7 +52367,7 @@ class Document {
       return this.getString(elementNameArray == null ? void 0 : elementNameArray[element]);
     };
     const elementCategoryArray = await (elementTable == null ? void 0 : elementTable.getArray(objectModel.category.index));
-    const categoryTable = await this._entities.getBfast(objectModel.category.table);
+    const categoryTable = await this.entities.getBfast(objectModel.category.table);
     const categoryNameArray = await (categoryTable == null ? void 0 : categoryTable.getArray(objectModel.category.columns.name));
     const getCategory = (element) => {
       if (!categoryNameArray)
@@ -52364,11 +52376,11 @@ class Document {
         return;
       return this.getString(categoryNameArray[elementCategoryArray[element]]);
     };
-    const familyInstanceTable = await this._entities.getBfast(objectModel.familyInstance.table);
+    const familyInstanceTable = await this.entities.getBfast(objectModel.familyInstance.table);
     const familyNameArray = await (elementTable == null ? void 0 : elementTable.getArray(objectModel.element.columns.familyName));
     const getFamilyName = (element) => familyNameArray ? this.getString(familyNameArray[element]) : void 0;
     const familyInstanceFamilyType = await (familyInstanceTable == null ? void 0 : familyInstanceTable.getArray(objectModel.familyType.index));
-    const familyTypeTable = await this._entities.getBfast(objectModel.familyType.table);
+    const familyTypeTable = await this.entities.getBfast(objectModel.familyType.table);
     const familyTypeElementArray = await (familyTypeTable == null ? void 0 : familyTypeTable.getArray(objectModel.element.index));
     const getFamilyTypeName = (family) => {
       if (!elementNameArray)
@@ -52380,7 +52392,7 @@ class Document {
       return this.getString(elementNameArray[familyTypeElementArray[familyInstanceFamilyType[family]]]);
     };
     const elementWorksetArray = await (elementTable == null ? void 0 : elementTable.getArray(objectModel.workset.index));
-    const worksetTable = await this._entities.getBfast(objectModel.workset.table);
+    const worksetTable = await this.entities.getBfast(objectModel.workset.table);
     const worksetNameArray = await (worksetTable == null ? void 0 : worksetTable.getArray(objectModel.workset.columns.name));
     const getWorkset = (element) => {
       if (!worksetNameArray)
@@ -52390,7 +52402,7 @@ class Document {
       return this.getString(worksetNameArray[elementWorksetArray[element]]);
     };
     const elementDocumentArray = await (elementTable == null ? void 0 : elementTable.getArray(objectModel.document.index));
-    const documentTable = await this._entities.getBfast(objectModel.document.table);
+    const documentTable = await this.entities.getBfast(objectModel.document.table);
     const documentTitleArray = await (documentTable == null ? void 0 : documentTable.getArray(objectModel.document.columns.title));
     const getDocument = (element) => {
       if (!documentTitleArray)
@@ -52437,9 +52449,9 @@ class Document {
   }
   async getElementsParameters(elements, isInstance) {
     const set3 = new Set(elements);
-    const parameterTable2 = await this._entities.getBfast(objectModel.parameter.table);
-    const parameterElement = parameterTable2 ? await parameterTable2.getArray(objectModel.element.index) : void 0;
-    const parameterValue = parameterTable2 ? await parameterTable2.getArray(objectModel.parameter.columns.value) : void 0;
+    const parameterTable = await this.entities.getBfast(objectModel.parameter.table);
+    const parameterElement = parameterTable ? await parameterTable.getArray(objectModel.element.index) : void 0;
+    const parameterValue = parameterTable ? await parameterTable.getArray(objectModel.parameter.columns.value) : void 0;
     const getParameterDisplayValue = (index) => {
       var _a2;
       if (!parameterValue)
@@ -52448,8 +52460,8 @@ class Document {
       const displayValue = value == null ? void 0 : value[value.length - 1];
       return displayValue;
     };
-    const parameterDescription = parameterTable2 ? await parameterTable2.getArray(objectModel.parameterDescriptor.index) : void 0;
-    const parameterDescriptor = await this._entities.getBfast(objectModel.parameterDescriptor.table);
+    const parameterDescription = parameterTable ? await parameterTable.getArray(objectModel.parameterDescriptor.index) : void 0;
+    const parameterDescriptor = await this.entities.getBfast(objectModel.parameterDescriptor.table);
     const parameterDescriptorName = parameterDescriptor ? await parameterDescriptor.getArray(objectModel.parameterDescriptor.columns.name) : void 0;
     const getParameterName = (descriptor) => {
       if (descriptor === void 0)
@@ -52483,7 +52495,7 @@ class Document {
     return result;
   }
   async getElementFamilyInstance(element) {
-    const familyInstanceTable = await this._entities.getBfast(objectModel.familyInstance.table);
+    const familyInstanceTable = await this.entities.getBfast(objectModel.familyInstance.table);
     const familyInstanceElementArray = familyInstanceTable ? await familyInstanceTable.getArray(objectModel.element.index) : void 0;
     let result;
     familyInstanceElementArray == null ? void 0 : familyInstanceElementArray.forEach((e, i2) => {
@@ -52494,22 +52506,40 @@ class Document {
     return result;
   }
   async getFamilyInstanceFamilyType(familyInstance) {
-    const familyInstanceTable = await this._entities.getBfast(objectModel.familyInstance.table);
+    const familyInstanceTable = await this.entities.getBfast(objectModel.familyInstance.table);
     const result = await (familyInstanceTable == null ? void 0 : familyInstanceTable.getValue(objectModel.familyType.index, familyInstance));
     return result;
   }
   async getFamilyTypeFamily(familyType) {
-    const familyTypeTable = await this._entities.getBfast(objectModel.familyType.table);
+    const familyTypeTable = await this.entities.getBfast(objectModel.familyType.table);
     const result = await (familyTypeTable == null ? void 0 : familyTypeTable.getValue(objectModel.family.index, familyType));
     return result;
   }
   async getFamiltyTypeElement(familyType) {
-    const familyTypeTable = await this._entities.getBfast(objectModel.familyType.table);
+    const familyTypeTable = await this.entities.getBfast(objectModel.familyType.table);
     const result = await (familyTypeTable == null ? void 0 : familyTypeTable.getValue(objectModel.element.index, familyType));
     return result;
   }
+  async getBimDocumentSummary() {
+    const documentTable = await this.entities.getBfast(objectModel.bimDocument.table);
+    const titles = (await documentTable.getArray(objectModel.bimDocument.columns.title)).map((n2) => this._strings[n2]);
+    const versions2 = (await documentTable.getArray(objectModel.bimDocument.columns.version)).map((n2) => this._strings[n2]);
+    const authors = (await documentTable.getArray(objectModel.bimDocument.columns.author)).map((n2) => this._strings[n2]);
+    const dates = (await documentTable.getArray(objectModel.bimDocument.columns.date)).map((n2) => this._strings[n2]);
+    const max2 = Math.max(titles.length, versions2.length, authors.length, dates.length);
+    const summary = [];
+    for (let i2 = 0; i2 < max2; i2++) {
+      summary.push({
+        title: titles[i2],
+        version: versions2[i2],
+        author: authors[i2],
+        date: dates[i2]
+      });
+    }
+    return summary;
+  }
   async getFamilyElement(family) {
-    const familyTable = await this._entities.getBfast(objectModel.family.table);
+    const familyTable = await this.entities.getBfast(objectModel.family.table);
     const result = await (familyTable == null ? void 0 : familyTable.getValue(objectModel.element.index, family));
     return result;
   }
@@ -53863,7 +53893,7 @@ const orbit = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("
   fill,
   d: "M128 60.602c-.531 0-1.061.002-1.591.006-7.079.05-12.565 6.208-11.833 13.249.64 6.151 5.849 10.797 12.033 10.751.463-.003.926-.005 1.39-.005 29.699 0 58.4 6.563 78.743 18.006 16.051 9.029 25.257 19.961 25.257 29.994s-9.206 20.965-25.257 29.994c-20.343 11.443-49.044 18.006-78.743 18.006s-58.4-6.563-78.743-18.006c-16.051-9.028-25.257-19.961-25.257-29.994s9.206-20.965 25.257-29.994c2.522-1.419 5.189-2.751 7.957-4.015l-1.947 5.262c-1.787 4.831-1.549 11.646 5.003 14.956.328.166.661.314.997.446 5.46 2.136 11.577-.208 14.225-5.453l13.87-27.458c3.673-7.271.745-16.173-6.525-19.845L55.374 52.631a11.58 11.58 0 0 0-.996-.446c-5.459-2.135-11.576.209-14.225 5.452-2.772 5.493-.462 12.349 5.151 15.284l4.682 2.448.046.146C19.615 88.676 0 109.346 0 132.602c0 39.764 57.308 72 128 72s128-32.236 128-72-57.308-72-128-72Z"
 }), /* @__PURE__ */ React.createElement("path", {
-  "fill-rule": "evenodd",
+  fill,
   d: "M128 160.602c-15.44 0-28-12.561-28-28s12.56-28 28-28 28 12.561 28 28-12.56 28-28 28Z"
 }));
 const look = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
@@ -54195,6 +54225,9 @@ const actionButton = (tip, action, icon) => {
   }, icon({ height: "24", width: "24", fill: "currentColor" }));
 };
 function ControlBar(props) {
+  react.exports.useEffect(() => {
+    ReactTooltip.rebuild();
+  });
   return /* @__PURE__ */ React.createElement("div", {
     className: "vim-menu flex items-center justify-center w-full fixed px-2 bottom-0 py-2 divide-x-2 bg-white"
   }, /* @__PURE__ */ React.createElement("div", {
@@ -56741,32 +56774,46 @@ class BimTreeData {
 function range(size, startAt = 0) {
   return [...Array(size).keys()].map((i2) => i2 + startAt);
 }
-function BimParameters(props) {
+function BimObjectDetails(props) {
+  return BimDetails(props.object, getObjectParameterDetails, props.getOpen, props.setOpen, props.initOpen);
+}
+function BimDocumentDetails(props) {
+  return BimDetails(props.vim, getVimDocumentDetails, props.getOpen, props.setOpen, props.initOpen);
+}
+function BimDetails(input, toData, getOpen, setOpen, initOpen) {
   const [object, setObject] = react.exports.useState();
-  const [parameters, setParameters] = react.exports.useState();
-  if (props.object !== object) {
-    setObject(props.object);
-    toParameterData(props.object).then((data2) => {
-      setParameters(data2);
-      props.initOpen([...data2.instance.keys(), ...data2.type.keys()]);
+  const [details, setDetails] = react.exports.useState();
+  react.exports.useEffect(() => {
+    ReactTooltip.rebuild();
+  });
+  if (input !== object) {
+    setObject(input);
+    toData(input).then((data2) => {
+      setDetails(data2);
+      initOpen(data2.flatMap((d) => [...d.content.keys()]));
     });
   }
-  const createTitle = (value) => {
-    return /* @__PURE__ */ React.createElement("h2", {
-      key: `title-${value}`,
-      className: "text-xs font-bold uppercase text-gray-medium p-2 rounded-t border-t border-l border-r border-gray-light w-auto inline-flex"
-    }, value);
-  };
-  if (!parameters) {
+  if (!details) {
     return /* @__PURE__ */ React.createElement("div", {
       className: "vim-inspector-properties"
     }, " Loading . . .");
   }
   return /* @__PURE__ */ React.createElement("div", {
     className: "vim-inspector-properties"
-  }, parameters.instance ? createTitle("Instance Properties") : null, Array.from(parameters.instance, (v2, k) => parameterTable(v2[0], v2[1], props.getOpen(v2[0]), (b) => props.setOpen(v2[0], b))), /* @__PURE__ */ React.createElement("br", null), parameters.type ? createTitle("Type Properties") : null, Array.from(parameters.type, (v2, k) => parameterTable(v2[0], v2[1], props.getOpen(v2[0]), (b) => props.setOpen(v2[0], b))));
+  }, details.map((d) => {
+    return /* @__PURE__ */ React.createElement(React.Fragment, null, createTables(d.section, d.content, getOpen, setOpen), /* @__PURE__ */ React.createElement("br", null));
+  }));
 }
-function parameterTable(key, parameters, open, setOpen) {
+function createTables(title, entries, getOpen, setOpen) {
+  const createTitle = (value) => {
+    return /* @__PURE__ */ React.createElement("h2", {
+      key: `title-${value}`,
+      className: "text-xs font-bold uppercase text-gray-medium p-2 rounded-t border-t border-l border-r border-gray-light w-auto inline-flex"
+    }, value);
+  };
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, title ? createTitle(title) : null, Array.from(entries, (v2, k) => createTable(v2[0], v2[1], getOpen(v2[0]), (b) => setOpen(v2[0], b))));
+}
+function createTable(key, entries, open, setOpen) {
   return /* @__PURE__ */ React.createElement("div", {
     key: "parameters-" + key,
     className: "parameters"
@@ -56790,29 +56837,47 @@ function parameterTable(key, parameters, open, setOpen) {
     height: "15",
     width: "15",
     fill: "currentColor"
-  })))), open ? parameters.map((p2, i2) => {
+  })))), open ? entries.map((p2, i2) => {
     const id2 = key + p2.name + i2;
     return /* @__PURE__ */ React.createElement("li", {
       className: "odd:bg-white flex",
       key: "parameters-tr-" + id2
     }, /* @__PURE__ */ React.createElement("span", {
+      "data-tip": p2.value,
       className: "w-1/2 border-r border-gray-light p-2 truncate",
       title: p2.name,
       key: "parameters-th-" + id2
     }, p2.name), /* @__PURE__ */ React.createElement("span", {
+      "data-tip": p2.value,
       className: "w-1/2 text-gray-medium p-2 truncate",
       title: p2.value,
       key: "parameters-td-" + id2
     }, p2.value));
   }) : null));
 }
-async function toParameterData(object) {
+async function getVimDocumentDetails(vim) {
+  let documents = await (vim == null ? void 0 : vim.document.getBimDocumentSummary());
+  documents = documents.sort((a, b) => compare(a.title, b.title));
+  const data2 = new Map(documents.map((d) => [
+    d.title,
+    [
+      { name: "Revit Version", value: d.version, group: d.title },
+      { name: "Revit Author(s)", value: d.author, group: d.title },
+      { name: "Last Modified", value: d.date, group: d.title }
+    ]
+  ]));
+  return [{ section: "Source Files", content: data2 }];
+}
+async function getObjectParameterDetails(object) {
   let parameters = await (object == null ? void 0 : object.getBimParameters());
   parameters = parameters.filter(acceptParameter);
   parameters = parameters.sort((a, b) => compare(a.group, b.group));
   const instance = groupBy(parameters.filter((p2) => p2.isInstance), (p2) => p2.group);
   const type = groupBy(parameters.filter((p2) => !p2.isInstance), (p2) => p2.group);
-  return { instance, type };
+  return [
+    { section: "Instance Properties", content: instance },
+    { section: "Type Properties", content: type }
+  ];
 }
 const rejectedParameters = [
   "Coarse Scale Fill Pattern",
@@ -56897,7 +56962,7 @@ function acceptParameter(parameter) {
   });
   return result;
 }
-function BimInspector(props) {
+function BimObjectHeader(props) {
   if (!props.elements || !props.object) {
     return /* @__PURE__ */ React.createElement("div", {
       className: "vim-bim-inspector"
@@ -56914,29 +56979,67 @@ function BimInspector(props) {
       className: "vim-bim-inspector"
     }, "Could not find element.");
   }
-  const pairs = [
-    ["Document", element.documentTitle],
-    ["Workset", element.workset],
-    ["Category", element.categoryName],
-    ["Family Name", element.familyName],
-    ["Family Type", element.familyTypeName],
-    ["Element Id", element.id]
-  ];
-  const mains = pairs.map((pair, index) => {
-    return /* @__PURE__ */ React.createElement("li", {
-      className: "flex w-full",
+  react.exports.useEffect(() => {
+    ReactTooltip.rebuild();
+  });
+  return createHeader(getElementBimHeader(element));
+}
+function BimDocumentHeader(props) {
+  const [vim, setVim] = react.exports.useState();
+  react.exports.useState(-1);
+  if (vim !== props.vim) {
+    setVim(props.vim);
+  }
+  const header = getVimBimHeader(props.vim);
+  return createHeader(header);
+}
+function createHeader(header) {
+  const rows = header.map((row, index) => {
+    if (!row)
+      return /* @__PURE__ */ React.createElement("br", null);
+    return /* @__PURE__ */ React.createElement("tr", {
       key: "main-tr" + index
-    }, /* @__PURE__ */ React.createElement("span", {
-      className: "text-gray-medium w-3/12 py-1",
-      key: "main-th" + index
-    }, pair[0]), /* @__PURE__ */ React.createElement("span", {
-      className: "py-1",
-      key: "main-td" + index
-    }, pair[1]));
+    }, row.map((pair) => {
+      return /* @__PURE__ */ React.createElement("td", null, /* @__PURE__ */ React.createElement("span", {
+        "data-tip": pair[1],
+        className: "text-gray-medium w-3/12 py-1",
+        key: "main-th" + index
+      }, pair[0]), /* @__PURE__ */ React.createElement("span", {
+        "data-tip": pair[1],
+        className: "py-1",
+        key: "main-td" + index
+      }, pair[1]));
+    }));
   });
   return /* @__PURE__ */ React.createElement("div", {
     className: "vim-bim-inspector mb-6"
-  }, /* @__PURE__ */ React.createElement("ul", null, mains));
+  }, /* @__PURE__ */ React.createElement("table", null, rows));
+}
+function getElementBimHeader(info) {
+  return [
+    [["Document", info.documentTitle]],
+    [["Workset", info.workset]],
+    [["Category", info.categoryName]],
+    [["Family Name", info.familyName]],
+    [["Family Type", info.familyTypeName]],
+    [["Element Id", info.id]]
+  ];
+}
+function getVimBimHeader(vim) {
+  return [
+    [["Document", vim.source]],
+    [["Created on", vim.document.header.created]],
+    [["Created by", vim.document.header.generator]],
+    void 0,
+    [
+      ["BIM Count", [...vim.document.getAllElements()].length],
+      ["Node Count", vim.document.g3d.getInstanceCount()]
+    ],
+    [
+      ["Mesh Count", vim.document.g3d.getMeshCount()],
+      ["Revit Files", "N/A"]
+    ]
+  ];
 }
 function BimSearch(props) {
   const onChange = (e) => {
@@ -57036,48 +57139,22 @@ function BimPanel(props) {
     className: "text-xs font-bold uppercase mb-6"
   }, "Bim Inspector"), /* @__PURE__ */ React.createElement("div", {
     className: "vim-bim-lower h-1/2 overflow-y-auto"
-  }, last ? /* @__PURE__ */ React.createElement(BimInspector, {
+  }, last ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(BimObjectHeader, {
     elements,
     object: last
-  }) : /* @__PURE__ */ React.createElement(BimDocumentPanel, {
-    vim: viewer2.vims[0]
-  }), last ? /* @__PURE__ */ React.createElement(BimParameters, {
+  }), /* @__PURE__ */ React.createElement(BimObjectDetails, {
     object: last,
     getOpen,
     setOpen: updateOpen,
     initOpen
-  }) : null));
-}
-function BimDocumentPanel(props) {
-  const [vim, setVim] = react.exports.useState();
-  const [revit, setRevit] = react.exports.useState(-1);
-  if (vim !== props.vim) {
-    setVim(props.vim);
-  }
-  const pairs = [
-    ["Document", props.vim.source],
-    ["Created on", props.vim.document.header.created],
-    ["Created by", props.vim.document.header.generator],
-    ["BIM Count", [...props.vim.document.getAllElements()].length],
-    ["Node Count", props.vim.document.g3d.getInstanceCount()],
-    ["Mesh Count", props.vim.document.g3d.getMeshCount()],
-    ["Revit Files", revit >= 0 ? revit : "N/A"]
-  ];
-  const mains = pairs.map((pair, index) => {
-    return /* @__PURE__ */ React.createElement("li", {
-      className: "flex w-full",
-      key: "main-tr" + index
-    }, /* @__PURE__ */ React.createElement("span", {
-      className: "text-gray-medium w-3/12 py-1",
-      key: "main-th" + index
-    }, pair[0]), /* @__PURE__ */ React.createElement("span", {
-      className: "py-1",
-      key: "main-td" + index
-    }, pair[1]));
-  });
-  return /* @__PURE__ */ React.createElement("div", {
-    className: "vim-bim-inspector mb-6"
-  }, /* @__PURE__ */ React.createElement("ul", null, mains));
+  })) : /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(BimDocumentHeader, {
+    vim: viewer2.vims[0]
+  }), /* @__PURE__ */ React.createElement(BimDocumentDetails, {
+    vim,
+    getOpen,
+    setOpen: updateOpen,
+    initOpen
+  }))));
 }
 const VIM_CONTEXT_MENU_ID = "vim-context-menu-id";
 function VimContextMenu(props) {
@@ -57138,7 +57215,7 @@ function VimContextMenu(props) {
       v2.scene.material = void 0;
     });
     viewer2.environment.groundPlane.visible = props.settings.showGroundPlane;
-    viewer2.camera.frame(viewer2.renderer.getBoundingBox());
+    viewer2.camera.frame(viewer2.renderer.getBoundingBox(), "none", viewer2.camera.defaultLerpDuration);
     props.setHidden(false);
     e.stopPropagation();
   };
@@ -57590,7 +57667,7 @@ function getVisibleBoundingBox(source) {
   } else {
     vimBoxUnion(source);
   }
-  return box != null ? box : new Box3();
+  return box;
 }
 const params = new URLSearchParams(window.location.search);
 let url = params.has("vim") || params.has("model") ? (_a = params.get("vim")) != null ? _a : params.get("model") : "https://vim.azureedge.net/samples/residence.vim";
