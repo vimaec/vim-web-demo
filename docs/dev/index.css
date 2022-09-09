@@ -938,6 +938,10 @@ select {
   margin-left: -1.5rem;
   margin-right: -1.5rem;
 }
+.my-1 {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
 .mx-1 {
   margin-left: 0.25rem;
   margin-right: 0.25rem;
@@ -956,6 +960,9 @@ select {
 }
 .mb-6 {
   margin-bottom: 1.5rem;
+}
+.mt-5 {
+  margin-top: 1.25rem;
 }
 .mb-5 {
   margin-bottom: 1.25rem;
@@ -1017,11 +1024,11 @@ select {
 .w-1\/2 {
   width: 50%;
 }
-.w-4\/12 {
-  width: 33.333333%;
+.w-3\/12 {
+  width: 25%;
 }
-.w-8\/12 {
-  width: 66.666667%;
+.w-9\/12 {
+  width: 75%;
 }
 .w-full {
   width: 100%;
@@ -1116,18 +1123,27 @@ select {
 .border-b {
   border-bottom-width: 1px;
 }
+.border-t-0 {
+  border-top-width: 0px;
+}
+.border-l-0 {
+  border-left-width: 0px;
+}
+.border-r-0 {
+  border-right-width: 0px;
+}
 .border-gray-light {
   border-color: var(--c-light-gray);
 }
 .border-gray-divider {
   border-color: var(--c-gray-divider);
 }
+.border-gray-lighter {
+  border-color: var(--c-lighter-gray);
+}
 .border-white {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
-}
-.border-gray-lighter {
-  border-color: var(--c-lighter-gray);
 }
 .border-gray-medium {
   border-color: var(--c-medium-gray);
@@ -1247,6 +1263,9 @@ select {
 .opacity-60 {
   opacity: 0.6;
 }
+.opacity-50 {
+  opacity: 0.5;
+}
 .shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
@@ -1256,6 +1275,10 @@ select {
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.outline-none {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
@@ -1410,8 +1433,9 @@ body {
   width: 64px;
 }
 
-.vim-menu button:focus {
+.vim-menu button:focus, .vim-bim-search input[type='search']:focus {
   outline: 0;
+  box-shadow: none;
 }
 
 .vim-menu .iconButton {
@@ -1543,8 +1567,8 @@ body {
 .checked\:bg-primary-royal:checked {
   background-color: var(--c-primary-royal);
 }
-.focus-within\:border-primary-royal:focus-within {
-  border-color: var(--c-primary-royal);
+.focus-within\:border-b-primary-royal:focus-within {
+  border-bottom-color: var(--c-primary-royal);
 }
 .focus-within\:outline-none:focus-within {
   outline: 2px solid transparent;
@@ -1573,4 +1597,8 @@ body {
 }
 .hover\:opacity-100:hover {
   opacity: 1;
+}
+.focus\:outline-none:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }

@@ -8491,6 +8491,10 @@ select {
   margin-left: -1.5rem;
   margin-right: -1.5rem;
 }\r
+.my-1 {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}\r
 .mx-1 {
   margin-left: 0.25rem;
   margin-right: 0.25rem;
@@ -8509,6 +8513,9 @@ select {
 }\r
 .mb-6 {
   margin-bottom: 1.5rem;
+}\r
+.mt-5 {
+  margin-top: 1.25rem;
 }\r
 .mb-5 {
   margin-bottom: 1.25rem;
@@ -8570,11 +8577,11 @@ select {
 .w-1\\/2 {
   width: 50%;
 }\r
-.w-4\\/12 {
-  width: 33.333333%;
+.w-3\\/12 {
+  width: 25%;
 }\r
-.w-8\\/12 {
-  width: 66.666667%;
+.w-9\\/12 {
+  width: 75%;
 }\r
 .w-full {
   width: 100%;
@@ -8669,18 +8676,27 @@ select {
 .border-b {
   border-bottom-width: 1px;
 }\r
+.border-t-0 {
+  border-top-width: 0px;
+}\r
+.border-l-0 {
+  border-left-width: 0px;
+}\r
+.border-r-0 {
+  border-right-width: 0px;
+}\r
 .border-gray-light {
   border-color: var(--c-light-gray);
 }\r
 .border-gray-divider {
   border-color: var(--c-gray-divider);
 }\r
+.border-gray-lighter {
+  border-color: var(--c-lighter-gray);
+}\r
 .border-white {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
-}\r
-.border-gray-lighter {
-  border-color: var(--c-lighter-gray);
 }\r
 .border-gray-medium {
   border-color: var(--c-medium-gray);
@@ -8800,6 +8816,9 @@ select {
 .opacity-60 {
   opacity: 0.6;
 }\r
+.opacity-50 {
+  opacity: 0.5;
+}\r
 .shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
@@ -8809,6 +8828,10 @@ select {
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}\r
+.outline-none {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }\r
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
@@ -8963,8 +8986,9 @@ body {\r
   width: 64px;\r
 }\r
 \r
-.vim-menu button:focus {\r
+.vim-menu button:focus, .vim-bim-search input[type='search']:focus {\r
   outline: 0;\r
+  box-shadow: none;\r
 }\r
 \r
 .vim-menu .iconButton {\r
@@ -9096,8 +9120,8 @@ body {\r
 .checked\\:bg-primary-royal:checked {
   background-color: var(--c-primary-royal);
 }\r
-.focus-within\\:border-primary-royal:focus-within {
-  border-color: var(--c-primary-royal);
+.focus-within\\:border-b-primary-royal:focus-within {
+  border-bottom-color: var(--c-primary-royal);
 }\r
 .focus-within\\:outline-none:focus-within {
   outline: 2px solid transparent;
@@ -9126,6 +9150,10 @@ body {\r
 }\r
 .hover\\:opacity-100:hover {
   opacity: 1;
+}\r
+.focus\\:outline-none:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }\r
 `)();
 /**
@@ -56258,7 +56286,7 @@ function MenuTop(props) {
     fill: "currentColor"
   }));
   return /* @__PURE__ */ React.createElement("div", {
-    className: "vim-top flex flex-col fixed right-6 top-6 w-32 pointer-events-none  rounded-xl shadow-lg"
+    className: "vim-top flex flex-col fixed right-6 top-6 w-32 pointer-events-none  rounded-xl shadow-lg opacity-50 hover:opacity-100"
   }, /* @__PURE__ */ React.createElement("div", {
     className: "vim-top-background border border-white-t50 h-28 w-full rounded-t-xl pointer-events-none z-0"
   }, " "), /* @__PURE__ */ React.createElement("div", {
@@ -59069,11 +59097,11 @@ function createHeader(header) {
     return /* @__PURE__ */ React.createElement(React.Fragment, null, row.map((pair) => {
       return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("dt", {
         "data-tip": pair[1],
-        className: "text-gray-medium w-4/12 py-1 truncate",
+        className: "text-gray-medium py-1 truncate " + pair[2],
         key: "main-th" + index
       }, pair[0]), /* @__PURE__ */ React.createElement("dd", {
         "data-tip": pair[1],
-        className: "py-1 w-8/12 truncate",
+        className: "py-1 truncate " + pair[3],
         key: "main-td" + index
       }, pair[1]));
     }));
@@ -59086,27 +59114,27 @@ function createHeader(header) {
 }
 function getElementBimHeader(info) {
   return [
-    [["Document", info.documentTitle]],
-    [["Workset", info.workset]],
-    [["Category", info.categoryName]],
-    [["Family Name", info.familyName]],
-    [["Family Type", info.familyTypeName]],
-    [["Element Id", info.id]]
+    [["Document", info.documentTitle, "w-3/12", "w-9/12"]],
+    [["Workset", info.workset, "w-3/12", "w-9/12"]],
+    [["Category", info.categoryName, "w-3/12", "w-9/12"]],
+    [["Family Name", info.familyName, "w-3/12", "w-9/12"]],
+    [["Family Type", info.familyTypeName, "w-3/12", "w-9/12"]],
+    [["Element Id", info.id, "w-3/12", "w-9/12"]]
   ];
 }
 function getVimBimHeader(vim) {
   return [
-    [["Document", vim.source]],
-    [["Created on", vim.document.header.created]],
-    [["Created by", vim.document.header.generator]],
+    [["Document", vim.source, "w-3/12", "w-9/12"]],
+    [["Created on", vim.document.header.created, "w-3/12", "w-9/12"]],
+    [["Created by", vim.document.header.generator, "w-3/12", "w-9/12"]],
     void 0,
     [
-      ["BIM Count", [...vim.document.getAllElements()].length],
-      ["Node Count", vim.document.g3d.getInstanceCount()]
+      ["BIM Count", [...vim.document.getAllElements()].length, "w-3/12 mt-5", "w-3/12 mt-5"],
+      ["Node Count", vim.document.g3d.getInstanceCount(), "w-3/12 mt-5", "w-3/12 mt-5"]
     ],
     [
-      ["Mesh Count", vim.document.g3d.getMeshCount()],
-      ["Revit Files", "N/A"]
+      ["Mesh Count", vim.document.g3d.getMeshCount(), "w-3/12", "w-3/12"],
+      ["Revit Files", "N/A", "w-3/12", "w-3/12"]
     ]
   ];
 }
@@ -59133,7 +59161,7 @@ function BimSearch(props) {
     id: "ICONS",
     d: "m244.485 216.201-39.552-39.552a11.956 11.956 0 0 0-8.81-3.5C208.621 155.986 216 134.856 216 112 216 54.562 169.438 8 112 8S8 54.562 8 112s46.562 104 104 104c22.856 0 43.986-7.379 61.149-19.877a11.956 11.956 0 0 0 3.5 8.81l39.552 39.552c4.686 4.686 12.284 4.686 16.971 0l11.313-11.313c4.686-4.687 4.686-12.285 0-16.971ZM112 184c-39.701 0-72-32.299-72-72s32.299-72 72-72 72 32.299 72 72-32.299 72-72 72Z"
   })), /* @__PURE__ */ React.createElement("input", {
-    className: "w-full bg-transparent border-b border-gray-light focus-within:outline-none focus-within:border-primary-royal placeholder-text-gray-medium py-1 px-6",
+    className: "w-full bg-transparent border-b border-t-0 border-l-0 border-r-0 border-gray-light outline-none focus:outline-none focus-within:outline-none focus-within:border-b-primary-royal placeholder-text-gray-medium py-1 px-6",
     type: "search",
     name: "name",
     placeholder: "Type here to search",
@@ -59296,6 +59324,7 @@ function VimContextMenu(props) {
   };
   const createDivider = (condition = true) => {
     return condition ? /* @__PURE__ */ React.createElement(MenuItem, {
+      className: "border-t border-gray-lighter my-1",
       divider: true
     }) : null;
   };
