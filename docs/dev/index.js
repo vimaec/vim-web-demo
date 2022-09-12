@@ -8543,9 +8543,6 @@ select {
 .hidden {
   display: none;
 }\r
-.\\!hidden {
-  display: none !important;
-}\r
 .h-1\\/2 {
   height: 50%;
 }\r
@@ -8866,7 +8863,7 @@ select {
 body {\r
   -webkit-font-smoothing: antialiased;\r
   -moz-osx-font-smoothing: grayscale;\r
-  font-family: "Roboto", sans-serif;\r
+  font-family: 'Roboto', sans-serif;\r
 }\r
 \r
 /* Toast Notification */\r
@@ -8874,7 +8871,7 @@ body {\r
   position: absolute;\r
   top: 10%;\r
   left: calc(50% - 50px);\r
-  background-color: rgba(0,0,0,.6);\r
+  background-color: rgba(0, 0, 0, 0.6);\r
 }\r
 \r
 /* Axes Gizmo*/\r
@@ -8904,7 +8901,7 @@ body {\r
   border-radius: 3px;\r
   background-color: #f6f6f6;\r
 \r
-  font-family: "Roboto", sans-serif;\r
+  font-family: 'Roboto', sans-serif;\r
 \r
   /*Centers the box*/\r
   position: absolute;\r
@@ -8914,11 +8911,9 @@ body {\r
 }\r
 \r
 /* Context Menu */\r
-.\r
 .checked {\r
   font-weight: bold;\r
 }\r
-\r
 \r
 /* Logo */\r
 \r
@@ -8969,7 +8964,8 @@ body {\r
   width: 64px;\r
 }\r
 \r
-.vim-menu button:focus, .vim-bim-search input[type='search']:focus {\r
+.vim-menu button:focus,\r
+.vim-bim-search input[type='search']:focus {\r
   outline: 0;\r
   box-shadow: none;\r
 }\r
@@ -9026,18 +9022,20 @@ body {\r
   -o-object-fit: cover;\r
      object-fit: cover;\r
 }\r
-.vim-gfx.bim-panel-open + .vim-ui .vim-menu, .vim-gfx.bim-panel-open + .vim-ui .menu-help-controls, .vim-gfx.bim-panel-open + .vim-ui .menu-help-overlay h2  {\r
+.vim-gfx.bim-panel-open + .vim-ui .vim-menu,\r
+.vim-gfx.bim-panel-open + .vim-ui .menu-help-controls,\r
+.vim-gfx.bim-panel-open + .vim-ui .menu-help-overlay h2 {\r
   margin-left: 480px;\r
   max-width: calc(100% - 480px);\r
 }\r
-.vim-gfx.bim-panel-open + .vim-ui .vim-menu-toast  {\r
+.vim-gfx.bim-panel-open + .vim-ui .vim-menu-toast {\r
   left: calc(50% + 190px);\r
 }\r
 .submenu-item-active {\r
   position: relative;\r
 }\r
 .submenu-item-active::before {\r
-  content: "";\r
+  content: '';\r
   display: block;\r
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='%230590cc' d='M228.693 61.741c5.379-7.011 4.057-17.055-2.954-22.434-7.01-5.379-17.054-4.057-22.434 2.954l-.008.011L99.864 177.069l-39.607-47.203c-5.68-6.769-15.772-7.652-22.542-1.972s-7.652 15.772-1.972 22.542l52.416 62.467.006.007c.018.021.038.039.056.06.214.252.448.492.681.733.153.159.3.326.458.478s.331.291.497.437c.251.222.5.445.763.648l.062.053c.108.083.225.151.334.231.304.221.608.44.924.638.166.104.335.192.503.289.284.164.567.328.859.473.221.11.447.204.671.303.245.107.487.219.736.313.268.103.54.188.812.275.214.069.428.142.645.202.293.081.588.144.884.208.206.044.411.093.619.129.294.051.589.085.884.12.219.026.437.055.656.071.275.021.55.026.825.033.245.006.489.015.735.009.246-.005.491-.024.736-.042.274-.018.548-.036.821-.068.22-.026.437-.065.654-.101.293-.047.585-.094.876-.158.207-.045.41-.103.615-.157.292-.076.584-.152.873-.245.215-.069.425-.152.637-.23.267-.099.535-.196.798-.31.245-.105.483-.228.723-.346.219-.108.44-.211.656-.331.286-.158.562-.334.839-.511.163-.104.328-.199.488-.31.307-.211.603-.444.896-.678.106-.085.219-.157.324-.245.021-.018.039-.038.06-.056.253-.215.492-.449.733-.681.159-.153.326-.301.478-.458.152-.159.292-.332.438-.498.221-.25.444-.5.647-.761.017-.022.037-.041.054-.063L228.693 61.741Z'/%3E%3C/svg%3E");\r
   background-size: contain;\r
@@ -9061,14 +9059,13 @@ body {\r
   li\r
   .rct-tree-item-title-container\r
   .rct-tree-item-button {\r
-    display: block;\r
+  display: block;\r
   overflow: hidden;\r
   text-overflow: ellipsis;\r
   white-space: nowrap;\r
   padding-top: 0.25rem;\r
   padding-bottom: 0.25rem;\r
   min-height: 2.5rem;\r
-\r
 }\r
 .rct-tree-items-container > li:nth-child(odd) {\r
   background-color: var(--c-white);\r
@@ -49828,18 +49825,20 @@ class MouseHandler extends InputHandler {
     super(...arguments);
     __publicField(this, "_idleDelayMs", 200);
     __publicField(this, "ZOOM_SPEED", 5);
-    __publicField(this, "isMouseDown", false);
+    __publicField(this, "buttonDown");
     __publicField(this, "hasMouseMoved", false);
     __publicField(this, "_idleTimeout");
     __publicField(this, "_lastPosition");
     __publicField(this, "_downPosition");
     __publicField(this, "reset", () => {
-      this.isMouseDown = this.hasMouseMoved = false;
+      this.buttonDown = void 0;
+      this.hasMouseMoved = false;
       this._lastPosition = this._downPosition = void 0;
       clearTimeout(this._idleTimeout);
     });
     __publicField(this, "onMouseOut", (_) => {
-      this.isMouseDown = this.hasMouseMoved = false;
+      this.buttonDown = void 0;
+      this.hasMouseMoved = false;
     });
     __publicField(this, "onMouseIdle", (position) => {
       const action = new InputAction("idle", this.getModifier(), position, this.raycaster);
@@ -49848,7 +49847,7 @@ class MouseHandler extends InputHandler {
     __publicField(this, "onMouseMove", (event2) => {
       this._lastPosition = new Vector2(event2.offsetX, event2.offsetY);
       this.resetIdleTimeout();
-      if (!this.isMouseDown)
+      if (!this.buttonDown)
         return;
       this.onMouseDrag(event2);
     });
@@ -49864,16 +49863,23 @@ class MouseHandler extends InputHandler {
     });
     __publicField(this, "onMouseDown", (event2) => {
       event2.preventDefault();
+      if (this.buttonDown)
+        return;
       this._downPosition = new Vector2(event2.offsetX, event2.offsetY);
-      this.isMouseDown = true;
       this.hasMouseMoved = false;
       this.viewport.canvas.focus();
+      this.buttonDown = this.getButton(event2);
+      console.log("down " + this.buttonDown);
     });
     __publicField(this, "onMouseUp", (event2) => {
       var _a2, _b;
+      const btn = this.getButton(event2);
+      if (btn === this.buttonDown)
+        return;
+      console.log("up " + this.buttonDown);
       this._viewer.gizmoSelection.visible = false;
       event2.preventDefault();
-      if (!this.isMouseDown)
+      if (!this.buttonDown)
         return;
       if (this.inputs.pointerMode === "rect" && this.hasMouseMoved) {
         this.onRectEnd();
@@ -49882,7 +49888,7 @@ class MouseHandler extends InputHandler {
       } else if (event2.button === 2 && !this.hasMouseMoved) {
         (_b = (_a2 = this.inputs).onContextMenu) == null ? void 0 : _b.call(_a2, new Vector2(event2.clientX, event2.clientY));
       }
-      this.isMouseDown = false;
+      this.buttonDown = void 0;
     });
     __publicField(this, "onDoubleClick", (event2) => {
       this.onMouseClick(new Vector2(event2.offsetX, event2.offsetY), true);
@@ -49931,10 +49937,10 @@ class MouseHandler extends InputHandler {
     const delta = new Vector2(deltaX / size.x, deltaY / size.y);
     const position = new Vector2(event2.offsetX, event2.offsetY);
     this.hasMouseMoved = this.hasMouseMoved || this._downPosition.distanceTo(position) > 4;
-    if (event2.buttons & 2 || event2.buttons & 4) {
-      this.onMouseSecondaryDrag(delta);
-    } else {
+    if (this.buttonDown === "main") {
       this.onMouseMainDrag(delta);
+    } else if (this.buttonDown === "secondary") {
+      this.onMouseSecondaryDrag(delta);
     }
   }
   onMouseMainDrag(delta) {
@@ -49957,9 +49963,13 @@ class MouseHandler extends InputHandler {
       default:
         this.camera.rotate(delta);
     }
+    console.log("main");
   }
   onMouseSecondaryDrag(delta) {
     this.camera.move2(delta, "XY");
+  }
+  getButton(event2) {
+    return event2.buttons & 1 ? "main" : event2.buttons & 2 ? "secondary" : event2.buttons & 4 ? "secondary" : void 0;
   }
   onRectEnd() {
     const box = this._viewer.gizmoSelection.getBoundingBox();
@@ -50710,8 +50720,13 @@ class GroundPlane {
     __publicField(this, "_material");
     __publicField(this, "_texture");
     this._geometry = new PlaneGeometry();
-    this._material = new MeshBasicMaterial({ transparent: true });
+    this._material = new MeshBasicMaterial({
+      transparent: true,
+      depthTest: true,
+      depthWrite: false
+    });
     this.mesh = new Mesh(this._geometry, this._material);
+    this.mesh.renderOrder = -1;
   }
   applyViewerSettings(settings2) {
     this._size = settings2.getGroundPlaneSize();
@@ -53762,9 +53777,10 @@ class G3dAttribute {
         return new Uint32Array(bytes.buffer, bytes.byteOffset, bytes.byteLength / 4);
       case "int64":
       case "uint64":
-        throw new Error("64-bit buffers unsuported in the javascript implementation.");
+        console.error("G3d: 64-bit buffers unsuported");
+        return;
       default:
-        throw new Error("Unrecognized attribute data type " + dataType);
+        console.error("Unrecognized attribute data type " + dataType);
     }
   }
 }
@@ -56421,8 +56437,8 @@ function TabTools(viewer2, toggleIsolation$1) {
   }, btnIsolation), /* @__PURE__ */ React.createElement("div", {
     className: "mx-1"
   }, btnMeasure));
-  const btnMeasureDelete = actionButton("Delete", onMeasureDeleteBtn, trash, measuring ? true : false);
-  const btnMeasureConfirm = actionButton("Done", onMeasureBtn, checkmark, measuring ? true : false);
+  const btnMeasureDelete = actionButton("Delete", onMeasureDeleteBtn, trash, !!measuring);
+  const btnMeasureConfirm = actionButton("Done", onMeasureBtn, checkmark, !!measuring);
   const measureTab = /* @__PURE__ */ React.createElement("div", {
     className: "vim-menu-section flex items-center bg-primary rounded-full px-2 mx-4 shadow-md"
   }, /* @__PURE__ */ React.createElement("div", {
@@ -56430,10 +56446,10 @@ function TabTools(viewer2, toggleIsolation$1) {
   }, btnMeasureDelete), /* @__PURE__ */ React.createElement("div", {
     className: "mx-1"
   }, btnMeasureConfirm));
-  const btnSectionDelete = actionButton("Reset Section Box", onResetSectionBtn, sectionBoxReset, section ? true : false);
-  const btnSectionClip = actionButton("Hide Section", onSectionClip, sectionBoxClip, section ? true : false);
-  const btnSectionNoClip = actionButton("Show Section", onSectionNoClip, sectionBoxNoClip, section ? true : false);
-  const btnSectionConfirm = actionButton("Done", onSectionBtn, checkmark, section ? true : false);
+  const btnSectionDelete = actionButton("Reset Section Box", onResetSectionBtn, sectionBoxReset, !!section);
+  const btnSectionClip = actionButton("Hide Section", onSectionClip, sectionBoxClip, !!section);
+  const btnSectionNoClip = actionButton("Show Section", onSectionNoClip, sectionBoxNoClip, !!section);
+  const btnSectionConfirm = actionButton("Done", onSectionBtn, checkmark, !!section);
   const sectionTab = /* @__PURE__ */ React.createElement("div", {
     className: "vim-menu-section flex items-center bg-primary rounded-full px-2 mx-4 shadow-md"
   }, /* @__PURE__ */ React.createElement("div", {
@@ -58743,7 +58759,7 @@ function BimTree(props) {
     getItemTitle: (item) => item.title,
     defaultInteractionMode: InteractionMode.ClickItemToExpand,
     viewState: {
-      ["tree-bim"]: {
+      "tree-bim": {
         focusedItem,
         expandedItems,
         selectedItems
@@ -58847,13 +58863,34 @@ class BimTreeData {
       keys3.push(++i2);
       if (v2 instanceof Map) {
         const [next, children] = this.flatten(v2, i2);
-        this.nodes[i2] = { index: i2, parent, title: k, hasChildren: children.length > 0, data: void 0, children };
+        this.nodes[i2] = {
+          index: i2,
+          parent,
+          title: k,
+          hasChildren: children.length > 0,
+          data: void 0,
+          children
+        };
         i2 = next;
       } else {
-        this.nodes[i2] = { index: i2, parent, title: k, hasChildren: v2.length > 0, data: void 0, children: range(v2.length, i2 + 1) };
+        this.nodes[i2] = {
+          index: i2,
+          parent,
+          title: k,
+          hasChildren: v2.length > 0,
+          data: void 0,
+          children: range(v2.length, i2 + 1)
+        };
         const self2 = i2;
         v2.forEach((e) => {
-          this.nodes[++i2] = { index: i2, parent: self2, title: `${e.name} [${e.id}]`, hasChildren: false, data: e, children: [] };
+          this.nodes[++i2] = {
+            index: i2,
+            parent: self2,
+            title: `${e.name} [${e.id}]`,
+            hasChildren: false,
+            data: e,
+            children: []
+          };
           this.elemenToNode.set(e.element, i2);
         });
       }
@@ -59047,7 +59084,6 @@ function acceptParameter(parameter) {
   rejectedParameters.forEach((p2) => {
     if (p2 === parameter.name) {
       result = false;
-      return;
     }
   });
   return result;
@@ -59076,7 +59112,6 @@ function BimObjectHeader(props) {
 }
 function BimDocumentHeader(props) {
   const [vim, setVim] = react.exports.useState();
-  react.exports.useState(-1);
   if (vim !== props.vim) {
     setVim(props.vim);
   }
@@ -59089,7 +59124,7 @@ function BimDocumentHeader(props) {
 function createHeader(header) {
   const rows = header.map((row, index) => {
     if (!row)
-      return;
+      return void 0;
     return /* @__PURE__ */ React.createElement(React.Fragment, null, row.map((pair) => {
       return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("dt", {
         "data-tip": pair[1],
@@ -59125,8 +59160,18 @@ function getVimBimHeader(vim) {
     [["Created by", vim.document.header.generator, "w-3/12", "w-9/12"]],
     void 0,
     [
-      ["BIM Count", [...vim.document.getAllElements()].length, "w-3/12 mt-5", "w-3/12 mt-5"],
-      ["Node Count", vim.document.g3d.getInstanceCount(), "w-3/12 mt-5", "w-3/12 mt-5"]
+      [
+        "BIM Count",
+        [...vim.document.getAllElements()].length,
+        "w-3/12 mt-5",
+        "w-3/12 mt-5"
+      ],
+      [
+        "Node Count",
+        vim.document.g3d.getInstanceCount(),
+        "w-3/12 mt-5",
+        "w-3/12 mt-5"
+      ]
     ],
     [
       ["Mesh Count", vim.document.g3d.getMeshCount(), "w-3/12", "w-3/12"],
@@ -59367,7 +59412,11 @@ function MenuHelp(props) {
   }, "Key navigation controls"), /* @__PURE__ */ React.createElement("button", {
     className: "text-white",
     onClick: onCloseBtn
-  }, close({ height: "20px", width: "20px", fill: "currentColor" }))), /* @__PURE__ */ React.createElement("div", {
+  }, close({
+    height: "20px",
+    width: "20px",
+    fill: "currentColor"
+  }))), /* @__PURE__ */ React.createElement("div", {
     className: ""
   }, /* @__PURE__ */ React.createElement("img", {
     className: "menu-help-controls mb-8 mx-auto",
@@ -59492,8 +59541,8 @@ function VimComponent(props) {
   const [hidden, setHidden] = react.exports.useState(!getAllVisible(viewer2));
   const toastTimeout = react.exports.useRef(0);
   const toastSpeed = react.exports.useRef(0);
-  let sideContentRef = react.exports.useRef(sideContent);
-  let settingsRef = react.exports.useRef(settings2);
+  const sideContentRef = react.exports.useRef(sideContent);
+  const settingsRef = react.exports.useRef(settings2);
   const resetIsolation = () => {
     setIsolation(void 0);
   };
@@ -59515,7 +59564,7 @@ function VimComponent(props) {
     setHidden(!getAllVisible(viewer2));
   };
   const onContextMenu = (position) => {
-    let showMenuConfig = {
+    const showMenuConfig = {
       position: { x: position.x, y: position.y },
       target: window,
       id: VIM_CONTEXT_MENU_ID
@@ -59624,7 +59673,7 @@ function applySettings(viewer2, settings2) {
     if (hidden) {
       v2.scene.material = viewer2.renderer.materials.isolation;
     }
-    viewer2.environment.groundPlane.visible = settings2.showGroundPlane && !hidden;
+    viewer2.environment.groundPlane.visible = settings2.showGroundPlane;
   });
 }
 function MenuToast(props) {
@@ -59654,7 +59703,6 @@ function isolateSelection(viewer2, settings2) {
     obj.visible = set3.has(obj);
   }
   vim.scene.material = settings2.useIsolationMaterial ? viewer2.renderer.materials.isolation : void 0;
-  viewer2.environment.groundPlane.visible = false;
   viewer2.camera.frame(getVisibleBoundingBox(vim), "none", viewer2.camera.defaultLerpDuration);
 }
 function hideSelection(viewer2, settings2) {
@@ -59663,7 +59711,6 @@ function hideSelection(viewer2, settings2) {
   }
   const vim = viewer2.selection.vim;
   vim.scene.material = settings2.useIsolationMaterial ? viewer2.renderer.materials.isolation : void 0;
-  viewer2.environment.groundPlane.visible = false;
   viewer2.selection.clear();
   viewer2.camera.frame(getVisibleBoundingBox(vim), "none", viewer2.camera.defaultLerpDuration);
 }
@@ -59674,7 +59721,6 @@ function showAll(viewer2, settings2) {
     }
     v2.scene.material = void 0;
   });
-  viewer2.environment.groundPlane.visible = settings2.showGroundPlane;
   viewer2.camera.frame(viewer2.renderer.getBoundingBox(), "none", viewer2.camera.defaultLerpDuration);
 }
 function toGhost(source) {
