@@ -25,17 +25,15 @@ if (params.has('dev')) {
   devMode =  t === 'true'
 }
 
+
 const viewer = new VIM.Viewer()
 const root = createRoot(createContainer(viewer))
 root.render(<VimComponent viewer = {viewer} onMount = {loadVim}/>)
-
 function loadVim(){
-  globalThis.viewer = viewer
   viewer.loadVim(
     url,
     {
       rotation: { x: 270, y: 0, z: 0 },
-      transparency : transparency
     } 
   ).then(_ => console.log("Vim Successfully loaded"))
 }

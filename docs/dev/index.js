@@ -9026,7 +9026,13 @@ body {\r
   -o-object-fit: cover;\r
      object-fit: cover;\r
 }\r
-\r
+.vim-gfx.bim-panel-open + .vim-ui .vim-menu, .vim-gfx.bim-panel-open + .vim-ui .menu-help-controls, .vim-gfx.bim-panel-open + .vim-ui .menu-help-overlay h2  {\r
+  margin-left: 480px;\r
+  max-width: calc(100% - 480px);\r
+}\r
+.vim-gfx.bim-panel-open + .vim-ui .vim-menu-toast  {\r
+  left: calc(50% + 190px);\r
+}\r
 .submenu-item-active {\r
   position: relative;\r
 }\r
@@ -9055,9 +9061,14 @@ body {\r
   li\r
   .rct-tree-item-title-container\r
   .rct-tree-item-button {\r
+    display: block;\r
+  overflow: hidden;\r
+  text-overflow: ellipsis;\r
+  white-space: nowrap;\r
   padding-top: 0.25rem;\r
   padding-bottom: 0.25rem;\r
   min-height: 2.5rem;\r
+\r
 }\r
 .rct-tree-items-container > li:nth-child(odd) {\r
   background-color: var(--c-white);\r
@@ -49816,6 +49827,7 @@ class MouseHandler extends InputHandler {
   constructor() {
     super(...arguments);
     __publicField(this, "_idleDelayMs", 200);
+    __publicField(this, "ZOOM_SPEED", 5);
     __publicField(this, "isMouseDown", false);
     __publicField(this, "hasMouseMoved", false);
     __publicField(this, "_idleTimeout");
@@ -49863,7 +49875,7 @@ class MouseHandler extends InputHandler {
       event2.preventDefault();
       if (!this.isMouseDown)
         return;
-      if (this.inputs.pointerMode === "zone" && this.hasMouseMoved) {
+      if (this.inputs.pointerMode === "rect" && this.hasMouseMoved) {
         this.onRectEnd();
       } else if (event2.button === 0 && !this.hasMouseMoved) {
         this.onMouseClick(new Vector2(event2.offsetX, event2.offsetY), false);
@@ -49936,10 +49948,10 @@ class MouseHandler extends InputHandler {
       case "pan":
         this.camera.move2(delta, "XY");
         break;
-      case "dolly":
-        this.camera.move1(delta.y, "Z");
+      case "zoom":
+        this.camera.zoom(delta.y * this.ZOOM_SPEED);
         break;
-      case "zone":
+      case "rect":
         this.drawSelection();
         break;
       default:
@@ -50073,6 +50085,7 @@ class Input {
       this._altMode = "look";
     else
       this._altMode = this._mode;
+    this._viewer.gizmoSelection.visible = false;
     this._viewer.camera.orbitMode = value !== "look";
     this._mode = value;
     this._onPointerModeChanged.dispatch();
@@ -54860,7 +54873,7 @@ class MeshBuilder {
     __publicField(this, "materials");
     this.materials = materials != null ? materials : new VimMaterials();
   }
-  createInstancedMeshes(g3d, transparency2, instances) {
+  createInstancedMeshes(g3d, transparency, instances) {
     const result = [];
     const set3 = instances ? new Set(instances) : void 0;
     for (let mesh = 0; mesh < g3d.getMeshCount(); mesh++) {
@@ -54877,7 +54890,7 @@ class MeshBuilder {
         const geometry = Geometry.createGeometryFromMesh(g3d, mesh, section, transparent);
         return this.createInstancedMesh(geometry, g3d, meshInstances, transparent);
       };
-      switch (transparency2) {
+      switch (transparency) {
         case "all": {
           result.push(createMesh("opaque", false));
           result.push(createMesh("transparent", true));
@@ -54930,11 +54943,11 @@ class SceneBuilder {
     __publicField(this, "meshBuilder");
     this.meshBuilder = meshBuilder != null ? meshBuilder : new MeshBuilder();
   }
-  createFromG3d(g3d, transparency2 = "all", instances = void 0) {
+  createFromG3d(g3d, transparency = "all", instances = void 0) {
     const scene = new Scene(this);
-    const shared2 = this.createFromInstanciableMeshes(g3d, transparency2, instances);
+    const shared2 = this.createFromInstanciableMeshes(g3d, transparency, instances);
     scene.merge(shared2);
-    switch (transparency2) {
+    switch (transparency) {
       case "all": {
         scene.merge(this.createFromMergeableMeshes(g3d, "opaque", false, instances));
         scene.merge(this.createFromMergeableMeshes(g3d, "transparent", true, instances));
@@ -54955,8 +54968,8 @@ class SceneBuilder {
     }
     return scene;
   }
-  createFromInstanciableMeshes(g3d, transparency2, instances = void 0) {
-    const meshes = this.meshBuilder.createInstancedMeshes(g3d, transparency2, instances);
+  createFromInstanciableMeshes(g3d, transparency, instances = void 0) {
+    const meshes = this.meshBuilder.createInstancedMeshes(g3d, transparency, instances);
     const scene = new Scene(this);
     for (let m2 = 0; m2 < meshes.length; m2++) {
       scene.addInstancedMesh(meshes[m2]);
@@ -56324,8 +56337,8 @@ function TabCamera(viewer2) {
   const btnOrbit = toggleButton("Orbit", () => onModeBtn("orbit"), orbit, () => mode === "orbit");
   const btnLook = toggleButton("Look Around", () => onModeBtn("look"), look, () => mode === "look");
   const btnPan = toggleButton("Pan", () => onModeBtn("pan"), pan, () => mode === "pan");
-  const btnZoom = toggleButton("Zoom", () => onModeBtn("dolly"), zoom, () => mode === "dolly");
-  const btnFrameRect = toggleButton("Zoom Window", () => onModeBtn("zone"), frameRect, () => mode === "zone");
+  const btnZoom = toggleButton("Zoom", () => onModeBtn("zoom"), zoom, () => mode === "zoom");
+  const btnFrameRect = toggleButton("Zoom Window", () => onModeBtn("rect"), frameRect, () => mode === "rect");
   const btnFrame = actionButton("Zoom to Fit", onFrameBtn, frameSelection, false);
   const btnFullScreen = actionButton("Fullscreen", () => console.log("Full Screen"), fullsScreen, false);
   return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", {
@@ -59427,8 +59440,8 @@ class ComponentInputStrategy {
     this._default.onIdleAction(hit);
   }
   onKeyAction(key) {
-    if (key === 70) {
-      const box = this._viewer.selection.count > 0 ? getVisibleBoundingBox(this._viewer.selection.vim) : getVisibleBoundingBox(this._viewer);
+    if (key === KEYS.KEY_F) {
+      const box = this._viewer.selection.count > 0 ? this._viewer.selection.getBoundingBox() : getVisibleBoundingBox(this._viewer);
       this._viewer.camera.frame(box, "none", this._viewer.camera.defaultLerpDuration);
       return true;
     }
@@ -59751,10 +59764,9 @@ function getVisibleBoundingBox(source) {
 }
 const params = new URLSearchParams(window.location.search);
 let url = params.has("vim") || params.has("model") ? (_a = params.get("vim")) != null ? _a : params.get("model") : "https://vim.azureedge.net/samples/residence.vim";
-let transparency = "all";
 if (params.has("transparency")) {
   const t2 = params.get("transparency");
-  transparency = VIM.Transparency.isValid(t2) ? t2 : "all";
+  VIM.Transparency.isValid(t2) ? t2 : "all";
 }
 if (params.has("dev")) {
   params.get("dev");
@@ -59766,10 +59778,8 @@ root.render(/* @__PURE__ */ React.createElement(VimComponent, {
   onMount: loadVim
 }));
 function loadVim() {
-  globalThis.viewer = viewer;
   viewer.loadVim(url, {
-    rotation: { x: 270, y: 0, z: 0 },
-    transparency
+    rotation: { x: 270, y: 0, z: 0 }
   }).then((_) => console.log("Vim Successfully loaded"));
 }
 const stats = new Stats();
