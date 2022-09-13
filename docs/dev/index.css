@@ -883,9 +883,6 @@ select {
     max-width: 1536px;
   }
 }
-.pointer-events-none {
-  pointer-events: none;
-}
 .pointer-events-auto {
   pointer-events: auto;
 }
@@ -925,8 +922,8 @@ select {
 .z-10 {
   z-index: 10;
 }
-.z-0 {
-  z-index: 0;
+.order-2 {
+  order: 2;
 }
 .m-1 {
   margin: 0.25rem;
@@ -1005,9 +1002,6 @@ select {
 .h-8 {
   height: 2rem;
 }
-.h-28 {
-  height: 7rem;
-}
 .w-auto {
   width: auto;
 }
@@ -1051,6 +1045,14 @@ select {
   --tw-rotate: 0deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
+.cursor-pointer {
+  cursor: pointer;
+}
+.select-none {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
 .flex-col {
   flex-direction: column;
 }
@@ -1089,10 +1091,6 @@ select {
 .rounded-t {
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
-}
-.rounded-t-xl {
-  border-top-left-radius: 0.75rem;
-  border-top-right-radius: 0.75rem;
 }
 .rounded-b-xl {
   border-bottom-right-radius: 0.75rem;
@@ -1243,8 +1241,11 @@ select {
 .opacity-60 {
   opacity: 0.6;
 }
-.opacity-50 {
-  opacity: 0.5;
+.opacity-100 {
+  opacity: 1;
+}
+.opacity-0 {
+  opacity: 0;
 }
 .shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -1265,6 +1266,11 @@ select {
 }
 .transition-all {
   transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.transition-opacity {
+  transition-property: opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
@@ -1323,19 +1329,24 @@ body {
 
 /* Axes Gizmo*/
 .gizmo-axis-canvas {
-  z-index: 1;
-  top: 24px !important;
-  right: 24px !important;
-  margin: 8px 16px 8px 16px;
-  filter: saturate(0%);
+  display: block;
+  position: static!important;
+  order: 1;
+  padding: 8px 16px 8px 16px;
+  /* filter: saturate(0%); */
   transition: all 0.5s ease;
 }
 
-.gizmo-axis-canvas:hover {
+.vim-top:hover .gizmo-axis-canvas {
   filter: saturate(100%);
   transition: all 0.5s ease;
 }
-
+.vim-top {
+  opacity: .5;
+}
+.vim-top:hover {
+  opacity: 1;
+}
 .vim-loading-box {
   width: -webkit-fit-content;
   width: -moz-fit-content;
@@ -1399,47 +1410,47 @@ body {
 
 /* MENU */
 
-.vim-menu td {
+.vim-control-bar td {
   pointer-events: all;
 }
 
-.vim-menu td.empty {
+.vim-control-bar td.empty {
   pointer-events: none;
 }
 
-.vim-menu table {
+.vim-control-bar table {
   width: 64px;
 }
 
-.vim-menu button:focus,
+.vim-control-bar button:focus,
 .vim-bim-search input[type='search']:focus {
   outline: 0;
   box-shadow: none;
 }
 
-.vim-menu .iconButton {
+.vim-control-bar .iconButton {
   color: var(--c-white);
   border: none;
   background-color: transparent;
 }
-.vim-menu .iconButton.active {
+.vim-control-bar .iconButton.active {
   background-color: var(--c-primary-royal);
 }
-.vim-menu .iconButton img {
+.vim-control-bar .iconButton img {
   width: 42px;
   height: 42px;
 }
 
-.vim-menu .iconButton:hover img {
+.vim-control-bar .iconButton:hover img {
   transform: scale(1.1);
 }
 
-.vim-menu .iconButton:active img {
+.vim-control-bar .iconButton:active img {
   transform: scale(1.1);
   filter: brightness(1.5);
 }
 
-.vim-menu .iconButton:disabled img {
+.vim-control-bar .iconButton:disabled img {
   filter: brightness(0.5);
   transform: scale(1);
 }
@@ -1476,6 +1487,9 @@ body {
   max-width: calc(100% - 480px);
 }
 .vim-gfx.bim-panel-open + .vim-ui .vim-menu-toast {
+  left: calc(50% + 190px);
+}
+.vim-gfx.bim-panel-open + .vim-ui .vim-loading-box {
   left: calc(50% + 190px);
 }
 .submenu-item-active {
@@ -1550,6 +1564,10 @@ body {
 }
 .rct-tree-item-title-container:hover {
   background-color: var(--c-list-hover);
+}
+[type='checkbox']:focus, [type='radio']:focus {
+  outline: none;
+  box-shadow: none;
 }
 .odd\:bg-white:nth-child(odd) {
   --tw-bg-opacity: 1;
