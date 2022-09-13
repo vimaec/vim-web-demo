@@ -8883,7 +8883,7 @@ body {\r
 /* Axes Gizmo*/\r
 .gizmo-axis-canvas {\r
   display: block;\r
-  position: static!important;\r
+  position: static !important;\r
   order: 1;\r
   padding: 8px 16px 8px 16px;\r
   /* filter: saturate(0%); */\r
@@ -8895,7 +8895,7 @@ body {\r
   transition: all 0.5s ease;\r
 }\r
 .vim-top {\r
-  opacity: .5;\r
+  opacity: 0.5;\r
 }\r
 .vim-top:hover {\r
   opacity: 1;\r
@@ -9033,7 +9033,7 @@ body {\r
   -o-object-fit: cover;\r
      object-fit: cover;\r
 }\r
-.vim-gfx.bim-panel-open + .vim-ui .vim-menu,\r
+.vim-gfx.bim-panel-open + .vim-ui .vim-control-bar,\r
 .vim-gfx.bim-panel-open + .vim-ui .menu-help-controls,\r
 .vim-gfx.bim-panel-open + .vim-ui .menu-help-overlay h2 {\r
   margin-left: 480px;\r
@@ -9118,7 +9118,8 @@ body {\r
 .rct-tree-item-title-container:hover {\r
   background-color: var(--c-list-hover);\r
 }\r
-[type='checkbox']:focus, [type='radio']:focus {\r
+[type='checkbox']:focus,\r
+[type='radio']:focus {\r
   outline: none;\r
   box-shadow: none;\r
 }\r
@@ -9163,7 +9164,8 @@ body {\r
 .focus\\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
-}`)();
+}\r
+`)();
 /**
  * @license
  * Copyright 2010-2021 Three.js Authors
