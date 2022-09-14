@@ -56979,8 +56979,8 @@ function TabTools(viewer2, toggleIsolation$1, setCursor) {
     className: "mx-1"
   }, btnMeasureConfirm));
   const btnSectionDelete = actionButton("Reset Section Box", onResetSectionBtn, sectionBoxReset, !!section);
-  const btnSectionClip = actionButton("Hide Section", onSectionClip, sectionBoxClip, !!section);
-  const btnSectionNoClip = actionButton("Show Section", onSectionNoClip, sectionBoxNoClip, !!section);
+  const btnSectionClip = actionButton("Hide Section", onSectionClip, sectionBoxNoClip, !!section);
+  const btnSectionNoClip = actionButton("Show Section", onSectionNoClip, sectionBoxClip, !!section);
   const btnSectionConfirm = actionButton("Done", onSectionBtn, checkmark, !!section);
   const sectionTab = /* @__PURE__ */ React.createElement("div", {
     className: "vim-menu-section flex items-center bg-primary rounded-full px-2 mx-4 shadow-md"
