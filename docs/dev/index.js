@@ -9123,6 +9123,30 @@ body {\r
   outline: none;\r
   box-shadow: none;\r
 }\r
+.cursor-orbit:hover {\r
+  cursor: url('src/assets/cursor-orbit.svg'), auto;\r
+}\r
+.cursor-look:hover {\r
+  cursor: url('src/assets/cursor-look-around.svg'), auto;\r
+}\r
+.cursor-pan:hover {\r
+  cursor: url('src/assets/cursor-pan.svg'), auto;\r
+}\r
+.cursor-pan:active {\r
+  cursor: url('src/assets/cursor-pan-grab.svg'), auto;\r
+}\r
+.cursor-zoom:hover {\r
+  cursor: url('src/assets/cursor-zoom.svg'), auto;\r
+}\r
+.cursor-rect:hover {\r
+  cursor: url('src/assets/cursor-zoom-window.svg'), auto;\r
+}\r
+.cursor-measure:hover {\r
+  cursor: url('src/assets/cursor-measure.svg'), auto;\r
+}\r
+.cursor-section-box:hover {\r
+  /*cursor: url('src/assets/cursor-measure.svg'), auto;*/\r
+}\r
 .odd\\:bg-white:nth-child(odd) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -48454,14 +48478,14 @@ for (let i2 = 0; i2 < 256; i2++) {
 function clamp(value, min2, max2) {
   return Math.max(min2, Math.min(max2, value));
 }
-var dist$1 = {};
+var dist$3 = {};
 var SignalDispatcher$1 = {};
-var dist = {};
-var DispatcherBase$1 = {};
-var DispatcherWrapper$1 = {};
-Object.defineProperty(DispatcherWrapper$1, "__esModule", { value: true });
-DispatcherWrapper$1.DispatcherWrapper = void 0;
-class DispatcherWrapper {
+var dist$2 = {};
+var DispatcherBase$3 = {};
+var DispatcherWrapper$3 = {};
+Object.defineProperty(DispatcherWrapper$3, "__esModule", { value: true });
+DispatcherWrapper$3.DispatcherWrapper = void 0;
+class DispatcherWrapper$2 {
   constructor(dispatcher) {
     this._subscribe = (fn) => dispatcher.subscribe(fn);
     this._unsubscribe = (fn) => dispatcher.unsubscribe(fn);
@@ -48499,11 +48523,11 @@ class DispatcherWrapper {
     this._clear();
   }
 }
-DispatcherWrapper$1.DispatcherWrapper = DispatcherWrapper;
-var Subscription$1 = {};
-Object.defineProperty(Subscription$1, "__esModule", { value: true });
-Subscription$1.Subscription = void 0;
-class Subscription {
+DispatcherWrapper$3.DispatcherWrapper = DispatcherWrapper$2;
+var Subscription$3 = {};
+Object.defineProperty(Subscription$3, "__esModule", { value: true });
+Subscription$3.Subscription = void 0;
+class Subscription$2 {
   constructor(handler, isOnce) {
     this.handler = handler;
     this.isOnce = isOnce;
@@ -48523,11 +48547,11 @@ class Subscription {
     }
   }
 }
-Subscription$1.Subscription = Subscription;
-var EventManagement$1 = {};
-Object.defineProperty(EventManagement$1, "__esModule", { value: true });
-EventManagement$1.EventManagement = void 0;
-class EventManagement {
+Subscription$3.Subscription = Subscription$2;
+var EventManagement$3 = {};
+Object.defineProperty(EventManagement$3, "__esModule", { value: true });
+EventManagement$3.EventManagement = void 0;
+class EventManagement$2 {
   constructor(unsub) {
     this.unsub = unsub;
     this.propagationStopped = false;
@@ -48536,13 +48560,13 @@ class EventManagement {
     this.propagationStopped = true;
   }
 }
-EventManagement$1.EventManagement = EventManagement;
-Object.defineProperty(DispatcherBase$1, "__esModule", { value: true });
-DispatcherBase$1.SubscriptionChangeEventDispatcher = DispatcherBase$1.DispatcherBase = void 0;
-const DispatcherWrapper_1 = DispatcherWrapper$1;
-const Subscription_1 = Subscription$1;
-const EventManagement_1$1 = EventManagement$1;
-class DispatcherBase {
+EventManagement$3.EventManagement = EventManagement$2;
+Object.defineProperty(DispatcherBase$3, "__esModule", { value: true });
+DispatcherBase$3.SubscriptionChangeEventDispatcher = DispatcherBase$3.DispatcherBase = void 0;
+const DispatcherWrapper_1$1 = DispatcherWrapper$3;
+const Subscription_1$1 = Subscription$3;
+const EventManagement_1$3 = EventManagement$3;
+class DispatcherBase$2 {
   constructor() {
     this._subscriptions = new Array();
   }
@@ -48551,7 +48575,7 @@ class DispatcherBase {
   }
   get onSubscriptionChange() {
     if (this._onSubscriptionChange == null) {
-      this._onSubscriptionChange = new SubscriptionChangeEventDispatcher();
+      this._onSubscriptionChange = new SubscriptionChangeEventDispatcher$1();
     }
     return this._onSubscriptionChange.asEvent();
   }
@@ -48601,7 +48625,7 @@ class DispatcherBase {
   }
   _dispatch(executeAsync, scope, args) {
     for (let sub of [...this._subscriptions]) {
-      let ev = new EventManagement_1$1.EventManagement(() => this.unsub(sub.handler));
+      let ev = new EventManagement_1$3.EventManagement(() => this.unsub(sub.handler));
       let nargs = Array.prototype.slice.call(args);
       nargs.push(ev);
       let s = sub;
@@ -48617,7 +48641,7 @@ class DispatcherBase {
     return { propagationStopped: false };
   }
   createSubscription(handler, isOnce) {
-    return new Subscription_1.Subscription(handler, isOnce);
+    return new Subscription_1$1.Subscription(handler, isOnce);
   }
   cleanup(sub) {
     let changes = false;
@@ -48634,7 +48658,7 @@ class DispatcherBase {
   }
   asEvent() {
     if (this._wrap == null) {
-      this._wrap = new DispatcherWrapper_1.DispatcherWrapper(this);
+      this._wrap = new DispatcherWrapper_1$1.DispatcherWrapper(this);
     }
     return this._wrap;
   }
@@ -48650,26 +48674,26 @@ class DispatcherBase {
     }
   }
 }
-DispatcherBase$1.DispatcherBase = DispatcherBase;
-class SubscriptionChangeEventDispatcher extends DispatcherBase {
+DispatcherBase$3.DispatcherBase = DispatcherBase$2;
+class SubscriptionChangeEventDispatcher$1 extends DispatcherBase$2 {
   dispatch(count) {
     this._dispatch(false, this, arguments);
   }
 }
-DispatcherBase$1.SubscriptionChangeEventDispatcher = SubscriptionChangeEventDispatcher;
-var DispatchError$1 = {};
-Object.defineProperty(DispatchError$1, "__esModule", { value: true });
-DispatchError$1.DispatchError = void 0;
-class DispatchError extends Error {
+DispatcherBase$3.SubscriptionChangeEventDispatcher = SubscriptionChangeEventDispatcher$1;
+var DispatchError$3 = {};
+Object.defineProperty(DispatchError$3, "__esModule", { value: true });
+DispatchError$3.DispatchError = void 0;
+class DispatchError$2 extends Error {
   constructor(message) {
     super(message);
   }
 }
-DispatchError$1.DispatchError = DispatchError;
-var EventListBase$1 = {};
-Object.defineProperty(EventListBase$1, "__esModule", { value: true });
-EventListBase$1.EventListBase = void 0;
-class EventListBase {
+DispatchError$3.DispatchError = DispatchError$2;
+var EventListBase$3 = {};
+Object.defineProperty(EventListBase$3, "__esModule", { value: true });
+EventListBase$3.EventListBase = void 0;
+class EventListBase$2 {
   constructor() {
     this._events = {};
   }
@@ -48686,11 +48710,11 @@ class EventListBase {
     delete this._events[name];
   }
 }
-EventListBase$1.EventListBase = EventListBase;
-var HandlingBase$1 = {};
-Object.defineProperty(HandlingBase$1, "__esModule", { value: true });
-HandlingBase$1.HandlingBase = void 0;
-class HandlingBase {
+EventListBase$3.EventListBase = EventListBase$2;
+var HandlingBase$3 = {};
+Object.defineProperty(HandlingBase$3, "__esModule", { value: true });
+HandlingBase$3.HandlingBase = void 0;
+class HandlingBase$2 {
   constructor(events) {
     this.events = events;
   }
@@ -48713,12 +48737,12 @@ class HandlingBase {
     this.unsubscribe(name, fn);
   }
 }
-HandlingBase$1.HandlingBase = HandlingBase;
-var PromiseDispatcherBase$1 = {};
-var PromiseSubscription$1 = {};
-Object.defineProperty(PromiseSubscription$1, "__esModule", { value: true });
-PromiseSubscription$1.PromiseSubscription = void 0;
-class PromiseSubscription {
+HandlingBase$3.HandlingBase = HandlingBase$2;
+var PromiseDispatcherBase$3 = {};
+var PromiseSubscription$3 = {};
+Object.defineProperty(PromiseSubscription$3, "__esModule", { value: true });
+PromiseSubscription$3.PromiseSubscription = void 0;
+class PromiseSubscription$2 {
   constructor(handler, isOnce) {
     this.handler = handler;
     this.isOnce = isOnce;
@@ -48739,23 +48763,23 @@ class PromiseSubscription {
     }
   }
 }
-PromiseSubscription$1.PromiseSubscription = PromiseSubscription;
-Object.defineProperty(PromiseDispatcherBase$1, "__esModule", { value: true });
-PromiseDispatcherBase$1.PromiseDispatcherBase = void 0;
-const PromiseSubscription_1 = PromiseSubscription$1;
-const EventManagement_1 = EventManagement$1;
-const DispatcherBase_1 = DispatcherBase$1;
-const DispatchError_1 = DispatchError$1;
-class PromiseDispatcherBase extends DispatcherBase_1.DispatcherBase {
+PromiseSubscription$3.PromiseSubscription = PromiseSubscription$2;
+Object.defineProperty(PromiseDispatcherBase$3, "__esModule", { value: true });
+PromiseDispatcherBase$3.PromiseDispatcherBase = void 0;
+const PromiseSubscription_1$1 = PromiseSubscription$3;
+const EventManagement_1$2 = EventManagement$3;
+const DispatcherBase_1$1 = DispatcherBase$3;
+const DispatchError_1$1 = DispatchError$3;
+class PromiseDispatcherBase$2 extends DispatcherBase_1$1.DispatcherBase {
   _dispatch(executeAsync, scope, args) {
-    throw new DispatchError_1.DispatchError("_dispatch not supported. Use _dispatchAsPromise.");
+    throw new DispatchError_1$1.DispatchError("_dispatch not supported. Use _dispatchAsPromise.");
   }
   createSubscription(handler, isOnce) {
-    return new PromiseSubscription_1.PromiseSubscription(handler, isOnce);
+    return new PromiseSubscription_1$1.PromiseSubscription(handler, isOnce);
   }
   async _dispatchAsPromise(executeAsync, scope, args) {
     for (let sub of [...this._subscriptions]) {
-      let ev = new EventManagement_1.EventManagement(() => this.unsub(sub.handler));
+      let ev = new EventManagement_1$2.EventManagement(() => this.unsub(sub.handler));
       let nargs = Array.prototype.slice.call(args);
       nargs.push(ev);
       let ps = sub;
@@ -48771,7 +48795,7 @@ class PromiseDispatcherBase extends DispatcherBase_1.DispatcherBase {
     return { propagationStopped: false };
   }
 }
-PromiseDispatcherBase$1.PromiseDispatcherBase = PromiseDispatcherBase;
+PromiseDispatcherBase$3.PromiseDispatcherBase = PromiseDispatcherBase$2;
 (function(exports2) {
   /*!
    * Strongly Typed Events for TypeScript - Core
@@ -48783,54 +48807,54 @@ PromiseDispatcherBase$1.PromiseDispatcherBase = PromiseDispatcherBase;
    */
   Object.defineProperty(exports2, "__esModule", { value: true });
   exports2.SubscriptionChangeEventDispatcher = exports2.HandlingBase = exports2.PromiseDispatcherBase = exports2.PromiseSubscription = exports2.DispatchError = exports2.EventManagement = exports2.EventListBase = exports2.DispatcherWrapper = exports2.DispatcherBase = exports2.Subscription = void 0;
-  const DispatcherBase_12 = DispatcherBase$1;
+  const DispatcherBase_12 = DispatcherBase$3;
   Object.defineProperty(exports2, "DispatcherBase", { enumerable: true, get: function() {
     return DispatcherBase_12.DispatcherBase;
   } });
   Object.defineProperty(exports2, "SubscriptionChangeEventDispatcher", { enumerable: true, get: function() {
     return DispatcherBase_12.SubscriptionChangeEventDispatcher;
   } });
-  const DispatchError_12 = DispatchError$1;
+  const DispatchError_12 = DispatchError$3;
   Object.defineProperty(exports2, "DispatchError", { enumerable: true, get: function() {
     return DispatchError_12.DispatchError;
   } });
-  const DispatcherWrapper_12 = DispatcherWrapper$1;
+  const DispatcherWrapper_12 = DispatcherWrapper$3;
   Object.defineProperty(exports2, "DispatcherWrapper", { enumerable: true, get: function() {
     return DispatcherWrapper_12.DispatcherWrapper;
   } });
-  const EventListBase_1 = EventListBase$1;
+  const EventListBase_1 = EventListBase$3;
   Object.defineProperty(exports2, "EventListBase", { enumerable: true, get: function() {
     return EventListBase_1.EventListBase;
   } });
-  const EventManagement_12 = EventManagement$1;
+  const EventManagement_12 = EventManagement$3;
   Object.defineProperty(exports2, "EventManagement", { enumerable: true, get: function() {
     return EventManagement_12.EventManagement;
   } });
-  const HandlingBase_1 = HandlingBase$1;
+  const HandlingBase_1 = HandlingBase$3;
   Object.defineProperty(exports2, "HandlingBase", { enumerable: true, get: function() {
     return HandlingBase_1.HandlingBase;
   } });
-  const PromiseDispatcherBase_1 = PromiseDispatcherBase$1;
+  const PromiseDispatcherBase_1 = PromiseDispatcherBase$3;
   Object.defineProperty(exports2, "PromiseDispatcherBase", { enumerable: true, get: function() {
     return PromiseDispatcherBase_1.PromiseDispatcherBase;
   } });
-  const PromiseSubscription_12 = PromiseSubscription$1;
+  const PromiseSubscription_12 = PromiseSubscription$3;
   Object.defineProperty(exports2, "PromiseSubscription", { enumerable: true, get: function() {
     return PromiseSubscription_12.PromiseSubscription;
   } });
-  const Subscription_12 = Subscription$1;
+  const Subscription_12 = Subscription$3;
   Object.defineProperty(exports2, "Subscription", { enumerable: true, get: function() {
     return Subscription_12.Subscription;
   } });
-})(dist);
+})(dist$2);
 Object.defineProperty(SignalDispatcher$1, "__esModule", { value: true });
 SignalDispatcher$1.SignalDispatcher = void 0;
-const ste_core_1$2 = dist;
-class SignalDispatcher extends ste_core_1$2.DispatcherBase {
+const ste_core_1$5 = dist$2;
+class SignalDispatcher extends ste_core_1$5.DispatcherBase {
   dispatch() {
     const result = this._dispatch(false, this, arguments);
     if (result == null) {
-      throw new ste_core_1$2.DispatchError("Got `null` back from dispatch.");
+      throw new ste_core_1$5.DispatchError("Got `null` back from dispatch.");
     }
     return result;
   }
@@ -48846,9 +48870,9 @@ var SignalHandlingBase$1 = {};
 var SignalList$1 = {};
 Object.defineProperty(SignalList$1, "__esModule", { value: true });
 SignalList$1.SignalList = void 0;
-const ste_core_1$1 = dist;
+const ste_core_1$4 = dist$2;
 const SignalDispatcher_1 = SignalDispatcher$1;
-class SignalList extends ste_core_1$1.EventListBase {
+class SignalList extends ste_core_1$4.EventListBase {
   constructor() {
     super();
   }
@@ -48859,9 +48883,9 @@ class SignalList extends ste_core_1$1.EventListBase {
 SignalList$1.SignalList = SignalList;
 Object.defineProperty(SignalHandlingBase$1, "__esModule", { value: true });
 SignalHandlingBase$1.SignalHandlingBase = void 0;
-const ste_core_1 = dist;
+const ste_core_1$3 = dist$2;
 const SignalList_1 = SignalList$1;
-class SignalHandlingBase extends ste_core_1.HandlingBase {
+class SignalHandlingBase extends ste_core_1$3.HandlingBase {
   constructor() {
     super(new SignalList_1.SignalList());
   }
@@ -48890,7 +48914,7 @@ SignalHandlingBase$1.SignalHandlingBase = SignalHandlingBase;
   Object.defineProperty(exports2, "SignalList", { enumerable: true, get: function() {
     return SignalList_12.SignalList;
   } });
-})(dist$1);
+})(dist$3);
 ({
   forward: new Vector3(0, 0, -1),
   back: new Vector3(0, 0, 1),
@@ -48919,8 +48943,8 @@ class Camera {
     __publicField(this, "_lockDirection", false);
     __publicField(this, "_lerpPosition");
     __publicField(this, "_lerpRotation");
-    __publicField(this, "_onValueChanged", new dist$1.SignalDispatcher());
-    __publicField(this, "_onMoved", new dist$1.SignalDispatcher());
+    __publicField(this, "_onValueChanged", new dist$3.SignalDispatcher());
+    __publicField(this, "_onMoved", new dist$3.SignalDispatcher());
     __publicField(this, "defaultLerpDuration", 2);
     __publicField(this, "_vimReferenceSize", 1);
     __publicField(this, "_sceneSizeMultiplier", 1);
@@ -49554,7 +49578,7 @@ class KeyboardHandler extends InputHandler {
     return this._viewer.selection;
   }
   get section() {
-    return this._viewer.gizmoSection;
+    return this._viewer.sectionBox;
   }
   onActionKey(key) {
     switch (key) {
@@ -50091,7 +50115,7 @@ class Input {
     __publicField(this, "keyboard");
     __publicField(this, "_mode");
     __publicField(this, "_altMode");
-    __publicField(this, "_onPointerModeChanged", new dist$1.SignalDispatcher());
+    __publicField(this, "_onPointerModeChanged", new dist$3.SignalDispatcher());
     __publicField(this, "_strategy");
     __publicField(this, "onContextMenu", () => console.log("Context Menu"));
     __publicField(this, "unregisterAll", () => {
@@ -50584,7 +50608,7 @@ class Selection {
     __publicField(this, "_objects", /* @__PURE__ */ new Set());
     __publicField(this, "_vim");
     __publicField(this, "_highlight");
-    __publicField(this, "_onValueChanged", new dist$1.SignalDispatcher());
+    __publicField(this, "_onValueChanged", new dist$3.SignalDispatcher());
     this._renderer = renderer;
   }
   get onValueChanged() {
@@ -51837,7 +51861,467 @@ class BoxInputs {
     return this.raycaster.intersectObject(this.cube);
   }
 }
-class GizmoSection {
+var dist$1 = {};
+var SimpleEventDispatcher$1 = {};
+var dist = {};
+var DispatcherBase$1 = {};
+var DispatcherWrapper$1 = {};
+Object.defineProperty(DispatcherWrapper$1, "__esModule", { value: true });
+DispatcherWrapper$1.DispatcherWrapper = void 0;
+class DispatcherWrapper {
+  constructor(dispatcher) {
+    this._subscribe = (fn) => dispatcher.subscribe(fn);
+    this._unsubscribe = (fn) => dispatcher.unsubscribe(fn);
+    this._one = (fn) => dispatcher.one(fn);
+    this._has = (fn) => dispatcher.has(fn);
+    this._clear = () => dispatcher.clear();
+    this._count = () => dispatcher.count;
+    this._onSubscriptionChange = () => dispatcher.onSubscriptionChange;
+  }
+  get onSubscriptionChange() {
+    return this._onSubscriptionChange();
+  }
+  get count() {
+    return this._count();
+  }
+  subscribe(fn) {
+    return this._subscribe(fn);
+  }
+  sub(fn) {
+    return this.subscribe(fn);
+  }
+  unsubscribe(fn) {
+    this._unsubscribe(fn);
+  }
+  unsub(fn) {
+    this.unsubscribe(fn);
+  }
+  one(fn) {
+    return this._one(fn);
+  }
+  has(fn) {
+    return this._has(fn);
+  }
+  clear() {
+    this._clear();
+  }
+}
+DispatcherWrapper$1.DispatcherWrapper = DispatcherWrapper;
+var Subscription$1 = {};
+Object.defineProperty(Subscription$1, "__esModule", { value: true });
+Subscription$1.Subscription = void 0;
+class Subscription {
+  constructor(handler, isOnce) {
+    this.handler = handler;
+    this.isOnce = isOnce;
+    this.isExecuted = false;
+  }
+  execute(executeAsync, scope, args) {
+    if (!this.isOnce || !this.isExecuted) {
+      this.isExecuted = true;
+      var fn = this.handler;
+      if (executeAsync) {
+        setTimeout(() => {
+          fn.apply(scope, args);
+        }, 1);
+      } else {
+        fn.apply(scope, args);
+      }
+    }
+  }
+}
+Subscription$1.Subscription = Subscription;
+var EventManagement$1 = {};
+Object.defineProperty(EventManagement$1, "__esModule", { value: true });
+EventManagement$1.EventManagement = void 0;
+class EventManagement {
+  constructor(unsub) {
+    this.unsub = unsub;
+    this.propagationStopped = false;
+  }
+  stopPropagation() {
+    this.propagationStopped = true;
+  }
+}
+EventManagement$1.EventManagement = EventManagement;
+Object.defineProperty(DispatcherBase$1, "__esModule", { value: true });
+DispatcherBase$1.SubscriptionChangeEventDispatcher = DispatcherBase$1.DispatcherBase = void 0;
+const DispatcherWrapper_1 = DispatcherWrapper$1;
+const Subscription_1 = Subscription$1;
+const EventManagement_1$1 = EventManagement$1;
+class DispatcherBase {
+  constructor() {
+    this._subscriptions = new Array();
+  }
+  get count() {
+    return this._subscriptions.length;
+  }
+  get onSubscriptionChange() {
+    if (this._onSubscriptionChange == null) {
+      this._onSubscriptionChange = new SubscriptionChangeEventDispatcher();
+    }
+    return this._onSubscriptionChange.asEvent();
+  }
+  subscribe(fn) {
+    if (fn) {
+      this._subscriptions.push(this.createSubscription(fn, false));
+      this.triggerSubscriptionChange();
+    }
+    return () => {
+      this.unsubscribe(fn);
+    };
+  }
+  sub(fn) {
+    return this.subscribe(fn);
+  }
+  one(fn) {
+    if (fn) {
+      this._subscriptions.push(this.createSubscription(fn, true));
+      this.triggerSubscriptionChange();
+    }
+    return () => {
+      this.unsubscribe(fn);
+    };
+  }
+  has(fn) {
+    if (!fn)
+      return false;
+    return this._subscriptions.some((sub) => sub.handler == fn);
+  }
+  unsubscribe(fn) {
+    if (!fn)
+      return;
+    let changes = false;
+    for (let i2 = 0; i2 < this._subscriptions.length; i2++) {
+      if (this._subscriptions[i2].handler == fn) {
+        this._subscriptions.splice(i2, 1);
+        changes = true;
+        break;
+      }
+    }
+    if (changes) {
+      this.triggerSubscriptionChange();
+    }
+  }
+  unsub(fn) {
+    this.unsubscribe(fn);
+  }
+  _dispatch(executeAsync, scope, args) {
+    for (const sub of [...this._subscriptions]) {
+      const ev = new EventManagement_1$1.EventManagement(() => this.unsub(sub.handler));
+      const nargs = Array.prototype.slice.call(args);
+      nargs.push(ev);
+      const s = sub;
+      s.execute(executeAsync, scope, nargs);
+      this.cleanup(sub);
+      if (!executeAsync && ev.propagationStopped) {
+        return { propagationStopped: true };
+      }
+    }
+    if (executeAsync) {
+      return null;
+    }
+    return { propagationStopped: false };
+  }
+  createSubscription(handler, isOnce) {
+    return new Subscription_1.Subscription(handler, isOnce);
+  }
+  cleanup(sub) {
+    let changes = false;
+    if (sub.isOnce && sub.isExecuted) {
+      const i2 = this._subscriptions.indexOf(sub);
+      if (i2 > -1) {
+        this._subscriptions.splice(i2, 1);
+        changes = true;
+      }
+    }
+    if (changes) {
+      this.triggerSubscriptionChange();
+    }
+  }
+  asEvent() {
+    if (this._wrap == null) {
+      this._wrap = new DispatcherWrapper_1.DispatcherWrapper(this);
+    }
+    return this._wrap;
+  }
+  clear() {
+    if (this._subscriptions.length != 0) {
+      this._subscriptions.splice(0, this._subscriptions.length);
+      this.triggerSubscriptionChange();
+    }
+  }
+  triggerSubscriptionChange() {
+    if (this._onSubscriptionChange != null) {
+      this._onSubscriptionChange.dispatch(this.count);
+    }
+  }
+}
+DispatcherBase$1.DispatcherBase = DispatcherBase;
+class SubscriptionChangeEventDispatcher extends DispatcherBase {
+  dispatch(count) {
+    this._dispatch(false, this, arguments);
+  }
+}
+DispatcherBase$1.SubscriptionChangeEventDispatcher = SubscriptionChangeEventDispatcher;
+var DispatchError$1 = {};
+Object.defineProperty(DispatchError$1, "__esModule", { value: true });
+DispatchError$1.DispatchError = void 0;
+class DispatchError extends Error {
+  constructor(message) {
+    super(message);
+  }
+}
+DispatchError$1.DispatchError = DispatchError;
+var EventListBase$1 = {};
+Object.defineProperty(EventListBase$1, "__esModule", { value: true });
+EventListBase$1.EventListBase = void 0;
+class EventListBase {
+  constructor() {
+    this._events = {};
+  }
+  get(name) {
+    let event2 = this._events[name];
+    if (event2) {
+      return event2;
+    }
+    event2 = this.createDispatcher();
+    this._events[name] = event2;
+    return event2;
+  }
+  remove(name) {
+    delete this._events[name];
+  }
+}
+EventListBase$1.EventListBase = EventListBase;
+var HandlingBase$1 = {};
+Object.defineProperty(HandlingBase$1, "__esModule", { value: true });
+HandlingBase$1.HandlingBase = void 0;
+class HandlingBase {
+  constructor(events) {
+    this.events = events;
+  }
+  one(name, fn) {
+    this.events.get(name).one(fn);
+  }
+  has(name, fn) {
+    return this.events.get(name).has(fn);
+  }
+  subscribe(name, fn) {
+    this.events.get(name).subscribe(fn);
+  }
+  sub(name, fn) {
+    this.subscribe(name, fn);
+  }
+  unsubscribe(name, fn) {
+    this.events.get(name).unsubscribe(fn);
+  }
+  unsub(name, fn) {
+    this.unsubscribe(name, fn);
+  }
+}
+HandlingBase$1.HandlingBase = HandlingBase;
+var PromiseDispatcherBase$1 = {};
+var PromiseSubscription$1 = {};
+Object.defineProperty(PromiseSubscription$1, "__esModule", { value: true });
+PromiseSubscription$1.PromiseSubscription = void 0;
+class PromiseSubscription {
+  constructor(handler, isOnce) {
+    this.handler = handler;
+    this.isOnce = isOnce;
+    this.isExecuted = false;
+  }
+  async execute(executeAsync, scope, args) {
+    if (!this.isOnce || !this.isExecuted) {
+      this.isExecuted = true;
+      var fn = this.handler;
+      if (executeAsync) {
+        setTimeout(() => {
+          fn.apply(scope, args);
+        }, 1);
+        return;
+      }
+      let result = fn.apply(scope, args);
+      await result;
+    }
+  }
+}
+PromiseSubscription$1.PromiseSubscription = PromiseSubscription;
+Object.defineProperty(PromiseDispatcherBase$1, "__esModule", { value: true });
+PromiseDispatcherBase$1.PromiseDispatcherBase = void 0;
+const PromiseSubscription_1 = PromiseSubscription$1;
+const EventManagement_1 = EventManagement$1;
+const DispatcherBase_1 = DispatcherBase$1;
+const DispatchError_1 = DispatchError$1;
+class PromiseDispatcherBase extends DispatcherBase_1.DispatcherBase {
+  _dispatch(executeAsync, scope, args) {
+    throw new DispatchError_1.DispatchError("_dispatch not supported. Use _dispatchAsPromise.");
+  }
+  createSubscription(handler, isOnce) {
+    return new PromiseSubscription_1.PromiseSubscription(handler, isOnce);
+  }
+  async _dispatchAsPromise(executeAsync, scope, args) {
+    for (let sub of [...this._subscriptions]) {
+      let ev = new EventManagement_1.EventManagement(() => this.unsub(sub.handler));
+      let nargs = Array.prototype.slice.call(args);
+      nargs.push(ev);
+      let ps = sub;
+      await ps.execute(executeAsync, scope, nargs);
+      this.cleanup(sub);
+      if (!executeAsync && ev.propagationStopped) {
+        return { propagationStopped: true };
+      }
+    }
+    if (executeAsync) {
+      return null;
+    }
+    return { propagationStopped: false };
+  }
+}
+PromiseDispatcherBase$1.PromiseDispatcherBase = PromiseDispatcherBase;
+(function(exports2) {
+  /*!
+   * Strongly Typed Events for TypeScript - Core
+   * https://github.com/KeesCBakker/StronlyTypedEvents/
+   * http://keestalkstech.com
+   *
+   * Copyright Kees C. Bakker / KeesTalksTech
+   * Released under the MIT license
+   */
+  Object.defineProperty(exports2, "__esModule", { value: true });
+  exports2.SubscriptionChangeEventDispatcher = exports2.HandlingBase = exports2.PromiseDispatcherBase = exports2.PromiseSubscription = exports2.DispatchError = exports2.EventManagement = exports2.EventListBase = exports2.DispatcherWrapper = exports2.DispatcherBase = exports2.Subscription = void 0;
+  const DispatcherBase_12 = DispatcherBase$1;
+  Object.defineProperty(exports2, "DispatcherBase", { enumerable: true, get: function() {
+    return DispatcherBase_12.DispatcherBase;
+  } });
+  Object.defineProperty(exports2, "SubscriptionChangeEventDispatcher", { enumerable: true, get: function() {
+    return DispatcherBase_12.SubscriptionChangeEventDispatcher;
+  } });
+  const DispatchError_12 = DispatchError$1;
+  Object.defineProperty(exports2, "DispatchError", { enumerable: true, get: function() {
+    return DispatchError_12.DispatchError;
+  } });
+  const DispatcherWrapper_12 = DispatcherWrapper$1;
+  Object.defineProperty(exports2, "DispatcherWrapper", { enumerable: true, get: function() {
+    return DispatcherWrapper_12.DispatcherWrapper;
+  } });
+  const EventListBase_1 = EventListBase$1;
+  Object.defineProperty(exports2, "EventListBase", { enumerable: true, get: function() {
+    return EventListBase_1.EventListBase;
+  } });
+  const EventManagement_12 = EventManagement$1;
+  Object.defineProperty(exports2, "EventManagement", { enumerable: true, get: function() {
+    return EventManagement_12.EventManagement;
+  } });
+  const HandlingBase_1 = HandlingBase$1;
+  Object.defineProperty(exports2, "HandlingBase", { enumerable: true, get: function() {
+    return HandlingBase_1.HandlingBase;
+  } });
+  const PromiseDispatcherBase_1 = PromiseDispatcherBase$1;
+  Object.defineProperty(exports2, "PromiseDispatcherBase", { enumerable: true, get: function() {
+    return PromiseDispatcherBase_1.PromiseDispatcherBase;
+  } });
+  const PromiseSubscription_12 = PromiseSubscription$1;
+  Object.defineProperty(exports2, "PromiseSubscription", { enumerable: true, get: function() {
+    return PromiseSubscription_12.PromiseSubscription;
+  } });
+  const Subscription_12 = Subscription$1;
+  Object.defineProperty(exports2, "Subscription", { enumerable: true, get: function() {
+    return Subscription_12.Subscription;
+  } });
+})(dist);
+Object.defineProperty(SimpleEventDispatcher$1, "__esModule", { value: true });
+SimpleEventDispatcher$1.SimpleEventDispatcher = void 0;
+const ste_core_1$2 = dist;
+class SimpleEventDispatcher extends ste_core_1$2.DispatcherBase {
+  constructor() {
+    super();
+  }
+  dispatch(args) {
+    const result = this._dispatch(false, this, arguments);
+    if (result == null) {
+      throw new ste_core_1$2.DispatchError("Got `null` back from dispatch.");
+    }
+    return result;
+  }
+  dispatchAsync(args) {
+    this._dispatch(true, this, arguments);
+  }
+  asEvent() {
+    return super.asEvent();
+  }
+}
+SimpleEventDispatcher$1.SimpleEventDispatcher = SimpleEventDispatcher;
+var SimpleEventHandlingBase$1 = {};
+var SimpleEventList$1 = {};
+Object.defineProperty(SimpleEventList$1, "__esModule", { value: true });
+SimpleEventList$1.SimpleEventList = void 0;
+const ste_core_1$1 = dist;
+const SimpleEventDispatcher_1$1 = SimpleEventDispatcher$1;
+class SimpleEventList extends ste_core_1$1.EventListBase {
+  constructor() {
+    super();
+  }
+  createDispatcher() {
+    return new SimpleEventDispatcher_1$1.SimpleEventDispatcher();
+  }
+}
+SimpleEventList$1.SimpleEventList = SimpleEventList;
+Object.defineProperty(SimpleEventHandlingBase$1, "__esModule", { value: true });
+SimpleEventHandlingBase$1.SimpleEventHandlingBase = void 0;
+const ste_core_1 = dist;
+const SimpleEventList_1 = SimpleEventList$1;
+class SimpleEventHandlingBase extends ste_core_1.HandlingBase {
+  constructor() {
+    super(new SimpleEventList_1.SimpleEventList());
+  }
+}
+SimpleEventHandlingBase$1.SimpleEventHandlingBase = SimpleEventHandlingBase;
+var NonUniformSimpleEventList$1 = {};
+Object.defineProperty(NonUniformSimpleEventList$1, "__esModule", { value: true });
+NonUniformSimpleEventList$1.NonUniformSimpleEventList = void 0;
+const SimpleEventDispatcher_1 = SimpleEventDispatcher$1;
+class NonUniformSimpleEventList {
+  constructor() {
+    this._events = {};
+  }
+  get(name) {
+    if (this._events[name]) {
+      return this._events[name];
+    }
+    const event2 = this.createDispatcher();
+    this._events[name] = event2;
+    return event2;
+  }
+  remove(name) {
+    delete this._events[name];
+  }
+  createDispatcher() {
+    return new SimpleEventDispatcher_1.SimpleEventDispatcher();
+  }
+}
+NonUniformSimpleEventList$1.NonUniformSimpleEventList = NonUniformSimpleEventList;
+(function(exports2) {
+  Object.defineProperty(exports2, "__esModule", { value: true });
+  exports2.NonUniformSimpleEventList = exports2.SimpleEventList = exports2.SimpleEventHandlingBase = exports2.SimpleEventDispatcher = void 0;
+  const SimpleEventDispatcher_12 = SimpleEventDispatcher$1;
+  Object.defineProperty(exports2, "SimpleEventDispatcher", { enumerable: true, get: function() {
+    return SimpleEventDispatcher_12.SimpleEventDispatcher;
+  } });
+  const SimpleEventHandlingBase_1 = SimpleEventHandlingBase$1;
+  Object.defineProperty(exports2, "SimpleEventHandlingBase", { enumerable: true, get: function() {
+    return SimpleEventHandlingBase_1.SimpleEventHandlingBase;
+  } });
+  const NonUniformSimpleEventList_1 = NonUniformSimpleEventList$1;
+  Object.defineProperty(exports2, "NonUniformSimpleEventList", { enumerable: true, get: function() {
+    return NonUniformSimpleEventList_1.NonUniformSimpleEventList;
+  } });
+  const SimpleEventList_12 = SimpleEventList$1;
+  Object.defineProperty(exports2, "SimpleEventList", { enumerable: true, get: function() {
+    return SimpleEventList_12.SimpleEventList;
+  } });
+})(dist$1);
+class SectionBox {
   constructor(viewer2) {
     __publicField(this, "_viewer");
     __publicField(this, "_inputs");
@@ -51848,8 +52332,9 @@ class GizmoSection {
     __publicField(this, "_clip");
     __publicField(this, "_show");
     __publicField(this, "_interactive");
-    __publicField(this, "onStateChanged");
-    __publicField(this, "onBoxConfirm");
+    __publicField(this, "_onStateChanged", new dist$3.SignalDispatcher());
+    __publicField(this, "_onBoxConfirm", new dist$1.SimpleEventDispatcher());
+    __publicField(this, "_onHover", new dist$1.SimpleEventDispatcher());
     this._viewer = viewer2;
     this._normal = new Vector3();
     this._cube = new BoxMesh();
@@ -51863,19 +52348,26 @@ class GizmoSection {
       this._normal = normal;
       if (this.visible)
         this._highlight.highlight(this.section.box, normal);
+      this._onHover.dispatch(normal.x !== 0 || normal.y !== 0 || normal.z !== 0);
     };
     this._inputs.onBoxStretch = (box) => {
       this.renderer.section.fitBox(box);
       this.update();
     };
-    this._inputs.onBoxConfirm = (box) => {
-      var _a2;
-      return (_a2 = this.onBoxConfirm) == null ? void 0 : _a2.call(this, box);
-    };
+    this._inputs.onBoxConfirm = (box) => this._onBoxConfirm.dispatch(box);
     this.clip = false;
     this.visible = false;
     this.interactive = false;
     this.update();
+  }
+  get onStateChanged() {
+    return this._onStateChanged.asEvent();
+  }
+  get onBoxConfirm() {
+    return this._onBoxConfirm.asEvent();
+  }
+  get onHover() {
+    return this._onHover.asEvent();
   }
   get renderer() {
     return this._viewer.renderer;
@@ -51890,18 +52382,16 @@ class GizmoSection {
     return this._clip;
   }
   set clip(value) {
-    var _a2;
     if (value === this._clip)
       return;
     this._clip = value;
     this.renderer.section.active = value;
-    (_a2 = this.onStateChanged) == null ? void 0 : _a2.call(this);
+    this._onStateChanged.dispatch();
   }
   get interactive() {
     return this._interactive;
   }
   set interactive(value) {
-    var _a2;
     if (value === this.interactive)
       return;
     if (!this._interactive && value)
@@ -51910,13 +52400,12 @@ class GizmoSection {
       this._inputs.unregister();
     this._interactive = value;
     this._highlight.visible = false;
-    (_a2 = this.onStateChanged) == null ? void 0 : _a2.call(this);
+    this._onStateChanged.dispatch();
   }
   get visible() {
     return this._show;
   }
   set visible(value) {
-    var _a2;
     if (value === this.visible)
       return;
     this._show = value;
@@ -51925,14 +52414,13 @@ class GizmoSection {
     this._highlight.visible = value;
     if (value)
       this.update();
-    (_a2 = this.onStateChanged) == null ? void 0 : _a2.call(this);
+    this._onStateChanged.dispatch();
   }
   fitBox(box) {
-    var _a2;
     this._cube.fitBox(box);
     this._outline.fitBox(box);
     this.renderer.section.fitBox(box);
-    (_a2 = this.onBoxConfirm) == null ? void 0 : _a2.call(this, this.box);
+    this._onBoxConfirm.dispatch(this.box);
   }
   update() {
     this.fitBox(this.section.box);
@@ -52635,12 +53123,12 @@ class MeasureLine {
   }
 }
 class MeasureMarker {
-  constructor(position = new Vector3()) {
+  constructor(color) {
     __publicField(this, "mesh");
     __publicField(this, "_material");
     __publicField(this, "_materialAlways");
     this._material = new MeshBasicMaterial({
-      color: new Color(0, 0.75, 1)
+      color
     });
     this._materialAlways = new MeshBasicMaterial({
       transparent: true,
@@ -52652,7 +53140,6 @@ class MeasureMarker {
     g.addGroup(0, Infinity, 0);
     g.addGroup(0, Infinity, 1);
     this.mesh = new Mesh(g, [this._material, this._materialAlways]);
-    this.mesh.position.copy(position);
   }
   setPosition(position) {
     this.mesh.position.copy(position);
@@ -52674,8 +53161,8 @@ class MeasureGizmo {
     __publicField(this, "_group");
     this._viewer = viewer2;
     const canvasSize = this._viewer.viewport.getSize();
-    this._startMarker = new MeasureMarker();
-    this._endMarker = new MeasureMarker();
+    this._startMarker = new MeasureMarker(new Color("#FFB700"));
+    this._endMarker = new MeasureMarker(new Color("#0590CC"));
     this._line = new MeasureLine(canvasSize, new Color(1, 1, 1));
     this._lineX = new MeasureLine(canvasSize, new Color(1, 0, 0));
     this._lineY = new MeasureLine(canvasSize, new Color(0, 1, 0));
@@ -55747,7 +56234,7 @@ class Viewer {
     __publicField(this, "selection");
     __publicField(this, "inputs");
     __publicField(this, "raycaster");
-    __publicField(this, "gizmoSection");
+    __publicField(this, "sectionBox");
     __publicField(this, "measure");
     __publicField(this, "gizmoSelection");
     __publicField(this, "_environment");
@@ -55758,7 +56245,7 @@ class Viewer {
     __publicField(this, "_materials");
     __publicField(this, "_vims", []);
     __publicField(this, "_disposed", false);
-    __publicField(this, "_onVimLoaded", new dist$1.SignalDispatcher());
+    __publicField(this, "_onVimLoaded", new dist$3.SignalDispatcher());
     var _a2;
     this.settings = new ViewerSettings(options);
     const materials = new VimMaterials();
@@ -55775,7 +56262,7 @@ class Viewer {
     this.measure = new Measure(this);
     this._gizmoAxes = new GizmoAxes(this.camera);
     (_a2 = this.viewport.canvas.parentElement) == null ? void 0 : _a2.prepend(this._gizmoAxes.canvas);
-    this.gizmoSection = new GizmoSection(this);
+    this.sectionBox = new SectionBox(this);
     this.gizmoSelection = new GizmoSelection(this);
     this._environment = new Environment(this.settings);
     this._environment.getObjects().forEach((o) => this.renderer.add(o));
@@ -55863,7 +56350,7 @@ class Viewer {
     const box = this.renderer.getBoundingBox();
     if (box) {
       this._environment.adaptToContent(box);
-      this.gizmoSection.fitBox(box);
+      this.sectionBox.fitBox(box);
     }
     this._camera.adaptToContent();
     this._camera.frame("all", 45);
@@ -56364,14 +56851,14 @@ function ControlBar(props) {
     });
   }, []);
   return /* @__PURE__ */ React.createElement("div", {
-    className: `vim-control-bar flex items-center justify-center w-full fixed px-2 bottom-0 py-2 mb-9 transition-opacity ${show ? "opacity-100" : "opacity-0"}`
+    className: `vim-control-bar flex items-center justify-center w-full fixed px-2 bottom-0 py-2 mb-9 transition-opacity transition-all ${show ? "opacity-100" : "opacity-0"}`
   }, /* @__PURE__ */ React.createElement("div", {
     className: "vim-control-bar-section flex items-center bg-white rounded-full px-2 shadow-md"
-  }, TabCamera(props.viewer, props.setCursor)), /* @__PURE__ */ React.createElement(React.Fragment, null, TabTools(props.viewer, props.toggleIsolation)), /* @__PURE__ */ React.createElement("div", {
+  }, TabCamera(props.viewer)), /* @__PURE__ */ React.createElement(React.Fragment, null, TabTools(props.viewer, props.toggleIsolation, props.setCursor)), /* @__PURE__ */ React.createElement("div", {
     className: "vim-control-bar-section flex items-center bg-white rounded-full px-2 shadow-md"
   }, TabSettings(props)));
 }
-function TabCamera(viewer2, setCursor) {
+function TabCamera(viewer2) {
   const [mode, setMode] = react.exports.useState(viewer2.inputs.pointerMode);
   react.exports.useEffect(() => {
     viewer2.inputs.onPointerModeChanged.subscribe(() => setMode(viewer2.inputs.pointerMode));
@@ -56380,7 +56867,6 @@ function TabCamera(viewer2, setCursor) {
     const next = mode === target ? viewer2.inputs.altPointerMode : target;
     viewer2.inputs.pointerMode = next;
     setMode(next);
-    setCursor(pointerToCursor(next));
   };
   const onFrameBtn = () => {
     frameContext(viewer2);
@@ -56408,11 +56894,11 @@ function TabCamera(viewer2, setCursor) {
     className: "mx-1"
   }, btnFullScreen));
 }
-function TabTools(viewer2, toggleIsolation$1) {
+function TabTools(viewer2, toggleIsolation$1, setCursor) {
   const [measuring, setMeasuring] = react.exports.useState(false);
   const [measurement, setMeasurement] = react.exports.useState();
   const [section, setSection] = react.exports.useState(false);
-  const [clip, setClip] = react.exports.useState(viewer2.gizmoSection.clip);
+  const [clip, setClip] = react.exports.useState(viewer2.sectionBox.clip);
   const measuringRef = react.exports.useRef();
   measuringRef.current = measuring;
   const onSectionBtn = () => {
@@ -56421,8 +56907,8 @@ function TabTools(viewer2, toggleIsolation$1) {
       onMeasureBtn();
     }
     const next = !section;
-    viewer2.gizmoSection.interactive = next;
-    viewer2.gizmoSection.visible = next;
+    viewer2.sectionBox.interactive = next;
+    viewer2.sectionBox.visible = next;
     if (next) {
       viewer2.camera.frame(viewer2.renderer.section.box, "none", viewer2.camera.defaultLerpDuration);
     }
@@ -56438,18 +56924,18 @@ function TabTools(viewer2, toggleIsolation$1) {
       setMeasuring(false);
     } else {
       setMeasuring(true);
-      loopMeasure(viewer2, () => measuringRef.current, (m2) => setMeasurement(m2));
+      loopMeasure(viewer2, () => measuringRef.current, (m2) => setMeasurement(m2), setCursor);
     }
   };
   const onResetSectionBtn = () => {
-    viewer2.gizmoSection.fitBox(viewer2.renderer.getBoundingBox());
+    viewer2.sectionBox.fitBox(viewer2.renderer.getBoundingBox());
   };
   const onSectionClip = () => {
-    viewer2.gizmoSection.clip = true;
+    viewer2.sectionBox.clip = true;
     setClip(true);
   };
   const onSectionNoClip = () => {
-    viewer2.gizmoSection.clip = false;
+    viewer2.sectionBox.clip = false;
     setClip(false);
   };
   const onMeasureDeleteBtn = () => {
@@ -56517,19 +57003,21 @@ function TabSettings(props) {
     className: "mx-1"
   }, btnHelp));
 }
-function loopMeasure(viewer2, getMeasuring, setMeasure) {
+function loopMeasure(viewer2, getMeasuring, setMeasure, setCursor) {
   const onMouseMove = () => {
     setMeasure(viewer2.measure.measurement);
   };
+  setCursor("cursor-measure");
   viewer2.viewport.canvas.addEventListener("mousemove", onMouseMove);
   viewer2.measure.start().then(() => {
     setMeasure(viewer2.measure.measurement);
   }).catch(() => {
     setMeasure(void 0);
   }).finally(() => {
+    setCursor(pointerToCursor(viewer2.inputs.pointerMode));
     viewer2.viewport.canvas.removeEventListener("mousemove", onMouseMove);
     if (getMeasuring()) {
-      loopMeasure(viewer2, getMeasuring, setMeasure);
+      loopMeasure(viewer2, getMeasuring, setMeasure, setCursor);
     } else {
       viewer2.measure.clear();
     }
@@ -59337,10 +59825,10 @@ function VimContextMenu(props) {
     viewer2.selection.onValueChanged.subscribe(() => {
       setObject([...viewer2.selection.objects]);
     });
-    viewer2.gizmoSection.onBoxConfirm = () => {
-      const clipping = !viewer2.gizmoSection.box.containsBox(viewer2.renderer.getBoundingBox());
+    viewer2.sectionBox.onBoxConfirm.subscribe(() => {
+      const clipping = !viewer2.sectionBox.box.containsBox(viewer2.renderer.getBoundingBox());
       setSection(clipping);
-    };
+    });
   }, []);
   const onShowControlsBtn = (e) => {
     props.setHelpVisible(!props.helpVisible);
@@ -59380,10 +59868,10 @@ function VimContextMenu(props) {
     e.stopPropagation();
   };
   const onSectionIgnoreBtn = (e) => {
-    viewer2.gizmoSection.clip = false;
+    viewer2.sectionBox.clip = false;
   };
   const onSectionResetBtn = (e) => {
-    viewer2.gizmoSection.fitBox(viewer2.renderer.getBoundingBox());
+    viewer2.sectionBox.fitBox(viewer2.renderer.getBoundingBox());
     e.stopPropagation();
   };
   const onMeasureDeleteBtn = (e) => {
@@ -59574,8 +60062,8 @@ function createContainer(viewer2) {
   ui2.style.height = "100%";
   root2.append(ui2);
   viewer2.viewport.canvas.tabIndex = 0;
-  viewer2.gizmoSection.clip = true;
-  return ui2;
+  viewer2.sectionBox.clip = true;
+  return { root: root2, ui: ui2, gfx };
 }
 function VimComponent(props) {
   const viewer2 = props.viewer;
@@ -59638,6 +60126,8 @@ function VimComponent(props) {
     }
   };
   const setCursor = (value) => {
+    if (value === cursor.current)
+      return;
     if (!cursor.current) {
       viewer2.viewport.canvas.classList.add(value);
     } else {
@@ -59647,6 +60137,10 @@ function VimComponent(props) {
   };
   react.exports.useEffect(() => {
     props.onMount();
+    props.viewer.sectionBox.onHover.subscribe((hover) => {
+      const next = hover ? "cursor-section-box" : cursor.current === "cursor-section-box" ? pointerToCursor(props.viewer.inputs.pointerMode) : cursor.current;
+      setCursor(next);
+    });
     setCursor(pointerToCursor(props.viewer.inputs.pointerMode));
     props.viewer.inputs.onPointerModeChanged.subscribe(() => setCursor(pointerToCursor(props.viewer.inputs.pointerMode)));
     props.viewer.inputs.onContextMenu = onContextMenu;
