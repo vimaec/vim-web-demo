@@ -27,7 +27,7 @@ if (params.has('dev')) {
 
 
 const viewer = new VIM.Viewer()
-const root = createRoot(createContainer(viewer))
+const root = createRoot(createContainer(viewer).ui)
 root.render(<VimComponent viewer = {viewer} onMount = {loadVim}/>)
 function loadVim(){
   viewer.loadVim(
