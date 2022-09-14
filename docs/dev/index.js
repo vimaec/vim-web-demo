@@ -8791,14 +8791,14 @@ select {
 .text-gray-warm {
   color: var(--c-dark-gray-warm);
 }\r
-.opacity-60 {
-  opacity: 0.6;
-}\r
 .opacity-100 {
   opacity: 1;
 }\r
 .opacity-0 {
   opacity: 0;
+}\r
+.opacity-60 {
+  opacity: 0.6;
 }\r
 .shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -59249,9 +59249,9 @@ function BimTree(props) {
   const [selectedItems, setSelectedItems] = react.exports.useState([]);
   const [lastClickIndex, setLastClickIndex] = react.exports.useState();
   const [lastClickTime, setLastClickTime] = react.exports.useState();
-  const div = react.exports.useRef();
+  const div2 = react.exports.useRef();
   react.exports.useEffect(() => {
-    scrollToSelection(div.current);
+    scrollToSelection(div2.current);
   }, [objects]);
   if (props.elements && (props.elements !== elements || props.filter !== filter)) {
     setFilter(props.filter);
@@ -59261,7 +59261,7 @@ function BimTree(props) {
   if (!tree) {
     return /* @__PURE__ */ React.createElement("div", {
       className: "vim-bim-tree",
-      ref: div
+      ref: div2
     }, "Loading . . .");
   }
   const same = props.objects.length === objects.length && props.objects.every((v2, i2) => v2 === objects[i2]);
@@ -59282,9 +59282,15 @@ function BimTree(props) {
   const onBlur = () => {
     props.viewer.inputs.keyboard.register();
   };
+  const OnDoubleClick = () => {
+    const box = props.viewer.selection.getBoundingBox();
+    if (props.viewer.sectionBox.box.containsBox(box)) {
+      props.viewer.camera.frame(props.viewer.selection.getBoundingBox(), "center", props.viewer.camera.defaultLerpDuration);
+    }
+  };
   return /* @__PURE__ */ React.createElement("div", {
     className: "vim-bim-tree mb-5",
-    ref: div,
+    ref: div2,
     tabIndex: 0,
     onFocus,
     onBlur
@@ -59307,7 +59313,7 @@ function BimTree(props) {
       const click = item.index;
       const time = new Date().getTime();
       if (lastClickIndex === click && time - lastClickTime < 200) {
-        props.viewer.camera.frame(props.viewer.selection.getBoundingBox(), "center", props.viewer.camera.defaultLerpDuration);
+        OnDoubleClick();
         setLastClickIndex(-1);
       } else {
         setLastClickIndex(item.index);
@@ -59340,13 +59346,13 @@ function selectElementsInViewer(tree, viewer2, nodes) {
   });
   viewer2.selection.select(objects);
 }
-function scrollToSelection(div) {
+function scrollToSelection(div2) {
   var _a2;
-  const selection = (_a2 = div == null ? void 0 : div.querySelectorAll('[aria-selected="true"]')) == null ? void 0 : _a2[0];
+  const selection = (_a2 = div2 == null ? void 0 : div2.querySelectorAll('[aria-selected="true"]')) == null ? void 0 : _a2[0];
   if (!selection)
     return;
   const rectElem = selection.getBoundingClientRect();
-  const rectContainer = div.getBoundingClientRect();
+  const rectContainer = div2.getBoundingClientRect();
   if (rectElem.bottom > rectContainer.bottom || rectElem.bottom > window.innerHeight) {
     selection.scrollIntoView(false);
     return;
@@ -59998,17 +60004,15 @@ function MenuSettings(props) {
     }), " ", label);
   };
   const next = props.settings.clone();
-  const onGhostTgl = () => {
-    next.useIsolationMaterial = !next.useIsolationMaterial;
-    props.setSettings(next);
-  };
-  const onGroundPlaneTgl = () => {
-    next.showGroundPlane = !next.showGroundPlane;
-    props.setSettings(next);
+  const settingsToggle = (label, getter, setter) => {
+    return toggleElement(label, getter(props.settings), () => {
+      setter(next, !getter(next));
+      props.setSettings(next);
+    });
   };
   return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("h2", {
     className: "text-xs font-bold uppercase mb-6"
-  }, "Display Settings"), toggleElement("Show hidden object with ghost effect", props.settings.useIsolationMaterial, onGhostTgl), toggleElement("Show ground plane", props.settings.showGroundPlane, onGroundPlaneTgl));
+  }, "Display Settings"), settingsToggle("Show hidden object with ghost effect", (settings2) => settings2.useIsolationMaterial, (settings2, value) => settings2.useIsolationMaterial = value), settingsToggle("Show ground plane", (settings2) => settings2.showGroundPlane, (settings2, value) => settings2.showGroundPlane = value), settingsToggle("Show performance", (settings2) => settings2.showPerformance, (settings2, value) => settings2.showPerformance = value));
 }
 function pointerToCursor(pointer) {
   switch (pointer) {
@@ -60049,8 +60053,8 @@ class ComponentInputStrategy {
 class Settings {
   constructor() {
     this.useIsolationMaterial = true;
-    this.showInspectorOnSelect = true;
     this.showGroundPlane = true;
+    this.showPerformance = true;
   }
   clone() {
     return Object.assign(new Settings(), this);
@@ -60129,7 +60133,7 @@ function VimComponent(props) {
     sideContentRef.current = sideContent;
   }, [sideContent]);
   const updateSide = () => {
-    const showBim = props.viewer.selection.count > 0 && sideContentRef.current === "none" && settingsRef.current.showInspectorOnSelect;
+    const showBim = props.viewer.selection.count > 0 && sideContentRef.current === "none";
     if (showBim) {
       setSideContent("bim");
     }
@@ -60159,9 +60163,9 @@ function VimComponent(props) {
     props.viewer.camera.onValueChanged.subscribe(() => {
       if (props.viewer.camera.speed !== toastSpeed.current) {
         toastSpeed.current = props.viewer.camera.speed;
-        setToast({ speed: props.viewer.camera.speed });
+        setToast({ visible: true, speed: props.viewer.camera.speed });
         clearTimeout(toastTimeout.current);
-        toastTimeout.current = setTimeout(() => setToast(void 0), 1e3);
+        toastTimeout.current = setTimeout(() => setToast({ visible: false, speed: props.viewer.camera.speed }), 1e3);
       }
     });
     props.viewer.selection.onValueChanged.subscribe(() => updateSide());
@@ -60224,6 +60228,14 @@ function Logo() {
   })));
 }
 function applySettings(viewer2, settings2) {
+  const performance2 = document.getElementsByClassName("vim-performance")[0];
+  if (performance2) {
+    if (settings2.showPerformance) {
+      performance2.classList.remove("hidden");
+    } else {
+      performance2.classList.add("hidden");
+    }
+  }
   viewer2.vims.forEach((v2) => {
     if (!settings2.useIsolationMaterial) {
       v2.scene.material = void 0;
@@ -60243,11 +60255,10 @@ function applySettings(viewer2, settings2) {
   });
 }
 function MenuToast(props) {
-  console.log("MenuToast :" + props.config);
   if (!props.config)
     return null;
   return /* @__PURE__ */ React.createElement("div", {
-    className: "vim-menu-toast rounded shadow-lg py-2 px-5 flex items-center justify-between"
+    className: `vim-menu-toast rounded shadow-lg py-2 px-5 flex items-center justify-between transition-all ${props.config.visible ? "opacity-100" : "opacity-0"}`
   }, /* @__PURE__ */ React.createElement("span", {
     className: "text-sm uppercase font-semibold text-gray-light"
   }, "Speed:"), /* @__PURE__ */ React.createElement("span", {
@@ -60278,7 +60289,6 @@ function hideSelection(viewer2, settings2) {
   const vim = viewer2.selection.vim;
   vim.scene.material = settings2.useIsolationMaterial ? viewer2.renderer.materials.isolation : void 0;
   viewer2.selection.clear();
-  viewer2.camera.frame(getVisibleBoundingBox(vim), "none", viewer2.camera.defaultLerpDuration);
 }
 function showAll(viewer2, settings2) {
   viewer2.vims.forEach((v2) => {
@@ -60287,7 +60297,6 @@ function showAll(viewer2, settings2) {
     }
     v2.scene.material = void 0;
   });
-  viewer2.camera.frame(viewer2.renderer.getBoundingBox(), "none", viewer2.camera.defaultLerpDuration);
 }
 function toGhost(source) {
   const vimToGhost = (vim) => {
@@ -60383,7 +60392,14 @@ if (params.has("transparency")) {
 if (params.has("dev")) {
   params.get("dev");
 }
-const viewer = new VIM.Viewer();
+const viewer = new VIM.Viewer({
+  groundPlane: {
+    visible: true,
+    texture: "https://vimdevelopment01storage.blob.core.windows.net/textures/vim-floor-soft.png",
+    opacity: 1,
+    size: 5
+  }
+});
 const root = createRoot(createContainer(viewer).ui);
 root.render(/* @__PURE__ */ React.createElement(VimComponent, {
   viewer,
@@ -60396,6 +60412,8 @@ function loadVim() {
 }
 const stats = new Stats();
 const style = stats.dom.style;
+const div = stats.dom;
+div.className = "vim-performance";
 style.right = "24px";
 style.left = "auto";
 style.top = "200px";

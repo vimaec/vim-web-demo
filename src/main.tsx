@@ -25,8 +25,16 @@ if (params.has('dev')) {
   devMode =  t === 'true'
 }
 
-
-const viewer = new VIM.Viewer()
+const viewer = new VIM.Viewer(
+{
+  groundPlane: {
+    visible: true,
+    texture:
+      'https://vimdevelopment01storage.blob.core.windows.net/textures/vim-floor-soft.png',
+    opacity: 1,
+    size: 5
+  }
+})
 const root = createRoot(createContainer(viewer).ui)
 root.render(<VimComponent viewer = {viewer} onMount = {loadVim}/>)
 function loadVim(){
@@ -41,6 +49,8 @@ function loadVim(){
 // Add the FPS Counter
 const stats = new Stats()
 const style = stats.dom.style as CSSStyleDeclaration
+const div = stats.dom as HTMLDivElement
+div.className = 'vim-performance'
 style.right = '24px'
 style.left = 'auto'
 style.top = '200px'
