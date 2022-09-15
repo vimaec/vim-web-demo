@@ -57077,7 +57077,7 @@ var mergeInteractionManagers = function(main, fallback) {
     }
   };
 };
-var isControlKey = function(e) {
+var isControlKey$1 = function(e) {
   return e.ctrlKey || navigator.platform.toUpperCase().indexOf("MAC") >= 0 && e.metaKey;
 };
 var DoubleClickItemToExpandInteractionManager = function() {
@@ -57092,7 +57092,7 @@ var DoubleClickItemToExpandInteractionManager = function() {
         actions.focusItem();
         if (e.shiftKey) {
           actions.selectUpTo();
-        } else if (isControlKey(e)) {
+        } else if (isControlKey$1(e)) {
           if (renderFlags.isSelected) {
             actions.unselectItem();
           } else {
@@ -57140,7 +57140,7 @@ var ClickItemToExpandInteractionManager = function() {
         actions.focusItem();
         if (e.shiftKey) {
           actions.selectUpTo();
-        } else if (isControlKey(e)) {
+        } else if (isControlKey$1(e)) {
           if (renderFlags.isSelected) {
             actions.unselectItem();
           } else {
@@ -57184,7 +57184,7 @@ var ClickArrowToExpandInteractionManager = function() {
         actions.focusItem();
         if (e.shiftKey) {
           actions.selectUpTo();
-        } else if (isControlKey(e)) {
+        } else if (isControlKey$1(e)) {
           if (renderFlags.isSelected) {
             actions.unselectItem();
           } else {
@@ -59239,42 +59239,48 @@ function sort(map) {
   map.clear();
   array.forEach((e) => map.set(e[0], e[1]));
 }
+const isControlKey = (e) => {
+  return e.ctrlKey || navigator.platform.toUpperCase().indexOf("MAC") >= 0 && e.metaKey;
+};
 function BimTree(props) {
   const [objects, setObjects] = react.exports.useState([]);
   const [elements, setElements] = react.exports.useState();
   const [filter, setFilter] = react.exports.useState();
   const [tree, setTree] = react.exports.useState();
-  const [focusedItem, setFocusedItem] = react.exports.useState();
   const [expandedItems, setExpandedItems] = react.exports.useState([]);
   const [selectedItems, setSelectedItems] = react.exports.useState([]);
-  const [lastClickIndex, setLastClickIndex] = react.exports.useState();
-  const [lastClickTime, setLastClickTime] = react.exports.useState();
-  const div2 = react.exports.useRef();
-  react.exports.useEffect(() => {
-    scrollToSelection(div2.current);
-  }, [objects]);
+  const [focusedItem, setFocusedItem] = react.exports.useState();
+  const focus = react.exports.useRef(0);
+  const [lastClick, setLastClick] = react.exports.useState({
+    time: 0,
+    index: -1
+  });
   if (props.elements && (props.elements !== elements || props.filter !== filter)) {
     setFilter(props.filter);
     setElements(props.elements);
     toTreeData(props.elements, props.filter).then((t2) => setTree(t2));
   }
+  const div2 = react.exports.useRef();
+  react.exports.useEffect(() => {
+    if (props.viewer.selection.count === 1) {
+      scrollToSelection(div2.current);
+      const [first] = props.viewer.selection.objects;
+      focus.current = tree.getNode(first.element);
+    }
+  }, [objects]);
   if (!tree) {
     return /* @__PURE__ */ React.createElement("div", {
       className: "vim-bim-tree",
       ref: div2
     }, "Loading . . .");
   }
-  const same = props.objects.length === objects.length && props.objects.every((v2, i2) => v2 === objects[i2]);
-  if (!same) {
+  if (!ArrayIsSame(props.objects, objects)) {
     setObjects(props.objects);
     const nodes = props.objects.map((o) => tree.getNode(o.element));
-    const parents = nodes.flatMap((n2) => tree.getParents(n2));
-    const set3 = new Set(expandedItems);
-    const missing = parents.filter((p2) => !set3.has(p2));
-    const expanded = expandedItems.concat(missing);
-    setExpandedItems(expanded);
-    setFocusedItem(nodes[0]);
-    setSelectedItems(nodes);
+    const parents = nodes.flatMap((n2) => tree.getAncestors(n2));
+    const selection = tree.getSelection(props.objects.map((o) => o.element));
+    setExpandedItems([...new Set(expandedItems.concat(parents))]);
+    setSelectedItems(selection);
   }
   const onFocus = () => {
     props.viewer.inputs.keyboard.unregister();
@@ -59282,10 +59288,19 @@ function BimTree(props) {
   const onBlur = () => {
     props.viewer.inputs.keyboard.register();
   };
+  const checkForDoubleClick = (node) => {
+    const time = new Date().getTime();
+    if (lastClick.index === node && time - lastClick.time < 200) {
+      OnDoubleClick();
+      setLastClick({ time: 0, index: -1 });
+    } else {
+      setLastClick({ time: new Date().getTime(), index: node });
+    }
+  };
   const OnDoubleClick = () => {
     const box = props.viewer.selection.getBoundingBox();
     if (props.viewer.sectionBox.box.containsBox(box)) {
-      props.viewer.camera.frame(props.viewer.selection.getBoundingBox(), "center", props.viewer.camera.defaultLerpDuration);
+      props.viewer.camera.frame(props.viewer.selection.getBoundingBox(), "none", props.viewer.camera.defaultLerpDuration);
     }
   };
   return /* @__PURE__ */ React.createElement("div", {
@@ -59297,7 +59312,6 @@ function BimTree(props) {
   }, /* @__PURE__ */ React.createElement(ControlledTreeEnvironment, {
     items: tree.nodes,
     getItemTitle: (item) => item.title,
-    defaultInteractionMode: InteractionMode.ClickItemToExpand,
     viewState: {
       "tree-bim": {
         focusedItem,
@@ -59305,28 +59319,45 @@ function BimTree(props) {
         selectedItems
       }
     },
+    defaultInteractionMode: {
+      mode: "custom",
+      extends: InteractionMode.ClickArrowToExpand,
+      createInteractiveElementProps: (item, treeId, actions, renderFlags) => ({
+        onClick: (e) => {
+          if (e.shiftKey) {
+            const range2 = tree.getRange(focus.current, item.index);
+            updateViewerSelection(tree, props.viewer, range2, "set");
+          } else if (isControlKey(e)) {
+            if (renderFlags.isSelected) {
+              const leafs = tree.getLeafs(item.index);
+              updateViewerSelection(tree, props.viewer, leafs, "remove");
+              focus.current = item.index;
+            } else {
+              const leafs = tree.getLeafs(item.index);
+              updateViewerSelection(tree, props.viewer, leafs, "add");
+              focus.current = item.index;
+            }
+          } else {
+            const leafs = tree.getLeafs(item.index);
+            updateViewerSelection(tree, props.viewer, leafs, "set");
+            focus.current = item.index;
+          }
+          actions.primaryAction();
+          actions.focusItem();
+        }
+      })
+    },
+    onPrimaryAction: (item, _) => {
+      checkForDoubleClick(item.index);
+    },
     onFocusItem: (item) => {
-      const index = item.index;
-      setFocusedItem(index);
+      setFocusedItem(item.index);
     },
-    onPrimaryAction: (item, tree2) => {
-      const click = item.index;
-      const time = new Date().getTime();
-      if (lastClickIndex === click && time - lastClickTime < 200) {
-        OnDoubleClick();
-        setLastClickIndex(-1);
-      } else {
-        setLastClickIndex(item.index);
-        setLastClickTime(new Date().getTime());
-      }
+    onExpandItem: (item) => {
+      setExpandedItems([...expandedItems, item.index]);
     },
-    onExpandItem: (item) => setExpandedItems([...expandedItems, item.index]),
-    onCollapseItem: (item) => setExpandedItems(expandedItems.filter((expandedItemIndex) => expandedItemIndex !== item.index)),
-    onSelectItems: (items) => {
-      console.log("Selected: " + JSON.stringify(items));
-      if (items) {
-        selectElementsInViewer(tree, props.viewer, items);
-      }
+    onCollapseItem: (item) => {
+      setExpandedItems(expandedItems.filter((expandedItemIndex) => expandedItemIndex !== item.index));
     }
   }, /* @__PURE__ */ React.createElement(Tree, {
     treeId: "tree-bim",
@@ -59334,21 +59365,29 @@ function BimTree(props) {
     treeLabel: "Tree Example"
   })));
 }
-function selectElementsInViewer(tree, viewer2, nodes) {
+function updateViewerSelection(tree, viewer2, nodes, operation) {
   const objects = [];
   nodes.forEach((n2) => {
     const item = tree.nodes[n2];
-    if (!item.data)
-      return;
     const element = item.data.element;
     const obj = viewer2.vims[0].getObjectFromElement(element);
     objects.push(obj);
   });
-  viewer2.selection.select(objects);
+  switch (operation) {
+    case "add":
+      viewer2.selection.add(...objects);
+      break;
+    case "remove":
+      viewer2.selection.remove(...objects);
+      break;
+    case "set":
+      viewer2.selection.select(objects);
+      break;
+  }
 }
 function scrollToSelection(div2) {
-  var _a2;
-  const selection = (_a2 = div2 == null ? void 0 : div2.querySelectorAll('[aria-selected="true"]')) == null ? void 0 : _a2[0];
+  const selectedItems = div2 == null ? void 0 : div2.querySelectorAll('[aria-selected="true"]');
+  const selection = selectedItems == null ? void 0 : selectedItems[(selectedItems == null ? void 0 : selectedItems.length) - 1];
   if (!selection)
     return;
   const rectElem = selection.getBoundingClientRect();
@@ -59360,6 +59399,9 @@ function scrollToSelection(div2) {
   if (rectElem.top < rectContainer.top || rectElem.top < 0) {
     selection.scrollIntoView();
   }
+}
+function ArrayIsSame(first, second) {
+  return first.length === second.length && first.every((v2, i2) => v2 === second[i2]);
 }
 async function toTreeData(elements, filter) {
   if (!document)
@@ -59378,13 +59420,77 @@ async function toTreeData(elements, filter) {
 class BimTreeData {
   constructor(map) {
     this.nodes = {};
-    this.elemenToNode = /* @__PURE__ */ new Map();
+    this.elementToNode = /* @__PURE__ */ new Map();
     this.flatten(map);
   }
-  getNode(element) {
-    return this.elemenToNode.get(element);
+  getRange(start, end) {
+    const min2 = Math.min(start, end);
+    const max2 = Math.max(start, end);
+    const result = [];
+    for (const node of Object.values(this.nodes)) {
+      const index = node.index;
+      if (index >= min2 && index <= max2)
+        result.push(index);
+    }
+    return result;
   }
-  getParents(node) {
+  getNode(element) {
+    return this.elementToNode.get(element);
+  }
+  getLeafs(node, result = []) {
+    const current = this.nodes[node];
+    if (current.hasChildren) {
+      current.children.forEach((c) => this.getLeafs(c, result));
+    } else {
+      result.push(current.index);
+    }
+    return result;
+  }
+  getSelection2(elements) {
+    const nodes = elements.map((e) => this.elementToNode.get(e));
+    const result = [...nodes];
+    const set3 = new Set(nodes);
+    const parents = [...new Set(nodes.flatMap((n2) => this.getAncestors(n2)))];
+    parents.forEach((p2) => {
+      if (this.isFull(p2, set3)) {
+        result.push(p2);
+      }
+    });
+    return result;
+  }
+  getSelection(elements) {
+    const nodes = elements.map((e) => this.elementToNode.get(e));
+    return [...new Set(nodes.flatMap((n2) => this.getAncestors(n2)))];
+  }
+  isFull(node, set3) {
+    const children = this.getLeafs(node);
+    for (const c of children) {
+      if (!set3.has(c))
+        return false;
+    }
+    return true;
+  }
+  hasSome(node, set3) {
+    const children = this.getLeafs(node);
+    for (const c of children) {
+      if (set3.has(c))
+        return true;
+    }
+    return true;
+  }
+  getChildren(node, recusive = false, result = []) {
+    result.push(node);
+    const current = this.nodes[node];
+    if (current.hasChildren) {
+      if (recusive) {
+        current.children.forEach((c) => this.getChildren(c, recusive, result));
+      } else {
+        current.children.forEach((c) => result.push(c));
+      }
+    }
+    return result;
+  }
+  getAncestors(node) {
     const result = [];
     let n2 = node;
     while (true) {
@@ -59431,7 +59537,7 @@ class BimTreeData {
             data: e,
             children: []
           };
-          this.elemenToNode.set(e.element, i2);
+          this.elementToNode.set(e.element, i2);
         });
       }
     }
