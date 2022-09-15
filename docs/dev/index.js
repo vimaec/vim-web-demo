@@ -59255,6 +59255,9 @@ function BimTree(props) {
     time: 0,
     index: -1
   });
+  react.exports.useEffect(() => {
+    ReactTooltip.rebuild();
+  }, [expandedItems, tree]);
   if (props.elements && (props.elements !== elements || props.filter !== filter)) {
     setFilter(props.filter);
     setElements(props.elements);
@@ -59319,10 +59322,29 @@ function BimTree(props) {
         selectedItems
       }
     },
+    renderItemTitle: ({ title }) => /* @__PURE__ */ React.createElement("span", {
+      "data-tip": title
+    }, title),
+    canRename: false,
+    canSearchByStartingTyping: false,
+    canSearch: false,
     defaultInteractionMode: {
       mode: "custom",
       extends: InteractionMode.ClickArrowToExpand,
       createInteractiveElementProps: (item, treeId, actions, renderFlags) => ({
+        onKeyUp: (e) => {
+          if (e.key === "f") {
+            frameContext(props.viewer);
+          }
+          if (e.key === "Escape") {
+            props.viewer.selection.clear();
+          }
+        },
+        onContextMenu: (e) => {
+          showContextMenu({ x: e.clientX, y: e.clientY });
+          e.preventDefault();
+          e.stopPropagation();
+        },
         onClick: (e) => {
           if (e.shiftKey) {
             const range2 = tree.getRange(focus.current, item.index);
@@ -60185,6 +60207,14 @@ function createContainer(viewer2) {
   viewer2.sectionBox.clip = true;
   return { root: root2, ui: ui2, gfx };
 }
+function showContextMenu(position) {
+  const showMenuConfig = {
+    position: { x: position.x, y: position.y },
+    target: window,
+    id: VIM_CONTEXT_MENU_ID
+  };
+  showMenu(showMenuConfig);
+}
 function VimComponent(props) {
   const viewer2 = props.viewer;
   const useLogo = props.logo === void 0 ? true : props.logo;
@@ -60223,14 +60253,6 @@ function VimComponent(props) {
     }
     setHidden(!getAllVisible(viewer2));
   };
-  const onContextMenu = (position) => {
-    const showMenuConfig = {
-      position: { x: position.x, y: position.y },
-      target: window,
-      id: VIM_CONTEXT_MENU_ID
-    };
-    showMenu(showMenuConfig);
-  };
   react.exports.useEffect(() => {
     applySettings(props.viewer, settings2);
     settingsRef.current = settings2;
@@ -60262,7 +60284,7 @@ function VimComponent(props) {
     });
     setCursor(pointerToCursor(props.viewer.inputs.pointerMode));
     props.viewer.inputs.onPointerModeChanged.subscribe(() => setCursor(pointerToCursor(props.viewer.inputs.pointerMode)));
-    props.viewer.inputs.onContextMenu = onContextMenu;
+    props.viewer.inputs.onContextMenu = showContextMenu;
     viewer2.onVimLoaded.subscribe(() => {
       viewer2.camera.frame("all", 45);
     });
