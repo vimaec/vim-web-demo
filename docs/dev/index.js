@@ -14,7 +14,7 @@ var __spreadValues2 = (a, b) => {
     }
   return a;
 };
-var _a;
+var _a2;
 const p$3 = function polyfill() {
   const relList = document.createElement("link").relList;
   if (relList && relList.supports && relList.supports("modulepreload")) {
@@ -9199,6 +9199,49 @@ body {\r
 .focus\\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
+}\r
+.vim-measure {\r
+  background-color: white;\r
+}\r
+\r
+.vim-measure table {\r
+  border-collapse: collapse;\r
+}\r
+\r
+.vim-measure table tr {\r
+  border: 1px solid;\r
+  border-color: black;\r
+}\r
+\r
+.vim-measure-label-d,\r
+.vim-measure-label-x,\r
+.vim-measure-label-y,\r
+.vim-measure-label-z {\r
+  color: white;\r
+  width: 10px;\r
+  text-align: center;\r
+  padding: 5px;\r
+}\r
+\r
+.vim-measure-label-d {\r
+  background-color: black;\r
+}\r
+.vim-measure-label-x {\r
+  background-color: red;\r
+}\r
+.vim-measure-label-y {\r
+  background-color: green;\r
+}\r
+.vim-measure-label-z {\r
+  background-color: blue;\r
+}\r
+\r
+.vim-measure-value-d,\r
+.vim-measure-value-x,\r
+.vim-measure-value-y,\r
+.vim-measure-value-z {\r
+  text-align: center;\r
+  padding: 5px;\r
 }\r
 `)();
 /**
@@ -35799,7 +35842,7 @@ class DirectionalLightHelper extends Object3D {
     this.targetLine.scale.z = _v3.length();
   }
 }
-const _vector = /* @__PURE__ */ new Vector3();
+const _vector$d = /* @__PURE__ */ new Vector3();
 const _camera = /* @__PURE__ */ new Camera$1();
 class CameraHelper extends LineSegments {
   constructor(camera) {
@@ -35896,12 +35939,12 @@ class CameraHelper extends LineSegments {
   }
 }
 function setPoint(point, pointMap, geometry, camera, x2, y2, z2) {
-  _vector.set(x2, y2, z2).unproject(camera);
+  _vector$d.set(x2, y2, z2).unproject(camera);
   const points = pointMap[point];
   if (points !== void 0) {
     const position = geometry.getAttribute("position");
     for (let i2 = 0, l2 = points.length; i2 < l2; i2++) {
-      position.setXYZ(points[i2], _vector.x, _vector.y, _vector.z);
+      position.setXYZ(points[i2], _vector$d.x, _vector$d.y, _vector$d.z);
     }
   }
 }
@@ -38880,8 +38923,8 @@ if (typeof sharedStore.inspectSource != "function") {
   };
 }
 var inspectSource = sharedStore.inspectSource;
-var WeakMap$2 = global_1.WeakMap;
-var nativeWeakMap = typeof WeakMap$2 === "function" && /native code/.test(inspectSource(WeakMap$2));
+var WeakMap$3 = global_1.WeakMap;
+var nativeWeakMap = typeof WeakMap$3 === "function" && /native code/.test(inspectSource(WeakMap$3));
 var shared = createCommonjsModule(function(module2) {
   (module2.exports = function(key, value) {
     return sharedStore[key] || (sharedStore[key] = value !== void 0 ? value : {});
@@ -48984,8 +49027,8 @@ class Camera {
     return this._onMoved.asEvent();
   }
   dispose() {
-    var _a2;
-    (_a2 = this.gizmo) == null ? void 0 : _a2.dispose();
+    var _a22;
+    (_a22 = this.gizmo) == null ? void 0 : _a22.dispose();
     this.gizmo = void 0;
   }
   reset() {
@@ -49089,7 +49132,7 @@ class Camera {
     return this._targetPosition.distanceTo(this._orbitTarget);
   }
   zoom(amount, duration = 0) {
-    var _a2;
+    var _a22;
     const sphere = this._scene.getBoundingBox().getBoundingSphere(new Sphere());
     if (this.camera instanceof PerspectiveCamera) {
       const reverse = 1 / (1 - this._zoomSpeed) - 1;
@@ -49125,10 +49168,10 @@ class Camera {
       this.camera.top += padY;
       this.camera.updateProjectionMatrix();
     }
-    (_a2 = this.gizmo) == null ? void 0 : _a2.show();
+    (_a22 = this.gizmo) == null ? void 0 : _a22.show();
   }
   move3(vector) {
-    var _a2;
+    var _a22;
     this.cancelLerp();
     const v2 = new Vector3();
     if (this.orthographic) {
@@ -49145,7 +49188,7 @@ class Camera {
     this._targetPosition.add(v2);
     this._lockDirection = true;
     this.startLerp(0, "Position");
-    (_a2 = this.gizmo) == null ? void 0 : _a2.show();
+    (_a22 = this.gizmo) == null ? void 0 : _a22.show();
   }
   move2(vector, axes) {
     const direction = axes === "XY" ? new Vector3(-vector.x, vector.y, 0) : axes === "XZ" ? new Vector3(-vector.x, 0, vector.y) : void 0;
@@ -49191,7 +49234,7 @@ class Camera {
     this.startLerp(duration, "Position");
   }
   frameSphere(sphere, angle, duration) {
-    var _a2;
+    var _a22;
     const offset = this.camera.position.clone().sub(sphere.center);
     const dist2 = this.camera.position.distanceTo(sphere.center);
     if (angle === "center") {
@@ -49207,7 +49250,7 @@ class Camera {
     this._orbitTarget = sphere.center;
     this.startLerp(duration, "Both");
     this.updateProjection(sphere);
-    (_a2 = this.gizmo) == null ? void 0 : _a2.show();
+    (_a22 = this.gizmo) == null ? void 0 : _a22.show();
   }
   lookAt(position) {
     this.camera.lookAt(position);
@@ -49295,7 +49338,7 @@ class Camera {
     return progress;
   }
   update(deltaTime) {
-    var _a2;
+    var _a22;
     if (this.shouldLerp()) {
       if (this._lerpPosition && !this.isNearTarget()) {
         this.applyPositionLerp();
@@ -49312,7 +49355,7 @@ class Camera {
       this._targetPosition.copy(this.camera.position);
       this.applyVelocity(deltaTime);
     }
-    (_a2 = this.gizmo) == null ? void 0 : _a2.setPosition(this._orbitTarget);
+    (_a22 = this.gizmo) == null ? void 0 : _a22.setPosition(this._orbitTarget);
   }
   isNearTarget() {
     return this.camera.position.distanceTo(this._targetPosition) < 0.1;
@@ -49339,7 +49382,7 @@ class Camera {
     this.lookAt(this._orbitTarget);
   }
   applyVelocity(deltaTime) {
-    var _a2;
+    var _a22;
     const invBlendFactor = Math.pow(this._velocityBlendFactor, deltaTime);
     const blendFactor = 1 - invBlendFactor;
     this._velocity.multiplyScalar(invBlendFactor);
@@ -49362,7 +49405,7 @@ class Camera {
       this.cameraOrthographic.top += d;
       this.cameraOrthographic.bottom -= d;
       this.cameraOrthographic.updateProjectionMatrix();
-      (_a2 = this.gizmo) == null ? void 0 : _a2.show();
+      (_a22 = this.gizmo) == null ? void 0 : _a22.show();
     }
   }
   isSignificant(vector) {
@@ -49681,20 +49724,20 @@ class RaycastResult {
     return !!this.firstHit;
   }
   get distance() {
-    var _a2;
-    return (_a2 = this.firstHit) == null ? void 0 : _a2.distance;
+    var _a22;
+    return (_a22 = this.firstHit) == null ? void 0 : _a22.distance;
   }
   get position() {
-    var _a2;
-    return (_a2 = this.firstHit) == null ? void 0 : _a2.point;
+    var _a22;
+    return (_a22 = this.firstHit) == null ? void 0 : _a22.point;
   }
   get threeId() {
-    var _a2, _b;
-    return (_b = (_a2 = this.firstHit) == null ? void 0 : _a2.object) == null ? void 0 : _b.id;
+    var _a22, _b2;
+    return (_b2 = (_a22 = this.firstHit) == null ? void 0 : _a22.object) == null ? void 0 : _b2.id;
   }
   get faceIndex() {
-    var _a2;
-    return (_a2 = this.firstHit) == null ? void 0 : _a2.faceIndex;
+    var _a22;
+    return (_a22 = this.firstHit) == null ? void 0 : _a22.faceIndex;
   }
 }
 class Raycaster {
@@ -49753,8 +49796,8 @@ class InputAction {
     this._raycaster = raycaster;
   }
   get raycast() {
-    var _a2;
-    return (_a2 = this._raycast) != null ? _a2 : this._raycast = this._raycaster.raycast2(this.position);
+    var _a22;
+    return (_a22 = this._raycast) != null ? _a22 : this._raycast = this._raycaster.raycast2(this.position);
   }
   get object() {
     return this.raycast.object;
@@ -49937,7 +49980,7 @@ class MouseHandler extends InputHandler {
       }
     });
     __publicField(this, "onMouseUp", (event2) => {
-      var _a2, _b;
+      var _a22, _b2;
       const btn = this.getButton(event2);
       if (btn === this.buttonDown)
         return;
@@ -49950,7 +49993,7 @@ class MouseHandler extends InputHandler {
       } else if (event2.button === 0 && !this.hasMouseMoved) {
         this.onMouseClick(new Vector2(event2.offsetX, event2.offsetY), false);
       } else if (event2.button === 2 && !this.hasMouseMoved) {
-        (_b = (_a2 = this.inputs).onContextMenu) == null ? void 0 : _b.call(_a2, new Vector2(event2.clientX, event2.clientY));
+        (_b2 = (_a22 = this.inputs).onContextMenu) == null ? void 0 : _b2.call(_a22, new Vector2(event2.clientX, event2.clientY));
       }
       this.camera.orbitMode = this.inputs.pointerMode === "orbit";
       this.buttonDown = void 0;
@@ -50035,7 +50078,6 @@ class MouseHandler extends InputHandler {
       default:
         this.camera.rotate(delta);
     }
-    console.log("main");
   }
   onMouseMiddleDrag(delta) {
     this.camera.move2(delta, "XY");
@@ -50086,8 +50128,8 @@ class DefaultInputStrategy {
       camera.frame(action.object, "none", camera.defaultLerpDuration);
     }
     action.object.getBimElement().then((e) => {
-      var _a2;
-      e == null ? void 0 : e.set("Index", (_a2 = action.object) == null ? void 0 : _a2.element);
+      var _a22;
+      e == null ? void 0 : e.set("Index", (_a22 = action.object) == null ? void 0 : _a22.element);
       console.log(e);
     });
   }
@@ -50434,8 +50476,8 @@ class Object$1 {
     return this.vim.scene.builder.meshBuilder;
   }
   get hasMesh() {
-    var _a2;
-    return (_a2 = this._meshes) == null ? void 0 : _a2.length;
+    var _a22;
+    return (_a22 = this._meshes) == null ? void 0 : _a22.length;
   }
   updateMeshes(meshes) {
     this._meshes = meshes;
@@ -50461,7 +50503,7 @@ class Object$1 {
     return this.vim.document.getElementId(this.element);
   }
   getBoundingBox() {
-    var _a2;
+    var _a22;
     if (!this.instances)
       return;
     if (this._boundingBox)
@@ -50469,13 +50511,13 @@ class Object$1 {
     const geometry = Geometry.createGeometryFromInstances(this.vim.document.g3d, this.instances);
     geometry.applyMatrix4(this.vim.getMatrix());
     geometry.computeBoundingBox();
-    this._boundingBox = (_a2 = geometry.boundingBox) != null ? _a2 : void 0;
+    this._boundingBox = (_a22 = geometry.boundingBox) != null ? _a22 : void 0;
     geometry.dispose();
     return this._boundingBox;
   }
   getCenter(target = new Vector3()) {
-    var _a2;
-    return (_a2 = this.getBoundingBox()) == null ? void 0 : _a2.getCenter(target);
+    var _a22;
+    return (_a22 = this.getBoundingBox()) == null ? void 0 : _a22.getCenter(target);
   }
   createWireframe() {
     if (!this.instances)
@@ -50541,9 +50583,9 @@ class Object$1 {
     return index + 1 < mesh.userData.submeshes.length ? mesh.userData.submeshes[index + 1] : mesh.geometry.index.count;
   }
   applyMergedVisible(mesh, index, show) {
-    var _a2;
+    var _a22;
     const positions = mesh.geometry.getAttribute("position");
-    const attribute = (_a2 = mesh.geometry.getAttribute("ignoreVertex")) != null ? _a2 : new Float32BufferAttribute(new Float32Array(positions.count), 1);
+    const attribute = (_a22 = mesh.geometry.getAttribute("ignoreVertex")) != null ? _a22 : new Float32BufferAttribute(new Float32Array(positions.count), 1);
     mesh.geometry.setAttribute("ignoreVertex", attribute);
     const start = this.getMergedMeshStart(mesh, index);
     const end = this.getMergedMeshEnd(mesh, index);
@@ -50825,22 +50867,22 @@ class GroundPlane {
     this._material.opacity = settings2.getGroundPlaneOpacity();
   }
   adaptToContent(box) {
-    var _a2;
+    var _a22;
     const center = box.getCenter(new Vector3());
     const position = new Vector3(center.x, box.min.y - Math.abs(box.min.y) * 0.01, center.z);
     this.mesh.position.copy(position);
     this.mesh.quaternion.copy(new Quaternion().setFromEuler(new Euler(1.5 * Math.PI, 0, 0)));
     const sphere = box == null ? void 0 : box.getBoundingSphere(new Sphere());
-    const size = ((_a2 = sphere == null ? void 0 : sphere.radius) != null ? _a2 : 1) * this._size;
+    const size = ((_a22 = sphere == null ? void 0 : sphere.radius) != null ? _a22 : 1) * this._size;
     const scale = new Vector3(1, 1, 1).multiplyScalar(size);
     this.mesh.scale.copy(scale);
   }
   applyTexture(texUrl) {
-    var _a2;
+    var _a22;
     if (texUrl === this._source)
       return;
     this._source = texUrl;
-    (_a2 = this._texture) == null ? void 0 : _a2.dispose();
+    (_a22 = this._texture) == null ? void 0 : _a22.dispose();
     this._texture = void 0;
     if (!texUrl)
       return;
@@ -50853,9 +50895,9 @@ class GroundPlane {
     this._material.map = this._texture;
   }
   dispose() {
-    var _a2, _b, _c;
-    (_a2 = this._geometry) == null ? void 0 : _a2.dispose();
-    (_b = this._material) == null ? void 0 : _b.dispose();
+    var _a22, _b2, _c;
+    (_a22 = this._geometry) == null ? void 0 : _a22.dispose();
+    (_b2 = this._material) == null ? void 0 : _b2.dispose();
     (_c = this._texture) == null ? void 0 : _c.dispose();
     this._texture = void 0;
   }
@@ -50927,10 +50969,10 @@ class CameraGizmo {
     this.applySettings(settings2);
   }
   dispose() {
-    var _a2, _b, _c, _d;
+    var _a22, _b2, _c, _d;
     clearTimeout(this._timeout);
-    (_a2 = this._box) == null ? void 0 : _a2.dispose();
-    (_b = this._wireframe) == null ? void 0 : _b.dispose();
+    (_a22 = this._box) == null ? void 0 : _a22.dispose();
+    (_b2 = this._wireframe) == null ? void 0 : _b2.dispose();
     (_c = this._material) == null ? void 0 : _c.dispose();
     (_d = this._materialAlways) == null ? void 0 : _d.dispose();
     this._box = void 0;
@@ -50977,8 +51019,8 @@ class CameraGizmo {
     }
   }
   setPosition(position) {
-    var _a2;
-    (_a2 = this._gizmos) == null ? void 0 : _a2.position.copy(position);
+    var _a22;
+    (_a22 = this._gizmos) == null ? void 0 : _a22.position.copy(position);
     this.updateScale();
   }
   setSize(size) {
@@ -51083,7 +51125,7 @@ class Scene {
     }
   }
   addMergedMesh(mesh) {
-    var _a2, _b, _c;
+    var _a22, _b2, _c;
     if (!mesh)
       return this;
     const instances = mesh.userData.instances;
@@ -51091,13 +51133,13 @@ class Scene {
       throw new Error("Expected mesh to have userdata instances : number[]");
     }
     for (let i2 = 0; i2 < instances.length; i2++) {
-      const set3 = (_a2 = this._instanceToThreeMeshes.get(instances[i2])) != null ? _a2 : [];
+      const set3 = (_a22 = this._instanceToThreeMeshes.get(instances[i2])) != null ? _a22 : [];
       set3.push([mesh, i2]);
       this._instanceToThreeMeshes.set(instances[i2], set3);
     }
     mesh.geometry.computeBoundingBox();
     const box = mesh.geometry.boundingBox;
-    this._boundingBox = (_c = (_b = this._boundingBox) == null ? void 0 : _b.union(box)) != null ? _c : box.clone();
+    this._boundingBox = (_c = (_b2 = this._boundingBox) == null ? void 0 : _b2.union(box)) != null ? _c : box.clone();
     this._threeMeshIdToInstances.set(mesh.id, instances);
     this.meshes.push(mesh);
     return this;
@@ -51108,7 +51150,7 @@ class Scene {
     return this;
   }
   registerInstancedMesh(mesh) {
-    var _a2, _b, _c;
+    var _a22, _b2, _c;
     const instances = mesh.userData.instances;
     if (!instances || instances.length === 0) {
       throw new Error("Expected mesh to have userdata instances : number[] with at least one member");
@@ -51117,29 +51159,29 @@ class Scene {
       throw new Error("Expected mesh to have at least one instance");
     }
     for (let i2 = 0; i2 < instances.length; i2++) {
-      const set3 = (_a2 = this._instanceToThreeMeshes.get(instances[i2])) != null ? _a2 : [];
+      const set3 = (_a22 = this._instanceToThreeMeshes.get(instances[i2])) != null ? _a22 : [];
       set3.push([mesh, i2]);
       this._instanceToThreeMeshes.set(instances[i2], set3);
     }
     const box = this.computeIntancedMeshBoundingBox(mesh);
-    this._boundingBox = (_c = (_b = this._boundingBox) == null ? void 0 : _b.union(box)) != null ? _c : box.clone();
+    this._boundingBox = (_c = (_b2 = this._boundingBox) == null ? void 0 : _b2.union(box)) != null ? _c : box.clone();
     this._threeMeshIdToInstances.set(mesh.id, instances);
   }
   merge(other) {
-    var _a2, _b;
+    var _a22, _b2;
     if (!other)
       return this;
     other.meshes.forEach((mesh) => this.meshes.push(mesh));
     other._instanceToThreeMeshes.forEach((meshes, instance) => {
-      var _a22;
-      const set3 = (_a22 = this._instanceToThreeMeshes.get(instance)) != null ? _a22 : [];
+      var _a3;
+      const set3 = (_a3 = this._instanceToThreeMeshes.get(instance)) != null ? _a3 : [];
       meshes.forEach((m2) => set3.push(m2));
       this._instanceToThreeMeshes.set(instance, set3);
     });
     other._threeMeshIdToInstances.forEach((value, key) => {
       this._threeMeshIdToInstances.set(key, value);
     });
-    this._boundingBox = (_b = (_a2 = this._boundingBox) == null ? void 0 : _a2.union(other._boundingBox)) != null ? _b : other._boundingBox.clone();
+    this._boundingBox = (_b2 = (_a22 = this._boundingBox) == null ? void 0 : _a22.union(other._boundingBox)) != null ? _b2 : other._boundingBox.clone();
     return this;
   }
   get material() {
@@ -51228,9 +51270,123 @@ class RenderScene {
     this._boundingBox = this._scenes.length > 0 ? this._scenes.map((s) => s.getBoundingBox()).reduce((b1, b2) => b1.union(b2)) : void 0;
   }
 }
+class CSS2DObject extends Object3D {
+  constructor(element) {
+    super();
+    this.element = element || document.createElement("div");
+    this.element.style.position = "absolute";
+    this.element.style.userSelect = "none";
+    this.element.setAttribute("draggable", false);
+    this.addEventListener("removed", function() {
+      this.traverse(function(object) {
+        if (object.element instanceof Element && object.element.parentNode !== null) {
+          object.element.parentNode.removeChild(object.element);
+        }
+      });
+    });
+  }
+  copy(source, recursive) {
+    super.copy(source, recursive);
+    this.element = source.element.cloneNode(true);
+    return this;
+  }
+}
+CSS2DObject.prototype.isCSS2DObject = true;
+const _vector = new Vector3();
+const _viewMatrix = new Matrix4();
+const _viewProjectionMatrix = new Matrix4();
+const _a = new Vector3();
+const _b = new Vector3();
+class CSS2DRenderer {
+  constructor() {
+    const _this = this;
+    let _width, _height;
+    let _widthHalf, _heightHalf;
+    const cache = {
+      objects: /* @__PURE__ */ new WeakMap()
+    };
+    const domElement = document.createElement("div");
+    domElement.style.overflow = "hidden";
+    this.domElement = domElement;
+    this.getSize = function() {
+      return {
+        width: _width,
+        height: _height
+      };
+    };
+    this.render = function(scene, camera) {
+      if (scene.autoUpdate === true)
+        scene.updateMatrixWorld();
+      if (camera.parent === null)
+        camera.updateMatrixWorld();
+      _viewMatrix.copy(camera.matrixWorldInverse);
+      _viewProjectionMatrix.multiplyMatrices(camera.projectionMatrix, _viewMatrix);
+      renderObject(scene, scene, camera);
+      zOrder2(scene);
+    };
+    this.setSize = function(width, height) {
+      _width = width;
+      _height = height;
+      _widthHalf = _width / 2;
+      _heightHalf = _height / 2;
+      domElement.style.width = width + "px";
+      domElement.style.height = height + "px";
+    };
+    function renderObject(object, scene, camera) {
+      if (object.isCSS2DObject) {
+        object.onBeforeRender(_this, scene, camera);
+        _vector.setFromMatrixPosition(object.matrixWorld);
+        _vector.applyMatrix4(_viewProjectionMatrix);
+        const element = object.element;
+        if (/apple/i.test(navigator.vendor)) {
+          element.style.transform = "translate(-50%,-50%) translate(" + Math.round(_vector.x * _widthHalf + _widthHalf) + "px," + Math.round(-_vector.y * _heightHalf + _heightHalf) + "px)";
+        } else {
+          element.style.transform = "translate(-50%,-50%) translate(" + (_vector.x * _widthHalf + _widthHalf) + "px," + (-_vector.y * _heightHalf + _heightHalf) + "px)";
+        }
+        element.style.display = object.visible && _vector.z >= -1 && _vector.z <= 1 ? "" : "none";
+        const objectData = {
+          distanceToCameraSquared: getDistanceToSquared(camera, object)
+        };
+        cache.objects.set(object, objectData);
+        if (element.parentNode !== domElement) {
+          domElement.appendChild(element);
+        }
+        object.onAfterRender(_this, scene, camera);
+      }
+      for (let i2 = 0, l2 = object.children.length; i2 < l2; i2++) {
+        renderObject(object.children[i2], scene, camera);
+      }
+    }
+    function getDistanceToSquared(object1, object2) {
+      _a.setFromMatrixPosition(object1.matrixWorld);
+      _b.setFromMatrixPosition(object2.matrixWorld);
+      return _a.distanceToSquared(_b);
+    }
+    function filterAndFlatten(scene) {
+      const result = [];
+      scene.traverse(function(object) {
+        if (object.isCSS2DObject)
+          result.push(object);
+      });
+      return result;
+    }
+    function zOrder2(scene) {
+      const sorted = filterAndFlatten(scene).sort(function(a, b) {
+        const distanceA = cache.objects.get(a).distanceToCameraSquared;
+        const distanceB = cache.objects.get(b).distanceToCameraSquared;
+        return distanceA - distanceB;
+      });
+      const zMax = sorted.length;
+      for (let i2 = 0, l2 = sorted.length; i2 < l2; i2++) {
+        sorted[i2].element.style.zIndex = zMax - i2;
+      }
+    }
+  }
+}
 class Viewport {
   constructor(settings2) {
     __publicField(this, "canvas");
+    __publicField(this, "text");
     __publicField(this, "_unregisterResize");
     __publicField(this, "_ownedCanvas");
     __publicField(this, "_resizeCallbacks", []);
@@ -51249,16 +51405,28 @@ class Viewport {
     document.body.appendChild(canvas);
     return [canvas, true];
   }
+  createTextRenderer() {
+    const size = this.getParentSize();
+    const renderer = new CSS2DRenderer();
+    renderer.setSize(size.x, size.y);
+    this.text = renderer.domElement;
+    this.text.className = "vim-text-renderer";
+    this.text.style.position = "absolute";
+    this.text.style.top = "0px";
+    this.text.style.pointerEvents = "none";
+    this.canvas.parentElement.append(this.text);
+    return renderer;
+  }
   dispose() {
-    var _a2;
-    (_a2 = this._unregisterResize) == null ? void 0 : _a2.call(this);
+    var _a22;
+    (_a22 = this._unregisterResize) == null ? void 0 : _a22.call(this);
     this._unregisterResize = void 0;
     if (this._ownedCanvas)
       this.canvas.remove();
   }
   getParentSize() {
-    var _a2, _b, _c, _d;
-    return new Vector2((_b = (_a2 = this.canvas.parentElement) == null ? void 0 : _a2.clientWidth) != null ? _b : this.canvas.clientWidth, (_d = (_c = this.canvas.parentElement) == null ? void 0 : _c.clientHeight) != null ? _d : this.canvas.clientHeight);
+    var _a22, _b2, _c, _d;
+    return new Vector2((_b2 = (_a22 = this.canvas.parentElement) == null ? void 0 : _a22.clientWidth) != null ? _b2 : this.canvas.clientWidth, (_d = (_c = this.canvas.parentElement) == null ? void 0 : _c.clientHeight) != null ? _d : this.canvas.clientHeight);
   }
   getSize() {
     return new Vector2(this.canvas.clientWidth, this.canvas.clientHeight);
@@ -51327,9 +51495,9 @@ class GizmoOptions {
     __publicField(this, "colorXSub", "#942424");
     __publicField(this, "colorYSub", "#417a17");
     __publicField(this, "colorZSub", "#0e5490");
-    var _a2, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p;
-    this.size = (_a2 = init == null ? void 0 : init.size) != null ? _a2 : this.size;
-    this.padding = (_b = init == null ? void 0 : init.padding) != null ? _b : this.padding;
+    var _a22, _b2, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p;
+    this.size = (_a22 = init == null ? void 0 : init.size) != null ? _a22 : this.size;
+    this.padding = (_b2 = init == null ? void 0 : init.padding) != null ? _b2 : this.padding;
     this.bubbleSizePrimary = (_c = init == null ? void 0 : init.bubbleSizePrimary) != null ? _c : this.bubbleSizePrimary;
     this.bubbleSizeSecondary = (_d = init == null ? void 0 : init.bubbleSizeSecondary) != null ? _d : this.bubbleSizeSecondary;
     this.lineWidth = (_e = init == null ? void 0 : init.lineWidth) != null ? _e : this.lineWidth;
@@ -51813,18 +51981,18 @@ class BoxInputs {
     this.unregisters.length = 0;
   }
   onMouseMove(event2) {
-    var _a2, _b, _c;
+    var _a22, _b2, _c;
     if (this.mouseDown) {
       this.onDrag(event2);
       return;
     }
     const hits = this.raycast(new Vector2(event2.offsetX, event2.offsetY));
     const hit = hits == null ? void 0 : hits[0];
-    const norm = (_a2 = hit == null ? void 0 : hit.face) == null ? void 0 : _a2.normal;
+    const norm = (_a22 = hit == null ? void 0 : hit.face) == null ? void 0 : _a22.normal;
     if (!norm) {
       if (this.faceNormal.x !== 0 || this.faceNormal.y !== 0 || this.faceNormal.z !== 0) {
         this.faceNormal.set(0, 0, 0);
-        (_b = this.onFaceEnter) == null ? void 0 : _b.call(this, this.faceNormal);
+        (_b2 = this.onFaceEnter) == null ? void 0 : _b2.call(this, this.faceNormal);
       }
       return;
     }
@@ -51835,7 +52003,7 @@ class BoxInputs {
     (_c = this.onFaceEnter) == null ? void 0 : _c.call(this, this.faceNormal);
   }
   onMouseUp(event2) {
-    var _a2, _b;
+    var _a22, _b2;
     if (this.mouseDown) {
       this.mouseDown = false;
       this.viewer.inputs.registerAll();
@@ -51843,16 +52011,16 @@ class BoxInputs {
         this.onMouseMove(event2);
       } else {
         this.faceNormal = new Vector3();
-        (_a2 = this.onFaceEnter) == null ? void 0 : _a2.call(this, this.faceNormal);
+        (_a22 = this.onFaceEnter) == null ? void 0 : _a22.call(this, this.faceNormal);
       }
-      (_b = this.onBoxConfirm) == null ? void 0 : _b.call(this, this.sharedBox);
+      (_b2 = this.onBoxConfirm) == null ? void 0 : _b2.call(this, this.sharedBox);
     }
   }
   onMouseClick(event2) {
-    var _a2, _b;
+    var _a22, _b2;
     const hits = this.raycast(new Vector2(event2.offsetX, event2.offsetY));
     const hit = hits == null ? void 0 : hits[0];
-    if (!((_a2 = hit == null ? void 0 : hit.face) == null ? void 0 : _a2.normal))
+    if (!((_a22 = hit == null ? void 0 : hit.face) == null ? void 0 : _a22.normal))
       return;
     this.lastBox.copy(this.sharedBox);
     this.faceNormal = hit.face.normal;
@@ -51861,16 +52029,16 @@ class BoxInputs {
     this.dragpPlane.set(this.viewer.camera.forward, -dist2);
     this.mouseDown = true;
     this.viewer.inputs.unregisterAll();
-    (_b = this.onFaceEnter) == null ? void 0 : _b.call(this, this.faceNormal);
+    (_b2 = this.onFaceEnter) == null ? void 0 : _b2.call(this, this.faceNormal);
   }
   onDrag(event2) {
-    var _a2, _b;
+    var _a22, _b2;
     this.raycaster = this.viewer.raycaster.fromPoint2(new Vector2(event2.offsetX, event2.offsetY), this.raycaster);
-    const point = (_a2 = this.raycaster.ray.intersectPlane(this.dragpPlane, new Vector3())) != null ? _a2 : this.dragOrigin.clone();
+    const point = (_a22 = this.raycaster.ray.intersectPlane(this.dragpPlane, new Vector3())) != null ? _a22 : this.dragOrigin.clone();
     const delta = point.sub(this.dragOrigin);
     const amount = delta.dot(this.faceNormal);
     const box = this.stretch(this.faceNormal, amount);
-    (_b = this.onBoxStretch) == null ? void 0 : _b.call(this, box);
+    (_b2 = this.onBoxStretch) == null ? void 0 : _b2.call(this, box);
   }
   stretch(normal, amount) {
     const result = this.sharedBox.clone();
@@ -52488,39 +52656,39 @@ class MeasureFlow {
     return this._stage;
   }
   unregister() {
-    var _a2;
-    (_a2 = this.removeMouseListener) == null ? void 0 : _a2.call(this);
+    var _a22;
+    (_a22 = this.removeMouseListener) == null ? void 0 : _a22.call(this);
     this.removeMouseListener = void 0;
   }
   registerMouse(callBack) {
-    var _a2;
-    (_a2 = this.removeMouseListener) == null ? void 0 : _a2.call(this);
+    var _a22;
+    (_a22 = this.removeMouseListener) == null ? void 0 : _a22.call(this);
     window.addEventListener("mousemove", callBack);
     this.removeMouseListener = () => {
       window.removeEventListener("mousemove", callBack);
     };
   }
   abort() {
-    var _a2;
+    var _a22;
     if (this.stage === "active" || this.stage === "ready") {
       this._stage = void 0;
-      (_a2 = this.onComplete) == null ? void 0 : _a2.call(this, false);
+      (_a22 = this.onComplete) == null ? void 0 : _a22.call(this, false);
       this.unregister();
     }
   }
   onMainAction(action) {
-    var _a2, _b, _c;
+    var _a22, _b2, _c;
     switch (this._stage) {
       case "ready":
         if (!action.object)
           return;
         this._gizmoMeasure.onFirstClick(action);
         this._stage = "active";
-        (_a2 = this.onProgress) == null ? void 0 : _a2.call(this, this._stage);
+        (_a22 = this.onProgress) == null ? void 0 : _a22.call(this, this._stage);
         break;
       case "active":
         this._stage = this._gizmoMeasure.onSecondClick(action) ? "done" : "failed";
-        (_b = this.onProgress) == null ? void 0 : _b.call(this, this._stage);
+        (_b2 = this.onProgress) == null ? void 0 : _b2.call(this, this._stage);
         (_c = this.onComplete) == null ? void 0 : _c.call(this, this._stage === "done");
         this.unregister();
         break;
@@ -53121,12 +53289,79 @@ MeshLineMaterial.prototype.copy = function(source) {
   this.repeat.copy(source.repeat);
   return this;
 };
+function createMeasureElement(style2) {
+  const div2 = document.createElement("div");
+  div2.className = "vim-measure";
+  const table = document.createElement("table");
+  div2.appendChild(table);
+  let distValue;
+  let xValue;
+  let yValue;
+  let zValue;
+  if (style2 === "all" || style2 === "Dist") {
+    const trDist = document.createElement("tr");
+    const tdDistLabel = document.createElement("td");
+    const tdDistValue = document.createElement("td");
+    table.appendChild(trDist);
+    trDist.appendChild(tdDistLabel);
+    trDist.appendChild(tdDistValue);
+    tdDistLabel.className = "vim-measure-label-d";
+    tdDistValue.className = "vim-measure-value-d";
+    tdDistLabel.textContent = "Dist";
+    distValue = tdDistValue;
+  }
+  if (style2 === "all" || style2 === "X") {
+    const trX = document.createElement("tr");
+    const tdXLabel = document.createElement("td");
+    const tdXValue = document.createElement("td");
+    table.appendChild(trX);
+    trX.appendChild(tdXLabel);
+    trX.appendChild(tdXValue);
+    tdXLabel.className = "vim-measure-label-x";
+    tdXValue.className = "vim-measure-value-x";
+    tdXLabel.textContent = "X";
+    xValue = tdXValue;
+  }
+  if (style2 === "all" || style2 === "Y") {
+    const trY = document.createElement("tr");
+    const tdYLabel = document.createElement("td");
+    const tdYValue = document.createElement("td");
+    table.appendChild(trY);
+    trY.appendChild(tdYLabel);
+    trY.appendChild(tdYValue);
+    tdYLabel.className = "vim-measure-label-y";
+    tdYValue.className = "vim-measure-value-y";
+    tdYLabel.textContent = "Y";
+    yValue = tdYValue;
+  }
+  if (style2 === "all" || style2 === "Z") {
+    const trZ = document.createElement("tr");
+    const tdZLabel = document.createElement("td");
+    const tdZValue = document.createElement("td");
+    table.appendChild(trZ);
+    trZ.appendChild(tdZLabel);
+    trZ.appendChild(tdZValue);
+    tdZLabel.className = "vim-measure-label-z";
+    tdZValue.className = "vim-measure-value-z";
+    tdZLabel.textContent = "Z";
+    zValue = tdZValue;
+  }
+  return {
+    div: div2,
+    value: style2 === "Dist" ? distValue : style2 === "X" ? xValue : style2 === "Y" ? yValue : style2 === "Z" ? zValue : void 0,
+    values: { dist: distValue, x: xValue, y: yValue, z: zValue }
+  };
+}
 class MeasureLine {
-  constructor(canvasSize, color) {
+  constructor(canvasSize, color, style2) {
     __publicField(this, "mesh");
+    __publicField(this, "label");
+    __publicField(this, "position");
+    __publicField(this, "length");
     __publicField(this, "_meshLine");
     __publicField(this, "_material");
     __publicField(this, "_materialAlways");
+    __publicField(this, "_text");
     this._material = new MeshLineMaterial({
       sizeAttenuation: 0,
       lineWidth: 5,
@@ -53147,12 +53382,21 @@ class MeasureLine {
       this._material,
       this._materialAlways
     ]);
+    const element = createMeasureElement(style2);
+    this._text = element.value;
+    this.label = new CSS2DObject(element.div);
+    this.label.visible = false;
     this._meshLine.geometry.addGroup(0, Infinity, 0);
     this._meshLine.geometry.addGroup(0, Infinity, 1);
     this.mesh.frustumCulled = false;
   }
   setPoints(start, end) {
+    this.position = start.clone().add(end).multiplyScalar(0.5);
     this._meshLine.setPoints([start, end]);
+    this.label.position.copy(this.position);
+    this.length = start.distanceTo(end);
+    this.label.visible = this.length > 0;
+    this._text.textContent = start.distanceTo(end).toFixed(2);
   }
   dispose() {
     this._meshLine.dispose();
@@ -53197,25 +53441,71 @@ class MeasureGizmo {
     __publicField(this, "_lineY");
     __publicField(this, "_lineZ");
     __publicField(this, "_group");
+    __publicField(this, "_label");
+    __publicField(this, "_html");
+    __publicField(this, "_animId");
     this._viewer = viewer2;
     const canvasSize = this._viewer.viewport.getSize();
     this._startMarker = new MeasureMarker(new Color("#FFB700"));
     this._endMarker = new MeasureMarker(new Color("#0590CC"));
-    this._line = new MeasureLine(canvasSize, new Color(1, 1, 1));
-    this._lineX = new MeasureLine(canvasSize, new Color(1, 0, 0));
-    this._lineY = new MeasureLine(canvasSize, new Color(0, 1, 0));
-    this._lineZ = new MeasureLine(canvasSize, new Color(0, 0, 1));
+    this._line = new MeasureLine(canvasSize, new Color(1, 1, 1), "Dist");
+    this._lineX = new MeasureLine(canvasSize, new Color(1, 0, 0), "X");
+    this._lineY = new MeasureLine(canvasSize, new Color(0, 1, 0), "Y");
+    this._lineZ = new MeasureLine(canvasSize, new Color(0, 0, 1), "Z");
+    this._html = createMeasureElement("all");
+    this._label = new CSS2DObject(this._html.div);
+    this._label.visible = false;
     this._group = new Group();
     this._group.name = "GizmoMeasure";
-    this._group.add(this._startMarker.mesh, this._endMarker.mesh, this._line.mesh, this._lineX.mesh, this._lineY.mesh, this._lineZ.mesh);
+    this._group.add(this._startMarker.mesh, this._endMarker.mesh, this._line.mesh, this._line.label, this._lineX.mesh, this._lineX.label, this._lineY.mesh, this._lineY.label, this._lineZ.mesh, this._lineZ.label, this._label);
     this._viewer.renderer.add(this._group);
+  }
+  _animate() {
+    this._animId = requestAnimationFrame(() => this._animate());
+    const lx = this.screenDist(this._line.position, this._lineX.position);
+    const ly = this.screenDist(this._line.position, this._lineY.position);
+    const lz = this.screenDist(this._line.position, this._lineZ.position);
+    const xy = this.screenDist(this._lineX.position, this._lineY.position);
+    const xz = this.screenDist(this._lineX.position, this._lineZ.position);
+    const yz = this.screenDist(this._lineY.position, this._lineZ.position);
+    let conflicts = 0;
+    if (lx < 0.1)
+      conflicts++;
+    if (ly < 0.1)
+      conflicts++;
+    if (lz < 0.1)
+      conflicts++;
+    if (xy < 0.1)
+      conflicts++;
+    if (xz < 0.1)
+      conflicts++;
+    if (yz < 0.1)
+      conflicts++;
+    const collapse2 = conflicts > 1;
+    this._label.visible = collapse2;
+    this._line.label.visible = !collapse2;
+    this._lineX.label.visible = !collapse2;
+    this._lineY.label.visible = !collapse2;
+    this._lineZ.label.visible = !collapse2;
+  }
+  screenDist(first, second) {
+    if (!first || !second)
+      return;
+    const camera = this._viewer.camera.camera;
+    const camDist = first.distanceTo(this._viewer.camera.camera.position);
+    const screenLength = camDist * Math.tan(camera.fov / 2 * (Math.PI / 180));
+    const length = first.distanceTo(second);
+    const ratio = length / screenLength;
+    return ratio;
   }
   start(start) {
     this._startMarker.setPosition(start);
   }
   hide() {
-    if (this._line)
+    if (this._line) {
       this._line.mesh.visible = false;
+      this._line.label.visible = false;
+    }
   }
   update(start, pos) {
     if (this._line) {
@@ -53234,9 +53524,21 @@ class MeasureGizmo {
     this._lineX.setPoints(start, endX);
     this._lineY.setPoints(endX, endY);
     this._lineZ.setPoints(endY, end);
+    this._label.position.copy(this._line.label.position);
+    this._html.values.dist.textContent = this._line.length.toFixed(2);
+    this._html.values.x.textContent = this._lineX.length.toFixed(2);
+    this._html.values.y.textContent = this._lineY.length.toFixed(2);
+    this._html.values.z.textContent = this._lineZ.length.toFixed(2);
+    this._animate();
     return true;
   }
   dispose() {
+    cancelAnimationFrame(this._animId);
+    this._group.remove(this._label);
+    this._group.remove(this._line.label);
+    this._group.remove(this._lineX.label);
+    this._group.remove(this._lineY.label);
+    this._group.remove(this._lineZ.label);
     this._viewer.renderer.remove(this._group);
     this._startMarker.dispose();
     this._endMarker.dispose();
@@ -53266,8 +53568,8 @@ class Measure {
     return this._measurement;
   }
   get stage() {
-    var _a2;
-    return (_a2 = this._flow) == null ? void 0 : _a2.stage;
+    var _a22;
+    return (_a22 = this._flow) == null ? void 0 : _a22.stage;
   }
   async start(onProgress) {
     this.abort();
@@ -53292,17 +53594,17 @@ class Measure {
     this._meshes.start(this._startPos);
   }
   onMouseMove() {
-    var _a2;
-    (_a2 = this._meshes) == null ? void 0 : _a2.hide();
+    var _a22;
+    (_a22 = this._meshes) == null ? void 0 : _a22.hide();
   }
   onMouseIdle(action) {
-    var _a2, _b;
+    var _a22, _b2;
     const position = action.raycast.position;
     this._measurement = action.object ? position.clone().sub(this._startPos) : void 0;
     if (action.object) {
-      (_a2 = this._meshes) == null ? void 0 : _a2.update(this._startPos, position);
+      (_a22 = this._meshes) == null ? void 0 : _a22.update(this._startPos, position);
     } else {
-      (_b = this._meshes) == null ? void 0 : _b.hide();
+      (_b2 = this._meshes) == null ? void 0 : _b2.hide();
     }
   }
   onSecondClick(action) {
@@ -53321,16 +53623,16 @@ class Measure {
     return true;
   }
   abort() {
-    var _a2;
-    (_a2 = this._flow) == null ? void 0 : _a2.abort();
+    var _a22;
+    (_a22 = this._flow) == null ? void 0 : _a22.abort();
     this._flow = void 0;
     this._startPos = void 0;
     this._endPos = void 0;
     this._measurement = void 0;
   }
   clear() {
-    var _a2;
-    (_a2 = this._meshes) == null ? void 0 : _a2.dispose();
+    var _a22;
+    (_a22 = this._meshes) == null ? void 0 : _a22.dispose();
     this._meshes = void 0;
   }
 }
@@ -53545,8 +53847,8 @@ function getNative(object, key) {
   var value = getValue(object, key);
   return baseIsNative(value) ? value : void 0;
 }
-var WeakMap2 = getNative(root$1$1, "WeakMap");
-var WeakMap$1 = WeakMap2;
+var WeakMap$1 = getNative(root$1$1, "WeakMap");
+var WeakMap$2 = WeakMap$1;
 var objectCreate = Object.create;
 var baseCreate = function() {
   function object() {
@@ -54055,9 +54357,9 @@ var Set$1 = getNative(root$1$1, "Set");
 var Set$2 = Set$1;
 var mapTag$3 = "[object Map]", objectTag$1 = "[object Object]", promiseTag = "[object Promise]", setTag$3 = "[object Set]", weakMapTag$1 = "[object WeakMap]";
 var dataViewTag$2 = "[object DataView]";
-var dataViewCtorString = toSource(DataView$1$1), mapCtorString = toSource(Map$2), promiseCtorString = toSource(Promise$2), setCtorString = toSource(Set$2), weakMapCtorString = toSource(WeakMap$1);
+var dataViewCtorString = toSource(DataView$1$1), mapCtorString = toSource(Map$2), promiseCtorString = toSource(Promise$2), setCtorString = toSource(Set$2), weakMapCtorString = toSource(WeakMap$2);
 var getTag = baseGetTag;
-if (DataView$1$1 && getTag(new DataView$1$1(new ArrayBuffer(1))) != dataViewTag$2 || Map$2 && getTag(new Map$2()) != mapTag$3 || Promise$2 && getTag(Promise$2.resolve()) != promiseTag || Set$2 && getTag(new Set$2()) != setTag$3 || WeakMap$1 && getTag(new WeakMap$1()) != weakMapTag$1) {
+if (DataView$1$1 && getTag(new DataView$1$1(new ArrayBuffer(1))) != dataViewTag$2 || Map$2 && getTag(new Map$2()) != mapTag$3 || Promise$2 && getTag(Promise$2.resolve()) != promiseTag || Set$2 && getTag(new Set$2()) != setTag$3 || WeakMap$2 && getTag(new WeakMap$2()) != weakMapTag$1) {
   getTag = function(value) {
     var result = baseGetTag(value), Ctor = result == objectTag$1 ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : "";
     if (ctorString) {
@@ -54416,10 +54718,10 @@ class G3d {
     __publicField(this, "getMeshCount", () => this.meshSubmeshes.length);
     __publicField(this, "getInstanceCount", () => this.instanceMeshes.length);
     __publicField(this, "getMaterialCount", () => this.materialColors.length / this.COLOR_SIZE);
-    var _a2, _b, _c, _d, _e, _f, _g, _h, _i, _j;
+    var _a22, _b2, _c, _d, _e, _f, _g, _h, _i, _j;
     this.rawG3d = g3d;
-    this.positions = (_a2 = g3d.findAttribute(VimAttributes.positions)) == null ? void 0 : _a2.data;
-    const tmp2 = (_b = g3d.findAttribute(VimAttributes.indices)) == null ? void 0 : _b.data;
+    this.positions = (_a22 = g3d.findAttribute(VimAttributes.positions)) == null ? void 0 : _a22.data;
+    const tmp2 = (_b2 = g3d.findAttribute(VimAttributes.indices)) == null ? void 0 : _b2.data;
     if (!tmp2)
       throw new Error("No Index Buffer Found");
     this.indices = new Uint32Array(tmp2.buffer, tmp2.byteOffset, tmp2.length);
@@ -54939,11 +55241,11 @@ class Document {
     return instances;
   }
   static async requestElementIds(entities) {
-    var _a2;
+    var _a22;
     if (!entities)
       return;
     const elements = await entities.getBfast(objectModel.element.table);
-    const ids = (_a2 = await (elements == null ? void 0 : elements.getArray("int:Id"))) != null ? _a2 : await (elements == null ? void 0 : elements.getArray("numeric:Id"));
+    const ids = (_a22 = await (elements == null ? void 0 : elements.getArray("int:Id"))) != null ? _a22 : await (elements == null ? void 0 : elements.getArray("numeric:Id"));
     if (!ids) {
       throw new Error("Could not get ElementIds from VIM file.");
     }
@@ -54969,10 +55271,10 @@ class Document {
     return this._elementIds.keys();
   }
   getInstancesFromElement(element) {
-    var _a2;
+    var _a22;
     if (!this.hasElement(element))
       return;
-    return (_a2 = this._elementToInstances.get(element)) != null ? _a2 : [];
+    return (_a22 = this._elementToInstances.get(element)) != null ? _a22 : [];
   }
   async getElement(element) {
     return this.getEntity(objectModel.element.table, element);
@@ -55002,8 +55304,8 @@ class Document {
     return row;
   }
   getString(index) {
-    var _a2;
-    return (_a2 = this._strings) == null ? void 0 : _a2[index];
+    var _a22;
+    return (_a22 = this._strings) == null ? void 0 : _a22[index];
   }
   async getElementsSummary(elements) {
     const set3 = elements ? new Set(elements) : void 0;
@@ -55102,10 +55404,10 @@ class Document {
     const parameterElement = parameterTable ? await parameterTable.getArray(objectModel.element.index) : void 0;
     const parameterValue = parameterTable ? await parameterTable.getArray(objectModel.parameter.columns.value) : void 0;
     const getParameterDisplayValue = (index) => {
-      var _a2;
+      var _a22;
       if (!parameterValue)
         return;
-      const value = (_a2 = this.getString(parameterValue[index])) == null ? void 0 : _a2.split("|");
+      const value = (_a22 = this.getString(parameterValue[index])) == null ? void 0 : _a22.split("|");
       const displayValue = value == null ? void 0 : value[value.length - 1];
       return displayValue;
     };
@@ -55760,21 +56062,21 @@ class RequestLogger {
     this.signal();
   }
   end(field) {
-    var _a2;
+    var _a22;
     console.log(`${field} completed`);
     const download = this.all.get(field);
     if (!download)
       throw new Error("Failing missing download");
     download.status = "completed";
-    (_a2 = this.onUpdate) == null ? void 0 : _a2.call(this, this);
+    (_a22 = this.onUpdate) == null ? void 0 : _a22.call(this, this);
   }
   signal() {
-    var _a2;
+    var _a22;
     if (this.sleeping)
       return;
     this.sleeping = true;
     setTimeout(() => this.sleeping = false, this.delay);
-    (_a2 = this.onUpdate) == null ? void 0 : _a2.call(this, this);
+    (_a22 = this.onUpdate) == null ? void 0 : _a22.call(this, this);
   }
 }
 class RetryRequest {
@@ -55792,8 +56094,8 @@ class RetryRequest {
     this.responseType = responseType;
   }
   send() {
-    var _a2;
-    (_a2 = this.xhr) == null ? void 0 : _a2.abort();
+    var _a22;
+    (_a22 = this.xhr) == null ? void 0 : _a22.abort();
     const xhr = new XMLHttpRequest();
     xhr.open("GET", this.url);
     xhr.responseType = this.responseType;
@@ -55801,17 +56103,17 @@ class RetryRequest {
       xhr.setRequestHeader("Range", this.range);
     }
     xhr.onprogress = (e) => {
-      var _a22;
-      (_a22 = this.onProgress) == null ? void 0 : _a22.call(this, e);
+      var _a3;
+      (_a3 = this.onProgress) == null ? void 0 : _a3.call(this, e);
     };
     xhr.onload = (e) => {
-      var _a22, _b;
-      (_a22 = this.onProgress) == null ? void 0 : _a22.call(this, e);
-      (_b = this.onLoad) == null ? void 0 : _b.call(this, xhr.response);
+      var _a3, _b2;
+      (_a3 = this.onProgress) == null ? void 0 : _a3.call(this, e);
+      (_b2 = this.onLoad) == null ? void 0 : _b2.call(this, xhr.response);
     };
     xhr.onerror = (_) => {
-      var _a22;
-      (_a22 = this.onError) == null ? void 0 : _a22.call(this);
+      var _a3;
+      (_a3 = this.onError) == null ? void 0 : _a3.call(this);
     };
     xhr.send();
     this.xhr = xhr;
@@ -56132,8 +56434,8 @@ class BFast {
     return result;
   }
   async request(range2, label) {
-    var _a2, _b;
-    const buffer = (_b = (_a2 = this.local(range2, label)) != null ? _a2 : await this.remote(range2, label)) != null ? _b : await this.remote(void 0, label);
+    var _a22, _b2;
+    const buffer = (_b2 = (_a22 = this.local(range2, label)) != null ? _a22 : await this.remote(range2, label)) != null ? _b2 : await this.remote(void 0, label);
     if (!buffer) {
       throw new Error(`Could not load vim at ${this.source}`);
     }
@@ -56151,12 +56453,12 @@ class BFast {
     return this.source.slice(r2.start, r2.end);
   }
   async remote(range2, label) {
-    var _a2;
+    var _a22;
     if (!(this.source instanceof RemoteBuffer))
       return;
     const r2 = range2 == null ? void 0 : range2.offset(this.offset);
     const buffer = await this.source.http(r2, `${this.name}.${label}`);
-    if (range2 && ((_a2 = buffer == null ? void 0 : buffer.byteLength) != null ? _a2 : 0) < range2.count) {
+    if (range2 && ((_a22 = buffer == null ? void 0 : buffer.byteLength) != null ? _a22 : 0) < range2.count) {
       console.log("Range request request failed.");
       return;
     }
@@ -56211,6 +56513,7 @@ class Section {
 class Renderer {
   constructor(scene, viewport, materials) {
     __publicField(this, "renderer");
+    __publicField(this, "textRenderer");
     __publicField(this, "viewport");
     __publicField(this, "scene");
     __publicField(this, "section");
@@ -56219,6 +56522,7 @@ class Renderer {
       const size = this.viewport.getParentSize();
       this.renderer.setPixelRatio(window.devicePixelRatio);
       this.renderer.setSize(size.x, size.y);
+      this.textRenderer.setSize(size.x, size.y);
     });
     this.viewport = viewport;
     this.scene = scene;
@@ -56232,6 +56536,7 @@ class Renderer {
       powerPreference: "high-performance",
       logarithmicDepthBuffer: true
     });
+    this.textRenderer = this.viewport.createTextRenderer();
     this.fitViewport();
     this.viewport.onResize(() => this.fitViewport());
     this.renderer.setPixelRatio(window.devicePixelRatio);
@@ -56249,6 +56554,7 @@ class Renderer {
   }
   render(camera) {
     this.renderer.render(this.scene.scene, camera);
+    this.textRenderer.render(this.scene.scene, camera);
   }
   add(target) {
     this.scene.add(target);
@@ -56284,7 +56590,7 @@ class Viewer {
     __publicField(this, "_vims", []);
     __publicField(this, "_disposed", false);
     __publicField(this, "_onVimLoaded", new dist$3.SignalDispatcher());
-    var _a2;
+    var _a22;
     this.settings = new ViewerSettings(options);
     const materials = new VimMaterials();
     this._loader = new Loader(materials);
@@ -56299,7 +56605,7 @@ class Viewer {
     this.renderer.applyMaterialSettings(this.settings);
     this.measure = new Measure(this);
     this._gizmoAxes = new GizmoAxes(this.camera);
-    (_a2 = this.viewport.canvas.parentElement) == null ? void 0 : _a2.prepend(this._gizmoAxes.canvas);
+    (_a22 = this.viewport.canvas.parentElement) == null ? void 0 : _a22.prepend(this._gizmoAxes.canvas);
     this.sectionBox = new SectionBox(this);
     this.gizmoSelection = new GizmoSelection(this);
     this._environment = new Environment(this.settings);
@@ -57261,7 +57567,7 @@ var InteractionManagerProvider = function(props) {
   var environment = useTreeEnvironment();
   var defaultInteractionMode = environment.defaultInteractionMode;
   var interactionManager = react.exports.useMemo(function() {
-    var _a2;
+    var _a22;
     if (defaultInteractionMode && typeof defaultInteractionMode !== "string") {
       if (defaultInteractionMode.extends) {
         return mergeInteractionManagers(defaultInteractionMode, buildInteractionMode(defaultInteractionMode.extends, environment));
@@ -57269,7 +57575,7 @@ var InteractionManagerProvider = function(props) {
         return defaultInteractionMode;
       }
     }
-    return buildInteractionMode((_a2 = defaultInteractionMode) !== null && _a2 !== void 0 ? _a2 : InteractionMode.ClickItemToExpand, environment);
+    return buildInteractionMode((_a22 = defaultInteractionMode) !== null && _a22 !== void 0 ? _a22 : InteractionMode.ClickItemToExpand, environment);
   }, []);
   return react.exports.createElement(InteractionManagerContext.Provider, { value: interactionManager }, props.children);
 };
@@ -57305,10 +57611,10 @@ var getHoveringPosition = function(clientY, treeTop, itemHeight, canDropOnItemWi
   return { linearIndex, offset };
 };
 var useOnDragOverTreeHandler = function(lastDragCode, setLastDragCode, itemHeight, onDragAtPosition, onPerformDrag) {
-  var _a2 = useTreeEnvironment(), canDropOnItemWithChildren = _a2.canDropOnItemWithChildren, canDropOnItemWithoutChildren = _a2.canDropOnItemWithoutChildren, canDragAndDrop = _a2.canDragAndDrop, linearItems = _a2.linearItems, items = _a2.items, canReorderItems = _a2.canReorderItems, viewState = _a2.viewState;
+  var _a22 = useTreeEnvironment(), canDropOnItemWithChildren = _a22.canDropOnItemWithChildren, canDropOnItemWithoutChildren = _a22.canDropOnItemWithoutChildren, canDragAndDrop = _a22.canDragAndDrop, linearItems = _a22.linearItems, items = _a22.items, canReorderItems = _a22.canReorderItems, viewState = _a22.viewState;
   var getParentOfLinearItem = useGetGetParentOfLinearItem();
   return react.exports.useCallback(function(e, treeId, containerRef) {
-    var _a22, _b, _c, _d;
+    var _a3, _b2, _c, _d;
     if (!canDragAndDrop) {
       return;
     }
@@ -57350,7 +57656,7 @@ var useOnDragOverTreeHandler = function(lastDragCode, setLastDragCode, itemHeigh
       return;
     }
     var parent = getParentOfLinearItem(linearIndex, treeId);
-    if ((_b = (_a22 = viewState[treeId]) === null || _a22 === void 0 ? void 0 : _a22.selectedItems) === null || _b === void 0 ? void 0 : _b.includes(targetItem.item)) {
+    if ((_b2 = (_a3 = viewState[treeId]) === null || _a3 === void 0 ? void 0 : _a3.selectedItems) === null || _b2 === void 0 ? void 0 : _b2.includes(targetItem.item)) {
       return;
     }
     var newChildIndex = items[parent.item].children.indexOf(targetItem.item) + (offset === "top" ? 0 : 1);
@@ -57426,9 +57732,9 @@ var useGetViableDragPositions = function() {
   var canDropAt = useCanDropAt();
   return react.exports.useCallback(function(treeId, draggingItems) {
     var linearItems = environment.linearItems[treeId];
-    return linearItems.map(function(_a2, linearIndex) {
-      var _b, _c;
-      var item = _a2.item, depth = _a2.depth;
+    return linearItems.map(function(_a22, linearIndex) {
+      var _b2, _c;
+      var item = _a22.item, depth = _a22.depth;
       var parent = getParentOfLinearItem(linearIndex, treeId);
       var childIndex = environment.items[parent.item].children.indexOf(item);
       var itemPosition = {
@@ -57457,7 +57763,7 @@ var useGetViableDragPositions = function() {
         depth,
         treeId
       };
-      var skipTopPosition = depth === ((_c = (_b = linearItems[linearIndex - 1]) === null || _b === void 0 ? void 0 : _b.depth) !== null && _c !== void 0 ? _c : -1);
+      var skipTopPosition = depth === ((_c = (_b2 = linearItems[linearIndex - 1]) === null || _b2 === void 0 ? void 0 : _b2.depth) !== null && _c !== void 0 ? _c : -1);
       if (skipTopPosition) {
         return [itemPosition, bottomPosition];
       } else {
@@ -57507,10 +57813,10 @@ var __assign$a = globalThis && globalThis.__assign || function() {
 var buildMapForTrees = function(treeIds, build) {
   return treeIds.map(function(id2) {
     return [id2, build(id2)];
-  }).reduce(function(a, _a2) {
-    var _b;
-    var id2 = _a2[0], obj = _a2[1];
-    return __assign$a(__assign$a({}, a), (_b = {}, _b[id2] = obj, _b));
+  }).reduce(function(a, _a22) {
+    var _b2;
+    var id2 = _a22[0], obj = _a22[1];
+    return __assign$a(__assign$a({}, a), (_b2 = {}, _b2[id2] = obj, _b2));
   }, {});
 };
 function useCallSoon() {
@@ -57538,8 +57844,8 @@ var useDragAndDrop = function() {
 };
 var DragAndDropProvider = function(props) {
   var environment = useTreeEnvironment();
-  var _a2 = react.exports.useState(false), isProgrammaticallyDragging = _a2[0], setIsProgrammaticallyDragging = _a2[1];
-  var _b = react.exports.useState(4), itemHeight = _b[0], setItemHeight = _b[1];
+  var _a22 = react.exports.useState(false), isProgrammaticallyDragging = _a22[0], setIsProgrammaticallyDragging = _a22[1];
+  var _b2 = react.exports.useState(4), itemHeight = _b2[0], setItemHeight = _b2[1];
   var _c = react.exports.useState({}), viableDragPositions = _c[0], setViableDragPositions = _c[1];
   var _d = react.exports.useState(0), programmaticDragIndex = _d[0], setProgrammaticDragIndex = _d[1];
   var _e = react.exports.useState(), draggingItems = _e[0], setDraggingItems = _e[1];
@@ -57549,8 +57855,8 @@ var DragAndDropProvider = function(props) {
   var callSoon = useCallSoon();
   react.exports.useRef(false);
   var resetProgrammaticDragIndexForCurrentTree = react.exports.useCallback(function(viableDragPositions2, draggingItems2) {
-    var _a22;
-    if (environment.activeTreeId && ((_a22 = environment.viewState[environment.activeTreeId]) === null || _a22 === void 0 ? void 0 : _a22.focusedItem) && environment.linearItems && draggingItems2) {
+    var _a3;
+    if (environment.activeTreeId && ((_a3 = environment.viewState[environment.activeTreeId]) === null || _a3 === void 0 ? void 0 : _a3.focusedItem) && environment.linearItems && draggingItems2) {
       var focusItem_1 = environment.viewState[environment.activeTreeId].focusedItem;
       var treeDragPositions = getViableDragPositions(environment.activeTreeId, draggingItems2);
       var newPos = treeDragPositions.findIndex(function(pos) {
@@ -57602,14 +57908,14 @@ var DragAndDropProvider = function(props) {
   }, [programmaticDragIndex, environment.activeTreeId, isProgrammaticallyDragging, viableDragPositions], [programmaticDragIndex, environment.activeTreeId]);
   var canDropAt = useCanDropAt();
   var performDrag = function(draggingPosition2) {
-    var _a22;
+    var _a3;
     if (draggingItems && !canDropAt(draggingPosition2, draggingItems)) {
       return;
     }
     setDraggingPosition(draggingPosition2);
     environment.setActiveTree(draggingPosition2.treeId);
     if (draggingItems && environment.activeTreeId !== draggingPosition2.treeId) {
-      (_a22 = environment.onSelectItems) === null || _a22 === void 0 ? void 0 : _a22.call(environment, draggingItems.map(function(item) {
+      (_a3 = environment.onSelectItems) === null || _a3 === void 0 ? void 0 : _a3.call(environment, draggingItems.map(function(item) {
         return item.index;
       }), draggingPosition2.treeId);
     }
@@ -57619,18 +57925,18 @@ var DragAndDropProvider = function(props) {
     if (draggingItems && draggingPosition && environment.onDrop) {
       environment.onDrop(draggingItems, draggingPosition);
       callSoon(function() {
-        var _a22;
-        (_a22 = environment.onFocusItem) === null || _a22 === void 0 ? void 0 : _a22.call(environment, draggingItems[0], draggingPosition.treeId);
+        var _a3;
+        (_a3 = environment.onFocusItem) === null || _a3 === void 0 ? void 0 : _a3.call(environment, draggingItems[0], draggingPosition.treeId);
         resetState();
       });
     }
   }, [draggingItems, draggingPosition, environment, resetState, callSoon]);
   var onStartDraggingItems = react.exports.useCallback(function(items, treeId) {
-    var _a22, _b2;
+    var _a3, _b3;
     var treeViableDragPositions = buildMapForTrees(environment.treeIds, function(treeId2) {
       return getViableDragPositions(treeId2, items);
     });
-    var height = (_b2 = (_a22 = document.querySelector('[data-rct-tree="' + treeId + '"] [data-rct-item-container="true"]')) === null || _a22 === void 0 ? void 0 : _a22.offsetHeight) !== null && _b2 !== void 0 ? _b2 : 5;
+    var height = (_b3 = (_a3 = document.querySelector('[data-rct-tree="' + treeId + '"] [data-rct-item-container="true"]')) === null || _a3 === void 0 ? void 0 : _a3.offsetHeight) !== null && _b3 !== void 0 ? _b3 : 5;
     setItemHeight(height);
     setDraggingItems(items);
     setViableDragPositions(treeViableDragPositions);
@@ -57639,12 +57945,12 @@ var DragAndDropProvider = function(props) {
     }
   }, [environment.activeTreeId, environment.treeIds, getViableDragPositions, resetProgrammaticDragIndexForCurrentTree]);
   var startProgrammaticDrag = react.exports.useCallback(function() {
-    var _a22, _b2, _c2;
+    var _a3, _b3, _c2;
     if (!environment.canDragAndDrop) {
       return;
     }
     if (environment.activeTreeId) {
-      var draggingItems_1 = (_b2 = (_a22 = environment.viewState[environment.activeTreeId]) === null || _a22 === void 0 ? void 0 : _a22.selectedItems) !== null && _b2 !== void 0 ? _b2 : [(_c2 = environment.viewState[environment.activeTreeId]) === null || _c2 === void 0 ? void 0 : _c2.focusedItem];
+      var draggingItems_1 = (_b3 = (_a3 = environment.viewState[environment.activeTreeId]) === null || _a3 === void 0 ? void 0 : _a3.selectedItems) !== null && _b3 !== void 0 ? _b3 : [(_c2 = environment.viewState[environment.activeTreeId]) === null || _c2 === void 0 ? void 0 : _c2.focusedItem];
       if (draggingItems_1.length === 0 || draggingItems_1[0] === void 0) {
         return;
       }
@@ -57732,10 +58038,10 @@ var useEnvironmentActions = function() {
   return react.exports.useContext(EnvironmentActionsContext$1);
 };
 var EnvironmentActionsProvider = react.exports.forwardRef(function(props, ref) {
-  var _a2 = useTreeEnvironment(), onCollapseItem = _a2.onCollapseItem, items = _a2.items;
-  _a2.trees;
-  var viewState = _a2.viewState, onExpandItem = _a2.onExpandItem, onFocusItem = _a2.onFocusItem, setActiveTree = _a2.setActiveTree, onRenameItem = _a2.onRenameItem, onSelectItems = _a2.onSelectItems, onPrimaryAction = _a2.onPrimaryAction, linearItems = _a2.linearItems;
-  var _b = useDragAndDrop(), abortProgrammaticDrag = _b.abortProgrammaticDrag, completeProgrammaticDrag = _b.completeProgrammaticDrag, programmaticDragDown = _b.programmaticDragDown, programmaticDragUp = _b.programmaticDragUp, startProgrammaticDrag = _b.startProgrammaticDrag;
+  var _a22 = useTreeEnvironment(), onCollapseItem = _a22.onCollapseItem, items = _a22.items;
+  _a22.trees;
+  var viewState = _a22.viewState, onExpandItem = _a22.onExpandItem, onFocusItem = _a22.onFocusItem, setActiveTree = _a22.setActiveTree, onRenameItem = _a22.onRenameItem, onSelectItems = _a22.onSelectItems, onPrimaryAction = _a22.onPrimaryAction, linearItems = _a22.linearItems;
+  var _b2 = useDragAndDrop(), abortProgrammaticDrag = _b2.abortProgrammaticDrag, completeProgrammaticDrag = _b2.completeProgrammaticDrag, programmaticDragDown = _b2.programmaticDragDown, programmaticDragUp = _b2.programmaticDragUp, startProgrammaticDrag = _b2.startProgrammaticDrag;
   var actions = {
     abortProgrammaticDrag: react.exports.useCallback(function() {
       abortProgrammaticDrag();
@@ -57760,10 +58066,10 @@ var EnvironmentActionsProvider = react.exports.forwardRef(function(props, ref) {
     }, [setActiveTree]),
     moveFocusDown: react.exports.useCallback(function(treeId) {
       var treeLinearItems = linearItems[treeId];
-      var currentFocusIndex = treeLinearItems.findIndex(function(_a22) {
-        var _b2;
-        var item = _a22.item;
-        return item === ((_b2 = viewState[treeId]) === null || _b2 === void 0 ? void 0 : _b2.focusedItem);
+      var currentFocusIndex = treeLinearItems.findIndex(function(_a3) {
+        var _b3;
+        var item = _a3.item;
+        return item === ((_b3 = viewState[treeId]) === null || _b3 === void 0 ? void 0 : _b3.focusedItem);
       });
       var newIndex = currentFocusIndex !== void 0 ? Math.min(treeLinearItems.length - 1, currentFocusIndex + 1) : 0;
       var newItem = items[treeLinearItems[newIndex].item];
@@ -57771,10 +58077,10 @@ var EnvironmentActionsProvider = react.exports.forwardRef(function(props, ref) {
     }, [items, linearItems, onFocusItem, viewState]),
     moveFocusUp: react.exports.useCallback(function(treeId) {
       var treeLinearItems = linearItems[treeId];
-      var currentFocusIndex = treeLinearItems.findIndex(function(_a22) {
-        var _b2;
-        var item = _a22.item;
-        return item === ((_b2 = viewState[treeId]) === null || _b2 === void 0 ? void 0 : _b2.focusedItem);
+      var currentFocusIndex = treeLinearItems.findIndex(function(_a3) {
+        var _b3;
+        var item = _a3.item;
+        return item === ((_b3 = viewState[treeId]) === null || _b3 === void 0 ? void 0 : _b3.focusedItem);
       });
       var newIndex = currentFocusIndex !== void 0 ? Math.max(0, currentFocusIndex - 1) : 0;
       var newItem = items[treeLinearItems[newIndex].item];
@@ -57796,16 +58102,16 @@ var EnvironmentActionsProvider = react.exports.forwardRef(function(props, ref) {
       startProgrammaticDrag();
     }, [startProgrammaticDrag]),
     toggleItemExpandedState: react.exports.useCallback(function(itemId, treeId) {
-      var _a22, _b2;
-      if ((_b2 = (_a22 = viewState[treeId]) === null || _a22 === void 0 ? void 0 : _a22.expandedItems) === null || _b2 === void 0 ? void 0 : _b2.includes(itemId)) {
+      var _a3, _b3;
+      if ((_b3 = (_a3 = viewState[treeId]) === null || _a3 === void 0 ? void 0 : _a3.expandedItems) === null || _b3 === void 0 ? void 0 : _b3.includes(itemId)) {
         onCollapseItem === null || onCollapseItem === void 0 ? void 0 : onCollapseItem(items[itemId], treeId);
       } else {
         onExpandItem === null || onExpandItem === void 0 ? void 0 : onExpandItem(items[itemId], treeId);
       }
     }, [items, onCollapseItem, onExpandItem, viewState]),
     toggleItemSelectStatus: react.exports.useCallback(function(itemId, treeId) {
-      var _a22, _b2, _c, _d, _e;
-      if ((_b2 = (_a22 = viewState[treeId]) === null || _a22 === void 0 ? void 0 : _a22.selectedItems) === null || _b2 === void 0 ? void 0 : _b2.includes(itemId)) {
+      var _a3, _b3, _c, _d, _e;
+      if ((_b3 = (_a3 = viewState[treeId]) === null || _a3 === void 0 ? void 0 : _a3.selectedItems) === null || _b3 === void 0 ? void 0 : _b3.includes(itemId)) {
         onSelectItems === null || onSelectItems === void 0 ? void 0 : onSelectItems((_d = (_c = viewState[treeId].selectedItems) === null || _c === void 0 ? void 0 : _c.filter(function(item) {
           return item !== itemId;
         })) !== null && _d !== void 0 ? _d : [], treeId);
@@ -57857,8 +58163,8 @@ var cx = function() {
 };
 var createDefaultRenderers = function(renderDepthOffset) {
   return {
-    renderItemTitle: function(_a2) {
-      var title = _a2.title, context = _a2.context, info = _a2.info;
+    renderItemTitle: function(_a22) {
+      var title = _a22.title, context = _a22.context, info = _a22.info;
       if (!info.isSearching || !context.isSearchMatching) {
         return React.createElement(React.Fragment, null, title);
       } else {
@@ -57866,18 +58172,18 @@ var createDefaultRenderers = function(renderDepthOffset) {
         return React.createElement(React.Fragment, null, startIndex > 0 && React.createElement("span", null, title.slice(0, startIndex)), React.createElement("span", { className: "rct-tree-item-search-highlight" }, title.slice(startIndex, startIndex + info.search.length)), startIndex + info.search.length < title.length && React.createElement("span", null, title.slice(startIndex + info.search.length, title.length)));
       }
     },
-    renderItemArrow: function(_a2) {
-      var item = _a2.item, context = _a2.context;
+    renderItemArrow: function(_a22) {
+      var item = _a22.item, context = _a22.context;
       return React.createElement("div", __assign$8({ className: cx(item.hasChildren && "rct-tree-item-arrow-hasChildren", "rct-tree-item-arrow") }, context.arrowProps), item.hasChildren && (context.isExpanded ? React.createElement("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", xmlnsXlink: "http://www.w3.org/1999/xlink", x: "0px", y: "0px", viewBox: "0 0 16 16", enableBackground: "new 0 0 16 16", xmlSpace: "preserve" }, React.createElement("g", null, React.createElement("g", null, React.createElement("path", { fillRule: "evenodd", clipRule: "evenodd", d: "M12,5c-0.28,0-0.53,0.11-0.71,0.29L8,8.59L4.71,5.29C4.53,5.11,4.28,5,4,5\n                      C3.45,5,3,5.45,3,6c0,0.28,0.11,0.53,0.29,0.71l4,4C7.47,10.89,7.72,11,8,11s0.53-0.11,0.71-0.29l4-4C12.89,6.53,13,6.28,13,6\n                      C13,5.45,12.55,5,12,5z", className: "rct-tree-item-arrow-path" })))) : React.createElement("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", xmlnsXlink: "http://www.w3.org/1999/xlink", x: "0px", y: "0px", viewBox: "0 0 16 16", enableBackground: "new 0 0 16 16", xmlSpace: "preserve" }, React.createElement("g", null, React.createElement("g", null, React.createElement("path", { fillRule: "evenodd", clipRule: "evenodd", d: "M10.71,7.29l-4-4C6.53,3.11,6.28,3,6,3C5.45,3,5,3.45,5,4\n                      c0,0.28,0.11,0.53,0.29,0.71L8.59,8l-3.29,3.29C5.11,11.47,5,11.72,5,12c0,0.55,0.45,1,1,1c0.28,0,0.53-0.11,0.71-0.29l4-4\n                      C10.89,8.53,11,8.28,11,8C11,7.72,10.89,7.47,10.71,7.29z", className: "rct-tree-item-arrow-path" }))))));
     },
-    renderItem: function(_a2) {
-      var item = _a2.item, depth = _a2.depth, children = _a2.children, title = _a2.title, context = _a2.context, arrow = _a2.arrow;
+    renderItem: function(_a22) {
+      var item = _a22.item, depth = _a22.depth, children = _a22.children, title = _a22.title, context = _a22.context, arrow = _a22.arrow;
       var InteractiveComponent = context.isRenaming ? "div" : "button";
       var type = context.isRenaming ? void 0 : "button";
       return React.createElement("li", __assign$8({}, context.itemContainerWithChildrenProps, { className: cx("rct-tree-item-li", item.hasChildren && "rct-tree-item-li-hasChildren", context.isSelected && "rct-tree-item-li-selected", context.isExpanded && "rct-tree-item-li-expanded", context.isFocused && "rct-tree-item-li-focused", context.isDraggingOver && "rct-tree-item-li-dragging-over", context.isSearchMatching && "rct-tree-item-li-search-match") }), React.createElement("div", __assign$8({}, context.itemContainerWithoutChildrenProps, { style: { paddingLeft: (depth + 1) * renderDepthOffset + "px" }, className: cx("rct-tree-item-title-container", item.hasChildren && "rct-tree-item-title-container-hasChildren", context.isSelected && "rct-tree-item-title-container-selected", context.isExpanded && "rct-tree-item-title-container-expanded", context.isFocused && "rct-tree-item-title-container-focused", context.isDraggingOver && "rct-tree-item-title-container-dragging-over", context.isSearchMatching && "rct-tree-item-title-container-search-match") }), arrow, React.createElement(InteractiveComponent, __assign$8({ type }, context.interactiveElementProps, { className: cx("rct-tree-item-button", item.hasChildren && "rct-tree-item-button-hasChildren", context.isSelected && "rct-tree-item-button-selected", context.isExpanded && "rct-tree-item-button-expanded", context.isFocused && "rct-tree-item-button-focused", context.isDraggingOver && "rct-tree-item-button-dragging-over", context.isSearchMatching && "rct-tree-item-button-search-match") }), title)), children);
     },
-    renderRenameInput: function(_a2) {
-      var inputProps = _a2.inputProps, inputRef = _a2.inputRef, submitButtonProps = _a2.submitButtonProps, submitButtonRef = _a2.submitButtonRef, formProps = _a2.formProps;
+    renderRenameInput: function(_a22) {
+      var inputProps = _a22.inputProps, inputRef = _a22.inputRef, submitButtonProps = _a22.submitButtonProps, submitButtonRef = _a22.submitButtonRef, formProps = _a22.formProps;
       return React.createElement("form", __assign$8({}, formProps, { className: "rct-tree-item-renaming-form" }), React.createElement("input", __assign$8({}, inputProps, { ref: inputRef, className: "rct-tree-item-renaming-input" })), React.createElement("input", __assign$8({}, submitButtonProps, { ref: submitButtonRef, type: "submit", className: "rct-tree-item-renaming-submit-button", value: "\u{1F5F8}" })));
     },
     renderDraggingItem: function() {
@@ -57886,24 +58192,24 @@ var createDefaultRenderers = function(renderDepthOffset) {
     renderDraggingItemTitle: function() {
       return React.createElement("div", null);
     },
-    renderTreeContainer: function(_a2) {
-      var children = _a2.children, containerProps = _a2.containerProps, info = _a2.info;
+    renderTreeContainer: function(_a22) {
+      var children = _a22.children, containerProps = _a22.containerProps, info = _a22.info;
       return React.createElement("div", { className: cx("rct-tree-root", info.isFocused && "rct-tree-root-focus", info.isRenaming && "rct-tree-root-renaming", info.areItemsSelected && "rct-tree-root-itemsselected") }, React.createElement("div", __assign$8({}, containerProps), children));
     },
-    renderItemsContainer: function(_a2) {
-      var children = _a2.children, containerProps = _a2.containerProps;
+    renderItemsContainer: function(_a22) {
+      var children = _a22.children, containerProps = _a22.containerProps;
       return React.createElement("ul", __assign$8({}, containerProps, { className: "rct-tree-items-container" }), children);
     },
-    renderDragBetweenLine: function(_a2) {
-      var draggingPosition = _a2.draggingPosition, lineProps = _a2.lineProps;
+    renderDragBetweenLine: function(_a22) {
+      var draggingPosition = _a22.draggingPosition, lineProps = _a22.lineProps;
       return React.createElement("div", __assign$8({}, lineProps, { style: { left: draggingPosition.depth * renderDepthOffset + "px" }, className: cx("rct-tree-drag-between-line", draggingPosition.targetType === "between-items" && draggingPosition.linePosition === "top" && "rct-tree-drag-between-line-top", draggingPosition.targetType === "between-items" && draggingPosition.linePosition === "bottom" && "rct-tree-drag-between-line-bottom") }));
     },
-    renderSearchInput: function(_a2) {
-      var inputProps = _a2.inputProps;
+    renderSearchInput: function(_a22) {
+      var inputProps = _a22.inputProps;
       return React.createElement("div", { className: cx("rct-tree-search-input-container") }, React.createElement("input", __assign$8({}, inputProps, { className: cx("rct-tree-search-input") })));
     },
-    renderLiveDescriptorContainer: function(_a2) {
-      var tree = _a2.tree, children = _a2.children;
+    renderLiveDescriptorContainer: function(_a22) {
+      var tree = _a22.tree, children = _a22.children;
       return React.createElement("div", { id: "rct-livedescription-" + tree.treeId, style: {
         clip: "rect(0 0 0 0)",
         clipPath: "inset(50%)",
@@ -57917,8 +58223,8 @@ var createDefaultRenderers = function(renderDepthOffset) {
     renderDepthOffset: 10
   };
 };
-var useRenderers = function(_a2) {
-  var renderItem = _a2.renderItem, renderItemTitle = _a2.renderItemTitle, renderItemArrow = _a2.renderItemArrow, renderRenameInput = _a2.renderRenameInput, renderDraggingItem = _a2.renderDraggingItem, renderDraggingItemTitle = _a2.renderDraggingItemTitle, renderItemsContainer = _a2.renderItemsContainer, renderTreeContainer = _a2.renderTreeContainer, renderDragBetweenLine = _a2.renderDragBetweenLine, renderSearchInput = _a2.renderSearchInput, renderLiveDescriptorContainer = _a2.renderLiveDescriptorContainer, renderDepthOffset = _a2.renderDepthOffset;
+var useRenderers = function(_a22) {
+  var renderItem = _a22.renderItem, renderItemTitle = _a22.renderItemTitle, renderItemArrow = _a22.renderItemArrow, renderRenameInput = _a22.renderRenameInput, renderDraggingItem = _a22.renderDraggingItem, renderDraggingItemTitle = _a22.renderDraggingItemTitle, renderItemsContainer = _a22.renderItemsContainer, renderTreeContainer = _a22.renderTreeContainer, renderDragBetweenLine = _a22.renderDragBetweenLine, renderSearchInput = _a22.renderSearchInput, renderLiveDescriptorContainer = _a22.renderLiveDescriptorContainer, renderDepthOffset = _a22.renderDepthOffset;
   var defaultRenderers = react.exports.useMemo(function() {
     return createDefaultRenderers(renderDepthOffset !== null && renderDepthOffset !== void 0 ? renderDepthOffset : 10);
   }, [renderDepthOffset]);
@@ -57936,8 +58242,8 @@ var useRenderers = function(_a2) {
     renderLiveDescriptorContainer,
     renderDepthOffset
   };
-  var renderers = Object.entries(defaultRenderers).reduce(function(acc, _a22) {
-    var key = _a22[0], value = _a22[1];
+  var renderers = Object.entries(defaultRenderers).reduce(function(acc, _a3) {
+    var key = _a3[0], value = _a3[1];
     var keyMapped = key;
     if (customRenderers[keyMapped]) {
       acc[keyMapped] = customRenderers[keyMapped];
@@ -57959,12 +58265,12 @@ var useRenderers = function(_a2) {
   return renderers;
 };
 var getItemsLinearly = function(rootItem, viewState, items, depth) {
-  var _a2, _b, _c;
+  var _a22, _b2, _c;
   if (depth === void 0) {
     depth = 0;
   }
   var itemIds = [];
-  for (var _i = 0, _d = (_b = (_a2 = items[rootItem]) === null || _a2 === void 0 ? void 0 : _a2.children) !== null && _b !== void 0 ? _b : []; _i < _d.length; _i++) {
+  for (var _i = 0, _d = (_b2 = (_a22 = items[rootItem]) === null || _a22 === void 0 ? void 0 : _a22.children) !== null && _b2 !== void 0 ? _b2 : []; _i < _d.length; _i++) {
     var itemId = _d[_i];
     var item = items[itemId];
     itemIds.push({ item: itemId, depth });
@@ -58013,9 +58319,9 @@ var __rest = globalThis && globalThis.__rest || function(s, e) {
     }
   return t2;
 };
-var useControlledTreeEnvironmentProps = function(_a2) {
-  var onExpandItemProp = _a2.onExpandItem, onCollapseProp = _a2.onCollapseItem, onDropProp = _a2.onDrop, props = __rest(_a2, ["onExpandItem", "onCollapseItem", "onDrop"]);
-  var _b = react.exports.useState({}), trees = _b[0], setTrees = _b[1];
+var useControlledTreeEnvironmentProps = function(_a22) {
+  var onExpandItemProp = _a22.onExpandItem, onCollapseProp = _a22.onCollapseItem, onDropProp = _a22.onDrop, props = __rest(_a22, ["onExpandItem", "onCollapseItem", "onDrop"]);
+  var _b2 = react.exports.useState({}), trees = _b2[0], setTrees = _b2[1];
   var _c = react.exports.useState({}), linearItems = _c[0], setLinearItems = _c[1];
   var _d = react.exports.useState(), activeTreeId = _d[0], setActiveTreeId = _d[1];
   var viewStateRef = useRefCopy(props.viewState);
@@ -58027,8 +58333,8 @@ var useControlledTreeEnvironmentProps = function(_a2) {
   var updateLinearItems = useStableHandler(function() {
     setTimeout(function() {
       setLinearItems(buildMapForTrees(treeIds, function(treeId) {
-        var _a22;
-        return getItemsLinearly(trees[treeId].rootItem, (_a22 = viewStateRef.current[treeId]) !== null && _a22 !== void 0 ? _a22 : {}, items);
+        var _a3;
+        return getItemsLinearly(trees[treeId].rootItem, (_a3 = viewStateRef.current[treeId]) !== null && _a3 !== void 0 ? _a3 : {}, items);
       }));
     });
   });
@@ -58036,11 +58342,11 @@ var useControlledTreeEnvironmentProps = function(_a2) {
     return updateLinearItems();
   }, [items, treeIds, updateLinearItems]);
   var onFocusItemHandler = react.exports.useCallback(function(item, treeId) {
-    var _a22, _b2, _c2, _d2, _e, _f;
-    if (((_a22 = viewStateRef.current[treeId]) === null || _a22 === void 0 ? void 0 : _a22.focusedItem) === item.index) {
+    var _a3, _b3, _c2, _d2, _e, _f;
+    if (((_a3 = viewStateRef.current[treeId]) === null || _a3 === void 0 ? void 0 : _a3.focusedItem) === item.index) {
       return;
     }
-    (_b2 = onFocusItemRef.current) === null || _b2 === void 0 ? void 0 : _b2.call(onFocusItemRef, item, treeId);
+    (_b3 = onFocusItemRef.current) === null || _b3 === void 0 ? void 0 : _b3.call(onFocusItemRef, item, treeId);
     var newItem = document.querySelector('[data-rct-tree="' + treeId + '"] [data-rct-item-id="' + item.index + '"]');
     if (autoFocus !== null && autoFocus !== void 0 ? autoFocus : true) {
       if (((_d2 = (_c2 = document.activeElement) === null || _c2 === void 0 ? void 0 : _c2.attributes.getNamedItem("data-rct-search-input")) === null || _d2 === void 0 ? void 0 : _d2.value) !== "true") {
@@ -58052,8 +58358,8 @@ var useControlledTreeEnvironmentProps = function(_a2) {
   }, [autoFocus, onFocusItemRef, viewStateRef]);
   var registerTree = react.exports.useCallback(function(tree) {
     setTrees(function(trees2) {
-      var _a22;
-      return __assign$7(__assign$7({}, trees2), (_a22 = {}, _a22[tree.treeId] = tree, _a22));
+      var _a3;
+      return __assign$7(__assign$7({}, trees2), (_a3 = {}, _a3[tree.treeId] = tree, _a3));
     });
     onRegisterTree === null || onRegisterTree === void 0 ? void 0 : onRegisterTree(tree);
     updateLinearItems();
@@ -58080,10 +58386,10 @@ var useControlledTreeEnvironmentProps = function(_a2) {
       autoFocusTree = true;
     }
     var focusTree = function(treeId2) {
-      var _a22, _b2, _c2;
-      if (autoFocusTree && (autoFocus !== null && autoFocus !== void 0 ? autoFocus : true) && treeId2 && !((_a22 = document.querySelector('[data-rct-tree="' + treeId2 + '"]')) === null || _a22 === void 0 ? void 0 : _a22.contains(document.activeElement))) {
+      var _a3, _b3, _c2;
+      if (autoFocusTree && (autoFocus !== null && autoFocus !== void 0 ? autoFocus : true) && treeId2 && !((_a3 = document.querySelector('[data-rct-tree="' + treeId2 + '"]')) === null || _a3 === void 0 ? void 0 : _a3.contains(document.activeElement))) {
         var focusItem = document.querySelector('[data-rct-tree="' + treeId2 + '"] [data-rct-item-focus="true"]');
-        (_c2 = (_b2 = focusItem) === null || _b2 === void 0 ? void 0 : _b2.focus) === null || _c2 === void 0 ? void 0 : _c2.call(_b2);
+        (_c2 = (_b3 = focusItem) === null || _b3 === void 0 ? void 0 : _b3.focus) === null || _c2 === void 0 ? void 0 : _c2.call(_b3);
       }
     };
     if (typeof treeIdOrSetStateFunction === "function") {
@@ -58132,22 +58438,22 @@ var useTreeEnvironment = function() {
   return react.exports.useContext(TreeEnvironmentContext);
 };
 var ControlledTreeEnvironment = react.exports.forwardRef(function(props, ref) {
-  var _a2, _b, _c;
+  var _a22, _b2, _c;
   var environmentContextProps = useControlledTreeEnvironmentProps(props);
   var viewState = props.viewState;
   for (var _i = 0, _d = Object.keys(environmentContextProps.trees); _i < _d.length; _i++) {
     var treeId = _d[_i];
-    if (!((_a2 = viewState[treeId]) === null || _a2 === void 0 ? void 0 : _a2.focusedItem) && environmentContextProps.trees[treeId]) {
-      viewState[treeId] = __assign$6(__assign$6({}, viewState[treeId]), { focusedItem: (_c = (_b = props.items[environmentContextProps.trees[treeId].rootItem]) === null || _b === void 0 ? void 0 : _b.children) === null || _c === void 0 ? void 0 : _c[0] });
+    if (!((_a22 = viewState[treeId]) === null || _a22 === void 0 ? void 0 : _a22.focusedItem) && environmentContextProps.trees[treeId]) {
+      viewState[treeId] = __assign$6(__assign$6({}, viewState[treeId]), { focusedItem: (_c = (_b2 = props.items[environmentContextProps.trees[treeId].rootItem]) === null || _b2 === void 0 ? void 0 : _b2.children) === null || _c === void 0 ? void 0 : _c[0] });
     }
   }
   return react.exports.createElement(TreeEnvironmentContext.Provider, { value: environmentContextProps }, react.exports.createElement(InteractionManagerProvider, null, react.exports.createElement(DragAndDropProvider, null, react.exports.createElement(EnvironmentActionsProvider, { ref }, props.children))));
 });
 var useViewState = function() {
-  var _a2;
+  var _a22;
   var treeId = useTree().treeId;
   var viewState = useTreeEnvironment().viewState;
-  return (_a2 = viewState[treeId]) !== null && _a2 !== void 0 ? _a2 : {};
+  return (_a22 = viewState[treeId]) !== null && _a22 !== void 0 ? _a22 : {};
 };
 var defaultMatcher = function(search, item, itemTitle) {
   return itemTitle.toLowerCase().includes(search.toLowerCase());
@@ -58166,27 +58472,27 @@ var useSelectUpTo = function() {
   var linearItems = useLinearItems(treeId);
   var onSelectItems = useTreeEnvironment().onSelectItems;
   return react.exports.useCallback(function(item) {
-    var _a2, _b;
+    var _a22, _b2;
     if (viewState && viewState.selectedItems && viewState.selectedItems.length > 0) {
       var selectionStart = linearItems.findIndex(function(linearItem) {
-        var _a22;
-        return (_a22 = viewState.selectedItems) === null || _a22 === void 0 ? void 0 : _a22.includes(linearItem.item);
+        var _a3;
+        return (_a3 = viewState.selectedItems) === null || _a3 === void 0 ? void 0 : _a3.includes(linearItem.item);
       });
       var selectionEnd = linearItems.findIndex(function(linearItem) {
         return linearItem.item === item.index;
       });
       if (selectionStart < selectionEnd) {
-        var selection = linearItems.slice(selectionStart, selectionEnd + 1).map(function(_a22) {
-          var item2 = _a22.item;
+        var selection = linearItems.slice(selectionStart, selectionEnd + 1).map(function(_a3) {
+          var item2 = _a3.item;
           return item2;
         });
-        onSelectItems === null || onSelectItems === void 0 ? void 0 : onSelectItems(__spreadArray$6(__spreadArray$6([], (_a2 = viewState === null || viewState === void 0 ? void 0 : viewState.selectedItems) !== null && _a2 !== void 0 ? _a2 : []), selection), treeId);
+        onSelectItems === null || onSelectItems === void 0 ? void 0 : onSelectItems(__spreadArray$6(__spreadArray$6([], (_a22 = viewState === null || viewState === void 0 ? void 0 : viewState.selectedItems) !== null && _a22 !== void 0 ? _a22 : []), selection), treeId);
       } else {
-        var selection = linearItems.slice(selectionEnd, selectionStart).map(function(_a22) {
-          var item2 = _a22.item;
+        var selection = linearItems.slice(selectionEnd, selectionStart).map(function(_a3) {
+          var item2 = _a3.item;
           return item2;
         });
-        onSelectItems === null || onSelectItems === void 0 ? void 0 : onSelectItems(__spreadArray$6(__spreadArray$6([], (_b = viewState === null || viewState === void 0 ? void 0 : viewState.selectedItems) !== null && _b !== void 0 ? _b : []), selection), treeId);
+        onSelectItems === null || onSelectItems === void 0 ? void 0 : onSelectItems(__spreadArray$6(__spreadArray$6([], (_b2 = viewState === null || viewState === void 0 ? void 0 : viewState.selectedItems) !== null && _b2 !== void 0 ? _b2 : []), selection), treeId);
       }
     } else {
       onSelectItems === null || onSelectItems === void 0 ? void 0 : onSelectItems([item.index], treeId);
@@ -58211,7 +58517,7 @@ var __spreadArray$5 = globalThis && globalThis.__spreadArray || function(to, fro
   return to;
 };
 var useTreeItemRenderContext = function(item) {
-  var _a2, _b, _c, _d;
+  var _a22, _b2, _c, _d;
   var _e = useTree(), treeId = _e.treeId, search = _e.search, renamingItem = _e.renamingItem;
   var environment = useTreeEnvironment();
   var interactionManager = useInteractionManager();
@@ -58219,14 +58525,14 @@ var useTreeItemRenderContext = function(item) {
   var selectUpTo = useSelectUpTo();
   var itemTitle = item && environment.getItemTitle(item);
   var isSearchMatching = react.exports.useMemo(function() {
-    var _a22;
-    return search === null || search.length === 0 || !item || !itemTitle ? false : ((_a22 = environment.doesSearchMatchItem) !== null && _a22 !== void 0 ? _a22 : defaultMatcher)(search, item, itemTitle);
+    var _a3;
+    return search === null || search.length === 0 || !item || !itemTitle ? false : ((_a3 = environment.doesSearchMatchItem) !== null && _a3 !== void 0 ? _a3 : defaultMatcher)(search, item, itemTitle);
   }, [search, item, itemTitle, environment.doesSearchMatchItem]);
-  var isSelected = item && ((_b = (_a2 = environment.viewState[treeId]) === null || _a2 === void 0 ? void 0 : _a2.selectedItems) === null || _b === void 0 ? void 0 : _b.includes(item.index));
+  var isSelected = item && ((_b2 = (_a22 = environment.viewState[treeId]) === null || _a22 === void 0 ? void 0 : _a22.selectedItems) === null || _b2 === void 0 ? void 0 : _b2.includes(item.index));
   var isExpanded = item && ((_d = (_c = environment.viewState[treeId]) === null || _c === void 0 ? void 0 : _c.expandedItems) === null || _d === void 0 ? void 0 : _d.includes(item.index));
   var isRenaming = item && renamingItem === item.index;
   return react.exports.useMemo(function() {
-    var _a22, _b2;
+    var _a3, _b3;
     var _c2, _d2, _e2, _f, _g, _h, _j, _k, _l;
     if (!item) {
       return void 0;
@@ -58241,8 +58547,8 @@ var useTreeItemRenderContext = function(item) {
       return selectedItem.index === item.index;
     });
     var canDragCurrentlySelectedItems = currentlySelectedItems && ((_f = (_e2 = environment.canDrag) === null || _e2 === void 0 ? void 0 : _e2.call(environment, currentlySelectedItems)) !== null && _f !== void 0 ? _f : true) && currentlySelectedItems.map(function(item2) {
-      var _a3;
-      return (_a3 = item2.canMove) !== null && _a3 !== void 0 ? _a3 : true;
+      var _a4;
+      return (_a4 = item2.canMove) !== null && _a4 !== void 0 ? _a4 : true;
     }).reduce(function(a, b) {
       return a && b;
     }, true);
@@ -58253,36 +58559,36 @@ var useTreeItemRenderContext = function(item) {
     }));
     var actions = {
       primaryAction: function() {
-        var _a3;
-        (_a3 = environment.onPrimaryAction) === null || _a3 === void 0 ? void 0 : _a3.call(environment, environment.items[item.index], treeId);
+        var _a4;
+        (_a4 = environment.onPrimaryAction) === null || _a4 === void 0 ? void 0 : _a4.call(environment, environment.items[item.index], treeId);
       },
       collapseItem: function() {
-        var _a3;
-        (_a3 = environment.onCollapseItem) === null || _a3 === void 0 ? void 0 : _a3.call(environment, item, treeId);
+        var _a4;
+        (_a4 = environment.onCollapseItem) === null || _a4 === void 0 ? void 0 : _a4.call(environment, item, treeId);
       },
       expandItem: function() {
-        var _a3;
-        (_a3 = environment.onExpandItem) === null || _a3 === void 0 ? void 0 : _a3.call(environment, item, treeId);
+        var _a4;
+        (_a4 = environment.onExpandItem) === null || _a4 === void 0 ? void 0 : _a4.call(environment, item, treeId);
       },
       toggleExpandedState: function() {
-        var _a3, _b3;
+        var _a4, _b4;
         if (isExpanded) {
-          (_a3 = environment.onCollapseItem) === null || _a3 === void 0 ? void 0 : _a3.call(environment, item, treeId);
+          (_a4 = environment.onCollapseItem) === null || _a4 === void 0 ? void 0 : _a4.call(environment, item, treeId);
         } else {
-          (_b3 = environment.onExpandItem) === null || _b3 === void 0 ? void 0 : _b3.call(environment, item, treeId);
+          (_b4 = environment.onExpandItem) === null || _b4 === void 0 ? void 0 : _b4.call(environment, item, treeId);
         }
       },
       selectItem: function() {
-        var _a3;
-        (_a3 = environment.onSelectItems) === null || _a3 === void 0 ? void 0 : _a3.call(environment, [item.index], treeId);
+        var _a4;
+        (_a4 = environment.onSelectItems) === null || _a4 === void 0 ? void 0 : _a4.call(environment, [item.index], treeId);
       },
       addToSelectedItems: function() {
-        var _a3, _b3;
-        (_a3 = environment.onSelectItems) === null || _a3 === void 0 ? void 0 : _a3.call(environment, __spreadArray$5(__spreadArray$5([], (_b3 = viewState === null || viewState === void 0 ? void 0 : viewState.selectedItems) !== null && _b3 !== void 0 ? _b3 : []), [item.index]), treeId);
+        var _a4, _b4;
+        (_a4 = environment.onSelectItems) === null || _a4 === void 0 ? void 0 : _a4.call(environment, __spreadArray$5(__spreadArray$5([], (_b4 = viewState === null || viewState === void 0 ? void 0 : viewState.selectedItems) !== null && _b4 !== void 0 ? _b4 : []), [item.index]), treeId);
       },
       unselectItem: function() {
-        var _a3, _b3, _c3;
-        (_a3 = environment.onSelectItems) === null || _a3 === void 0 ? void 0 : _a3.call(environment, (_c3 = (_b3 = viewState === null || viewState === void 0 ? void 0 : viewState.selectedItems) === null || _b3 === void 0 ? void 0 : _b3.filter(function(id2) {
+        var _a4, _b4, _c3;
+        (_a4 = environment.onSelectItems) === null || _a4 === void 0 ? void 0 : _a4.call(environment, (_c3 = (_b4 = viewState === null || viewState === void 0 ? void 0 : viewState.selectedItems) === null || _b4 === void 0 ? void 0 : _b4.filter(function(id2) {
           return id2 !== item.index;
         })) !== null && _c3 !== void 0 ? _c3 : [], treeId);
       },
@@ -58290,19 +58596,19 @@ var useTreeItemRenderContext = function(item) {
         selectUpTo(item);
       },
       startRenamingItem: function() {
-        var _a3;
-        (_a3 = environment.onStartRenamingItem) === null || _a3 === void 0 ? void 0 : _a3.call(environment, item, treeId);
+        var _a4;
+        (_a4 = environment.onStartRenamingItem) === null || _a4 === void 0 ? void 0 : _a4.call(environment, item, treeId);
       },
       focusItem: function() {
-        var _a3;
-        (_a3 = environment.onFocusItem) === null || _a3 === void 0 ? void 0 : _a3.call(environment, item, treeId);
+        var _a4;
+        (_a4 = environment.onFocusItem) === null || _a4 === void 0 ? void 0 : _a4.call(environment, item, treeId);
       },
       startDragging: function() {
-        var _a3, _b3;
-        var selectedItems = (_a3 = viewState === null || viewState === void 0 ? void 0 : viewState.selectedItems) !== null && _a3 !== void 0 ? _a3 : [];
+        var _a4, _b4;
+        var selectedItems = (_a4 = viewState === null || viewState === void 0 ? void 0 : viewState.selectedItems) !== null && _a4 !== void 0 ? _a4 : [];
         if (!selectedItems.includes(item.index)) {
           selectedItems = [item.index];
-          (_b3 = environment.onSelectItems) === null || _b3 === void 0 ? void 0 : _b3.call(environment, selectedItems, treeId);
+          (_b4 = environment.onSelectItems) === null || _b4 === void 0 ? void 0 : _b4.call(environment, selectedItems, treeId);
         }
         if (canDrag) {
           dnd.onStartDraggingItems(selectedItems.map(function(id2) {
@@ -58322,8 +58628,8 @@ var useTreeItemRenderContext = function(item) {
       canDrag,
       canDropOn
     };
-    var interactiveElementProps = __assign$5(__assign$5({}, interactionManager.createInteractiveElementProps(item, treeId, actions, renderFlags, viewState)), (_a22 = {}, _a22["data-rct-item-interactive"] = true, _a22["data-rct-item-focus"] = renderFlags.isFocused ? "true" : "false", _a22["data-rct-item-id"] = item.index, _a22));
-    var itemContainerWithoutChildrenProps = __assign$5({}, (_b2 = {}, _b2["data-rct-item-container"] = "true", _b2));
+    var interactiveElementProps = __assign$5(__assign$5({}, interactionManager.createInteractiveElementProps(item, treeId, actions, renderFlags, viewState)), (_a3 = {}, _a3["data-rct-item-interactive"] = true, _a3["data-rct-item-focus"] = renderFlags.isFocused ? "true" : "false", _a3["data-rct-item-id"] = item.index, _a3));
+    var itemContainerWithoutChildrenProps = __assign$5({}, (_b3 = {}, _b3["data-rct-item-container"] = "true", _b3));
     var itemContainerWithChildrenProps = {
       role: "treeitem",
       "aria-selected": renderFlags.isSelected,
@@ -58345,8 +58651,8 @@ var useTreeItemRenderContext = function(item) {
       "aria-hidden": true,
       tabIndex: -1
     };
-    var viewStateFlags = !viewState ? {} : Object.entries(viewState).reduce(function(acc, _a3) {
-      var key = _a3[0], value = _a3[1];
+    var viewStateFlags = !viewState ? {} : Object.entries(viewState).reduce(function(acc, _a4) {
+      var key = _a4[0], value = _a4[1];
       acc[key] = Array.isArray(value) ? value.includes(item.index) : value === item.index;
       return acc;
     }, {});
@@ -58498,34 +58804,34 @@ var useHotkey = function(combinationName, onHit, active, activatableWhileFocusin
   }, __spreadArray$3([possibleCombinations, onHit, active, callSoon], deps !== null && deps !== void 0 ? deps : []));
 };
 var TreeItemRenamingInput = function(props) {
-  var _a2 = useTree(), renderers = _a2.renderers, treeInformation = _a2.treeInformation, setRenamingItem = _a2.setRenamingItem, treeId = _a2.treeId;
+  var _a22 = useTree(), renderers = _a22.renderers, treeInformation = _a22.treeInformation, setRenamingItem = _a22.setRenamingItem, treeId = _a22.treeId;
   var environment = useTreeEnvironment();
   var inputRef = react.exports.useRef(null);
   var submitButtonRef = react.exports.useRef(null);
   var item = environment.items[props.itemIndex];
-  var _b = react.exports.useState(environment.getItemTitle(item)), title = _b[0], setTitle = _b[1];
+  var _b2 = react.exports.useState(environment.getItemTitle(item)), title = _b2[0], setTitle = _b2[1];
   var callSoon = useCallSoon();
   var abort = function() {
-    var _a22;
-    (_a22 = environment.onAbortRenamingItem) === null || _a22 === void 0 ? void 0 : _a22.call(environment, item, treeInformation.treeId);
+    var _a3;
+    (_a3 = environment.onAbortRenamingItem) === null || _a3 === void 0 ? void 0 : _a3.call(environment, item, treeInformation.treeId);
     setRenamingItem(null);
     callSoon(function() {
       environment.setActiveTree(treeId);
     });
   };
   var confirm = function() {
-    var _a22;
-    (_a22 = environment.onRenameItem) === null || _a22 === void 0 ? void 0 : _a22.call(environment, item, title, treeInformation.treeId);
+    var _a3;
+    (_a3 = environment.onRenameItem) === null || _a3 === void 0 ? void 0 : _a3.call(environment, item, title, treeInformation.treeId);
     setRenamingItem(null);
     callSoon(function() {
       environment.setActiveTree(treeId);
     });
   };
   useSideEffect(function() {
-    var _a22, _b2, _c;
+    var _a3, _b3, _c;
     environment.setActiveTree(treeId);
-    if ((_a22 = environment.autoFocus) !== null && _a22 !== void 0 ? _a22 : true) {
-      (_b2 = inputRef.current) === null || _b2 === void 0 ? void 0 : _b2.select();
+    if ((_a3 = environment.autoFocus) !== null && _a3 !== void 0 ? _a3 : true) {
+      (_b3 = inputRef.current) === null || _b3 === void 0 ? void 0 : _b3.select();
       (_c = inputRef.current) === null || _c === void 0 ? void 0 : _c.focus();
     }
   }, [environment, treeId], []);
@@ -58567,21 +58873,21 @@ var TreeItemRenamingInput = function(props) {
   });
 };
 var TreeItem = function(props) {
-  var _a2, _b;
+  var _a22, _b2;
   var _c = react.exports.useState(false), hasBeenRequested = _c[0], setHasBeenRequested = _c[1];
   var _d = useTree(), renderers = _d.renderers, treeInformation = _d.treeInformation, renamingItem = _d.renamingItem;
   var environment = useTreeEnvironment();
   var viewState = useViewState();
   var item = environment.items[props.itemIndex];
   var isExpanded = react.exports.useMemo(function() {
-    var _a22;
-    return (_a22 = viewState.expandedItems) === null || _a22 === void 0 ? void 0 : _a22.includes(props.itemIndex);
+    var _a3;
+    return (_a3 = viewState.expandedItems) === null || _a3 === void 0 ? void 0 : _a3.includes(props.itemIndex);
   }, [props.itemIndex, viewState.expandedItems]);
   var renderContext = useTreeItemRenderContext(item);
   if (item === void 0) {
     if (!hasBeenRequested) {
       setHasBeenRequested(true);
-      (_a2 = environment.onMissingItems) === null || _a2 === void 0 ? void 0 : _a2.call(environment, [props.itemIndex]);
+      (_a22 = environment.onMissingItems) === null || _a22 === void 0 ? void 0 : _a22.call(environment, [props.itemIndex]);
     }
     return null;
   }
@@ -58598,7 +58904,7 @@ var TreeItem = function(props) {
     context: renderContext,
     item: environment.items[props.itemIndex]
   });
-  return (_b = renderers.renderItem({
+  return (_b2 = renderers.renderItem({
     item: environment.items[props.itemIndex],
     depth: props.depth,
     title: titleComponent,
@@ -58606,13 +58912,13 @@ var TreeItem = function(props) {
     context: renderContext,
     info: treeInformation,
     children
-  })) !== null && _b !== void 0 ? _b : null;
+  })) !== null && _b2 !== void 0 ? _b2 : null;
 };
 var TreeItemChildren = function(props) {
-  var _a2 = useTree(), renderers = _a2.renderers, treeInformation = _a2.treeInformation;
+  var _a22 = useTree(), renderers = _a22.renderers, treeInformation = _a22.treeInformation;
   var childElements = [];
-  for (var _i = 0, _b = props.children; _i < _b.length; _i++) {
-    var child = _b[_i];
+  for (var _i = 0, _b2 = props.children; _i < _b2.length; _i++) {
+    var child = _b2[_i];
     childElements.push(React.createElement(TreeItem, { key: child, itemIndex: child, depth: props.depth }));
   }
   if (childElements.length === 0) {
@@ -58628,8 +58934,8 @@ var TreeItemChildren = function(props) {
   });
 };
 var DragBetweenLine = function(props) {
-  var _a2;
-  var _b = useDragAndDrop(), draggingPosition = _b.draggingPosition, itemHeight = _b.itemHeight;
+  var _a22;
+  var _b2 = useDragAndDrop(), draggingPosition = _b2.draggingPosition, itemHeight = _b2.itemHeight;
   var renderers = useTree().renderers;
   var shouldDisplay = draggingPosition && draggingPosition.targetType === "between-items" && draggingPosition.treeId === props.treeId;
   if (!shouldDisplay) {
@@ -58644,7 +58950,7 @@ var DragBetweenLine = function(props) {
     position: "absolute",
     left: "0",
     right: "0",
-    top: ((_a2 = draggingPosition === null || draggingPosition === void 0 ? void 0 : draggingPosition.linearIndex) !== null && _a2 !== void 0 ? _a2 : 0) * itemHeight + "px"
+    top: ((_a22 = draggingPosition === null || draggingPosition === void 0 ? void 0 : draggingPosition.linearIndex) !== null && _a22 !== void 0 ? _a22 : 0) * itemHeight + "px"
   } }, renderers.renderDragBetweenLine({
     draggingPosition,
     lineProps
@@ -58659,7 +58965,7 @@ var useFocusWithin = function(element, onFocusIn, onFocusOut, deps) {
   if (deps === void 0) {
     deps = [];
   }
-  var _a2 = react.exports.useState(false), focusWithin = _a2[0], setFocusWithin = _a2[1];
+  var _a22 = react.exports.useState(false), focusWithin = _a22[0], setFocusWithin = _a22[1];
   var isLoosingFocusFlag = react.exports.useRef(false);
   var callSoon = useCallSoon();
   useHtmlElementEventListener(element, "focusin", function() {
@@ -58700,14 +59006,14 @@ var useKey = function(key, onHit, active, deps) {
 };
 var useMoveFocusToIndex = function() {
   var treeId = useTree().treeId;
-  var _a2 = useTreeEnvironment(), onFocusItem = _a2.onFocusItem, items = _a2.items;
+  var _a22 = useTreeEnvironment(), onFocusItem = _a22.onFocusItem, items = _a22.items;
   var linearItems = useLinearItems(treeId);
   var viewState = useViewState();
   return react.exports.useCallback(function(computeNewIndex) {
-    var _a22;
-    var currentIndex = (_a22 = linearItems.findIndex(function(item) {
+    var _a3;
+    var currentIndex = (_a3 = linearItems.findIndex(function(item) {
       return item.item === viewState.focusedItem;
-    })) !== null && _a22 !== void 0 ? _a22 : 0;
+    })) !== null && _a3 !== void 0 ? _a3 : 0;
     var newIndex = computeNewIndex(currentIndex, linearItems);
     var newIndexBounded = Math.max(0, Math.min(linearItems.length - 1, newIndex));
     var newFocusItem = items[linearItems[newIndexBounded].item];
@@ -58721,9 +59027,9 @@ var __spreadArray = globalThis && globalThis.__spreadArray || function(to, from)
   return to;
 };
 var useTreeKeyboardBindings = function() {
-  var _a2;
+  var _a22;
   var environment = useTreeEnvironment();
-  var _b = useTree(), treeId = _b.treeId, setRenamingItem = _b.setRenamingItem, setSearch = _b.setSearch, renamingItem = _b.renamingItem;
+  var _b2 = useTree(), treeId = _b2.treeId, setRenamingItem = _b2.setRenamingItem, setSearch = _b2.setSearch, renamingItem = _b2.renamingItem;
   var linearItems = useLinearItems(treeId);
   var dnd = useDragAndDrop();
   var viewState = useViewState();
@@ -58772,13 +59078,13 @@ var useTreeKeyboardBindings = function() {
   useKey("arrowright", react.exports.useCallback(function(e) {
     e.preventDefault();
     moveFocusToIndex(function(currentIndex, linearItems2) {
-      var _a22, _b2;
+      var _a3, _b3;
       var item = environment.items[linearItems2[currentIndex].item];
       if (item.hasChildren) {
-        if ((_a22 = viewState.expandedItems) === null || _a22 === void 0 ? void 0 : _a22.includes(item.index)) {
+        if ((_a3 = viewState.expandedItems) === null || _a3 === void 0 ? void 0 : _a3.includes(item.index)) {
           return currentIndex + 1;
         } else {
-          (_b2 = environment.onExpandItem) === null || _b2 === void 0 ? void 0 : _b2.call(environment, item, treeId);
+          (_b3 = environment.onExpandItem) === null || _b3 === void 0 ? void 0 : _b3.call(environment, item, treeId);
         }
       }
       return currentIndex;
@@ -58787,11 +59093,11 @@ var useTreeKeyboardBindings = function() {
   useKey("arrowleft", react.exports.useCallback(function(e) {
     e.preventDefault();
     moveFocusToIndex(function(currentIndex, linearItems2) {
-      var _a22, _b2;
+      var _a3, _b3;
       var item = environment.items[linearItems2[currentIndex].item];
       var itemDepth = linearItems2[currentIndex].depth;
-      if (item.hasChildren && ((_a22 = viewState.expandedItems) === null || _a22 === void 0 ? void 0 : _a22.includes(item.index))) {
-        (_b2 = environment.onCollapseItem) === null || _b2 === void 0 ? void 0 : _b2.call(environment, item, treeId);
+      if (item.hasChildren && ((_a3 = viewState.expandedItems) === null || _a3 === void 0 ? void 0 : _a3.includes(item.index))) {
+        (_b3 = environment.onCollapseItem) === null || _b3 === void 0 ? void 0 : _b3.call(environment, item, treeId);
       } else if (itemDepth > 0) {
         var parentIndex = currentIndex;
         for (parentIndex; linearItems2[parentIndex].depth !== itemDepth - 1; parentIndex--)
@@ -58802,48 +59108,48 @@ var useTreeKeyboardBindings = function() {
     });
   }, [environment, moveFocusToIndex, treeId, viewState.expandedItems]), isActiveTree && !dnd.isProgrammaticallyDragging && !isRenaming);
   useHotkey("primaryAction", react.exports.useCallback(function(e) {
-    var _a22, _b2;
+    var _a3, _b3;
     e.preventDefault();
     if (viewState.focusedItem !== void 0) {
-      (_a22 = environment.onSelectItems) === null || _a22 === void 0 ? void 0 : _a22.call(environment, [viewState.focusedItem], treeId);
-      (_b2 = environment.onPrimaryAction) === null || _b2 === void 0 ? void 0 : _b2.call(environment, environment.items[viewState.focusedItem], treeId);
+      (_a3 = environment.onSelectItems) === null || _a3 === void 0 ? void 0 : _a3.call(environment, [viewState.focusedItem], treeId);
+      (_b3 = environment.onPrimaryAction) === null || _b3 === void 0 ? void 0 : _b3.call(environment, environment.items[viewState.focusedItem], treeId);
     }
   }, [environment, treeId, viewState.focusedItem]), isActiveTree && !dnd.isProgrammaticallyDragging && !isRenaming);
   useHotkey("toggleSelectItem", react.exports.useCallback(function(e) {
-    var _a22, _b2, _c;
+    var _a3, _b3, _c;
     e.preventDefault();
     if (viewState.focusedItem !== void 0) {
       if (viewState.selectedItems && viewState.selectedItems.includes(viewState.focusedItem)) {
-        (_a22 = environment.onSelectItems) === null || _a22 === void 0 ? void 0 : _a22.call(environment, viewState.selectedItems.filter(function(item) {
+        (_a3 = environment.onSelectItems) === null || _a3 === void 0 ? void 0 : _a3.call(environment, viewState.selectedItems.filter(function(item) {
           return item !== viewState.focusedItem;
         }), treeId);
       } else {
-        (_b2 = environment.onSelectItems) === null || _b2 === void 0 ? void 0 : _b2.call(environment, __spreadArray(__spreadArray([], (_c = viewState.selectedItems) !== null && _c !== void 0 ? _c : []), [viewState.focusedItem]), treeId);
+        (_b3 = environment.onSelectItems) === null || _b3 === void 0 ? void 0 : _b3.call(environment, __spreadArray(__spreadArray([], (_c = viewState.selectedItems) !== null && _c !== void 0 ? _c : []), [viewState.focusedItem]), treeId);
       }
     }
   }, [environment, treeId, viewState.focusedItem, viewState.selectedItems]), isActiveTree && !dnd.isProgrammaticallyDragging && !isRenaming);
   useHotkey("selectAll", react.exports.useCallback(function(e) {
-    var _a22;
+    var _a3;
     e.preventDefault();
-    (_a22 = environment.onSelectItems) === null || _a22 === void 0 ? void 0 : _a22.call(environment, linearItems.map(function(_a3) {
-      var item = _a3.item;
+    (_a3 = environment.onSelectItems) === null || _a3 === void 0 ? void 0 : _a3.call(environment, linearItems.map(function(_a4) {
+      var item = _a4.item;
       return item;
     }), treeId);
   }, [environment, linearItems, treeId]), isActiveTree && !dnd.isProgrammaticallyDragging && !isRenaming);
   useHotkey("renameItem", react.exports.useCallback(function(e) {
-    var _a22;
+    var _a3;
     if (viewState.focusedItem !== void 0) {
       e.preventDefault();
       var item = environment.items[viewState.focusedItem];
-      (_a22 = environment.onStartRenamingItem) === null || _a22 === void 0 ? void 0 : _a22.call(environment, item, treeId);
+      (_a3 = environment.onStartRenamingItem) === null || _a3 === void 0 ? void 0 : _a3.call(environment, item, treeId);
       setRenamingItem(item.index);
     }
-  }, [environment, setRenamingItem, treeId, viewState.focusedItem]), isActiveTree && ((_a2 = environment.canRename) !== null && _a2 !== void 0 ? _a2 : true) && !isRenaming);
+  }, [environment, setRenamingItem, treeId, viewState.focusedItem]), isActiveTree && ((_a22 = environment.canRename) !== null && _a22 !== void 0 ? _a22 : true) && !isRenaming);
   useHotkey("startSearch", react.exports.useCallback(function(e) {
-    var _a22, _b2;
+    var _a3, _b3;
     e.preventDefault();
     setSearch("");
-    (_b2 = (_a22 = document.querySelector('[data-rct-search-input="true"]')) === null || _a22 === void 0 ? void 0 : _a22.focus) === null || _b2 === void 0 ? void 0 : _b2.call(_a22);
+    (_b3 = (_a3 = document.querySelector('[data-rct-search-input="true"]')) === null || _a3 === void 0 ? void 0 : _a3.focus) === null || _b3 === void 0 ? void 0 : _b3.call(_a3);
   }, [setSearch]), isActiveTree && !dnd.isProgrammaticallyDragging && !isRenaming);
   useHotkey("startProgrammaticDnd", react.exports.useCallback(function(e) {
     e.preventDefault();
@@ -58859,15 +59165,15 @@ var useTreeKeyboardBindings = function() {
   }, [dnd]), isActiveTree && dnd.isProgrammaticallyDragging && !isRenaming);
 };
 var useSearchMatchFocus = function() {
-  var _a2 = useTreeEnvironment(), doesSearchMatchItem = _a2.doesSearchMatchItem, items = _a2.items, getItemTitle = _a2.getItemTitle, onFocusItem = _a2.onFocusItem;
-  var _b = useTree(), search = _b.search, treeId = _b.treeId;
+  var _a22 = useTreeEnvironment(), doesSearchMatchItem = _a22.doesSearchMatchItem, items = _a22.items, getItemTitle = _a22.getItemTitle, onFocusItem = _a22.onFocusItem;
+  var _b2 = useTree(), search = _b2.search, treeId = _b2.treeId;
   var linearItems = useLinearItems(treeId);
   var callSoon = useCallSoon();
   useSideEffect(function() {
     if (search && search.length > 0) {
       callSoon(function() {
-        var focusItem = linearItems.find(function(_a22) {
-          var item = _a22.item;
+        var focusItem = linearItems.find(function(_a3) {
+          var item = _a3.item;
           return (doesSearchMatchItem !== null && doesSearchMatchItem !== void 0 ? doesSearchMatchItem : defaultMatcher)(search, items[item], getItemTitle(items[item]));
         });
         if (focusItem) {
@@ -58890,8 +59196,8 @@ var __assign$3 = globalThis && globalThis.__assign || function() {
   return __assign$3.apply(this, arguments);
 };
 var SearchInput = function(props) {
-  var _a2;
-  var _b;
+  var _a22;
+  var _b2;
   var _c = useTree(), search = _c.search, setSearch = _c.setSearch, treeId = _c.treeId, renderers = _c.renderers, renamingItem = _c.renamingItem;
   var environment = useTreeEnvironment();
   useViewState();
@@ -58899,11 +59205,11 @@ var SearchInput = function(props) {
   var callSoon = useCallSoon();
   useSearchMatchFocus();
   var clearSearch = function() {
-    var _a22, _b2, _c2;
+    var _a3, _b3, _c2;
     setSearch(null);
-    if ((_a22 = environment.autoFocus) !== null && _a22 !== void 0 ? _a22 : true) {
+    if ((_a3 = environment.autoFocus) !== null && _a3 !== void 0 ? _a3 : true) {
       var focusItem = document.querySelector('[data-rct-tree="' + treeId + '"] [data-rct-item-focus="true"]');
-      (_c2 = (_b2 = focusItem) === null || _b2 === void 0 ? void 0 : _b2.focus) === null || _c2 === void 0 ? void 0 : _c2.call(_b2);
+      (_c2 = (_b3 = focusItem) === null || _b3 === void 0 ? void 0 : _b3.focus) === null || _c2 === void 0 ? void 0 : _c2.call(_b3);
     }
   };
   useHotkey("abortSearch", function() {
@@ -58912,14 +59218,14 @@ var SearchInput = function(props) {
     });
   }, isActiveTree && search !== null, true, [search, isActiveTree, callSoon]);
   useHtmlElementEventListener(props.containerRef, "keydown", function(e) {
-    var _a22, _b2, _c2, _d;
+    var _a3, _b3, _c2, _d;
     var unicode = e.key.charCodeAt(0);
-    if (((_a22 = environment.canSearch) !== null && _a22 !== void 0 ? _a22 : true) && ((_b2 = environment.canSearchByStartingTyping) !== null && _b2 !== void 0 ? _b2 : true) && isActiveTree && search === null && !renamingItem && !e.ctrlKey && !e.shiftKey && !e.altKey && !e.metaKey && (unicode >= 48 && unicode <= 57 || unicode >= 97 && unicode <= 122)) {
+    if (((_a3 = environment.canSearch) !== null && _a3 !== void 0 ? _a3 : true) && ((_b3 = environment.canSearchByStartingTyping) !== null && _b3 !== void 0 ? _b3 : true) && isActiveTree && search === null && !renamingItem && !e.ctrlKey && !e.shiftKey && !e.altKey && !e.metaKey && (unicode >= 48 && unicode <= 57 || unicode >= 97 && unicode <= 122)) {
       setSearch("");
       (_d = (_c2 = document.querySelector('[data-rct-search-input="true"]')) === null || _c2 === void 0 ? void 0 : _c2.focus) === null || _d === void 0 ? void 0 : _d.call(_c2);
     }
   }, [isActiveTree, search, renamingItem, environment.canSearchByStartingTyping, environment.canSearch]);
-  if (!((_b = environment.canSearch) !== null && _b !== void 0 ? _b : true) || search === null) {
+  if (!((_b2 = environment.canSearch) !== null && _b2 !== void 0 ? _b2 : true) || search === null) {
     return null;
   }
   return renderers.renderSearchInput({
@@ -58927,7 +59233,7 @@ var SearchInput = function(props) {
       return setSearch(e.target.value);
     }, onBlur: function() {
       clearSearch();
-    }, "aria-label": "Search for items" }, (_a2 = {}, _a2["data-rct-search-input"] = "true", _a2))
+    }, "aria-label": "Search for items" }, (_a22 = {}, _a22["data-rct-search-input"] = "true", _a22))
   });
 };
 var defaultLiveDescriptors = {
@@ -58942,15 +59248,15 @@ var resolveLiveDescriptor = function(descriptor, environment, dnd, tree, keyboar
     return environment.getItemTitle(environment.items[index]);
   };
   return descriptor.replace(/({[^\s}]+)}/g, function(variableNameWithBrackets) {
-    var _a2, _b, _c;
+    var _a22, _b2, _c;
     var variableName = variableNameWithBrackets.slice(1, -1);
     switch (variableName) {
       case "treeLabel":
-        return (_a2 = tree.treeLabel) !== null && _a2 !== void 0 ? _a2 : "";
+        return (_a22 = tree.treeLabel) !== null && _a22 !== void 0 ? _a22 : "";
       case "renamingItem":
         return tree.renamingItem ? getItemTitle(tree.renamingItem) : "None";
       case "dragItems":
-        return (_c = (_b = dnd.draggingItems) === null || _b === void 0 ? void 0 : _b.map(function(item) {
+        return (_c = (_b2 = dnd.draggingItems) === null || _b2 === void 0 ? void 0 : _b2.map(function(item) {
           return environment.getItemTitle(item);
         }).join(", ")) !== null && _c !== void 0 ? _c : "None";
       case "dropTarget":
@@ -58982,12 +59288,12 @@ var LiveDescription = function() {
   var dnd = useDragAndDrop();
   var keys3 = useKeyboardBindings();
   var descriptors2 = react.exports.useMemo(function() {
-    var _a2;
-    return (_a2 = env.liveDescriptors) !== null && _a2 !== void 0 ? _a2 : defaultLiveDescriptors;
+    var _a22;
+    return (_a22 = env.liveDescriptors) !== null && _a22 !== void 0 ? _a22 : defaultLiveDescriptors;
   }, [env.liveDescriptors]);
   var LiveWrapper = react.exports.useMemo(function() {
-    return function(_a2) {
-      var children = _a2.children, live = _a2.live;
+    return function(_a22) {
+      var children = _a22.children, live = _a22.live;
       return react.exports.createElement("div", { "aria-live": live, dangerouslySetInnerHTML: { __html: children } });
     };
   }, []);
@@ -59003,9 +59309,9 @@ var LiveDescription = function() {
   }
 };
 var MaybeLiveDescription = function() {
-  var _a2;
+  var _a22;
   var env = useTreeEnvironment();
-  if (!((_a2 = env.showLiveDescription) !== null && _a2 !== void 0 ? _a2 : true)) {
+  if (!((_a22 = env.showLiveDescription) !== null && _a22 !== void 0 ? _a22 : true)) {
     return null;
   }
   return react.exports.createElement(LiveDescription, null);
@@ -59023,8 +59329,8 @@ var __assign$2 = globalThis && globalThis.__assign || function() {
   return __assign$2.apply(this, arguments);
 };
 var TreeManager = function() {
-  var _a2;
-  var _b = useTree(), treeId = _b.treeId, rootItem = _b.rootItem, renderers = _b.renderers, treeInformation = _b.treeInformation;
+  var _a22;
+  var _b2 = useTree(), treeId = _b2.treeId, rootItem = _b2.rootItem, renderers = _b2.renderers, treeInformation = _b2.treeInformation;
   var environment = useTreeEnvironment();
   var containerRef = react.exports.useRef();
   var dnd = useDragAndDrop();
@@ -59054,7 +59360,7 @@ var TreeManager = function() {
     role: "tree",
     "aria-label": !treeInformation.treeLabelledBy ? treeInformation.treeLabel : void 0,
     "aria-labelledby": treeInformation.treeLabelledBy
-  }, (_a2 = {}, _a2["data-rct-tree"] = treeId, _a2));
+  }, (_a22 = {}, _a22["data-rct-tree"] = treeId, _a22));
   return renderers.renderTreeContainer({
     children: treeChildren,
     info: treeInformation,
@@ -59062,19 +59368,19 @@ var TreeManager = function() {
   });
 };
 var useCreatedTreeInformation = function(tree, renamingItem, search) {
-  var _a2;
+  var _a22;
   var environment = useTreeEnvironment();
   var dnd = useDragAndDrop();
-  var selectedItems = (_a2 = environment.viewState[tree.treeId]) === null || _a2 === void 0 ? void 0 : _a2.selectedItems;
+  var selectedItems = (_a22 = environment.viewState[tree.treeId]) === null || _a22 === void 0 ? void 0 : _a22.selectedItems;
   return react.exports.useMemo(function() {
-    var _a22, _b;
+    var _a3, _b2;
     return {
       isFocused: environment.activeTreeId === tree.treeId,
       isRenaming: !!renamingItem,
-      areItemsSelected: ((_a22 = selectedItems === null || selectedItems === void 0 ? void 0 : selectedItems.length) !== null && _a22 !== void 0 ? _a22 : 0) > 0,
+      areItemsSelected: ((_a3 = selectedItems === null || selectedItems === void 0 ? void 0 : selectedItems.length) !== null && _a3 !== void 0 ? _a3 : 0) > 0,
       isSearching: search !== null,
       search,
-      isProgrammaticallyDragging: (_b = dnd.isProgrammaticallyDragging) !== null && _b !== void 0 ? _b : false,
+      isProgrammaticallyDragging: (_b2 = dnd.isProgrammaticallyDragging) !== null && _b2 !== void 0 ? _b2 : false,
       treeId: tree.treeId,
       rootItem: tree.rootItem
     };
@@ -59189,7 +59495,7 @@ var useTree = function() {
   return react.exports.useContext(TreeContext);
 };
 var Tree = react.exports.forwardRef(function(props, ref) {
-  var _a2, _b;
+  var _a22, _b2;
   var environment = useTreeEnvironment();
   var renderers = react.exports.useMemo(function() {
     return __assign(__assign({}, environment), props);
@@ -59197,7 +59503,7 @@ var Tree = react.exports.forwardRef(function(props, ref) {
   var _c = react.exports.useState(null), search = _c[0], setSearch = _c[1];
   var _d = react.exports.useState(null), renamingItem = _d[0], setRenamingItem = _d[1];
   var rootItem = environment.items[props.rootItem];
-  var viewState = (_a2 = environment.viewState[props.treeId]) !== null && _a2 !== void 0 ? _a2 : {};
+  var viewState = (_a22 = environment.viewState[props.treeId]) !== null && _a22 !== void 0 ? _a22 : {};
   react.exports.useEffect(function() {
     environment.registerTree({
       treeId: props.treeId,
@@ -59224,7 +59530,7 @@ var Tree = react.exports.forwardRef(function(props, ref) {
     renderers
   };
   if (rootItem === void 0) {
-    (_b = environment.onMissingItems) === null || _b === void 0 ? void 0 : _b.call(environment, [props.rootItem]);
+    (_b2 = environment.onMissingItems) === null || _b2 === void 0 ? void 0 : _b2.call(environment, [props.rootItem]);
     return null;
   }
   return react.exports.createElement(TreeContext.Provider, { value: treeContextProps }, react.exports.createElement(TreeActionsProvider, { ref }, react.exports.createElement(TreeManager, null)));
@@ -59920,8 +60226,8 @@ function BimPanel(props) {
     setOpen(next);
   };
   const initOpen = (keys3) => {
-    var _a2;
-    const map = new Map((_a2 = open == null ? void 0 : open.entries()) != null ? _a2 : []);
+    var _a22;
+    const map = new Map((_a22 = open == null ? void 0 : open.entries()) != null ? _a22 : []);
     keys3.forEach((k) => {
       if (!map.has(k))
         map.set(k, true);
@@ -59933,8 +60239,8 @@ function BimPanel(props) {
     setFilter(value);
   };
   const updateVim = () => {
-    var _a2;
-    const nextVim = (_a2 = viewer2.selection.vim) != null ? _a2 : viewer2.vims[0];
+    var _a22;
+    const nextVim = (_a22 = viewer2.selection.vim) != null ? _a22 : viewer2.vims[0];
     if (nextVim && vim !== nextVim) {
       setVim(nextVim);
       nextVim.document.getElementsSummary().then((s) => {
@@ -60236,6 +60542,7 @@ function createContainer(viewer2) {
   gfx.style.height = "100%";
   root2.append(gfx);
   gfx.append(viewer2.viewport.canvas);
+  gfx.append(viewer2.viewport.text);
   gfx.append(viewer2.axesCanvas);
   const ui2 = document.createElement("div");
   ui2.className = "vim-ui";
@@ -60556,7 +60863,7 @@ function getVisibleBoundingBox(source) {
   return box;
 }
 const params = new URLSearchParams(window.location.search);
-let url = params.has("vim") || params.has("model") ? (_a = params.get("vim")) != null ? _a : params.get("model") : "https://vim.azureedge.net/samples/residence.vim";
+let url = params.has("vim") || params.has("model") ? (_a2 = params.get("vim")) != null ? _a2 : params.get("model") : "https://vim.azureedge.net/samples/residence.vim";
 if (params.has("transparency")) {
   const t2 = params.get("transparency");
   VIM.Transparency.isValid(t2) ? t2 : "all";
