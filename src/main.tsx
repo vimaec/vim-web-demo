@@ -54,6 +54,7 @@ div.className = 'vim-performance'
 style.right = '24px'
 style.left = 'auto'
 style.top = '200px'
+style.zIndex = '1'
 // -half width
 
 document.body.appendChild(stats.dom)
