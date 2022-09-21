@@ -913,6 +913,12 @@ select {
 .top-0 {
   top: 0px;
 }
+.right-2 {
+  right: 0.5rem;
+}
+.top-2 {
+  top: 0.5rem;
+}
 .right-6 {
   right: 1.5rem;
 }
@@ -1079,11 +1085,11 @@ select {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.rounded {
-  border-radius: 0.25rem;
-}
 .rounded-full {
   border-radius: 9999px;
+}
+.rounded {
+  border-radius: 0.25rem;
 }
 .rounded-xl {
   border-radius: 0.75rem;
@@ -1144,6 +1150,9 @@ select {
 }
 .bg-transparent {
   background-color: transparent;
+}
+.bg-light-blue {
+  background-color: var(--c-light-blue);
 }
 .bg-white {
   --tw-bg-opacity: 1;
@@ -1470,7 +1479,7 @@ body {
 
 /* Bim Panel */
 
-.vim-bim-panel {
+.vim-side-panel {
   height: 100%;
   width: 480px;
 }

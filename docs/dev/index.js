@@ -8466,6 +8466,12 @@ select {
 .top-0 {
   top: 0px;
 }\r
+.right-2 {
+  right: 0.5rem;
+}\r
+.top-2 {
+  top: 0.5rem;
+}\r
 .right-6 {
   right: 1.5rem;
 }\r
@@ -8632,11 +8638,11 @@ select {
   text-overflow: ellipsis;
   white-space: nowrap;
 }\r
-.rounded {
-  border-radius: 0.25rem;
-}\r
 .rounded-full {
   border-radius: 9999px;
+}\r
+.rounded {
+  border-radius: 0.25rem;
 }\r
 .rounded-xl {
   border-radius: 0.75rem;
@@ -8697,6 +8703,9 @@ select {
 }\r
 .bg-transparent {
   background-color: transparent;
+}\r
+.bg-light-blue {
+  background-color: var(--c-light-blue);
 }\r
 .bg-white {
   --tw-bg-opacity: 1;
@@ -9023,7 +9032,7 @@ body {\r
 \r
 /* Bim Panel */\r
 \r
-.vim-bim-panel {\r
+.vim-side-panel {\r
   height: 100%;\r
   width: 480px;\r
 }\r
@@ -53402,7 +53411,7 @@ class MeasureLine {
     this.label.position.copy(this.position);
     this.length = start.distanceTo(end);
     this.label.visible = this.length > 0;
-    this._text.textContent = start.distanceTo(end).toFixed(2);
+    this._text.textContent = `~${start.distanceTo(end).toFixed(2)}`;
   }
   dispose() {
     this._meshLine.dispose();
@@ -56858,6 +56867,16 @@ const collapse = ({ height, width, fill, className }) => /* @__PURE__ */ React.c
   fill,
   d: "m226.207 82.919-.017-.019c-5.937-6.547-16.057-7.04-22.602-1.102L128 150.367l-75.588-68.57c-6.546-5.938-16.666-5.444-22.602 1.102l-.017.019c-5.935 6.545-5.442 16.662 1.102 22.599l86.348 78.33c6.103 5.536 15.411 5.536 21.514 0l86.348-78.33c6.544-5.936 7.038-16.054 1.102-22.599Z"
 }));
+const arrowLeft = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
+  height,
+  width,
+  viewBox: "0 0 256 256"
+}, /* @__PURE__ */ React.createElement("path", {
+  fill: "none",
+  d: "M0 0h256v256H0z"
+}), /* @__PURE__ */ React.createElement("path", {
+  d: "m161.905 202.207.019-.017c6.547-5.937 7.04-16.057 1.102-22.602L118.457 128l44.569-51.588c5.938-6.546 5.444-16.666-1.102-22.602l-.019-.017c-6.545-5.935-16.662-5.442-22.599 1.102l-54.33 62.348c-5.536 6.103-5.536 15.411 0 21.514l54.33 62.348c5.936 6.544 16.054 7.038 22.599 1.102Z"
+}));
 const orbit = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
   height,
   width,
@@ -57337,6 +57356,12 @@ class CursorManager {
     this.setCursor(pointerToCursor(this._viewer.inputs.pointerMode));
     this._viewer.inputs.onPointerModeChanged.subscribe(() => this.updateCursor());
     this._viewer.inputs.onPointerOverrideChanged.subscribe(() => this.updateCursor());
+    this._viewer.sectionBox.onStateChanged.subscribe(() => {
+      if (!this._viewer.sectionBox.visible) {
+        this._boxHover = false;
+        this.updateCursor();
+      }
+    });
     this._viewer.sectionBox.onHover.subscribe((hover) => {
       this._boxHover = hover;
       this.updateCursor();
@@ -57346,11 +57371,11 @@ class CursorManager {
 const btnStyle = "rounded-full text-gray-medium h-10 w-10 flex items-center justify-center transition-all hover:scale-110 hover:text-primary-royal";
 const btnStyleActive = "rounded-full text-white h-10 w-10 flex items-center justify-center transition-all hover:scale-110 opacity-60 hover:opacity-100";
 const toggleButton = (tip, action, icon, isOn) => {
-  const fillColor = isOn() ? "rounded-full text-gray-medium h-10 w-10 flex items-center justify-center transition-all hover:scale-110 hover:text-primary-royal text-primary" : "rounded-full text-gray-medium h-10 w-10 flex items-center justify-center transition-all hover:scale-110 hover:text-primary-royal text-gray-medium";
+  const style2 = isOn() ? "rounded-full text-gray-medium h-10 w-10 flex items-center justify-center transition-all hover:scale-110 hover:text-primary-royal text-primary" : "rounded-full text-gray-medium h-10 w-10 flex items-center justify-center transition-all hover:scale-110 hover:text-primary-royal text-gray-medium";
   return /* @__PURE__ */ React.createElement("button", {
     "data-tip": tip,
     onClick: action,
-    className: fillColor,
+    className: style2,
     type: "button"
   }, icon({ height: "20", width: "20", fill: "currentColor" }));
 };
@@ -57518,13 +57543,13 @@ function TabSettings(props) {
     props.setHelpVisible(!props.helpVisible);
   };
   const onTreeViewBtn = () => {
-    props.setSideContent(props.sideContent === "bim" ? "none" : "bim");
+    props.toggleSide("bim");
   };
   const onSettingsBtn = () => {
-    props.setSideContent(props.sideContent === "settings" ? "none" : "settings");
+    props.toggleSide("settings");
   };
-  const btnTreeView = toggleButton("Project Inspector", onTreeViewBtn, treeView, () => props.sideContent === "bim");
-  const btnSettings = toggleButton("Settings", onSettingsBtn, settings, () => props.sideContent === "settings");
+  const btnTreeView = toggleButton("Project Inspector", onTreeViewBtn, treeView, () => props.side === "bim");
+  const btnSettings = toggleButton("Settings", onSettingsBtn, settings, () => props.side === "settings");
   const btnHelp = toggleButton("Help", onHelpBtn, help, () => props.helpVisible);
   return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", {
     className: "mx-1"
@@ -59765,7 +59790,6 @@ const isControlKey = (e) => {
 function BimTree(props) {
   const [objects, setObjects] = react.exports.useState([]);
   const [elements, setElements] = react.exports.useState();
-  const [filter, setFilter] = react.exports.useState();
   const [tree, setTree] = react.exports.useState();
   const treeRef = react.exports.useRef(tree);
   const [expandedItems, setExpandedItems] = react.exports.useState([]);
@@ -59790,10 +59814,9 @@ function BimTree(props) {
       focus.current = tree.getNode(first.element);
     }
   }, [tree, objects]);
-  if (props.elements && (props.elements !== elements || props.filter !== filter)) {
-    setFilter(props.filter);
+  if (props.elements && props.elements !== elements) {
     setElements(props.elements);
-    toTreeData(props.elements, props.filter).then((t2) => setTree(t2));
+    toTreeData(props.elements).then((t2) => setTree(t2));
   }
   if (!tree) {
     return /* @__PURE__ */ React.createElement("div", {
@@ -59949,12 +59972,10 @@ function scrollToSelection(div2) {
 function ArrayIsSame(first, second) {
   return first.length === second.length && first.every((v2, i2) => v2 === second[i2]);
 }
-async function toTreeData(elements, filter) {
+async function toTreeData(elements) {
   if (!document)
     return;
-  const filterLower = filter.toLocaleLowerCase();
-  const filtered = elements.filter((s) => s.id.toString().toLocaleLowerCase().includes(filterLower) || s.name.toLocaleLowerCase().includes(filterLower) || s.categoryName.toLocaleLowerCase().includes(filterLower) || s.familyName.toLocaleLowerCase().includes(filterLower) || s.familyTypeName.toLocaleLowerCase().includes(filterLower));
-  const tree = toMapTree(filtered, [
+  const tree = toMapTree(elements, [
     (e) => e.categoryName,
     (e) => e.familyName,
     (e) => e.familyTypeName
@@ -60309,13 +60330,14 @@ function BimObjectHeader(props) {
 }
 function BimDocumentHeader(props) {
   const [vim, setVim] = react.exports.useState();
+  const [header, setHeader] = react.exports.useState();
   if (vim !== props.vim) {
     setVim(props.vim);
+    getVimBimHeader(props.vim).then((h) => setHeader(h));
   }
-  if (!props.vim) {
+  if (!header) {
     return /* @__PURE__ */ React.createElement(React.Fragment, null, "Loading...");
   }
-  const header = getVimBimHeader(props.vim);
   return createHeader(header);
 }
 function createHeader(header) {
@@ -60353,11 +60375,11 @@ function getElementBimHeader(info) {
     [["Element Id", info.id, "w-3/12", "w-9/12"]]
   ];
 }
-function getVimBimHeader(vim) {
+async function getVimBimHeader(vim) {
+  const documents = await vim.document.getBimDocumentSummary();
   return [
-    [["Document", vim.source, "w-3/12", "w-9/12"]],
+    [["Document", formatSource(vim.source), "w-3/12", "w-9/12"]],
     [["Created on", vim.document.header.created, "w-3/12", "w-9/12"]],
-    [["Created by", vim.document.header.generator, "w-3/12", "w-9/12"]],
     void 0,
     [
       [
@@ -60375,9 +60397,14 @@ function getVimBimHeader(vim) {
     ],
     [
       ["Mesh Count", vim.document.g3d.getMeshCount(), "w-3/12", "w-3/12"],
-      ["Revit Files", "N/A", "w-3/12", "w-3/12"]
+      ["Revit Files", documents == null ? void 0 : documents.length, "w-3/12", "w-3/12"]
     ]
   ];
+}
+function formatSource(source) {
+  console.log(source);
+  const parts = source.split("/");
+  return parts[parts.length - 1];
 }
 function BimSearch(props) {
   const onChange = (e) => {
@@ -60410,7 +60437,9 @@ function BimSearch(props) {
     onFocus,
     onBlur,
     onChange
-  }));
+  }), props.count !== void 0 && props.filter ? /* @__PURE__ */ React.createElement("span", {
+    className: "vim-bim-search-count rounded-full bg-light-blue px-2"
+  }, props.count) : null);
 }
 function BimPanel(props) {
   const viewer2 = props.viewer;
@@ -60418,6 +60447,7 @@ function BimPanel(props) {
   const [objects, setObjects] = react.exports.useState([]);
   const [vim, setVim] = react.exports.useState();
   const [elements, setElements] = react.exports.useState();
+  const [filteredElements, setFilteredElements] = react.exports.useState();
   const [open, setOpen] = react.exports.useState();
   const updateOpen = (group, value) => {
     const next = new Map(open.entries()).set(group, value);
@@ -60441,12 +60471,16 @@ function BimPanel(props) {
     const nextVim = (_a22 = viewer2.selection.vim) != null ? _a22 : viewer2.vims[0];
     if (nextVim && vim !== nextVim) {
       setVim(nextVim);
-      nextVim.document.getElementsSummary().then((s) => {
-        const filtered = s.filter((s2) => nextVim.getObjectFromElement(s2.element).hasMesh);
-        setElements(filtered);
+      nextVim.document.getElementsSummary().then((elements2) => {
+        setElements(filterElements(nextVim, elements2, filter));
       });
     }
   };
+  react.exports.useEffect(() => {
+    if (vim && elements) {
+      setFilteredElements(filterElements(vim, elements, filter));
+    }
+  }, [filter, elements]);
   react.exports.useEffect(() => {
     viewer2.onVimLoaded.subscribe(updateVim);
     viewer2.selection.onValueChanged.subscribe(() => {
@@ -60464,11 +60498,11 @@ function BimPanel(props) {
   }, "Project Inspector"), /* @__PURE__ */ React.createElement(BimSearch, {
     viewer: viewer2,
     filter,
-    setFilter: updateFilter
+    setFilter: updateFilter,
+    count: filteredElements == null ? void 0 : filteredElements.length
   }), /* @__PURE__ */ React.createElement(BimTree, {
     viewer: viewer2,
-    elements,
-    filter,
+    elements: filteredElements,
     objects
   })), /* @__PURE__ */ React.createElement("hr", {
     className: "border-gray-divider mb-5 -mx-6"
@@ -60477,7 +60511,7 @@ function BimPanel(props) {
   }, "Bim Inspector"), /* @__PURE__ */ React.createElement("div", {
     className: "vim-bim-lower h-1/2 overflow-y-auto"
   }, last ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(BimObjectHeader, {
-    elements,
+    elements: filteredElements,
     object: last
   }), /* @__PURE__ */ React.createElement(BimObjectDetails, {
     object: last,
@@ -60492,6 +60526,11 @@ function BimPanel(props) {
     setOpen: updateOpen,
     initOpen
   }))));
+}
+function filterElements(vim, elements, filter) {
+  const filterLower = filter.toLocaleLowerCase();
+  const filtered = elements.filter((e) => vim.getObjectFromElement(e.element).hasMesh && (e.id.toString().toLocaleLowerCase().includes(filterLower) || e.name.toLocaleLowerCase().includes(filterLower) || e.categoryName.toLocaleLowerCase().includes(filterLower) || e.familyName.toLocaleLowerCase().includes(filterLower) || e.familyTypeName.toLocaleLowerCase().includes(filterLower)));
+  return filtered;
 }
 const VIM_CONTEXT_MENU_ID = "vim-context-menu-id";
 function VimContextMenu(props) {
@@ -60650,11 +60689,18 @@ function SidePanel(props) {
     props.viewer.viewport.canvas.focus();
     resizeCanvas(props.viewer, visible);
   }, [visible]);
+  const onNavBtn = () => {
+    props.popSide();
+  };
   if (!visible)
     return null;
+  const iconOptions = { height: "20", width: "20", fill: "currentColor" };
   return /* @__PURE__ */ React.createElement("div", {
-    className: "vim-bim-panel fixed left-0 top-0 bg-gray-lightest p-6 text-gray-darker h-full"
-  }, props.content());
+    className: "vim-side-panel fixed left-0 top-0 bg-gray-lightest p-6 text-gray-darker h-full"
+  }, /* @__PURE__ */ React.createElement("button", {
+    className: "vim-side-panel-nav absolute right-2 top-2",
+    onClick: onNavBtn
+  }, props.getSideNav() === "back" ? arrowLeft(iconOptions) : close(iconOptions)), props.content());
 }
 function resizeCanvas(viewer2, open) {
   const parent = viewer2.viewport.canvas.parentElement;
@@ -60764,14 +60810,37 @@ function VimComponent(props) {
   const useMenuTop = props.menuTop === void 0 ? true : props.menuTop;
   const useLoading = props.loading === void 0 ? true : props.loading;
   const [helpVisible, setHelpVisible] = react.exports.useState(false);
-  const [sideContent, setSideContent] = react.exports.useState("bim");
   const [settings2, setSettings] = react.exports.useState(new ComponentSettings());
   const [toast, setToast] = react.exports.useState();
   const [isolation, setIsolation] = react.exports.useState();
   const [hidden, setHidden] = react.exports.useState(!getAllVisible(viewer2));
   const toastTimeout = react.exports.useRef();
   const toastSpeed = react.exports.useRef(0);
+  const [sideContent, setSideContent] = react.exports.useState(["bim"]);
   const sideContentRef = react.exports.useRef(sideContent);
+  const toggleSide = (content) => {
+    let r2;
+    const [A2, B2] = sideContentRef.current;
+    if (!A2 && !B2)
+      r2 = [content];
+    else if (A2 === content && !B2)
+      r2 = [];
+    else if (A2 !== content && !B2)
+      r2 = [A2, content];
+    else if (A2 && B2 === content)
+      r2 = [A2];
+    else if (A2 && B2 !== content)
+      r2 = [content];
+    sideContentRef.current = r2;
+    setSideContent(r2);
+  };
+  const popSide = () => {
+    sideContentRef.current.pop();
+    setSideContent([...sideContentRef.current]);
+  };
+  const getSideNav = () => {
+    return sideContentRef.current.length > 1 ? "back" : "close";
+  };
   const settingsRef = react.exports.useRef(settings2);
   const [cursorManager] = react.exports.useState(new CursorManager(props.viewer));
   const resetIsolation = () => {
@@ -60801,12 +60870,6 @@ function VimComponent(props) {
   react.exports.useEffect(() => {
     sideContentRef.current = sideContent;
   }, [sideContent]);
-  const updateSide = () => {
-    const showBim = props.viewer.selection.count > 0 && sideContentRef.current === "none";
-    if (showBim) {
-      setSideContent("bim");
-    }
-  };
   react.exports.useEffect(() => {
     props.onMount();
     cursorManager.register();
@@ -60822,11 +60885,18 @@ function VimComponent(props) {
         toastTimeout.current = setTimeout(() => setToast({ visible: false, speed: props.viewer.camera.speed }), 1e3);
       }
     });
-    props.viewer.selection.onValueChanged.subscribe(() => updateSide());
+    props.viewer.selection.onValueChanged.subscribe(() => {
+      const last = sideContentRef.current[sideContentRef.current.length - 1];
+      if (props.viewer.selection.count > 0 && last !== "bim") {
+        sideContentRef.current = ["bim"];
+        setSideContent(["bim"]);
+      }
+    });
     props.viewer.inputs.strategy = new ComponentInputStrategy(props.viewer);
   }, []);
   const getSidePanelContent = () => {
-    switch (sideContent) {
+    const last = sideContent[sideContent.length - 1];
+    switch (last) {
       case "bim":
         return /* @__PURE__ */ React.createElement(BimPanel, {
           viewer: props.viewer
@@ -60849,15 +60919,17 @@ function VimComponent(props) {
     viewer: props.viewer,
     helpVisible,
     setHelpVisible,
-    sideContent,
-    setSideContent,
+    side: sideContent[sideContent.length - 1],
+    toggleSide,
     toggleIsolation: toggleIsolation2,
     setCursor: cursorManager.setCursor
   }) : null, useMenuTop ? /* @__PURE__ */ React.createElement(MenuTop, {
     viewer: props.viewer
   }) : null, /* @__PURE__ */ React.createElement(SidePanel, {
     viewer: props.viewer,
-    content: getSidePanelContent
+    content: getSidePanelContent,
+    popSide,
+    getSideNav
   }), /* @__PURE__ */ React.createElement(ReactTooltip, {
     delayShow: 200
   }), /* @__PURE__ */ React.createElement(VimContextMenu, {
@@ -60942,6 +61014,7 @@ div.className = "vim-performance";
 style.right = "24px";
 style.left = "auto";
 style.top = "200px";
+style.zIndex = "1";
 document.body.appendChild(stats.dom);
 animate();
 function animate() {
