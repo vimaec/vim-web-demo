@@ -48914,6 +48914,15 @@ var vimWebglViewer_es = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.def
   createWireframe,
   patchBaseMaterial
 }, Symbol.toStringTag, { value: "Module" }));
+function setBehind(value) {
+  const component = document.getElementsByClassName("vim-component")[0];
+  const behind = component.classList.contains("behind");
+  if (value && !behind) {
+    component.classList.add("behind");
+  } else if (!value && behind) {
+    component.classList.remove("behind");
+  }
+}
 function resetCamera(viewer2) {
   viewer2.camera.reset();
   viewer2.camera.frame("all", 45);
@@ -49385,6 +49394,9 @@ function _LoadingBox(props) {
       }).then((_2) => setProgress(void 0));
     };
   }, []);
+  react.exports.useEffect(() => {
+    setBehind(progress !== void 0);
+  }, [progress]);
   const msg = progress === "processing" ? "Processing" : typeof progress === "number" ? `Downloading: ${Math.round(progress / 1e6)} MB` : typeof progress === "string" ? `Error: ${progress}` : void 0;
   if (!msg)
     return null;
@@ -60936,13 +60948,7 @@ function VimComponent(props) {
     applySettings(viewer2, settings2);
   }, [settings2]);
   react.exports.useEffect(() => {
-    const component = document.getElementsByClassName("vim-component")[0];
-    const behind = component.classList.contains("behind");
-    if (helpVisible && !behind) {
-      component.classList.add("behind");
-    } else if (!helpVisible && behind) {
-      component.classList.remove("behind");
-    }
+    setBehind(helpVisible);
   }, [helpVisible]);
   react.exports.useEffect(() => {
     props.onMount();
