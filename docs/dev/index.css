@@ -749,6 +749,9 @@ select {
 .top-6 {
   top: 1.5rem;
 }
+.isolate {
+  isolation: isolate;
+}
 .z-10 {
   z-index: 10;
 }
