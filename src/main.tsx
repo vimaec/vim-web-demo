@@ -35,8 +35,9 @@ const viewer = new VIM.Viewer(
     size: 5
   }
 })
-const root = createRoot(createContainer(viewer).ui)
-root.render(<VimComponent viewer = {viewer} onMount = {loadVim}/>)
+const container = createContainer(viewer)
+const root = createRoot(container.ui)
+root.render(<VimComponent root={container.root} viewer = {viewer} onMount = {loadVim}/>)
 function loadVim(){
   viewer.loadVim(
     url,
@@ -56,8 +57,7 @@ style.left = 'auto'
 style.top = '200px'
 style.zIndex = '1'
 // -half width
-
-document.body.appendChild(stats.dom)
+container.root.appendChild(stats.dom)
 animate()
 
 function animate () {

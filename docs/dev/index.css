@@ -743,12 +743,6 @@ select {
 .top-0 {
   top: 0px;
 }
-.right-2 {
-  right: 0.5rem;
-}
-.top-2 {
-  top: 0.5rem;
-}
 .right-6 {
   right: 1.5rem;
 }
@@ -801,6 +795,9 @@ select {
 }
 .mb-9 {
   margin-bottom: 2.25rem;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
 }
 .mb-8 {
   margin-bottom: 2rem;
@@ -873,6 +870,9 @@ select {
 }
 .w-px {
   width: 1px;
+}
+.w-\[320px\] {
+  width: 320px;
 }
 .w-max {
   width: -webkit-max-content;
@@ -1036,6 +1036,10 @@ select {
 .px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
+}
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 .py-5 {
   padding-top: 1.25rem;
@@ -1201,26 +1205,7 @@ body {
 .vim-top:hover {
   opacity: 1;
 }
-.vim-loading-box {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  padding: 10px;
-  border: 1px solid #e3e3e3;
-  border-radius: 3px;
-  background-color: #f6f6f6;
 
-  font-family: 'Roboto', sans-serif;
-
-  /*Centers the box*/
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
 
 /* Context Menu */
 .checked {
@@ -1344,7 +1329,12 @@ body {
   left: calc(50% + 190px);
 }
 .vim-gfx.bim-panel-open + .vim-ui .vim-loading-box {
-  left: calc(50% + 190px);
+  margin: auto;
+  align-self: center;
+  position: absolute;
+  top: calc(50% - 37px);
+  left: calc(50% - 160px);
+  z-index: 999;
 }
 .submenu-item-active {
   position: relative;
@@ -1381,6 +1371,10 @@ body {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   min-height: 2.5rem;
+  webkit-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+          user-select: none;
 }
 .rct-tree-items-container > li:nth-child(odd) {
   background-color: var(--c-white);
@@ -1399,7 +1393,7 @@ body {
   border: none;
 }
 
-.rct-tree-item-li {
+.rct-tree-items-container .rct-tree-item-li {
   font-size: 1rem;
   position: relative;
 }
@@ -1513,58 +1507,132 @@ input[type='search']::-webkit-search-cancel-button {
 .vim-text-renderer .vim-measure:nth-of-type(5) table tr {
   border: 1px solid var(--c-darkest-gray);
 }
+@-moz-document url-prefix() { 
+  .vim-bim-search-count {
+     right: 1.5rem
+  }
+}
+.behind canvas, .behind .vim-logo, .behind .vim-logo, .behind .vim-control-bar, .behind .vim-logo, .behind .vim-top, .behind .vim-side-panel, .behind .vim-logo {
+  filter: blur(10px);
+}
+.loader {
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  display: inline-block;
+  position: relative;
+  background: var(--c-lighter-gray);
+  overflow: hidden;
+}
+.loader::after {
+  content: '';
+  width: 130px;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--c-primary);
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  -webkit-animation: animloader 2s linear infinite;
+          animation: animloader 2s linear infinite;
+}
+
+@-webkit-keyframes animloader {
+  0% {
+    left: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    left: 100%;
+    transform: translateX(0%);
+  }
+}
+
+@keyframes animloader {
+  0% {
+    left: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    left: 100%;
+    transform: translateX(0%);
+  }
+}
+
 .odd\:bg-gray-zebra:nth-child(odd) {
   background-color: var(--c-gray-zebra);
 }
+
 .even\:bg-white:nth-child(even) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
+
 .checked\:bg-primary-royal:checked {
   background-color: var(--c-primary-royal);
 }
+
 .focus-within\:border-b-primary-royal:focus-within {
   border-bottom-color: var(--c-primary-royal);
 }
+
 .focus-within\:text-primary-royal:focus-within {
   color: var(--c-primary-royal);
 }
+
 .focus-within\:outline-none:focus-within {
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
+
 .hover\:scale-110:hover {
   --tw-scale-x: 1.1;
   --tw-scale-y: 1.1;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
+
 .hover\:border-primary-royal:hover {
   border-color: var(--c-primary-royal);
 }
+
 .hover\:bg-gray-lightest:hover {
   background-color: var(--c-lightest-gray);
 }
+
 .hover\:bg-primary-royal:hover {
   background-color: var(--c-primary-royal);
 }
+
 .hover\:text-primary-royal:hover {
   color: var(--c-primary-royal);
 }
+
 .hover\:text-white:hover {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
+
 .hover\:opacity-100:hover {
   opacity: 1;
 }
+
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
+
 .active\:text-primary-royal:active {
   color: var(--c-primary-royal);
 }
-.vim-measure {
+
+@media (min-width: 1536px) {
+
+  .\32xl\:w-\[50vw\] {
+    width: 50vw;
+  }
+}
+    .vim-measure {
   background-color: white;
 }
 
