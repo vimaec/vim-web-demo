@@ -49119,16 +49119,7 @@ function isolate(viewer2, settings2, objects) {
     vim.scene.material = settings2.useIsolationMaterial ? viewer2.renderer.materials.isolation : void 0;
   });
   viewer2.camera.frame(getVisibleBoundingBox(viewer2), "none", viewer2.camera.defaultLerpDuration);
-}
-function isolateSelection(viewer2, settings2) {
-  isolate(viewer2, settings2, [...viewer2.selection.objects]);
-  const set3 = new Set(viewer2.selection.objects);
-  const vim = viewer2.selection.vim;
-  for (const obj of vim.getAllObjects()) {
-    obj.visible = set3.has(obj);
-  }
-  vim.scene.material = settings2.useIsolationMaterial ? viewer2.renderer.materials.isolation : void 0;
-  viewer2.camera.frame(getVisibleBoundingBox(vim), "none", viewer2.camera.defaultLerpDuration);
+  viewer2.selection.clear();
 }
 function showAll(viewer2, settings2) {
   viewer2.vims.forEach((v2) => {
@@ -60066,15 +60057,11 @@ function VimContextMenu(props) {
     e.stopPropagation();
   };
   const onSelectionIsolateBtn = (e) => {
-    if (selection.length === 0)
-      return;
     props.isolation.toggle();
     e.stopPropagation();
   };
   const onSelectionHideBtn = (e) => {
-    if (selection.length === 0)
-      return;
-    props.isolation.hide([...viewer2.selection.objects]);
+    props.isolation.hide();
     e.stopPropagation();
   };
   const onSelectionClearBtn = (e) => {
@@ -61251,12 +61238,12 @@ function createIsolationState(viewer2, settings2) {
         setAllVisible(viewer2);
         isolationRef.current = void 0;
       } else {
-        isolateSelection(viewer2, settings2);
+        isolate(viewer2, settings2, selection);
         isolationRef.current = selection;
       }
     } else {
       if (selection.length > 0) {
-        isolateSelection(viewer2, settings2);
+        isolate(viewer2, settings2, selection);
         isolationRef.current = selection;
       } else if (lastIsolation.current) {
         isolate(viewer2, settings2, lastIsolation.current);
@@ -61264,13 +61251,17 @@ function createIsolationState(viewer2, settings2) {
       }
     }
   };
-  const hide = (objects) => {
-    if (isolationRef.current) {
-      const set3 = new Set(objects);
-      isolationRef.current = isolationRef.current.filter((o) => !set3.has(o));
+  const hide = () => {
+    var _a22;
+    const selection = new Set(viewer2.selection.objects);
+    const initial = (_a22 = isolationRef.current) != null ? _a22 : viewer2.vims[0].getAllObjects();
+    const result = [];
+    for (const obj of initial) {
+      if (!selection.has(obj))
+        result.push(obj);
     }
-    objects.forEach((o) => o.visible = false);
-    viewer2.selection.clear();
+    isolate(viewer2, settings2, result);
+    isolationRef.current = result;
   };
   return { toggle, hide, current };
 }
