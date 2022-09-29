@@ -42198,7 +42198,7 @@ class MouseHandler extends InputHandler {
       this.hasMouseMoved = false;
     });
     __publicField(this, "onMouseIdle", (position) => {
-      if (this.buttonDown)
+      if (this.buttonDown || !position)
         return;
       const action = new InputAction("idle", this.getModifier(), position, this.raycaster);
       this._viewer.inputs.IdleAction(action);
@@ -60805,7 +60805,7 @@ function BimPanel(props) {
   const [vim, setVim] = react.exports.useState();
   const [elements, setElements] = react.exports.useState();
   const [filteredElements, setFilteredElements] = react.exports.useState();
-  const [searching, setSearching] = react.exports.useState(false);
+  const searching = react.exports.useRef(false);
   if (props.vim !== vim) {
     setVim(props.vim);
   }
@@ -60826,7 +60826,7 @@ function BimPanel(props) {
       const meshElements = elements.filter((e) => vim.getObjectFromElement(e.element).hasMesh);
       const result = filterElements(vim, meshElements, filter);
       setFilteredElements(result);
-      if (searching) {
+      if (searching.current) {
         if (filter !== "") {
           const objects = result.map((e) => vim.getObjectFromElement(e.element));
           props.isolation.search(objects);
@@ -60851,7 +60851,7 @@ function BimPanel(props) {
     filter,
     setFilter: updateFilter,
     count: filteredElements == null ? void 0 : filteredElements.length,
-    setSearching
+    setSearching: (value) => searching.current = value
   }), /* @__PURE__ */ React.createElement(BimTree, {
     viewer: viewer2,
     elements: filteredElements,
