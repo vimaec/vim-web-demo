@@ -8762,7 +8762,6 @@ body {\r
   opacity: 1;\r
 }\r
 \r
-\r
 /* Context Menu */\r
 .checked {\r
   font-weight: bold;\r
@@ -8988,6 +8987,17 @@ body {\r
 .rct-tree-item-title-container:hover {\r
   background-color: var(--c-list-hover);\r
 }\r
+.rct-tree-items-:hover {\r
+  background-color: var(--c-list-hover);\r
+}\r
+\r
+.rct-tree-item-title {\r
+  margin: 0px;\r
+}\r
+.rct-tree-item-checkbox {\r
+  position: absolute;\r
+  right: 10px;\r
+}\r
 \r
 [type='checkbox']:focus,\r
 [type='radio']:focus {\r
@@ -9063,12 +9073,19 @@ input[type='search']::-webkit-search-cancel-button {\r
 .vim-text-renderer .vim-measure:nth-of-type(5) table tr {\r
   border: 1px solid var(--c-darkest-gray);\r
 }\r
-@-moz-document url-prefix() { \r
+@-moz-document url-prefix() {\r
   .vim-bim-search-count {\r
-     right: 1.5rem\r
+    right: 1.5rem;\r
   }\r
 }\r
-.behind canvas, .behind .vim-logo, .behind .vim-logo, .behind .vim-control-bar, .behind .vim-logo, .behind .vim-top, .behind .vim-side-panel, .behind .vim-logo {\r
+.behind canvas,\r
+.behind .vim-logo,\r
+.behind .vim-logo,\r
+.behind .vim-control-bar,\r
+.behind .vim-logo,\r
+.behind .vim-top,\r
+.behind .vim-side-panel,\r
+.behind .vim-logo {\r
   filter: blur(10px);\r
 }\r
 .loader {\r
@@ -9188,7 +9205,7 @@ input[type='search']::-webkit-search-cancel-button {\r
     width: 50vw;
   }
 }\r
-    .vim-measure {\r
+.vim-measure {\r
   background-color: white;\r
 }\r
 \r
@@ -49414,7 +49431,7 @@ function TabTools(viewer2, setCursor, isolation) {
   };
   const btnSection = actionButton("Sectioning Mode", onSectionBtn, sectionBox, false);
   const btnMeasure = actionButton("Measuring Mode", onMeasureBtn, measure, false);
-  const btnIsolation = actionButton("Toggle Isolation", isolation.toggle, toggleIsolation, false);
+  const btnIsolation = actionButton("Toggle Isolation", () => isolation.toggleContextual("controlBar"), toggleIsolation, false);
   const toolsTab = /* @__PURE__ */ React.createElement("div", {
     className: "vim-menu-section flex items-center bg-white rounded-full px-2 mx-2 shadow-md"
   }, /* @__PURE__ */ React.createElement("div", {
@@ -60061,11 +60078,11 @@ function VimContextMenu(props) {
     e.stopPropagation();
   };
   const onSelectionIsolateBtn = (e) => {
-    props.isolation.toggle();
+    props.isolation.toggleContextual("contextMenu");
     e.stopPropagation();
   };
   const onSelectionHideBtn = (e) => {
-    props.isolation.hide();
+    props.isolation.hideSelection("contextMenu");
     e.stopPropagation();
   };
   const onSelectionClearBtn = (e) => {
@@ -60073,7 +60090,7 @@ function VimContextMenu(props) {
     e.stopPropagation();
   };
   const onShowAllBtn = (e) => {
-    props.isolation.clear();
+    props.isolation.clear("contextMenu");
     e.stopPropagation();
   };
   const onSectionToggleBtn = (e) => {
@@ -60139,6 +60156,11 @@ function BimTree(props) {
       focus.current = treeRef.current.getNode(first.element);
     }
   }, [elements, objects]);
+  react.exports.useEffect(() => {
+    props.viewer.renderer.onVisibilityChanged.subscribe(() => {
+      setElements(elements);
+    });
+  }, []);
   if (props.elements && props.elements !== elements) {
     setElements(props.elements);
   }
@@ -60156,6 +60178,31 @@ function BimTree(props) {
     setExpandedItems([...new Set(expandedItems.concat(parents))]);
     setSelectedItems(selection);
   }
+  const onCheckmark = (index, value) => {
+    var _a22;
+    const node = treeRef.current.nodes[index];
+    if (node.data) {
+      const obj = props.viewer.vims[0].getObjectFromElement((_a22 = node.data) == null ? void 0 : _a22.element);
+      if (obj) {
+        if (value) {
+          props.isolation.show([obj], "tree");
+        } else {
+          props.isolation.hide([obj], "tree");
+        }
+      }
+    } else {
+      const leafs = treeRef.current.getLeafs(index);
+      const objs = leafs.map((n2) => {
+        var _a3;
+        return props.viewer.vims[0].getObjectFromElement((_a3 = treeRef.current.nodes[n2]) == null ? void 0 : _a3.data.element);
+      });
+      if (value) {
+        props.isolation.show(objs, "tree");
+      } else {
+        props.isolation.hide(objs, "tree");
+      }
+    }
+  };
   return /* @__PURE__ */ React.createElement("div", {
     className: "vim-bim-tree mb-5",
     ref: div2,
@@ -60172,9 +60219,18 @@ function BimTree(props) {
         selectedItems
       }
     },
-    renderItemTitle: ({ title }) => /* @__PURE__ */ React.createElement("span", {
+    renderItemTitle: ({ title, item }) => /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("span", {
+      className: "rct-tree-item-title",
       "data-tip": title
-    }, title),
+    }, title), /* @__PURE__ */ React.createElement("input", {
+      className: "rct-tree-item-checkbox",
+      type: "checkbox",
+      checked: getObjectVisibility(props.viewer, treeRef.current, item.index),
+      onClick: (e) => e.stopPropagation(),
+      onChange: (e) => {
+        onCheckmark(item.index, e.target.checked);
+      }
+    })),
     canRename: false,
     canSearchByStartingTyping: false,
     canSearch: false,
@@ -60243,6 +60299,21 @@ function BimTree(props) {
     rootItem: "0",
     treeLabel: "Tree Example"
   })));
+}
+function getObjectVisibility(viewer2, tree, index) {
+  var _a22, _b2;
+  const node = tree.nodes[index];
+  if (node.data) {
+    const obj = viewer2.vims[0].getObjectFromElement((_a22 = node.data) == null ? void 0 : _a22.element);
+    return (_b2 = obj == null ? void 0 : obj.visible) != null ? _b2 : false;
+  }
+  const result = tree.hasSomePredicate(index, (n2) => {
+    var _a3, _b3;
+    const leaf = tree.nodes[n2];
+    const obj = viewer2.vims[0].getObjectFromElement((_a3 = leaf.data) == null ? void 0 : _a3.element);
+    return (_b3 = obj == null ? void 0 : obj.visible) != null ? _b3 : false;
+  });
+  return result;
 }
 function updateViewerFocus(viewer2, tree, index) {
   var _a22;
@@ -60350,13 +60421,21 @@ class BimTreeData {
     }
     return true;
   }
+  hasSomePredicate(node, predicate) {
+    const leafs = this.getLeafs(node);
+    for (const n2 of leafs) {
+      if (predicate(n2))
+        return true;
+    }
+    return false;
+  }
   hasSome(node, set3) {
     const children = this.getLeafs(node);
     for (const c of children) {
       if (set3.has(c))
         return true;
     }
-    return true;
+    return false;
   }
   getChildren(node, recusive = false, result = []) {
     result.push(node);
@@ -60810,7 +60889,10 @@ function BimPanel(props) {
     setVim(props.vim);
   }
   react.exports.useEffect(() => {
-    props.isolation.onChange(() => setFilter(""));
+    props.isolation.onChange((source) => {
+      if (source !== "tree" && source !== "search")
+        setFilter("");
+    });
   }, []);
   react.exports.useEffect(() => {
     if (vim) {
@@ -60829,9 +60911,9 @@ function BimPanel(props) {
       if (searching.current) {
         if (filter !== "") {
           const objects = result.map((e) => vim.getObjectFromElement(e.element));
-          props.isolation.search(objects);
+          props.isolation.search(objects, "search");
         } else {
-          props.isolation.search(void 0);
+          props.isolation.search(void 0, "search");
         }
       }
     }
@@ -60855,7 +60937,8 @@ function BimPanel(props) {
   }), /* @__PURE__ */ React.createElement(BimTree, {
     viewer: viewer2,
     elements: filteredElements,
-    objects: props.selection
+    objects: props.selection,
+    isolation: props.isolation
   })), /* @__PURE__ */ React.createElement("hr", {
     className: "border-gray-divider mb-5 -mx-6"
   }), /* @__PURE__ */ React.createElement("h2", {
@@ -61005,10 +61088,10 @@ function _MenuToast(props) {
   }, speed + 25));
 }
 class ComponentInputs {
-  constructor(viewer2, toggleIsolation2) {
+  constructor(viewer2, isolation) {
     this._viewer = viewer2;
     this._default = new DefaultInputScheme(viewer2);
-    this._toggleIsolation = toggleIsolation2;
+    this._isolation = isolation;
   }
   onMainAction(hit) {
     this._default.onMainAction(hit);
@@ -61024,7 +61107,7 @@ class ComponentInputs {
         return true;
       }
       case KEYS.KEY_I: {
-        this._toggleIsolation();
+        this._isolation.toggleContextual("keyboard");
         break;
       }
     }
@@ -61129,7 +61212,7 @@ function VimComponent(props) {
     const subLoad = viewer2.onVimLoaded.subscribe(() => {
       viewer2.camera.frame("all", 45);
     });
-    props.viewer.inputs.scheme = new ComponentInputs(props.viewer, isolation.toggle);
+    props.viewer.inputs.scheme = new ComponentInputs(props.viewer, isolation);
     return () => {
       cursorManager.unregister();
       subLoad();
@@ -61244,14 +61327,15 @@ function createIsolationState(viewer2, settings2) {
   const current = () => {
     return isolationRef.current;
   };
-  const search = (objects) => {
+  const search = (objects, source) => {
     if (isolationRef.current) {
       lastIsolation.current = isolationRef.current;
     }
     isolate(viewer2, settings2, objects);
     isolationRef.current = objects;
+    changed.current(source);
   };
-  const toggle = () => {
+  const toggleContextual = (source) => {
     const selection = [...viewer2.selection.objects];
     if (isolationRef.current) {
       lastIsolation.current = isolationRef.current;
@@ -61273,11 +61357,14 @@ function createIsolationState(viewer2, settings2) {
         isolationRef.current = [...lastIsolation.current];
       }
     }
-    changed.current();
+    changed.current(source);
   };
-  const hide = () => {
+  const hideSelection = (source) => {
+    hide([...viewer2.selection.objects], source);
+  };
+  const hide = (objects, source) => {
     var _a22;
-    const selection = new Set(viewer2.selection.objects);
+    const selection = new Set(objects);
     const initial = (_a22 = isolationRef.current) != null ? _a22 : viewer2.vims[0].getAllObjects();
     const result = [];
     for (const obj of initial) {
@@ -61286,14 +61373,30 @@ function createIsolationState(viewer2, settings2) {
     }
     isolate(viewer2, settings2, result);
     isolationRef.current = result;
-    changed.current();
+    changed.current(source);
   };
-  const clear = () => {
+  const show = (objects, source) => {
+    objects.forEach((o) => isolationRef.current.push(o));
+    const result = [...new Set(isolationRef.current)];
+    isolate(viewer2, settings2, result);
+    isolationRef.current = result;
+    changed.current(source);
+  };
+  const clear = (source) => {
     setAllVisible(viewer2);
     isolationRef.current = void 0;
-    changed.current();
+    changed.current(source);
   };
-  return { search, toggle, hide, clear, current, onChange };
+  return {
+    search,
+    show,
+    hide,
+    toggleContextual,
+    hideSelection,
+    clear,
+    current,
+    onChange
+  };
 }
 const params = new URLSearchParams(window.location.search);
 let url = params.has("vim") || params.has("model") ? (_a2 = params.get("vim")) != null ? _a2 : params.get("model") : "https://vim.azureedge.net/samples/residence.vim";

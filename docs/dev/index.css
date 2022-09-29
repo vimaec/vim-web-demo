@@ -1209,7 +1209,6 @@ body {
   opacity: 1;
 }
 
-
 /* Context Menu */
 .checked {
   font-weight: bold;
@@ -1435,6 +1434,17 @@ body {
 .rct-tree-item-title-container:hover {
   background-color: var(--c-list-hover);
 }
+.rct-tree-items-:hover {
+  background-color: var(--c-list-hover);
+}
+
+.rct-tree-item-title {
+  margin: 0px;
+}
+.rct-tree-item-checkbox {
+  position: absolute;
+  right: 10px;
+}
 
 [type='checkbox']:focus,
 [type='radio']:focus {
@@ -1510,12 +1520,19 @@ input[type='search']::-webkit-search-cancel-button {
 .vim-text-renderer .vim-measure:nth-of-type(5) table tr {
   border: 1px solid var(--c-darkest-gray);
 }
-@-moz-document url-prefix() { 
+@-moz-document url-prefix() {
   .vim-bim-search-count {
-     right: 1.5rem
+    right: 1.5rem;
   }
 }
-.behind canvas, .behind .vim-logo, .behind .vim-logo, .behind .vim-control-bar, .behind .vim-logo, .behind .vim-top, .behind .vim-side-panel, .behind .vim-logo {
+.behind canvas,
+.behind .vim-logo,
+.behind .vim-logo,
+.behind .vim-control-bar,
+.behind .vim-logo,
+.behind .vim-top,
+.behind .vim-side-panel,
+.behind .vim-logo {
   filter: blur(10px);
 }
 .loader {
@@ -1635,7 +1652,7 @@ input[type='search']::-webkit-search-cancel-button {
     width: 50vw;
   }
 }
-    .vim-measure {
+.vim-measure {
   background-color: white;
 }
 
