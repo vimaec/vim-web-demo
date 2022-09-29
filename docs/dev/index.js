@@ -49111,15 +49111,27 @@ function frameSelection(viewer2) {
   }
 }
 function isolate(viewer2, settings2, objects) {
-  const set3 = new Set(objects);
-  viewer2.vims.forEach((vim) => {
-    for (const obj of vim.getAllObjects()) {
-      obj.visible = set3.has(obj);
-    }
-    vim.scene.material = settings2.useIsolationMaterial ? viewer2.renderer.materials.isolation : void 0;
-  });
+  if (!objects) {
+    showAll(viewer2);
+  } else {
+    const set3 = new Set(objects);
+    viewer2.vims.forEach((vim) => {
+      for (const obj of vim.getAllObjects()) {
+        obj.visible = set3.has(obj);
+      }
+      vim.scene.material = settings2.useIsolationMaterial ? viewer2.renderer.materials.isolation : void 0;
+    });
+  }
   viewer2.camera.frame(getVisibleBoundingBox(viewer2), "none", viewer2.camera.defaultLerpDuration);
   viewer2.selection.clear();
+}
+function showAll(viewer2, settings2) {
+  viewer2.vims.forEach((v2) => {
+    for (const obj of v2.getAllObjects()) {
+      obj.visible = true;
+    }
+    v2.scene.material = void 0;
+  });
 }
 function setAllVisible(source) {
   const vimShowAll = (vim) => {
@@ -60757,9 +60769,11 @@ function BimSearch(props) {
   };
   const onFocus = () => {
     props.viewer.inputs.keyboard.unregister();
+    props.setSearching(true);
   };
   const onBlur = () => {
     props.viewer.inputs.keyboard.register();
+    props.setSearching(false);
   };
   return /* @__PURE__ */ React.createElement("div", {
     className: "vim-bim-search mb-4 flex items-center"
@@ -60791,6 +60805,7 @@ function BimPanel(props) {
   const [vim, setVim] = react.exports.useState();
   const [elements, setElements] = react.exports.useState();
   const [filteredElements, setFilteredElements] = react.exports.useState();
+  const [searching, setSearching] = react.exports.useState(false);
   if (props.vim !== vim) {
     setVim(props.vim);
   }
@@ -60811,11 +60826,13 @@ function BimPanel(props) {
       const meshElements = elements.filter((e) => vim.getObjectFromElement(e.element).hasMesh);
       const result = filterElements(vim, meshElements, filter);
       setFilteredElements(result);
-      if (filter !== "") {
-        const objects = result.map((e) => vim.getObjectFromElement(e.element));
-        props.isolation.set(objects);
-      } else {
-        props.isolation.clear();
+      if (searching) {
+        if (filter !== "") {
+          const objects = result.map((e) => vim.getObjectFromElement(e.element));
+          props.isolation.search(objects);
+        } else {
+          props.isolation.search(void 0);
+        }
       }
     }
   }, [filter, elements]);
@@ -60833,7 +60850,8 @@ function BimPanel(props) {
     viewer: viewer2,
     filter,
     setFilter: updateFilter,
-    count: filteredElements == null ? void 0 : filteredElements.length
+    count: filteredElements == null ? void 0 : filteredElements.length,
+    setSearching
   }), /* @__PURE__ */ React.createElement(BimTree, {
     viewer: viewer2,
     elements: filteredElements,
@@ -61275,7 +61293,7 @@ function createIsolationState(viewer2, settings2) {
     isolationRef.current = void 0;
     changed.current();
   };
-  return { set: search, toggle, hide, clear, current, onChange };
+  return { search, toggle, hide, clear, current, onChange };
 }
 const params = new URLSearchParams(window.location.search);
 let url = params.has("vim") || params.has("model") ? (_a2 = params.get("vim")) != null ? _a2 : params.get("model") : "https://vim.azureedge.net/samples/residence.vim";
