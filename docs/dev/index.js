@@ -8994,9 +8994,30 @@ body {\r
 .rct-tree-item-title {\r
   margin: 0px;\r
 }\r
-.rct-tree-item-checkbox {\r
+\r
+.rct-tree-item-icon {\r
   position: absolute;\r
   right: 10px;\r
+  top: 10px;\r
+}\r
+\r
+.rct-tree-item-icon.vim-hidden {\r
+  color: black;\r
+  opacity: 0.75;\r
+}\r
+.rct-tree-item-icon.vim-visible {\r
+  color: black;\r
+  opacity: 0;\r
+}\r
+\r
+.rct-tree-item:hover .rct-tree-item-icon.vim-visible {\r
+  color: black;\r
+  opacity: 0.25;\r
+}\r
+\r
+.rct-tree-item:hover .rct-tree-item-icon:hover {\r
+  opacity: 0.75;\r
+  color: #0000f5;\r
 }\r
 \r
 [type='checkbox']:focus,\r
@@ -40307,6 +40328,20 @@ const collapse = ({ height, width, fill, className }) => /* @__PURE__ */ React.c
   fill,
   d: "m226.207 82.919-.017-.019c-5.937-6.547-16.057-7.04-22.602-1.102L128 150.367l-75.588-68.57c-6.546-5.938-16.666-5.444-22.602 1.102l-.017.019c-5.935 6.545-5.442 16.662 1.102 22.599l86.348 78.33c6.103 5.536 15.411 5.536 21.514 0l86.348-78.33c6.544-5.936 7.038-16.054 1.102-22.599Z"
 }));
+const hidden = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
+  height,
+  width,
+  viewBox: "0 0 256 256"
+}, /* @__PURE__ */ React.createElement("path", {
+  fill: "none",
+  d: "M0 0h256v256H0z"
+}), /* @__PURE__ */ React.createElement("path", {
+  fill,
+  d: "M154.271 63.406c22.243 5.762 39.382 17.586 48.956 25.494 9.186 7.587 17.187 16.341 22.527 24.648 6.176 9.606 6.247 14.405 6.247 14.452 0 4.764-5.566 18.577-22.079 34.01l16.973 16.972c18.185-17.247 29.106-36.602 29.106-50.982 0-30.946-57.308-92-128-92-13.307 0-26.139 2.165-38.205 5.884l42.099 42.099c2.731-10.572 11.479-18.722 22.376-20.577Z"
+}), /* @__PURE__ */ React.createElement("path", {
+  fill,
+  d: "m166.022 118.111 21.472 21.472A63.801 63.801 0 0 0 191.999 116a63.79 63.79 0 0 0-5.004-24.847c-.07 12.971-8.957 23.853-20.974 26.958ZM31.833 17.863c-4.687-4.686-12.284-4.686-16.971 0-4.686 4.687-4.686 12.285 0 16.971l29.92 29.92C17.38 84.825 0 110.966 0 128c0 32.943 57.308 92 128 92 21.088 0 40.972-5.269 58.51-13.52l37.657 37.657c4.687 4.686 12.284 4.686 16.971 0 4.686-4.687 4.686-12.285 0-16.971L31.833 17.863ZM128 196c-35.405 0-62.403-17.699-75.346-28.249C31.004 150.103 24 133.349 24 128c0-.047.071-4.846 6.247-14.452 5.34-8.308 13.341-17.061 22.527-24.648a134.832 134.832 0 0 1 9.205-6.95l7.708 7.708a63.612 63.612 0 0 0-5.686 26.343c0 35.346 28.654 64 64 64 9.397 0 18.31-2.043 26.345-5.684l13.936 13.936c-11.606 4.516-25.17 7.749-40.281 7.749Z"
+}));
 const orbit = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
   height,
   width,
@@ -60048,7 +60083,7 @@ function VimContextMenu(props) {
     return !viewer2.sectionBox.box.containsBox(viewer2.renderer.getBoundingBox());
   };
   const [clipping, setClipping] = react.exports.useState(isClipping());
-  const [hidden, setHidden] = react.exports.useState(!getAllVisible(viewer2));
+  const [hidden2, setHidden] = react.exports.useState(!getAllVisible(viewer2));
   react.exports.useEffect(() => {
     viewer2.selection.onValueChanged.subscribe(() => {
       setSelection([...viewer2.selection.objects]);
@@ -60133,7 +60168,7 @@ function VimContextMenu(props) {
   }, /* @__PURE__ */ React.createElement(ContextMenu, {
     className: "text-gray-darker bg-white py-1 w-[240px] rounded shadow-lg",
     id: VIM_CONTEXT_MENU_ID
-  }, createButton("Show Controls", "F1", onShowControlsBtn), createDivider(), createButton("Reset Camera", "HOME", onCameraResetBtn), createButton("Zoom to Fit", "F", onCameraFrameBtn), createDivider(hasSelection || hidden), createButton("Isolate Object", "I", onSelectionIsolateBtn, hasSelection && !isolated), createButton("Hide Object", "", onSelectionHideBtn, hasSelection), createButton("Clear Selection", "Esc", onSelectionClearBtn, hasSelection), createButton("Show All", "", onShowAllBtn, hidden), createDivider(measuring), createButton("Delete Measurement", "", onMeasureDeleteBtn, measuring), createDivider(clipping || section.visible), createButton(section.clip ? "Ignore Section Box" : "Apply Section Box", "", onSectionToggleBtn, clipping), createButton("Reset Section Box", "", onSectionResetBtn, section.visible), createButton("Fit section box to selection", "", onFitSectionToSelectionBtn, section.visible && hasSelection)));
+  }, createButton("Show Controls", "F1", onShowControlsBtn), createDivider(), createButton("Reset Camera", "HOME", onCameraResetBtn), createButton("Zoom to Fit", "F", onCameraFrameBtn), createDivider(hasSelection || hidden2), createButton("Isolate Object", "I", onSelectionIsolateBtn, hasSelection && !isolated), createButton("Hide Object", "", onSelectionHideBtn, hasSelection), createButton("Clear Selection", "Esc", onSelectionClearBtn, hasSelection), createButton("Show All", "", onShowAllBtn, hidden2), createDivider(measuring), createButton("Delete Measurement", "", onMeasureDeleteBtn, measuring), createDivider(clipping || section.visible), createButton(section.clip ? "Ignore Section Box" : "Apply Section Box", "", onSectionToggleBtn, clipping), createButton("Reset Section Box", "", onSectionResetBtn, section.visible), createButton("Fit section box to selection", "", onFitSectionToSelectionBtn, section.visible && hasSelection)));
 }
 function BimTree(props) {
   const [objects, setObjects] = react.exports.useState([]);
@@ -60153,7 +60188,7 @@ function BimTree(props) {
     if (elements && objects.length === 1) {
       scrollToSelection(div2.current);
       const [first] = props.viewer.selection.objects;
-      focus.current = treeRef.current.getNode(first.element);
+      focus.current = treeRef.current.getNodeFromElement(first.element);
     }
   }, [elements, objects]);
   react.exports.useEffect(() => {
@@ -60172,35 +60207,22 @@ function BimTree(props) {
   }
   if (!ArrayEquals(props.objects, objects)) {
     setObjects(props.objects);
-    const nodes = props.objects.map((o) => tree.getNode(o.element));
+    const nodes = props.objects.map((o) => tree.getNodeFromElement(o.element));
     const parents = nodes.flatMap((n2) => tree.getAncestors(n2));
     const selection = tree.getSelection(props.objects.map((o) => o.element));
     setExpandedItems([...new Set(expandedItems.concat(parents))]);
     setSelectedItems(selection);
   }
-  const onCheckmark = (index, value) => {
-    var _a22;
-    const node = treeRef.current.nodes[index];
-    if (node.data) {
-      const obj = props.viewer.vims[0].getObjectFromElement((_a22 = node.data) == null ? void 0 : _a22.element);
-      if (obj) {
-        if (value) {
-          props.isolation.show([obj], "tree");
-        } else {
-          props.isolation.hide([obj], "tree");
-        }
-      }
+  const onCheckmark = (index) => {
+    const visibility = getObjectVisibility(props.viewer, treeRef.current, index);
+    const objs = treeRef.current.getLeafs(index).map((n2) => {
+      var _a22;
+      return props.viewer.vims[0].getObjectFromElement((_a22 = treeRef.current.nodes[n2]) == null ? void 0 : _a22.data.element);
+    });
+    if (visibility !== "vim-visible") {
+      props.isolation.show(objs, "tree");
     } else {
-      const leafs = treeRef.current.getLeafs(index);
-      const objs = leafs.map((n2) => {
-        var _a3;
-        return props.viewer.vims[0].getObjectFromElement((_a3 = treeRef.current.nodes[n2]) == null ? void 0 : _a3.data.element);
-      });
-      if (value) {
-        props.isolation.show(objs, "tree");
-      } else {
-        props.isolation.hide(objs, "tree");
-      }
+      props.isolation.hide(objs, "tree");
     }
   };
   return /* @__PURE__ */ React.createElement("div", {
@@ -60219,18 +60241,22 @@ function BimTree(props) {
         selectedItems
       }
     },
-    renderItemTitle: ({ title, item }) => /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("span", {
+    renderItemTitle: ({ title, item, context }) => /* @__PURE__ */ React.createElement("div", {
+      className: `rct-tree-item ${context.isSelected ? "selected" : ""}`
+    }, /* @__PURE__ */ React.createElement("span", {
       className: "rct-tree-item-title",
       "data-tip": title
-    }, title), /* @__PURE__ */ React.createElement("input", {
-      className: "rct-tree-item-checkbox",
-      type: "checkbox",
-      checked: getObjectVisibility(props.viewer, treeRef.current, item.index),
-      onClick: (e) => e.stopPropagation(),
-      onChange: (e) => {
-        onCheckmark(item.index, e.target.checked);
+    }, title), /* @__PURE__ */ React.createElement("div", {
+      className: `rct-tree-item-icon ${getObjectVisibility(props.viewer, treeRef.current, item.index)}`,
+      onClick: (e) => {
+        onCheckmark(item.index);
+        e.stopPropagation();
       }
-    })),
+    }, hidden({
+      width: 16,
+      height: 16,
+      fill: "currentColor"
+    }))),
     canRename: false,
     canSearchByStartingTyping: false,
     canSearch: false,
@@ -60301,19 +60327,19 @@ function BimTree(props) {
   })));
 }
 function getObjectVisibility(viewer2, tree, index) {
-  var _a22, _b2;
+  var _a22;
   const node = tree.nodes[index];
   if (node.data) {
     const obj = viewer2.vims[0].getObjectFromElement((_a22 = node.data) == null ? void 0 : _a22.element);
-    return (_b2 = obj == null ? void 0 : obj.visible) != null ? _b2 : false;
+    return (obj == null ? void 0 : obj.visible) ? "vim-visible" : "vim-hidden";
   }
-  const result = tree.hasSomePredicate(index, (n2) => {
-    var _a3, _b3;
+  const result = tree.countPredicate(index, (n2) => {
+    var _a3, _b2;
     const leaf = tree.nodes[n2];
     const obj = viewer2.vims[0].getObjectFromElement((_a3 = leaf.data) == null ? void 0 : _a3.element);
-    return (_b3 = obj == null ? void 0 : obj.visible) != null ? _b3 : false;
+    return (_b2 = obj == null ? void 0 : obj.visible) != null ? _b2 : false;
   });
-  return result;
+  return result === "all" ? "vim-visible" : result === "some" ? "vim-undefined" : "vim-hidden";
 }
 function updateViewerFocus(viewer2, tree, index) {
   var _a22;
@@ -60385,7 +60411,7 @@ class BimTreeData {
     }
     return result;
   }
-  getNode(element) {
+  getNodeFromElement(element) {
     return this.elementToNode.get(element);
   }
   getLeafs(node, result = []) {
@@ -60397,45 +60423,22 @@ class BimTreeData {
     }
     return result;
   }
-  getSelection2(elements) {
-    const nodes = elements.map((e) => this.elementToNode.get(e));
-    const result = [...nodes];
-    const set3 = new Set(nodes);
-    const parents = [...new Set(nodes.flatMap((n2) => this.getAncestors(n2)))];
-    parents.forEach((p2) => {
-      if (this.isFull(p2, set3)) {
-        result.push(p2);
-      }
-    });
-    return result;
-  }
   getSelection(elements) {
     const nodes = elements.map((e) => this.elementToNode.get(e));
     return [...new Set(nodes.flatMap((n2) => this.getAncestors(n2)))];
   }
-  isFull(node, set3) {
-    const children = this.getLeafs(node);
-    for (const c of children) {
-      if (!set3.has(c))
-        return false;
-    }
-    return true;
-  }
-  hasSomePredicate(node, predicate) {
+  countPredicate(node, predicate) {
+    let all = true;
+    let none = true;
     const leafs = this.getLeafs(node);
     for (const n2 of leafs) {
-      if (predicate(n2))
-        return true;
+      if (predicate(n2)) {
+        none = false;
+      } else {
+        all = false;
+      }
     }
-    return false;
-  }
-  hasSome(node, set3) {
-    const children = this.getLeafs(node);
-    for (const c of children) {
-      if (set3.has(c))
-        return true;
-    }
-    return false;
+    return none ? "none" : all ? "all" : "some";
   }
   getChildren(node, recusive = false, result = []) {
     result.push(node);
@@ -61138,14 +61141,14 @@ function applySettings(viewer2, settings2) {
       v2.scene.material = void 0;
       return;
     }
-    let hidden = false;
+    let hidden2 = false;
     for (const obj of v2.getAllObjects()) {
       if (!obj.visible) {
-        hidden = true;
+        hidden2 = true;
         break;
       }
     }
-    if (hidden) {
+    if (hidden2) {
       v2.scene.material = viewer2.renderer.materials.isolation;
     }
     viewer2.environment.groundPlane.visible = settings2.showGroundPlane;
@@ -61376,8 +61379,10 @@ function createIsolationState(viewer2, settings2) {
     changed.current(source);
   };
   const show = (objects, source) => {
-    objects.forEach((o) => isolationRef.current.push(o));
-    const result = [...new Set(isolationRef.current)];
+    var _a22;
+    const isolation = (_a22 = isolationRef.current) != null ? _a22 : [];
+    objects.forEach((o) => isolation.push(o));
+    const result = [...new Set(isolation)];
     isolate(viewer2, settings2, result);
     isolationRef.current = result;
     changed.current(source);
