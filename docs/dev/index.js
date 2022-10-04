@@ -8979,9 +8979,11 @@ body {\r
 .parameters:first-child > ul > li h3 {\r
   border-top-right-radius: 4px;\r
 }\r
-.rct-tree-root:not(.rct-tree-root-focus)\r
-  .rct-tree-item-title-container-selected,\r
-.rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-selected {\r
+.vim-bim-lower {\r
+  max-height:44vh;\r
+}\r
+.vim-bim-tree .rct-tree-root:not(.rct-tree-root-focus) .rct-tree-item-title-container-selected,\r
+.vim-bim-tree .rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-selected {\r
   background-color: var(--c-lightest-blue);\r
 }\r
 .rct-tree-item-title-container:hover {\r
@@ -43122,7 +43124,7 @@ var Geometry;
     const buffer = new MergeBuffer(info, g3d.POSITION_SIZE, transparent ? 4 : 3);
     fillBuffers(g3d, buffer, info);
     const geometry = buffer.toBufferGeometry();
-    return new MergeResult(geometry, info.instances, buffer.groups);
+    return new MergeResult(geometry, info.instances, buffer.groups, buffer.boxes);
   }
   function getUniqueMeshMergeInfo(g3d, section) {
     let vertexCount = 0;
@@ -43194,11 +43196,19 @@ var Geometry;
       getInstanceMatrix(g3d, instance, matrix);
       const vertexStart = g3d.getMeshVertexStart(mesh);
       const vertexEnd = g3d.getMeshVertexEnd(mesh);
-      for (let p2 = vertexStart; p2 < vertexEnd; p2++) {
+      if (vertexEnd > vertexStart) {
+        vector.fromArray(g3d.positions, vertexStart * g3d.POSITION_SIZE);
+        vector.applyMatrix4(matrix);
+        vector.toArray(buffer.vertices, vertex2);
+        vertex2 += g3d.POSITION_SIZE;
+        buffer.boxes[i2] = new Box3(vector.clone(), vector.clone());
+      }
+      for (let p2 = vertexStart + 1; p2 < vertexEnd; p2++) {
         vector.fromArray(g3d.positions, p2 * g3d.POSITION_SIZE);
         vector.applyMatrix4(matrix);
         vector.toArray(buffer.vertices, vertex2);
         vertex2 += g3d.POSITION_SIZE;
+        buffer.boxes[i2].expandByPoint(vector);
       }
       offset += vertexEnd - vertexStart;
     }
@@ -43222,10 +43232,12 @@ var Geometry;
       __publicField(this, "colors");
       __publicField(this, "groups");
       __publicField(this, "colorSize");
+      __publicField(this, "boxes");
       this.indices = new Uint32Array(info.indexCount);
       this.vertices = new Float32Array(info.vertexCount * positionSize);
       this.colors = new Float32Array(info.vertexCount * colorSize);
       this.groups = new Array(info.instances.length);
+      this.boxes = new Array(info.instances.length);
       this.colorSize = colorSize;
     }
     toBufferGeometry() {
@@ -43234,13 +43246,15 @@ var Geometry;
     }
   }
   class MergeResult {
-    constructor(geometry, instance, submeshes) {
+    constructor(geometry, instance, submeshes, boxes) {
       __publicField(this, "geometry");
       __publicField(this, "instances");
       __publicField(this, "submeshes");
+      __publicField(this, "boxes");
       this.geometry = geometry;
       this.instances = instance;
       this.submeshes = submeshes;
+      this.boxes = boxes;
     }
   }
 })(Geometry || (Geometry = {}));
@@ -43290,16 +43304,18 @@ class Object$1 {
     return this.vim.document.getElementId(this.element);
   }
   getBoundingBox() {
-    var _a22;
-    if (!this.instances)
+    if (!this.instances || !this._meshes)
       return;
     if (this._boundingBox)
       return this._boundingBox;
-    const geometry = Geometry.createGeometryFromInstances(this.vim.document.g3d, this.instances);
-    geometry.applyMatrix4(this.vim.getMatrix());
-    geometry.computeBoundingBox();
-    this._boundingBox = (_a22 = geometry.boundingBox) != null ? _a22 : void 0;
-    geometry.dispose();
+    let box;
+    this._meshes.forEach((m2) => {
+      const [mesh, index] = m2;
+      const b = mesh.userData.boxes[index];
+      box = box ? box.union(b) : b.clone();
+    });
+    box.applyMatrix4(this.vim.getMatrix());
+    this._boundingBox = box;
     return this._boundingBox;
   }
   getCenter(target = new Vector3()) {
@@ -43938,48 +43954,25 @@ class Scene {
       this.meshes[m2].userData.vim = vim;
     }
   }
-  addMergedMesh(mesh) {
-    var _a22, _b2, _c;
-    if (!mesh)
-      return this;
-    const instances = mesh.userData.instances;
-    if (!instances) {
-      throw new Error("Expected mesh to have userdata instances : number[]");
-    }
-    for (let i2 = 0; i2 < instances.length; i2++) {
-      const set3 = (_a22 = this._instanceToThreeMeshes.get(instances[i2])) != null ? _a22 : [];
-      set3.push([mesh, i2]);
-      this._instanceToThreeMeshes.set(instances[i2], set3);
-    }
-    mesh.geometry.computeBoundingBox();
-    const box = mesh.geometry.boundingBox;
-    this._boundingBox = (_c = (_b2 = this._boundingBox) == null ? void 0 : _b2.union(box)) != null ? _c : box.clone();
-    this._threeMeshIdToInstances.set(mesh.id, instances);
-    this.meshes.push(mesh);
-    return this;
-  }
-  addInstancedMesh(mesh) {
-    this.registerInstancedMesh(mesh);
-    this.meshes.push(mesh);
-    return this;
-  }
-  registerInstancedMesh(mesh) {
+  addMesh(mesh) {
     var _a22, _b2, _c;
     const instances = mesh.userData.instances;
     if (!instances || instances.length === 0) {
       throw new Error("Expected mesh to have userdata instances : number[] with at least one member");
     }
-    if (mesh.count === 0) {
-      throw new Error("Expected mesh to have at least one instance");
-    }
     for (let i2 = 0; i2 < instances.length; i2++) {
       const set3 = (_a22 = this._instanceToThreeMeshes.get(instances[i2])) != null ? _a22 : [];
       set3.push([mesh, i2]);
       this._instanceToThreeMeshes.set(instances[i2], set3);
     }
-    const box = this.computeIntancedMeshBoundingBox(mesh);
+    const box = mesh.userData.boxes[0].clone();
+    for (let i2 = 1; i2 < instances.length; i2++) {
+      box.union(mesh.userData.boxes[i2]);
+    }
     this._boundingBox = (_c = (_b2 = this._boundingBox) == null ? void 0 : _b2.union(box)) != null ? _c : box.clone();
     this._threeMeshIdToInstances.set(mesh.id, instances);
+    this.meshes.push(mesh);
+    return this;
   }
   merge(other) {
     var _a22, _b2;
@@ -44026,19 +44019,6 @@ class Scene {
     this.meshes.length = 0;
     this._instanceToThreeMeshes.clear();
     this._threeMeshIdToInstances.clear();
-  }
-  computeIntancedMeshBoundingBox(mesh) {
-    let result;
-    const matrix = new Matrix4();
-    const box = new Box3();
-    mesh.geometry.computeBoundingBox();
-    for (let i2 = 0; i2 < mesh.count; i2++) {
-      mesh.getMatrixAt(i2, matrix);
-      box.copy(mesh.geometry.boundingBox);
-      box.applyMatrix4(matrix);
-      result = result ? result.union(box) : box.clone();
-    }
-    return result;
   }
 }
 class RenderScene {
@@ -48164,11 +48144,15 @@ class MeshBuilder {
   createInstancedMesh(geometry, g3d, instances, useAlpha) {
     const material = useAlpha ? this.materials.transparent : this.materials.opaque;
     const result = new InstancedMesh(geometry, material, instances.length);
+    geometry.computeBoundingBox();
+    const boxes = [];
     for (let i2 = 0; i2 < instances.length; i2++) {
       const matrix = Geometry.getInstanceMatrix(g3d, instances[i2]);
       result.setMatrixAt(i2, matrix);
+      boxes[i2] = geometry.boundingBox.clone().applyMatrix4(matrix);
     }
     result.userData.instances = instances;
+    result.userData.boxes = boxes;
     return result;
   }
   createMergedMesh(g3d, section, transparent, instances) {
@@ -48178,6 +48162,7 @@ class MeshBuilder {
     mesh.userData.merged = true;
     mesh.userData.instances = merge.instances;
     mesh.userData.submeshes = merge.submeshes;
+    mesh.userData.boxes = merge.boxes;
     return mesh;
   }
   createWireframe(g3d, instances) {
@@ -48220,13 +48205,13 @@ class SceneBuilder {
     const meshes = this.meshBuilder.createInstancedMeshes(g3d, transparency, instances);
     const scene = new Scene(this);
     for (let m2 = 0; m2 < meshes.length; m2++) {
-      scene.addInstancedMesh(meshes[m2]);
+      scene.addMesh(meshes[m2]);
     }
     return scene;
   }
   createFromMergeableMeshes(g3d, section, transparent, instances) {
     const mesh = this.meshBuilder.createMergedMesh(g3d, section, transparent, instances);
-    return new Scene(this).addMergedMesh(mesh);
+    return new Scene(this).addMesh(mesh);
   }
 }
 class Vim {
@@ -49225,7 +49210,9 @@ function getVisibleBoundingBox(source) {
       if (!obj.visible)
         continue;
       const b = obj.getBoundingBox();
-      box = box ? box.union(b) : b.clone();
+      if (!b)
+        continue;
+      box = box ? box.union(b) : b == null ? void 0 : b.clone();
     }
   };
   if (source instanceof Viewer) {
@@ -49360,15 +49347,24 @@ const actionButton = (tip, action, icon, state) => {
 };
 function ControlBar(props) {
   const [show, setShow] = react.exports.useState(true);
+  const showRef = react.exports.useRef(show);
   const barTimeout = react.exports.useRef();
   react.exports.useEffect(() => {
     ReactTooltip.rebuild();
   });
   react.exports.useEffect(() => {
     props.viewer.camera.onMoved.subscribe(() => {
-      setShow(false);
+      if (showRef.current) {
+        showRef.current = false;
+        setShow(false);
+      }
       clearTimeout(barTimeout.current);
-      barTimeout.current = setTimeout(() => setShow(true), 200);
+      barTimeout.current = setTimeout(() => {
+        if (!showRef.current) {
+          showRef.current = true;
+          setShow(true);
+        }
+      }, 200);
     });
   }, []);
   return /* @__PURE__ */ React.createElement("div", {
@@ -49377,12 +49373,15 @@ function ControlBar(props) {
     className: "vim-control-bar-section flex items-center bg-white rounded-full px-2 shadow-md mx-2"
   }, TabCamera(props.viewer)), TabTools(props.viewer, props.setCursor, props.isolation), /* @__PURE__ */ React.createElement("div", {
     className: "vim-control-bar-section flex items-center bg-white rounded-full px-2 shadow-md mx-2"
-  }, TabSettings(props)));
+  }, /* @__PURE__ */ React.createElement(TabSettings, __spreadValues({}, props))));
 }
 function TabCamera(viewer2) {
   const [mode, setMode] = react.exports.useState(viewer2.inputs.pointerActive);
   react.exports.useEffect(() => {
-    viewer2.inputs.onPointerModeChanged.subscribe(() => setMode(viewer2.inputs.pointerActive));
+    viewer2.inputs.onPointerModeChanged.subscribe(() => {
+      console.log("MODE");
+      setMode(viewer2.inputs.pointerActive);
+    });
   }, []);
   const onModeBtn = (target) => {
     const next = mode === target ? viewer2.inputs.pointerFallback : target;
@@ -49508,11 +49507,16 @@ function TabTools(viewer2, setCursor, isolation) {
   return measuring ? measureTab : section.active ? sectionTab : toolsTab;
 }
 function TabSettings(props) {
-  const [, setFullScreen] = react.exports.useState(!!document.fullscreenElement);
+  const [fullScreen, setFullScreen] = react.exports.useState(!!document.fullscreenElement);
+  const fullScreenRef = react.exports.useRef(fullScreen);
   react.exports.useEffect(() => {
     const refreshFullScreen = () => {
       setTimeout(refreshFullScreen, 250);
-      setFullScreen(!!document.fullscreenElement);
+      const next = !!document.fullscreenElement;
+      if (fullScreenRef.current !== next) {
+        fullScreenRef.current = next;
+        setFullScreen(next);
+      }
     };
     refreshFullScreen();
   }, []);
@@ -60788,7 +60792,7 @@ function createHeader(header) {
       return [
         /* @__PURE__ */ React.createElement("dt", {
           "data-tip": pair[1],
-          className: "text-gray-medium py-1 truncate " + pair[2],
+          className: "text-gray-medium py-1 truncate select-none " + pair[2],
           key: `dt-${rowIndex}-${columnIndex}`
         }, pair[0]),
         /* @__PURE__ */ React.createElement("dd", {
