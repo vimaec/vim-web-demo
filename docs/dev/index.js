@@ -8738,7 +8738,7 @@ select {
   --c-axe-y: #11a936;\r
   --c-axe-z: #0000f5;\r
 \r
-  --c-overflow: rgba(5, 12, 26, .80)\r
+  --c-overflow: rgba(5, 12, 26, 0.8);\r
 }\r
 \r
 body {\r
@@ -8993,10 +8993,14 @@ body {\r
   border-top-right-radius: 4px;\r
 }\r
 .vim-bim-lower {\r
-  max-height:44vh;\r
+  max-height: 44vh;\r
 }\r
-.vim-bim-tree .rct-tree-root:not(.rct-tree-root-focus) .rct-tree-item-title-container-selected,\r
-.vim-bim-tree .rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-selected {\r
+.vim-bim-tree\r
+  .rct-tree-root:not(.rct-tree-root-focus)\r
+  .rct-tree-item-title-container-selected,\r
+.vim-bim-tree\r
+  .rct-tree-root.rct-tree-root-focus\r
+  .rct-tree-item-title-container-selected {\r
   background-color: var(--c-lightest-blue);\r
 }\r
 .rct-tree-item-title-container:hover {\r
@@ -9008,33 +9012,84 @@ body {\r
 \r
 .rct-tree-item-title {\r
   margin: 0px;\r
+  /*\r
+  Doesnt work\r
+  text-overflow: ellipsis;\r
+  margin-right: 40px;\r
+  */\r
 }\r
 \r
-.rct-tree-item-icon {\r
+/* Tree Visibilty Icons */\r
+.rct-tree-item-icons {\r
   position: absolute;\r
-  right: 10px;\r
-  top: 10px;\r
+  right: 0px;\r
+  top: 0px;\r
+}\r
+\r
+.rct-tree-item-icon-visible,\r
+.rct-tree-item-icon-hidden {\r
+  width: 32px;\r
+  height: 32px;\r
+  padding: 8px;\r
+}\r
+\r
+.rct-tree-item-icons.vim-visible .rct-tree-item-icon-visible {\r
+  display: block;\r
+  opacity: 0;\r
+}\r
+.rct-tree-item-icons.vim-visible .rct-tree-item-icon-hidden {\r
+  display: none;\r
+}\r
+.rct-tree-item-icons.vim-hidden .rct-tree-item-icon-visible {\r
+  display: none;\r
+}\r
+.rct-tree-item-icons.vim-hidden .rct-tree-item-icon-hidden {\r
+  display: block;\r
 }\r
 \r
 .rct-tree-item-icon.vim-hidden {\r
   color: black;\r
   opacity: 0.75;\r
 }\r
-.rct-tree-item-icon.vim-visible {\r
-  color: black;\r
-  opacity: 0;\r
-}\r
 \r
-.rct-tree-item:hover .rct-tree-item-icon.vim-visible {\r
+/*Line hover*/\r
+.rct-tree-item:hover\r
+  .rct-tree-item-icons.vim-visible\r
+  .rct-tree-item-icon-visible {\r
   color: black;\r
   opacity: 0.25;\r
 }\r
 \r
-.rct-tree-item:hover .rct-tree-item-icon:hover {\r
+/* Hover Visible Object*/\r
+.rct-tree-item:hover\r
+  .rct-tree-item-icons.vim-visible:hover\r
+  .rct-tree-item-icon-hidden {\r
+  display: block;\r
   opacity: 0.75;\r
   color: #0000f5;\r
 }\r
 \r
+.rct-tree-item:hover\r
+  .rct-tree-item-icons.vim-visible:hover\r
+  .rct-tree-item-icon-visible {\r
+  display: none;\r
+}\r
+\r
+/* Hover Hidden Object*/\r
+.rct-tree-item:hover\r
+  .rct-tree-item-icons.vim-hidden:hover\r
+  .rct-tree-item-icon-visible {\r
+  display: block;\r
+  opacity: 0.75;\r
+  color: #0000f5;\r
+}\r
+.rct-tree-item:hover\r
+  .rct-tree-item-icons.vim-hidden:hover\r
+  .rct-tree-item-icon-hidden {\r
+  display: none;\r
+}\r
+\r
+/*Others*/\r
 [type='checkbox']:focus,\r
 [type='radio']:focus {\r
   outline: none;\r
@@ -21757,8 +21812,8 @@ function WebGLShadowMap(_renderer, _objects, _capabilities) {
   function renderObject(object, camera, shadowCamera, light, type) {
     if (object.visible === false)
       return;
-    const visible = object.layers.test(camera.layers);
-    if (visible && (object.isMesh || object.isLine || object.isPoints)) {
+    const visible2 = object.layers.test(camera.layers);
+    if (visible2 && (object.isMesh || object.isLine || object.isPoints)) {
       if ((object.castShadow || object.receiveShadow && type === VSMShadowMap) && (!object.frustumCulled || _frustum.intersectsObject(object))) {
         object.modelViewMatrix.multiplyMatrices(shadowCamera.matrixWorldInverse, object.matrixWorld);
         const geometry = _objects.update(object);
@@ -24838,8 +24893,8 @@ function WebGLRenderer(parameters = {}) {
   function projectObject(object, camera, groupOrder, sortObjects) {
     if (object.visible === false)
       return;
-    const visible = object.layers.test(camera.layers);
-    if (visible) {
+    const visible2 = object.layers.test(camera.layers);
+    if (visible2) {
       if (object.isGroup) {
         groupOrder = object.renderOrder;
       } else if (object.isLOD) {
@@ -40343,7 +40398,20 @@ const collapse = ({ height, width, fill, className }) => /* @__PURE__ */ React.c
   fill,
   d: "m226.207 82.919-.017-.019c-5.937-6.547-16.057-7.04-22.602-1.102L128 150.367l-75.588-68.57c-6.546-5.938-16.666-5.444-22.602 1.102l-.017.019c-5.935 6.545-5.442 16.662 1.102 22.599l86.348 78.33c6.103 5.536 15.411 5.536 21.514 0l86.348-78.33c6.544-5.936 7.038-16.054 1.102-22.599Z"
 }));
-const hidden = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
+const visible = ({ height, width, fill, className }) => /* @__PURE__ */ React.createElement("svg", {
+  className,
+  height,
+  width,
+  viewBox: "0 0 256 256"
+}, /* @__PURE__ */ React.createElement("path", {
+  fill: "none",
+  d: "M0 0h256v256H0z"
+}), /* @__PURE__ */ React.createElement("path", {
+  fill,
+  d: "M128 36C57.308 36 0 97.054 0 128c0 32.943 57.308 92 128 92s128-59.057 128-92c0-30.946-57.308-92-128-92Zm75.346 131.751C190.404 178.301 163.406 196 128 196s-62.403-17.699-75.346-28.249C31.004 150.103 24 133.349 24 128c0-.047.071-4.846 6.247-14.452 5.34-8.308 13.341-17.061 22.527-24.648 6.833-5.643 17.521-13.282 31.163-19.291C71.664 81.27 64 97.734 64 116c0 35.346 28.654 64 64 64s64-28.654 64-64a63.79 63.79 0 0 0-5.004-24.847C186.913 106.546 174.413 119 159 119s-28-12.536-28-28c0-13.851 10.06-25.346 23.271-27.594 22.243 5.762 39.382 17.586 48.956 25.494 9.186 7.587 17.187 16.341 22.527 24.648 6.176 9.606 6.247 14.405 6.247 14.452 0 5.349-7.004 22.103-28.654 39.751Z"
+}));
+const hidden = ({ height, width, fill, className = "" }) => /* @__PURE__ */ React.createElement("svg", {
+  className,
   height,
   width,
   viewBox: "0 0 256 256"
@@ -40357,7 +40425,7 @@ const hidden = ({ height, width, fill }) => /* @__PURE__ */ React.createElement(
   fill,
   d: "m166.022 118.111 21.472 21.472A63.801 63.801 0 0 0 191.999 116a63.79 63.79 0 0 0-5.004-24.847c-.07 12.971-8.957 23.853-20.974 26.958ZM31.833 17.863c-4.687-4.686-12.284-4.686-16.971 0-4.686 4.687-4.686 12.285 0 16.971l29.92 29.92C17.38 84.825 0 110.966 0 128c0 32.943 57.308 92 128 92 21.088 0 40.972-5.269 58.51-13.52l37.657 37.657c4.687 4.686 12.284 4.686 16.971 0 4.686-4.687 4.686-12.285 0-16.971L31.833 17.863ZM128 196c-35.405 0-62.403-17.699-75.346-28.249C31.004 150.103 24 133.349 24 128c0-.047.071-4.846 6.247-14.452 5.34-8.308 13.341-17.061 22.527-24.648a134.832 134.832 0 0 1 9.205-6.95l7.708 7.708a63.612 63.612 0 0 0-5.686 26.343c0 35.346 28.654 64 64 64 9.397 0 18.31-2.043 26.345-5.684l13.936 13.936c-11.606 4.516-25.17 7.749-40.281 7.749Z"
 }));
-const orbit = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
+const orbit = ({ height, width, fill = "" }) => /* @__PURE__ */ React.createElement("svg", {
   height,
   width,
   viewBox: "0 0 256 256"
@@ -43413,13 +43481,13 @@ class Object$1 {
     }
     attribute.needsUpdate = true;
   }
-  applyInstancedVisible(mesh, index, visible) {
+  applyInstancedVisible(mesh, index, visible2) {
     let attribute = mesh.geometry.getAttribute("ignoreInstance");
     if (!attribute) {
       attribute = new InstancedBufferAttribute(new Float32Array(mesh.count), 1);
       mesh.geometry.setAttribute("ignoreInstance", attribute);
     }
-    attribute.setX(index, visible ? 0 : 1);
+    attribute.setX(index, visible2 ? 0 : 1);
     attribute.needsUpdate = true;
   }
   applyMergedColor(mesh, index, color) {
@@ -44710,6 +44778,7 @@ class BoxHighlight extends Mesh {
       side: DoubleSide
     });
     super(geo, mat);
+    this.frustumCulled = false;
   }
   highlight(box, normal) {
     this.visible = false;
@@ -59578,7 +59647,7 @@ class SubMenu extends AbstractMenu {
       selected
     } = this.props;
     const {
-      visible
+      visible: visible2
     } = this.state;
     const menuProps = {
       ref: this.menuRef,
@@ -59592,7 +59661,7 @@ class SubMenu extends AbstractMenu {
     const menuItemProps = {
       className: cx(cssClasses.menuItem, attributes.className, {
         [cx(cssClasses.menuItemDisabled, attributes.disabledClassName)]: disabled,
-        [cx(cssClasses.menuItemActive, attributes.visibleClassName)]: visible,
+        [cx(cssClasses.menuItemActive, attributes.visibleClassName)]: visible2,
         [cx(cssClasses.menuItemSelected, attributes.selectedClassName)]: selected
       }),
       onMouseMove: this.props.onMouseMove,
@@ -60215,25 +60284,26 @@ class BimTreeData {
   updateVisibility(viewer2) {
     const set3 = /* @__PURE__ */ new Set();
     const updateOne = (node) => {
+      var _a22;
       if (set3.has(node)) {
         return node.visible;
       }
       set3.add(node);
       if (node.hasChildren) {
         let hidden2 = true;
-        let visible = true;
+        let visible2 = true;
         node.children.forEach((c) => {
           const r2 = updateOne(this.nodes[c]);
           if (r2 !== "vim-hidden")
             hidden2 = false;
           if (r2 !== "vim-visible")
-            visible = false;
+            visible2 = false;
         });
-        node.visible = visible ? "vim-visible" : hidden2 ? "vim-hidden" : "vim-undefined";
+        node.visible = visible2 ? "vim-visible" : hidden2 ? "vim-hidden" : "vim-undefined";
         return node.visible;
       } else {
-        const obj = viewer2.vims[0].getObjectFromElement(node.data.element);
-        node.visible = obj.visible ? "vim-visible" : "vim-hidden";
+        const obj = viewer2.vims[0].getObjectFromElement((_a22 = node.data) == null ? void 0 : _a22.element);
+        node.visible = (obj == null ? void 0 : obj.visible) ? "vim-visible" : "vim-hidden";
         return node.visible;
       }
     };
@@ -60423,7 +60493,7 @@ function BimTree(props) {
       className: "rct-tree-item-title",
       "data-tip": title
     }, title), /* @__PURE__ */ React.createElement("div", {
-      className: `rct-tree-item-icon ${treeRef.current.nodes[item.index].visible}`,
+      className: `rct-tree-item-icons ${treeRef.current.nodes[item.index].visible}`,
       onClick: (e) => {
         toggleVisibility(props.viewer, props.isolation, treeRef.current, item.index);
         e.stopPropagation();
@@ -60431,7 +60501,13 @@ function BimTree(props) {
     }, hidden({
       width: 16,
       height: 16,
-      fill: "currentColor"
+      fill: "currentColor",
+      className: "rct-tree-item-icon-hidden"
+    }), visible({
+      width: 16,
+      height: 16,
+      fill: "currentColor",
+      className: "rct-tree-item-icon-visible"
     }))),
     canRename: false,
     canSearchByStartingTyping: false,
@@ -60580,14 +60656,14 @@ function BimObjectDetails(props) {
 function BimDocumentDetails(props) {
   return BimDetails(props.vim, getVimDocumentDetails, props.visible);
 }
-function BimDetails(input, toData, visible) {
+function BimDetails(input, toData, visible2) {
   const open = createOpenState();
   const [object, setObject] = react.exports.useState();
   const [details, setDetails] = react.exports.useState();
   react.exports.useEffect(() => {
     ReactTooltip.rebuild();
   });
-  if (!visible)
+  if (!visible2)
     return null;
   if (input !== object) {
     setObject(input);
@@ -61116,7 +61192,7 @@ function MenuSettings(props) {
 }
 const MenuToast = React.memo(_MenuToast);
 function _MenuToast(props) {
-  const [visible, setVisible] = react.exports.useState();
+  const [visible2, setVisible] = react.exports.useState();
   const [speed, setSpeed] = react.exports.useState(-1);
   const speedRef = react.exports.useRef(speed);
   const toastTimeout = react.exports.useRef();
@@ -61132,7 +61208,7 @@ function _MenuToast(props) {
     });
   }, []);
   return /* @__PURE__ */ React.createElement("div", {
-    className: `vim-menu-toast rounded shadow-lg py-2 px-5 flex items-center justify-between transition-all ${visible ? "opacity-100" : "opacity-0"}`
+    className: `vim-menu-toast rounded shadow-lg py-2 px-5 flex items-center justify-between transition-all ${visible2 ? "opacity-100" : "opacity-0"}`
   }, /* @__PURE__ */ React.createElement("span", {
     className: "text-sm uppercase font-semibold text-gray-light"
   }, "Speed:"), /* @__PURE__ */ React.createElement("span", {
