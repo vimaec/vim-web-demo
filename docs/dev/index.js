@@ -8290,11 +8290,11 @@ select {
 .bottom-0 {
   bottom: 0px;
 }\r
-.left-0 {
-  left: 0px;
-}\r
 .top-0 {
   top: 0px;
+}\r
+.left-0 {
+  left: 0px;
 }\r
 .right-6 {
   right: 1.5rem;
@@ -8307,6 +8307,9 @@ select {
 }\r
 .z-10 {
   z-index: 10;
+}\r
+.z-20 {
+  z-index: 20;
 }\r
 .order-2 {
   order: 2;
@@ -8562,6 +8565,9 @@ select {
 .bg-white\\/\\[\\.5\\] {
   background-color: rgb(255 255 255 / .5);
 }\r
+.bg-overflow {
+  background-color: var(--c-overflow);
+}\r
 .bg-black\\/80 {
   background-color: rgb(0 0 0 / 0.8);
 }\r
@@ -8674,6 +8680,11 @@ select {
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }\r
+.backdrop-blur {
+  --tw-backdrop-blur: blur(8px);
+  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+          backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+}\r
 .transition-all {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -8726,6 +8737,8 @@ select {
   --c-axe-x: #fd0202;\r
   --c-axe-y: #11a936;\r
   --c-axe-z: #0000f5;\r
+\r
+  --c-overflow: rgba(5, 12, 26, .80)\r
 }\r
 \r
 body {\r
@@ -9101,7 +9114,7 @@ input[type='search']::-webkit-search-cancel-button {\r
     right: 1.5rem;\r
   }\r
 }\r
-.behind canvas,\r
+/* .behind canvas,\r
 .behind .vim-logo,\r
 .behind .vim-logo,\r
 .behind .vim-control-bar,\r
@@ -9110,7 +9123,7 @@ input[type='search']::-webkit-search-cancel-button {\r
 .behind .vim-side-panel,\r
 .behind .vim-logo {\r
   filter: blur(10px);\r
-}\r
+} */\r
 .loader {\r
   width: 100%;\r
   height: 10px;\r
@@ -49152,11 +49165,15 @@ function isolate(viewer2, settings2, objects) {
     showAll(viewer2);
   } else {
     const set3 = new Set(objects);
+    let allVisible = true;
     viewer2.vims.forEach((vim) => {
       for (const obj of vim.getAllObjects()) {
-        obj.visible = set3.has(obj);
+        const has2 = set3.has(obj);
+        obj.visible = has2;
+        if (!has2)
+          allVisible = false;
       }
-      vim.scene.material = settings2.useIsolationMaterial ? viewer2.renderer.materials.isolation : void 0;
+      vim.scene.material = !allVisible && settings2.useIsolationMaterial ? viewer2.renderer.materials.isolation : void 0;
     });
   }
   viewer2.camera.frame(getVisibleBoundingBox(viewer2), "none", viewer2.camera.defaultLerpDuration);
@@ -49589,12 +49606,14 @@ function _LoadingBox(props) {
   if (!msg)
     return null;
   return /* @__PURE__ */ React.createElement("div", {
-    className: "vim-loading-box w-[320px] text-gray-medium bg-white px-5 py-4 rounded shadow-lg"
+    className: "loading-wrapper backdrop-blur fixed items-center justify-center top-0 left-0 w-full h-full z-10 bg-overflow"
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: "vim-loading-box w-[320px] text-gray-medium bg-white px-5 py-4 rounded shadow-lg z-20"
   }, /* @__PURE__ */ React.createElement("h1", {
     className: "w-full mb-2"
   }, " ", msg, " "), /* @__PURE__ */ React.createElement("span", {
     className: "loader"
-  }));
+  })));
 }
 var InteractionMode;
 (function(InteractionMode2) {
@@ -60174,219 +60193,7 @@ function VimContextMenu(props) {
     id: VIM_CONTEXT_MENU_ID
   }, createButton("Show Controls", "F1", onShowControlsBtn), createDivider(), createButton("Reset Camera", "HOME", onCameraResetBtn), createButton("Zoom to Fit", "F", onCameraFrameBtn), createDivider(hasSelection || hidden2), createButton("Isolate Object", "I", onSelectionIsolateBtn, hasSelection && !isolated), createButton("Hide Object", "", onSelectionHideBtn, hasSelection), createButton("Clear Selection", "Esc", onSelectionClearBtn, hasSelection), createButton("Show All", "", onShowAllBtn, hidden2), createDivider(measuring), createButton("Delete Measurement", "", onMeasureDeleteBtn, measuring), createDivider(clipping || section.visible), createButton(section.clip ? "Ignore Section Box" : "Apply Section Box", "", onSectionToggleBtn, clipping), createButton("Reset Section Box", "", onSectionResetBtn, section.visible), createButton("Fit section box to selection", "", onFitSectionToSelectionBtn, section.visible && hasSelection)));
 }
-function BimTree(props) {
-  const [objects, setObjects] = react.exports.useState([]);
-  const [elements, setElements] = react.exports.useState();
-  const treeRef = react.exports.useRef();
-  const tree = react.exports.useMemo(() => treeRef.current = toTreeData(props.elements), [elements]);
-  const [expandedItems, setExpandedItems] = react.exports.useState([]);
-  const [selectedItems, setSelectedItems] = react.exports.useState([]);
-  const [focusedItem, setFocusedItem] = react.exports.useState();
-  const [doubleClick] = react.exports.useState(new DoubleClickManager());
-  const focus = react.exports.useRef(0);
-  const div2 = react.exports.useRef();
-  react.exports.useEffect(() => {
-    ReactTooltip.rebuild();
-  }, [expandedItems, elements]);
-  react.exports.useEffect(() => {
-    if (elements && objects.length === 1) {
-      scrollToSelection(div2.current);
-      const [first] = props.viewer.selection.objects;
-      focus.current = treeRef.current.getNodeFromElement(first.element);
-    }
-  }, [elements, objects]);
-  react.exports.useEffect(() => {
-    props.viewer.renderer.onVisibilityChanged.subscribe(() => {
-      setElements(elements);
-    });
-  }, []);
-  if (props.elements && props.elements !== elements) {
-    setElements(props.elements);
-  }
-  if (!tree) {
-    return /* @__PURE__ */ React.createElement("div", {
-      className: "vim-bim-tree",
-      ref: div2
-    }, "Loading . . .");
-  }
-  if (!ArrayEquals(props.objects, objects)) {
-    setObjects(props.objects);
-    const nodes = props.objects.map((o) => tree.getNodeFromElement(o.element));
-    const parents = nodes.flatMap((n2) => tree.getAncestors(n2));
-    const selection = tree.getSelection(props.objects.map((o) => o.element));
-    setExpandedItems([...new Set(expandedItems.concat(parents))]);
-    setSelectedItems(selection);
-  }
-  const onCheckmark = (index) => {
-    const visibility = getObjectVisibility(props.viewer, treeRef.current, index);
-    const objs = treeRef.current.getLeafs(index).map((n2) => {
-      var _a22;
-      return props.viewer.vims[0].getObjectFromElement((_a22 = treeRef.current.nodes[n2]) == null ? void 0 : _a22.data.element);
-    });
-    if (visibility !== "vim-visible") {
-      props.isolation.show(objs, "tree");
-    } else {
-      props.isolation.hide(objs, "tree");
-    }
-  };
-  return /* @__PURE__ */ React.createElement("div", {
-    className: "vim-bim-tree mb-5",
-    ref: div2,
-    tabIndex: 0,
-    onFocus: () => props.viewer.inputs.keyboard.unregister(),
-    onBlur: () => props.viewer.inputs.keyboard.register()
-  }, /* @__PURE__ */ React.createElement(ControlledTreeEnvironment, {
-    items: tree.nodes,
-    getItemTitle: (item) => item.title,
-    viewState: {
-      "tree-bim": {
-        focusedItem,
-        expandedItems,
-        selectedItems
-      }
-    },
-    renderItemTitle: ({ title, item, context }) => /* @__PURE__ */ React.createElement("div", {
-      className: `rct-tree-item ${context.isSelected ? "selected" : ""}`
-    }, /* @__PURE__ */ React.createElement("span", {
-      className: "rct-tree-item-title",
-      "data-tip": title
-    }, title), /* @__PURE__ */ React.createElement("div", {
-      className: `rct-tree-item-icon ${getObjectVisibility(props.viewer, treeRef.current, item.index)}`,
-      onClick: (e) => {
-        onCheckmark(item.index);
-        e.stopPropagation();
-      }
-    }, hidden({
-      width: 16,
-      height: 16,
-      fill: "currentColor"
-    }))),
-    canRename: false,
-    canSearchByStartingTyping: false,
-    canSearch: false,
-    defaultInteractionMode: {
-      mode: "custom",
-      extends: InteractionMode.ClickArrowToExpand,
-      createInteractiveElementProps: (item, treeId, actions, renderFlags) => ({
-        onKeyUp: (e) => {
-          if (e.key === "f") {
-            frameContext(props.viewer);
-          }
-          if (e.key === "Escape") {
-            props.viewer.selection.clear();
-          }
-        },
-        onContextMenu: (e) => {
-          showContextMenu({ x: e.clientX, y: e.clientY });
-          e.preventDefault();
-          e.stopPropagation();
-        },
-        onPointerEnter: (e) => {
-          actions.focusItem();
-        },
-        onClick: (e) => {
-          if (e.shiftKey) {
-            const range2 = treeRef.current.getRange(focus.current, item.index);
-            updateViewerSelection(treeRef.current, props.viewer, range2, "set");
-          } else if (isControlKey(e)) {
-            if (renderFlags.isSelected) {
-              const leafs = treeRef.current.getLeafs(item.index);
-              updateViewerSelection(treeRef.current, props.viewer, leafs, "remove");
-              focus.current = item.index;
-            } else {
-              const leafs = treeRef.current.getLeafs(item.index);
-              updateViewerSelection(treeRef.current, props.viewer, leafs, "add");
-              focus.current = item.index;
-            }
-          } else {
-            const leafs = treeRef.current.getLeafs(item.index);
-            updateViewerSelection(treeRef.current, props.viewer, leafs, "set");
-            focus.current = item.index;
-          }
-          actions.primaryAction();
-          actions.focusItem();
-        }
-      })
-    },
-    onPrimaryAction: (item, _) => {
-      if (doubleClick.isDoubleClick(item.index)) {
-        frameSelection(props.viewer);
-      }
-    },
-    onFocusItem: (item) => {
-      const index = item.index;
-      setFocusedItem(index);
-      updateViewerFocus(props.viewer, treeRef.current, index);
-    },
-    onExpandItem: (item) => {
-      setExpandedItems([...expandedItems, item.index]);
-    },
-    onCollapseItem: (item) => {
-      setExpandedItems(expandedItems.filter((expandedItemIndex) => expandedItemIndex !== item.index));
-    }
-  }, /* @__PURE__ */ React.createElement(Tree, {
-    treeId: "tree-bim",
-    rootItem: "0",
-    treeLabel: "Tree Example"
-  })));
-}
-function getObjectVisibility(viewer2, tree, index) {
-  var _a22;
-  const node = tree.nodes[index];
-  if (node.data) {
-    const obj = viewer2.vims[0].getObjectFromElement((_a22 = node.data) == null ? void 0 : _a22.element);
-    return (obj == null ? void 0 : obj.visible) ? "vim-visible" : "vim-hidden";
-  }
-  const result = tree.countPredicate(index, (n2) => {
-    var _a3, _b2;
-    const leaf = tree.nodes[n2];
-    const obj = viewer2.vims[0].getObjectFromElement((_a3 = leaf.data) == null ? void 0 : _a3.element);
-    return (_b2 = obj == null ? void 0 : obj.visible) != null ? _b2 : false;
-  });
-  return result === "all" ? "vim-visible" : result === "some" ? "vim-undefined" : "vim-hidden";
-}
-function updateViewerFocus(viewer2, tree, index) {
-  var _a22;
-  const node = tree.nodes[index];
-  const obj = viewer2.vims[0].getObjectFromElement((_a22 = node.data) == null ? void 0 : _a22.element);
-  viewer2.selection.focus(obj);
-}
-function updateViewerSelection(tree, viewer2, nodes, operation) {
-  const objects = [];
-  nodes.forEach((n2) => {
-    const item = tree.nodes[n2];
-    const element = item.data.element;
-    const obj = viewer2.vims[0].getObjectFromElement(element);
-    objects.push(obj);
-  });
-  switch (operation) {
-    case "add":
-      viewer2.selection.add(...objects);
-      break;
-    case "remove":
-      viewer2.selection.remove(...objects);
-      break;
-    case "set":
-      viewer2.selection.select(objects);
-      break;
-  }
-}
-function scrollToSelection(div2) {
-  const selectedItems = div2 == null ? void 0 : div2.querySelectorAll('[aria-selected="true"]');
-  const selection = selectedItems == null ? void 0 : selectedItems[(selectedItems == null ? void 0 : selectedItems.length) - 1];
-  if (!selection)
-    return;
-  const rectElem = selection.getBoundingClientRect();
-  const rectContainer = div2.getBoundingClientRect();
-  if (rectElem.bottom > rectContainer.bottom || rectElem.bottom > window.innerHeight) {
-    selection.scrollIntoView(false);
-    return;
-  }
-  if (rectElem.top < rectContainer.top || rectElem.top < 0) {
-    selection.scrollIntoView();
-  }
-}
-function toTreeData(elements) {
+function toTreeData(viewer2, elements) {
   if (!elements)
     return;
   const tree = toMapTree(elements, [
@@ -60396,6 +60203,7 @@ function toTreeData(elements) {
   ]);
   sort(tree);
   const result = new BimTreeData(tree);
+  result.updateVisibility(viewer2);
   return result;
 }
 class BimTreeData {
@@ -60403,6 +60211,37 @@ class BimTreeData {
     this.nodes = {};
     this.elementToNode = /* @__PURE__ */ new Map();
     this.flatten(map);
+  }
+  updateVisibility(viewer2) {
+    const set3 = /* @__PURE__ */ new Set();
+    const updateOne = (node) => {
+      if (set3.has(node)) {
+        return node.visible;
+      }
+      set3.add(node);
+      if (node.hasChildren) {
+        let hidden2 = true;
+        let visible = true;
+        node.children.forEach((c) => {
+          const r2 = updateOne(this.nodes[c]);
+          if (r2 !== "vim-hidden")
+            hidden2 = false;
+          if (r2 !== "vim-visible")
+            visible = false;
+        });
+        node.visible = visible ? "vim-visible" : hidden2 ? "vim-hidden" : "vim-undefined";
+        return node.visible;
+      } else {
+        const obj = viewer2.vims[0].getObjectFromElement(node.data.element);
+        node.visible = obj.visible ? "vim-visible" : "vim-hidden";
+        return node.visible;
+      }
+    };
+    for (const n2 of Object.values(this.nodes)) {
+      if (set3.has(n2))
+        continue;
+      updateOne(n2);
+    }
   }
   getRange(start, end) {
     const min2 = Math.min(start, end);
@@ -60480,7 +60319,8 @@ class BimTreeData {
           title: k,
           hasChildren: children.length > 0,
           data: void 0,
-          children
+          children,
+          visible: void 0
         };
         i2 = next;
       } else {
@@ -60490,7 +60330,8 @@ class BimTreeData {
           title: k,
           hasChildren: v2.length > 0,
           data: void 0,
-          children: range(v2.length, i2 + 1)
+          children: range(v2.length, i2 + 1),
+          visible: void 0
         };
         const self2 = i2;
         v2.forEach((e) => {
@@ -60500,7 +60341,8 @@ class BimTreeData {
             title: `${e.name} [${e.id}]`,
             hasChildren: false,
             data: e,
-            children: []
+            children: [],
+            visible: void 0
           };
           this.elementToNode.set(e.element, i2);
         });
@@ -60509,12 +60351,213 @@ class BimTreeData {
     return [i2, keys3];
   }
 }
-const isControlKey = (e) => {
-  return e.ctrlKey || navigator.platform.toUpperCase().indexOf("MAC") >= 0 && e.metaKey;
-};
 function range(size, startAt = 0) {
   return [...Array(size).keys()].map((i2) => i2 + startAt);
 }
+function BimTree(props) {
+  const [objects, setObjects] = react.exports.useState([]);
+  const [elements, setElements] = react.exports.useState();
+  const treeRef = react.exports.useRef();
+  const [expandedItems, setExpandedItems] = react.exports.useState([]);
+  const [selectedItems, setSelectedItems] = react.exports.useState([]);
+  const [focusedItem, setFocusedItem] = react.exports.useState();
+  const [doubleClick] = react.exports.useState(new DoubleClickManager());
+  const [, setVersion] = react.exports.useState(0);
+  const focus = react.exports.useRef(0);
+  const div2 = react.exports.useRef();
+  react.exports.useMemo(() => {
+    return treeRef.current = toTreeData(props.viewer, elements);
+  }, [elements]);
+  react.exports.useEffect(() => {
+    ReactTooltip.rebuild();
+  }, [expandedItems, elements]);
+  react.exports.useEffect(() => {
+    if (elements && objects.length === 1) {
+      scrollToSelection(div2.current);
+      const [first] = props.viewer.selection.objects;
+      focus.current = treeRef.current.getNodeFromElement(first.element);
+    }
+  }, [elements, objects]);
+  react.exports.useEffect(() => {
+    props.viewer.renderer.onVisibilityChanged.subscribe(() => {
+      treeRef.current.updateVisibility(props.viewer);
+      setVersion((v2) => v2 + 1);
+    });
+  }, []);
+  if (props.elements && props.elements !== elements) {
+    setElements(props.elements);
+  }
+  if (!elements) {
+    return /* @__PURE__ */ React.createElement("div", {
+      className: "vim-bim-tree",
+      ref: div2
+    }, "Loading . . .");
+  }
+  if (!ArrayEquals(props.objects, objects)) {
+    setObjects(props.objects);
+    const nodes = props.objects.map((o) => treeRef.current.getNodeFromElement(o.element));
+    const parents = nodes.flatMap((n2) => treeRef.current.getAncestors(n2));
+    const selection = treeRef.current.getSelection(props.objects.map((o) => o.element));
+    setExpandedItems([...new Set(expandedItems.concat(parents))]);
+    setSelectedItems(selection);
+  }
+  return /* @__PURE__ */ React.createElement("div", {
+    className: "vim-bim-tree mb-5",
+    ref: div2,
+    tabIndex: 0,
+    onFocus: () => props.viewer.inputs.keyboard.unregister(),
+    onBlur: () => props.viewer.inputs.keyboard.register()
+  }, /* @__PURE__ */ React.createElement(ControlledTreeEnvironment, {
+    items: treeRef.current.nodes,
+    getItemTitle: (item) => item.title,
+    viewState: {
+      "tree-bim": {
+        focusedItem,
+        expandedItems,
+        selectedItems
+      }
+    },
+    renderItemTitle: ({ title, item, context }) => /* @__PURE__ */ React.createElement("div", {
+      className: `rct-tree-item ${context.isSelected ? "selected" : ""}`
+    }, /* @__PURE__ */ React.createElement("span", {
+      className: "rct-tree-item-title",
+      "data-tip": title
+    }, title), /* @__PURE__ */ React.createElement("div", {
+      className: `rct-tree-item-icon ${treeRef.current.nodes[item.index].visible}`,
+      onClick: (e) => {
+        toggleVisibility(props.viewer, props.isolation, treeRef.current, item.index);
+        e.stopPropagation();
+      }
+    }, hidden({
+      width: 16,
+      height: 16,
+      fill: "currentColor"
+    }))),
+    canRename: false,
+    canSearchByStartingTyping: false,
+    canSearch: false,
+    defaultInteractionMode: {
+      mode: "custom",
+      extends: InteractionMode.ClickArrowToExpand,
+      createInteractiveElementProps: (item, treeId, actions, renderFlags) => ({
+        onKeyUp: (e) => {
+          if (e.key === "f") {
+            frameContext(props.viewer);
+          }
+          if (e.key === "Escape") {
+            props.viewer.selection.clear();
+          }
+        },
+        onContextMenu: (e) => {
+          showContextMenu({ x: e.clientX, y: e.clientY });
+          e.preventDefault();
+          e.stopPropagation();
+        },
+        onPointerEnter: (e) => {
+          actions.focusItem();
+        },
+        onClick: (e) => {
+          if (e.shiftKey) {
+            const range2 = treeRef.current.getRange(focus.current, item.index);
+            updateViewerSelection(treeRef.current, props.viewer, range2, "set");
+          } else if (isControlKey(e)) {
+            if (renderFlags.isSelected) {
+              const leafs = treeRef.current.getLeafs(item.index);
+              updateViewerSelection(treeRef.current, props.viewer, leafs, "remove");
+              focus.current = item.index;
+            } else {
+              const leafs = treeRef.current.getLeafs(item.index);
+              updateViewerSelection(treeRef.current, props.viewer, leafs, "add");
+              focus.current = item.index;
+            }
+          } else {
+            const leafs = treeRef.current.getLeafs(item.index);
+            updateViewerSelection(treeRef.current, props.viewer, leafs, "set");
+            focus.current = item.index;
+          }
+          actions.primaryAction();
+          actions.focusItem();
+        }
+      })
+    },
+    onPrimaryAction: (item, _) => {
+      if (doubleClick.isDoubleClick(item.index)) {
+        frameSelection(props.viewer);
+      }
+    },
+    onFocusItem: (item) => {
+      const index = item.index;
+      setFocusedItem(index);
+      updateViewerFocus(props.viewer, treeRef.current, index);
+    },
+    onExpandItem: (item) => {
+      setExpandedItems([...expandedItems, item.index]);
+    },
+    onCollapseItem: (item) => {
+      setExpandedItems(expandedItems.filter((expandedItemIndex) => expandedItemIndex !== item.index));
+    }
+  }, /* @__PURE__ */ React.createElement(Tree, {
+    treeId: "tree-bim",
+    rootItem: "0",
+    treeLabel: "Tree Example"
+  })));
+}
+function toggleVisibility(viewer2, isolation, tree, index) {
+  const objs = tree.getLeafs(index).map((n2) => {
+    var _a22;
+    return viewer2.vims[0].getObjectFromElement((_a22 = tree.nodes[n2]) == null ? void 0 : _a22.data.element);
+  });
+  const visibility = tree.nodes[index].visible;
+  if (visibility !== "vim-visible") {
+    isolation.show(objs, "tree");
+  } else {
+    isolation.hide(objs, "tree");
+  }
+}
+function updateViewerFocus(viewer2, tree, index) {
+  var _a22;
+  const node = tree.nodes[index];
+  const obj = viewer2.vims[0].getObjectFromElement((_a22 = node.data) == null ? void 0 : _a22.element);
+  viewer2.selection.focus(obj);
+}
+function updateViewerSelection(tree, viewer2, nodes, operation) {
+  const objects = [];
+  nodes.forEach((n2) => {
+    const item = tree.nodes[n2];
+    const element = item.data.element;
+    const obj = viewer2.vims[0].getObjectFromElement(element);
+    objects.push(obj);
+  });
+  switch (operation) {
+    case "add":
+      viewer2.selection.add(...objects);
+      break;
+    case "remove":
+      viewer2.selection.remove(...objects);
+      break;
+    case "set":
+      viewer2.selection.select(objects);
+      break;
+  }
+}
+function scrollToSelection(div2) {
+  const selectedItems = div2 == null ? void 0 : div2.querySelectorAll('[aria-selected="true"]');
+  const selection = selectedItems == null ? void 0 : selectedItems[(selectedItems == null ? void 0 : selectedItems.length) - 1];
+  if (!selection)
+    return;
+  const rectElem = selection.getBoundingClientRect();
+  const rectContainer = div2.getBoundingClientRect();
+  if (rectElem.bottom > rectContainer.bottom || rectElem.bottom > window.innerHeight) {
+    selection.scrollIntoView(false);
+    return;
+  }
+  if (rectElem.top < rectContainer.top || rectElem.top < 0) {
+    selection.scrollIntoView();
+  }
+}
+const isControlKey = (e) => {
+  return e.ctrlKey || navigator.platform.toUpperCase().indexOf("MAC") >= 0 && e.metaKey;
+};
 class DoubleClickManager {
   constructor() {
     this.isDoubleClick = (target) => {
@@ -60903,6 +60946,7 @@ function BimPanel(props) {
   }, []);
   react.exports.useEffect(() => {
     if (vim) {
+      console.log("VIM Update");
       vim.document.getElementsSummary().then((elements2) => {
         setElements(elements2);
       });
@@ -60915,6 +60959,7 @@ function BimPanel(props) {
       const meshElements = elements.filter((e) => vim.getObjectFromElement(e.element).hasMesh);
       const result = filterElements(vim, meshElements, filter);
       setFilteredElements(result);
+      console.log("setFilteredElements");
       if (searching.current) {
         if (filter !== "") {
           const objects = result.map((e) => vim.getObjectFromElement(e.element));
