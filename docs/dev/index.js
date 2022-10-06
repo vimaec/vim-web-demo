@@ -8284,8 +8284,11 @@ select {
   bottom: 0px;
   left: 0px;
 }\r
-.right-16 {
-  right: 4rem;
+.right-6 {
+  right: 1.5rem;
+}\r
+.top-6 {
+  top: 1.5rem;
 }\r
 .bottom-0 {
   bottom: 0px;
@@ -8296,11 +8299,8 @@ select {
 .left-0 {
   left: 0px;
 }\r
-.right-6 {
-  right: 1.5rem;
-}\r
-.top-6 {
-  top: 1.5rem;
+.right-16 {
+  right: 4rem;
 }\r
 .isolate {
   isolation: isolate;
@@ -8317,9 +8317,9 @@ select {
 .m-1 {
   margin: 0.25rem;
 }\r
-.-mx-6 {
-  margin-left: -1.5rem;
-  margin-right: -1.5rem;
+.mx-1 {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
 }\r
 .my-1 {
   margin-top: 0.25rem;
@@ -8329,13 +8329,34 @@ select {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
 }\r
-.mx-1 {
-  margin-left: 0.25rem;
-  margin-right: 0.25rem;
-}\r
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
+}\r
+.-mx-6 {
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+}\r
+.mb-0 {
+  margin-bottom: 0px;
+}\r
+.mt-auto {
+  margin-top: auto;
+}\r
+.mb-9 {
+  margin-bottom: 2.25rem;
+}\r
+.mb-8 {
+  margin-bottom: 2rem;
+}\r
+.mr-4 {
+  margin-right: 1rem;
+}\r
+.mb-2 {
+  margin-bottom: 0.5rem;
+}\r
+.ml-1 {
+  margin-left: 0.25rem;
 }\r
 .mb-6 {
   margin-bottom: 1.5rem;
@@ -8352,29 +8373,8 @@ select {
 .-mr-4 {
   margin-right: -1rem;
 }\r
-.mb-9 {
-  margin-bottom: 2.25rem;
-}\r
-.mb-2 {
-  margin-bottom: 0.5rem;
-}\r
-.mb-8 {
-  margin-bottom: 2rem;
-}\r
-.mr-4 {
-  margin-right: 1rem;
-}\r
 .mr-2 {
   margin-right: 0.5rem;
-}\r
-.ml-1 {
-  margin-left: 0.25rem;
-}\r
-.mb-0 {
-  margin-bottom: 0px;
-}\r
-.mt-auto {
-  margin-top: auto;
 }\r
 .flex {
   display: flex;
@@ -8385,8 +8385,11 @@ select {
 .hidden {
   display: none;
 }\r
-.h-1\\/2 {
-  height: 50%;
+.h-8 {
+  height: 2rem;
+}\r
+.h-\\[145px\\] {
+  height: 145px;
 }\r
 .h-10 {
   height: 2.5rem;
@@ -8397,14 +8400,32 @@ select {
 .h-full {
   height: 100%;
 }\r
+.h-1\\/2 {
+  height: 50%;
+}\r
 .h-\\[18px\\] {
   height: 18px;
 }\r
-.h-8 {
-  height: 2rem;
+.w-8 {
+  width: 2rem;
 }\r
-.h-\\[145px\\] {
-  height: 145px;
+.w-\\[100px\\] {
+  width: 100px;
+}\r
+.w-\\[240px\\] {
+  width: 240px;
+}\r
+.w-10 {
+  width: 2.5rem;
+}\r
+.w-full {
+  width: 100%;
+}\r
+.w-px {
+  width: 1px;
+}\r
+.w-\\[320px\\] {
+  width: 320px;
 }\r
 .w-auto {
   width: auto;
@@ -8418,21 +8439,6 @@ select {
 .w-9\\/12 {
   width: 75%;
 }\r
-.w-full {
-  width: 100%;
-}\r
-.w-\\[240px\\] {
-  width: 240px;
-}\r
-.w-10 {
-  width: 2.5rem;
-}\r
-.w-px {
-  width: 1px;
-}\r
-.w-\\[320px\\] {
-  width: 320px;
-}\r
 .w-max {
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -8440,12 +8446,6 @@ select {
 }\r
 .w-\\[18px\\] {
   width: 18px;
-}\r
-.w-8 {
-  width: 2rem;
-}\r
-.w-\\[100px\\] {
-  width: 100px;
 }\r
 .rotate-180 {
   --tw-rotate: 180deg;
@@ -8492,19 +8492,19 @@ select {
 .rounded-full {
   border-radius: 9999px;
 }\r
-.rounded {
-  border-radius: 0.25rem;
-}\r
 .rounded-2xl {
   border-radius: 1rem;
 }\r
-.rounded-t {
-  border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.25rem;
+.rounded {
+  border-radius: 0.25rem;
 }\r
 .rounded-b-xl {
   border-bottom-right-radius: 0.75rem;
   border-bottom-left-radius: 0.75rem;
+}\r
+.rounded-t {
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
 }\r
 .border {
   border-width: 1px;
@@ -8530,30 +8530,21 @@ select {
 .border-r-0 {
   border-right-width: 0px;
 }\r
+.border-white {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity));
+}\r
+.border-gray-lighter {
+  border-color: var(--c-lighter-gray);
+}\r
 .border-gray-light {
   border-color: var(--c-light-gray);
 }\r
 .border-gray-divider {
   border-color: var(--c-gray-divider);
 }\r
-.border-gray-lighter {
-  border-color: var(--c-lighter-gray);
-}\r
-.border-white {
-  --tw-border-opacity: 1;
-  border-color: rgb(255 255 255 / var(--tw-border-opacity));
-}\r
 .border-gray-medium {
   border-color: var(--c-medium-gray);
-}\r
-.bg-gray-light {
-  background-color: var(--c-light-gray);
-}\r
-.bg-transparent {
-  background-color: transparent;
-}\r
-.bg-primary-royal {
-  background-color: var(--c-primary-royal);
 }\r
 .bg-white {
   --tw-bg-opacity: 1;
@@ -8565,14 +8556,26 @@ select {
 .bg-white\\/\\[\\.5\\] {
   background-color: rgb(255 255 255 / .5);
 }\r
-.bg-overflow {
-  background-color: var(--c-overflow);
-}\r
 .bg-black\\/80 {
   background-color: rgb(0 0 0 / 0.8);
 }\r
+.bg-overflow {
+  background-color: var(--c-overflow);
+}\r
+.bg-gray-light {
+  background-color: var(--c-light-gray);
+}\r
+.bg-transparent {
+  background-color: transparent;
+}\r
+.bg-primary-royal {
+  background-color: var(--c-primary-royal);
+}\r
 .bg-gray-lightest {
   background-color: var(--c-lightest-gray);
+}\r
+.p-1 {
+  padding: 0.25rem;
 }\r
 .p-2 {
   padding: 0.5rem;
@@ -8580,12 +8583,9 @@ select {
 .p-6 {
   padding: 1.5rem;
 }\r
-.p-1 {
-  padding: 0.25rem;
-}\r
-.px-2 {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }\r
 .py-2 {
   padding-top: 0.5rem;
@@ -8595,13 +8595,9 @@ select {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
 }\r
-.px-5 {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-}\r
-.py-4 {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }\r
 .py-5 {
   padding-top: 1.25rem;
@@ -8611,16 +8607,20 @@ select {
   padding-left: 2rem;
   padding-right: 2rem;
 }\r
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}\r
 .pl-6 {
   padding-left: 1.5rem;
-}\r
-.text-xs {
-  font-size: 0.75rem;
-  line-height: 1rem;
 }\r
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
+}\r
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
 }\r
 .text-lg {
   font-size: 1.125rem;
@@ -8638,18 +8638,18 @@ select {
 .text-gray-medium {
   color: var(--c-medium-gray);
 }\r
-.text-gray-light {
-  color: var(--c-light-gray);
-}\r
-.text-white {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}\r
 .text-gray-darker {
   color: var(--c-darker-gray);
 }\r
 .text-primary {
   color: var(--c-primary);
+}\r
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}\r
+.text-gray-light {
+  color: var(--c-light-gray);
 }\r
 .text-gray-warm {
   color: var(--c-dark-gray-warm);
@@ -40577,7 +40577,7 @@ const frameRect = ({ height, width, fill }) => /* @__PURE__ */ React.createEleme
   fill,
   d: "M252.5 229.872l-17.706-17.706A83.578 83.578 0 00248 166.979c0-46.392-37.608-84-84-84s-84 37.608-84 84 37.608 84 84 84c18.179 0 34.995-5.794 48.742-15.61l17.13 17.13c4.667 4.667 12.304 4.667 16.971 0l5.657-5.657c4.667-4.667 4.667-12.304 0-16.971zm-141.955-62.893c0-29.475 23.98-53.455 53.455-53.455s53.455 23.98 53.455 53.455-23.98 53.455-53.455 53.455-53.455-23.98-53.455-53.455z"
 }));
-const frameSelection$1 = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
+const frameSelection = ({ height, width, fill }) => /* @__PURE__ */ React.createElement("svg", {
   height,
   width,
   viewBox: "0 0 256 256"
@@ -40717,8610 +40717,19 @@ const sectionBoxShrink = ({ height, width, fill }) => /* @__PURE__ */ React.crea
   fill,
   d: "M191.661 82.008 136 49.872a15.991 15.991 0 0 0-16 0L64.339 82.008a16 16 0 0 0-8 13.856v64.272a16 16 0 0 0 8 13.856L120 206.128a15.991 15.991 0 0 0 16 0l55.661-32.136a16 16 0 0 0 8-13.856V95.864a16 16 0 0 0-8-13.856ZM128 72.966l36.556 21.105L128 115.176 91.443 94.071 128 72.965Zm-47.661 42.408L116 135.961v40.145l-35.661-20.589v-40.143ZM140 176.106v-40.145l35.661-20.589v40.145L140 176.106ZM228.971 212H240c6.627 0 12-5.373 12-12s-5.373-12-12-12h-40a11.963 11.963 0 0 0-8.485 3.515A11.963 11.963 0 0 0 188 200v40c0 6.627 5.373 12 12 12s12-5.373 12-12v-11.03l19.515 19.515c4.687 4.686 12.284 4.686 16.971 0 4.686-4.686 4.686-12.284 0-16.971l-19.515-19.515ZM44 228.971V240c0 6.627 5.373 12 12 12s12-5.373 12-12v-40c0-3.071-1.172-6.142-3.515-8.485A11.963 11.963 0 0 0 56 188H16c-6.627 0-12 5.373-12 12s5.373 12 12 12h11.03L7.515 231.515c-4.686 4.687-4.686 12.284 0 16.971 4.686 4.686 12.284 4.686 16.971 0l19.515-19.515ZM27.029 44H16C9.373 44 4 49.373 4 56s5.373 12 12 12h40c3.071 0 6.142-1.172 8.485-3.515A11.963 11.963 0 0 0 68 56V16c0-6.627-5.373-12-12-12S44 9.373 44 16v11.03L24.485 7.515c-4.687-4.686-12.284-4.686-16.971 0-4.686 4.686-4.686 12.284 0 16.971l19.515 19.515ZM212 27.029V16c0-6.627-5.373-12-12-12s-12 5.373-12 12v40c0 3.071 1.172 6.142 3.515 8.485A11.963 11.963 0 0 0 200 68h40c6.627 0 12-5.373 12-12s-5.373-12-12-12h-11.03l19.515-19.515c4.686-4.687 4.686-12.284 0-16.971-4.686-4.686-12.284-4.686-16.971 0l-19.515 19.515Z"
 })));
-var __defProp2 = Object.defineProperty;
-var __defNormalProp2 = (obj, key, value) => key in obj ? __defProp2(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __publicField = (obj, key, value) => {
-  __defNormalProp2(obj, typeof key !== "symbol" ? key + "" : key, value);
-  return value;
-};
-var isMergeableObject = function isMergeableObject2(value) {
-  return isNonNullObject(value) && !isSpecial(value);
-};
-function isNonNullObject(value) {
-  return !!value && typeof value === "object";
-}
-function isSpecial(value) {
-  var stringValue = Object.prototype.toString.call(value);
-  return stringValue === "[object RegExp]" || stringValue === "[object Date]" || isReactElement(value);
-}
-var canUseSymbol = typeof Symbol === "function" && Symbol.for;
-var REACT_ELEMENT_TYPE = canUseSymbol ? Symbol.for("react.element") : 60103;
-function isReactElement(value) {
-  return value.$$typeof === REACT_ELEMENT_TYPE;
-}
-function emptyTarget(val) {
-  return Array.isArray(val) ? [] : {};
-}
-function cloneUnlessOtherwiseSpecified(value, options) {
-  return options.clone !== false && options.isMergeableObject(value) ? deepmerge(emptyTarget(value), value, options) : value;
-}
-function defaultArrayMerge(target, source, options) {
-  return target.concat(source).map(function(element) {
-    return cloneUnlessOtherwiseSpecified(element, options);
-  });
-}
-function getMergeFunction(key, options) {
-  if (!options.customMerge) {
-    return deepmerge;
-  }
-  var customMerge = options.customMerge(key);
-  return typeof customMerge === "function" ? customMerge : deepmerge;
-}
-function getEnumerableOwnPropertySymbols(target) {
-  return Object.getOwnPropertySymbols ? Object.getOwnPropertySymbols(target).filter(function(symbol) {
-    return target.propertyIsEnumerable(symbol);
-  }) : [];
-}
-function getKeys(target) {
-  return Object.keys(target).concat(getEnumerableOwnPropertySymbols(target));
-}
-function propertyIsOnObject(object, property) {
-  try {
-    return property in object;
-  } catch (_) {
-    return false;
-  }
-}
-function propertyIsUnsafe(target, key) {
-  return propertyIsOnObject(target, key) && !(Object.hasOwnProperty.call(target, key) && Object.propertyIsEnumerable.call(target, key));
-}
-function mergeObject(target, source, options) {
-  var destination = {};
-  if (options.isMergeableObject(target)) {
-    getKeys(target).forEach(function(key) {
-      destination[key] = cloneUnlessOtherwiseSpecified(target[key], options);
-    });
-  }
-  getKeys(source).forEach(function(key) {
-    if (propertyIsUnsafe(target, key)) {
-      return;
-    }
-    if (propertyIsOnObject(target, key) && options.isMergeableObject(source[key])) {
-      destination[key] = getMergeFunction(key, options)(target[key], source[key], options);
-    } else {
-      destination[key] = cloneUnlessOtherwiseSpecified(source[key], options);
-    }
-  });
-  return destination;
-}
-function deepmerge(target, source, options) {
-  options = options || {};
-  options.arrayMerge = options.arrayMerge || defaultArrayMerge;
-  options.isMergeableObject = options.isMergeableObject || isMergeableObject;
-  options.cloneUnlessOtherwiseSpecified = cloneUnlessOtherwiseSpecified;
-  var sourceIsArray = Array.isArray(source);
-  var targetIsArray = Array.isArray(target);
-  var sourceAndTargetTypesMatch = sourceIsArray === targetIsArray;
-  if (!sourceAndTargetTypesMatch) {
-    return cloneUnlessOtherwiseSpecified(source, options);
-  } else if (sourceIsArray) {
-    return options.arrayMerge(target, source, options);
-  } else {
-    return mergeObject(target, source, options);
-  }
-}
-deepmerge.all = function deepmergeAll(array, options) {
-  if (!Array.isArray(array)) {
-    throw new Error("first argument should be an array");
-  }
-  return array.reduce(function(prev, next) {
-    return deepmerge(prev, next, options);
-  }, {});
-};
-var deepmerge_1 = deepmerge;
-var cjs = deepmerge_1;
-class ViewerSettings {
-  constructor(options) {
-    __publicField(this, "options");
-    __publicField(this, "getCanvasResizeDelay", () => this.options.canvas.resizeDelay);
-    __publicField(this, "getCanvasId", () => this.options.canvas.id);
-    __publicField(this, "getGroundPlaneVisible", () => this.options.groundPlane.visible);
-    __publicField(this, "getGroundPlaneColor", () => toRGBColor(this.options.groundPlane.color));
-    __publicField(this, "getGroundPlaneTextureUrl", () => this.options.groundPlane.texture);
-    __publicField(this, "getGroundPlaneOpacity", () => this.options.groundPlane.opacity);
-    __publicField(this, "getGroundPlaneSize", () => this.options.groundPlane.size);
-    __publicField(this, "getSkylightColor", () => toHSLColor(this.options.skylight.skyColor));
-    __publicField(this, "getSkylightGroundColor", () => toHSLColor(this.options.skylight.groundColor));
-    __publicField(this, "getSkylightIntensity", () => this.options.skylight.intensity);
-    __publicField(this, "getSunlightCount", () => this.options.sunLights.length);
-    __publicField(this, "getSunlightColor", (index) => toHSLColor(this.options.sunLights[index].color));
-    __publicField(this, "getSunlightPosition", (index) => toVec$1(this.options.sunLights[index].position));
-    __publicField(this, "getSunlightIntensity", (index) => this.options.sunLights[index].intensity);
-    __publicField(this, "getHighlightColor", () => toRGBColor(this.highlight.color));
-    __publicField(this, "getHighlightOpacity", () => this.highlight.opacity);
-    __publicField(this, "getIsolationColor", () => toRGBColor(this.isolation.color));
-    __publicField(this, "getIsolationOpacity", () => this.isolation.opacity);
-    __publicField(this, "getCameraNear", () => this.camera.near);
-    __publicField(this, "getCameraFar", () => this.camera.far);
-    __publicField(this, "getCameraFov", () => this.camera.fov);
-    __publicField(this, "getCameraZoom", () => this.camera.zoom);
-    __publicField(this, "getCameraGizmoEnable", () => this.camera.gizmo.enable);
-    __publicField(this, "getCameraGizmoSize", () => this.camera.gizmo.size);
-    __publicField(this, "getCameraGizmoColor", () => toRGBColor(this.camera.gizmo.color));
-    __publicField(this, "getCameraGizmoOpacity", () => this.camera.gizmo.opacity);
-    __publicField(this, "getCameraGizmoOpacityAlways", () => this.camera.gizmo.opacityAlways);
-    __publicField(this, "getCameraIsOrbit", () => this.cameraControls.orbit);
-    __publicField(this, "getCameraMoveSpeed", () => this.cameraControls.moveSpeed);
-    __publicField(this, "getCameraRotateSpeed", () => this.cameraControls.rotateSpeed);
-    __publicField(this, "getCameraOrbitSpeed", () => this.cameraControls.orbitSpeed);
-    __publicField(this, "getCameraReferenceVimSize", () => this.cameraControls.vimReferenceSize);
-    const fallback = {
-      canvas: {
-        id: void 0,
-        resizeDelay: 200
-      },
-      camera: {
-        near: 0.01,
-        far: 15e3,
-        fov: 50,
-        zoom: 1,
-        controls: {
-          orbit: true,
-          vimReferenceSize: 1,
-          rotateSpeed: 1,
-          orbitSpeed: 1,
-          moveSpeed: 1
-        },
-        gizmo: {
-          enable: true,
-          size: 5e-3,
-          color: { r: 255, g: 255, b: 255 },
-          opacity: 0.5,
-          opacityAlways: 0.125
-        }
-      },
-      groundPlane: {
-        visible: false,
-        texture: void 0,
-        opacity: 1,
-        color: { r: 255, g: 255, b: 255 },
-        size: 3
-      },
-      skylight: {
-        skyColor: { h: 0.6, s: 1, l: 0.6 },
-        groundColor: { h: 0.095, s: 1, l: 0.75 },
-        intensity: 0.8
-      },
-      sunLights: [
-        {
-          position: { x: -45, y: 40, z: -23 },
-          color: { h: 0.1, s: 1, l: 0.95 },
-          intensity: 0.8
-        },
-        {
-          position: { x: 45, y: 40, z: 23 },
-          color: { h: 0.1, s: 1, l: 0.95 },
-          intensity: 0.2
-        }
-      ],
-      materials: {
-        highlight: {
-          color: { r: 106, g: 210, b: 255 },
-          opacity: 0.5
-        },
-        isolation: {
-          color: { r: 64, g: 64, b: 64 },
-          opacity: 0.1
-        }
-      }
-    };
-    this.options = options ? cjs(fallback, options, void 0) : fallback;
-  }
-  get highlight() {
-    return this.options.materials.highlight;
-  }
-  get isolation() {
-    return this.options.materials.isolation;
-  }
-  get camera() {
-    return this.options.camera;
-  }
-  get cameraControls() {
-    return this.camera.controls;
-  }
-}
-function toRGBColor(c) {
-  return new Color(c.r / 255, c.g / 255, c.b / 255);
-}
-function toHSLColor(obj) {
-  return new Color().setHSL(obj.h, obj.s, obj.l);
-}
-function toVec$1(obj) {
-  return new Vector3(obj.x, obj.y, obj.z);
-}
-for (let i2 = 0; i2 < 256; i2++) {
-  (i2 < 16 ? "0" : "") + i2.toString(16);
-}
-function clamp(value, min2, max2) {
-  return Math.max(min2, Math.min(max2, value));
-}
-var dist$3 = {};
-var SignalDispatcher$1 = {};
-var dist$2 = {};
-var DispatcherBase$3 = {};
-var DispatcherWrapper$3 = {};
-Object.defineProperty(DispatcherWrapper$3, "__esModule", { value: true });
-DispatcherWrapper$3.DispatcherWrapper = void 0;
-class DispatcherWrapper$2 {
-  constructor(dispatcher) {
-    this._subscribe = (fn) => dispatcher.subscribe(fn);
-    this._unsubscribe = (fn) => dispatcher.unsubscribe(fn);
-    this._one = (fn) => dispatcher.one(fn);
-    this._has = (fn) => dispatcher.has(fn);
-    this._clear = () => dispatcher.clear();
-    this._count = () => dispatcher.count;
-    this._onSubscriptionChange = () => dispatcher.onSubscriptionChange;
-  }
-  get onSubscriptionChange() {
-    return this._onSubscriptionChange();
-  }
-  get count() {
-    return this._count();
-  }
-  subscribe(fn) {
-    return this._subscribe(fn);
-  }
-  sub(fn) {
-    return this.subscribe(fn);
-  }
-  unsubscribe(fn) {
-    this._unsubscribe(fn);
-  }
-  unsub(fn) {
-    this.unsubscribe(fn);
-  }
-  one(fn) {
-    return this._one(fn);
-  }
-  has(fn) {
-    return this._has(fn);
-  }
-  clear() {
-    this._clear();
-  }
-}
-DispatcherWrapper$3.DispatcherWrapper = DispatcherWrapper$2;
-var Subscription$3 = {};
-Object.defineProperty(Subscription$3, "__esModule", { value: true });
-Subscription$3.Subscription = void 0;
-class Subscription$2 {
-  constructor(handler, isOnce) {
-    this.handler = handler;
-    this.isOnce = isOnce;
-    this.isExecuted = false;
-  }
-  execute(executeAsync, scope, args) {
-    if (!this.isOnce || !this.isExecuted) {
-      this.isExecuted = true;
-      var fn = this.handler;
-      if (executeAsync) {
-        setTimeout(() => {
-          fn.apply(scope, args);
-        }, 1);
-      } else {
-        fn.apply(scope, args);
-      }
-    }
-  }
-}
-Subscription$3.Subscription = Subscription$2;
-var EventManagement$3 = {};
-Object.defineProperty(EventManagement$3, "__esModule", { value: true });
-EventManagement$3.EventManagement = void 0;
-class EventManagement$2 {
-  constructor(unsub) {
-    this.unsub = unsub;
-    this.propagationStopped = false;
-  }
-  stopPropagation() {
-    this.propagationStopped = true;
-  }
-}
-EventManagement$3.EventManagement = EventManagement$2;
-Object.defineProperty(DispatcherBase$3, "__esModule", { value: true });
-DispatcherBase$3.SubscriptionChangeEventDispatcher = DispatcherBase$3.DispatcherBase = void 0;
-const DispatcherWrapper_1$1 = DispatcherWrapper$3;
-const Subscription_1$1 = Subscription$3;
-const EventManagement_1$3 = EventManagement$3;
-class DispatcherBase$2 {
-  constructor() {
-    this._subscriptions = new Array();
-  }
-  get count() {
-    return this._subscriptions.length;
-  }
-  get onSubscriptionChange() {
-    if (this._onSubscriptionChange == null) {
-      this._onSubscriptionChange = new SubscriptionChangeEventDispatcher$1();
-    }
-    return this._onSubscriptionChange.asEvent();
-  }
-  subscribe(fn) {
-    if (fn) {
-      this._subscriptions.push(this.createSubscription(fn, false));
-      this.triggerSubscriptionChange();
-    }
-    return () => {
-      this.unsubscribe(fn);
-    };
-  }
-  sub(fn) {
-    return this.subscribe(fn);
-  }
-  one(fn) {
-    if (fn) {
-      this._subscriptions.push(this.createSubscription(fn, true));
-      this.triggerSubscriptionChange();
-    }
-    return () => {
-      this.unsubscribe(fn);
-    };
-  }
-  has(fn) {
-    if (!fn)
-      return false;
-    return this._subscriptions.some((sub) => sub.handler == fn);
-  }
-  unsubscribe(fn) {
-    if (!fn)
-      return;
-    let changes = false;
-    for (let i2 = 0; i2 < this._subscriptions.length; i2++) {
-      if (this._subscriptions[i2].handler == fn) {
-        this._subscriptions.splice(i2, 1);
-        changes = true;
-        break;
-      }
-    }
-    if (changes) {
-      this.triggerSubscriptionChange();
-    }
-  }
-  unsub(fn) {
-    this.unsubscribe(fn);
-  }
-  _dispatch(executeAsync, scope, args) {
-    for (let sub of [...this._subscriptions]) {
-      let ev = new EventManagement_1$3.EventManagement(() => this.unsub(sub.handler));
-      let nargs = Array.prototype.slice.call(args);
-      nargs.push(ev);
-      let s = sub;
-      s.execute(executeAsync, scope, nargs);
-      this.cleanup(sub);
-      if (!executeAsync && ev.propagationStopped) {
-        return { propagationStopped: true };
-      }
-    }
-    if (executeAsync) {
-      return null;
-    }
-    return { propagationStopped: false };
-  }
-  createSubscription(handler, isOnce) {
-    return new Subscription_1$1.Subscription(handler, isOnce);
-  }
-  cleanup(sub) {
-    let changes = false;
-    if (sub.isOnce && sub.isExecuted) {
-      let i2 = this._subscriptions.indexOf(sub);
-      if (i2 > -1) {
-        this._subscriptions.splice(i2, 1);
-        changes = true;
-      }
-    }
-    if (changes) {
-      this.triggerSubscriptionChange();
-    }
-  }
-  asEvent() {
-    if (this._wrap == null) {
-      this._wrap = new DispatcherWrapper_1$1.DispatcherWrapper(this);
-    }
-    return this._wrap;
-  }
-  clear() {
-    if (this._subscriptions.length != 0) {
-      this._subscriptions.splice(0, this._subscriptions.length);
-      this.triggerSubscriptionChange();
-    }
-  }
-  triggerSubscriptionChange() {
-    if (this._onSubscriptionChange != null) {
-      this._onSubscriptionChange.dispatch(this.count);
-    }
-  }
-}
-DispatcherBase$3.DispatcherBase = DispatcherBase$2;
-class SubscriptionChangeEventDispatcher$1 extends DispatcherBase$2 {
-  dispatch(count) {
-    this._dispatch(false, this, arguments);
-  }
-}
-DispatcherBase$3.SubscriptionChangeEventDispatcher = SubscriptionChangeEventDispatcher$1;
-var DispatchError$3 = {};
-Object.defineProperty(DispatchError$3, "__esModule", { value: true });
-DispatchError$3.DispatchError = void 0;
-class DispatchError$2 extends Error {
-  constructor(message) {
-    super(message);
-  }
-}
-DispatchError$3.DispatchError = DispatchError$2;
-var EventListBase$3 = {};
-Object.defineProperty(EventListBase$3, "__esModule", { value: true });
-EventListBase$3.EventListBase = void 0;
-class EventListBase$2 {
-  constructor() {
-    this._events = {};
-  }
-  get(name) {
-    let event = this._events[name];
-    if (event) {
-      return event;
-    }
-    event = this.createDispatcher();
-    this._events[name] = event;
-    return event;
-  }
-  remove(name) {
-    delete this._events[name];
-  }
-}
-EventListBase$3.EventListBase = EventListBase$2;
-var HandlingBase$3 = {};
-Object.defineProperty(HandlingBase$3, "__esModule", { value: true });
-HandlingBase$3.HandlingBase = void 0;
-class HandlingBase$2 {
-  constructor(events) {
-    this.events = events;
-  }
-  one(name, fn) {
-    this.events.get(name).one(fn);
-  }
-  has(name, fn) {
-    return this.events.get(name).has(fn);
-  }
-  subscribe(name, fn) {
-    this.events.get(name).subscribe(fn);
-  }
-  sub(name, fn) {
-    this.subscribe(name, fn);
-  }
-  unsubscribe(name, fn) {
-    this.events.get(name).unsubscribe(fn);
-  }
-  unsub(name, fn) {
-    this.unsubscribe(name, fn);
-  }
-}
-HandlingBase$3.HandlingBase = HandlingBase$2;
-var PromiseDispatcherBase$3 = {};
-var PromiseSubscription$3 = {};
-Object.defineProperty(PromiseSubscription$3, "__esModule", { value: true });
-PromiseSubscription$3.PromiseSubscription = void 0;
-class PromiseSubscription$2 {
-  constructor(handler, isOnce) {
-    this.handler = handler;
-    this.isOnce = isOnce;
-    this.isExecuted = false;
-  }
-  async execute(executeAsync, scope, args) {
-    if (!this.isOnce || !this.isExecuted) {
-      this.isExecuted = true;
-      var fn = this.handler;
-      if (executeAsync) {
-        setTimeout(() => {
-          fn.apply(scope, args);
-        }, 1);
-        return;
-      }
-      let result = fn.apply(scope, args);
-      await result;
-    }
-  }
-}
-PromiseSubscription$3.PromiseSubscription = PromiseSubscription$2;
-Object.defineProperty(PromiseDispatcherBase$3, "__esModule", { value: true });
-PromiseDispatcherBase$3.PromiseDispatcherBase = void 0;
-const PromiseSubscription_1$1 = PromiseSubscription$3;
-const EventManagement_1$2 = EventManagement$3;
-const DispatcherBase_1$1 = DispatcherBase$3;
-const DispatchError_1$1 = DispatchError$3;
-class PromiseDispatcherBase$2 extends DispatcherBase_1$1.DispatcherBase {
-  _dispatch(executeAsync, scope, args) {
-    throw new DispatchError_1$1.DispatchError("_dispatch not supported. Use _dispatchAsPromise.");
-  }
-  createSubscription(handler, isOnce) {
-    return new PromiseSubscription_1$1.PromiseSubscription(handler, isOnce);
-  }
-  async _dispatchAsPromise(executeAsync, scope, args) {
-    for (let sub of [...this._subscriptions]) {
-      let ev = new EventManagement_1$2.EventManagement(() => this.unsub(sub.handler));
-      let nargs = Array.prototype.slice.call(args);
-      nargs.push(ev);
-      let ps = sub;
-      await ps.execute(executeAsync, scope, nargs);
-      this.cleanup(sub);
-      if (!executeAsync && ev.propagationStopped) {
-        return { propagationStopped: true };
-      }
-    }
-    if (executeAsync) {
-      return null;
-    }
-    return { propagationStopped: false };
-  }
-}
-PromiseDispatcherBase$3.PromiseDispatcherBase = PromiseDispatcherBase$2;
-(function(exports2) {
-  /*!
-   * Strongly Typed Events for TypeScript - Core
-   * https://github.com/KeesCBakker/StronlyTypedEvents/
-   * http://keestalkstech.com
-   *
-   * Copyright Kees C. Bakker / KeesTalksTech
-   * Released under the MIT license
-   */
-  Object.defineProperty(exports2, "__esModule", { value: true });
-  exports2.SubscriptionChangeEventDispatcher = exports2.HandlingBase = exports2.PromiseDispatcherBase = exports2.PromiseSubscription = exports2.DispatchError = exports2.EventManagement = exports2.EventListBase = exports2.DispatcherWrapper = exports2.DispatcherBase = exports2.Subscription = void 0;
-  const DispatcherBase_12 = DispatcherBase$3;
-  Object.defineProperty(exports2, "DispatcherBase", { enumerable: true, get: function() {
-    return DispatcherBase_12.DispatcherBase;
-  } });
-  Object.defineProperty(exports2, "SubscriptionChangeEventDispatcher", { enumerable: true, get: function() {
-    return DispatcherBase_12.SubscriptionChangeEventDispatcher;
-  } });
-  const DispatchError_12 = DispatchError$3;
-  Object.defineProperty(exports2, "DispatchError", { enumerable: true, get: function() {
-    return DispatchError_12.DispatchError;
-  } });
-  const DispatcherWrapper_12 = DispatcherWrapper$3;
-  Object.defineProperty(exports2, "DispatcherWrapper", { enumerable: true, get: function() {
-    return DispatcherWrapper_12.DispatcherWrapper;
-  } });
-  const EventListBase_1 = EventListBase$3;
-  Object.defineProperty(exports2, "EventListBase", { enumerable: true, get: function() {
-    return EventListBase_1.EventListBase;
-  } });
-  const EventManagement_12 = EventManagement$3;
-  Object.defineProperty(exports2, "EventManagement", { enumerable: true, get: function() {
-    return EventManagement_12.EventManagement;
-  } });
-  const HandlingBase_1 = HandlingBase$3;
-  Object.defineProperty(exports2, "HandlingBase", { enumerable: true, get: function() {
-    return HandlingBase_1.HandlingBase;
-  } });
-  const PromiseDispatcherBase_1 = PromiseDispatcherBase$3;
-  Object.defineProperty(exports2, "PromiseDispatcherBase", { enumerable: true, get: function() {
-    return PromiseDispatcherBase_1.PromiseDispatcherBase;
-  } });
-  const PromiseSubscription_12 = PromiseSubscription$3;
-  Object.defineProperty(exports2, "PromiseSubscription", { enumerable: true, get: function() {
-    return PromiseSubscription_12.PromiseSubscription;
-  } });
-  const Subscription_12 = Subscription$3;
-  Object.defineProperty(exports2, "Subscription", { enumerable: true, get: function() {
-    return Subscription_12.Subscription;
-  } });
-})(dist$2);
-Object.defineProperty(SignalDispatcher$1, "__esModule", { value: true });
-SignalDispatcher$1.SignalDispatcher = void 0;
-const ste_core_1$5 = dist$2;
-class SignalDispatcher extends ste_core_1$5.DispatcherBase {
-  dispatch() {
-    const result = this._dispatch(false, this, arguments);
-    if (result == null) {
-      throw new ste_core_1$5.DispatchError("Got `null` back from dispatch.");
-    }
-    return result;
-  }
-  dispatchAsync() {
-    this._dispatch(true, this, arguments);
-  }
-  asEvent() {
-    return super.asEvent();
-  }
-}
-SignalDispatcher$1.SignalDispatcher = SignalDispatcher;
-var SignalHandlingBase$1 = {};
-var SignalList$1 = {};
-Object.defineProperty(SignalList$1, "__esModule", { value: true });
-SignalList$1.SignalList = void 0;
-const ste_core_1$4 = dist$2;
-const SignalDispatcher_1 = SignalDispatcher$1;
-class SignalList extends ste_core_1$4.EventListBase {
-  constructor() {
-    super();
-  }
-  createDispatcher() {
-    return new SignalDispatcher_1.SignalDispatcher();
-  }
-}
-SignalList$1.SignalList = SignalList;
-Object.defineProperty(SignalHandlingBase$1, "__esModule", { value: true });
-SignalHandlingBase$1.SignalHandlingBase = void 0;
-const ste_core_1$3 = dist$2;
-const SignalList_1 = SignalList$1;
-class SignalHandlingBase extends ste_core_1$3.HandlingBase {
-  constructor() {
-    super(new SignalList_1.SignalList());
-  }
-}
-SignalHandlingBase$1.SignalHandlingBase = SignalHandlingBase;
-(function(exports2) {
-  /*!
-   * Strongly Typed Events for TypeScript - Promise Signals
-   * https://github.com/KeesCBakker/StronlyTypedEvents/
-   * http://keestalkstech.com
-   *
-   * Copyright Kees C. Bakker / KeesTalksTech
-   * Released under the MIT license
-   */
-  Object.defineProperty(exports2, "__esModule", { value: true });
-  exports2.SignalList = exports2.SignalHandlingBase = exports2.SignalDispatcher = void 0;
-  const SignalDispatcher_12 = SignalDispatcher$1;
-  Object.defineProperty(exports2, "SignalDispatcher", { enumerable: true, get: function() {
-    return SignalDispatcher_12.SignalDispatcher;
-  } });
-  const SignalHandlingBase_1 = SignalHandlingBase$1;
-  Object.defineProperty(exports2, "SignalHandlingBase", { enumerable: true, get: function() {
-    return SignalHandlingBase_1.SignalHandlingBase;
-  } });
-  const SignalList_12 = SignalList$1;
-  Object.defineProperty(exports2, "SignalList", { enumerable: true, get: function() {
-    return SignalList_12.SignalList;
-  } });
-})(dist$3);
-({
-  forward: new Vector3(0, 0, -1),
-  back: new Vector3(0, 0, 1),
-  left: new Vector3(-1, 0, 0),
-  right: new Vector3(1, 0, 0),
-  up: new Vector3(0, 1, 0),
-  down: new Vector3(0, -1, 0)
-});
-class Camera {
-  constructor(scene, viewport, settings2) {
-    __publicField(this, "camera");
-    __publicField(this, "gizmo");
-    __publicField(this, "cameraPerspective");
-    __publicField(this, "cameraOrthographic");
-    __publicField(this, "_viewport");
-    __publicField(this, "_scene");
-    __publicField(this, "_targetVelocity", new Vector3());
-    __publicField(this, "_velocity", new Vector3());
-    __publicField(this, "_speed", 0);
-    __publicField(this, "_orbitMode", false);
-    __publicField(this, "_orbitTarget", new Vector3());
-    __publicField(this, "_minOrbitalDistance", 0.05);
-    __publicField(this, "_targetPosition");
-    __publicField(this, "_lerpStartMs", 0);
-    __publicField(this, "_lerpEndMs", 0);
-    __publicField(this, "_lockDirection", false);
-    __publicField(this, "_lerpPosition");
-    __publicField(this, "_lerpRotation");
-    __publicField(this, "_onValueChanged", new dist$3.SignalDispatcher());
-    __publicField(this, "_onMoved", new dist$3.SignalDispatcher());
-    __publicField(this, "defaultLerpDuration", 2);
-    __publicField(this, "_vimReferenceSize", 1);
-    __publicField(this, "_sceneSizeMultiplier", 1);
-    __publicField(this, "_velocityBlendFactor", 1e-4);
-    __publicField(this, "_moveSpeed", 0.8);
-    __publicField(this, "_rotateSpeed", 1);
-    __publicField(this, "_orbitSpeed", 1);
-    __publicField(this, "_zoomSpeed", 0.25);
-    __publicField(this, "_firstPersonSpeed", 10);
-    __publicField(this, "_minModelScrenSize", 0.05);
-    __publicField(this, "_minOrthoSize", 1);
-    this.cameraPerspective = new PerspectiveCamera();
-    this.camera = this.cameraPerspective;
-    this._scene = scene;
-    this._viewport = viewport;
-    this._viewport.onResize(() => {
-      this.updateProjection(this._scene.getBoundingBox());
-    });
-    this.applySettings(settings2);
-    this.reset();
-  }
-  get onValueChanged() {
-    return this._onValueChanged.asEvent();
-  }
-  get onMoved() {
-    return this._onMoved.asEvent();
-  }
-  heightAt(point) {
-    if (this.orthographic) {
-      return this.cameraOrthographic.top - this.cameraOrthographic.bottom;
-    } else {
-      const dist2 = this.camera.position.distanceTo(point);
-      return dist2 * Math.tan(this.cameraPerspective.fov / 2 * (Math.PI / 180));
-    }
-  }
-  dispose() {
-    var _a22;
-    (_a22 = this.gizmo) == null ? void 0 : _a22.dispose();
-    this.gizmo = void 0;
-  }
-  reset() {
-    this.camera.position.set(0, 0, -1e3);
-    this._targetPosition = this.camera.position;
-    this._targetVelocity.set(0, 0, 0);
-    this._velocity.set(0, 0, 0);
-    this._orbitTarget.set(0, 0, 0);
-    this.lookAt(this._orbitTarget);
-  }
-  get speed() {
-    return this._speed;
-  }
-  set speed(value) {
-    this._speed = clamp(value, -25, 25);
-    this._onValueChanged.dispatch();
-  }
-  get localVelocity() {
-    const result = this._velocity.clone();
-    result.applyQuaternion(this.camera.quaternion.clone().invert());
-    result.setZ(-result.z);
-    result.multiplyScalar(1 / this.getVelocityMultiplier() * this._moveSpeed);
-    return result;
-  }
-  get forward() {
-    return this.camera.getWorldDirection(new Vector3());
-  }
-  get orbitPosition() {
-    return this._orbitTarget;
-  }
-  set localVelocity(vector) {
-    this.cancelLerp();
-    const move = vector.clone();
-    move.setZ(-move.z);
-    move.applyQuaternion(this.camera.quaternion);
-    move.multiplyScalar(this.getVelocityMultiplier() * this._moveSpeed);
-    this._targetVelocity.copy(move);
-  }
-  get orbitMode() {
-    return this._orbitMode;
-  }
-  set orbitMode(value) {
-    this._orbitMode = value;
-    if (this.gizmo) {
-      this.gizmo.enabled = value;
-      this.gizmo.show(value);
-    }
-    this._onValueChanged.dispatch();
-  }
-  setPosition(position) {
-    const changed = this.isSignificant(this.camera.position.sub(position));
-    this.camera.position.copy(position);
-    if (changed)
-      this._onMoved.dispatch();
-  }
-  target(target, duration = 0) {
-    if (target instanceof Object$1 && !target.hasMesh) {
-      throw new Error("Attempting to target a mesh with no geometry.");
-    }
-    const position = target instanceof Vector3 ? target : target.getCenter();
-    this._orbitTarget = position;
-    this.startLerp(duration, "Rotation");
-  }
-  frame(target, center = "none", duration = 0) {
-    if (target instanceof Object$1) {
-      target = target.getBoundingBox();
-    }
-    if (target === "all") {
-      target = this._scene.getBoundingBox();
-    }
-    if (target instanceof Box3) {
-      target = target.getBoundingSphere(new Sphere());
-    }
-    if (target instanceof Sphere) {
-      this.frameSphere(target, center, duration);
-    }
-  }
-  applySettings(settings2) {
-    this.orbitMode = settings2.getCameraIsOrbit();
-    if (this.camera instanceof PerspectiveCamera) {
-      this.camera.fov = settings2.getCameraFov();
-      this.camera.zoom = settings2.getCameraZoom();
-      this.camera.near = settings2.getCameraNear();
-      this.camera.far = settings2.getCameraFar();
-      this.camera.updateProjectionMatrix();
-    }
-    this._moveSpeed = settings2.getCameraMoveSpeed();
-    this._rotateSpeed = settings2.getCameraRotateSpeed();
-    this._orbitSpeed = settings2.getCameraOrbitSpeed();
-    this._vimReferenceSize = settings2.getCameraReferenceVimSize();
-    this._onValueChanged.dispatch();
-  }
-  adaptToContent() {
-    const sphere = this._scene.getBoundingBox().getBoundingSphere(new Sphere());
-    this._sceneSizeMultiplier = sphere ? sphere.radius / this._vimReferenceSize : 1;
-  }
-  get orbitDistance() {
-    return this.camera.position.distanceTo(this._orbitTarget);
-  }
-  get targetOrbitDistance() {
-    return this._targetPosition.distanceTo(this._orbitTarget);
-  }
-  zoom(amount, duration = 0) {
-    var _a22;
-    const sphere = this._scene.getBoundingBox().getBoundingSphere(new Sphere());
-    if (this.camera instanceof PerspectiveCamera) {
-      const reverse = 1 / (1 - this._zoomSpeed) - 1;
-      const factor = amount < 0 ? this._zoomSpeed : reverse;
-      const dist2 = this.targetOrbitDistance;
-      let offset = dist2 * factor;
-      offset = Math.max(this._minOrbitalDistance, offset);
-      let targetDist = dist2 + offset * amount;
-      targetDist = Math.max(this._minOrbitalDistance, targetDist);
-      const rad = this.camera.fov / 2 * (Math.PI / 180);
-      if (sphere.radius / (targetDist * Math.tan(rad)) < this._minModelScrenSize) {
-        return;
-      }
-      const target = new Vector3(0, 0, targetDist);
-      target.applyQuaternion(this.camera.quaternion);
-      target.add(this._orbitTarget);
-      this._targetPosition = target;
-      this.startLerp(duration, "Position");
-    } else {
-      const multiplier = this._zoomSpeed * this.getBaseMultiplier();
-      const padX = (this.camera.right - this.camera.left) * amount * multiplier;
-      const padY = (this.camera.top - this.camera.bottom) * amount * multiplier;
-      const X2 = this.camera.right - this.camera.left + 2 * padX;
-      const Y2 = this.camera.top - this.camera.bottom + 2 * padY;
-      const radius = Math.min(X2 / 2, Y2 / 2);
-      if (sphere.radius / radius < this._minModelScrenSize)
-        return;
-      if (radius * 2 < this._minOrbitalDistance)
-        return;
-      this.camera.left -= padX;
-      this.camera.right += padX;
-      this.camera.bottom -= padY;
-      this.camera.top += padY;
-      this.camera.updateProjectionMatrix();
-    }
-    (_a22 = this.gizmo) == null ? void 0 : _a22.show();
-  }
-  move3(vector) {
-    var _a22;
-    this.cancelLerp();
-    const v2 = new Vector3();
-    if (this.orthographic) {
-      const aspect2 = this._viewport.getAspectRatio();
-      const dx = this.cameraOrthographic.right - this.cameraOrthographic.left;
-      const dy = this.cameraOrthographic.top - this.cameraOrthographic.bottom;
-      v2.set(-vector.x * dx * aspect2, vector.y * dy, 0);
-    } else {
-      v2.copy(vector);
-      v2.applyQuaternion(this.camera.quaternion);
-      v2.multiplyScalar(this.getMoveMultiplier() * this._moveSpeed);
-    }
-    this._orbitTarget.add(v2);
-    this._targetPosition.add(v2);
-    this._lockDirection = true;
-    this.startLerp(0, "Position");
-    (_a22 = this.gizmo) == null ? void 0 : _a22.show();
-  }
-  move2(vector, axes) {
-    const direction = axes === "XY" ? new Vector3(-vector.x, vector.y, 0) : axes === "XZ" ? new Vector3(-vector.x, 0, vector.y) : void 0;
-    if (direction)
-      this.move3(direction);
-  }
-  move1(amount, axis) {
-    const direction = new Vector3(axis === "X" ? -amount : 0, axis === "Y" ? amount : 0, axis === "Z" ? amount : 0);
-    this.move3(direction);
-  }
-  rotate(vector, duration = 0) {
-    const euler = new Euler(0, 0, 0, "YXZ");
-    euler.setFromQuaternion(this.camera.quaternion);
-    const factor = this.orbitMode ? -Math.PI * this._orbitSpeed : -Math.PI * this._rotateSpeed;
-    euler.y += vector.x * factor;
-    euler.x += vector.y * factor;
-    euler.z = 0;
-    const max2 = Math.PI * 0.48;
-    euler.x = Math.max(-max2, Math.min(max2, euler.x));
-    const rotation = new Quaternion().setFromEuler(euler);
-    if (this.orbitMode) {
-      const target = new Vector3(0, 0, 1);
-      target.applyQuaternion(rotation);
-      this.orbit(target, duration);
-    } else {
-      const offset = new Vector3(0, 0, -this.orbitDistance);
-      if (duration <= 0) {
-        this.camera.quaternion.copy(rotation);
-        offset.applyQuaternion(this.camera.quaternion);
-        this._onMoved.dispatch();
-      } else {
-        offset.applyQuaternion(rotation);
-        this.startLerp(duration, "Rotation");
-      }
-      this._orbitTarget = this.camera.position.clone().add(offset);
-    }
-  }
-  orbit(forward, duration = 0) {
-    const direction = this.clampY(this._orbitTarget, this.camera.position, forward);
-    const pos = this._orbitTarget.clone();
-    const delta = direction.normalize().multiplyScalar(this.orbitDistance);
-    this._targetPosition = pos.add(delta);
-    this.startLerp(duration, "Position");
-  }
-  frameSphere(sphere, angle, duration) {
-    var _a22;
-    const offset = this.camera.position.clone().sub(sphere.center);
-    const dist2 = this.camera.position.distanceTo(sphere.center);
-    if (angle === "center") {
-      offset.setY(0);
-    }
-    if (typeof angle === "number") {
-      const y2 = Math.sin(angle * (Math.PI / 180)) * dist2;
-      offset.setY(y2);
-    }
-    offset.normalize();
-    offset.multiplyScalar(sphere.radius * 3);
-    this._targetPosition = sphere.center.clone().add(offset);
-    this._orbitTarget = sphere.center;
-    this.startLerp(duration, "Both");
-    this.updateProjection(sphere);
-    (_a22 = this.gizmo) == null ? void 0 : _a22.show();
-  }
-  lookAt(position) {
-    this.camera.lookAt(position);
-    this.camera.up.set(0, 1, 0);
-  }
-  updateProjection(target) {
-    if (target instanceof Box3) {
-      target = target.getBoundingSphere(new Sphere());
-    }
-    const aspect2 = this._viewport.getAspectRatio();
-    if (this.camera instanceof PerspectiveCamera) {
-      this.camera.aspect = aspect2;
-    } else {
-      if (target) {
-        this.camera.left = -target.radius * aspect2;
-        this.camera.right = target.radius * aspect2;
-        this.camera.top = target.radius;
-        this.camera.bottom = -target.radius;
-      }
-      this.camera.near = -this.cameraPerspective.far;
-      this.camera.far = this.cameraPerspective.far;
-    }
-    this.camera.updateProjectionMatrix();
-  }
-  get orthographic() {
-    return this.camera instanceof OrthographicCamera;
-  }
-  set orthographic(value) {
-    if (value === this.orthographic)
-      return;
-    if (value && !this.cameraOrthographic) {
-      this.cameraOrthographic = new OrthographicCamera(-1, 1, 1, -1, -1, 1);
-    }
-    const next = value ? this.cameraOrthographic : this.cameraPerspective;
-    next.position.copy(this.camera.position);
-    next.rotation.copy(this.camera.rotation);
-    this.camera = next;
-    this.updateProjection(this._scene.getBoundingBox());
-    this._onValueChanged.dispatch();
-  }
-  getBaseMultiplier() {
-    return Math.pow(1.25, this.speed);
-  }
-  getVelocityMultiplier() {
-    const dist2 = this.orbitMode ? this.orbitDistance / this._vimReferenceSize : this._firstPersonSpeed;
-    return this.getBaseMultiplier() * dist2;
-  }
-  getMoveMultiplier() {
-    return this.orbitDistance / this._vimReferenceSize;
-  }
-  clampY(center, origin, value) {
-    const result = value.clone();
-    if (value.y !== 0 && value.x === 0 && value.z === 0) {
-      const delta = origin.clone().sub(center);
-      delta.setY(0);
-      delta.normalize().multiplyScalar(0.01);
-      result.x = delta.x;
-      result.z = delta.z;
-    }
-    return result;
-  }
-  slerp(center, start, end, value) {
-    const mid = start.clone().lerp(end, value);
-    const d1 = start.distanceTo(center);
-    const d2 = end.distanceTo(center);
-    const dist2 = d1 + (d2 - d1) * value;
-    const dir = mid.clone().sub(center).normalize();
-    const pos = center.clone().add(dir.multiplyScalar(dist2));
-    return pos;
-  }
-  startLerp(seconds, lerp2) {
-    const time = new Date().getTime();
-    this._lerpEndMs = time + seconds * 1e3;
-    this._lerpStartMs = time;
-    this._lerpPosition = lerp2 === "Position" || lerp2 === "Both";
-    this._lerpRotation = lerp2 === "Rotation" || lerp2 === "Both";
-  }
-  shouldLerp() {
-    return new Date().getTime() < this._lerpEndMs;
-  }
-  lerpProgress() {
-    const done = new Date().getTime() - this._lerpStartMs;
-    const duration = this._lerpEndMs - this._lerpStartMs;
-    let progress = done / duration;
-    progress = Math.min(progress, 1);
-    return progress;
-  }
-  update(deltaTime) {
-    var _a22;
-    if (this.shouldLerp()) {
-      if (this._lerpPosition && !this.isNearTarget()) {
-        this.applyPositionLerp();
-      }
-      if (this._lerpRotation && !this.isLookingAtTarget()) {
-        this.applyRotationLerp();
-      } else if (!this._lockDirection) {
-        this.lookAt(this._orbitTarget);
-      }
-    } else {
-      if (this._lerpPosition || this._lerpRotation) {
-        this.endLerp();
-      }
-      this._targetPosition.copy(this.camera.position);
-      this.applyVelocity(deltaTime);
-    }
-    (_a22 = this.gizmo) == null ? void 0 : _a22.setPosition(this._orbitTarget);
-  }
-  isNearTarget() {
-    return this.camera.position.distanceTo(this._targetPosition) < 0.1;
-  }
-  isLookingAtTarget() {
-    return this.goesThrough(this.camera.position, this.forward, this._orbitTarget, 0.01);
-  }
-  goesThrough(origin, direction, point, tolerance) {
-    const x2 = (point.x - origin.x) / direction.x;
-    const y2 = (point.y - origin.y) / direction.y;
-    const z2 = (point.z - origin.z) / direction.z;
-    const result = Math.abs(x2 - y2) < tolerance && Math.abs(x2 - z2) < tolerance && Math.abs(y2 - z2) < tolerance;
-    return result;
-  }
-  cancelLerp() {
-    this._lerpPosition = false;
-    this._lerpRotation = false;
-    this._lockDirection = false;
-    this._lerpEndMs = 0;
-  }
-  endLerp() {
-    this.cancelLerp();
-    this.setPosition(this._targetPosition);
-    this.lookAt(this._orbitTarget);
-  }
-  applyVelocity(deltaTime) {
-    var _a22;
-    const invBlendFactor = Math.pow(this._velocityBlendFactor, deltaTime);
-    const blendFactor = 1 - invBlendFactor;
-    this._velocity.multiplyScalar(invBlendFactor);
-    const deltaVelocity = this._targetVelocity.clone().multiplyScalar(blendFactor);
-    this._velocity.add(deltaVelocity);
-    const deltaPosition = this._velocity.clone().multiplyScalar(deltaTime);
-    const endPosition = this.camera.position.clone().add(deltaPosition);
-    this.setPosition(endPosition);
-    this._orbitTarget.add(deltaPosition);
-    if (this.orthographic) {
-      const aspect2 = this._viewport.getAspectRatio();
-      const d = -deltaPosition.dot(this.forward);
-      const dx = this.cameraOrthographic.right - this.cameraOrthographic.left + 2 * d * aspect2;
-      const dy = this.cameraOrthographic.top - this.cameraOrthographic.bottom + 2 * d * aspect2;
-      const radius = Math.min(dx, dy);
-      if (radius < this._minOrthoSize)
-        return;
-      this.cameraOrthographic.left -= d * aspect2;
-      this.cameraOrthographic.right += d * aspect2;
-      this.cameraOrthographic.top += d;
-      this.cameraOrthographic.bottom -= d;
-      this.cameraOrthographic.updateProjectionMatrix();
-      (_a22 = this.gizmo) == null ? void 0 : _a22.show();
-    }
-  }
-  isSignificant(vector) {
-    const min2 = 0.01 * this._sceneSizeMultiplier / 60;
-    return Math.abs(vector.x) > min2 || Math.abs(vector.y) > min2 || Math.abs(vector.z) > min2;
-  }
-  applyPositionLerp() {
-    const alpha = this.lerpProgress();
-    const pos = this.slerp(this._orbitTarget, this.camera.position, this._targetPosition, alpha);
-    this.setPosition(pos);
-  }
-  applyRotationLerp() {
-    const current = this.camera.position.clone().add(this.forward.multiplyScalar(this.orbitDistance));
-    const look2 = current.lerp(this._orbitTarget, this.lerpProgress());
-    this.lookAt(look2);
-  }
-}
-class InputHandler {
-  constructor(viewer2) {
-    __publicField(this, "_viewer");
-    __publicField(this, "_unregisters", []);
-    __publicField(this, "reg", (handler, type, listener2) => {
-      handler.addEventListener(type, listener2);
-      this._unregisters.push(() => handler.removeEventListener(type, listener2));
-    });
-    this._viewer = viewer2;
-  }
-  register() {
-    if (this._unregisters.length > 0)
-      return;
-    this.addListeners();
-  }
-  addListeners() {
-  }
-  unregister() {
-    this._unregisters.forEach((f2) => f2());
-    this._unregisters.length = 0;
-    this.reset();
-  }
-  reset() {
-  }
-}
-const KEYS = {
-  KEY_0: 48,
-  KEY_1: 49,
-  KEY_2: 50,
-  KEY_3: 51,
-  KEY_4: 52,
-  KEY_5: 53,
-  KEY_6: 54,
-  KEY_7: 55,
-  KEY_8: 56,
-  KEY_9: 57,
-  KEY_LEFT: 37,
-  KEY_RIGHT: 39,
-  KEY_UP: 38,
-  KEY_DOWN: 40,
-  KEY_CTRL: 17,
-  KEY_SHIFT: 16,
-  KEY_ENTER: 13,
-  KEY_SPACE: 32,
-  KEY_TAB: 9,
-  KEY_ESCAPE: 27,
-  KEY_BACKSPACE: 8,
-  KEY_HOME: 36,
-  KEY_END: 35,
-  KEY_INSERT: 45,
-  KEY_DELETE: 46,
-  KEY_ALT: 18,
-  KEY_F1: 112,
-  KEY_F2: 113,
-  KEY_F3: 114,
-  KEY_F4: 115,
-  KEY_F5: 116,
-  KEY_F6: 117,
-  KEY_F7: 118,
-  KEY_F8: 119,
-  KEY_F9: 120,
-  KEY_F10: 121,
-  KEY_F11: 122,
-  KEY_F12: 123,
-  KEY_NUMPAD0: 96,
-  KEY_NUMPAD1: 97,
-  KEY_NUMPAD2: 98,
-  KEY_NUMPAD3: 99,
-  KEY_NUMPAD4: 100,
-  KEY_NUMPAD5: 101,
-  KEY_NUMPAD6: 102,
-  KEY_NUMPAD7: 103,
-  KEY_NUMPAD8: 104,
-  KEY_NUMPAD9: 105,
-  KEY_ADD: 107,
-  KEY_SUBTRACT: 109,
-  KEY_MULTIPLY: 106,
-  KEY_DIVIDE: 111,
-  KEY_SEPARATOR: 108,
-  KEY_DECIMAL: 110,
-  KEY_OEM_PLUS: 187,
-  KEY_OEM_MINUS: 189,
-  KEY_A: 65,
-  KEY_B: 66,
-  KEY_C: 67,
-  KEY_D: 68,
-  KEY_E: 69,
-  KEY_F: 70,
-  KEY_G: 71,
-  KEY_H: 72,
-  KEY_I: 73,
-  KEY_J: 74,
-  KEY_K: 75,
-  KEY_L: 76,
-  KEY_M: 77,
-  KEY_N: 78,
-  KEY_O: 79,
-  KEY_P: 80,
-  KEY_Q: 81,
-  KEY_R: 82,
-  KEY_S: 83,
-  KEY_T: 84,
-  KEY_U: 85,
-  KEY_V: 86,
-  KEY_W: 87,
-  KEY_X: 88,
-  KEY_Y: 89,
-  KEY_Z: 90
-};
-const KeySet = new Set(Object.values(KEYS));
-class KeyboardHandler extends InputHandler {
-  constructor() {
-    super(...arguments);
-    __publicField(this, "SHIFT_MULTIPLIER", 3);
-    __publicField(this, "isUpPressed", false);
-    __publicField(this, "isDownPressed", false);
-    __publicField(this, "isLeftPressed", false);
-    __publicField(this, "isRightPressed", false);
-    __publicField(this, "isEPressed", false);
-    __publicField(this, "isQPressed", false);
-    __publicField(this, "isShiftPressed", false);
-    __publicField(this, "isCtrlPressed", false);
-    __publicField(this, "onKeyUp", (event) => {
-      this.onKey(event, false);
-    });
-    __publicField(this, "onKeyDown", (event) => {
-      this.onKey(event, true);
-    });
-    __publicField(this, "onKey", (event, keyDown) => {
-      if (!keyDown && KeySet.has(event.keyCode)) {
-        if (this._viewer.inputs.KeyAction(event.keyCode)) {
-          event.preventDefault();
-        }
-      }
-      switch (event.keyCode) {
-        case KEYS.KEY_W:
-        case KEYS.KEY_UP:
-          this.isUpPressed = keyDown;
-          this.applyMove();
-          event.preventDefault();
-          break;
-        case KEYS.KEY_S:
-        case KEYS.KEY_DOWN:
-          this.isDownPressed = keyDown;
-          this.applyMove();
-          event.preventDefault();
-          break;
-        case KEYS.KEY_D:
-        case KEYS.KEY_RIGHT:
-          this.isRightPressed = keyDown;
-          this.applyMove();
-          event.preventDefault();
-          break;
-        case KEYS.KEY_A:
-        case KEYS.KEY_LEFT:
-          this.isLeftPressed = keyDown;
-          this.applyMove();
-          event.preventDefault();
-          break;
-        case KEYS.KEY_E:
-          this.isEPressed = keyDown;
-          this.applyMove();
-          event.preventDefault();
-          break;
-        case KEYS.KEY_Q:
-          this.isQPressed = keyDown;
-          this.applyMove();
-          event.preventDefault();
-          break;
-        case KEYS.KEY_SHIFT:
-          this.isShiftPressed = keyDown;
-          this.applyMove();
-          event.preventDefault();
-          break;
-        case KEYS.KEY_CTRL:
-          this.isCtrlPressed = keyDown;
-          console.log("Control:" + keyDown);
-          event.preventDefault();
-          break;
-      }
-    });
-    __publicField(this, "applyMove", () => {
-      const move = new Vector3((this.isRightPressed ? 1 : 0) - (this.isLeftPressed ? 1 : 0), (this.isEPressed ? 1 : 0) - (this.isQPressed ? 1 : 0), (this.isUpPressed ? 1 : 0) - (this.isDownPressed ? 1 : 0));
-      const speed = this.isShiftPressed ? this.SHIFT_MULTIPLIER : 1;
-      move.multiplyScalar(speed);
-      this.camera.localVelocity = move;
-    });
-  }
-  addListeners() {
-    this.reg(document, "keydown", this.onKeyDown);
-    this.reg(document, "keyup", this.onKeyUp);
-  }
-  reset() {
-    this.isUpPressed = false;
-    this.isDownPressed = false;
-    this.isLeftPressed = false;
-    this.isRightPressed = false;
-    this.isEPressed = false;
-    this.isQPressed = false;
-    this.isShiftPressed = false;
-    this.isCtrlPressed = false;
-  }
-  get camera() {
-    return this._viewer.camera;
-  }
-  get selection() {
-    return this._viewer.selection;
-  }
-  get section() {
-    return this._viewer.sectionBox;
-  }
-}
-class RaycastResult {
-  constructor(intersections) {
-    __publicField(this, "object");
-    __publicField(this, "intersections");
-    __publicField(this, "firstHit");
-    this.intersections = intersections;
-    const [hit, obj] = this.GetFirstVimHit(intersections);
-    this.firstHit = hit;
-    this.object = obj;
-  }
-  GetFirstVimHit(intersections) {
-    for (let i2 = 0; i2 < intersections.length; i2++) {
-      const obj = this.getVimObjectFromHit(intersections[i2]);
-      if (obj == null ? void 0 : obj.visible)
-        return [intersections[i2], obj];
-    }
-    return [];
-  }
-  getVimObjectFromHit(hit) {
-    const vim = hit.object.userData.vim;
-    if (!vim)
-      return;
-    if (hit.object.userData.merged) {
-      if (!hit.faceIndex) {
-        throw new Error("Raycast hit has no face index.");
-      }
-      const index = this.binarySearch(hit.object.userData.submeshes, hit.faceIndex * 3);
-      const instance = hit.object.userData.instances[index];
-      return vim.getObjectFromInstance(instance);
-    } else if (hit.instanceId !== void 0) {
-      return vim.getObjectFromMesh(hit.object, hit.instanceId);
-    }
-  }
-  binarySearch(array, element) {
-    let m2 = 0;
-    let n2 = array.length - 1;
-    while (m2 <= n2) {
-      const k = n2 + m2 >> 1;
-      const cmp = element - array[k];
-      if (cmp > 0) {
-        m2 = k + 1;
-      } else if (cmp < 0) {
-        n2 = k - 1;
-      } else {
-        return k;
-      }
-    }
-    return m2 - 1;
-  }
-  get isHit() {
-    return !!this.firstHit;
-  }
-  get distance() {
-    var _a22;
-    return (_a22 = this.firstHit) == null ? void 0 : _a22.distance;
-  }
-  get position() {
-    var _a22;
-    return (_a22 = this.firstHit) == null ? void 0 : _a22.point;
-  }
-  get threeId() {
-    var _a22, _b2;
-    return (_b2 = (_a22 = this.firstHit) == null ? void 0 : _a22.object) == null ? void 0 : _b2.id;
-  }
-  get faceIndex() {
-    var _a22;
-    return (_a22 = this.firstHit) == null ? void 0 : _a22.faceIndex;
-  }
-}
-class Raycaster {
-  constructor(viewport, camera, scene, renderer) {
-    __publicField(this, "_viewport");
-    __publicField(this, "_camera");
-    __publicField(this, "_scene");
-    __publicField(this, "_renderer");
-    __publicField(this, "_raycaster", new Raycaster$1());
-    this._viewport = viewport;
-    this._camera = camera;
-    this._scene = scene;
-    this._renderer = renderer;
-  }
-  raycast2(position) {
-    this._raycaster = this.fromPoint2(position, this._raycaster);
-    let hits = this._raycaster.intersectObjects(this._scene.scene.children);
-    hits = this.filterHits(hits);
-    return new RaycastResult(hits);
-  }
-  filterHits(hits) {
-    return this._renderer.section.active ? hits.filter((i2) => this._renderer.section.box.containsPoint(i2.point)) : hits;
-  }
-  raycast3(position) {
-    this._raycaster = this.fromPoint3(position, this._raycaster);
-    let hits = this._raycaster.intersectObjects(this._scene.scene.children);
-    hits = this.filterHits(hits);
-    return new RaycastResult(hits);
-  }
-  raycastForward() {
-    return this.raycast3(this._camera.orbitPosition);
-  }
-  fromPoint2(position, target = new Raycaster$1()) {
-    const size = this._viewport.getSize();
-    const x2 = position.x / size.x * 2 - 1;
-    const y2 = -(position.y / size.y) * 2 + 1;
-    target.setFromCamera(new Vector2(x2, y2), this._camera.camera);
-    return target;
-  }
-  fromPoint3(position, target = new Raycaster$1()) {
-    const direction = position.clone().sub(this._camera.camera.position).normalize();
-    target.set(this._camera.camera.position, direction);
-    return target;
-  }
-}
-class InputAction {
-  constructor(type, modifier, position, raycaster) {
-    __publicField(this, "position");
-    __publicField(this, "modifier");
-    __publicField(this, "type");
-    __publicField(this, "_raycaster");
-    __publicField(this, "_raycast");
-    this.type = type;
-    this.modifier = modifier;
-    this.position = position;
-    this._raycaster = raycaster;
-  }
-  get raycast() {
-    var _a22;
-    return (_a22 = this._raycast) != null ? _a22 : this._raycast = this._raycaster.raycast2(this.position);
-  }
-  get object() {
-    return this.raycast.object;
-  }
-}
-class TouchHandler extends InputHandler {
-  constructor() {
-    super(...arguments);
-    __publicField(this, "TAP_DURATION_MS", 500);
-    __publicField(this, "DOUBLE_TAP_DELAY_MS", 500);
-    __publicField(this, "TAP_MAX_MOVE_PIXEL", 5);
-    __publicField(this, "ZOOM_SPEED", 5);
-    __publicField(this, "_touch");
-    __publicField(this, "_touch1");
-    __publicField(this, "_touch2");
-    __publicField(this, "_touchStartTime");
-    __publicField(this, "_lastTapMs");
-    __publicField(this, "_touchStart");
-    __publicField(this, "reset", () => {
-      this._touch = this._touch1 = this._touch2 = this._touchStartTime = void 0;
-    });
-    __publicField(this, "onTap", (position) => {
-      const time = new Date().getTime();
-      const double = time - this._lastTapMs < this.DOUBLE_TAP_DELAY_MS;
-      this._lastTapMs = new Date().getTime();
-      const action = new InputAction(double ? "double" : "main", "none", position, this._viewer.raycaster);
-      this._viewer.inputs.MainAction(action);
-    });
-    __publicField(this, "onTouchStart", (event) => {
-      event.preventDefault();
-      if (!event || !event.touches || !event.touches.length) {
-        return;
-      }
-      this._touchStartTime = new Date().getTime();
-      if (event.touches.length === 1) {
-        this._touch = this.touchToVector(event.touches[0]);
-        this._touch1 = this._touch2 = void 0;
-      } else if (event.touches.length === 2) {
-        this._touch1 = this.touchToVector(event.touches[0]);
-        this._touch2 = this.touchToVector(event.touches[1]);
-        this._touch = this.average(this._touch1, this._touch2);
-      }
-      this._touchStart = this._touch;
-    });
-    __publicField(this, "onDrag", (delta) => {
-      this.camera.rotate(delta);
-    });
-    __publicField(this, "onDoubleDrag", (delta) => {
-      this.camera.move2(delta, "XY");
-    });
-    __publicField(this, "onPinchOrSpread", (delta) => {
-      if (this.camera.orbitMode) {
-        this.camera.zoom(delta * this.ZOOM_SPEED);
-      } else {
-        this.camera.move1(delta * this.ZOOM_SPEED, "Z");
-      }
-    });
-    __publicField(this, "onTouchMove", (event) => {
-      event.preventDefault();
-      if (!event || !event.touches || !event.touches.length)
-        return;
-      if (!this._touch)
-        return;
-      if (event.touches.length === 1) {
-        const pos = this.touchToVector(event.touches[0]);
-        const size = this.viewport.getSize();
-        const delta = pos.clone().sub(this._touch).multiply(new Vector2(1 / size.x, 1 / size.y));
-        this._touch = pos;
-        this.onDrag(delta);
-        return;
-      }
-      if (!this._touch1 || !this._touch2)
-        return;
-      if (event.touches.length >= 2) {
-        const p1 = this.touchToVector(event.touches[0]);
-        const p2 = this.touchToVector(event.touches[1]);
-        const p3 = this.average(p1, p2);
-        const size = this.viewport.getSize();
-        const moveDelta = this._touch.clone().sub(p3).multiply(new Vector2(-1 / size.x, -1 / size.y));
-        const zoom2 = p1.distanceTo(p2);
-        const prevZoom = this._touch1.distanceTo(this._touch2);
-        const min2 = Math.min(size.x, size.y);
-        const zoomDelta = (zoom2 - prevZoom) / -min2;
-        this._touch = p3;
-        this._touch1 = p1;
-        this._touch2 = p2;
-        if (moveDelta.length() > Math.abs(zoomDelta)) {
-          this.onDoubleDrag(moveDelta);
-        } else {
-          this.onPinchOrSpread(zoomDelta);
-        }
-      }
-    });
-    __publicField(this, "onTouchEnd", (event) => {
-      if (this.isSingleTouch()) {
-        const touchDurationMs = new Date().getTime() - this._touchStartTime;
-        const length = this._touch.clone().sub(this._touchStart).length();
-        console.log(length);
-        if (touchDurationMs < this.TAP_DURATION_MS && length < this.TAP_MAX_MOVE_PIXEL) {
-          this.onTap(this._touch);
-        }
-      }
-      this.reset();
-    });
-  }
-  get camera() {
-    return this._viewer.camera;
-  }
-  get viewport() {
-    return this._viewer.viewport;
-  }
-  addListeners() {
-    const canvas = this.viewport.canvas;
-    this.reg(canvas, "touchstart", this.onTouchStart);
-    this.reg(canvas, "touchend", this.onTouchEnd);
-    this.reg(canvas, "touchmove", this.onTouchMove);
-  }
-  isSingleTouch() {
-    return this._touch !== void 0 && this._touchStartTime !== void 0 && this._touch1 === void 0 && this._touch2 === void 0;
-  }
-  touchToVector(touch) {
-    return new Vector2(touch.pageX, touch.pageY);
-  }
-  average(p1, p2) {
-    return p1.clone().lerp(p2, 0.5);
-  }
-}
-class MouseHandler extends InputHandler {
-  constructor() {
-    super(...arguments);
-    __publicField(this, "_idleDelayMs", 150);
-    __publicField(this, "ZOOM_SPEED", 5);
-    __publicField(this, "buttonDown");
-    __publicField(this, "hasMouseMoved", false);
-    __publicField(this, "_idleTimeout");
-    __publicField(this, "_idle");
-    __publicField(this, "_idlePosition");
-    __publicField(this, "_lastPosition");
-    __publicField(this, "_downPosition");
-    __publicField(this, "reset", () => {
-      this.buttonDown = void 0;
-      this.hasMouseMoved = false;
-      this._lastPosition = this._downPosition = void 0;
-      clearTimeout(this._idleTimeout);
-    });
-    __publicField(this, "onMouseOut", (_) => {
-      this.buttonDown = void 0;
-      this.hasMouseMoved = false;
-    });
-    __publicField(this, "onMouseIdle", (position) => {
-      if (this.buttonDown || !position)
-        return;
-      const action = new InputAction("idle", this.getModifier(), position, this.raycaster);
-      this._viewer.inputs.IdleAction(action);
-      this._idle = true;
-      this._idlePosition = position;
-    });
-    __publicField(this, "onCameraMoved", () => {
-      if (this._idle) {
-        this._viewer.inputs.IdleAction(void 0);
-      }
-      this.resetIdleTimeout();
-    });
-    __publicField(this, "onMouseMove", (event) => {
-      this._lastPosition = new Vector2(event.offsetX, event.offsetY);
-      if (this._idle && this._lastPosition.distanceTo(this._idlePosition) > 5) {
-        this._viewer.inputs.IdleAction(void 0);
-        this.resetIdleTimeout();
-      }
-      if (!this._idle) {
-        this.resetIdleTimeout();
-      }
-      if (!this.buttonDown)
-        return;
-      this.onMouseDrag(event);
-    });
-    __publicField(this, "onMouseDown", (event) => {
-      event.preventDefault();
-      if (this.buttonDown)
-        return;
-      this._downPosition = new Vector2(event.offsetX, event.offsetY);
-      this.hasMouseMoved = false;
-      this.viewport.canvas.focus();
-      this.buttonDown = this.getButton(event);
-      const pointer = this.buttonDown === "middle" ? "pan" : this.buttonDown === "right" ? "look" : void 0;
-      this._viewer.inputs.pointerOverride = pointer;
-      if (pointer === "look")
-        this._viewer.camera.orbitMode = false;
-    });
-    __publicField(this, "onMouseWheel", (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      const scrollValue = Math.sign(event.deltaY);
-      if (this.keyboard.isCtrlPressed) {
-        this.camera.speed -= scrollValue;
-      } else {
-        this.camera.zoom(scrollValue, this.camera.defaultLerpDuration);
-      }
-    });
-    __publicField(this, "onMouseUp", (event) => {
-      this.resetIdleTimeout();
-      const btn = this.getButton(event);
-      if (btn === this.buttonDown)
-        return;
-      this._viewer.gizmoRectangle.visible = false;
-      event.preventDefault();
-      if (!this.buttonDown)
-        return;
-      if (this.inputs.pointerActive === "rect" && this.hasMouseMoved) {
-        this.onRectEnd();
-      } else if (event.button === 0 && !this.hasMouseMoved) {
-        this.onMouseClick(new Vector2(event.offsetX, event.offsetY), false);
-      } else if (event.button === 2 && !this.hasMouseMoved) {
-        this.inputs.ContextMenu(new Vector2(event.clientX, event.clientY));
-      }
-      this.camera.orbitMode = this.inputs.pointerActive === "orbit";
-      this.buttonDown = void 0;
-      this.inputs.pointerOverride = void 0;
-    });
-    __publicField(this, "onDoubleClick", (event) => {
-      this.onMouseClick(new Vector2(event.offsetX, event.offsetY), true);
-    });
-    __publicField(this, "onMouseClick", (position, doubleClick) => {
-      const action = new InputAction(doubleClick ? "double" : "main", this.getModifier(), position, this.raycaster);
-      this._viewer.inputs.MainAction(action);
-    });
-  }
-  get camera() {
-    return this._viewer.camera;
-  }
-  get viewport() {
-    return this._viewer.viewport;
-  }
-  get canvas() {
-    return this.viewport.canvas;
-  }
-  get raycaster() {
-    return this._viewer.raycaster;
-  }
-  get inputs() {
-    return this._viewer.inputs;
-  }
-  get keyboard() {
-    return this._viewer.inputs.keyboard;
-  }
-  addListeners() {
-    this.reg(this.canvas, "mousedown", this.onMouseDown);
-    this.reg(this.canvas, "wheel", this.onMouseWheel);
-    this.reg(this.canvas, "mousemove", this.onMouseMove);
-    this.reg(this.canvas, "mouseup", this.onMouseUp);
-    this.reg(this.canvas, "mouseout", this.onMouseOut);
-    this.reg(this.canvas, "dblclick", this.onDoubleClick);
-    this.reg(this.canvas, "contextmenu", (e) => e.preventDefault());
-    this._unregisters.push(this.camera.onMoved.subscribe(() => this.onCameraMoved()));
-  }
-  resetIdleTimeout() {
-    clearTimeout(this._idleTimeout);
-    this._idleTimeout = setTimeout(() => this.onMouseIdle(this._lastPosition), this._idleDelayMs);
-  }
-  onMouseDrag(event) {
-    event.preventDefault();
-    const deltaX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
-    const deltaY = event.movementY || event.mozMovementY || event.webkitMovementY || 0;
-    const size = this.viewport.getSize();
-    const delta = new Vector2(deltaX / size.x, deltaY / size.y);
-    const position = new Vector2(event.offsetX, event.offsetY);
-    this.hasMouseMoved = this.hasMouseMoved || this._downPosition.distanceTo(position) > 4;
-    switch (this.buttonDown) {
-      case "main":
-        this.onMouseMainDrag(delta);
-        break;
-      case "middle":
-        this.onMouseMiddleDrag(delta);
-        break;
-      case "right":
-        this.onMouseRightDrag(delta);
-        break;
-    }
-  }
-  onMouseMainDrag(delta) {
-    switch (this.inputs.pointerActive) {
-      case "orbit":
-        this.camera.rotate(delta);
-        break;
-      case "look":
-        this.camera.rotate(delta);
-        break;
-      case "pan":
-        this.camera.move2(delta, "XY");
-        break;
-      case "zoom":
-        this.camera.zoom(delta.y * this.ZOOM_SPEED);
-        break;
-      case "rect":
-        this.drawSelection();
-        break;
-      default:
-        this.camera.rotate(delta);
-    }
-  }
-  onMouseMiddleDrag(delta) {
-    this.camera.move2(delta, "XY");
-  }
-  onMouseRightDrag(delta) {
-    this.camera.rotate(delta);
-  }
-  getButton(event) {
-    return event.buttons & 1 ? "main" : event.buttons & 2 ? "right" : event.buttons & 4 ? "middle" : void 0;
-  }
-  onRectEnd() {
-    const box = this._viewer.gizmoRectangle.getBoundingBox();
-    const center = box.getCenter(new Vector3());
-    const size = box.getSize(new Vector3());
-    size.multiplyScalar(0.5);
-    box.setFromCenterAndSize(center, size);
-    this._viewer.camera.frame(box, "none", this._viewer.camera.defaultLerpDuration);
-  }
-  getModifier() {
-    return this.keyboard.isCtrlPressed ? "ctrl" : this.keyboard.isShiftPressed ? "shift" : "none";
-  }
-  drawSelection() {
-    this._viewer.gizmoRectangle.visible = true;
-    this._viewer.gizmoRectangle.update(this._downPosition, this._lastPosition);
-  }
-}
-var dist$1 = {};
-var SimpleEventDispatcher$1 = {};
-var dist = {};
-var DispatcherBase$1 = {};
-var DispatcherWrapper$1 = {};
-Object.defineProperty(DispatcherWrapper$1, "__esModule", { value: true });
-DispatcherWrapper$1.DispatcherWrapper = void 0;
-class DispatcherWrapper {
-  constructor(dispatcher) {
-    this._subscribe = (fn) => dispatcher.subscribe(fn);
-    this._unsubscribe = (fn) => dispatcher.unsubscribe(fn);
-    this._one = (fn) => dispatcher.one(fn);
-    this._has = (fn) => dispatcher.has(fn);
-    this._clear = () => dispatcher.clear();
-    this._count = () => dispatcher.count;
-    this._onSubscriptionChange = () => dispatcher.onSubscriptionChange;
-  }
-  get onSubscriptionChange() {
-    return this._onSubscriptionChange();
-  }
-  get count() {
-    return this._count();
-  }
-  subscribe(fn) {
-    return this._subscribe(fn);
-  }
-  sub(fn) {
-    return this.subscribe(fn);
-  }
-  unsubscribe(fn) {
-    this._unsubscribe(fn);
-  }
-  unsub(fn) {
-    this.unsubscribe(fn);
-  }
-  one(fn) {
-    return this._one(fn);
-  }
-  has(fn) {
-    return this._has(fn);
-  }
-  clear() {
-    this._clear();
-  }
-}
-DispatcherWrapper$1.DispatcherWrapper = DispatcherWrapper;
-var Subscription$1 = {};
-Object.defineProperty(Subscription$1, "__esModule", { value: true });
-Subscription$1.Subscription = void 0;
-class Subscription {
-  constructor(handler, isOnce) {
-    this.handler = handler;
-    this.isOnce = isOnce;
-    this.isExecuted = false;
-  }
-  execute(executeAsync, scope, args) {
-    if (!this.isOnce || !this.isExecuted) {
-      this.isExecuted = true;
-      var fn = this.handler;
-      if (executeAsync) {
-        setTimeout(() => {
-          fn.apply(scope, args);
-        }, 1);
-      } else {
-        fn.apply(scope, args);
-      }
-    }
-  }
-}
-Subscription$1.Subscription = Subscription;
-var EventManagement$1 = {};
-Object.defineProperty(EventManagement$1, "__esModule", { value: true });
-EventManagement$1.EventManagement = void 0;
-class EventManagement {
-  constructor(unsub) {
-    this.unsub = unsub;
-    this.propagationStopped = false;
-  }
-  stopPropagation() {
-    this.propagationStopped = true;
-  }
-}
-EventManagement$1.EventManagement = EventManagement;
-Object.defineProperty(DispatcherBase$1, "__esModule", { value: true });
-DispatcherBase$1.SubscriptionChangeEventDispatcher = DispatcherBase$1.DispatcherBase = void 0;
-const DispatcherWrapper_1 = DispatcherWrapper$1;
-const Subscription_1 = Subscription$1;
-const EventManagement_1$1 = EventManagement$1;
-class DispatcherBase {
-  constructor() {
-    this._subscriptions = new Array();
-  }
-  get count() {
-    return this._subscriptions.length;
-  }
-  get onSubscriptionChange() {
-    if (this._onSubscriptionChange == null) {
-      this._onSubscriptionChange = new SubscriptionChangeEventDispatcher();
-    }
-    return this._onSubscriptionChange.asEvent();
-  }
-  subscribe(fn) {
-    if (fn) {
-      this._subscriptions.push(this.createSubscription(fn, false));
-      this.triggerSubscriptionChange();
-    }
-    return () => {
-      this.unsubscribe(fn);
-    };
-  }
-  sub(fn) {
-    return this.subscribe(fn);
-  }
-  one(fn) {
-    if (fn) {
-      this._subscriptions.push(this.createSubscription(fn, true));
-      this.triggerSubscriptionChange();
-    }
-    return () => {
-      this.unsubscribe(fn);
-    };
-  }
-  has(fn) {
-    if (!fn)
-      return false;
-    return this._subscriptions.some((sub) => sub.handler == fn);
-  }
-  unsubscribe(fn) {
-    if (!fn)
-      return;
-    let changes = false;
-    for (let i2 = 0; i2 < this._subscriptions.length; i2++) {
-      if (this._subscriptions[i2].handler == fn) {
-        this._subscriptions.splice(i2, 1);
-        changes = true;
-        break;
-      }
-    }
-    if (changes) {
-      this.triggerSubscriptionChange();
-    }
-  }
-  unsub(fn) {
-    this.unsubscribe(fn);
-  }
-  _dispatch(executeAsync, scope, args) {
-    for (const sub of [...this._subscriptions]) {
-      const ev = new EventManagement_1$1.EventManagement(() => this.unsub(sub.handler));
-      const nargs = Array.prototype.slice.call(args);
-      nargs.push(ev);
-      const s = sub;
-      s.execute(executeAsync, scope, nargs);
-      this.cleanup(sub);
-      if (!executeAsync && ev.propagationStopped) {
-        return { propagationStopped: true };
-      }
-    }
-    if (executeAsync) {
-      return null;
-    }
-    return { propagationStopped: false };
-  }
-  createSubscription(handler, isOnce) {
-    return new Subscription_1.Subscription(handler, isOnce);
-  }
-  cleanup(sub) {
-    let changes = false;
-    if (sub.isOnce && sub.isExecuted) {
-      const i2 = this._subscriptions.indexOf(sub);
-      if (i2 > -1) {
-        this._subscriptions.splice(i2, 1);
-        changes = true;
-      }
-    }
-    if (changes) {
-      this.triggerSubscriptionChange();
-    }
-  }
-  asEvent() {
-    if (this._wrap == null) {
-      this._wrap = new DispatcherWrapper_1.DispatcherWrapper(this);
-    }
-    return this._wrap;
-  }
-  clear() {
-    if (this._subscriptions.length != 0) {
-      this._subscriptions.splice(0, this._subscriptions.length);
-      this.triggerSubscriptionChange();
-    }
-  }
-  triggerSubscriptionChange() {
-    if (this._onSubscriptionChange != null) {
-      this._onSubscriptionChange.dispatch(this.count);
-    }
-  }
-}
-DispatcherBase$1.DispatcherBase = DispatcherBase;
-class SubscriptionChangeEventDispatcher extends DispatcherBase {
-  dispatch(count) {
-    this._dispatch(false, this, arguments);
-  }
-}
-DispatcherBase$1.SubscriptionChangeEventDispatcher = SubscriptionChangeEventDispatcher;
-var DispatchError$1 = {};
-Object.defineProperty(DispatchError$1, "__esModule", { value: true });
-DispatchError$1.DispatchError = void 0;
-class DispatchError extends Error {
-  constructor(message) {
-    super(message);
-  }
-}
-DispatchError$1.DispatchError = DispatchError;
-var EventListBase$1 = {};
-Object.defineProperty(EventListBase$1, "__esModule", { value: true });
-EventListBase$1.EventListBase = void 0;
-class EventListBase {
-  constructor() {
-    this._events = {};
-  }
-  get(name) {
-    let event = this._events[name];
-    if (event) {
-      return event;
-    }
-    event = this.createDispatcher();
-    this._events[name] = event;
-    return event;
-  }
-  remove(name) {
-    delete this._events[name];
-  }
-}
-EventListBase$1.EventListBase = EventListBase;
-var HandlingBase$1 = {};
-Object.defineProperty(HandlingBase$1, "__esModule", { value: true });
-HandlingBase$1.HandlingBase = void 0;
-class HandlingBase {
-  constructor(events) {
-    this.events = events;
-  }
-  one(name, fn) {
-    this.events.get(name).one(fn);
-  }
-  has(name, fn) {
-    return this.events.get(name).has(fn);
-  }
-  subscribe(name, fn) {
-    this.events.get(name).subscribe(fn);
-  }
-  sub(name, fn) {
-    this.subscribe(name, fn);
-  }
-  unsubscribe(name, fn) {
-    this.events.get(name).unsubscribe(fn);
-  }
-  unsub(name, fn) {
-    this.unsubscribe(name, fn);
-  }
-}
-HandlingBase$1.HandlingBase = HandlingBase;
-var PromiseDispatcherBase$1 = {};
-var PromiseSubscription$1 = {};
-Object.defineProperty(PromiseSubscription$1, "__esModule", { value: true });
-PromiseSubscription$1.PromiseSubscription = void 0;
-class PromiseSubscription {
-  constructor(handler, isOnce) {
-    this.handler = handler;
-    this.isOnce = isOnce;
-    this.isExecuted = false;
-  }
-  async execute(executeAsync, scope, args) {
-    if (!this.isOnce || !this.isExecuted) {
-      this.isExecuted = true;
-      var fn = this.handler;
-      if (executeAsync) {
-        setTimeout(() => {
-          fn.apply(scope, args);
-        }, 1);
-        return;
-      }
-      let result = fn.apply(scope, args);
-      await result;
-    }
-  }
-}
-PromiseSubscription$1.PromiseSubscription = PromiseSubscription;
-Object.defineProperty(PromiseDispatcherBase$1, "__esModule", { value: true });
-PromiseDispatcherBase$1.PromiseDispatcherBase = void 0;
-const PromiseSubscription_1 = PromiseSubscription$1;
-const EventManagement_1 = EventManagement$1;
-const DispatcherBase_1 = DispatcherBase$1;
-const DispatchError_1 = DispatchError$1;
-class PromiseDispatcherBase extends DispatcherBase_1.DispatcherBase {
-  _dispatch(executeAsync, scope, args) {
-    throw new DispatchError_1.DispatchError("_dispatch not supported. Use _dispatchAsPromise.");
-  }
-  createSubscription(handler, isOnce) {
-    return new PromiseSubscription_1.PromiseSubscription(handler, isOnce);
-  }
-  async _dispatchAsPromise(executeAsync, scope, args) {
-    for (let sub of [...this._subscriptions]) {
-      let ev = new EventManagement_1.EventManagement(() => this.unsub(sub.handler));
-      let nargs = Array.prototype.slice.call(args);
-      nargs.push(ev);
-      let ps = sub;
-      await ps.execute(executeAsync, scope, nargs);
-      this.cleanup(sub);
-      if (!executeAsync && ev.propagationStopped) {
-        return { propagationStopped: true };
-      }
-    }
-    if (executeAsync) {
-      return null;
-    }
-    return { propagationStopped: false };
-  }
-}
-PromiseDispatcherBase$1.PromiseDispatcherBase = PromiseDispatcherBase;
-(function(exports2) {
-  /*!
-   * Strongly Typed Events for TypeScript - Core
-   * https://github.com/KeesCBakker/StronlyTypedEvents/
-   * http://keestalkstech.com
-   *
-   * Copyright Kees C. Bakker / KeesTalksTech
-   * Released under the MIT license
-   */
-  Object.defineProperty(exports2, "__esModule", { value: true });
-  exports2.SubscriptionChangeEventDispatcher = exports2.HandlingBase = exports2.PromiseDispatcherBase = exports2.PromiseSubscription = exports2.DispatchError = exports2.EventManagement = exports2.EventListBase = exports2.DispatcherWrapper = exports2.DispatcherBase = exports2.Subscription = void 0;
-  const DispatcherBase_12 = DispatcherBase$1;
-  Object.defineProperty(exports2, "DispatcherBase", { enumerable: true, get: function() {
-    return DispatcherBase_12.DispatcherBase;
-  } });
-  Object.defineProperty(exports2, "SubscriptionChangeEventDispatcher", { enumerable: true, get: function() {
-    return DispatcherBase_12.SubscriptionChangeEventDispatcher;
-  } });
-  const DispatchError_12 = DispatchError$1;
-  Object.defineProperty(exports2, "DispatchError", { enumerable: true, get: function() {
-    return DispatchError_12.DispatchError;
-  } });
-  const DispatcherWrapper_12 = DispatcherWrapper$1;
-  Object.defineProperty(exports2, "DispatcherWrapper", { enumerable: true, get: function() {
-    return DispatcherWrapper_12.DispatcherWrapper;
-  } });
-  const EventListBase_1 = EventListBase$1;
-  Object.defineProperty(exports2, "EventListBase", { enumerable: true, get: function() {
-    return EventListBase_1.EventListBase;
-  } });
-  const EventManagement_12 = EventManagement$1;
-  Object.defineProperty(exports2, "EventManagement", { enumerable: true, get: function() {
-    return EventManagement_12.EventManagement;
-  } });
-  const HandlingBase_1 = HandlingBase$1;
-  Object.defineProperty(exports2, "HandlingBase", { enumerable: true, get: function() {
-    return HandlingBase_1.HandlingBase;
-  } });
-  const PromiseDispatcherBase_1 = PromiseDispatcherBase$1;
-  Object.defineProperty(exports2, "PromiseDispatcherBase", { enumerable: true, get: function() {
-    return PromiseDispatcherBase_1.PromiseDispatcherBase;
-  } });
-  const PromiseSubscription_12 = PromiseSubscription$1;
-  Object.defineProperty(exports2, "PromiseSubscription", { enumerable: true, get: function() {
-    return PromiseSubscription_12.PromiseSubscription;
-  } });
-  const Subscription_12 = Subscription$1;
-  Object.defineProperty(exports2, "Subscription", { enumerable: true, get: function() {
-    return Subscription_12.Subscription;
-  } });
-})(dist);
-Object.defineProperty(SimpleEventDispatcher$1, "__esModule", { value: true });
-SimpleEventDispatcher$1.SimpleEventDispatcher = void 0;
-const ste_core_1$2 = dist;
-class SimpleEventDispatcher extends ste_core_1$2.DispatcherBase {
-  constructor() {
-    super();
-  }
-  dispatch(args) {
-    const result = this._dispatch(false, this, arguments);
-    if (result == null) {
-      throw new ste_core_1$2.DispatchError("Got `null` back from dispatch.");
-    }
-    return result;
-  }
-  dispatchAsync(args) {
-    this._dispatch(true, this, arguments);
-  }
-  asEvent() {
-    return super.asEvent();
-  }
-}
-SimpleEventDispatcher$1.SimpleEventDispatcher = SimpleEventDispatcher;
-var SimpleEventHandlingBase$1 = {};
-var SimpleEventList$1 = {};
-Object.defineProperty(SimpleEventList$1, "__esModule", { value: true });
-SimpleEventList$1.SimpleEventList = void 0;
-const ste_core_1$1 = dist;
-const SimpleEventDispatcher_1$1 = SimpleEventDispatcher$1;
-class SimpleEventList extends ste_core_1$1.EventListBase {
-  constructor() {
-    super();
-  }
-  createDispatcher() {
-    return new SimpleEventDispatcher_1$1.SimpleEventDispatcher();
-  }
-}
-SimpleEventList$1.SimpleEventList = SimpleEventList;
-Object.defineProperty(SimpleEventHandlingBase$1, "__esModule", { value: true });
-SimpleEventHandlingBase$1.SimpleEventHandlingBase = void 0;
-const ste_core_1 = dist;
-const SimpleEventList_1 = SimpleEventList$1;
-class SimpleEventHandlingBase extends ste_core_1.HandlingBase {
-  constructor() {
-    super(new SimpleEventList_1.SimpleEventList());
-  }
-}
-SimpleEventHandlingBase$1.SimpleEventHandlingBase = SimpleEventHandlingBase;
-var NonUniformSimpleEventList$1 = {};
-Object.defineProperty(NonUniformSimpleEventList$1, "__esModule", { value: true });
-NonUniformSimpleEventList$1.NonUniformSimpleEventList = void 0;
-const SimpleEventDispatcher_1 = SimpleEventDispatcher$1;
-class NonUniformSimpleEventList {
-  constructor() {
-    this._events = {};
-  }
-  get(name) {
-    if (this._events[name]) {
-      return this._events[name];
-    }
-    const event = this.createDispatcher();
-    this._events[name] = event;
-    return event;
-  }
-  remove(name) {
-    delete this._events[name];
-  }
-  createDispatcher() {
-    return new SimpleEventDispatcher_1.SimpleEventDispatcher();
-  }
-}
-NonUniformSimpleEventList$1.NonUniformSimpleEventList = NonUniformSimpleEventList;
-(function(exports2) {
-  Object.defineProperty(exports2, "__esModule", { value: true });
-  exports2.NonUniformSimpleEventList = exports2.SimpleEventList = exports2.SimpleEventHandlingBase = exports2.SimpleEventDispatcher = void 0;
-  const SimpleEventDispatcher_12 = SimpleEventDispatcher$1;
-  Object.defineProperty(exports2, "SimpleEventDispatcher", { enumerable: true, get: function() {
-    return SimpleEventDispatcher_12.SimpleEventDispatcher;
-  } });
-  const SimpleEventHandlingBase_1 = SimpleEventHandlingBase$1;
-  Object.defineProperty(exports2, "SimpleEventHandlingBase", { enumerable: true, get: function() {
-    return SimpleEventHandlingBase_1.SimpleEventHandlingBase;
-  } });
-  const NonUniformSimpleEventList_1 = NonUniformSimpleEventList$1;
-  Object.defineProperty(exports2, "NonUniformSimpleEventList", { enumerable: true, get: function() {
-    return NonUniformSimpleEventList_1.NonUniformSimpleEventList;
-  } });
-  const SimpleEventList_12 = SimpleEventList$1;
-  Object.defineProperty(exports2, "SimpleEventList", { enumerable: true, get: function() {
-    return SimpleEventList_12.SimpleEventList;
-  } });
-})(dist$1);
-class DefaultInputScheme {
-  constructor(viewer2) {
-    __publicField(this, "_viewer");
-    this._viewer = viewer2;
-  }
-  onMainAction(action) {
-    const camera = this._viewer.camera;
-    const selection = this._viewer.selection;
-    if (!(action == null ? void 0 : action.object)) {
-      selection.select(void 0);
-      if (action.type === "double") {
-        camera.frame("all", "none", camera.defaultLerpDuration);
-      }
-      return;
-    }
-    if (action.modifier !== "none") {
-      selection.toggle(action.object);
-    } else {
-      selection.select(action.object);
-    }
-    if (action.type === "double") {
-      camera.frame(action.object, "none", camera.defaultLerpDuration);
-    }
-    action.object.getBimElement().then((e) => {
-      var _a22;
-      e == null ? void 0 : e.set("Index", (_a22 = action.object) == null ? void 0 : _a22.element);
-      console.log(e);
-    });
-  }
-  onIdleAction(hit) {
-    this._viewer.selection.focus(hit == null ? void 0 : hit.object);
-  }
-  onKeyAction(key) {
-    const camera = this._viewer.camera;
-    const selection = this._viewer.selection;
-    switch (key) {
-      case KEYS.KEY_P:
-        camera.orthographic = !camera.orthographic;
-        return true;
-      case KEYS.KEY_ADD:
-      case KEYS.KEY_OEM_PLUS:
-        camera.speed += 1;
-        return true;
-      case KEYS.KEY_SUBTRACT:
-      case KEYS.KEY_OEM_MINUS:
-        camera.speed -= 1;
-        return true;
-      case KEYS.KEY_F8:
-      case KEYS.KEY_SPACE:
-        this._viewer.inputs.pointerActive = this._viewer.inputs.pointerFallback;
-        return true;
-      case KEYS.KEY_HOME:
-        camera.frame("all", 45, camera.defaultLerpDuration);
-        return true;
-      case KEYS.KEY_ESCAPE:
-        selection.clear();
-        return true;
-      case KEYS.KEY_Z:
-      case KEYS.KEY_F:
-        if (selection.count > 0) {
-          camera.frame(selection.getBoundingBox(), "center", camera.defaultLerpDuration);
-        } else {
-          camera.frame("all", "center", camera.defaultLerpDuration);
-        }
-        return true;
-      default:
-        return false;
-    }
-  }
-}
-class Input {
-  constructor(viewer2) {
-    __publicField(this, "_viewer");
-    __publicField(this, "touch");
-    __publicField(this, "mouse");
-    __publicField(this, "keyboard");
-    __publicField(this, "_pointerActive");
-    __publicField(this, "_pointerFallback");
-    __publicField(this, "_pointerOverride");
-    __publicField(this, "_onPointerModeChanged", new dist$3.SignalDispatcher());
-    __publicField(this, "_onPointerOverrideChanged", new dist$3.SignalDispatcher());
-    __publicField(this, "_onContextMenu", new dist$1.SimpleEventDispatcher());
-    __publicField(this, "_scheme");
-    __publicField(this, "unregisterAll", () => {
-      this.mouse.unregister();
-      this.keyboard.unregister();
-      this.touch.unregister();
-    });
-    this._viewer = viewer2;
-    this.keyboard = new KeyboardHandler(viewer2);
-    this.mouse = new MouseHandler(viewer2);
-    this.touch = new TouchHandler(viewer2);
-    this._scheme = new DefaultInputScheme(viewer2);
-    this.pointerActive = "orbit";
-    this._pointerFallback = "look";
-  }
-  get pointerFallback() {
-    return this._pointerFallback;
-  }
-  get pointerActive() {
-    return this._pointerActive;
-  }
-  get pointerOverride() {
-    return this._pointerOverride;
-  }
-  set pointerOverride(value) {
-    if (value === this._pointerOverride)
-      return;
-    this._pointerOverride = value;
-    this._onPointerOverrideChanged.dispatch();
-  }
-  set pointerActive(value) {
-    if (value === this._pointerActive)
-      return;
-    if (value === "look")
-      this._pointerFallback = "orbit";
-    else if (value === "orbit")
-      this._pointerFallback = "look";
-    this._viewer.gizmoRectangle.visible = false;
-    this._viewer.camera.orbitMode = value !== "look";
-    this._pointerActive = value;
-    this._onPointerModeChanged.dispatch();
-  }
-  get onPointerModeChanged() {
-    return this._onPointerModeChanged.asEvent();
-  }
-  get onPointerOverrideChanged() {
-    return this._onPointerOverrideChanged.asEvent();
-  }
-  get onContextMenu() {
-    return this._onContextMenu.asEvent();
-  }
-  get scheme() {
-    return this._scheme;
-  }
-  set scheme(value) {
-    this._scheme = value != null ? value : new DefaultInputScheme(this._viewer);
-  }
-  MainAction(action) {
-    this._scheme.onMainAction(action);
-  }
-  IdleAction(action) {
-    this._scheme.onIdleAction(action);
-  }
-  KeyAction(key) {
-    return this._scheme.onKeyAction(key);
-  }
-  ContextMenu(position) {
-    this._onContextMenu.dispatch(position);
-  }
-  registerAll() {
-    this.keyboard.register();
-    this.mouse.register();
-    this.touch.register();
-  }
-  resetAll() {
-    this.mouse.reset();
-    this.keyboard.reset();
-    this.touch.reset();
-  }
-}
-var Transparency;
-((Transparency2) => {
-  function isValid(value) {
-    return ["all", "opaqueOnly", "transparentOnly", "allAsOpaque"].includes(value);
-  }
-  Transparency2.isValid = isValid;
-  function requiresAlpha(mode) {
-    return mode === "all" || mode === "transparentOnly";
-  }
-  Transparency2.requiresAlpha = requiresAlpha;
-})(Transparency || (Transparency = {}));
-var Geometry;
-((Geometry2) => {
-  function createGeometryFromInstances(g3d, instances) {
-    return Geometry2.mergeInstanceMeshes(g3d, "all", false, instances).geometry;
-  }
-  Geometry2.createGeometryFromInstances = createGeometryFromInstances;
-  function createGeometryFromMesh(g3d, mesh, section, transparent) {
-    const colors = createVertexColors(g3d, mesh, transparent);
-    const positions = g3d.positions.subarray(g3d.getMeshVertexStart(mesh) * 3, g3d.getMeshVertexEnd(mesh) * 3);
-    const start = g3d.getMeshIndexStart(mesh, section);
-    const end = g3d.getMeshIndexEnd(mesh, section);
-    const indices = g3d.indices.subarray(start, end);
-    return createGeometryFromArrays(positions, indices, colors, transparent ? 4 : 3);
-  }
-  Geometry2.createGeometryFromMesh = createGeometryFromMesh;
-  function createVertexColors(g3d, mesh, useAlpha) {
-    const colorSize = useAlpha ? 4 : 3;
-    const result = new Float32Array(g3d.getMeshVertexCount(mesh) * colorSize);
-    const subStart = g3d.getMeshSubmeshStart(mesh);
-    const subEnd = g3d.getMeshSubmeshEnd(mesh);
-    for (let submesh = subStart; submesh < subEnd; submesh++) {
-      const color = g3d.getSubmeshColor(submesh);
-      const start = g3d.getSubmeshIndexStart(submesh);
-      const end = g3d.getSubmeshIndexEnd(submesh);
-      for (let i2 = start; i2 < end; i2++) {
-        const v2 = g3d.indices[i2] * colorSize;
-        result[v2] = color[0];
-        result[v2 + 1] = color[1];
-        result[v2 + 2] = color[2];
-        if (useAlpha)
-          result[v2 + 3] = color[3];
-      }
-    }
-    return result;
-  }
-  function getInstanceMatrix(g3d, instance, target = new Matrix4()) {
-    const matrixAsArray = g3d.getInstanceMatrix(instance);
-    target.fromArray(matrixAsArray);
-    return target;
-  }
-  Geometry2.getInstanceMatrix = getInstanceMatrix;
-  function createGeometryFromArrays(vertices, indices, vertexColors = void 0, colorSize = 3) {
-    const geometry = new BufferGeometry();
-    geometry.setAttribute("position", new BufferAttribute(vertices, 3));
-    geometry.setIndex(new Uint32BufferAttribute(indices, 1));
-    if (vertexColors) {
-      geometry.setAttribute("color", new BufferAttribute(vertexColors, colorSize));
-    }
-    return geometry;
-  }
-  Geometry2.createGeometryFromArrays = createGeometryFromArrays;
-  function mergeInstanceMeshes(g3d, section, transparent, instances) {
-    const info = getInstanceMergeInfo(g3d, instances, section);
-    return merge(g3d, info, transparent);
-  }
-  Geometry2.mergeInstanceMeshes = mergeInstanceMeshes;
-  function mergeUniqueMeshes(g3d, section, transparent) {
-    const info = getUniqueMeshMergeInfo(g3d, section);
-    return merge(g3d, info, transparent);
-  }
-  Geometry2.mergeUniqueMeshes = mergeUniqueMeshes;
-  function merge(g3d, info, transparent) {
-    const buffer = new MergeBuffer(info, g3d.POSITION_SIZE, transparent ? 4 : 3);
-    fillBuffers(g3d, buffer, info);
-    const geometry = buffer.toBufferGeometry();
-    return new MergeResult(geometry, info.instances, buffer.groups, buffer.boxes);
-  }
-  function getUniqueMeshMergeInfo(g3d, section) {
-    let vertexCount = 0;
-    let indexCount = 0;
-    const instances = [];
-    const meshCount = g3d.getMeshCount();
-    for (let mesh = 0; mesh < meshCount; mesh++) {
-      const meshInstances = g3d.meshInstances[mesh];
-      if (!meshInstances || meshInstances.length !== 1)
-        continue;
-      const instance = meshInstances[0];
-      if ((g3d.instanceFlags[instance] & 1) > 0)
-        continue;
-      const count = g3d.getMeshIndexCount(mesh, section);
-      if (count <= 0)
-        continue;
-      indexCount += count;
-      vertexCount += g3d.getMeshVertexCount(mesh);
-      instances.push(instance);
-    }
-    return new MergeInfo(section, instances, indexCount, vertexCount);
-  }
-  function getInstanceMergeInfo(g3d, instances, section) {
-    let vertexCount = 0;
-    let indexCount = 0;
-    const instancesFiltered = [];
-    for (let i2 = 0; i2 < instances.length; i2++) {
-      const instance = instances[i2];
-      const mesh = g3d.instanceMeshes[instance];
-      const start = g3d.getMeshIndexStart(mesh, section);
-      const end = g3d.getMeshIndexEnd(mesh, section);
-      const count = end - start;
-      if (count <= 0)
-        continue;
-      indexCount += count;
-      vertexCount += g3d.getMeshVertexCount(mesh);
-      instancesFiltered.push(instance);
-    }
-    return new MergeInfo(section, instancesFiltered, indexCount, vertexCount);
-  }
-  function fillBuffers(g3d, buffer, info) {
-    let index = 0;
-    let vertex2 = 0;
-    let offset = 0;
-    const matrix = new Matrix4();
-    const vector = new Vector3();
-    for (let i2 = 0; i2 < info.instances.length; i2++) {
-      const instance = info.instances[i2];
-      const mesh = g3d.getInstanceMesh(instance);
-      buffer.groups[i2] = index;
-      const subStart = g3d.getMeshSubmeshStart(mesh, info.section);
-      const subEnd = g3d.getMeshSubmeshEnd(mesh, info.section);
-      for (let sub = subStart; sub < subEnd; sub++) {
-        const subColor = g3d.getSubmeshColor(sub);
-        const start = g3d.getSubmeshIndexStart(sub);
-        const end = g3d.getSubmeshIndexEnd(sub);
-        for (let s = start; s < end; s++) {
-          const newIndex = g3d.indices[s] + offset;
-          buffer.indices[index++] = newIndex;
-          const v2 = newIndex * buffer.colorSize;
-          buffer.colors[v2] = subColor[0];
-          buffer.colors[v2 + 1] = subColor[1];
-          buffer.colors[v2 + 2] = subColor[2];
-          if (buffer.colorSize > 3) {
-            buffer.colors[v2 + 3] = subColor[3];
-          }
-        }
-      }
-      getInstanceMatrix(g3d, instance, matrix);
-      const vertexStart = g3d.getMeshVertexStart(mesh);
-      const vertexEnd = g3d.getMeshVertexEnd(mesh);
-      if (vertexEnd > vertexStart) {
-        vector.fromArray(g3d.positions, vertexStart * g3d.POSITION_SIZE);
-        vector.applyMatrix4(matrix);
-        vector.toArray(buffer.vertices, vertex2);
-        vertex2 += g3d.POSITION_SIZE;
-        buffer.boxes[i2] = new Box3(vector.clone(), vector.clone());
-      }
-      for (let p2 = vertexStart + 1; p2 < vertexEnd; p2++) {
-        vector.fromArray(g3d.positions, p2 * g3d.POSITION_SIZE);
-        vector.applyMatrix4(matrix);
-        vector.toArray(buffer.vertices, vertex2);
-        vertex2 += g3d.POSITION_SIZE;
-        buffer.boxes[i2].expandByPoint(vector);
-      }
-      offset += vertexEnd - vertexStart;
-    }
-  }
-  class MergeInfo {
-    constructor(section, instance, indexCount, vertexCount) {
-      __publicField(this, "section");
-      __publicField(this, "instances");
-      __publicField(this, "indexCount");
-      __publicField(this, "vertexCount");
-      this.section = section;
-      this.instances = instance;
-      this.indexCount = indexCount;
-      this.vertexCount = vertexCount;
-    }
-  }
-  class MergeBuffer {
-    constructor(info, positionSize, colorSize) {
-      __publicField(this, "indices");
-      __publicField(this, "vertices");
-      __publicField(this, "colors");
-      __publicField(this, "groups");
-      __publicField(this, "colorSize");
-      __publicField(this, "boxes");
-      this.indices = new Uint32Array(info.indexCount);
-      this.vertices = new Float32Array(info.vertexCount * positionSize);
-      this.colors = new Float32Array(info.vertexCount * colorSize);
-      this.groups = new Array(info.instances.length);
-      this.boxes = new Array(info.instances.length);
-      this.colorSize = colorSize;
-    }
-    toBufferGeometry() {
-      const geometry = createGeometryFromArrays(this.vertices, this.indices, this.colors, this.colorSize);
-      return geometry;
-    }
-  }
-  class MergeResult {
-    constructor(geometry, instance, submeshes, boxes) {
-      __publicField(this, "geometry");
-      __publicField(this, "instances");
-      __publicField(this, "submeshes");
-      __publicField(this, "boxes");
-      this.geometry = geometry;
-      this.instances = instance;
-      this.submeshes = submeshes;
-      this.boxes = boxes;
-    }
-  }
-})(Geometry || (Geometry = {}));
-class Object$1 {
-  constructor(vim, element, instances, meshes) {
-    __publicField(this, "vim");
-    __publicField(this, "element");
-    __publicField(this, "instances");
-    __publicField(this, "_color");
-    __publicField(this, "_visible", true);
-    __publicField(this, "_boundingBox");
-    __publicField(this, "_meshes");
-    __publicField(this, "onVisibilityChanged");
-    this.vim = vim;
-    this.element = element;
-    this.instances = instances;
-    this._meshes = meshes;
-  }
-  get meshBuilder() {
-    return this.vim.scene.builder.meshBuilder;
-  }
-  get hasMesh() {
-    var _a22;
-    return (_a22 = this._meshes) == null ? void 0 : _a22.length;
-  }
-  updateMeshes(meshes) {
-    this._meshes = meshes;
-    if (!meshes)
-      return;
-    if (this.color) {
-      this.color = this._color;
-    }
-  }
-  getBimElement() {
-    return this.vim.document.getElement(this.element);
-  }
-  async getBimElementValue(field, resolveString) {
-    const value = await this.vim.document.getElementValue(this.element, field);
-    if (!value)
-      return;
-    return resolveString ? this.vim.document.getString(value) : value;
-  }
-  async getBimParameters() {
-    return await this.vim.document.getElementParameters(this.element);
-  }
-  get elementId() {
-    return this.vim.document.getElementId(this.element);
-  }
-  getBoundingBox() {
-    if (!this.instances || !this._meshes)
-      return;
-    if (this._boundingBox)
-      return this._boundingBox;
-    let box;
-    this._meshes.forEach((m2) => {
-      const [mesh, index] = m2;
-      const b = mesh.userData.boxes[index];
-      box = box ? box.union(b) : b.clone();
-    });
-    box.applyMatrix4(this.vim.getMatrix());
-    this._boundingBox = box;
-    return this._boundingBox;
-  }
-  getCenter(target = new Vector3()) {
-    var _a22;
-    return (_a22 = this.getBoundingBox()) == null ? void 0 : _a22.getCenter(target);
-  }
-  createWireframe() {
-    if (!this.instances)
-      return;
-    const wireframe = this.meshBuilder.createWireframe(this.vim.document.g3d, this.instances);
-    wireframe.applyMatrix4(this.vim.getMatrix());
-    return wireframe;
-  }
-  createGeometry() {
-    if (!this.instances)
-      return;
-    const geometry = Geometry.createGeometryFromInstances(this.vim.document.g3d, this.instances);
-    geometry.applyMatrix4(this.vim.getMatrix());
-    return geometry;
-  }
-  get color() {
-    return this._color;
-  }
-  set color(color) {
-    if (!this._color || !color ? !this._color && !color : this._color.equals(color)) {
-      return;
-    }
-    this._color = color;
-    this.applyColor(color);
-  }
-  applyColor(color) {
-    if (!this._meshes)
-      return;
-    for (let m2 = 0; m2 < this._meshes.length; m2++) {
-      const [mesh, index] = this._meshes[m2];
-      if (mesh.userData.merged) {
-        this.applyMergedColor(mesh, index, color);
-      } else {
-        this.applyInstancedColor(mesh, index, color);
-      }
-    }
-  }
-  get visible() {
-    return this._visible;
-  }
-  set visible(value) {
-    if (this._visible === value)
-      return;
-    this._visible = value;
-    this.applyVisible(value);
-    this.vim.scene._visibilityChanged = true;
-  }
-  applyVisible(value) {
-    if (!this._meshes)
-      return;
-    for (let m2 = 0; m2 < this._meshes.length; m2++) {
-      const [mesh, index] = this._meshes[m2];
-      if (mesh.userData.merged) {
-        this.applyMergedVisible(mesh, index, value);
-      } else {
-        this.applyInstancedVisible(mesh, index, value);
-      }
-    }
-  }
-  getMergedMeshStart(mesh, index) {
-    return mesh.userData.submeshes[index];
-  }
-  getMergedMeshEnd(mesh, index) {
-    return index + 1 < mesh.userData.submeshes.length ? mesh.userData.submeshes[index + 1] : mesh.geometry.index.count;
-  }
-  applyMergedVisible(mesh, index, show) {
-    var _a22;
-    const positions = mesh.geometry.getAttribute("position");
-    const attribute = (_a22 = mesh.geometry.getAttribute("ignoreVertex")) != null ? _a22 : new Float32BufferAttribute(new Float32Array(positions.count), 1);
-    mesh.geometry.setAttribute("ignoreVertex", attribute);
-    const start = this.getMergedMeshStart(mesh, index);
-    const end = this.getMergedMeshEnd(mesh, index);
-    const indices = mesh.geometry.index;
-    for (let i2 = start; i2 < end; i2++) {
-      const v2 = indices.getX(i2);
-      attribute.setX(v2, show ? 0 : 1);
-    }
-    attribute.needsUpdate = true;
-  }
-  applyInstancedVisible(mesh, index, visible2) {
-    let attribute = mesh.geometry.getAttribute("ignoreInstance");
-    if (!attribute) {
-      attribute = new InstancedBufferAttribute(new Float32Array(mesh.count), 1);
-      mesh.geometry.setAttribute("ignoreInstance", attribute);
-    }
-    attribute.setX(index, visible2 ? 0 : 1);
-    attribute.needsUpdate = true;
-  }
-  applyMergedColor(mesh, index, color) {
-    if (!color) {
-      this.resetMergedColor(mesh, index);
-      return;
-    }
-    const start = this.getMergedMeshStart(mesh, index);
-    const end = this.getMergedMeshEnd(mesh, index);
-    const colors = mesh.geometry.getAttribute("color");
-    const colored = this.getOrAddColoredAttribute(mesh);
-    const indices = mesh.geometry.index;
-    for (let i2 = start; i2 < end; i2++) {
-      const v2 = indices.getX(i2);
-      colors.setXYZ(v2, color.r, color.g, color.b);
-      colored.setX(v2, 1);
-    }
-    colors.needsUpdate = true;
-    colored.needsUpdate = true;
-  }
-  resetMergedColor(mesh, index) {
-    const colors = mesh.geometry.getAttribute("color");
-    const colored = this.getOrAddColoredAttribute(mesh);
-    const indices = mesh.geometry.index;
-    let mergedIndex = this.getMergedMeshStart(mesh, index);
-    const instance = this.vim.scene.getInstanceFromMesh(mesh, index);
-    if (!instance)
-      throw new Error("Could not reset original color.");
-    const g3d = this.vim.document.g3d;
-    const g3dMesh = g3d.instanceMeshes[instance];
-    const subStart = g3d.getMeshSubmeshStart(g3dMesh);
-    const subEnd = g3d.getMeshSubmeshEnd(g3dMesh);
-    for (let sub = subStart; sub < subEnd; sub++) {
-      const start = g3d.getSubmeshIndexStart(sub);
-      const end = g3d.getSubmeshIndexEnd(sub);
-      const color = g3d.getSubmeshColor(sub);
-      for (let i2 = start; i2 < end; i2++) {
-        const v2 = indices.getX(mergedIndex);
-        colors.setXYZ(v2, color[0], color[1], color[2]);
-        colored.setX(v2, 0);
-        mergedIndex++;
-      }
-    }
-    colors.needsUpdate = true;
-    colored.needsUpdate = true;
-  }
-  applyInstancedColor(mesh, index, color) {
-    const colors = this.getOrAddInstanceColorAttribute(mesh);
-    const colored = this.getOrAddColoredAttribute(mesh);
-    if (color) {
-      colors.setXYZ(index, color.r, color.g, color.b);
-      colored.setX(index, 1);
-    } else {
-      colored.setX(index, 0);
-    }
-    colored.needsUpdate = true;
-    colors.needsUpdate = true;
-  }
-  getOrAddInstanceColorAttribute(mesh) {
-    if (mesh.instanceColor)
-      return mesh.instanceColor;
-    const count = mesh.instanceMatrix.count;
-    const colors = new Float32Array(count * 3);
-    const attribute = new InstancedBufferAttribute(colors, 3);
-    mesh.instanceColor = attribute;
-    return attribute;
-  }
-  getOrAddColoredAttribute(mesh) {
-    const colored = mesh.geometry.getAttribute("colored");
-    if (colored) {
-      return colored;
-    }
-    const count = mesh instanceof InstancedMesh ? mesh.instanceMatrix.count : mesh.geometry.getAttribute("position").count;
-    const array = new Float32Array(count);
-    const attribute = mesh instanceof InstancedMesh ? new InstancedBufferAttribute(array, 1) : new BufferAttribute(array, 1);
-    mesh.geometry.setAttribute("colored", attribute);
-    return attribute;
-  }
-}
-class Selection {
-  constructor(renderer) {
-    __publicField(this, "_renderer");
-    __publicField(this, "_objects", /* @__PURE__ */ new Set());
-    __publicField(this, "_vim");
-    __publicField(this, "_selectionMesh");
-    __publicField(this, "_focusMesh");
-    __publicField(this, "_focusMaterial");
-    __publicField(this, "_focusStart");
-    __publicField(this, "_onValueChanged", new dist$3.SignalDispatcher());
-    this._renderer = renderer;
-    this._focusMaterial = renderer.materials.focus.clone();
-  }
-  get onValueChanged() {
-    return this._onValueChanged.asEvent();
-  }
-  get vim() {
-    return this._vim;
-  }
-  get objects() {
-    return this._objects.values();
-  }
-  getBoundingBox(target = new Box3()) {
-    if (this._objects.size === 0)
-      return;
-    let initialized = false;
-    for (const o of this._objects) {
-      const other = o.getBoundingBox();
-      if (!other)
-        continue;
-      if (!initialized) {
-        target.copy(other);
-      } else {
-        target.union(other);
-      }
-      initialized = true;
-    }
-    if (!initialized) {
-      return;
-    }
-    return target;
-  }
-  focus(object) {
-    var _a22;
-    (_a22 = this._focusMesh) == null ? void 0 : _a22.geometry.dispose();
-    this._renderer.remove(this._focusMesh);
-    this._focusMaterial.opacity = 0;
-    this._focusStart = new Date().getTime();
-    if (!object)
-      return;
-    this._focusMesh = new Mesh(object.createGeometry(), this._focusMaterial);
-    this._renderer.add(this._focusMesh);
-    this.focusTransition();
-  }
-  focusTransition() {
-    const t2 = (new Date().getTime() - this._focusStart) / 90;
-    this._focusMaterial.opacity = t2 * 0.15;
-    if (t2 < 1) {
-      requestAnimationFrame(() => this.focusTransition());
-    }
-  }
-  select(object) {
-    object = object === void 0 ? [] : object instanceof Object$1 ? [object] : object;
-    object = object.filter((o) => o);
-    if (object.length === this._objects.size && object.every((o) => this._objects.has(o))) {
-      return;
-    }
-    this._objects.clear();
-    this._vim = void 0;
-    object == null ? void 0 : object.forEach((o) => {
-      this.clearOnNewVim(o.vim);
-      this._objects.add(o);
-    });
-    this.updateHighlight();
-  }
-  has(object) {
-    return this._objects.has(object);
-  }
-  get count() {
-    return this._objects.size;
-  }
-  add(...objects) {
-    if (!objects)
-      return;
-    if (objects.length === 0)
-      return;
-    const count = this._objects.size;
-    const oldVim = this._vim;
-    objects.forEach((o) => {
-      this.clearOnNewVim(o.vim);
-      this._objects.add(o);
-    });
-    if (oldVim === this._vim && this._objects.size === count)
-      return;
-    this.updateHighlight();
-  }
-  remove(...objects) {
-    if (!objects)
-      return;
-    if (objects.length === 0)
-      return;
-    const count = this._objects.size;
-    objects.forEach((o) => {
-      this._objects.delete(o);
-    });
-    if (this._objects.size === count)
-      return;
-    if (this._objects.size === 0) {
-      this._vim = void 0;
-    }
-    this.updateHighlight();
-  }
-  toggle(...objects) {
-    if (!objects)
-      return;
-    if (objects.length === 0)
-      return;
-    const count = this._objects.size;
-    const oldVim = this.vim;
-    objects.forEach((o) => {
-      if (this._objects.has(o)) {
-        this._objects.delete(o);
-      } else {
-        this.clearOnNewVim(o.vim);
-        this._objects.add(o);
-      }
-    });
-    if (oldVim === this._vim && this._objects.size === count)
-      return;
-    this.updateHighlight();
-  }
-  clear() {
-    this._vim = void 0;
-    if (this._objects.size === 0)
-      return;
-    this._objects.clear();
-    this.updateHighlight();
-  }
-  clearOnNewVim(vim) {
-    if (this._vim) {
-      if (this._vim !== vim) {
-        console.log("Cross vim selection. Clearing selection.");
-        this._objects.clear();
-        this._vim = vim;
-      }
-    } else {
-      this._vim = vim;
-    }
-  }
-  updateHighlight() {
-    this.removeHighlight();
-    this.createHighlights(this._objects);
-    this._onValueChanged.dispatch();
-  }
-  createHighlights(objects) {
-    if (objects.size === 0)
-      return;
-    let vim;
-    const instances = [];
-    for (const o of objects.values()) {
-      vim = vim != null ? vim : o.vim;
-      if (o.vim !== vim) {
-        console.error("Cannot multiselect across vim files");
-        return;
-      }
-      if (o.instances) {
-        instances.push(...o.instances);
-      }
-    }
-    const meshBuilder = vim.scene.builder.meshBuilder;
-    this._selectionMesh = meshBuilder.createWireframe(vim.document.g3d, instances);
-    this._selectionMesh.applyMatrix4(vim.getMatrix());
-    if (this._selectionMesh)
-      this._renderer.add(this._selectionMesh);
-  }
-  removeHighlight() {
-    if (this._selectionMesh) {
-      this._selectionMesh.geometry.dispose();
-      this._renderer.remove(this._selectionMesh);
-      this._selectionMesh = void 0;
-    }
-  }
-}
-class GroundPlane {
-  constructor() {
-    __publicField(this, "mesh");
-    __publicField(this, "_source");
-    __publicField(this, "_size", 1);
-    __publicField(this, "_geometry");
-    __publicField(this, "_material");
-    __publicField(this, "_texture");
-    this._geometry = new PlaneGeometry();
-    this._material = new MeshBasicMaterial({
-      transparent: true,
-      depthTest: true,
-      depthWrite: false
-    });
-    this.mesh = new Mesh(this._geometry, this._material);
-    this.mesh.renderOrder = -1;
-  }
-  applyViewerSettings(settings2) {
-    this._size = settings2.getGroundPlaneSize();
-    this.mesh.visible = settings2.getGroundPlaneVisible();
-    this.applyTexture(settings2.getGroundPlaneTextureUrl());
-    this._material.color.copy(settings2.getGroundPlaneColor());
-    this._material.opacity = settings2.getGroundPlaneOpacity();
-  }
-  adaptToContent(box) {
-    var _a22;
-    const center = box.getCenter(new Vector3());
-    const position = new Vector3(center.x, box.min.y - Math.abs(box.min.y) * 0.01, center.z);
-    this.mesh.position.copy(position);
-    this.mesh.quaternion.copy(new Quaternion().setFromEuler(new Euler(1.5 * Math.PI, 0, 0)));
-    const sphere = box == null ? void 0 : box.getBoundingSphere(new Sphere());
-    const size = ((_a22 = sphere == null ? void 0 : sphere.radius) != null ? _a22 : 1) * this._size;
-    const scale = new Vector3(1, 1, 1).multiplyScalar(size);
-    this.mesh.scale.copy(scale);
-  }
-  applyTexture(texUrl) {
-    var _a22;
-    if (texUrl === this._source)
-      return;
-    this._source = texUrl;
-    (_a22 = this._texture) == null ? void 0 : _a22.dispose();
-    this._texture = void 0;
-    if (!texUrl)
-      return;
-    const loader = new TextureLoader();
-    this._texture = loader.load(texUrl);
-    if (!this._texture) {
-      console.error("Failed to load texture: " + texUrl);
-      return;
-    }
-    this._material.map = this._texture;
-  }
-  dispose() {
-    var _a22, _b2, _c;
-    (_a22 = this._geometry) == null ? void 0 : _a22.dispose();
-    (_b2 = this._material) == null ? void 0 : _b2.dispose();
-    (_c = this._texture) == null ? void 0 : _c.dispose();
-    this._texture = void 0;
-  }
-}
-class Environment {
-  constructor(settings2) {
-    __publicField(this, "skyLight");
-    __publicField(this, "sunLights");
-    __publicField(this, "_groundPlane");
-    this._groundPlane = new GroundPlane();
-    this.skyLight = new HemisphereLight();
-    this.sunLights = [];
-    this.applySettings(settings2);
-  }
-  get groundPlane() {
-    return this._groundPlane.mesh;
-  }
-  loadGroundTexture(url2) {
-    this._groundPlane.applyTexture(url2);
-  }
-  getObjects() {
-    return [this._groundPlane.mesh, this.skyLight, ...this.sunLights];
-  }
-  applySettings(settings2) {
-    this._groundPlane.applyViewerSettings(settings2);
-    this.skyLight.color.copy(settings2.getSkylightColor());
-    this.skyLight.groundColor.copy(settings2.getSkylightGroundColor());
-    this.skyLight.intensity = settings2.getSkylightIntensity();
-    const count = settings2.getSunlightCount();
-    for (let i2 = 0; i2 < count; i2++) {
-      if (!this.sunLights[i2]) {
-        this.sunLights[i2] = new DirectionalLight();
-      }
-      this.sunLights[i2].color.copy(settings2.getSunlightColor(i2));
-      this.sunLights[i2].position.copy(settings2.getSunlightPosition(i2));
-      this.sunLights[i2].intensity = settings2.getSunlightIntensity(i2);
-    }
-  }
-  adaptToContent(box) {
-    this._groundPlane.adaptToContent(box);
-  }
-  dispose() {
-    this.sunLights.forEach((s) => s.dispose());
-    this.skyLight.dispose();
-    this._groundPlane.dispose();
-  }
-}
-class CameraGizmo {
-  constructor(renderer, camera, settings2) {
-    __publicField(this, "_renderer");
-    __publicField(this, "_camera");
-    __publicField(this, "_size", 0.01);
-    __publicField(this, "_fov", 50);
-    __publicField(this, "_color", new Color("blue"));
-    __publicField(this, "_opacity", 0.2);
-    __publicField(this, "_opacityAlways", 0.5);
-    __publicField(this, "_fadeDurationMs", 200);
-    __publicField(this, "_showDurationMs", 1e3);
-    __publicField(this, "_box");
-    __publicField(this, "_wireframe");
-    __publicField(this, "_material");
-    __publicField(this, "_materialAlways");
-    __publicField(this, "_gizmos");
-    __publicField(this, "_timeout");
-    __publicField(this, "_fadeEnd", 0);
-    __publicField(this, "_active", true);
-    this._renderer = renderer;
-    this._camera = camera;
-    this.applySettings(settings2);
-  }
-  dispose() {
-    var _a22, _b2, _c, _d;
-    clearTimeout(this._timeout);
-    (_a22 = this._box) == null ? void 0 : _a22.dispose();
-    (_b2 = this._wireframe) == null ? void 0 : _b2.dispose();
-    (_c = this._material) == null ? void 0 : _c.dispose();
-    (_d = this._materialAlways) == null ? void 0 : _d.dispose();
-    this._box = void 0;
-    this._wireframe = void 0;
-    this._material = void 0;
-    this._materialAlways = void 0;
-    if (this._gizmos) {
-      this._renderer.remove(this._gizmos);
-      this._gizmos = void 0;
-    }
-  }
-  get enabled() {
-    return this._active;
-  }
-  set enabled(value) {
-    this._active = value;
-  }
-  show(show = true) {
-    if (!this._active)
-      return;
-    if (!this._gizmos) {
-      this.createGizmo();
-    }
-    clearTimeout(this._timeout);
-    this._gizmos.visible = show;
-    if (show) {
-      this._timeout = setTimeout(() => this.fadeOut(), this._showDurationMs);
-    }
-  }
-  fadeOut(fading) {
-    const now2 = new Date().getTime();
-    if (!fading) {
-      this._fadeEnd = now2 + this._fadeDurationMs;
-    }
-    if (now2 > this._fadeEnd) {
-      this._gizmos.visible = false;
-      this._material.opacity = this._opacity;
-      this._materialAlways.opacity = this._opacityAlways;
-    } else {
-      requestAnimationFrame(() => this.fadeOut(true));
-      const t2 = Math.pow((this._fadeEnd - now2) / this._fadeDurationMs, 4);
-      this._material.opacity = MathUtils.lerp(0, this._opacity, t2);
-      this._materialAlways.opacity = MathUtils.lerp(0, this._opacityAlways, t2);
-    }
-  }
-  setPosition(position) {
-    var _a22;
-    (_a22 = this._gizmos) == null ? void 0 : _a22.position.copy(position);
-    this.updateScale();
-  }
-  setSize(size) {
-    this._size = size;
-  }
-  setOpacity(opacity, opacityAlways) {
-    this._opacity = opacity;
-    this._opacityAlways = opacityAlways;
-    if (!this._gizmos)
-      return;
-    this._material.opacity = opacity;
-    this._materialAlways.opacity = opacityAlways;
-  }
-  setColor(color) {
-    this._color = color;
-    if (!this._gizmos)
-      return;
-    this._material.color = color;
-    this._materialAlways.color = color;
-  }
-  applySettings(settings2) {
-    this._active = settings2.getCameraGizmoEnable();
-    this._fov = settings2.getCameraFov();
-    this.setColor(settings2.getCameraGizmoColor());
-    this.setSize(settings2.getCameraGizmoSize());
-    this.setOpacity(settings2.getCameraGizmoOpacity(), settings2.getCameraGizmoOpacityAlways());
-  }
-  updateScale() {
-    if (!this._gizmos)
-      return;
-    const dist2 = this._camera.camera.position.clone().distanceTo(this._gizmos.position);
-    let h = 0;
-    const cam = this._camera.camera;
-    if (cam instanceof OrthographicCamera) {
-      const dx = cam.right - cam.left;
-      const dy = cam.top - cam.bottom;
-      h = Math.min(dx, dy) * this._size;
-    } else {
-      h = dist2 * Math.tan(MathUtils.degToRad(this._fov) * this._size);
-    }
-    this._gizmos.scale.set(h, h, h);
-  }
-  createGizmo() {
-    this._box = new SphereGeometry(1);
-    this._wireframe = new WireframeGeometry(this._box);
-    this._wireframe.addGroup(0, Infinity, 0);
-    this._wireframe.addGroup(0, Infinity, 1);
-    this._material = new LineBasicMaterial({
-      depthTest: true,
-      opacity: this._opacity,
-      color: this._color,
-      transparent: true
-    });
-    this._materialAlways = new LineBasicMaterial({
-      depthTest: false,
-      opacity: this._opacityAlways,
-      color: this._color,
-      transparent: true
-    });
-    this._gizmos = new LineSegments(this._wireframe, [
-      this._material,
-      this._materialAlways
-    ]);
-    this._renderer.add(this._gizmos);
-    this.updateScale();
-  }
-}
-class Scene {
-  constructor(builder) {
-    __publicField(this, "builder");
-    __publicField(this, "meshes", []);
-    __publicField(this, "vim");
-    __publicField(this, "_boundingBox", new Box3());
-    __publicField(this, "_instanceToThreeMeshes", /* @__PURE__ */ new Map());
-    __publicField(this, "_threeMeshIdToInstances", /* @__PURE__ */ new Map());
-    __publicField(this, "_material");
-    __publicField(this, "_visibilityChanged");
-    this.builder = builder;
-  }
-  getBoundingBox(target = new Box3()) {
-    return target.copy(this._boundingBox);
-  }
-  getMeshFromInstance(instance) {
-    return this._instanceToThreeMeshes.get(instance);
-  }
-  getInstanceFromMesh(mesh, index) {
-    if (!mesh || index < 0)
-      return;
-    const instances = this._threeMeshIdToInstances.get(mesh.id);
-    if (!instances)
-      return;
-    return instances[index];
-  }
-  applyMatrix4(matrix) {
-    for (let m2 = 0; m2 < this.meshes.length; m2++) {
-      this.meshes[m2].matrixAutoUpdate = false;
-      this.meshes[m2].matrix.copy(matrix);
-    }
-    this._boundingBox.applyMatrix4(matrix);
-  }
-  setVim(vim) {
-    this.vim = vim;
-    for (let m2 = 0; m2 < this.meshes.length; m2++) {
-      this.meshes[m2].userData.vim = vim;
-    }
-  }
-  addMesh(mesh) {
-    var _a22, _b2, _c;
-    const instances = mesh.userData.instances;
-    if (!instances || instances.length === 0) {
-      throw new Error("Expected mesh to have userdata instances : number[] with at least one member");
-    }
-    for (let i2 = 0; i2 < instances.length; i2++) {
-      const set3 = (_a22 = this._instanceToThreeMeshes.get(instances[i2])) != null ? _a22 : [];
-      set3.push([mesh, i2]);
-      this._instanceToThreeMeshes.set(instances[i2], set3);
-    }
-    const box = mesh.userData.boxes[0].clone();
-    for (let i2 = 1; i2 < instances.length; i2++) {
-      box.union(mesh.userData.boxes[i2]);
-    }
-    this._boundingBox = (_c = (_b2 = this._boundingBox) == null ? void 0 : _b2.union(box)) != null ? _c : box.clone();
-    this._threeMeshIdToInstances.set(mesh.id, instances);
-    this.meshes.push(mesh);
-    return this;
-  }
-  merge(other) {
-    var _a22, _b2;
-    if (!other)
-      return this;
-    other.meshes.forEach((mesh) => this.meshes.push(mesh));
-    other._instanceToThreeMeshes.forEach((meshes, instance) => {
-      var _a3;
-      const set3 = (_a3 = this._instanceToThreeMeshes.get(instance)) != null ? _a3 : [];
-      meshes.forEach((m2) => set3.push(m2));
-      this._instanceToThreeMeshes.set(instance, set3);
-    });
-    other._threeMeshIdToInstances.forEach((value, key) => {
-      this._threeMeshIdToInstances.set(key, value);
-    });
-    this._boundingBox = (_b2 = (_a22 = this._boundingBox) == null ? void 0 : _a22.union(other._boundingBox)) != null ? _b2 : other._boundingBox.clone();
-    return this;
-  }
-  get material() {
-    return this._material;
-  }
-  set material(value) {
-    this._material = value;
-    if (value) {
-      this.meshes.forEach((m2) => {
-        if (!m2.userData.mat) {
-          m2.userData.mat = m2.material;
-        }
-        m2.material = value;
-      });
-    } else {
-      this.meshes.forEach((m2) => {
-        if (m2.userData.mat) {
-          m2.material = m2.userData.mat;
-          m2.userData.mat = void 0;
-        }
-      });
-    }
-  }
-  dispose() {
-    for (let i2 = 0; i2 < this.meshes.length; i2++) {
-      this.meshes[i2].geometry.dispose();
-    }
-    this.meshes.length = 0;
-    this._instanceToThreeMeshes.clear();
-    this._threeMeshIdToInstances.clear();
-  }
-}
-class RenderScene {
-  constructor() {
-    __publicField(this, "scene");
-    __publicField(this, "_scenes", []);
-    __publicField(this, "_boundingBox");
-    this.scene = new Scene$1();
-  }
-  getUpdatedScenes() {
-    const result = [];
-    for (const s of this._scenes) {
-      if (s._visibilityChanged)
-        result.push(s);
-    }
-    return result;
-  }
-  clearUpdateFlags() {
-    this._scenes.forEach((s) => s._visibilityChanged = false);
-  }
-  getBoundingBox(target = new Box3()) {
-    return this._boundingBox ? target.copy(this._boundingBox) : target.set(new Vector3(-1, -1, -1), new Vector3(1, 1, 1));
-  }
-  add(target) {
-    if (target instanceof Scene) {
-      this.addScene(target);
-    } else {
-      this.scene.add(target);
-    }
-  }
-  remove(target) {
-    if (target instanceof Scene) {
-      this.removeScene(target);
-    } else {
-      this.scene.remove(target);
-    }
-  }
-  clear() {
-    this.scene.clear();
-    this._boundingBox = void 0;
-  }
-  addScene(scene) {
-    this._scenes.push(scene);
-    scene.meshes.forEach((m2) => {
-      this.scene.add(m2);
-    });
-    this._boundingBox = this._boundingBox ? this._boundingBox.union(scene.getBoundingBox()) : scene.getBoundingBox();
-  }
-  removeScene(scene) {
-    this._scenes = this._scenes.filter((f2) => f2 !== scene);
-    for (let i2 = 0; i2 < scene.meshes.length; i2++) {
-      this.scene.remove(scene.meshes[i2]);
-    }
-    this._boundingBox = this._scenes.length > 0 ? this._scenes.map((s) => s.getBoundingBox()).reduce((b1, b2) => b1.union(b2)) : void 0;
-  }
-}
-class CSS2DObject extends Object3D {
-  constructor(element) {
-    super();
-    this.element = element || document.createElement("div");
-    this.element.style.position = "absolute";
-    this.element.style.userSelect = "none";
-    this.element.setAttribute("draggable", false);
-    this.addEventListener("removed", function() {
-      this.traverse(function(object) {
-        if (object.element instanceof Element && object.element.parentNode !== null) {
-          object.element.parentNode.removeChild(object.element);
-        }
-      });
-    });
-  }
-  copy(source, recursive) {
-    super.copy(source, recursive);
-    this.element = source.element.cloneNode(true);
-    return this;
-  }
-}
-CSS2DObject.prototype.isCSS2DObject = true;
-const _vector = new Vector3();
-const _viewMatrix = new Matrix4();
-const _viewProjectionMatrix = new Matrix4();
-const _a = new Vector3();
-const _b = new Vector3();
-class CSS2DRenderer {
-  constructor() {
-    const _this = this;
-    let _width, _height;
-    let _widthHalf, _heightHalf;
-    const cache = {
-      objects: /* @__PURE__ */ new WeakMap()
-    };
-    const domElement = document.createElement("div");
-    domElement.style.overflow = "hidden";
-    this.domElement = domElement;
-    this.getSize = function() {
-      return {
-        width: _width,
-        height: _height
-      };
-    };
-    this.render = function(scene, camera) {
-      if (scene.autoUpdate === true)
-        scene.updateMatrixWorld();
-      if (camera.parent === null)
-        camera.updateMatrixWorld();
-      _viewMatrix.copy(camera.matrixWorldInverse);
-      _viewProjectionMatrix.multiplyMatrices(camera.projectionMatrix, _viewMatrix);
-      renderObject(scene, scene, camera);
-      zOrder2(scene);
-    };
-    this.setSize = function(width, height) {
-      _width = width;
-      _height = height;
-      _widthHalf = _width / 2;
-      _heightHalf = _height / 2;
-      domElement.style.width = width + "px";
-      domElement.style.height = height + "px";
-    };
-    function renderObject(object, scene, camera) {
-      if (object.isCSS2DObject) {
-        object.onBeforeRender(_this, scene, camera);
-        _vector.setFromMatrixPosition(object.matrixWorld);
-        _vector.applyMatrix4(_viewProjectionMatrix);
-        const element = object.element;
-        if (/apple/i.test(navigator.vendor)) {
-          element.style.transform = "translate(-50%,-50%) translate(" + Math.round(_vector.x * _widthHalf + _widthHalf) + "px," + Math.round(-_vector.y * _heightHalf + _heightHalf) + "px)";
-        } else {
-          element.style.transform = "translate(-50%,-50%) translate(" + (_vector.x * _widthHalf + _widthHalf) + "px," + (-_vector.y * _heightHalf + _heightHalf) + "px)";
-        }
-        element.style.display = object.visible && _vector.z >= -1 && _vector.z <= 1 ? "" : "none";
-        const objectData = {
-          distanceToCameraSquared: getDistanceToSquared(camera, object)
-        };
-        cache.objects.set(object, objectData);
-        if (element.parentNode !== domElement) {
-          domElement.appendChild(element);
-        }
-        object.onAfterRender(_this, scene, camera);
-      }
-      for (let i2 = 0, l2 = object.children.length; i2 < l2; i2++) {
-        renderObject(object.children[i2], scene, camera);
-      }
-    }
-    function getDistanceToSquared(object1, object2) {
-      _a.setFromMatrixPosition(object1.matrixWorld);
-      _b.setFromMatrixPosition(object2.matrixWorld);
-      return _a.distanceToSquared(_b);
-    }
-    function filterAndFlatten(scene) {
-      const result = [];
-      scene.traverse(function(object) {
-        if (object.isCSS2DObject)
-          result.push(object);
-      });
-      return result;
-    }
-    function zOrder2(scene) {
-      const sorted = filterAndFlatten(scene).sort(function(a, b) {
-        const distanceA = cache.objects.get(a).distanceToCameraSquared;
-        const distanceB = cache.objects.get(b).distanceToCameraSquared;
-        return distanceA - distanceB;
-      });
-      const zMax = sorted.length;
-      for (let i2 = 0, l2 = sorted.length; i2 < l2; i2++) {
-        sorted[i2].element.style.zIndex = zMax - i2;
-      }
-    }
-  }
-}
-class Viewport {
-  constructor(settings2) {
-    __publicField(this, "canvas");
-    __publicField(this, "text");
-    __publicField(this, "_unregisterResize");
-    __publicField(this, "_ownedCanvas");
-    __publicField(this, "_resizeCallbacks", []);
-    const [canvas, owned] = Viewport.getOrCreateCanvas(settings2.getCanvasId());
-    this.canvas = canvas;
-    this._ownedCanvas = owned;
-    this.registerResize(settings2.getCanvasResizeDelay());
-  }
-  static getOrCreateCanvas(canvasId) {
-    let canvas = canvasId ? document.getElementById(canvasId) : void 0;
-    if (canvas)
-      return [canvas, false];
-    canvas = document.createElement("canvas");
-    canvas.className = "vim-canvas";
-    canvas.tabIndex = 0;
-    document.body.appendChild(canvas);
-    return [canvas, true];
-  }
-  createTextRenderer() {
-    const size = this.getParentSize();
-    const renderer = new CSS2DRenderer();
-    renderer.setSize(size.x, size.y);
-    this.text = renderer.domElement;
-    this.text.className = "vim-text-renderer";
-    this.text.style.position = "absolute";
-    this.text.style.top = "0px";
-    this.text.style.pointerEvents = "none";
-    this.canvas.parentElement.append(this.text);
-    return renderer;
-  }
-  dispose() {
-    var _a22;
-    (_a22 = this._unregisterResize) == null ? void 0 : _a22.call(this);
-    this._unregisterResize = void 0;
-    if (this._ownedCanvas)
-      this.canvas.remove();
-  }
-  getParentSize() {
-    var _a22, _b2, _c, _d;
-    return new Vector2((_b2 = (_a22 = this.canvas.parentElement) == null ? void 0 : _a22.clientWidth) != null ? _b2 : this.canvas.clientWidth, (_d = (_c = this.canvas.parentElement) == null ? void 0 : _c.clientHeight) != null ? _d : this.canvas.clientHeight);
-  }
-  getSize() {
-    return new Vector2(this.canvas.clientWidth, this.canvas.clientHeight);
-  }
-  getAspectRatio() {
-    const size = this.getParentSize();
-    return size.x / size.y;
-  }
-  onResize(callback) {
-    this._resizeCallbacks.push(callback);
-  }
-  ResizeToParent() {
-    this._resizeCallbacks.forEach((cb2) => cb2());
-  }
-  registerResize(timeout) {
-    let timerId;
-    const onResize = () => {
-      if (timerId !== void 0) {
-        clearTimeout(timerId);
-        timerId = void 0;
-      }
-      timerId = setTimeout(() => {
-        timerId = void 0;
-        this._resizeCallbacks.forEach((cb2) => cb2());
-      }, timeout);
-    };
-    window.addEventListener("resize", onResize);
-    this._unregisterResize = () => window.removeEventListener("resize", onResize);
-  }
-}
-class Axis {
-  constructor(init) {
-    __publicField(this, "axis");
-    __publicField(this, "direction");
-    __publicField(this, "size");
-    __publicField(this, "color");
-    __publicField(this, "colorSub");
-    __publicField(this, "position");
-    __publicField(this, "label");
-    __publicField(this, "line");
-    this.axis = init.axis;
-    this.direction = init.direction;
-    this.size = init.size;
-    this.position = init.position;
-    this.color = init.color;
-    this.colorSub = init.colorSub;
-    this.line = init.line;
-    this.label = init.label;
-  }
-}
-class GizmoOptions {
-  constructor(init) {
-    __publicField(this, "size", 96);
-    __publicField(this, "padding", 4);
-    __publicField(this, "bubbleSizePrimary", 8);
-    __publicField(this, "bubbleSizeSecondary", 6);
-    __publicField(this, "lineWidth", 2);
-    __publicField(this, "fontSize", "12px");
-    __publicField(this, "fontFamily", "arial");
-    __publicField(this, "fontWeight", "bold");
-    __publicField(this, "fontColor", "#222222");
-    __publicField(this, "className", "gizmo-axis-canvas");
-    __publicField(this, "colorX", "#f73c3c");
-    __publicField(this, "colorY", "#6ccb26");
-    __publicField(this, "colorZ", "#178cf0");
-    __publicField(this, "colorXSub", "#942424");
-    __publicField(this, "colorYSub", "#417a17");
-    __publicField(this, "colorZSub", "#0e5490");
-    var _a22, _b2, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p;
-    this.size = (_a22 = init == null ? void 0 : init.size) != null ? _a22 : this.size;
-    this.padding = (_b2 = init == null ? void 0 : init.padding) != null ? _b2 : this.padding;
-    this.bubbleSizePrimary = (_c = init == null ? void 0 : init.bubbleSizePrimary) != null ? _c : this.bubbleSizePrimary;
-    this.bubbleSizeSecondary = (_d = init == null ? void 0 : init.bubbleSizeSecondary) != null ? _d : this.bubbleSizeSecondary;
-    this.lineWidth = (_e = init == null ? void 0 : init.lineWidth) != null ? _e : this.lineWidth;
-    this.fontSize = (_f = init == null ? void 0 : init.fontSize) != null ? _f : this.fontSize;
-    this.fontFamily = (_g = init == null ? void 0 : init.fontFamily) != null ? _g : this.fontFamily;
-    this.fontWeight = (_h = init == null ? void 0 : init.fontWeight) != null ? _h : this.fontWeight;
-    this.fontColor = (_i = init == null ? void 0 : init.fontColor) != null ? _i : this.fontColor;
-    this.className = (_j = init == null ? void 0 : init.className) != null ? _j : this.className;
-    this.colorX = (_k = init == null ? void 0 : init.colorX) != null ? _k : this.colorX;
-    this.colorY = (_l = init == null ? void 0 : init.colorY) != null ? _l : this.colorY;
-    this.colorZ = (_m = init == null ? void 0 : init.colorZ) != null ? _m : this.colorZ;
-    this.colorXSub = (_n = init == null ? void 0 : init.colorXSub) != null ? _n : this.colorXSub;
-    this.colorYSub = (_o = init == null ? void 0 : init.colorYSub) != null ? _o : this.colorYSub;
-    this.colorZSub = (_p = init == null ? void 0 : init.colorZSub) != null ? _p : this.colorZSub;
-  }
-}
-class GizmoAxes {
-  constructor(camera, options) {
-    __publicField(this, "options");
-    __publicField(this, "axes");
-    __publicField(this, "camera");
-    __publicField(this, "canvas");
-    __publicField(this, "context");
-    __publicField(this, "rect");
-    __publicField(this, "isDragging");
-    __publicField(this, "isDragSignificant");
-    __publicField(this, "dragStart");
-    __publicField(this, "dragLast");
-    __publicField(this, "pointer");
-    __publicField(this, "center");
-    __publicField(this, "invRotMat", new Matrix4());
-    __publicField(this, "selectedAxis");
-    __publicField(this, "onTouchStart", (e) => {
-      e.preventDefault();
-      if (e.touches.length > 1)
-        return;
-      const touch = e.touches[0];
-      this.initDrag(touch.clientX, touch.clientY);
-      window.addEventListener("touchmove", this.onTouchMove, false);
-      window.addEventListener("touchend", this.onTouchEnd, false);
-    });
-    __publicField(this, "onTouchMove", (e) => {
-      if (e.touches.length > 1)
-        return;
-      const touch = e.touches[0];
-      this.updateDrag(touch.clientX, touch.clientY);
-    });
-    __publicField(this, "onTouchEnd", (e) => {
-      e.preventDefault();
-      this.endDrag();
-      this.selectedAxis = null;
-      window.removeEventListener("touchmove", this.onTouchMove, false);
-      window.removeEventListener("touchend", this.onTouchEnd, false);
-    });
-    __publicField(this, "onPointerDown", (e) => {
-      this.initDrag(e.clientX, e.clientY);
-      window.addEventListener("pointermove", this.onPointerDrag, false);
-      window.addEventListener("pointerup", this.onPointerUp, false);
-    });
-    __publicField(this, "onPointerUp", (event) => {
-      this.endDrag();
-      if (event.pointerType !== "mouse") {
-        this.pointer.set(0, 0, 0);
-      }
-      window.removeEventListener("pointermove", this.onPointerDrag, false);
-      window.removeEventListener("pointerup", this.onPointerUp, false);
-    });
-    __publicField(this, "onPointerEnter", () => {
-      this.rect = this.canvas.getBoundingClientRect();
-    });
-    __publicField(this, "onPointerMove", (e) => {
-      if (this.isDragging)
-        return;
-      if (e) {
-        this.pointer = this.toMouseVector(e, this.pointer);
-      }
-    });
-    __publicField(this, "onPointerDrag", (e) => {
-      this.updateDrag(e.clientX, e.clientY);
-    });
-    __publicField(this, "onMouseClick", () => {
-      if (this.isDragging || !this.selectedAxis)
-        return;
-      this.camera.orbit(this.selectedAxis.direction, this.camera.defaultLerpDuration);
-      this.selectedAxis = null;
-    });
-    __publicField(this, "update", () => {
-      this.camera.camera.updateMatrix();
-      this.invRotMat.extractRotation(this.camera.camera.matrix).invert();
-      for (let i2 = 0, length = this.axes.length; i2 < length; i2++) {
-        this.setAxisPosition(this.axes[i2]);
-      }
-      this.axes.sort((a, b) => a.position.z > b.position.z ? 1 : -1);
-      this.drawLayers(true);
-      if (!this.isDragging) {
-        this.pickAxes(this.pointer);
-      }
-    });
-    __publicField(this, "dispose", () => {
-      this.canvas.removeEventListener("pointerdown", this.onPointerDown, false);
-      this.canvas.removeEventListener("pointerenter", this.onPointerEnter, false);
-      this.canvas.removeEventListener("pointermove", this.onPointerDrag, false);
-      window.removeEventListener("pointermove", this.onPointerDrag, false);
-      window.removeEventListener("pointerup", this.onPointerUp, false);
-      this.canvas.remove();
-    });
-    this.options = new GizmoOptions(options);
-    this.camera = camera;
-    this.pointer = new Vector3();
-    this.dragStart = new Vector2();
-    this.dragLast = new Vector2();
-    this.center = new Vector3(this.options.size / 2, this.options.size / 2, 0);
-    this.axes = this.createAxes();
-    this.selectedAxis = null;
-    this.isDragging = false;
-    this.isDragSignificant = false;
-    this.canvas = this.createCanvas();
-    this.context = this.canvas.getContext("2d");
-    this.rect = this.canvas.getBoundingClientRect();
-    this.context.imageSmoothingEnabled = true;
-    this.context.imageSmoothingQuality = "high";
-    this.animate();
-  }
-  animate() {
-    this.update();
-    requestAnimationFrame(() => this.animate());
-  }
-  createAxes() {
-    return [
-      new Axis({
-        axis: "x",
-        direction: new Vector3(1, 0, 0),
-        size: this.options.bubbleSizePrimary,
-        color: this.options.colorX,
-        colorSub: this.options.colorXSub,
-        line: this.options.lineWidth,
-        label: "X",
-        position: new Vector3(0, 0, 0)
-      }),
-      new Axis({
-        axis: "y",
-        direction: new Vector3(0, 1, 0),
-        size: this.options.bubbleSizePrimary,
-        color: this.options.colorY,
-        colorSub: this.options.colorYSub,
-        line: this.options.lineWidth,
-        label: "Y",
-        position: new Vector3(0, 0, 0)
-      }),
-      new Axis({
-        axis: "z",
-        direction: new Vector3(0, 0, 1),
-        size: this.options.bubbleSizePrimary,
-        color: this.options.colorZ,
-        colorSub: this.options.colorZSub,
-        line: this.options.lineWidth,
-        label: "Z",
-        position: new Vector3(0, 0, 0)
-      }),
-      new Axis({
-        axis: "-x",
-        direction: new Vector3(-1, 0, 0),
-        size: this.options.bubbleSizeSecondary,
-        color: this.options.colorX,
-        colorSub: this.options.colorXSub,
-        line: void 0,
-        label: void 0,
-        position: new Vector3(0, 0, 0)
-      }),
-      new Axis({
-        axis: "-y",
-        direction: new Vector3(0, -1, 0),
-        size: this.options.bubbleSizeSecondary,
-        color: this.options.colorY,
-        colorSub: this.options.colorYSub,
-        line: void 0,
-        label: void 0,
-        position: new Vector3(0, 0, 0)
-      }),
-      new Axis({
-        axis: "-z",
-        direction: new Vector3(0, 0, -1),
-        size: this.options.bubbleSizeSecondary,
-        color: this.options.colorZ,
-        colorSub: this.options.colorZSub,
-        line: void 0,
-        label: void 0,
-        position: new Vector3(0, 0, 0)
-      })
-    ];
-  }
-  createCanvas() {
-    const canvas = document.createElement("canvas");
-    canvas.width = this.options.size;
-    canvas.height = this.options.size;
-    canvas.style.position = "fixed";
-    canvas.style.right = "24px";
-    canvas.style.top = "24px";
-    canvas.classList.add(this.options.className);
-    canvas.addEventListener("pointerdown", this.onPointerDown, false);
-    canvas.addEventListener("pointerenter", this.onPointerEnter, false);
-    canvas.addEventListener("pointermove", this.onPointerMove, false);
-    return canvas;
-  }
-  toMouseVector(e, target) {
-    return target.set(e.clientX - this.rect.left, e.clientY - this.rect.top, 0);
-  }
-  initDrag(x2, y2) {
-    this.dragStart.set(x2, y2);
-    this.dragLast.set(x2, y2);
-    this.isDragging = true;
-    this.isDragSignificant = false;
-    if (!this.isDragging) {
-      this.canvas.classList.add("dragging");
-    }
-  }
-  updateDrag(x2, y2) {
-    if (new Vector2(x2, y2).sub(this.dragStart).length() > 3) {
-      this.isDragSignificant = true;
-    }
-    const drag = new Vector2(x2, y2).sub(this.dragLast);
-    this.dragLast.set(x2, y2);
-    const rotX = drag.x / this.canvas.width;
-    const rotY = drag.y / this.canvas.height;
-    this.camera.rotate(new Vector2(rotX, rotY));
-  }
-  endDrag() {
-    this.isDragging = false;
-    if (!this.isDragSignificant) {
-      this.onMouseClick();
-      this.isDragSignificant = false;
-    }
-    this.canvas.classList.remove("dragging");
-  }
-  drawLayers(clear) {
-    if (clear) {
-      this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    }
-    for (let i2 = 0, length = this.axes.length; i2 < length; i2++) {
-      const axis = this.axes[i2];
-      const highlight = this.selectedAxis === axis;
-      const color = axis.position.z >= -0.01 ? axis.color : axis.colorSub;
-      const center2 = new Vector2(this.center.x, this.center.y);
-      const pos2 = new Vector2(axis.position.x, axis.position.y);
-      if (axis.line)
-        this.drawLine(center2, pos2, axis.line, color);
-      this.drawCircle(axis.position, axis.size, highlight ? "#FFFFFF" : color);
-      if (axis.label) {
-        this.context.font = [
-          this.options.fontWeight,
-          this.options.fontSize,
-          this.options.fontFamily
-        ].join(" ");
-        this.context.fillStyle = this.options.fontColor;
-        this.context.textBaseline = "middle";
-        this.context.textAlign = "center";
-        this.context.fillText(axis.label, axis.position.x, axis.position.y);
-      }
-    }
-  }
-  drawCircle(pos, radius = 10, color = "#FF0000") {
-    this.context.beginPath();
-    this.context.arc(pos.x, pos.y, radius, 0, 2 * Math.PI, false);
-    this.context.fillStyle = color;
-    this.context.fill();
-    this.context.closePath();
-  }
-  drawLine(p1, p2, width = 1, color = "#FF0000") {
-    this.context.beginPath();
-    this.context.moveTo(p1.x, p1.y);
-    this.context.lineTo(p2.x, p2.y);
-    this.context.lineWidth = width;
-    this.context.strokeStyle = color;
-    this.context.stroke();
-    this.context.closePath();
-  }
-  setAxisPosition(axis) {
-    const position = axis.direction.clone().applyMatrix4(this.invRotMat);
-    const size = axis.size;
-    axis.position.set(position.x * (this.center.x - size / 2 - this.options.padding) + this.center.x, this.center.y - position.y * (this.center.y - size / 2 - this.options.padding), position.z);
-  }
-  pickAxes(mouse) {
-    const currentAxis = this.selectedAxis;
-    this.selectedAxis = null;
-    for (let i2 = 0, length = this.axes.length; i2 < length; i2++) {
-      const distance = mouse.distanceTo(this.axes[i2].position);
-      if (distance < this.axes[i2].size)
-        this.selectedAxis = this.axes[i2];
-    }
-    if (currentAxis !== this.selectedAxis)
-      this.drawLayers(false);
-  }
-}
-class BoxOutline extends LineSegments {
-  constructor() {
-    const vertices = new Float32Array([
-      -0.5,
-      -0.5,
-      -0.5,
-      0.5,
-      -0.5,
-      -0.5,
-      0.5,
-      0.5,
-      -0.5,
-      -0.5,
-      0.5,
-      -0.5,
-      -0.5,
-      -0.5,
-      0.5,
-      0.5,
-      -0.5,
-      0.5,
-      0.5,
-      0.5,
-      0.5,
-      -0.5,
-      0.5,
-      0.5
-    ]);
-    const indices = [
-      0.5,
-      1,
-      1,
-      2,
-      2,
-      3,
-      3,
-      0,
-      4,
-      5,
-      5,
-      6,
-      6,
-      7,
-      7,
-      4,
-      0,
-      4,
-      1,
-      5,
-      2,
-      6,
-      3,
-      7
-    ];
-    const geo = new BufferGeometry();
-    const mat = new LineBasicMaterial();
-    geo.setAttribute("position", new BufferAttribute(vertices, 3));
-    geo.setIndex(indices);
-    super(geo, mat);
-  }
-  fitBox(box) {
-    this.scale.set(box.max.x - box.min.x, box.max.y - box.min.y, box.max.z - box.min.z);
-    this.position.set((box.max.x + box.min.x) / 2, (box.max.y + box.min.y) / 2, (box.max.z + box.min.z) / 2);
-  }
-  dispose() {
-    this.geometry.dispose();
-    this.material.dispose();
-  }
-}
-class BoxMesh extends Mesh {
-  constructor() {
-    const geo = new BoxGeometry();
-    const mat = new MeshBasicMaterial({
-      opacity: 0.1,
-      transparent: true,
-      color: new Color(0, 0.5, 1),
-      depthTest: false
-    });
-    super(geo, mat);
-  }
-  fitBox(box) {
-    this.scale.set(box.max.x - box.min.x, box.max.y - box.min.y, box.max.z - box.min.z);
-    this.position.set((box.max.x + box.min.x) / 2, (box.max.y + box.min.y) / 2, (box.max.z + box.min.z) / 2);
-  }
-  dispose() {
-    this.geometry.dispose();
-    this.material.dispose();
-  }
-}
-class BoxHighlight extends Mesh {
-  constructor() {
-    const geo = new BufferGeometry();
-    geo.setAttribute("position", new BufferAttribute(new Float32Array(12), 3));
-    geo.setIndex([0, 1, 2, 0, 2, 3]);
-    const mat = new MeshBasicMaterial({
-      opacity: 0.5,
-      transparent: true,
-      depthTest: false,
-      side: DoubleSide
-    });
-    super(geo, mat);
-    this.frustumCulled = false;
-  }
-  highlight(box, normal) {
-    this.visible = false;
-    const positions = this.geometry.getAttribute("position");
-    if (normal.x > 0.1) {
-      positions.setXYZ(0, box.max.x, box.max.y, box.max.z);
-      positions.setXYZ(1, box.max.x, box.min.y, box.max.z);
-      positions.setXYZ(2, box.max.x, box.min.y, box.min.z);
-      positions.setXYZ(3, box.max.x, box.max.y, box.min.z);
-      this.visible = true;
-    }
-    if (normal.x < -0.1) {
-      positions.setXYZ(0, box.min.x, box.max.y, box.max.z);
-      positions.setXYZ(1, box.min.x, box.min.y, box.max.z);
-      positions.setXYZ(2, box.min.x, box.min.y, box.min.z);
-      positions.setXYZ(3, box.min.x, box.max.y, box.min.z);
-      this.visible = true;
-    }
-    if (normal.y > 0.1) {
-      positions.setXYZ(0, box.max.x, box.max.y, box.max.z);
-      positions.setXYZ(1, box.min.x, box.max.y, box.max.z);
-      positions.setXYZ(2, box.min.x, box.max.y, box.min.z);
-      positions.setXYZ(3, box.max.x, box.max.y, box.min.z);
-      this.visible = true;
-    }
-    if (normal.y < -0.1) {
-      positions.setXYZ(0, box.max.x, box.min.y, box.max.z);
-      positions.setXYZ(1, box.min.x, box.min.y, box.max.z);
-      positions.setXYZ(2, box.min.x, box.min.y, box.min.z);
-      positions.setXYZ(3, box.max.x, box.min.y, box.min.z);
-      this.visible = true;
-    }
-    if (normal.z > 0.1) {
-      positions.setXYZ(0, box.max.x, box.max.y, box.max.z);
-      positions.setXYZ(1, box.min.x, box.max.y, box.max.z);
-      positions.setXYZ(2, box.min.x, box.min.y, box.max.z);
-      positions.setXYZ(3, box.max.x, box.min.y, box.max.z);
-      this.visible = true;
-    }
-    if (normal.z < -0.1) {
-      positions.setXYZ(0, box.max.x, box.max.y, box.min.z);
-      positions.setXYZ(1, box.min.x, box.max.y, box.min.z);
-      positions.setXYZ(2, box.min.x, box.min.y, box.min.z);
-      positions.setXYZ(3, box.max.x, box.min.y, box.min.z);
-      this.visible = true;
-    }
-    positions.needsUpdate = true;
-  }
-  dispose() {
-    this.geometry.dispose();
-    this.material.dispose();
-  }
-}
-class BoxInputs {
-  constructor(viewer2, cube, box) {
-    __publicField(this, "viewer");
-    __publicField(this, "cube");
-    __publicField(this, "sharedBox");
-    __publicField(this, "faceNormal", new Vector3());
-    __publicField(this, "dragOrigin", new Vector3());
-    __publicField(this, "dragpPlane", new Plane());
-    __publicField(this, "mouseDown");
-    __publicField(this, "raycaster", new Raycaster$1());
-    __publicField(this, "lastBox", new Box3());
-    __publicField(this, "unregisters", []);
-    __publicField(this, "onFaceEnter");
-    __publicField(this, "onBoxStretch");
-    __publicField(this, "onBoxConfirm");
-    __publicField(this, "reg", (handler, type, listener2) => {
-      handler.addEventListener(type, listener2);
-      this.unregisters.push(() => handler.removeEventListener(type, listener2));
-    });
-    this.viewer = viewer2;
-    this.cube = cube;
-    this.sharedBox = box;
-  }
-  register() {
-    if (this.unregister.length > 0)
-      return;
-    const canvas = this.viewer.viewport.canvas;
-    this.reg(canvas, "pointerdown", this.onMouseClick.bind(this));
-    this.reg(canvas, "pointermove", this.onMouseMove.bind(this));
-    this.reg(canvas, "pointerup", this.onMouseUp.bind(this));
-  }
-  unregister() {
-    this.unregisters.forEach((unreg) => unreg());
-    this.unregisters.length = 0;
-  }
-  onMouseMove(event) {
-    var _a22, _b2, _c;
-    if (this.mouseDown) {
-      this.onDrag(event);
-      return;
-    }
-    const hits = this.raycast(new Vector2(event.offsetX, event.offsetY));
-    const hit = hits == null ? void 0 : hits[0];
-    const norm = (_a22 = hit == null ? void 0 : hit.face) == null ? void 0 : _a22.normal;
-    if (!norm) {
-      if (this.faceNormal.x !== 0 || this.faceNormal.y !== 0 || this.faceNormal.z !== 0) {
-        this.faceNormal.set(0, 0, 0);
-        (_b2 = this.onFaceEnter) == null ? void 0 : _b2.call(this, this.faceNormal);
-      }
-      return;
-    }
-    if (this.faceNormal.equals(norm)) {
-      return;
-    }
-    this.faceNormal = norm;
-    (_c = this.onFaceEnter) == null ? void 0 : _c.call(this, this.faceNormal);
-  }
-  onMouseUp(event) {
-    var _a22, _b2;
-    if (this.mouseDown) {
-      this.mouseDown = false;
-      this.viewer.inputs.registerAll();
-      if (event.pointerType === "mouse") {
-        this.onMouseMove(event);
-      } else {
-        this.faceNormal = new Vector3();
-        (_a22 = this.onFaceEnter) == null ? void 0 : _a22.call(this, this.faceNormal);
-      }
-      (_b2 = this.onBoxConfirm) == null ? void 0 : _b2.call(this, this.sharedBox);
-    }
-  }
-  onMouseClick(event) {
-    var _a22, _b2;
-    const hits = this.raycast(new Vector2(event.offsetX, event.offsetY));
-    const hit = hits == null ? void 0 : hits[0];
-    if (!((_a22 = hit == null ? void 0 : hit.face) == null ? void 0 : _a22.normal))
-      return;
-    this.lastBox.copy(this.sharedBox);
-    this.faceNormal = hit.face.normal;
-    this.dragOrigin.copy(hit.point);
-    const dist2 = hit.point.clone().dot(this.viewer.camera.forward);
-    this.dragpPlane.set(this.viewer.camera.forward, -dist2);
-    this.mouseDown = true;
-    this.viewer.inputs.unregisterAll();
-    (_b2 = this.onFaceEnter) == null ? void 0 : _b2.call(this, this.faceNormal);
-  }
-  onDrag(event) {
-    var _a22, _b2;
-    this.raycaster = this.viewer.raycaster.fromPoint2(new Vector2(event.offsetX, event.offsetY), this.raycaster);
-    const point = (_a22 = this.raycaster.ray.intersectPlane(this.dragpPlane, new Vector3())) != null ? _a22 : this.dragOrigin.clone();
-    const delta = point.sub(this.dragOrigin);
-    const amount = delta.dot(this.faceNormal);
-    const box = this.stretch(this.faceNormal, amount);
-    (_b2 = this.onBoxStretch) == null ? void 0 : _b2.call(this, box);
-  }
-  stretch(normal, amount) {
-    const result = this.sharedBox.clone();
-    if (normal.x > 0.1) {
-      result.max.setX(Math.max(this.lastBox.max.x + amount, result.min.x - 1));
-    }
-    if (normal.x < -0.1) {
-      result.min.setX(Math.min(this.lastBox.min.x - amount, result.max.x + 1));
-    }
-    if (normal.y > 0.1) {
-      result.max.setY(Math.max(this.lastBox.max.y + amount, result.min.y - 1));
-    }
-    if (normal.y < -0.1) {
-      result.min.setY(Math.min(this.lastBox.min.y - amount, result.max.y + 1));
-    }
-    if (normal.z > 0.1) {
-      result.max.setZ(Math.max(this.lastBox.max.z + amount, result.min.z - 1));
-    }
-    if (normal.z < -0.1) {
-      result.min.setZ(Math.min(this.lastBox.min.z - amount, result.max.z + 1));
-    }
-    return result;
-  }
-  raycast(position) {
-    this.raycaster = this.viewer.raycaster.fromPoint2(position, this.raycaster);
-    return this.raycaster.intersectObject(this.cube);
-  }
-}
-class SectionBox {
-  constructor(viewer2) {
-    __publicField(this, "_viewer");
-    __publicField(this, "_inputs");
-    __publicField(this, "_cube");
-    __publicField(this, "_outline");
-    __publicField(this, "_highlight");
-    __publicField(this, "_normal");
-    __publicField(this, "_clip");
-    __publicField(this, "_show");
-    __publicField(this, "_interactive");
-    __publicField(this, "_onStateChanged", new dist$3.SignalDispatcher());
-    __publicField(this, "_onBoxConfirm", new dist$1.SimpleEventDispatcher());
-    __publicField(this, "_onHover", new dist$1.SimpleEventDispatcher());
-    this._viewer = viewer2;
-    this._normal = new Vector3();
-    this._cube = new BoxMesh();
-    this._outline = new BoxOutline();
-    this._highlight = new BoxHighlight();
-    this.renderer.add(this._cube);
-    this.renderer.add(this._outline);
-    this.renderer.add(this._highlight);
-    this._inputs = new BoxInputs(viewer2, this._cube, this._viewer.renderer.section.box);
-    this._inputs.onFaceEnter = (normal) => {
-      this._normal = normal;
-      if (this.visible)
-        this._highlight.highlight(this.section.box, normal);
-      this._onHover.dispatch(normal.x !== 0 || normal.y !== 0 || normal.z !== 0);
-    };
-    this._inputs.onBoxStretch = (box) => {
-      this.renderer.section.fitBox(box);
-      this.update();
-    };
-    this._inputs.onBoxConfirm = (box) => this._onBoxConfirm.dispatch(box);
-    this.clip = false;
-    this.visible = false;
-    this.interactive = false;
-    this.update();
-  }
-  get onStateChanged() {
-    return this._onStateChanged.asEvent();
-  }
-  get onBoxConfirm() {
-    return this._onBoxConfirm.asEvent();
-  }
-  get onHover() {
-    return this._onHover.asEvent();
-  }
-  get renderer() {
-    return this._viewer.renderer;
-  }
-  get section() {
-    return this._viewer.renderer.section;
-  }
-  get box() {
-    return this.section.box;
-  }
-  get clip() {
-    return this._clip;
-  }
-  set clip(value) {
-    if (value === this._clip)
-      return;
-    this._clip = value;
-    this.renderer.section.active = value;
-    this._onStateChanged.dispatch();
-  }
-  get interactive() {
-    return this._interactive;
-  }
-  set interactive(value) {
-    if (value === this.interactive)
-      return;
-    if (!this._interactive && value)
-      this._inputs.register();
-    if (this._interactive && !value)
-      this._inputs.unregister();
-    this._interactive = value;
-    this._highlight.visible = false;
-    this._onStateChanged.dispatch();
-  }
-  get visible() {
-    return this._show;
-  }
-  set visible(value) {
-    if (value === this.visible)
-      return;
-    this._show = value;
-    this._cube.visible = value;
-    this._outline.visible = value;
-    this._highlight.visible = value;
-    if (value)
-      this.update();
-    this._onStateChanged.dispatch();
-  }
-  fitBox(box) {
-    this._cube.fitBox(box);
-    this._outline.fitBox(box);
-    this.renderer.section.fitBox(box);
-    this._onBoxConfirm.dispatch(this.box);
-  }
-  update() {
-    this.fitBox(this.section.box);
-    this._highlight.highlight(this.section.box, this._normal);
-  }
-  dispose() {
-    this.renderer.remove(this._cube);
-    this.renderer.remove(this._outline);
-    this.renderer.remove(this._highlight);
-    this._inputs.unregister();
-    this._cube.dispose();
-    this._outline.dispose();
-    this._highlight.dispose();
-  }
-}
-class MeasureFlow {
-  constructor(gizmoMeasure) {
-    __publicField(this, "_gizmoMeasure");
-    __publicField(this, "_stage", "ready");
-    __publicField(this, "removeMouseListener");
-    __publicField(this, "onProgress");
-    __publicField(this, "onComplete");
-    this._gizmoMeasure = gizmoMeasure;
-  }
-  get stage() {
-    return this._stage;
-  }
-  unregister() {
-    var _a22;
-    (_a22 = this.removeMouseListener) == null ? void 0 : _a22.call(this);
-    this.removeMouseListener = void 0;
-  }
-  abort() {
-    var _a22;
-    if (this.stage === "active" || this.stage === "ready") {
-      this._stage = void 0;
-      (_a22 = this.onComplete) == null ? void 0 : _a22.call(this, false);
-      this.unregister();
-    }
-  }
-  onMainAction(action) {
-    var _a22, _b2, _c;
-    switch (this._stage) {
-      case "ready":
-        if (!action.object)
-          return;
-        this._gizmoMeasure.onFirstClick(action);
-        this._stage = "active";
-        (_a22 = this.onProgress) == null ? void 0 : _a22.call(this, this._stage);
-        break;
-      case "active":
-        this._stage = this._gizmoMeasure.onSecondClick(action) ? "done" : "failed";
-        (_b2 = this.onProgress) == null ? void 0 : _b2.call(this, this._stage);
-        (_c = this.onComplete) == null ? void 0 : _c.call(this, this._stage === "done");
-        this.unregister();
-        break;
-    }
-  }
-  onIdleAction(action) {
-    if (this._stage === "active")
-      this._gizmoMeasure.onMouseIdle(action);
-  }
-  onKeyAction(key) {
-    return false;
-  }
-}
-class MeshLine extends BufferGeometry {
-  constructor() {
-    super();
-    this.isMeshLine = true;
-    this.type = "MeshLine";
-    this.positions = [];
-    this.previous = [];
-    this.next = [];
-    this.side = [];
-    this.width = [];
-    this.indices_array = [];
-    this.uvs = [];
-    this.counters = [];
-    this._points = [];
-    this._geom = null;
-    this.widthCallback = null;
-    this.matrixWorld = new Matrix4();
-    Object.defineProperties(this, {
-      geometry: {
-        enumerable: true,
-        get: function() {
-          return this;
-        }
-      },
-      geom: {
-        enumerable: true,
-        get: function() {
-          return this._geom;
-        },
-        set: function(value) {
-          this.setGeometry(value, this.widthCallback);
-        }
-      },
-      points: {
-        enumerable: true,
-        get: function() {
-          return this._points;
-        },
-        set: function(value) {
-          this.setPoints(value, this.widthCallback);
-        }
-      }
-    });
-  }
-}
-MeshLine.prototype.setMatrixWorld = function(matrixWorld) {
-  this.matrixWorld = matrixWorld;
-};
-MeshLine.prototype.setGeometry = function(g, c) {
-  this._geometry = g;
-  this.setPoints(g.getAttribute("position").array, c);
-};
-MeshLine.prototype.setPoints = function(points, wcb) {
-  if (!(points instanceof Float32Array) && !(points instanceof Array)) {
-    console.error("ERROR: The BufferArray of points is not instancied correctly.");
-    return;
-  }
-  this._points = points;
-  this.widthCallback = wcb;
-  this.positions = [];
-  this.counters = [];
-  if (points.length && points[0] instanceof Vector3) {
-    for (let j = 0; j < points.length; j++) {
-      const p2 = points[j];
-      const c = j / points.length;
-      this.positions.push(p2.x, p2.y, p2.z);
-      this.positions.push(p2.x, p2.y, p2.z);
-      this.counters.push(c);
-      this.counters.push(c);
-    }
-  } else {
-    for (let j = 0; j < points.length; j += 3) {
-      const c = j / points.length;
-      this.positions.push(points[j], points[j + 1], points[j + 2]);
-      this.positions.push(points[j], points[j + 1], points[j + 2]);
-      this.counters.push(c);
-      this.counters.push(c);
-    }
-  }
-  this.process();
-};
-function MeshLineRaycast(raycaster, intersects2) {
-  const inverseMatrix = new Matrix4();
-  const ray = new Ray();
-  const sphere = new Sphere();
-  const interRay = new Vector3();
-  const geometry = this.geometry;
-  if (!geometry.boundingSphere)
-    geometry.computeBoundingSphere();
-  sphere.copy(geometry.boundingSphere);
-  sphere.applyMatrix4(this.matrixWorld);
-  if (raycaster.ray.intersectSphere(sphere, interRay) === false) {
-    return;
-  }
-  inverseMatrix.copy(this.matrixWorld).invert();
-  ray.copy(raycaster.ray).applyMatrix4(inverseMatrix);
-  const vStart = new Vector3();
-  const vEnd = new Vector3();
-  const interSegment = new Vector3();
-  const step = this instanceof LineSegments ? 2 : 1;
-  const index = geometry.index;
-  const attributes = geometry.attributes;
-  if (index !== null) {
-    const indices = index.array;
-    const positions = attributes.position.array;
-    const widths = attributes.width.array;
-    for (let i2 = 0, l2 = indices.length - 1; i2 < l2; i2 += step) {
-      const a = indices[i2];
-      const b = indices[i2 + 1];
-      vStart.fromArray(positions, a * 3);
-      vEnd.fromArray(positions, b * 3);
-      const width = widths[Math.floor(i2 / 3)] !== void 0 ? widths[Math.floor(i2 / 3)] : 1;
-      const precision = raycaster.params.Line.threshold + this.material.lineWidth * width / 2;
-      const precisionSq = precision * precision;
-      const distSq = ray.distanceSqToSegment(vStart, vEnd, interRay, interSegment);
-      if (distSq > precisionSq)
-        continue;
-      interRay.applyMatrix4(this.matrixWorld);
-      const distance = raycaster.ray.origin.distanceTo(interRay);
-      if (distance < raycaster.near || distance > raycaster.far)
-        continue;
-      intersects2.push({
-        distance,
-        point: interSegment.clone().applyMatrix4(this.matrixWorld),
-        index: i2,
-        face: null,
-        faceIndex: null,
-        object: this
-      });
-      i2 = l2;
-    }
-  }
-}
-MeshLine.prototype.raycast = MeshLineRaycast;
-MeshLine.prototype.compareV3 = function(a, b) {
-  const aa2 = a * 6;
-  const ab2 = b * 6;
-  return this.positions[aa2] === this.positions[ab2] && this.positions[aa2 + 1] === this.positions[ab2 + 1] && this.positions[aa2 + 2] === this.positions[ab2 + 2];
-};
-MeshLine.prototype.copyV3 = function(a) {
-  const aa2 = a * 6;
-  return [this.positions[aa2], this.positions[aa2 + 1], this.positions[aa2 + 2]];
-};
-MeshLine.prototype.process = function() {
-  const l2 = this.positions.length / 6;
-  this.previous = [];
-  this.next = [];
-  this.side = [];
-  this.width = [];
-  this.indices_array = [];
-  this.uvs = [];
-  let w2;
-  let v2;
-  if (this.compareV3(0, l2 - 1)) {
-    v2 = this.copyV3(l2 - 2);
-  } else {
-    v2 = this.copyV3(0);
-  }
-  this.previous.push(v2[0], v2[1], v2[2]);
-  this.previous.push(v2[0], v2[1], v2[2]);
-  for (let j = 0; j < l2; j++) {
-    this.side.push(1);
-    this.side.push(-1);
-    if (this.widthCallback)
-      w2 = this.widthCallback(j / (l2 - 1));
-    else
-      w2 = 1;
-    this.width.push(w2);
-    this.width.push(w2);
-    this.uvs.push(j / (l2 - 1), 0);
-    this.uvs.push(j / (l2 - 1), 1);
-    if (j < l2 - 1) {
-      v2 = this.copyV3(j);
-      this.previous.push(v2[0], v2[1], v2[2]);
-      this.previous.push(v2[0], v2[1], v2[2]);
-      const n2 = j * 2;
-      this.indices_array.push(n2, n2 + 1, n2 + 2);
-      this.indices_array.push(n2 + 2, n2 + 1, n2 + 3);
-    }
-    if (j > 0) {
-      v2 = this.copyV3(j);
-      this.next.push(v2[0], v2[1], v2[2]);
-      this.next.push(v2[0], v2[1], v2[2]);
-    }
-  }
-  if (this.compareV3(l2 - 1, 0)) {
-    v2 = this.copyV3(1);
-  } else {
-    v2 = this.copyV3(l2 - 1);
-  }
-  this.next.push(v2[0], v2[1], v2[2]);
-  this.next.push(v2[0], v2[1], v2[2]);
-  if (!this._attributes || this._attributes.position.count !== this.positions.length) {
-    this._attributes = {
-      position: new BufferAttribute(new Float32Array(this.positions), 3),
-      previous: new BufferAttribute(new Float32Array(this.previous), 3),
-      next: new BufferAttribute(new Float32Array(this.next), 3),
-      side: new BufferAttribute(new Float32Array(this.side), 1),
-      width: new BufferAttribute(new Float32Array(this.width), 1),
-      uv: new BufferAttribute(new Float32Array(this.uvs), 2),
-      index: new BufferAttribute(new Uint16Array(this.indices_array), 1),
-      counters: new BufferAttribute(new Float32Array(this.counters), 1)
-    };
-  } else {
-    this._attributes.position.copyArray(new Float32Array(this.positions));
-    this._attributes.position.needsUpdate = true;
-    this._attributes.previous.copyArray(new Float32Array(this.previous));
-    this._attributes.previous.needsUpdate = true;
-    this._attributes.next.copyArray(new Float32Array(this.next));
-    this._attributes.next.needsUpdate = true;
-    this._attributes.side.copyArray(new Float32Array(this.side));
-    this._attributes.side.needsUpdate = true;
-    this._attributes.width.copyArray(new Float32Array(this.width));
-    this._attributes.width.needsUpdate = true;
-    this._attributes.uv.copyArray(new Float32Array(this.uvs));
-    this._attributes.uv.needsUpdate = true;
-    this._attributes.index.copyArray(new Uint16Array(this.indices_array));
-    this._attributes.index.needsUpdate = true;
-  }
-  this.setAttribute("position", this._attributes.position);
-  this.setAttribute("previous", this._attributes.previous);
-  this.setAttribute("next", this._attributes.next);
-  this.setAttribute("side", this._attributes.side);
-  this.setAttribute("width", this._attributes.width);
-  this.setAttribute("uv", this._attributes.uv);
-  this.setAttribute("counters", this._attributes.counters);
-  this.setIndex(this._attributes.index);
-  this.computeBoundingSphere();
-  this.computeBoundingBox();
-};
-function memcpy(src, srcOffset, dst, dstOffset, length) {
-  let i2;
-  src = src.subarray || src.slice ? src : src.buffer;
-  dst = dst.subarray || dst.slice ? dst : dst.buffer;
-  src = srcOffset ? src.subarray ? src.subarray(srcOffset, length && srcOffset + length) : src.slice(srcOffset, length && srcOffset + length) : src;
-  if (dst.set) {
-    dst.set(src, dstOffset);
-  } else {
-    for (i2 = 0; i2 < src.length; i2++) {
-      dst[i2 + dstOffset] = src[i2];
-    }
-  }
-  return dst;
-}
-MeshLine.prototype.advance = function(position) {
-  const positions = this._attributes.position.array;
-  const previous = this._attributes.previous.array;
-  const next = this._attributes.next.array;
-  const l2 = positions.length;
-  memcpy(positions, 0, previous, 0, l2);
-  memcpy(positions, 6, positions, 0, l2 - 6);
-  positions[l2 - 6] = position.x;
-  positions[l2 - 5] = position.y;
-  positions[l2 - 4] = position.z;
-  positions[l2 - 3] = position.x;
-  positions[l2 - 2] = position.y;
-  positions[l2 - 1] = position.z;
-  memcpy(positions, 6, next, 0, l2 - 6);
-  next[l2 - 6] = position.x;
-  next[l2 - 5] = position.y;
-  next[l2 - 4] = position.z;
-  next[l2 - 3] = position.x;
-  next[l2 - 2] = position.y;
-  next[l2 - 1] = position.z;
-  this._attributes.position.needsUpdate = true;
-  this._attributes.previous.needsUpdate = true;
-  this._attributes.next.needsUpdate = true;
-};
-ShaderChunk.meshline_vert = [
-  "",
-  ShaderChunk.common,
-  ShaderChunk.logdepthbuf_pars_vertex,
-  ShaderChunk.fog_pars_vertex,
-  "",
-  "attribute vec3 previous;",
-  "attribute vec3 next;",
-  "attribute float side;",
-  "attribute float width;",
-  "attribute float counters;",
-  "",
-  "uniform vec2 resolution;",
-  "uniform float lineWidth;",
-  "uniform vec3 color;",
-  "uniform float opacity;",
-  "uniform float sizeAttenuation;",
-  "",
-  "varying vec2 vUV;",
-  "varying vec4 vColor;",
-  "varying float vCounters;",
-  "",
-  "vec2 fix( vec4 i, float aspect ) {",
-  "",
-  "    vec2 res = i.xy / i.w;",
-  "    res.x *= aspect;",
-  "    vCounters = counters;",
-  "    return res;",
-  "",
-  "}",
-  "",
-  "void main() {",
-  "",
-  "    float aspect = resolution.x / resolution.y;",
-  "",
-  "    vColor = vec4( color, opacity );",
-  "    vUV = uv;",
-  "",
-  "    mat4 m = projectionMatrix * modelViewMatrix;",
-  "    vec4 finalPosition = m * vec4( position, 1.0 );",
-  "    vec4 prevPos = m * vec4( previous, 1.0 );",
-  "    vec4 nextPos = m * vec4( next, 1.0 );",
-  "",
-  "    vec2 currentP = fix( finalPosition, aspect );",
-  "    vec2 prevP = fix( prevPos, aspect );",
-  "    vec2 nextP = fix( nextPos, aspect );",
-  "",
-  "    float w = lineWidth * width;",
-  "",
-  "    vec2 dir;",
-  "    if( nextP == currentP ) dir = normalize( currentP - prevP );",
-  "    else if( prevP == currentP ) dir = normalize( nextP - currentP );",
-  "    else {",
-  "        vec2 dir1 = normalize( currentP - prevP );",
-  "        vec2 dir2 = normalize( nextP - currentP );",
-  "        dir = normalize( dir1 + dir2 );",
-  "",
-  "        vec2 perp = vec2( -dir1.y, dir1.x );",
-  "        vec2 miter = vec2( -dir.y, dir.x );",
-  "        //w = clamp( w / dot( miter, perp ), 0., 4. * lineWidth * width );",
-  "",
-  "    }",
-  "",
-  "    //vec2 normal = ( cross( vec3( dir, 0. ), vec3( 0., 0., 1. ) ) ).xy;",
-  "    vec4 normal = vec4( -dir.y, dir.x, 0., 1. );",
-  "    normal.xy *= .5 * w;",
-  "    normal *= projectionMatrix;",
-  "    if( sizeAttenuation == 0. ) {",
-  "        normal.xy *= finalPosition.w;",
-  "        normal.xy /= ( vec4( resolution, 0., 1. ) * projectionMatrix ).xy;",
-  "    }",
-  "",
-  "    finalPosition.xy += normal.xy * side;",
-  "",
-  "    gl_Position = finalPosition;",
-  "",
-  ShaderChunk.logdepthbuf_vertex,
-  ShaderChunk.fog_vertex && "    vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );",
-  ShaderChunk.fog_vertex,
-  "}"
-].join("\n");
-ShaderChunk.meshline_frag = [
-  "",
-  ShaderChunk.fog_pars_fragment,
-  ShaderChunk.logdepthbuf_pars_fragment,
-  "",
-  "uniform sampler2D map;",
-  "uniform sampler2D alphaMap;",
-  "uniform float useMap;",
-  "uniform float useAlphaMap;",
-  "uniform float useDash;",
-  "uniform float dashArray;",
-  "uniform float dashOffset;",
-  "uniform float dashRatio;",
-  "uniform float visibility;",
-  "uniform float alphaTest;",
-  "uniform vec2 repeat;",
-  "",
-  "varying vec2 vUV;",
-  "varying vec4 vColor;",
-  "varying float vCounters;",
-  "",
-  "void main() {",
-  "",
-  ShaderChunk.logdepthbuf_fragment,
-  "",
-  "    vec4 c = vColor;",
-  "    if( useMap == 1. ) c *= texture2D( map, vUV * repeat );",
-  "    if( useAlphaMap == 1. ) c.a *= texture2D( alphaMap, vUV * repeat ).a;",
-  "    if( c.a < alphaTest ) discard;",
-  "    if( useDash == 1. ){",
-  "        c.a *= ceil(mod(vCounters + dashOffset, dashArray) - (dashArray * dashRatio));",
-  "    }",
-  "    gl_FragColor = c;",
-  "    gl_FragColor.a *= step(vCounters, visibility);",
-  "",
-  ShaderChunk.fog_fragment,
-  "}"
-].join("\n");
-class MeshLineMaterial extends ShaderMaterial {
-  constructor(parameters) {
-    super({
-      uniforms: Object.assign({}, UniformsLib.fog, {
-        lineWidth: { value: 1 },
-        map: { value: null },
-        useMap: { value: 0 },
-        alphaMap: { value: null },
-        useAlphaMap: { value: 0 },
-        color: { value: new Color(16777215) },
-        opacity: { value: 1 },
-        resolution: { value: new Vector2(1, 1) },
-        sizeAttenuation: { value: 1 },
-        dashArray: { value: 0 },
-        dashOffset: { value: 0 },
-        dashRatio: { value: 0.5 },
-        useDash: { value: 0 },
-        visibility: { value: 1 },
-        alphaTest: { value: 0 },
-        repeat: { value: new Vector2(1, 1) }
-      }),
-      vertexShader: ShaderChunk.meshline_vert,
-      fragmentShader: ShaderChunk.meshline_frag
-    });
-    this.isMeshLineMaterial = true;
-    this.type = "MeshLineMaterial";
-    Object.defineProperties(this, {
-      lineWidth: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.lineWidth.value;
-        },
-        set: function(value) {
-          this.uniforms.lineWidth.value = value;
-        }
-      },
-      map: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.map.value;
-        },
-        set: function(value) {
-          this.uniforms.map.value = value;
-        }
-      },
-      useMap: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.useMap.value;
-        },
-        set: function(value) {
-          this.uniforms.useMap.value = value;
-        }
-      },
-      alphaMap: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.alphaMap.value;
-        },
-        set: function(value) {
-          this.uniforms.alphaMap.value = value;
-        }
-      },
-      useAlphaMap: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.useAlphaMap.value;
-        },
-        set: function(value) {
-          this.uniforms.useAlphaMap.value = value;
-        }
-      },
-      color: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.color.value;
-        },
-        set: function(value) {
-          this.uniforms.color.value = value;
-        }
-      },
-      opacity: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.opacity.value;
-        },
-        set: function(value) {
-          this.uniforms.opacity.value = value;
-        }
-      },
-      resolution: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.resolution.value;
-        },
-        set: function(value) {
-          this.uniforms.resolution.value.copy(value);
-        }
-      },
-      sizeAttenuation: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.sizeAttenuation.value;
-        },
-        set: function(value) {
-          this.uniforms.sizeAttenuation.value = value;
-        }
-      },
-      dashArray: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.dashArray.value;
-        },
-        set: function(value) {
-          this.uniforms.dashArray.value = value;
-          this.useDash = value !== 0 ? 1 : 0;
-        }
-      },
-      dashOffset: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.dashOffset.value;
-        },
-        set: function(value) {
-          this.uniforms.dashOffset.value = value;
-        }
-      },
-      dashRatio: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.dashRatio.value;
-        },
-        set: function(value) {
-          this.uniforms.dashRatio.value = value;
-        }
-      },
-      useDash: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.useDash.value;
-        },
-        set: function(value) {
-          this.uniforms.useDash.value = value;
-        }
-      },
-      visibility: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.visibility.value;
-        },
-        set: function(value) {
-          this.uniforms.visibility.value = value;
-        }
-      },
-      alphaTest: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.alphaTest.value;
-        },
-        set: function(value) {
-          this.uniforms.alphaTest.value = value;
-        }
-      },
-      repeat: {
-        enumerable: true,
-        get: function() {
-          return this.uniforms.repeat.value;
-        },
-        set: function(value) {
-          this.uniforms.repeat.value.copy(value);
-        }
-      }
-    });
-    this.setValues(parameters);
-  }
-}
-MeshLineMaterial.prototype.copy = function(source) {
-  ShaderMaterial.prototype.copy.call(this, source);
-  this.lineWidth = source.lineWidth;
-  this.map = source.map;
-  this.useMap = source.useMap;
-  this.alphaMap = source.alphaMap;
-  this.useAlphaMap = source.useAlphaMap;
-  this.color.copy(source.color);
-  this.opacity = source.opacity;
-  this.resolution.copy(source.resolution);
-  this.sizeAttenuation = source.sizeAttenuation;
-  this.dashArray.copy(source.dashArray);
-  this.dashOffset.copy(source.dashOffset);
-  this.dashRatio.copy(source.dashRatio);
-  this.useDash = source.useDash;
-  this.visibility = source.visibility;
-  this.alphaTest = source.alphaTest;
-  this.repeat.copy(source.repeat);
-  return this;
-};
-function createMeasureElement(style2) {
-  const div2 = document.createElement("div");
-  div2.className = "vim-measure";
-  const table = document.createElement("table");
-  div2.appendChild(table);
-  let distValue;
-  let xValue;
-  let yValue;
-  let zValue;
-  if (style2 === "all" || style2 === "Dist") {
-    const trDist = document.createElement("tr");
-    const tdDistLabel = document.createElement("td");
-    const tdDistValue = document.createElement("td");
-    table.appendChild(trDist);
-    trDist.appendChild(tdDistLabel);
-    trDist.appendChild(tdDistValue);
-    tdDistLabel.className = "vim-measure-label-d";
-    tdDistValue.className = "vim-measure-value-d";
-    tdDistLabel.textContent = "Dist";
-    distValue = tdDistValue;
-  }
-  if (style2 === "all" || style2 === "X") {
-    const trX = document.createElement("tr");
-    const tdXLabel = document.createElement("td");
-    const tdXValue = document.createElement("td");
-    table.appendChild(trX);
-    trX.appendChild(tdXLabel);
-    trX.appendChild(tdXValue);
-    tdXLabel.className = "vim-measure-label-x";
-    tdXValue.className = "vim-measure-value-x";
-    tdXLabel.textContent = "X";
-    xValue = tdXValue;
-  }
-  if (style2 === "all" || style2 === "Y") {
-    const trY = document.createElement("tr");
-    const tdYLabel = document.createElement("td");
-    const tdYValue = document.createElement("td");
-    table.appendChild(trY);
-    trY.appendChild(tdYLabel);
-    trY.appendChild(tdYValue);
-    tdYLabel.className = "vim-measure-label-y";
-    tdYValue.className = "vim-measure-value-y";
-    tdYLabel.textContent = "Y";
-    yValue = tdYValue;
-  }
-  if (style2 === "all" || style2 === "Z") {
-    const trZ = document.createElement("tr");
-    const tdZLabel = document.createElement("td");
-    const tdZValue = document.createElement("td");
-    table.appendChild(trZ);
-    trZ.appendChild(tdZLabel);
-    trZ.appendChild(tdZValue);
-    tdZLabel.className = "vim-measure-label-z";
-    tdZValue.className = "vim-measure-value-z";
-    tdZLabel.textContent = "Z";
-    zValue = tdZValue;
-  }
-  return {
-    div: div2,
-    value: style2 === "Dist" ? distValue : style2 === "X" ? xValue : style2 === "Y" ? yValue : style2 === "Z" ? zValue : void 0,
-    values: { dist: distValue, x: xValue, y: yValue, z: zValue }
-  };
-}
-class MeasureLine {
-  constructor(canvasSize, color, style2) {
-    __publicField(this, "mesh");
-    __publicField(this, "label");
-    __publicField(this, "position");
-    __publicField(this, "length");
-    __publicField(this, "_meshLine");
-    __publicField(this, "_material");
-    __publicField(this, "_materialAlways");
-    __publicField(this, "_text");
-    this._material = new MeshLineMaterial({
-      sizeAttenuation: 0,
-      lineWidth: 5,
-      resolution: canvasSize,
-      color
-    });
-    this._materialAlways = new MeshLineMaterial({
-      lineWidth: 5,
-      sizeAttenuation: 0,
-      depthTest: false,
-      transparent: true,
-      opacity: 0.5,
-      resolution: canvasSize,
-      color
-    });
-    this._meshLine = new MeshLine();
-    this.mesh = new Mesh(this._meshLine, [
-      this._material,
-      this._materialAlways
-    ]);
-    const element = createMeasureElement(style2);
-    this._text = element.value;
-    this.label = new CSS2DObject(element.div);
-    this.label.visible = false;
-    this._meshLine.geometry.addGroup(0, Infinity, 0);
-    this._meshLine.geometry.addGroup(0, Infinity, 1);
-    this.mesh.frustumCulled = false;
-  }
-  setPoints(start, end) {
-    this.position = start.clone().add(end).multiplyScalar(0.5);
-    this._meshLine.setPoints([start, end]);
-    this.label.position.copy(this.position);
-    this.length = start.distanceTo(end);
-    this.label.visible = this.length > 0;
-    this._text.textContent = `~${start.distanceTo(end).toFixed(2)}`;
-  }
-  dispose() {
-    this._meshLine.dispose();
-    this._material.dispose();
-    this._materialAlways.dispose();
-  }
-}
-class MeasureMarker {
-  constructor(color, camera, viewer2) {
-    __publicField(this, "MARKER_SIZE", 0.01);
-    __publicField(this, "mesh");
-    __publicField(this, "_material");
-    __publicField(this, "_materialAlways");
-    __publicField(this, "_camera");
-    __publicField(this, "disconnect");
-    this._material = new MeshBasicMaterial({
-      color
-    });
-    this._materialAlways = new MeshBasicMaterial({
-      transparent: true,
-      opacity: 0.2,
-      depthTest: false,
-      color: new Color(0, 0.75, 1)
-    });
-    const g = new SphereGeometry(1);
-    g.addGroup(0, Infinity, 0);
-    g.addGroup(0, Infinity, 1);
-    this.mesh = new Mesh(g, [this._material, this._materialAlways]);
-    this.mesh.visible = false;
-    this.disconnect = camera.onMoved.subscribe(() => this.updateScale());
-    this._camera = camera;
-    this.updateScale();
-  }
-  updateScale() {
-    const scale = this._camera.heightAt(this.mesh.position) * this.MARKER_SIZE;
-    this.mesh.scale.set(scale, scale, scale);
-    this.mesh.updateMatrix();
-  }
-  setPosition(position) {
-    this.mesh.position.copy(position);
-  }
-  dispose() {
-    this.mesh.geometry.dispose();
-    this._material.dispose();
-    this.disconnect();
-  }
-}
-class MeasureGizmo {
-  constructor(viewer2) {
-    __publicField(this, "_viewer");
-    __publicField(this, "_startMarker");
-    __publicField(this, "_endMarker");
-    __publicField(this, "_line");
-    __publicField(this, "_lineX");
-    __publicField(this, "_lineY");
-    __publicField(this, "_lineZ");
-    __publicField(this, "_group");
-    __publicField(this, "_label");
-    __publicField(this, "_html");
-    __publicField(this, "_animId");
-    this._viewer = viewer2;
-    const canvasSize = this._viewer.viewport.getSize();
-    this._startMarker = new MeasureMarker(new Color("#FFB700"), this._viewer.camera, this._viewer);
-    this._endMarker = new MeasureMarker(new Color("#0590CC"), this._viewer.camera, this._viewer);
-    this._line = new MeasureLine(canvasSize, new Color(1, 1, 1), "Dist");
-    this._lineX = new MeasureLine(canvasSize, new Color(1, 0, 0), "X");
-    this._lineY = new MeasureLine(canvasSize, new Color(0, 1, 0), "Y");
-    this._lineZ = new MeasureLine(canvasSize, new Color(0, 0, 1), "Z");
-    this._html = createMeasureElement("all");
-    this._label = new CSS2DObject(this._html.div);
-    this._label.visible = false;
-    this._group = new Group();
-    this._group.name = "GizmoMeasure";
-    this._group.add(this._startMarker.mesh, this._endMarker.mesh, this._line.mesh, this._line.label, this._lineX.mesh, this._lineX.label, this._lineY.mesh, this._lineY.label, this._lineZ.mesh, this._lineZ.label, this._label);
-    this._viewer.renderer.add(this._group);
-  }
-  _animate() {
-    this._animId = requestAnimationFrame(() => this._animate());
-    const lx = this.screenDist(this._line.position, this._lineX.position);
-    const ly = this.screenDist(this._line.position, this._lineY.position);
-    const lz = this.screenDist(this._line.position, this._lineZ.position);
-    const xy = this.screenDist(this._lineX.position, this._lineY.position);
-    const xz = this.screenDist(this._lineX.position, this._lineZ.position);
-    const yz = this.screenDist(this._lineY.position, this._lineZ.position);
-    let conflicts = 0;
-    if (lx < 0.1)
-      conflicts++;
-    if (ly < 0.1)
-      conflicts++;
-    if (lz < 0.1)
-      conflicts++;
-    if (xy < 0.1)
-      conflicts++;
-    if (xz < 0.1)
-      conflicts++;
-    if (yz < 0.1)
-      conflicts++;
-    const collapse2 = conflicts > 1;
-    this._label.visible = collapse2;
-    this._line.label.visible = !collapse2;
-    this._lineX.label.visible = !collapse2;
-    this._lineY.label.visible = !collapse2;
-    this._lineZ.label.visible = !collapse2;
-  }
-  screenDist(first, second) {
-    if (!first || !second)
-      return;
-    const length = first.distanceTo(second);
-    const ratio = length / this._viewer.camera.heightAt(first);
-    return ratio;
-  }
-  start(start) {
-    this._startMarker.setPosition(start);
-    this._startMarker.mesh.visible = true;
-  }
-  hide() {
-    if (this._line) {
-      this._line.mesh.visible = false;
-      this._line.label.visible = false;
-    }
-  }
-  update(start, pos) {
-    if (this._line) {
-      this._line.setPoints(start, pos);
-      this._line.mesh.visible = true;
-    }
-  }
-  finish(start, end) {
-    this._line.mesh.visible = true;
-    this._startMarker.setPosition(start);
-    this._endMarker.setPosition(end);
-    this._endMarker.mesh.visible = true;
-    const delta = end.clone().sub(start);
-    const endX = start.clone().setX(start.x + delta.x);
-    const endY = endX.clone().setY(endX.y + delta.y);
-    this._line.setPoints(start, end);
-    this._lineX.setPoints(start, endX);
-    this._lineY.setPoints(endX, endY);
-    this._lineZ.setPoints(endY, end);
-    this._label.position.copy(this._line.label.position);
-    this._html.values.dist.textContent = this._line.length.toFixed(2);
-    this._html.values.x.textContent = this._lineX.length.toFixed(2);
-    this._html.values.y.textContent = this._lineY.length.toFixed(2);
-    this._html.values.z.textContent = this._lineZ.length.toFixed(2);
-    this._animate();
-    return true;
-  }
-  dispose() {
-    cancelAnimationFrame(this._animId);
-    this._group.remove(this._label);
-    this._group.remove(this._line.label);
-    this._group.remove(this._lineX.label);
-    this._group.remove(this._lineY.label);
-    this._group.remove(this._lineZ.label);
-    this._viewer.renderer.remove(this._group);
-    this._startMarker.dispose();
-    this._endMarker.dispose();
-    this._line.dispose();
-    this._lineX.dispose();
-    this._lineY.dispose();
-    this._lineZ.dispose();
-  }
-}
-class Measure {
-  constructor(viewer2) {
-    __publicField(this, "_viewer");
-    __publicField(this, "_meshes");
-    __publicField(this, "_startPos");
-    __publicField(this, "_endPos");
-    __publicField(this, "_measurement");
-    __publicField(this, "_flow");
-    this._viewer = viewer2;
-  }
-  get startPoint() {
-    return this._startPos;
-  }
-  get endPoint() {
-    return this._endPos;
-  }
-  get measurement() {
-    return this._measurement;
-  }
-  get stage() {
-    var _a22;
-    return (_a22 = this._flow) == null ? void 0 : _a22.stage;
-  }
-  async start(onProgress) {
-    this.abort();
-    this._flow = new MeasureFlow(this);
-    this._viewer.inputs.scheme = this._flow;
-    this._flow.onProgress = onProgress;
-    return new Promise((resolve, reject) => {
-      this._flow.onComplete = (success) => {
-        this._viewer.inputs.scheme = void 0;
-        if (success)
-          resolve();
-        else {
-          reject(new Error("Measurement Aborted"));
-        }
-      };
-    });
-  }
-  onFirstClick(action) {
-    this.clear();
-    this._meshes = new MeasureGizmo(this._viewer);
-    this._startPos = action.raycast.position;
-    this._meshes.start(this._startPos);
-  }
-  onMouseMove() {
-    var _a22;
-    (_a22 = this._meshes) == null ? void 0 : _a22.hide();
-  }
-  onMouseIdle(action) {
-    var _a22, _b2, _c;
-    if (!action) {
-      (_a22 = this._meshes) == null ? void 0 : _a22.hide();
-      return;
-    }
-    const position = action.raycast.position;
-    this._measurement = action.object ? position.clone().sub(this._startPos) : void 0;
-    if (action.object) {
-      (_b2 = this._meshes) == null ? void 0 : _b2.update(this._startPos, position);
-    } else {
-      (_c = this._meshes) == null ? void 0 : _c.hide();
-    }
-  }
-  onSecondClick(action) {
-    if (!action.object) {
-      return false;
-    }
-    this._endPos = action.raycast.position;
-    this._measurement = this._endPos.clone().sub(this._startPos);
-    console.log(`Distance: ${this._measurement.length()}`);
-    console.log(`
-      X: ${this._measurement.x},
-      Y: ${this._measurement.y},
-      Z: ${this._measurement.z} 
-      `);
-    this._meshes.finish(this._startPos, this._endPos);
-    return true;
-  }
-  abort() {
-    var _a22;
-    (_a22 = this._flow) == null ? void 0 : _a22.abort();
-    this._flow = void 0;
-    this._startPos = void 0;
-    this._endPos = void 0;
-    this._measurement = void 0;
-  }
-  clear() {
-    var _a22;
-    (_a22 = this._meshes) == null ? void 0 : _a22.dispose();
-    this._meshes = void 0;
-  }
-}
-class GizmoRectangle {
-  constructor(viewer2) {
-    __publicField(this, "line");
-    __publicField(this, "viewer");
-    __publicField(this, "points");
-    this.viewer = viewer2;
-    const mat = new LineBasicMaterial({
-      depthTest: false,
-      color: new Color(0, 1, 0)
-    });
-    const vertices = new Float32Array([
-      -0.5,
-      -0.5,
-      0,
-      0.5,
-      -0.5,
-      0,
-      0.5,
-      -0.5,
-      0,
-      0.5,
-      0.5,
-      0,
-      0.5,
-      0.5,
-      0,
-      -0.5,
-      0.5,
-      0,
-      -0.5,
-      0.5,
-      0,
-      -0.5,
-      -0.5,
-      0
-    ]);
-    const geo = new BufferGeometry();
-    geo.setAttribute("position", new BufferAttribute(vertices, 3));
-    this.line = new LineSegments(geo, mat);
-    this.line.name = "GizmoSelection";
-    this.line.visible = false;
-    this.viewer.renderer.add(this.line);
-  }
-  dispose() {
-    this.viewer.renderer.remove(this.line);
-    this.line.geometry.dispose();
-    this.line.material.dispose();
-  }
-  get visible() {
-    return this.line.visible;
-  }
-  set visible(value) {
-    this.line.visible = value;
-  }
-  update(posA, posB) {
-    const plane = new Plane().setFromNormalAndCoplanarPoint(this.viewer.camera.forward, this.viewer.camera.orbitPosition);
-    const A2 = this.getIntersection(plane, posA);
-    const B2 = this.getIntersection(plane, posB);
-    const center = A2.clone().add(B2).multiplyScalar(0.5);
-    const [dx, dy] = this.getBoxSize(A2, B2);
-    this.updateRect(center, dx, dy);
-    const AB = this.getIntersection(plane, new Vector2(posA.x, posB.y));
-    const BA = this.getIntersection(plane, new Vector2(posB.x, posA.y));
-    this.points = [A2, B2, AB, BA, center];
-  }
-  getIntersection(plane, position) {
-    const raycaster = this.viewer.raycaster.fromPoint2(position);
-    return raycaster.ray.intersectPlane(plane, new Vector3());
-  }
-  updateRect(position, dx, dy) {
-    this.line.quaternion.copy(this.viewer.camera.camera.quaternion);
-    this.line.position.copy(position);
-    this.line.scale.set(dx, dy, 1);
-    this.line.updateMatrix();
-  }
-  getBoxSize(A2, B2) {
-    const cam = this.viewer.camera;
-    const up = new Vector3(0, 1, 0).applyQuaternion(cam.camera.quaternion);
-    const right = new Vector3(1, 0, 0).applyQuaternion(cam.camera.quaternion);
-    const Ax = A2.dot(right);
-    const Ay = A2.dot(up);
-    const Bx = B2.dot(right);
-    const By = B2.dot(up);
-    const dx = Math.abs(Ax - Bx);
-    const dy = Math.abs(Ay - By);
-    return [dx, dy];
-  }
-  getBoundingBox(target = new Box3()) {
-    const position = this.getClosestHit();
-    const projections = position ? this.projectPoints(position) : this.points;
-    return target.setFromPoints(projections);
-  }
-  getClosestHit() {
-    const hits = this.points.map((p2) => this.viewer.raycaster.raycast3(p2)).filter((h) => h.isHit);
-    let position;
-    let dist2;
-    hits.forEach((h) => {
-      if (dist2 === void 0 || h.distance < dist2) {
-        dist2 = h.distance;
-        position = h.position;
-      }
-    });
-    return position;
-  }
-  projectPoints(position) {
-    const plane = new Plane().setFromNormalAndCoplanarPoint(this.viewer.camera.forward, position);
-    return this.points.map((p2) => plane.projectPoint(p2, new Vector3()));
-  }
-}
-var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
-var freeGlobal$1 = freeGlobal;
-var freeSelf = typeof self == "object" && self && self.Object === Object && self;
-var root$1 = freeGlobal$1 || freeSelf || Function("return this")();
-var root$1$1 = root$1;
-var Symbol$1 = root$1$1.Symbol;
-var Symbol$2 = Symbol$1;
-var objectProto$c = Object.prototype;
-var hasOwnProperty$9 = objectProto$c.hasOwnProperty;
-var nativeObjectToString$1 = objectProto$c.toString;
-var symToStringTag$1 = Symbol$2 ? Symbol$2.toStringTag : void 0;
-function getRawTag(value) {
-  var isOwn = hasOwnProperty$9.call(value, symToStringTag$1), tag = value[symToStringTag$1];
-  try {
-    value[symToStringTag$1] = void 0;
-    var unmasked = true;
-  } catch (e) {
-  }
-  var result = nativeObjectToString$1.call(value);
-  if (unmasked) {
-    if (isOwn) {
-      value[symToStringTag$1] = tag;
-    } else {
-      delete value[symToStringTag$1];
-    }
-  }
-  return result;
-}
-var objectProto$b = Object.prototype;
-var nativeObjectToString = objectProto$b.toString;
-function objectToString(value) {
-  return nativeObjectToString.call(value);
-}
-var nullTag = "[object Null]", undefinedTag = "[object Undefined]";
-var symToStringTag = Symbol$2 ? Symbol$2.toStringTag : void 0;
-function baseGetTag(value) {
-  if (value == null) {
-    return value === void 0 ? undefinedTag : nullTag;
-  }
-  return symToStringTag && symToStringTag in Object(value) ? getRawTag(value) : objectToString(value);
-}
-function isObjectLike(value) {
-  return value != null && typeof value == "object";
-}
-var isArray2 = Array.isArray;
-var isArray$1 = isArray2;
-function isObject(value) {
-  var type = typeof value;
-  return value != null && (type == "object" || type == "function");
-}
-var asyncTag = "[object AsyncFunction]", funcTag$2 = "[object Function]", genTag$1 = "[object GeneratorFunction]", proxyTag = "[object Proxy]";
-function isFunction(value) {
-  if (!isObject(value)) {
-    return false;
-  }
-  var tag = baseGetTag(value);
-  return tag == funcTag$2 || tag == genTag$1 || tag == asyncTag || tag == proxyTag;
-}
-var coreJsData = root$1$1["__core-js_shared__"];
-var coreJsData$1 = coreJsData;
-var maskSrcKey = function() {
-  var uid2 = /[^.]+$/.exec(coreJsData$1 && coreJsData$1.keys && coreJsData$1.keys.IE_PROTO || "");
-  return uid2 ? "Symbol(src)_1." + uid2 : "";
-}();
-function isMasked(func) {
-  return !!maskSrcKey && maskSrcKey in func;
-}
-var funcProto$1 = Function.prototype;
-var funcToString$1 = funcProto$1.toString;
-function toSource(func) {
-  if (func != null) {
-    try {
-      return funcToString$1.call(func);
-    } catch (e) {
-    }
-    try {
-      return func + "";
-    } catch (e) {
-    }
-  }
-  return "";
-}
-var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
-var reIsHostCtor = /^\[object .+?Constructor\]$/;
-var funcProto = Function.prototype, objectProto$a = Object.prototype;
-var funcToString = funcProto.toString;
-var hasOwnProperty$8 = objectProto$a.hasOwnProperty;
-var reIsNative = RegExp("^" + funcToString.call(hasOwnProperty$8).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$");
-function baseIsNative(value) {
-  if (!isObject(value) || isMasked(value)) {
-    return false;
-  }
-  var pattern = isFunction(value) ? reIsNative : reIsHostCtor;
-  return pattern.test(toSource(value));
-}
-function getValue(object, key) {
-  return object == null ? void 0 : object[key];
-}
-function getNative(object, key) {
-  var value = getValue(object, key);
-  return baseIsNative(value) ? value : void 0;
-}
-var WeakMap$1 = getNative(root$1$1, "WeakMap");
-var WeakMap$2 = WeakMap$1;
-var objectCreate = Object.create;
-var baseCreate = function() {
-  function object() {
-  }
-  return function(proto) {
-    if (!isObject(proto)) {
-      return {};
-    }
-    if (objectCreate) {
-      return objectCreate(proto);
-    }
-    object.prototype = proto;
-    var result = new object();
-    object.prototype = void 0;
-    return result;
-  };
-}();
-var baseCreate$1 = baseCreate;
-function copyArray(source, array) {
-  var index = -1, length = source.length;
-  array || (array = Array(length));
-  while (++index < length) {
-    array[index] = source[index];
-  }
-  return array;
-}
-var defineProperty2 = function() {
-  try {
-    var func = getNative(Object, "defineProperty");
-    func({}, "", {});
-    return func;
-  } catch (e) {
-  }
-}();
-var defineProperty$1 = defineProperty2;
-function arrayEach(array, iteratee) {
-  var index = -1, length = array == null ? 0 : array.length;
-  while (++index < length) {
-    if (iteratee(array[index], index, array) === false) {
-      break;
-    }
-  }
-  return array;
-}
-var MAX_SAFE_INTEGER$1 = 9007199254740991;
-var reIsUint = /^(?:0|[1-9]\d*)$/;
-function isIndex(value, length) {
-  var type = typeof value;
-  length = length == null ? MAX_SAFE_INTEGER$1 : length;
-  return !!length && (type == "number" || type != "symbol" && reIsUint.test(value)) && (value > -1 && value % 1 == 0 && value < length);
-}
-function baseAssignValue(object, key, value) {
-  if (key == "__proto__" && defineProperty$1) {
-    defineProperty$1(object, key, {
-      "configurable": true,
-      "enumerable": true,
-      "value": value,
-      "writable": true
-    });
-  } else {
-    object[key] = value;
-  }
-}
-function eq(value, other) {
-  return value === other || value !== value && other !== other;
-}
-var objectProto$9 = Object.prototype;
-var hasOwnProperty$7 = objectProto$9.hasOwnProperty;
-function assignValue(object, key, value) {
-  var objValue = object[key];
-  if (!(hasOwnProperty$7.call(object, key) && eq(objValue, value)) || value === void 0 && !(key in object)) {
-    baseAssignValue(object, key, value);
-  }
-}
-function copyObject(source, props, object, customizer) {
-  var isNew = !object;
-  object || (object = {});
-  var index = -1, length = props.length;
-  while (++index < length) {
-    var key = props[index];
-    var newValue = customizer ? customizer(object[key], source[key], key, object, source) : void 0;
-    if (newValue === void 0) {
-      newValue = source[key];
-    }
-    if (isNew) {
-      baseAssignValue(object, key, newValue);
-    } else {
-      assignValue(object, key, newValue);
-    }
-  }
-  return object;
-}
-var MAX_SAFE_INTEGER = 9007199254740991;
-function isLength(value) {
-  return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-}
-function isArrayLike(value) {
-  return value != null && isLength(value.length) && !isFunction(value);
-}
-var objectProto$8 = Object.prototype;
-function isPrototype(value) {
-  var Ctor = value && value.constructor, proto = typeof Ctor == "function" && Ctor.prototype || objectProto$8;
-  return value === proto;
-}
-function baseTimes(n2, iteratee) {
-  var index = -1, result = Array(n2);
-  while (++index < n2) {
-    result[index] = iteratee(index);
-  }
-  return result;
-}
-var argsTag$2 = "[object Arguments]";
-function baseIsArguments(value) {
-  return isObjectLike(value) && baseGetTag(value) == argsTag$2;
-}
-var objectProto$7 = Object.prototype;
-var hasOwnProperty$6 = objectProto$7.hasOwnProperty;
-var propertyIsEnumerable$1 = objectProto$7.propertyIsEnumerable;
-var isArguments = baseIsArguments(function() {
-  return arguments;
-}()) ? baseIsArguments : function(value) {
-  return isObjectLike(value) && hasOwnProperty$6.call(value, "callee") && !propertyIsEnumerable$1.call(value, "callee");
-};
-var isArguments$1 = isArguments;
-function stubFalse() {
-  return false;
-}
-var freeExports$2 = typeof exports == "object" && exports && !exports.nodeType && exports;
-var freeModule$2 = freeExports$2 && typeof module == "object" && module && !module.nodeType && module;
-var moduleExports$2 = freeModule$2 && freeModule$2.exports === freeExports$2;
-var Buffer$1 = moduleExports$2 ? root$1$1.Buffer : void 0;
-var nativeIsBuffer = Buffer$1 ? Buffer$1.isBuffer : void 0;
-var isBuffer = nativeIsBuffer || stubFalse;
-var isBuffer$1 = isBuffer;
-var argsTag$1 = "[object Arguments]", arrayTag$1 = "[object Array]", boolTag$2 = "[object Boolean]", dateTag$2 = "[object Date]", errorTag$1 = "[object Error]", funcTag$1 = "[object Function]", mapTag$4 = "[object Map]", numberTag$2 = "[object Number]", objectTag$2 = "[object Object]", regexpTag$2 = "[object RegExp]", setTag$4 = "[object Set]", stringTag$2 = "[object String]", weakMapTag$2 = "[object WeakMap]";
-var arrayBufferTag$2 = "[object ArrayBuffer]", dataViewTag$3 = "[object DataView]", float32Tag$2 = "[object Float32Array]", float64Tag$2 = "[object Float64Array]", int8Tag$2 = "[object Int8Array]", int16Tag$2 = "[object Int16Array]", int32Tag$2 = "[object Int32Array]", uint8Tag$2 = "[object Uint8Array]", uint8ClampedTag$2 = "[object Uint8ClampedArray]", uint16Tag$2 = "[object Uint16Array]", uint32Tag$2 = "[object Uint32Array]";
-var typedArrayTags = {};
-typedArrayTags[float32Tag$2] = typedArrayTags[float64Tag$2] = typedArrayTags[int8Tag$2] = typedArrayTags[int16Tag$2] = typedArrayTags[int32Tag$2] = typedArrayTags[uint8Tag$2] = typedArrayTags[uint8ClampedTag$2] = typedArrayTags[uint16Tag$2] = typedArrayTags[uint32Tag$2] = true;
-typedArrayTags[argsTag$1] = typedArrayTags[arrayTag$1] = typedArrayTags[arrayBufferTag$2] = typedArrayTags[boolTag$2] = typedArrayTags[dataViewTag$3] = typedArrayTags[dateTag$2] = typedArrayTags[errorTag$1] = typedArrayTags[funcTag$1] = typedArrayTags[mapTag$4] = typedArrayTags[numberTag$2] = typedArrayTags[objectTag$2] = typedArrayTags[regexpTag$2] = typedArrayTags[setTag$4] = typedArrayTags[stringTag$2] = typedArrayTags[weakMapTag$2] = false;
-function baseIsTypedArray(value) {
-  return isObjectLike(value) && isLength(value.length) && !!typedArrayTags[baseGetTag(value)];
-}
-function baseUnary(func) {
-  return function(value) {
-    return func(value);
-  };
-}
-var freeExports$1 = typeof exports == "object" && exports && !exports.nodeType && exports;
-var freeModule$1 = freeExports$1 && typeof module == "object" && module && !module.nodeType && module;
-var moduleExports$1 = freeModule$1 && freeModule$1.exports === freeExports$1;
-var freeProcess = moduleExports$1 && freeGlobal$1.process;
-var nodeUtil = function() {
-  try {
-    var types = freeModule$1 && freeModule$1.require && freeModule$1.require("util").types;
-    if (types) {
-      return types;
-    }
-    return freeProcess && freeProcess.binding && freeProcess.binding("util");
-  } catch (e) {
-  }
-}();
-var nodeUtil$1 = nodeUtil;
-var nodeIsTypedArray = nodeUtil$1 && nodeUtil$1.isTypedArray;
-var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
-var isTypedArray$1 = isTypedArray;
-var objectProto$6 = Object.prototype;
-var hasOwnProperty$5 = objectProto$6.hasOwnProperty;
-function arrayLikeKeys(value, inherited) {
-  var isArr = isArray$1(value), isArg = !isArr && isArguments$1(value), isBuff = !isArr && !isArg && isBuffer$1(value), isType = !isArr && !isArg && !isBuff && isTypedArray$1(value), skipIndexes = isArr || isArg || isBuff || isType, result = skipIndexes ? baseTimes(value.length, String) : [], length = result.length;
-  for (var key in value) {
-    if ((inherited || hasOwnProperty$5.call(value, key)) && !(skipIndexes && (key == "length" || isBuff && (key == "offset" || key == "parent") || isType && (key == "buffer" || key == "byteLength" || key == "byteOffset") || isIndex(key, length)))) {
-      result.push(key);
-    }
-  }
-  return result;
-}
-function overArg(func, transform) {
-  return function(arg) {
-    return func(transform(arg));
-  };
-}
-var nativeKeys = overArg(Object.keys, Object);
-var nativeKeys$1 = nativeKeys;
-var objectProto$5 = Object.prototype;
-var hasOwnProperty$4 = objectProto$5.hasOwnProperty;
-function baseKeys(object) {
-  if (!isPrototype(object)) {
-    return nativeKeys$1(object);
-  }
-  var result = [];
-  for (var key in Object(object)) {
-    if (hasOwnProperty$4.call(object, key) && key != "constructor") {
-      result.push(key);
-    }
-  }
-  return result;
-}
-function keys2(object) {
-  return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
-}
-function nativeKeysIn(object) {
-  var result = [];
-  if (object != null) {
-    for (var key in Object(object)) {
-      result.push(key);
-    }
-  }
-  return result;
-}
-var objectProto$4 = Object.prototype;
-var hasOwnProperty$3 = objectProto$4.hasOwnProperty;
-function baseKeysIn(object) {
-  if (!isObject(object)) {
-    return nativeKeysIn(object);
-  }
-  var isProto = isPrototype(object), result = [];
-  for (var key in object) {
-    if (!(key == "constructor" && (isProto || !hasOwnProperty$3.call(object, key)))) {
-      result.push(key);
-    }
-  }
-  return result;
-}
-function keysIn(object) {
-  return isArrayLike(object) ? arrayLikeKeys(object, true) : baseKeysIn(object);
-}
-var nativeCreate = getNative(Object, "create");
-var nativeCreate$1 = nativeCreate;
-function hashClear() {
-  this.__data__ = nativeCreate$1 ? nativeCreate$1(null) : {};
-  this.size = 0;
-}
-function hashDelete(key) {
-  var result = this.has(key) && delete this.__data__[key];
-  this.size -= result ? 1 : 0;
-  return result;
-}
-var HASH_UNDEFINED$1 = "__lodash_hash_undefined__";
-var objectProto$3 = Object.prototype;
-var hasOwnProperty$2 = objectProto$3.hasOwnProperty;
-function hashGet(key) {
-  var data2 = this.__data__;
-  if (nativeCreate$1) {
-    var result = data2[key];
-    return result === HASH_UNDEFINED$1 ? void 0 : result;
-  }
-  return hasOwnProperty$2.call(data2, key) ? data2[key] : void 0;
-}
-var objectProto$2 = Object.prototype;
-var hasOwnProperty$1 = objectProto$2.hasOwnProperty;
-function hashHas(key) {
-  var data2 = this.__data__;
-  return nativeCreate$1 ? data2[key] !== void 0 : hasOwnProperty$1.call(data2, key);
-}
-var HASH_UNDEFINED = "__lodash_hash_undefined__";
-function hashSet(key, value) {
-  var data2 = this.__data__;
-  this.size += this.has(key) ? 0 : 1;
-  data2[key] = nativeCreate$1 && value === void 0 ? HASH_UNDEFINED : value;
-  return this;
-}
-function Hash(entries) {
-  var index = -1, length = entries == null ? 0 : entries.length;
-  this.clear();
-  while (++index < length) {
-    var entry = entries[index];
-    this.set(entry[0], entry[1]);
-  }
-}
-Hash.prototype.clear = hashClear;
-Hash.prototype["delete"] = hashDelete;
-Hash.prototype.get = hashGet;
-Hash.prototype.has = hashHas;
-Hash.prototype.set = hashSet;
-function listCacheClear() {
-  this.__data__ = [];
-  this.size = 0;
-}
-function assocIndexOf(array, key) {
-  var length = array.length;
-  while (length--) {
-    if (eq(array[length][0], key)) {
-      return length;
-    }
-  }
-  return -1;
-}
-var arrayProto = Array.prototype;
-var splice = arrayProto.splice;
-function listCacheDelete(key) {
-  var data2 = this.__data__, index = assocIndexOf(data2, key);
-  if (index < 0) {
-    return false;
-  }
-  var lastIndex = data2.length - 1;
-  if (index == lastIndex) {
-    data2.pop();
-  } else {
-    splice.call(data2, index, 1);
-  }
-  --this.size;
-  return true;
-}
-function listCacheGet(key) {
-  var data2 = this.__data__, index = assocIndexOf(data2, key);
-  return index < 0 ? void 0 : data2[index][1];
-}
-function listCacheHas(key) {
-  return assocIndexOf(this.__data__, key) > -1;
-}
-function listCacheSet(key, value) {
-  var data2 = this.__data__, index = assocIndexOf(data2, key);
-  if (index < 0) {
-    ++this.size;
-    data2.push([key, value]);
-  } else {
-    data2[index][1] = value;
-  }
-  return this;
-}
-function ListCache(entries) {
-  var index = -1, length = entries == null ? 0 : entries.length;
-  this.clear();
-  while (++index < length) {
-    var entry = entries[index];
-    this.set(entry[0], entry[1]);
-  }
-}
-ListCache.prototype.clear = listCacheClear;
-ListCache.prototype["delete"] = listCacheDelete;
-ListCache.prototype.get = listCacheGet;
-ListCache.prototype.has = listCacheHas;
-ListCache.prototype.set = listCacheSet;
-var Map$1 = getNative(root$1$1, "Map");
-var Map$2 = Map$1;
-function mapCacheClear() {
-  this.size = 0;
-  this.__data__ = {
-    "hash": new Hash(),
-    "map": new (Map$2 || ListCache)(),
-    "string": new Hash()
-  };
-}
-function isKeyable(value) {
-  var type = typeof value;
-  return type == "string" || type == "number" || type == "symbol" || type == "boolean" ? value !== "__proto__" : value === null;
-}
-function getMapData(map, key) {
-  var data2 = map.__data__;
-  return isKeyable(key) ? data2[typeof key == "string" ? "string" : "hash"] : data2.map;
-}
-function mapCacheDelete(key) {
-  var result = getMapData(this, key)["delete"](key);
-  this.size -= result ? 1 : 0;
-  return result;
-}
-function mapCacheGet(key) {
-  return getMapData(this, key).get(key);
-}
-function mapCacheHas(key) {
-  return getMapData(this, key).has(key);
-}
-function mapCacheSet(key, value) {
-  var data2 = getMapData(this, key), size = data2.size;
-  data2.set(key, value);
-  this.size += data2.size == size ? 0 : 1;
-  return this;
-}
-function MapCache(entries) {
-  var index = -1, length = entries == null ? 0 : entries.length;
-  this.clear();
-  while (++index < length) {
-    var entry = entries[index];
-    this.set(entry[0], entry[1]);
-  }
-}
-MapCache.prototype.clear = mapCacheClear;
-MapCache.prototype["delete"] = mapCacheDelete;
-MapCache.prototype.get = mapCacheGet;
-MapCache.prototype.has = mapCacheHas;
-MapCache.prototype.set = mapCacheSet;
-function arrayPush(array, values) {
-  var index = -1, length = values.length, offset = array.length;
-  while (++index < length) {
-    array[offset + index] = values[index];
-  }
-  return array;
-}
-var getPrototype = overArg(Object.getPrototypeOf, Object);
-var getPrototype$1 = getPrototype;
-function stackClear() {
-  this.__data__ = new ListCache();
-  this.size = 0;
-}
-function stackDelete(key) {
-  var data2 = this.__data__, result = data2["delete"](key);
-  this.size = data2.size;
-  return result;
-}
-function stackGet(key) {
-  return this.__data__.get(key);
-}
-function stackHas(key) {
-  return this.__data__.has(key);
-}
-var LARGE_ARRAY_SIZE = 200;
-function stackSet(key, value) {
-  var data2 = this.__data__;
-  if (data2 instanceof ListCache) {
-    var pairs = data2.__data__;
-    if (!Map$2 || pairs.length < LARGE_ARRAY_SIZE - 1) {
-      pairs.push([key, value]);
-      this.size = ++data2.size;
-      return this;
-    }
-    data2 = this.__data__ = new MapCache(pairs);
-  }
-  data2.set(key, value);
-  this.size = data2.size;
-  return this;
-}
-function Stack(entries) {
-  var data2 = this.__data__ = new ListCache(entries);
-  this.size = data2.size;
-}
-Stack.prototype.clear = stackClear;
-Stack.prototype["delete"] = stackDelete;
-Stack.prototype.get = stackGet;
-Stack.prototype.has = stackHas;
-Stack.prototype.set = stackSet;
-function baseAssign(object, source) {
-  return object && copyObject(source, keys2(source), object);
-}
-function baseAssignIn(object, source) {
-  return object && copyObject(source, keysIn(source), object);
-}
-var freeExports = typeof exports == "object" && exports && !exports.nodeType && exports;
-var freeModule = freeExports && typeof module == "object" && module && !module.nodeType && module;
-var moduleExports = freeModule && freeModule.exports === freeExports;
-var Buffer2 = moduleExports ? root$1$1.Buffer : void 0, allocUnsafe = Buffer2 ? Buffer2.allocUnsafe : void 0;
-function cloneBuffer(buffer, isDeep) {
-  if (isDeep) {
-    return buffer.slice();
-  }
-  var length = buffer.length, result = allocUnsafe ? allocUnsafe(length) : new buffer.constructor(length);
-  buffer.copy(result);
-  return result;
-}
-function arrayFilter(array, predicate) {
-  var index = -1, length = array == null ? 0 : array.length, resIndex = 0, result = [];
-  while (++index < length) {
-    var value = array[index];
-    if (predicate(value, index, array)) {
-      result[resIndex++] = value;
-    }
-  }
-  return result;
-}
-function stubArray() {
-  return [];
-}
-var objectProto$1 = Object.prototype;
-var propertyIsEnumerable2 = objectProto$1.propertyIsEnumerable;
-var nativeGetSymbols$1 = Object.getOwnPropertySymbols;
-var getSymbols = !nativeGetSymbols$1 ? stubArray : function(object) {
-  if (object == null) {
-    return [];
-  }
-  object = Object(object);
-  return arrayFilter(nativeGetSymbols$1(object), function(symbol) {
-    return propertyIsEnumerable2.call(object, symbol);
-  });
-};
-var getSymbols$1 = getSymbols;
-function copySymbols(source, object) {
-  return copyObject(source, getSymbols$1(source), object);
-}
-var nativeGetSymbols = Object.getOwnPropertySymbols;
-var getSymbolsIn = !nativeGetSymbols ? stubArray : function(object) {
-  var result = [];
-  while (object) {
-    arrayPush(result, getSymbols$1(object));
-    object = getPrototype$1(object);
-  }
-  return result;
-};
-var getSymbolsIn$1 = getSymbolsIn;
-function copySymbolsIn(source, object) {
-  return copyObject(source, getSymbolsIn$1(source), object);
-}
-function baseGetAllKeys(object, keysFunc, symbolsFunc) {
-  var result = keysFunc(object);
-  return isArray$1(object) ? result : arrayPush(result, symbolsFunc(object));
-}
-function getAllKeys(object) {
-  return baseGetAllKeys(object, keys2, getSymbols$1);
-}
-function getAllKeysIn(object) {
-  return baseGetAllKeys(object, keysIn, getSymbolsIn$1);
-}
-var DataView$1 = getNative(root$1$1, "DataView");
-var DataView$1$1 = DataView$1;
-var Promise$1 = getNative(root$1$1, "Promise");
-var Promise$2 = Promise$1;
-var Set$1 = getNative(root$1$1, "Set");
-var Set$2 = Set$1;
-var mapTag$3 = "[object Map]", objectTag$1 = "[object Object]", promiseTag = "[object Promise]", setTag$3 = "[object Set]", weakMapTag$1 = "[object WeakMap]";
-var dataViewTag$2 = "[object DataView]";
-var dataViewCtorString = toSource(DataView$1$1), mapCtorString = toSource(Map$2), promiseCtorString = toSource(Promise$2), setCtorString = toSource(Set$2), weakMapCtorString = toSource(WeakMap$2);
-var getTag = baseGetTag;
-if (DataView$1$1 && getTag(new DataView$1$1(new ArrayBuffer(1))) != dataViewTag$2 || Map$2 && getTag(new Map$2()) != mapTag$3 || Promise$2 && getTag(Promise$2.resolve()) != promiseTag || Set$2 && getTag(new Set$2()) != setTag$3 || WeakMap$2 && getTag(new WeakMap$2()) != weakMapTag$1) {
-  getTag = function(value) {
-    var result = baseGetTag(value), Ctor = result == objectTag$1 ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : "";
-    if (ctorString) {
-      switch (ctorString) {
-        case dataViewCtorString:
-          return dataViewTag$2;
-        case mapCtorString:
-          return mapTag$3;
-        case promiseCtorString:
-          return promiseTag;
-        case setCtorString:
-          return setTag$3;
-        case weakMapCtorString:
-          return weakMapTag$1;
-      }
-    }
-    return result;
-  };
-}
-var getTag$1 = getTag;
-var objectProto = Object.prototype;
-var hasOwnProperty$a = objectProto.hasOwnProperty;
-function initCloneArray(array) {
-  var length = array.length, result = new array.constructor(length);
-  if (length && typeof array[0] == "string" && hasOwnProperty$a.call(array, "index")) {
-    result.index = array.index;
-    result.input = array.input;
-  }
-  return result;
-}
-var Uint8Array$1 = root$1$1.Uint8Array;
-var Uint8Array$2 = Uint8Array$1;
-function cloneArrayBuffer(arrayBuffer) {
-  var result = new arrayBuffer.constructor(arrayBuffer.byteLength);
-  new Uint8Array$2(result).set(new Uint8Array$2(arrayBuffer));
-  return result;
-}
-function cloneDataView(dataView, isDeep) {
-  var buffer = isDeep ? cloneArrayBuffer(dataView.buffer) : dataView.buffer;
-  return new dataView.constructor(buffer, dataView.byteOffset, dataView.byteLength);
-}
-var reFlags = /\w*$/;
-function cloneRegExp(regexp) {
-  var result = new regexp.constructor(regexp.source, reFlags.exec(regexp));
-  result.lastIndex = regexp.lastIndex;
-  return result;
-}
-var symbolProto = Symbol$2 ? Symbol$2.prototype : void 0, symbolValueOf = symbolProto ? symbolProto.valueOf : void 0;
-function cloneSymbol(symbol) {
-  return symbolValueOf ? Object(symbolValueOf.call(symbol)) : {};
-}
-function cloneTypedArray(typedArray, isDeep) {
-  var buffer = isDeep ? cloneArrayBuffer(typedArray.buffer) : typedArray.buffer;
-  return new typedArray.constructor(buffer, typedArray.byteOffset, typedArray.length);
-}
-var boolTag$1 = "[object Boolean]", dateTag$1 = "[object Date]", mapTag$2 = "[object Map]", numberTag$1 = "[object Number]", regexpTag$1 = "[object RegExp]", setTag$2 = "[object Set]", stringTag$1 = "[object String]", symbolTag$1 = "[object Symbol]";
-var arrayBufferTag$1 = "[object ArrayBuffer]", dataViewTag$1 = "[object DataView]", float32Tag$1 = "[object Float32Array]", float64Tag$1 = "[object Float64Array]", int8Tag$1 = "[object Int8Array]", int16Tag$1 = "[object Int16Array]", int32Tag$1 = "[object Int32Array]", uint8Tag$1 = "[object Uint8Array]", uint8ClampedTag$1 = "[object Uint8ClampedArray]", uint16Tag$1 = "[object Uint16Array]", uint32Tag$1 = "[object Uint32Array]";
-function initCloneByTag(object, tag, isDeep) {
-  var Ctor = object.constructor;
-  switch (tag) {
-    case arrayBufferTag$1:
-      return cloneArrayBuffer(object);
-    case boolTag$1:
-    case dateTag$1:
-      return new Ctor(+object);
-    case dataViewTag$1:
-      return cloneDataView(object, isDeep);
-    case float32Tag$1:
-    case float64Tag$1:
-    case int8Tag$1:
-    case int16Tag$1:
-    case int32Tag$1:
-    case uint8Tag$1:
-    case uint8ClampedTag$1:
-    case uint16Tag$1:
-    case uint32Tag$1:
-      return cloneTypedArray(object, isDeep);
-    case mapTag$2:
-      return new Ctor();
-    case numberTag$1:
-    case stringTag$1:
-      return new Ctor(object);
-    case regexpTag$1:
-      return cloneRegExp(object);
-    case setTag$2:
-      return new Ctor();
-    case symbolTag$1:
-      return cloneSymbol(object);
-  }
-}
-function initCloneObject(object) {
-  return typeof object.constructor == "function" && !isPrototype(object) ? baseCreate$1(getPrototype$1(object)) : {};
-}
-var mapTag$1 = "[object Map]";
-function baseIsMap(value) {
-  return isObjectLike(value) && getTag$1(value) == mapTag$1;
-}
-var nodeIsMap = nodeUtil$1 && nodeUtil$1.isMap;
-var isMap = nodeIsMap ? baseUnary(nodeIsMap) : baseIsMap;
-var isMap$1 = isMap;
-var setTag$1 = "[object Set]";
-function baseIsSet(value) {
-  return isObjectLike(value) && getTag$1(value) == setTag$1;
-}
-var nodeIsSet = nodeUtil$1 && nodeUtil$1.isSet;
-var isSet = nodeIsSet ? baseUnary(nodeIsSet) : baseIsSet;
-var isSet$1 = isSet;
-var CLONE_DEEP_FLAG$1 = 1, CLONE_FLAT_FLAG = 2, CLONE_SYMBOLS_FLAG$1 = 4;
-var argsTag = "[object Arguments]", arrayTag = "[object Array]", boolTag = "[object Boolean]", dateTag = "[object Date]", errorTag = "[object Error]", funcTag = "[object Function]", genTag = "[object GeneratorFunction]", mapTag = "[object Map]", numberTag = "[object Number]", objectTag = "[object Object]", regexpTag = "[object RegExp]", setTag = "[object Set]", stringTag = "[object String]", symbolTag = "[object Symbol]", weakMapTag = "[object WeakMap]";
-var arrayBufferTag = "[object ArrayBuffer]", dataViewTag = "[object DataView]", float32Tag = "[object Float32Array]", float64Tag = "[object Float64Array]", int8Tag = "[object Int8Array]", int16Tag = "[object Int16Array]", int32Tag = "[object Int32Array]", uint8Tag = "[object Uint8Array]", uint8ClampedTag = "[object Uint8ClampedArray]", uint16Tag = "[object Uint16Array]", uint32Tag = "[object Uint32Array]";
-var cloneableTags = {};
-cloneableTags[argsTag] = cloneableTags[arrayTag] = cloneableTags[arrayBufferTag] = cloneableTags[dataViewTag] = cloneableTags[boolTag] = cloneableTags[dateTag] = cloneableTags[float32Tag] = cloneableTags[float64Tag] = cloneableTags[int8Tag] = cloneableTags[int16Tag] = cloneableTags[int32Tag] = cloneableTags[mapTag] = cloneableTags[numberTag] = cloneableTags[objectTag] = cloneableTags[regexpTag] = cloneableTags[setTag] = cloneableTags[stringTag] = cloneableTags[symbolTag] = cloneableTags[uint8Tag] = cloneableTags[uint8ClampedTag] = cloneableTags[uint16Tag] = cloneableTags[uint32Tag] = true;
-cloneableTags[errorTag] = cloneableTags[funcTag] = cloneableTags[weakMapTag] = false;
-function baseClone(value, bitmask, customizer, key, object, stack) {
-  var result, isDeep = bitmask & CLONE_DEEP_FLAG$1, isFlat = bitmask & CLONE_FLAT_FLAG, isFull = bitmask & CLONE_SYMBOLS_FLAG$1;
-  if (customizer) {
-    result = object ? customizer(value, key, object, stack) : customizer(value);
-  }
-  if (result !== void 0) {
-    return result;
-  }
-  if (!isObject(value)) {
-    return value;
-  }
-  var isArr = isArray$1(value);
-  if (isArr) {
-    result = initCloneArray(value);
-    if (!isDeep) {
-      return copyArray(value, result);
-    }
-  } else {
-    var tag = getTag$1(value), isFunc = tag == funcTag || tag == genTag;
-    if (isBuffer$1(value)) {
-      return cloneBuffer(value, isDeep);
-    }
-    if (tag == objectTag || tag == argsTag || isFunc && !object) {
-      result = isFlat || isFunc ? {} : initCloneObject(value);
-      if (!isDeep) {
-        return isFlat ? copySymbolsIn(value, baseAssignIn(result, value)) : copySymbols(value, baseAssign(result, value));
-      }
-    } else {
-      if (!cloneableTags[tag]) {
-        return object ? value : {};
-      }
-      result = initCloneByTag(value, tag, isDeep);
-    }
-  }
-  stack || (stack = new Stack());
-  var stacked = stack.get(value);
-  if (stacked) {
-    return stacked;
-  }
-  stack.set(value, result);
-  if (isSet$1(value)) {
-    value.forEach(function(subValue) {
-      result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
-    });
-  } else if (isMap$1(value)) {
-    value.forEach(function(subValue, key2) {
-      result.set(key2, baseClone(subValue, bitmask, customizer, key2, value, stack));
-    });
-  }
-  var keysFunc = isFull ? isFlat ? getAllKeysIn : getAllKeys : isFlat ? keysIn : keys2;
-  var props = isArr ? void 0 : keysFunc(value);
-  arrayEach(props || value, function(subValue, key2) {
-    if (props) {
-      key2 = subValue;
-      subValue = value[key2];
-    }
-    assignValue(result, key2, baseClone(subValue, bitmask, customizer, key2, value, stack));
-  });
-  return result;
-}
-var CLONE_DEEP_FLAG = 1, CLONE_SYMBOLS_FLAG = 4;
-function cloneDeep(value) {
-  return baseClone(value, CLONE_DEEP_FLAG | CLONE_SYMBOLS_FLAG);
-}
-class VimSettings {
-  constructor(options) {
-    __publicField(this, "options");
-    __publicField(this, "getOptions", () => cloneDeep(this.options));
-    __publicField(this, "getPosition", () => toVec(this.options.position));
-    __publicField(this, "getRotation", () => toQuaternion(this.options.rotation));
-    __publicField(this, "getScale", () => scalarToVec(this.options.scale));
-    __publicField(this, "getMatrix", () => new Matrix4().compose(this.getPosition(), this.getRotation(), this.getScale()));
-    __publicField(this, "getTransparency", () => this.options.transparency);
-    __publicField(this, "getDownloadMode", () => this.options.download);
-    const fallback = {
-      position: { x: 0, y: 0, z: 0 },
-      rotation: { x: 0, y: 0, z: 0 },
-      scale: 1,
-      transparency: "all",
-      download: "stream"
-    };
-    this.options = options ? cjs(fallback, options, void 0) : fallback;
-    this.options.transparency = Transparency.isValid(this.options.transparency) ? this.options.transparency : "all";
-  }
-}
-function toVec(obj) {
-  return new Vector3(obj.x, obj.y, obj.z);
-}
-function toQuaternion(rot) {
-  return new Quaternion().setFromEuler(toEuler(toVec(rot)));
-}
-function scalarToVec(x2) {
-  return new Vector3(x2, x2, x2);
-}
-function toEuler(rot) {
-  return new Euler(rot.x * Math.PI / 180, rot.y * Math.PI / 180, rot.z * Math.PI / 180);
-}
-class G3dAttributeDescriptor {
-  constructor(description, association, semantic, attributeTypeIndex, dataType, dataArity) {
-    __publicField(this, "description");
-    __publicField(this, "association");
-    __publicField(this, "semantic");
-    __publicField(this, "attributeTypeIndex");
-    __publicField(this, "dataType");
-    __publicField(this, "dataArity");
-    if (!description.startsWith("g3d:")) {
-      throw new Error(`${description} must start with 'g3d'`);
-    }
-    this.description = description;
-    this.association = association;
-    this.semantic = semantic;
-    this.attributeTypeIndex = attributeTypeIndex;
-    this.dataType = dataType;
-    this.dataArity = parseInt(dataArity);
-  }
-  static fromString(descriptor) {
-    const desc = descriptor.split(":");
-    if (desc.length !== 6) {
-      throw new Error(`${descriptor}, must have 6 components delimited by ':'`);
-    }
-    return new this(descriptor, desc[1], desc[2], desc[3], desc[4], desc[5]);
-  }
-  matches(other) {
-    const match2 = (a, b) => a === "*" || b === "*" || a === b;
-    return match2(this.association, other.association) && match2(this.semantic, other.semantic) && match2(this.attributeTypeIndex, other.attributeTypeIndex) && match2(this.dataType, other.dataType);
-  }
-}
-class G3dAttribute {
-  constructor(descriptor, bytes) {
-    __publicField(this, "descriptor");
-    __publicField(this, "bytes");
-    __publicField(this, "data");
-    this.descriptor = descriptor;
-    this.bytes = bytes;
-    this.data = G3dAttribute.castData(bytes, descriptor.dataType);
-  }
-  static fromString(descriptor, buffer) {
-    return new this(G3dAttributeDescriptor.fromString(descriptor), buffer);
-  }
-  static castData(bytes, dataType) {
-    switch (dataType) {
-      case "float32":
-        return new Float32Array(bytes.buffer, bytes.byteOffset, bytes.byteLength / 4);
-      case "float64":
-        throw new Float64Array(bytes.buffer, bytes.byteOffset, bytes.byteLength / 8);
-      case "uint8":
-      case "int8":
-        return bytes;
-      case "int16":
-        return new Int16Array(bytes.buffer, bytes.byteOffset, bytes.byteLength / 2);
-      case "uint16":
-        return new Uint16Array(bytes.buffer, bytes.byteOffset, bytes.byteLength / 2);
-      case "int32":
-        return new Int32Array(bytes.buffer, bytes.byteOffset, bytes.byteLength / 4);
-      case "uint32":
-        return new Uint32Array(bytes.buffer, bytes.byteOffset, bytes.byteLength / 4);
-      case "int64":
-      case "uint64":
-        console.error("G3d: 64-bit buffers unsuported");
-        return;
-      default:
-        console.error("Unrecognized attribute data type " + dataType);
-    }
-  }
-}
-class AbstractG3d {
-  constructor(meta, attributes) {
-    __publicField(this, "meta");
-    __publicField(this, "attributes");
-    this.meta = meta;
-    this.attributes = attributes;
-  }
-  findAttribute(descriptor) {
-    const filter = G3dAttributeDescriptor.fromString(descriptor);
-    for (let i2 = 0; i2 < this.attributes.length; ++i2) {
-      const attribute = this.attributes[i2];
-      if (attribute.descriptor.matches(filter))
-        return attribute;
-    }
-  }
-  static createFromBfast(bfast) {
-    const promises = VimAttributes.all.map((a) => bfast.getBytes(a).then((bytes) => bytes ? new G3dAttribute(G3dAttributeDescriptor.fromString(a), bytes) : void 0));
-    return Promise.all(promises).then((attributes) => new AbstractG3d("meta", attributes.filter((a) => a !== void 0)));
-  }
-}
-const _VimAttributes = class {
-};
-let VimAttributes = _VimAttributes;
-__publicField(VimAttributes, "positions", "g3d:vertex:position:0:float32:3");
-__publicField(VimAttributes, "indices", "g3d:corner:index:0:int32:1");
-__publicField(VimAttributes, "instanceMeshes", "g3d:instance:mesh:0:int32:1");
-__publicField(VimAttributes, "instanceTransforms", "g3d:instance:transform:0:float32:16");
-__publicField(VimAttributes, "instanceFlags", "g3d:instance:flags:0:uint16:1");
-__publicField(VimAttributes, "meshSubmeshes", "g3d:mesh:submeshoffset:0:int32:1");
-__publicField(VimAttributes, "submeshIndexOffsets", "g3d:submesh:indexoffset:0:int32:1");
-__publicField(VimAttributes, "submeshMaterials", "g3d:submesh:material:0:int32:1");
-__publicField(VimAttributes, "materialColors", "g3d:material:color:0:float32:4");
-__publicField(VimAttributes, "all", [
-  _VimAttributes.positions,
-  _VimAttributes.indices,
-  _VimAttributes.instanceMeshes,
-  _VimAttributes.instanceTransforms,
-  _VimAttributes.instanceFlags,
-  _VimAttributes.meshSubmeshes,
-  _VimAttributes.submeshIndexOffsets,
-  _VimAttributes.submeshMaterials,
-  _VimAttributes.materialColors
-]);
-class G3d {
-  constructor(g3d) {
-    __publicField(this, "positions");
-    __publicField(this, "indices");
-    __publicField(this, "instanceMeshes");
-    __publicField(this, "instanceTransforms");
-    __publicField(this, "instanceFlags");
-    __publicField(this, "meshSubmeshes");
-    __publicField(this, "submeshIndexOffset");
-    __publicField(this, "submeshMaterial");
-    __publicField(this, "materialColors");
-    __publicField(this, "meshVertexOffsets");
-    __publicField(this, "meshInstances");
-    __publicField(this, "meshOpaqueCount");
-    __publicField(this, "rawG3d");
-    __publicField(this, "MATRIX_SIZE", 16);
-    __publicField(this, "COLOR_SIZE", 4);
-    __publicField(this, "POSITION_SIZE", 3);
-    __publicField(this, "DEFAULT_COLOR", new Float32Array([1, 1, 1, 1]));
-    __publicField(this, "computeMeshInstances", () => {
-      const result = [];
-      for (let i2 = 0; i2 < this.instanceMeshes.length; i2++) {
-        const mesh = this.instanceMeshes[i2];
-        if (mesh < 0)
-          continue;
-        const instanceIndices = result[mesh];
-        if (instanceIndices)
-          instanceIndices.push(i2);
-        else
-          result[mesh] = [i2];
-      }
-      return result;
-    });
-    __publicField(this, "getVertexCount", () => this.positions.length / this.POSITION_SIZE);
-    __publicField(this, "getMeshCount", () => this.meshSubmeshes.length);
-    __publicField(this, "getInstanceCount", () => this.instanceMeshes.length);
-    __publicField(this, "getMaterialCount", () => this.materialColors.length / this.COLOR_SIZE);
-    var _a22, _b2, _c, _d, _e, _f, _g, _h, _i, _j;
-    this.rawG3d = g3d;
-    this.positions = (_a22 = g3d.findAttribute(VimAttributes.positions)) == null ? void 0 : _a22.data;
-    const tmp2 = (_b2 = g3d.findAttribute(VimAttributes.indices)) == null ? void 0 : _b2.data;
-    if (!tmp2)
-      throw new Error("No Index Buffer Found");
-    this.indices = new Uint32Array(tmp2.buffer, tmp2.byteOffset, tmp2.length);
-    this.meshSubmeshes = (_c = g3d.findAttribute(VimAttributes.meshSubmeshes)) == null ? void 0 : _c.data;
-    this.submeshIndexOffset = (_d = g3d.findAttribute(VimAttributes.submeshIndexOffsets)) == null ? void 0 : _d.data;
-    this.submeshMaterial = (_e = g3d.findAttribute(VimAttributes.submeshMaterials)) == null ? void 0 : _e.data;
-    this.materialColors = (_f = g3d.findAttribute(VimAttributes.materialColors)) == null ? void 0 : _f.data;
-    this.instanceMeshes = (_g = g3d.findAttribute(VimAttributes.instanceMeshes)) == null ? void 0 : _g.data;
-    this.instanceTransforms = (_h = g3d.findAttribute(VimAttributes.instanceTransforms)) == null ? void 0 : _h.data;
-    this.instanceFlags = (_j = (_i = g3d.findAttribute(VimAttributes.instanceFlags)) == null ? void 0 : _i.data) != null ? _j : new Uint16Array(this.instanceMeshes.length);
-    this.meshVertexOffsets = this.computeMeshVertexOffsets();
-    this.rebaseIndices();
-    this.meshInstances = this.computeMeshInstances();
-    this.meshOpaqueCount = this.computeMeshOpaqueCount();
-    this.sortSubmeshes();
-  }
-  computeMeshVertexOffsets() {
-    const result = new Int32Array(this.getMeshCount());
-    for (let m2 = 0; m2 < result.length; m2++) {
-      let min2 = Number.MAX_SAFE_INTEGER;
-      const start = this.getMeshIndexStart(m2, "all");
-      const end = this.getMeshIndexEnd(m2, "all");
-      for (let i2 = start; i2 < end; i2++) {
-        min2 = Math.min(min2, this.indices[i2]);
-      }
-      result[m2] = min2;
-    }
-    return result;
-  }
-  sortSubmeshes() {
-    const submeshEnd = this.computeSubmeshEnd();
-    const meshIndexOffsets = this.computeMeshIndexOffsets();
-    const meshCount = this.getMeshCount();
-    const meshReordered = new Array(meshCount);
-    const submeshArrays = [
-      this.submeshIndexOffset,
-      this.submeshMaterial,
-      submeshEnd
-    ];
-    const largestMesh = this.reorderSubmeshes(submeshArrays, meshReordered);
-    this.reorderIndices(meshIndexOffsets, submeshEnd, meshReordered, largestMesh);
-  }
-  computeSubmeshEnd() {
-    const submeshCount = this.getSubmeshCount();
-    const result = new Int32Array(submeshCount);
-    for (let s = 0; s < submeshCount; s++) {
-      result[s] = this.getSubmeshIndexEnd(s);
-    }
-    return result;
-  }
-  computeMeshIndexOffsets() {
-    const meshCount = this.getMeshCount();
-    const result = new Int32Array(meshCount);
-    for (let m2 = 0; m2 < meshCount; m2++) {
-      result[m2] = this.getMeshIndexStart(m2, "all");
-    }
-    return result;
-  }
-  reorderSubmeshes(submeshArrays, reordered) {
-    const meshCount = this.getMeshCount();
-    let largestMesh = 0;
-    for (let m2 = 0; m2 < meshCount; m2++) {
-      const subStart = this.getMeshSubmeshStart(m2, "all");
-      const subEnd = this.getMeshSubmeshEnd(m2, "all");
-      if (subEnd - subStart <= 1) {
-        continue;
-      }
-      largestMesh = Math.max(largestMesh, this.getMeshIndexCount(m2, "all"));
-      reordered[m2] = this.Sort(subStart, subEnd, (i2) => this.getSubmeshAlpha(i2), submeshArrays);
-    }
-    return largestMesh;
-  }
-  Sort(start, end, criterion, arrays) {
-    let swapped = false;
-    while (true) {
-      let loop = false;
-      for (let i2 = start; i2 < end - 1; i2++) {
-        if (criterion(i2) < criterion(i2 + 1)) {
-          loop = true;
-          swapped = true;
-          for (let j = 0; j < arrays.length; j++) {
-            const array = arrays[j];
-            const t2 = array[i2];
-            array[i2] = array[i2 + 1];
-            array[i2 + 1] = t2;
-          }
-        }
-      }
-      if (!loop) {
-        break;
-      }
-    }
-    return swapped;
-  }
-  reorderIndices(meshIndexOffsets, submeshEnd, meshReordered, bufferSize) {
-    const meshCount = this.getMeshCount();
-    const buffer = new Float32Array(bufferSize);
-    for (let m2 = 0; m2 < meshCount; m2++) {
-      if (!meshReordered[m2])
-        continue;
-      const meshOffset = meshIndexOffsets[m2];
-      const subStart = this.getMeshSubmeshStart(m2, "all");
-      const subEnd = this.getMeshSubmeshEnd(m2, "all");
-      let index = 0;
-      for (let s = subStart; s < subEnd; s++) {
-        const start = this.submeshIndexOffset[s];
-        const end = submeshEnd[s];
-        this.submeshIndexOffset[s] = meshOffset + index;
-        for (let i2 = start; i2 < end; i2++) {
-          buffer[index++] = this.indices[i2];
-        }
-      }
-      for (let i2 = 0; i2 < index; i2++) {
-        this.indices[meshOffset + i2] = buffer[i2];
-      }
-    }
-  }
-  rebaseIndices() {
-    const count = this.getMeshCount();
-    for (let m2 = 0; m2 < count; m2++) {
-      const offset = this.meshVertexOffsets[m2];
-      const start = this.getMeshIndexStart(m2, "all");
-      const end = this.getMeshIndexEnd(m2, "all");
-      for (let i2 = start; i2 < end; i2++) {
-        this.indices[i2] -= offset;
-      }
-    }
-  }
-  computeMeshOpaqueCount() {
-    const result = new Array(this.getMeshCount()).fill(0);
-    for (let m2 = 0; m2 < result.length; m2++) {
-      const subStart = this.getMeshSubmeshStart(m2, "all");
-      const subEnd = this.getMeshSubmeshEnd(m2, "all");
-      for (let s = subStart; s < subEnd; s++) {
-        const alpha = this.getSubmeshAlpha(s);
-        result[m2] += alpha === 1 ? 1 : 0;
-      }
-    }
-    return result;
-  }
-  getMeshIndexStart(mesh, section = "all") {
-    const sub = this.getMeshSubmeshStart(mesh, section);
-    return this.getSubmeshIndexStart(sub);
-  }
-  getMeshIndexEnd(mesh, section = "all") {
-    const sub = this.getMeshSubmeshEnd(mesh, section);
-    return this.getSubmeshIndexEnd(sub - 1);
-  }
-  getMeshIndexCount(mesh, section = "all") {
-    return this.getMeshIndexEnd(mesh, section) - this.getMeshIndexStart(mesh, section);
-  }
-  getMeshVertexStart(mesh) {
-    return this.meshVertexOffsets[mesh];
-  }
-  getMeshVertexEnd(mesh) {
-    return mesh < this.meshVertexOffsets.length - 1 ? this.meshVertexOffsets[mesh + 1] : this.getVertexCount();
-  }
-  getMeshVertexCount(mesh) {
-    return this.getMeshVertexEnd(mesh) - this.getMeshVertexStart(mesh);
-  }
-  getMeshSubmeshStart(mesh, section = "all") {
-    if (section === "transparent") {
-      return this.getMeshSubmeshEnd(mesh, "opaque");
-    }
-    return this.meshSubmeshes[mesh];
-  }
-  getMeshSubmeshEnd(mesh, section = "all") {
-    if (section === "opaque") {
-      return this.meshSubmeshes[mesh] + this.meshOpaqueCount[mesh];
-    }
-    return mesh < this.meshSubmeshes.length - 1 ? this.meshSubmeshes[mesh + 1] : this.submeshIndexOffset.length;
-  }
-  getMeshSubmeshCount(mesh, section = "all") {
-    const end = this.getMeshSubmeshEnd(mesh, section);
-    const start = this.getMeshSubmeshStart(mesh, section);
-    return end - start;
-  }
-  getMeshHasTransparency(mesh) {
-    return this.getMeshSubmeshCount(mesh, "transparent") > 0;
-  }
-  getSubmeshIndexStart(submesh) {
-    return submesh < this.submeshIndexOffset.length ? this.submeshIndexOffset[submesh] : this.indices.length;
-  }
-  getSubmeshIndexEnd(submesh) {
-    return submesh < this.submeshIndexOffset.length - 1 ? this.submeshIndexOffset[submesh + 1] : this.indices.length;
-  }
-  getSubmeshIndexCount(submesh) {
-    return this.getSubmeshIndexEnd(submesh) - this.getSubmeshIndexStart(submesh);
-  }
-  getSubmeshColor(submesh) {
-    return this.getMaterialColor(this.submeshMaterial[submesh]);
-  }
-  getSubmeshAlpha(submesh) {
-    return this.getMaterialAlpha(this.submeshMaterial[submesh]);
-  }
-  getSubmeshIsTransparent(submesh) {
-    return this.getSubmeshAlpha(submesh) < 1;
-  }
-  getSubmeshCount() {
-    return this.submeshMaterial.length;
-  }
-  getInstanceMesh(instance) {
-    return this.instanceMeshes[instance];
-  }
-  getInstanceMatrix(instance) {
-    return this.instanceTransforms.subarray(instance * this.MATRIX_SIZE, (instance + 1) * this.MATRIX_SIZE);
-  }
-  getMaterialColor(material) {
-    if (material < 0)
-      return this.DEFAULT_COLOR;
-    return this.materialColors.subarray(material * this.COLOR_SIZE, (material + 1) * this.COLOR_SIZE);
-  }
-  getMaterialAlpha(material) {
-    if (material < 0)
-      return 1;
-    const index = material * this.COLOR_SIZE + this.COLOR_SIZE - 1;
-    const result = this.materialColors[index];
-    return result;
-  }
-  static async createFromBfast(bfast) {
-    return AbstractG3d.createFromBfast(bfast).then((g3d) => new G3d(g3d));
-  }
-  validate() {
-    const isPresent = (attribute, label) => {
-      if (!attribute) {
-        throw new Error(`Missing Attribute Buffer: ${label}`);
-      }
-    };
-    isPresent(this.positions, "position");
-    isPresent(this.indices, "indices");
-    isPresent(this.instanceMeshes, "instanceMeshes");
-    isPresent(this.instanceTransforms, "instanceTransforms");
-    isPresent(this.meshSubmeshes, "meshSubmeshes");
-    isPresent(this.submeshIndexOffset, "submeshIndexOffset");
-    isPresent(this.submeshMaterial, "submeshMaterial");
-    isPresent(this.materialColors, "materialColors");
-    if (this.positions.length % this.POSITION_SIZE !== 0) {
-      throw new Error("Invalid position buffer, must be divisible by " + this.POSITION_SIZE);
-    }
-    if (this.indices.length % 3 !== 0) {
-      throw new Error("Invalid Index Count, must be divisible by 3");
-    }
-    for (let i2 = 0; i2 < this.indices.length; i2++) {
-      if (this.indices[i2] < 0 || this.indices[i2] >= this.positions.length) {
-        throw new Error("Vertex index out of bound");
-      }
-    }
-    if (this.instanceMeshes.length !== this.instanceTransforms.length / this.MATRIX_SIZE) {
-      throw new Error("Instance buffers mismatched");
-    }
-    if (this.instanceTransforms.length % this.MATRIX_SIZE !== 0) {
-      throw new Error("Invalid InstanceTransform buffer, must respect arity " + this.MATRIX_SIZE);
-    }
-    for (let i2 = 0; i2 < this.instanceMeshes.length; i2++) {
-      if (this.instanceMeshes[i2] >= this.meshSubmeshes.length) {
-        throw new Error("Instance Mesh Out of range.");
-      }
-    }
-    for (let i2 = 0; i2 < this.meshSubmeshes.length; i2++) {
-      if (this.meshSubmeshes[i2] < 0 || this.meshSubmeshes[i2] >= this.submeshIndexOffset.length) {
-        throw new Error("MeshSubmeshOffset out of bound at");
-      }
-    }
-    for (let i2 = 0; i2 < this.meshSubmeshes.length - 1; i2++) {
-      if (this.meshSubmeshes[i2] >= this.meshSubmeshes[i2 + 1]) {
-        throw new Error("MeshSubmesh out of sequence.");
-      }
-    }
-    if (this.submeshIndexOffset.length !== this.submeshMaterial.length) {
-      throw new Error("Mismatched submesh buffers");
-    }
-    for (let i2 = 0; i2 < this.submeshIndexOffset.length; i2++) {
-      if (this.submeshIndexOffset[i2] < 0 || this.submeshIndexOffset[i2] >= this.indices.length) {
-        throw new Error("SubmeshIndexOffset out of bound");
-      }
-    }
-    for (let i2 = 0; i2 < this.submeshIndexOffset.length; i2++) {
-      if (this.submeshIndexOffset[i2] % 3 !== 0) {
-        throw new Error("Invalid SubmeshIndexOffset, must be divisible by 3");
-      }
-    }
-    for (let i2 = 0; i2 < this.submeshIndexOffset.length - 1; i2++) {
-      if (this.submeshIndexOffset[i2] >= this.submeshIndexOffset[i2 + 1]) {
-        throw new Error("SubmeshIndexOffset out of sequence.");
-      }
-    }
-    for (let i2 = 0; i2 < this.submeshMaterial.length; i2++) {
-      if (this.submeshMaterial[i2] >= this.materialColors.length) {
-        throw new Error("submeshMaterial out of bound");
-      }
-    }
-    if (this.materialColors.length % this.COLOR_SIZE !== 0) {
-      throw new Error("Invalid material color buffer, must be divisible by " + this.COLOR_SIZE);
-    }
-    console.assert(this.meshInstances.length === this.getMeshCount());
-    console.assert(this.meshOpaqueCount.length === this.getMeshCount());
-    console.assert(this.meshSubmeshes.length === this.getMeshCount());
-    console.assert(this.meshVertexOffsets.length === this.getMeshCount());
-    for (let m2 = 0; m2 < this.getMeshCount(); m2++) {
-      console.assert(this.getMeshSubmeshCount(m2, "opaque") + this.getMeshSubmeshCount(m2, "transparent") === this.getMeshSubmeshCount(m2, "all"));
-      console.assert(this.getMeshIndexCount(m2, "opaque") + this.getMeshIndexCount(m2, "transparent") === this.getMeshIndexCount(m2, "all"));
-    }
-  }
-}
-const objectModel = {
-  header: "header",
-  entities: "entities",
-  bimDocument: {
-    table: "Vim.BimDocument",
-    columns: {
-      title: "string:Title",
-      version: "string:Version",
-      author: "string:Author",
-      date: "string:IssueDate"
-    }
-  },
-  category: {
-    table: "Vim.Category",
-    index: "index:Vim.Category:Category",
-    columns: {
-      name: "string:Name"
-    }
-  },
-  document: {
-    table: "Vim.BimDocument",
-    index: "index:Vim.BimDocument:BimDocument",
-    columns: {
-      name: "string:Name",
-      title: "string:Title"
-    }
-  },
-  element: {
-    table: "Vim.Element",
-    index: "index:Vim.Element:Element",
-    columns: {
-      name: "string:Name",
-      familyName: "string:FamilyName",
-      id: "int:Id"
-    }
-  },
-  familyInstance: {
-    table: "Vim.FamilyInstance",
-    columns: {}
-  },
-  familyType: {
-    table: "Vim.FamilyType",
-    index: "index:Vim.FamilyType:FamilyType",
-    columns: {
-      name: "string:Name"
-    }
-  },
-  family: {
-    table: "Vim.Family",
-    index: "index:Vim.Family:Family",
-    columns: {}
-  },
-  nodes: {
-    table: "Vim.Node"
-  },
-  parameter: {
-    table: "Vim.Parameter",
-    columns: {
-      value: "string:Value"
-    }
-  },
-  parameterDescriptor: {
-    table: "Vim.ParameterDescriptor",
-    index: "index:Vim.ParameterDescriptor:ParameterDescriptor",
-    columns: {
-      name: "string:Name",
-      group: "string:Group",
-      isInstance: "byte:IsInstance"
-    }
-  },
-  workset: {
-    table: "Vim.Workset",
-    index: "index:Vim.Workset:Workset",
-    columns: {
-      name: "string:Name"
-    }
-  }
-};
-class DocumentNoBim {
-  constructor(header, g3d) {
-    __publicField(this, "header");
-    __publicField(this, "g3d");
-    this.header = header;
-    this.g3d = g3d;
-  }
-  getAllElements() {
-    return [].keys();
-  }
-  hasElement(element) {
-    return false;
-  }
-  getInstancesFromElement(element) {
-    return void 0;
-  }
-  async getElement(element) {
-    return void 0;
-  }
-  async getElementValue(element, field) {
-    return void 0;
-  }
-  getElementFromInstance(instance) {
-    return void 0;
-  }
-  getElementsFromElementId(elementId) {
-    return [];
-  }
-  getElementId(element) {
-    return void 0;
-  }
-  async getEntity(name, index) {
-    return void 0;
-  }
-  getString(index) {
-    return void 0;
-  }
-  async getElementsSummary(elements) {
-    return void 0;
-  }
-  async getElementParameters(element) {
-    return void 0;
-  }
-  getBimDocumentSummary() {
-    return void 0;
-  }
-}
-class Document {
-  constructor(header, g3d, entities, strings, instanceToElement, elementToInstances, elementIds, elementIdToElements) {
-    __publicField(this, "header");
-    __publicField(this, "g3d");
-    __publicField(this, "entities");
-    __publicField(this, "_strings");
-    __publicField(this, "_instanceToElement");
-    __publicField(this, "_elementToInstances");
-    __publicField(this, "_elementIds");
-    __publicField(this, "_elementIdToElements");
-    this.header = header;
-    this.g3d = g3d;
-    this.entities = entities;
-    this._strings = strings;
-    this._instanceToElement = instanceToElement;
-    this._elementToInstances = elementToInstances;
-    this._elementIds = elementIds;
-    this._elementIdToElements = elementIdToElements;
-  }
-  static async createFromBfast(bfast, streamG3d = false) {
-    let header;
-    let g3d;
-    let entity;
-    let strings;
-    let instanceToElement;
-    let elementIds;
-    await Promise.all([
-      Document.requestHeader(bfast).then((h) => header = h),
-      Document.requestG3d(bfast, streamG3d).then((g) => g3d = g),
-      Document.requestStrings(bfast).then((strs) => strings = strs),
-      Document.requestEntities(bfast).then((ets) => entity = ets).then((ets) => Promise.all([
-        Document.requestInstanceToElement(ets).then((array) => instanceToElement = array),
-        Document.requestElementIds(ets).then((v2) => elementIds = v2)
-      ]))
-    ]);
-    if (!entity) {
-      return new DocumentNoBim(header, g3d);
-    }
-    const elementToInstance = Document.invert(instanceToElement);
-    const elementIdToElements = Document.invert(elementIds);
-    return new Document(header, g3d, entity, strings, instanceToElement, elementToInstance, elementIds, elementIdToElements);
-  }
-  static async requestHeader(bfast) {
-    const header = await bfast.getBuffer(objectModel.header);
-    const pairs = new TextDecoder("utf-8").decode(header).split("\n");
-    const map = new Map(pairs.map((p2) => p2.split("=")).map((p2) => [p2[0], p2[1]]));
-    return {
-      vim: map.get("vim"),
-      id: map.get("id"),
-      revision: map.get("revision"),
-      generator: map.get("generator"),
-      created: map.get("created"),
-      schema: map.get("schema")
-    };
-  }
-  static async requestG3d(bfast, streamG3d) {
-    const geometry = streamG3d ? await bfast.getBfast("geometry") : await bfast.getLocalBfast("geometry");
-    if (!geometry) {
-      throw new Error("Could not get G3d Data from VIM file.");
-    }
-    const g3d = await G3d.createFromBfast(geometry);
-    return g3d;
-  }
-  static async requestStrings(bfast) {
-    const buffer = await bfast.getBuffer("strings");
-    if (!buffer) {
-      console.error("Could not get String Data from VIM file. Bim features will be disabled.");
-      return;
-    }
-    const strings = new TextDecoder("utf-8").decode(buffer).split("\0");
-    return strings;
-  }
-  static async requestEntities(bfast) {
-    const entities = await bfast.getBfast(objectModel.entities);
-    if (!entities) {
-      console.error("Could not get String Data from VIM file. Bim features will be disabled.");
-    }
-    return entities;
-  }
-  static async requestInstanceToElement(entities) {
-    if (!entities)
-      return;
-    const nodes = await entities.getBfast(objectModel.nodes.table);
-    const instances = await (nodes == null ? void 0 : nodes.getArray(objectModel.element.index));
-    if (!instances) {
-      throw new Error("Could not get InstanceToElement from VIM file.");
-    }
-    return instances;
-  }
-  static async requestElementIds(entities) {
-    var _a22;
-    if (!entities)
-      return;
-    const elements = await entities.getBfast(objectModel.element.table);
-    const ids = (_a22 = await (elements == null ? void 0 : elements.getArray("int:Id"))) != null ? _a22 : await (elements == null ? void 0 : elements.getArray("numeric:Id"));
-    if (!ids) {
-      throw new Error("Could not get ElementIds from VIM file.");
-    }
-    return ids;
-  }
-  static invert(data2) {
-    const result = /* @__PURE__ */ new Map();
-    for (let i2 = 0; i2 < data2.length; i2++) {
-      const value = data2[i2];
-      const list = result.get(value);
-      if (list) {
-        list.push(i2);
-      } else {
-        result.set(value, [i2]);
-      }
-    }
-    return result;
-  }
-  hasElement(element) {
-    return element >= 0 && element < this._elementIds.length;
-  }
-  getAllElements() {
-    return this._elementIds.keys();
-  }
-  getInstancesFromElement(element) {
-    var _a22;
-    if (!this.hasElement(element))
-      return;
-    return (_a22 = this._elementToInstances.get(element)) != null ? _a22 : [];
-  }
-  async getElement(element) {
-    return this.getEntity(objectModel.element.table, element);
-  }
-  async getElementValue(element, field) {
-    const elements = await this.entities.getBfast(objectModel.element.table);
-    if (!elements)
-      return;
-    const value = await elements.getValue(field, element);
-    return value;
-  }
-  getElementFromInstance(instance) {
-    return this._instanceToElement[instance];
-  }
-  getElementsFromElementId(elementId) {
-    return this._elementIdToElements.get(elementId);
-  }
-  getElementId(element) {
-    return this._elementIds[element];
-  }
-  async getEntity(name, index) {
-    const elements = await this.entities.getBfast(name);
-    const row = await (elements == null ? void 0 : elements.getRow(index));
-    if (!row)
-      return;
-    this.resolveStrings(row);
-    return row;
-  }
-  getString(index) {
-    var _a22;
-    return (_a22 = this._strings) == null ? void 0 : _a22[index];
-  }
-  async getElementsSummary(elements) {
-    const set3 = elements ? new Set(elements) : void 0;
-    const elementTable = await this.entities.getBfast(objectModel.element.table);
-    const elementNameArray = await (elementTable == null ? void 0 : elementTable.getArray(objectModel.element.columns.name));
-    const elementIdArray = await (elementTable == null ? void 0 : elementTable.getArray(objectModel.element.columns.id));
-    const getElementName = (element) => {
-      if (!elementNameArray)
-        return;
-      return this.getString(elementNameArray == null ? void 0 : elementNameArray[element]);
-    };
-    const elementCategoryArray = await (elementTable == null ? void 0 : elementTable.getArray(objectModel.category.index));
-    const categoryTable = await this.entities.getBfast(objectModel.category.table);
-    const categoryNameArray = await (categoryTable == null ? void 0 : categoryTable.getArray(objectModel.category.columns.name));
-    const getCategory = (element) => {
-      if (!categoryNameArray)
-        return;
-      if (!elementCategoryArray)
-        return;
-      return this.getString(categoryNameArray[elementCategoryArray[element]]);
-    };
-    const familyInstanceTable = await this.entities.getBfast(objectModel.familyInstance.table);
-    const familyNameArray = await (elementTable == null ? void 0 : elementTable.getArray(objectModel.element.columns.familyName));
-    const getFamilyName = (element) => familyNameArray ? this.getString(familyNameArray[element]) : void 0;
-    const familyInstanceFamilyType = await (familyInstanceTable == null ? void 0 : familyInstanceTable.getArray(objectModel.familyType.index));
-    const familyTypeTable = await this.entities.getBfast(objectModel.familyType.table);
-    const familyTypeElementArray = await (familyTypeTable == null ? void 0 : familyTypeTable.getArray(objectModel.element.index));
-    const getFamilyTypeName = (family) => {
-      if (!elementNameArray)
-        return;
-      if (!familyTypeElementArray)
-        return;
-      if (!familyInstanceFamilyType)
-        return;
-      return this.getString(elementNameArray[familyTypeElementArray[familyInstanceFamilyType[family]]]);
-    };
-    const elementWorksetArray = await (elementTable == null ? void 0 : elementTable.getArray(objectModel.workset.index));
-    const worksetTable = await this.entities.getBfast(objectModel.workset.table);
-    const worksetNameArray = await (worksetTable == null ? void 0 : worksetTable.getArray(objectModel.workset.columns.name));
-    const getWorkset = (element) => {
-      if (!worksetNameArray)
-        return;
-      if (!elementWorksetArray)
-        return;
-      return this.getString(worksetNameArray[elementWorksetArray[element]]);
-    };
-    const elementDocumentArray = await (elementTable == null ? void 0 : elementTable.getArray(objectModel.document.index));
-    const documentTable = await this.entities.getBfast(objectModel.document.table);
-    const documentTitleArray = await (documentTable == null ? void 0 : documentTable.getArray(objectModel.document.columns.title));
-    const getDocument = (element) => {
-      if (!documentTitleArray)
-        return;
-      if (!elementDocumentArray)
-        return;
-      return this.getString(documentTitleArray[elementDocumentArray[element]]);
-    };
-    const familyInstanceElement = await (familyInstanceTable == null ? void 0 : familyInstanceTable.getArray(objectModel.element.index));
-    const summary = [];
-    familyInstanceElement == null ? void 0 : familyInstanceElement.forEach((e, f2) => {
-      if (!set3 || set3.has(e)) {
-        summary.push({
-          element: e,
-          id: elementIdArray == null ? void 0 : elementIdArray[e],
-          name: getElementName(e),
-          categoryName: getCategory(e),
-          familyName: getFamilyName(e),
-          familyTypeName: getFamilyTypeName(f2),
-          workset: getWorkset(e),
-          documentTitle: getDocument(e)
-        });
-      }
-    });
-    return summary;
-  }
-  async getElementParameters(element) {
-    const result = [];
-    const instance = await this.getElementsParameters([element], true);
-    instance == null ? void 0 : instance.forEach((i2) => result.push(i2));
-    const familyInstance = await this.getElementFamilyInstance(element);
-    const familyType = familyInstance ? await this.getFamilyInstanceFamilyType(familyInstance) : void 0;
-    const family = familyType ? await this.getFamilyTypeFamily(familyType) : void 0;
-    const familyTypeElement = familyType ? await this.getFamiltyTypeElement(familyType) : void 0;
-    const familyElement = family ? await this.getFamilyElement(family) : void 0;
-    const elements = [];
-    if (familyTypeElement)
-      elements.push(familyTypeElement);
-    if (familyElement)
-      elements.push(familyElement);
-    const type = await this.getElementsParameters(elements, false);
-    type == null ? void 0 : type.forEach((i2) => result.push(i2));
-    return result;
-  }
-  async getElementsParameters(elements, isInstance) {
-    const set3 = new Set(elements);
-    const parameterTable = await this.entities.getBfast(objectModel.parameter.table);
-    const parameterElement = parameterTable ? await parameterTable.getArray(objectModel.element.index) : void 0;
-    const parameterValue = parameterTable ? await parameterTable.getArray(objectModel.parameter.columns.value) : void 0;
-    const getParameterDisplayValue = (index) => {
-      var _a22;
-      if (!parameterValue)
-        return;
-      const value = (_a22 = this.getString(parameterValue[index])) == null ? void 0 : _a22.split("|");
-      const displayValue = value == null ? void 0 : value[value.length - 1];
-      return displayValue;
-    };
-    const parameterDescription = parameterTable ? await parameterTable.getArray(objectModel.parameterDescriptor.index) : void 0;
-    const parameterDescriptor = await this.entities.getBfast(objectModel.parameterDescriptor.table);
-    const parameterDescriptorName = parameterDescriptor ? await parameterDescriptor.getArray(objectModel.parameterDescriptor.columns.name) : void 0;
-    const getParameterName = (descriptor) => {
-      if (descriptor === void 0)
-        return;
-      if (!parameterDescriptorName)
-        return;
-      return this.getString(parameterDescriptorName[descriptor]);
-    };
-    const parameterDescriptorGroup = parameterDescriptor ? await parameterDescriptor.getArray(objectModel.parameterDescriptor.columns.group) : void 0;
-    const getParameterGroup = (descriptor) => {
-      if (!descriptor)
-        return;
-      if (!parameterDescriptorGroup)
-        return;
-      return this.getString(parameterDescriptorGroup[descriptor]);
-    };
-    const result = [];
-    if (!parameterElement)
-      return void 0;
-    parameterElement.forEach((e, i2) => {
-      if (set3.has(e)) {
-        const d = parameterDescription == null ? void 0 : parameterDescription[i2];
-        result.push({
-          name: getParameterName(d),
-          value: getParameterDisplayValue(i2),
-          group: getParameterGroup(d),
-          isInstance
-        });
-      }
-    });
-    return result;
-  }
-  async getElementFamilyInstance(element) {
-    const familyInstanceTable = await this.entities.getBfast(objectModel.familyInstance.table);
-    const familyInstanceElementArray = familyInstanceTable ? await familyInstanceTable.getArray(objectModel.element.index) : void 0;
-    let result;
-    familyInstanceElementArray == null ? void 0 : familyInstanceElementArray.forEach((e, i2) => {
-      if (e === element) {
-        result = i2;
-      }
-    });
-    return result;
-  }
-  async getFamilyInstanceFamilyType(familyInstance) {
-    const familyInstanceTable = await this.entities.getBfast(objectModel.familyInstance.table);
-    const result = await (familyInstanceTable == null ? void 0 : familyInstanceTable.getValue(objectModel.familyType.index, familyInstance));
-    return result;
-  }
-  async getFamilyTypeFamily(familyType) {
-    const familyTypeTable = await this.entities.getBfast(objectModel.familyType.table);
-    const result = await (familyTypeTable == null ? void 0 : familyTypeTable.getValue(objectModel.family.index, familyType));
-    return result;
-  }
-  async getFamiltyTypeElement(familyType) {
-    const familyTypeTable = await this.entities.getBfast(objectModel.familyType.table);
-    const result = await (familyTypeTable == null ? void 0 : familyTypeTable.getValue(objectModel.element.index, familyType));
-    return result;
-  }
-  async getBimDocumentSummary() {
-    const documentTable = await this.entities.getBfast(objectModel.bimDocument.table);
-    const titles = (await documentTable.getArray(objectModel.bimDocument.columns.title)).map((n2) => this._strings[n2]);
-    const versions2 = (await documentTable.getArray(objectModel.bimDocument.columns.version)).map((n2) => this._strings[n2]);
-    const authors = (await documentTable.getArray(objectModel.bimDocument.columns.author)).map((n2) => this._strings[n2]);
-    const dates = (await documentTable.getArray(objectModel.bimDocument.columns.date)).map((n2) => this._strings[n2]);
-    const max2 = Math.max(titles.length, versions2.length, authors.length, dates.length);
-    const summary = [];
-    for (let i2 = 0; i2 < max2; i2++) {
-      summary.push({
-        title: titles[i2],
-        version: versions2[i2],
-        author: authors[i2],
-        date: dates[i2]
-      });
-    }
-    return summary;
-  }
-  async getFamilyElement(family) {
-    const familyTable = await this.entities.getBfast(objectModel.family.table);
-    const result = await (familyTable == null ? void 0 : familyTable.getValue(objectModel.element.index, family));
-    return result;
-  }
-  resolveStrings(map) {
-    if (!this._strings)
-      return;
-    const result = map;
-    for (const key of map.keys()) {
-      if (key.startsWith("string:")) {
-        const v2 = map.get(key);
-        result.set(key, v2 ? this._strings[v2] : void 0);
-      }
-    }
-  }
-}
-class VimMaterials {
-  constructor(opaque, transparent, wireframe, isolation, focus) {
-    __publicField(this, "opaque");
-    __publicField(this, "transparent");
-    __publicField(this, "wireframe");
-    __publicField(this, "isolation");
-    __publicField(this, "focus");
-    this.opaque = opaque != null ? opaque : createOpaque();
-    this.transparent = transparent != null ? transparent : createTransparent();
-    this.wireframe = wireframe != null ? wireframe : createWireframe();
-    this.isolation = isolation != null ? isolation : createIsolationMaterial();
-    this.focus = focus != null ? focus : createFocus();
-  }
-  applyWireframeSettings(color, opacity) {
-    this.wireframe.color = color;
-    this.wireframe.opacity = opacity;
-  }
-  dispose() {
-    this.opaque.dispose();
-    this.transparent.dispose();
-    this.wireframe.dispose();
-    this.isolation.dispose();
-    this.focus.dispose();
-  }
-}
-function createBase() {
-  return new MeshPhongMaterial({
-    color: 10066329,
-    vertexColors: true,
-    flatShading: true,
-    side: DoubleSide,
-    shininess: 5
-  });
-}
-function createOpaque() {
-  const mat = createBase();
-  patchBaseMaterial(mat);
-  return mat;
-}
-function createTransparent() {
-  const mat = createBase();
-  mat.transparent = true;
-  mat.shininess = 70;
-  patchBaseMaterial(mat);
-  return mat;
-}
-function createWireframe() {
-  const material = new LineBasicMaterial({
-    depthTest: false,
-    opacity: 1,
-    color: new Color(255),
-    transparent: true
-  });
-  return material;
-}
-function createFocus() {
-  const material = new MeshBasicMaterial({
-    depthTest: false,
-    opacity: 0.15,
-    color: new Color(1, 1, 1),
-    transparent: true
-  });
-  return material;
-}
-function patchBaseMaterial(material) {
-  material.onBeforeCompile = (shader) => {
-    material.userData.shader = shader;
-    shader.vertexShader = shader.vertexShader.replace("#include <color_pars_vertex>", `
-        #include <color_pars_vertex>
-        
-        // COLORING
-
-        // attribute for color override
-        // merged meshes use it as vertex attribute
-        // instanced meshes use it as an instance attribute
-        attribute float colored;
-
-        // There seems to be an issue where setting mehs.instanceColor
-        // doesn't properly set USE_INSTANCING_COLOR
-        // so we always use it as a fix
-        #ifndef USE_INSTANCING_COLOR
-        attribute vec3 instanceColor;
-        #endif
-
-        // Passed to fragment to ignore phong model
-        varying float vColored;
-        
-        // VISIBILITY
-
-        // Instance or vertex attribute to hide objects 
-        #ifdef USE_INSTANCING
-          attribute float ignoreInstance;
-        #else
-          attribute float ignoreVertex;
-        #endif
-
-        // Passed to fragment to discard them
-        varying float vIgnore;
-
-        `).replace("#include <color_vertex>", `
-          // COLORING
-          vColor = color;
-          vColored = colored;
-
-          // colored == 1 -> instance color
-          // colored == 0 -> vertex color
-          #ifdef USE_INSTANCING
-            vColor.xyz = colored * instanceColor.xyz + (1.0f - colored) * color.xyz;
-          #endif
-
-
-          // VISIBILITY
-          // Set frag ignore from instance or vertex attribute
-          #ifdef USE_INSTANCING
-            vIgnore = ignoreInstance;
-          #else
-            vIgnore = ignoreVertex;
-          #endif
-
-        `);
-    shader.fragmentShader = shader.fragmentShader.replace("#include <clipping_planes_pars_fragment>", `
-        #include <clipping_planes_pars_fragment>
-        varying float vIgnore;
-        varying float vColored;
-        `).replace("#include <output_fragment>", `
-          // VISIBILITY
-          if (vIgnore > 0.0f)
-            discard;
-         
-          // COLORING
-          // vColored == 1 -> Vertex Color * light 
-          // vColored == 0 -> Phong Color 
-          float d = length(outgoingLight);
-          gl_FragColor = vec4(vColored * vColor.xyz * d + (1.0f - vColored) * outgoingLight.xyz, diffuseColor.a);
-        `);
-  };
-}
-function createIsolationMaterial() {
-  return new ShaderMaterial({
-    uniforms: {
-      opacity: { value: 0.1 },
-      fillColor: { value: new Vector3(0.5, 0.5, 0.5) }
-    },
-    vertexColors: true,
-    transparent: true,
-    clipping: true,
-    vertexShader: `
-
-      #include <common>
-      #include <logdepthbuf_pars_vertex>
-      #include <clipping_planes_pars_vertex>
-        
-      // VISIBILITY
-      // Instance or vertex attribute to hide objects 
-      #ifdef USE_INSTANCING
-        attribute float ignoreInstance;
-      #else
-        attribute float ignoreVertex;
-      #endif
-
-      // Passed to fragment to discard them
-      varying float vIgnore;
-      varying vec3 vPosition;
-
-
-      // COLORING
-      varying vec3 vColor;
-
-      // attribute for color override
-      // merged meshes use it as vertex attribute
-      // instanced meshes use it as an instance attribute
-      attribute float colored;
-
-      // There seems to be an issue where setting mehs.instanceColor
-      // doesn't properly set USE_INSTANCING_COLOR
-      // so we always use it as a fix
-      #ifndef USE_INSTANCING_COLOR
-      attribute vec3 instanceColor;
-      #endif
-
-      void main() {
-        #include <begin_vertex>
-        #include <project_vertex>
-        #include <clipping_planes_vertex>
-        #include <logdepthbuf_vertex>
-
-        // VISIBILITY
-        // Set frag ignore from instance or vertex attribute
-        #ifdef USE_INSTANCING
-          vIgnore = ignoreInstance;
-        #else
-          vIgnore = ignoreVertex;
-        #endif
-
-        // COLORING
-        vColor = color.xyz;
-
-        // colored == 1 -> instance color
-        // colored == 0 -> vertex color
-        #ifdef USE_INSTANCING
-          vColor.xyz = colored * instanceColor.xyz + (1.0f - colored) * color.xyz;
-        #endif
-
-
-        // ORDERING
-        if(vIgnore > 0.0f){
-          gl_Position.z = 1.0f;
-        }else{
-          gl_Position.z = -1.0f;
-        }
-        
-        // LIGHTING
-        vPosition = vec3(mvPosition ) / mvPosition .w;
-      }
-      `,
-    fragmentShader: `
-      #include <clipping_planes_pars_fragment>
-      varying float vIgnore;
-      uniform float opacity;
-      uniform vec3 fillColor;
-      varying vec3 vPosition;
-      varying vec3 vColor;
-
-      void main() {
-        #include <clipping_planes_fragment>
-
-        if (vIgnore > 0.0f){
-          gl_FragColor = vec4(fillColor, opacity);
-        }
-        else{ 
-          gl_FragColor = vec4(vColor.x, vColor.y, vColor.z, 1.0f);
-
-          // LIGHTING
-          vec3 normal = normalize( cross(dFdx(vPosition), dFdy(vPosition)) );
-          float light = dot(normal, normalize(vec3(1.4142f, 1.732f, 2.2360f)));
-          light = 0.5 + (light *0.5);
-          gl_FragColor.xyz *= light;
-        }
-      }
-      `
-  });
-}
-class MeshBuilder {
-  constructor(materials) {
-    __publicField(this, "materials");
-    this.materials = materials != null ? materials : new VimMaterials();
-  }
-  createInstancedMeshes(g3d, transparency, instances) {
-    const result = [];
-    const set3 = instances ? new Set(instances) : void 0;
-    for (let mesh = 0; mesh < g3d.getMeshCount(); mesh++) {
-      let meshInstances = g3d.meshInstances[mesh];
-      if (!meshInstances)
-        continue;
-      meshInstances = set3 ? meshInstances.filter((i2) => set3.has(i2)) : meshInstances.filter((i2) => (g3d.instanceFlags[i2] & 1) === 0);
-      if (meshInstances.length <= 1)
-        continue;
-      const createMesh = (section, transparent) => {
-        const count = g3d.getMeshSubmeshCount(mesh, section);
-        if (count <= 0)
-          return;
-        const geometry = Geometry.createGeometryFromMesh(g3d, mesh, section, transparent);
-        return this.createInstancedMesh(geometry, g3d, meshInstances, transparent);
-      };
-      switch (transparency) {
-        case "all": {
-          result.push(createMesh("opaque", false));
-          result.push(createMesh("transparent", true));
-          break;
-        }
-        case "allAsOpaque": {
-          result.push(createMesh("all", false));
-          break;
-        }
-        case "opaqueOnly": {
-          result.push(createMesh("opaque", false));
-          break;
-        }
-        case "transparentOnly": {
-          result.push(createMesh("transparent", true));
-          break;
-        }
-      }
-    }
-    const filter = result.filter((m2) => !!m2);
-    return filter;
-  }
-  createInstancedMesh(geometry, g3d, instances, useAlpha) {
-    const material = useAlpha ? this.materials.transparent : this.materials.opaque;
-    const result = new InstancedMesh(geometry, material, instances.length);
-    geometry.computeBoundingBox();
-    const boxes = [];
-    for (let i2 = 0; i2 < instances.length; i2++) {
-      const matrix = Geometry.getInstanceMatrix(g3d, instances[i2]);
-      result.setMatrixAt(i2, matrix);
-      boxes[i2] = geometry.boundingBox.clone().applyMatrix4(matrix);
-    }
-    result.userData.instances = instances;
-    result.userData.boxes = boxes;
-    return result;
-  }
-  createMergedMesh(g3d, section, transparent, instances) {
-    const merge = instances ? Geometry.mergeInstanceMeshes(g3d, section, transparent, instances) : Geometry.mergeUniqueMeshes(g3d, section, transparent);
-    const material = transparent ? this.materials.transparent : this.materials.opaque;
-    const mesh = new Mesh(merge.geometry, material);
-    mesh.userData.merged = true;
-    mesh.userData.instances = merge.instances;
-    mesh.userData.submeshes = merge.submeshes;
-    mesh.userData.boxes = merge.boxes;
-    return mesh;
-  }
-  createWireframe(g3d, instances) {
-    const geometry = Geometry.createGeometryFromInstances(g3d, instances);
-    const wireframe = new WireframeGeometry(geometry);
-    return new LineSegments(wireframe, this.materials.wireframe);
-  }
-}
-class SceneBuilder {
-  constructor(meshBuilder) {
-    __publicField(this, "meshBuilder");
-    this.meshBuilder = meshBuilder != null ? meshBuilder : new MeshBuilder();
-  }
-  createFromG3d(g3d, transparency = "all", instances = void 0) {
-    const scene = new Scene(this);
-    const shared2 = this.createFromInstanciableMeshes(g3d, transparency, instances);
-    scene.merge(shared2);
-    switch (transparency) {
-      case "all": {
-        scene.merge(this.createFromMergeableMeshes(g3d, "opaque", false, instances));
-        scene.merge(this.createFromMergeableMeshes(g3d, "transparent", true, instances));
-        break;
-      }
-      case "opaqueOnly": {
-        scene.merge(this.createFromMergeableMeshes(g3d, "opaque", false, instances));
-        break;
-      }
-      case "transparentOnly": {
-        scene.merge(this.createFromMergeableMeshes(g3d, "transparent", true, instances));
-        break;
-      }
-      case "allAsOpaque": {
-        scene.merge(this.createFromMergeableMeshes(g3d, "all", false, instances));
-        break;
-      }
-    }
-    return scene;
-  }
-  createFromInstanciableMeshes(g3d, transparency, instances = void 0) {
-    const meshes = this.meshBuilder.createInstancedMeshes(g3d, transparency, instances);
-    const scene = new Scene(this);
-    for (let m2 = 0; m2 < meshes.length; m2++) {
-      scene.addMesh(meshes[m2]);
-    }
-    return scene;
-  }
-  createFromMergeableMeshes(g3d, section, transparent, instances) {
-    const mesh = this.meshBuilder.createMergedMesh(g3d, section, transparent, instances);
-    return new Scene(this).addMesh(mesh);
-  }
-}
-class Vim {
-  constructor(vim, scene, settings2) {
-    __publicField(this, "source");
-    __publicField(this, "document");
-    __publicField(this, "index", -1);
-    __publicField(this, "settings");
-    __publicField(this, "scene");
-    __publicField(this, "_elementToObject", /* @__PURE__ */ new Map());
-    this.document = vim;
-    this.scene = scene;
-    this.scene.setVim(this);
-    this.settings = settings2;
-    this.scene.applyMatrix4(this.settings.getMatrix());
-  }
-  dispose() {
-    this.scene.dispose();
-  }
-  filter(instances) {
-    const next = this.scene.builder.createFromG3d(this.document.g3d, this.settings.getTransparency(), instances);
-    this.scene.dispose();
-    next.applyMatrix4(this.settings.getMatrix());
-    next.setVim(this);
-    this.scene = next;
-    for (const [element, object] of this._elementToObject.entries()) {
-      object.updateMeshes(this.getMeshesFromElement(element));
-    }
-  }
-  applySettings(settings2) {
-    this.settings = settings2;
-    this.scene.applyMatrix4(this.settings.getMatrix());
-  }
-  getMatrix() {
-    return this.settings.getMatrix();
-  }
-  getObjectFromMesh(mesh, index) {
-    const element = this.getElementFromMesh(mesh, index);
-    if (!element)
-      return;
-    return this.getObjectFromElement(element);
-  }
-  getObjectFromInstance(instance) {
-    const element = this.document.getElementFromInstance(instance);
-    if (!element)
-      return;
-    return this.getObjectFromElement(element);
-  }
-  getObjectsFromElementId(id2) {
-    const elements = this.document.getElementsFromElementId(id2);
-    return elements == null ? void 0 : elements.map((e) => this.getObjectFromElement(e)).filter((o) => o !== void 0);
-  }
-  getObjectFromElement(element) {
-    if (!this.document.hasElement(element))
-      return;
-    if (this._elementToObject.has(element)) {
-      return this._elementToObject.get(element);
-    }
-    const instances = this.document.getInstancesFromElement(element);
-    const meshes = this.getMeshesFromInstances(instances);
-    const result = new Object$1(this, element, instances, meshes);
-    this._elementToObject.set(element, result);
-    return result;
-  }
-  getObjectsInBox(box) {
-    const result = [];
-    for (const obj of this.getAllObjects()) {
-      const b = obj.getBoundingBox();
-      if (!b)
-        continue;
-      if (box.containsBox(b)) {
-        result.push(obj);
-      }
-    }
-    return result;
-  }
-  *getAllObjects() {
-    for (const e of this.document.getAllElements()) {
-      const obj = this.getObjectFromElement(e);
-      if (obj)
-        yield obj;
-    }
-  }
-  getMeshesFromElement(element) {
-    const instances = this.document.getInstancesFromElement(element);
-    if (!instances)
-      return;
-    return this.getMeshesFromInstances(instances);
-  }
-  getMeshesFromInstances(instances) {
-    if (!(instances == null ? void 0 : instances.length))
-      return;
-    const meshes = [];
-    for (let i2 = 0; i2 < instances.length; i2++) {
-      const instance = instances[i2];
-      if (instance < 0)
-        continue;
-      const pairs = this.scene.getMeshFromInstance(instance);
-      pairs == null ? void 0 : pairs.forEach((p2) => meshes.push(p2));
-    }
-    if (meshes.length === 0)
-      return;
-    return meshes;
-  }
-  getElementFromMesh(mesh, index) {
-    if (!mesh || index < 0)
-      return;
-    const instance = this.scene.getInstanceFromMesh(mesh, index);
-    if (!instance)
-      return;
-    return this.document.getElementFromInstance(instance);
-  }
-}
-class Loader {
-  constructor(materials) {
-    __publicField(this, "sceneBuilder");
-    __publicField(this, "meshBuilder");
-    this.meshBuilder = new MeshBuilder(materials);
-    this.sceneBuilder = new SceneBuilder(this.meshBuilder);
-  }
-  async load(bfast, settings2) {
-    let document2;
-    const mode = settings2.getDownloadMode();
-    if (mode === "download")
-      await bfast.forceDownload();
-    await Document.createFromBfast(bfast, mode === "stream").then((d) => document2 = d);
-    const scene = this.sceneBuilder.createFromG3d(document2.g3d, settings2.getTransparency());
-    const vim = new Vim(document2, scene, settings2);
-    return vim;
-  }
-}
-class RemoteValue {
-  constructor(getter, label) {
-    __publicField(this, "label");
-    __publicField(this, "_getter");
-    __publicField(this, "_value");
-    __publicField(this, "_request");
-    this._getter = getter;
-    this.label = label != null ? label : "";
-  }
-  get() {
-    if (this._value !== void 0) {
-      return Promise.resolve(this._value);
-    }
-    if (this._request) {
-      return this._request;
-    }
-    this._request = this._getter().then((value) => {
-      this._value = value;
-      this._request = void 0;
-      return this._value;
-    });
-    return this._request;
-  }
-}
-class Request {
-  constructor(field) {
-    __publicField(this, "status", "active");
-    __publicField(this, "field");
-    __publicField(this, "loaded", 0);
-    __publicField(this, "total", 0);
-    __publicField(this, "lengthComputable", true);
-    this.field = field;
-  }
-}
-class RequestLogger {
-  constructor(source) {
-    __publicField(this, "source");
-    __publicField(this, "all", /* @__PURE__ */ new Map());
-    __publicField(this, "lastUpdate", 0);
-    __publicField(this, "delay", 500);
-    __publicField(this, "sleeping", false);
-    __publicField(this, "onUpdate");
-    this.source = source;
-  }
-  get loaded() {
-    let result = 0;
-    this.all.forEach((request) => {
-      result += request.loaded;
-    });
-    return result;
-  }
-  get total() {
-    let result = 0;
-    this.all.forEach((request) => {
-      result += request.total;
-    });
-    return result;
-  }
-  start(field) {
-    this.all.set(field, new Request(field));
-    this.signal();
-  }
-  update(field, progress) {
-    const r2 = this.all.get(field);
-    if (!r2)
-      throw new Error("Updating missing download");
-    if (r2.status !== "active")
-      return;
-    r2.loaded = progress.loaded;
-    r2.total = progress.total;
-    r2.lengthComputable = progress.lengthComputable;
-    this.signal();
-  }
-  fail(field) {
-    console.error(`${field} failed`);
-    const download = this.all.get(field);
-    if (!download)
-      throw new Error("Failing missing download");
-    download.status = "failed";
-    this.signal();
-  }
-  end(field) {
-    var _a22;
-    console.log(`${field} completed`);
-    const download = this.all.get(field);
-    if (!download)
-      throw new Error("Failing missing download");
-    download.status = "completed";
-    (_a22 = this.onUpdate) == null ? void 0 : _a22.call(this, this);
-  }
-  signal() {
-    var _a22;
-    if (this.sleeping)
-      return;
-    this.sleeping = true;
-    setTimeout(() => this.sleeping = false, this.delay);
-    (_a22 = this.onUpdate) == null ? void 0 : _a22.call(this, this);
-  }
-}
-class RetryRequest {
-  constructor(url2, range2, responseType) {
-    __publicField(this, "url");
-    __publicField(this, "range");
-    __publicField(this, "responseType");
-    __publicField(this, "msg");
-    __publicField(this, "xhr");
-    __publicField(this, "onLoad");
-    __publicField(this, "onError");
-    __publicField(this, "onProgress");
-    this.url = url2;
-    this.range = range2;
-    this.responseType = responseType;
-  }
-  send() {
-    var _a22;
-    (_a22 = this.xhr) == null ? void 0 : _a22.abort();
-    const xhr = new XMLHttpRequest();
-    xhr.open("GET", this.url);
-    xhr.responseType = this.responseType;
-    if (this.range) {
-      xhr.setRequestHeader("Range", this.range);
-    }
-    xhr.onprogress = (e) => {
-      var _a3;
-      (_a3 = this.onProgress) == null ? void 0 : _a3.call(this, e);
-    };
-    xhr.onload = (e) => {
-      var _a3, _b2;
-      (_a3 = this.onProgress) == null ? void 0 : _a3.call(this, e);
-      (_b2 = this.onLoad) == null ? void 0 : _b2.call(this, xhr.response);
-    };
-    xhr.onerror = (_) => {
-      var _a3;
-      (_a3 = this.onError) == null ? void 0 : _a3.call(this);
-    };
-    xhr.send();
-    this.xhr = xhr;
-  }
-}
-class RemoteBuffer {
-  constructor(url2, logger = new RequestLogger(url2)) {
-    __publicField(this, "url");
-    __publicField(this, "logger");
-    __publicField(this, "queue", []);
-    __publicField(this, "active", /* @__PURE__ */ new Set());
-    __publicField(this, "maxConcurency", 10);
-    __publicField(this, "encoded");
-    this.url = url2;
-    this.logger = logger;
-    this.encoded = new RemoteValue(() => this.requestEncoding());
-  }
-  async requestEncoding() {
-    const xhr = new XMLHttpRequest();
-    xhr.open("HEAD", this.url);
-    xhr.send();
-    console.log(`Requesting header for ${this.url}`);
-    const promise = new Promise((resolve, reject) => {
-      xhr.onload = (_) => {
-        let encoding2 = null;
-        try {
-          encoding2 = xhr.getResponseHeader("content-encoding");
-        } catch (e) {
-          console.error(e);
-        }
-        resolve(encoding2);
-      };
-      xhr.onerror = (_) => resolve(null);
-    });
-    const encoding = await promise;
-    const encoded = !!encoding;
-    console.log(`Encoding for ${this.url} = ${encoding}`);
-    if (encoded) {
-      console.log(`Defaulting to download strategy for encoded content at ${this.url}`);
-    }
-    return encoded;
-  }
-  async http(range2, label) {
-    const useRange = range2 && !await this.encoded.get();
-    const rangeStr = useRange ? `bytes=${range2.start}-${range2.end - 1}` : void 0;
-    const request = new RetryRequest(this.url, rangeStr, "arraybuffer");
-    request.msg = useRange ? `${label} : [${range2.start}, ${range2.end}] of ${this.url}` : `${label} of ${this.url}`;
-    this.enqueue(request);
-    return new Promise((resolve, reject) => {
-      this.logger.start(label);
-      request.onProgress = (e) => {
-        this.logger.update(label, e);
-      };
-      request.onLoad = (result) => {
-        this.logger.end(label);
-        resolve(result);
-        this.end(request);
-      };
-      request.onError = () => {
-        this.logger.fail(label);
-        this.retry(request);
-      };
-    });
-  }
-  enqueue(xhr) {
-    this.queue.push(xhr);
-    this.next();
-  }
-  retry(xhr) {
-    this.active.delete(xhr);
-    this.maxConcurency = Math.max(1, this.maxConcurency - 1);
-    setTimeout(() => this.enqueue(xhr), 2e3);
-  }
-  end(xhr) {
-    this.active.delete(xhr);
-    this.next();
-  }
-  next() {
-    if (this.queue.length === 0) {
-      return;
-    }
-    if (this.active.size >= this.maxConcurency) {
-      return;
-    }
-    const next = this.queue[0];
-    this.queue.shift();
-    this.active.add(next);
-    next.send();
-    console.log("Starting " + next.msg);
-  }
-}
-class Range {
-  constructor(start, end) {
-    __publicField(this, "start");
-    __publicField(this, "end");
-    this.start = start;
-    this.end = end;
-  }
-  get count() {
-    return this.end - this.start;
-  }
-  offset(offset) {
-    return new Range(this.start + offset, this.end + offset);
-  }
-}
-function typeSize(type) {
-  switch (type) {
-    case "byte":
-      return 1;
-    case "short":
-      return 2;
-    case "int":
-    case "float":
-      return 4;
-    case "long":
-    case "double":
-      return 8;
-    default:
-      return 4;
-  }
-}
-function typeConstructor(type) {
-  switch (type) {
-    case "byte":
-      return Int8Array;
-    case "short":
-      return Int16Array;
-    case "int":
-      return Int32Array;
-    case "float":
-      return Float32Array;
-    case "long":
-    case "double":
-      return Float64Array;
-    default:
-      return Int32Array;
-  }
-}
-class BFastHeader {
-  constructor(magic, dataStart, dataEnd, numArrays) {
-    __publicField(this, "magic");
-    __publicField(this, "dataStart");
-    __publicField(this, "dataEnd");
-    __publicField(this, "numArrays");
-    if (magic !== 49061) {
-      throw new Error("Invalid Bfast. Invalid Magic number");
-    }
-    if (dataStart <= 32 || dataStart > Number.MAX_SAFE_INTEGER) {
-      throw new Error("Invalid Bfast. Data start is out of valid range");
-    }
-    if (dataEnd < dataStart || dataEnd > Number.MAX_SAFE_INTEGER) {
-      throw new Error("Invalid Bfast. Data end is out of valid range");
-    }
-    if (numArrays < 0 || numArrays > dataEnd) {
-      throw new Error("Invalid Bfast. Number of arrays is invalid");
-    }
-    this.magic = magic;
-    this.dataStart = dataStart;
-    this.dataEnd = dataEnd;
-    this.numArrays = numArrays;
-  }
-  static createFromArray(array) {
-    if (array[1] !== 0) {
-      throw new Error("Invalid Bfast. Expected 0 in byte position 0");
-    }
-    if (array[3] !== 0) {
-      throw new Error("Invalid Bfast. Expected 0 in byte position 8");
-    }
-    if (array[5] !== 0) {
-      throw new Error("Invalid Bfast. Expected 0 in position 16");
-    }
-    if (array[7] !== 0) {
-      throw new Error("Invalid Bfast. Expected 0 in position 24");
-    }
-    return new this(array[0], array[2], array[4], array[6]);
-  }
-  static createFromBuffer(array) {
-    return BFastHeader.createFromArray(new Uint32Array(array));
-  }
-}
-class BFast {
-  constructor(source, offset = 0, name = "") {
-    __publicField(this, "source");
-    __publicField(this, "offset");
-    __publicField(this, "name");
-    __publicField(this, "_header");
-    __publicField(this, "_ranges");
-    __publicField(this, "_children");
-    this.source = source;
-    this.offset = offset;
-    this.name = name;
-    this._header = new RemoteValue(() => this.requestHeader(), name + ".header");
-    this._children = /* @__PURE__ */ new Map();
-    this._ranges = new RemoteValue(() => this.requestRanges(), name + ".ranges");
-  }
-  async getHeader() {
-    return this._header.get();
-  }
-  async getRanges() {
-    return this._ranges.get();
-  }
-  async getBfast(name) {
-    let request = this._children.get(name);
-    if (!request) {
-      request = new RemoteValue(() => this.requestBfast(name));
-      this._children.set(name, request);
-    }
-    return request.get();
-  }
-  async getLocalBfast(name) {
-    const buffer = await this.getBuffer(name);
-    return new BFast(buffer, 0, name);
-  }
-  async getBuffer(name) {
-    const ranges = await this.getRanges();
-    const range2 = ranges.get(name);
-    if (!range2)
-      return;
-    const buffer = await this.request(range2, name);
-    return buffer;
-  }
-  async getArray(name) {
-    const buffer = await this.getBuffer(name);
-    if (!buffer)
-      return;
-    const type = name.split(":")[0];
-    const Ctor = typeConstructor(type);
-    const array = new Ctor(buffer);
-    return Array.from(array);
-  }
-  async getValue(name, index) {
-    const ranges = await this.getRanges();
-    const range2 = ranges.get(name);
-    if (!range2)
-      return;
-    const type = name.split(":")[0];
-    const size = typeSize(type);
-    const start = range2.start + index * size;
-    const buffer = await this.request(new Range(start, start + size), `${name}[${index.toString()}]`);
-    if (!buffer)
-      return;
-    const Ctor = typeConstructor(type);
-    const array = new Ctor(buffer);
-    return array[0];
-  }
-  async getBytes(name) {
-    const buffer = await this.getBuffer(name);
-    if (!buffer)
-      return;
-    const array = new Uint8Array(buffer);
-    return array;
-  }
-  async getRow(index) {
-    const ranges = await this.getRanges();
-    if (!ranges)
-      return;
-    const result = /* @__PURE__ */ new Map();
-    const promises = [];
-    for (const name of ranges.keys()) {
-      const p2 = this.getValue(name, index).then((v2) => result.set(name, v2));
-      promises.push(p2);
-    }
-    await Promise.all(promises);
-    return result;
-  }
-  async forceDownload() {
-    if (this.source instanceof ArrayBuffer) {
-      console.log("Ignoring forceDownload on local buffer.");
-      return;
-    }
-    const buffer = await this.remote(void 0, this.name);
-    if (!buffer)
-      throw new Error("Failed to download BFAST.");
-    this.source = buffer;
-  }
-  async requestBfast(name) {
-    const ranges = await this.getRanges();
-    const range2 = ranges.get(name);
-    if (!range2)
-      return;
-    const result = new BFast(this.source, this.offset + range2.start, this.name + "." + name);
-    return result;
-  }
-  async requestRanges() {
-    const header = await this.getHeader();
-    const buffer = await this.request(new Range(32, 32 + header.numArrays * 16), "Ranges");
-    if (!buffer)
-      throw new Error("Could not get BFAST Ranges.");
-    const array = new Uint32Array(buffer);
-    const ranges = [];
-    for (let i2 = 0; i2 < array.length; i2 += 4) {
-      if (array[i2 + 1] !== 0 || array[i2 + 3] !== 0) {
-        throw new Error("Invalid Bfast. 64 bit ranges not supported");
-      }
-      ranges.push(new Range(array[i2], array[i2 + 2]));
-    }
-    const names = await this.requestNames(ranges[0]);
-    if (ranges.length !== names.length + 1) {
-      throw new Error("Mismatched ranges and names count");
-    }
-    const map = /* @__PURE__ */ new Map();
-    for (let i2 = 0; i2 < names.length; i2++) {
-      map.set(names[i2], ranges[i2 + 1]);
-    }
-    return map;
-  }
-  async requestNames(range2) {
-    const buffer = await this.request(range2, "Names");
-    const names = new TextDecoder("utf-8").decode(buffer);
-    const result = names.slice(0, -1).split("\0");
-    return result;
-  }
-  async requestHeader() {
-    const buffer = await this.request(new Range(0, 32), "Header");
-    if (!buffer)
-      throw new Error("Could not get BFAST Header");
-    const result = BFastHeader.createFromBuffer(buffer);
-    return result;
-  }
-  async request(range2, label) {
-    var _a22, _b2;
-    const buffer = (_b2 = (_a22 = this.local(range2, label)) != null ? _a22 : await this.remote(range2, label)) != null ? _b2 : await this.remote(void 0, label);
-    if (!buffer) {
-      throw new Error(`Could not load vim at ${this.source}`);
-    }
-    if (buffer.byteLength > range2.count) {
-      this.source = buffer;
-      return this.local(range2, label);
-    }
-    return buffer;
-  }
-  local(range2, label) {
-    if (!(this.source instanceof ArrayBuffer))
-      return;
-    console.log(`Returning local ${this.name}.${label}`);
-    const r2 = range2.offset(this.offset);
-    return this.source.slice(r2.start, r2.end);
-  }
-  async remote(range2, label) {
-    var _a22;
-    if (!(this.source instanceof RemoteBuffer))
-      return;
-    const r2 = range2 == null ? void 0 : range2.offset(this.offset);
-    const buffer = await this.source.http(r2, `${this.name}.${label}`);
-    if (range2 && ((_a22 = buffer == null ? void 0 : buffer.byteLength) != null ? _a22 : 0) < range2.count) {
-      console.log("Range request request failed.");
-      return;
-    }
-    return buffer;
-  }
-}
-class Section {
-  constructor(renderer, materials) {
-    __publicField(this, "_renderer");
-    __publicField(this, "_materials");
-    __publicField(this, "_active");
-    __publicField(this, "box", new Box3(new Vector3(-100, -100, -100), new Vector3(100, 100, 100)));
-    __publicField(this, "maxX", new Plane(new Vector3(-1, 0, 0)));
-    __publicField(this, "minX", new Plane(new Vector3(1, 0, 0)));
-    __publicField(this, "maxY", new Plane(new Vector3(0, -1, 0)));
-    __publicField(this, "minY", new Plane(new Vector3(0, 1, 0)));
-    __publicField(this, "maxZ", new Plane(new Vector3(0, 0, -1)));
-    __publicField(this, "minZ", new Plane(new Vector3(0, 0, 1)));
-    __publicField(this, "planes", [
-      this.maxX,
-      this.minX,
-      this.maxY,
-      this.minY,
-      this.maxZ,
-      this.minZ
-    ]);
-    this._renderer = renderer;
-    this._materials = materials;
-  }
-  fitBox(box) {
-    this.maxX.constant = box.max.x;
-    this.minX.constant = -box.min.x;
-    this.maxY.constant = box.max.y;
-    this.minY.constant = -box.min.y;
-    this.maxZ.constant = box.max.z;
-    this.minZ.constant = -box.min.z;
-    this.box.copy(box);
-  }
-  set active(value) {
-    const p2 = value ? this.planes : void 0;
-    this._materials.opaque.clippingPlanes = p2;
-    this._materials.transparent.clippingPlanes = p2;
-    this._materials.wireframe.clippingPlanes = p2;
-    this._materials.isolation.clippingPlanes = p2;
-    this._renderer.localClippingEnabled = value;
-    this._active = value;
-  }
-  get active() {
-    return this._active;
-  }
-}
-class Renderer {
-  constructor(scene, viewport, materials) {
-    __publicField(this, "renderer");
-    __publicField(this, "textRenderer");
-    __publicField(this, "viewport");
-    __publicField(this, "scene");
-    __publicField(this, "section");
-    __publicField(this, "materials");
-    __publicField(this, "_onVisibilityChanged", new dist$1.SimpleEventDispatcher());
-    __publicField(this, "fitViewport", () => {
-      const size = this.viewport.getParentSize();
-      this.renderer.setPixelRatio(window.devicePixelRatio);
-      this.renderer.setSize(size.x, size.y);
-      this.textRenderer.setSize(size.x, size.y);
-    });
-    this.viewport = viewport;
-    this.scene = scene;
-    this.materials = materials;
-    this.renderer = new WebGLRenderer({
-      canvas: viewport.canvas,
-      antialias: true,
-      precision: "highp",
-      alpha: true,
-      stencil: false,
-      powerPreference: "high-performance",
-      logarithmicDepthBuffer: true
-    });
-    this.textRenderer = this.viewport.createTextRenderer();
-    this.fitViewport();
-    this.viewport.onResize(() => this.fitViewport());
-    this.renderer.setPixelRatio(window.devicePixelRatio);
-    this.renderer.shadowMap.enabled = false;
-    this.section = new Section(this.renderer, this.materials);
-  }
-  get onVisibilityChanged() {
-    return this._onVisibilityChanged.asEvent();
-  }
-  dispose() {
-    this.clear();
-    this.renderer.clear();
-    this.renderer.forceContextLoss();
-    this.renderer.dispose();
-  }
-  getBoundingBox(target = new Box3()) {
-    return this.scene.getBoundingBox(target);
-  }
-  render(camera) {
-    this.renderer.render(this.scene.scene, camera);
-    this.textRenderer.render(this.scene.scene, camera);
-    this.scene.getUpdatedScenes().forEach((s) => this._onVisibilityChanged.dispatch(s.vim));
-    this.scene.clearUpdateFlags();
-  }
-  add(target) {
-    this.scene.add(target);
-  }
-  remove(target) {
-    this.scene.remove(target);
-  }
-  clear() {
-    this.scene.clear();
-  }
-  applyMaterialSettings(settings2) {
-    this.materials.applyWireframeSettings(settings2.getHighlightColor(), settings2.getHighlightOpacity());
-  }
-}
-class Viewer {
-  constructor(options) {
-    __publicField(this, "settings");
-    __publicField(this, "renderer");
-    __publicField(this, "viewport");
-    __publicField(this, "selection");
-    __publicField(this, "inputs");
-    __publicField(this, "raycaster");
-    __publicField(this, "sectionBox");
-    __publicField(this, "measure");
-    __publicField(this, "gizmoRectangle");
-    __publicField(this, "_environment");
-    __publicField(this, "_camera");
-    __publicField(this, "_loader");
-    __publicField(this, "_clock", new Clock());
-    __publicField(this, "_gizmoAxes");
-    __publicField(this, "_materials");
-    __publicField(this, "_vims", []);
-    __publicField(this, "_disposed", false);
-    __publicField(this, "_onVimLoaded", new dist$3.SignalDispatcher());
-    var _a22;
-    this.settings = new ViewerSettings(options);
-    const materials = new VimMaterials();
-    this._loader = new Loader(materials);
-    this._materials = materials;
-    const scene = new RenderScene();
-    this.viewport = new Viewport(this.settings);
-    this._camera = new Camera(scene, this.viewport, this.settings);
-    this.renderer = new Renderer(scene, this.viewport, materials);
-    if (this.settings.getCameraGizmoEnable()) {
-      this._camera.gizmo = new CameraGizmo(this.renderer, this._camera, this.settings);
-    }
-    this.renderer.applyMaterialSettings(this.settings);
-    this.measure = new Measure(this);
-    this._gizmoAxes = new GizmoAxes(this.camera);
-    (_a22 = this.viewport.canvas.parentElement) == null ? void 0 : _a22.prepend(this._gizmoAxes.canvas);
-    this.sectionBox = new SectionBox(this);
-    this.gizmoRectangle = new GizmoRectangle(this);
-    this._environment = new Environment(this.settings);
-    this._environment.getObjects().forEach((o) => this.renderer.add(o));
-    this.selection = new Selection(this.renderer);
-    this.raycaster = new Raycaster(this.viewport, this._camera, scene, this.renderer);
-    this.inputs = new Input(this);
-    this.inputs.registerAll();
-    this.animate();
-  }
-  get camera() {
-    return this._camera;
-  }
-  get environment() {
-    return this._environment;
-  }
-  get onVimLoaded() {
-    return this._onVimLoaded.asEvent();
-  }
-  get axesCanvas() {
-    return this._gizmoAxes.canvas;
-  }
-  dispose() {
-    if (this._disposed)
-      return;
-    this._environment.dispose();
-    this.selection.clear();
-    this._camera.dispose();
-    this.viewport.dispose();
-    this.renderer.dispose();
-    this.inputs.unregisterAll();
-    this._vims.forEach((v2) => v2 == null ? void 0 : v2.dispose());
-    this._materials.dispose();
-    this.gizmoRectangle.dispose();
-    this._disposed = true;
-  }
-  animate() {
-    if (this._disposed)
-      return;
-    requestAnimationFrame(() => this.animate());
-    this._camera.update(this._clock.getDelta());
-    if (this._vims.length)
-      this.renderer.render(this.camera.camera);
-  }
-  get vims() {
-    return this._vims.filter((v2) => v2 !== void 0);
-  }
-  get vimCount() {
-    return this._vims.length;
-  }
-  addVim(vim) {
-    for (let i2 = 0; i2 <= this._vims.length; i2++) {
-      if (this._vims[i2] === void 0) {
-        this._vims[i2] = vim;
-        vim.index = i2;
-        return;
-      }
-    }
-  }
-  removeVim(vim) {
-    this._vims[vim.index] = void 0;
-    vim.index = -1;
-  }
-  async loadVim(source, options, onProgress) {
-    let buffer;
-    let url2;
-    if (typeof source === "string") {
-      url2 = source;
-      buffer = new RemoteBuffer(source);
-      buffer.logger.onUpdate = (log) => onProgress == null ? void 0 : onProgress(log);
-    } else
-      buffer = source;
-    const settings2 = new VimSettings(options);
-    const bfast = new BFast(buffer, 0, "vim");
-    const vim = await this._loader.load(bfast, settings2);
-    vim.source = url2;
-    if (buffer instanceof RemoteBuffer)
-      buffer.logger.onUpdate = void 0;
-    this.onLoad(vim);
-    return vim;
-  }
-  onLoad(vim) {
-    this.addVim(vim);
-    this.renderer.add(vim.scene);
-    const box = this.renderer.getBoundingBox();
-    if (box) {
-      this._environment.adaptToContent(box);
-      this.sectionBox.fitBox(box);
-    }
-    this._camera.adaptToContent();
-    this._camera.frame("all", 45);
-    this._onVimLoaded.dispatch();
-  }
-  unloadVim(vim) {
-    this.removeVim(vim);
-    this.renderer.remove(vim.scene);
-    vim.dispose();
-    if (this.selection.vim === vim) {
-      this.selection.clear();
-    }
-    this._onVimLoaded.dispatch();
-  }
-  clear() {
-    this.vims.forEach((v2) => this.unloadVim(v2));
-  }
-  filterVim(vim, objects) {
-    const instances = objects == null ? void 0 : objects.flatMap((o) => o == null ? void 0 : o.instances).filter((i2) => i2 !== void 0);
-    this.renderer.remove(vim.scene);
-    vim.filter(instances);
-    this.renderer.add(vim.scene);
-  }
-}
-var vimWebglViewer_es = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  THREE,
-  BFast,
-  BFastHeader,
-  DefaultInputScheme,
-  Document,
-  DocumentNoBim,
-  G3d,
-  get Geometry() {
-    return Geometry;
-  },
-  HitTestResult: RaycastResult,
-  KEYS,
-  Loader,
-  MeshBuilder,
-  Object: Object$1,
-  Range,
-  Scene,
-  get Transparency() {
-    return Transparency;
-  },
-  Viewer,
-  ViewerSettings,
-  Vim,
-  VimMaterials,
-  VimSettings,
-  createBase,
-  createFocus,
-  createIsolationMaterial,
-  createOpaque,
-  createTransparent,
-  createWireframe,
-  patchBaseMaterial
-}, Symbol.toStringTag, { value: "Module" }));
-function setBehind(value) {
-  const component = document.getElementsByClassName("vim-component")[0];
-  const behind = component.classList.contains("behind");
-  if (value && !behind) {
-    component.classList.add("behind");
-  } else if (!value && behind) {
-    component.classList.remove("behind");
-  }
-}
-function resetCamera(viewer2) {
-  viewer2.camera.reset();
-  viewer2.camera.frame("all", 45);
-}
-function frameContext(viewer2) {
-  const box = viewer2.selection.count > 0 ? viewer2.selection.getBoundingBox() : getVisibleBoundingBox(viewer2);
-  if (box)
-    viewer2.camera.frame(box, "none", viewer2.camera.defaultLerpDuration);
-}
-function frameSelection(viewer2) {
-  if (viewer2.selection.count === 0)
-    return;
-  const box = viewer2.selection.getBoundingBox();
-  if (box && viewer2.sectionBox.box.intersectsBox(box)) {
-    viewer2.camera.frame(box, "none", viewer2.camera.defaultLerpDuration);
-  }
-}
-function isolate(viewer2, settings2, objects) {
-  if (!objects) {
-    showAll(viewer2);
-  } else {
-    const set3 = new Set(objects);
-    let allVisible = true;
-    viewer2.vims.forEach((vim) => {
-      for (const obj of vim.getAllObjects()) {
-        const has2 = set3.has(obj);
-        obj.visible = has2;
-        if (!has2)
-          allVisible = false;
-      }
-      vim.scene.material = !allVisible && settings2.useIsolationMaterial ? viewer2.renderer.materials.isolation : void 0;
-    });
-  }
-  viewer2.camera.frame(getVisibleBoundingBox(viewer2), "none", viewer2.camera.defaultLerpDuration);
-  viewer2.selection.clear();
-}
-function showAll(viewer2, settings2) {
-  viewer2.vims.forEach((v2) => {
-    for (const obj of v2.getAllObjects()) {
-      obj.visible = true;
-    }
-    v2.scene.material = void 0;
-  });
-}
-function setAllVisible(source) {
-  const vimShowAll = (vim) => {
-    for (const obj of vim.getAllObjects()) {
-      obj.visible = true;
-    }
-    vim.scene.material = void 0;
-  };
-  if (source instanceof Viewer) {
-    for (const vim of source.vims) {
-      vimShowAll(vim);
-    }
-  } else {
-    vimShowAll(source);
-  }
-}
-function getAllVisible(source) {
-  const vimAllVisible = (vim) => {
-    for (const obj of vim.getAllObjects()) {
-      if (!obj.visible)
-        return false;
-    }
-    return true;
-  };
-  if (source instanceof Viewer) {
-    for (const vim of source.vims) {
-      if (!vimAllVisible(vim))
-        return false;
-    }
-    return true;
-  } else {
-    return vimAllVisible(source);
-  }
-}
-function getVisibleBoundingBox(source) {
-  let box;
-  const vimBoxUnion = (vim) => {
-    for (const obj of vim.getAllObjects()) {
-      if (!obj.visible)
-        continue;
-      const b = obj.getBoundingBox();
-      if (!b)
-        continue;
-      box = box ? box.union(b) : b == null ? void 0 : b.clone();
-    }
-  };
-  if (source instanceof Viewer) {
-    for (const vim of source.vims) {
-      vimBoxUnion(vim);
-    }
-  } else {
-    vimBoxUnion(source);
-  }
-  return box;
-}
 const MenuTop = React.memo(_MenuTop);
 function _MenuTop(props) {
-  const [ortho, setOrtho] = react.exports.useState(props.viewer.camera.orthographic);
+  const viewer2 = props.viewer.base;
+  const helper = props.viewer;
+  const [ortho, setOrtho] = react.exports.useState(viewer2.camera.orthographic);
   const ui2 = react.exports.useRef();
   react.exports.useEffect(() => {
-    props.viewer.camera.onValueChanged.subscribe(() => setOrtho(props.viewer.camera.orthographic));
+    viewer2.camera.onValueChanged.subscribe(() => setOrtho(viewer2.camera.orthographic));
     const axes = document.getElementsByClassName("gizmo-axis-canvas")[0];
     ui2.current.appendChild(axes);
   }, []);
   const onHomeBtn = () => {
-    resetCamera(props.viewer);
+    helper.resetCamera();
   };
   const btnHome = /* @__PURE__ */ React.createElement("button", {
     "data-tip": "Reset Camera",
@@ -49334,7 +40743,7 @@ function _MenuTop(props) {
   }), " ");
   const btnOrtho = /* @__PURE__ */ React.createElement("button", {
     "data-tip": ortho ? "Orthographic" : "Perspective",
-    onClick: () => props.viewer.camera.orthographic = !ortho,
+    onClick: () => props.viewer.base.camera.orthographic = !ortho,
     className: "rounded-full text-gray-medium h-8 w-8 flex items-center justify-center transition-all hover:text-primary-royal",
     type: "button"
   }, ortho ? /* @__PURE__ */ React.createElement(orthographic, {
@@ -49439,7 +40848,7 @@ function ControlBar(props) {
     ReactTooltip.rebuild();
   });
   react.exports.useEffect(() => {
-    props.viewer.camera.onMoved.subscribe(() => {
+    props.viewer.base.camera.onMoved.subscribe(() => {
       if (showRef.current) {
         showRef.current = false;
         setShow(false);
@@ -49457,15 +40866,16 @@ function ControlBar(props) {
     className: `vim-control-bar flex items-center justify-center w-full fixed px-2 bottom-0 py-2 mb-9 transition-opacity transition-all ${show ? "opacity-100" : "opacity-0"}`
   }, /* @__PURE__ */ React.createElement("div", {
     className: "vim-control-bar-section flex items-center bg-white rounded-full px-2 shadow-md mx-2"
-  }, TabCamera(props.viewer)), TabTools(props.viewer, props.setCursor, props.isolation), /* @__PURE__ */ React.createElement("div", {
+  }, /* @__PURE__ */ React.createElement(TabCamera, __spreadValues({}, props))), /* @__PURE__ */ React.createElement(TabTools, __spreadValues({}, props)), /* @__PURE__ */ React.createElement("div", {
     className: "vim-control-bar-section flex items-center bg-white rounded-full px-2 shadow-md mx-2"
   }, /* @__PURE__ */ React.createElement(TabSettings, __spreadValues({}, props))));
 }
-function TabCamera(viewer2) {
+function TabCamera(props) {
+  const viewer2 = props.viewer.base;
+  const helper = props.viewer;
   const [mode, setMode] = react.exports.useState(viewer2.inputs.pointerActive);
   react.exports.useEffect(() => {
     viewer2.inputs.onPointerModeChanged.subscribe(() => {
-      console.log("MODE");
       setMode(viewer2.inputs.pointerActive);
     });
   }, []);
@@ -49483,7 +40893,7 @@ function TabCamera(viewer2) {
     viewer2.sectionBox.visible = false;
     viewer2.sectionBox.interactive = false;
   }, frameRect, () => mode === "rect");
-  const btnFrame = actionButton("Zoom to Fit", () => frameContext(viewer2), frameSelection$1, false);
+  const btnFrame = actionButton("Zoom to Fit", () => helper.frameContext(), frameSelection, false);
   return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", {
     className: "mx-1"
   }, btnOrbit), /* @__PURE__ */ React.createElement("div", {
@@ -49498,7 +40908,8 @@ function TabCamera(viewer2) {
     className: "mx-1"
   }, btnFrame));
 }
-function TabTools(viewer2, setCursor, isolation) {
+function TabTools(props) {
+  const viewer2 = props.viewer.base;
   const [measuring, setMeasuring] = react.exports.useState(false);
   const [measurement, setMeasurement] = react.exports.useState();
   const [section, setSection] = react.exports.useState({
@@ -49532,7 +40943,7 @@ function TabTools(viewer2, setCursor, isolation) {
       setMeasuring(false);
     } else {
       setMeasuring(true);
-      loopMeasure(viewer2, () => measuringRef.current, (m2) => setMeasurement(m2), setCursor);
+      loopMeasure(viewer2, () => measuringRef.current, (m2) => setMeasurement(m2), props.cursor.setCursor);
     }
   };
   const onResetSectionBtn = () => {
@@ -49551,7 +40962,7 @@ function TabTools(viewer2, setCursor, isolation) {
   };
   const btnSection = actionButton("Sectioning Mode", onSectionBtn, sectionBox, false);
   const btnMeasure = actionButton("Measuring Mode", onMeasureBtn, measure, false);
-  const btnIsolation = actionButton("Toggle Isolation", () => isolation.toggleContextual("controlBar"), toggleIsolation, false);
+  const btnIsolation = actionButton("Toggle Isolation", () => props.isolation.toggleContextual("controlBar"), toggleIsolation, false);
   const toolsTab = /* @__PURE__ */ React.createElement("div", {
     className: "vim-menu-section flex items-center bg-white rounded-full px-2 mx-2 shadow-md"
   }, /* @__PURE__ */ React.createElement("div", {
@@ -49607,17 +41018,17 @@ function TabSettings(props) {
     refreshFullScreen();
   }, []);
   const onHelpBtn = () => {
-    props.setHelpVisible(!props.helpVisible);
+    props.help.setVisible(!props.help.visible);
   };
   const onTreeViewBtn = () => {
-    props.toggleSide("bim");
+    props.side.toggle("bim");
   };
   const onSettingsBtn = () => {
-    props.toggleSide("settings");
+    props.side.toggle("settings");
   };
-  const btnTreeView = toggleButton("Project Inspector", onTreeViewBtn, treeView, () => props.side === "bim");
-  const btnSettings = toggleButton("Settings", onSettingsBtn, settings, () => props.side === "settings");
-  const btnHelp = toggleButton("Help", onHelpBtn, help, () => props.helpVisible);
+  const btnTreeView = toggleButton("Project Inspector", onTreeViewBtn, treeView, () => props.side.get() === "bim");
+  const btnSettings = toggleButton("Settings", onSettingsBtn, settings, () => props.side.get() === "settings");
+  const btnHelp = toggleButton("Help", onHelpBtn, help, () => props.help.visible);
   const btnFullScreen = actionButton(document.fullscreenElement ? "Fullscreen" : "Minimize", () => {
     if (document.fullscreenElement) {
       document.exitFullscreen();
@@ -49655,6 +41066,15 @@ function loopMeasure(viewer2, getMeasuring, setMeasure, setCursor) {
     }
   });
 }
+function setComponentBehind(value) {
+  const component = document.getElementsByClassName("vim-component")[0];
+  const behind = component.classList.contains("behind");
+  if (value && !behind) {
+    component.classList.add("behind");
+  } else if (!value && behind) {
+    component.classList.remove("behind");
+  }
+}
 const LoadingBox = React.memo(_LoadingBox);
 function _LoadingBox(props) {
   const [progress, setProgress] = react.exports.useState();
@@ -49667,7 +41087,7 @@ function _LoadingBox(props) {
     };
   }, []);
   react.exports.useEffect(() => {
-    setBehind(progress !== void 0);
+    setComponentBehind(progress !== void 0);
   }, [progress]);
   const msg = progress === "processing" ? "Processing" : typeof progress === "number" ? /* @__PURE__ */ React.createElement("div", {
     className: "flex justify-between w-full"
@@ -59043,7 +50463,7 @@ object-assign
 @license MIT
 */
 var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-var hasOwnProperty = Object.prototype.hasOwnProperty;
+var hasOwnProperty$a = Object.prototype.hasOwnProperty;
 var propIsEnumerable = Object.prototype.propertyIsEnumerable;
 function toObject(val) {
   if (val === null || val === void 0) {
@@ -59090,7 +50510,7 @@ var objectAssign = shouldUseNative() ? Object.assign : function(target, source) 
   for (var s = 1; s < arguments.length; s++) {
     from = Object(arguments[s]);
     for (var key in from) {
-      if (hasOwnProperty.call(from, key)) {
+      if (hasOwnProperty$a.call(from, key)) {
         to[key] = from[key];
       }
     }
@@ -60164,18 +51584,20 @@ function showContextMenu(position) {
   };
   showMenu(showMenuConfig);
 }
-function VimContextMenu(props) {
-  const viewer2 = props.viewer;
+const VimContextMenu = React.memo(_VimContextMenu);
+function _VimContextMenu(props) {
+  const viewer2 = props.viewer.base;
+  const helper = props.viewer;
   const [selection, setSelection] = react.exports.useState([]);
   const [section, setSection] = react.exports.useState({
-    visible: props.viewer.sectionBox.visible,
-    clip: props.viewer.sectionBox.clip
+    visible: viewer2.sectionBox.visible,
+    clip: viewer2.sectionBox.clip
   });
   const isClipping = () => {
     return !viewer2.sectionBox.box.containsBox(viewer2.renderer.getBoundingBox());
   };
   const [clipping, setClipping] = react.exports.useState(isClipping());
-  const [hidden2, setHidden] = react.exports.useState(!getAllVisible(viewer2));
+  const [hidden2, setHidden] = react.exports.useState(!helper.areAllObjectsVisible());
   react.exports.useEffect(() => {
     viewer2.selection.onValueChanged.subscribe(() => {
       setSelection([...viewer2.selection.objects]);
@@ -60187,21 +51609,21 @@ function VimContextMenu(props) {
       });
     });
     viewer2.renderer.onVisibilityChanged.subscribe((vim) => {
-      setHidden(!getAllVisible(vim));
+      setHidden(!helper.areAllObjectsVisible(vim));
       setSelection([...viewer2.selection.objects]);
     });
     viewer2.sectionBox.onBoxConfirm.subscribe(() => setClipping(isClipping()));
   }, []);
   const onShowControlsBtn = (e) => {
-    props.setHelpVisible(!props.helpVisible);
+    props.help.setVisible(true);
     e.stopPropagation();
   };
   const onCameraResetBtn = (e) => {
-    resetCamera(viewer2);
+    helper.resetCamera();
     e.stopPropagation();
   };
   const onCameraFrameBtn = (e) => {
-    frameContext(viewer2);
+    helper.frameContext();
     e.stopPropagation();
   };
   const onSelectionIsolateBtn = (e) => {
@@ -60425,6 +51847,8 @@ function range(size, startAt = 0) {
   return [...Array(size).keys()].map((i2) => i2 + startAt);
 }
 function BimTree(props) {
+  const viewer2 = props.viewer.base;
+  const helper = props.viewer;
   const [objects, setObjects] = react.exports.useState([]);
   const [elements, setElements] = react.exports.useState();
   const treeRef = react.exports.useRef();
@@ -60436,7 +51860,7 @@ function BimTree(props) {
   const focus = react.exports.useRef(0);
   const div2 = react.exports.useRef();
   react.exports.useMemo(() => {
-    return treeRef.current = toTreeData(props.viewer, elements);
+    return treeRef.current = toTreeData(props.viewer.base, elements);
   }, [elements]);
   react.exports.useEffect(() => {
     ReactTooltip.rebuild();
@@ -60444,13 +51868,13 @@ function BimTree(props) {
   react.exports.useEffect(() => {
     if (elements && objects.length === 1) {
       scrollToSelection(div2.current);
-      const [first] = props.viewer.selection.objects;
+      const [first] = viewer2.selection.objects;
       focus.current = treeRef.current.getNodeFromElement(first.element);
     }
   }, [elements, objects]);
   react.exports.useEffect(() => {
-    props.viewer.renderer.onVisibilityChanged.subscribe(() => {
-      treeRef.current.updateVisibility(props.viewer);
+    viewer2.renderer.onVisibilityChanged.subscribe(() => {
+      treeRef.current.updateVisibility(viewer2);
       setVersion((v2) => v2 + 1);
     });
   }, []);
@@ -60475,8 +51899,8 @@ function BimTree(props) {
     className: "vim-bim-tree mb-5",
     ref: div2,
     tabIndex: 0,
-    onFocus: () => props.viewer.inputs.keyboard.unregister(),
-    onBlur: () => props.viewer.inputs.keyboard.register()
+    onFocus: () => viewer2.inputs.keyboard.unregister(),
+    onBlur: () => viewer2.inputs.keyboard.register()
   }, /* @__PURE__ */ React.createElement(ControlledTreeEnvironment, {
     items: treeRef.current.nodes,
     getItemTitle: (item) => item.title,
@@ -60495,7 +51919,7 @@ function BimTree(props) {
     }, title), /* @__PURE__ */ React.createElement("div", {
       className: `rct-tree-item-icons ${treeRef.current.nodes[item.index].visible}`,
       onClick: (e) => {
-        toggleVisibility(props.viewer, props.isolation, treeRef.current, item.index);
+        toggleVisibility(viewer2, props.isolation, treeRef.current, item.index);
         e.stopPropagation();
       }
     }, hidden({
@@ -60518,10 +51942,10 @@ function BimTree(props) {
       createInteractiveElementProps: (item, treeId, actions, renderFlags) => ({
         onKeyUp: (e) => {
           if (e.key === "f") {
-            frameContext(props.viewer);
+            helper.frameContext();
           }
           if (e.key === "Escape") {
-            props.viewer.selection.clear();
+            viewer2.selection.clear();
           }
         },
         onContextMenu: (e) => {
@@ -60535,20 +51959,20 @@ function BimTree(props) {
         onClick: (e) => {
           if (e.shiftKey) {
             const range2 = treeRef.current.getRange(focus.current, item.index);
-            updateViewerSelection(treeRef.current, props.viewer, range2, "set");
+            updateViewerSelection(treeRef.current, viewer2, range2, "set");
           } else if (isControlKey(e)) {
             if (renderFlags.isSelected) {
               const leafs = treeRef.current.getLeafs(item.index);
-              updateViewerSelection(treeRef.current, props.viewer, leafs, "remove");
+              updateViewerSelection(treeRef.current, viewer2, leafs, "remove");
               focus.current = item.index;
             } else {
               const leafs = treeRef.current.getLeafs(item.index);
-              updateViewerSelection(treeRef.current, props.viewer, leafs, "add");
+              updateViewerSelection(treeRef.current, viewer2, leafs, "add");
               focus.current = item.index;
             }
           } else {
             const leafs = treeRef.current.getLeafs(item.index);
-            updateViewerSelection(treeRef.current, props.viewer, leafs, "set");
+            updateViewerSelection(treeRef.current, viewer2, leafs, "set");
             focus.current = item.index;
           }
           actions.primaryAction();
@@ -60558,13 +51982,13 @@ function BimTree(props) {
     },
     onPrimaryAction: (item, _) => {
       if (doubleClick.isDoubleClick(item.index)) {
-        frameSelection(props.viewer);
+        helper.frameSelection();
       }
     },
     onFocusItem: (item) => {
       const index = item.index;
       setFocusedItem(index);
-      updateViewerFocus(props.viewer, treeRef.current, index);
+      updateViewerFocus(viewer2, treeRef.current, index);
     },
     onExpandItem: (item) => {
       setExpandedItems([...expandedItems, item.index]);
@@ -60973,11 +52397,11 @@ function BimSearch(props) {
     props.setFilter(e.currentTarget.value);
   };
   const onFocus = () => {
-    props.viewer.inputs.keyboard.unregister();
+    props.viewer.base.inputs.keyboard.unregister();
     props.setSearching(true);
   };
   const onBlur = () => {
-    props.viewer.inputs.keyboard.register();
+    props.viewer.base.inputs.keyboard.register();
     props.setSearching(false);
   };
   return /* @__PURE__ */ React.createElement("div", {
@@ -61022,7 +52446,6 @@ function BimPanel(props) {
   }, []);
   react.exports.useEffect(() => {
     if (vim) {
-      console.log("VIM Update");
       vim.document.getElementsSummary().then((elements2) => {
         setElements(elements2);
       });
@@ -61035,7 +52458,6 @@ function BimPanel(props) {
       const meshElements = elements.filter((e) => vim.getObjectFromElement(e.element).hasMesh);
       const result = filterElements(vim, meshElements, filter);
       setFilteredElements(result);
-      console.log("setFilteredElements");
       if (searching.current) {
         if (filter !== "") {
           const objects = result.map((e) => vim.getObjectFromElement(e.element));
@@ -61081,7 +52503,7 @@ function BimPanel(props) {
     object: last,
     visible: last !== void 0
   }), /* @__PURE__ */ React.createElement(BimDocumentHeader, {
-    vim: viewer2.vims[0],
+    vim: viewer2.base.vims[0],
     visible: last === void 0
   }), /* @__PURE__ */ React.createElement(BimDocumentDetails, {
     vim,
@@ -61096,10 +52518,19 @@ function filterElements(vim, elements, filter) {
 var helpImage = "data:image/svg+xml;base64,PHN2ZyBpZD0icXVpY2stY29udHJvbHMiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSI3MTQiIGhlaWdodD0iMzI0IiB2aWV3Qm94PSIwIDAgNzE0IDMyNCI+DQogIDxkZWZzPg0KICAgIDxmaWx0ZXIgaWQ9ImtleS1idG0iIHg9IjU0NiIgeT0iMjczIiB3aWR0aD0iNzkuNzY1IiBoZWlnaHQ9IjQ5LjkzOCIgZmlsdGVyVW5pdHM9InVzZXJTcGFjZU9uVXNlIj4NCiAgICAgIDxmZU9mZnNldCBkeD0iMiIgZHk9IjMiIGlucHV0PSJTb3VyY2VBbHBoYSIvPg0KICAgICAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMyIgcmVzdWx0PSJibHVyIi8+DQogICAgICA8ZmVGbG9vZCBmbG9vZC1vcGFjaXR5PSIwLjIiLz4NCiAgICAgIDxmZUNvbXBvc2l0ZSBvcGVyYXRvcj0iaW4iIGluMj0iYmx1ciIvPg0KICAgICAgPGZlQ29tcG9zaXRlIGluPSJTb3VyY2VHcmFwaGljIi8+DQogICAgPC9maWx0ZXI+DQogICAgPGxpbmVhckdyYWRpZW50IGlkPSJsaW5lYXItZ3JhZGllbnQiIHgxPSIwLjcyNCIgeTE9IjAuNTY2IiB4Mj0iMC4wNDQiIHkyPSIwLjA0NiIgZ3JhZGllbnRVbml0cz0ib2JqZWN0Qm91bmRpbmdCb3giPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjM2MzYzNjIi8+DQogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyZDJkMmQiLz4NCiAgICA8L2xpbmVhckdyYWRpZW50Pg0KICAgIDxmaWx0ZXIgaWQ9ImtleS1idG0tMiIgeD0iNTQ2IiB5PSIyMzMiIHdpZHRoPSI3OS43NjUiIGhlaWdodD0iNDkuOTM4IiBmaWx0ZXJVbml0cz0idXNlclNwYWNlT25Vc2UiPg0KICAgICAgPGZlT2Zmc2V0IGR4PSIyIiBkeT0iMyIgaW5wdXQ9IlNvdXJjZUFscGhhIi8+DQogICAgICA8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIzIiByZXN1bHQ9ImJsdXItMiIvPg0KICAgICAgPGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMC4yIi8+DQogICAgICA8ZmVDb21wb3NpdGUgb3BlcmF0b3I9ImluIiBpbjI9ImJsdXItMiIvPg0KICAgICAgPGZlQ29tcG9zaXRlIGluPSJTb3VyY2VHcmFwaGljIi8+DQogICAgPC9maWx0ZXI+DQogICAgPGZpbHRlciBpZD0ia2V5LWJ0bS0zIiB4PSI1NDYiIHk9IjE5MyIgd2lkdGg9Ijc5Ljc2NSIgaGVpZ2h0PSI0OS45MzgiIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+DQogICAgICA8ZmVPZmZzZXQgZHg9IjIiIGR5PSIzIiBpbnB1dD0iU291cmNlQWxwaGEiLz4NCiAgICAgIDxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjMiIHJlc3VsdD0iYmx1ci0zIi8+DQogICAgICA8ZmVGbG9vZCBmbG9vZC1vcGFjaXR5PSIwLjIiLz4NCiAgICAgIDxmZUNvbXBvc2l0ZSBvcGVyYXRvcj0iaW4iIGluMj0iYmx1ci0zIi8+DQogICAgICA8ZmVDb21wb3NpdGUgaW49IlNvdXJjZUdyYXBoaWMiLz4NCiAgICA8L2ZpbHRlcj4NCiAgICA8ZmlsdGVyIGlkPSJrZXktYnRtLTQiIHg9IjQyNyIgeT0iMjczIiB3aWR0aD0iNDkuNzY1IiBoZWlnaHQ9IjQ5LjkzOCIgZmlsdGVyVW5pdHM9InVzZXJTcGFjZU9uVXNlIj4NCiAgICAgIDxmZU9mZnNldCBkeD0iMiIgZHk9IjMiIGlucHV0PSJTb3VyY2VBbHBoYSIvPg0KICAgICAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMyIgcmVzdWx0PSJibHVyLTQiLz4NCiAgICAgIDxmZUZsb29kIGZsb29kLW9wYWNpdHk9IjAuMiIvPg0KICAgICAgPGZlQ29tcG9zaXRlIG9wZXJhdG9yPSJpbiIgaW4yPSJibHVyLTQiLz4NCiAgICAgIDxmZUNvbXBvc2l0ZSBpbj0iU291cmNlR3JhcGhpYyIvPg0KICAgIDwvZmlsdGVyPg0KICAgIDxmaWx0ZXIgaWQ9ImtleS1idG0tNSIgeD0iNDI3IiB5PSIyMzMiIHdpZHRoPSI0OS43NjUiIGhlaWdodD0iNDkuOTM4IiBmaWx0ZXJVbml0cz0idXNlclNwYWNlT25Vc2UiPg0KICAgICAgPGZlT2Zmc2V0IGR4PSIyIiBkeT0iMyIgaW5wdXQ9IlNvdXJjZUFscGhhIi8+DQogICAgICA8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIzIiByZXN1bHQ9ImJsdXItNSIvPg0KICAgICAgPGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMC4yIi8+DQogICAgICA8ZmVDb21wb3NpdGUgb3BlcmF0b3I9ImluIiBpbjI9ImJsdXItNSIvPg0KICAgICAgPGZlQ29tcG9zaXRlIGluPSJTb3VyY2VHcmFwaGljIi8+DQogICAgPC9maWx0ZXI+DQogICAgPGZpbHRlciBpZD0ia2V5LWJ0bS02IiB4PSI0MjciIHk9IjE5MyIgd2lkdGg9IjQ5Ljc2NSIgaGVpZ2h0PSI0OS45MzgiIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+DQogICAgICA8ZmVPZmZzZXQgZHg9IjIiIGR5PSIzIiBpbnB1dD0iU291cmNlQWxwaGEiLz4NCiAgICAgIDxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjMiIHJlc3VsdD0iYmx1ci02Ii8+DQogICAgICA8ZmVGbG9vZCBmbG9vZC1vcGFjaXR5PSIwLjIiLz4NCiAgICAgIDxmZUNvbXBvc2l0ZSBvcGVyYXRvcj0iaW4iIGluMj0iYmx1ci02Ii8+DQogICAgICA8ZmVDb21wb3NpdGUgaW49IlNvdXJjZUdyYXBoaWMiLz4NCiAgICA8L2ZpbHRlcj4NCiAgICA8ZmlsdGVyIGlkPSJidG0iIHg9IjMzMCIgeT0iMjA4IiB3aWR0aD0iNTQiIGhlaWdodD0iNzIiIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+DQogICAgICA8ZmVPZmZzZXQgZHk9IjMiIGlucHV0PSJTb3VyY2VBbHBoYSIvPg0KICAgICAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMyIgcmVzdWx0PSJibHVyLTciLz4NCiAgICAgIDxmZUZsb29kIGZsb29kLW9wYWNpdHk9IjAuMTYxIi8+DQogICAgICA8ZmVDb21wb3NpdGUgb3BlcmF0b3I9ImluIiBpbjI9ImJsdXItNyIvPg0KICAgICAgPGZlQ29tcG9zaXRlIGluPSJTb3VyY2VHcmFwaGljIi8+DQogICAgPC9maWx0ZXI+DQogICAgPGxpbmVhckdyYWRpZW50IGlkPSJsaW5lYXItZ3JhZGllbnQtNyIgeDE9IjEuMTQ4IiB5MT0iMC42MjgiIHgyPSIwIiB5Mj0iMC4xNjQiIGdyYWRpZW50VW5pdHM9Im9iamVjdEJvdW5kaW5nQm94Ij4NCiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzIxMjEyMSIvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIwLjI2MSIgc3RvcC1jb2xvcj0iIzIxMjEyMSIvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIwLjYzOSIgc3RvcC1jb2xvcj0iIzRhNGE0YSIvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNGE0YTRhIi8+DQogICAgPC9saW5lYXJHcmFkaWVudD4NCiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImxpbmVhci1ncmFkaWVudC04IiB5MT0iMC4wMjIiIHgyPSIwLjk0MiIgeTI9IjAuOTA5IiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCI+DQogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMyZDJkMmQiLz4NCiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzNjM2MzYyIvPg0KICAgIDwvbGluZWFyR3JhZGllbnQ+DQogICAgPGZpbHRlciBpZD0ic2Nyb2xsIiB4PSIzNDQiIHk9IjIxNSIgd2lkdGg9IjI2IiBoZWlnaHQ9IjM0IiBmaWx0ZXJVbml0cz0idXNlclNwYWNlT25Vc2UiPg0KICAgICAgPGZlT2Zmc2V0IGlucHV0PSJTb3VyY2VBbHBoYSIvPg0KICAgICAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMyIgcmVzdWx0PSJibHVyLTgiLz4NCiAgICAgIDxmZUZsb29kIGZsb29kLWNvbG9yPSIjZmZiNzAwIiBmbG9vZC1vcGFjaXR5PSIwLjI1MSIvPg0KICAgICAgPGZlQ29tcG9zaXRlIG9wZXJhdG9yPSJpbiIgaW4yPSJibHVyLTgiLz4NCiAgICAgIDxmZUNvbXBvc2l0ZSBpbj0iU291cmNlR3JhcGhpYyIvPg0KICAgIDwvZmlsdGVyPg0KICAgIDxmaWx0ZXIgaWQ9ImtleS1idG0tNyIgeD0iMjUxIiB5PSIxOTUiIHdpZHRoPSI0OS43NjUiIGhlaWdodD0iNDkuOTM4IiBmaWx0ZXJVbml0cz0idXNlclNwYWNlT25Vc2UiPg0KICAgICAgPGZlT2Zmc2V0IGR4PSIyIiBkeT0iMyIgaW5wdXQ9IlNvdXJjZUFscGhhIi8+DQogICAgICA8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIzIiByZXN1bHQ9ImJsdXItOSIvPg0KICAgICAgPGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMC4yIi8+DQogICAgICA8ZmVDb21wb3NpdGUgb3BlcmF0b3I9ImluIiBpbjI9ImJsdXItOSIvPg0KICAgICAgPGZlQ29tcG9zaXRlIGluPSJTb3VyY2VHcmFwaGljIi8+DQogICAgPC9maWx0ZXI+DQogICAgPGZpbHRlciBpZD0ia2V5LWJ0bS04IiB4PSIyNTEiIHk9IjI0OSIgd2lkdGg9IjQ5Ljc2NSIgaGVpZ2h0PSI0OS45MzgiIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+DQogICAgICA8ZmVPZmZzZXQgZHg9IjIiIGR5PSIzIiBpbnB1dD0iU291cmNlQWxwaGEiLz4NCiAgICAgIDxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjMiIHJlc3VsdD0iYmx1ci0xMCIvPg0KICAgICAgPGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMC4yIi8+DQogICAgICA8ZmVDb21wb3NpdGUgb3BlcmF0b3I9ImluIiBpbjI9ImJsdXItMTAiLz4NCiAgICAgIDxmZUNvbXBvc2l0ZSBpbj0iU291cmNlR3JhcGhpYyIvPg0KICAgIDwvZmlsdGVyPg0KICAgIDxmaWx0ZXIgaWQ9ImJ0bS0yIiB4PSIxNjYiIHk9IjIwOCIgd2lkdGg9IjU0IiBoZWlnaHQ9IjcyIiBmaWx0ZXJVbml0cz0idXNlclNwYWNlT25Vc2UiPg0KICAgICAgPGZlT2Zmc2V0IGR5PSIzIiBpbnB1dD0iU291cmNlQWxwaGEiLz4NCiAgICAgIDxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjMiIHJlc3VsdD0iYmx1ci0xMSIvPg0KICAgICAgPGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMC4xNjEiLz4NCiAgICAgIDxmZUNvbXBvc2l0ZSBvcGVyYXRvcj0iaW4iIGluMj0iYmx1ci0xMSIvPg0KICAgICAgPGZlQ29tcG9zaXRlIGluPSJTb3VyY2VHcmFwaGljIi8+DQogICAgPC9maWx0ZXI+DQogICAgPGZpbHRlciBpZD0idHIiIHg9IjE4NC41IiB5PSIyMDgiIHdpZHRoPSIzMi41IiBoZWlnaHQ9IjM1IiBmaWx0ZXJVbml0cz0idXNlclNwYWNlT25Vc2UiPg0KICAgICAgPGZlT2Zmc2V0IGlucHV0PSJTb3VyY2VBbHBoYSIvPg0KICAgICAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMyIgcmVzdWx0PSJibHVyLTEyIi8+DQogICAgICA8ZmVGbG9vZCBmbG9vZC1jb2xvcj0iI2ZmYjcwMCIgZmxvb2Qtb3BhY2l0eT0iMC4yNTEiLz4NCiAgICAgIDxmZUNvbXBvc2l0ZSBvcGVyYXRvcj0iaW4iIGluMj0iYmx1ci0xMiIvPg0KICAgICAgPGZlQ29tcG9zaXRlIGluPSJTb3VyY2VHcmFwaGljIi8+DQogICAgPC9maWx0ZXI+DQogICAgPGZpbHRlciBpZD0ia2V5LWJ0bS05IiB4PSI4NyIgeT0iMjQ5IiB3aWR0aD0iNDkuNzY1IiBoZWlnaHQ9IjQ5LjkzOCIgZmlsdGVyVW5pdHM9InVzZXJTcGFjZU9uVXNlIj4NCiAgICAgIDxmZU9mZnNldCBkeD0iMiIgZHk9IjMiIGlucHV0PSJTb3VyY2VBbHBoYSIvPg0KICAgICAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMyIgcmVzdWx0PSJibHVyLTEzIi8+DQogICAgICA8ZmVGbG9vZCBmbG9vZC1vcGFjaXR5PSIwLjIiLz4NCiAgICAgIDxmZUNvbXBvc2l0ZSBvcGVyYXRvcj0iaW4iIGluMj0iYmx1ci0xMyIvPg0KICAgICAgPGZlQ29tcG9zaXRlIGluPSJTb3VyY2VHcmFwaGljIi8+DQogICAgPC9maWx0ZXI+DQogICAgPGZpbHRlciBpZD0ia2V5LWJ0bS0xMCIgeD0iNTAiIHk9IjI0OSIgd2lkdGg9IjQ5Ljc2NSIgaGVpZ2h0PSI0OS45MzgiIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+DQogICAgICA8ZmVPZmZzZXQgZHg9IjIiIGR5PSIzIiBpbnB1dD0iU291cmNlQWxwaGEiLz4NCiAgICAgIDxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjMiIHJlc3VsdD0iYmx1ci0xNCIvPg0KICAgICAgPGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMC4yIi8+DQogICAgICA8ZmVDb21wb3NpdGUgb3BlcmF0b3I9ImluIiBpbjI9ImJsdXItMTQiLz4NCiAgICAgIDxmZUNvbXBvc2l0ZSBpbj0iU291cmNlR3JhcGhpYyIvPg0KICAgIDwvZmlsdGVyPg0KICAgIDxmaWx0ZXIgaWQ9ImtleS1idG0tMTEiIHg9IjEzIiB5PSIyNDkiIHdpZHRoPSI0OS43NjUiIGhlaWdodD0iNDkuOTM4IiBmaWx0ZXJVbml0cz0idXNlclNwYWNlT25Vc2UiPg0KICAgICAgPGZlT2Zmc2V0IGR4PSIyIiBkeT0iMyIgaW5wdXQ9IlNvdXJjZUFscGhhIi8+DQogICAgICA8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIzIiByZXN1bHQ9ImJsdXItMTUiLz4NCiAgICAgIDxmZUZsb29kIGZsb29kLW9wYWNpdHk9IjAuMiIvPg0KICAgICAgPGZlQ29tcG9zaXRlIG9wZXJhdG9yPSJpbiIgaW4yPSJibHVyLTE1Ii8+DQogICAgICA8ZmVDb21wb3NpdGUgaW49IlNvdXJjZUdyYXBoaWMiLz4NCiAgICA8L2ZpbHRlcj4NCiAgICA8ZmlsdGVyIGlkPSJrZXktYnRtLTEyIiB4PSI1MCIgeT0iMTk1IiB3aWR0aD0iNDkuNzY1IiBoZWlnaHQ9IjQ5LjkzOCIgZmlsdGVyVW5pdHM9InVzZXJTcGFjZU9uVXNlIj4NCiAgICAgIDxmZU9mZnNldCBkeD0iMiIgZHk9IjMiIGlucHV0PSJTb3VyY2VBbHBoYSIvPg0KICAgICAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMyIgcmVzdWx0PSJibHVyLTE2Ii8+DQogICAgICA8ZmVGbG9vZCBmbG9vZC1vcGFjaXR5PSIwLjIiLz4NCiAgICAgIDxmZUNvbXBvc2l0ZSBvcGVyYXRvcj0iaW4iIGluMj0iYmx1ci0xNiIvPg0KICAgICAgPGZlQ29tcG9zaXRlIGluPSJTb3VyY2VHcmFwaGljIi8+DQogICAgPC9maWx0ZXI+DQogICAgPGZpbHRlciBpZD0ia2V5LWJ0bS0xMyIgeD0iNjU0IiB5PSI4NSIgd2lkdGg9IjQ5Ljc2NSIgaGVpZ2h0PSI0OS45MzgiIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+DQogICAgICA8ZmVPZmZzZXQgZHg9IjIiIGR5PSIzIiBpbnB1dD0iU291cmNlQWxwaGEiLz4NCiAgICAgIDxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjMiIHJlc3VsdD0iYmx1ci0xNyIvPg0KICAgICAgPGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMC4yIi8+DQogICAgICA8ZmVDb21wb3NpdGUgb3BlcmF0b3I9ImluIiBpbjI9ImJsdXItMTciLz4NCiAgICAgIDxmZUNvbXBvc2l0ZSBpbj0iU291cmNlR3JhcGhpYyIvPg0KICAgIDwvZmlsdGVyPg0KICAgIDxmaWx0ZXIgaWQ9ImtleS1idG0tMTQiIHg9IjY1NCIgeT0iMzEiIHdpZHRoPSI0OS43NjUiIGhlaWdodD0iNDkuOTM4IiBmaWx0ZXJVbml0cz0idXNlclNwYWNlT25Vc2UiPg0KICAgICAgPGZlT2Zmc2V0IGR4PSIyIiBkeT0iMyIgaW5wdXQ9IlNvdXJjZUFscGhhIi8+DQogICAgICA8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIzIiByZXN1bHQ9ImJsdXItMTgiLz4NCiAgICAgIDxmZUZsb29kIGZsb29kLW9wYWNpdHk9IjAuMiIvPg0KICAgICAgPGZlQ29tcG9zaXRlIG9wZXJhdG9yPSJpbiIgaW4yPSJibHVyLTE4Ii8+DQogICAgICA8ZmVDb21wb3NpdGUgaW49IlNvdXJjZUdyYXBoaWMiLz4NCiAgICA8L2ZpbHRlcj4NCiAgICA8ZmlsdGVyIGlkPSJrZXktYnRtLTE1IiB4PSI0NDUiIHk9IjU1IiB3aWR0aD0iNzkuNzY1IiBoZWlnaHQ9IjQ5LjkzOCIgZmlsdGVyVW5pdHM9InVzZXJTcGFjZU9uVXNlIj4NCiAgICAgIDxmZU9mZnNldCBkeD0iMiIgZHk9IjMiIGlucHV0PSJTb3VyY2VBbHBoYSIvPg0KICAgICAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMyIgcmVzdWx0PSJibHVyLTE5Ii8+DQogICAgICA8ZmVGbG9vZCBmbG9vZC1vcGFjaXR5PSIwLjIiLz4NCiAgICAgIDxmZUNvbXBvc2l0ZSBvcGVyYXRvcj0iaW4iIGluMj0iYmx1ci0xOSIvPg0KICAgICAgPGZlQ29tcG9zaXRlIGluPSJTb3VyY2VHcmFwaGljIi8+DQogICAgPC9maWx0ZXI+DQogICAgPGZpbHRlciBpZD0iYnRtLTMiIHg9IjUyOSIgeT0iNDQiIHdpZHRoPSI1NCIgaGVpZ2h0PSI3MiIgZmlsdGVyVW5pdHM9InVzZXJTcGFjZU9uVXNlIj4NCiAgICAgIDxmZU9mZnNldCBkeT0iMyIgaW5wdXQ9IlNvdXJjZUFscGhhIi8+DQogICAgICA8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIzIiByZXN1bHQ9ImJsdXItMjAiLz4NCiAgICAgIDxmZUZsb29kIGZsb29kLW9wYWNpdHk9IjAuMTYxIi8+DQogICAgICA8ZmVDb21wb3NpdGUgb3BlcmF0b3I9ImluIiBpbjI9ImJsdXItMjAiLz4NCiAgICAgIDxmZUNvbXBvc2l0ZSBpbj0iU291cmNlR3JhcGhpYyIvPg0KICAgIDwvZmlsdGVyPg0KICAgIDxmaWx0ZXIgaWQ9InNjcm9sbC0yIiB4PSI1NDMiIHk9IjUxIiB3aWR0aD0iMjYiIGhlaWdodD0iMzQiIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+DQogICAgICA8ZmVPZmZzZXQgaW5wdXQ9IlNvdXJjZUFscGhhIi8+DQogICAgICA8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIzIiByZXN1bHQ9ImJsdXItMjEiLz4NCiAgICAgIDxmZUZsb29kIGZsb29kLWNvbG9yPSIjZmZiNzAwIiBmbG9vZC1vcGFjaXR5PSIwLjI1MSIvPg0KICAgICAgPGZlQ29tcG9zaXRlIG9wZXJhdG9yPSJpbiIgaW4yPSJibHVyLTIxIi8+DQogICAgICA8ZmVDb21wb3NpdGUgaW49IlNvdXJjZUdyYXBoaWMiLz4NCiAgICA8L2ZpbHRlcj4NCiAgICA8ZmlsdGVyIGlkPSJidG0tNCIgeD0iMzQ5IiB5PSI0NCIgd2lkdGg9IjU0IiBoZWlnaHQ9IjcyIiBmaWx0ZXJVbml0cz0idXNlclNwYWNlT25Vc2UiPg0KICAgICAgPGZlT2Zmc2V0IGR5PSIzIiBpbnB1dD0iU291cmNlQWxwaGEiLz4NCiAgICAgIDxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjMiIHJlc3VsdD0iYmx1ci0yMiIvPg0KICAgICAgPGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMC4xNjEiLz4NCiAgICAgIDxmZUNvbXBvc2l0ZSBvcGVyYXRvcj0iaW4iIGluMj0iYmx1ci0yMiIvPg0KICAgICAgPGZlQ29tcG9zaXRlIGluPSJTb3VyY2VHcmFwaGljIi8+DQogICAgPC9maWx0ZXI+DQogICAgPGZpbHRlciBpZD0idGwiIHg9IjM1MiIgeT0iNDQiIHdpZHRoPSIzMi41IiBoZWlnaHQ9IjM1IiBmaWx0ZXJVbml0cz0idXNlclNwYWNlT25Vc2UiPg0KICAgICAgPGZlT2Zmc2V0IGlucHV0PSJTb3VyY2VBbHBoYSIvPg0KICAgICAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMyIgcmVzdWx0PSJibHVyLTIzIi8+DQogICAgICA8ZmVGbG9vZCBmbG9vZC1jb2xvcj0iI2ZmYjcwMCIgZmxvb2Qtb3BhY2l0eT0iMC4yNTEiLz4NCiAgICAgIDxmZUNvbXBvc2l0ZSBvcGVyYXRvcj0iaW4iIGluMj0iYmx1ci0yMyIvPg0KICAgICAgPGZlQ29tcG9zaXRlIGluPSJTb3VyY2VHcmFwaGljIi8+DQogICAgPC9maWx0ZXI+DQogICAgPGZpbHRlciBpZD0iYnRtLTUiIHg9IjIzMyIgeT0iNDQiIHdpZHRoPSI1NCIgaGVpZ2h0PSI3MiIgZmlsdGVyVW5pdHM9InVzZXJTcGFjZU9uVXNlIj4NCiAgICAgIDxmZU9mZnNldCBkeT0iMyIgaW5wdXQ9IlNvdXJjZUFscGhhIi8+DQogICAgICA8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIzIiByZXN1bHQ9ImJsdXItMjQiLz4NCiAgICAgIDxmZUZsb29kIGZsb29kLW9wYWNpdHk9IjAuMTYxIi8+DQogICAgICA8ZmVDb21wb3NpdGUgb3BlcmF0b3I9ImluIiBpbjI9ImJsdXItMjQiLz4NCiAgICAgIDxmZUNvbXBvc2l0ZSBpbj0iU291cmNlR3JhcGhpYyIvPg0KICAgIDwvZmlsdGVyPg0KICAgIDxmaWx0ZXIgaWQ9InNjcm9sbC0zIiB4PSIyNDciIHk9IjUxIiB3aWR0aD0iMjYiIGhlaWdodD0iMzQiIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+DQogICAgICA8ZmVPZmZzZXQgaW5wdXQ9IlNvdXJjZUFscGhhIi8+DQogICAgICA8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIzIiByZXN1bHQ9ImJsdXItMjUiLz4NCiAgICAgIDxmZUZsb29kIGZsb29kLWNvbG9yPSIjZmZiNzAwIiBmbG9vZC1vcGFjaXR5PSIwLjI1MSIvPg0KICAgICAgPGZlQ29tcG9zaXRlIG9wZXJhdG9yPSJpbiIgaW4yPSJibHVyLTI1Ii8+DQogICAgICA8ZmVDb21wb3NpdGUgaW49IlNvdXJjZUdyYXBoaWMiLz4NCiAgICA8L2ZpbHRlcj4NCiAgICA8ZmlsdGVyIGlkPSJidG0tNiIgeD0iMTMzIiB5PSI0NCIgd2lkdGg9IjU0IiBoZWlnaHQ9IjcyIiBmaWx0ZXJVbml0cz0idXNlclNwYWNlT25Vc2UiPg0KICAgICAgPGZlT2Zmc2V0IGR5PSIzIiBpbnB1dD0iU291cmNlQWxwaGEiLz4NCiAgICAgIDxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjMiIHJlc3VsdD0iYmx1ci0yNiIvPg0KICAgICAgPGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMC4xNjEiLz4NCiAgICAgIDxmZUNvbXBvc2l0ZSBvcGVyYXRvcj0iaW4iIGluMj0iYmx1ci0yNiIvPg0KICAgICAgPGZlQ29tcG9zaXRlIGluPSJTb3VyY2VHcmFwaGljIi8+DQogICAgPC9maWx0ZXI+DQogICAgPGZpbHRlciBpZD0idHItMiIgeD0iMTUxLjUiIHk9IjQ0IiB3aWR0aD0iMzIuNSIgaGVpZ2h0PSIzNSIgZmlsdGVyVW5pdHM9InVzZXJTcGFjZU9uVXNlIj4NCiAgICAgIDxmZU9mZnNldCBpbnB1dD0iU291cmNlQWxwaGEiLz4NCiAgICAgIDxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjMiIHJlc3VsdD0iYmx1ci0yNyIvPg0KICAgICAgPGZlRmxvb2QgZmxvb2QtY29sb3I9IiNmZmI3MDAiIGZsb29kLW9wYWNpdHk9IjAuMjUxIi8+DQogICAgICA8ZmVDb21wb3NpdGUgb3BlcmF0b3I9ImluIiBpbjI9ImJsdXItMjciLz4NCiAgICAgIDxmZUNvbXBvc2l0ZSBpbj0iU291cmNlR3JhcGhpYyIvPg0KICAgIDwvZmlsdGVyPg0KICAgIDxmaWx0ZXIgaWQ9ImJ0bS03IiB4PSIyNSIgeT0iNDQiIHdpZHRoPSI1NCIgaGVpZ2h0PSI3MiIgZmlsdGVyVW5pdHM9InVzZXJTcGFjZU9uVXNlIj4NCiAgICAgIDxmZU9mZnNldCBkeT0iMyIgaW5wdXQ9IlNvdXJjZUFscGhhIi8+DQogICAgICA8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIzIiByZXN1bHQ9ImJsdXItMjgiLz4NCiAgICAgIDxmZUZsb29kIGZsb29kLW9wYWNpdHk9IjAuMTYxIi8+DQogICAgICA8ZmVDb21wb3NpdGUgb3BlcmF0b3I9ImluIiBpbjI9ImJsdXItMjgiLz4NCiAgICAgIDxmZUNvbXBvc2l0ZSBpbj0iU291cmNlR3JhcGhpYyIvPg0KICAgIDwvZmlsdGVyPg0KICAgIDxmaWx0ZXIgaWQ9InRsLTIiIHg9IjI4IiB5PSI0NCIgd2lkdGg9IjMyLjUiIGhlaWdodD0iMzUiIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+DQogICAgICA8ZmVPZmZzZXQgaW5wdXQ9IlNvdXJjZUFscGhhIi8+DQogICAgICA8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIzIiByZXN1bHQ9ImJsdXItMjkiLz4NCiAgICAgIDxmZUZsb29kIGZsb29kLWNvbG9yPSIjZmZiNzAwIiBmbG9vZC1vcGFjaXR5PSIwLjI1MSIvPg0KICAgICAgPGZlQ29tcG9zaXRlIG9wZXJhdG9yPSJpbiIgaW4yPSJibHVyLTI5Ii8+DQogICAgICA8ZmVDb21wb3NpdGUgaW49IlNvdXJjZUdyYXBoaWMiLz4NCiAgICA8L2ZpbHRlcj4NCiAgPC9kZWZzPg0KICA8ZyBpZD0icDciIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0yMDEgLTQ3NikiPg0KICAgIDxnIGlkPSJwYW5lIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2MTUgNjQwKSI+DQogICAgICA8cmVjdCBpZD0iYm94IiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjE2MCIgcng9IjQiIGZpbGw9IiNmNmY2ZjYiLz4NCiAgICAgIDxwYXRoIGlkPSJsYWJlbCIgZD0iTTIuNzg4LTcuMTA5LDQuMzc1LTIuMTYzLDUuOTU3LTcuMTA5SDguMjEzVjBINi40OTRWLTEuNjZsLjE2Ni0zLjRMNC45NDEsMEgzLjgwOUwyLjA4NS01LjA2M2wuMTY2LDMuNFYwSC41MzdWLTcuMTA5Wm0xMi43MzQsMy43YTQuMTkyLDQuMTkyLDAsMCwxLS4zODYsMS44NDEsMi44NTEsMi44NTEsMCwwLDEtMS4xLDEuMjMzQTMuMDUyLDMuMDUyLDAsMCwxLDEyLjQyMi4xLDMuMSwzLjEsMCwwLDEsMTAuODEtLjMyYTIuODQ2LDIuODQ2LDAsMCwxLTEuMS0xLjE5NEE0LjA3Miw0LjA3MiwwLDAsMSw5LjMtMy4zdi0uNEE0LjIxMSw0LjIxMSwwLDAsMSw5LjY4NS01LjU0YTIuODQ0LDIuODQ0LDAsMCwxLDEuMS0xLjIzMywzLjA3NCwzLjA3NCwwLDAsMSwxLjYyOC0uNDM1LDMuMDQ0LDMuMDQ0LDAsMCwxLDEuNjExLjQzLDIuOSwyLjksMCwwLDEsMS4xLDEuMjIzLDQuMDksNC4wOSwwLDAsMSwuNCwxLjgxOVptLTEuNzQzLS4zYTIuOTksMi45OSwwLDAsMC0uMzU0LTEuNjA5LDEuMTM1LDEuMTM1LDAsMCwwLTEuMDEzLS41NDlxLTEuMjg5LDAtMS4zNjIsMS45MzRsMCwuNTIyQTMuMDc1LDMuMDc1LDAsMCwwLDExLjM5MS0xLjhhMS4xMzQsMS4xMzQsMCwwLDAsMS4wMy41NjIsMS4xMiwxLjEyLDAsMCwwLDEtLjU1MiwyLjk5MSwyLjk5MSwwLDAsMCwuMzU2LTEuNTg3Wm01LjQ2OSwxLjE5MUgxOC4zMlYwSDE2LjYwNlYtNy4xMDloMi44YTMuMTIzLDMuMTIzLDAsMCwxLDEuOTc4LjU2MSwxLjksMS45LDAsMCwxLC43MTMsMS41ODUsMi4zMDgsMi4zMDgsMCwwLDEtLjMsMS4yMjksMi4xMzEsMi4xMzEsMCwwLDEtLjk0Ljc5TDIyLjMzOC0uMDczVjBIMjAuNVpNMTguMzItMy44MzNIMTkuNGEuOTczLjk3MywwLDAsMCwuNzM1LS4yNTcuOTkzLjk5MywwLDAsMCwuMjQ3LS43MTcsMSwxLDAsMCwwLS4yNDktLjcyMi45NjQuOTY0LDAsMCwwLS43MzItLjI2MkgxOC4zMlptOS40MTkuODE1aC0yLjd2MS43aDMuMTg0VjBoLTQuOVYtNy4xMDloNC45MDd2MS4zMjNIMjUuMDQzdjEuNWgyLjdabTkuODI5LjYxYTIuNiwyLjYsMCwwLDEtLjQsMS4zMTEsMi40MTYsMi40MTYsMCwwLDEtMS4wMjguODgxQTMuNSwzLjUsMCwwLDEsMzQuNjI4LjFhMi43OTIsMi43OTIsMCwwLDEtMi4yMDctLjkxMywzLjc3LDMuNzcsMCwwLDEtLjgwNi0yLjU3OHYtLjM1MmE0LjMsNC4zLDAsMCwxLC4zNjQtMS44MjksMi43NTYsMi43NTYsMCwwLDEsMS4wNDctMS4yMTEsMi45MjIsMi45MjIsMCwwLDEsMS41ODItLjQyNywzLjA2NCwzLjA2NCwwLDAsMSwyLjA4LjY4MSwyLjY5MSwyLjY5MSwwLDAsMSwuODk0LDEuODc3SDM1Ljg3M2ExLjI3MywxLjI3MywwLDAsMC0uMzI3LS45MzMsMS4zNDYsMS4zNDYsMCwwLDAtLjkzNy0uMjgzLDEuMDI0LDEuMDI0LDAsMCwwLS45MzcuNDc5LDMuMDc1LDMuMDc1LDAsMCwwLS4zMTIsMS41Mjh2LjVhMy40LDMuNCwwLDAsMCwuMjg2LDEuNjI2LDEuMDQ1LDEuMDQ1LDAsMCwwLC45ODQuNDg4LDEuMzE2LDEuMzE2LDAsMCwwLC45LS4yNzgsMS4xODEsMS4xODEsMCwwLDAsLjMzMi0uODg0Wm03LjAzMS0xYTQuMTkyLDQuMTkyLDAsMCwxLS4zODYsMS44NDEsMi44NTEsMi44NTEsMCwwLDEtMS4xLDEuMjMzQTMuMDUyLDMuMDUyLDAsMCwxLDQxLjUuMSwzLjEsMy4xLDAsMCwxLDM5Ljg4Ny0uMzJhMi44NDYsMi44NDYsMCwwLDEtMS4xLTEuMTk0QTQuMDcyLDQuMDcyLDAsMCwxLDM4LjM3OC0zLjN2LS40YTQuMjExLDQuMjExLDAsMCwxLC4zODMtMS44NDMsMi44NDQsMi44NDQsMCwwLDEsMS4xLTEuMjMzLDMuMDc0LDMuMDc0LDAsMCwxLDEuNjI4LS40MzUsMy4wNDQsMy4wNDQsMCwwLDEsMS42MTEuNDMsMi45LDIuOSwwLDAsMSwxLjEsMS4yMjMsNC4wOSw0LjA5LDAsMCwxLC40LDEuODE5Wm0tMS43NDMtLjNBMi45OSwyLjk5LDAsMCwwLDQyLjUtNS4zMTVhMS4xMzUsMS4xMzUsMCwwLDAtMS4wMTMtLjU0OXEtMS4yODksMC0xLjM2MiwxLjkzNGwwLC41MjJBMy4wNzUsMy4wNzUsMCwwLDAsNDAuNDY4LTEuOGExLjEzNCwxLjEzNCwwLDAsMCwxLjAzLjU2MiwxLjEyLDEuMTIsMCwwLDAsMS0uNTUyLDIuOTkxLDIuOTkxLDAsMCwwLC4zNTYtMS41ODdaTTUxLjYyLDBoLTEuN0w0Ny40LTQuNDI0VjBINDUuNjgyVi03LjEwOUg0Ny40bDIuNTE1LDQuNDI0Vi03LjEwOUg1MS42MlptNi44NjUtNS43ODZINTYuMzUxVjBINTQuNjM3Vi01Ljc4Nkg1Mi41NDJWLTcuMTA5aDUuOTQyWm0zLjU2NCwzLjI3MWgtLjkyOFYwSDU5LjQwN1YtNy4xMDloMi44YTMuMTIzLDMuMTIzLDAsMCwxLDEuOTc4LjU2MUExLjksMS45LDAsMCwxLDY0LjktNC45NjNhMi4zMDgsMi4zMDgsMCwwLDEtLjMsMS4yMjksMi4xMzEsMi4xMzEsMCwwLDEtLjk0Ljc5TDY1LjE0LS4wNzNWMEg2My4zWm0tLjkyOC0xLjMxOGgxLjA4NGEuOTczLjk3MywwLDAsMCwuNzM1LS4yNTcuOTkzLjk5MywwLDAsMCwuMjQ3LS43MTcsMSwxLDAsMCwwLS4yNDktLjcyMi45NjQuOTY0LDAsMCwwLS43MzItLjI2Mkg2MS4xMjFabTExLjAzLjQyNWE0LjE5Miw0LjE5MiwwLDAsMS0uMzg2LDEuODQxLDIuODUxLDIuODUxLDAsMCwxLTEuMSwxLjIzM0EzLjA1MiwzLjA1MiwwLDAsMSw2OS4wNTEuMSwzLjEsMy4xLDAsMCwxLDY3LjQzOS0uMzJhMi44NDYsMi44NDYsMCwwLDEtMS4xLTEuMTk0QTQuMDcyLDQuMDcyLDAsMCwxLDY1LjkzMS0zLjN2LS40YTQuMjExLDQuMjExLDAsMCwxLC4zODMtMS44NDMsMi44NDQsMi44NDQsMCwwLDEsMS4xLTEuMjMzLDMuMDc0LDMuMDc0LDAsMCwxLDEuNjI4LS40MzUsMy4wNDQsMy4wNDQsMCwwLDEsMS42MTEuNDMsMi45LDIuOSwwLDAsMSwxLjEsMS4yMjMsNC4wOSw0LjA5LDAsMCwxLC40LDEuODE5Wm0tMS43NDMtLjNhMi45OSwyLjk5LDAsMCwwLS4zNTQtMS42MDksMS4xMzUsMS4xMzUsMCwwLDAtMS4wMTMtLjU0OXEtMS4yODksMC0xLjM2MiwxLjkzNGwwLC41MjJBMy4wNzUsMy4wNzUsMCwwLDAsNjguMDIxLTEuOGExLjEzNCwxLjEzNCwwLDAsMCwxLjAzLjU2MiwxLjEyLDEuMTIsMCwwLDAsMS0uNTUyLDIuOTkxLDIuOTkxLDAsMCwwLC4zNTYtMS41ODdabTQuNTQxLDIuMzg4aDIuOTgzVjBoLTQuN1YtNy4xMDloMS43MTRabTcuNTczLS41NzFhLjcuNywwLDAsMC0uMjY2LS41ODYsMy4zMDgsMy4zMDgsMCwwLDAtLjkzNS0uNDM1LDguOTcxLDguOTcxLDAsMCwxLTEuMDk0LS40MzVBMi4wNzEsMi4wNzEsMCwwLDEsNzguODQ1LTUuMjFhMS42NzMsMS42NzMsMCwwLDEsLjM0NC0xLjA0MiwyLjIyNiwyLjIyNiwwLDAsMSwuOTc0LS43LDMuNzkxLDMuNzkxLDAsMCwxLDEuNDE2LS4yNTEsMy4zMTYsMy4zMTYsMCwwLDEsMS4zNzUuMjczLDIuMTc2LDIuMTc2LDAsMCwxLC45NDUuNzc5QTIuMDM0LDIuMDM0LDAsMCwxLDg0LjIzNi01SDgyLjUyN2EuODU5Ljg1OSwwLDAsMC0uMjY2LS42NzQsMS4wMzcsMS4wMzcsMCwwLDAtLjcyLS4yMzksMS4xNywxLjE3LDAsMCwwLS43MjUuMi42MjIuNjIyLDAsMCwwLS4yNjYuNTE1LjYyNi42MjYsMCwwLDAsLjI5My41LDMuNjk0LDMuNjk0LDAsMCwwLDEuMDMuNDU5LDYuMzExLDYuMzExLDAsMCwxLDEuMjExLjUxQTIuMDM1LDIuMDM1LDAsMCwxLDg0LjIzNi0xLjlhMS43MzYsMS43MzYsMCwwLDEtLjcsMS40NjVBMy4xMjcsMy4xMjcsMCwwLDEsODEuNi4xYTMuODI3LDMuODI3LDAsMCwxLTEuNTY1LS4zMSwyLjM1OSwyLjM1OSwwLDAsMS0xLjA1NS0uODVBMi4yMTQsMi4yMTQsMCwwLDEsNzguNjMtMi4zaDEuNzE5YTEuMDksMS4wOSwwLDAsMCwuMy44NDIsMS40LDEuNCwwLDAsMCwuOTU5LjI3MSwxLjEsMS4xLDAsMCwwLC42NzEtLjE4M0EuNi42LDAsMCwwLDgyLjUyMi0xLjg5WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTAgMTgpIiBmaWxsPSIjMDUwYzFhIi8+DQogICAgPC9nPg0KICAgIDxnIGlkPSJrZXktYmlnLWVzYyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNzU0IDc1NSkiPg0KICAgICAgPHBhdGggaWQ9ImxhYmVsLTIiIGRhdGEtbmFtZT0ibGFiZWwiIGQ9Ik00LjEyMSw4LjEzNXEuMTA3LS43LS43NjctMS4wNDVsLS40LS4xNDZBMy43LDMuNywwLDAsMSwxLjM5Miw2LjAzLDEuNjMzLDEuNjMzLDAsMCwxLC45NzIsNC44YTEuODQzLDEuODQzLDAsMCwxLC40MTMtMS4wNjcsMi40MDYsMi40MDYsMCwwLDEsLjk4NC0uNzEsMy4yMiwzLjIyLDAsMCwxLDEuMy0uMjM0LDIuNiwyLjYsMCwwLDEsMS4xODIuMjkxLDEuOTEyLDEuOTEyLDAsMCwxLC43OTEuNzY3LDIuMTIzLDIuMTIzLDAsMCwxLC4yNTQsMS4xMjFsLTEuMiwwQTEuMTI3LDEuMTI3LDAsMCwwLDQuNDQ2LDQuMSwxLjEzMywxLjEzMywwLDAsMCwzLjYsMy43NzlhMS41NzgsMS41NzgsMCwwLDAtLjk2NC4yNjksMS4wNzQsMS4wNzQsMCwwLDAtLjQ2MS43NTJxLS4xLjYyLjgzLjk3N2wuMzY2LjEzMmEzLjU1NSwzLjU1NSwwLDAsMSwxLjU2My45NCwxLjczNSwxLjczNSwwLDAsMSwuMzkxLDEuMjc3LDEuOTIzLDEuOTIzLDAsMCwxLS40LDEuMDQ3LDIuMjIxLDIuMjIxLDAsMCwxLS45NTkuNjkxLDMuNDksMy40OSwwLDAsMS0xLjM1LjIzNEEyLjgwOSwyLjgwOSwwLDAsMSwxLjM1LDkuOCwyLjAzLDIuMDMsMCwwLDEsLjIsNy44NDdsMS4yMDYsMGExLjEzMiwxLjEzMiwwLDAsMCwuMy45MzMsMS4zNjQsMS4zNjQsMCwwLDAsLjk2Ny4zMzcsMS42OSwxLjY5LDAsMCwwLC45NzktLjI0OUExLjA0NiwxLjA0NiwwLDAsMCw0LjEyMSw4LjEzNVpNNy44OTEsNS4zYTEuOTUzLDEuOTUzLDAsMCwxLDEuNS0uNjc0LDEuMjg5LDEuMjg5LDAsMCwxLDEuMTE2LjUzMkEyLjExMywyLjExMywwLDAsMSwxMC43NzYsNi42TDEwLjIxLDEwSDkuMDUzbC41NzYtMy40MTNhMS45OTQsMS45OTQsMCwwLDAsLjAxLS4zOTEuNjMzLjYzMywwLDAsMC0uNy0uNjEsMS40MjcsMS40MjcsMCwwLDAtMS4xNTIuNjM1TDcuMTI0LDEwSDUuOTY3bDEuMy03LjVIOC40MjhabTMuOCwyLjA0MWEzLjQ3NiwzLjQ3NiwwLDAsMSwuNDU3LTEuNDExLDIuNzA5LDIuNzA5LDAsMCwxLC45NTktLjk4MSwyLjM3MSwyLjM3MSwwLDAsMSwxLjMtLjMyN0ExLjk2MiwxLjk2MiwwLDAsMSwxNi4zLDUuOTQyLDMuMDU0LDMuMDU0LDAsMCwxLDE2LjQ2LDcuMywzLjU0MSwzLjU0MSwwLDAsMSwxNiw4Ljc4NGEyLjcsMi43LDAsMCwxLS45NjcuOTg5LDIuNCwyLjQsMCwwLDEtMS4zMDYuMzI1LDEuOTYsMS45NiwwLDAsMS0xLjg4NS0xLjMxNiwzLjAxNSwzLjAxNSwwLDAsMS0uMTY2LTEuMzRabTEuMTM4LjY2OWExLjQsMS40LDAsMCwwLC4yNzEuODIzLjg2Ny44NjcsMCwwLDAsLjY4Ni4zMjUsMS4yMTcsMS4yMTcsMCwwLDAsMS0uNDU5QTIuNDE1LDIuNDE1LDAsMCwwLDE1LjI5Myw3LjRsLjAyOS0uNDc5YTEuNjkxLDEuNjkxLDAsMCwwLS4yNDktLjk4MS44NzQuODc0LDAsMCwwLS43MjMtLjM3NiwxLjI2NSwxLjI2NSwwLDAsMC0xLjE3Mi43MjgsMi43MTgsMi43MTgsMCwwLDAtLjMyNywxLjA0NUE0LjA4OCw0LjA4OCwwLDAsMCwxMi44MzIsOC4wMDhabTguOTI2LjM0NywxLjQ1LTMuNjM4SDI0LjM3TDIyLjA1NiwxMEgyMS4xTDIwLjY0LDYuMzg3LDE4LjkzMSwxMGgtLjk1N0wxNy40OSw0LjcxN2gxLjA5NGwuMiwzLjU4NCwxLjY3LTMuNTg0aC44NzRabTkuMjMzLS4wMUgyOC4zM0wyNy40OCwxMGgtMS4zTDMwLjAyLDIuODkxSDMxLjFMMzIuNDgsMTBIMzEuMjdabS0yLjE1My0xSDMwLjgzbC0uNDgzLTIuOTM5Wk0zNC40NDMsMTBIMzMuMjg2bDEuMy03LjVoMS4xNTdabTIuNTI0LDBIMzUuODExbDEuMy03LjVoMS4xNTdabTYuNjA2LjFhMi40MSwyLjQxLDAsMCwxLTEuMjE4LS4zMzIsMi4xMzIsMi4xMzIsMCwwLDEtLjgxOC0uOTIsMy41MTIsMy41MTIsMCwwLDEtLjMzMi0xLjM3LDYuMyw2LjMsMCwwLDEsLjExLTEuNDI2LDQuOCw0LjgsMCwwLDEsLjUxMy0xLjQ4NywzLjczNywzLjczNywwLDAsMSwuODgxLTEuMSwyLjksMi45LDAsMCwxLDEuOTUzLS42NzQsMi4xOTQsMi4xOTQsMCwwLDEsMS42ODIuNzI4LDMuMDEzLDMuMDEzLDAsMCwxLC42ODYsMS45MTQsNi4zLDYuMywwLDAsMS0uMTEsMS4zODksNS4wMzUsNS4wMzUsMCwwLDEtLjQ3OSwxLjQ0LDMuNjc2LDMuNjc2LDAsMCwxLS44NDIsMS4xQTIuODgxLDIuODgxLDAsMCwxLDQzLjU3NCwxMC4xWk00NS44LDYuMjU1bC4wNDQtLjUxOGEzLjEsMy4xLDAsMCwwLS4wOTMtLjk4NCwxLjI5MSwxLjI5MSwwLDAsMC0uNDEzLS42ODgsMS4xOSwxLjE5LDAsMCwwLS43MzUtLjI1MSwxLjY1MSwxLjY1MSwwLDAsMC0xLjA5MS4zNDcsMi41NDEsMi41NDEsMCwwLDAtLjc3MSwxLjExMyw1LjgzMyw1LjgzMywwLDAsMC0uMzQ0LDEuODc1LDIuMzc4LDIuMzc4LDAsMCwwLC4yNzMsMS40MDYsMS4xMSwxLjExLDAsMCwwLC45NjcuNTMyLDEuNjY5LDEuNjY5LDAsMCwwLDEuMzk0LS42MzUsMy42NiwzLjY2LDAsMCwwLC43Mi0xLjg1NVptNi42MzYsMS4xMjhBNC4zLDQuMywwLDAsMSw1Miw4Ljg0YTIuMzkxLDIuMzkxLDAsMCwxLS44My45NjQsMS45NTgsMS45NTgsMCwwLDEtMS4xMTYuMywxLjU1MywxLjU1MywwLDAsMS0xLjMzMy0uNjc5TDQ4LjUzNSwxMGgtMS4wNmwxLjMtNy41aDEuMTYybC0uNTI3LDIuNzI5YTEuOCwxLjgsMCwwLDEsMS40LS42MSwxLjUsMS41LDAsMCwxLDEuMi41NjIsMi40MjQsMi40MjQsMCwwLDEsLjQ1NywxLjQ4NEE2LjgwNyw2LjgwNywwLDAsMSw1Mi40MzIsNy4zODNabS0xLjExMy0uNjU0QTEuMzg2LDEuMzg2LDAsMCwwLDUxLjEsNS45YS43NjIuNzYyLDAsMCwwLS42MzUtLjMxLDEuMzYxLDEuMzYxLDAsMCwwLTEuMTgyLjY3NEw0OC45LDguNDQ3YS45MjIuOTIyLDAsMCwwLC45MjMuNjg4LDEuMTUsMS4xNSwwLDAsMCwuOTY0LS40NDksMi41NDcsMi41NDcsMCwwLDAsLjQ4Ni0xLjMwOVE1MS4zMTMsNi45NjMsNTEuMzE4LDYuNzI5Wm0zLjc4OS0yLjAxMi0uOTcyLDUuNzQ3YTIuMDM5LDIuMDM5LDAsMCwxLS41NjYsMS4yNTcsMS42MywxLjYzLDAsMCwxLTEuMi40MjcsMy4yNzUsMy4yNzUsMCwwLDEtLjY1OS0uMDkzbC4xLS45MzdhMS43NzYsMS43NzYsMCwwLDAsLjQxLjA1NHEuNjIsMCwuNzQ3LS43MjhsLjk4MS01LjcyOFpNNTQuMDkyLDMuMzY0YS42My42MywwLDAsMSwuNjQ1LS42NTkuNjI1LjYyNSwwLDAsMSwuNDcxLjE2OC42LjYsMCwwLDEsLjE4OC40NTIuNjE3LjYxNywwLDAsMS0uMTgzLjQ1OS42NzEuNjcxLDAsMCwxLS40NjYuMTkuNjU2LjY1NiwwLDAsMS0uNDc0LS4xNzNBLjU4LjU4LDAsMCwxLDU0LjA5MiwzLjM2NFpNNTcuODU2LDEwLjFhMi4yMTMsMi4yMTMsMCwwLDEtMS4xOTQtLjM0NywxLjk3MiwxLjk3MiwwLDAsMS0uNzQ3LS45MDgsMi43LDIuNywwLDAsMS0uMTgzLTEuMjg0bC4wMTUtLjJhMy41MzYsMy41MzYsMCwwLDEsLjQ3MS0xLjQ0OCwyLjY4OSwyLjY4OSwwLDAsMSwuOTU1LS45NzQsMi4zMjEsMi4zMjEsMCwwLDEsMS4yNC0uMzE3LDEuNzMxLDEuNzMxLDAsMCwxLDEuNDg3LjczOCwyLjcxMSwyLjcxMSwwLDAsMSwuMzc0LDEuODczbC0uMDY4LjUwOUg1Ni44OGExLjQzNSwxLjQzNSwwLDAsMCwuMjU0LDEuMDEyLDEuMDA2LDEuMDA2LDAsMCwwLC44Mi4zOTRBMS43OCwxLjc4LDAsMCwwLDU5LjMzMSw4LjVsLjU4Ni42MTVhMi4yMjcsMi4yMjcsMCwwLDEtLjg3NC43MzVBMi42LDIuNiwwLDAsMSw1Ny44NTYsMTAuMVptLjQ5My00LjUzMXEtLjkxOC0uMDI5LTEuMzc3LDEuM2wyLjE5MiwwLC4wMi0uMWExLjUzMiwxLjUzMiwwLDAsMCwwLS40MzkuOS45LDAsMCwwLS4yNzMtLjU0N0EuODY2Ljg2NiwwLDAsMCw1OC4zNSw1LjU2NlptNC42NzMsMy41ODlhMS4xMzIsMS4xMzIsMCwwLDAsMS4xNDMtLjlsMS4wOTQsMGExLjg3LDEuODcsMCwwLDEtLjM3OC45NTIsMi4yLDIuMiwwLDAsMS0uODMzLjY2OSwyLjMxLDIuMzEsMCwwLDEtMS4wNi4yMjUsMS45OSwxLjk5LDAsMCwxLTEuMTU3LS4zNTIsMS45NDQsMS45NDQsMCwwLDEtLjctLjk0NSwzLjAyMywzLjAyMywwLDAsMS0uMTQ2LTEuMzQ1TDYxLDcuMjg1QTMuNDU3LDMuNDU3LDAsMCwxLDYxLjQ0OCw1LjlhMi42MDgsMi42MDgsMCwwLDEsLjk0LS45NTksMi4zNTQsMi4zNTQsMCwwLDEsMS4yNzktLjMxNywxLjg0OCwxLjg0OCwwLDAsMSwxLjM3Mi41NjksMi4wMDksMi4wMDksMCwwLDEsLjUxMywxLjQyOEg2NC40NjhhMS4xODEsMS4xODEsMCwwLDAtLjIyMi0uNzQyLjgxMy44MTMsMCwwLDAtLjY0Mi0uMzA4LDEuMTcyLDEuMTcyLDAsMCwwLTEuMDY5LjU3NiwzLjIxNiwzLjIxNiwwLDAsMC0uNDIsMS42OFE2Mi4wOCw5LjEzNiw2My4wMjIsOS4xNTVabTUuNDE1LTUuNzIzLS4yMjUsMS4yODRoLjlsLS4xNTEuODc5aC0uOTA4bC0uNSwyLjk1OWExLjAxMiwxLjAxMiwwLDAsMCwwLC4yMnEuMDI5LjMxNy4zOTEuMzMyYTIuMjA2LDIuMjA2LDAsMCwwLC40MS0uMDQ0bC0uMDc4LjkyOGEyLjY1MywyLjY1MywwLDAsMS0uNzI4LjEsMS4wOCwxLjA4LDAsMCwxLS45MDYtLjQxMywxLjQ5MywxLjQ5MywwLDAsMS0uMjM3LTEuMDY3TDY2LjksNS42aC0uODQ1bC4xNTYtLjg3OWguODRsLjIyNS0xLjI4NFptMy44NDMsNS4xcS4wODMtLjQ4My0uNjI3LS42NzFhNy45NzcsNy45NzcsMCwwLDEtLjk2OS0uMywxLjMzNiwxLjMzNiwwLDAsMS0uOTcyLTEuMzA5LDEuNDg2LDEuNDg2LDAsMCwxLC42NDctMS4xNzksMi4zNzEsMi4zNzEsMCwwLDEsMS40OTItLjQ1NywyLjA0MSwyLjA0MSwwLDAsMSwxLjM3LjQ3NCwxLjUxLDEuNTEsMCwwLDEsLjUyLDEuMjE2bC0xLjE0NywwYS43NDEuNzQxLDAsMCwwLS4yLS41NzQuODE3LjgxNywwLDAsMC0uNTc2LS4yMTcsMS4xMzYsMS4xMzYsMCwwLDAtLjY2Mi4xOS43MS43MSwwLDAsMC0uMzIuNXEtLjA2OC40NDQuNjI1LjYxOGE2Ljg2LDYuODYsMCwwLDEsMS4wMjUuMzIsMS4zMzcsMS4zMzcsMCwwLDEsLjkzMywxLjMyOCwxLjQ2LDEuNDYsMCwwLDEtLjMzLjg3NiwxLjkyMywxLjkyMywwLDAsMS0uODE4LjU3MSwyLjgsMi44LDAsMCwxLTEuMDg5LjE4MywyLjE0OCwyLjE0OCwwLDAsMS0xLjQzMy0uNSwxLjU3LDEuNTcsMCwwLDEtLjU1OS0xLjI2NWwxLjExOCwwYS44NTEuODUxLDAsMCwwLC4yNTQuNjQ1Ljk4MS45ODEsMCwwLDAsLjY2OS4yMjUsMS4zMjgsMS4zMjgsMCwwLDAsLjcxNS0uMTc4QS42ODQuNjg0LDAsMCwwLDcyLjI4LDguNTM1WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjggMTApIiBmaWxsPSIjMDUwYzFhIi8+DQogICAgICA8ZyB0cmFuc2Zvcm09Im1hdHJpeCgxLCAwLCAwLCAxLCAtNTUzLCAtMjc5KSIgZmlsdGVyPSJ1cmwoI2tleS1idG0pIj4NCiAgICAgICAgPHBhdGggaWQ9ImtleS1idG0tMTYiIGRhdGEtbmFtZT0ia2V5LWJ0bSIgZD0iTTIsMEg2MGEyLjE3NSwyLjE3NSwwLDAsMSwxLjUuNjczQTIuNDA4LDIuNDA4LDAsMCwxLDYxLjc2NSwyVjMwQTEuNjQsMS42NCwwLDAsMSw2MCwzMS43ODlsLTU4LjAzMS4xNDlhMi4yLDIuMiwwLDAsMS0xLjM5MS0uNTc4QTEuNjU2LDEuNjU2LDAsMCwxLDAsMzBWMkEyLDIsMCwwLDEsMiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTUzIDI3OSkiIGZpbGw9IiM0YTRhNGEiLz4NCiAgICAgIDwvZz4NCiAgICAgIDxwYXRoIGlkPSJrZXktc2lkZSIgZD0iTTExNTAyLjkzOC0xNDE0M2ExLjkxMSwxLjkxMSwwLDAsMS0xLjQ4Mi0uNzFsNi4yMDctOS42Niw0Ny42LTE2Ljg4Nyw3LjAxMi00LjNhMi4wMjgsMi4wMjgsMCwwLDEsLjcyMiwxLjU2MXYyOGExLjk2NywxLjk2NywwLDAsMS0xLjkzNSwyWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTExNTAxIDE0MTc1KSIgZmlsbD0iIzIxMjEyMSIvPg0KICAgICAgPHBhdGggaWQ9ImtleS10b3AiIGQ9Ik0xLjk2NCwwSDU1LjUzNkExLjk2NCwxLjk2NCwwLDAsMSw1Ny41LDEuOTY0VjI1LjUzNkExLjk2NCwxLjk2NCwwLDAsMSw1NS41MzYsMjcuNUgxLjk2NEExLjk2NCwxLjk2NCwwLDAsMSwwLDI1LjUzNlYxLjk2NEExLjk2NCwxLjk2NCwwLDAsMSwxLjk2NCwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMiAxKSIgZmlsbD0idXJsKCNsaW5lYXItZ3JhZGllbnQpIi8+DQogICAgICA8cGF0aCBpZD0iZXNjIiBkPSJNLjgxMywzLjI5MUg1LjY0VjQuNDhIMS45ODlWNi42NTRINS42NFY3LjgzSDEuOTg5djIuOTk0SDUuNjRWMTJILjgxM1pNMTAuMzI5LDcuMDNsLS43OTMuN0E0LjE4OCw0LjE4OCwwLDAsMCw5LDcuNGExLjE3OSwxLjE3OSwwLDAsMC0uNTMzLS4xMTNxLS43MjUsMC0uNzI1LjUzMywwLC4zODMuOTE5Ljc0M2EzLjYzNywzLjYzNywwLDAsMSwxLjMyMy43OTEsMS40NjMsMS40NjMsMCwwLDEsLjQsMS4wMzgsMS42MjgsMS42MjgsMCwwLDEtLjU4MSwxLjIzOSwxLjk2NCwxLjk2NCwwLDAsMS0xLjM2Ny41MjlBMi4zLDIuMywwLDAsMSw2LjQ4LDExLjA1bC45MzctLjQ1MWExLjQ2OSwxLjQ2OSwwLDAsMCwxLjAyNS40NzksMS4wNjgsMS4wNjgsMCwwLDAsLjY0Ni0uMi41NzYuNTc2LDAsMCwwLC4yNzctLjQ2OHEwLS40NzItLjk3MS0uODQ5QTMuODY0LDMuODY0LDAsMCwxLDcuMDUxLDguOGExLjMxOSwxLjMxOSwwLDAsMS0uMzczLS45NTMsMS41LDEuNSwwLDAsMSwuNTMtMS4xNzJBMS45MzUsMS45MzUsMCwwLDEsOC41MzgsNi4yLDIuOTM4LDIuOTM4LDAsMCwxLDEwLjMyOSw3LjAzWm01LjQ4OSwzLjI0N3YxLjM2YTMuNTUxLDMuNTUxLDAsMCwxLTEuNzY0LjUyLDIuODA3LDIuODA3LDAsMCwxLTIuMDQ3LS44NzgsMi43OTIsMi43OTIsMCwwLDEtLjg3OC0yLjAzNEEyLjkzNCwyLjkzNCwwLDAsMSwxMiw3LjA2OCwzLDMsMCwwLDEsMTQuMiw2LjJhMy42NjEsMy42NjEsMCwwLDEsMS42Mi40MVY3LjkzOWEzLjE2OCwzLjE2OCwwLDAsMC0xLjctLjU3NCwxLjgyOSwxLjgyOSwwLDAsMC0xLjI5Mi41MkExLjYxOCwxLjYxOCwwLDAsMCwxMi4yNzcsOS4xYTEuODI4LDEuODI4LDAsMCwwLC41MiwxLjMyMywxLjcsMS43LDAsMCwwLDEuMjcxLjUzN0EzLjE5MywzLjE5MywwLDAsMCwxNS44MTgsMTAuMjc3WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNiAxMikiIGZpbGw9IiNmZmYiLz4NCiAgICA8L2c+DQogICAgPGcgaWQ9ImtleS1iaWctc3BhY2UiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDc1NCA3MTUpIj4NCiAgICAgIDxwYXRoIGlkPSJsYWJlbC0zIiBkYXRhLW5hbWU9ImxhYmVsIiBkPSJNNi4yNCwzLjg4N0g0LjA5MkwzLjAzMiwxMGgtMS4yTDIuOSwzLjg4N0guNzYybC4xNzYtMUg2LjQxNlpNNS4yNzgsNy4zMzlhMy40NzYsMy40NzYsMCwwLDEsLjQ1Ny0xLjQxMSwyLjcwOSwyLjcwOSwwLDAsMSwuOTU5LS45ODEsMi4zNzEsMi4zNzEsMCwwLDEsMS4zLS4zMjdBMS45NjIsMS45NjIsMCwwLDEsOS44ODUsNS45NDIsMy4wNTQsMy4wNTQsMCwwLDEsMTAuMDQ0LDcuM2EzLjU0MSwzLjU0MSwwLDAsMS0uNDU3LDEuNDg0LDIuNywyLjcsMCwwLDEtLjk2Ny45ODksMi40LDIuNCwwLDAsMS0xLjMwNi4zMjVBMS45NiwxLjk2LDAsMCwxLDUuNDMsOC43ODJhMy4wMTUsMy4wMTUsMCwwLDEtLjE2Ni0xLjM0Wm0xLjEzOC42NjlhMS40LDEuNCwwLDAsMCwuMjcxLjgyMy44NjcuODY3LDAsMCwwLC42ODYuMzI1LDEuMjE3LDEuMjE3LDAsMCwwLDEtLjQ1OUEyLjQxNSwyLjQxNSwwLDAsMCw4Ljg3Nyw3LjRsLjAyOS0uNDc5YTEuNjkxLDEuNjkxLDAsMCwwLS4yNDktLjk4MS44NzQuODc0LDAsMCwwLS43MjMtLjM3NiwxLjI2NSwxLjI2NSwwLDAsMC0xLjE3Mi43MjgsMi43MTgsMi43MTgsMCwwLDAtLjMyNywxLjA0NUE0LjA4OCw0LjA4OCwwLDAsMCw2LjQxNiw4LjAwOFptNC40MTktLjY1NGE0LjA4Nyw0LjA4NywwLDAsMSwuNDI3LTEuNDMxLDIuNTg0LDIuNTg0LDAsMCwxLC44NDItLjk3OSwxLjk4NywxLjk4NywwLDAsMSwxLjE2Mi0uMzMsMS41NTksMS41NTksMCwwLDEsMS4zMTMuNjRsLjE4MS0uNTQyLDEuMDU1LDAtLjg3NCw1LjEzN0EyLjQ5NCwyLjQ5NCwwLDAsMSwxMi4zLDEyLjA4NWEyLjQ2NiwyLjQ2NiwwLDAsMS0xLjA1NS0uMjU0LDIuMTkzLDIuMTkzLDAsMCwxLS44LS42NDVsLjYxNS0uN2ExLjQ4MiwxLjQ4MiwwLDAsMCwxLjIxMS42NTksMS40MTksMS40MTksMCwwLDAsLjk3NC0uMzEsMS42MTYsMS42MTYsMCwwLDAsLjU0NC0uOTRsLjA4My0uMzcxYTEuODY5LDEuODY5LDAsMCwxLTEuMzg3LjU3MUExLjQ4LDEuNDgsMCwwLDEsMTEuMyw5LjUzNmEyLjQ4NCwyLjQ4NCwwLDAsMS0uNDkxLTEuNDg0QTQuODc5LDQuODc5LDAsMCwxLDEwLjgzNSw3LjM1NFptMS4xNDcuMWEzLjU3MSwzLjU3MSwwLDAsMC0uMDIuNTM3LDEuMzk0LDEuMzk0LDAsMCwwLC4yMzQuODIuNzg2Ljc4NiwwLDAsMCwuNjQuMzE3LDEuMzY2LDEuMzY2LDAsMCwwLDEuMTUyLS42MUwxNC40LDYuMTg3YS45NDMuOTQzLDAsMCwwLS45LS42LDEuMjA1LDEuMjA1LDAsMCwwLS45ODYuNDU0LDIuNTQ0LDIuNTQ0LDAsMCwwLS41MjIsMS4zMTNabTQuNC0uMWE0LjA4Nyw0LjA4NywwLDAsMSwuNDI3LTEuNDMxLDIuNTg0LDIuNTg0LDAsMCwxLC44NDItLjk3OSwxLjk4NywxLjk4NywwLDAsMSwxLjE2Mi0uMzMsMS41NTksMS41NTksMCwwLDEsMS4zMTMuNjRsLjE4MS0uNTQyLDEuMDU1LDAtLjg3NCw1LjEzN2EyLjQ5NCwyLjQ5NCwwLDAsMS0yLjYzNywyLjIzMSwyLjQ2NiwyLjQ2NiwwLDAsMS0xLjA1NS0uMjU0LDIuMTkzLDIuMTkzLDAsMCwxLS44LS42NDVsLjYxNS0uN2ExLjQ4MiwxLjQ4MiwwLDAsMCwxLjIxMS42NTksMS40MTksMS40MTksMCwwLDAsLjk3NC0uMzEsMS42MTYsMS42MTYsMCwwLDAsLjU0NC0uOTRsLjA4My0uMzcxYTEuODY5LDEuODY5LDAsMCwxLTEuMzg3LjU3MSwxLjQ4LDEuNDgsMCwwLDEtMS4xODktLjU2MiwyLjQ4NCwyLjQ4NCwwLDAsMS0uNDkxLTEuNDg0QTQuODc5LDQuODc5LDAsMCwxLDE2LjM4Miw3LjM1NFptMS4xNDcuMWEzLjU3MSwzLjU3MSwwLDAsMC0uMDIuNTM3LDEuMzk0LDEuMzk0LDAsMCwwLC4yMzQuODIuNzg2Ljc4NiwwLDAsMCwuNjQuMzE3LDEuMzY2LDEuMzY2LDAsMCwwLDEuMTUyLS42MWwuNDE1LTIuMzM0YS45NDMuOTQzLDAsMCwwLS45LS42LDEuMjA1LDEuMjA1LDAsMCwwLS45ODYuNDU0LDIuNTQ0LDIuNTQ0LDAsMCwwLS41MjIsMS4zMTNaTTIyLjksMTBIMjEuNzM4bDEuMy03LjVIMjQuMlptMy42ODcuMWEyLjIxMywyLjIxMywwLDAsMS0xLjE5NC0uMzQ3LDEuOTcyLDEuOTcyLDAsMCwxLS43NDctLjkwOCwyLjcsMi43LDAsMCwxLS4xODMtMS4yODRsLjAxNS0uMmEzLjUzNiwzLjUzNiwwLDAsMSwuNDcxLTEuNDQ4LDIuNjg5LDIuNjg5LDAsMCwxLC45NTUtLjk3NCwyLjMyMSwyLjMyMSwwLDAsMSwxLjI0LS4zMTcsMS43MzEsMS43MzEsMCwwLDEsMS40ODcuNzM4QTIuNzExLDIuNzExLDAsMCwxLDI5LDcuMjMxbC0uMDY4LjUwOUgyNS42MDVhMS40MzUsMS40MzUsMCwwLDAsLjI1NCwxLjAxMiwxLjAwNiwxLjAwNiwwLDAsMCwuODIuMzk0QTEuNzgsMS43OCwwLDAsMCwyOC4wNTcsOC41bC41ODYuNjE1YTIuMjI3LDIuMjI3LDAsMCwxLS44NzQuNzM1QTIuNiwyLjYsMCwwLDEsMjYuNTgyLDEwLjFabS40OTMtNC41MzFxLS45MTgtLjAyOS0xLjM3NywxLjNsMi4xOTIsMCwuMDItLjFhMS41MzIsMS41MzIsMCwwLDAsMC0uNDM5LjkuOSwwLDAsMC0uMjczLS41NDdBLjg2Ni44NjYsMCwwLDAsMjcuMDc1LDUuNTY2Wm05Ljc5LDEuODE2YTQuMyw0LjMsMCwwLDEtLjQzMiwxLjQ1OCwyLjM5MSwyLjM5MSwwLDAsMS0uODMuOTY0LDEuOTU4LDEuOTU4LDAsMCwxLTEuMTE2LjMsMS41NTMsMS41NTMsMCwwLDEtMS4zMzMtLjY3OUwzMi45NjksMTBoLTEuMDZsMS4zLTcuNUgzNC4zN2wtLjUyNywyLjcyOWExLjgsMS44LDAsMCwxLDEuNC0uNjEsMS41LDEuNSwwLDAsMSwxLjIuNTYyQTIuNDI0LDIuNDI0LDAsMCwxLDM2LjksNi42NjUsNi44MDcsNi44MDcsMCwwLDEsMzYuODY1LDcuMzgzWm0tMS4xMTMtLjY1NGExLjM4NiwxLjM4NiwwLDAsMC0uMjItLjgzMy43NjIuNzYyLDAsMCwwLS42MzUtLjMxLDEuMzYxLDEuMzYxLDAsMCwwLTEuMTgyLjY3NGwtLjM4MSwyLjE4OGEuOTIyLjkyMiwwLDAsMCwuOTIzLjY4OCwxLjE1LDEuMTUsMCwwLDAsLjk2NC0uNDQ5LDIuNTQ3LDIuNTQ3LDAsMCwwLC40ODYtMS4zMDlRMzUuNzQ3LDYuOTYzLDM1Ljc1Miw2LjcyOVptMS45MTQsMy44ODJoLS45NTdsNC4wNTMtNy43MmguOTYyWm01LjYyNS01LjktLjExNy42MmEyLjAxNiwyLjAxNiwwLDAsMSwxLjU2Ny0uNzEzLDEuMjc3LDEuMjc3LDAsMCwxLDEuMS41M0EyLjExNSwyLjExNSwwLDAsMSw0Ni4xLDYuNTg3TDQ1LjUzMiwxMEg0NC4zNzVsLjU3Ni0zLjQyOGExLjc1NCwxLjc1NCwwLDAsMCwwLS4zOTEuNjIzLjYyMywwLDAsMC0uNjkzLS42LDEuNDA3LDEuNDA3LDAsMCwwLTEuMTU3LjY0OUw0Mi40NDYsMTBINDEuMjg5TDQyLjIsNC43MTdabTguNzcsNS4zODZhMi40MSwyLjQxLDAsMCwxLTEuMjE4LS4zMzIsMi4xMzIsMi4xMzIsMCwwLDEtLjgxOC0uOTIsMy41MTIsMy41MTIsMCwwLDEtLjMzMi0xLjM3QTYuMyw2LjMsMCwwLDEsNDkuOCw2LjA1YTQuOCw0LjgsMCwwLDEsLjUxMy0xLjQ4NywzLjczNywzLjczNywwLDAsMSwuODgxLTEuMSwyLjksMi45LDAsMCwxLDEuOTUzLS42NzQsMi4xOTQsMi4xOTQsMCwwLDEsMS42ODIuNzI4LDMuMDEzLDMuMDEzLDAsMCwxLC42ODYsMS45MTQsNi4zLDYuMywwLDAsMS0uMTEsMS4zODksNS4wMzUsNS4wMzUsMCwwLDEtLjQ3OSwxLjQ0LDMuNjc2LDMuNjc2LDAsMCwxLS44NDIsMS4xQTIuODgxLDIuODgxLDAsMCwxLDUyLjA2MSwxMC4xWm0yLjIyMi0zLjg0My4wNDQtLjUxOGEzLjEsMy4xLDAsMCwwLS4wOTMtLjk4NCwxLjI5MSwxLjI5MSwwLDAsMC0uNDEzLS42ODgsMS4xOSwxLjE5LDAsMCwwLS43MzUtLjI1MSwxLjY1MSwxLjY1MSwwLDAsMC0xLjA5MS4zNDcsMi41NDEsMi41NDEsMCwwLDAtLjc3MSwxLjExMyw1LjgzMyw1LjgzMywwLDAsMC0uMzQ0LDEuODc1LDIuMzc4LDIuMzc4LDAsMCwwLC4yNzMsMS40MDYsMS4xMSwxLjExLDAsMCwwLC45NjcuNTMyLDEuNjY5LDEuNjY5LDAsMCwwLDEuMzk0LS42MzUsMy42NiwzLjY2LDAsMCwwLC43Mi0xLjg1NVpNNTkuNDE5LDUuOGEyLjEzMiwyLjEzMiwwLDAsMC0uNDU0LS4wNDksMS4zNTUsMS4zNTUsMCwwLDAtMS4yMTEuNjNMNTcuMTE5LDEwSDU1Ljk2MmwuOTEzLTUuMjgzLDEuMSwwLS4xMTcuNmExLjUxMiwxLjUxMiwwLDAsMSwxLjI1LS43LDEuOSwxLjksMCwwLDEsLjQ0NC4wNzNabTQuOTU2LDEuNTgyYTQuMyw0LjMsMCwwLDEtLjQzMiwxLjQ1OCwyLjM5MSwyLjM5MSwwLDAsMS0uODMuOTY0QTEuOTU4LDEuOTU4LDAsMCwxLDYyLDEwLjFhMS41NTMsMS41NTMsMCwwLDEtMS4zMzMtLjY3OUw2MC40NzksMTBoLTEuMDZsMS4zLTcuNUg2MS44OGwtLjUyNywyLjcyOWExLjgsMS44LDAsMCwxLDEuNC0uNjEsMS41LDEuNSwwLDAsMSwxLjIuNTYyLDIuNDI0LDIuNDI0LDAsMCwxLC40NTcsMS40ODRBNi44MDcsNi44MDcsMCwwLDEsNjQuMzc1LDcuMzgzWm0tMS4xMTMtLjY1NGExLjM4NiwxLjM4NiwwLDAsMC0uMjItLjgzMy43NjIuNzYyLDAsMCwwLS42MzUtLjMxLDEuMzYxLDEuMzYxLDAsMCwwLTEuMTgyLjY3NGwtLjM4MSwyLjE4OGEuOTIyLjkyMiwwLDAsMCwuOTIzLjY4OCwxLjE1LDEuMTUsMCwwLDAsLjk2NC0uNDQ5LDIuNTQ3LDIuNTQ3LDAsMCwwLC40ODYtMS4zMDlRNjMuMjU3LDYuOTYzLDYzLjI2Miw2LjcyOVpNNjYuMTU3LDEwSDY1bC45MTgtNS4yODNoMS4xNTdabS0uMDczLTYuNjM2YS42NTMuNjUzLDAsMCwxLC4xNzYtLjQ1OS42NDQuNjQ0LDAsMCwxLC40NzQtLjIuNjE2LjYxNiwwLDAsMSwuNDcxLjE3My42LjYsMCwwLDEsLjE4OC40NDcuNjE3LjYxNywwLDAsMS0uMTgzLjQ1OS42NzEuNjcxLDAsMCwxLS40NjYuMTkuNjI2LjYyNiwwLDAsMS0uNDY5LS4xNjhBLjU4MS41ODEsMCwwLDEsNjYuMDg0LDMuMzY0Wm0zLjk2LjA2OC0uMjI1LDEuMjg0aC45bC0uMTUxLjg3OWgtLjkwOGwtLjUsMi45NTlhMS4wMTIsMS4wMTIsMCwwLDAsMCwuMjJxLjAyOS4zMTcuMzkxLjMzMmEyLjIwNiwyLjIwNiwwLDAsMCwuNDEtLjA0NGwtLjA3OC45MjhhMi42NTMsMi42NTMsMCwwLDEtLjcyOC4xLDEuMDgsMS4wOCwwLDAsMS0uOTA2LS40MTMsMS40OTMsMS40OTMsMCwwLDEtLjIzNy0xLjA2N0w2OC41MDYsNS42aC0uODQ1bC4xNTYtLjg3OWguODRsLjIyNS0xLjI4NFpNMy4yMTgsMjBhMS41NjcsMS41NjcsMCwwLDEtLjA0OS0uNDkzLDEuOTU5LDEuOTU5LDAsMCwxLTEuNDExLjU5MSwxLjYxOCwxLjYxOCwwLDAsMS0xLjE0LS40NDJBMS4zNjMsMS4zNjMsMCwwLDEsLjIsMTguNTZhMS42MTgsMS42MTgsMCwwLDEsLjcyMy0xLjMxMywzLjE0NiwzLjE0NiwwLDAsMSwxLjgzNi0uNDc5bC43NTIuMDEuMDY4LS4zNjFhMS4wOSwxLjA5LDAsMCwwLDAtLjM1Ni42MzYuNjM2LDAsMCwwLS43LS41NDIsMS4wNTMsMS4wNTMsMCwwLDAtLjY1Mi4xODguODEzLjgxMywwLDAsMC0uMzQ0LjUzbC0xLjE1Ny4wMWExLjQ0OSwxLjQ0OSwwLDAsMSwuMzQ3LS44NTcsMi4wNTYsMi4wNTYsMCwwLDEsLjgzLS41NzQsMi44MSwyLjgxLDAsMCwxLDEuMDk0LS4yLDEuODQ4LDEuODQ4LDAsMCwxLDEuMzQ4LjUyLDEuNTQxLDEuNTQxLDAsMCwxLC40LDEuM2wtLjQwNSwyLjQ3Ni0uMDM5LjQzOWExLjU2MSwxLjU2MSwwLDAsMCwuMDczLjU2MmwwLC4wODhabS0xLjE5MS0uODVhMS4yNzYsMS4yNzYsMCwwLDAsLjY3OS0uMTY4LDEuNzg4LDEuNzg4LDAsMCwwLC41MzItLjQ2MWwuMTgxLTEtLjU1MiwwYTEuOTM5LDEuOTM5LDAsMCwwLTEuMDQ1LjI0Ny45LjksMCwwLDAtLjQ0NC42NzYuNi42LDAsMCwwLC4xNDQuNTE1QS43LjcsMCwwLDAsMi4wMjYsMTkuMTVabTUuMzM3LTQuNDM4LS4xMTcuNjJhMi4wMTYsMi4wMTYsMCwwLDEsMS41NjctLjcxMywxLjI3NywxLjI3NywwLDAsMSwxLjEuNTMsMi4xMTUsMi4xMTUsMCwwLDEsLjI2NCwxLjQzOEw5LjYsMjBIOC40NDdsLjU3Ni0zLjQyOGExLjc1NCwxLjc1NCwwLDAsMCwwLS4zOTEuNjIzLjYyMywwLDAsMC0uNjkzLS42LDEuNDA3LDEuNDA3LDAsMCwwLTEuMTU3LjY0OUw2LjUxOSwyMEg1LjM2MWwuOTEzLTUuMjgzWm0zLjcxMSwyLjY0MmE0LjE4NSw0LjE4NSwwLDAsMSwuNDM5LTEuNDY1LDIuNDgsMi40OCwwLDAsMSwuODQ1LS45NjksMS45NTEsMS45NTEsMCwwLDEsMS4xMTgtLjMwNSwxLjU2MSwxLjU2MSwwLDAsMSwxLjI2LjZsLjUwOC0yLjcxNWgxLjE2MkwxNS4xLDIwSDE0LjA2N2wuMDc4LS41NDdBMS44NDEsMS44NDEsMCwwLDEsMTIuNywyMC4xYTEuNDUzLDEuNDUzLDAsMCwxLTEuMTc5LS41NjksMi40ODQsMi40ODQsMCwwLDEtLjQ3Ni0xLjQ4NywzLjk0OCwzLjk0OCwwLDAsMSwuMDE1LS41OTFabTEuMTIzLjQ1NGExLjYyNywxLjYyNywwLDAsMCwuMTg4Ljk2Mi43NTEuNzUxLDAsMCwwLC42NjIuMzY2LDEuMzU5LDEuMzU5LDAsMCwwLDEuMTU3LS42NDlsLjQtMi4yNzFhLjkuOSwwLDAsMC0uODg5LS42MywxLjE4OSwxLjE4OSwwLDAsMC0xLjA2OS41ODZBMy4xMjMsMy4xMjMsMCwwLDAsMTIuMiwxNy44MDhabTguMSwxLjIwNmgzLjEzNUwyMy4yNTcsMjBIMTguOTIxbDEuMjM1LTcuMTA5aDEuMjA2Wm00LjA4Ny0xLjY3NWEzLjQ3NiwzLjQ3NiwwLDAsMSwuNDU3LTEuNDExLDIuNzA5LDIuNzA5LDAsMCwxLC45NTktLjk4MSwyLjM3MSwyLjM3MSwwLDAsMSwxLjMtLjMyNywxLjk2MiwxLjk2MiwwLDAsMSwxLjg5MiwxLjMyM0EzLjA1NCwzLjA1NCwwLDAsMSwyOS4xNSwxNy4zYTMuNTQxLDMuNTQxLDAsMCwxLS40NTcsMS40ODQsMi43LDIuNywwLDAsMS0uOTY3Ljk4OSwyLjQsMi40LDAsMCwxLTEuMzA2LjMyNSwxLjk2LDEuOTYsMCwwLDEtMS44ODUtMS4zMTYsMy4wMTUsMy4wMTUsMCwwLDEtLjE2Ni0xLjM0Wm0xLjEzOC42NjlhMS40LDEuNCwwLDAsMCwuMjcxLjgyMy44NjcuODY3LDAsMCwwLC42ODYuMzI1LDEuMjE3LDEuMjE3LDAsMCwwLDEtLjQ1OSwyLjQxNSwyLjQxNSwwLDAsMCwuNTA1LTEuMjk0bC4wMjktLjQ3OWExLjY5MSwxLjY5MSwwLDAsMC0uMjQ5LS45ODEuODc0Ljg3NCwwLDAsMC0uNzIzLS4zNzYsMS4yNjUsMS4yNjUsMCwwLDAtMS4xNzIuNzI4LDIuNzE4LDIuNzE4LDAsMCwwLS4zMjcsMS4wNDVBNC4wODgsNC4wODgsMCwwLDAsMjUuNTIyLDE4LjAwOFptNC40MzQtLjY2OWEzLjQ3NiwzLjQ3NiwwLDAsMSwuNDU3LTEuNDExLDIuNzA5LDIuNzA5LDAsMCwxLC45NTktLjk4MSwyLjM3MSwyLjM3MSwwLDAsMSwxLjMtLjMyNywxLjk2MiwxLjk2MiwwLDAsMSwxLjg5MiwxLjMyMywzLjA1NCwzLjA1NCwwLDAsMSwuMTU5LDEuMzU3LDMuNTQxLDMuNTQxLDAsMCwxLS40NTcsMS40ODQsMi43LDIuNywwLDAsMS0uOTY3Ljk4OSwyLjQsMi40LDAsMCwxLTEuMzA2LjMyNSwxLjk2LDEuOTYsMCwwLDEtMS44ODUtMS4zMTYsMy4wMTUsMy4wMTUsMCwwLDEtLjE2Ni0xLjM0Wm0xLjEzOC42NjlhMS40LDEuNCwwLDAsMCwuMjcxLjgyMy44NjcuODY3LDAsMCwwLC42ODYuMzI1LDEuMjE3LDEuMjE3LDAsMCwwLDEtLjQ1OSwyLjQxNSwyLjQxNSwwLDAsMCwuNTA1LTEuMjk0bC4wMjktLjQ3OWExLjY5MSwxLjY5MSwwLDAsMC0uMjQ5LS45ODEuODc0Ljg3NCwwLDAsMC0uNzIzLS4zNzYsMS4yNjUsMS4yNjUsMCwwLDAtMS4xNzIuNzI4LDIuNzE4LDIuNzE4LDAsMCwwLS4zMjcsMS4wNDVBNC4wODgsNC4wODgsMCwwLDAsMzEuMDk0LDE4LjAwOFptNi4yNi0uMjY0LS42NTQuNTgxTDM2LjQxMSwyMEgzNS4yNTRsMS4zLTcuNUgzNy43MWwtLjc0Miw0LjI1OC40MDUtLjQyLDEuNjgtMS42MjFoMS40NzlsLTIuMzQ0LDIuMjU2TDM5LjczMSwyMEgzOC40NzdabTkuNzU2LjZINDQuNDQ4TDQzLjYsMjBINDIuM2wzLjgzOC03LjEwOWgxLjA4NEw0OC42LDIwSDQ3LjM4OFptLTIuMTUzLTFoMS45OTJsLS40ODMtMi45MzlaTTUyLjc4OCwxNS44YTIuMTMyLDIuMTMyLDAsMCwwLS40NTQtLjA0OSwxLjM1NSwxLjM1NSwwLDAsMC0xLjIxMS42M0w1MC40ODgsMjBINDkuMzMxbC45MTMtNS4yODMsMS4xLDAtLjExNy42YTEuNTEyLDEuNTEyLDAsMCwxLDEuMjUtLjcsMS45LDEuOSwwLDAsMSwuNDQ0LjA3M1ptLjEsMS41MzhhMy40NzYsMy40NzYsMCwwLDEsLjQ1Ny0xLjQxMSwyLjcwOSwyLjcwOSwwLDAsMSwuOTU5LS45ODEsMi4zNzEsMi4zNzEsMCwwLDEsMS4zLS4zMjdBMS45NjIsMS45NjIsMCwwLDEsNTcuNSwxNS45NDJhMy4wNTQsMy4wNTQsMCwwLDEsLjE1OSwxLjM1NywzLjU0MSwzLjU0MSwwLDAsMS0uNDU3LDEuNDg0LDIuNywyLjcsMCwwLDEtLjk2Ny45ODksMi40LDIuNCwwLDAsMS0xLjMwNi4zMjUsMS45NiwxLjk2LDAsMCwxLTEuODg1LTEuMzE2LDMuMDE1LDMuMDE1LDAsMCwxLS4xNjYtMS4zNFptMS4xMzguNjY5YTEuNCwxLjQsMCwwLDAsLjI3MS44MjMuODY3Ljg2NywwLDAsMCwuNjg2LjMyNSwxLjIxNywxLjIxNywwLDAsMCwxLS40NTksMi40MTUsMi40MTUsMCwwLDAsLjUwNS0xLjI5NGwuMDI5LS40NzlhMS42OTEsMS42OTEsMCwwLDAtLjI0OS0uOTgxLjg3NC44NzQsMCwwLDAtLjcyMy0uMzc2LDEuMjY1LDEuMjY1LDAsMCwwLTEuMTcyLjcyOCwyLjcxOCwyLjcxOCwwLDAsMC0uMzI3LDEuMDQ1QTQuMDg4LDQuMDg4LDAsMCwwLDU0LjAyOCwxOC4wMDhabTcuNDIyLDEuNDdhMS45MTYsMS45MTYsMCwwLDEtMS41LjYyLDEuNDcyLDEuNDcyLDAsMCwxLS44NTItLjI1NCwxLjMyMSwxLjMyMSwwLDAsMS0uNDgzLS42ODEsMi40OTQsMi40OTQsMCwwLDEtLjA4NS0xLjAyOGwuNTcxLTMuNDE4aDEuMTU3bC0uNTc2LDMuNDMzYTEuODIsMS44MiwwLDAsMCwwLC4zNTIuNTk0LjU5NCwwLDAsMCwuNjEuNjMsMS40LDEuNCwwLDAsMCwxLjI0LS42MTVsLjY2NC0zLjhoMS4xNTdMNjIuNDMyLDIwSDYxLjM0OFptNC4xNi00Ljc2Ni0uMTE3LjYyYTIuMDE2LDIuMDE2LDAsMCwxLDEuNTY3LS43MTMsMS4yNzcsMS4yNzcsMCwwLDEsMS4xLjUzLDIuMTE1LDIuMTE1LDAsMCwxLC4yNjQsMS40MzhMNjcuODUyLDIwSDY2LjY5NGwuNTc2LTMuNDI4YTEuNzU0LDEuNzU0LDAsMCwwLDAtLjM5MS42MjMuNjIzLDAsMCwwLS42OTMtLjYsMS40MDcsMS40MDcsMCwwLDAtMS4xNTcuNjQ5TDY0Ljc2NiwyMEg2My42MDhsLjkxMy01LjI4M1ptMy43MTEsMi42NDJhNC4xODUsNC4xODUsMCwwLDEsLjQzOS0xLjQ2NSwyLjQ4LDIuNDgsMCwwLDEsLjg0NS0uOTY5LDEuOTUxLDEuOTUxLDAsMCwxLDEuMTE4LS4zMDUsMS41NjEsMS41NjEsMCwwLDEsMS4yNi42bC41MDgtMi43MTVoMS4xNjJMNzMuMzUsMjBINzIuMzE0bC4wNzgtLjU0N2ExLjg0MSwxLjg0MSwwLDAsMS0xLjQ0NS42NDksMS40NTMsMS40NTMsMCwwLDEtMS4xNzktLjU2OSwyLjQ4NCwyLjQ4NCwwLDAsMS0uNDc2LTEuNDg3LDMuOTQ4LDMuOTQ4LDAsMCwxLC4wMTUtLjU5MVptMS4xMjMuNDU0YTEuNjI3LDEuNjI3LDAsMCwwLC4xODguOTYyLjc1MS43NTEsMCwwLDAsLjY2Mi4zNjYsMS4zNTksMS4zNTksMCwwLDAsMS4xNTctLjY0OWwuNC0yLjI3MWEuOS45LDAsMCwwLS44ODktLjYzLDEuMTg5LDEuMTg5LDAsMCwwLTEuMDY5LjU4NkEzLjEyMywzLjEyMywwLDAsMCw3MC40NDQsMTcuODA4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjggNSkiIGZpbGw9IiMwNTBjMWEiLz4NCiAgICAgIDxnIHRyYW5zZm9ybT0ibWF0cml4KDEsIDAsIDAsIDEsIC01NTMsIC0yMzkpIiBmaWx0ZXI9InVybCgja2V5LWJ0bS0yKSI+DQogICAgICAgIDxwYXRoIGlkPSJrZXktYnRtLTE3IiBkYXRhLW5hbWU9ImtleS1idG0iIGQ9Ik0yLDBINjBhMi4xNzUsMi4xNzUsMCwwLDEsMS41LjY3M0EyLjQwOCwyLjQwOCwwLDAsMSw2MS43NjUsMlYzMEExLjY0LDEuNjQsMCwwLDEsNjAsMzEuNzg5bC01OC4wMzEuMTQ5YTIuMiwyLjIsMCwwLDEtMS4zOTEtLjU3OEExLjY1NiwxLjY1NiwwLDAsMSwwLDMwVjJBMiwyLDAsMCwxLDIsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDU1MyAyMzkpIiBmaWxsPSIjNGE0YTRhIi8+DQogICAgICA8L2c+DQogICAgICA8cGF0aCBpZD0ia2V5LXNpZGUtMiIgZGF0YS1uYW1lPSJrZXktc2lkZSIgZD0iTTExNTAyLjkzOC0xNDE0M2ExLjkxMSwxLjkxMSwwLDAsMS0xLjQ4Mi0uNzFsNi4yMDctOS42Niw0Ny42LTE2Ljg4Nyw3LjAxMi00LjNhMi4wMjgsMi4wMjgsMCwwLDEsLjcyMiwxLjU2MXYyOGExLjk2NywxLjk2NywwLDAsMS0xLjkzNSwyWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTExNTAxIDE0MTc1KSIgZmlsbD0iIzIxMjEyMSIvPg0KICAgICAgPHBhdGggaWQ9ImtleS10b3AtMiIgZGF0YS1uYW1lPSJrZXktdG9wIiBkPSJNMS45NjQsMEg1NS41MzZBMS45NjQsMS45NjQsMCwwLDEsNTcuNSwxLjk2NFYyNS41MzZBMS45NjQsMS45NjQsMCwwLDEsNTUuNTM2LDI3LjVIMS45NjRBMS45NjQsMS45NjQsMCwwLDEsMCwyNS41MzZWMS45NjRBMS45NjQsMS45NjQsMCwwLDEsMS45NjQsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIgMSkiIGZpbGw9InVybCgjbGluZWFyLWdyYWRpZW50KSIvPg0KICAgICAgPHBhdGggaWQ9InNwYWNlIiBkPSJNNi4yMjgsNC4yNjJsLS45NjQuNzcyYTMuODUzLDMuODUzLDAsMCwwLS42OTItLjU5MSwxLjcsMS43LDAsMCwwLS45LS4xOTUsMS43MjksMS43MjksMCwwLDAtMS4wNC4yOS44ODUuODg1LDAsMCwwLS40Ljc0Ni45MDYuOTA2LDAsMCwwLC4zNDguNyw0Ljc3Miw0Ljc3MiwwLDAsMCwxLjE4OC42NjQsOC40NzUsOC40NzUsMCwwLDEsMS4zMDcuNjcxQTMuMzM0LDMuMzM0LDAsMCwxLDUuODQ2LDhhMi43MDcsMi43MDcsMCwwLDEsLjQ0Ny43OTIsMi42MzQsMi42MzQsMCwwLDEsLjE0Ny44ODEsMi40ODMsMi40ODMsMCwwLDEtLjc5LDEuODUxLDIuNjQ1LDIuNjQ1LDAsMCwxLTEuOTExLjc2NSwzLjIzOCwzLjIzOCwwLDAsMS0xLjkzMS0uNkEzLjc1MywzLjc1MywwLDAsMSwuNTIsOS45bDEuMTg5LS4zMzVBMi4xMTMsMi4xMTMsMCwwLDAsMy43LDExLjAzNmExLjU1MiwxLjU1MiwwLDAsMCwxLjA4LS4zODgsMS4yNjUsMS4yNjUsMCwwLDAsLjQzMS0uOTgxLDEuMzI3LDEuMzI3LDAsMCwwLS4yMjYtLjcxMiwyLjAxMywyLjAxMywwLDAsMC0uNTYxLS41OSw2LDYsMCwwLDAtMS4wNjctLjUzMiw3LjU1Nyw3LjU1NywwLDAsMS0xLjEyNi0uNTQ5LDIuOSwyLjksMCwwLDEtLjY4My0uNTk0QTIuNTEyLDIuNTEyLDAsMCwxLDEuMTI1LDZhMS45ODYsMS45ODYsMCwwLDEtLjEzNC0uNzMxLDIuMDQ3LDIuMDQ3LDAsMCwxLC43NTItMS42LDIuNjczLDIuNjczLDAsMCwxLDEuODI1LS42NTksMy43LDMuNywwLDAsMSwxLjQ0Mi4zMDhBMi45NjMsMi45NjMsMCwwLDEsNi4yMjgsNC4yNjJabTIuOTA1LDIuMVY3LjVBMi41NDEsMi41NDEsMCwwLDEsMTEuMzE3LDYuMmEyLjQ1MywyLjQ1MywwLDAsMSwxLjg4MS44NzIsMywzLDAsMCwxLC43ODgsMi4wODIsMy4wNTQsMy4wNTQsMCwwLDEtLjgsMi4xMTIsMi40NTcsMi40NTcsMCwwLDEtMS44ODQuODg5LDIuNCwyLjQsMCwwLDEtMS4yLS4zMjgsMi42MjUsMi42MjUsMCwwLDEtLjk1Mi0uOTV2My43NjdINy45NTdWNi4zNlptMy42MDksMi44YTEuNzgsMS43OCwwLDAsMC0uNTYtMS4zQTEuODA2LDEuODA2LDAsMCwwLDEwLjg2Niw3LjNhMS44MzgsMS44MzgsMCwwLDAtMS4zMzQuNTU0LDEuNzcyLDEuNzcyLDAsMCwwLS41NjMsMS4zMDYsMS44NTEsMS44NTEsMCwwLDAsLjU1NiwxLjM0LDEuNzc5LDEuNzc5LDAsMCwwLDEuMzE0LjU2NywxLjkxMiwxLjkxMiwwLDAsMCwxLjktMS45MDdabTcuNTI2LTIuOGgxLjE4OVYxMkgyMC4yNjlWMTAuODc5YTIuNTQ3LDIuNTQ3LDAsMCwxLTIuMTUzLDEuMjc4LDIuNDc0LDIuNDc0LDAsMCwxLTEuOS0uODc1LDMuMDYsMy4wNiwwLDAsMS0uNzktMi4xMjYsMywzLDAsMCwxLC44LTIuMDY4LDIuNDQyLDIuNDQyLDAsMCwxLDEuODctLjg4NSwyLjM3OSwyLjM3OSwwLDAsMSwxLjI1OC4zNjIsMi41NzcsMi41NzcsMCwwLDEsLjkyMy45NDNaTTIwLjQzMyw5LjJhMS44LDEuOCwwLDAsMC0uNTU1LTEuMzIzLDEuODY3LDEuODY3LDAsMCwwLTIuNjQzLDAsMS43MzcsMS43MzcsMCwwLDAtLjU2MiwxLjI4NSwxLjg3NCwxLjg3NCwwLDAsMCwuNTQ4LDEuMzYsMS43ODksMS43ODksMCwwLDAsMS4zMjkuNTYxQTEuOSwxLjksMCwwLDAsMjAuNDMzLDkuMlptNy4wNDEsMS4wOHYxLjM2YTMuNTUxLDMuNTUxLDAsMCwxLTEuNzY0LjUyLDIuODA3LDIuODA3LDAsMCwxLTIuMDQ3LS44NzgsMi43OTIsMi43OTIsMCwwLDEtLjg3OC0yLjAzNCwyLjkzNCwyLjkzNCwwLDAsMSwuODc1LTIuMTc3QTMsMywwLDAsMSwyNS44NTQsNi4yYTMuNjYxLDMuNjYxLDAsMCwxLDEuNjIuNDFWNy45MzlhMy4xNjgsMy4xNjgsMCwwLDAtMS43LS41NzQsMS44MjksMS44MjksMCwwLDAtMS4yOTIuNTJBMS42MTgsMS42MTgsMCwwLDAsMjMuOTMzLDkuMWExLjgyOCwxLjgyOCwwLDAsMCwuNTIsMS4zMjMsMS43LDEuNywwLDAsMCwxLjI3MS41MzdBMy4xOTMsMy4xOTMsMCwwLDAsMjcuNDc0LDEwLjI3N1ptNi43ODgtLjg2OEgyOS40NDlhMS45LDEuOSwwLDAsMCwuNzE0LDEuMjY4LDIuMDM4LDIuMDM4LDAsMCwwLDEuMjEzLjQsMi4xLDIuMSwwLDAsMCwxLjctLjg0MWwuODY4LjY1NmEzLjE0LDMuMTQsMCwwLDEtMi42MTgsMS4yNjUsMi44MzUsMi44MzUsMCwwLDEtMi4xMDUtLjg2MSwyLjkyOSwyLjkyOSwwLDAsMS0uODQ4LTIuMTQsMi44NzEsMi44NzEsMCwwLDEsLjg1OC0yLjA3NSwyLjkxLDIuOTEsMCwwLDEsNC4xOC4wMTRBMy4xMzIsMy4xMzIsMCwwLDEsMzQuMjYyLDkuNDA5Wm0tNC42ODktLjk1aDMuNDQ1YTEuODIxLDEuODIxLDAsMCwwLTEuNy0xLjE2MkExLjgsMS44LDAsMCwwLDI5LjU3Miw4LjQ1OVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDYgMTIpIiBmaWxsPSIjZmZmIi8+DQogICAgPC9nPg0KICAgIDxnIGlkPSJrZXktYmlnLWhvbWUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDc1NCA2NzUpIj4NCiAgICAgIDxwYXRoIGlkPSJsYWJlbC00IiBkYXRhLW5hbWU9ImxhYmVsIiBkPSJNMy4yMzIsNy4yNjZIMS44NzVMMS40LDEwSC4xOUwxLjQyNiwyLjg5MWwyLjI0MSwwYTIuNTUzLDIuNTUzLDAsMCwxLDEuNzcyLjU1N0ExLjc2OSwxLjc2OSwwLDAsMSw1Ljk3Miw1LDIuMTI4LDIuMTI4LDAsMCwxLDUuNTEzLDYuMmEyLjY3MSwyLjY3MSwwLDAsMS0xLjEzOC43OTRsMS4wNSwyLjkzNiwwLC4wNzNINC4xNDFabS0xLjE5MS0xLDEuMTY3LjAxQTEuNjU4LDEuNjU4LDAsMCwwLDQuMjYsNS45NWExLjMsMS4zLDAsMCwwLC41LS45LDEuMDA4LDEuMDA4LDAsMCwwLS4yLS44NDcsMS4xLDEuMSwwLDAsMC0uODE1LS4zMTVsLTEuMjg5LDBaTTguNTc0LDEwLjFBMi4yMTMsMi4yMTMsMCwwLDEsNy4zOCw5Ljc1MWExLjk3MiwxLjk3MiwwLDAsMS0uNzQ3LS45MDhBMi43LDIuNywwLDAsMSw2LjQ1LDcuNTU5bC4wMTUtLjJhMy41MzYsMy41MzYsMCwwLDEsLjQ3MS0xLjQ0OCwyLjY4OSwyLjY4OSwwLDAsMSwuOTU1LS45NzQsMi4zMjEsMi4zMjEsMCwwLDEsMS4yNC0uMzE3LDEuNzMxLDEuNzMxLDAsMCwxLDEuNDg3LjczOCwyLjcxMSwyLjcxMSwwLDAsMSwuMzc0LDEuODczbC0uMDY4LjUwOUg3LjZhMS40MzUsMS40MzUsMCwwLDAsLjI1NCwxLjAxMiwxLjAwNiwxLjAwNiwwLDAsMCwuODIuMzk0QTEuNzgsMS43OCwwLDAsMCwxMC4wNDksOC41bC41ODYuNjE1YTIuMjI3LDIuMjI3LDAsMCwxLS44NzQuNzM1QTIuNiwyLjYsMCwwLDEsOC41NzQsMTAuMVptLjQ5My00LjUzMXEtLjkxOC0uMDI5LTEuMzc3LDEuM2wyLjE5MiwwLC4wMi0uMWExLjUzMiwxLjUzMiwwLDAsMCwwLS40MzkuOS45LDAsMCwwLS4yNzMtLjU0N0EuODY2Ljg2NiwwLDAsMCw5LjA2Nyw1LjU2NlptNS41MjcsMi45NjlxLjA4My0uNDgzLS42MjctLjY3MWE3Ljk3Nyw3Ljk3NywwLDAsMS0uOTY5LS4zLDEuMzM2LDEuMzM2LDAsMCwxLS45NzItMS4zMDksMS40ODYsMS40ODYsMCwwLDEsLjY0Ny0xLjE3OSwyLjM3MSwyLjM3MSwwLDAsMSwxLjQ5Mi0uNDU3LDIuMDQxLDIuMDQxLDAsMCwxLDEuMzcuNDc0LDEuNTEsMS41MSwwLDAsMSwuNTIsMS4yMTZsLTEuMTQ3LDBhLjc0MS43NDEsMCwwLDAtLjItLjU3NC44MTcuODE3LDAsMCwwLS41NzYtLjIxNywxLjEzNiwxLjEzNiwwLDAsMC0uNjYyLjE5LjcxLjcxLDAsMCwwLS4zMi41cS0uMDY4LjQ0NC42MjUuNjE4YTYuODYsNi44NiwwLDAsMSwxLjAyNS4zMiwxLjMzNywxLjMzNywwLDAsMSwuOTMzLDEuMzI4LDEuNDYsMS40NiwwLDAsMS0uMzMuODc2LDEuOTIzLDEuOTIzLDAsMCwxLS44MTguNTcxQTIuOCwyLjgsMCwwLDEsMTMuNSwxMC4xYTIuMTQ4LDIuMTQ4LDAsMCwxLTEuNDMzLS41QTEuNTcsMS41NywwLDAsMSwxMS41LDguMzNsMS4xMTgsMGEuODUxLjg1MSwwLDAsMCwuMjU0LjY0NS45ODEuOTgxLDAsMCwwLC42NjkuMjI1LDEuMzI4LDEuMzI4LDAsMCwwLC43MTUtLjE3OEEuNjg0LjY4NCwwLDAsMCwxNC41OTUsOC41MzVaTTE4Ljg4MiwxMC4xYTIuMjEzLDIuMjEzLDAsMCwxLTEuMTk0LS4zNDcsMS45NzIsMS45NzIsMCwwLDEtLjc0Ny0uOTA4LDIuNywyLjcsMCwwLDEtLjE4My0xLjI4NGwuMDE1LS4yYTMuNTM2LDMuNTM2LDAsMCwxLC40NzEtMS40NDgsMi42ODksMi42ODksMCwwLDEsLjk1NS0uOTc0LDIuMzIxLDIuMzIxLDAsMCwxLDEuMjQtLjMxNywxLjczMSwxLjczMSwwLDAsMSwxLjQ4Ny43MzhBMi43MTEsMi43MTEsMCwwLDEsMjEuMyw3LjIzMWwtLjA2OC41MDlIMTcuOTA1YTEuNDM1LDEuNDM1LDAsMCwwLC4yNTQsMS4wMTIsMS4wMDYsMS4wMDYsMCwwLDAsLjgyLjM5NEExLjc4LDEuNzgsMCwwLDAsMjAuMzU2LDguNWwuNTg2LjYxNWEyLjIyNywyLjIyNywwLDAsMS0uODc0LjczNUEyLjYsMi42LDAsMCwxLDE4Ljg4MiwxMC4xWm0uNDkzLTQuNTMxcS0uOTE4LS4wMjktMS4zNzcsMS4zbDIuMTkyLDAsLjAyLS4xYTEuNTMyLDEuNTMyLDAsMCwwLDAtLjQzOS45LjksMCwwLDAtLjI3My0uNTQ3QS44NjYuODY2LDAsMCwwLDE5LjM3NSw1LjU2NlptNC45NjEtMi4xMzQtLjIyNSwxLjI4NGguOWwtLjE1MS44NzloLS45MDhsLS41LDIuOTU5YTEuMDEyLDEuMDEyLDAsMCwwLDAsLjIycS4wMjkuMzE3LjM5MS4zMzJhMi4yMDYsMi4yMDYsMCwwLDAsLjQxLS4wNDRsLS4wNzguOTI4YTIuNjUzLDIuNjUzLDAsMCwxLS43MjguMSwxLjA4LDEuMDgsMCwwLDEtLjkwNi0uNDEzQTEuNDkzLDEuNDkzLDAsMCwxLDIyLjMsOC42MTNMMjIuOCw1LjZoLS44NDVsLjE1Ni0uODc5aC44NGwuMjI1LTEuMjg0Wm04LjksNC4yNDhhMi43NjEsMi43NjEsMCwwLDEtMSwxLjc3NSwzLDMsMCwwLDEtMiwuNjQyLDIuMzYsMi4zNiwwLDAsMS0xLjE4OS0uMzIyLDIuMDg1LDIuMDg1LDAsMCwxLS44LS45LDMuMzQ0LDMuMzQ0LDAsMCwxLS4zMjItMS4zMzEsNy4yLDcuMiwwLDAsMSwuMTM3LTEuNTE2QTQuNzg5LDQuNzg5LDAsMCwxLDI4LjcsNC4zMTJhMy4yMjQsMy4yMjQsMCwwLDEsMS4xNTctMS4xNDcsMi45NTEsMi45NTEsMCwwLDEsMS41MjYtLjM3MSwyLjI3MSwyLjI3MSwwLDAsMSwxLjY3Ny42NjcsMi42MTYsMi42MTYsMCwwLDEsLjY1NywxLjc4NWgtMS4yYTEuNzUyLDEuNzUyLDAsMCwwLS4zMi0xLjEsMS4xNCwxLjE0LDAsMCwwLS44NzYtLjM1NEExLjY1LDEuNjUsMCwwLDAsMzAsNC4zNmEzLjM0LDMuMzQsMCwwLDAtLjcyMywxLjczMmwtLjEuNjQ5LS4wNDQuNWEyLjk0NCwyLjk0NCwwLDAsMCwuMDcxLjk0NCwxLjIzMSwxLjIzMSwwLDAsMCwuMzg4LjY3M0ExLjEzMiwxLjEzMiwwLDAsMCwzMC4zLDkuMSwxLjYyOCwxLjYyOCwwLDAsMCwzMi4wNDYsNy42OVpNMzcuMDA3LDEwYTEuNTY3LDEuNTY3LDAsMCwxLS4wNDktLjQ5MywxLjk1OSwxLjk1OSwwLDAsMS0xLjQxMS41OTEsMS42MTgsMS42MTgsMCwwLDEtMS4xNC0uNDQyLDEuMzYzLDEuMzYzLDAsMCwxLS40MjItMS4xLDEuNjE4LDEuNjE4LDAsMCwxLC43MjMtMS4zMTMsMy4xNDYsMy4xNDYsMCwwLDEsMS44MzYtLjQ3OWwuNzUyLjAxLjA2OC0uMzYxYTEuMDksMS4wOSwwLDAsMCwwLS4zNTYuNjM2LjYzNiwwLDAsMC0uNy0uNTQyLDEuMDUzLDEuMDUzLDAsMCwwLS42NTIuMTg4LjgxMy44MTMsMCwwLDAtLjM0NC41M2wtMS4xNTcuMDFhMS40NDksMS40NDksMCwwLDEsLjM0Ny0uODU3LDIuMDU2LDIuMDU2LDAsMCwxLC44My0uNTc0LDIuODEsMi44MSwwLDAsMSwxLjA5NC0uMiwxLjg0OCwxLjg0OCwwLDAsMSwxLjM0OC41MiwxLjU0MSwxLjU0MSwwLDAsMSwuNCwxLjNsLS40MDUsMi40NzYtLjAzOS40MzlhMS41NjEsMS41NjEsMCwwLDAsLjA3My41NjJsMCwuMDg4Wm0tMS4xOTEtLjg1YTEuMjc2LDEuMjc2LDAsMCwwLC42NzktLjE2OCwxLjc4OCwxLjc4OCwwLDAsMCwuNTMyLS40NjFsLjE4MS0xLS41NTIsMGExLjkzOSwxLjkzOSwwLDAsMC0xLjA0NS4yNDcuOS45LDAsMCwwLS40NDQuNjc2LjYuNiwwLDAsMCwuMTQ0LjUxNUEuNy43LDAsMCwwLDM1LjgxNSw5LjE1Wm01LjM0Ny00LjQzOC0uMS41NjJhMi4wMzcsMi4wMzcsMCwwLDEsMS41NjMtLjY1NCwxLjUxNywxLjUxNywwLDAsMSwuODI4LjIyOSwxLjA4NiwxLjA4NiwwLDAsMSwuNDQ3LjU4MSwyLjEyOSwyLjEyOSwwLDAsMSwxLjY4LS44MTEsMS4zNzIsMS4zNzIsMCwwLDEsMS4xNDUuNTNBMi4wMjIsMi4wMjIsMCwwLDEsNDcsNi41NzdMNDYuNDMxLDEwSDQ1LjI3M2wuNTc2LTMuNDMzYTEuOCwxLjgsMCwwLDAsMC0uNC42NDYuNjQ2LDAsMCwwLS43MjMtLjU4NkExLjIxOCwxLjIxOCwwLDAsMCw0NCw2LjM3MmwtLjAxNS4xMDdMNDMuMzc5LDEwSDQyLjIxN2wuNTc2LTMuNDE4YTEuNzU0LDEuNzU0LDAsMCwwLDAtLjM5MS42NTIuNjUyLDAsMCwwLS43MjMtLjYwNSwxLjI3NiwxLjI3NiwwLDAsMC0xLjA4NC41ODFMNDAuMzIyLDEwSDM5LjE2NWwuOTEzLTUuMjgzWk01MC4wNDksMTAuMWEyLjIxMywyLjIxMywwLDAsMS0xLjE5NC0uMzQ3LDEuOTcyLDEuOTcyLDAsMCwxLS43NDctLjkwOCwyLjcsMi43LDAsMCwxLS4xODMtMS4yODRsLjAxNS0uMmEzLjUzNiwzLjUzNiwwLDAsMSwuNDcxLTEuNDQ4LDIuNjg5LDIuNjg5LDAsMCwxLC45NTUtLjk3NCwyLjMyMSwyLjMyMSwwLDAsMSwxLjI0LS4zMTcsMS43MzEsMS43MzEsMCwwLDEsMS40ODcuNzM4LDIuNzExLDIuNzExLDAsMCwxLC4zNzQsMS44NzNsLS4wNjguNTA5SDQ5LjA3MmExLjQzNSwxLjQzNSwwLDAsMCwuMjU0LDEuMDEyLDEuMDA2LDEuMDA2LDAsMCwwLC44Mi4zOTRBMS43OCwxLjc4LDAsMCwwLDUxLjUyMyw4LjVsLjU4Ni42MTVhMi4yMjcsMi4yMjcsMCwwLDEtLjg3NC43MzVBMi42LDIuNiwwLDAsMSw1MC4wNDksMTAuMVptLjQ5My00LjUzMXEtLjkxOC0uMDI5LTEuMzc3LDEuM2wyLjE5MiwwLC4wMi0uMWExLjUzMiwxLjUzMiwwLDAsMCwwLS40MzkuOS45LDAsMCwwLS4yNzMtLjU0N0EuODY2Ljg2NiwwLDAsMCw1MC41NDIsNS41NjZabTUuODI1LjIzNGEyLjEzMiwyLjEzMiwwLDAsMC0uNDU0LS4wNDksMS4zNTUsMS4zNTUsMCwwLDAtMS4yMTEuNjNMNTQuMDY3LDEwSDUyLjkxbC45MTMtNS4yODMsMS4xLDAtLjExNy42YTEuNTEyLDEuNTEyLDAsMCwxLDEuMjUtLjcsMS45LDEuOSwwLDAsMSwuNDQ0LjA3M1pNNTkuMzYsMTBhMS41NjcsMS41NjcsMCwwLDEtLjA0OS0uNDkzQTEuOTU5LDEuOTU5LDAsMCwxLDU3LjksMTAuMWExLjYxOCwxLjYxOCwwLDAsMS0xLjE0LS40NDIsMS4zNjMsMS4zNjMsMCwwLDEtLjQyMi0xLjEsMS42MTgsMS42MTgsMCwwLDEsLjcyMy0xLjMxM0EzLjE0NiwzLjE0NiwwLDAsMSw1OC45LDYuNzY4bC43NTIuMDEuMDY4LS4zNjFhMS4wOSwxLjA5LDAsMCwwLDAtLjM1Ni42MzYuNjM2LDAsMCwwLS43LS41NDIsMS4wNTMsMS4wNTMsMCwwLDAtLjY1Mi4xODguODEzLjgxMywwLDAsMC0uMzQ0LjUzbC0xLjE1Ny4wMWExLjQ0OSwxLjQ0OSwwLDAsMSwuMzQ3LS44NTcsMi4wNTYsMi4wNTYsMCwwLDEsLjgzLS41NzQsMi44MSwyLjgxLDAsMCwxLDEuMDk0LS4yLDEuODQ4LDEuODQ4LDAsMCwxLDEuMzQ4LjUyLDEuNTQxLDEuNTQxLDAsMCwxLC40LDEuM2wtLjQwNSwyLjQ3Ni0uMDM5LjQzOWExLjU2MSwxLjU2MSwwLDAsMCwuMDczLjU2MmwwLC4wODhabS0xLjE5MS0uODVhMS4yNzYsMS4yNzYsMCwwLDAsLjY3OS0uMTY4LDEuNzg4LDEuNzg4LDAsMCwwLC41MzItLjQ2MWwuMTgxLTEtLjU1MiwwYTEuOTM5LDEuOTM5LDAsMCwwLTEuMDQ1LjI0Ny45LjksMCwwLDAtLjQ0NC42NzYuNi42LDAsMCwwLC4xNDQuNTE1QS43LjcsMCwwLDAsNTguMTY5LDkuMTVaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2OCAxMCkiIGZpbGw9IiMwNTBjMWEiLz4NCiAgICAgIDxnIHRyYW5zZm9ybT0ibWF0cml4KDEsIDAsIDAsIDEsIC01NTMsIC0xOTkpIiBmaWx0ZXI9InVybCgja2V5LWJ0bS0zKSI+DQogICAgICAgIDxwYXRoIGlkPSJrZXktYnRtLTE4IiBkYXRhLW5hbWU9ImtleS1idG0iIGQ9Ik0yLDBINjBhMi4xNzUsMi4xNzUsMCwwLDEsMS41LjY3M0EyLjQwOCwyLjQwOCwwLDAsMSw2MS43NjUsMlYzMEExLjY0LDEuNjQsMCwwLDEsNjAsMzEuNzg5bC01OC4wMzEuMTQ5YTIuMiwyLjIsMCwwLDEtMS4zOTEtLjU3OEExLjY1NiwxLjY1NiwwLDAsMSwwLDMwVjJBMiwyLDAsMCwxLDIsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDU1MyAxOTkpIiBmaWxsPSIjNGE0YTRhIi8+DQogICAgICA8L2c+DQogICAgICA8cGF0aCBpZD0ia2V5LXNpZGUtMyIgZGF0YS1uYW1lPSJrZXktc2lkZSIgZD0iTTExNTAyLjkzOC0xNDE0M2ExLjkxMSwxLjkxMSwwLDAsMS0xLjQ4Mi0uNzFsNi4yMDctOS42Niw0Ny42LTE2Ljg4Nyw3LjAxMi00LjNhMi4wMjgsMi4wMjgsMCwwLDEsLjcyMiwxLjU2MXYyOGExLjk2NywxLjk2NywwLDAsMS0xLjkzNSwyWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTExNTAxIDE0MTc1KSIgZmlsbD0iIzIxMjEyMSIvPg0KICAgICAgPHBhdGggaWQ9ImtleS10b3AtMyIgZGF0YS1uYW1lPSJrZXktdG9wIiBkPSJNMS45NjQsMEg1NS41MzZBMS45NjQsMS45NjQsMCwwLDEsNTcuNSwxLjk2NFYyNS41MzZBMS45NjQsMS45NjQsMCwwLDEsNTUuNTM2LDI3LjVIMS45NjRBMS45NjQsMS45NjQsMCwwLDEsMCwyNS41MzZWMS45NjRBMS45NjQsMS45NjQsMCwwLDEsMS45NjQsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIgMSkiIGZpbGw9InVybCgjbGluZWFyLWdyYWRpZW50KSIvPg0KICAgICAgPHBhdGggaWQ9ImhvbWUiIGQ9Ik0uOTUsMy4yOTFIMi4xNHYzLjM1SDYuM1YzLjI5MUg3LjQ3OVYxMkg2LjNWNy44MTZIMi4xNFYxMkguOTVaTTguOTM1LDkuMTU2QTIuODA4LDIuODA4LDAsMCwxLDkuODQ3LDcuMWEyLjksMi45LDAsMCwxLDIuMS0uOSwyLjk1MSwyLjk1MSwwLDAsMSwyLjEyNi44ODUsMi44LDIuOCwwLDAsMSwuOTA5LDIuMDY4LDIuOSwyLjksMCwwLDEtLjg5MiwyLjEsMi44MSwyLjgxLDAsMCwxLTIuMDYxLjkwNiwzLjAwOCwzLjAwOCwwLDAsMS0yLjE3LS45QTIuODQ1LDIuODQ1LDAsMCwxLDguOTM1LDkuMTU2Wm00Ljg5NSwwYTEuNjg2LDEuNjg2LDAsMCwwLS41NDctMS4yNSwxLjgsMS44LDAsMCwwLTEuMy0uNTMxLDEuODQ4LDEuODQ4LDAsMCwwLTEuMzMuNTM4QTEuNzIzLDEuNzIzLDAsMCwwLDEwLjEsOS4yYTEuNjY2LDEuNjY2LDAsMCwwLC41NjQsMS4yNDcsMS44NjEsMS44NjEsMCwwLDAsMS4zMjMuNTM0LDEuNzgsMS43OCwwLDAsMCwxLjI5Mi0uNTQ4QTEuNzM4LDEuNzM4LDAsMCwwLDEzLjgyOSw5LjE2Wk0xNi4xNCwxMlY2LjM2aDEuMTc2di44NjhhMy40NTYsMy40NTYsMCwwLDEsLjgtLjc3OSwxLjU2NiwxLjU2NiwwLDAsMSwuODcyLS4yNDYsMS42MjEsMS42MjEsMCwwLDEsMS4wMDguMjgsMi4xMDgsMi4xMDgsMCwwLDEsLjYxOS45LDMuNjYyLDMuNjYyLDAsMCwxLC44NjEtLjksMS42ODIsMS42ODIsMCwwLDEsLjk2NC0uMjgsMS41NjEsMS41NjEsMCwwLDEsMS4xNi41QTEuNjU1LDEuNjU1LDAsMCwxLDI0LjA4Myw3LjlWMTJIMjIuODk0VjguMjA2YS44MjMuODIzLDAsMCwwLS45MjYtLjkzNywxLjEsMS4xLDAsMCwwLS44OTUuNDc5LDEuODg2LDEuODg2LDAsMCwwLS4zNjcsMS4xODNWMTJIMTkuNTE3VjguMzYzcTAtMS4xMDctLjkwOS0xLjEwN2ExLjE1MSwxLjE1MSwwLDAsMC0uOTE2LjQ1MSwxLjY4MiwxLjY4MiwwLDAsMC0uMzc2LDEuMTE0VjEyWk0zMS4yMiw5LjQwOUgyNi40MDdhMS45LDEuOSwwLDAsMCwuNzE0LDEuMjY4LDIuMDM4LDIuMDM4LDAsMCwwLDEuMjEzLjQsMi4xLDIuMSwwLDAsMCwxLjctLjg0MWwuODY4LjY1NmEzLjE0LDMuMTQsMCwwLDEtMi42MTgsMS4yNjUsMi44MzUsMi44MzUsMCwwLDEtMi4xMDUtLjg2MSwyLjkyOSwyLjkyOSwwLDAsMS0uODQ4LTIuMTQsMi44NzEsMi44NzEsMCwwLDEsLjg1OC0yLjA3NSwyLjkxLDIuOTEsMCwwLDEsNC4xOC4wMTRBMy4xMzIsMy4xMzIsMCwwLDEsMzEuMjIsOS40MDlabS00LjY4OS0uOTVoMy40NDVBMS44MjEsMS44MjEsMCwwLDAsMjguMjgsNy4zLDEuOCwxLjgsMCwwLDAsMjYuNTMsOC40NTlaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2IDEyKSIgZmlsbD0iI2ZmZiIvPg0KICAgIDwvZz4NCiAgICA8ZyBpZD0ia2V5LXAiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDYzNSA3NTUpIj4NCiAgICAgIDxwYXRoIGlkPSJsYWJlbC01IiBkYXRhLW5hbWU9ImxhYmVsIiBkPSJNNi4yNCwzLjg4N0g0LjA5MkwzLjAzMiwxMGgtMS4yTDIuOSwzLjg4N0guNzYybC4xNzYtMUg2LjQxNlpNNS4yNzgsNy4zMzlhMy40NzYsMy40NzYsMCwwLDEsLjQ1Ny0xLjQxMSwyLjcwOSwyLjcwOSwwLDAsMSwuOTU5LS45ODEsMi4zNzEsMi4zNzEsMCwwLDEsMS4zLS4zMjdBMS45NjIsMS45NjIsMCwwLDEsOS44ODUsNS45NDIsMy4wNTQsMy4wNTQsMCwwLDEsMTAuMDQ0LDcuM2EzLjU0MSwzLjU0MSwwLDAsMS0uNDU3LDEuNDg0LDIuNywyLjcsMCwwLDEtLjk2Ny45ODksMi40LDIuNCwwLDAsMS0xLjMwNi4zMjVBMS45NiwxLjk2LDAsMCwxLDUuNDMsOC43ODJhMy4wMTUsMy4wMTUsMCwwLDEtLjE2Ni0xLjM0Wm0xLjEzOC42NjlhMS40LDEuNCwwLDAsMCwuMjcxLjgyMy44NjcuODY3LDAsMCwwLC42ODYuMzI1LDEuMjE3LDEuMjE3LDAsMCwwLDEtLjQ1OUEyLjQxNSwyLjQxNSwwLDAsMCw4Ljg3Nyw3LjRsLjAyOS0uNDc5YTEuNjkxLDEuNjkxLDAsMCwwLS4yNDktLjk4MS44NzQuODc0LDAsMCwwLS43MjMtLjM3NiwxLjI2NSwxLjI2NSwwLDAsMC0xLjE3Mi43MjgsMi43MTgsMi43MTgsMCwwLDAtLjMyNywxLjA0NUE0LjA4OCw0LjA4OCwwLDAsMCw2LjQxNiw4LjAwOFptNC40MTktLjY1NGE0LjA4Nyw0LjA4NywwLDAsMSwuNDI3LTEuNDMxLDIuNTg0LDIuNTg0LDAsMCwxLC44NDItLjk3OSwxLjk4NywxLjk4NywwLDAsMSwxLjE2Mi0uMzMsMS41NTksMS41NTksMCwwLDEsMS4zMTMuNjRsLjE4MS0uNTQyLDEuMDU1LDAtLjg3NCw1LjEzN0EyLjQ5NCwyLjQ5NCwwLDAsMSwxMi4zLDEyLjA4NWEyLjQ2NiwyLjQ2NiwwLDAsMS0xLjA1NS0uMjU0LDIuMTkzLDIuMTkzLDAsMCwxLS44LS42NDVsLjYxNS0uN2ExLjQ4MiwxLjQ4MiwwLDAsMCwxLjIxMS42NTksMS40MTksMS40MTksMCwwLDAsLjk3NC0uMzEsMS42MTYsMS42MTYsMCwwLDAsLjU0NC0uOTRsLjA4My0uMzcxYTEuODY5LDEuODY5LDAsMCwxLTEuMzg3LjU3MUExLjQ4LDEuNDgsMCwwLDEsMTEuMyw5LjUzNmEyLjQ4NCwyLjQ4NCwwLDAsMS0uNDkxLTEuNDg0QTQuODc5LDQuODc5LDAsMCwxLDEwLjgzNSw3LjM1NFptMS4xNDcuMWEzLjU3MSwzLjU3MSwwLDAsMC0uMDIuNTM3LDEuMzk0LDEuMzk0LDAsMCwwLC4yMzQuODIuNzg2Ljc4NiwwLDAsMCwuNjQuMzE3LDEuMzY2LDEuMzY2LDAsMCwwLDEuMTUyLS42MUwxNC40LDYuMTg3YS45NDMuOTQzLDAsMCwwLS45LS42LDEuMjA1LDEuMjA1LDAsMCwwLS45ODYuNDU0LDIuNTQ0LDIuNTQ0LDAsMCwwLS41MjIsMS4zMTNabTQuNC0uMWE0LjA4Nyw0LjA4NywwLDAsMSwuNDI3LTEuNDMxLDIuNTg0LDIuNTg0LDAsMCwxLC44NDItLjk3OSwxLjk4NywxLjk4NywwLDAsMSwxLjE2Mi0uMzMsMS41NTksMS41NTksMCwwLDEsMS4zMTMuNjRsLjE4MS0uNTQyLDEuMDU1LDAtLjg3NCw1LjEzN2EyLjQ5NCwyLjQ5NCwwLDAsMS0yLjYzNywyLjIzMSwyLjQ2NiwyLjQ2NiwwLDAsMS0xLjA1NS0uMjU0LDIuMTkzLDIuMTkzLDAsMCwxLS44LS42NDVsLjYxNS0uN2ExLjQ4MiwxLjQ4MiwwLDAsMCwxLjIxMS42NTksMS40MTksMS40MTksMCwwLDAsLjk3NC0uMzEsMS42MTYsMS42MTYsMCwwLDAsLjU0NC0uOTRsLjA4My0uMzcxYTEuODY5LDEuODY5LDAsMCwxLTEuMzg3LjU3MSwxLjQ4LDEuNDgsMCwwLDEtMS4xODktLjU2MiwyLjQ4NCwyLjQ4NCwwLDAsMS0uNDkxLTEuNDg0QTQuODc5LDQuODc5LDAsMCwxLDE2LjM4Miw3LjM1NFptMS4xNDcuMWEzLjU3MSwzLjU3MSwwLDAsMC0uMDIuNTM3LDEuMzk0LDEuMzk0LDAsMCwwLC4yMzQuODIuNzg2Ljc4NiwwLDAsMCwuNjQuMzE3LDEuMzY2LDEuMzY2LDAsMCwwLDEuMTUyLS42MWwuNDE1LTIuMzM0YS45NDMuOTQzLDAsMCwwLS45LS42LDEuMjA1LDEuMjA1LDAsMCwwLS45ODYuNDU0LDIuNTQ0LDIuNTQ0LDAsMCwwLS41MjIsMS4zMTNaTTIyLjksMTBIMjEuNzM4bDEuMy03LjVIMjQuMlptMy42ODcuMWEyLjIxMywyLjIxMywwLDAsMS0xLjE5NC0uMzQ3LDEuOTcyLDEuOTcyLDAsMCwxLS43NDctLjkwOCwyLjcsMi43LDAsMCwxLS4xODMtMS4yODRsLjAxNS0uMmEzLjUzNiwzLjUzNiwwLDAsMSwuNDcxLTEuNDQ4LDIuNjg5LDIuNjg5LDAsMCwxLC45NTUtLjk3NCwyLjMyMSwyLjMyMSwwLDAsMSwxLjI0LS4zMTcsMS43MzEsMS43MzEsMCwwLDEsMS40ODcuNzM4QTIuNzExLDIuNzExLDAsMCwxLDI5LDcuMjMxbC0uMDY4LjUwOUgyNS42MDVhMS40MzUsMS40MzUsMCwwLDAsLjI1NCwxLjAxMiwxLjAwNiwxLjAwNiwwLDAsMCwuODIuMzk0QTEuNzgsMS43OCwwLDAsMCwyOC4wNTcsOC41bC41ODYuNjE1YTIuMjI3LDIuMjI3LDAsMCwxLS44NzQuNzM1QTIuNiwyLjYsMCwwLDEsMjYuNTgyLDEwLjFabS40OTMtNC41MzFxLS45MTgtLjAyOS0xLjM3NywxLjNsMi4xOTIsMCwuMDItLjFhMS41MzIsMS41MzIsMCwwLDAsMC0uNDM5LjkuOSwwLDAsMC0uMjczLS41NDdBLjg2Ni44NjYsMCwwLDAsMjcuMDc1LDUuNTY2Wm0tMjUuMjIsMTEuOEwxLjQsMjBILjE5bDEuMjM1LTcuMTA5LDIuNDYxLDBhMi40MjEsMi40MjEsMCwwLDEsMS43NDguNjA5LDEuOSwxLjksMCwwLDEsLjU1MiwxLjYxMSwyLjI2MSwyLjI2MSwwLDAsMS0uODQ1LDEuNjQ1LDMuMDY3LDMuMDY3LDAsMCwxLTEuOTgyLjYwOVptLjE3MS0xLDEuMzgyLjAxYTEuNjY5LDEuNjY5LDAsMCwwLDEuMDcyLS4zMzIsMS4zNzUsMS4zNzUsMCwwLDAsLjUtLjkyOCwxLjEsMS4xLDAsMCwwLS4yLS44NzIsMS4wNjMsMS4wNjMsMCwwLDAtLjgxOC0uMzU0bC0xLjUsMFpNOC43MjEsMjAuMWEyLjIxMywyLjIxMywwLDAsMS0xLjE5NC0uMzQ3LDEuOTcyLDEuOTcyLDAsMCwxLS43NDctLjkwOEEyLjcsMi43LDAsMCwxLDYuNiwxNy41NTlsLjAxNS0uMmEzLjUzNiwzLjUzNiwwLDAsMSwuNDcxLTEuNDQ4LDIuNjg5LDIuNjg5LDAsMCwxLC45NTUtLjk3NCwyLjMyMSwyLjMyMSwwLDAsMSwxLjI0LS4zMTcsMS43MzEsMS43MzEsMCwwLDEsMS40ODcuNzM4LDIuNzExLDIuNzExLDAsMCwxLC4zNzQsMS44NzNsLS4wNjguNTA5SDcuNzQ0QTEuNDM1LDEuNDM1LDAsMCwwLDgsMTguNzUxYTEuMDA2LDEuMDA2LDAsMCwwLC44Mi4zOTRBMS43OCwxLjc4LDAsMCwwLDEwLjIsMTguNWwuNTg2LjYxNWEyLjIyNywyLjIyNywwLDAsMS0uODc0LjczNUEyLjYsMi42LDAsMCwxLDguNzIxLDIwLjFabS40OTMtNC41MzFxLS45MTgtLjAyOS0xLjM3NywxLjNsMi4xOTIsMCwuMDItLjFhMS41MzIsMS41MzIsMCwwLDAsMC0uNDM5LjkuOSwwLDAsMC0uMjczLS41NDdBLjg2Ni44NjYsMCwwLDAsOS4yMTQsMTUuNTY2Wm01LjgyNS4yMzRhMi4xMzIsMi4xMzIsMCwwLDAtLjQ1NC0uMDQ5LDEuMzU1LDEuMzU1LDAsMCwwLTEuMjExLjYzTDEyLjczOSwyMEgxMS41ODJsLjkxMy01LjI4MywxLjEsMC0uMTE3LjZhMS41MTIsMS41MTIsMCwwLDEsMS4yNS0uNywxLjksMS45LDAsMCwxLC40NDQuMDczWk0xOC4yLDE4LjUzNXEuMDgzLS40ODMtLjYyNy0uNjcxYTcuOTc3LDcuOTc3LDAsMCwxLS45NjktLjMsMS4zMzYsMS4zMzYsMCwwLDEtLjk3Mi0xLjMwOSwxLjQ4NiwxLjQ4NiwwLDAsMSwuNjQ3LTEuMTc5LDIuMzcxLDIuMzcxLDAsMCwxLDEuNDkyLS40NTcsMi4wNDEsMi4wNDEsMCwwLDEsMS4zNy40NzQsMS41MSwxLjUxLDAsMCwxLC41MiwxLjIxNmwtMS4xNDcsMGEuNzQxLjc0MSwwLDAsMC0uMi0uNTc0LjgxNy44MTcsMCwwLDAtLjU3Ni0uMjE3LDEuMTM2LDEuMTM2LDAsMCwwLS42NjIuMTkuNzEuNzEsMCwwLDAtLjMyLjVxLS4wNjguNDQ0LjYyNS42MThhNi44Niw2Ljg2LDAsMCwxLDEuMDI1LjMyLDEuMzM3LDEuMzM3LDAsMCwxLC45MzMsMS4zMjgsMS40NiwxLjQ2LDAsMCwxLS4zMy44NzYsMS45MjMsMS45MjMsMCwwLDEtLjgxOC41NzFBMi44LDIuOCwwLDAsMSwxNy4xLDIwLjFhMi4xNDgsMi4xNDgsMCwwLDEtMS40MzMtLjUsMS41NywxLjU3LDAsMCwxLS41NTktMS4yNjVsMS4xMTgsMGEuODUxLjg1MSwwLDAsMCwuMjU0LjY0NS45ODEuOTgxLDAsMCwwLC42NjkuMjI1LDEuMzI4LDEuMzI4LDAsMCwwLC43MTUtLjE3OEEuNjg0LjY4NCwwLDAsMCwxOC4yLDE4LjUzNVptNi44NDEtMS4xNTdhNC4zNSw0LjM1LDAsMCwxLS40MjIsMS40MzYsMi40NSwyLjQ1LDAsMCwxLS44MjUuOTc0LDEuOTA4LDEuOTA4LDAsMCwxLTEuMTIxLjMxNSwxLjY1NywxLjY1NywwLDAsMS0xLjMtLjU4NkwyMC45LDIyLjAzMUgxOS43MzZsMS4yNy03LjMxNCwxLjA2LDAtLjA4OC41NDdhMS44MjksMS44MjksMCwwLDEsMS40NC0uNjQsMS41NDgsMS41NDgsMCwwLDEsLjg3NC4yNTYsMS41ODIsMS41ODIsMCwwLDEsLjU2OS43MywyLjk1OSwyLjk1OSwwLDAsMSwuMjEyLDEuMDY0QTYuNDkxLDYuNDkxLDAsMCwxLDI1LjAzOSwxNy4zNzhabS0xLjE0My0uMS4wMjQtLjM1NmExLjczLDEuNzMsMCwwLDAtLjIwOC0uOTc3Ljc2MS43NjEsMCwwLDAtLjY2Ny0uMzU2LDEuMzQ3LDEuMzQ3LDAsMCwwLTEuMTMzLjZsLS40MSwyLjM1OGEuOS45LDAsMCwwLC44OTQuNjEsMS4xOCwxLjE4LDAsMCwwLC45NjktLjQ0OUEyLjgxMywyLjgxMywwLDAsMCwyMy45LDE3LjI3NVptNC4xLDIuODIyYTIuMjEzLDIuMjEzLDAsMCwxLTEuMTk0LS4zNDcsMS45NzIsMS45NzIsMCwwLDEtLjc0Ny0uOTA4LDIuNywyLjcsMCwwLDEtLjE4My0xLjI4NGwuMDE1LS4yYTMuNTM2LDMuNTM2LDAsMCwxLC40NzEtMS40NDgsMi42ODksMi42ODksMCwwLDEsLjk1NS0uOTc0LDIuMzIxLDIuMzIxLDAsMCwxLDEuMjQtLjMxNywxLjczMSwxLjczMSwwLDAsMSwxLjQ4Ny43MzgsMi43MTEsMi43MTEsMCwwLDEsLjM3NCwxLjg3M2wtLjA2OC41MDlIMjcuMDE3YTEuNDM1LDEuNDM1LDAsMCwwLC4yNTQsMS4wMTIsMS4wMDYsMS4wMDYsMCwwLDAsLjgyLjM5NCwxLjc4LDEuNzgsMCwwLDAsMS4zNzctLjY0OWwuNTg2LjYxNWEyLjIyNywyLjIyNywwLDAsMS0uODc0LjczNUEyLjYsMi42LDAsMCwxLDI3Ljk5MywyMC4xWm0uNDkzLTQuNTMxcS0uOTE4LS4wMjktMS4zNzcsMS4zbDIuMTkyLDAsLjAyLS4xYTEuNTMyLDEuNTMyLDAsMCwwLDAtLjQzOS45LjksMCwwLDAtLjI3My0uNTQ3QS44NjYuODY2LDAsMCwwLDI4LjQ4NiwxNS41NjZabTQuNjczLDMuNTg5YTEuMTMyLDEuMTMyLDAsMCwwLDEuMTQzLS45bDEuMDk0LDBhMS44NywxLjg3LDAsMCwxLS4zNzguOTUyLDIuMiwyLjIsMCwwLDEtLjgzMy42NjksMi4zMSwyLjMxLDAsMCwxLTEuMDYuMjI1LDEuOTksMS45OSwwLDAsMS0xLjE1Ny0uMzUyLDEuOTQ0LDEuOTQ0LDAsMCwxLS43LS45NDUsMy4wMjMsMy4wMjMsMCwwLDEtLjE0Ni0xLjM0NWwuMDE1LS4xNzFhMy40NTcsMy40NTcsMCwwLDEsLjQ0Ny0xLjM4OSwyLjYwOCwyLjYwOCwwLDAsMSwuOTQtLjk1OSwyLjM1NCwyLjM1NCwwLDAsMSwxLjI3OS0uMzE3LDEuODQ4LDEuODQ4LDAsMCwxLDEuMzcyLjU2OSwyLjAwOSwyLjAwOSwwLDAsMSwuNTEzLDEuNDI4SDM0LjZhMS4xODEsMS4xODEsMCwwLDAtLjIyMi0uNzQyLjgxMy44MTMsMCwwLDAtLjY0Mi0uMzA4LDEuMTcyLDEuMTcyLDAsMCwwLTEuMDY5LjU3NiwzLjIxNiwzLjIxNiwwLDAsMC0uNDIsMS42OFEzMi4yMTcsMTkuMTM2LDMzLjE1OSwxOS4xNTVabTUuNDE1LTUuNzIzLS4yMjUsMS4yODRoLjlMMzkuMSwxNS42aC0uOTA4bC0uNSwyLjk1OWExLjAxMiwxLjAxMiwwLDAsMCwwLC4yMnEuMDI5LjMxNy4zOTEuMzMyYTIuMjA2LDIuMjA2LDAsMCwwLC40MS0uMDQ0bC0uMDc4LjkyOGEyLjY1MywyLjY1MywwLDAsMS0uNzI4LjEsMS4wOCwxLjA4LDAsMCwxLS45MDYtLjQxMywxLjQ5MywxLjQ5MywwLDAsMS0uMjM3LTEuMDY3bC40OTMtMy4wMThoLS44NDVsLjE1Ni0uODc5aC44NGwuMjI1LTEuMjg0Wk00MC40ODgsMjBIMzkuMzMxbC45MTgtNS4yODNoMS4xNTdabS0uMDczLTYuNjM2YS42NTMuNjUzLDAsMCwxLC4xNzYtLjQ1OS42NDQuNjQ0LDAsMCwxLC40NzQtLjIuNjE2LjYxNiwwLDAsMSwuNDcxLjE3My42LjYsMCwwLDEsLjE4OC40NDcuNjE3LjYxNywwLDAsMS0uMTgzLjQ1OS42NzEuNjcxLDAsMCwxLS40NjYuMTkuNjI2LjYyNiwwLDAsMS0uNDY5LS4xNjhBLjU4MS41ODEsMCwwLDEsNDAuNDE1LDEzLjM2NFptMy40NDcsNS4xMTcsMS42Ny0zLjc2NWgxLjIzNUw0NC4xNjUsMjBINDMuMTU5bC0uOTY3LTUuMjgzaDEuMTYyWk00OS4wMjMsMjAuMWEyLjIxMywyLjIxMywwLDAsMS0xLjE5NC0uMzQ3LDEuOTcyLDEuOTcyLDAsMCwxLS43NDctLjkwOCwyLjcsMi43LDAsMCwxLS4xODMtMS4yODRsLjAxNS0uMmEzLjUzNiwzLjUzNiwwLDAsMSwuNDcxLTEuNDQ4LDIuNjg5LDIuNjg5LDAsMCwxLC45NTUtLjk3NCwyLjMyMSwyLjMyMSwwLDAsMSwxLjI0LS4zMTcsMS43MzEsMS43MzEsMCwwLDEsMS40ODcuNzM4LDIuNzExLDIuNzExLDAsMCwxLC4zNzQsMS44NzNsLS4wNjguNTA5SDQ4LjA0N2ExLjQzNSwxLjQzNSwwLDAsMCwuMjU0LDEuMDEyLDEuMDA2LDEuMDA2LDAsMCwwLC44Mi4zOTRBMS43OCwxLjc4LDAsMCwwLDUwLjUsMTguNWwuNTg2LjYxNWEyLjIyNywyLjIyNywwLDAsMS0uODc0LjczNUEyLjYsMi42LDAsMCwxLDQ5LjAyMywyMC4xWm0uNDkzLTQuNTMxcS0uOTE4LS4wMjktMS4zNzcsMS4zbDIuMTkyLDAsLjAyLS4xYTEuNTMyLDEuNTMyLDAsMCwwLDAtLjQzOS45LjksMCwwLDAtLjI3My0uNTQ3QS44NjYuODY2LDAsMCwwLDQ5LjUxNywxNS41NjZaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzOCA1KSIgZmlsbD0iIzA1MGMxYSIvPg0KICAgICAgPGcgdHJhbnNmb3JtPSJtYXRyaXgoMSwgMCwgMCwgMSwgLTQzNCwgLTI3OSkiIGZpbHRlcj0idXJsKCNrZXktYnRtLTQpIj4NCiAgICAgICAgPHBhdGggaWQ9ImtleS1idG0tMTkiIGRhdGEtbmFtZT0ia2V5LWJ0bSIgZD0iTTIsMEgzMGEyLjE3NSwyLjE3NSwwLDAsMSwxLjUuNjczQTIuNDA4LDIuNDA4LDAsMCwxLDMxLjc2NSwyVjMwQTEuNjQsMS42NCwwLDAsMSwzMCwzMS43ODlsLTI4LjAzMS4xNDlhMi4yLDIuMiwwLDAsMS0xLjM5MS0uNTc4QTEuNjU2LDEuNjU2LDAsMCwxLDAsMzBWMkEyLDIsMCwwLDEsMiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDM0IDI3OSkiIGZpbGw9IiM0YTRhNGEiLz4NCiAgICAgIDwvZz4NCiAgICAgIDxwYXRoIGlkPSJrZXktc2lkZS00IiBkYXRhLW5hbWU9ImtleS1zaWRlIiBkPSJNMTEyOTQtMTQxMTlhMS45OTQsMS45OTQsMCwwLDEtMS41MjEtLjdsMTUuMTA5LTIyLjE5NCwxNS42NDUtOC42ODFhMiwyLDAsMCwxLC43NjcsMS41NzR2MjhhMiwyLDAsMCwxLTIsMloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMTI5MiAxNDE1MSkiIGZpbGw9IiMyMTIxMjEiLz4NCiAgICAgIDxwYXRoIGlkPSJrZXktdG9wLTQiIGRhdGEtbmFtZT0ia2V5LXRvcCIgZD0iTTEuOTY0LDBIMjUuNTM2QTEuOTY0LDEuOTY0LDAsMCwxLDI3LjUsMS45NjRWMjUuNTM2QTEuOTY0LDEuOTY0LDAsMCwxLDI1LjUzNiwyNy41SDEuOTY0QTEuOTY0LDEuOTY0LDAsMCwxLDAsMjUuNTM2VjEuOTY0QTEuOTY0LDEuOTY0LDAsMCwxLDEuOTY0LDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyIDEpIiBmaWxsPSJ1cmwoI2xpbmVhci1ncmFkaWVudCkiLz4NCiAgICAgIDxwYXRoIGlkPSJwIiBkPSJNMTEuMzU5LDQuMDQ3aDJhNC4zNzMsNC4zNzMsMCwwLDEsMi43MzQuOCwyLjQ5MSwyLjQ5MSwwLDAsMSwxLjAzOSwyLjA3LDIuNjQsMi42NCwwLDAsMS0xLjEsMi4xNDgsNS4yMzMsNS4yMzMsMCwwLDEtMy4zMzIuODQ0VjE0SDExLjM1OVpNMTIuNyw1LjIzNFY4LjcxOWE0Ljg2NCw0Ljg2NCwwLDAsMCwyLjI3LS40MzQsMS40MjUsMS40MjUsMCwwLDAsLjczOC0xLjM0LDEuNTc1LDEuNTc1LDAsMCwwLS41NTktMS4yQTMuOTQ4LDMuOTQ4LDAsMCwwLDEyLjcsNS4yMzRaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyIDYuNSkiIGZpbGw9IiNmZmYiLz4NCiAgICA8L2c+DQogICAgPGcgaWQ9ImtleS1mIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2MzUgNzE1KSI+DQogICAgICA8cGF0aCBpZD0ibGFiZWwtNiIgZGF0YS1uYW1lPSJsYWJlbCIgZD0iTTEuNTMzLS45ODZINS4xODZMNS4wMSwwSC0uMTMyTC4wMi0uODU5LDQuNDU4LTYuMTEzSC45NTJsLjE3Ni0xaDVsLS4xNDYuODRaTTYuMTQzLTIuNjYxQTMuNDc2LDMuNDc2LDAsMCwxLDYuNi00LjA3MmEyLjcwOSwyLjcwOSwwLDAsMSwuOTU5LS45ODEsMi4zNzEsMi4zNzEsMCwwLDEsMS4zLS4zMjcsMi4wMTgsMi4wMTgsMCwwLDEsMS4xNzIuMzYxLDIuMDA3LDIuMDA3LDAsMCwxLC43Mi45NjJBMy4wNTQsMy4wNTQsMCwwLDEsMTAuOTA4LTIuN2EzLjU0MSwzLjU0MSwwLDAsMS0uNDU3LDEuNDg0LDIuNywyLjcsMCwwLDEtLjk2Ny45ODlBMi40LDIuNCwwLDAsMSw4LjE3OS4xLDIuMDA5LDIuMDA5LDAsMCwxLDcuMDE0LS4yNjFhMi4wMTQsMi4wMTQsMCwwLDEtLjcyLS45NTcsMy4wMTUsMy4wMTUsMCwwLDEtLjE2Ni0xLjM0Wm0xLjEzOC42NjlhMS40LDEuNCwwLDAsMCwuMjcxLjgyMy44NjcuODY3LDAsMCwwLC42ODYuMzI1LDEuMjE3LDEuMjE3LDAsMCwwLDEtLjQ1OUEyLjQxNSwyLjQxNSwwLDAsMCw5Ljc0MS0yLjZsLjAyOS0uNDc5YTEuNjkxLDEuNjkxLDAsMCwwLS4yNDktLjk4MUEuODc0Ljg3NCwwLDAsMCw4LjgtNC40MzRhMS4yNjUsMS4yNjUsMCwwLDAtMS4xNzIuNzI4QTIuNzE4LDIuNzE4LDAsMCwwLDcuMy0yLjY2MSw0LjA4OCw0LjA4OCwwLDAsMCw3LjI4LTEuOTkyWm00LjQzNC0uNjY5YTMuNDc2LDMuNDc2LDAsMCwxLC40NTctMS40MTEsMi43MDksMi43MDksMCwwLDEsLjk1OS0uOTgxLDIuMzcxLDIuMzcxLDAsMCwxLDEuMy0uMzI3QTIuMDE4LDIuMDE4LDAsMCwxLDE1LjYtNS4wMmEyLjAwNywyLjAwNywwLDAsMSwuNzIuOTYyQTMuMDU0LDMuMDU0LDAsMCwxLDE2LjQ3OS0yLjdhMy41NDEsMy41NDEsMCwwLDEtLjQ1NywxLjQ4NCwyLjcsMi43LDAsMCwxLS45NjcuOTg5QTIuNCwyLjQsMCwwLDEsMTMuNzUuMWEyLjAwOSwyLjAwOSwwLDAsMS0xLjE2NS0uMzU5LDIuMDE0LDIuMDE0LDAsMCwxLS43Mi0uOTU3LDMuMDE1LDMuMDE1LDAsMCwxLS4xNjYtMS4zNFptMS4xMzguNjY5YTEuNCwxLjQsMCwwLDAsLjI3MS44MjMuODY3Ljg2NywwLDAsMCwuNjg2LjMyNSwxLjIxNywxLjIxNywwLDAsMCwxLS40NTlBMi40MTUsMi40MTUsMCwwLDAsMTUuMzEzLTIuNmwuMDI5LS40NzlhMS42OTEsMS42OTEsMCwwLDAtLjI0OS0uOTgxLjg3NC44NzQsMCwwLDAtLjcyMy0uMzc2LDEuMjY1LDEuMjY1LDAsMCwwLTEuMTcyLjcyOCwyLjcxOCwyLjcxOCwwLDAsMC0uMzI3LDEuMDQ1QTQuMDg4LDQuMDg4LDAsMCwwLDEyLjg1Mi0xLjk5MlpNMTktNS4yODhsLS4xLjU2MmEyLjAzNywyLjAzNywwLDAsMSwxLjU2My0uNjU0LDEuNTE3LDEuNTE3LDAsMCwxLC44MjguMjI5LDEuMDg2LDEuMDg2LDAsMCwxLC40NDcuNTgxLDIuMTI5LDIuMTI5LDAsMCwxLDEuNjgtLjgxMSwxLjM3MiwxLjM3MiwwLDAsMSwxLjE0NS41MywyLjAyMiwyLjAyMiwwLDAsMSwuMjgxLDEuNDI4TDI0LjI3MiwwSDIzLjExNWwuNTc2LTMuNDMzYTEuOCwxLjgsMCwwLDAsMC0uNC42NDYuNjQ2LDAsMCwwLS43MjMtLjU4NiwxLjIxOCwxLjIxOCwwLDAsMC0xLjEzMy43ODZsLS4wMTUuMTA3TDIxLjIyMSwwSDIwLjA1OWwuNTc2LTMuNDE4YTEuNzU0LDEuNzU0LDAsMCwwLDAtLjM5MS42NTIuNjUyLDAsMCwwLS43MjMtLjYwNSwxLjI3NiwxLjI3NiwwLDAsMC0xLjA4NC41ODFMMTguMTY0LDBIMTcuMDA3bC45MTMtNS4yODNaTTMwLjU1Ny02LjU2N2wtLjIyNSwxLjI4NGguOWwtLjE1MS44NzloLS45MDhsLS41LDIuOTU5YTEuMDEyLDEuMDEyLDAsMCwwLDAsLjIycS4wMjkuMzE3LjM5MS4zMzJhMi4yMDYsMi4yMDYsMCwwLDAsLjQxLS4wNDRMMzAuNC0uMDFhMi42NTMsMi42NTMsMCwwLDEtLjcyOC4xLDEuMDgsMS4wOCwwLDAsMS0uOTA2LS40MTMsMS40OTMsMS40OTMsMCwwLDEtLjIzNy0xLjA2N0wyOS4wMTktNC40aC0uODQ1bC4xNTYtLjg3OWguODRsLjIyNS0xLjI4NFptLjgxNSwzLjkwNmEzLjQ3NiwzLjQ3NiwwLDAsMSwuNDU3LTEuNDExLDIuNzA5LDIuNzA5LDAsMCwxLC45NTktLjk4MSwyLjM3MSwyLjM3MSwwLDAsMSwxLjMtLjMyNywyLjAxOCwyLjAxOCwwLDAsMSwxLjE3Mi4zNjEsMi4wMDcsMi4wMDcsMCwwLDEsLjcyLjk2MkEzLjA1NCwzLjA1NCwwLDAsMSwzNi4xMzgtMi43YTMuNTQxLDMuNTQxLDAsMCwxLS40NTcsMS40ODQsMi43LDIuNywwLDAsMS0uOTY3Ljk4OUEyLjQsMi40LDAsMCwxLDMzLjQwOC4xYTIuMDA5LDIuMDA5LDAsMCwxLTEuMTY1LS4zNTksMi4wMTQsMi4wMTQsMCwwLDEtLjcyLS45NTcsMy4wMTUsMy4wMTUsMCwwLDEtLjE2Ni0xLjM0Wm0xLjEzOC42NjlhMS40LDEuNCwwLDAsMCwuMjcxLjgyMy44NjcuODY3LDAsMCwwLC42ODYuMzI1LDEuMjE3LDEuMjE3LDAsMCwwLDEtLjQ1OUEyLjQxNSwyLjQxNSwwLDAsMCwzNC45NzEtMi42TDM1LTMuMDc2YTEuNjkxLDEuNjkxLDAsMCwwLS4yNDktLjk4MS44NzQuODc0LDAsMCwwLS43MjMtLjM3NiwxLjI2NSwxLjI2NSwwLDAsMC0xLjE3Mi43MjgsMi43MTgsMi43MTgsMCwwLDAtLjMyNywxLjA0NUE0LjA4OCw0LjA4OCwwLDAsMCwzMi41MS0xLjk5MlpNNDMuNzQ1LTMuMDEzSDQwLjk3Mkw0MC40NDksMEgzOS4yNDNsMS4yMy03LjEwOWg0LjM5NWwtLjE3NiwxSDQxLjUwOUw0MS4xNDMtNGgyLjc3OFpNNDUuNzM3LDBINDQuNThMNDUuNS01LjI4M2gxLjE1N1ptLS4wNzMtNi42MzZhLjY1My42NTMsMCwwLDEsLjE3Ni0uNDU5LjY0NC42NDQsMCwwLDEsLjQ3NC0uMi42MTYuNjE2LDAsMCwxLC40NzEuMTczLjYuNiwwLDAsMSwuMTg4LjQ0Ny42MTcuNjE3LDAsMCwxLS4xODMuNDU5LjY3MS42NzEsMCwwLDEtLjQ2Ni4xOS42MjYuNjI2LDAsMCwxLS40NjktLjE2OEEuNTgxLjU4MSwwLDAsMSw0NS42NjQtNi42MzZabTMuOTYuMDY4TDQ5LjQtNS4yODNoLjlsLS4xNTEuODc5aC0uOTA4bC0uNSwyLjk1OWExLjAxMiwxLjAxMiwwLDAsMCwwLC4yMnEuMDI5LjMxNy4zOTEuMzMyYTIuMjA2LDIuMjA2LDAsMCwwLC40MS0uMDQ0bC0uMDc4LjkyOGEyLjY1MywyLjY1MywwLDAsMS0uNzI4LjFBMS4wOCwxLjA4LDAsMCwxLDQ3LjgzLS4zMmExLjQ5MywxLjQ5MywwLDAsMS0uMjM3LTEuMDY3TDQ4LjA4Ni00LjRoLS44NDVsLjE1Ni0uODc5aC44NGwuMjI1LTEuMjg0Wm0tNDksMTMuN0E4LjYyOCw4LjYyOCwwLDAsMSwxLjcsMy45NTgsNC41LDQuNSwwLDAsMSwzLjczLDIuMDMxbC4xNzYuN0E2LjI3OSw2LjI3OSwwLDAsMCwxLjczOCw2Ljc3N2ExMS4zLDExLjMsMCwwLDAtLjE4NiwxLjkzOCw1LjM2Miw1LjM2MiwwLDAsMCwuMjM0LDEuNzMxLDIuNjEsMi42MSwwLDAsMCwuNzIzLDEuMTY1bC0uMjczLjY0OUEzLjI3NSwzLjI3NSwwLDAsMSwuOTU1LDEwLjY0OSw2LjI1NSw2LjI1NSwwLDAsMSwuNTQ3LDguMWE3LjU3OCw3LjU3OCwwLDAsMSwuMDY4LS44ODlaTTYuNjcsOC41MzVxLjA4My0uNDgzLS42MjctLjY3MWE3Ljk3Nyw3Ljk3NywwLDAsMS0uOTY5LS4zQTEuMzM2LDEuMzM2LDAsMCwxLDQuMSw2LjI1NWExLjQ4NiwxLjQ4NiwwLDAsMSwuNjQ3LTEuMTc5QTIuMzcxLDIuMzcxLDAsMCwxLDYuMjQsNC42MTlhMi4wNDEsMi4wNDEsMCwwLDEsMS4zNy40NzQsMS41MSwxLjUxLDAsMCwxLC41MiwxLjIxNmwtMS4xNDcsMGEuNzQxLjc0MSwwLDAsMC0uMi0uNTc0LjgxNy44MTcsMCwwLDAtLjU3Ni0uMjE3LDEuMTM2LDEuMTM2LDAsMCwwLS42NjIuMTkuNzEuNzEsMCwwLDAtLjMyLjVxLS4wNjguNDQ0LjYyNS42MThhNi44Niw2Ljg2LDAsMCwxLDEuMDI1LjMyLDEuMzM3LDEuMzM3LDAsMCwxLC45MzMsMS4zMjgsMS40NiwxLjQ2LDAsMCwxLS4zMy44NzYsMS45MjMsMS45MjMsMCwwLDEtLjgxOC41NzEsMi44LDIuOCwwLDAsMS0xLjA4OS4xODMsMi4xNDgsMi4xNDgsMCwwLDEtMS40MzMtLjVBMS41NywxLjU3LDAsMCwxLDMuNTc5LDguMzNsMS4xMTgsMGEuODUxLjg1MSwwLDAsMCwuMjU0LjY0NUEuOTgxLjk4MSwwLDAsMCw1LjYyLDkuMmExLjMyOCwxLjMyOCwwLDAsMCwuNzE1LS4xNzhBLjY4NC42ODQsMCwwLDAsNi42Nyw4LjUzNVpNMTAuOTU3LDEwLjFhMi4yMTMsMi4yMTMsMCwwLDEtMS4xOTQtLjM0NywxLjk3MiwxLjk3MiwwLDAsMS0uNzQ3LS45MDgsMi43LDIuNywwLDAsMS0uMTgzLTEuMjg0bC4wMTUtLjJhMy41MzYsMy41MzYsMCwwLDEsLjQ3MS0xLjQ0OCwyLjY4OSwyLjY4OSwwLDAsMSwuOTU1LS45NzQsMi4zMjEsMi4zMjEsMCwwLDEsMS4yNC0uMzE3QTEuNzMxLDEuNzMxLDAsMCwxLDEzLDUuMzU4YTIuNzExLDIuNzExLDAsMCwxLC4zNzQsMS44NzNsLS4wNjguNTA5SDkuOThhMS40MzUsMS40MzUsMCwwLDAsLjI1NCwxLjAxMiwxLjAwNiwxLjAwNiwwLDAsMCwuODIuMzk0QTEuNzgsMS43OCwwLDAsMCwxMi40MzIsOC41bC41ODYuNjE1YTIuMjI3LDIuMjI3LDAsMCwxLS44NzQuNzM1QTIuNiwyLjYsMCwwLDEsMTAuOTU3LDEwLjFabS40OTMtNC41MzFxLS45MTgtLjAyOS0xLjM3NywxLjNsMi4xOTIsMCwuMDItLjFhMS41MzIsMS41MzIsMCwwLDAsMC0uNDM5LjkuOSwwLDAsMC0uMjczLS41NDdBLjg2Ni44NjYsMCwwLDAsMTEuNDUsNS41NjZaTTE1LjA0OSwxMEgxMy44OTJsMS4zLTcuNWgxLjE1N1ptMy42ODcuMWEyLjIxMywyLjIxMywwLDAsMS0xLjE5NC0uMzQ3LDEuOTcyLDEuOTcyLDAsMCwxLS43NDctLjkwOCwyLjcsMi43LDAsMCwxLS4xODMtMS4yODRsLjAxNS0uMkEzLjUzNiwzLjUzNiwwLDAsMSwxNy4xLDUuOTExYTIuNjg5LDIuNjg5LDAsMCwxLC45NTUtLjk3NCwyLjMyMSwyLjMyMSwwLDAsMSwxLjI0LS4zMTcsMS43MzEsMS43MzEsMCwwLDEsMS40ODcuNzM4LDIuNzExLDIuNzExLDAsMCwxLC4zNzQsMS44NzNsLS4wNjguNTA5SDE3Ljc1OWExLjQzNSwxLjQzNSwwLDAsMCwuMjU0LDEuMDEyLDEuMDA2LDEuMDA2LDAsMCwwLC44Mi4zOTRBMS43OCwxLjc4LDAsMCwwLDIwLjIxLDguNWwuNTg2LjYxNWEyLjIyNywyLjIyNywwLDAsMS0uODc0LjczNUEyLjYsMi42LDAsMCwxLDE4LjczNSwxMC4xWm0uNDkzLTQuNTMxcS0uOTE4LS4wMjktMS4zNzcsMS4zbDIuMTkyLDAsLjAyLS4xYTEuNTMyLDEuNTMyLDAsMCwwLDAtLjQzOS45LjksMCwwLDAtLjI3My0uNTQ3QS44NjYuODY2LDAsMCwwLDE5LjIyOSw1LjU2NlpNMjMuOSw5LjE1NWExLjEzMiwxLjEzMiwwLDAsMCwxLjE0My0uOWwxLjA5NCwwYTEuODcsMS44NywwLDAsMS0uMzc4Ljk1MiwyLjIsMi4yLDAsMCwxLS44MzMuNjY5LDIuMzEsMi4zMSwwLDAsMS0xLjA2LjIyNSwxLjk5LDEuOTksMCwwLDEtMS4xNTctLjM1MiwxLjk0NCwxLjk0NCwwLDAsMS0uNy0uOTQ1LDMuMDIzLDMuMDIzLDAsMCwxLS4xNDYtMS4zNDVsLjAxNS0uMTcxQTMuNDU3LDMuNDU3LDAsMCwxLDIyLjMyNyw1LjlhMi42MDgsMi42MDgsMCwwLDEsLjk0LS45NTksMi4zNTQsMi4zNTQsMCwwLDEsMS4yNzktLjMxNywxLjg0OCwxLjg0OCwwLDAsMSwxLjM3Mi41NjksMi4wMDksMi4wMDksMCwwLDEsLjUxMywxLjQyOEgyNS4zNDdhMS4xODEsMS4xODEsMCwwLDAtLjIyMi0uNzQyLjgxMy44MTMsMCwwLDAtLjY0Mi0uMzA4LDEuMTcyLDEuMTcyLDAsMCwwLTEuMDY5LjU3NiwzLjIxNiwzLjIxNiwwLDAsMC0uNDIsMS42OFEyMi45NTksOS4xMzYsMjMuOSw5LjE1NVptNS40MTUtNS43MjMtLjIyNSwxLjI4NEgzMGwtLjE1MS44NzloLS45MDhsLS41LDIuOTU5YTEuMDEyLDEuMDEyLDAsMCwwLDAsLjIycS4wMjkuMzE3LjM5MS4zMzJhMi4yMDYsMi4yMDYsMCwwLDAsLjQxLS4wNDRsLS4wNzguOTI4YTIuNjUzLDIuNjUzLDAsMCwxLS43MjguMSwxLjA4LDEuMDgsMCwwLDEtLjkwNi0uNDEzLDEuNDkzLDEuNDkzLDAsMCwxLS4yMzctMS4wNjdMMjcuNzc4LDUuNmgtLjg0NWwuMTU2LS44NzloLjg0bC4yMjUtMS4yODRaTTMxLjIzLDEwSDMwLjA3M2wuOTE4LTUuMjgzaDEuMTU3Wm0tLjA3My02LjYzNmEuNjUzLjY1MywwLDAsMSwuMTc2LS40NTkuNjQ0LjY0NCwwLDAsMSwuNDc0LS4yLjYxNi42MTYsMCwwLDEsLjQ3MS4xNzMuNi42LDAsMCwxLC4xODguNDQ3LjYxNy42MTcsMCwwLDEtLjE4My40NTkuNjcxLjY3MSwwLDAsMS0uNDY2LjE5LjYyNi42MjYsMCwwLDEtLjQ2OS0uMTY4QS41ODEuNTgxLDAsMCwxLDMxLjE1NywzLjM2NFpNMzIuOCw3LjMzOWEzLjQ3NiwzLjQ3NiwwLDAsMSwuNDU3LTEuNDExLDIuNzA5LDIuNzA5LDAsMCwxLC45NTktLjk4MSwyLjM3MSwyLjM3MSwwLDAsMSwxLjMtLjMyN0ExLjk2MiwxLjk2MiwwLDAsMSwzNy40MSw1Ljk0MiwzLjA1NCwzLjA1NCwwLDAsMSwzNy41NjgsNy4zYTMuNTQxLDMuNTQxLDAsMCwxLS40NTcsMS40ODQsMi43LDIuNywwLDAsMS0uOTY3Ljk4OSwyLjQsMi40LDAsMCwxLTEuMzA2LjMyNSwxLjk2LDEuOTYsMCwwLDEtMS44ODUtMS4zMTYsMy4wMTUsMy4wMTUsMCwwLDEtLjE2Ni0xLjM0Wm0xLjEzOC42NjlhMS40LDEuNCwwLDAsMCwuMjcxLjgyMy44NjcuODY3LDAsMCwwLC42ODYuMzI1LDEuMjE3LDEuMjE3LDAsMCwwLDEtLjQ1OUEyLjQxNSwyLjQxNSwwLDAsMCwzNi40LDcuNGwuMDI5LS40NzlhMS42OTEsMS42OTEsMCwwLDAtLjI0OS0uOTgxLjg3NC44NzQsMCwwLDAtLjcyMy0uMzc2LDEuMjY1LDEuMjY1LDAsMCwwLTEuMTcyLjcyOCwyLjcxOCwyLjcxOCwwLDAsMC0uMzI3LDEuMDQ1QTQuMDg4LDQuMDg4LDAsMCwwLDMzLjk0LDguMDA4Wm02LjE0My0zLjMtLjExNy42MmEyLjAxNiwyLjAxNiwwLDAsMSwxLjU2Ny0uNzEzLDEuMjc3LDEuMjc3LDAsMCwxLDEuMS41M0EyLjExNSwyLjExNSwwLDAsMSw0Mi45LDYuNTg3TDQyLjMyNCwxMEg0MS4xNjdsLjU3Ni0zLjQyOGExLjc1NCwxLjc1NCwwLDAsMCwwLS4zOTEuNjIzLjYyMywwLDAsMC0uNjkzLS42LDEuNDA3LDEuNDA3LDAsMCwwLTEuMTU3LjY0OUwzOS4yMzgsMTBIMzguMDgxbC45MTMtNS4yODNabTMuMDMyLDcuNTU5LS4xODEtLjY3NGE1LjM2NSw1LjM2NSwwLDAsMCwxLjYyMS0yLjE3LDkuODg1LDkuODg1LDAsMCwwLC43MTMtMy4yMzVsLjAyLS42MDVhMy43LDMuNywwLDAsMC0uOTU3LTIuOWwuMjc4LS42NTRBMywzLDAsMCwxLDQ1LjU2OSwzYTQuNTQ0LDQuNTQ0LDAsMCwxLC41OTEsMS40NjdBNy4wOTIsNy4wOTIsMCwwLDEsNDYuMzMzLDYuMmE5LDksMCwwLDEtLjQ4MSwyLjYzOSw3LjA2NSw3LjA2NSwwLDAsMS0xLjE0NSwyLjE1OEE0LjMxMiw0LjMxMiwwLDAsMSw0My4xMTUsMTIuMjcxWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzggMTUpIiBmaWxsPSIjMDUwYzFhIi8+DQogICAgICA8ZyB0cmFuc2Zvcm09Im1hdHJpeCgxLCAwLCAwLCAxLCAtNDM0LCAtMjM5KSIgZmlsdGVyPSJ1cmwoI2tleS1idG0tNSkiPg0KICAgICAgICA8cGF0aCBpZD0ia2V5LWJ0bS0yMCIgZGF0YS1uYW1lPSJrZXktYnRtIiBkPSJNMiwwSDMwYTIuMTc1LDIuMTc1LDAsMCwxLDEuNS42NzNBMi40MDgsMi40MDgsMCwwLDEsMzEuNzY1LDJWMzBBMS42NCwxLjY0LDAsMCwxLDMwLDMxLjc4OWwtMjguMDMxLjE0OWEyLjIsMi4yLDAsMCwxLTEuMzkxLS41NzhBMS42NTYsMS42NTYsMCwwLDEsMCwzMFYyQTIsMiwwLDAsMSwyLDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0MzQgMjM5KSIgZmlsbD0iIzRhNGE0YSIvPg0KICAgICAgPC9nPg0KICAgICAgPHBhdGggaWQ9ImtleS1zaWRlLTUiIGRhdGEtbmFtZT0ia2V5LXNpZGUiIGQ9Ik0xMTI5NC0xNDExOWExLjk5NCwxLjk5NCwwLDAsMS0xLjUyMS0uN2wxNS4xMDktMjIuMTk0LDE1LjY0NS04LjY4MWEyLDIsMCwwLDEsLjc2NywxLjU3NHYyOGEyLDIsMCwwLDEtMiwyWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTExMjkyIDE0MTUxKSIgZmlsbD0iIzIxMjEyMSIvPg0KICAgICAgPHBhdGggaWQ9ImtleS10b3AtNSIgZGF0YS1uYW1lPSJrZXktdG9wIiBkPSJNMS45NjQsMEgyNS41MzZBMS45NjQsMS45NjQsMCwwLDEsMjcuNSwxLjk2NFYyNS41MzZBMS45NjQsMS45NjQsMCwwLDEsMjUuNTM2LDI3LjVIMS45NjRBMS45NjQsMS45NjQsMCwwLDEsMCwyNS41MzZWMS45NjRBMS45NjQsMS45NjQsMCwwLDEsMS45NjQsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIgMSkiIGZpbGw9InVybCgjbGluZWFyLWdyYWRpZW50KSIvPg0KICAgICAgPHBhdGggaWQ9ImYiIGQ9Ik0xMS40MjYsNC4wNDdoNS41MTZWNS40MDZIMTIuNzdWNy44OTFoNC4xNzJWOS4yMzRIMTIuNzg1VjE0SDExLjQyNloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIgNi41KSIgZmlsbD0iI2ZmZiIvPg0KICAgIDwvZz4NCiAgICA8ZyBpZD0ia2V5LWkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDYzNSA2NzUpIj4NCiAgICAgIDxwYXRoIGlkPSJsYWJlbC03IiBkYXRhLW5hbWU9ImxhYmVsIiBkPSJNMS40NiwwSC4yNTlMMS40OTQtNy4xMDlIMi43Wk02LjAyNS0xLjQ2NXEuMDgzLS40ODMtLjYyNy0uNjcxYTcuOTc3LDcuOTc3LDAsMCwxLS45NjktLjMsMS4zMzYsMS4zMzYsMCwwLDEtLjk3Mi0xLjMwOUExLjQ4NiwxLjQ4NiwwLDAsMSw0LjEtNC45MjQsMi4zNzEsMi4zNzEsMCwwLDEsNS42LTUuMzgxYTIuMDQxLDIuMDQxLDAsMCwxLDEuMzcuNDc0LDEuNTEsMS41MSwwLDAsMSwuNTIsMS4yMTZsLTEuMTQ3LDBhLjc0MS43NDEsMCwwLDAtLjItLjU3NC44MTcuODE3LDAsMCwwLS41NzYtLjIxN0ExLjEzNiwxLjEzNiwwLDAsMCw0LjktNC4zYS43MS43MSwwLDAsMC0uMzIuNXEtLjA2OC40NDQuNjI1LjYxOGE2Ljg2LDYuODYsMCwwLDEsMS4wMjUuMzIsMS4zMzcsMS4zMzcsMCwwLDEsLjkzMywxLjMyOCwxLjQ2LDEuNDYsMCwwLDEtLjMzLjg3NiwxLjkyMywxLjkyMywwLDAsMS0uODE4LjU3MUEyLjgsMi44LDAsMCwxLDQuOTI3LjFhMi4xNDgsMi4xNDgsMCwwLDEtMS40MzMtLjVBMS41NywxLjU3LDAsMCwxLDIuOTM1LTEuNjdsMS4xMTgsMGEuODUxLjg1MSwwLDAsMCwuMjU0LjY0NUEuOTgxLjk4MSwwLDAsMCw0Ljk3Ni0uOGExLjMyOCwxLjMyOCwwLDAsMCwuNzE1LS4xNzhBLjY4NC42ODQsMCwwLDAsNi4wMjUtMS40NjVaTTguMi0yLjY2MWEzLjQ3NiwzLjQ3NiwwLDAsMSwuNDU3LTEuNDExLDIuNzA5LDIuNzA5LDAsMCwxLC45NTktLjk4MSwyLjM3MSwyLjM3MSwwLDAsMSwxLjMtLjMyNywyLjAxOCwyLjAxOCwwLDAsMSwxLjE3Mi4zNjEsMi4wMDcsMi4wMDcsMCwwLDEsLjcyLjk2MkEzLjA1NCwzLjA1NCwwLDAsMSwxMi45NjQtMi43YTMuNTQxLDMuNTQxLDAsMCwxLS40NTcsMS40ODQsMi43LDIuNywwLDAsMS0uOTY3Ljk4OUEyLjQsMi40LDAsMCwxLDEwLjIzNC4xLDIuMDA5LDIuMDA5LDAsMCwxLDkuMDctLjI2MWEyLjAxNCwyLjAxNCwwLDAsMS0uNzItLjk1NywzLjAxNSwzLjAxNSwwLDAsMS0uMTY2LTEuMzRabTEuMTM4LjY2OWExLjQsMS40LDAsMCwwLC4yNzEuODIzLjg2Ny44NjcsMCwwLDAsLjY4Ni4zMjUsMS4yMTcsMS4yMTcsMCwwLDAsMS0uNDU5QTIuNDE1LDIuNDE1LDAsMCwwLDExLjgtMi42bC4wMjktLjQ3OWExLjY5MSwxLjY5MSwwLDAsMC0uMjQ5LS45ODEuODc0Ljg3NCwwLDAsMC0uNzIzLS4zNzYsMS4yNjUsMS4yNjUsMCwwLDAtMS4xNzIuNzI4LDIuNzE4LDIuNzE4LDAsMCwwLS4zMjcsMS4wNDVBNC4wODgsNC4wODgsMCwwLDAsOS4zMzYtMS45OTJaTTE0LjcyMiwwSDEzLjU2NGwxLjMtNy41aDEuMTU3Wm00LjQzNCwwYTEuNTY3LDEuNTY3LDAsMCwxLS4wNDktLjQ5M0ExLjk1OSwxLjk1OSwwLDAsMSwxNy43LjFhMS42MTgsMS42MTgsMCwwLDEtMS4xNC0uNDQyLDEuMzYzLDEuMzYzLDAsMCwxLS40MjItMS4xLDEuNjE4LDEuNjE4LDAsMCwxLC43MjMtMS4zMTMsMy4xNDYsMy4xNDYsMCwwLDEsMS44MzYtLjQ3OWwuNzUyLjAxLjA2OC0uMzYxYTEuMDksMS4wOSwwLDAsMCwwLS4zNTYuNjM2LjYzNiwwLDAsMC0uNy0uNTQyLDEuMDUzLDEuMDUzLDAsMCwwLS42NTIuMTg4LjgxMy44MTMsMCwwLDAtLjM0NC41M2wtMS4xNTcuMDFhMS40NDksMS40NDksMCwwLDEsLjM0Ny0uODU3LDIuMDU2LDIuMDU2LDAsMCwxLC44My0uNTc0LDIuODEsMi44MSwwLDAsMSwxLjA5NC0uMiwxLjg0OCwxLjg0OCwwLDAsMSwxLjM0OC41MiwxLjU0MSwxLjU0MSwwLDAsMSwuNCwxLjNsLS40MDUsMi40NzYtLjAzOS40MzlhMS41NjEsMS41NjEsMCwwLDAsLjA3My41NjJMMjAuMywwWk0xNy45NjQtLjg1YTEuMjc2LDEuMjc2LDAsMCwwLC42NzktLjE2OCwxLjc4OCwxLjc4OCwwLDAsMCwuNTMyLS40NjFsLjE4MS0xLS41NTIsMGExLjkzOSwxLjkzOSwwLDAsMC0xLjA0NS4yNDcuOS45LDAsMCwwLS40NDQuNjc2LjYuNiwwLDAsMCwuMTQ0LjUxNUEuNy43LDAsMCwwLDE3Ljk2NC0uODVabTUuOTQyLTUuNzE4LS4yMjUsMS4yODRoLjlsLS4xNTEuODc5aC0uOTA4bC0uNSwyLjk1OWExLjAxMiwxLjAxMiwwLDAsMCwwLC4yMnEuMDI5LjMxNy4zOTEuMzMyYTIuMjA2LDIuMjA2LDAsMCwwLC40MS0uMDQ0bC0uMDc4LjkyOGEyLjY1MywyLjY1MywwLDAsMS0uNzI4LjEsMS4wOCwxLjA4LDAsMCwxLS45MDYtLjQxMywxLjQ5MywxLjQ5MywwLDAsMS0uMjM3LTEuMDY3TDIyLjM2OC00LjRoLS44NDVsLjE1Ni0uODc5aC44NGwuMjI1LTEuMjg0Wk0yNi45ODIuMWEyLjIxMywyLjIxMywwLDAsMS0xLjE5NC0uMzQ3LDEuOTcyLDEuOTcyLDAsMCwxLS43NDctLjkwOCwyLjcsMi43LDAsMCwxLS4xODMtMS4yODRsLjAxNS0uMmEzLjUzNiwzLjUzNiwwLDAsMSwuNDcxLTEuNDQ4LDIuNjg5LDIuNjg5LDAsMCwxLC45NTUtLjk3NCwyLjMyMSwyLjMyMSwwLDAsMSwxLjI0LS4zMTcsMS43MzEsMS43MzEsMCwwLDEsMS40ODcuNzM4QTIuNzExLDIuNzExLDAsMCwxLDI5LjQtMi43NjlsLS4wNjguNTA5SDI2LjAwNmExLjQzNSwxLjQzNSwwLDAsMCwuMjU0LDEuMDEyLDEuMDA2LDEuMDA2LDAsMCwwLC44Mi4zOTRBMS43OCwxLjc4LDAsMCwwLDI4LjQ1Ny0xLjVsLjU4Ni42MTVhMi4yMjcsMi4yMjcsMCwwLDEtLjg3NC43MzVBMi42LDIuNiwwLDAsMSwyNi45ODIuMVptLjQ5My00LjUzMXEtLjkxOC0uMDI5LTEuMzc3LDEuM2wyLjE5MiwwLC4wMi0uMWExLjUzMiwxLjUzMiwwLDAsMCwwLS40MzkuOS45LDAsMCwwLS4yNzMtLjU0N0EuODY2Ljg2NiwwLDAsMCwyNy40NzYtNC40MzRaTTM1LjE1Ni4xYTIuNDEsMi40MSwwLDAsMS0xLjIxOC0uMzMyLDIuMTMyLDIuMTMyLDAsMCwxLS44MTgtLjkyLDMuNTEyLDMuNTEyLDAsMCwxLS4zMzItMS4zN0E2LjMsNi4zLDAsMCwxLDMyLjktMy45NWE0LjgsNC44LDAsMCwxLC41MTMtMS40ODcsMy43MzcsMy43MzcsMCwwLDEsLjg4MS0xLjEsMi45LDIuOSwwLDAsMSwxLjk1My0uNjc0LDIuMTk0LDIuMTk0LDAsMCwxLDEuNjgyLjcyOCwzLjAxMywzLjAxMywwLDAsMSwuNjg2LDEuOTE0LDYuMyw2LjMsMCwwLDEtLjExLDEuMzg5LDUuMDM1LDUuMDM1LDAsMCwxLS40NzksMS40NCwzLjY3NiwzLjY3NiwwLDAsMS0uODQyLDEuMUEyLjg4MSwyLjg4MSwwLDAsMSwzNS4xNTYuMVptMi4yMjItMy44NDMuMDQ0LS41MThhMy4xLDMuMSwwLDAsMC0uMDkzLS45ODQsMS4yOTEsMS4yOTEsMCwwLDAtLjQxMy0uNjg4LDEuMTksMS4xOSwwLDAsMC0uNzM1LS4yNTEsMS42NTEsMS42NTEsMCwwLDAtMS4wOTEuMzQ3LDIuNTQxLDIuNTQxLDAsMCwwLS43NzEsMS4xMTMsNS44MzMsNS44MzMsMCwwLDAtLjM0NCwxLjg3NSwyLjM3OCwyLjM3OCwwLDAsMCwuMjczLDEuNDA2LDEuMTEsMS4xMSwwLDAsMCwuOTY3LjUzMiwxLjY2OSwxLjY2OSwwLDAsMCwxLjM5NC0uNjM1LDMuNjYsMy42NiwwLDAsMCwuNzItMS44NTVabTYuNjM2LDEuMTI4YTQuMyw0LjMsMCwwLDEtLjQzMiwxLjQ1OCwyLjM5MSwyLjM5MSwwLDAsMS0uODMuOTY0LDEuOTU4LDEuOTU4LDAsMCwxLTEuMTE2LjNBMS41NTMsMS41NTMsMCwwLDEsNDAuMy0uNTc2TDQwLjExNywwaC0xLjA2bDEuMy03LjVoMS4xNjJsLS41MjcsMi43MjlhMS44LDEuOCwwLDAsMSwxLjQtLjYxLDEuNSwxLjUsMCwwLDEsMS4yLjU2MiwyLjQyNCwyLjQyNCwwLDAsMSwuNDU3LDEuNDg0QTYuODA3LDYuODA3LDAsMCwxLDQ0LjAxNC0yLjYxN1pNNDIuOS0zLjI3MWExLjM4NiwxLjM4NiwwLDAsMC0uMjItLjgzMy43NjIuNzYyLDAsMCwwLS42MzUtLjMxLDEuMzYxLDEuMzYxLDAsMCwwLTEuMTgyLjY3NGwtLjM4MSwyLjE4OGEuOTIyLjkyMiwwLDAsMCwuOTIzLjY4OCwxLjE1LDEuMTUsMCwwLDAsLjk2NC0uNDQ5LDIuNTQ3LDIuNTQ3LDAsMCwwLC40ODYtMS4zMDlRNDIuOS0zLjAzNyw0Mi45LTMuMjcxWm0zLjc4OS0yLjAxMkw0NS43MTguNDY0YTIuMDM5LDIuMDM5LDAsMCwxLS41NjYsMS4yNTcsMS42MywxLjYzLDAsMCwxLTEuMi40MjcsMy4yNzUsMy4yNzUsMCwwLDEtLjY1OS0uMDkzbC4xLS45MzdhMS43NzYsMS43NzYsMCwwLDAsLjQxLjA1NHEuNjIsMCwuNzQ3LS43MjhsLjk4MS01LjcyOFpNNDUuNjc0LTYuNjM2QS42NDYuNjQ2LDAsMCwxLDQ1Ljg1LTcuMWEuNjUyLjY1MiwwLDAsMSwuNDY5LS4xOTMuNjI1LjYyNSwwLDAsMSwuNDcxLjE2OC42LjYsMCwwLDEsLjE4OC40NTIuNjE3LjYxNywwLDAsMS0uMTgzLjQ1OS42NzEuNjcxLDAsMCwxLS40NjYuMTkuNjU2LjY1NiwwLDAsMS0uNDc0LS4xNzNBLjU4LjU4LDAsMCwxLDQ1LjY3NC02LjYzNlpNNDkuNDM4LjFhMi4yMTMsMi4yMTMsMCwwLDEtMS4xOTQtLjM0NywxLjk3MiwxLjk3MiwwLDAsMS0uNzQ3LS45MDgsMi43LDIuNywwLDAsMS0uMTgzLTEuMjg0bC4wMTUtLjJBMy41MzYsMy41MzYsMCwwLDEsNDcuOC00LjA4OWEyLjY4OSwyLjY4OSwwLDAsMSwuOTU1LS45NzRBMi4zMjEsMi4zMjEsMCwwLDEsNTAtNS4zODFhMS43MzEsMS43MzEsMCwwLDEsMS40ODcuNzM4LDIuNzExLDIuNzExLDAsMCwxLC4zNzQsMS44NzNsLS4wNjguNTA5SDQ4LjQ2MmExLjQzNSwxLjQzNSwwLDAsMCwuMjU0LDEuMDEyLDEuMDA2LDEuMDA2LDAsMCwwLC44Mi4zOTRBMS43OCwxLjc4LDAsMCwwLDUwLjkxMy0xLjVsLjU4Ni42MTVhMi4yMjcsMi4yMjcsMCwwLDEtLjg3NC43MzVBMi42LDIuNiwwLDAsMSw0OS40MzguMVptLjQ5My00LjUzMXEtLjkxOC0uMDI5LTEuMzc3LDEuM2wyLjE5MiwwLC4wMi0uMWExLjUzMiwxLjUzMiwwLDAsMCwwLS40MzkuOS45LDAsMCwwLS4yNzMtLjU0N0EuODY2Ljg2NiwwLDAsMCw0OS45MzItNC40MzRaTTU0LjYtLjg0NWExLjExMSwxLjExMSwwLDAsMCwuNzM1LS4yNDIsMS4xMDksMS4xMDksMCwwLDAsLjQwOC0uNjU3bDEuMDk0LDBhMS44NywxLjg3LDAsMCwxLS4zNzguOTUyLDIuMiwyLjIsMCwwLDEtLjgzMy42NjlBMi4zMSwyLjMxLDAsMCwxLDU0LjU3LjFhMS45OSwxLjk5LDAsMCwxLTEuMTU3LS4zNTIsMS45NDQsMS45NDQsMCwwLDEtLjctLjk0NSwzLjAyMywzLjAyMywwLDAsMS0uMTQ2LTEuMzQ1bC4wMTUtLjE3MUEzLjQ1NywzLjQ1NywwLDAsMSw1My4wMy00LjFhMi42MDgsMi42MDgsMCwwLDEsLjk0LS45NTksMi4zNTQsMi4zNTQsMCwwLDEsMS4yNzktLjMxNywxLjg0OCwxLjg0OCwwLDAsMSwxLjM3Mi41NjksMi4wMDksMi4wMDksMCwwLDEsLjUxMywxLjQyOEg1Ni4wNWExLjE4MSwxLjE4MSwwLDAsMC0uMjIyLS43NDIuODEzLjgxMywwLDAsMC0uNjQyLS4zMDgsMS4xNzIsMS4xNzIsMCwwLDAtMS4wNjkuNTc2LDMuMjE2LDMuMjE2LDAsMCwwLS40MiwxLjY4UTUzLjY2Mi0uODY0LDU0LjYtLjg0NVpNNjAuMDItNi41NjdsLS4yMjUsMS4yODRoLjlsLS4xNTEuODc5aC0uOTA4bC0uNSwyLjk1OWExLjAxMiwxLjAxMiwwLDAsMCwwLC4yMnEuMDI5LjMxNy4zOTEuMzMyYTIuMjA2LDIuMjA2LDAsMCwwLC40MS0uMDQ0bC0uMDc4LjkyOGEyLjY1MywyLjY1MywwLDAsMS0uNzI4LjEsMS4wOCwxLjA4LDAsMCwxLS45MDYtLjQxMywxLjQ5MywxLjQ5MywwLDAsMS0uMjM3LTEuMDY3TDU4LjQ4MS00LjRoLS44NDVsLjE1Ni0uODc5aC44NGwuMjI1LTEuMjg0WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzggMjApIiBmaWxsPSIjMDUwYzFhIi8+DQogICAgICA8ZyB0cmFuc2Zvcm09Im1hdHJpeCgxLCAwLCAwLCAxLCAtNDM0LCAtMTk5KSIgZmlsdGVyPSJ1cmwoI2tleS1idG0tNikiPg0KICAgICAgICA8cGF0aCBpZD0ia2V5LWJ0bS0yMSIgZGF0YS1uYW1lPSJrZXktYnRtIiBkPSJNMiwwSDMwYTIuMTc1LDIuMTc1LDAsMCwxLDEuNS42NzNBMi40MDgsMi40MDgsMCwwLDEsMzEuNzY1LDJWMzBBMS42NCwxLjY0LDAsMCwxLDMwLDMxLjc4OWwtMjguMDMxLjE0OWEyLjIsMi4yLDAsMCwxLTEuMzkxLS41NzhBMS42NTYsMS42NTYsMCwwLDEsMCwzMFYyQTIsMiwwLDAsMSwyLDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0MzQgMTk5KSIgZmlsbD0iIzRhNGE0YSIvPg0KICAgICAgPC9nPg0KICAgICAgPHBhdGggaWQ9ImtleS1zaWRlLTYiIGRhdGEtbmFtZT0ia2V5LXNpZGUiIGQ9Ik0xMTI5NC0xNDExOWExLjk5NCwxLjk5NCwwLDAsMS0xLjUyMS0uN2wxNS4xMDktMjIuMTk0LDE1LjY0NS04LjY4MWEyLDIsMCwwLDEsLjc2NywxLjU3NHYyOGEyLDIsMCwwLDEtMiwyWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTExMjkyIDE0MTUxKSIgZmlsbD0iIzIxMjEyMSIvPg0KICAgICAgPHBhdGggaWQ9ImtleS10b3AtNiIgZGF0YS1uYW1lPSJrZXktdG9wIiBkPSJNMS45NjQsMEgyNS41MzZBMS45NjQsMS45NjQsMCwwLDEsMjcuNSwxLjk2NFYyNS41MzZBMS45NjQsMS45NjQsMCwwLDEsMjUuNTM2LDI3LjVIMS45NjRBMS45NjQsMS45NjQsMCwwLDEsMCwyNS41MzZWMS45NjRBMS45NjQsMS45NjQsMCwwLDEsMS45NjQsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIgMSkiIGZpbGw9InVybCgjbGluZWFyLWdyYWRpZW50KSIvPg0KICAgICAgPHBhdGggaWQ9ImkiIGQ9Ik0xMy4yNjIsNC4wNDdoMS4zNDRWMTRIMTMuMjYyWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMiA2LjUpIiBmaWxsPSIjZmZmIi8+DQogICAgPC9nPg0KICA8L2c+DQogIDxnIGlkPSJwNiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTgwIC00NzYpIj4NCiAgICA8ZyBpZD0icGFuZS0yIiBkYXRhLW5hbWU9InBhbmUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDgwIDY0MCkiPg0KICAgICAgPHJlY3QgaWQ9ImJveC0yIiBkYXRhLW5hbWU9ImJveCIgd2lkdGg9IjQxMCIgaGVpZ2h0PSIxNjAiIHJ4PSI0IiBmaWxsPSIjZjZmNmY2Ii8+DQogICAgICA8cGF0aCBpZD0ibGFiZWwtOCIgZGF0YS1uYW1lPSJsYWJlbCIgZD0iTTIuNzg4LTcuMTA5LDQuMzc1LTIuMTYzLDUuOTU3LTcuMTA5SDguMjEzVjBINi40OTRWLTEuNjZsLjE2Ni0zLjRMNC45NDEsMEgzLjgwOUwyLjA4NS01LjA2M2wuMTY2LDMuNFYwSC41MzdWLTcuMTA5Wm0xMi43MzQsMy43YTQuMTkyLDQuMTkyLDAsMCwxLS4zODYsMS44NDEsMi44NTEsMi44NTEsMCwwLDEtMS4xLDEuMjMzQTMuMDUyLDMuMDUyLDAsMCwxLDEyLjQyMi4xLDMuMSwzLjEsMCwwLDEsMTAuODEtLjMyYTIuODQ2LDIuODQ2LDAsMCwxLTEuMS0xLjE5NEE0LjA3Miw0LjA3MiwwLDAsMSw5LjMtMy4zdi0uNEE0LjIxMSw0LjIxMSwwLDAsMSw5LjY4NS01LjU0YTIuODQ0LDIuODQ0LDAsMCwxLDEuMS0xLjIzMywzLjA3NCwzLjA3NCwwLDAsMSwxLjYyOC0uNDM1LDMuMDQ0LDMuMDQ0LDAsMCwxLDEuNjExLjQzLDIuOSwyLjksMCwwLDEsMS4xLDEuMjIzLDQuMDksNC4wOSwwLDAsMSwuNCwxLjgxOVptLTEuNzQzLS4zYTIuOTksMi45OSwwLDAsMC0uMzU0LTEuNjA5LDEuMTM1LDEuMTM1LDAsMCwwLTEuMDEzLS41NDlxLTEuMjg5LDAtMS4zNjIsMS45MzRsMCwuNTIyQTMuMDc1LDMuMDc1LDAsMCwwLDExLjM5MS0xLjhhMS4xMzQsMS4xMzQsMCwwLDAsMS4wMy41NjIsMS4xMiwxLjEyLDAsMCwwLDEtLjU1MiwyLjk5MSwyLjk5MSwwLDAsMCwuMzU2LTEuNTg3Wm01LjQ3OCwxLjc3MiwxLjQxNi01LjE3NmgxLjkxNEwyMC4xOTUsMEgxOC4zMkwxNS45NDctNy4xMDloMS45Wm04LjQ1Ny0xLjA4NGgtMi43djEuN0gyOC4yVjBoLTQuOVYtNy4xMDloNC45MDd2MS4zMjNIMjUuMDE5djEuNWgyLjdabTkuODI5LjYxYTIuNiwyLjYsMCwwLDEtLjQsMS4zMTEsMi40MTYsMi40MTYsMCwwLDEtMS4wMjguODgxQTMuNSwzLjUsMCwwLDEsMzQuNi4xLDIuNzkyLDIuNzkyLDAsMCwxLDMyLjQtLjgxNWEzLjc3LDMuNzcsMCwwLDEtLjgwNi0yLjU3OHYtLjM1MmE0LjMsNC4zLDAsMCwxLC4zNjQtMS44MjlBMi43NTYsMi43NTYsMCwwLDEsMzMtNi43ODVhMi45MjIsMi45MjIsMCwwLDEsMS41ODItLjQyNywzLjA2NCwzLjA2NCwwLDAsMSwyLjA4LjY4MSwyLjY5MSwyLjY5MSwwLDAsMSwuODk0LDEuODc3SDM1Ljg0OWExLjI3MywxLjI3MywwLDAsMC0uMzI3LS45MzMsMS4zNDYsMS4zNDYsMCwwLDAtLjkzNy0uMjgzLDEuMDI0LDEuMDI0LDAsMCwwLS45MzcuNDc5LDMuMDc1LDMuMDc1LDAsMCwwLS4zMTIsMS41Mjh2LjVhMy40LDMuNCwwLDAsMCwuMjg2LDEuNjI2LDEuMDQ1LDEuMDQ1LDAsMCwwLC45ODQuNDg4LDEuMzE2LDEuMzE2LDAsMCwwLC45LS4yNzgsMS4xODEsMS4xODEsMCwwLDAsLjMzMi0uODg0Wm01LjA0OSwxLjA3OUg0MC4yNDNMMzkuODMzLDBIMzhsMi42MDctNy4xMDloMS42MTFMNDQuODQ3LDBINDMuMDA3Wk00MC42NTMtMi42NTFoMS41MjhsLS43NjctMi40NjZabTcuMTYzLTQuNDU4TDQ5LjQtMi4xNjNsMS41ODItNC45NDZoMi4yNTZWMEg1MS41MjJWLTEuNjZsLjE2Ni0zLjRMNDkuOTY5LDBINDguODM3TDQ3LjExMy01LjA2M2wuMTY2LDMuNFYwSDQ1LjU2NVYtNy4xMDlaTTU4LjkzOS0zLjAxOGgtMi43djEuN2gzLjE4NFYwaC00LjlWLTcuMTA5aDQuOTA3djEuMzIzSDU2LjI0NHYxLjVoMi43Wm00LjAyOC41aC0uOTI4VjBINjAuMzI1Vi03LjEwOWgyLjhhMy4xMjMsMy4xMjMsMCwwLDEsMS45NzguNTYxLDEuOSwxLjksMCwwLDEsLjcxMywxLjU4NSwyLjMwOCwyLjMwOCwwLDAsMS0uMywxLjIyOSwyLjEzMSwyLjEzMSwwLDAsMS0uOTQuNzlMNjYuMDU4LS4wNzNWMEg2NC4yMjJabS0uOTI4LTEuMzE4aDEuMDg0YS45NzMuOTczLDAsMCwwLC43MzUtLjI1Ny45OTMuOTkzLDAsMCwwLC4yNDctLjcxNywxLDEsMCwwLDAtLjI0OS0uNzIyLjk2NC45NjQsMCwwLDAtLjczMi0uMjYySDYyLjAzOVptOS4wNDgsMi41SDY4LjczOEw2OC4zMjgsMEg2Ni41TDY5LjEtNy4xMDloMS42MTFMNzMuMzQzLDBINzEuNVpNNjkuMTQ4LTIuNjUxaDEuNTI4TDY5LjkxLTUuMTE3WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTAgMTgpIiBmaWxsPSIjMDUwYzFhIi8+DQogICAgPC9nPg0KICAgIDxnIGlkPSJtb3ZlLXVwLWRvd24iIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEpIj4NCiAgICAgIDxwYXRoIGlkPSJkZXNjcmlwdGlvbiIgZD0iTS0yMy44MDktNy4xMDlsMS4wNCw1LjQzOSwyLjkyNS01LjQzOWgxLjU4MkwtMTkuNDkyLDBoLTEuMmwuNDE1LTIuNDA3LjYzLTIuOTY0TC0yMi41NzgsMGgtLjg2OWwtMS4wODktNS41MzJMLTI0Ljk4LTIuMjhsLS40LDIuMjhoLTEuMmwxLjIzNS03LjEwOVpNLTE2LjkxOSwwaC0xLjE1N2wuOTE4LTUuMjgzSC0xNlptLS4wNzMtNi42MzZhLjY1My42NTMsMCwwLDEsLjE3Ni0uNDU5LjY0NC42NDQsMCwwLDEsLjQ3NC0uMi42MTYuNjE2LDAsMCwxLC40NzEuMTczLjYuNiwwLDAsMSwuMTg4LjQ0Ny42MTcuNjE3LDAsMCwxLS4xODMuNDU5LjY3MS42NzEsMCwwLDEtLjQ2Ni4xOS42MjYuNjI2LDAsMCwxLS40NjktLjE2OEEuNTgxLjU4MSwwLDAsMS0xNi45OTItNi42MzZabTEuNjIxLDMuOTg5YTQuMTg1LDQuMTg1LDAsMCwxLC40MzktMS40NjUsMi40OCwyLjQ4LDAsMCwxLC44NDUtLjk2OSwxLjk1MSwxLjk1MSwwLDAsMSwxLjExOC0uMzA1LDEuNTYxLDEuNTYxLDAsMCwxLDEuMjYuNkwtMTEuMi03LjVoMS4xNjJsLTEuMyw3LjVoLTEuMDM1bC4wNzgtLjU0N0ExLjg0MSwxLjg0MSwwLDAsMS0xMy43NDUuMWExLjQ1MywxLjQ1MywwLDAsMS0xLjE3OS0uNTY5QTIuNDg0LDIuNDg0LDAsMCwxLTE1LjQtMS45NTNhMy45NDgsMy45NDgsMCwwLDEsLjAxNS0uNTkxWm0xLjEyMy40NTRhMS42MjcsMS42MjcsMCwwLDAsLjE4OC45NjIuNzUxLjc1MSwwLDAsMCwuNjYyLjM2NiwxLjM1OSwxLjM1OSwwLDAsMCwxLjE1Ny0uNjQ5bC40LTIuMjcxYS45LjksMCwwLDAtLjg4OS0uNjMsMS4xODksMS4xODksMCwwLDAtMS4wNjkuNTg2QTMuMTIzLDMuMTIzLDAsMCwwLTE0LjI0OC0yLjE5MlptNC40LS40NTRhNC4xODUsNC4xODUsMCwwLDEsLjQzOS0xLjQ2NSwyLjQ4LDIuNDgsMCwwLDEsLjg0NS0uOTY5LDEuOTUxLDEuOTUxLDAsMCwxLDEuMTE4LS4zMDUsMS41NjEsMS41NjEsMCwwLDEsMS4yNi42TC01LjY3OS03LjVoMS4xNjJMLTUuODIsMEgtNi44NTVsLjA3OC0uNTQ3QTEuODQxLDEuODQxLDAsMCwxLTguMjIzLjEsMS40NTMsMS40NTMsMCwwLDEtOS40LS40NjZhMi40ODQsMi40ODQsMCwwLDEtLjQ3Ni0xLjQ4NywzLjk0OCwzLjk0OCwwLDAsMSwuMDE1LS41OTFabTEuMTIzLjQ1NGExLjYyNywxLjYyNywwLDAsMCwuMTg4Ljk2Mi43NTEuNzUxLDAsMCwwLC42NjIuMzY2LDEuMzU5LDEuMzU5LDAsMCwwLDEuMTU3LS42NDlsLjQtMi4yNzFhLjkuOSwwLDAsMC0uODg5LS42MywxLjE4OSwxLjE4OSwwLDAsMC0xLjA2OS41ODZBMy4xMjMsMy4xMjMsMCwwLDAtOC43MjYtMi4xOTJaTS0zLjM1LDBILTQuNTA3bDEuMy03LjVoMS4xNTdaTS4zMzcuMUEyLjIxMywyLjIxMywwLDAsMS0uODU3LS4yNDksMS45NzIsMS45NzIsMCwwLDEtMS42LTEuMTU3YTIuNywyLjcsMCwwLDEtLjE4My0xLjI4NGwuMDE1LS4yQTMuNTM2LDMuNTM2LDAsMCwxLTEuMy00LjA4OWEyLjY4OSwyLjY4OSwwLDAsMSwuOTU1LS45NzQsMi4zMjEsMi4zMjEsMCwwLDEsMS4yNC0uMzE3LDEuNzMxLDEuNzMxLDAsMCwxLDEuNDg3LjczOCwyLjcxMSwyLjcxMSwwLDAsMSwuMzc0LDEuODczbC0uMDY4LjUwOUgtLjY0QTEuNDM1LDEuNDM1LDAsMCwwLS4zODYtMS4yNDlhMS4wMDYsMS4wMDYsMCwwLDAsLjgyLjM5NEExLjc4LDEuNzgsMCwwLDAsMS44MTItMS41TDIuNC0uODg5YTIuMjI3LDIuMjI3LDAsMCwxLS44NzQuNzM1QTIuNiwyLjYsMCwwLDEsLjMzNy4xWk0uODMtNC40MzRxLS45MTgtLjAyOS0xLjM3NywxLjNsMi4xOTIsMCwuMDItLjFhMS41MzIsMS41MzIsMCwwLDAsMC0uNDM5QS45LjksMCwwLDAsMS40LTQuMjE5Ljg2Ni44NjYsMCwwLDAsLjgzLTQuNDM0Wm01LjA0OSwxLjg5aC0yLjVMMy41NTUtMy41aDIuNVptMi44NTYsMS43YTEuMTExLDEuMTExLDAsMCwwLC43MzUtLjI0MiwxLjEwOSwxLjEwOSwwLDAsMCwuNDA4LS42NTdsMS4wOTQsMGExLjg3LDEuODcsMCwwLDEtLjM3OC45NTIsMi4yLDIuMiwwLDAsMS0uODMzLjY2OUEyLjMxLDIuMzEsMCwwLDEsOC43LjEsMS45OSwxLjk5LDAsMCwxLDcuNTQ0LS4yNTRhMS45NDQsMS45NDQsMCwwLDEtLjctLjk0NUEzLjAyMywzLjAyMywwLDAsMSw2LjctMi41NDRsLjAxNS0uMTcxQTMuNDU3LDMuNDU3LDAsMCwxLDcuMTYxLTQuMWEyLjYwOCwyLjYwOCwwLDAsMSwuOTQtLjk1OUEyLjM1NCwyLjM1NCwwLDAsMSw5LjM4LTUuMzgxYTEuODQ4LDEuODQ4LDAsMCwxLDEuMzcyLjU2OSwyLjAwOSwyLjAwOSwwLDAsMSwuNTEzLDEuNDI4SDEwLjE4MWExLjE4MSwxLjE4MSwwLDAsMC0uMjIyLS43NDIuODEzLjgxMywwLDAsMC0uNjQyLS4zMDgsMS4xNzIsMS4xNzIsMCwwLDAtMS4wNjkuNTc2LDMuMjE2LDMuMjE2LDAsMCwwLS40MiwxLjY4UTcuNzkzLS44NjQsOC43MzUtLjg0NVpNMTIuNzg4LDBIMTEuNjMxbDEuMy03LjVoMS4xNTdabTIuNTI0LDBIMTQuMTU1bC45MTgtNS4yODNIMTYuMjNabS0uMDczLTYuNjM2YS42NTMuNjUzLDAsMCwxLC4xNzYtLjQ1OS42NDQuNjQ0LDAsMCwxLC40NzQtLjIuNjE2LjYxNiwwLDAsMSwuNDcxLjE3My42LjYsMCwwLDEsLjE4OC40NDcuNjE3LjYxNywwLDAsMS0uMTgzLjQ1OS42NzEuNjcxLDAsMCwxLS40NjYuMTkuNjI2LjYyNiwwLDAsMS0uNDY5LS4xNjhBLjU4MS41ODEsMCwwLDEsMTUuMjM5LTYuNjM2Wk0xOC45MTEtLjg0NWExLjExMSwxLjExMSwwLDAsMCwuNzM1LS4yNDIsMS4xMDksMS4xMDksMCwwLDAsLjQwOC0uNjU3bDEuMDk0LDBhMS44NywxLjg3LDAsMCwxLS4zNzguOTUyLDIuMiwyLjIsMCwwLDEtLjgzMy42NjlBMi4zMSwyLjMxLDAsMCwxLDE4Ljg3Ny4xLDEuOTksMS45OSwwLDAsMSwxNy43Mi0uMjU0YTEuOTQ0LDEuOTQ0LDAsMCwxLS43LS45NDUsMy4wMjMsMy4wMjMsMCwwLDEtLjE0Ni0xLjM0NWwuMDE1LS4xNzFBMy40NTcsMy40NTcsMCwwLDEsMTcuMzM2LTQuMWEyLjYwOCwyLjYwOCwwLDAsMSwuOTQtLjk1OSwyLjM1NCwyLjM1NCwwLDAsMSwxLjI3OS0uMzE3LDEuODQ4LDEuODQ4LDAsMCwxLDEuMzcyLjU2OSwyLjAwOSwyLjAwOSwwLDAsMSwuNTEzLDEuNDI4SDIwLjM1NmExLjE4MSwxLjE4MSwwLDAsMC0uMjIyLS43NDIuODEzLjgxMywwLDAsMC0uNjQyLS4zMDgsMS4xNzIsMS4xNzIsMCwwLDAtMS4wNjkuNTc2QTMuMjE2LDMuMjE2LDAsMCwwLDE4LTIuMTc4UTE3Ljk2OS0uODY0LDE4LjkxMS0uODQ1Wm00LjkyNy0xLjQxMS0uNjU0LjU4MUwyMi45LDBIMjEuNzM4bDEuMy03LjVoMS4xNTdsLS43NDIsNC4yNTguNDA1LS40MiwxLjY4LTEuNjIxaDEuNDc5TDI0LjY3My0zLjAyNywyNi4yMTYsMEgyNC45NjFaTS0xNi40MTgsMTBhMS41NjcsMS41NjcsMCwwLDEtLjA0OS0uNDkzLDEuOTU5LDEuOTU5LDAsMCwxLTEuNDExLjU5MSwxLjYxOCwxLjYxOCwwLDAsMS0xLjE0LS40NDIsMS4zNjMsMS4zNjMsMCwwLDEtLjQyMi0xLjEsMS42MTgsMS42MTgsMCwwLDEsLjcyMy0xLjMxMywzLjE0NiwzLjE0NiwwLDAsMSwxLjgzNi0uNDc5bC43NTIuMDEuMDY4LS4zNjFhMS4wOSwxLjA5LDAsMCwwLDAtLjM1Ni42MzYuNjM2LDAsMCwwLS43LS41NDIsMS4wNTMsMS4wNTMsMCwwLDAtLjY1Mi4xODguODEzLjgxMywwLDAsMC0uMzQ0LjUzbC0xLjE1Ny4wMWExLjQ0OSwxLjQ0OSwwLDAsMSwuMzQ3LS44NTcsMi4wNTYsMi4wNTYsMCwwLDEsLjgzLS41NzQsMi44MSwyLjgxLDAsMCwxLDEuMDk0LS4yLDEuODQ4LDEuODQ4LDAsMCwxLDEuMzQ4LjUyLDEuNTQxLDEuNTQxLDAsMCwxLC40LDEuM0wtMTUuMyw4LjkxMWwtLjAzOS40MzlhMS41NjEsMS41NjEsMCwwLDAsLjA3My41NjJsMCwuMDg4Wm0tMS4xOTEtLjg1YTEuMjc2LDEuMjc2LDAsMCwwLC42NzktLjE2OCwxLjc4OCwxLjc4OCwwLDAsMCwuNTMyLS40NjFsLjE4MS0xLS41NTIsMGExLjkzOSwxLjkzOSwwLDAsMC0xLjA0NS4yNDcuOS45LDAsMCwwLS40NDQuNjc2LjYuNiwwLDAsMCwuMTQ0LjUxNUEuNy43LDAsMCwwLTE3LjYxLDkuMTVabTUuMzM3LTQuNDM4LS4xMTcuNjJhMi4wMTYsMi4wMTYsMCwwLDEsMS41NjctLjcxMywxLjI3NywxLjI3NywwLDAsMSwxLjEuNTNBMi4xMTUsMi4xMTUsMCwwLDEtOS40Niw2LjU4N0wtMTAuMDMyLDEwaC0xLjE1N2wuNTc2LTMuNDI4YTEuNzU0LDEuNzU0LDAsMCwwLDAtLjM5MS42MjMuNjIzLDAsMCwwLS42OTMtLjYsMS40MDcsMS40MDcsMCwwLDAtMS4xNTcuNjQ5TC0xMy4xMTgsMTBoLTEuMTU3bC45MTMtNS4yODNabTMuNzExLDIuNjQyYTQuMTg1LDQuMTg1LDAsMCwxLC40MzktMS40NjUsMi40OCwyLjQ4LDAsMCwxLC44NDUtLjk2OUExLjk1MSwxLjk1MSwwLDAsMS02LjE2LDQuNjE0YTEuNTYxLDEuNTYxLDAsMCwxLDEuMjYuNkwtNC4zOTIsMi41SC0zLjIzbC0xLjMsNy41SC01LjU2OWwuMDc4LS41NDdhMS44NDEsMS44NDEsMCwwLDEtMS40NDUuNjQ5LDEuNDUzLDEuNDUzLDAsMCwxLTEuMTc5LS41NjksMi40ODQsMi40ODQsMCwwLDEtLjQ3Ni0xLjQ4NywzLjk0OCwzLjk0OCwwLDAsMSwuMDE1LS41OTFabTEuMTIzLjQ1NGExLjYyNywxLjYyNywwLDAsMCwuMTg4Ljk2Mi43NTEuNzUxLDAsMCwwLC42NjIuMzY2LDEuMzU5LDEuMzU5LDAsMCwwLDEuMTU3LS42NDlsLjQtMi4yNzFhLjkuOSwwLDAsMC0uODg5LS42MywxLjE4OSwxLjE4OSwwLDAsMC0xLjA2OS41ODZBMy4xMjMsMy4xMjMsMCwwLDAtNy40MzksNy44MDhaTS0uNzE1LDEwLC41MTUsMi44OTFsMS45MjQsMGEyLjYzMywyLjYzMywwLDAsMSwxLjUzMS40NDJBMi40ODQsMi40ODQsMCwwLDEsNC45LDQuNTU4YTMuNjM5LDMuNjM5LDAsMCwxLC4xNzYsMS43MTZsLS4wNTQuMzg2QTQuMjYzLDQuMjYzLDAsMCwxLDQuMzc1LDguNCwzLjQ4MSwzLjQ4MSwwLDAsMSwzLjA4Myw5LjU4LDMuNjQ5LDMuNjQ5LDAsMCwxLDEuMzQ1LDEwWk0xLjU1LDMuODg3LjY2Miw5LjAxNGwuNzEzLDBhMi4yMjEsMi4yMjEsMCwwLDAsMS42LS42MTNBMi45NDMsMi45NDMsMCwwLDAsMy44LDYuNzE0LDUuNyw1LjcsMCwwLDAsMy44ODksNS40MmExLjc0MiwxLjc0MiwwLDAsMC0uNDEzLTEuMTA4LDEuMzgxLDEuMzgxLDAsMCwwLTEuMDIzLS40MlpNOS4wMTYsNS44YTIuMTMyLDIuMTMyLDAsMCwwLS40NTQtLjA0OSwxLjM1NSwxLjM1NSwwLDAsMC0xLjIxMS42M0w2LjcxNiwxMEg1LjU1OWwuOTEzLTUuMjgzLDEuMSwwLS4xMTcuNmExLjUxMiwxLjUxMiwwLDAsMSwxLjI1LS43LDEuOSwxLjksMCwwLDEsLjQ0NC4wNzNaTTEyLjAwOSwxMGExLjU2NywxLjU2NywwLDAsMS0uMDQ5LS40OTMsMS45NTksMS45NTksMCwwLDEtMS40MTEuNTkxLDEuNjE4LDEuNjE4LDAsMCwxLTEuMTQtLjQ0MiwxLjM2MywxLjM2MywwLDAsMS0uNDIyLTEuMSwxLjYxOCwxLjYxOCwwLDAsMSwuNzIzLTEuMzEzLDMuMTQ2LDMuMTQ2LDAsMCwxLDEuODM2LS40NzlsLjc1Mi4wMS4wNjgtLjM2MWExLjA5LDEuMDksMCwwLDAsMC0uMzU2LjYzNi42MzYsMCwwLDAtLjctLjU0MiwxLjA1MywxLjA1MywwLDAsMC0uNjUyLjE4OC44MTMuODEzLDAsMCwwLS4zNDQuNTNsLTEuMTU3LjAxYTEuNDQ5LDEuNDQ5LDAsMCwxLC4zNDctLjg1NywyLjA1NiwyLjA1NiwwLDAsMSwuODMtLjU3NCwyLjgxLDIuODEsMCwwLDEsMS4wOTQtLjIsMS44NDgsMS44NDgsMCwwLDEsMS4zNDguNTIsMS41NDEsMS41NDEsMCwwLDEsLjQsMS4zbC0uNDA1LDIuNDc2LS4wMzkuNDM5YTEuNTYxLDEuNTYxLDAsMCwwLC4wNzMuNTYybDAsLjA4OFptLTEuMTkxLS44NWExLjI3NiwxLjI3NiwwLDAsMCwuNjc5LS4xNjgsMS43ODgsMS43ODgsMCwwLDAsLjUzMi0uNDYxbC4xODEtMS0uNTUyLDBhMS45MzksMS45MzksMCwwLDAtMS4wNDUuMjQ3LjkuOSwwLDAsMC0uNDQ0LjY3Ni42LjYsMCwwLDAsLjE0NC41MTVBLjcuNywwLDAsMCwxMC44MTgsOS4xNVptMy42MTMtMS44YTQuMDg3LDQuMDg3LDAsMCwxLC40MjctMS40MzEsMi41ODQsMi41ODQsMCwwLDEsLjg0Mi0uOTc5LDEuOTg3LDEuOTg3LDAsMCwxLDEuMTYyLS4zMywxLjU1OSwxLjU1OSwwLDAsMSwxLjMxMy42NGwuMTgxLS41NDIsMS4wNTUsMC0uODc0LDUuMTM3QTIuNDk0LDIuNDk0LDAsMCwxLDE1LjksMTIuMDg1YTIuNDY2LDIuNDY2LDAsMCwxLTEuMDU1LS4yNTQsMi4xOTMsMi4xOTMsMCwwLDEtLjgtLjY0NWwuNjE1LS43YTEuNDgyLDEuNDgyLDAsMCwwLDEuMjExLjY1OSwxLjQxOSwxLjQxOSwwLDAsMCwuOTc0LS4zMSwxLjYxNiwxLjYxNiwwLDAsMCwuNTQ0LS45NGwuMDgzLS4zNzFhMS44NjksMS44NjksMCwwLDEtMS4zODcuNTcxQTEuNDgsMS40OCwwLDAsMSwxNC45LDkuNTM2YTIuNDg0LDIuNDg0LDAsMCwxLS40OTEtMS40ODRBNC44NzksNC44NzksMCwwLDEsMTQuNDMxLDcuMzU0Wm0xLjE0Ny4xYTMuNTcxLDMuNTcxLDAsMCwwLS4wMi41MzcsMS4zOTQsMS4zOTQsMCwwLDAsLjIzNC44Mi43ODYuNzg2LDAsMCwwLC42NC4zMTcsMS4zNjYsMS4zNjYsMCwwLDAsMS4xNTItLjYxTDE4LDYuMTg3YS45NDMuOTQzLDAsMCwwLS45LS42LDEuMjA1LDEuMjA1LDAsMCwwLS45ODYuNDU0LDIuNTQ0LDIuNTQ0LDAsMCwwLS41MjIsMS4zMTNaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0MzYgNzc3KSIgZmlsbD0iIzA1MGMxYSIvPg0KICAgICAgPGcgaWQ9Im1vdXNlIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0MDMgNjkwKSI+DQogICAgICAgIDxnIGlkPSJkcmFnIj4NCiAgICAgICAgICA8cGF0aCBpZD0icjQiIGQ9Ik03LjIsMEgyOC44QTcuMiw3LjIsMCwwLDEsMzYsNy4yVjM2QTE4LDE4LDAsMCwxLDE4LDU0aDBBMTgsMTgsMCwwLDEsMCwzNlY3LjJBNy4yLDcuMiwwLDAsMSw3LjIsMFoiIG9wYWNpdHk9IjAuMDciLz4NCiAgICAgICAgICA8cGF0aCBpZD0icjMiIGQ9Ik03LjIsMEgyOC44QTcuMiw3LjIsMCwwLDEsMzYsNy4yVjM2QTE4LDE4LDAsMCwxLDE4LDU0aDBBMTgsMTgsMCwwLDEsMCwzNlY3LjJBNy4yLDcuMiwwLDAsMSw3LjIsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMwKSIgb3BhY2l0eT0iMC4wNyIvPg0KICAgICAgICAgIDxwYXRoIGlkPSJyMiIgZD0iTTcuMiwwSDI4LjhBNy4yLDcuMiwwLDAsMSwzNiw3LjJWMzZBMTgsMTgsMCwwLDEsMTgsNTRoMEExOCwxOCwwLDAsMSwwLDM2VjcuMkE3LjIsNy4yLDAsMCwxLDcuMiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjApIiBvcGFjaXR5PSIwLjA3Ii8+DQogICAgICAgICAgPHBhdGggaWQ9InIxIiBkPSJNNy4yLDBIMjguOEE3LjIsNy4yLDAsMCwxLDM2LDcuMlYzNkExOCwxOCwwLDAsMSwxOCw1NGgwQTE4LDE4LDAsMCwxLDAsMzZWNy4yQTcuMiw3LjIsMCwwLDEsNy4yLDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMCkiIG9wYWNpdHk9IjAuMDciLz4NCiAgICAgICAgPC9nPg0KICAgICAgICA8ZyBpZD0ic2hhcGUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC05MDQgLTY0MykiPg0KICAgICAgICAgIDxnIHRyYW5zZm9ybT0ibWF0cml4KDEsIDAsIDAsIDEsIDU4MCwgNDI5KSIgZmlsdGVyPSJ1cmwoI2J0bSkiPg0KICAgICAgICAgICAgPHBhdGggaWQ9ImJ0bS04IiBkYXRhLW5hbWU9ImJ0bSIgZD0iTTcuMiwwSDI4LjhBNy4yLDcuMiwwLDAsMSwzNiw3LjJWMzZBMTgsMTgsMCwwLDEsMTgsNTRoMEExOCwxOCwwLDAsMSwwLDM2VjcuMkE3LjIsNy4yLDAsMCwxLDcuMiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzM5IDIxNCkiIGZpbGw9IiMyMTIxMjEiLz4NCiAgICAgICAgICA8L2c+DQogICAgICAgICAgPHBhdGggaWQ9InNpZGUiIGQ9Ik0tNDEwMiwyNzA0YTE3Ljg4MSwxNy44ODEsMCwwLDEtMTIuNzI4LTUuMjcyQTE3Ljg4MiwxNy44ODIsMCwwLDEtNDEyMCwyNjg2di0yOC44YTcuMjA4LDcuMjA4LDAsMCwxLDcuMi03LjJoMjEuNmE3LjIwOCw3LjIwOCwwLDAsMSw3LjIsNy4yVjI2ODZhMTcuODgxLDE3Ljg4MSwwLDAsMS01LjI3MiwxMi43MjhBMTcuODg0LDE3Ljg4NCwwLDAsMS00MTAyLDI3MDRabS0xMC40LTUyYTUuNjA2LDUuNjA2LDAsMCwwLTUuNiw1LjZWMjY4MmExNi4wMTgsMTYuMDE4LDAsMCwwLDE2LDE2LDE2LjAxOCwxNi4wMTgsMCwwLDAsMTYtMTZ2LTI0LjRhNS42MDYsNS42MDYsMCwwLDAtNS42LTUuNloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDUwMzkgLTIwMDcpIiBmaWxsPSJ1cmwoI2xpbmVhci1ncmFkaWVudC03KSIvPg0KICAgICAgICAgIDxwYXRoIGlkPSJ0b3AiIGQ9Ik01LjYsMEgyNi40QTUuNiw1LjYsMCwwLDEsMzIsNS42VjMwQTE2LDE2LDAsMCwxLDE2LDQ2aDBBMTYsMTYsMCwwLDEsMCwzMFY1LjZBNS42LDUuNiwwLDAsMSw1LjYsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDkyMSA2NDUpIiBmaWxsPSJ1cmwoI2xpbmVhci1ncmFkaWVudC04KSIvPg0KICAgICAgICA8L2c+DQogICAgICAgIDxwYXRoIGlkPSJ0ci0zIiBkYXRhLW5hbWU9InRyIiBkPSJNMCwwSDkuNWE1LDUsMCwwLDEsNSw1VjE3YTAsMCwwLDAsMSwwLDBIMGEwLDAsMCwwLDEsMCwwVjBBMCwwLDAsMCwxLDAsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMzLjUgMykiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAuMTUiLz4NCiAgICAgICAgPHBhdGggaWQ9InRsLTMiIGRhdGEtbmFtZT0idGwiIGQ9Ik01LDBoOS41YTAsMCwwLDAsMSwwLDBWMTdhMCwwLDAsMCwxLDAsMEgwYTAsMCwwLDAsMSwwLDBWNUE1LDUsMCwwLDEsNSwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTggMykiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAuMTUiLz4NCiAgICAgICAgPGcgdHJhbnNmb3JtPSJtYXRyaXgoMSwgMCwgMCwgMSwgLTMyNCwgLTIxNCkiIGZpbHRlcj0idXJsKCNzY3JvbGwpIj4NCiAgICAgICAgICA8ZyBpZD0ic2Nyb2xsLTQiIGRhdGEtbmFtZT0ic2Nyb2xsIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzNTQgMjI1KSIgZmlsbD0iI2ZmYjcwMCIgc3Ryb2tlPSIjMzEzMTMxIiBzdHJva2Utd2lkdGg9IjEiPg0KICAgICAgICAgICAgPHJlY3Qgd2lkdGg9IjYiIGhlaWdodD0iMTQiIHN0cm9rZT0ibm9uZSIvPg0KICAgICAgICAgICAgPHJlY3QgeD0iLTAuNSIgeT0iLTAuNSIgd2lkdGg9IjciIGhlaWdodD0iMTUiIGZpbGw9Im5vbmUiLz4NCiAgICAgICAgICA8L2c+DQogICAgICAgIDwvZz4NCiAgICAgIDwvZz4NCiAgICAgIDxwYXRoIGlkPSJvciIgZD0iTS02LjktMi41NDRoLTIuNWwuMTcxLS45NTdoMi41Wk0tMy41LjFBMi40MSwyLjQxLDAsMCwxLTQuNzE5LS4yMzRhMi4xMzIsMi4xMzIsMCwwLDEtLjgxOC0uOTIsMy41MTIsMy41MTIsMCwwLDEtLjMzMi0xLjM3LDYuMyw2LjMsMCwwLDEsLjExLTEuNDI2LDQuOCw0LjgsMCwwLDEsLjUxMy0xLjQ4NywzLjczNywzLjczNywwLDAsMSwuODgxLTEuMSwyLjksMi45LDAsMCwxLDEuOTUzLS42NzRBMi4xOTQsMi4xOTQsMCwwLDEtLjczLTYuNDc5LDMuMDEzLDMuMDEzLDAsMCwxLS4wNDQtNC41NjVhNi4zLDYuMywwLDAsMS0uMTEsMS4zODksNS4wMzUsNS4wMzUsMCwwLDEtLjQ3OSwxLjQ0LDMuNjc2LDMuNjc2LDAsMCwxLS44NDIsMS4xQTIuODgxLDIuODgxLDAsMCwxLTMuNS4xWm0yLjIyMi0zLjg0My4wNDQtLjUxOGEzLjEsMy4xLDAsMCwwLS4wOTMtLjk4NCwxLjI5MSwxLjI5MSwwLDAsMC0uNDEzLS42ODgsMS4xOSwxLjE5LDAsMCwwLS43MzUtLjI1MSwxLjY1MSwxLjY1MSwwLDAsMC0xLjA5MS4zNDcsMi41NDEsMi41NDEsMCwwLDAtLjc3MSwxLjExMyw1LjgzMyw1LjgzMywwLDAsMC0uMzQ0LDEuODc1LDIuMzc4LDIuMzc4LDAsMCwwLC4yNzMsMS40MDYsMS4xMSwxLjExLDAsMCwwLC45NjcuNTMyLDEuNjY5LDEuNjY5LDAsMCwwLDEuMzk0LS42MzVBMy42NiwzLjY2LDAsMCwwLTEuMzI4LTMuNFpNMy41NTUtMi43MzRIMi4yTDEuNzE5LDBILjUxM0wxLjc0OC03LjEwOWwyLjI0MSwwYTIuNTUzLDIuNTUzLDAsMCwxLDEuNzcyLjU1N0ExLjc2OSwxLjc2OSwwLDAsMSw2LjI5NC01LDIuMTI4LDIuMTI4LDAsMCwxLDUuODM1LTMuOCwyLjY3MSwyLjY3MSwwLDAsMSw0LjctMy4wMDlMNS43NDctLjA3M2wwLC4wNzNINC40NjNabS0xLjE5MS0xLDEuMTY3LjAxYTEuNjU4LDEuNjU4LDAsMCwwLDEuMDUyLS4zMywxLjMsMS4zLDAsMCwwLC41LS45LDEuMDA4LDEuMDA4LDAsMCwwLS4yLS44NDcsMS4xLDEuMSwwLDAsMC0uODE1LS4zMTVsLTEuMjg5LDBaTTkuMTg1LTIuNTQ0aC0yLjVMNi44Ni0zLjVoMi41WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzg3IDcyMSkiIGZpbGw9IiMwNTBjMWEiLz4NCiAgICAgIDxnIGlkPSJrZXlzLWVsZXZhdGUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDgpIj4NCiAgICAgICAgPHBhdGggaWQ9InRleHQtZG93biIgZD0iTS0xMi4xMzksMGwxLjIzLTcuMTA5LDEuOTI0LDBhMi42MzMsMi42MzMsMCwwLDEsMS41MzEuNDQyLDIuNDg0LDIuNDg0LDAsMCwxLC45MywxLjIyMSwzLjYzOSwzLjYzOSwwLDAsMSwuMTc2LDEuNzE2TC02LjQtMy4zNEE0LjI2Myw0LjI2MywwLDAsMS03LjA0OC0xLjYsMy40ODEsMy40ODEsMCwwLDEtOC4zNC0uNDIsMy42NDksMy42NDksMCwwLDEtMTAuMDc4LDBabTIuMjY2LTYuMTEzLS44ODksNS4xMjcuNzEzLDBhMi4yMjEsMi4yMjEsMCwwLDAsMS42LS42MTMsMi45NDMsMi45NDMsMCwwLDAsLjgxOC0xLjY5MkE1LjcsNS43LDAsMCwwLTcuNTM0LTQuNThhMS43NDIsMS43NDIsMCwwLDAtLjQxMy0xLjEwOCwxLjM4MSwxLjM4MSwwLDAsMC0xLjAyMy0uNDJabTQuMjg3LDMuNDUyYTMuNDc2LDMuNDc2LDAsMCwxLC40NTctMS40MTEsMi43MDksMi43MDksMCwwLDEsLjk1OS0uOTgxLDIuMzcxLDIuMzcxLDAsMCwxLDEuMy0uMzI3QTIuMDE4LDIuMDE4LDAsMCwxLTEuNy01LjAyYTIuMDA3LDIuMDA3LDAsMCwxLC43Mi45NjJBMy4wNTQsMy4wNTQsMCwwLDEtLjgyLTIuN2EzLjU0MSwzLjU0MSwwLDAsMS0uNDU3LDEuNDg0LDIuNywyLjcsMCwwLDEtLjk2Ny45ODlBMi40LDIuNCwwLDAsMS0zLjU1LjEsMi4wMDksMi4wMDksMCwwLDEtNC43MTQtLjI2MWEyLjAxNCwyLjAxNCwwLDAsMS0uNzItLjk1N0EzLjAxNSwzLjAxNSwwLDAsMS01LjYtMi41NTlabTEuMTM4LjY2OWExLjQsMS40LDAsMCwwLC4yNzEuODIzLjg2Ny44NjcsMCwwLDAsLjY4Ni4zMjUsMS4yMTcsMS4yMTcsMCwwLDAsMS0uNDU5QTIuNDE1LDIuNDE1LDAsMCwwLTEuOTg3LTIuNmwuMDI5LS40NzlhMS42OTEsMS42OTEsMCwwLDAtLjI0OS0uOTgxLjg3NC44NzQsMCwwLDAtLjcyMy0uMzc2QTEuMjY1LDEuMjY1LDAsMCwwLTQuMS0zLjcwNmEyLjcxOCwyLjcxOCwwLDAsMC0uMzI3LDEuMDQ1QTQuMDg4LDQuMDg4LDAsMCwwLTQuNDQ4LTEuOTkyWm04LjkyNi4zNDcsMS40NS0zLjYzOEg3LjA5TDQuNzc1LDBIMy44MjNMMy4zNTktMy42MTMsMS42NSwwSC42OTNMLjIxLTUuMjgzSDEuM0wxLjUtMS43bDEuNjctMy41ODRoLjg3NFpNOC45NS01LjI4OGwtLjExNy42MkEyLjAxNiwyLjAxNiwwLDAsMSwxMC40LTUuMzgxYTEuMjc3LDEuMjc3LDAsMCwxLDEuMS41MywyLjExNSwyLjExNSwwLDAsMSwuMjY0LDEuNDM4TDExLjE5MSwwSDEwLjAzNGwuNTc2LTMuNDI4YTEuNzU0LDEuNzU0LDAsMCwwLDAtLjM5MS42MjMuNjIzLDAsMCwwLS42OTMtLjYsMS40MDcsMS40MDcsMCwwLDAtMS4xNTcuNjQ5TDguMTA1LDBINi45NDhsLjkxMy01LjI4M1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM0NSA3NzcpIiBmaWxsPSIjMDUwYzFhIi8+DQogICAgICAgIDxnIGlkPSJrZXktZSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzI5IDY3NykiPg0KICAgICAgICAgIDxnIHRyYW5zZm9ybT0ibWF0cml4KDEsIDAsIDAsIDEsIC0yNTgsIC0yMDEpIiBmaWx0ZXI9InVybCgja2V5LWJ0bS03KSI+DQogICAgICAgICAgICA8cGF0aCBpZD0ia2V5LWJ0bS0yMiIgZGF0YS1uYW1lPSJrZXktYnRtIiBkPSJNMiwwSDMwYTIuMTc1LDIuMTc1LDAsMCwxLDEuNS42NzNBMi40MDgsMi40MDgsMCwwLDEsMzEuNzY1LDJWMzBBMS42NCwxLjY0LDAsMCwxLDMwLDMxLjc4OWwtMjguMDMxLjE0OWEyLjIsMi4yLDAsMCwxLTEuMzkxLS41NzhBMS42NTYsMS42NTYsMCwwLDEsMCwzMFYyQTIsMiwwLDAsMSwyLDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyNTggMjAxKSIgZmlsbD0iIzRhNGE0YSIvPg0KICAgICAgICAgIDwvZz4NCiAgICAgICAgICA8cGF0aCBpZD0ia2V5LXNpZGUtNyIgZGF0YS1uYW1lPSJrZXktc2lkZSIgZD0iTTExMjk0LTE0MTE5YTEuOTk0LDEuOTk0LDAsMCwxLTEuNTIxLS43bDE1LjEwOS0yMi4xOTQsMTUuNjQ1LTguNjgxYTIsMiwwLDAsMSwuNzY3LDEuNTc0djI4YTIsMiwwLDAsMS0yLDJaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTEyOTIgMTQxNTEpIiBmaWxsPSIjMjEyMTIxIi8+DQogICAgICAgICAgPHBhdGggaWQ9ImtleS10b3AtNyIgZGF0YS1uYW1lPSJrZXktdG9wIiBkPSJNMS45NjQsMEgyNS41MzZBMS45NjQsMS45NjQsMCwwLDEsMjcuNSwxLjk2NFYyNS41MzZBMS45NjQsMS45NjQsMCwwLDEsMjUuNTM2LDI3LjVIMS45NjRBMS45NjQsMS45NjQsMCwwLDEsMCwyNS41MzZWMS45NjRBMS45NjQsMS45NjQsMCwwLDEsMS45NjQsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIgMSkiIGZpbGw9InVybCgjbGluZWFyLWdyYWRpZW50KSIvPg0KICAgICAgICAgIDxwYXRoIGlkPSJlIiBkPSJNMTEuNDI2LDQuMDQ3aDUuNTE2VjUuNDA2SDEyLjc3VjcuODkxaDQuMTcyVjkuMjM0SDEyLjc3djMuNDIyaDQuMTcyVjE0SDExLjQyNloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIgNi41KSIgZmlsbD0iI2ZmZiIvPg0KICAgICAgICA8L2c+DQogICAgICAgIDxwYXRoIGlkPSJ0ZXh0LXVwIiBkPSJNLjU0LTcuMTA5LS4yNjYtMi4zNThBMi43OSwyLjc5LDAsMCwxLTEuMjQtLjU0NywyLjg3MywyLjg3MywwLDAsMS0zLjIuMTA3LDIuMzIxLDIuMzIxLDAsMCwxLTQuODc4LS41MzdhMi4wNTQsMi4wNTQsMCwwLDEtLjU2NC0xLjYzMWwuMDE1LS4xODYuODA2LTQuNzU2aDEuMmwtLjgwNiw0Ljc2MWExLjQwOCwxLjQwOCwwLDAsMCwuMiwxLjA2LDEuMDksMS4wOSwwLDAsMCwuODg5LjQsMS41NTYsMS41NTYsMCwwLDAsMS4xLS4zNTYsMS43NTksMS43NTksMCwwLDAsLjU2Mi0xLjA3OWwuODE1LTQuNzg1Wk01LjQ1Ny0yLjYyMmE0LjM1LDQuMzUsMCwwLDEtLjQyMiwxLjQzNiwyLjQ1LDIuNDUsMCwwLDEtLjgyNS45NzRBMS45MDgsMS45MDgsMCwwLDEsMy4wODguMWExLjY1NywxLjY1NywwLDAsMS0xLjMtLjU4NkwxLjMxNiwyLjAzMUguMTU0bDEuMjctNy4zMTQsMS4wNiwwTDIuNC00Ljc0MWExLjgyOSwxLjgyOSwwLDAsMSwxLjQ0LS42NCwxLjU0OCwxLjU0OCwwLDAsMSwuODc0LjI1NiwxLjU4MiwxLjU4MiwwLDAsMSwuNTY5LjczQTIuOTU5LDIuOTU5LDAsMCwxLDUuNDkxLTMuMzMsNi40OTEsNi40OTEsMCwwLDEsNS40NTctMi42MjJabS0xLjE0My0uMS4wMjQtLjM1NmExLjczLDEuNzMsMCwwLDAtLjIwOC0uOTc3Ljc2MS43NjEsMCwwLDAtLjY2Ny0uMzU2LDEuMzQ3LDEuMzQ3LDAsMCwwLTEuMTMzLjZsLS40MSwyLjM1OGEuOS45LDAsMCwwLC44OTQuNjEsMS4xOCwxLjE4LDAsMCwwLC45NjktLjQ0OUEyLjgxMywyLjgxMywwLDAsMCw0LjMxNC0yLjcyNVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM0NSA3MjEpIiBmaWxsPSIjMDUwYzFhIi8+DQogICAgICAgIDxnIGlkPSJrZXktcSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzI5IDczMSkiPg0KICAgICAgICAgIDxnIHRyYW5zZm9ybT0ibWF0cml4KDEsIDAsIDAsIDEsIC0yNTgsIC0yNTUpIiBmaWx0ZXI9InVybCgja2V5LWJ0bS04KSI+DQogICAgICAgICAgICA8cGF0aCBpZD0ia2V5LWJ0bS0yMyIgZGF0YS1uYW1lPSJrZXktYnRtIiBkPSJNMiwwSDMwYTIuMTc1LDIuMTc1LDAsMCwxLDEuNS42NzNBMi40MDgsMi40MDgsMCwwLDEsMzEuNzY1LDJWMzBBMS42NCwxLjY0LDAsMCwxLDMwLDMxLjc4OWwtMjguMDMxLjE0OWEyLjIsMi4yLDAsMCwxLTEuMzkxLS41NzhBMS42NTYsMS42NTYsMCwwLDEsMCwzMFYyQTIsMiwwLDAsMSwyLDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyNTggMjU1KSIgZmlsbD0iIzRhNGE0YSIvPg0KICAgICAgICAgIDwvZz4NCiAgICAgICAgICA8cGF0aCBpZD0ia2V5LXNpZGUtOCIgZGF0YS1uYW1lPSJrZXktc2lkZSIgZD0iTTExMjk0LTE0MTE5YTEuOTk0LDEuOTk0LDAsMCwxLTEuNTIxLS43bDE1LjEwOS0yMi4xOTQsMTUuNjQ1LTguNjgxYTIsMiwwLDAsMSwuNzY3LDEuNTc0djI4YTIsMiwwLDAsMS0yLDJaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTEyOTIgMTQxNTEpIiBmaWxsPSIjMjEyMTIxIi8+DQogICAgICAgICAgPHBhdGggaWQ9ImtleS10b3AtOCIgZGF0YS1uYW1lPSJrZXktdG9wIiBkPSJNMS45NjQsMEgyNS41MzZBMS45NjQsMS45NjQsMCwwLDEsMjcuNSwxLjk2NFYyNS41MzZBMS45NjQsMS45NjQsMCwwLDEsMjUuNTM2LDI3LjVIMS45NjRBMS45NjQsMS45NjQsMCwwLDEsMCwyNS41MzZWMS45NjRBMS45NjQsMS45NjQsMCwwLDEsMS45NjQsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIgMSkiIGZpbGw9InVybCgjbGluZWFyLWdyYWRpZW50KSIvPg0KICAgICAgICAgIDxwYXRoIGlkPSJxIiBkPSJNMTcuNzA4LDEyLjkxNGwxLjU2MSwxLjdIMTcuNWwtLjg3Mi0uOTM0YTYuMzczLDYuMzczLDAsMCwxLTIuNjkxLjY2LDUuMzQ5LDUuMzQ5LDAsMCwxLTMuODkxLTEuNTY5LDUuMTI5LDUuMTI5LDAsMCwxLTEuNi0zLjgsNC45MTYsNC45MTYsMCwwLDEsMS42MTctMy42OTMsNS40NTQsNS40NTQsMCwwLDEsMy45LTEuNTM4LDUuNDIxLDUuNDIxLDAsMCwxLDMuODU5LDEuNTMsNC44NTcsNC44NTcsMCwwLDEsMS42MTcsMy42NTNBNS4yMSw1LjIxLDAsMCwxLDE3LjcwOCwxMi45MTRaTTE1LjYsMTIuNTgxbC0yLjE4NC0yLjMzOWgxLjc3NGwxLjUzMiwxLjY0MWEzLjg0LDMuODQsMCwwLDAsMS4yNjQtMi44NjcsMy42NjksMy42NjksMCwwLDAtMS4xOC0yLjc3LDQuMDg4LDQuMDg4LDAsMCwwLTIuOTMtMS4xMjEsMy45MDYsMy45MDYsMCwwLDAtMi44MzIsMS4xMzlBMy43MTcsMy43MTcsMCwwLDAsOS44NzksOS4wMjdhMy42NTIsMy42NTIsMCwwLDAsMS4xOTUsMi43NTUsNC4wNzcsNC4wNzcsMCwwLDAsMi45MTIsMS4xMzJBNC43MDUsNC43MDUsMCwwLDAsMTUuNiwxMi41ODFaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyIDYuNSkiIGZpbGw9IiNmZmYiLz4NCiAgICAgICAgPC9nPg0KICAgICAgPC9nPg0KICAgIDwvZz4NCiAgICA8ZyBpZD0ibW91c2UtbW92ZSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEpIj4NCiAgICAgIDxwYXRoIGlkPSJkZXNjcmlwdGlvbi0yIiBkYXRhLW5hbWU9ImRlc2NyaXB0aW9uIiBkPSJNLTIwLjAzNC0yLjczNGgtMS4zNTdMLTIxLjg3LDBoLTEuMjA2bDEuMjM1LTcuMTA5LDIuMjQxLDBhMi41NTMsMi41NTMsMCwwLDEsMS43NzIuNTU3QTEuNzY5LDEuNzY5LDAsMCwxLTE3LjI5NS01LDIuMTI4LDIuMTI4LDAsMCwxLTE3Ljc1NC0zLjhhMi42NzEsMi42NzEsMCwwLDEtMS4xMzguNzk0bDEuMDUsMi45MzYsMCwuMDczaC0xLjI3OVptLTEuMTkxLTEsMS4xNjcuMDFhMS42NTgsMS42NTgsMCwwLDAsMS4wNTItLjMzLDEuMywxLjMsMCwwLDAsLjUtLjksMS4wMDgsMS4wMDgsMCwwLDAtLjItLjg0NywxLjEsMS4xLDAsMCwwLS44MTUtLjMxNWwtMS4yODksMFpNLTE1Ljg1NCwwaC0xLjE1N2wuOTE4LTUuMjgzaDEuMTU3Wm0tLjA3My02LjYzNmEuNjUzLjY1MywwLDAsMSwuMTc2LS40NTkuNjQ0LjY0NCwwLDAsMSwuNDc0LS4yLjYxNi42MTYsMCwwLDEsLjQ3MS4xNzMuNi42LDAsMCwxLC4xODguNDQ3LjYxNy42MTcsMCwwLDEtLjE4My40NTkuNjcxLjY3MSwwLDAsMS0uNDY2LjE5LjYyNi42MjYsMCwwLDEtLjQ2OS0uMTY4QS41ODEuNTgxLDAsMCwxLTE1LjkyOC02LjYzNlpNLTE0LjMtMi42NDZhNC4wODcsNC4wODcsMCwwLDEsLjQyNy0xLjQzMSwyLjU4NCwyLjU4NCwwLDAsMSwuODQyLS45NzksMS45ODcsMS45ODcsMCwwLDEsMS4xNjItLjMzLDEuNTU5LDEuNTU5LDAsMCwxLDEuMzEzLjY0bC4xODEtLjU0MiwxLjA1NSwwTC0xMC4xOS0uMTQ2QTIuNTM4LDIuNTM4LDAsMCwxLTExLjA2MiwxLjVhMi41MjYsMi41MjYsMCwwLDEtMS43NjUuNTgzLDIuNDY2LDIuNDY2LDAsMCwxLTEuMDU1LS4yNTQsMi4xOTMsMi4xOTMsMCwwLDEtLjgtLjY0NWwuNjE1LS43YTEuNDgyLDEuNDgyLDAsMCwwLDEuMjExLjY1OSwxLjQxOSwxLjQxOSwwLDAsMCwuOTc0LS4zMSwxLjYxNiwxLjYxNiwwLDAsMCwuNTQ0LS45NGwuMDgzLS4zNzFBMS44NjksMS44NjksMCwwLDEtMTIuNjQyLjFhMS40OCwxLjQ4LDAsMCwxLTEuMTg5LS41NjIsMi40ODQsMi40ODQsMCwwLDEtLjQ5MS0xLjQ4NEE0Ljg3OSw0Ljg3OSwwLDAsMS0xNC4zLTIuNjQ2Wm0xLjE0Ny4xYTMuNTcxLDMuNTcxLDAsMCwwLS4wMi41MzcsMS4zOTQsMS4zOTQsMCwwLDAsLjIzNC44Mi43ODYuNzg2LDAsMCwwLC42NC4zMTcsMS4zNjYsMS4zNjYsMCwwLDAsMS4xNTItLjYxbC40MTUtMi4zMzRhLjk0My45NDMsMCwwLDAtLjktLjYsMS4yMDUsMS4yMDUsMCwwLDAtLjk4Ni40NTQsMi41NDQsMi41NDQsMCwwLDAtLjUyMiwxLjMxM1pNLTcuMS00LjdhMS45NTMsMS45NTMsMCwwLDEsMS41LS42NzQsMS4yODksMS4yODksMCwwLDEsMS4xMTYuNTMyQTIuMTEzLDIuMTEzLDAsMCwxLTQuMjE5LTMuNEwtNC43ODUsMEgtNS45NDJsLjU3Ni0zLjQxM2ExLjk5NCwxLjk5NCwwLDAsMCwuMDEtLjM5MS42MzMuNjMzLDAsMCwwLS43LS42MSwxLjQyNywxLjQyNywwLDAsMC0xLjE1Mi42MzVMLTcuODcxLDBILTkuMDI4bDEuMy03LjVoMS4xNjJaTS0uOTg2LTYuNTY3bC0uMjI1LDEuMjg0aC45TC0uNDU5LTQuNGgtLjkwOGwtLjUsMi45NTlhMS4wMTIsMS4wMTIsMCwwLDAsMCwuMjJxLjAyOS4zMTcuMzkxLjMzMmEyLjIwNiwyLjIwNiwwLDAsMCwuNDEtLjA0NGwtLjA3OC45MjhhMi42NTMsMi42NTMsMCwwLDEtLjcyOC4xQTEuMDgsMS4wOCwwLDAsMS0yLjc4MS0uMzJhMS40OTMsMS40OTMsMCwwLDEtLjIzNy0xLjA2N0wtMi41MjQtNC40aC0uODQ1bC4xNTYtLjg3OWguODRsLjIyNS0xLjI4NFpNMi4zNzgtMi41NDRoLTIuNUwuMDU0LTMuNWgyLjVabTIuODU2LDEuN2ExLjExMSwxLjExMSwwLDAsMCwuNzM1LS4yNDIsMS4xMDksMS4xMDksMCwwLDAsLjQwOC0uNjU3bDEuMDk0LDBBMS44NywxLjg3LDAsMCwxLDcuMDkyLS44YTIuMiwyLjIsMCwwLDEtLjgzMy42NjlBMi4zMSwyLjMxLDAsMCwxLDUuMi4xLDEuOTksMS45OSwwLDAsMSw0LjA0My0uMjU0YTEuOTQ0LDEuOTQ0LDAsMCwxLS43LS45NDVBMy4wMjMsMy4wMjMsMCwwLDEsMy4yLTIuNTQ0bC4wMTUtLjE3MUEzLjQ1NywzLjQ1NywwLDAsMSwzLjY2LTQuMWEyLjYwOCwyLjYwOCwwLDAsMSwuOTQtLjk1OSwyLjM1NCwyLjM1NCwwLDAsMSwxLjI3OS0uMzE3LDEuODQ4LDEuODQ4LDAsMCwxLDEuMzcyLjU2OSwyLjAwOSwyLjAwOSwwLDAsMSwuNTEzLDEuNDI4SDYuNjhhMS4xODEsMS4xODEsMCwwLDAtLjIyMi0uNzQyLjgxMy44MTMsMCwwLDAtLjY0Mi0uMzA4LDEuMTcyLDEuMTcyLDAsMCwwLTEuMDY5LjU3NiwzLjIxNiwzLjIxNiwwLDAsMC0uNDIsMS42OFE0LjI5Mi0uODY0LDUuMjM0LS44NDVaTTkuMjg3LDBIOC4xM2wxLjMtNy41aDEuMTU3Wm0yLjUyNCwwSDEwLjY1NGwuOTE4LTUuMjgzaDEuMTU3Wm0tLjA3My02LjYzNmEuNjUzLjY1MywwLDAsMSwuMTc2LS40NTkuNjQ0LjY0NCwwLDAsMSwuNDc0LS4yLjYxNi42MTYsMCwwLDEsLjQ3MS4xNzMuNi42LDAsMCwxLC4xODguNDQ3LjYxNy42MTcsMCwwLDEtLjE4My40NTkuNjcxLjY3MSwwLDAsMS0uNDY2LjE5LjYyNi42MjYsMCwwLDEtLjQ2OS0uMTY4QS41ODEuNTgxLDAsMCwxLDExLjczOC02LjYzNlpNMTUuNDEtLjg0NWExLjExMSwxLjExMSwwLDAsMCwuNzM1LS4yNDIsMS4xMDksMS4xMDksMCwwLDAsLjQwOC0uNjU3bDEuMDk0LDBhMS44NywxLjg3LDAsMCwxLS4zNzguOTUyLDIuMiwyLjIsMCwwLDEtLjgzMy42NjlBMi4zMSwyLjMxLDAsMCwxLDE1LjM3Ni4xYTEuOTksMS45OSwwLDAsMS0xLjE1Ny0uMzUyLDEuOTQ0LDEuOTQ0LDAsMCwxLS43LS45NDUsMy4wMjMsMy4wMjMsMCwwLDEtLjE0Ni0xLjM0NWwuMDE1LS4xNzFBMy40NTcsMy40NTcsMCwwLDEsMTMuODM1LTQuMWEyLjYwOCwyLjYwOCwwLDAsMSwuOTQtLjk1OSwyLjM1NCwyLjM1NCwwLDAsMSwxLjI3OS0uMzE3LDEuODQ4LDEuODQ4LDAsMCwxLDEuMzcyLjU2OSwyLjAwOSwyLjAwOSwwLDAsMSwuNTEzLDEuNDI4SDE2Ljg1NWExLjE4MSwxLjE4MSwwLDAsMC0uMjIyLS43NDIuODEzLjgxMywwLDAsMC0uNjQyLS4zMDgsMS4xNzIsMS4xNzIsMCwwLDAtMS4wNjkuNTc2LDMuMjE2LDMuMjE2LDAsMCwwLS40MiwxLjY4UTE0LjQ2OC0uODY0LDE1LjQxLS44NDVabTQuOTI3LTEuNDExLS42NTQuNTgxTDE5LjM5NSwwSDE4LjIzN2wxLjMtNy41aDEuMTU3bC0uNzQyLDQuMjU4LjQwNS0uNDIsMS42OC0xLjYyMWgxLjQ3OUwyMS4xNzItMy4wMjcsMjIuNzE1LDBIMjEuNDZaTS0xNi40MTgsMTBhMS41NjcsMS41NjcsMCwwLDEtLjA0OS0uNDkzLDEuOTU5LDEuOTU5LDAsMCwxLTEuNDExLjU5MSwxLjYxOCwxLjYxOCwwLDAsMS0xLjE0LS40NDIsMS4zNjMsMS4zNjMsMCwwLDEtLjQyMi0xLjEsMS42MTgsMS42MTgsMCwwLDEsLjcyMy0xLjMxMywzLjE0NiwzLjE0NiwwLDAsMSwxLjgzNi0uNDc5bC43NTIuMDEuMDY4LS4zNjFhMS4wOSwxLjA5LDAsMCwwLDAtLjM1Ni42MzYuNjM2LDAsMCwwLS43LS41NDIsMS4wNTMsMS4wNTMsMCwwLDAtLjY1Mi4xODguODEzLjgxMywwLDAsMC0uMzQ0LjUzbC0xLjE1Ny4wMWExLjQ0OSwxLjQ0OSwwLDAsMSwuMzQ3LS44NTcsMi4wNTYsMi4wNTYsMCwwLDEsLjgzLS41NzQsMi44MSwyLjgxLDAsMCwxLDEuMDk0LS4yLDEuODQ4LDEuODQ4LDAsMCwxLDEuMzQ4LjUyLDEuNTQxLDEuNTQxLDAsMCwxLC40LDEuM0wtMTUuMyw4LjkxMWwtLjAzOS40MzlhMS41NjEsMS41NjEsMCwwLDAsLjA3My41NjJsMCwuMDg4Wm0tMS4xOTEtLjg1YTEuMjc2LDEuMjc2LDAsMCwwLC42NzktLjE2OCwxLjc4OCwxLjc4OCwwLDAsMCwuNTMyLS40NjFsLjE4MS0xLS41NTIsMGExLjkzOSwxLjkzOSwwLDAsMC0xLjA0NS4yNDcuOS45LDAsMCwwLS40NDQuNjc2LjYuNiwwLDAsMCwuMTQ0LjUxNUEuNy43LDAsMCwwLTE3LjYxLDkuMTVabTUuMzM3LTQuNDM4LS4xMTcuNjJhMi4wMTYsMi4wMTYsMCwwLDEsMS41NjctLjcxMywxLjI3NywxLjI3NywwLDAsMSwxLjEuNTNBMi4xMTUsMi4xMTUsMCwwLDEtOS40Niw2LjU4N0wtMTAuMDMyLDEwaC0xLjE1N2wuNTc2LTMuNDI4YTEuNzU0LDEuNzU0LDAsMCwwLDAtLjM5MS42MjMuNjIzLDAsMCwwLS42OTMtLjYsMS40MDcsMS40MDcsMCwwLDAtMS4xNTcuNjQ5TC0xMy4xMTgsMTBoLTEuMTU3bC45MTMtNS4yODNabTMuNzExLDIuNjQyYTQuMTg1LDQuMTg1LDAsMCwxLC40MzktMS40NjUsMi40OCwyLjQ4LDAsMCwxLC44NDUtLjk2OUExLjk1MSwxLjk1MSwwLDAsMS02LjE2LDQuNjE0YTEuNTYxLDEuNTYxLDAsMCwxLDEuMjYuNkwtNC4zOTIsMi41SC0zLjIzbC0xLjMsNy41SC01LjU2OWwuMDc4LS41NDdhMS44NDEsMS44NDEsMCwwLDEtMS40NDUuNjQ5LDEuNDUzLDEuNDUzLDAsMCwxLTEuMTc5LS41NjksMi40ODQsMi40ODQsMCwwLDEtLjQ3Ni0xLjQ4NywzLjk0OCwzLjk0OCwwLDAsMSwuMDE1LS41OTFabTEuMTIzLjQ1NGExLjYyNywxLjYyNywwLDAsMCwuMTg4Ljk2Mi43NTEuNzUxLDAsMCwwLC42NjIuMzY2LDEuMzU5LDEuMzU5LDAsMCwwLDEuMTU3LS42NDlsLjQtMi4yNzFhLjkuOSwwLDAsMC0uODg5LS42MywxLjE4OSwxLjE4OSwwLDAsMC0xLjA2OS41ODZBMy4xMjMsMy4xMjMsMCwwLDAtNy40MzksNy44MDhaTS0uNzE1LDEwLC41MTUsMi44OTFsMS45MjQsMGEyLjYzMywyLjYzMywwLDAsMSwxLjUzMS40NDJBMi40ODQsMi40ODQsMCwwLDEsNC45LDQuNTU4YTMuNjM5LDMuNjM5LDAsMCwxLC4xNzYsMS43MTZsLS4wNTQuMzg2QTQuMjYzLDQuMjYzLDAsMCwxLDQuMzc1LDguNCwzLjQ4MSwzLjQ4MSwwLDAsMSwzLjA4Myw5LjU4LDMuNjQ5LDMuNjQ5LDAsMCwxLDEuMzQ1LDEwWk0xLjU1LDMuODg3LjY2Miw5LjAxNGwuNzEzLDBhMi4yMjEsMi4yMjEsMCwwLDAsMS42LS42MTNBMi45NDMsMi45NDMsMCwwLDAsMy44LDYuNzE0LDUuNyw1LjcsMCwwLDAsMy44ODksNS40MmExLjc0MiwxLjc0MiwwLDAsMC0uNDEzLTEuMTA4LDEuMzgxLDEuMzgxLDAsMCwwLTEuMDIzLS40MlpNOS4wMTYsNS44YTIuMTMyLDIuMTMyLDAsMCwwLS40NTQtLjA0OSwxLjM1NSwxLjM1NSwwLDAsMC0xLjIxMS42M0w2LjcxNiwxMEg1LjU1OWwuOTEzLTUuMjgzLDEuMSwwLS4xMTcuNmExLjUxMiwxLjUxMiwwLDAsMSwxLjI1LS43LDEuOSwxLjksMCwwLDEsLjQ0NC4wNzNaTTEyLjAwOSwxMGExLjU2NywxLjU2NywwLDAsMS0uMDQ5LS40OTMsMS45NTksMS45NTksMCwwLDEtMS40MTEuNTkxLDEuNjE4LDEuNjE4LDAsMCwxLTEuMTQtLjQ0MiwxLjM2MywxLjM2MywwLDAsMS0uNDIyLTEuMSwxLjYxOCwxLjYxOCwwLDAsMSwuNzIzLTEuMzEzLDMuMTQ2LDMuMTQ2LDAsMCwxLDEuODM2LS40NzlsLjc1Mi4wMS4wNjgtLjM2MWExLjA5LDEuMDksMCwwLDAsMC0uMzU2LjYzNi42MzYsMCwwLDAtLjctLjU0MiwxLjA1MywxLjA1MywwLDAsMC0uNjUyLjE4OC44MTMuODEzLDAsMCwwLS4zNDQuNTNsLTEuMTU3LjAxYTEuNDQ5LDEuNDQ5LDAsMCwxLC4zNDctLjg1NywyLjA1NiwyLjA1NiwwLDAsMSwuODMtLjU3NCwyLjgxLDIuODEsMCwwLDEsMS4wOTQtLjIsMS44NDgsMS44NDgsMCwwLDEsMS4zNDguNTIsMS41NDEsMS41NDEsMCwwLDEsLjQsMS4zbC0uNDA1LDIuNDc2LS4wMzkuNDM5YTEuNTYxLDEuNTYxLDAsMCwwLC4wNzMuNTYybDAsLjA4OFptLTEuMTkxLS44NWExLjI3NiwxLjI3NiwwLDAsMCwuNjc5LS4xNjgsMS43ODgsMS43ODgsMCwwLDAsLjUzMi0uNDYxbC4xODEtMS0uNTUyLDBhMS45MzksMS45MzksMCwwLDAtMS4wNDUuMjQ3LjkuOSwwLDAsMC0uNDQ0LjY3Ni42LjYsMCwwLDAsLjE0NC41MTVBLjcuNywwLDAsMCwxMC44MTgsOS4xNVptMy42MTMtMS44YTQuMDg3LDQuMDg3LDAsMCwxLC40MjctMS40MzEsMi41ODQsMi41ODQsMCwwLDEsLjg0Mi0uOTc5LDEuOTg3LDEuOTg3LDAsMCwxLDEuMTYyLS4zMywxLjU1OSwxLjU1OSwwLDAsMSwxLjMxMy42NGwuMTgxLS41NDIsMS4wNTUsMC0uODc0LDUuMTM3QTIuNDk0LDIuNDk0LDAsMCwxLDE1LjksMTIuMDg1YTIuNDY2LDIuNDY2LDAsMCwxLTEuMDU1LS4yNTQsMi4xOTMsMi4xOTMsMCwwLDEtLjgtLjY0NWwuNjE1LS43YTEuNDgyLDEuNDgyLDAsMCwwLDEuMjExLjY1OSwxLjQxOSwxLjQxOSwwLDAsMCwuOTc0LS4zMSwxLjYxNiwxLjYxNiwwLDAsMCwuNTQ0LS45NGwuMDgzLS4zNzFhMS44NjksMS44NjksMCwwLDEtMS4zODcuNTcxQTEuNDgsMS40OCwwLDAsMSwxNC45LDkuNTM2YTIuNDg0LDIuNDg0LDAsMCwxLS40OTEtMS40ODRBNC44NzksNC44NzksMCwwLDEsMTQuNDMxLDcuMzU0Wm0xLjE0Ny4xYTMuNTcxLDMuNTcxLDAsMCwwLS4wMi41MzcsMS4zOTQsMS4zOTQsMCwwLDAsLjIzNC44Mi43ODYuNzg2LDAsMCwwLC42NC4zMTcsMS4zNjYsMS4zNjYsMCwwLDAsMS4xNTItLjYxTDE4LDYuMTg3YS45NDMuOTQzLDAsMCwwLS45LS42LDEuMjA1LDEuMjA1LDAsMCwwLS45ODYuNDU0LDIuNTQ0LDIuNTQ0LDAsMCwwLS41MjIsMS4zMTNaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyNzQgNzc3KSIgZmlsbD0iIzA1MGMxYSIvPg0KICAgICAgPGcgaWQ9Im1vdXNlLTIiIGRhdGEtbmFtZT0ibW91c2UiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI0MSA2OTApIj4NCiAgICAgICAgPGcgaWQ9ImRyYWctMiIgZGF0YS1uYW1lPSJkcmFnIj4NCiAgICAgICAgICA8cGF0aCBpZD0icjQtMiIgZGF0YS1uYW1lPSJyNCIgZD0iTTcuMiwwSDI4LjhBNy4yLDcuMiwwLDAsMSwzNiw3LjJWMzZBMTgsMTgsMCwwLDEsMTgsNTRoMEExOCwxOCwwLDAsMSwwLDM2VjcuMkE3LjIsNy4yLDAsMCwxLDcuMiwwWiIgb3BhY2l0eT0iMC4wNyIvPg0KICAgICAgICAgIDxwYXRoIGlkPSJyMy0yIiBkYXRhLW5hbWU9InIzIiBkPSJNNy4yLDBIMjguOEE3LjIsNy4yLDAsMCwxLDM2LDcuMlYzNkExOCwxOCwwLDAsMSwxOCw1NGgwQTE4LDE4LDAsMCwxLDAsMzZWNy4yQTcuMiw3LjIsMCwwLDEsNy4yLDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMCkiIG9wYWNpdHk9IjAuMDciLz4NCiAgICAgICAgICA8cGF0aCBpZD0icjItMiIgZGF0YS1uYW1lPSJyMiIgZD0iTTcuMiwwSDI4LjhBNy4yLDcuMiwwLDAsMSwzNiw3LjJWMzZBMTgsMTgsMCwwLDEsMTgsNTRoMEExOCwxOCwwLDAsMSwwLDM2VjcuMkE3LjIsNy4yLDAsMCwxLDcuMiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjApIiBvcGFjaXR5PSIwLjA3Ii8+DQogICAgICAgICAgPHBhdGggaWQ9InIxLTIiIGRhdGEtbmFtZT0icjEiIGQ9Ik03LjIsMEgyOC44QTcuMiw3LjIsMCwwLDEsMzYsNy4yVjM2QTE4LDE4LDAsMCwxLDE4LDU0aDBBMTgsMTgsMCwwLDEsMCwzNlY3LjJBNy4yLDcuMiwwLDAsMSw3LjIsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEwKSIgb3BhY2l0eT0iMC4wNyIvPg0KICAgICAgICA8L2c+DQogICAgICAgIDxnIGlkPSJzaGFwZS0yIiBkYXRhLW5hbWU9InNoYXBlIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtOTA0IC02NDMpIj4NCiAgICAgICAgICA8ZyB0cmFuc2Zvcm09Im1hdHJpeCgxLCAwLCAwLCAxLCA3NDQsIDQyOSkiIGZpbHRlcj0idXJsKCNidG0tMikiPg0KICAgICAgICAgICAgPHBhdGggaWQ9ImJ0bS05IiBkYXRhLW5hbWU9ImJ0bSIgZD0iTTcuMiwwSDI4LjhBNy4yLDcuMiwwLDAsMSwzNiw3LjJWMzZBMTgsMTgsMCwwLDEsMTgsNTRoMEExOCwxOCwwLDAsMSwwLDM2VjcuMkE3LjIsNy4yLDAsMCwxLDcuMiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTc1IDIxNCkiIGZpbGw9IiMyMTIxMjEiLz4NCiAgICAgICAgICA8L2c+DQogICAgICAgICAgPHBhdGggaWQ9InNpZGUtMiIgZGF0YS1uYW1lPSJzaWRlIiBkPSJNLTQxMDIsMjcwNGExNy44ODEsMTcuODgxLDAsMCwxLTEyLjcyOC01LjI3MkExNy44ODIsMTcuODgyLDAsMCwxLTQxMjAsMjY4NnYtMjguOGE3LjIwOCw3LjIwOCwwLDAsMSw3LjItNy4yaDIxLjZhNy4yMDgsNy4yMDgsMCwwLDEsNy4yLDcuMlYyNjg2YTE3Ljg4MSwxNy44ODEsMCwwLDEtNS4yNzIsMTIuNzI4QTE3Ljg4NCwxNy44ODQsMCwwLDEtNDEwMiwyNzA0Wm0tMTAuNC01MmE1LjYwNiw1LjYwNiwwLDAsMC01LjYsNS42VjI2ODJhMTYuMDE4LDE2LjAxOCwwLDAsMCwxNiwxNiwxNi4wMTgsMTYuMDE4LDAsMCwwLDE2LTE2di0yNC40YTUuNjA2LDUuNjA2LDAsMCwwLTUuNi01LjZaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1MDM5IC0yMDA3KSIgZmlsbD0idXJsKCNsaW5lYXItZ3JhZGllbnQtNykiLz4NCiAgICAgICAgICA8cGF0aCBpZD0idG9wLTIiIGRhdGEtbmFtZT0idG9wIiBkPSJNNS42LDBIMjYuNEE1LjYsNS42LDAsMCwxLDMyLDUuNlYzMEExNiwxNiwwLDAsMSwxNiw0NmgwQTE2LDE2LDAsMCwxLDAsMzBWNS42QTUuNiw1LjYsMCwwLDEsNS42LDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg5MjEgNjQ1KSIgZmlsbD0idXJsKCNsaW5lYXItZ3JhZGllbnQtOCkiLz4NCiAgICAgICAgPC9nPg0KICAgICAgICA8ZyB0cmFuc2Zvcm09Im1hdHJpeCgxLCAwLCAwLCAxLCAtMTYwLCAtMjE0KSIgZmlsdGVyPSJ1cmwoI3RyKSI+DQogICAgICAgICAgPHBhdGggaWQ9InRyLTQiIGRhdGEtbmFtZT0idHIiIGQ9Ik0wLDBIOS41YTUsNSwwLDAsMSw1LDVWMTdhMCwwLDAsMCwxLDAsMEgwYTAsMCwwLDAsMSwwLDBWMEEwLDAsMCwwLDEsMCwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTkzLjUgMjE3KSIgZmlsbD0iI2ZmYjcwMCIvPg0KICAgICAgICA8L2c+DQogICAgICAgIDxwYXRoIGlkPSJ0bC00IiBkYXRhLW5hbWU9InRsIiBkPSJNNSwwaDkuNWEwLDAsMCwwLDEsMCwwVjE3YTAsMCwwLDAsMSwwLDBIMGEwLDAsMCwwLDEsMCwwVjVBNSw1LDAsMCwxLDUsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE4IDMpIiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIwLjE1Ii8+DQogICAgICAgIDxnIGlkPSJzY3JvbGwtNSIgZGF0YS1uYW1lPSJzY3JvbGwiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMwIDExKSIgZmlsbD0iIzRkNGQ0ZCIgc3Ryb2tlPSIjMzEzMTMxIiBzdHJva2Utd2lkdGg9IjEiPg0KICAgICAgICAgIDxyZWN0IHdpZHRoPSI2IiBoZWlnaHQ9IjE0IiBzdHJva2U9Im5vbmUiLz4NCiAgICAgICAgICA8cmVjdCB4PSItMC41IiB5PSItMC41IiB3aWR0aD0iNyIgaGVpZ2h0PSIxNSIgZmlsbD0ibm9uZSIvPg0KICAgICAgICA8L2c+DQogICAgICA8L2c+DQogICAgPC9nPg0KICAgIDxwYXRoIGlkPSJvci0yIiBkYXRhLW5hbWU9Im9yIiBkPSJNLTYuOS0yLjU0NGgtMi41bC4xNzEtLjk1N2gyLjVaTS0zLjUuMUEyLjQxLDIuNDEsMCwwLDEtNC43MTktLjIzNGEyLjEzMiwyLjEzMiwwLDAsMS0uODE4LS45MiwzLjUxMiwzLjUxMiwwLDAsMS0uMzMyLTEuMzcsNi4zLDYuMywwLDAsMSwuMTEtMS40MjYsNC44LDQuOCwwLDAsMSwuNTEzLTEuNDg3LDMuNzM3LDMuNzM3LDAsMCwxLC44ODEtMS4xLDIuOSwyLjksMCwwLDEsMS45NTMtLjY3NEEyLjE5NCwyLjE5NCwwLDAsMS0uNzMtNi40NzksMy4wMTMsMy4wMTMsMCwwLDEtLjA0NC00LjU2NWE2LjMsNi4zLDAsMCwxLS4xMSwxLjM4OSw1LjAzNSw1LjAzNSwwLDAsMS0uNDc5LDEuNDQsMy42NzYsMy42NzYsMCwwLDEtLjg0MiwxLjFBMi44ODEsMi44ODEsMCwwLDEtMy41LjFabTIuMjIyLTMuODQzLjA0NC0uNTE4YTMuMSwzLjEsMCwwLDAtLjA5My0uOTg0LDEuMjkxLDEuMjkxLDAsMCwwLS40MTMtLjY4OCwxLjE5LDEuMTksMCwwLDAtLjczNS0uMjUxLDEuNjUxLDEuNjUxLDAsMCwwLTEuMDkxLjM0NywyLjU0MSwyLjU0MSwwLDAsMC0uNzcxLDEuMTEzLDUuODMzLDUuODMzLDAsMCwwLS4zNDQsMS44NzUsMi4zNzgsMi4zNzgsMCwwLDAsLjI3MywxLjQwNiwxLjExLDEuMTEsMCwwLDAsLjk2Ny41MzIsMS42NjksMS42NjksMCwwLDAsMS4zOTQtLjYzNUEzLjY2LDMuNjYsMCwwLDAtMS4zMjgtMy40Wk0zLjU1NS0yLjczNEgyLjJMMS43MTksMEguNTEzTDEuNzQ4LTcuMTA5bDIuMjQxLDBhMi41NTMsMi41NTMsMCwwLDEsMS43NzIuNTU3QTEuNzY5LDEuNzY5LDAsMCwxLDYuMjk0LTUsMi4xMjgsMi4xMjgsMCwwLDEsNS44MzUtMy44LDIuNjcxLDIuNjcxLDAsMCwxLDQuNy0zLjAwOUw1Ljc0Ny0uMDczbDAsLjA3M0g0LjQ2M1ptLTEuMTkxLTEsMS4xNjcuMDFhMS42NTgsMS42NTgsMCwwLDAsMS4wNTItLjMzLDEuMywxLjMsMCwwLDAsLjUtLjksMS4wMDgsMS4wMDgsMCwwLDAtLjItLjg0NywxLjEsMS4xLDAsMCwwLS44MTUtLjMxNWwtMS4yODksMFpNOS4xODUtMi41NDRoLTIuNUw2Ljg2LTMuNWgyLjVaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMjQgNzIxKSIgZmlsbD0iIzA1MGMxYSIvPg0KICAgIDxnIGlkPSJrZXlzLXdhc2QiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDUpIj4NCiAgICAgIDxwYXRoIGlkPSJ0ZXh0LWwiIGQ9Ik0tNy4wOS0uOTg2aDMuMTM1TC00LjEzMSwwSC04LjQ2N2wxLjIzNS03LjEwOWgxLjIwNlpNLS44ODkuMUEyLjIxMywyLjIxMywwLDAsMS0yLjA4My0uMjQ5YTEuOTcyLDEuOTcyLDAsMCwxLS43NDctLjkwOCwyLjcsMi43LDAsMCwxLS4xODMtMS4yODRsLjAxNS0uMmEzLjUzNiwzLjUzNiwwLDAsMSwuNDcxLTEuNDQ4LDIuNjg5LDIuNjg5LDAsMCwxLC45NTUtLjk3NCwyLjMyMSwyLjMyMSwwLDAsMSwxLjI0LS4zMTcsMS43MzEsMS43MzEsMCwwLDEsMS40ODcuNzM4LDIuNzExLDIuNzExLDAsMCwxLC4zNzQsMS44NzNsLS4wNjguNTA5SC0xLjg2NWExLjQzNSwxLjQzNSwwLDAsMCwuMjU0LDEuMDEyLDEuMDA2LDEuMDA2LDAsMCwwLC44Mi4zOTRBMS43OCwxLjc4LDAsMCwwLC41ODYtMS41bC41ODYuNjE1QTIuMjI3LDIuMjI3LDAsMCwxLC4zLS4xNTQsMi42LDIuNiwwLDAsMS0uODg5LjFaTS0uNC00LjQzNHEtLjkxOC0uMDI5LTEuMzc3LDEuM2wyLjE5MiwwLC4wMi0uMWExLjUzMiwxLjUzMiwwLDAsMCwwLS40MzkuOS45LDAsMCwwLS4yNzMtLjU0N0EuODY2Ljg2NiwwLDAsMC0uNC00LjQzNFpNMi4zNzgsMGwuNzY3LTQuNEgyLjM1OGwuMTU2LS44NzlIMy4zbC4wNzgtLjU2NmEyLjExMSwyLjExMSwwLDAsMSwuNjYyLTEuMywxLjk1NCwxLjk1NCwwLDAsMSwxLjM3OS0uNDY5LDMuNzQ2LDMuNzQ2LDAsMCwxLC42ODguMWwtLjEyNy45MjhhMS45NTUsMS45NTUsMCwwLDAtLjQzNS0uMDQ5Ljk3OC45NzgsMCwwLDAtLjY3OS4yMjUsMS4wNiwxLjA2LDAsMCwwLS4zMzcuNjM1bC0uMDczLjVINS41TDUuMzQyLTQuNEg0LjNMMy41MzUsMFpNOC4wNTItNi41NjcsNy44MjctNS4yODNoLjlMOC41NzktNC40SDcuNjcxbC0uNSwyLjk1OWExLjAxMiwxLjAxMiwwLDAsMCwwLC4yMnEuMDI5LjMxNy4zOTEuMzMyYTIuMjA2LDIuMjA2LDAsMCwwLC40MS0uMDQ0TDcuODkxLS4wMWEyLjY1MywyLjY1MywwLDAsMS0uNzI4LjFBMS4wOCwxLjA4LDAsMCwxLDYuMjU3LS4zMmExLjQ5MywxLjQ5MywwLDAsMS0uMjM3LTEuMDY3TDYuNTE0LTQuNEg1LjY2OWwuMTU2LS44NzloLjg0TDYuODktNi41NjdaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMTEgNzc3KSIgZmlsbD0iIzA1MGMxYSIvPg0KICAgICAgPGcgaWQ9ImtleS1kIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNjkgNzMxKSI+DQogICAgICAgIDxnIHRyYW5zZm9ybT0ibWF0cml4KDEsIDAsIDAsIDEsIC05NCwgLTI1NSkiIGZpbHRlcj0idXJsKCNrZXktYnRtLTkpIj4NCiAgICAgICAgICA8cGF0aCBpZD0ia2V5LWJ0bS0yNCIgZGF0YS1uYW1lPSJrZXktYnRtIiBkPSJNMiwwSDMwYTIuMTc1LDIuMTc1LDAsMCwxLDEuNS42NzNBMi40MDgsMi40MDgsMCwwLDEsMzEuNzY1LDJWMzBBMS42NCwxLjY0LDAsMCwxLDMwLDMxLjc4OWwtMjguMDMxLjE0OWEyLjIsMi4yLDAsMCwxLTEuMzkxLS41NzhBMS42NTYsMS42NTYsMCwwLDEsMCwzMFYyQTIsMiwwLDAsMSwyLDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg5NCAyNTUpIiBmaWxsPSIjNGE0YTRhIi8+DQogICAgICAgIDwvZz4NCiAgICAgICAgPHBhdGggaWQ9ImtleS1zaWRlLTkiIGRhdGEtbmFtZT0ia2V5LXNpZGUiIGQ9Ik0xMTI5NC0xNDExOWExLjk5NCwxLjk5NCwwLDAsMS0xLjUyMS0uN2wxNS4xMDktMjIuMTk0LDE1LjY0NS04LjY4MWEyLDIsMCwwLDEsLjc2NywxLjU3NHYyOGEyLDIsMCwwLDEtMiwyWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTExMjkyIDE0MTUxKSIgZmlsbD0iIzIxMjEyMSIvPg0KICAgICAgICA8cGF0aCBpZD0ia2V5LXRvcC05IiBkYXRhLW5hbWU9ImtleS10b3AiIGQ9Ik0xLjk2NCwwSDI1LjUzNkExLjk2NCwxLjk2NCwwLDAsMSwyNy41LDEuOTY0VjI1LjUzNkExLjk2NCwxLjk2NCwwLDAsMSwyNS41MzYsMjcuNUgxLjk2NEExLjk2NCwxLjk2NCwwLDAsMSwwLDI1LjUzNlYxLjk2NEExLjk2NCwxLjk2NCwwLDAsMSwxLjk2NCwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMiAxKSIgZmlsbD0idXJsKCNsaW5lYXItZ3JhZGllbnQpIi8+DQogICAgICAgIDxwYXRoIGlkPSJkIiBkPSJNMTAuMjIzLDQuMDQ3aDIuNDE0QTUuNTMxLDUuNTMxLDAsMCwxLDE2LjksNS41NjNhNC45NjEsNC45NjEsMCwwLDEsMS40LDMuNDYxLDQuODY4LDQuODY4LDAsMCwxLTEuNDQ1LDMuNDY5QTUuNTU0LDUuNTU0LDAsMCwxLDEyLjY1MiwxNGgtMi40M1ptMS4zNTksMS4zMjh2Ny4yODFoLjA3OGExNC4wNDYsMTQuMDQ2LDAsMCwwLDIuMjgxLS4xMzcsMy43ODYsMy43ODYsMCwwLDAsMS40NTMtLjZBMy4zMzIsMy4zMzIsMCwwLDAsMTYuNDg4LDEwLjdhMy41LDMuNSwwLDAsMCwuNDA2LTEuNjc2LDMuNTQ5LDMuNTQ5LDAsMCwwLS42NDgtMi4wNzhBMy4yLDMuMiwwLDAsMCwxNC43LDUuN2E3LjQ1Myw3LjQ1MywwLDAsMC0yLjQyNi0uMzJaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyIDYuNSkiIGZpbGw9IiNmZmYiLz4NCiAgICAgIDwvZz4NCiAgICAgIDxwYXRoIGlkPSJ0ZXh0LWIiIGQ9Ik0tMTAuNjYyLDBsMS4yMzUtNy4xMDksMi4xODMsMGEyLjYyLDIuNjIsMCwwLDEsMS43MzEuNUExLjU0MiwxLjU0MiwwLDAsMS01LTUuMjI5LDEuODYxLDEuODYxLDAsMCwxLTYuMjY3LTMuNjcyYTEuMjQ1LDEuMjQ1LDAsMCwxLC42NzkuNTcxLDEuNzM5LDEuNzM5LDAsMCwxLC4yMDUuOTkxQTIuMDU4LDIuMDU4LDAsMCwxLTYuMTY3LS41NjYsMi45NTIsMi45NTIsMCwwLDEtOC4wNTQsMFpNLTguOS0zLjIwOC05LjI4NS0uOTg2bDEuMjY1LDBhMS41NjQsMS41NjQsMCwwLDAsLjk3Mi0uMywxLjIsMS4yLDAsMCwwLC40NzQtLjgzQTEuMDE5LDEuMDE5LDAsMCwwLTYuNzI2LTIuOWEuOTEyLjkxMiwwLDAsMC0uNzI4LS4zWm0uMTU2LS45MDgsMS4xMDgsMGExLjU3MiwxLjU3MiwwLDAsMCwuOTcyLS4yODMsMS4xMTcsMS4xMTcsMCwwLDAsLjQ0NC0uNzY3cS4xMjItLjkxMy0uOTIzLS45NDdsLTEuMjU1LDBaTS0xLjQ2NywwYTEuNTY3LDEuNTY3LDAsMCwxLS4wNDktLjQ5M0ExLjk1OSwxLjk1OSwwLDAsMS0yLjkyNy4xYTEuNjE4LDEuNjE4LDAsMCwxLTEuMTQtLjQ0MiwxLjM2MywxLjM2MywwLDAsMS0uNDIyLTEuMSwxLjYxOCwxLjYxOCwwLDAsMSwuNzIzLTEuMzEzLDMuMTQ2LDMuMTQ2LDAsMCwxLDEuODM2LS40NzlsLjc1Mi4wMS4wNjgtLjM2MWExLjA5LDEuMDksMCwwLDAsMC0uMzU2LjYzNi42MzYsMCwwLDAtLjctLjU0MiwxLjA1MywxLjA1MywwLDAsMC0uNjUyLjE4OC44MTMuODEzLDAsMCwwLS4zNDQuNTNsLTEuMTU3LjAxYTEuNDQ5LDEuNDQ5LDAsMCwxLC4zNDctLjg1NywyLjA1NiwyLjA1NiwwLDAsMSwuODMtLjU3NCwyLjgxLDIuODEsMCwwLDEsMS4wOTQtLjIsMS44NDgsMS44NDgsMCwwLDEsMS4zNDguNTIsMS41NDEsMS41NDEsMCwwLDEsLjQsMS4zTC0uMzQ5LTEuMDg5bC0uMDM5LjQzOWExLjU2MSwxLjU2MSwwLDAsMCwuMDczLjU2MkwtLjMyLDBaTS0yLjY1OS0uODVhMS4yNzYsMS4yNzYsMCwwLDAsLjY3OS0uMTY4LDEuNzg4LDEuNzg4LDAsMCwwLC41MzItLjQ2MWwuMTgxLTEtLjU1MiwwYTEuOTM5LDEuOTM5LDAsMCwwLTEuMDQ1LjI0Ny45LjksMCwwLDAtLjQ0NC42NzYuNi42LDAsMCwwLC4xNDQuNTE1QS43LjcsMCwwLDAtMi42NTktLjg1Wk0zLS44NDVhMS4xMTEsMS4xMTEsMCwwLDAsLjczNS0uMjQyLDEuMTA5LDEuMTA5LDAsMCwwLC40MDgtLjY1N2wxLjA5NCwwQTEuODcsMS44NywwLDAsMSw0Ljg1NC0uOGEyLjIsMi4yLDAsMCwxLS44MzMuNjY5QTIuMzEsMi4zMSwwLDAsMSwyLjk2MS4xLDEuOTksMS45OSwwLDAsMSwxLjgtLjI1NGExLjk0NCwxLjk0NCwwLDAsMS0uNy0uOTQ1QTMuMDIzLDMuMDIzLDAsMCwxLC45NTktMi41NDRsLjAxNS0uMTcxQTMuNDU3LDMuNDU3LDAsMCwxLDEuNDIxLTQuMWEyLjYwOCwyLjYwOCwwLDAsMSwuOTQtLjk1OUEyLjM1NCwyLjM1NCwwLDAsMSwzLjY0LTUuMzgxYTEuODQ4LDEuODQ4LDAsMCwxLDEuMzcyLjU2OSwyLjAwOSwyLjAwOSwwLDAsMSwuNTEzLDEuNDI4SDQuNDQxYTEuMTgxLDEuMTgxLDAsMCwwLS4yMjItLjc0Mi44MTMuODEzLDAsMCwwLS42NDItLjMwOCwxLjE3MiwxLjE3MiwwLDAsMC0xLjA2OS41NzYsMy4yMTYsMy4yMTYsMCwwLDAtLjQyLDEuNjhRMi4wNTMtLjg2NCwzLS44NDVaTTcuOTIyLTIuMjU2bC0uNjU0LjU4MUw2Ljk4LDBINS44MjNsMS4zLTcuNUg4LjI3OUw3LjUzNy0zLjI0MmwuNDA1LS40MiwxLjY4LTEuNjIxSDExLjFMOC43NTctMy4wMjcsMTAuMywwSDkuMDQ1WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTQ4IDc3NykiIGZpbGw9IiMwNTBjMWEiLz4NCiAgICAgIDxnIGlkPSJrZXktcyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTMyIDczMSkiPg0KICAgICAgICA8ZyB0cmFuc2Zvcm09Im1hdHJpeCgxLCAwLCAwLCAxLCAtNTcsIC0yNTUpIiBmaWx0ZXI9InVybCgja2V5LWJ0bS0xMCkiPg0KICAgICAgICAgIDxwYXRoIGlkPSJrZXktYnRtLTI1IiBkYXRhLW5hbWU9ImtleS1idG0iIGQ9Ik0yLDBIMzBhMi4xNzUsMi4xNzUsMCwwLDEsMS41LjY3M0EyLjQwOCwyLjQwOCwwLDAsMSwzMS43NjUsMlYzMEExLjY0LDEuNjQsMCwwLDEsMzAsMzEuNzg5bC0yOC4wMzEuMTQ5YTIuMiwyLjIsMCwwLDEtMS4zOTEtLjU3OEExLjY1NiwxLjY1NiwwLDAsMSwwLDMwVjJBMiwyLDAsMCwxLDIsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDU3IDI1NSkiIGZpbGw9IiM0YTRhNGEiLz4NCiAgICAgICAgPC9nPg0KICAgICAgICA8cGF0aCBpZD0ia2V5LXNpZGUtMTAiIGRhdGEtbmFtZT0ia2V5LXNpZGUiIGQ9Ik0xMTI5NC0xNDExOWExLjk5NCwxLjk5NCwwLDAsMS0xLjUyMS0uN2wxNS4xMDktMjIuMTk0LDE1LjY0NS04LjY4MWEyLDIsMCwwLDEsLjc2NywxLjU3NHYyOGEyLDIsMCwwLDEtMiwyWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTExMjkyIDE0MTUxKSIgZmlsbD0iIzIxMjEyMSIvPg0KICAgICAgICA8cGF0aCBpZD0ia2V5LXRvcC0xMCIgZGF0YS1uYW1lPSJrZXktdG9wIiBkPSJNMS45NjQsMEgyNS41MzZBMS45NjQsMS45NjQsMCwwLDEsMjcuNSwxLjk2NFYyNS41MzZBMS45NjQsMS45NjQsMCwwLDEsMjUuNTM2LDI3LjVIMS45NjRBMS45NjQsMS45NjQsMCwwLDEsMCwyNS41MzZWMS45NjRBMS45NjQsMS45NjQsMCwwLDEsMS45NjQsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIgMSkiIGZpbGw9InVybCgjbGluZWFyLWdyYWRpZW50KSIvPg0KICAgICAgICA8cGF0aCBpZD0icyIgZD0iTTE3LjExNyw1LjE1NmwtMS4xLjg4M2E0LjQsNC40LDAsMCwwLS43OTEtLjY3NkExLjk0LDEuOTQsMCwwLDAsMTQuMiw1LjE0MWExLjk3NiwxLjk3NiwwLDAsMC0xLjE4OS4zMzEsMS4wMTEsMS4wMTEsMCwwLDAtLjQ1Ni44NTMsMS4wMzUsMS4wMzUsMCwwLDAsLjQuOCw1LjQ1NCw1LjQ1NCwwLDAsMCwxLjM1Ny43NTksOS42ODYsOS42ODYsMCwwLDEsMS40OTMuNzY3LDMuODEsMy44MSwwLDAsMSwuODc3Ljc4NSwzLjA5NCwzLjA5NCwwLDAsMSwuNTExLjkwNiwzLjAxLDMuMDEsMCwwLDEsLjE2OCwxLjAwNywyLjgzNywyLjgzNywwLDAsMS0uOSwyLjExNiwzLjAyMywzLjAyMywwLDAsMS0yLjE4NC44NzQsMy43LDMuNywwLDAsMS0yLjIwNy0uNjg0QTQuMjg5LDQuMjg5LDAsMCwxLDEwLjU5NCwxMS42bDEuMzU5LS4zODNhMi40MTUsMi40MTUsMCwwLDAsMi4yNzMsMS42OCwxLjc3NCwxLjc3NCwwLDAsMCwxLjIzNC0uNDQ0LDEuNDQ1LDEuNDQ1LDAsMCwwLC40OTItMS4xMjIsMS41MTcsMS41MTcsMCwwLDAtLjI1OC0uODE0LDIuMywyLjMsMCwwLDAtLjY0MS0uNjc0LDYuODU0LDYuODU0LDAsMCwwLTEuMjE5LS42MDgsOC42MzcsOC42MzcsMCwwLDEtMS4yODctLjYyOCwzLjMxOCwzLjMxOCwwLDAsMS0uNzgtLjY3OSwyLjg3MSwyLjg3MSwwLDAsMS0uNDgyLS43ODUsMi4yNywyLjI3LDAsMCwxLS4xNTMtLjgzNSwyLjM0LDIuMzQsMCwwLDEsLjg1OS0xLjgyMywzLjA1NCwzLjA1NCwwLDAsMSwyLjA4Ni0uNzUzLDQuMjMsNC4yMywwLDAsMSwxLjY0OC4zNTJBMy4zODcsMy4zODcsMCwwLDEsMTcuMTE3LDUuMTU2WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMiA2LjUpIiBmaWxsPSIjZmZmIi8+DQogICAgICA8L2c+DQogICAgICA8cGF0aCBpZD0idGV4dC1yIiBkPSJNLTguMjEtMi43MzRILTkuNTY4TC0xMC4wNDYsMGgtMS4yMDZsMS4yMzUtNy4xMDksMi4yNDEsMEEyLjU1MywyLjU1MywwLDAsMS02LTYuNTQ3LDEuNzY5LDEuNzY5LDAsMCwxLTUuNDcxLTUsMi4xMjgsMi4xMjgsMCwwLDEtNS45My0zLjhhMi42NzEsMi42NzEsMCwwLDEtMS4xMzguNzk0bDEuMDUsMi45MzYsMCwuMDczSC03LjNabS0xLjE5MS0xLDEuMTY3LjAxYTEuNjU4LDEuNjU4LDAsMCwwLDEuMDUyLS4zMywxLjMsMS4zLDAsMCwwLC41LS45LDEuMDA4LDEuMDA4LDAsMCwwLS4yLS44NDdBMS4xLDEuMSwwLDAsMC03LjctNi4xMDhsLTEuMjg5LDBaTS00LjAzMSwwSC01LjE4OGwuOTE4LTUuMjgzaDEuMTU3Wk0tNC4xLTYuNjM2YS42NTMuNjUzLDAsMCwxLC4xNzYtLjQ1OS42NDQuNjQ0LDAsMCwxLC40NzQtLjIuNjE2LjYxNiwwLDAsMSwuNDcxLjE3My42LjYsMCwwLDEsLjE4OC40NDcuNjE3LjYxNywwLDAsMS0uMTgzLjQ1OS42NzEuNjcxLDAsMCwxLS40NjYuMTkuNjI2LjYyNiwwLDAsMS0uNDY5LS4xNjhBLjU4MS41ODEsMCwwLDEtNC4xLTYuNjM2Wm0xLjYzMSwzLjk4OWE0LjA4Nyw0LjA4NywwLDAsMSwuNDI3LTEuNDMxQTIuNTg0LDIuNTg0LDAsMCwxLTEuMi01LjA1NmExLjk4NywxLjk4NywwLDAsMSwxLjE2Mi0uMzMsMS41NTksMS41NTksMCwwLDEsMS4zMTMuNjRsLjE4MS0uNTQyLDEuMDU1LDBMMS42MzMtLjE0NkEyLjUzOCwyLjUzOCwwLDAsMSwuNzYyLDEuNSwyLjUyNiwyLjUyNiwwLDAsMS0xLDIuMDg1YTIuNDY2LDIuNDY2LDAsMCwxLTEuMDU1LS4yNTQsMi4xOTMsMi4xOTMsMCwwLDEtLjgtLjY0NWwuNjE1LS43YTEuNDgyLDEuNDgyLDAsMCwwLDEuMjExLjY1OUExLjQxOSwxLjQxOSwwLDAsMC0uMDU5LjgzNywxLjYxNiwxLjYxNiwwLDAsMCwuNDg2LS4xTC41NjktLjQ3NEExLjg2OSwxLjg2OSwwLDAsMS0uODE4LjEsMS40OCwxLjQ4LDAsMCwxLTIuMDA3LS40NjQsMi40ODQsMi40ODQsMCwwLDEtMi41LTEuOTQ4LDQuODc5LDQuODc5LDAsMCwxLTIuNDczLTIuNjQ2Wm0xLjE0Ny4xYTMuNTcxLDMuNTcxLDAsMCwwLS4wMi41MzcsMS4zOTQsMS4zOTQsMCwwLDAsLjIzNC44Mi43ODYuNzg2LDAsMCwwLC42NC4zMTcsMS4zNjYsMS4zNjYsMCwwLDAsMS4xNTItLjYxTDEuMS0zLjgxM2EuOTQzLjk0MywwLDAsMC0uOS0uNiwxLjIwNSwxLjIwNSwwLDAsMC0uOTg2LjQ1NCwyLjU0NCwyLjU0NCwwLDAsMC0uNTIyLDEuMzEzWk00LjcxOS00LjdhMS45NTMsMS45NTMsMCwwLDEsMS41LS42NzQsMS4yODksMS4yODksMCwwLDEsMS4xMTYuNTMyQTIuMTEzLDIuMTEzLDAsMCwxLDcuNi0zLjRMNy4wMzksMEg1Ljg4MWwuNTc2LTMuNDEzYTEuOTk0LDEuOTk0LDAsMCwwLC4wMS0uMzkxLjYzMy42MzMsMCwwLDAtLjctLjYxLDEuNDI3LDEuNDI3LDAsMCwwLTEuMTUyLjYzNUwzLjk1MywwSDIuOGwxLjMtNy41SDUuMjU2Wm02LjExOC0xLjg2NS0uMjI1LDEuMjg0aC45bC0uMTUxLjg3OWgtLjkwOGwtLjUsMi45NTlhMS4wMTIsMS4wMTIsMCwwLDAsMCwuMjJxLjAyOS4zMTcuMzkxLjMzMmEyLjIwNiwyLjIwNiwwLDAsMCwuNDEtLjA0NGwtLjA3OC45MjhhMi42NTMsMi42NTMsMCwwLDEtLjcyOC4xQTEuMDgsMS4wOCwwLDAsMSw5LjA0My0uMzJhMS40OTMsMS40OTMsMCwwLDEtLjIzNy0xLjA2N0w5LjMtNC40SDguNDU1bC4xNTYtLjg3OWguODRsLjIyNS0xLjI4NFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE4NSA3NzcpIiBmaWxsPSIjMDUwYzFhIi8+DQogICAgICA8ZyBpZD0ia2V5LWEiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDk1IDczMSkiPg0KICAgICAgICA8ZyB0cmFuc2Zvcm09Im1hdHJpeCgxLCAwLCAwLCAxLCAtMjAsIC0yNTUpIiBmaWx0ZXI9InVybCgja2V5LWJ0bS0xMSkiPg0KICAgICAgICAgIDxwYXRoIGlkPSJrZXktYnRtLTI2IiBkYXRhLW5hbWU9ImtleS1idG0iIGQ9Ik0yLDBIMzBhMi4xNzUsMi4xNzUsMCwwLDEsMS41LjY3M0EyLjQwOCwyLjQwOCwwLDAsMSwzMS43NjUsMlYzMEExLjY0LDEuNjQsMCwwLDEsMzAsMzEuNzg5bC0yOC4wMzEuMTQ5YTIuMiwyLjIsMCwwLDEtMS4zOTEtLjU3OEExLjY1NiwxLjY1NiwwLDAsMSwwLDMwVjJBMiwyLDAsMCwxLDIsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIwIDI1NSkiIGZpbGw9IiM0YTRhNGEiLz4NCiAgICAgICAgPC9nPg0KICAgICAgICA8cGF0aCBpZD0ia2V5LXNpZGUtMTEiIGRhdGEtbmFtZT0ia2V5LXNpZGUiIGQ9Ik0xMTI5NC0xNDExOWExLjk5NCwxLjk5NCwwLDAsMS0xLjUyMS0uN2wxNS4xMDktMjIuMTk0LDE1LjY0NS04LjY4MWEyLDIsMCwwLDEsLjc2NywxLjU3NHYyOGEyLDIsMCwwLDEtMiwyWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTExMjkyIDE0MTUxKSIgZmlsbD0iIzIxMjEyMSIvPg0KICAgICAgICA8cGF0aCBpZD0ia2V5LXRvcC0xMSIgZGF0YS1uYW1lPSJrZXktdG9wIiBkPSJNMS45NjQsMEgyNS41MzZBMS45NjQsMS45NjQsMCwwLDEsMjcuNSwxLjk2NFYyNS41MzZBMS45NjQsMS45NjQsMCwwLDEsMjUuNTM2LDI3LjVIMS45NjRBMS45NjQsMS45NjQsMCwwLDEsMCwyNS41MzZWMS45NjRBMS45NjQsMS45NjQsMCwwLDEsMS45NjQsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIgMSkiIGZpbGw9InVybCgjbGluZWFyLWdyYWRpZW50KSIvPg0KICAgICAgICA8cGF0aCBpZD0iYSIgZD0iTTEzLjkyMiwzLjY2NCwxOC42MjEsMTRIMTcuMmwtMS4xNTUtMi41NDdIMTEuODE4TDEwLjY3NiwxNEg5LjI2MlptMCwzLjEwNi0xLjU5MiwzLjU1aDMuMloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIgNi41KSIgZmlsbD0iI2ZmZiIvPg0KICAgICAgPC9nPg0KICAgICAgPHBhdGggaWQ9InRleHQtZiIgZD0iTS0xMy4yNjctMy4wMTNILTE2LjA0TC0xNi41NjIsMGgtMS4yMDZsMS4yMy03LjEwOWg0LjM5NWwtLjE3NiwxSC0xNS41TC0xNS44NjktNGgyLjc3OFptLjkzOC4zNTJhMy40NzYsMy40NzYsMCwwLDEsLjQ1Ny0xLjQxMSwyLjcwOSwyLjcwOSwwLDAsMSwuOTU5LS45ODEsMi4zNzEsMi4zNzEsMCwwLDEsMS4zLS4zMjcsMi4wMTgsMi4wMTgsMCwwLDEsMS4xNzIuMzYxLDIuMDA3LDIuMDA3LDAsMCwxLC43Mi45NjJBMy4wNTQsMy4wNTQsMCwwLDEtNy41NjMtMi43LDMuNTQxLDMuNTQxLDAsMCwxLTguMDItMS4yMTZhMi43LDIuNywwLDAsMS0uOTY3Ljk4OUEyLjQsMi40LDAsMCwxLTEwLjI5My4xYTIuMDA5LDIuMDA5LDAsMCwxLTEuMTY1LS4zNTksMi4wMTQsMi4wMTQsMCwwLDEtLjcyLS45NTcsMy4wMTUsMy4wMTUsMCwwLDEtLjE2Ni0xLjM0Wm0xLjEzOC42NjlhMS40LDEuNCwwLDAsMCwuMjcxLjgyMy44NjcuODY3LDAsMCwwLC42ODYuMzI1LDEuMjE3LDEuMjE3LDAsMCwwLDEtLjQ1OUEyLjQxNSwyLjQxNSwwLDAsMC04LjczLTIuNmwuMDI5LS40NzlhMS42OTEsMS42OTEsMCwwLDAtLjI0OS0uOTgxLjg3NC44NzQsMCwwLDAtLjcyMy0uMzc2LDEuMjY1LDEuMjY1LDAsMCwwLTEuMTcyLjcyOCwyLjcxOCwyLjcxOCwwLDAsMC0uMzI3LDEuMDQ1QTQuMDg4LDQuMDg4LDAsMCwwLTExLjE5MS0xLjk5MlpNLTMuNTc5LTQuMmEyLjEzMiwyLjEzMiwwLDAsMC0uNDU0LS4wNDksMS4zNTUsMS4zNTUsMCwwLDAtMS4yMTEuNjNMLTUuODc5LDBILTcuMDM2bC45MTMtNS4yODMsMS4xLDAtLjExNy42YTEuNTEyLDEuNTEyLDAsMCwxLDEuMjUtLjcsMS45LDEuOSwwLDAsMSwuNDQ0LjA3M1pNMS4yNzQtMS42NDZsMS40NS0zLjYzOEgzLjg4N0wxLjU3MiwwSC42MkwuMTU2LTMuNjEzLTEuNTUzLDBILTIuNTFsLS40ODMtNS4yODNILTEuOUwtMS43LTEuN2wxLjY3LTMuNTg0SC44NDVaTTYuOSwwYTEuNTY3LDEuNTY3LDAsMCwxLS4wNDktLjQ5M0ExLjk1OSwxLjk1OSwwLDAsMSw1LjQzOS4xLDEuNjE4LDEuNjE4LDAsMCwxLDQuMy0uMzQ0YTEuMzYzLDEuMzYzLDAsMCwxLS40MjItMS4xQTEuNjE4LDEuNjE4LDAsMCwxLDQuNi0yLjc1NGEzLjE0NiwzLjE0NiwwLDAsMSwxLjgzNi0uNDc5bC43NTIuMDEuMDY4LS4zNjFhMS4wOSwxLjA5LDAsMCwwLDAtLjM1Ni42MzYuNjM2LDAsMCwwLS43LS41NDIsMS4wNTMsMS4wNTMsMCwwLDAtLjY1Mi4xODguODEzLjgxMywwLDAsMC0uMzQ0LjUzTDQuNC0zLjc1NWExLjQ0OSwxLjQ0OSwwLDAsMSwuMzQ3LS44NTcsMi4wNTYsMi4wNTYsMCwwLDEsLjgzLS41NzQsMi44MSwyLjgxLDAsMCwxLDEuMDk0LS4yLDEuODQ4LDEuODQ4LDAsMCwxLDEuMzQ4LjUyLDEuNTQxLDEuNTQxLDAsMCwxLC40LDEuM0w4LjAxOC0xLjA4OWwtLjAzOS40MzlhMS41NjEsMS41NjEsMCwwLDAsLjA3My41NjJsMCwuMDg4Wk01LjcwOC0uODVhMS4yNzYsMS4yNzYsMCwwLDAsLjY3OS0uMTY4LDEuNzg4LDEuNzg4LDAsMCwwLC41MzItLjQ2MWwuMTgxLTEtLjU1MiwwQTEuOTM5LDEuOTM5LDAsMCwwLDUuNS0yLjIzOWEuOS45LDAsMCwwLS40NDQuNjc2LjYuNiwwLDAsMCwuMTQ0LjUxNUEuNy43LDAsMCwwLDUuNzA4LS44NVpNMTIuNTE1LTQuMmEyLjEzMiwyLjEzMiwwLDAsMC0uNDU0LS4wNDksMS4zNTUsMS4zNTUsMCwwLDAtMS4yMTEuNjNMMTAuMjE1LDBIOS4wNThsLjkxMy01LjI4MywxLjEsMC0uMTE3LjZhMS41MTIsMS41MTIsMCwwLDEsMS4yNS0uNywxLjksMS45LDAsMCwxLC40NDQuMDczWm0uMjU0LDEuNTUzYTQuMTg1LDQuMTg1LDAsMCwxLC40MzktMS40NjUsMi40OCwyLjQ4LDAsMCwxLC44NDUtLjk2OSwxLjk1MSwxLjk1MSwwLDAsMSwxLjExOC0uMzA1LDEuNTYxLDEuNTYxLDAsMCwxLDEuMjYuNkwxNi45MzgtNy41SDE4LjFMMTYuOCwwSDE1Ljc2MmwuMDc4LS41NDdBMS44NDEsMS44NDEsMCwwLDEsMTQuMzk1LjFhMS40NTMsMS40NTMsMCwwLDEtMS4xNzktLjU2OSwyLjQ4NCwyLjQ4NCwwLDAsMS0uNDc2LTEuNDg3LDMuOTQ4LDMuOTQ4LDAsMCwxLC4wMTUtLjU5MVptMS4xMjMuNDU0YTEuNjI3LDEuNjI3LDAsMCwwLC4xODguOTYyLjc1MS43NTEsMCwwLDAsLjY2Mi4zNjZBMS4zNTksMS4zNTksMCwwLDAsMTUuOS0xLjUxNGwuNC0yLjI3MWEuOS45LDAsMCwwLS44ODktLjYzLDEuMTg5LDEuMTg5LDAsMCwwLTEuMDY5LjU4NkEzLjEyMywzLjEyMywwLDAsMCwxMy44OTItMi4xOTJaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNDggNzIxKSIgZmlsbD0iIzA1MGMxYSIvPg0KICAgICAgPGcgaWQ9ImtleS13IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMzIgNjc3KSI+DQogICAgICAgIDxnIHRyYW5zZm9ybT0ibWF0cml4KDEsIDAsIDAsIDEsIC01NywgLTIwMSkiIGZpbHRlcj0idXJsKCNrZXktYnRtLTEyKSI+DQogICAgICAgICAgPHBhdGggaWQ9ImtleS1idG0tMjciIGRhdGEtbmFtZT0ia2V5LWJ0bSIgZD0iTTIsMEgzMGEyLjE3NSwyLjE3NSwwLDAsMSwxLjUuNjczQTIuNDA4LDIuNDA4LDAsMCwxLDMxLjc2NSwyVjMwQTEuNjQsMS42NCwwLDAsMSwzMCwzMS43ODlsLTI4LjAzMS4xNDlhMi4yLDIuMiwwLDAsMS0xLjM5MS0uNTc4QTEuNjU2LDEuNjU2LDAsMCwxLDAsMzBWMkEyLDIsMCwwLDEsMiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTcgMjAxKSIgZmlsbD0iIzRhNGE0YSIvPg0KICAgICAgICA8L2c+DQogICAgICAgIDxwYXRoIGlkPSJrZXktc2lkZS0xMiIgZGF0YS1uYW1lPSJrZXktc2lkZSIgZD0iTTExMjk0LTE0MTE5YTEuOTk0LDEuOTk0LDAsMCwxLTEuNTIxLS43bDE1LjEwOS0yMi4xOTQsMTUuNjQ1LTguNjgxYTIsMiwwLDAsMSwuNzY3LDEuNTc0djI4YTIsMiwwLDAsMS0yLDJaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTEyOTIgMTQxNTEpIiBmaWxsPSIjMjEyMTIxIi8+DQogICAgICAgIDxwYXRoIGlkPSJrZXktdG9wLTEyIiBkYXRhLW5hbWU9ImtleS10b3AiIGQ9Ik0xLjk2NCwwSDI1LjUzNkExLjk2NCwxLjk2NCwwLDAsMSwyNy41LDEuOTY0VjI1LjUzNkExLjk2NCwxLjk2NCwwLDAsMSwyNS41MzYsMjcuNUgxLjk2NEExLjk2NCwxLjk2NCwwLDAsMSwwLDI1LjUzNlYxLjk2NEExLjk2NCwxLjk2NCwwLDAsMSwxLjk2NCwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMiAxKSIgZmlsbD0idXJsKCNsaW5lYXItZ3JhZGllbnQpIi8+DQogICAgICAgIDxwYXRoIGlkPSJ3IiBkPSJNMTMuOTg4LDMuNjY0bDMuMiw3LjM0N0wyMC4yLDQuMDYzaDEuNGwtNC40MSwxMC4yNS0zLjItNy4zNjQtMy4yLDcuMzY0TDYuMzY3LDQuMDYzaDEuNEwxMC44LDExLjA5WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMiA2LjUpIiBmaWxsPSIjZmZmIi8+DQogICAgICA8L2c+DQogICAgPC9nPg0KICA8L2c+DQogIDxnIGlkPSJwNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE4MyAtNjQwKSI+DQogICAgPGcgaWQ9InBhbmUtMyIgZGF0YS1uYW1lPSJwYW5lIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2MTUgNjQwKSI+DQogICAgICA8cmVjdCBpZD0iYm94LTMiIGRhdGEtbmFtZT0iYm94IiB3aWR0aD0iMjgyIiBoZWlnaHQ9IjE2MCIgcng9IjQiIGZpbGw9IiNmNmY2ZjYiLz4NCiAgICAgIDxwYXRoIGlkPSJsYWJlbC05IiBkYXRhLW5hbWU9ImxhYmVsIiBkPSJNNC41NzUtMS4zMjhIMi4yMjdMMS44MTYsMEgtLjAxNUwyLjU5My03LjEwOUg0LjJMNi44MzEsMEg0Ljk5Wk0yLjYzNy0yLjY1MUg0LjE2NUwzLjQtNS4xMTdaTTcuNTQ5LDBWLTcuMTA5aDIuMjlhMy4zNjksMy4zNjksMCwwLDEsMS42OTQuNDI3LDMsMywwLDAsMSwxLjE3NCwxLjIwNiwzLjY0MSwzLjY0MSwwLDAsMSwuNDI3LDEuNzQ2Vi0zLjRhMy42NjIsMy42NjIsMCwwLDEtLjQxMywxLjc1QTMuMDE2LDMuMDE2LDAsMCwxLDExLjU2LS40NDIsMy4zLDMuMywwLDAsMSw5Ljg4NywwWk05LjI2Mi01Ljc4NnY0LjQ2OGguNmExLjMzMywxLjMzMywwLDAsMCwxLjEzMy0uNTI1LDIuNTcyLDIuNTcyLDAsMCwwLC40LTEuNTZ2LS4zMDhhMi41NTEsMi41NTEsMCwwLDAtLjQtMS41NTMsMS4zNTYsMS4zNTYsMCwwLDAtMS4xNTItLjUyMlptNy43ODMtMS4zMjNoMS43MDl2NC44NzhhMi4zMzIsMi4zMzIsMCwwLDEtLjMxNSwxLjIxMSwyLjE1LDIuMTUsMCwwLDEtLjg3OS44MjVBMi42ODYsMi42ODYsMCwwLDEsMTYuMy4xLDIuNTg5LDIuNTg5LDAsMCwxLDE0LjUtLjQ4OGEyLjEyOSwyLjEyOSwwLDAsMS0uNjQ1LTEuNjZoMS43MTlhMS4xNzQsMS4xNzQsMCwwLDAsLjE2OC43MDguNjY3LjY2NywwLDAsMCwuNTY0LjIyLjYzOC42MzgsMCwwLDAsLjU0OS0uMjY2LDEuMjUxLDEuMjUxLDAsMCwwLC4xOTMtLjc0NVptOC41NjQsMHY0LjY1M2EyLjY3NCwyLjY3NCwwLDAsMS0uMzM3LDEuMzcsMi4xODMsMi4xODMsMCwwLDEtLjk2Ny44ODEsMy40MDYsMy40MDYsMCwwLDEtMS40ODkuMywyLjk0MiwyLjk0MiwwLDAsMS0yLjA0Ni0uNjc0LDIuNCwyLjQsMCwwLDEtLjc2Mi0xLjg0NlYtNy4xMDloMS43MjR2NC43MjJxLjAyOSwxLjE2NywxLjA4NCwxLjE2N2ExLjA0OSwxLjA0OSwwLDAsMCwuODA2LS4yOTMsMS4zNjksMS4zNjksMCwwLDAsLjI3My0uOTUyVi03LjEwOVptNC45MzYsNS4yMmEuNy43LDAsMCwwLS4yNjYtLjU4NiwzLjMwOCwzLjMwOCwwLDAsMC0uOTM1LS40MzUsOC45NzEsOC45NzEsMCwwLDEtMS4wOTQtLjQzNUEyLjA3MSwyLjA3MSwwLDAsMSwyNi44NjktNS4yMWExLjY3MywxLjY3MywwLDAsMSwuMzQ0LTEuMDQyLDIuMjI2LDIuMjI2LDAsMCwxLC45NzQtLjdBMy43OTEsMy43OTEsMCwwLDEsMjkuNi03LjIwN2EzLjMxNiwzLjMxNiwwLDAsMSwxLjM3NS4yNzMsMi4xNzYsMi4xNzYsMCwwLDEsLjk0NS43NzlBMi4wMzQsMi4wMzQsMCwwLDEsMzIuMjYtNUgzMC41NTFhLjg1OS44NTksMCwwLDAtLjI2Ni0uNjc0LDEuMDM3LDEuMDM3LDAsMCwwLS43Mi0uMjM5LDEuMTcsMS4xNywwLDAsMC0uNzI1LjIuNjIyLjYyMiwwLDAsMC0uMjY2LjUxNS42MjYuNjI2LDAsMCwwLC4yOTMuNSwzLjcsMy43LDAsMCwwLDEuMDMuNDU5LDYuMzExLDYuMzExLDAsMCwxLDEuMjExLjUxQTIuMDM1LDIuMDM1LDAsMCwxLDMyLjI2LTEuOWExLjczNiwxLjczNiwwLDAsMS0uNywxLjQ2NUEzLjEyNywzLjEyNywwLDAsMSwyOS42MjguMWEzLjgyNywzLjgyNywwLDAsMS0xLjU2NS0uMzEsMi4zNTksMi4zNTksMCwwLDEtMS4wNTUtLjg1QTIuMjE0LDIuMjE0LDAsMCwxLDI2LjY1NC0yLjNoMS43MTlhMS4wOSwxLjA5LDAsMCwwLC4zLjg0MiwxLjQsMS40LDAsMCwwLC45NTkuMjcxLDEuMSwxLjEsMCwwLDAsLjY3MS0uMTgzQS42LjYsMCwwLDAsMzAuNTQ2LTEuODlabTguMzc0LTMuOUgzNi43ODZWMEgzNS4wNzJWLTUuNzg2SDMyLjk3OFYtNy4xMDlIMzguOTJabTkuMDcyLDMuMzc5YTIuNiwyLjYsMCwwLDEtLjQsMS4zMTEsMi40MTYsMi40MTYsMCwwLDEtMS4wMjguODgxQTMuNSwzLjUsMCwwLDEsNDUuMDUyLjFhMi43OTIsMi43OTIsMCwwLDEtMi4yMDctLjkxMywzLjc3LDMuNzcsMCwwLDEtLjgwNi0yLjU3OHYtLjM1MkE0LjMsNC4zLDAsMCwxLDQyLjQtNS41NzRhMi43NTYsMi43NTYsMCwwLDEsMS4wNDctMS4yMTEsMi45MjIsMi45MjIsMCwwLDEsMS41ODItLjQyNywzLjA2NCwzLjA2NCwwLDAsMSwyLjA4LjY4MSwyLjY5MSwyLjY5MSwwLDAsMSwuODk0LDEuODc3SDQ2LjNhMS4yNzMsMS4yNzMsMCwwLDAtLjMyNy0uOTMzLDEuMzQ2LDEuMzQ2LDAsMCwwLS45MzctLjI4MywxLjAyNCwxLjAyNCwwLDAsMC0uOTM3LjQ3OSwzLjA3NSwzLjA3NSwwLDAsMC0uMzEyLDEuNTI4di41YTMuNCwzLjQsMCwwLDAsLjI4NiwxLjYyNiwxLjA0NSwxLjA0NSwwLDAsMCwuOTg0LjQ4OCwxLjMxNiwxLjMxNiwwLDAsMCwuOS0uMjc4LDEuMTgxLDEuMTgxLDAsMCwwLC4zMzItLjg4NFpNNTMuMDQtMS4zMjhINTAuNjkyTDUwLjI4MiwwSDQ4LjQ1MWwyLjYwNy03LjEwOWgxLjYxMUw1NS4zLDBINTMuNDU1Wk01MS4xLTIuNjUxSDUyLjYzbC0uNzY3LTIuNDY2Wm03LjE2My00LjQ1OCwxLjU4Nyw0Ljk0NiwxLjU4Mi00Ljk0Nkg2My42OVYwSDYxLjk3MVYtMS42NmwuMTY2LTMuNEw2MC40MTgsMEg1OS4yODVMNTcuNTYyLTUuMDYzbC4xNjYsMy40VjBINTYuMDE0Vi03LjEwOVpNNjkuMzg4LTMuMDE4aC0yLjd2MS43aDMuMTg0VjBoLTQuOVYtNy4xMDloNC45MDd2MS4zMjNINjYuNjkydjEuNWgyLjdabTQuMDI4LjVoLS45MjhWMEg3MC43NzRWLTcuMTA5aDIuOGEzLjEyMywzLjEyMywwLDAsMSwxLjk3OC41NjEsMS45LDEuOSwwLDAsMSwuNzEzLDEuNTg1LDIuMzA4LDIuMzA4LDAsMCwxLS4zLDEuMjI5LDIuMTMxLDIuMTMxLDAsMCwxLS45NC43OUw3Ni41MDctLjA3M1YwSDc0LjY3MVptLS45MjgtMS4zMThoMS4wODRhLjk3My45NzMsMCwwLDAsLjczNS0uMjU3Ljk5My45OTMsMCwwLDAsLjI0Ny0uNzE3LDEsMSwwLDAsMC0uMjQ5LS43MjIuOTY0Ljk2NCwwLDAsMC0uNzMyLS4yNjJINzIuNDg4Wm05LjA0OCwyLjVINzkuMTg3TDc4Ljc3NywwSDc2Ljk0NmwyLjYwNy03LjEwOWgxLjYxMUw4My43OTIsMEg4MS45NTFaTTc5LjYtMi42NTFoMS41MjhsLS43NjctMi40NjZaTTg5LjQ1LTcuMTA5bDEuNTg3LDQuOTQ2LDEuNTgyLTQuOTQ2aDIuMjU2VjBIOTMuMTU2Vi0xLjY2bC4xNjYtMy40TDkxLjYsMEg5MC40NzFMODguNzQ3LTUuMDYzbC4xNjYsMy40VjBIODcuMlYtNy4xMDlabTEyLjczNCwzLjdhNC4xOTIsNC4xOTIsMCwwLDEtLjM4NiwxLjg0MSwyLjg1MSwyLjg1MSwwLDAsMS0xLjEsMS4yMzNBMy4wNTIsMy4wNTIsMCwwLDEsOTkuMDg0LjEsMy4xLDMuMSwwLDAsMSw5Ny40NzMtLjMyYTIuODQ2LDIuODQ2LDAsMCwxLTEuMS0xLjE5NEE0LjA3Miw0LjA3MiwwLDAsMSw5NS45NjQtMy4zdi0uNGE0LjIxMSw0LjIxMSwwLDAsMSwuMzgzLTEuODQzLDIuODQ0LDIuODQ0LDAsMCwxLDEuMS0xLjIzMywzLjA3NCwzLjA3NCwwLDAsMSwxLjYyOC0uNDM1LDMuMDQ0LDMuMDQ0LDAsMCwxLDEuNjExLjQzLDIuOSwyLjksMCwwLDEsMS4xLDEuMjIzLDQuMDksNC4wOSwwLDAsMSwuNCwxLjgxOVptLTEuNzQzLS4zYTIuOTksMi45OSwwLDAsMC0uMzU0LTEuNjA5LDEuMTM1LDEuMTM1LDAsMCwwLTEuMDEzLS41NDlxLTEuMjg5LDAtMS4zNjIsMS45MzRsMCwuNTIyQTMuMDc1LDMuMDc1LDAsMCwwLDk4LjA1NC0xLjhhMS4xMzQsMS4xMzQsMCwwLDAsMS4wMy41NjIsMS4xMiwxLjEyLDAsMCwwLDEtLjU1MiwyLjk5MSwyLjk5MSwwLDAsMCwuMzU2LTEuNTg3Wm01LjQ3OCwxLjc3MiwxLjQxNi01LjE3NmgxLjkxNEwxMDYuODU3LDBoLTEuODc1bC0yLjM3My03LjEwOWgxLjlabTguNDU3LTEuMDg0aC0yLjd2MS43aDMuMTg0VjBoLTQuOVYtNy4xMDloNC45MDd2MS4zMjNoLTMuMTkzdjEuNWgyLjdabTMuNjM3LTQuMDkyTDExOS42LTIuMTYzbDEuNTgyLTQuOTQ2aDIuMjU2VjBIMTIxLjcyVi0xLjY2bC4xNjYtMy40TDEyMC4xNjcsMGgtMS4xMzNsLTEuNzI0LTUuMDYzLjE2NiwzLjRWMGgtMS43MTRWLTcuMTA5Wm0xMS4xMjMsNC4wOTJoLTIuN3YxLjdoMy4xODRWMGgtNC45Vi03LjEwOWg0LjkwN3YxLjMyM2gtMy4xOTN2MS41aDIuN1pNMTM2LjQ2MSwwaC0xLjdsLTIuNTItNC40MjRWMGgtMS43MTRWLTcuMTA5aDEuNzE0bDIuNTE1LDQuNDI0Vi03LjEwOWgxLjcwOVptNi44NjUtNS43ODZoLTIuMTM0VjBoLTEuNzE0Vi01Ljc4NmgtMi4wOTVWLTcuMTA5aDUuOTQyWm02Ljk4NywzLjlhLjcuNywwLDAsMC0uMjY2LS41ODYsMy4zMDgsMy4zMDgsMCwwLDAtLjkzNS0uNDM1LDguOTcsOC45NywwLDAsMS0xLjA5NC0uNDM1LDIuMDcxLDIuMDcxLDAsMCwxLTEuMzgyLTEuODY1LDEuNjczLDEuNjczLDAsMCwxLC4zNDQtMS4wNDIsMi4yMjYsMi4yMjYsMCwwLDEsLjk3NC0uNywzLjc5MSwzLjc5MSwwLDAsMSwxLjQxNi0uMjUxLDMuMzE2LDMuMzE2LDAsMCwxLDEuMzc1LjI3MywyLjE3NiwyLjE3NiwwLDAsMSwuOTQ1Ljc3OUEyLjAzNCwyLjAzNCwwLDAsMSwxNTIuMDI3LTVoLTEuNzA5YS44NTkuODU5LDAsMCwwLS4yNjYtLjY3NCwxLjAzNywxLjAzNywwLDAsMC0uNzItLjIzOSwxLjE3LDEuMTcsMCwwLDAtLjcyNS4yLjYyMi42MjIsMCwwLDAtLjI2Ni41MTUuNjI2LjYyNiwwLDAsMCwuMjkzLjUsMy43LDMuNywwLDAsMCwxLjAzLjQ1OSw2LjMxMSw2LjMxMSwwLDAsMSwxLjIxMS41MUEyLjAzNSwyLjAzNSwwLDAsMSwxNTIuMDI3LTEuOWExLjczNiwxLjczNiwwLDAsMS0uNywxLjQ2NUEzLjEyNywzLjEyNywwLDAsMSwxNDkuMzk1LjFhMy44MjYsMy44MjYsMCwwLDEtMS41NjUtLjMxLDIuMzYsMi4zNiwwLDAsMS0xLjA1NS0uODUsMi4yMTQsMi4yMTQsMCwwLDEtLjM1NC0xLjI0M2gxLjcxOWExLjA5LDEuMDksMCwwLDAsLjMuODQyLDEuNCwxLjQsMCwwLDAsLjk1OS4yNzEsMS4xLDEuMSwwLDAsMCwuNjcxLS4xODNBLjYuNiwwLDAsMCwxNTAuMzEzLTEuODlabTQuNTA3LS41MjJWMGgtMS43MTRWLTcuMTA5aDIuODM3YTMuMywzLjMsMCwwLDEsMS40NDMuMywyLjI2MywyLjI2MywwLDAsMSwuOTcyLjg1NEEyLjMzNCwyLjMzNCwwLDAsMSwxNTguNy00LjdhMi4wNTcsMi4wNTcsMCwwLDEtLjc0NSwxLjY2MywzLjA5LDMuMDksMCwwLDEtMi4wNDMuNjIzWm0wLTEuMzIzaDEuMTIzYTEuMDU5LDEuMDU5LDAsMCwwLC43NTktLjI0OS45MjUuOTI1LDAsMCwwLC4yNjEtLjcsMS4xNDQsMS4xNDQsMCwwLDAtLjI2OS0uOC45NTEuOTUxLDAsMCwwLS43MzItLjNoLTEuMTQzWm05LjQuNzE4aC0yLjd2MS43aDMuMTg0VjBoLTQuOVYtNy4xMDloNC45MDd2MS4zMjNoLTMuMTkzdjEuNWgyLjdabTUuOCwwaC0yLjd2MS43aDMuMTg0VjBoLTQuOVYtNy4xMDloNC45MDd2MS4zMjNoLTMuMTkzdjEuNWgyLjdaTTE3MS40MDYsMFYtNy4xMDloMi4yOWEzLjM2OSwzLjM2OSwwLDAsMSwxLjY5NC40MjcsMywzLDAsMCwxLDEuMTc0LDEuMjA2LDMuNjQxLDMuNjQxLDAsMCwxLC40MjcsMS43NDZWLTMuNGEzLjY2MiwzLjY2MiwwLDAsMS0uNDEzLDEuNzUsMy4wMTYsMy4wMTYsMCwwLDEtMS4xNjIsMS4yMTFBMy4zLDMuMywwLDAsMSwxNzMuNzQ1LDBabTEuNzE0LTUuNzg2djQuNDY4aC42YTEuMzMzLDEuMzMzLDAsMCwwLDEuMTMzLS41MjUsMi41NzIsMi41NzIsMCwwLDAsLjQtMS41NnYtLjMwOGEyLjU1MSwyLjU1MSwwLDAsMC0uNC0xLjU1MywxLjM1NiwxLjM1NiwwLDAsMC0xLjE1Mi0uNTIyWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTAgMTgpIiBmaWxsPSIjMDUwYzFhIi8+DQogICAgPC9nPg0KICAgIDxwYXRoIGlkPSJkZXNjcmlwdGlvbi0zIiBkYXRhLW5hbWU9ImRlc2NyaXB0aW9uIiBkPSJNLTY1Ljc0NSwwaC0xLjJsLjU0Ny0zLjE1NGgtMy4wNzZMLTcwLjAyMiwwaC0xLjIwNmwxLjIzNS03LjEwOWgxLjIwNkwtNjkuMy00LjE1aDMuMDc2bC41MTMtMi45NTloMS4yMDZabTEuNjIxLTIuNjYxYTMuNDc2LDMuNDc2LDAsMCwxLC40NTctMS40MTEsMi43MDksMi43MDksMCwwLDEsLjk1OS0uOTgxLDIuMzcxLDIuMzcxLDAsMCwxLDEuMy0uMzI3LDIuMDE4LDIuMDE4LDAsMCwxLDEuMTcyLjM2MSwyLjAwNywyLjAwNywwLDAsMSwuNzIuOTYyQTMuMDU0LDMuMDU0LDAsMCwxLTU5LjM1OC0yLjdhMy41NDEsMy41NDEsMCwwLDEtLjQ1NywxLjQ4NCwyLjcsMi43LDAsMCwxLS45NjcuOTg5QTIuNCwyLjQsMCwwLDEtNjIuMDg3LjFhMi4wMDksMi4wMDksMCwwLDEtMS4xNjUtLjM1OSwyLjAxNCwyLjAxNCwwLDAsMS0uNzItLjk1NywzLjAxNSwzLjAxNSwwLDAsMS0uMTY2LTEuMzRabTEuMTM4LjY2OWExLjQsMS40LDAsMCwwLC4yNzEuODIzLjg2Ny44NjcsMCwwLDAsLjY4Ni4zMjUsMS4yMTcsMS4yMTcsMCwwLDAsMS0uNDU5QTIuNDE1LDIuNDE1LDAsMCwwLTYwLjUyNS0yLjZsLjAyOS0uNDc5YTEuNjkxLDEuNjkxLDAsMCwwLS4yNDktLjk4MS44NzQuODc0LDAsMCwwLS43MjMtLjM3NiwxLjI2NSwxLjI2NSwwLDAsMC0xLjE3Mi43MjgsMi43MTgsMi43MTgsMCwwLDAtLjMyNywxLjA0NUE0LjA4OCw0LjA4OCwwLDAsMC02Mi45ODYtMS45OTJaTS01Ny42LDBoLTEuMTU3bDEuMy03LjVILTU2LjNabTEuNTQ4LTIuNjQ2YTQuMTg1LDQuMTg1LDAsMCwxLC40MzktMS40NjUsMi40OCwyLjQ4LDAsMCwxLC44NDUtLjk2OSwxLjk1MSwxLjk1MSwwLDAsMSwxLjExOC0uMzA1LDEuNTYxLDEuNTYxLDAsMCwxLDEuMjYuNmwuNTA4LTIuNzE1aDEuMTYybC0xLjMsNy41aC0xLjAzNWwuMDc4LS41NDdBMS44NDEsMS44NDEsMCwwLDEtNTQuNDI2LjFhMS40NTMsMS40NTMsMCwwLDEtMS4xNzktLjU2OSwyLjQ4NCwyLjQ4NCwwLDAsMS0uNDc2LTEuNDg3LDMuOTQ4LDMuOTQ4LDAsMCwxLC4wMTUtLjU5MVptMS4xMjMuNDU0YTEuNjI3LDEuNjI3LDAsMCwwLC4xODguOTYyLjc1MS43NTEsMCwwLDAsLjY2Mi4zNjYsMS4zNTksMS4zNTksMCwwLDAsMS4xNTctLjY0OWwuNC0yLjI3MWEuOS45LDAsMCwwLS44ODktLjYzLDEuMTg5LDEuMTg5LDAsMCwwLTEuMDY5LjU4NkEzLjEyMywzLjEyMywwLDAsMC01NC45MjktMi4xOTJabTEyLjM2My0uMTI3YTIuNzYxLDIuNzYxLDAsMCwxLTEsMS43NzUsMywzLDAsMCwxLTIsLjY0MiwyLjM2LDIuMzYsMCwwLDEtMS4xODktLjMyMiwyLjA4NSwyLjA4NSwwLDAsMS0uOC0uOSwzLjM0NCwzLjM0NCwwLDAsMS0uMzIyLTEuMzMxLDcuMiw3LjIsMCwwLDEsLjEzNy0xLjUxNkE0Ljc4OSw0Ljc4OSwwLDAsMS00Ny4xLTUuNjg4YTMuMjI0LDMuMjI0LDAsMCwxLDEuMTU3LTEuMTQ3LDIuOTUxLDIuOTUxLDAsMCwxLDEuNTI2LS4zNzEsMi4yNzEsMi4yNzEsMCwwLDEsMS42NzcuNjY3LDIuNjE2LDIuNjE2LDAsMCwxLC42NTcsMS43ODVoLTEuMmExLjc1MiwxLjc1MiwwLDAsMC0uMzItMS4xLDEuMTQsMS4xNCwwLDAsMC0uODc2LS4zNTQsMS42NSwxLjY1LDAsMCwwLTEuMzMzLjU3MSwzLjM0LDMuMzQsMCwwLDAtLjcyMywxLjczMmwtLjEuNjQ5LS4wNDQuNWEyLjk0NCwyLjk0NCwwLDAsMCwuMDcxLjk0NCwxLjIzMSwxLjIzMSwwLDAsMCwuMzg4LjY3MywxLjEzMiwxLjEzMiwwLDAsMCwuNzA4LjI0NkExLjYyOCwxLjYyOCwwLDAsMC00My43NTctMi4zMVptMy4yMjMtNC4yNDgtLjIyNSwxLjI4NGguOWwtLjE1MS44NzloLS45MDhsLS41LDIuOTU5YTEuMDEyLDEuMDEyLDAsMCwwLDAsLjIycS4wMjkuMzE3LjM5MS4zMzJhMi4yMDYsMi4yMDYsMCwwLDAsLjQxLS4wNDRMLTM5LjUtLjAxYTIuNjUzLDIuNjUzLDAsMCwxLS43MjguMSwxLjA4LDEuMDgsMCwwLDEtLjkwNi0uNDEzLDEuNDkzLDEuNDkzLDAsMCwxLS4yMzctMS4wNjdsLjQ5My0zLjAxOGgtLjg0NWwuMTU2LS44NzloLjg0bC4yMjUtMS4yODRaTS0zNS4yLTQuMmEyLjEzMiwyLjEzMiwwLDAsMC0uNDU0LS4wNDksMS4zNTUsMS4zNTUsMCwwLDAtMS4yMTEuNjNMLTM3LjUsMEgtMzguNjZsLjkxMy01LjI4MywxLjEsMC0uMTE3LjZhMS41MTIsMS41MTIsMCwwLDEsMS4yNS0uNywxLjksMS45LDAsMCwxLC40NDQuMDczWm0xLjIzLDQuMmgtMS4xNTdsMS4zLTcuNWgxLjE1N1ptNi45LDBhMS41NjcsMS41NjcsMCwwLDEtLjA0OS0uNDkzQTEuOTU5LDEuOTU5LDAsMCwxLTI4LjUzMy4xYTEuNjE4LDEuNjE4LDAsMCwxLTEuMTQtLjQ0MiwxLjM2MywxLjM2MywwLDAsMS0uNDIyLTEuMSwxLjYxOCwxLjYxOCwwLDAsMSwuNzIzLTEuMzEzLDMuMTQ2LDMuMTQ2LDAsMCwxLDEuODM2LS40NzlsLjc1Mi4wMS4wNjgtLjM2MWExLjA5LDEuMDksMCwwLDAsMC0uMzU2LjYzNi42MzYsMCwwLDAtLjctLjU0MiwxLjA1MywxLjA1MywwLDAsMC0uNjUyLjE4OC44MTMuODEzLDAsMCwwLS4zNDQuNTNsLTEuMTU3LjAxYTEuNDQ5LDEuNDQ5LDAsMCwxLC4zNDctLjg1NywyLjA1NiwyLjA1NiwwLDAsMSwuODMtLjU3NCwyLjgxLDIuODEsMCwwLDEsMS4wOTQtLjIsMS44NDgsMS44NDgsMCwwLDEsMS4zNDguNTIsMS41NDEsMS41NDEsMCwwLDEsLjQsMS4zbC0uNDA1LDIuNDc2LS4wMzkuNDM5YTEuNTYxLDEuNTYxLDAsMCwwLC4wNzMuNTYybDAsLjA4OFptLTEuMTkxLS44NWExLjI3NiwxLjI3NiwwLDAsMCwuNjc5LS4xNjgsMS43ODgsMS43ODgsMCwwLDAsLjUzMi0uNDYxbC4xODEtMS0uNTUyLDBhMS45MzksMS45MzksMCwwLDAtMS4wNDUuMjQ3LjkuOSwwLDAsMC0uNDQ0LjY3Ni42LjYsMCwwLDAsLjE0NC41MTVBLjcuNywwLDAsMC0yOC4yNjQtLjg1Wm01LjMzNy00LjQzOC0uMTE3LjYyYTIuMDE2LDIuMDE2LDAsMCwxLDEuNTY3LS43MTMsMS4yNzcsMS4yNzcsMCwwLDEsMS4xLjUzLDIuMTE1LDIuMTE1LDAsMCwxLC4yNjQsMS40MzhMLTIwLjY4NiwwaC0xLjE1N2wuNTc2LTMuNDI4YTEuNzU0LDEuNzU0LDAsMCwwLDAtLjM5MS42MjMuNjIzLDAsMCwwLS42OTMtLjYsMS40MDcsMS40MDcsMCwwLDAtMS4xNTcuNjQ5TC0yMy43NzIsMGgtMS4xNTdsLjkxMy01LjI4M1ptMy43MTEsMi42NDJhNC4xODUsNC4xODUsMCwwLDEsLjQzOS0xLjQ2NSwyLjQ4LDIuNDgsMCwwLDEsLjg0NS0uOTY5LDEuOTUxLDEuOTUxLDAsMCwxLDEuMTE4LS4zMDUsMS41NjEsMS41NjEsMCwwLDEsMS4yNi42bC41MDgtMi43MTVoMS4xNjJsLTEuMyw3LjVoLTEuMDM1bC4wNzgtLjU0N0ExLjg0MSwxLjg0MSwwLDAsMS0xNy41OS4xLDEuNDUzLDEuNDUzLDAsMCwxLTE4Ljc3LS40NjZhMi40ODQsMi40ODQsMCwwLDEtLjQ3Ni0xLjQ4NywzLjk0OCwzLjk0OCwwLDAsMSwuMDE1LS41OTFabTEuMTIzLjQ1NGExLjYyNywxLjYyNywwLDAsMCwuMTg4Ljk2Mi43NTEuNzUxLDAsMCwwLC42NjIuMzY2LDEuMzU5LDEuMzU5LDAsMCwwLDEuMTU3LS42NDlsLjQtMi4yNzFhLjkuOSwwLDAsMC0uODg5LS42MywxLjE4OSwxLjE4OSwwLDAsMC0xLjA2OS41ODZBMy4xMjMsMy4xMjMsMCwwLDAtMTguMDkzLTIuMTkyWm0xMC42NTQuMzI3cS4xMDctLjctLjc2Ny0xLjA0NWwtLjQtLjE0NmEzLjcsMy43LDAsMCwxLTEuNTY3LS45MTMsMS42MzMsMS42MzMsMCwwLDEtLjQyLTEuMjI2LDEuODQzLDEuODQzLDAsMCwxLC40MTMtMS4wNjcsMi40MDYsMi40MDYsMCwwLDEsLjk4NC0uNzEsMy4yMiwzLjIyLDAsMCwxLDEuMy0uMjM0LDIuNiwyLjYsMCwwLDEsMS4xODIuMjkxLDEuOTEyLDEuOTEyLDAsMCwxLC43OTEuNzY3LDIuMTIzLDIuMTIzLDAsMCwxLC4yNTQsMS4xMjFsLTEuMiwwQTEuMTI3LDEuMTI3LDAsMCwwLTcuMTE0LTUuOWExLjEzMywxLjEzMywwLDAsMC0uODQ3LS4zMjIsMS41NzgsMS41NzgsMCwwLDAtLjk2NC4yNjksMS4wNzQsMS4wNzQsMCwwLDAtLjQ2MS43NTJxLS4xLjYyLjgzLjk3N2wuMzY2LjEzMmEzLjU1NSwzLjU1NSwwLDAsMSwxLjU2My45NCwxLjczNSwxLjczNSwwLDAsMSwuMzkxLDEuMjc3LDEuOTIzLDEuOTIzLDAsMCwxLS40LDEuMDQ3LDIuMjIxLDIuMjIxLDAsMCwxLS45NTkuNjkxQTMuNDksMy40OSwwLDAsMS04Ljk0My4xLDIuODA5LDIuODA5LDAsMCwxLTEwLjIxLS4yYTIuMDc1LDIuMDc1LDAsMCwxLS44NzItLjgsMi4wNzEsMi4wNzEsMCwwLDEtLjI3OC0xLjE2bDEuMjA2LDBhMS4xMzIsMS4xMzIsMCwwLDAsLjMuOTMzLDEuMzY0LDEuMzY0LDAsMCwwLC45NjcuMzM3LDEuNjksMS42OSwwLDAsMCwuOTc5LS4yNDlBMS4wNDYsMS4wNDYsMCwwLDAtNy40MzktMS44NjVaTS0zLjI3NC0uODQ1YTEuMTExLDEuMTExLDAsMCwwLC43MzUtLjI0MiwxLjEwOSwxLjEwOSwwLDAsMCwuNDA4LS42NTdsMS4wOTQsMEExLjg3LDEuODcsMCwwLDEtMS40MTYtLjhhMi4yLDIuMiwwLDAsMS0uODMzLjY2OUEyLjMxLDIuMzEsMCwwLDEtMy4zMDguMSwxLjk5LDEuOTksMCwwLDEtNC40NjUtLjI1NGExLjk0NCwxLjk0NCwwLDAsMS0uNy0uOTQ1QTMuMDIzLDMuMDIzLDAsMCwxLTUuMzEtMi41NDRsLjAxNS0uMTcxQTMuNDU3LDMuNDU3LDAsMCwxLTQuODQ5LTQuMWEyLjYwOCwyLjYwOCwwLDAsMSwuOTQtLjk1OSwyLjM1NCwyLjM1NCwwLDAsMSwxLjI3OS0uMzE3LDEuODQ4LDEuODQ4LDAsMCwxLDEuMzcyLjU2OUEyLjAwOSwyLjAwOSwwLDAsMS0uNzQ1LTMuMzg0SC0xLjgyOWExLjE4MSwxLjE4MSwwLDAsMC0uMjIyLS43NDIuODEzLjgxMywwLDAsMC0uNjQyLS4zMDgsMS4xNzIsMS4xNzIsMCwwLDAtMS4wNjkuNTc2LDMuMjE2LDMuMjE2LDAsMCwwLS40MiwxLjY4US00LjIxNi0uODY0LTMuMjc0LS44NDVaTTMuMDA1LTQuMmEyLjEzMiwyLjEzMiwwLDAsMC0uNDU0LS4wNDksMS4zNTUsMS4zNTUsMCwwLDAtMS4yMTEuNjNMLjcwNiwwSC0uNDUyTC40NjEtNS4yODNsMS4xLDAtLjExNy42YTEuNTEyLDEuNTEyLDAsMCwxLDEuMjUtLjcsMS45LDEuOSwwLDAsMSwuNDQ0LjA3M1ptLjEsMS41MzhhMy40NzYsMy40NzYsMCwwLDEsLjQ1Ny0xLjQxMSwyLjcwOSwyLjcwOSwwLDAsMSwuOTU5LS45ODEsMi4zNzEsMi4zNzEsMCwwLDEsMS4zLS4zMjcsMi4wMTgsMi4wMTgsMCwwLDEsMS4xNzIuMzYxLDIuMDA3LDIuMDA3LDAsMCwxLC43Mi45NjJBMy4wNTQsMy4wNTQsMCwwLDEsNy44NzQtMi43YTMuNTQxLDMuNTQxLDAsMCwxLS40NTcsMS40ODQsMi43LDIuNywwLDAsMS0uOTY3Ljk4OUEyLjQsMi40LDAsMCwxLDUuMTQ0LjEsMi4wMDksMi4wMDksMCwwLDEsMy45NzktLjI2MWEyLjAxNCwyLjAxNCwwLDAsMS0uNzItLjk1NywzLjAxNSwzLjAxNSwwLDAsMS0uMTY2LTEuMzRabTEuMTM4LjY2OWExLjQsMS40LDAsMCwwLC4yNzEuODIzQS44NjcuODY3LDAsMCwwLDUuMi0uODQ1YTEuMjE3LDEuMjE3LDAsMCwwLDEtLjQ1OUEyLjQxNSwyLjQxNSwwLDAsMCw2LjcwNy0yLjZsLjAyOS0uNDc5YTEuNjkxLDEuNjkxLDAsMCwwLS4yNDktLjk4MS44NzQuODc0LDAsMCwwLS43MjMtLjM3NiwxLjI2NSwxLjI2NSwwLDAsMC0xLjE3Mi43MjgsMi43MTgsMi43MTgsMCwwLDAtLjMyNywxLjA0NUE0LjA4OCw0LjA4OCwwLDAsMCw0LjI0Ni0xLjk5MlpNOS42MzEsMEg4LjQ3NGwxLjMtNy41aDEuMTU3Wm0yLjUyNCwwSDExbDEuMy03LjVoMS4xNTdaTTE4LjgtNy4xMDlsMS4wNCw1LjQzOSwyLjkyNS01LjQzOWgxLjU4MkwyMy4xMTMsMGgtMS4ybC40MTUtMi40MDcuNjMtMi45NjRMMjAuMDI3LDBoLS44NjlMMTguMDY5LTUuNTMyLDE3LjYyNS0yLjI4LDE3LjIyOSwwaC0xLjJsMS4yMzUtNy4xMDlabTUuOTM4LDQuNDQ4YTMuNDc2LDMuNDc2LDAsMCwxLC40NTctMS40MTEsMi43MDksMi43MDksMCwwLDEsLjk1OS0uOTgxLDIuMzcxLDIuMzcxLDAsMCwxLDEuMy0uMzI3LDIuMDE4LDIuMDE4LDAsMCwxLDEuMTcyLjM2MSwyLjAwNywyLjAwNywwLDAsMSwuNzIuOTYyQTMuMDU0LDMuMDU0LDAsMCwxLDI5LjUtMi43YTMuNTQxLDMuNTQxLDAsMCwxLS40NTcsMS40ODQsMi43LDIuNywwLDAsMS0uOTY3Ljk4OUEyLjQsMi40LDAsMCwxLDI2Ljc3LjFhMi4wMDksMi4wMDksMCwwLDEtMS4xNjUtLjM1OSwyLjAxNCwyLjAxNCwwLDAsMS0uNzItLjk1NywzLjAxNSwzLjAxNSwwLDAsMS0uMTY2LTEuMzRabTEuMTM4LjY2OWExLjQsMS40LDAsMCwwLC4yNzEuODIzLjg2Ny44NjcsMCwwLDAsLjY4Ni4zMjUsMS4yMTcsMS4yMTcsMCwwLDAsMS0uNDU5QTIuNDE1LDIuNDE1LDAsMCwwLDI4LjMzMy0yLjZsLjAyOS0uNDc5YTEuNjkxLDEuNjkxLDAsMCwwLS4yNDktLjk4MS44NzQuODc0LDAsMCwwLS43MjMtLjM3NiwxLjI2NSwxLjI2NSwwLDAsMC0xLjE3Mi43MjgsMi43MTgsMi43MTgsMCwwLDAtLjMyNywxLjA0NUE0LjA4OCw0LjA4OCwwLDAsMCwyNS44NzItMS45OTJabTcuNDIyLDEuNDdhMS45MTYsMS45MTYsMCwwLDEtMS41LjYyLDEuNDcyLDEuNDcyLDAsMCwxLS44NTItLjI1NCwxLjMyMSwxLjMyMSwwLDAsMS0uNDgzLS42ODEsMi40OTQsMi40OTQsMCwwLDEtLjA4NS0xLjAyOGwuNTcxLTMuNDE4SDMyLjFsLS41NzYsMy40MzNhMS44MiwxLjgyLDAsMCwwLDAsLjM1Mi41OTQuNTk0LDAsMCwwLC42MS42MywxLjQsMS40LDAsMCwwLDEuMjQtLjYxNWwuNjY0LTMuOGgxLjE1N0wzNC4yNzUsMEgzMy4xOTFabTUuMzMyLS45NDJxLjA4My0uNDgzLS42MjctLjY3MWE3Ljk3Nyw3Ljk3NywwLDAsMS0uOTY5LS4zLDEuMzM2LDEuMzM2LDAsMCwxLS45NzItMS4zMDlBMS40ODYsMS40ODYsMCwwLDEsMzYuNy00LjkyNCwyLjM3MSwyLjM3MSwwLDAsMSwzOC4yLTUuMzgxYTIuMDQxLDIuMDQxLDAsMCwxLDEuMzcuNDc0LDEuNTEsMS41MSwwLDAsMSwuNTIsMS4yMTZsLTEuMTQ3LDBhLjc0MS43NDEsMCwwLDAtLjItLjU3NC44MTcuODE3LDAsMCwwLS41NzYtLjIxNywxLjEzNiwxLjEzNiwwLDAsMC0uNjYyLjE5LjcxLjcxLDAsMCwwLS4zMi41cS0uMDY4LjQ0NC42MjUuNjE4YTYuODYsNi44NiwwLDAsMSwxLjAyNS4zMiwxLjMzNywxLjMzNywwLDAsMSwuOTMzLDEuMzI4LDEuNDYsMS40NiwwLDAsMS0uMzMuODc2LDEuOTIzLDEuOTIzLDAsMCwxLS44MTguNTcxQTIuOCwyLjgsMCwwLDEsMzcuNTI3LjFhMi4xNDgsMi4xNDgsMCwwLDEtMS40MzMtLjUsMS41NywxLjU3LDAsMCwxLS41NTktMS4yNjVsMS4xMTgsMGEuODUxLjg1MSwwLDAsMCwuMjU0LjY0NS45ODEuOTgxLDAsMCwwLC42NjkuMjI1LDEuMzI4LDEuMzI4LDAsMCwwLC43MTUtLjE3OEEuNjg0LjY4NCwwLDAsMCwzOC42MjUtMS40NjVaTTQyLjkxMy4xYTIuMjEzLDIuMjEzLDAsMCwxLTEuMTk0LS4zNDcsMS45NzIsMS45NzIsMCwwLDEtLjc0Ny0uOTA4LDIuNywyLjcsMCwwLDEtLjE4My0xLjI4NGwuMDE1LS4yYTMuNTM2LDMuNTM2LDAsMCwxLC40NzEtMS40NDgsMi42ODksMi42ODksMCwwLDEsLjk1NS0uOTc0LDIuMzIxLDIuMzIxLDAsMCwxLDEuMjQtLjMxNywxLjczMSwxLjczMSwwLDAsMSwxLjQ4Ny43MzgsMi43MTEsMi43MTEsMCwwLDEsLjM3NCwxLjg3M2wtLjA2OC41MDlINDEuOTM2YTEuNDM1LDEuNDM1LDAsMCwwLC4yNTQsMS4wMTIsMS4wMDYsMS4wMDYsMCwwLDAsLjgyLjM5NEExLjc4LDEuNzgsMCwwLDAsNDQuMzg3LTEuNWwuNTg2LjYxNWEyLjIyNywyLjIyNywwLDAsMS0uODc0LjczNUEyLjYsMi42LDAsMCwxLDQyLjkxMy4xWm0uNDkzLTQuNTMxcS0uOTE4LS4wMjktMS4zNzcsMS4zbDIuMTkyLDAsLjAyLS4xYTEuNTMyLDEuNTMyLDAsMCwwLDAtLjQzOS45LjksMCwwLDAtLjI3My0uNTQ3QS44NjYuODY2LDAsMCwwLDQzLjQwNi00LjQzNFptNy4xMzksMi43ODgsMS40NS0zLjYzOGgxLjE2Mkw1MC44NDIsMEg0OS44OWwtLjQ2NC0zLjYxM0w0Ny43MTcsMEg0Ni43NmwtLjQ4My01LjI4M2gxLjA5NGwuMiwzLjU4NCwxLjY3LTMuNTg0aC44NzRaTTU0LjkzOS00LjdhMS45NTMsMS45NTMsMCwwLDEsMS41LS42NzQsMS4yODksMS4yODksMCwwLDEsMS4xMTYuNTMyQTIuMTEzLDIuMTEzLDAsMCwxLDU3LjgyNS0zLjRMNTcuMjU4LDBINTYuMWwuNTc2LTMuNDEzYTEuOTk0LDEuOTk0LDAsMCwwLC4wMS0uMzkxLjYzMy42MzMsMCwwLDAtLjctLjYxLDEuNDI3LDEuNDI3LDAsMCwwLTEuMTUyLjYzNUw1NC4xNzIsMEg1My4wMTVsMS4zLTcuNWgxLjE2MlpNNjAuODU3LjFhMi4yMTMsMi4yMTMsMCwwLDEtMS4xOTQtLjM0NywxLjk3MiwxLjk3MiwwLDAsMS0uNzQ3LS45MDgsMi43LDIuNywwLDAsMS0uMTgzLTEuMjg0bC4wMTUtLjJhMy41MzYsMy41MzYsMCwwLDEsLjQ3MS0xLjQ0OCwyLjY4OSwyLjY4OSwwLDAsMSwuOTU1LS45NzQsMi4zMjEsMi4zMjEsMCwwLDEsMS4yNC0uMzE3LDEuNzMxLDEuNzMxLDAsMCwxLDEuNDg3LjczOCwyLjcxMSwyLjcxMSwwLDAsMSwuMzc0LDEuODczbC0uMDY4LjUwOUg1OS44OGExLjQzNSwxLjQzNSwwLDAsMCwuMjU0LDEuMDEyLDEuMDA2LDEuMDA2LDAsMCwwLC44Mi4zOTRBMS43OCwxLjc4LDAsMCwwLDYyLjMzMi0xLjVsLjU4Ni42MTVhMi4yMjcsMi4yMjcsMCwwLDEtLjg3NC43MzVBMi42LDIuNiwwLDAsMSw2MC44NTcuMVptLjQ5My00LjUzMXEtLjkxOC0uMDI5LTEuMzc3LDEuM2wyLjE5MiwwLC4wMi0uMWExLjUzMiwxLjUzMiwwLDAsMCwwLS40MzkuOS45LDAsMCwwLS4yNzMtLjU0N0EuODY2Ljg2NiwwLDAsMCw2MS4zNS00LjQzNFpNNjYuMTExLjFhMi4yMTMsMi4yMTMsMCwwLDEtMS4xOTQtLjM0NywxLjk3MiwxLjk3MiwwLDAsMS0uNzQ3LS45MDgsMi43LDIuNywwLDAsMS0uMTgzLTEuMjg0bC4wMTUtLjJhMy41MzYsMy41MzYsMCwwLDEsLjQ3MS0xLjQ0OCwyLjY4OSwyLjY4OSwwLDAsMSwuOTU1LS45NzQsMi4zMjEsMi4zMjEsMCwwLDEsMS4yNC0uMzE3LDEuNzMxLDEuNzMxLDAsMCwxLDEuNDg3LjczOCwyLjcxMSwyLjcxMSwwLDAsMSwuMzc0LDEuODczbC0uMDY4LjUwOUg2NS4xMzRhMS40MzUsMS40MzUsMCwwLDAsLjI1NCwxLjAxMiwxLjAwNiwxLjAwNiwwLDAsMCwuODIuMzk0QTEuNzgsMS43OCwwLDAsMCw2Ny41ODUtMS41bC41ODYuNjE1YTIuMjI3LDIuMjI3LDAsMCwxLS44NzQuNzM1QTIuNiwyLjYsMCwwLDEsNjYuMTExLjFaTTY2LjYtNC40MzRxLS45MTgtLjAyOS0xLjM3NywxLjNsMi4xOTIsMCwuMDItLjFhMS41MzIsMS41MzIsMCwwLDAsMC0uNDM5LjkuOSwwLDAsMC0uMjczLS41NDdBLjg2Ni44NjYsMCwwLDAsNjYuNi00LjQzNFpNNzAuMiwwSDY5LjA0NWwxLjMtNy41aDEuMTU3WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNzEzIDc3NykiIGZpbGw9IiMwNTBjMWEiLz4NCiAgICA8ZyBpZD0ia2V5cyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAzKSI+DQogICAgICA8cGF0aCBpZD0ic2xvd2VyIiBkPSJNLTEwLjctMS44MzdxLjEwNi0uNjkzLS43NTUtMS4wMjlsLS4zOS0uMTQ0YTMuNjQsMy42NCwwLDAsMS0xLjU0NC0uOUExLjYwOSwxLjYwOSwwLDAsMS0xMy44LTUuMTE3YTEuODE2LDEuODE2LDAsMCwxLC40MDYtMS4wNTEsMi4zNywyLjM3LDAsMCwxLC45NjktLjdBMy4xNzIsMy4xNzIsMCwwLDEtMTEuMTQ2LTcuMWEyLjU1OSwyLjU1OSwwLDAsMSwxLjE2NC4yODYsMS44ODMsMS44ODMsMCwwLDEsLjc3OS43NTUsMi4wOTIsMi4wOTIsMCwwLDEsLjI1LDEuMWwtMS4xODMsMGExLjExLDEuMTEsMCwwLDAtLjI0My0uODUxLDEuMTE2LDEuMTE2LDAsMCwwLS44MzQtLjMxNywxLjU1NCwxLjU1NCwwLDAsMC0uOTUuMjY1LDEuMDU4LDEuMDU4LDAsMCwwLS40NTUuNzQxcS0uMS42MTEuODE4Ljk2MmwuMzYxLjEzQTMuNSwzLjUsMCwwLDEtOS45LTMuMWExLjcwOSwxLjcwOSwwLDAsMSwuMzg1LDEuMjU4LDEuODk0LDEuODk0LDAsMCwxLS4zOSwxLjAzMiwyLjE4OCwyLjE4OCwwLDAsMS0uOTQ1LjY4MUEzLjQzNywzLjQzNywwLDAsMS0xMi4xOC4xYTIuNzY2LDIuNzY2LDAsMCwxLTEuMjQ4LS4yODksMi4wNDQsMi4wNDQsMCwwLDEtLjg1OS0uNzg2LDIuMDQsMi4wNCwwLDAsMS0uMjc0LTEuMTQybDEuMTg4LDBhMS4xMTUsMS4xMTUsMCwwLDAsLjI5My45MTksMS4zNDMsMS4zNDMsMCwwLDAsLjk1Mi4zMzIsMS42NjUsMS42NjUsMCwwLDAsLjk2NC0uMjQ1QTEuMDMsMS4wMywwLDAsMC0xMC43LTEuODM3Wk0tNy42NTQsMGgtMS4xNEwtNy41MS03LjM4OGgxLjE0Wm0xLjU0OS0yLjYyMWEzLjQyNCwzLjQyNCwwLDAsMSwuNDUtMS4zOSwyLjY2OSwyLjY2OSwwLDAsMSwuOTQ1LS45NjdBMi4zMzUsMi4zMzUsMCwwLDEtMy40MzItNS4zYTEuOTg4LDEuOTg4LDAsMCwxLDEuMTU0LjM1NkExLjk3NiwxLjk3NiwwLDAsMS0xLjU2OC00LDMuMDA4LDMuMDA4LDAsMCwxLTEuNDEyLTIuNjYsMy40ODgsMy40ODgsMCwwLDEtMS44NjEtMS4yYTIuNjU5LDIuNjU5LDAsMCwxLS45NTIuOTc0QTIuMzY5LDIuMzY5LDAsMCwxLTQuMS4xLDEuOTc4LDEuOTc4LDAsMCwxLTUuMjQ3LS4yNTcsMS45ODMsMS45ODMsMCwwLDEtNS45NTctMS4yLDIuOTcsMi45NywwLDAsMS02LjEyLTIuNTJabTEuMTIxLjY1OWExLjM3NCwxLjM3NCwwLDAsMCwuMjY3LjgxLjg1NC44NTQsMCwwLDAsLjY3Ni4zMiwxLjIsMS4yLDAsMCwwLC45ODQtLjQ1MiwyLjM3OCwyLjM3OCwwLDAsMCwuNS0xLjI3NWwuMDI5LS40NzFBMS42NjUsMS42NjUsMCwwLDAtMi43NzgtNGEuODYxLjg2MSwwLDAsMC0uNzEyLS4zNywxLjI0NiwxLjI0NiwwLDAsMC0xLjE1NC43MTcsMi42NzcsMi42NzcsMCwwLDAtLjMyMiwxLjAyOUE0LjAyNyw0LjAyNywwLDAsMC00Ljk4NS0xLjk2MlptOC43OTIuMzQxTDUuMjM1LTUuMkg2LjM4TDQuMSwwSDMuMTYyTDIuNzA1LTMuNTU5LDEuMDIyLDBILjA3OUwtLjQtNS4ySC42ODFsLjIsMy41M0wyLjUyMy01LjJoLjg2MVpNOC42MTIuMUEyLjE4LDIuMTgsMCwwLDEsNy40MzYtLjI0NSwxLjk0MywxLjk0MywwLDAsMSw2LjctMS4xNCwyLjY1OSwyLjY1OSwwLDAsMSw2LjUxOS0yLjRsLjAxNC0uMkEzLjQ4MywzLjQ4MywwLDAsMSw3LTQuMDI4YTIuNjQ4LDIuNjQ4LDAsMCwxLC45NC0uOTZBMi4yODYsMi4yODYsMCwwLDEsOS4xNi01LjNhMS43LDEuNywwLDAsMSwxLjQ2NS43MjcsMi42NywyLjY3LDAsMCwxLC4zNjgsMS44NDVsLS4wNjcuNUg3LjY1YTEuNDE0LDEuNDE0LDAsMCwwLC4yNSwxLC45OTEuOTkxLDAsMCwwLC44MDguMzg4LDEuNzUzLDEuNzUzLDAsMCwwLDEuMzU2LS42NGwuNTc3LjYwNmEyLjE5NCwyLjE5NCwwLDAsMS0uODYxLjcyNEEyLjU2NCwyLjU2NCwwLDAsMSw4LjYxMi4xWk05LjEtNC4zNjdxLS45LS4wMjktMS4zNTYsMS4yNzlsMi4xNTksMCwuMDE5LS4xYTEuNTA5LDEuNTA5LDAsMCwwLDAtLjQzMy44ODUuODg1LDAsMCwwLS4yNjktLjUzOUEuODUzLjg1MywwLDAsMCw5LjEtNC4zNjdabTUuNzM4LjIzMWEyLjEsMi4xLDAsMCwwLS40NDctLjA0OCwxLjMzNSwxLjMzNSwwLDAsMC0xLjE5My42MkwxMi41NywwSDExLjQzbC45LTUuMiwxLjA4MiwwLS4xMTUuNTkyYTEuNDg5LDEuNDg5LDAsMCwxLDEuMjMxLS42OTMsMS44NzEsMS44NzEsMCwwLDEsLjQzOC4wNzJaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4NjAgNzcyKSIgZmlsbD0iIzA1MGMxYSIvPg0KICAgICAgPGcgaWQ9ImtleS1zbG93ZXIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDg0NCA3MjgpIj4NCiAgICAgICAgPGcgdHJhbnNmb3JtPSJtYXRyaXgoMSwgMCwgMCwgMSwgLTY2MSwgLTkxKSIgZmlsdGVyPSJ1cmwoI2tleS1idG0tMTMpIj4NCiAgICAgICAgICA8cGF0aCBpZD0ia2V5LWJ0bS0yOCIgZGF0YS1uYW1lPSJrZXktYnRtIiBkPSJNMiwwSDMwYTIuMTc1LDIuMTc1LDAsMCwxLDEuNS42NzNBMi40MDgsMi40MDgsMCwwLDEsMzEuNzY1LDJWMzBBMS42NCwxLjY0LDAsMCwxLDMwLDMxLjc4OWwtMjguMDMxLjE0OWEyLjIsMi4yLDAsMCwxLTEuMzkxLS41NzhBMS42NTYsMS42NTYsMCwwLDEsMCwzMFYyQTIsMiwwLDAsMSwyLDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2NjEgOTEpIiBmaWxsPSIjNGE0YTRhIi8+DQogICAgICAgIDwvZz4NCiAgICAgICAgPHBhdGggaWQ9ImtleS1zaWRlLTEzIiBkYXRhLW5hbWU9ImtleS1zaWRlIiBkPSJNMTEyOTQtMTQxMTlhMS45OTQsMS45OTQsMCwwLDEtMS41MjEtLjdsMTUuMTA5LTIyLjE5NCwxNS42NDUtOC42ODFhMiwyLDAsMCwxLC43NjcsMS41NzR2MjhhMiwyLDAsMCwxLTIsMloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMTI5MiAxNDE1MSkiIGZpbGw9IiMyMTIxMjEiLz4NCiAgICAgICAgPHBhdGggaWQ9ImtleS10b3AtMTMiIGRhdGEtbmFtZT0ia2V5LXRvcCIgZD0iTTEuOTY0LDBIMjUuNTM2QTEuOTY0LDEuOTY0LDAsMCwxLDI3LjUsMS45NjRWMjUuNTM2QTEuOTY0LDEuOTY0LDAsMCwxLDI1LjUzNiwyNy41SDEuOTY0QTEuOTY0LDEuOTY0LDAsMCwxLDAsMjUuNTM2VjEuOTY0QTEuOTY0LDEuOTY0LDAsMCwxLDEuOTY0LDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyIDEpIiBmaWxsPSJ1cmwoI2xpbmVhci1ncmFkaWVudCkiLz4NCiAgICAgICAgPHBhdGggaWQ9InRleHQiIGQ9Ik0xMi4xODgsMTAuMTA5aDMuNjI1djEuMzI4SDEyLjE4OFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIgNC41KSIgZmlsbD0iI2ZmZiIvPg0KICAgICAgPC9nPg0KICAgICAgPHBhdGggaWQ9ImZhc3RlciIgZD0iTS04Ljk0Ni0yLjk2OGgtMi43MzJMLTEyLjE5MiwwSC0xMy4zOGwxLjIxMi03SC03Ljg0bC0uMTczLjk4MWgtMy4xMzZsLS4zNjEsMi4wODNoMi43MzdaTS01LjI2NiwwYTEuNTQ0LDEuNTQ0LDAsMCwxLS4wNDgtLjQ4NkExLjkzLDEuOTMsMCwwLDEtNi43LjEsMS41OTQsMS41OTQsMCwwLDEtNy44MjgtLjMzOWExLjM0MiwxLjM0MiwwLDAsMS0uNDE2LTEuMDgsMS41OTQsMS41OTQsMCwwLDEsLjcxMi0xLjI5NCwzLjEsMy4xLDAsMCwxLDEuODA4LS40NzFsLjc0MS4wMS4wNjctLjM1NmExLjA3NCwxLjA3NCwwLDAsMCwwLS4zNTFBLjYyNi42MjYsMCwwLDAtNS42LTQuNDE1YTEuMDM3LDEuMDM3LDAsMCwwLS42NDIuMTg1LjguOCwwLDAsMC0uMzM5LjUyMmwtMS4xNC4wMWExLjQyNywxLjQyNywwLDAsMSwuMzQxLS44NDQsMi4wMjUsMi4wMjUsMCwwLDEsLjgxOC0uNTY1QTIuNzY4LDIuNzY4LDAsMCwxLTUuNDg4LTUuM2ExLjgyLDEuODIsMCwwLDEsMS4zMjcuNTEyLDEuNTE4LDEuNTE4LDAsMCwxLC4zOTQsMS4yNzdsLS40LDIuNDM4TC00LjItLjY0YTEuNTM4LDEuNTM4LDAsMCwwLC4wNzIuNTUzbDAsLjA4N1pNLTYuNDQtLjgzN0ExLjI1NywxLjI1NywwLDAsMC01Ljc3MS0xYTEuNzYyLDEuNzYyLDAsMCwwLC41MjQtLjQ1NWwuMTc4LS45ODYtLjU0MywwYTEuOTEsMS45MSwwLDAsMC0xLjAyOS4yNDMuODkxLjg5MSwwLDAsMC0uNDM4LjY2Ni41ODkuNTg5LDAsMCwwLC4xNDIuNTA3QS42OTQuNjk0LDAsMCwwLTYuNDQtLjgzN1ptNi40MTEtLjYwNlEuMDUzLTEuOTE5LS42NDctMi4xQTcuODU3LDcuODU3LDAsMCwxLTEuNi0yLjRhMS4zMTYsMS4zMTYsMCwwLDEtLjk1Ny0xLjI4OUExLjQ2NCwxLjQ2NCwwLDAsMS0xLjkyMS00Ljg1LDIuMzM1LDIuMzM1LDAsMCwxLS40NTItNS4zLDIuMDExLDIuMDExLDAsMCwxLC45LTQuODM0YTEuNDg4LDEuNDg4LDAsMCwxLC41MTIsMS4ybC0xLjEzLDBhLjczLjczLDAsMCwwLS4yLS41NjVBLjguOCwwLDAsMC0uNDg2LTQuNDJhMS4xMTksMS4xMTksMCwwLDAtLjY1Mi4xODguNy43LDAsMCwwLS4zMTUuNDkxcS0uMDY3LjQzOC42MTYuNjA4YTYuNzU3LDYuNzU3LDAsMCwxLDEuMDEuMzE1QTEuMzE3LDEuMzE3LDAsMCwxLDEuMDkyLTEuNTFhMS40MzgsMS40MzgsMCwwLDEtLjMyNS44NjMsMS44OTQsMS44OTQsMCwwLDEtLjgwNi41NjNBMi43NTYsMi43NTYsMCwwLDEtMS4xMTEuMSwyLjExNiwyLjExNiwwLDAsMS0yLjUyMy0uNGExLjU0NiwxLjU0NiwwLDAsMS0uNTUxLTEuMjQ2bDEuMSwwYS44MzguODM4LDAsMCwwLC4yNS42MzUuOTY2Ljk2NiwwLDAsMCwuNjU5LjIyMSwxLjMwOSwxLjMwOSwwLDAsMCwuNy0uMTc2QS42NzMuNjczLDAsMCwwLS4wMjktMS40NDNabTQuNDItNS4wMjZMNC4xNy01LjJoLjg5bC0uMTQ5Ljg2Nkg0LjAxNkwzLjUyNS0xLjQyNGExLDEsMCwwLDAsMCwuMjE2cS4wMjkuMzEzLjM4NS4zMjdhMi4xNzMsMi4xNzMsMCwwLDAsLjQtLjA0M0w0LjIzMi0uMDFhMi42MTMsMi42MTMsMCwwLDEtLjcxNy4xLDEuMDY0LDEuMDY0LDAsMCwxLS44OTItLjQwNkExLjQ3MSwxLjQ3MSwwLDAsMSwyLjM5LTEuMzY2bC40ODYtMi45NzJIMi4wNDRMMi4yLTUuMmguODI3bC4yMjEtMS4yNjVaTTcuNDIxLjFBMi4xOCwyLjE4LDAsMCwxLDYuMjQ1LS4yNDVhMS45NDMsMS45NDMsMCwwLDEtLjczNi0uODk1QTIuNjU5LDIuNjU5LDAsMCwxLDUuMzI5LTIuNGwuMDE0LS4yYTMuNDgzLDMuNDgzLDAsMCwxLC40NjQtMS40MjYsMi42NDgsMi42NDgsMCwwLDEsLjk0LS45NkEyLjI4NiwyLjI4NiwwLDAsMSw3Ljk2OS01LjNhMS43LDEuNywwLDAsMSwxLjQ2NS43MjdBMi42NywyLjY3LDAsMCwxLDkuOC0yLjcyOGwtLjA2Ny41SDYuNDU5YTEuNDE0LDEuNDE0LDAsMCwwLC4yNSwxLC45OTEuOTkxLDAsMCwwLC44MDguMzg4LDEuNzUzLDEuNzUzLDAsMCwwLDEuMzU2LS42NGwuNTc3LjYwNmEyLjE5NCwyLjE5NCwwLDAsMS0uODYxLjcyNEEyLjU2NCwyLjU2NCwwLDAsMSw3LjQyMS4xWm0uNDg2LTQuNDYzUTctNC40LDYuNTUxLTMuMDg4bDIuMTU5LDAsLjAxOS0uMWExLjUwOSwxLjUwOSwwLDAsMCwwLS40MzMuODg1Ljg4NSwwLDAsMC0uMjY5LS41MzlBLjg1My44NTMsMCwwLDAsNy45MDctNC4zNjdabTUuNzM4LjIzMWEyLjEsMi4xLDAsMCwwLS40NDctLjA0OEExLjMzNSwxLjMzNSwwLDAsMCwxMi0zLjU2NEwxMS4zNzksMEgxMC4yNGwuOS01LjIsMS4wODIsMC0uMTE1LjU5MmExLjQ4OSwxLjQ4OSwwLDAsMSwxLjIzMS0uNjkzLDEuODcxLDEuODcxLDAsMCwxLC40MzguMDcyWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoODYwIDcxOCkiIGZpbGw9IiMwNTBjMWEiLz4NCiAgICAgIDxnIGlkPSJrZXktZmFzdGVyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4NDQgNjc0KSI+DQogICAgICAgIDxnIHRyYW5zZm9ybT0ibWF0cml4KDEsIDAsIDAsIDEsIC02NjEsIC0zNykiIGZpbHRlcj0idXJsKCNrZXktYnRtLTE0KSI+DQogICAgICAgICAgPHBhdGggaWQ9ImtleS1idG0tMjkiIGRhdGEtbmFtZT0ia2V5LWJ0bSIgZD0iTTIsMEgzMGEyLjE3NSwyLjE3NSwwLDAsMSwxLjUuNjczQTIuNDA4LDIuNDA4LDAsMCwxLDMxLjc2NSwyVjMwQTEuNjQsMS42NCwwLDAsMSwzMCwzMS43ODlsLTI4LjAzMS4xNDlhMi4yLDIuMiwwLDAsMS0xLjM5MS0uNTc4QTEuNjU2LDEuNjU2LDAsMCwxLDAsMzBWMkEyLDIsMCwwLDEsMiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjYxIDM3KSIgZmlsbD0iIzRhNGE0YSIvPg0KICAgICAgICA8L2c+DQogICAgICAgIDxwYXRoIGlkPSJrZXktc2lkZS0xNCIgZGF0YS1uYW1lPSJrZXktc2lkZSIgZD0iTTExMjk0LTE0MTE5YTEuOTk0LDEuOTk0LDAsMCwxLTEuNTIxLS43bDE1LjEwOS0yMi4xOTQsMTUuNjQ1LTguNjgxYTIsMiwwLDAsMSwuNzY3LDEuNTc0djI4YTIsMiwwLDAsMS0yLDJaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTEyOTIgMTQxNTEpIiBmaWxsPSIjMjEyMTIxIi8+DQogICAgICAgIDxwYXRoIGlkPSJrZXktdG9wLTE0IiBkYXRhLW5hbWU9ImtleS10b3AiIGQ9Ik0xLjk2NCwwSDI1LjUzNkExLjk2NCwxLjk2NCwwLDAsMSwyNy41LDEuOTY0VjI1LjUzNkExLjk2NCwxLjk2NCwwLDAsMSwyNS41MzYsMjcuNUgxLjk2NEExLjk2NCwxLjk2NCwwLDAsMSwwLDI1LjUzNlYxLjk2NEExLjk2NCwxLjk2NCwwLDAsMSwxLjk2NCwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMiAxKSIgZmlsbD0idXJsKCNsaW5lYXItZ3JhZGllbnQpIi8+DQogICAgICAgIDxwYXRoIGlkPSJ0ZXh0LTIiIGRhdGEtbmFtZT0idGV4dCIgZD0iTTkuNzM0LDguMzJoMy43MjdWNC41NzhoMS4wMjNWOC4zMkgxOC4yNVY5LjM0NEgxNC40ODR2My43MTFIMTMuNDYxVjkuMzQ0SDkuNzM0WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMiA2LjUpIiBmaWxsPSIjZmZmIi8+DQogICAgICA8L2c+DQogICAgPC9nPg0KICAgIDxwYXRoIGlkPSJvci0zIiBkYXRhLW5hbWU9Im9yIiBkPSJNLTYuOC0yLjUwNkgtOS4yNTRsLjE2OC0uOTQzaDIuNDU4Wk0tMy40NDguMWEyLjM3MywyLjM3MywwLDAsMS0xLjItLjMyNywyLjEsMi4xLDAsMCwxLS44MDYtLjkwNywzLjQ2LDMuNDYsMCwwLDEtLjMyNy0xLjM0OSw2LjIsNi4yLDAsMCwxLC4xMDgtMS40LDQuNzI4LDQuNzI4LDAsMCwxLC41MDUtMS40NjVBMy42ODEsMy42ODEsMCwwLDEtNC4zLTYuNDM1LDIuODYsMi44NiwwLDAsMS0yLjM3Ni03LjFhMi4xNjEsMi4xNjEsMCwwLDEsMS42NTcuNzE3QTIuOTY4LDIuOTY4LDAsMCwxLS4wNDMtNC41LDYuMiw2LjIsMCwwLDEtLjE1Mi0zLjEyOSw0Ljk2LDQuOTYsMCwwLDEtLjYyMy0xLjcxYTMuNjIxLDMuNjIxLDAsMCwxLS44MywxLjA4QTIuODM4LDIuODM4LDAsMCwxLTMuNDQ4LjFaTS0xLjI2LTMuNjg5bC4wNDMtLjUxYTMuMDU1LDMuMDU1LDAsMCwwLS4wOTEtLjk2OSwxLjI3MiwxLjI3MiwwLDAsMC0uNDA2LS42NzgsMS4xNzIsMS4xNzIsMCwwLDAtLjcyNC0uMjQ4LDEuNjI2LDEuNjI2LDAsMCwwLTEuMDc1LjM0MSwyLjUsMi41LDAsMCwwLS43NiwxLjEsNS43NDUsNS43NDUsMCwwLDAtLjMzOSwxLjg0NywyLjM0MiwyLjM0MiwwLDAsMCwuMjY5LDEuMzg1QTEuMDkzLDEuMDkzLDAsMCwwLTMuMzkxLS45YTEuNjQ0LDEuNjQ0LDAsMCwwLDEuMzczLS42MjUsMy42LDMuNiwwLDAsMCwuNzA5LTEuODI4Wm00Ljc2MSwxSDIuMTY0TDEuNjkzLDBILjUwNUwxLjcyMi03LDMuOTI5LTdhMi41MTUsMi41MTUsMCwwLDEsMS43NDYuNTQ5QTEuNzQzLDEuNzQzLDAsMCwxLDYuMi00LjkyM2EyLjEsMi4xLDAsMCwxLS40NTIsMS4xNzcsMi42MzEsMi42MzEsMCwwLDEtMS4xMjEuNzgyTDUuNjYxLS4wNzJsMCwuMDcySDQuNFpNMi4zMjgtMy42NzVsMS4xNDkuMDFBMS42MzQsMS42MzQsMCwwLDAsNC41MTQtMy45OSwxLjI4LDEuMjgsMCwwLDAsNS00Ljg3MmEuOTkyLjk5MiwwLDAsMC0uMTkyLS44MzQsMS4wODgsMS4wODgsMCwwLDAtLjgtLjMxbC0xLjI3LDBaTTkuMDQ3LTIuNTA2SDYuNTg5bC4xNjgtLjk0M0g5LjIxNVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDgxOCA3MjEpIiBmaWxsPSIjMDUwYzFhIi8+DQogICAgPGcgaWQ9InBvd2VyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1KSI+DQogICAgICA8ZyBpZD0ia2V5LWJpZyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjMwIDcwMSkiPg0KICAgICAgICA8ZyB0cmFuc2Zvcm09Im1hdHJpeCgxLCAwLCAwLCAxLCAtNDUyLCAtNjEpIiBmaWx0ZXI9InVybCgja2V5LWJ0bS0xNSkiPg0KICAgICAgICAgIDxwYXRoIGlkPSJrZXktYnRtLTMwIiBkYXRhLW5hbWU9ImtleS1idG0iIGQ9Ik0yLDBINjBhMi4xNzUsMi4xNzUsMCwwLDEsMS41LjY3M0EyLjQwOCwyLjQwOCwwLDAsMSw2MS43NjUsMlYzMEExLjY0LDEuNjQsMCwwLDEsNjAsMzEuNzg5bC01OC4wMzEuMTQ5YTIuMiwyLjIsMCwwLDEtMS4zOTEtLjU3OEExLjY1NiwxLjY1NiwwLDAsMSwwLDMwVjJBMiwyLDAsMCwxLDIsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQ1MiA2MSkiIGZpbGw9IiM0YTRhNGEiLz4NCiAgICAgICAgPC9nPg0KICAgICAgICA8cGF0aCBpZD0ia2V5LXNpZGUtMTUiIGRhdGEtbmFtZT0ia2V5LXNpZGUiIGQ9Ik0xMTUwMi45MzgtMTQxNDNhMS45MTEsMS45MTEsMCwwLDEtMS40ODItLjcxbDYuMjA3LTkuNjYsNDcuNi0xNi44ODcsNy4wMTItNC4zYTIuMDI4LDIuMDI4LDAsMCwxLC43MjIsMS41NjF2MjhhMS45NjcsMS45NjcsMCwwLDEtMS45MzUsMloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMTUwMSAxNDE3NSkiIGZpbGw9IiMyMTIxMjEiLz4NCiAgICAgICAgPHBhdGggaWQ9ImtleS10b3AtMTUiIGRhdGEtbmFtZT0ia2V5LXRvcCIgZD0iTTEuOTY0LDBINTUuNTM2QTEuOTY0LDEuOTY0LDAsMCwxLDU3LjUsMS45NjRWMjUuNTM2QTEuOTY0LDEuOTY0LDAsMCwxLDU1LjUzNiwyNy41SDEuOTY0QTEuOTY0LDEuOTY0LDAsMCwxLDAsMjUuNTM2VjEuOTY0QTEuOTY0LDEuOTY0LDAsMCwxLDEuOTY0LDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyIDEpIiBmaWxsPSJ1cmwoI2xpbmVhci1ncmFkaWVudCkiLz4NCiAgICAgICAgPHBhdGggaWQ9InRleHQtMyIgZGF0YS1uYW1lPSJ0ZXh0IiBkPSJNNy45NSwzLjU5MlY0LjkzOGE1Ljk0Nyw1Ljk0NywwLDAsMC0yLjU5MS0uNjksMy41ODUsMy41ODUsMCwwLDAtMi41NTcuOThBMy4xOCwzLjE4LDAsMCwwLDEuNzY0LDcuNjM1YTMuMTU2LDMuMTU2LDAsMCwwLDEuMDYzLDIuNDI4LDMuNzkzLDMuNzkzLDAsMCwwLDIuNjYzLjk3M0E1LjAzOSw1LjAzOSwwLDAsMCw3Ljk1LDEwLjN2MS4zNmE1LjM3Niw1LjM3NiwwLDAsMS0yLjU2My42MjksNC44MzEsNC44MzEsMCwwLDEtMy40NTktMS4zNyw0LjQsNC40LDAsMCwxLTEuNDM2LTMuM0E0LjM0Myw0LjM0MywwLDAsMSwxLjksNC4zNyw0LjczOSw0LjczOSwwLDAsMSw1LjMsMy4wMTgsNi44MTUsNi44MTUsMCwwLDEsNy45NSwzLjU5MlpNOS42MzIsNC43MmgxLjE4OVY2LjM2SDEyVjcuNDQ3SDEwLjgyMVYxMkg5LjYzMlY3LjQ0N0g4Ljd2LTEuMWguOTM3Wk0xNC4zNjksNi4zNlY3LjUyMmEzLjYxOCwzLjYxOCwwLDAsMSwuNzc2LTEuMDA4LDEuNTA4LDEuNTA4LDAsMCwxLC45ODgtLjMxMSwyLjE2NSwyLjE2NSwwLDAsMSwuNDkyLjA4MmwtLjM2MiwxLjE4OWEyLjk2MiwyLjk2MiwwLDAsMC0uNDUxLS4wNjgsMS4zNDcsMS4zNDcsMCwwLDAtMS4wMDguNDJBMS40NDksMS40NDksMCwwLDAsMTQuNCw4Ljg3NlYxMkgxMy4yMDdWNi4zNlptMy41LTMuMjMzaDEuMTg5VjEySDE3Ljg2OVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDYgMTIpIiBmaWxsPSIjZmZmIi8+DQogICAgICA8L2c+DQogICAgICA8cGF0aCBpZD0iXyIgZGF0YS1uYW1lPSIrIiBkPSJNNC43NDQtNS41NzFINy4yMTJ2MS43ODRINC43NDRWLTFIMi44NjRWLTMuNzg3SC4zOVYtNS41NzFIMi44NjRWLTguMjQ0aDEuODhaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg3MDAgNzIxKSIgZmlsbD0iIzA1MGMxYSIvPg0KICAgICAgPHBhdGggaWQ9ImZhc3Rlci0yIiBkYXRhLW5hbWU9ImZhc3RlciIgZD0iTS05LjA4Mi0zLjAxM2gtMi43NzNMLTEyLjM3OCwwaC0xLjIwNmwxLjIzLTcuMTA5aDQuMzk1bC0uMTc2LDFoLTMuMTg0TC0xMS42ODUtNGgyLjc3OFpNLTUuMzQ3LDBBMS41NjcsMS41NjcsMCwwLDEtNS40LS40OTMsMS45NTksMS45NTksMCwwLDEtNi44MDcuMWExLjYxOCwxLjYxOCwwLDAsMS0xLjE0LS40NDIsMS4zNjMsMS4zNjMsMCwwLDEtLjQyMi0xLjEsMS42MTgsMS42MTgsMCwwLDEsLjcyMy0xLjMxMywzLjE0NiwzLjE0NiwwLDAsMSwxLjgzNi0uNDc5bC43NTIuMDEuMDY4LS4zNjFhMS4wOSwxLjA5LDAsMCwwLDAtLjM1Ni42MzYuNjM2LDAsMCwwLS43LS41NDIsMS4wNTMsMS4wNTMsMCwwLDAtLjY1Mi4xODguODEzLjgxMywwLDAsMC0uMzQ0LjUzbC0xLjE1Ny4wMUExLjQ0OSwxLjQ0OSwwLDAsMS03LjUtNC42MTJhMi4wNTYsMi4wNTYsMCwwLDEsLjgzLS41NzQsMi44MSwyLjgxLDAsMCwxLDEuMDk0LS4yLDEuODQ4LDEuODQ4LDAsMCwxLDEuMzQ4LjUyLDEuNTQxLDEuNTQxLDAsMCwxLC40LDEuM2wtLjQwNSwyLjQ3Ni0uMDM5LjQzOWExLjU2MSwxLjU2MSwwLDAsMCwuMDczLjU2MkwtNC4yLDBaTS02LjUzOC0uODVhMS4yNzYsMS4yNzYsMCwwLDAsLjY3OS0uMTY4LDEuNzg4LDEuNzg4LDAsMCwwLC41MzItLjQ2MWwuMTgxLTEtLjU1MiwwYTEuOTM5LDEuOTM5LDAsMCwwLTEuMDQ1LjI0Ny45LjksMCwwLDAtLjQ0NC42NzYuNi42LDAsMCwwLC4xNDQuNTE1QS43LjcsMCwwLDAtNi41MzgtLjg1Wm02LjUwOS0uNjE1cS4wODMtLjQ4My0uNjI3LS42NzFhNy45NzcsNy45NzcsMCwwLDEtLjk2OS0uM0ExLjMzNiwxLjMzNiwwLDAsMS0yLjYtMy43NDVhMS40ODYsMS40ODYsMCwwLDEsLjY0Ny0xLjE3OUEyLjM3MSwyLjM3MSwwLDAsMS0uNDU5LTUuMzgxYTIuMDQxLDIuMDQxLDAsMCwxLDEuMzcuNDc0LDEuNTEsMS41MSwwLDAsMSwuNTIsMS4yMTZMLjI4My0zLjdhLjc0MS43NDEsMCwwLDAtLjItLjU3NC44MTcuODE3LDAsMCwwLS41NzYtLjIxNywxLjEzNiwxLjEzNiwwLDAsMC0uNjYyLjE5LjcxLjcxLDAsMCwwLS4zMi41cS0uMDY4LjQ0NC42MjUuNjE4YTYuODYsNi44NiwwLDAsMSwxLjAyNS4zMiwxLjMzNywxLjMzNywwLDAsMSwuOTMzLDEuMzI4LDEuNDYsMS40NiwwLDAsMS0uMzMuODc2LDEuOTIzLDEuOTIzLDAsMCwxLS44MTguNTcxQTIuOCwyLjgsMCwwLDEtMS4xMjguMWEyLjE0OCwyLjE0OCwwLDAsMS0xLjQzMy0uNUExLjU3LDEuNTcsMCwwLDEtMy4xMi0xLjY3bDEuMTE4LDBhLjg1MS44NTEsMCwwLDAsLjI1NC42NDVBLjk4MS45ODEsMCwwLDAtMS4wNzktLjgsMS4zMjgsMS4zMjgsMCwwLDAtLjM2NC0uOTc0LjY4NC42ODQsMCwwLDAtLjAyOS0xLjQ2NVptNC40ODctNS4xTDQuMjMzLTUuMjgzaC45TDQuOTg1LTQuNEg0LjA3N2wtLjUsMi45NTlhMS4wMTIsMS4wMTIsMCwwLDAsMCwuMjJxLjAyOS4zMTcuMzkxLjMzMmEyLjIwNiwyLjIwNiwwLDAsMCwuNDEtLjA0NEw0LjMtLjAxYTIuNjUzLDIuNjUzLDAsMCwxLS43MjguMUExLjA4LDEuMDgsMCwwLDEsMi42NjQtLjMyYTEuNDkzLDEuNDkzLDAsMCwxLS4yMzctMS4wNjdMMi45Mi00LjRIMi4wNzVsLjE1Ni0uODc5aC44NEwzLjMtNi41NjdaTTcuNTM0LjFBMi4yMTMsMi4yMTMsMCwwLDEsNi4zNC0uMjQ5YTEuOTcyLDEuOTcyLDAsMCwxLS43NDctLjkwOEEyLjcsMi43LDAsMCwxLDUuNDEtMi40NDFsLjAxNS0uMkEzLjUzNiwzLjUzNiwwLDAsMSw1LjktNC4wODlhMi42ODksMi42ODksMCwwLDEsLjk1NS0uOTc0LDIuMzIxLDIuMzIxLDAsMCwxLDEuMjQtLjMxNywxLjczMSwxLjczMSwwLDAsMSwxLjQ4Ny43MzgsMi43MTEsMi43MTEsMCwwLDEsLjM3NCwxLjg3M2wtLjA2OC41MDlINi41NThhMS40MzUsMS40MzUsMCwwLDAsLjI1NCwxLjAxMiwxLjAwNiwxLjAwNiwwLDAsMCwuODIuMzk0QTEuNzgsMS43OCwwLDAsMCw5LjAwOS0xLjVsLjU4Ni42MTVhMi4yMjcsMi4yMjcsMCwwLDEtLjg3NC43MzVBMi42LDIuNiwwLDAsMSw3LjUzNC4xWm0uNDkzLTQuNTMxcS0uOTE4LS4wMjktMS4zNzcsMS4zbDIuMTkyLDAsLjAyLS4xYTEuNTMyLDEuNTMyLDAsMCwwLDAtLjQzOS45LjksMCwwLDAtLjI3My0uNTQ3QS44NjYuODY2LDAsMCwwLDguMDI3LTQuNDM0Wm01LjgyNS4yMzRhMi4xMzIsMi4xMzIsMCwwLDAtLjQ1NC0uMDQ5LDEuMzU1LDEuMzU1LDAsMCwwLTEuMjExLjYzTDExLjU1MywwSDEwLjRsLjkxMy01LjI4MywxLjEsMC0uMTE3LjZhMS41MTIsMS41MTIsMCwwLDEsMS4yNS0uNywxLjksMS45LDAsMCwxLC40NDQuMDczWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNzcyIDcwMikiIGZpbGw9IiMwNTBjMWEiLz4NCiAgICAgIDxwYXRoIGlkPSJzbG93ZXItMiIgZGF0YS1uYW1lPSJzbG93ZXIiIGQ9Ik0tMTAuODYyLTEuODY1cS4xMDctLjctLjc2Ny0xLjA0NWwtLjQtLjE0NmEzLjcsMy43LDAsMCwxLTEuNTY3LS45MTMsMS42MzMsMS42MzMsMCwwLDEtLjQyLTEuMjI2QTEuODQzLDEuODQzLDAsMCwxLTEzLjYtNi4yNjJhMi40MDYsMi40MDYsMCwwLDEsLjk4NC0uNzEsMy4yMiwzLjIyLDAsMCwxLDEuMy0uMjM0LDIuNiwyLjYsMCwwLDEsMS4xODIuMjkxLDEuOTEyLDEuOTEyLDAsMCwxLC43OTEuNzY3LDIuMTIzLDIuMTIzLDAsMCwxLC4yNTQsMS4xMjFsLTEuMiwwYTEuMTI3LDEuMTI3LDAsMCwwLS4yNDctLjg2NCwxLjEzMywxLjEzMywwLDAsMC0uODQ3LS4zMjIsMS41NzgsMS41NzgsMCwwLDAtLjk2NC4yNjksMS4wNzQsMS4wNzQsMCwwLDAtLjQ2MS43NTJxLS4xLjYyLjgzLjk3N2wuMzY2LjEzMmEzLjU1NSwzLjU1NSwwLDAsMSwxLjU2My45NCwxLjczNSwxLjczNSwwLDAsMSwuMzkxLDEuMjc3LDEuOTIzLDEuOTIzLDAsMCwxLS40LDEuMDQ3LDIuMjIxLDIuMjIxLDAsMCwxLS45NTkuNjkxQTMuNDksMy40OSwwLDAsMS0xMi4zNjYuMSwyLjgwOSwyLjgwOSwwLDAsMS0xMy42MzMtLjJhMi4wNzUsMi4wNzUsMCwwLDEtLjg3Mi0uOCwyLjA3MSwyLjA3MSwwLDAsMS0uMjc4LTEuMTZsMS4yMDYsMGExLjEzMiwxLjEzMiwwLDAsMCwuMy45MzMsMS4zNjQsMS4zNjQsMCwwLDAsLjk2Ny4zMzcsMS42OSwxLjY5LDAsMCwwLC45NzktLjI0OUExLjA0NiwxLjA0NiwwLDAsMC0xMC44NjItMS44NjVaTS03Ljc3MSwwSC04LjkyOGwxLjMtNy41aDEuMTU3Wk0tNi4yLTIuNjYxYTMuNDc2LDMuNDc2LDAsMCwxLC40NTctMS40MTEsMi43MDksMi43MDksMCwwLDEsLjk1OS0uOTgxLDIuMzcxLDIuMzcxLDAsMCwxLDEuMy0uMzI3LDIuMDE4LDIuMDE4LDAsMCwxLDEuMTcyLjM2MSwyLjAwNywyLjAwNywwLDAsMSwuNzIuOTYyQTMuMDU0LDMuMDU0LDAsMCwxLTEuNDMzLTIuNywzLjU0MSwzLjU0MSwwLDAsMS0xLjg5LTEuMjE2YTIuNywyLjcsMCwwLDEtLjk2Ny45ODlBMi40LDIuNCwwLDAsMS00LjE2My4xLDIuMDA5LDIuMDA5LDAsMCwxLTUuMzI3LS4yNjFhMi4wMTQsMi4wMTQsMCwwLDEtLjcyLS45NTcsMy4wMTUsMy4wMTUsMCwwLDEtLjE2Ni0xLjM0Wm0xLjEzOC42NjlhMS40LDEuNCwwLDAsMCwuMjcxLjgyM0EuODY3Ljg2NywwLDAsMC00LjEtLjg0NWExLjIxNywxLjIxNywwLDAsMCwxLS40NTlBMi40MTUsMi40MTUsMCwwLDAtMi42LTIuNmwuMDI5LS40NzlhMS42OTEsMS42OTEsMCwwLDAtLjI0OS0uOTgxLjg3NC44NzQsMCwwLDAtLjcyMy0uMzc2LDEuMjY1LDEuMjY1LDAsMCwwLTEuMTcyLjcyOCwyLjcxOCwyLjcxOCwwLDAsMC0uMzI3LDEuMDQ1QTQuMDg4LDQuMDg4LDAsMCwwLTUuMDYxLTEuOTkyWm04LjkyNi4zNDcsMS40NS0zLjYzOEg2LjQ3N0w0LjE2MywwSDMuMjFMMi43NDctMy42MTMsMS4wMzgsMEguMDgxTC0uNC01LjI4M0guNjkxTC44OTEtMS43bDEuNjctMy41ODRoLjg3NFpNOC43NDMuMUEyLjIxMywyLjIxMywwLDAsMSw3LjU0OS0uMjQ5LDEuOTcyLDEuOTcyLDAsMCwxLDYuOC0xLjE1N2EyLjcsMi43LDAsMCwxLS4xODMtMS4yODRsLjAxNS0uMkEzLjUzNiwzLjUzNiwwLDAsMSw3LjEtNC4wODlhMi42ODksMi42ODksMCwwLDEsLjk1NS0uOTc0QTIuMzIxLDIuMzIxLDAsMCwxLDkuMy01LjM4MWExLjczMSwxLjczMSwwLDAsMSwxLjQ4Ny43MzgsMi43MTEsMi43MTEsMCwwLDEsLjM3NCwxLjg3M2wtLjA2OC41MDlINy43NjZBMS40MzUsMS40MzUsMCwwLDAsOC4wMi0xLjI0OWExLjAwNiwxLjAwNiwwLDAsMCwuODIuMzk0QTEuNzgsMS43OCwwLDAsMCwxMC4yMTctMS41bC41ODYuNjE1YTIuMjI3LDIuMjI3LDAsMCwxLS44NzQuNzM1QTIuNiwyLjYsMCwwLDEsOC43NDMuMVptLjQ5My00LjUzMXEtLjkxOC0uMDI5LTEuMzc3LDEuM2wyLjE5MiwwLC4wMi0uMWExLjUzMiwxLjUzMiwwLDAsMCwwLS40MzlBLjkuOSwwLDAsMCw5LjgtNC4yMTkuODY2Ljg2NiwwLDAsMCw5LjIzNi00LjQzNFptNS44MjUuMjM0YTIuMTMyLDIuMTMyLDAsMCwwLS40NTQtLjA0OSwxLjM1NSwxLjM1NSwwLDAsMC0xLjIxMS42M0wxMi43NjEsMEgxMS42bC45MTMtNS4yODMsMS4xLDAtLjExNy42YTEuNTEyLDEuNTEyLDAsMCwxLDEuMjUtLjcsMS45LDEuOSwwLDAsMSwuNDQ0LjA3M1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDc3MiA3MzkpIiBmaWxsPSIjMDUwYzFhIi8+DQogICAgICA8cGF0aCBpZD0iYXJyb3ciIGQ9Ik0tODI2Ni4zMzIsMjY2Mi44MzJoLTExLjMzM1YyNjY1bC01LjMzNS00LjUsNS4zMzUtNC41djIuMTY3aDExLjMzM1YyNjU2bDUuMzMzLDQuNS01LjMzMyw0LjVaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTg4OCAtNzU1NSkgcm90YXRlKC05MCkiIGZpbGw9IiMyMTIzMjkiIG9wYWNpdHk9IjAuNCIvPg0KICAgICAgPGcgaWQ9Im1vdXNlLTMiIGRhdGEtbmFtZT0ibW91c2UiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDcwMSA2OTApIj4NCiAgICAgICAgPGcgaWQ9InNoYXBlLTMiIGRhdGEtbmFtZT0ic2hhcGUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC05MDQgLTY0MykiPg0KICAgICAgICAgIDxnIHRyYW5zZm9ybT0ibWF0cml4KDEsIDAsIDAsIDEsIDM4MSwgNTkzKSIgZmlsdGVyPSJ1cmwoI2J0bS0zKSI+DQogICAgICAgICAgICA8cGF0aCBpZD0iYnRtLTEwIiBkYXRhLW5hbWU9ImJ0bSIgZD0iTTcuMiwwSDI4LjhBNy4yLDcuMiwwLDAsMSwzNiw3LjJWMzZBMTgsMTgsMCwwLDEsMTgsNTRoMEExOCwxOCwwLDAsMSwwLDM2VjcuMkE3LjIsNy4yLDAsMCwxLDcuMiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTM4IDUwKSIgZmlsbD0iIzIxMjEyMSIvPg0KICAgICAgICAgIDwvZz4NCiAgICAgICAgICA8cGF0aCBpZD0ic2lkZS0zIiBkYXRhLW5hbWU9InNpZGUiIGQ9Ik0tNDEwMiwyNzA0YTE3Ljg4MSwxNy44ODEsMCwwLDEtMTIuNzI4LTUuMjcyQTE3Ljg4MiwxNy44ODIsMCwwLDEtNDEyMCwyNjg2di0yOC44YTcuMjA4LDcuMjA4LDAsMCwxLDcuMi03LjJoMjEuNmE3LjIwOCw3LjIwOCwwLDAsMSw3LjIsNy4yVjI2ODZhMTcuODgxLDE3Ljg4MSwwLDAsMS01LjI3MiwxMi43MjhBMTcuODg0LDE3Ljg4NCwwLDAsMS00MTAyLDI3MDRabS0xMC40LTUyYTUuNjA2LDUuNjA2LDAsMCwwLTUuNiw1LjZWMjY4MmExNi4wMTgsMTYuMDE4LDAsMCwwLDE2LDE2LDE2LjAxOCwxNi4wMTgsMCwwLDAsMTYtMTZ2LTI0LjRhNS42MDYsNS42MDYsMCwwLDAtNS42LTUuNloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDUwMzkgLTIwMDcpIiBmaWxsPSJ1cmwoI2xpbmVhci1ncmFkaWVudC03KSIvPg0KICAgICAgICAgIDxwYXRoIGlkPSJ0b3AtMyIgZGF0YS1uYW1lPSJ0b3AiIGQ9Ik01LjYsMEgyNi40QTUuNiw1LjYsMCwwLDEsMzIsNS42VjMwQTE2LDE2LDAsMCwxLDE2LDQ2aDBBMTYsMTYsMCwwLDEsMCwzMFY1LjZBNS42LDUuNiwwLDAsMSw1LjYsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDkyMSA2NDUpIiBmaWxsPSJ1cmwoI2xpbmVhci1ncmFkaWVudC04KSIvPg0KICAgICAgICA8L2c+DQogICAgICAgIDxwYXRoIGlkPSJ0ci01IiBkYXRhLW5hbWU9InRyIiBkPSJNMCwwSDkuNWE1LDUsMCwwLDEsNSw1VjE3YTAsMCwwLDAsMSwwLDBIMGEwLDAsMCwwLDEsMCwwVjBBMCwwLDAsMCwxLDAsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMzLjUgMykiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAuMTUiLz4NCiAgICAgICAgPHBhdGggaWQ9InRsLTUiIGRhdGEtbmFtZT0idGwiIGQ9Ik01LDBoOS41YTAsMCwwLDAsMSwwLDBWMTdhMCwwLDAsMCwxLDAsMEgwYTAsMCwwLDAsMSwwLDBWNUE1LDUsMCwwLDEsNSwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTggMykiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAuMTUiLz4NCiAgICAgICAgPGcgdHJhbnNmb3JtPSJtYXRyaXgoMSwgMCwgMCwgMSwgLTUyMywgLTUwKSIgZmlsdGVyPSJ1cmwoI3Njcm9sbC0yKSI+DQogICAgICAgICAgPGcgaWQ9InNjcm9sbC02IiBkYXRhLW5hbWU9InNjcm9sbCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTUzIDYxKSIgZmlsbD0iI2ZmYjcwMCIgc3Ryb2tlPSIjMzEzMTMxIiBzdHJva2Utd2lkdGg9IjEiPg0KICAgICAgICAgICAgPHJlY3Qgd2lkdGg9IjYiIGhlaWdodD0iMTQiIHN0cm9rZT0ibm9uZSIvPg0KICAgICAgICAgICAgPHJlY3QgeD0iLTAuNSIgeT0iLTAuNSIgd2lkdGg9IjciIGhlaWdodD0iMTUiIGZpbGw9Im5vbmUiLz4NCiAgICAgICAgICA8L2c+DQogICAgICAgIDwvZz4NCiAgICAgIDwvZz4NCiAgICA8L2c+DQogIDwvZz4NCiAgPGcgaWQ9InA0IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMjkxIC02NDApIj4NCiAgICA8ZyBpZD0icGFuZS00IiBkYXRhLW5hbWU9InBhbmUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDYxNSA2NDApIj4NCiAgICAgIDxyZWN0IGlkPSJib3gtNCIgZGF0YS1uYW1lPSJib3giIHdpZHRoPSIxMDQiIGhlaWdodD0iMTYwIiByeD0iNCIgZmlsbD0iI2Y2ZjZmNiIvPg0KICAgICAgPHBhdGggaWQ9ImxhYmVsLTEwIiBkYXRhLW5hbWU9ImxhYmVsIiBkPSJNMi40NjEtMS4zMThoMy40VjBILjMyMlYtLjlMMy43MTEtNS43ODZILjNWLTcuMTA5SDUuODI1di44NzlabTEwLjI2OC0yLjA5YTQuMTkyLDQuMTkyLDAsMCwxLS4zODYsMS44NDEsMi44NTEsMi44NTEsMCwwLDEtMS4xLDEuMjMzQTMuMDUyLDMuMDUyLDAsMCwxLDkuNjI5LjEsMy4xLDMuMSwwLDAsMSw4LjAxNy0uMzJhMi44NDYsMi44NDYsMCwwLDEtMS4xLTEuMTk0QTQuMDcyLDQuMDcyLDAsMCwxLDYuNTA5LTMuM3YtLjRBNC4yMTEsNC4yMTEsMCwwLDEsNi44OTItNS41NGEyLjg0NCwyLjg0NCwwLDAsMSwxLjEtMS4yMzMsMy4wNzQsMy4wNzQsMCwwLDEsMS42MjgtLjQzNSwzLjA0NCwzLjA0NCwwLDAsMSwxLjYxMS40MywyLjksMi45LDAsMCwxLDEuMSwxLjIyMyw0LjA5LDQuMDksMCwwLDEsLjQsMS44MTlabS0xLjc0My0uM2EyLjk5LDIuOTksMCwwLDAtLjM1NC0xLjYwOSwxLjEzNSwxLjEzNSwwLDAsMC0xLjAxMy0uNTQ5cS0xLjI4OSwwLTEuMzYyLDEuOTM0bDAsLjUyMkEzLjA3NSwzLjA3NSwwLDAsMCw4LjYtMS44YTEuMTM0LDEuMTM0LDAsMCwwLDEuMDMuNTYyLDEuMTIsMS4xMiwwLDAsMCwxLS41NTIsMi45OTEsMi45OTEsMCwwLDAsLjM1Ni0xLjU4N1ptOC44NDcuM2E0LjE5Miw0LjE5MiwwLDAsMS0uMzg2LDEuODQxLDIuODUxLDIuODUxLDAsMCwxLTEuMSwxLjIzM0EzLjA1MiwzLjA1MiwwLDAsMSwxNi43MzMuMSwzLjEsMy4xLDAsMCwxLDE1LjEyMi0uMzJhMi44NDYsMi44NDYsMCwwLDEtMS4xLTEuMTk0QTQuMDcyLDQuMDcyLDAsMCwxLDEzLjYxMy0zLjN2LS40QTQuMjExLDQuMjExLDAsMCwxLDE0LTUuNTRhMi44NDQsMi44NDQsMCwwLDEsMS4xLTEuMjMzLDMuMDc0LDMuMDc0LDAsMCwxLDEuNjI4LS40MzUsMy4wNDQsMy4wNDQsMCwwLDEsMS42MTEuNDMsMi45LDIuOSwwLDAsMSwxLjEsMS4yMjMsNC4wOSw0LjA5LDAsMCwxLC40LDEuODE5Wm0tMS43NDMtLjNhMi45OSwyLjk5LDAsMCwwLS4zNTQtMS42MDksMS4xMzUsMS4xMzUsMCwwLDAtMS4wMTMtLjU0OXEtMS4yODksMC0xLjM2MiwxLjkzNGwwLC41MjJBMy4wNzUsMy4wNzUsMCwwLDAsMTUuNy0xLjhhMS4xMzQsMS4xMzQsMCwwLDAsMS4wMy41NjIsMS4xMiwxLjEyLDAsMCwwLDEtLjU1MiwyLjk5MSwyLjk5MSwwLDAsMCwuMzU2LTEuNTg3Wm01LjA3OC0zLjQsMS41ODcsNC45NDYsMS41ODItNC45NDZoMi4yNTZWMEgyNi44NzRWLTEuNjZsLjE2Ni0zLjRMMjUuMzIyLDBIMjQuMTg5TDIyLjQ2NS01LjA2M2wuMTY2LDMuNFYwSDIwLjkxN1YtNy4xMDlaTTM3Ljg2LTUuNzg2SDM1LjcyN1YwSDM0LjAxM1YtNS43ODZIMzEuOTE4Vi03LjEwOUgzNy44NlptNi44MDYsMi4zNzhhNC4xOTIsNC4xOTIsMCwwLDEtLjM4NiwxLjg0MSwyLjg1MSwyLjg1MSwwLDAsMS0xLjEsMS4yMzNBMy4wNTIsMy4wNTIsMCwwLDEsNDEuNTY2LjEsMy4xLDMuMSwwLDAsMSwzOS45NTUtLjMyYTIuODQ2LDIuODQ2LDAsMCwxLTEuMS0xLjE5NEE0LjA3Miw0LjA3MiwwLDAsMSwzOC40NDYtMy4zdi0uNGE0LjIxMSw0LjIxMSwwLDAsMSwuMzgzLTEuODQzLDIuODQ0LDIuODQ0LDAsMCwxLDEuMS0xLjIzMywzLjA3NCwzLjA3NCwwLDAsMSwxLjYyOC0uNDM1LDMuMDQ0LDMuMDQ0LDAsMCwxLDEuNjExLjQzLDIuOSwyLjksMCwwLDEsMS4xLDEuMjIzLDQuMDksNC4wOSwwLDAsMSwuNCwxLjgxOVptLTEuNzQzLS4zYTIuOTksMi45OSwwLDAsMC0uMzU0LTEuNjA5LDEuMTM1LDEuMTM1LDAsMCwwLTEuMDEzLS41NDlxLTEuMjg5LDAtMS4zNjIsMS45MzRsMCwuNTIyQTMuMDc1LDMuMDc1LDAsMCwwLDQwLjUzNi0xLjhhMS4xMzQsMS4xMzQsMCwwLDAsMS4wMy41NjIsMS4xMiwxLjEyLDAsMCwwLDEtLjU1MiwyLjk5MSwyLjk5MSwwLDAsMCwuMzU2LTEuNTg3Wm0xMS41MzguM2E0LjE5Miw0LjE5MiwwLDAsMS0uMzg2LDEuODQxLDIuODUxLDIuODUxLDAsMCwxLTEuMSwxLjIzM0EzLjA1MiwzLjA1MiwwLDAsMSw1MS4zNjEuMSwzLjEsMy4xLDAsMCwxLDQ5Ljc0OS0uMzJhMi44NDYsMi44NDYsMCwwLDEtMS4xLTEuMTk0QTQuMDcyLDQuMDcyLDAsMCwxLDQ4LjI0MS0zLjN2LS40YTQuMjExLDQuMjExLDAsMCwxLC4zODMtMS44NDMsMi44NDQsMi44NDQsMCwwLDEsMS4xLTEuMjMzLDMuMDc0LDMuMDc0LDAsMCwxLDEuNjI4LS40MzUsMy4wNDQsMy4wNDQsMCwwLDEsMS42MTEuNDMsMi45LDIuOSwwLDAsMSwxLjEsMS4yMjMsNC4wOSw0LjA5LDAsMCwxLC40LDEuODE5Wm0tMS43NDMtLjNhMi45OSwyLjk5LDAsMCwwLS4zNTQtMS42MDksMS4xMzUsMS4xMzUsMCwwLDAtMS4wMTMtLjU0OXEtMS4yODksMC0xLjM2MiwxLjkzNGwwLC41MjJBMy4wNzUsMy4wNzUsMCwwLDAsNTAuMzMtMS44YTEuMTM0LDEuMTM0LDAsMCwwLDEuMDMuNTYyLDEuMTIsMS4xMiwwLDAsMCwxLS41NTIsMi45OTEsMi45OTEsMCwwLDAsLjM1Ni0xLjU4N1pNNTUuNTQ1LDBWLTcuMTA5SDU4LjFhMy42MTYsMy42MTYsMCwwLDEsMi4wODcuNSwxLjY3MywxLjY3MywwLDAsMSwuNzE1LDEuNDYsMS42OTIsMS42OTIsMCwwLDEtLjI1NC45NDIsMS40OCwxLjQ4LDAsMCwxLS43NDcuNTc2LDEuNSwxLjUsMCwwLDEsLjg1NC41NDcsMS41OSwxLjU5LDAsMCwxLC4zLjk3NywxLjg4MiwxLjg4MiwwLDAsMS0uNjYyLDEuNTdBMy4xNDksMy4xNDksMCwwLDEsNTguNDMxLDBabTEuNzE0LTMuMDIydjEuN2gxLjEyM2ExLjA2OCwxLjA2OCwwLDAsMCwuNzEzLS4yMTIuNzQzLjc0MywwLDAsMCwuMjQ5LS42Ljc4OC43ODgsMCwwLDAtLjg4NC0uODk0Wm0wLTEuMTIzaC44OTRhMS4yNjksMS4yNjksMCwwLDAsLjgtLjIwNi43My43MywwLDAsMCwuMjM5LS41OTMuNzY2Ljc2NiwwLDAsMC0uMjU5LS42NDksMS4zODUsMS4zODUsMCwwLDAtLjgzNS0uMmgtLjg0Wm03Ljc2OC0yLjk2NGgxLjcwOXY0Ljg3OGEyLjMzMiwyLjMzMiwwLDAsMS0uMzE1LDEuMjExLDIuMTUsMi4xNSwwLDAsMS0uODc5LjgyNUEyLjY4NiwyLjY4NiwwLDAsMSw2NC4yODUuMWEyLjU4OSwyLjU4OSwwLDAsMS0xLjgwNy0uNTg2LDIuMTI5LDIuMTI5LDAsMCwxLS42NDUtMS42NmgxLjcxOWExLjE3NCwxLjE3NCwwLDAsMCwuMTY4LjcwOC42NjcuNjY3LDAsMCwwLC41NjQuMjIuNjM4LjYzOCwwLDAsMCwuNTQ5LS4yNjYsMS4yNTEsMS4yNTEsMCwwLDAsLjE5My0uNzQ1Wm03LjQsNC4wOTJoLTIuN3YxLjdoMy4xODRWMGgtNC45Vi03LjEwOWg0LjkwN3YxLjMyM0g2OS43Mjl2MS41aDIuN1ptNy4xMzguNjFhMi42LDIuNiwwLDAsMS0uNCwxLjMxMSwyLjQxNiwyLjQxNiwwLDAsMS0xLjAyOC44ODFBMy41LDMuNSwwLDAsMSw3Ni42MjQuMWEyLjc5MiwyLjc5MiwwLDAsMS0yLjIwNy0uOTEzLDMuNzcsMy43NywwLDAsMS0uODA2LTIuNTc4di0uMzUyYTQuMyw0LjMsMCwwLDEsLjM2NC0xLjgyOSwyLjc1NiwyLjc1NiwwLDAsMSwxLjA0Ny0xLjIxMUEyLjkyMiwyLjkyMiwwLDAsMSw3Ni42LTcuMjEyYTMuMDY0LDMuMDY0LDAsMCwxLDIuMDguNjgxLDIuNjkxLDIuNjkxLDAsMCwxLC44OTQsMS44NzdINzcuODY5YTEuMjczLDEuMjczLDAsMCwwLS4zMjctLjkzMywxLjM0NiwxLjM0NiwwLDAsMC0uOTM3LS4yODMsMS4wMjQsMS4wMjQsMCwwLDAtLjkzNy40NzksMy4wNzUsMy4wNzUsMCwwLDAtLjMxMiwxLjUyOHYuNWEzLjQsMy40LDAsMCwwLC4yODYsMS42MjYsMS4wNDUsMS4wNDUsMCwwLDAsLjk4NC40ODgsMS4zMTYsMS4zMTYsMCwwLDAsLjktLjI3OCwxLjE4MSwxLjE4MSwwLDAsMCwuMzMyLS44ODRabTYuNDUtMy4zNzlIODMuODc5VjBIODIuMTY1Vi01Ljc4Nkg4MC4wNzFWLTcuMTA5aDUuOTQyWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTAgMTgpIiBmaWxsPSIjMDUwYzFhIi8+DQogICAgPC9nPg0KICAgIDxwYXRoIGlkPSJkZXNjcmlwdGlvbi00IiBkYXRhLW5hbWU9ImRlc2NyaXB0aW9uIiBkPSJNLTM2Ljg2NSwwbDEuMjMtNy4xMDksMS45MjQsMGEyLjYzMywyLjYzMywwLDAsMSwxLjUzMS40NDIsMi40ODQsMi40ODQsMCwwLDEsLjkzLDEuMjIxLDMuNjM5LDMuNjM5LDAsMCwxLC4xNzYsMS43MTZsLS4wNTQuMzg2QTQuMjYzLDQuMjYzLDAsMCwxLTMxLjc3NS0xLjYsMy40ODEsMy40ODEsMCwwLDEtMzMuMDY2LS40MiwzLjY0OSwzLjY0OSwwLDAsMS0zNC44LDBaTS0zNC42LTYuMTEzbC0uODg5LDUuMTI3LjcxMywwYTIuMjIxLDIuMjIxLDAsMCwwLDEuNi0uNjEzLDIuOTQzLDIuOTQzLDAsMCwwLC44MTgtMS42OTIsNS43LDUuNywwLDAsMCwuMDkzLTEuMjk0LDEuNzQyLDEuNzQyLDAsMCwwLS40MTMtMS4xMDgsMS4zODEsMS4zODEsMCwwLDAtMS4wMjMtLjQyWm00LjI4NywzLjQ1MmEzLjQ3NiwzLjQ3NiwwLDAsMSwuNDU3LTEuNDExLDIuNzA5LDIuNzA5LDAsMCwxLC45NTktLjk4MSwyLjM3MSwyLjM3MSwwLDAsMSwxLjMtLjMyNywyLjAxOCwyLjAxOCwwLDAsMSwxLjE3Mi4zNjEsMi4wMDcsMi4wMDcsMCwwLDEsLjcyLjk2MkEzLjA1NCwzLjA1NCwwLDAsMS0yNS41NDctMi43LDMuNTQxLDMuNTQxLDAsMCwxLTI2LTEuMjE2YTIuNywyLjcsMCwwLDEtLjk2Ny45ODlBMi40LDIuNCwwLDAsMS0yOC4yNzYuMWEyLjAwOSwyLjAwOSwwLDAsMS0xLjE2NS0uMzU5LDIuMDE0LDIuMDE0LDAsMCwxLS43Mi0uOTU3LDMuMDE1LDMuMDE1LDAsMCwxLS4xNjYtMS4zNFptMS4xMzguNjY5YTEuNCwxLjQsMCwwLDAsLjI3MS44MjMuODY3Ljg2NywwLDAsMCwuNjg2LjMyNSwxLjIxNywxLjIxNywwLDAsMCwxLS40NTlBMi40MTUsMi40MTUsMCwwLDAtMjYuNzE0LTIuNmwuMDI5LS40NzlhMS42OTEsMS42OTEsMCwwLDAtLjI0OS0uOTgxLjg3NC44NzQsMCwwLDAtLjcyMy0uMzc2LDEuMjY1LDEuMjY1LDAsMCwwLTEuMTcyLjcyOCwyLjcxOCwyLjcxOCwwLDAsMC0uMzI3LDEuMDQ1QTQuMDg4LDQuMDg4LDAsMCwwLTI5LjE3NS0xLjk5MlptNy40MjIsMS40N2ExLjkxNiwxLjkxNiwwLDAsMS0xLjUuNjIsMS40NzIsMS40NzIsMCwwLDEtLjg1Mi0uMjU0LDEuMzIxLDEuMzIxLDAsMCwxLS40ODMtLjY4MSwyLjQ5NCwyLjQ5NCwwLDAsMS0uMDg1LTEuMDI4bC41NzEtMy40MThoMS4xNTdsLS41NzYsMy40MzNhMS44MiwxLjgyLDAsMCwwLDAsLjM1Mi41OTQuNTk0LDAsMCwwLC42MS42MywxLjQsMS40LDAsMCwwLDEuMjQtLjYxNWwuNjY0LTMuOGgxLjE1N0wtMjAuNzcxLDBoLTEuMDg0Wm03LjEyOS0yLjA5NWE0LjMsNC4zLDAsMCwxLS40MzIsMS40NTgsMi4zOTEsMi4zOTEsMCwwLDEtLjgzLjk2NEExLjk1OCwxLjk1OCwwLDAsMS0xNywuMWExLjU1MywxLjU1MywwLDAsMS0xLjMzMy0uNjc5TC0xOC41MjEsMGgtMS4wNmwxLjMtNy41aDEuMTYybC0uNTI3LDIuNzI5YTEuOCwxLjgsMCwwLDEsMS40LS42MSwxLjUsMS41LDAsMCwxLDEuMi41NjIsMi40MjQsMi40MjQsMCwwLDEsLjQ1NywxLjQ4NEE2LjgwNyw2LjgwNywwLDAsMS0xNC42MjQtMi42MTdabS0xLjExMy0uNjU0YTEuMzg2LDEuMzg2LDAsMCwwLS4yMi0uODMzLjc2Mi43NjIsMCwwLDAtLjYzNS0uMzEsMS4zNjEsMS4zNjEsMCwwLDAtMS4xODIuNjc0bC0uMzgxLDIuMTg4YS45MjIuOTIyLDAsMCwwLC45MjMuNjg4LDEuMTUsMS4xNSwwLDAsMCwuOTY0LS40NDksMi41NDcsMi41NDcsMCwwLDAsLjQ4Ni0xLjMwOVEtMTUuNzQyLTMuMDM3LTE1LjczNy0zLjI3MVpNLTEyLjg0MiwwSC0xNGwxLjMtNy41aDEuMTU3Wm0zLjY4Ny4xYTIuMjEzLDIuMjEzLDAsMCwxLTEuMTk0LS4zNDcsMS45NzIsMS45NzIsMCwwLDEtLjc0Ny0uOTA4LDIuNywyLjcsMCwwLDEtLjE4My0xLjI4NGwuMDE1LS4yYTMuNTM2LDMuNTM2LDAsMCwxLC40NzEtMS40NDgsMi42ODksMi42ODksMCwwLDEsLjk1NS0uOTc0QTIuMzIxLDIuMzIxLDAsMCwxLTguNi01LjM4MWExLjczMSwxLjczMSwwLDAsMSwxLjQ4Ny43MzgsMi43MTEsMi43MTEsMCwwLDEsLjM3NCwxLjg3M2wtLjA2OC41MDloLTMuMzI1YTEuNDM1LDEuNDM1LDAsMCwwLC4yNTQsMS4wMTIsMS4wMDYsMS4wMDYsMCwwLDAsLjgyLjM5NEExLjc4LDEuNzgsMCwwLDAtNy42ODEtMS41bC41ODYuNjE1YTIuMjI3LDIuMjI3LDAsMCwxLS44NzQuNzM1QTIuNiwyLjYsMCwwLDEtOS4xNTUuMVptLjQ5My00LjUzMXEtLjkxOC0uMDI5LTEuMzc3LDEuM2wyLjE5MiwwLC4wMi0uMWExLjUzMiwxLjUzMiwwLDAsMCwwLS40MzlBLjkuOSwwLDAsMC04LjEtNC4yMTkuODY2Ljg2NiwwLDAsMC04LjY2Mi00LjQzNFpNLTIuMzM5LS45ODZILjhMLjYyLDBILTMuNzE2TC0yLjQ4LTcuMTA5aDEuMjA2Wk0zLjg2Mi4xQTIuMjEzLDIuMjEzLDAsMCwxLDIuNjY4LS4yNDlhMS45NzIsMS45NzIsMCwwLDEtLjc0Ny0uOTA4LDIuNywyLjcsMCwwLDEtLjE4My0xLjI4NGwuMDE1LS4yYTMuNTM2LDMuNTM2LDAsMCwxLC40NzEtMS40NDgsMi42ODksMi42ODksMCwwLDEsLjk1NS0uOTc0LDIuMzIxLDIuMzIxLDAsMCwxLDEuMjQtLjMxNywxLjczMSwxLjczMSwwLDAsMSwxLjQ4Ny43MzgsMi43MTEsMi43MTEsMCwwLDEsLjM3NCwxLjg3M2wtLjA2OC41MDlIMi44ODZBMS40MzUsMS40MzUsMCwwLDAsMy4xNC0xLjI0OWExLjAwNiwxLjAwNiwwLDAsMCwuODIuMzk0QTEuNzgsMS43OCwwLDAsMCw1LjMzNy0xLjVsLjU4Ni42MTVhMi4yMjcsMi4yMjcsMCwwLDEtLjg3NC43MzVBMi42LDIuNiwwLDAsMSwzLjg2Mi4xWm0uNDkzLTQuNTMxcS0uOTE4LS4wMjktMS4zNzcsMS4zbDIuMTkyLDAsLjAyLS4xYTEuNTMyLDEuNTMyLDAsMCwwLDAtLjQzOS45LjksMCwwLDAtLjI3My0uNTQ3QS44NjYuODY2LDAsMCwwLDQuMzU1LTQuNDM0Wk03LjEyOSwwLDcuOS00LjRINy4xMDlsLjE1Ni0uODc5aC43ODFsLjA3OC0uNTY2YTIuMTExLDIuMTExLDAsMCwxLC42NjItMS4zLDEuOTU0LDEuOTU0LDAsMCwxLDEuMzc5LS40NjksMy43NDYsMy43NDYsMCwwLDEsLjY4OC4xbC0uMTI3LjkyOGExLjk1NSwxLjk1NSwwLDAsMC0uNDM1LS4wNDkuOTc4Ljk3OCwwLDAsMC0uNjc5LjIyNSwxLjA2LDEuMDYsMCwwLDAtLjMzNy42MzVsLS4wNzMuNWgxLjA0NWwtLjE1Ni44NzlIOS4wNTNMOC4yODYsMFpNMTIuOC02LjU2N2wtLjIyNSwxLjI4NGguOUwxMy4zMy00LjRoLS45MDhsLS41LDIuOTU5YTEuMDEyLDEuMDEyLDAsMCwwLDAsLjIycS4wMjkuMzE3LjM5MS4zMzJhMi4yMDYsMi4yMDYsMCwwLDAsLjQxLS4wNDRsLS4wNzguOTI4YTIuNjUzLDIuNjUzLDAsMCwxLS43MjguMSwxLjA4LDEuMDgsMCwwLDEtLjkwNi0uNDEzLDEuNDkzLDEuNDkzLDAsMCwxLS4yMzctMS4wNjdMMTEuMjY1LTQuNEgxMC40MmwuMTU2LS44NzloLjg0bC4yMjUtMS4yODRabTMuMzY0LDQuMDIzaC0yLjVsLjE3MS0uOTU3aDIuNVptMi44NTYsMS43YTEuMTExLDEuMTExLDAsMCwwLC43MzUtLjI0MiwxLjEwOSwxLjEwOSwwLDAsMCwuNDA4LS42NTdsMS4wOTQsMGExLjg3LDEuODcsMCwwLDEtLjM3OC45NTIsMi4yLDIuMiwwLDAsMS0uODMzLjY2OUEyLjMxLDIuMzEsMCwwLDEsMTguOTg5LjFhMS45OSwxLjk5LDAsMCwxLTEuMTU3LS4zNTIsMS45NDQsMS45NDQsMCwwLDEtLjctLjk0NSwzLjAyMywzLjAyMywwLDAsMS0uMTQ2LTEuMzQ1TDE3LTIuNzE1QTMuNDU3LDMuNDU3LDAsMCwxLDE3LjQ0OS00LjFhMi42MDgsMi42MDgsMCwwLDEsLjk0LS45NTksMi4zNTQsMi4zNTQsMCwwLDEsMS4yNzktLjMxNywxLjg0OCwxLjg0OCwwLDAsMSwxLjM3Mi41NjksMi4wMDksMi4wMDksMCwwLDEsLjUxMywxLjQyOEgyMC40NjlhMS4xODEsMS4xODEsMCwwLDAtLjIyMi0uNzQyLjgxMy44MTMsMCwwLDAtLjY0Mi0uMzA4LDEuMTcyLDEuMTcyLDAsMCwwLTEuMDY5LjU3NiwzLjIxNiwzLjIxNiwwLDAsMC0uNDIsMS42OFExOC4wODEtLjg2NCwxOS4wMjMtLjg0NVpNMjMuMDc2LDBIMjEuOTE5bDEuMy03LjVIMjQuMzhaTTI1LjYsMEgyNC40NDNsLjkxOC01LjI4M2gxLjE1N1ptLS4wNzMtNi42MzZhLjY1My42NTMsMCwwLDEsLjE3Ni0uNDU5LjY0NC42NDQsMCwwLDEsLjQ3NC0uMi42MTYuNjE2LDAsMCwxLC40NzEuMTczLjYuNiwwLDAsMSwuMTg4LjQ0Ny42MTcuNjE3LDAsMCwxLS4xODMuNDU5LjY3MS42NzEsMCwwLDEtLjQ2Ni4xOS42MjYuNjI2LDAsMCwxLS40NjktLjE2OEEuNTgxLjU4MSwwLDAsMSwyNS41MjctNi42MzZaTTI5LjItLjg0NWExLjExMSwxLjExMSwwLDAsMCwuNzM1LS4yNDIsMS4xMDksMS4xMDksMCwwLDAsLjQwOC0uNjU3bDEuMDk0LDBhMS44NywxLjg3LDAsMCwxLS4zNzguOTUyLDIuMiwyLjIsMCwwLDEtLjgzMy42NjlBMi4zMSwyLjMxLDAsMCwxLDI5LjE2NS4xYTEuOTksMS45OSwwLDAsMS0xLjE1Ny0uMzUyLDEuOTQ0LDEuOTQ0LDAsMCwxLS43LS45NDUsMy4wMjMsMy4wMjMsMCwwLDEtLjE0Ni0xLjM0NWwuMDE1LS4xNzFBMy40NTcsMy40NTcsMCwwLDEsMjcuNjI1LTQuMWEyLjYwOCwyLjYwOCwwLDAsMSwuOTQtLjk1OSwyLjM1NCwyLjM1NCwwLDAsMSwxLjI3OS0uMzE3LDEuODQ4LDEuODQ4LDAsMCwxLDEuMzcyLjU2OSwyLjAwOSwyLjAwOSwwLDAsMSwuNTEzLDEuNDI4SDMwLjY0NWExLjE4MSwxLjE4MSwwLDAsMC0uMjIyLS43NDIuODEzLjgxMywwLDAsMC0uNjQyLS4zMDgsMS4xNzIsMS4xNzIsMCwwLDAtMS4wNjkuNTc2LDMuMjE2LDMuMjE2LDAsMCwwLS40MiwxLjY4UTI4LjI1Ny0uODY0LDI5LjItLjg0NVptNC45MjctMS40MTEtLjY1NC41ODFMMzMuMTg0LDBIMzIuMDI2bDEuMy03LjVoMS4xNTdMMzMuNzQtMy4yNDJsLjQwNS0uNDIsMS42OC0xLjYyMUgzNy4zTDM0Ljk2MS0zLjAyNywzNi41LDBIMzUuMjQ5Wk0tMjAuNTgxLDcuMzM5YTMuNDc2LDMuNDc2LDAsMCwxLC40NTctMS40MTEsMi43MDksMi43MDksMCwwLDEsLjk1OS0uOTgxLDIuMzcxLDIuMzcxLDAsMCwxLDEuMy0uMzI3LDIuMDE4LDIuMDE4LDAsMCwxLDEuMTcyLjM2MSwyLjAwNywyLjAwNywwLDAsMSwuNzIuOTYyQTMuMDU0LDMuMDU0LDAsMCwxLTE1LjgxNSw3LjNhMy41NDEsMy41NDEsMCwwLDEtLjQ1NywxLjQ4NCwyLjcsMi43LDAsMCwxLS45NjcuOTg5LDIuNCwyLjQsMCwwLDEtMS4zMDYuMzI1LDIuMDA5LDIuMDA5LDAsMCwxLTEuMTY1LS4zNTksMi4wMTQsMi4wMTQsMCwwLDEtLjcyLS45NTcsMy4wMTUsMy4wMTUsMCwwLDEtLjE2Ni0xLjM0Wm0xLjEzOC42NjlhMS40LDEuNCwwLDAsMCwuMjcxLjgyMy44NjcuODY3LDAsMCwwLC42ODYuMzI1LDEuMjE3LDEuMjE3LDAsMCwwLDEtLjQ1OUEyLjQxNSwyLjQxNSwwLDAsMC0xNi45ODIsNy40bC4wMjktLjQ3OWExLjY5MSwxLjY5MSwwLDAsMC0uMjQ5LS45ODEuODc0Ljg3NCwwLDAsMC0uNzIzLS4zNzYsMS4yNjUsMS4yNjUsMCwwLDAtMS4xNzIuNzI4LDIuNzE4LDIuNzE4LDAsMCwwLS4zMjcsMS4wNDVBNC4wODgsNC4wODgsMCwwLDAtMTkuNDQzLDguMDA4Wm02LjE0My0zLjMtLjExNy42MmEyLjAxNiwyLjAxNiwwLDAsMSwxLjU2Ny0uNzEzLDEuMjc3LDEuMjc3LDAsMCwxLDEuMS41MywyLjExNSwyLjExNSwwLDAsMSwuMjY0LDEuNDM4TC0xMS4wNiwxMGgtMS4xNTdsLjU3Ni0zLjQyOGExLjc1NCwxLjc1NCwwLDAsMCwwLS4zOTEuNjIzLjYyMywwLDAsMC0uNjkzLS42LDEuNDA3LDEuNDA3LDAsMCwwLTEuMTU3LjY0OUwtMTQuMTQ2LDEwSC0xNS4zbC45MTMtNS4yODNabTguNzcsNS4zODZBMi40MSwyLjQxLDAsMCwxLTUuNzUsOS43NjZhMi4xMzIsMi4xMzIsMCwwLDEtLjgxOC0uOTJBMy41MTIsMy41MTIsMCwwLDEtNi45LDcuNDc2LDYuMyw2LjMsMCwwLDEtNi43OSw2LjA1YTQuOCw0LjgsMCwwLDEsLjUxMy0xLjQ4NywzLjczNywzLjczNywwLDAsMSwuODgxLTEuMSwyLjksMi45LDAsMCwxLDEuOTUzLS42NzQsMi4xOTQsMi4xOTQsMCwwLDEsMS42ODIuNzI4LDMuMDEzLDMuMDEzLDAsMCwxLC42ODYsMS45MTQsNi4zLDYuMywwLDAsMS0uMTEsMS4zODksNS4wMzUsNS4wMzUsMCwwLDEtLjQ3OSwxLjQ0QTMuNjc2LDMuNjc2LDAsMCwxLTIuNSw5LjM2LDIuODgxLDIuODgxLDAsMCwxLTQuNTMxLDEwLjFaTS0yLjMxLDYuMjU1bC4wNDQtLjUxOGEzLjEsMy4xLDAsMCwwLS4wOTMtLjk4NCwxLjI5MSwxLjI5MSwwLDAsMC0uNDEzLS42ODgsMS4xOSwxLjE5LDAsMCwwLS43MzUtLjI1MUExLjY1MSwxLjY1MSwwLDAsMC00LjYsNC4xNmEyLjU0MSwyLjU0MSwwLDAsMC0uNzcxLDEuMTEzLDUuODMzLDUuODMzLDAsMCwwLS4zNDQsMS44NzUsMi4zNzgsMi4zNzgsMCwwLDAsLjI3MywxLjQwNiwxLjExLDEuMTEsMCwwLDAsLjk2Ny41MzIsMS42NjksMS42NjksMCwwLDAsMS4zOTQtLjYzNUEzLjY2LDMuNjYsMCwwLDAtMi4zNTgsNi42Wk00LjMyNiw3LjM4M0E0LjMsNC4zLDAsMCwxLDMuODk0LDguODRhMi4zOTEsMi4zOTEsMCwwLDEtLjgzLjk2NCwxLjk1OCwxLjk1OCwwLDAsMS0xLjExNi4zQTEuNTUzLDEuNTUzLDAsMCwxLC42MTUsOS40MjRMLjQzLDEwSC0uNjNsMS4zLTcuNUgxLjgzMUwxLjMsNS4yMjlhMS44LDEuOCwwLDAsMSwxLjQtLjYxLDEuNSwxLjUsMCwwLDEsMS4yLjU2MkEyLjQyNCwyLjQyNCwwLDAsMSw0LjM2LDYuNjY1LDYuODA3LDYuODA3LDAsMCwxLDQuMzI2LDcuMzgzWk0zLjIxMyw2LjcyOWExLjM4NiwxLjM4NiwwLDAsMC0uMjItLjgzMy43NjIuNzYyLDAsMCwwLS42MzUtLjMxLDEuMzYxLDEuMzYxLDAsMCwwLTEuMTgyLjY3NEwuOCw4LjQ0N2EuOTIyLjkyMiwwLDAsMCwuOTIzLjY4OCwxLjE1LDEuMTUsMCwwLDAsLjk2NC0uNDQ5LDIuNTQ3LDIuNTQ3LDAsMCwwLC40ODYtMS4zMDlRMy4yMDgsNi45NjMsMy4yMTMsNi43MjlaTTcsNC43MTcsNi4wMywxMC40NjRhMi4wMzksMi4wMzksMCwwLDEtLjU2NiwxLjI1NywxLjYzLDEuNjMsMCwwLDEtMS4yLjQyNywzLjI3NSwzLjI3NSwwLDAsMS0uNjU5LS4wOTNsLjEtLjkzN2ExLjc3NiwxLjc3NiwwLDAsMCwuNDEuMDU0cS42MiwwLC43NDctLjcyOGwuOTgxLTUuNzI4Wk01Ljk4NiwzLjM2NGEuNjMuNjMsMCwwLDEsLjY0NS0uNjU5LjYyNS42MjUsMCwwLDEsLjQ3MS4xNjguNi42LDAsMCwxLC4xODguNDUyLjYxNy42MTcsMCwwLDEtLjE4My40NTkuNjcxLjY3MSwwLDAsMS0uNDY2LjE5QS42NTYuNjU2LDAsMCwxLDYuMTY3LDMuOC41OC41OCwwLDAsMSw1Ljk4NiwzLjM2NFpNOS43NTEsMTAuMWEyLjIxMywyLjIxMywwLDAsMS0xLjE5NC0uMzQ3LDEuOTcyLDEuOTcyLDAsMCwxLS43NDctLjkwOCwyLjcsMi43LDAsMCwxLS4xODMtMS4yODRsLjAxNS0uMmEzLjUzNiwzLjUzNiwwLDAsMSwuNDcxLTEuNDQ4LDIuNjg5LDIuNjg5LDAsMCwxLC45NTUtLjk3NCwyLjMyMSwyLjMyMSwwLDAsMSwxLjI0LS4zMTcsMS43MzEsMS43MzEsMCwwLDEsMS40ODcuNzM4LDIuNzExLDIuNzExLDAsMCwxLC4zNzQsMS44NzNsLS4wNjguNTA5SDguNzc0YTEuNDM1LDEuNDM1LDAsMCwwLC4yNTQsMS4wMTIsMS4wMDYsMS4wMDYsMCwwLDAsLjgyLjM5NEExLjc4LDEuNzgsMCwwLDAsMTEuMjI2LDguNWwuNTg2LjYxNWEyLjIyNywyLjIyNywwLDAsMS0uODc0LjczNUEyLjYsMi42LDAsMCwxLDkuNzUxLDEwLjFabS40OTMtNC41MzFxLS45MTgtLjAyOS0xLjM3NywxLjNsMi4xOTIsMCwuMDItLjFhMS41MzIsMS41MzIsMCwwLDAsMC0uNDM5LjkuOSwwLDAsMC0uMjczLS41NDdBLjg2Ni44NjYsMCwwLDAsMTAuMjQ0LDUuNTY2Wm00LjY3MywzLjU4OWExLjEzMiwxLjEzMiwwLDAsMCwxLjE0My0uOWwxLjA5NCwwYTEuODcsMS44NywwLDAsMS0uMzc4Ljk1MiwyLjIsMi4yLDAsMCwxLS44MzMuNjY5LDIuMzEsMi4zMSwwLDAsMS0xLjA2LjIyNSwxLjk5LDEuOTksMCwwLDEtMS4xNTctLjM1MiwxLjk0NCwxLjk0NCwwLDAsMS0uNy0uOTQ1LDMuMDIzLDMuMDIzLDAsMCwxLS4xNDYtMS4zNDVsLjAxNS0uMTcxQTMuNDU3LDMuNDU3LDAsMCwxLDEzLjM0Miw1LjlhMi42MDgsMi42MDgsMCwwLDEsLjk0LS45NTksMi4zNTQsMi4zNTQsMCwwLDEsMS4yNzktLjMxNywxLjg0OCwxLjg0OCwwLDAsMSwxLjM3Mi41NjksMi4wMDksMi4wMDksMCwwLDEsLjUxMywxLjQyOEgxNi4zNjJhMS4xODEsMS4xODEsMCwwLDAtLjIyMi0uNzQyLjgxMy44MTMsMCwwLDAtLjY0Mi0uMzA4LDEuMTcyLDEuMTcyLDAsMCwwLTEuMDY5LjU3NiwzLjIxNiwzLjIxNiwwLDAsMC0uNDIsMS42OFExMy45NzUsOS4xMzYsMTQuOTE3LDkuMTU1Wm01LjQxNS01LjcyMy0uMjI1LDEuMjg0aC45bC0uMTUxLjg3OWgtLjkwOGwtLjUsMi45NTlhMS4wMTIsMS4wMTIsMCwwLDAsMCwuMjJxLjAyOS4zMTcuMzkxLjMzMmEyLjIwNiwyLjIwNiwwLDAsMCwuNDEtLjA0NGwtLjA3OC45MjhhMi42NTMsMi42NTMsMCwwLDEtLjcyOC4xLDEuMDgsMS4wOCwwLDAsMS0uOTA2LS40MTNBMS40OTMsMS40OTMsMCwwLDEsMTguMyw4LjYxM0wxOC43OTQsNS42aC0uODQ1bC4xNTYtLjg3OWguODRsLjIyNS0xLjI4NFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY2NyA3NzcpIiBmaWxsPSIjMDUwYzFhIi8+DQogICAgPGcgaWQ9Im1vdXNlLTQiIGRhdGEtbmFtZT0ibW91c2UiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDYzNCA2OTApIj4NCiAgICAgIDxnIGlkPSJzaGFwZS00IiBkYXRhLW5hbWU9InNoYXBlIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtOTA0IC02NDMpIj4NCiAgICAgICAgPGcgdHJhbnNmb3JtPSJtYXRyaXgoMSwgMCwgMCwgMSwgNTYxLCA1OTMpIiBmaWx0ZXI9InVybCgjYnRtLTQpIj4NCiAgICAgICAgICA8cGF0aCBpZD0iYnRtLTExIiBkYXRhLW5hbWU9ImJ0bSIgZD0iTTcuMiwwSDI4LjhBNy4yLDcuMiwwLDAsMSwzNiw3LjJWMzZBMTgsMTgsMCwwLDEsMTgsNTRoMEExOCwxOCwwLDAsMSwwLDM2VjcuMkE3LjIsNy4yLDAsMCwxLDcuMiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzU4IDUwKSIgZmlsbD0iIzIxMjEyMSIvPg0KICAgICAgICA8L2c+DQogICAgICAgIDxwYXRoIGlkPSJzaWRlLTQiIGRhdGEtbmFtZT0ic2lkZSIgZD0iTS00MTAyLDI3MDRhMTcuODgxLDE3Ljg4MSwwLDAsMS0xMi43MjgtNS4yNzJBMTcuODgyLDE3Ljg4MiwwLDAsMS00MTIwLDI2ODZ2LTI4LjhhNy4yMDgsNy4yMDgsMCwwLDEsNy4yLTcuMmgyMS42YTcuMjA4LDcuMjA4LDAsMCwxLDcuMiw3LjJWMjY4NmExNy44ODEsMTcuODgxLDAsMCwxLTUuMjcyLDEyLjcyOEExNy44ODQsMTcuODg0LDAsMCwxLTQxMDIsMjcwNFptLTEwLjQtNTJhNS42MDYsNS42MDYsMCwwLDAtNS42LDUuNlYyNjgyYTE2LjAxOCwxNi4wMTgsMCwwLDAsMTYsMTYsMTYuMDE4LDE2LjAxOCwwLDAsMCwxNi0xNnYtMjQuNGE1LjYwNiw1LjYwNiwwLDAsMC01LjYtNS42WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTAzOSAtMjAwNykiIGZpbGw9InVybCgjbGluZWFyLWdyYWRpZW50LTcpIi8+DQogICAgICAgIDxwYXRoIGlkPSJ0b3AtNCIgZGF0YS1uYW1lPSJ0b3AiIGQ9Ik01LjYsMEgyNi40QTUuNiw1LjYsMCwwLDEsMzIsNS42VjMwQTE2LDE2LDAsMCwxLDE2LDQ2aDBBMTYsMTYsMCwwLDEsMCwzMFY1LjZBNS42LDUuNiwwLDAsMSw1LjYsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDkyMSA2NDUpIiBmaWxsPSJ1cmwoI2xpbmVhci1ncmFkaWVudC04KSIvPg0KICAgICAgPC9nPg0KICAgICAgPHBhdGggaWQ9InRyLTYiIGRhdGEtbmFtZT0idHIiIGQ9Ik0wLDBIOS41YTUsNSwwLDAsMSw1LDVWMTdhMCwwLDAsMCwxLDAsMEgwYTAsMCwwLDAsMSwwLDBWMEEwLDAsMCwwLDEsMCwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzMuNSAzKSIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iMC4xNSIvPg0KICAgICAgPGcgdHJhbnNmb3JtPSJtYXRyaXgoMSwgMCwgMCwgMSwgLTM0MywgLTUwKSIgZmlsdGVyPSJ1cmwoI3RsKSI+DQogICAgICAgIDxwYXRoIGlkPSJ0bC02IiBkYXRhLW5hbWU9InRsIiBkPSJNNSwwaDkuNWEwLDAsMCwwLDEsMCwwVjE3YTAsMCwwLDAsMSwwLDBIMGEwLDAsMCwwLDEsMCwwVjVBNSw1LDAsMCwxLDUsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM2MSA1MykiIGZpbGw9IiNmZmI3MDAiLz4NCiAgICAgIDwvZz4NCiAgICAgIDxnIGlkPSJzY3JvbGwtNyIgZGF0YS1uYW1lPSJzY3JvbGwiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMwIDExKSIgZmlsbD0iIzRkNGQ0ZCIgc3Ryb2tlPSIjMzEzMTMxIiBzdHJva2Utd2lkdGg9IjEiPg0KICAgICAgICA8cmVjdCB3aWR0aD0iNiIgaGVpZ2h0PSIxNCIgc3Ryb2tlPSJub25lIi8+DQogICAgICAgIDxyZWN0IHg9Ii0wLjUiIHk9Ii0wLjUiIHdpZHRoPSI3IiBoZWlnaHQ9IjE1IiBmaWxsPSJub25lIi8+DQogICAgICA8L2c+DQogICAgICA8cGF0aCBpZD0iY2xpY2siIGQ9Ik0xMTYxNS0xNDE0OXYtMWE5LjAxLDkuMDEsMCwwLDEsOS05aDF2MmE4LjAwOCw4LjAwOCwwLDAsMC04LDhabS00LDB2LTNhMTAuOTE0LDEwLjkxNCwwLDAsMSwzLjIyNS03Ljc3N0ExMC45MTUsMTAuOTE1LDAsMCwxLDExNjIyLTE0MTYzaDN2MmgtMmExMC4wMTEsMTAuMDExLDAsMCwwLTEwLDEwdjJaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTE2MDQgMTQxNTUpIiBmaWxsPSIjZDFkM2Q4Ii8+DQogICAgPC9nPg0KICA8L2c+DQogIDxnIGlkPSJwMyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTM2IC02NDApIj4NCiAgICA8ZyBpZD0icGFuZS01IiBkYXRhLW5hbWU9InBhbmUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDgwIDY0MCkiPg0KICAgICAgPHJlY3QgaWQ9ImJveC01IiBkYXRhLW5hbWU9ImJveCIgd2lkdGg9IjEwNCIgaGVpZ2h0PSIxNjAiIHJ4PSI0IiBmaWxsPSIjZjZmNmY2Ii8+DQogICAgICA8cGF0aCBpZD0ibGFiZWwtMTEiIGRhdGEtbmFtZT0ibGFiZWwiIGQ9Ik0yLjQ2MS0xLjMxOGgzLjRWMEguMzIyVi0uOUwzLjcxMS01Ljc4NkguM1YtNy4xMDlINS44MjV2Ljg3OVptMTAuMjY4LTIuMDlhNC4xOTIsNC4xOTIsMCwwLDEtLjM4NiwxLjg0MSwyLjg1MSwyLjg1MSwwLDAsMS0xLjEsMS4yMzNBMy4wNTIsMy4wNTIsMCwwLDEsOS42MjkuMSwzLjEsMy4xLDAsMCwxLDguMDE3LS4zMmEyLjg0NiwyLjg0NiwwLDAsMS0xLjEtMS4xOTRBNC4wNzIsNC4wNzIsMCwwLDEsNi41MDktMy4zdi0uNEE0LjIxMSw0LjIxMSwwLDAsMSw2Ljg5Mi01LjU0YTIuODQ0LDIuODQ0LDAsMCwxLDEuMS0xLjIzMywzLjA3NCwzLjA3NCwwLDAsMSwxLjYyOC0uNDM1LDMuMDQ0LDMuMDQ0LDAsMCwxLDEuNjExLjQzLDIuOSwyLjksMCwwLDEsMS4xLDEuMjIzLDQuMDksNC4wOSwwLDAsMSwuNCwxLjgxOVptLTEuNzQzLS4zYTIuOTksMi45OSwwLDAsMC0uMzU0LTEuNjA5LDEuMTM1LDEuMTM1LDAsMCwwLTEuMDEzLS41NDlxLTEuMjg5LDAtMS4zNjIsMS45MzRsMCwuNTIyQTMuMDc1LDMuMDc1LDAsMCwwLDguNi0xLjhhMS4xMzQsMS4xMzQsMCwwLDAsMS4wMy41NjIsMS4xMiwxLjEyLDAsMCwwLDEtLjU1MiwyLjk5MSwyLjk5MSwwLDAsMCwuMzU2LTEuNTg3Wm04Ljg0Ny4zYTQuMTkyLDQuMTkyLDAsMCwxLS4zODYsMS44NDEsMi44NTEsMi44NTEsMCwwLDEtMS4xLDEuMjMzQTMuMDUyLDMuMDUyLDAsMCwxLDE2LjczMy4xLDMuMSwzLjEsMCwwLDEsMTUuMTIyLS4zMmEyLjg0NiwyLjg0NiwwLDAsMS0xLjEtMS4xOTRBNC4wNzIsNC4wNzIsMCwwLDEsMTMuNjEzLTMuM3YtLjRBNC4yMTEsNC4yMTEsMCwwLDEsMTQtNS41NGEyLjg0NCwyLjg0NCwwLDAsMSwxLjEtMS4yMzMsMy4wNzQsMy4wNzQsMCwwLDEsMS42MjgtLjQzNSwzLjA0NCwzLjA0NCwwLDAsMSwxLjYxMS40MywyLjksMi45LDAsMCwxLDEuMSwxLjIyMyw0LjA5LDQuMDksMCwwLDEsLjQsMS44MTlabS0xLjc0My0uM2EyLjk5LDIuOTksMCwwLDAtLjM1NC0xLjYwOSwxLjEzNSwxLjEzNSwwLDAsMC0xLjAxMy0uNTQ5cS0xLjI4OSwwLTEuMzYyLDEuOTM0bDAsLjUyMkEzLjA3NSwzLjA3NSwwLDAsMCwxNS43LTEuOGExLjEzNCwxLjEzNCwwLDAsMCwxLjAzLjU2MiwxLjEyLDEuMTIsMCwwLDAsMS0uNTUyLDIuOTkxLDIuOTkxLDAsMCwwLC4zNTYtMS41ODdabTUuMDc4LTMuNCwxLjU4Nyw0Ljk0NiwxLjU4Mi00Ljk0NmgyLjI1NlYwSDI2Ljg3NFYtMS42NmwuMTY2LTMuNEwyNS4zMjIsMEgyNC4xODlMMjIuNDY1LTUuMDYzbC4xNjYsMy40VjBIMjAuOTE3Vi03LjEwOVpNMzQuNCwwSDMyLjY4OVYtNy4xMDlIMzQuNFptNy4zMjksMGgtMS43TDM3LjUtNC40MjRWMEgzNS43OVYtNy4xMDlIMzcuNWwyLjUxNSw0LjQyNFYtNy4xMDloMS43MDlaTTQzLjUuNjFINDIuMzMzbDIuNDI3LTcuNzJoMS4xNzJabTkuMjQzLTQuMDE5YTQuMTkyLDQuMTkyLDAsMCwxLS4zODYsMS44NDEsMi44NTEsMi44NTEsMCwwLDEtMS4xLDEuMjMzQTMuMDUyLDMuMDUyLDAsMCwxLDQ5LjY0Mi4xLDMuMSwzLjEsMCwwLDEsNDguMDMxLS4zMmEyLjg0NiwyLjg0NiwwLDAsMS0xLjEtMS4xOTRBNC4wNzIsNC4wNzIsMCwwLDEsNDYuNTIyLTMuM3YtLjRhNC4yMTEsNC4yMTEsMCwwLDEsLjM4My0xLjg0M0EyLjg0NCwyLjg0NCwwLDAsMSw0OC02Ljc3MmEzLjA3NCwzLjA3NCwwLDAsMSwxLjYyOC0uNDM1LDMuMDQ0LDMuMDQ0LDAsMCwxLDEuNjExLjQzLDIuOSwyLjksMCwwLDEsMS4xLDEuMjIzLDQuMDksNC4wOSwwLDAsMSwuNCwxLjgxOVpNNTEtMy43MDZhMi45OSwyLjk5LDAsMCwwLS4zNTQtMS42MDksMS4xMzUsMS4xMzUsMCwwLDAtMS4wMTMtLjU0OXEtMS4yODksMC0xLjM2MiwxLjkzNGwwLC41MjJBMy4wNzUsMy4wNzUsMCwwLDAsNDguNjEyLTEuOGExLjEzNCwxLjEzNCwwLDAsMCwxLjAzLjU2MiwxLjEyLDEuMTIsMCwwLDAsMS0uNTUyQTIuOTkxLDIuOTkxLDAsMCwwLDUxLTMuMzc5Wm04LjQtMy40djQuNjUzYTIuNjc0LDIuNjc0LDAsMCwxLS4zMzcsMS4zNywyLjE4MywyLjE4MywwLDAsMS0uOTY3Ljg4MUEzLjQwNiwzLjQwNiwwLDAsMSw1Ni42MS4xYTIuOTQyLDIuOTQyLDAsMCwxLTIuMDQ2LS42NzRBMi40LDIuNCwwLDAsMSw1My44LTIuNDIyVi03LjEwOWgxLjcyNHY0LjcyMnEuMDI5LDEuMTY3LDEuMDg0LDEuMTY3YTEuMDQ5LDEuMDQ5LDAsMCwwLC44MDYtLjI5MywxLjM2OSwxLjM2OSwwLDAsMCwuMjczLS45NTJWLTcuMTA5Wm02Ljg1LDEuMzIzSDY0LjExOVYwSDYyLjQwNVYtNS43ODZINjAuMzExVi03LjEwOWg1Ljk0MloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEwIDE4KSIgZmlsbD0iIzA1MGMxYSIvPg0KICAgIDwvZz4NCiAgICA8ZyBpZD0ibm90ZXMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC02MykiPg0KICAgICAgPHBhdGggaWQ9Im91dCIgZD0iTS0yLjYxNiwwSC0zLjhsMS4yMTctN0gtMS40Wk0uNzI2LTUuMjA5LjYxMS00LjZhMS45ODYsMS45ODYsMCwwLDEsMS41NDQtLjcsMS4yNTgsMS4yNTgsMCwwLDEsMS4wODIuNTIyQTIuMDgzLDIuMDgzLDAsMCwxLDMuNS0zLjM2MkwyLjkzNCwwSDEuNzk0bC41NjgtMy4zNzZhMS43MjgsMS43MjgsMCwwLDAsMC0uMzg1LjYxMy42MTMsMCwwLDAtLjY4My0uNTg3LDEuMzg1LDEuMzg1LDAsMCwwLTEuMTQuNjRMLS4xMDYsMGgtMS4xNGwuOS01LjJaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMTcgNzAwKSIgZmlsbD0iIzA1MGMxYSIvPg0KICAgICAgPHBhdGggaWQ9ImluIiBkPSJNLTQuNzM1LjFhMi4zNzMsMi4zNzMsMCwwLDEtMS4yLS4zMjcsMi4xLDIuMSwwLDAsMS0uODA2LS45MDcsMy40NiwzLjQ2LDAsMCwxLS4zMjctMS4zNDksNi4yLDYuMiwwLDAsMSwuMTA4LTEuNCw0LjcyOCw0LjcyOCwwLDAsMSwuNTA1LTEuNDY1LDMuNjgxLDMuNjgxLDAsMCwxLC44NjgtMS4wOEEyLjg2LDIuODYsMCwwLDEtMy42NjItNy4xYTIuMTYxLDIuMTYxLDAsMCwxLDEuNjU3LjcxN0EyLjk2OCwyLjk2OCwwLDAsMS0xLjMzLTQuNWE2LjIsNi4yLDAsMCwxLS4xMDgsMS4zNjhBNC45Niw0Ljk2LDAsMCwxLTEuOTA5LTEuNzFhMy42MjEsMy42MjEsMCwwLDEtLjgzLDEuMDhBMi44MzgsMi44MzgsMCwwLDEtNC43MzUuMVptMi4xODgtMy43ODVMLTIuNS00LjJhMy4wNTUsMy4wNTUsMCwwLDAtLjA5MS0uOTY5QTEuMjcyLDEuMjcyLDAsMCwwLTMtNS44NDZhMS4xNzIsMS4xNzIsMCwwLDAtLjcyNC0uMjQ4QTEuNjI2LDEuNjI2LDAsMCwwLTQuOC01Ljc1MmEyLjUsMi41LDAsMCwwLS43NiwxLjFBNS43NDUsNS43NDUsMCwwLDAtNS45LTIuODA5LDIuMzQyLDIuMzQyLDAsMCwwLTUuNjMtMS40MjQsMS4wOTMsMS4wOTMsMCwwLDAtNC42NzctLjksMS42NDQsMS42NDQsMCwwLDAtMy4zLTEuNTI1YTMuNiwzLjYsMCwwLDAsLjcwOS0xLjgyOFpNMi4zMjUtLjUxNUExLjg4NywxLjg4NywwLDAsMSwuODQ0LjEsMS40NSwxLjQ1LDAsMCwxLDAtLjE1NCwxLjMsMS4zLDAsMCwxLS40NzEtLjgyNSwyLjQ1NiwyLjQ1NiwwLDAsMS0uNTU2LTEuODM3TC4wMDctNS4yaDEuMTRMLjU4LTEuODIzYTEuNzkyLDEuNzkyLDAsMCwwLDAsLjM0Ni41ODUuNTg1LDAsMCwwLC42LjYyQTEuMzc3LDEuMzc3LDAsMCwwLDIuNC0xLjQ2MkwzLjA1Mi01LjJoMS4xNEwzLjI5MiwwSDIuMjI0Wk03LjAyLTYuNDY5LDYuOC01LjJoLjg5bC0uMTQ5Ljg2Nkg2LjY0NEw2LjE1NC0xLjQyNGExLDEsMCwwLDAsMCwuMjE2cS4wMjkuMzEzLjM4NS4zMjdhMi4xNzMsMi4xNzMsMCwwLDAsLjQtLjA0M0w2Ljg2MS0uMDFhMi42MTMsMi42MTMsMCwwLDEtLjcxNy4xLDEuMDY0LDEuMDY0LDAsMCwxLS44OTItLjQwNiwxLjQ3MSwxLjQ3MSwwLDAsMS0uMjMzLTEuMDUxTDUuNS00LjMzOEg0LjY3Mkw0LjgyNi01LjJoLjgyN2wuMjIxLTEuMjY1WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjE3IDczNykiIGZpbGw9IiMwNTBjMWEiLz4NCiAgICAgIDxwYXRoIGlkPSJhcnJvdy0yIiBkYXRhLW5hbWU9ImFycm93IiBkPSJNLTgyNjYuMzMyLDI2NjIuODMyaC0xMS4zMzNWMjY2NWwtNS4zMzUtNC41LDUuMzM1LTQuNXYyLjE2N2gxMS4zMzNWMjY1Nmw1LjMzMyw0LjUtNS4zMzMsNC41WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTI0NDMgLTc1NTcpIHJvdGF0ZSgtOTApIiBmaWxsPSIjMjEyMzI5IiBvcGFjaXR5PSIwLjQiLz4NCiAgICA8L2c+DQogICAgPHBhdGggaWQ9ImRlc2NyaXB0aW9uLTUiIGRhdGEtbmFtZT0iZGVzY3JpcHRpb24iIGQ9Ik0tOC4zNDUtMS44NjVxLjEwNy0uNy0uNzY3LTEuMDQ1bC0uNC0uMTQ2YTMuNywzLjcsMCwwLDEtMS41NjctLjkxMywxLjYzMywxLjYzMywwLDAsMS0uNDItMS4yMjYsMS44NDMsMS44NDMsMCwwLDEsLjQxMy0xLjA2NywyLjQwNiwyLjQwNiwwLDAsMSwuOTg0LS43MSwzLjIyLDMuMjIsMCwwLDEsMS4zLS4yMzQsMi42LDIuNiwwLDAsMSwxLjE4Mi4yOTEsMS45MTIsMS45MTIsMCwwLDEsLjc5MS43NjcsMi4xMjMsMi4xMjMsMCwwLDEsLjI1NCwxLjEyMWwtMS4yLDBBMS4xMjcsMS4xMjcsMCwwLDAtOC4wMi01LjlhMS4xMzMsMS4xMzMsMCwwLDAtLjg0Ny0uMzIyLDEuNTc4LDEuNTc4LDAsMCwwLS45NjQuMjY5LDEuMDc0LDEuMDc0LDAsMCwwLS40NjEuNzUycS0uMS42Mi44My45NzdsLjM2Ni4xMzJhMy41NTUsMy41NTUsMCwwLDEsMS41NjMuOTQsMS43MzUsMS43MzUsMCwwLDEsLjM5MSwxLjI3NywxLjkyMywxLjkyMywwLDAsMS0uNCwxLjA0N0EyLjIyMSwyLjIyMSwwLDAsMS04LjUtLjEzNywzLjQ5LDMuNDksMCwwLDEtOS44NDkuMSwyLjgwOSwyLjgwOSwwLDAsMS0xMS4xMTYtLjJhMi4wNzUsMi4wNzUsMCwwLDEtLjg3Mi0uOCwyLjA3MSwyLjA3MSwwLDAsMS0uMjc4LTEuMTZsMS4yMDYsMGExLjEzMiwxLjEzMiwwLDAsMCwuMy45MzMsMS4zNjQsMS4zNjQsMCwwLDAsLjk2Ny4zMzcsMS42OSwxLjY5LDAsMCwwLC45NzktLjI0OUExLjA0NiwxLjA0NiwwLDAsMC04LjM0NS0xLjg2NVpNLTQuMTgtLjg0NWExLjExMSwxLjExMSwwLDAsMCwuNzM1LS4yNDIsMS4xMDksMS4xMDksMCwwLDAsLjQwOC0uNjU3bDEuMDk0LDBBMS44NywxLjg3LDAsMCwxLTIuMzIyLS44YTIuMiwyLjIsMCwwLDEtLjgzMy42NjlBMi4zMSwyLjMxLDAsMCwxLTQuMjE0LjEsMS45OSwxLjk5LDAsMCwxLTUuMzcxLS4yNTRhMS45NDQsMS45NDQsMCwwLDEtLjctLjk0NSwzLjAyMywzLjAyMywwLDAsMS0uMTQ2LTEuMzQ1bC4wMTUtLjE3MUEzLjQ1NywzLjQ1NywwLDAsMS01Ljc1NC00LjFhMi42MDgsMi42MDgsMCwwLDEsLjk0LS45NTksMi4zNTQsMi4zNTQsMCwwLDEsMS4yNzktLjMxNywxLjg0OCwxLjg0OCwwLDAsMSwxLjM3Mi41NjlBMi4wMDksMi4wMDksMCwwLDEtMS42NS0zLjM4NEgtMi43MzRhMS4xODEsMS4xODEsMCwwLDAtLjIyMi0uNzQyQS44MTMuODEzLDAsMCwwLTMuNi00LjQzNGExLjE3MiwxLjE3MiwwLDAsMC0xLjA2OS41NzYsMy4yMTYsMy4yMTYsMCwwLDAtLjQyLDEuNjhRLTUuMTIyLS44NjQtNC4xOC0uODQ1Wk0yLjEtNC4yYTIuMTMyLDIuMTMyLDAsMCwwLS40NTQtLjA0OSwxLjM1NSwxLjM1NSwwLDAsMC0xLjIxMS42M0wtLjIsMEgtMS4zNTdsLjkxMy01LjI4MywxLjEsMC0uMTE3LjZhMS41MTIsMS41MTIsMCwwLDEsMS4yNS0uNywxLjksMS45LDAsMCwxLC40NDQuMDczWm0uMSwxLjUzOGEzLjQ3NiwzLjQ3NiwwLDAsMSwuNDU3LTEuNDExLDIuNzA5LDIuNzA5LDAsMCwxLC45NTktLjk4MSwyLjM3MSwyLjM3MSwwLDAsMSwxLjMtLjMyNywyLjAxOCwyLjAxOCwwLDAsMSwxLjE3Mi4zNjEsMi4wMDcsMi4wMDcsMCwwLDEsLjcyLjk2MkEzLjA1NCwzLjA1NCwwLDAsMSw2Ljk2OC0yLjdhMy41NDEsMy41NDEsMCwwLDEtLjQ1NywxLjQ4NCwyLjcsMi43LDAsMCwxLS45NjcuOTg5QTIuNCwyLjQsMCwwLDEsNC4yMzguMSwyLjAwOSwyLjAwOSwwLDAsMSwzLjA3NC0uMjYxYTIuMDE0LDIuMDE0LDAsMCwxLS43Mi0uOTU3LDMuMDE1LDMuMDE1LDAsMCwxLS4xNjYtMS4zNFptMS4xMzguNjY5YTEuNCwxLjQsMCwwLDAsLjI3MS44MjNBLjg2Ny44NjcsMCwwLDAsNC4zLS44NDVhMS4yMTcsMS4yMTcsMCwwLDAsMS0uNDU5QTIuNDE1LDIuNDE1LDAsMCwwLDUuOC0yLjZsLjAyOS0uNDc5YTEuNjkxLDEuNjkxLDAsMCwwLS4yNDktLjk4MS44NzQuODc0LDAsMCwwLS43MjMtLjM3NiwxLjI2NSwxLjI2NSwwLDAsMC0xLjE3Mi43MjgsMi43MTgsMi43MTgsMCwwLDAtLjMyNywxLjA0NUE0LjA4OCw0LjA4OCwwLDAsMCwzLjM0LTEuOTkyWk04LjcyNiwwSDcuNTY4bDEuMy03LjVoMS4xNTdaTTExLjI1LDBIMTAuMDkzbDEuMy03LjVoMS4xNTdaTS0yNC44MzIsMi44OTFsMS4wNCw1LjQzOSwyLjkyNS01LjQzOWgxLjU4MkwtMjAuNTE1LDEwaC0xLjJsLjQxNS0yLjQwNy42My0yLjk2NEwtMjMuNiwxMGgtLjg2OWwtMS4wODktNS41MzJMLTI2LDcuNzItMjYuNCwxMGgtMS4ybDEuMjM1LTcuMTA5Wm01LjkzOCw0LjQ0OGEzLjQ3NiwzLjQ3NiwwLDAsMSwuNDU3LTEuNDExLDIuNzA5LDIuNzA5LDAsMCwxLC45NTktLjk4MSwyLjM3MSwyLjM3MSwwLDAsMSwxLjMtLjMyNywyLjAxOCwyLjAxOCwwLDAsMSwxLjE3Mi4zNjEsMi4wMDcsMi4wMDcsMCwwLDEsLjcyLjk2MkEzLjA1NCwzLjA1NCwwLDAsMS0xNC4xMjgsNy4zYTMuNTQxLDMuNTQxLDAsMCwxLS40NTcsMS40ODQsMi43LDIuNywwLDAsMS0uOTY3Ljk4OSwyLjQsMi40LDAsMCwxLTEuMzA2LjMyNSwyLjAwOSwyLjAwOSwwLDAsMS0xLjE2NS0uMzU5LDIuMDE0LDIuMDE0LDAsMCwxLS43Mi0uOTU3LDMuMDE1LDMuMDE1LDAsMCwxLS4xNjYtMS4zNFptMS4xMzguNjY5YTEuNCwxLjQsMCwwLDAsLjI3MS44MjMuODY3Ljg2NywwLDAsMCwuNjg2LjMyNSwxLjIxNywxLjIxNywwLDAsMCwxLS40NTlBMi40MTUsMi40MTUsMCwwLDAtMTUuMyw3LjRsLjAyOS0uNDc5YTEuNjkxLDEuNjkxLDAsMCwwLS4yNDktLjk4MS44NzQuODc0LDAsMCwwLS43MjMtLjM3NiwxLjI2NSwxLjI2NSwwLDAsMC0xLjE3Mi43MjgsMi43MTgsMi43MTgsMCwwLDAtLjMyNywxLjA0NUE0LjA4OCw0LjA4OCwwLDAsMC0xNy43NTYsOC4wMDhabTcuNDIyLDEuNDdhMS45MTYsMS45MTYsMCwwLDEtMS41LjYyLDEuNDcyLDEuNDcyLDAsMCwxLS44NTItLjI1NCwxLjMyMSwxLjMyMSwwLDAsMS0uNDgzLS42ODEsMi40OTQsMi40OTQsMCwwLDEtLjA4NS0xLjAyOGwuNTcxLTMuNDE4aDEuMTU3bC0uNTc2LDMuNDMzYTEuODIsMS44MiwwLDAsMCwwLC4zNTIuNTk0LjU5NCwwLDAsMCwuNjEuNjMsMS40LDEuNCwwLDAsMCwxLjI0LS42MTVsLjY2NC0zLjhILTguNDRMLTkuMzUzLDEwaC0xLjA4NFpNLTUsOC41MzVxLjA4My0uNDgzLS42MjctLjY3MWE3Ljk3Nyw3Ljk3NywwLDAsMS0uOTY5LS4zLDEuMzM2LDEuMzM2LDAsMCwxLS45NzItMS4zMDksMS40ODYsMS40ODYsMCwwLDEsLjY0Ny0xLjE3OSwyLjM3MSwyLjM3MSwwLDAsMSwxLjQ5Mi0uNDU3LDIuMDQxLDIuMDQxLDAsMCwxLDEuMzcuNDc0LDEuNTEsMS41MSwwLDAsMSwuNTIsMS4yMTZsLTEuMTQ3LDBhLjc0MS43NDEsMCwwLDAtLjItLjU3NC44MTcuODE3LDAsMCwwLS41NzYtLjIxNywxLjEzNiwxLjEzNiwwLDAsMC0uNjYyLjE5LjcxLjcxLDAsMCwwLS4zMi41cS0uMDY4LjQ0NC42MjUuNjE4YTYuODYsNi44NiwwLDAsMSwxLjAyNS4zMiwxLjMzNywxLjMzNywwLDAsMSwuOTMzLDEuMzI4LDEuNDYsMS40NiwwLDAsMS0uMzMuODc2LDEuOTIzLDEuOTIzLDAsMCwxLS44MTguNTcxQTIuOCwyLjgsMCwwLDEtNi4xLDEwLjFhMi4xNDgsMi4xNDgsMCwwLDEtMS40MzMtLjVBMS41NywxLjU3LDAsMCwxLTguMDkzLDguMzNsMS4xMTgsMGEuODUxLjg1MSwwLDAsMCwuMjU0LjY0NS45ODEuOTgxLDAsMCwwLC42NjkuMjI1LDEuMzI4LDEuMzI4LDAsMCwwLC43MTUtLjE3OEEuNjg0LjY4NCwwLDAsMC01LDguNTM1Wk0tLjcxNSwxMC4xYTIuMjEzLDIuMjEzLDAsMCwxLTEuMTk0LS4zNDcsMS45NzIsMS45NzIsMCwwLDEtLjc0Ny0uOTA4LDIuNywyLjcsMCwwLDEtLjE4My0xLjI4NGwuMDE1LS4yYTMuNTM2LDMuNTM2LDAsMCwxLC40NzEtMS40NDhBMi42ODksMi42ODksMCwwLDEtMS40LDQuOTM3YTIuMzIxLDIuMzIxLDAsMCwxLDEuMjQtLjMxNywxLjczMSwxLjczMSwwLDAsMSwxLjQ4Ny43MzhBMi43MTEsMi43MTEsMCwwLDEsMS43LDcuMjMxbC0uMDY4LjUwOUgtMS42OTJhMS40MzUsMS40MzUsMCwwLDAsLjI1NCwxLjAxMiwxLjAwNiwxLjAwNiwwLDAsMCwuODIuMzk0QTEuNzgsMS43OCwwLDAsMCwuNzU5LDguNWwuNTg2LjYxNWEyLjIyNywyLjIyNywwLDAsMS0uODc0LjczNUEyLjYsMi42LDAsMCwxLS43MTUsMTAuMVptLjQ5My00LjUzMXEtLjkxOC0uMDI5LTEuMzc3LDEuM2wyLjE5MiwwLC4wMi0uMWExLjUzMiwxLjUzMiwwLDAsMCwwLS40MzkuOS45LDAsMCwwLS4yNzMtLjU0N0EuODY2Ljg2NiwwLDAsMC0uMjIyLDUuNTY2Wk02LjkxNyw4LjM1NGwxLjQ1LTMuNjM4SDkuNTI5TDcuMjE0LDEwSDYuMjYyTDUuOCw2LjM4Nyw0LjA4OSwxMEgzLjEzMkwyLjY0OSw0LjcxN0gzLjc0M2wuMiwzLjU4NCwxLjY3LTMuNTg0aC44NzRaTTExLjMxMSw1LjNhMS45NTMsMS45NTMsMCwwLDEsMS41LS42NzQsMS4yODksMS4yODksMCwwLDEsMS4xMTYuNTMyQTIuMTEzLDIuMTEzLDAsMCwxLDE0LjIsNi42TDEzLjYzLDEwSDEyLjQ3M2wuNTc2LTMuNDEzYTEuOTk0LDEuOTk0LDAsMCwwLC4wMS0uMzkxLjYzMy42MzMsMCwwLDAtLjctLjYxLDEuNDI3LDEuNDI3LDAsMCwwLTEuMTUyLjYzNUwxMC41NDQsMTBIOS4zODdsMS4zLTcuNWgxLjE2MlptNS45MTgsNC44YTIuMjEzLDIuMjEzLDAsMCwxLTEuMTk0LS4zNDcsMS45NzIsMS45NzIsMCwwLDEtLjc0Ny0uOTA4QTIuNywyLjcsMCwwLDEsMTUuMSw3LjU1OWwuMDE1LS4yYTMuNTM2LDMuNTM2LDAsMCwxLC40NzEtMS40NDgsMi42ODksMi42ODksMCwwLDEsLjk1NS0uOTc0LDIuMzIxLDIuMzIxLDAsMCwxLDEuMjQtLjMxNywxLjczMSwxLjczMSwwLDAsMSwxLjQ4Ny43MzgsMi43MTEsMi43MTEsMCwwLDEsLjM3NCwxLjg3M2wtLjA2OC41MDlIMTYuMjUyYTEuNDM1LDEuNDM1LDAsMCwwLC4yNTQsMS4wMTIsMS4wMDYsMS4wMDYsMCwwLDAsLjgyLjM5NEExLjc4LDEuNzgsMCwwLDAsMTguNyw4LjVsLjU4Ni42MTVhMi4yMjcsMi4yMjcsMCwwLDEtLjg3NC43MzVBMi42LDIuNiwwLDAsMSwxNy4yMjksMTAuMVptLjQ5My00LjUzMXEtLjkxOC0uMDI5LTEuMzc3LDEuM2wyLjE5MiwwLC4wMi0uMWExLjUzMiwxLjUzMiwwLDAsMCwwLS40MzkuOS45LDAsMCwwLS4yNzMtLjU0N0EuODY2Ljg2NiwwLDAsMCwxNy43MjIsNS41NjZaTTIyLjQ4MywxMC4xYTIuMjEzLDIuMjEzLDAsMCwxLTEuMTk0LS4zNDcsMS45NzIsMS45NzIsMCwwLDEtLjc0Ny0uOTA4LDIuNywyLjcsMCwwLDEtLjE4My0xLjI4NGwuMDE1LS4yYTMuNTM2LDMuNTM2LDAsMCwxLC40NzEtMS40NDgsMi42ODksMi42ODksMCwwLDEsLjk1NS0uOTc0LDIuMzIxLDIuMzIxLDAsMCwxLDEuMjQtLjMxNywxLjczMSwxLjczMSwwLDAsMSwxLjQ4Ny43MzhBMi43MTEsMi43MTEsMCwwLDEsMjQuOSw3LjIzMWwtLjA2OC41MDlIMjEuNTA2YTEuNDM1LDEuNDM1LDAsMCwwLC4yNTQsMS4wMTIsMS4wMDYsMS4wMDYsMCwwLDAsLjgyLjM5NEExLjc4LDEuNzgsMCwwLDAsMjMuOTU4LDguNWwuNTg2LjYxNWEyLjIyNywyLjIyNywwLDAsMS0uODc0LjczNUEyLjYsMi42LDAsMCwxLDIyLjQ4MywxMC4xWm0uNDkzLTQuNTMxcS0uOTE4LS4wMjktMS4zNzcsMS4zbDIuMTkyLDAsLjAyLS4xYTEuNTMyLDEuNTMyLDAsMCwwLDAtLjQzOS45LjksMCwwLDAtLjI3My0uNTQ3QS44NjYuODY2LDAsMCwwLDIyLjk3Niw1LjU2NlpNMjYuNTc1LDEwSDI1LjQxN2wxLjMtNy41aDEuMTU3WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTMyIDc3NykiIGZpbGw9IiMwNTBjMWEiLz4NCiAgICA8ZyBpZD0ibW91c2UtNSIgZGF0YS1uYW1lPSJtb3VzZSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoOTEgNjkwKSI+DQogICAgICA8ZyBpZD0ic2hhcGUtNSIgZGF0YS1uYW1lPSJzaGFwZSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTkwNCAtNjQzKSI+DQogICAgICAgIDxnIHRyYW5zZm9ybT0ibWF0cml4KDEsIDAsIDAsIDEsIDY3NywgNTkzKSIgZmlsdGVyPSJ1cmwoI2J0bS01KSI+DQogICAgICAgICAgPHBhdGggaWQ9ImJ0bS0xMiIgZGF0YS1uYW1lPSJidG0iIGQ9Ik03LjIsMEgyOC44QTcuMiw3LjIsMCwwLDEsMzYsNy4yVjM2QTE4LDE4LDAsMCwxLDE4LDU0aDBBMTgsMTgsMCwwLDEsMCwzNlY3LjJBNy4yLDcuMiwwLDAsMSw3LjIsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI0MiA1MCkiIGZpbGw9IiMyMTIxMjEiLz4NCiAgICAgICAgPC9nPg0KICAgICAgICA8cGF0aCBpZD0ic2lkZS01IiBkYXRhLW5hbWU9InNpZGUiIGQ9Ik0tNDEwMiwyNzA0YTE3Ljg4MSwxNy44ODEsMCwwLDEtMTIuNzI4LTUuMjcyQTE3Ljg4MiwxNy44ODIsMCwwLDEtNDEyMCwyNjg2di0yOC44YTcuMjA4LDcuMjA4LDAsMCwxLDcuMi03LjJoMjEuNmE3LjIwOCw3LjIwOCwwLDAsMSw3LjIsNy4yVjI2ODZhMTcuODgxLDE3Ljg4MSwwLDAsMS01LjI3MiwxMi43MjhBMTcuODg0LDE3Ljg4NCwwLDAsMS00MTAyLDI3MDRabS0xMC40LTUyYTUuNjA2LDUuNjA2LDAsMCwwLTUuNiw1LjZWMjY4MmExNi4wMTgsMTYuMDE4LDAsMCwwLDE2LDE2LDE2LjAxOCwxNi4wMTgsMCwwLDAsMTYtMTZ2LTI0LjRhNS42MDYsNS42MDYsMCwwLDAtNS42LTUuNloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDUwMzkgLTIwMDcpIiBmaWxsPSJ1cmwoI2xpbmVhci1ncmFkaWVudC03KSIvPg0KICAgICAgICA8cGF0aCBpZD0idG9wLTUiIGRhdGEtbmFtZT0idG9wIiBkPSJNNS42LDBIMjYuNEE1LjYsNS42LDAsMCwxLDMyLDUuNlYzMEExNiwxNiwwLDAsMSwxNiw0NmgwQTE2LDE2LDAsMCwxLDAsMzBWNS42QTUuNiw1LjYsMCwwLDEsNS42LDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg5MjEgNjQ1KSIgZmlsbD0idXJsKCNsaW5lYXItZ3JhZGllbnQtOCkiLz4NCiAgICAgIDwvZz4NCiAgICAgIDxwYXRoIGlkPSJ0ci03IiBkYXRhLW5hbWU9InRyIiBkPSJNMCwwSDkuNWE1LDUsMCwwLDEsNSw1VjE3YTAsMCwwLDAsMSwwLDBIMGEwLDAsMCwwLDEsMCwwVjBBMCwwLDAsMCwxLDAsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMzLjUgMykiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAuMTUiLz4NCiAgICAgIDxwYXRoIGlkPSJ0bC03IiBkYXRhLW5hbWU9InRsIiBkPSJNNSwwaDkuNWEwLDAsMCwwLDEsMCwwVjE3YTAsMCwwLDAsMSwwLDBIMGEwLDAsMCwwLDEsMCwwVjVBNSw1LDAsMCwxLDUsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE4IDMpIiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIwLjE1Ii8+DQogICAgICA8ZyB0cmFuc2Zvcm09Im1hdHJpeCgxLCAwLCAwLCAxLCAtMjI3LCAtNTApIiBmaWx0ZXI9InVybCgjc2Nyb2xsLTMpIj4NCiAgICAgICAgPGcgaWQ9InNjcm9sbC04IiBkYXRhLW5hbWU9InNjcm9sbCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjU3IDYxKSIgZmlsbD0iI2ZmYjcwMCIgc3Ryb2tlPSIjMzEzMTMxIiBzdHJva2Utd2lkdGg9IjEiPg0KICAgICAgICAgIDxyZWN0IHdpZHRoPSI2IiBoZWlnaHQ9IjE0IiBzdHJva2U9Im5vbmUiLz4NCiAgICAgICAgICA8cmVjdCB4PSItMC41IiB5PSItMC41IiB3aWR0aD0iNyIgaGVpZ2h0PSIxNSIgZmlsbD0ibm9uZSIvPg0KICAgICAgICA8L2c+DQogICAgICA8L2c+DQogICAgPC9nPg0KICA8L2c+DQogIDxnIGlkPSJwMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUwNyAtNjQwKSI+DQogICAgPGcgaWQ9InBhbmUtNiIgZGF0YS1uYW1lPSJwYW5lIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2MTUgNjQwKSI+DQogICAgICA8cmVjdCBpZD0iYm94LTYiIGRhdGEtbmFtZT0iYm94IiB3aWR0aD0iMTA0IiBoZWlnaHQ9IjE2MCIgcng9IjQiIGZpbGw9IiNmNmY2ZjYiLz4NCiAgICAgIDxwYXRoIGlkPSJsYWJlbC0xMiIgZGF0YS1uYW1lPSJsYWJlbCIgZD0iTTIuMjUxLTIuNDEyVjBILjUzN1YtNy4xMDlIMy4zNzRhMy4zLDMuMywwLDAsMSwxLjQ0My4zLDIuMjYzLDIuMjYzLDAsMCwxLC45NzIuODU0QTIuMzM0LDIuMzM0LDAsMCwxLDYuMTMzLTQuN2EyLjA1NywyLjA1NywwLDAsMS0uNzQ1LDEuNjYzLDMuMDksMy4wOSwwLDAsMS0yLjA0My42MjNabTAtMS4zMjNIMy4zNzRhMS4wNTksMS4wNTksMCwwLDAsLjc1OS0uMjQ5LjkyNS45MjUsMCwwLDAsLjI2MS0uNywxLjE0NCwxLjE0NCwwLDAsMC0uMjY5LS44Ljk1MS45NTEsMCwwLDAtLjczMi0uM0gyLjI1MVptOC4xNjQsMi40MDdIOC4wNjZMNy42NTYsMEg1LjgyNUw4LjQzMi03LjEwOWgxLjYxMUwxMi42NzEsMEgxMC44M1pNOC40NzYtMi42NTFIMTBMOS4yMzgtNS4xMTdaTTE5LjMyNiwwaC0xLjdMMTUuMS00LjQyNFYwSDEzLjM4OFYtNy4xMDlIMTUuMWwyLjUxNSw0LjQyNFYtNy4xMDloMS43MDlabTguMDEyLTEuMzI4SDI0Ljk4OUwyNC41NzksMEgyMi43NDhsMi42MDctNy4xMDloMS42MTFMMjkuNTk0LDBIMjcuNzUzWk0yNS40LTIuNjUxaDEuNTI4bC0uNzY3LTIuNDY2Wm03LjU1NC4xMzdoLS45MjhWMEgzMC4zMTJWLTcuMTA5aDIuOGEzLjEyMywzLjEyMywwLDAsMSwxLjk3OC41NjFBMS45LDEuOSwwLDAsMSwzNS44LTQuOTYzYTIuMzA4LDIuMzA4LDAsMCwxLS4zLDEuMjI5LDIuMTMxLDIuMTMxLDAsMCwxLS45NC43OUwzNi4wNDQtLjA3M1YwSDM0LjIwOFptLS45MjgtMS4zMThoMS4wODRhLjk3My45NzMsMCwwLDAsLjczNS0uMjU3Ljk5My45OTMsMCwwLDAsLjI0Ny0uNzE3LDEsMSwwLDAsMC0uMjQ5LS43MjIuOTY0Ljk2NCwwLDAsMC0uNzMyLS4yNjJIMzIuMDI1Wm0xMS4wMy40MjVhNC4xOTIsNC4xOTIsMCwwLDEtLjM4NiwxLjg0MSwyLjg1MSwyLjg1MSwwLDAsMS0xLjEsMS4yMzNBMy4wNTIsMy4wNTIsMCwwLDEsMzkuOTU1LjEsMy4xLDMuMSwwLDAsMSwzOC4zNDQtLjMyYTIuODQ2LDIuODQ2LDAsMCwxLTEuMS0xLjE5NEE0LjA3Miw0LjA3MiwwLDAsMSwzNi44MzUtMy4zdi0uNGE0LjIxMSw0LjIxMSwwLDAsMSwuMzgzLTEuODQzLDIuODQ0LDIuODQ0LDAsMCwxLDEuMS0xLjIzMywzLjA3NCwzLjA3NCwwLDAsMSwxLjYyOC0uNDM1LDMuMDQ0LDMuMDQ0LDAsMCwxLDEuNjExLjQzLDIuOSwyLjksMCwwLDEsMS4xLDEuMjIzLDQuMDksNC4wOSwwLDAsMSwuNCwxLjgxOVptLTEuNzQzLS4zYTIuOTksMi45OSwwLDAsMC0uMzU0LTEuNjA5LDEuMTM1LDEuMTM1LDAsMCwwLTEuMDEzLS41NDlxLTEuMjg5LDAtMS4zNjIsMS45MzRsMCwuNTIyQTMuMDc1LDMuMDc1LDAsMCwwLDM4LjkyNS0xLjhhMS4xMzQsMS4xMzQsMCwwLDAsMS4wMy41NjIsMS4xMiwxLjEyLDAsMCwwLDEtLjU1MiwyLjk5MSwyLjk5MSwwLDAsMCwuMzU2LTEuNTg3Wm04LjQtMy40djQuNjUzYTIuNjc0LDIuNjc0LDAsMCwxLS4zMzcsMS4zNywyLjE4MywyLjE4MywwLDAsMS0uOTY3Ljg4MSwzLjQwNiwzLjQwNiwwLDAsMS0xLjQ4OS4zLDIuOTQyLDIuOTQyLDAsMCwxLTIuMDQ2LS42NzQsMi40LDIuNCwwLDAsMS0uNzYyLTEuODQ2Vi03LjEwOWgxLjcyNHY0LjcyMnEuMDI5LDEuMTY3LDEuMDg0LDEuMTY3YTEuMDQ5LDEuMDQ5LDAsMCwwLC44MDYtLjI5M0ExLjM2OSwxLjM2OSwwLDAsMCw0OC0yLjQ2NlYtNy4xMDlaTTU2LjkyMiwwaC0xLjdMNTIuNy00LjQyNFYwSDUwLjk4NVYtNy4xMDlINTIuN2wyLjUxNSw0LjQyNFYtNy4xMDloMS43MDlabTEuMjg0LDBWLTcuMTA5SDYwLjVhMy4zNjksMy4zNjksMCwwLDEsMS42OTQuNDI3LDMsMywwLDAsMSwxLjE3NCwxLjIwNiwzLjY0MSwzLjY0MSwwLDAsMSwuNDI3LDEuNzQ2Vi0zLjRhMy42NjIsMy42NjIsMCwwLDEtLjQxMywxLjc1QTMuMDE2LDMuMDE2LDAsMCwxLDYyLjIxNy0uNDQyLDMuMywzLjMsMCwwLDEsNjAuNTQ1LDBaTTU5LjkyLTUuNzg2djQuNDY4aC42YTEuMzMzLDEuMzMzLDAsMCwwLDEuMTMzLS41MjUsMi41NzIsMi41NzIsMCwwLDAsLjQtMS41NnYtLjMwOGEyLjU1MSwyLjU1MSwwLDAsMC0uNC0xLjU1M0ExLjM1NiwxLjM1NiwwLDAsMCw2MC41LTUuNzg2WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTAgMTgpIiBmaWxsPSIjMDUwYzFhIi8+DQogICAgPC9nPg0KICAgIDxwYXRoIGlkPSJkZXNjcmlwdGlvbi02IiBkYXRhLW5hbWU9ImRlc2NyaXB0aW9uIiBkPSJNLTIwLjAzNC0yLjczNGgtMS4zNTdMLTIxLjg3LDBoLTEuMjA2bDEuMjM1LTcuMTA5LDIuMjQxLDBhMi41NTMsMi41NTMsMCwwLDEsMS43NzIuNTU3QTEuNzY5LDEuNzY5LDAsMCwxLTE3LjI5NS01LDIuMTI4LDIuMTI4LDAsMCwxLTE3Ljc1NC0zLjhhMi42NzEsMi42NzEsMCwwLDEtMS4xMzguNzk0bDEuMDUsMi45MzYsMCwuMDczaC0xLjI3OVptLTEuMTkxLTEsMS4xNjcuMDFhMS42NTgsMS42NTgsMCwwLDAsMS4wNTItLjMzLDEuMywxLjMsMCwwLDAsLjUtLjksMS4wMDgsMS4wMDgsMCwwLDAtLjItLjg0NywxLjEsMS4xLDAsMCwwLS44MTUtLjMxNWwtMS4yODksMFpNLTE1Ljg1NCwwaC0xLjE1N2wuOTE4LTUuMjgzaDEuMTU3Wm0tLjA3My02LjYzNmEuNjUzLjY1MywwLDAsMSwuMTc2LS40NTkuNjQ0LjY0NCwwLDAsMSwuNDc0LS4yLjYxNi42MTYsMCwwLDEsLjQ3MS4xNzMuNi42LDAsMCwxLC4xODguNDQ3LjYxNy42MTcsMCwwLDEtLjE4My40NTkuNjcxLjY3MSwwLDAsMS0uNDY2LjE5LjYyNi42MjYsMCwwLDEtLjQ2OS0uMTY4QS41ODEuNTgxLDAsMCwxLTE1LjkyOC02LjYzNlpNLTE0LjMtMi42NDZhNC4wODcsNC4wODcsMCwwLDEsLjQyNy0xLjQzMSwyLjU4NCwyLjU4NCwwLDAsMSwuODQyLS45NzksMS45ODcsMS45ODcsMCwwLDEsMS4xNjItLjMzLDEuNTU5LDEuNTU5LDAsMCwxLDEuMzEzLjY0bC4xODEtLjU0MiwxLjA1NSwwTC0xMC4xOS0uMTQ2QTIuNTM4LDIuNTM4LDAsMCwxLTExLjA2MiwxLjVhMi41MjYsMi41MjYsMCwwLDEtMS43NjUuNTgzLDIuNDY2LDIuNDY2LDAsMCwxLTEuMDU1LS4yNTQsMi4xOTMsMi4xOTMsMCwwLDEtLjgtLjY0NWwuNjE1LS43YTEuNDgyLDEuNDgyLDAsMCwwLDEuMjExLjY1OSwxLjQxOSwxLjQxOSwwLDAsMCwuOTc0LS4zMSwxLjYxNiwxLjYxNiwwLDAsMCwuNTQ0LS45NGwuMDgzLS4zNzFBMS44NjksMS44NjksMCwwLDEtMTIuNjQyLjFhMS40OCwxLjQ4LDAsMCwxLTEuMTg5LS41NjIsMi40ODQsMi40ODQsMCwwLDEtLjQ5MS0xLjQ4NEE0Ljg3OSw0Ljg3OSwwLDAsMS0xNC4zLTIuNjQ2Wm0xLjE0Ny4xYTMuNTcxLDMuNTcxLDAsMCwwLS4wMi41MzcsMS4zOTQsMS4zOTQsMCwwLDAsLjIzNC44Mi43ODYuNzg2LDAsMCwwLC42NC4zMTcsMS4zNjYsMS4zNjYsMCwwLDAsMS4xNTItLjYxbC40MTUtMi4zMzRhLjk0My45NDMsMCwwLDAtLjktLjYsMS4yMDUsMS4yMDUsMCwwLDAtLjk4Ni40NTQsMi41NDQsMi41NDQsMCwwLDAtLjUyMiwxLjMxM1pNLTcuMS00LjdhMS45NTMsMS45NTMsMCwwLDEsMS41LS42NzQsMS4yODksMS4yODksMCwwLDEsMS4xMTYuNTMyQTIuMTEzLDIuMTEzLDAsMCwxLTQuMjE5LTMuNEwtNC43ODUsMEgtNS45NDJsLjU3Ni0zLjQxM2ExLjk5NCwxLjk5NCwwLDAsMCwuMDEtLjM5MS42MzMuNjMzLDAsMCwwLS43LS42MSwxLjQyNywxLjQyNywwLDAsMC0xLjE1Mi42MzVMLTcuODcxLDBILTkuMDI4bDEuMy03LjVoMS4xNjJaTS0uOTg2LTYuNTY3bC0uMjI1LDEuMjg0aC45TC0uNDU5LTQuNGgtLjkwOGwtLjUsMi45NTlhMS4wMTIsMS4wMTIsMCwwLDAsMCwuMjJxLjAyOS4zMTcuMzkxLjMzMmEyLjIwNiwyLjIwNiwwLDAsMCwuNDEtLjA0NGwtLjA3OC45MjhhMi42NTMsMi42NTMsMCwwLDEtLjcyOC4xQTEuMDgsMS4wOCwwLDAsMS0yLjc4MS0uMzJhMS40OTMsMS40OTMsMCwwLDEtLjIzNy0xLjA2N0wtMi41MjQtNC40aC0uODQ1bC4xNTYtLjg3OWguODRsLjIyNS0xLjI4NFpNMi4zNzgtMi41NDRoLTIuNUwuMDU0LTMuNWgyLjVabTIuODU2LDEuN2ExLjExMSwxLjExMSwwLDAsMCwuNzM1LS4yNDIsMS4xMDksMS4xMDksMCwwLDAsLjQwOC0uNjU3bDEuMDk0LDBBMS44NywxLjg3LDAsMCwxLDcuMDkyLS44YTIuMiwyLjIsMCwwLDEtLjgzMy42NjlBMi4zMSwyLjMxLDAsMCwxLDUuMi4xLDEuOTksMS45OSwwLDAsMSw0LjA0My0uMjU0YTEuOTQ0LDEuOTQ0LDAsMCwxLS43LS45NDVBMy4wMjMsMy4wMjMsMCwwLDEsMy4yLTIuNTQ0bC4wMTUtLjE3MUEzLjQ1NywzLjQ1NywwLDAsMSwzLjY2LTQuMWEyLjYwOCwyLjYwOCwwLDAsMSwuOTQtLjk1OSwyLjM1NCwyLjM1NCwwLDAsMSwxLjI3OS0uMzE3LDEuODQ4LDEuODQ4LDAsMCwxLDEuMzcyLjU2OSwyLjAwOSwyLjAwOSwwLDAsMSwuNTEzLDEuNDI4SDYuNjhhMS4xODEsMS4xODEsMCwwLDAtLjIyMi0uNzQyLjgxMy44MTMsMCwwLDAtLjY0Mi0uMzA4LDEuMTcyLDEuMTcyLDAsMCwwLTEuMDY5LjU3NiwzLjIxNiwzLjIxNiwwLDAsMC0uNDIsMS42OFE0LjI5Mi0uODY0LDUuMjM0LS44NDVaTTkuMjg3LDBIOC4xM2wxLjMtNy41aDEuMTU3Wm0yLjUyNCwwSDEwLjY1NGwuOTE4LTUuMjgzaDEuMTU3Wm0tLjA3My02LjYzNmEuNjUzLjY1MywwLDAsMSwuMTc2LS40NTkuNjQ0LjY0NCwwLDAsMSwuNDc0LS4yLjYxNi42MTYsMCwwLDEsLjQ3MS4xNzMuNi42LDAsMCwxLC4xODguNDQ3LjYxNy42MTcsMCwwLDEtLjE4My40NTkuNjcxLjY3MSwwLDAsMS0uNDY2LjE5LjYyNi42MjYsMCwwLDEtLjQ2OS0uMTY4QS41ODEuNTgxLDAsMCwxLDExLjczOC02LjYzNlpNMTUuNDEtLjg0NWExLjExMSwxLjExMSwwLDAsMCwuNzM1LS4yNDIsMS4xMDksMS4xMDksMCwwLDAsLjQwOC0uNjU3bDEuMDk0LDBhMS44NywxLjg3LDAsMCwxLS4zNzguOTUyLDIuMiwyLjIsMCwwLDEtLjgzMy42NjlBMi4zMSwyLjMxLDAsMCwxLDE1LjM3Ni4xYTEuOTksMS45OSwwLDAsMS0xLjE1Ny0uMzUyLDEuOTQ0LDEuOTQ0LDAsMCwxLS43LS45NDUsMy4wMjMsMy4wMjMsMCwwLDEtLjE0Ni0xLjM0NWwuMDE1LS4xNzFBMy40NTcsMy40NTcsMCwwLDEsMTMuODM1LTQuMWEyLjYwOCwyLjYwOCwwLDAsMSwuOTQtLjk1OSwyLjM1NCwyLjM1NCwwLDAsMSwxLjI3OS0uMzE3LDEuODQ4LDEuODQ4LDAsMCwxLDEuMzcyLjU2OSwyLjAwOSwyLjAwOSwwLDAsMSwuNTEzLDEuNDI4SDE2Ljg1NWExLjE4MSwxLjE4MSwwLDAsMC0uMjIyLS43NDIuODEzLjgxMywwLDAsMC0uNjQyLS4zMDgsMS4xNzIsMS4xNzIsMCwwLDAtMS4wNjkuNTc2LDMuMjE2LDMuMjE2LDAsMCwwLS40MiwxLjY4UTE0LjQ2OC0uODY0LDE1LjQxLS44NDVabTQuOTI3LTEuNDExLS42NTQuNTgxTDE5LjM5NSwwSDE4LjIzN2wxLjMtNy41aDEuMTU3bC0uNzQyLDQuMjU4LjQwNS0uNDIsMS42OC0xLjYyMWgxLjQ3OUwyMS4xNzItMy4wMjcsMjIuNzE1LDBIMjEuNDZaTS0xNi40MTgsMTBhMS41NjcsMS41NjcsMCwwLDEtLjA0OS0uNDkzLDEuOTU5LDEuOTU5LDAsMCwxLTEuNDExLjU5MSwxLjYxOCwxLjYxOCwwLDAsMS0xLjE0LS40NDIsMS4zNjMsMS4zNjMsMCwwLDEtLjQyMi0xLjEsMS42MTgsMS42MTgsMCwwLDEsLjcyMy0xLjMxMywzLjE0NiwzLjE0NiwwLDAsMSwxLjgzNi0uNDc5bC43NTIuMDEuMDY4LS4zNjFhMS4wOSwxLjA5LDAsMCwwLDAtLjM1Ni42MzYuNjM2LDAsMCwwLS43LS41NDIsMS4wNTMsMS4wNTMsMCwwLDAtLjY1Mi4xODguODEzLjgxMywwLDAsMC0uMzQ0LjUzbC0xLjE1Ny4wMWExLjQ0OSwxLjQ0OSwwLDAsMSwuMzQ3LS44NTcsMi4wNTYsMi4wNTYsMCwwLDEsLjgzLS41NzQsMi44MSwyLjgxLDAsMCwxLDEuMDk0LS4yLDEuODQ4LDEuODQ4LDAsMCwxLDEuMzQ4LjUyLDEuNTQxLDEuNTQxLDAsMCwxLC40LDEuM0wtMTUuMyw4LjkxMWwtLjAzOS40MzlhMS41NjEsMS41NjEsMCwwLDAsLjA3My41NjJsMCwuMDg4Wm0tMS4xOTEtLjg1YTEuMjc2LDEuMjc2LDAsMCwwLC42NzktLjE2OCwxLjc4OCwxLjc4OCwwLDAsMCwuNTMyLS40NjFsLjE4MS0xLS41NTIsMGExLjkzOSwxLjkzOSwwLDAsMC0xLjA0NS4yNDcuOS45LDAsMCwwLS40NDQuNjc2LjYuNiwwLDAsMCwuMTQ0LjUxNUEuNy43LDAsMCwwLTE3LjYxLDkuMTVabTUuMzM3LTQuNDM4LS4xMTcuNjJhMi4wMTYsMi4wMTYsMCwwLDEsMS41NjctLjcxMywxLjI3NywxLjI3NywwLDAsMSwxLjEuNTNBMi4xMTUsMi4xMTUsMCwwLDEtOS40Niw2LjU4N0wtMTAuMDMyLDEwaC0xLjE1N2wuNTc2LTMuNDI4YTEuNzU0LDEuNzU0LDAsMCwwLDAtLjM5MS42MjMuNjIzLDAsMCwwLS42OTMtLjYsMS40MDcsMS40MDcsMCwwLDAtMS4xNTcuNjQ5TC0xMy4xMTgsMTBoLTEuMTU3bC45MTMtNS4yODNabTMuNzExLDIuNjQyYTQuMTg1LDQuMTg1LDAsMCwxLC40MzktMS40NjUsMi40OCwyLjQ4LDAsMCwxLC44NDUtLjk2OUExLjk1MSwxLjk1MSwwLDAsMS02LjE2LDQuNjE0YTEuNTYxLDEuNTYxLDAsMCwxLDEuMjYuNkwtNC4zOTIsMi41SC0zLjIzbC0xLjMsNy41SC01LjU2OWwuMDc4LS41NDdhMS44NDEsMS44NDEsMCwwLDEtMS40NDUuNjQ5LDEuNDUzLDEuNDUzLDAsMCwxLTEuMTc5LS41NjksMi40ODQsMi40ODQsMCwwLDEtLjQ3Ni0xLjQ4NywzLjk0OCwzLjk0OCwwLDAsMSwuMDE1LS41OTFabTEuMTIzLjQ1NGExLjYyNywxLjYyNywwLDAsMCwuMTg4Ljk2Mi43NTEuNzUxLDAsMCwwLC42NjIuMzY2LDEuMzU5LDEuMzU5LDAsMCwwLDEuMTU3LS42NDlsLjQtMi4yNzFhLjkuOSwwLDAsMC0uODg5LS42MywxLjE4OSwxLjE4OSwwLDAsMC0xLjA2OS41ODZBMy4xMjMsMy4xMjMsMCwwLDAtNy40MzksNy44MDhaTS0uNzE1LDEwLC41MTUsMi44OTFsMS45MjQsMGEyLjYzMywyLjYzMywwLDAsMSwxLjUzMS40NDJBMi40ODQsMi40ODQsMCwwLDEsNC45LDQuNTU4YTMuNjM5LDMuNjM5LDAsMCwxLC4xNzYsMS43MTZsLS4wNTQuMzg2QTQuMjYzLDQuMjYzLDAsMCwxLDQuMzc1LDguNCwzLjQ4MSwzLjQ4MSwwLDAsMSwzLjA4Myw5LjU4LDMuNjQ5LDMuNjQ5LDAsMCwxLDEuMzQ1LDEwWk0xLjU1LDMuODg3LjY2Miw5LjAxNGwuNzEzLDBhMi4yMjEsMi4yMjEsMCwwLDAsMS42LS42MTNBMi45NDMsMi45NDMsMCwwLDAsMy44LDYuNzE0LDUuNyw1LjcsMCwwLDAsMy44ODksNS40MmExLjc0MiwxLjc0MiwwLDAsMC0uNDEzLTEuMTA4LDEuMzgxLDEuMzgxLDAsMCwwLTEuMDIzLS40MlpNOS4wMTYsNS44YTIuMTMyLDIuMTMyLDAsMCwwLS40NTQtLjA0OSwxLjM1NSwxLjM1NSwwLDAsMC0xLjIxMS42M0w2LjcxNiwxMEg1LjU1OWwuOTEzLTUuMjgzLDEuMSwwLS4xMTcuNmExLjUxMiwxLjUxMiwwLDAsMSwxLjI1LS43LDEuOSwxLjksMCwwLDEsLjQ0NC4wNzNaTTEyLjAwOSwxMGExLjU2NywxLjU2NywwLDAsMS0uMDQ5LS40OTMsMS45NTksMS45NTksMCwwLDEtMS40MTEuNTkxLDEuNjE4LDEuNjE4LDAsMCwxLTEuMTQtLjQ0MiwxLjM2MywxLjM2MywwLDAsMS0uNDIyLTEuMSwxLjYxOCwxLjYxOCwwLDAsMSwuNzIzLTEuMzEzLDMuMTQ2LDMuMTQ2LDAsMCwxLDEuODM2LS40NzlsLjc1Mi4wMS4wNjgtLjM2MWExLjA5LDEuMDksMCwwLDAsMC0uMzU2LjYzNi42MzYsMCwwLDAtLjctLjU0MiwxLjA1MywxLjA1MywwLDAsMC0uNjUyLjE4OC44MTMuODEzLDAsMCwwLS4zNDQuNTNsLTEuMTU3LjAxYTEuNDQ5LDEuNDQ5LDAsMCwxLC4zNDctLjg1NywyLjA1NiwyLjA1NiwwLDAsMSwuODMtLjU3NCwyLjgxLDIuODEsMCwwLDEsMS4wOTQtLjIsMS44NDgsMS44NDgsMCwwLDEsMS4zNDguNTIsMS41NDEsMS41NDEsMCwwLDEsLjQsMS4zbC0uNDA1LDIuNDc2LS4wMzkuNDM5YTEuNTYxLDEuNTYxLDAsMCwwLC4wNzMuNTYybDAsLjA4OFptLTEuMTkxLS44NWExLjI3NiwxLjI3NiwwLDAsMCwuNjc5LS4xNjgsMS43ODgsMS43ODgsMCwwLDAsLjUzMi0uNDYxbC4xODEtMS0uNTUyLDBhMS45MzksMS45MzksMCwwLDAtMS4wNDUuMjQ3LjkuOSwwLDAsMC0uNDQ0LjY3Ni42LjYsMCwwLDAsLjE0NC41MTVBLjcuNywwLDAsMCwxMC44MTgsOS4xNVptMy42MTMtMS44YTQuMDg3LDQuMDg3LDAsMCwxLC40MjctMS40MzEsMi41ODQsMi41ODQsMCwwLDEsLjg0Mi0uOTc5LDEuOTg3LDEuOTg3LDAsMCwxLDEuMTYyLS4zMywxLjU1OSwxLjU1OSwwLDAsMSwxLjMxMy42NGwuMTgxLS41NDIsMS4wNTUsMC0uODc0LDUuMTM3QTIuNDk0LDIuNDk0LDAsMCwxLDE1LjksMTIuMDg1YTIuNDY2LDIuNDY2LDAsMCwxLTEuMDU1LS4yNTQsMi4xOTMsMi4xOTMsMCwwLDEtLjgtLjY0NWwuNjE1LS43YTEuNDgyLDEuNDgyLDAsMCwwLDEuMjExLjY1OSwxLjQxOSwxLjQxOSwwLDAsMCwuOTc0LS4zMSwxLjYxNiwxLjYxNiwwLDAsMCwuNTQ0LS45NGwuMDgzLS4zNzFhMS44NjksMS44NjksMCwwLDEtMS4zODcuNTcxQTEuNDgsMS40OCwwLDAsMSwxNC45LDkuNTM2YTIuNDg0LDIuNDg0LDAsMCwxLS40OTEtMS40ODRBNC44NzksNC44NzksMCwwLDEsMTQuNDMxLDcuMzU0Wm0xLjE0Ny4xYTMuNTcxLDMuNTcxLDAsMCwwLS4wMi41MzcsMS4zOTQsMS4zOTQsMCwwLDAsLjIzNC44Mi43ODYuNzg2LDAsMCwwLC42NC4zMTcsMS4zNjYsMS4zNjYsMCwwLDAsMS4xNTItLjYxTDE4LDYuMTg3YS45NDMuOTQzLDAsMCwwLS45LS42LDEuMjA1LDEuMjA1LDAsMCwwLS45ODYuNDU0LDIuNTQ0LDIuNTQ0LDAsMCwwLS41MjIsMS4zMTNaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2NjcgNzc3KSIgZmlsbD0iIzA1MGMxYSIvPg0KICAgIDxnIGlkPSJtb3VzZS02IiBkYXRhLW5hbWU9Im1vdXNlIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2MzQgNjkwKSI+DQogICAgICA8ZyBpZD0iZHJhZy0zIiBkYXRhLW5hbWU9ImRyYWciPg0KICAgICAgICA8cGF0aCBpZD0icjQtMyIgZGF0YS1uYW1lPSJyNCIgZD0iTTcuMiwwSDI4LjhBNy4yLDcuMiwwLDAsMSwzNiw3LjJWMzZBMTgsMTgsMCwwLDEsMTgsNTRoMEExOCwxOCwwLDAsMSwwLDM2VjcuMkE3LjIsNy4yLDAsMCwxLDcuMiwwWiIgb3BhY2l0eT0iMC4wNyIvPg0KICAgICAgICA8cGF0aCBpZD0icjMtMyIgZGF0YS1uYW1lPSJyMyIgZD0iTTcuMiwwSDI4LjhBNy4yLDcuMiwwLDAsMSwzNiw3LjJWMzZBMTgsMTgsMCwwLDEsMTgsNTRoMEExOCwxOCwwLDAsMSwwLDM2VjcuMkE3LjIsNy4yLDAsMCwxLDcuMiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzApIiBvcGFjaXR5PSIwLjA3Ii8+DQogICAgICAgIDxwYXRoIGlkPSJyMi0zIiBkYXRhLW5hbWU9InIyIiBkPSJNNy4yLDBIMjguOEE3LjIsNy4yLDAsMCwxLDM2LDcuMlYzNkExOCwxOCwwLDAsMSwxOCw1NGgwQTE4LDE4LDAsMCwxLDAsMzZWNy4yQTcuMiw3LjIsMCwwLDEsNy4yLDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMCkiIG9wYWNpdHk9IjAuMDciLz4NCiAgICAgICAgPHBhdGggaWQ9InIxLTMiIGRhdGEtbmFtZT0icjEiIGQ9Ik03LjIsMEgyOC44QTcuMiw3LjIsMCwwLDEsMzYsNy4yVjM2QTE4LDE4LDAsMCwxLDE4LDU0aDBBMTgsMTgsMCwwLDEsMCwzNlY3LjJBNy4yLDcuMiwwLDAsMSw3LjIsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEwKSIgb3BhY2l0eT0iMC4wNyIvPg0KICAgICAgPC9nPg0KICAgICAgPGcgaWQ9InNoYXBlLTYiIGRhdGEtbmFtZT0ic2hhcGUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC05MDQgLTY0MykiPg0KICAgICAgICA8ZyB0cmFuc2Zvcm09Im1hdHJpeCgxLCAwLCAwLCAxLCA3NzcsIDU5MykiIGZpbHRlcj0idXJsKCNidG0tNikiPg0KICAgICAgICAgIDxwYXRoIGlkPSJidG0tMTMiIGRhdGEtbmFtZT0iYnRtIiBkPSJNNy4yLDBIMjguOEE3LjIsNy4yLDAsMCwxLDM2LDcuMlYzNkExOCwxOCwwLDAsMSwxOCw1NGgwQTE4LDE4LDAsMCwxLDAsMzZWNy4yQTcuMiw3LjIsMCwwLDEsNy4yLDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNDIgNTApIiBmaWxsPSIjMjEyMTIxIi8+DQogICAgICAgIDwvZz4NCiAgICAgICAgPHBhdGggaWQ9InNpZGUtNiIgZGF0YS1uYW1lPSJzaWRlIiBkPSJNLTQxMDIsMjcwNGExNy44ODEsMTcuODgxLDAsMCwxLTEyLjcyOC01LjI3MkExNy44ODIsMTcuODgyLDAsMCwxLTQxMjAsMjY4NnYtMjguOGE3LjIwOCw3LjIwOCwwLDAsMSw3LjItNy4yaDIxLjZhNy4yMDgsNy4yMDgsMCwwLDEsNy4yLDcuMlYyNjg2YTE3Ljg4MSwxNy44ODEsMCwwLDEtNS4yNzIsMTIuNzI4QTE3Ljg4NCwxNy44ODQsMCwwLDEtNDEwMiwyNzA0Wm0tMTAuNC01MmE1LjYwNiw1LjYwNiwwLDAsMC01LjYsNS42VjI2ODJhMTYuMDE4LDE2LjAxOCwwLDAsMCwxNiwxNiwxNi4wMTgsMTYuMDE4LDAsMCwwLDE2LTE2di0yNC40YTUuNjA2LDUuNjA2LDAsMCwwLTUuNi01LjZaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1MDM5IC0yMDA3KSIgZmlsbD0idXJsKCNsaW5lYXItZ3JhZGllbnQtNykiLz4NCiAgICAgICAgPHBhdGggaWQ9InRvcC02IiBkYXRhLW5hbWU9InRvcCIgZD0iTTUuNiwwSDI2LjRBNS42LDUuNiwwLDAsMSwzMiw1LjZWMzBBMTYsMTYsMCwwLDEsMTYsNDZoMEExNiwxNiwwLDAsMSwwLDMwVjUuNkE1LjYsNS42LDAsMCwxLDUuNiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoOTIxIDY0NSkiIGZpbGw9InVybCgjbGluZWFyLWdyYWRpZW50LTgpIi8+DQogICAgICA8L2c+DQogICAgICA8ZyB0cmFuc2Zvcm09Im1hdHJpeCgxLCAwLCAwLCAxLCAtMTI3LCAtNTApIiBmaWx0ZXI9InVybCgjdHItMikiPg0KICAgICAgICA8cGF0aCBpZD0idHItOCIgZGF0YS1uYW1lPSJ0ciIgZD0iTTAsMEg5LjVhNSw1LDAsMCwxLDUsNVYxN2EwLDAsMCwwLDEsMCwwSDBhMCwwLDAsMCwxLDAsMFYwQTAsMCwwLDAsMSwwLDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNjAuNSA1MykiIGZpbGw9IiNmZmI3MDAiLz4NCiAgICAgIDwvZz4NCiAgICAgIDxwYXRoIGlkPSJ0bC04IiBkYXRhLW5hbWU9InRsIiBkPSJNNSwwaDkuNWEwLDAsMCwwLDEsMCwwVjE3YTAsMCwwLDAsMSwwLDBIMGEwLDAsMCwwLDEsMCwwVjVBNSw1LDAsMCwxLDUsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE4IDMpIiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIwLjE1Ii8+DQogICAgICA8ZyBpZD0ic2Nyb2xsLTkiIGRhdGEtbmFtZT0ic2Nyb2xsIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMCAxMSkiIGZpbGw9IiM0ZDRkNGQiIHN0cm9rZT0iIzMxMzEzMSIgc3Ryb2tlLXdpZHRoPSIxIj4NCiAgICAgICAgPHJlY3Qgd2lkdGg9IjYiIGhlaWdodD0iMTQiIHN0cm9rZT0ibm9uZSIvPg0KICAgICAgICA8cmVjdCB4PSItMC41IiB5PSItMC41IiB3aWR0aD0iNyIgaGVpZ2h0PSIxNSIgZmlsbD0ibm9uZSIvPg0KICAgICAgPC9nPg0KICAgIDwvZz4NCiAgPC9nPg0KICA8ZyBpZD0icDEiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC01MTAgLTY0MCkiPg0KICAgIDxnIGlkPSJjb250YWluZXIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDUxMCA2NDApIj4NCiAgICAgIDxyZWN0IGlkPSJib3gtNyIgZGF0YS1uYW1lPSJib3giIHdpZHRoPSIxMDQiIGhlaWdodD0iMTYwIiByeD0iNCIgZmlsbD0iI2Y2ZjZmNiIvPg0KICAgICAgPHBhdGggaWQ9ImxhYmVsLTEzIiBkYXRhLW5hbWU9ImxhYmVsIiBkPSJNNi41NTgtMy40MDhhNC4xOTIsNC4xOTIsMCwwLDEtLjM4NiwxLjg0MSwyLjg1MSwyLjg1MSwwLDAsMS0xLjEsMS4yMzNBMy4wNTIsMy4wNTIsMCwwLDEsMy40NTcuMSwzLjEsMy4xLDAsMCwxLDEuODQ2LS4zMiwyLjg0NiwyLjg0NiwwLDAsMSwuNzUtMS41MTQsNC4wNzIsNC4wNzIsMCwwLDEsLjMzNy0zLjN2LS40QTQuMjExLDQuMjExLDAsMCwxLC43Mi01LjU0YTIuODQ0LDIuODQ0LDAsMCwxLDEuMS0xLjIzMywzLjA3NCwzLjA3NCwwLDAsMSwxLjYyOC0uNDM1LDMuMDQ0LDMuMDQ0LDAsMCwxLDEuNjExLjQzLDIuOSwyLjksMCwwLDEsMS4xLDEuMjIzLDQuMDksNC4wOSwwLDAsMSwuNCwxLjgxOVptLTEuNzQzLS4zQTIuOTksMi45OSwwLDAsMCw0LjQ2LTUuMzE1YTEuMTM1LDEuMTM1LDAsMCwwLTEuMDEzLS41NDlxLTEuMjg5LDAtMS4zNjIsMS45MzRsMCwuNTIyQTMuMDc1LDMuMDc1LDAsMCwwLDIuNDI3LTEuOGExLjEzNCwxLjEzNCwwLDAsMCwxLjAzLjU2MiwxLjEyLDEuMTIsMCwwLDAsMS0uNTUyLDIuOTkxLDIuOTkxLDAsMCwwLC4zNTYtMS41ODdabTUuNDY5LDEuMTkxSDkuMzU1VjBINy42NDFWLTcuMTA5aDIuOGEzLjEyMywzLjEyMywwLDAsMSwxLjk3OC41NjEsMS45LDEuOSwwLDAsMSwuNzEzLDEuNTg1LDIuMzA4LDIuMzA4LDAsMCwxLS4zLDEuMjI5LDIuMTMxLDIuMTMxLDAsMCwxLS45NC43OUwxMy4zNzQtLjA3M1YwSDExLjUzOFpNOS4zNTUtMy44MzNoMS4wODRhLjk3My45NzMsMCwwLDAsLjczNS0uMjU3Ljk5My45OTMsMCwwLDAsLjI0Ny0uNzE3LDEsMSwwLDAsMC0uMjQ5LS43MjIuOTY0Ljk2NCwwLDAsMC0uNzMyLS4yNjJIOS4zNTVaTTE0LjM2NSwwVi03LjEwOWgyLjU1NGEzLjYxNiwzLjYxNiwwLDAsMSwyLjA4Ny41LDEuNjczLDEuNjczLDAsMCwxLC43MTUsMS40NiwxLjY5MiwxLjY5MiwwLDAsMS0uMjU0Ljk0MiwxLjQ4LDEuNDgsMCwwLDEtLjc0Ny41NzYsMS41LDEuNSwwLDAsMSwuODU0LjU0NywxLjU5LDEuNTksMCwwLDEsLjMuOTc3LDEuODgyLDEuODgyLDAsMCwxLS42NjIsMS41N0EzLjE0OSwzLjE0OSwwLDAsMSwxNy4yNTEsMFptMS43MTQtMy4wMjJ2MS43SDE3LjJhMS4wNjgsMS4wNjgsMCwwLDAsLjcxMy0uMjEyLjc0My43NDMsMCwwLDAsLjI0OS0uNi43ODguNzg4LDAsMCwwLS44ODQtLjg5NFptMC0xLjEyM2guODk0YTEuMjY5LDEuMjY5LDAsMCwwLC44LS4yMDYuNzMuNzMsMCwwLDAsLjIzOS0uNTkzLjc2Ni43NjYsMCwwLDAtLjI1OS0uNjQ5LDEuMzg1LDEuMzg1LDAsMCwwLS44MzUtLjJoLS44NFpNMjIuODQxLDBIMjEuMTMyVi03LjEwOWgxLjcwOVptNi45NzItNS43ODZIMjcuNjhWMEgyNS45NjZWLTUuNzg2SDIzLjg3MVYtNy4xMDloNS45NDJaTTMzLjYyMi42MUgzMi40NTVsMi40MjctNy43MmgxLjE3MlpNMi4yNTEsOS42ODJINS4yMzRWMTFILjUzN1YzLjg5MUgyLjI1MVptOS42MTQtMi4wOWE0LjE5Miw0LjE5MiwwLDAsMS0uMzg2LDEuODQxLDIuODUxLDIuODUxLDAsMCwxLTEuMSwxLjIzMywzLjA1MiwzLjA1MiwwLDAsMS0xLjYxOS40MzIsMy4xLDMuMSwwLDAsMS0xLjYxMS0uNDE3LDIuODQ2LDIuODQ2LDAsMCwxLTEuMS0xLjE5NEE0LjA3Miw0LjA3MiwwLDAsMSw1LjY0NCw3LjdWNy4zQTQuMjExLDQuMjExLDAsMCwxLDYuMDI4LDUuNDZhMi44NDQsMi44NDQsMCwwLDEsMS4xLTEuMjMzLDMuMDc0LDMuMDc0LDAsMCwxLDEuNjI4LS40MzUsMy4wNDQsMy4wNDQsMCwwLDEsMS42MTEuNDMsMi45LDIuOSwwLDAsMSwxLjEsMS4yMjMsNC4wOSw0LjA5LDAsMCwxLC40LDEuODE5Wm0tMS43NDMtLjNhMi45OSwyLjk5LDAsMCwwLS4zNTQtMS42MDksMS4xMzUsMS4xMzUsMCwwLDAtMS4wMTMtLjU0OXEtMS4yODksMC0xLjM2MiwxLjkzNGwwLC41MjJBMy4wNzUsMy4wNzUsMCwwLDAsNy43MzQsOS4yYTEuMTM0LDEuMTM0LDAsMCwwLDEuMDMuNTYyLDEuMTIsMS4xMiwwLDAsMCwxLS41NTIsMi45OTEsMi45OTEsMCwwLDAsLjM1Ni0xLjU4N1ptOC44NDcuM2E0LjE5Miw0LjE5MiwwLDAsMS0uMzg2LDEuODQxLDIuODUxLDIuODUxLDAsMCwxLTEuMSwxLjIzMywzLjA1MiwzLjA1MiwwLDAsMS0xLjYxOS40MzIsMy4xLDMuMSwwLDAsMS0xLjYxMS0uNDE3LDIuODQ2LDIuODQ2LDAsMCwxLTEuMS0xLjE5NEE0LjA3Miw0LjA3MiwwLDAsMSwxMi43NDksNy43VjcuM2E0LjIxMSw0LjIxMSwwLDAsMSwuMzgzLTEuODQzLDIuODQ0LDIuODQ0LDAsMCwxLDEuMS0xLjIzMywzLjI1MiwzLjI1MiwwLDAsMSwzLjI0LDAsMi45LDIuOSwwLDAsMSwxLjEsMS4yMjMsNC4wOSw0LjA5LDAsMCwxLC40LDEuODE5Wm0tMS43NDMtLjNhMi45OSwyLjk5LDAsMCwwLS4zNTQtMS42MDksMS4xMzUsMS4xMzUsMCwwLDAtMS4wMTMtLjU0OXEtMS4yODksMC0xLjM2MiwxLjkzNGwwLC41MjJBMy4wNzUsMy4wNzUsMCwwLDAsMTQuODM4LDkuMmExLjEzNCwxLjEzNCwwLDAsMCwxLjAzLjU2MiwxLjEyLDEuMTIsMCwwLDAsMS0uNTUyLDIuOTkxLDIuOTkxLDAsMCwwLC4zNTYtMS41ODdabTUuMjQ0LDEuMDYtLjcuNzcxVjExSDIwLjA1M1YzLjg5MWgxLjcxNFY3LjAyNWwuNi0uOUwyMy45LDMuODkxaDIuMTE5bC0yLjQsMy4xNDVMMjYuMDE1LDExSDIzLjk4NFpNMzMuMzc4LDkuNjcySDMxLjAyOUwzMC42MTksMTFIMjguNzg4TDMxLjQsMy44OTFoMS42MTFMMzUuNjM0LDExSDMzLjc5M1pNMzEuNDM5LDguMzQ5aDEuNTI4TDMyLjIsNS44ODNabTcuNTU0LjEzN2gtLjkyOFYxMUgzNi4zNTFWMy44OTFoMi44YTMuMTIzLDMuMTIzLDAsMCwxLDEuOTc4LjU2MSwxLjksMS45LDAsMCwxLC43MTMsMS41ODUsMi4zMDgsMi4zMDgsMCwwLDEtLjMsMS4yMjksMi4xMzEsMi4xMzEsMCwwLDEtLjk0Ljc5bDEuNDg0LDIuODcxVjExSDQwLjI0OFptLS45MjgtMS4zMThoMS4wODRhLjk3My45NzMsMCwwLDAsLjczNS0uMjU3Ljk5My45OTMsMCwwLDAsLjI0Ny0uNzE3LDEsMSwwLDAsMC0uMjQ5LS43MjIuOTY0Ljk2NCwwLDAsMC0uNzMyLS4yNjJIMzguMDY1Wm0xMS4wMy40MjVhNC4xOTIsNC4xOTIsMCwwLDEtLjM4NiwxLjg0MSwyLjg1MSwyLjg1MSwwLDAsMS0xLjEsMS4yMzMsMy4wNTIsMy4wNTIsMCwwLDEtMS42MTkuNDMyLDMuMSwzLjEsMCwwLDEtMS42MTEtLjQxNywyLjg0NiwyLjg0NiwwLDAsMS0xLjEtMS4xOTRBNC4wNzIsNC4wNzIsMCwwLDEsNDIuODc1LDcuN1Y3LjNhNC4yMTEsNC4yMTEsMCwwLDEsLjM4My0xLjg0MywyLjg0NCwyLjg0NCwwLDAsMSwxLjEtMS4yMzMsMy4yNTIsMy4yNTIsMCwwLDEsMy4yNCwwLDIuOSwyLjksMCwwLDEsMS4xLDEuMjIzLDQuMDksNC4wOSwwLDAsMSwuNCwxLjgxOVptLTEuNzQzLS4zQTIuOTksMi45OSwwLDAsMCw0Nyw1LjY4NWExLjEzNSwxLjEzNSwwLDAsMC0xLjAxMy0uNTQ5cS0xLjI4OSwwLTEuMzYyLDEuOTM0bDAsLjUyMkEzLjA3NSwzLjA3NSwwLDAsMCw0NC45NjQsOS4yYTEuMTM0LDEuMTM0LDAsMCwwLDEuMDMuNTYyLDEuMTIsMS4xMiwwLDAsMCwxLS41NTIsMi45OTEsMi45OTEsMCwwLDAsLjM1Ni0xLjU4N1ptOC40LTMuNFY4LjU0NGEyLjY3NCwyLjY3NCwwLDAsMS0uMzM3LDEuMzcsMi4xODMsMi4xODMsMCwwLDEtLjk2Ny44ODEsMy40MDYsMy40MDYsMCwwLDEtMS40ODkuMywyLjk0MiwyLjk0MiwwLDAsMS0yLjA0Ni0uNjc0LDIuNCwyLjQsMCwwLDEtLjc2Mi0xLjg0NlYzLjg5MWgxLjcyNFY4LjYxMnEuMDI5LDEuMTY3LDEuMDg0LDEuMTY3YTEuMDQ5LDEuMDQ5LDAsMCwwLC44MDYtLjI5MywxLjM2OSwxLjM2OSwwLDAsMCwuMjczLS45NTJWMy44OTFaTTYyLjk2MiwxMWgtMS43bC0yLjUyLTQuNDI0VjExSDU3LjAyNVYzLjg5MWgxLjcxNGwyLjUxNSw0LjQyNFYzLjg5MWgxLjcwOVptMS4yODQsMFYzLjg5MWgyLjI5YTMuMzY5LDMuMzY5LDAsMCwxLDEuNjk0LjQyN0EzLDMsMCwwLDEsNjkuNCw1LjUyNGEzLjY0MSwzLjY0MSwwLDAsMSwuNDI3LDEuNzQ2VjcuNmEzLjY2MiwzLjY2MiwwLDAsMS0uNDEzLDEuNzUsMy4wMTYsMy4wMTYsMCwwLDEtMS4xNjIsMS4yMTFBMy4zLDMuMywwLDAsMSw2Ni41ODUsMTFaTTY1Ljk2LDUuMjE0VjkuNjgyaC42YTEuMzMzLDEuMzMzLDAsMCwwLDEuMTMzLS41MjUsMi41NzIsMi41NzIsMCwwLDAsLjQtMS41NlY3LjI4OWEyLjU1MSwyLjU1MSwwLDAsMC0uNC0xLjU1MywxLjM1NiwxLjM1NiwwLDAsMC0xLjE1Mi0uNTIyWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTAgMTgpIiBmaWxsPSIjMDUwYzFhIi8+DQogICAgPC9nPg0KICAgIDxwYXRoIGlkPSJkZXNjcmlwdGlvbi03IiBkYXRhLW5hbWU9ImRlc2NyaXB0aW9uIiBkPSJNLTE4LjkxNC0uOTg2aDMuMTM1TC0xNS45NTUsMGgtNC4zMzZsMS4yMzUtNy4xMDloMS4yMDZaTS0xMi43MTIuMWEyLjIxMywyLjIxMywwLDAsMS0xLjE5NC0uMzQ3LDEuOTcyLDEuOTcyLDAsMCwxLS43NDctLjkwOCwyLjcsMi43LDAsMCwxLS4xODMtMS4yODRsLjAxNS0uMmEzLjUzNiwzLjUzNiwwLDAsMSwuNDcxLTEuNDQ4LDIuNjg5LDIuNjg5LDAsMCwxLC45NTUtLjk3NCwyLjMyMSwyLjMyMSwwLDAsMSwxLjI0LS4zMTcsMS43MzEsMS43MzEsMCwwLDEsMS40ODcuNzM4QTIuNzExLDIuNzExLDAsMCwxLTEwLjMtMi43NjlsLS4wNjguNTA5aC0zLjMyNWExLjQzNSwxLjQzNSwwLDAsMCwuMjU0LDEuMDEyLDEuMDA2LDEuMDA2LDAsMCwwLC44Mi4zOTRBMS43OCwxLjc4LDAsMCwwLTExLjIzOC0xLjVsLjU4Ni42MTVhMi4yMjcsMi4yMjcsMCwwLDEtLjg3NC43MzVBMi42LDIuNiwwLDAsMS0xMi43MTIuMVptLjQ5My00LjUzMXEtLjkxOC0uMDI5LTEuMzc3LDEuM2wyLjE5MiwwLC4wMi0uMWExLjUzMiwxLjUzMiwwLDAsMCwwLS40MzkuOS45LDAsMCwwLS4yNzMtLjU0N0EuODY2Ljg2NiwwLDAsMC0xMi4yMTktNC40MzRaTS05LjQ0NiwwbC43NjctNC40aC0uNzg2bC4xNTYtLjg3OWguNzgxbC4wNzgtLjU2NmEyLjExMSwyLjExMSwwLDAsMSwuNjYyLTEuMywxLjk1NCwxLjk1NCwwLDAsMSwxLjM3OS0uNDY5LDMuNzQ2LDMuNzQ2LDAsMCwxLC42ODguMWwtLjEyNy45MjhhMS45NTUsMS45NTUsMCwwLDAtLjQzNS0uMDQ5Ljk3OC45NzgsMCwwLDAtLjY3OS4yMjUsMS4wNiwxLjA2LDAsMCwwLS4zMzcuNjM1bC0uMDczLjVoMS4wNDVsLS4xNTYuODc5aC0xLjA0TC04LjI4OSwwWm01LjY3NC02LjU2N0wtNC01LjI4M2guOWwtLjE1MS44NzloLS45MDhsLS41LDIuOTU5YTEuMDEyLDEuMDEyLDAsMCwwLDAsLjIycS4wMjkuMzE3LjM5MS4zMzJhMi4yMDYsMi4yMDYsMCwwLDAsLjQxLS4wNDRsLS4wNzguOTI4YTIuNjUzLDIuNjUzLDAsMCwxLS43MjguMUExLjA4LDEuMDgsMCwwLDEtNS41NjYtLjMyLDEuNDkzLDEuNDkzLDAsMCwxLTUuOC0xLjM4N0wtNS4zMS00LjRoLS44NDVMLTYtNS4yODNoLjg0bC4yMjUtMS4yODRaTS0uNDA4LTIuNTQ0SC0yLjlsLjE3MS0uOTU3aDIuNVptMi44NTYsMS43YTEuMTExLDEuMTExLDAsMCwwLC43MzUtLjI0MiwxLjEwOSwxLjEwOSwwLDAsMCwuNDA4LS42NTdsMS4wOTQsMEExLjg3LDEuODcsMCwwLDEsNC4zMDctLjhhMi4yLDIuMiwwLDAsMS0uODMzLjY2OUEyLjMxLDIuMzEsMCwwLDEsMi40MTUuMSwxLjk5LDEuOTksMCwwLDEsMS4yNTctLjI1NGExLjk0NCwxLjk0NCwwLDAsMS0uNy0uOTQ1QTMuMDIzLDMuMDIzLDAsMCwxLC40MTMtMi41NDRsLjAxNS0uMTcxQTMuNDU3LDMuNDU3LDAsMCwxLC44NzQtNC4xYTIuNjA4LDIuNjA4LDAsMCwxLC45NC0uOTU5LDIuMzU0LDIuMzU0LDAsMCwxLDEuMjc5LS4zMTcsMS44NDgsMS44NDgsMCwwLDEsMS4zNzIuNTY5LDIuMDA5LDIuMDA5LDAsMCwxLC41MTMsMS40MjhIMy44OTRhMS4xODEsMS4xODEsMCwwLDAtLjIyMi0uNzQyLjgxMy44MTMsMCwwLDAtLjY0Mi0uMzA4LDEuMTcyLDEuMTcyLDAsMCwwLTEuMDY5LjU3NiwzLjIxNiwzLjIxNiwwLDAsMC0uNDIsMS42OFExLjUwNi0uODY0LDIuNDQ5LS44NDVaTTYuNSwwSDUuMzQ0bDEuMy03LjVINy44MDVaTTkuMDI2LDBINy44NjlsLjkxOC01LjI4M0g5Ljk0NFpNOC45NTMtNi42MzZhLjY1My42NTMsMCwwLDEsLjE3Ni0uNDU5LjY0NC42NDQsMCwwLDEsLjQ3NC0uMi42MTYuNjE2LDAsMCwxLC40NzEuMTczLjYuNiwwLDAsMSwuMTg4LjQ0Ny42MTcuNjE3LDAsMCwxLS4xODMuNDU5LjY3MS42NzEsMCwwLDEtLjQ2Ni4xOS42MjYuNjI2LDAsMCwxLS40NjktLjE2OEEuNTgxLjU4MSwwLDAsMSw4Ljk1My02LjYzNlpNMTIuNjI1LS44NDVhMS4xMTEsMS4xMTEsMCwwLDAsLjczNS0uMjQyLDEuMTA5LDEuMTA5LDAsMCwwLC40MDgtLjY1N2wxLjA5NCwwYTEuODcsMS44NywwLDAsMS0uMzc4Ljk1MiwyLjIsMi4yLDAsMCwxLS44MzMuNjY5QTIuMzEsMi4zMSwwLDAsMSwxMi41OS4xYTEuOTksMS45OSwwLDAsMS0xLjE1Ny0uMzUyLDEuOTQ0LDEuOTQ0LDAsMCwxLS43LS45NDUsMy4wMjMsMy4wMjMsMCwwLDEtLjE0Ni0xLjM0NWwuMDE1LS4xNzFBMy40NTcsMy40NTcsMCwwLDEsMTEuMDUtNC4xYTIuNjA4LDIuNjA4LDAsMCwxLC45NC0uOTU5LDIuMzU0LDIuMzU0LDAsMCwxLDEuMjc5LS4zMTcsMS44NDgsMS44NDgsMCwwLDEsMS4zNzIuNTY5LDIuMDA5LDIuMDA5LDAsMCwxLC41MTMsMS40MjhIMTQuMDdhMS4xODEsMS4xODEsMCwwLDAtLjIyMi0uNzQyLjgxMy44MTMsMCwwLDAtLjY0Mi0uMzA4LDEuMTcyLDEuMTcyLDAsMCwwLTEuMDY5LjU3NiwzLjIxNiwzLjIxNiwwLDAsMC0uNDIsMS42OFExMS42ODItLjg2NCwxMi42MjUtLjg0NVptNC45MjctMS40MTEtLjY1NC41ODFMMTYuNjA5LDBIMTUuNDUybDEuMy03LjVoMS4xNTdsLS43NDIsNC4yNTguNDA1LS40MiwxLjY4LTEuNjIxSDIwLjczTDE4LjM4Ni0zLjAyNywxOS45MjksMEgxOC42NzRaTS0xNi40MTgsMTBhMS41NjcsMS41NjcsMCwwLDEtLjA0OS0uNDkzLDEuOTU5LDEuOTU5LDAsMCwxLTEuNDExLjU5MSwxLjYxOCwxLjYxOCwwLDAsMS0xLjE0LS40NDIsMS4zNjMsMS4zNjMsMCwwLDEtLjQyMi0xLjEsMS42MTgsMS42MTgsMCwwLDEsLjcyMy0xLjMxMywzLjE0NiwzLjE0NiwwLDAsMSwxLjgzNi0uNDc5bC43NTIuMDEuMDY4LS4zNjFhMS4wOSwxLjA5LDAsMCwwLDAtLjM1Ni42MzYuNjM2LDAsMCwwLS43LS41NDIsMS4wNTMsMS4wNTMsMCwwLDAtLjY1Mi4xODguODEzLjgxMywwLDAsMC0uMzQ0LjUzbC0xLjE1Ny4wMWExLjQ0OSwxLjQ0OSwwLDAsMSwuMzQ3LS44NTcsMi4wNTYsMi4wNTYsMCwwLDEsLjgzLS41NzQsMi44MSwyLjgxLDAsMCwxLDEuMDk0LS4yLDEuODQ4LDEuODQ4LDAsMCwxLDEuMzQ4LjUyLDEuNTQxLDEuNTQxLDAsMCwxLC40LDEuM0wtMTUuMyw4LjkxMWwtLjAzOS40MzlhMS41NjEsMS41NjEsMCwwLDAsLjA3My41NjJsMCwuMDg4Wm0tMS4xOTEtLjg1YTEuMjc2LDEuMjc2LDAsMCwwLC42NzktLjE2OCwxLjc4OCwxLjc4OCwwLDAsMCwuNTMyLS40NjFsLjE4MS0xLS41NTIsMGExLjkzOSwxLjkzOSwwLDAsMC0xLjA0NS4yNDcuOS45LDAsMCwwLS40NDQuNjc2LjYuNiwwLDAsMCwuMTQ0LjUxNUEuNy43LDAsMCwwLTE3LjYxLDkuMTVabTUuMzM3LTQuNDM4LS4xMTcuNjJhMi4wMTYsMi4wMTYsMCwwLDEsMS41NjctLjcxMywxLjI3NywxLjI3NywwLDAsMSwxLjEuNTNBMi4xMTUsMi4xMTUsMCwwLDEtOS40Niw2LjU4N0wtMTAuMDMyLDEwaC0xLjE1N2wuNTc2LTMuNDI4YTEuNzU0LDEuNzU0LDAsMCwwLDAtLjM5MS42MjMuNjIzLDAsMCwwLS42OTMtLjYsMS40MDcsMS40MDcsMCwwLDAtMS4xNTcuNjQ5TC0xMy4xMTgsMTBoLTEuMTU3bC45MTMtNS4yODNabTMuNzExLDIuNjQyYTQuMTg1LDQuMTg1LDAsMCwxLC40MzktMS40NjUsMi40OCwyLjQ4LDAsMCwxLC44NDUtLjk2OUExLjk1MSwxLjk1MSwwLDAsMS02LjE2LDQuNjE0YTEuNTYxLDEuNTYxLDAsMCwxLDEuMjYuNkwtNC4zOTIsMi41SC0zLjIzbC0xLjMsNy41SC01LjU2OWwuMDc4LS41NDdhMS44NDEsMS44NDEsMCwwLDEtMS40NDUuNjQ5LDEuNDUzLDEuNDUzLDAsMCwxLTEuMTc5LS41NjksMi40ODQsMi40ODQsMCwwLDEtLjQ3Ni0xLjQ4NywzLjk0OCwzLjk0OCwwLDAsMSwuMDE1LS41OTFabTEuMTIzLjQ1NGExLjYyNywxLjYyNywwLDAsMCwuMTg4Ljk2Mi43NTEuNzUxLDAsMCwwLC42NjIuMzY2LDEuMzU5LDEuMzU5LDAsMCwwLDEuMTU3LS42NDlsLjQtMi4yNzFhLjkuOSwwLDAsMC0uODg5LS42MywxLjE4OSwxLjE4OSwwLDAsMC0xLjA2OS41ODZBMy4xMjMsMy4xMjMsMCwwLDAtNy40MzksNy44MDhaTS0uNzE1LDEwLC41MTUsMi44OTFsMS45MjQsMGEyLjYzMywyLjYzMywwLDAsMSwxLjUzMS40NDJBMi40ODQsMi40ODQsMCwwLDEsNC45LDQuNTU4YTMuNjM5LDMuNjM5LDAsMCwxLC4xNzYsMS43MTZsLS4wNTQuMzg2QTQuMjYzLDQuMjYzLDAsMCwxLDQuMzc1LDguNCwzLjQ4MSwzLjQ4MSwwLDAsMSwzLjA4Myw5LjU4LDMuNjQ5LDMuNjQ5LDAsMCwxLDEuMzQ1LDEwWk0xLjU1LDMuODg3LjY2Miw5LjAxNGwuNzEzLDBhMi4yMjEsMi4yMjEsMCwwLDAsMS42LS42MTNBMi45NDMsMi45NDMsMCwwLDAsMy44LDYuNzE0LDUuNyw1LjcsMCwwLDAsMy44ODksNS40MmExLjc0MiwxLjc0MiwwLDAsMC0uNDEzLTEuMTA4LDEuMzgxLDEuMzgxLDAsMCwwLTEuMDIzLS40MlpNOS4wMTYsNS44YTIuMTMyLDIuMTMyLDAsMCwwLS40NTQtLjA0OSwxLjM1NSwxLjM1NSwwLDAsMC0xLjIxMS42M0w2LjcxNiwxMEg1LjU1OWwuOTEzLTUuMjgzLDEuMSwwLS4xMTcuNmExLjUxMiwxLjUxMiwwLDAsMSwxLjI1LS43LDEuOSwxLjksMCwwLDEsLjQ0NC4wNzNaTTEyLjAwOSwxMGExLjU2NywxLjU2NywwLDAsMS0uMDQ5LS40OTMsMS45NTksMS45NTksMCwwLDEtMS40MTEuNTkxLDEuNjE4LDEuNjE4LDAsMCwxLTEuMTQtLjQ0MiwxLjM2MywxLjM2MywwLDAsMS0uNDIyLTEuMSwxLjYxOCwxLjYxOCwwLDAsMSwuNzIzLTEuMzEzLDMuMTQ2LDMuMTQ2LDAsMCwxLDEuODM2LS40NzlsLjc1Mi4wMS4wNjgtLjM2MWExLjA5LDEuMDksMCwwLDAsMC0uMzU2LjYzNi42MzYsMCwwLDAtLjctLjU0MiwxLjA1MywxLjA1MywwLDAsMC0uNjUyLjE4OC44MTMuODEzLDAsMCwwLS4zNDQuNTNsLTEuMTU3LjAxYTEuNDQ5LDEuNDQ5LDAsMCwxLC4zNDctLjg1NywyLjA1NiwyLjA1NiwwLDAsMSwuODMtLjU3NCwyLjgxLDIuODEsMCwwLDEsMS4wOTQtLjIsMS44NDgsMS44NDgsMCwwLDEsMS4zNDguNTIsMS41NDEsMS41NDEsMCwwLDEsLjQsMS4zbC0uNDA1LDIuNDc2LS4wMzkuNDM5YTEuNTYxLDEuNTYxLDAsMCwwLC4wNzMuNTYybDAsLjA4OFptLTEuMTkxLS44NWExLjI3NiwxLjI3NiwwLDAsMCwuNjc5LS4xNjgsMS43ODgsMS43ODgsMCwwLDAsLjUzMi0uNDYxbC4xODEtMS0uNTUyLDBhMS45MzksMS45MzksMCwwLDAtMS4wNDUuMjQ3LjkuOSwwLDAsMC0uNDQ0LjY3Ni42LjYsMCwwLDAsLjE0NC41MTVBLjcuNywwLDAsMCwxMC44MTgsOS4xNVptMy42MTMtMS44YTQuMDg3LDQuMDg3LDAsMCwxLC40MjctMS40MzEsMi41ODQsMi41ODQsMCwwLDEsLjg0Mi0uOTc5LDEuOTg3LDEuOTg3LDAsMCwxLDEuMTYyLS4zMywxLjU1OSwxLjU1OSwwLDAsMSwxLjMxMy42NGwuMTgxLS41NDIsMS4wNTUsMC0uODc0LDUuMTM3QTIuNDk0LDIuNDk0LDAsMCwxLDE1LjksMTIuMDg1YTIuNDY2LDIuNDY2LDAsMCwxLTEuMDU1LS4yNTQsMi4xOTMsMi4xOTMsMCwwLDEtLjgtLjY0NWwuNjE1LS43YTEuNDgyLDEuNDgyLDAsMCwwLDEuMjExLjY1OSwxLjQxOSwxLjQxOSwwLDAsMCwuOTc0LS4zMSwxLjYxNiwxLjYxNiwwLDAsMCwuNTQ0LS45NGwuMDgzLS4zNzFhMS44NjksMS44NjksMCwwLDEtMS4zODcuNTcxQTEuNDgsMS40OCwwLDAsMSwxNC45LDkuNTM2YTIuNDg0LDIuNDg0LDAsMCwxLS40OTEtMS40ODRBNC44NzksNC44NzksMCwwLDEsMTQuNDMxLDcuMzU0Wm0xLjE0Ny4xYTMuNTcxLDMuNTcxLDAsMCwwLS4wMi41MzcsMS4zOTQsMS4zOTQsMCwwLDAsLjIzNC44Mi43ODYuNzg2LDAsMCwwLC42NC4zMTcsMS4zNjYsMS4zNjYsMCwwLDAsMS4xNTItLjYxTDE4LDYuMTg3YS45NDMuOTQzLDAsMCwwLS45LS42LDEuMjA1LDEuMjA1LDAsMCwwLS45ODYuNDU0LDIuNTQ0LDIuNTQ0LDAsMCwwLS41MjIsMS4zMTNaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1NjIgNzc3KSIgZmlsbD0iIzA1MGMxYSIvPg0KICAgIDxnIGlkPSJtb3VzZS03IiBkYXRhLW5hbWU9Im1vdXNlIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1MjkgNjkwKSI+DQogICAgICA8ZyBpZD0iZHJhZy00IiBkYXRhLW5hbWU9ImRyYWciPg0KICAgICAgICA8cGF0aCBpZD0icjQtNCIgZGF0YS1uYW1lPSJyNCIgZD0iTTcuMiwwSDI4LjhBNy4yLDcuMiwwLDAsMSwzNiw3LjJWMzZBMTgsMTgsMCwwLDEsMTgsNTRoMEExOCwxOCwwLDAsMSwwLDM2VjcuMkE3LjIsNy4yLDAsMCwxLDcuMiwwWiIgb3BhY2l0eT0iMC4wNyIvPg0KICAgICAgICA8cGF0aCBpZD0icjMtNCIgZGF0YS1uYW1lPSJyMyIgZD0iTTcuMiwwSDI4LjhBNy4yLDcuMiwwLDAsMSwzNiw3LjJWMzZBMTgsMTgsMCwwLDEsMTgsNTRoMEExOCwxOCwwLDAsMSwwLDM2VjcuMkE3LjIsNy4yLDAsMCwxLDcuMiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzApIiBvcGFjaXR5PSIwLjA3Ii8+DQogICAgICAgIDxwYXRoIGlkPSJyMi00IiBkYXRhLW5hbWU9InIyIiBkPSJNNy4yLDBIMjguOEE3LjIsNy4yLDAsMCwxLDM2LDcuMlYzNkExOCwxOCwwLDAsMSwxOCw1NGgwQTE4LDE4LDAsMCwxLDAsMzZWNy4yQTcuMiw3LjIsMCwwLDEsNy4yLDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMCkiIG9wYWNpdHk9IjAuMDciLz4NCiAgICAgICAgPHBhdGggaWQ9InIxLTQiIGRhdGEtbmFtZT0icjEiIGQ9Ik03LjIsMEgyOC44QTcuMiw3LjIsMCwwLDEsMzYsNy4yVjM2QTE4LDE4LDAsMCwxLDE4LDU0aDBBMTgsMTgsMCwwLDEsMCwzNlY3LjJBNy4yLDcuMiwwLDAsMSw3LjIsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEwKSIgb3BhY2l0eT0iMC4wNyIvPg0KICAgICAgPC9nPg0KICAgICAgPGcgaWQ9InNoYXBlLTciIGRhdGEtbmFtZT0ic2hhcGUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC05MDQgLTY0MykiPg0KICAgICAgICA8ZyB0cmFuc2Zvcm09Im1hdHJpeCgxLCAwLCAwLCAxLCA4ODUsIDU5MykiIGZpbHRlcj0idXJsKCNidG0tNykiPg0KICAgICAgICAgIDxwYXRoIGlkPSJidG0tMTQiIGRhdGEtbmFtZT0iYnRtIiBkPSJNNy4yLDBIMjguOEE3LjIsNy4yLDAsMCwxLDM2LDcuMlYzNkExOCwxOCwwLDAsMSwxOCw1NGgwQTE4LDE4LDAsMCwxLDAsMzZWNy4yQTcuMiw3LjIsMCwwLDEsNy4yLDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzNCA1MCkiIGZpbGw9IiMyMTIxMjEiLz4NCiAgICAgICAgPC9nPg0KICAgICAgICA8cGF0aCBpZD0ic2lkZS03IiBkYXRhLW5hbWU9InNpZGUiIGQ9Ik0tNDEwMiwyNzA0YTE3Ljg4MSwxNy44ODEsMCwwLDEtMTIuNzI4LTUuMjcyQTE3Ljg4MiwxNy44ODIsMCwwLDEtNDEyMCwyNjg2di0yOC44YTcuMjA4LDcuMjA4LDAsMCwxLDcuMi03LjJoMjEuNmE3LjIwOCw3LjIwOCwwLDAsMSw3LjIsNy4yVjI2ODZhMTcuODgxLDE3Ljg4MSwwLDAsMS01LjI3MiwxMi43MjhBMTcuODg0LDE3Ljg4NCwwLDAsMS00MTAyLDI3MDRabS0xMC40LTUyYTUuNjA2LDUuNjA2LDAsMCwwLTUuNiw1LjZWMjY4MmExNi4wMTgsMTYuMDE4LDAsMCwwLDE2LDE2LDE2LjAxOCwxNi4wMTgsMCwwLDAsMTYtMTZ2LTI0LjRhNS42MDYsNS42MDYsMCwwLDAtNS42LTUuNloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDUwMzkgLTIwMDcpIiBmaWxsPSJ1cmwoI2xpbmVhci1ncmFkaWVudC03KSIvPg0KICAgICAgICA8cGF0aCBpZD0idG9wLTciIGRhdGEtbmFtZT0idG9wIiBkPSJNNS42LDBIMjYuNEE1LjYsNS42LDAsMCwxLDMyLDUuNlYzMEExNiwxNiwwLDAsMSwxNiw0NmgwQTE2LDE2LDAsMCwxLDAsMzBWNS42QTUuNiw1LjYsMCwwLDEsNS42LDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg5MjEgNjQ1KSIgZmlsbD0idXJsKCNsaW5lYXItZ3JhZGllbnQtOCkiLz4NCiAgICAgIDwvZz4NCiAgICAgIDxwYXRoIGlkPSJ0ci05IiBkYXRhLW5hbWU9InRyIiBkPSJNMCwwSDkuNWE1LDUsMCwwLDEsNSw1VjE3YTAsMCwwLDAsMSwwLDBIMGEwLDAsMCwwLDEsMCwwVjBBMCwwLDAsMCwxLDAsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMzLjUgMykiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAuMTUiLz4NCiAgICAgIDxnIHRyYW5zZm9ybT0ibWF0cml4KDEsIDAsIDAsIDEsIC0xOSwgLTUwKSIgZmlsdGVyPSJ1cmwoI3RsLTIpIj4NCiAgICAgICAgPHBhdGggaWQ9InRsLTkiIGRhdGEtbmFtZT0idGwiIGQ9Ik01LDBoOS41YTAsMCwwLDAsMSwwLDBWMTdhMCwwLDAsMCwxLDAsMEgwYTAsMCwwLDAsMSwwLDBWNUE1LDUsMCwwLDEsNSwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzcgNTMpIiBmaWxsPSIjZmZiNzAwIi8+DQogICAgICA8L2c+DQogICAgICA8ZyBpZD0ic2Nyb2xsLTEwIiBkYXRhLW5hbWU9InNjcm9sbCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzAgMTEpIiBmaWxsPSIjNGQ0ZDRkIiBzdHJva2U9IiMzMTMxMzEiIHN0cm9rZS13aWR0aD0iMSI+DQogICAgICAgIDxyZWN0IHdpZHRoPSI2IiBoZWlnaHQ9IjE0IiBzdHJva2U9Im5vbmUiLz4NCiAgICAgICAgPHJlY3QgeD0iLTAuNSIgeT0iLTAuNSIgd2lkdGg9IjciIGhlaWdodD0iMTUiIGZpbGw9Im5vbmUiLz4NCiAgICAgIDwvZz4NCiAgICA8L2c+DQogIDwvZz4NCjwvc3ZnPg0K";
 const urlSupport = "https://support.vimaec.com";
 const urlControls = "https://support.vimaec.com/en/articles/5872168-navigation-and-controls";
+function useHelp() {
+  const [visible2, setVisible] = react.exports.useState(false);
+  react.exports.useEffect(() => {
+    setComponentBehind(visible2);
+  }, [visible2]);
+  return { visible: visible2, setVisible };
+}
 const MenuHelp = React.memo(_MenuHelp);
 function _MenuHelp(props) {
+  if (!props.help.visible)
+    return null;
   const onCloseBtn = () => {
-    props.closeHelp();
+    props.help.setVisible(false);
   };
   const onControlsBtn = () => {
     window.open(urlControls);
@@ -61141,17 +52572,18 @@ function _MenuHelp(props) {
     onClick: onHelpBtn
   }, "Help Center")))));
 }
-function SidePanel(props) {
+const SidePanel = React.memo(_SidePanel);
+function _SidePanel(props) {
   react.exports.useEffect(() => {
     props.viewer.viewport.canvas.focus();
-    resizeCanvas(props.viewer, props.visible);
+    resizeCanvas(props.viewer, props.side.get() !== "none");
   });
   const onNavBtn = () => {
-    props.popSide();
+    props.side.pop();
   };
   const iconOptions = { height: "20", width: "20", fill: "currentColor" };
   return /* @__PURE__ */ React.createElement("div", {
-    className: `vim-side-panel fixed left-0 top-0 bg-gray-lightest p-6 text-gray-darker h-full ${props.visible ? "" : "hidden"}`
+    className: `vim-side-panel fixed left-0 top-0 bg-gray-lightest p-6 text-gray-darker h-full ${props.side.get() !== "none" ? "" : "hidden"}`
   }, /* @__PURE__ */ React.createElement("button", {
     className: "vim-side-panel-nav text-gray-medium absolute right-6 top-6",
     onClick: onNavBtn
@@ -61166,6 +52598,45 @@ function resizeCanvas(viewer2, open) {
     viewer2.viewport.ResizeToParent();
   }
 }
+function useSideState(useInspector) {
+  const [side, setSide] = react.exports.useState(["bim"]);
+  const sideRef = react.exports.useRef(side);
+  const toggle = (content) => {
+    let r2;
+    const [A2, B2] = sideRef.current;
+    if (!A2 && !B2)
+      r2 = [content];
+    else if (A2 === content && !B2)
+      r2 = [];
+    else if (A2 !== content && !B2)
+      r2 = [A2, content];
+    else if (A2 && B2 === content)
+      r2 = [A2];
+    else if (A2 && B2 !== content)
+      r2 = [content];
+    sideRef.current = r2;
+    setSide(r2);
+  };
+  const pop = () => {
+    sideRef.current.pop();
+    setSide([...sideRef.current]);
+  };
+  const getNav = () => {
+    return sideRef.current.length > 1 ? "back" : "close";
+  };
+  const get3 = () => {
+    var _a22;
+    const result = (_a22 = sideRef.current[sideRef.current.length - 1]) != null ? _a22 : "none";
+    if (result && !useInspector)
+      return "none";
+    return result;
+  };
+  const set3 = (value) => {
+    sideRef.current = [value];
+    setSide([value]);
+  };
+  return { set: set3, get: get3, toggle, pop, getNav };
+}
 function MenuSettings(props) {
   if (!props.visible)
     return null;
@@ -61179,11 +52650,11 @@ function MenuSettings(props) {
       className: "w-[18px] h-[18px] rounded border border-gray-medium checked:bg-primary-royal mr-2 "
     }), " ", label);
   };
-  const next = props.settings.clone();
+  const next = props.settings.get.clone();
   const settingsToggle = (label, getter, setter) => {
-    return toggleElement(label, getter(props.settings), () => {
+    return toggleElement(label, getter(props.settings.get), () => {
       setter(next, !getter(next));
-      props.setSettings(next);
+      props.settings.set(next);
     });
   };
   return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("h2", {
@@ -61215,10 +52686,8496 @@ function _MenuToast(props) {
     className: "font-bold text-lg text-white ml-1"
   }, speed + 25));
 }
+var __defProp2 = Object.defineProperty;
+var __defNormalProp2 = (obj, key, value) => key in obj ? __defProp2(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __publicField = (obj, key, value) => {
+  __defNormalProp2(obj, typeof key !== "symbol" ? key + "" : key, value);
+  return value;
+};
+var isMergeableObject = function isMergeableObject2(value) {
+  return isNonNullObject(value) && !isSpecial(value);
+};
+function isNonNullObject(value) {
+  return !!value && typeof value === "object";
+}
+function isSpecial(value) {
+  var stringValue = Object.prototype.toString.call(value);
+  return stringValue === "[object RegExp]" || stringValue === "[object Date]" || isReactElement(value);
+}
+var canUseSymbol = typeof Symbol === "function" && Symbol.for;
+var REACT_ELEMENT_TYPE = canUseSymbol ? Symbol.for("react.element") : 60103;
+function isReactElement(value) {
+  return value.$$typeof === REACT_ELEMENT_TYPE;
+}
+function emptyTarget(val) {
+  return Array.isArray(val) ? [] : {};
+}
+function cloneUnlessOtherwiseSpecified(value, options) {
+  return options.clone !== false && options.isMergeableObject(value) ? deepmerge(emptyTarget(value), value, options) : value;
+}
+function defaultArrayMerge(target, source, options) {
+  return target.concat(source).map(function(element) {
+    return cloneUnlessOtherwiseSpecified(element, options);
+  });
+}
+function getMergeFunction(key, options) {
+  if (!options.customMerge) {
+    return deepmerge;
+  }
+  var customMerge = options.customMerge(key);
+  return typeof customMerge === "function" ? customMerge : deepmerge;
+}
+function getEnumerableOwnPropertySymbols(target) {
+  return Object.getOwnPropertySymbols ? Object.getOwnPropertySymbols(target).filter(function(symbol) {
+    return target.propertyIsEnumerable(symbol);
+  }) : [];
+}
+function getKeys(target) {
+  return Object.keys(target).concat(getEnumerableOwnPropertySymbols(target));
+}
+function propertyIsOnObject(object, property) {
+  try {
+    return property in object;
+  } catch (_) {
+    return false;
+  }
+}
+function propertyIsUnsafe(target, key) {
+  return propertyIsOnObject(target, key) && !(Object.hasOwnProperty.call(target, key) && Object.propertyIsEnumerable.call(target, key));
+}
+function mergeObject(target, source, options) {
+  var destination = {};
+  if (options.isMergeableObject(target)) {
+    getKeys(target).forEach(function(key) {
+      destination[key] = cloneUnlessOtherwiseSpecified(target[key], options);
+    });
+  }
+  getKeys(source).forEach(function(key) {
+    if (propertyIsUnsafe(target, key)) {
+      return;
+    }
+    if (propertyIsOnObject(target, key) && options.isMergeableObject(source[key])) {
+      destination[key] = getMergeFunction(key, options)(target[key], source[key], options);
+    } else {
+      destination[key] = cloneUnlessOtherwiseSpecified(source[key], options);
+    }
+  });
+  return destination;
+}
+function deepmerge(target, source, options) {
+  options = options || {};
+  options.arrayMerge = options.arrayMerge || defaultArrayMerge;
+  options.isMergeableObject = options.isMergeableObject || isMergeableObject;
+  options.cloneUnlessOtherwiseSpecified = cloneUnlessOtherwiseSpecified;
+  var sourceIsArray = Array.isArray(source);
+  var targetIsArray = Array.isArray(target);
+  var sourceAndTargetTypesMatch = sourceIsArray === targetIsArray;
+  if (!sourceAndTargetTypesMatch) {
+    return cloneUnlessOtherwiseSpecified(source, options);
+  } else if (sourceIsArray) {
+    return options.arrayMerge(target, source, options);
+  } else {
+    return mergeObject(target, source, options);
+  }
+}
+deepmerge.all = function deepmergeAll(array, options) {
+  if (!Array.isArray(array)) {
+    throw new Error("first argument should be an array");
+  }
+  return array.reduce(function(prev, next) {
+    return deepmerge(prev, next, options);
+  }, {});
+};
+var deepmerge_1 = deepmerge;
+var cjs = deepmerge_1;
+class ViewerSettings {
+  constructor(options) {
+    __publicField(this, "options");
+    __publicField(this, "getCanvasResizeDelay", () => this.options.canvas.resizeDelay);
+    __publicField(this, "getCanvasId", () => this.options.canvas.id);
+    __publicField(this, "getGroundPlaneVisible", () => this.options.groundPlane.visible);
+    __publicField(this, "getGroundPlaneColor", () => toRGBColor(this.options.groundPlane.color));
+    __publicField(this, "getGroundPlaneTextureUrl", () => this.options.groundPlane.texture);
+    __publicField(this, "getGroundPlaneOpacity", () => this.options.groundPlane.opacity);
+    __publicField(this, "getGroundPlaneSize", () => this.options.groundPlane.size);
+    __publicField(this, "getSkylightColor", () => toHSLColor(this.options.skylight.skyColor));
+    __publicField(this, "getSkylightGroundColor", () => toHSLColor(this.options.skylight.groundColor));
+    __publicField(this, "getSkylightIntensity", () => this.options.skylight.intensity);
+    __publicField(this, "getSunlightCount", () => this.options.sunLights.length);
+    __publicField(this, "getSunlightColor", (index) => toHSLColor(this.options.sunLights[index].color));
+    __publicField(this, "getSunlightPosition", (index) => toVec$1(this.options.sunLights[index].position));
+    __publicField(this, "getSunlightIntensity", (index) => this.options.sunLights[index].intensity);
+    __publicField(this, "getHighlightColor", () => toRGBColor(this.highlight.color));
+    __publicField(this, "getHighlightOpacity", () => this.highlight.opacity);
+    __publicField(this, "getIsolationColor", () => toRGBColor(this.isolation.color));
+    __publicField(this, "getIsolationOpacity", () => this.isolation.opacity);
+    __publicField(this, "getCameraNear", () => this.camera.near);
+    __publicField(this, "getCameraFar", () => this.camera.far);
+    __publicField(this, "getCameraFov", () => this.camera.fov);
+    __publicField(this, "getCameraZoom", () => this.camera.zoom);
+    __publicField(this, "getCameraGizmoEnable", () => this.camera.gizmo.enable);
+    __publicField(this, "getCameraGizmoSize", () => this.camera.gizmo.size);
+    __publicField(this, "getCameraGizmoColor", () => toRGBColor(this.camera.gizmo.color));
+    __publicField(this, "getCameraGizmoOpacity", () => this.camera.gizmo.opacity);
+    __publicField(this, "getCameraGizmoOpacityAlways", () => this.camera.gizmo.opacityAlways);
+    __publicField(this, "getCameraIsOrbit", () => this.cameraControls.orbit);
+    __publicField(this, "getCameraMoveSpeed", () => this.cameraControls.moveSpeed);
+    __publicField(this, "getCameraRotateSpeed", () => this.cameraControls.rotateSpeed);
+    __publicField(this, "getCameraOrbitSpeed", () => this.cameraControls.orbitSpeed);
+    __publicField(this, "getCameraReferenceVimSize", () => this.cameraControls.vimReferenceSize);
+    const fallback = {
+      canvas: {
+        id: void 0,
+        resizeDelay: 200
+      },
+      camera: {
+        near: 0.01,
+        far: 15e3,
+        fov: 50,
+        zoom: 1,
+        controls: {
+          orbit: true,
+          vimReferenceSize: 1,
+          rotateSpeed: 1,
+          orbitSpeed: 1,
+          moveSpeed: 1
+        },
+        gizmo: {
+          enable: true,
+          size: 5e-3,
+          color: { r: 255, g: 255, b: 255 },
+          opacity: 0.5,
+          opacityAlways: 0.125
+        }
+      },
+      groundPlane: {
+        visible: false,
+        texture: void 0,
+        opacity: 1,
+        color: { r: 255, g: 255, b: 255 },
+        size: 3
+      },
+      skylight: {
+        skyColor: { h: 0.6, s: 1, l: 0.6 },
+        groundColor: { h: 0.095, s: 1, l: 0.75 },
+        intensity: 0.8
+      },
+      sunLights: [
+        {
+          position: { x: -45, y: 40, z: -23 },
+          color: { h: 0.1, s: 1, l: 0.95 },
+          intensity: 0.8
+        },
+        {
+          position: { x: 45, y: 40, z: 23 },
+          color: { h: 0.1, s: 1, l: 0.95 },
+          intensity: 0.2
+        }
+      ],
+      materials: {
+        highlight: {
+          color: { r: 106, g: 210, b: 255 },
+          opacity: 0.5
+        },
+        isolation: {
+          color: { r: 64, g: 64, b: 64 },
+          opacity: 0.1
+        }
+      }
+    };
+    this.options = options ? cjs(fallback, options, void 0) : fallback;
+  }
+  get highlight() {
+    return this.options.materials.highlight;
+  }
+  get isolation() {
+    return this.options.materials.isolation;
+  }
+  get camera() {
+    return this.options.camera;
+  }
+  get cameraControls() {
+    return this.camera.controls;
+  }
+}
+function toRGBColor(c) {
+  return new Color(c.r / 255, c.g / 255, c.b / 255);
+}
+function toHSLColor(obj) {
+  return new Color().setHSL(obj.h, obj.s, obj.l);
+}
+function toVec$1(obj) {
+  return new Vector3(obj.x, obj.y, obj.z);
+}
+for (let i2 = 0; i2 < 256; i2++) {
+  (i2 < 16 ? "0" : "") + i2.toString(16);
+}
+function clamp(value, min2, max2) {
+  return Math.max(min2, Math.min(max2, value));
+}
+var dist$3 = {};
+var SignalDispatcher$1 = {};
+var dist$2 = {};
+var DispatcherBase$3 = {};
+var DispatcherWrapper$3 = {};
+Object.defineProperty(DispatcherWrapper$3, "__esModule", { value: true });
+DispatcherWrapper$3.DispatcherWrapper = void 0;
+class DispatcherWrapper$2 {
+  constructor(dispatcher) {
+    this._subscribe = (fn) => dispatcher.subscribe(fn);
+    this._unsubscribe = (fn) => dispatcher.unsubscribe(fn);
+    this._one = (fn) => dispatcher.one(fn);
+    this._has = (fn) => dispatcher.has(fn);
+    this._clear = () => dispatcher.clear();
+    this._count = () => dispatcher.count;
+    this._onSubscriptionChange = () => dispatcher.onSubscriptionChange;
+  }
+  get onSubscriptionChange() {
+    return this._onSubscriptionChange();
+  }
+  get count() {
+    return this._count();
+  }
+  subscribe(fn) {
+    return this._subscribe(fn);
+  }
+  sub(fn) {
+    return this.subscribe(fn);
+  }
+  unsubscribe(fn) {
+    this._unsubscribe(fn);
+  }
+  unsub(fn) {
+    this.unsubscribe(fn);
+  }
+  one(fn) {
+    return this._one(fn);
+  }
+  has(fn) {
+    return this._has(fn);
+  }
+  clear() {
+    this._clear();
+  }
+}
+DispatcherWrapper$3.DispatcherWrapper = DispatcherWrapper$2;
+var Subscription$3 = {};
+Object.defineProperty(Subscription$3, "__esModule", { value: true });
+Subscription$3.Subscription = void 0;
+class Subscription$2 {
+  constructor(handler, isOnce) {
+    this.handler = handler;
+    this.isOnce = isOnce;
+    this.isExecuted = false;
+  }
+  execute(executeAsync, scope, args) {
+    if (!this.isOnce || !this.isExecuted) {
+      this.isExecuted = true;
+      var fn = this.handler;
+      if (executeAsync) {
+        setTimeout(() => {
+          fn.apply(scope, args);
+        }, 1);
+      } else {
+        fn.apply(scope, args);
+      }
+    }
+  }
+}
+Subscription$3.Subscription = Subscription$2;
+var EventManagement$3 = {};
+Object.defineProperty(EventManagement$3, "__esModule", { value: true });
+EventManagement$3.EventManagement = void 0;
+class EventManagement$2 {
+  constructor(unsub) {
+    this.unsub = unsub;
+    this.propagationStopped = false;
+  }
+  stopPropagation() {
+    this.propagationStopped = true;
+  }
+}
+EventManagement$3.EventManagement = EventManagement$2;
+Object.defineProperty(DispatcherBase$3, "__esModule", { value: true });
+DispatcherBase$3.SubscriptionChangeEventDispatcher = DispatcherBase$3.DispatcherBase = void 0;
+const DispatcherWrapper_1$1 = DispatcherWrapper$3;
+const Subscription_1$1 = Subscription$3;
+const EventManagement_1$3 = EventManagement$3;
+class DispatcherBase$2 {
+  constructor() {
+    this._subscriptions = new Array();
+  }
+  get count() {
+    return this._subscriptions.length;
+  }
+  get onSubscriptionChange() {
+    if (this._onSubscriptionChange == null) {
+      this._onSubscriptionChange = new SubscriptionChangeEventDispatcher$1();
+    }
+    return this._onSubscriptionChange.asEvent();
+  }
+  subscribe(fn) {
+    if (fn) {
+      this._subscriptions.push(this.createSubscription(fn, false));
+      this.triggerSubscriptionChange();
+    }
+    return () => {
+      this.unsubscribe(fn);
+    };
+  }
+  sub(fn) {
+    return this.subscribe(fn);
+  }
+  one(fn) {
+    if (fn) {
+      this._subscriptions.push(this.createSubscription(fn, true));
+      this.triggerSubscriptionChange();
+    }
+    return () => {
+      this.unsubscribe(fn);
+    };
+  }
+  has(fn) {
+    if (!fn)
+      return false;
+    return this._subscriptions.some((sub) => sub.handler == fn);
+  }
+  unsubscribe(fn) {
+    if (!fn)
+      return;
+    let changes = false;
+    for (let i2 = 0; i2 < this._subscriptions.length; i2++) {
+      if (this._subscriptions[i2].handler == fn) {
+        this._subscriptions.splice(i2, 1);
+        changes = true;
+        break;
+      }
+    }
+    if (changes) {
+      this.triggerSubscriptionChange();
+    }
+  }
+  unsub(fn) {
+    this.unsubscribe(fn);
+  }
+  _dispatch(executeAsync, scope, args) {
+    for (let sub of [...this._subscriptions]) {
+      let ev = new EventManagement_1$3.EventManagement(() => this.unsub(sub.handler));
+      let nargs = Array.prototype.slice.call(args);
+      nargs.push(ev);
+      let s = sub;
+      s.execute(executeAsync, scope, nargs);
+      this.cleanup(sub);
+      if (!executeAsync && ev.propagationStopped) {
+        return { propagationStopped: true };
+      }
+    }
+    if (executeAsync) {
+      return null;
+    }
+    return { propagationStopped: false };
+  }
+  createSubscription(handler, isOnce) {
+    return new Subscription_1$1.Subscription(handler, isOnce);
+  }
+  cleanup(sub) {
+    let changes = false;
+    if (sub.isOnce && sub.isExecuted) {
+      let i2 = this._subscriptions.indexOf(sub);
+      if (i2 > -1) {
+        this._subscriptions.splice(i2, 1);
+        changes = true;
+      }
+    }
+    if (changes) {
+      this.triggerSubscriptionChange();
+    }
+  }
+  asEvent() {
+    if (this._wrap == null) {
+      this._wrap = new DispatcherWrapper_1$1.DispatcherWrapper(this);
+    }
+    return this._wrap;
+  }
+  clear() {
+    if (this._subscriptions.length != 0) {
+      this._subscriptions.splice(0, this._subscriptions.length);
+      this.triggerSubscriptionChange();
+    }
+  }
+  triggerSubscriptionChange() {
+    if (this._onSubscriptionChange != null) {
+      this._onSubscriptionChange.dispatch(this.count);
+    }
+  }
+}
+DispatcherBase$3.DispatcherBase = DispatcherBase$2;
+class SubscriptionChangeEventDispatcher$1 extends DispatcherBase$2 {
+  dispatch(count) {
+    this._dispatch(false, this, arguments);
+  }
+}
+DispatcherBase$3.SubscriptionChangeEventDispatcher = SubscriptionChangeEventDispatcher$1;
+var DispatchError$3 = {};
+Object.defineProperty(DispatchError$3, "__esModule", { value: true });
+DispatchError$3.DispatchError = void 0;
+class DispatchError$2 extends Error {
+  constructor(message) {
+    super(message);
+  }
+}
+DispatchError$3.DispatchError = DispatchError$2;
+var EventListBase$3 = {};
+Object.defineProperty(EventListBase$3, "__esModule", { value: true });
+EventListBase$3.EventListBase = void 0;
+class EventListBase$2 {
+  constructor() {
+    this._events = {};
+  }
+  get(name) {
+    let event = this._events[name];
+    if (event) {
+      return event;
+    }
+    event = this.createDispatcher();
+    this._events[name] = event;
+    return event;
+  }
+  remove(name) {
+    delete this._events[name];
+  }
+}
+EventListBase$3.EventListBase = EventListBase$2;
+var HandlingBase$3 = {};
+Object.defineProperty(HandlingBase$3, "__esModule", { value: true });
+HandlingBase$3.HandlingBase = void 0;
+class HandlingBase$2 {
+  constructor(events) {
+    this.events = events;
+  }
+  one(name, fn) {
+    this.events.get(name).one(fn);
+  }
+  has(name, fn) {
+    return this.events.get(name).has(fn);
+  }
+  subscribe(name, fn) {
+    this.events.get(name).subscribe(fn);
+  }
+  sub(name, fn) {
+    this.subscribe(name, fn);
+  }
+  unsubscribe(name, fn) {
+    this.events.get(name).unsubscribe(fn);
+  }
+  unsub(name, fn) {
+    this.unsubscribe(name, fn);
+  }
+}
+HandlingBase$3.HandlingBase = HandlingBase$2;
+var PromiseDispatcherBase$3 = {};
+var PromiseSubscription$3 = {};
+Object.defineProperty(PromiseSubscription$3, "__esModule", { value: true });
+PromiseSubscription$3.PromiseSubscription = void 0;
+class PromiseSubscription$2 {
+  constructor(handler, isOnce) {
+    this.handler = handler;
+    this.isOnce = isOnce;
+    this.isExecuted = false;
+  }
+  async execute(executeAsync, scope, args) {
+    if (!this.isOnce || !this.isExecuted) {
+      this.isExecuted = true;
+      var fn = this.handler;
+      if (executeAsync) {
+        setTimeout(() => {
+          fn.apply(scope, args);
+        }, 1);
+        return;
+      }
+      let result = fn.apply(scope, args);
+      await result;
+    }
+  }
+}
+PromiseSubscription$3.PromiseSubscription = PromiseSubscription$2;
+Object.defineProperty(PromiseDispatcherBase$3, "__esModule", { value: true });
+PromiseDispatcherBase$3.PromiseDispatcherBase = void 0;
+const PromiseSubscription_1$1 = PromiseSubscription$3;
+const EventManagement_1$2 = EventManagement$3;
+const DispatcherBase_1$1 = DispatcherBase$3;
+const DispatchError_1$1 = DispatchError$3;
+class PromiseDispatcherBase$2 extends DispatcherBase_1$1.DispatcherBase {
+  _dispatch(executeAsync, scope, args) {
+    throw new DispatchError_1$1.DispatchError("_dispatch not supported. Use _dispatchAsPromise.");
+  }
+  createSubscription(handler, isOnce) {
+    return new PromiseSubscription_1$1.PromiseSubscription(handler, isOnce);
+  }
+  async _dispatchAsPromise(executeAsync, scope, args) {
+    for (let sub of [...this._subscriptions]) {
+      let ev = new EventManagement_1$2.EventManagement(() => this.unsub(sub.handler));
+      let nargs = Array.prototype.slice.call(args);
+      nargs.push(ev);
+      let ps = sub;
+      await ps.execute(executeAsync, scope, nargs);
+      this.cleanup(sub);
+      if (!executeAsync && ev.propagationStopped) {
+        return { propagationStopped: true };
+      }
+    }
+    if (executeAsync) {
+      return null;
+    }
+    return { propagationStopped: false };
+  }
+}
+PromiseDispatcherBase$3.PromiseDispatcherBase = PromiseDispatcherBase$2;
+(function(exports2) {
+  /*!
+   * Strongly Typed Events for TypeScript - Core
+   * https://github.com/KeesCBakker/StronlyTypedEvents/
+   * http://keestalkstech.com
+   *
+   * Copyright Kees C. Bakker / KeesTalksTech
+   * Released under the MIT license
+   */
+  Object.defineProperty(exports2, "__esModule", { value: true });
+  exports2.SubscriptionChangeEventDispatcher = exports2.HandlingBase = exports2.PromiseDispatcherBase = exports2.PromiseSubscription = exports2.DispatchError = exports2.EventManagement = exports2.EventListBase = exports2.DispatcherWrapper = exports2.DispatcherBase = exports2.Subscription = void 0;
+  const DispatcherBase_12 = DispatcherBase$3;
+  Object.defineProperty(exports2, "DispatcherBase", { enumerable: true, get: function() {
+    return DispatcherBase_12.DispatcherBase;
+  } });
+  Object.defineProperty(exports2, "SubscriptionChangeEventDispatcher", { enumerable: true, get: function() {
+    return DispatcherBase_12.SubscriptionChangeEventDispatcher;
+  } });
+  const DispatchError_12 = DispatchError$3;
+  Object.defineProperty(exports2, "DispatchError", { enumerable: true, get: function() {
+    return DispatchError_12.DispatchError;
+  } });
+  const DispatcherWrapper_12 = DispatcherWrapper$3;
+  Object.defineProperty(exports2, "DispatcherWrapper", { enumerable: true, get: function() {
+    return DispatcherWrapper_12.DispatcherWrapper;
+  } });
+  const EventListBase_1 = EventListBase$3;
+  Object.defineProperty(exports2, "EventListBase", { enumerable: true, get: function() {
+    return EventListBase_1.EventListBase;
+  } });
+  const EventManagement_12 = EventManagement$3;
+  Object.defineProperty(exports2, "EventManagement", { enumerable: true, get: function() {
+    return EventManagement_12.EventManagement;
+  } });
+  const HandlingBase_1 = HandlingBase$3;
+  Object.defineProperty(exports2, "HandlingBase", { enumerable: true, get: function() {
+    return HandlingBase_1.HandlingBase;
+  } });
+  const PromiseDispatcherBase_1 = PromiseDispatcherBase$3;
+  Object.defineProperty(exports2, "PromiseDispatcherBase", { enumerable: true, get: function() {
+    return PromiseDispatcherBase_1.PromiseDispatcherBase;
+  } });
+  const PromiseSubscription_12 = PromiseSubscription$3;
+  Object.defineProperty(exports2, "PromiseSubscription", { enumerable: true, get: function() {
+    return PromiseSubscription_12.PromiseSubscription;
+  } });
+  const Subscription_12 = Subscription$3;
+  Object.defineProperty(exports2, "Subscription", { enumerable: true, get: function() {
+    return Subscription_12.Subscription;
+  } });
+})(dist$2);
+Object.defineProperty(SignalDispatcher$1, "__esModule", { value: true });
+SignalDispatcher$1.SignalDispatcher = void 0;
+const ste_core_1$5 = dist$2;
+class SignalDispatcher extends ste_core_1$5.DispatcherBase {
+  dispatch() {
+    const result = this._dispatch(false, this, arguments);
+    if (result == null) {
+      throw new ste_core_1$5.DispatchError("Got `null` back from dispatch.");
+    }
+    return result;
+  }
+  dispatchAsync() {
+    this._dispatch(true, this, arguments);
+  }
+  asEvent() {
+    return super.asEvent();
+  }
+}
+SignalDispatcher$1.SignalDispatcher = SignalDispatcher;
+var SignalHandlingBase$1 = {};
+var SignalList$1 = {};
+Object.defineProperty(SignalList$1, "__esModule", { value: true });
+SignalList$1.SignalList = void 0;
+const ste_core_1$4 = dist$2;
+const SignalDispatcher_1 = SignalDispatcher$1;
+class SignalList extends ste_core_1$4.EventListBase {
+  constructor() {
+    super();
+  }
+  createDispatcher() {
+    return new SignalDispatcher_1.SignalDispatcher();
+  }
+}
+SignalList$1.SignalList = SignalList;
+Object.defineProperty(SignalHandlingBase$1, "__esModule", { value: true });
+SignalHandlingBase$1.SignalHandlingBase = void 0;
+const ste_core_1$3 = dist$2;
+const SignalList_1 = SignalList$1;
+class SignalHandlingBase extends ste_core_1$3.HandlingBase {
+  constructor() {
+    super(new SignalList_1.SignalList());
+  }
+}
+SignalHandlingBase$1.SignalHandlingBase = SignalHandlingBase;
+(function(exports2) {
+  /*!
+   * Strongly Typed Events for TypeScript - Promise Signals
+   * https://github.com/KeesCBakker/StronlyTypedEvents/
+   * http://keestalkstech.com
+   *
+   * Copyright Kees C. Bakker / KeesTalksTech
+   * Released under the MIT license
+   */
+  Object.defineProperty(exports2, "__esModule", { value: true });
+  exports2.SignalList = exports2.SignalHandlingBase = exports2.SignalDispatcher = void 0;
+  const SignalDispatcher_12 = SignalDispatcher$1;
+  Object.defineProperty(exports2, "SignalDispatcher", { enumerable: true, get: function() {
+    return SignalDispatcher_12.SignalDispatcher;
+  } });
+  const SignalHandlingBase_1 = SignalHandlingBase$1;
+  Object.defineProperty(exports2, "SignalHandlingBase", { enumerable: true, get: function() {
+    return SignalHandlingBase_1.SignalHandlingBase;
+  } });
+  const SignalList_12 = SignalList$1;
+  Object.defineProperty(exports2, "SignalList", { enumerable: true, get: function() {
+    return SignalList_12.SignalList;
+  } });
+})(dist$3);
+({
+  forward: new Vector3(0, 0, -1),
+  back: new Vector3(0, 0, 1),
+  left: new Vector3(-1, 0, 0),
+  right: new Vector3(1, 0, 0),
+  up: new Vector3(0, 1, 0),
+  down: new Vector3(0, -1, 0)
+});
+class Camera {
+  constructor(scene, viewport, settings2) {
+    __publicField(this, "camera");
+    __publicField(this, "gizmo");
+    __publicField(this, "cameraPerspective");
+    __publicField(this, "cameraOrthographic");
+    __publicField(this, "_viewport");
+    __publicField(this, "_scene");
+    __publicField(this, "_targetVelocity", new Vector3());
+    __publicField(this, "_velocity", new Vector3());
+    __publicField(this, "_speed", 0);
+    __publicField(this, "_orbitMode", false);
+    __publicField(this, "_orbitTarget", new Vector3());
+    __publicField(this, "_minOrbitalDistance", 0.05);
+    __publicField(this, "_targetPosition");
+    __publicField(this, "_lerpStartMs", 0);
+    __publicField(this, "_lerpEndMs", 0);
+    __publicField(this, "_lockDirection", false);
+    __publicField(this, "_lerpPosition");
+    __publicField(this, "_lerpRotation");
+    __publicField(this, "_onValueChanged", new dist$3.SignalDispatcher());
+    __publicField(this, "_onMoved", new dist$3.SignalDispatcher());
+    __publicField(this, "defaultLerpDuration", 2);
+    __publicField(this, "_vimReferenceSize", 1);
+    __publicField(this, "_sceneSizeMultiplier", 1);
+    __publicField(this, "_velocityBlendFactor", 1e-4);
+    __publicField(this, "_moveSpeed", 0.8);
+    __publicField(this, "_rotateSpeed", 1);
+    __publicField(this, "_orbitSpeed", 1);
+    __publicField(this, "_zoomSpeed", 0.25);
+    __publicField(this, "_firstPersonSpeed", 10);
+    __publicField(this, "_minModelScrenSize", 0.05);
+    __publicField(this, "_minOrthoSize", 1);
+    this.cameraPerspective = new PerspectiveCamera();
+    this.camera = this.cameraPerspective;
+    this._scene = scene;
+    this._viewport = viewport;
+    this._viewport.onResize(() => {
+      this.updateProjection(this._scene.getBoundingBox());
+    });
+    this.applySettings(settings2);
+    this.reset();
+  }
+  get onValueChanged() {
+    return this._onValueChanged.asEvent();
+  }
+  get onMoved() {
+    return this._onMoved.asEvent();
+  }
+  heightAt(point) {
+    if (this.orthographic) {
+      return this.cameraOrthographic.top - this.cameraOrthographic.bottom;
+    } else {
+      const dist2 = this.camera.position.distanceTo(point);
+      return dist2 * Math.tan(this.cameraPerspective.fov / 2 * (Math.PI / 180));
+    }
+  }
+  dispose() {
+    var _a22;
+    (_a22 = this.gizmo) == null ? void 0 : _a22.dispose();
+    this.gizmo = void 0;
+  }
+  reset() {
+    this.camera.position.set(0, 0, -1e3);
+    this._targetPosition = this.camera.position;
+    this._targetVelocity.set(0, 0, 0);
+    this._velocity.set(0, 0, 0);
+    this._orbitTarget.set(0, 0, 0);
+    this.lookAt(this._orbitTarget);
+  }
+  get speed() {
+    return this._speed;
+  }
+  set speed(value) {
+    this._speed = clamp(value, -25, 25);
+    this._onValueChanged.dispatch();
+  }
+  get localVelocity() {
+    const result = this._velocity.clone();
+    result.applyQuaternion(this.camera.quaternion.clone().invert());
+    result.setZ(-result.z);
+    result.multiplyScalar(1 / this.getVelocityMultiplier() * this._moveSpeed);
+    return result;
+  }
+  get forward() {
+    return this.camera.getWorldDirection(new Vector3());
+  }
+  get orbitPosition() {
+    return this._orbitTarget;
+  }
+  set localVelocity(vector) {
+    this.cancelLerp();
+    const move = vector.clone();
+    move.setZ(-move.z);
+    move.applyQuaternion(this.camera.quaternion);
+    move.multiplyScalar(this.getVelocityMultiplier() * this._moveSpeed);
+    this._targetVelocity.copy(move);
+  }
+  get orbitMode() {
+    return this._orbitMode;
+  }
+  set orbitMode(value) {
+    this._orbitMode = value;
+    if (this.gizmo) {
+      this.gizmo.enabled = value;
+      this.gizmo.show(value);
+    }
+    this._onValueChanged.dispatch();
+  }
+  setPosition(position) {
+    const changed = this.isSignificant(this.camera.position.sub(position));
+    this.camera.position.copy(position);
+    if (changed)
+      this._onMoved.dispatch();
+  }
+  target(target, duration = 0) {
+    if (target instanceof Object$1 && !target.hasMesh) {
+      throw new Error("Attempting to target a mesh with no geometry.");
+    }
+    const position = target instanceof Vector3 ? target : target.getCenter();
+    this._orbitTarget = position;
+    this.startLerp(duration, "Rotation");
+  }
+  frame(target, center = "none", duration = 0) {
+    if (target instanceof Object$1) {
+      target = target.getBoundingBox();
+    }
+    if (target === "all") {
+      target = this._scene.getBoundingBox();
+    }
+    if (target instanceof Box3) {
+      target = target.getBoundingSphere(new Sphere());
+    }
+    if (target instanceof Sphere) {
+      this.frameSphere(target, center, duration);
+    }
+  }
+  applySettings(settings2) {
+    this.orbitMode = settings2.getCameraIsOrbit();
+    if (this.camera instanceof PerspectiveCamera) {
+      this.camera.fov = settings2.getCameraFov();
+      this.camera.zoom = settings2.getCameraZoom();
+      this.camera.near = settings2.getCameraNear();
+      this.camera.far = settings2.getCameraFar();
+      this.camera.updateProjectionMatrix();
+    }
+    this._moveSpeed = settings2.getCameraMoveSpeed();
+    this._rotateSpeed = settings2.getCameraRotateSpeed();
+    this._orbitSpeed = settings2.getCameraOrbitSpeed();
+    this._vimReferenceSize = settings2.getCameraReferenceVimSize();
+    this._onValueChanged.dispatch();
+  }
+  adaptToContent() {
+    const sphere = this._scene.getBoundingBox().getBoundingSphere(new Sphere());
+    this._sceneSizeMultiplier = sphere ? sphere.radius / this._vimReferenceSize : 1;
+  }
+  get orbitDistance() {
+    return this.camera.position.distanceTo(this._orbitTarget);
+  }
+  get targetOrbitDistance() {
+    return this._targetPosition.distanceTo(this._orbitTarget);
+  }
+  zoom(amount, duration = 0) {
+    var _a22;
+    const sphere = this._scene.getBoundingBox().getBoundingSphere(new Sphere());
+    if (this.camera instanceof PerspectiveCamera) {
+      const reverse = 1 / (1 - this._zoomSpeed) - 1;
+      const factor = amount < 0 ? this._zoomSpeed : reverse;
+      const dist2 = this.targetOrbitDistance;
+      let offset = dist2 * factor;
+      offset = Math.max(this._minOrbitalDistance, offset);
+      let targetDist = dist2 + offset * amount;
+      targetDist = Math.max(this._minOrbitalDistance, targetDist);
+      const rad = this.camera.fov / 2 * (Math.PI / 180);
+      if (sphere.radius / (targetDist * Math.tan(rad)) < this._minModelScrenSize) {
+        return;
+      }
+      const target = new Vector3(0, 0, targetDist);
+      target.applyQuaternion(this.camera.quaternion);
+      target.add(this._orbitTarget);
+      this._targetPosition = target;
+      this.startLerp(duration, "Position");
+    } else {
+      const multiplier = this._zoomSpeed * this.getBaseMultiplier();
+      const padX = (this.camera.right - this.camera.left) * amount * multiplier;
+      const padY = (this.camera.top - this.camera.bottom) * amount * multiplier;
+      const X2 = this.camera.right - this.camera.left + 2 * padX;
+      const Y2 = this.camera.top - this.camera.bottom + 2 * padY;
+      const radius = Math.min(X2 / 2, Y2 / 2);
+      if (sphere.radius / radius < this._minModelScrenSize)
+        return;
+      if (radius * 2 < this._minOrbitalDistance)
+        return;
+      this.camera.left -= padX;
+      this.camera.right += padX;
+      this.camera.bottom -= padY;
+      this.camera.top += padY;
+      this.camera.updateProjectionMatrix();
+    }
+    (_a22 = this.gizmo) == null ? void 0 : _a22.show();
+  }
+  move3(vector) {
+    var _a22;
+    this.cancelLerp();
+    const v2 = new Vector3();
+    if (this.orthographic) {
+      const aspect2 = this._viewport.getAspectRatio();
+      const dx = this.cameraOrthographic.right - this.cameraOrthographic.left;
+      const dy = this.cameraOrthographic.top - this.cameraOrthographic.bottom;
+      v2.set(-vector.x * dx * aspect2, vector.y * dy, 0);
+    } else {
+      v2.copy(vector);
+      v2.applyQuaternion(this.camera.quaternion);
+      v2.multiplyScalar(this.getMoveMultiplier() * this._moveSpeed);
+    }
+    this._orbitTarget.add(v2);
+    this._targetPosition.add(v2);
+    this._lockDirection = true;
+    this.startLerp(0, "Position");
+    (_a22 = this.gizmo) == null ? void 0 : _a22.show();
+  }
+  move2(vector, axes) {
+    const direction = axes === "XY" ? new Vector3(-vector.x, vector.y, 0) : axes === "XZ" ? new Vector3(-vector.x, 0, vector.y) : void 0;
+    if (direction)
+      this.move3(direction);
+  }
+  move1(amount, axis) {
+    const direction = new Vector3(axis === "X" ? -amount : 0, axis === "Y" ? amount : 0, axis === "Z" ? amount : 0);
+    this.move3(direction);
+  }
+  rotate(vector, duration = 0) {
+    const euler = new Euler(0, 0, 0, "YXZ");
+    euler.setFromQuaternion(this.camera.quaternion);
+    const factor = this.orbitMode ? -Math.PI * this._orbitSpeed : -Math.PI * this._rotateSpeed;
+    euler.y += vector.x * factor;
+    euler.x += vector.y * factor;
+    euler.z = 0;
+    const max2 = Math.PI * 0.48;
+    euler.x = Math.max(-max2, Math.min(max2, euler.x));
+    const rotation = new Quaternion().setFromEuler(euler);
+    if (this.orbitMode) {
+      const target = new Vector3(0, 0, 1);
+      target.applyQuaternion(rotation);
+      this.orbit(target, duration);
+    } else {
+      const offset = new Vector3(0, 0, -this.orbitDistance);
+      if (duration <= 0) {
+        this.camera.quaternion.copy(rotation);
+        offset.applyQuaternion(this.camera.quaternion);
+        this._onMoved.dispatch();
+      } else {
+        offset.applyQuaternion(rotation);
+        this.startLerp(duration, "Rotation");
+      }
+      this._orbitTarget = this.camera.position.clone().add(offset);
+    }
+  }
+  orbit(forward, duration = 0) {
+    const direction = this.clampY(this._orbitTarget, this.camera.position, forward);
+    const pos = this._orbitTarget.clone();
+    const delta = direction.normalize().multiplyScalar(this.orbitDistance);
+    this._targetPosition = pos.add(delta);
+    this.startLerp(duration, "Position");
+  }
+  frameSphere(sphere, angle, duration) {
+    var _a22;
+    const offset = this.camera.position.clone().sub(sphere.center);
+    const dist2 = this.camera.position.distanceTo(sphere.center);
+    if (angle === "center") {
+      offset.setY(0);
+    }
+    if (typeof angle === "number") {
+      const y2 = Math.sin(angle * (Math.PI / 180)) * dist2;
+      offset.setY(y2);
+    }
+    offset.normalize();
+    offset.multiplyScalar(sphere.radius * 3);
+    this._targetPosition = sphere.center.clone().add(offset);
+    this._orbitTarget = sphere.center;
+    this.startLerp(duration, "Both");
+    this.updateProjection(sphere);
+    (_a22 = this.gizmo) == null ? void 0 : _a22.show();
+  }
+  lookAt(position) {
+    this.camera.lookAt(position);
+    this.camera.up.set(0, 1, 0);
+  }
+  updateProjection(target) {
+    if (target instanceof Box3) {
+      target = target.getBoundingSphere(new Sphere());
+    }
+    const aspect2 = this._viewport.getAspectRatio();
+    if (this.camera instanceof PerspectiveCamera) {
+      this.camera.aspect = aspect2;
+    } else {
+      if (target) {
+        this.camera.left = -target.radius * aspect2;
+        this.camera.right = target.radius * aspect2;
+        this.camera.top = target.radius;
+        this.camera.bottom = -target.radius;
+      }
+      this.camera.near = -this.cameraPerspective.far;
+      this.camera.far = this.cameraPerspective.far;
+    }
+    this.camera.updateProjectionMatrix();
+  }
+  get orthographic() {
+    return this.camera instanceof OrthographicCamera;
+  }
+  set orthographic(value) {
+    if (value === this.orthographic)
+      return;
+    if (value && !this.cameraOrthographic) {
+      this.cameraOrthographic = new OrthographicCamera(-1, 1, 1, -1, -1, 1);
+    }
+    const next = value ? this.cameraOrthographic : this.cameraPerspective;
+    next.position.copy(this.camera.position);
+    next.rotation.copy(this.camera.rotation);
+    this.camera = next;
+    this.updateProjection(this._scene.getBoundingBox());
+    this._onValueChanged.dispatch();
+  }
+  getBaseMultiplier() {
+    return Math.pow(1.25, this.speed);
+  }
+  getVelocityMultiplier() {
+    const dist2 = this.orbitMode ? this.orbitDistance / this._vimReferenceSize : this._firstPersonSpeed;
+    return this.getBaseMultiplier() * dist2;
+  }
+  getMoveMultiplier() {
+    return this.orbitDistance / this._vimReferenceSize;
+  }
+  clampY(center, origin, value) {
+    const result = value.clone();
+    if (value.y !== 0 && value.x === 0 && value.z === 0) {
+      const delta = origin.clone().sub(center);
+      delta.setY(0);
+      delta.normalize().multiplyScalar(0.01);
+      result.x = delta.x;
+      result.z = delta.z;
+    }
+    return result;
+  }
+  slerp(center, start, end, value) {
+    const mid = start.clone().lerp(end, value);
+    const d1 = start.distanceTo(center);
+    const d2 = end.distanceTo(center);
+    const dist2 = d1 + (d2 - d1) * value;
+    const dir = mid.clone().sub(center).normalize();
+    const pos = center.clone().add(dir.multiplyScalar(dist2));
+    return pos;
+  }
+  startLerp(seconds, lerp2) {
+    const time = new Date().getTime();
+    this._lerpEndMs = time + seconds * 1e3;
+    this._lerpStartMs = time;
+    this._lerpPosition = lerp2 === "Position" || lerp2 === "Both";
+    this._lerpRotation = lerp2 === "Rotation" || lerp2 === "Both";
+  }
+  shouldLerp() {
+    return new Date().getTime() < this._lerpEndMs;
+  }
+  lerpProgress() {
+    const done = new Date().getTime() - this._lerpStartMs;
+    const duration = this._lerpEndMs - this._lerpStartMs;
+    let progress = done / duration;
+    progress = Math.min(progress, 1);
+    return progress;
+  }
+  update(deltaTime) {
+    var _a22;
+    if (this.shouldLerp()) {
+      if (this._lerpPosition && !this.isNearTarget()) {
+        this.applyPositionLerp();
+      }
+      if (this._lerpRotation && !this.isLookingAtTarget()) {
+        this.applyRotationLerp();
+      } else if (!this._lockDirection) {
+        this.lookAt(this._orbitTarget);
+      }
+    } else {
+      if (this._lerpPosition || this._lerpRotation) {
+        this.endLerp();
+      }
+      this._targetPosition.copy(this.camera.position);
+      this.applyVelocity(deltaTime);
+    }
+    (_a22 = this.gizmo) == null ? void 0 : _a22.setPosition(this._orbitTarget);
+  }
+  isNearTarget() {
+    return this.camera.position.distanceTo(this._targetPosition) < 0.1;
+  }
+  isLookingAtTarget() {
+    return this.goesThrough(this.camera.position, this.forward, this._orbitTarget, 0.01);
+  }
+  goesThrough(origin, direction, point, tolerance) {
+    const x2 = (point.x - origin.x) / direction.x;
+    const y2 = (point.y - origin.y) / direction.y;
+    const z2 = (point.z - origin.z) / direction.z;
+    const result = Math.abs(x2 - y2) < tolerance && Math.abs(x2 - z2) < tolerance && Math.abs(y2 - z2) < tolerance;
+    return result;
+  }
+  cancelLerp() {
+    this._lerpPosition = false;
+    this._lerpRotation = false;
+    this._lockDirection = false;
+    this._lerpEndMs = 0;
+  }
+  endLerp() {
+    this.cancelLerp();
+    this.setPosition(this._targetPosition);
+    this.lookAt(this._orbitTarget);
+  }
+  applyVelocity(deltaTime) {
+    var _a22;
+    const invBlendFactor = Math.pow(this._velocityBlendFactor, deltaTime);
+    const blendFactor = 1 - invBlendFactor;
+    this._velocity.multiplyScalar(invBlendFactor);
+    const deltaVelocity = this._targetVelocity.clone().multiplyScalar(blendFactor);
+    this._velocity.add(deltaVelocity);
+    const deltaPosition = this._velocity.clone().multiplyScalar(deltaTime);
+    const endPosition = this.camera.position.clone().add(deltaPosition);
+    this.setPosition(endPosition);
+    this._orbitTarget.add(deltaPosition);
+    if (this.orthographic) {
+      const aspect2 = this._viewport.getAspectRatio();
+      const d = -deltaPosition.dot(this.forward);
+      const dx = this.cameraOrthographic.right - this.cameraOrthographic.left + 2 * d * aspect2;
+      const dy = this.cameraOrthographic.top - this.cameraOrthographic.bottom + 2 * d * aspect2;
+      const radius = Math.min(dx, dy);
+      if (radius < this._minOrthoSize)
+        return;
+      this.cameraOrthographic.left -= d * aspect2;
+      this.cameraOrthographic.right += d * aspect2;
+      this.cameraOrthographic.top += d;
+      this.cameraOrthographic.bottom -= d;
+      this.cameraOrthographic.updateProjectionMatrix();
+      (_a22 = this.gizmo) == null ? void 0 : _a22.show();
+    }
+  }
+  isSignificant(vector) {
+    const min2 = 0.01 * this._sceneSizeMultiplier / 60;
+    return Math.abs(vector.x) > min2 || Math.abs(vector.y) > min2 || Math.abs(vector.z) > min2;
+  }
+  applyPositionLerp() {
+    const alpha = this.lerpProgress();
+    const pos = this.slerp(this._orbitTarget, this.camera.position, this._targetPosition, alpha);
+    this.setPosition(pos);
+  }
+  applyRotationLerp() {
+    const current = this.camera.position.clone().add(this.forward.multiplyScalar(this.orbitDistance));
+    const look2 = current.lerp(this._orbitTarget, this.lerpProgress());
+    this.lookAt(look2);
+  }
+}
+class InputHandler {
+  constructor(viewer2) {
+    __publicField(this, "_viewer");
+    __publicField(this, "_unregisters", []);
+    __publicField(this, "reg", (handler, type, listener2) => {
+      handler.addEventListener(type, listener2);
+      this._unregisters.push(() => handler.removeEventListener(type, listener2));
+    });
+    this._viewer = viewer2;
+  }
+  register() {
+    if (this._unregisters.length > 0)
+      return;
+    this.addListeners();
+  }
+  addListeners() {
+  }
+  unregister() {
+    this._unregisters.forEach((f2) => f2());
+    this._unregisters.length = 0;
+    this.reset();
+  }
+  reset() {
+  }
+}
+const KEYS = {
+  KEY_0: 48,
+  KEY_1: 49,
+  KEY_2: 50,
+  KEY_3: 51,
+  KEY_4: 52,
+  KEY_5: 53,
+  KEY_6: 54,
+  KEY_7: 55,
+  KEY_8: 56,
+  KEY_9: 57,
+  KEY_LEFT: 37,
+  KEY_RIGHT: 39,
+  KEY_UP: 38,
+  KEY_DOWN: 40,
+  KEY_CTRL: 17,
+  KEY_SHIFT: 16,
+  KEY_ENTER: 13,
+  KEY_SPACE: 32,
+  KEY_TAB: 9,
+  KEY_ESCAPE: 27,
+  KEY_BACKSPACE: 8,
+  KEY_HOME: 36,
+  KEY_END: 35,
+  KEY_INSERT: 45,
+  KEY_DELETE: 46,
+  KEY_ALT: 18,
+  KEY_F1: 112,
+  KEY_F2: 113,
+  KEY_F3: 114,
+  KEY_F4: 115,
+  KEY_F5: 116,
+  KEY_F6: 117,
+  KEY_F7: 118,
+  KEY_F8: 119,
+  KEY_F9: 120,
+  KEY_F10: 121,
+  KEY_F11: 122,
+  KEY_F12: 123,
+  KEY_NUMPAD0: 96,
+  KEY_NUMPAD1: 97,
+  KEY_NUMPAD2: 98,
+  KEY_NUMPAD3: 99,
+  KEY_NUMPAD4: 100,
+  KEY_NUMPAD5: 101,
+  KEY_NUMPAD6: 102,
+  KEY_NUMPAD7: 103,
+  KEY_NUMPAD8: 104,
+  KEY_NUMPAD9: 105,
+  KEY_ADD: 107,
+  KEY_SUBTRACT: 109,
+  KEY_MULTIPLY: 106,
+  KEY_DIVIDE: 111,
+  KEY_SEPARATOR: 108,
+  KEY_DECIMAL: 110,
+  KEY_OEM_PLUS: 187,
+  KEY_OEM_MINUS: 189,
+  KEY_A: 65,
+  KEY_B: 66,
+  KEY_C: 67,
+  KEY_D: 68,
+  KEY_E: 69,
+  KEY_F: 70,
+  KEY_G: 71,
+  KEY_H: 72,
+  KEY_I: 73,
+  KEY_J: 74,
+  KEY_K: 75,
+  KEY_L: 76,
+  KEY_M: 77,
+  KEY_N: 78,
+  KEY_O: 79,
+  KEY_P: 80,
+  KEY_Q: 81,
+  KEY_R: 82,
+  KEY_S: 83,
+  KEY_T: 84,
+  KEY_U: 85,
+  KEY_V: 86,
+  KEY_W: 87,
+  KEY_X: 88,
+  KEY_Y: 89,
+  KEY_Z: 90
+};
+const KeySet = new Set(Object.values(KEYS));
+class KeyboardHandler extends InputHandler {
+  constructor() {
+    super(...arguments);
+    __publicField(this, "SHIFT_MULTIPLIER", 3);
+    __publicField(this, "isUpPressed", false);
+    __publicField(this, "isDownPressed", false);
+    __publicField(this, "isLeftPressed", false);
+    __publicField(this, "isRightPressed", false);
+    __publicField(this, "isEPressed", false);
+    __publicField(this, "isQPressed", false);
+    __publicField(this, "isShiftPressed", false);
+    __publicField(this, "isCtrlPressed", false);
+    __publicField(this, "onKeyUp", (event) => {
+      this.onKey(event, false);
+    });
+    __publicField(this, "onKeyDown", (event) => {
+      this.onKey(event, true);
+    });
+    __publicField(this, "onKey", (event, keyDown) => {
+      if (!keyDown && KeySet.has(event.keyCode)) {
+        if (this._viewer.inputs.KeyAction(event.keyCode)) {
+          event.preventDefault();
+        }
+      }
+      switch (event.keyCode) {
+        case KEYS.KEY_W:
+        case KEYS.KEY_UP:
+          this.isUpPressed = keyDown;
+          this.applyMove();
+          event.preventDefault();
+          break;
+        case KEYS.KEY_S:
+        case KEYS.KEY_DOWN:
+          this.isDownPressed = keyDown;
+          this.applyMove();
+          event.preventDefault();
+          break;
+        case KEYS.KEY_D:
+        case KEYS.KEY_RIGHT:
+          this.isRightPressed = keyDown;
+          this.applyMove();
+          event.preventDefault();
+          break;
+        case KEYS.KEY_A:
+        case KEYS.KEY_LEFT:
+          this.isLeftPressed = keyDown;
+          this.applyMove();
+          event.preventDefault();
+          break;
+        case KEYS.KEY_E:
+          this.isEPressed = keyDown;
+          this.applyMove();
+          event.preventDefault();
+          break;
+        case KEYS.KEY_Q:
+          this.isQPressed = keyDown;
+          this.applyMove();
+          event.preventDefault();
+          break;
+        case KEYS.KEY_SHIFT:
+          this.isShiftPressed = keyDown;
+          this.applyMove();
+          event.preventDefault();
+          break;
+        case KEYS.KEY_CTRL:
+          this.isCtrlPressed = keyDown;
+          console.log("Control:" + keyDown);
+          event.preventDefault();
+          break;
+      }
+    });
+    __publicField(this, "applyMove", () => {
+      const move = new Vector3((this.isRightPressed ? 1 : 0) - (this.isLeftPressed ? 1 : 0), (this.isEPressed ? 1 : 0) - (this.isQPressed ? 1 : 0), (this.isUpPressed ? 1 : 0) - (this.isDownPressed ? 1 : 0));
+      const speed = this.isShiftPressed ? this.SHIFT_MULTIPLIER : 1;
+      move.multiplyScalar(speed);
+      this.camera.localVelocity = move;
+    });
+  }
+  addListeners() {
+    this.reg(document, "keydown", this.onKeyDown);
+    this.reg(document, "keyup", this.onKeyUp);
+  }
+  reset() {
+    this.isUpPressed = false;
+    this.isDownPressed = false;
+    this.isLeftPressed = false;
+    this.isRightPressed = false;
+    this.isEPressed = false;
+    this.isQPressed = false;
+    this.isShiftPressed = false;
+    this.isCtrlPressed = false;
+  }
+  get camera() {
+    return this._viewer.camera;
+  }
+  get selection() {
+    return this._viewer.selection;
+  }
+  get section() {
+    return this._viewer.sectionBox;
+  }
+}
+class RaycastResult {
+  constructor(intersections) {
+    __publicField(this, "object");
+    __publicField(this, "intersections");
+    __publicField(this, "firstHit");
+    this.intersections = intersections;
+    const [hit, obj] = this.GetFirstVimHit(intersections);
+    this.firstHit = hit;
+    this.object = obj;
+  }
+  GetFirstVimHit(intersections) {
+    for (let i2 = 0; i2 < intersections.length; i2++) {
+      const obj = this.getVimObjectFromHit(intersections[i2]);
+      if (obj == null ? void 0 : obj.visible)
+        return [intersections[i2], obj];
+    }
+    return [];
+  }
+  getVimObjectFromHit(hit) {
+    const vim = hit.object.userData.vim;
+    if (!vim)
+      return;
+    if (hit.object.userData.merged) {
+      if (!hit.faceIndex) {
+        throw new Error("Raycast hit has no face index.");
+      }
+      const index = this.binarySearch(hit.object.userData.submeshes, hit.faceIndex * 3);
+      const instance = hit.object.userData.instances[index];
+      return vim.getObjectFromInstance(instance);
+    } else if (hit.instanceId !== void 0) {
+      return vim.getObjectFromMesh(hit.object, hit.instanceId);
+    }
+  }
+  binarySearch(array, element) {
+    let m2 = 0;
+    let n2 = array.length - 1;
+    while (m2 <= n2) {
+      const k = n2 + m2 >> 1;
+      const cmp = element - array[k];
+      if (cmp > 0) {
+        m2 = k + 1;
+      } else if (cmp < 0) {
+        n2 = k - 1;
+      } else {
+        return k;
+      }
+    }
+    return m2 - 1;
+  }
+  get isHit() {
+    return !!this.firstHit;
+  }
+  get distance() {
+    var _a22;
+    return (_a22 = this.firstHit) == null ? void 0 : _a22.distance;
+  }
+  get position() {
+    var _a22;
+    return (_a22 = this.firstHit) == null ? void 0 : _a22.point;
+  }
+  get threeId() {
+    var _a22, _b2;
+    return (_b2 = (_a22 = this.firstHit) == null ? void 0 : _a22.object) == null ? void 0 : _b2.id;
+  }
+  get faceIndex() {
+    var _a22;
+    return (_a22 = this.firstHit) == null ? void 0 : _a22.faceIndex;
+  }
+}
+class Raycaster {
+  constructor(viewport, camera, scene, renderer) {
+    __publicField(this, "_viewport");
+    __publicField(this, "_camera");
+    __publicField(this, "_scene");
+    __publicField(this, "_renderer");
+    __publicField(this, "_raycaster", new Raycaster$1());
+    this._viewport = viewport;
+    this._camera = camera;
+    this._scene = scene;
+    this._renderer = renderer;
+  }
+  raycast2(position) {
+    this._raycaster = this.fromPoint2(position, this._raycaster);
+    let hits = this._raycaster.intersectObjects(this._scene.scene.children);
+    hits = this.filterHits(hits);
+    return new RaycastResult(hits);
+  }
+  filterHits(hits) {
+    return this._renderer.section.active ? hits.filter((i2) => this._renderer.section.box.containsPoint(i2.point)) : hits;
+  }
+  raycast3(position) {
+    this._raycaster = this.fromPoint3(position, this._raycaster);
+    let hits = this._raycaster.intersectObjects(this._scene.scene.children);
+    hits = this.filterHits(hits);
+    return new RaycastResult(hits);
+  }
+  raycastForward() {
+    return this.raycast3(this._camera.orbitPosition);
+  }
+  fromPoint2(position, target = new Raycaster$1()) {
+    const size = this._viewport.getSize();
+    const x2 = position.x / size.x * 2 - 1;
+    const y2 = -(position.y / size.y) * 2 + 1;
+    target.setFromCamera(new Vector2(x2, y2), this._camera.camera);
+    return target;
+  }
+  fromPoint3(position, target = new Raycaster$1()) {
+    const direction = position.clone().sub(this._camera.camera.position).normalize();
+    target.set(this._camera.camera.position, direction);
+    return target;
+  }
+}
+class InputAction {
+  constructor(type, modifier, position, raycaster) {
+    __publicField(this, "position");
+    __publicField(this, "modifier");
+    __publicField(this, "type");
+    __publicField(this, "_raycaster");
+    __publicField(this, "_raycast");
+    this.type = type;
+    this.modifier = modifier;
+    this.position = position;
+    this._raycaster = raycaster;
+  }
+  get raycast() {
+    var _a22;
+    return (_a22 = this._raycast) != null ? _a22 : this._raycast = this._raycaster.raycast2(this.position);
+  }
+  get object() {
+    return this.raycast.object;
+  }
+}
+class TouchHandler extends InputHandler {
+  constructor() {
+    super(...arguments);
+    __publicField(this, "TAP_DURATION_MS", 500);
+    __publicField(this, "DOUBLE_TAP_DELAY_MS", 500);
+    __publicField(this, "TAP_MAX_MOVE_PIXEL", 5);
+    __publicField(this, "ZOOM_SPEED", 5);
+    __publicField(this, "_touch");
+    __publicField(this, "_touch1");
+    __publicField(this, "_touch2");
+    __publicField(this, "_touchStartTime");
+    __publicField(this, "_lastTapMs");
+    __publicField(this, "_touchStart");
+    __publicField(this, "reset", () => {
+      this._touch = this._touch1 = this._touch2 = this._touchStartTime = void 0;
+    });
+    __publicField(this, "onTap", (position) => {
+      const time = new Date().getTime();
+      const double = time - this._lastTapMs < this.DOUBLE_TAP_DELAY_MS;
+      this._lastTapMs = new Date().getTime();
+      const action = new InputAction(double ? "double" : "main", "none", position, this._viewer.raycaster);
+      this._viewer.inputs.MainAction(action);
+    });
+    __publicField(this, "onTouchStart", (event) => {
+      event.preventDefault();
+      if (!event || !event.touches || !event.touches.length) {
+        return;
+      }
+      this._touchStartTime = new Date().getTime();
+      if (event.touches.length === 1) {
+        this._touch = this.touchToVector(event.touches[0]);
+        this._touch1 = this._touch2 = void 0;
+      } else if (event.touches.length === 2) {
+        this._touch1 = this.touchToVector(event.touches[0]);
+        this._touch2 = this.touchToVector(event.touches[1]);
+        this._touch = this.average(this._touch1, this._touch2);
+      }
+      this._touchStart = this._touch;
+    });
+    __publicField(this, "onDrag", (delta) => {
+      this.camera.rotate(delta);
+    });
+    __publicField(this, "onDoubleDrag", (delta) => {
+      this.camera.move2(delta, "XY");
+    });
+    __publicField(this, "onPinchOrSpread", (delta) => {
+      if (this.camera.orbitMode) {
+        this.camera.zoom(delta * this.ZOOM_SPEED);
+      } else {
+        this.camera.move1(delta * this.ZOOM_SPEED, "Z");
+      }
+    });
+    __publicField(this, "onTouchMove", (event) => {
+      event.preventDefault();
+      if (!event || !event.touches || !event.touches.length)
+        return;
+      if (!this._touch)
+        return;
+      if (event.touches.length === 1) {
+        const pos = this.touchToVector(event.touches[0]);
+        const size = this.viewport.getSize();
+        const delta = pos.clone().sub(this._touch).multiply(new Vector2(1 / size.x, 1 / size.y));
+        this._touch = pos;
+        this.onDrag(delta);
+        return;
+      }
+      if (!this._touch1 || !this._touch2)
+        return;
+      if (event.touches.length >= 2) {
+        const p1 = this.touchToVector(event.touches[0]);
+        const p2 = this.touchToVector(event.touches[1]);
+        const p3 = this.average(p1, p2);
+        const size = this.viewport.getSize();
+        const moveDelta = this._touch.clone().sub(p3).multiply(new Vector2(-1 / size.x, -1 / size.y));
+        const zoom2 = p1.distanceTo(p2);
+        const prevZoom = this._touch1.distanceTo(this._touch2);
+        const min2 = Math.min(size.x, size.y);
+        const zoomDelta = (zoom2 - prevZoom) / -min2;
+        this._touch = p3;
+        this._touch1 = p1;
+        this._touch2 = p2;
+        if (moveDelta.length() > Math.abs(zoomDelta)) {
+          this.onDoubleDrag(moveDelta);
+        } else {
+          this.onPinchOrSpread(zoomDelta);
+        }
+      }
+    });
+    __publicField(this, "onTouchEnd", (event) => {
+      if (this.isSingleTouch()) {
+        const touchDurationMs = new Date().getTime() - this._touchStartTime;
+        const length = this._touch.clone().sub(this._touchStart).length();
+        console.log(length);
+        if (touchDurationMs < this.TAP_DURATION_MS && length < this.TAP_MAX_MOVE_PIXEL) {
+          this.onTap(this._touch);
+        }
+      }
+      this.reset();
+    });
+  }
+  get camera() {
+    return this._viewer.camera;
+  }
+  get viewport() {
+    return this._viewer.viewport;
+  }
+  addListeners() {
+    const canvas = this.viewport.canvas;
+    this.reg(canvas, "touchstart", this.onTouchStart);
+    this.reg(canvas, "touchend", this.onTouchEnd);
+    this.reg(canvas, "touchmove", this.onTouchMove);
+  }
+  isSingleTouch() {
+    return this._touch !== void 0 && this._touchStartTime !== void 0 && this._touch1 === void 0 && this._touch2 === void 0;
+  }
+  touchToVector(touch) {
+    return new Vector2(touch.pageX, touch.pageY);
+  }
+  average(p1, p2) {
+    return p1.clone().lerp(p2, 0.5);
+  }
+}
+class MouseHandler extends InputHandler {
+  constructor() {
+    super(...arguments);
+    __publicField(this, "_idleDelayMs", 150);
+    __publicField(this, "ZOOM_SPEED", 5);
+    __publicField(this, "buttonDown");
+    __publicField(this, "hasMouseMoved", false);
+    __publicField(this, "_idleTimeout");
+    __publicField(this, "_idle");
+    __publicField(this, "_idlePosition");
+    __publicField(this, "_lastPosition");
+    __publicField(this, "_downPosition");
+    __publicField(this, "reset", () => {
+      this.buttonDown = void 0;
+      this.hasMouseMoved = false;
+      this._lastPosition = this._downPosition = void 0;
+      clearTimeout(this._idleTimeout);
+    });
+    __publicField(this, "onMouseOut", (_) => {
+      this.buttonDown = void 0;
+      this.hasMouseMoved = false;
+    });
+    __publicField(this, "onMouseIdle", (position) => {
+      if (this.buttonDown || !position)
+        return;
+      const action = new InputAction("idle", this.getModifier(), position, this.raycaster);
+      this._viewer.inputs.IdleAction(action);
+      this._idle = true;
+      this._idlePosition = position;
+    });
+    __publicField(this, "onCameraMoved", () => {
+      if (this._idle) {
+        this._viewer.inputs.IdleAction(void 0);
+      }
+      this.resetIdleTimeout();
+    });
+    __publicField(this, "onMouseMove", (event) => {
+      this._lastPosition = new Vector2(event.offsetX, event.offsetY);
+      if (this._idle && this._lastPosition.distanceTo(this._idlePosition) > 5) {
+        this._viewer.inputs.IdleAction(void 0);
+        this.resetIdleTimeout();
+      }
+      if (!this._idle) {
+        this.resetIdleTimeout();
+      }
+      if (!this.buttonDown)
+        return;
+      this.onMouseDrag(event);
+    });
+    __publicField(this, "onMouseDown", (event) => {
+      event.preventDefault();
+      if (this.buttonDown)
+        return;
+      this._downPosition = new Vector2(event.offsetX, event.offsetY);
+      this.hasMouseMoved = false;
+      this.viewport.canvas.focus();
+      this.buttonDown = this.getButton(event);
+      const pointer = this.buttonDown === "middle" ? "pan" : this.buttonDown === "right" ? "look" : void 0;
+      this._viewer.inputs.pointerOverride = pointer;
+      if (pointer === "look")
+        this._viewer.camera.orbitMode = false;
+    });
+    __publicField(this, "onMouseWheel", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const scrollValue = Math.sign(event.deltaY);
+      if (this.keyboard.isCtrlPressed) {
+        this.camera.speed -= scrollValue;
+      } else {
+        this.camera.zoom(scrollValue, this.camera.defaultLerpDuration);
+      }
+    });
+    __publicField(this, "onMouseUp", (event) => {
+      this.resetIdleTimeout();
+      const btn = this.getButton(event);
+      if (btn === this.buttonDown)
+        return;
+      this._viewer.gizmoRectangle.visible = false;
+      event.preventDefault();
+      if (!this.buttonDown)
+        return;
+      if (this.inputs.pointerActive === "rect" && this.hasMouseMoved) {
+        this.onRectEnd();
+      } else if (event.button === 0 && !this.hasMouseMoved) {
+        this.onMouseClick(new Vector2(event.offsetX, event.offsetY), false);
+      } else if (event.button === 2 && !this.hasMouseMoved) {
+        this.inputs.ContextMenu(new Vector2(event.clientX, event.clientY));
+      }
+      this.camera.orbitMode = this.inputs.pointerActive === "orbit";
+      this.buttonDown = void 0;
+      this.inputs.pointerOverride = void 0;
+    });
+    __publicField(this, "onDoubleClick", (event) => {
+      this.onMouseClick(new Vector2(event.offsetX, event.offsetY), true);
+    });
+    __publicField(this, "onMouseClick", (position, doubleClick) => {
+      const action = new InputAction(doubleClick ? "double" : "main", this.getModifier(), position, this.raycaster);
+      this._viewer.inputs.MainAction(action);
+    });
+  }
+  get camera() {
+    return this._viewer.camera;
+  }
+  get viewport() {
+    return this._viewer.viewport;
+  }
+  get canvas() {
+    return this.viewport.canvas;
+  }
+  get raycaster() {
+    return this._viewer.raycaster;
+  }
+  get inputs() {
+    return this._viewer.inputs;
+  }
+  get keyboard() {
+    return this._viewer.inputs.keyboard;
+  }
+  addListeners() {
+    this.reg(this.canvas, "mousedown", this.onMouseDown);
+    this.reg(this.canvas, "wheel", this.onMouseWheel);
+    this.reg(this.canvas, "mousemove", this.onMouseMove);
+    this.reg(this.canvas, "mouseup", this.onMouseUp);
+    this.reg(this.canvas, "mouseout", this.onMouseOut);
+    this.reg(this.canvas, "dblclick", this.onDoubleClick);
+    this.reg(this.canvas, "contextmenu", (e) => e.preventDefault());
+    this._unregisters.push(this.camera.onMoved.subscribe(() => this.onCameraMoved()));
+  }
+  resetIdleTimeout() {
+    clearTimeout(this._idleTimeout);
+    this._idleTimeout = setTimeout(() => this.onMouseIdle(this._lastPosition), this._idleDelayMs);
+  }
+  onMouseDrag(event) {
+    event.preventDefault();
+    const deltaX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
+    const deltaY = event.movementY || event.mozMovementY || event.webkitMovementY || 0;
+    const size = this.viewport.getSize();
+    const delta = new Vector2(deltaX / size.x, deltaY / size.y);
+    const position = new Vector2(event.offsetX, event.offsetY);
+    this.hasMouseMoved = this.hasMouseMoved || this._downPosition.distanceTo(position) > 4;
+    switch (this.buttonDown) {
+      case "main":
+        this.onMouseMainDrag(delta);
+        break;
+      case "middle":
+        this.onMouseMiddleDrag(delta);
+        break;
+      case "right":
+        this.onMouseRightDrag(delta);
+        break;
+    }
+  }
+  onMouseMainDrag(delta) {
+    switch (this.inputs.pointerActive) {
+      case "orbit":
+        this.camera.rotate(delta);
+        break;
+      case "look":
+        this.camera.rotate(delta);
+        break;
+      case "pan":
+        this.camera.move2(delta, "XY");
+        break;
+      case "zoom":
+        this.camera.zoom(delta.y * this.ZOOM_SPEED);
+        break;
+      case "rect":
+        this.drawSelection();
+        break;
+      default:
+        this.camera.rotate(delta);
+    }
+  }
+  onMouseMiddleDrag(delta) {
+    this.camera.move2(delta, "XY");
+  }
+  onMouseRightDrag(delta) {
+    this.camera.rotate(delta);
+  }
+  getButton(event) {
+    return event.buttons & 1 ? "main" : event.buttons & 2 ? "right" : event.buttons & 4 ? "middle" : void 0;
+  }
+  onRectEnd() {
+    const box = this._viewer.gizmoRectangle.getBoundingBox();
+    const center = box.getCenter(new Vector3());
+    const size = box.getSize(new Vector3());
+    size.multiplyScalar(0.5);
+    box.setFromCenterAndSize(center, size);
+    this._viewer.camera.frame(box, "none", this._viewer.camera.defaultLerpDuration);
+  }
+  getModifier() {
+    return this.keyboard.isCtrlPressed ? "ctrl" : this.keyboard.isShiftPressed ? "shift" : "none";
+  }
+  drawSelection() {
+    this._viewer.gizmoRectangle.visible = true;
+    this._viewer.gizmoRectangle.update(this._downPosition, this._lastPosition);
+  }
+}
+var dist$1 = {};
+var SimpleEventDispatcher$1 = {};
+var dist = {};
+var DispatcherBase$1 = {};
+var DispatcherWrapper$1 = {};
+Object.defineProperty(DispatcherWrapper$1, "__esModule", { value: true });
+DispatcherWrapper$1.DispatcherWrapper = void 0;
+class DispatcherWrapper {
+  constructor(dispatcher) {
+    this._subscribe = (fn) => dispatcher.subscribe(fn);
+    this._unsubscribe = (fn) => dispatcher.unsubscribe(fn);
+    this._one = (fn) => dispatcher.one(fn);
+    this._has = (fn) => dispatcher.has(fn);
+    this._clear = () => dispatcher.clear();
+    this._count = () => dispatcher.count;
+    this._onSubscriptionChange = () => dispatcher.onSubscriptionChange;
+  }
+  get onSubscriptionChange() {
+    return this._onSubscriptionChange();
+  }
+  get count() {
+    return this._count();
+  }
+  subscribe(fn) {
+    return this._subscribe(fn);
+  }
+  sub(fn) {
+    return this.subscribe(fn);
+  }
+  unsubscribe(fn) {
+    this._unsubscribe(fn);
+  }
+  unsub(fn) {
+    this.unsubscribe(fn);
+  }
+  one(fn) {
+    return this._one(fn);
+  }
+  has(fn) {
+    return this._has(fn);
+  }
+  clear() {
+    this._clear();
+  }
+}
+DispatcherWrapper$1.DispatcherWrapper = DispatcherWrapper;
+var Subscription$1 = {};
+Object.defineProperty(Subscription$1, "__esModule", { value: true });
+Subscription$1.Subscription = void 0;
+class Subscription {
+  constructor(handler, isOnce) {
+    this.handler = handler;
+    this.isOnce = isOnce;
+    this.isExecuted = false;
+  }
+  execute(executeAsync, scope, args) {
+    if (!this.isOnce || !this.isExecuted) {
+      this.isExecuted = true;
+      var fn = this.handler;
+      if (executeAsync) {
+        setTimeout(() => {
+          fn.apply(scope, args);
+        }, 1);
+      } else {
+        fn.apply(scope, args);
+      }
+    }
+  }
+}
+Subscription$1.Subscription = Subscription;
+var EventManagement$1 = {};
+Object.defineProperty(EventManagement$1, "__esModule", { value: true });
+EventManagement$1.EventManagement = void 0;
+class EventManagement {
+  constructor(unsub) {
+    this.unsub = unsub;
+    this.propagationStopped = false;
+  }
+  stopPropagation() {
+    this.propagationStopped = true;
+  }
+}
+EventManagement$1.EventManagement = EventManagement;
+Object.defineProperty(DispatcherBase$1, "__esModule", { value: true });
+DispatcherBase$1.SubscriptionChangeEventDispatcher = DispatcherBase$1.DispatcherBase = void 0;
+const DispatcherWrapper_1 = DispatcherWrapper$1;
+const Subscription_1 = Subscription$1;
+const EventManagement_1$1 = EventManagement$1;
+class DispatcherBase {
+  constructor() {
+    this._subscriptions = new Array();
+  }
+  get count() {
+    return this._subscriptions.length;
+  }
+  get onSubscriptionChange() {
+    if (this._onSubscriptionChange == null) {
+      this._onSubscriptionChange = new SubscriptionChangeEventDispatcher();
+    }
+    return this._onSubscriptionChange.asEvent();
+  }
+  subscribe(fn) {
+    if (fn) {
+      this._subscriptions.push(this.createSubscription(fn, false));
+      this.triggerSubscriptionChange();
+    }
+    return () => {
+      this.unsubscribe(fn);
+    };
+  }
+  sub(fn) {
+    return this.subscribe(fn);
+  }
+  one(fn) {
+    if (fn) {
+      this._subscriptions.push(this.createSubscription(fn, true));
+      this.triggerSubscriptionChange();
+    }
+    return () => {
+      this.unsubscribe(fn);
+    };
+  }
+  has(fn) {
+    if (!fn)
+      return false;
+    return this._subscriptions.some((sub) => sub.handler == fn);
+  }
+  unsubscribe(fn) {
+    if (!fn)
+      return;
+    let changes = false;
+    for (let i2 = 0; i2 < this._subscriptions.length; i2++) {
+      if (this._subscriptions[i2].handler == fn) {
+        this._subscriptions.splice(i2, 1);
+        changes = true;
+        break;
+      }
+    }
+    if (changes) {
+      this.triggerSubscriptionChange();
+    }
+  }
+  unsub(fn) {
+    this.unsubscribe(fn);
+  }
+  _dispatch(executeAsync, scope, args) {
+    for (const sub of [...this._subscriptions]) {
+      const ev = new EventManagement_1$1.EventManagement(() => this.unsub(sub.handler));
+      const nargs = Array.prototype.slice.call(args);
+      nargs.push(ev);
+      const s = sub;
+      s.execute(executeAsync, scope, nargs);
+      this.cleanup(sub);
+      if (!executeAsync && ev.propagationStopped) {
+        return { propagationStopped: true };
+      }
+    }
+    if (executeAsync) {
+      return null;
+    }
+    return { propagationStopped: false };
+  }
+  createSubscription(handler, isOnce) {
+    return new Subscription_1.Subscription(handler, isOnce);
+  }
+  cleanup(sub) {
+    let changes = false;
+    if (sub.isOnce && sub.isExecuted) {
+      const i2 = this._subscriptions.indexOf(sub);
+      if (i2 > -1) {
+        this._subscriptions.splice(i2, 1);
+        changes = true;
+      }
+    }
+    if (changes) {
+      this.triggerSubscriptionChange();
+    }
+  }
+  asEvent() {
+    if (this._wrap == null) {
+      this._wrap = new DispatcherWrapper_1.DispatcherWrapper(this);
+    }
+    return this._wrap;
+  }
+  clear() {
+    if (this._subscriptions.length != 0) {
+      this._subscriptions.splice(0, this._subscriptions.length);
+      this.triggerSubscriptionChange();
+    }
+  }
+  triggerSubscriptionChange() {
+    if (this._onSubscriptionChange != null) {
+      this._onSubscriptionChange.dispatch(this.count);
+    }
+  }
+}
+DispatcherBase$1.DispatcherBase = DispatcherBase;
+class SubscriptionChangeEventDispatcher extends DispatcherBase {
+  dispatch(count) {
+    this._dispatch(false, this, arguments);
+  }
+}
+DispatcherBase$1.SubscriptionChangeEventDispatcher = SubscriptionChangeEventDispatcher;
+var DispatchError$1 = {};
+Object.defineProperty(DispatchError$1, "__esModule", { value: true });
+DispatchError$1.DispatchError = void 0;
+class DispatchError extends Error {
+  constructor(message) {
+    super(message);
+  }
+}
+DispatchError$1.DispatchError = DispatchError;
+var EventListBase$1 = {};
+Object.defineProperty(EventListBase$1, "__esModule", { value: true });
+EventListBase$1.EventListBase = void 0;
+class EventListBase {
+  constructor() {
+    this._events = {};
+  }
+  get(name) {
+    let event = this._events[name];
+    if (event) {
+      return event;
+    }
+    event = this.createDispatcher();
+    this._events[name] = event;
+    return event;
+  }
+  remove(name) {
+    delete this._events[name];
+  }
+}
+EventListBase$1.EventListBase = EventListBase;
+var HandlingBase$1 = {};
+Object.defineProperty(HandlingBase$1, "__esModule", { value: true });
+HandlingBase$1.HandlingBase = void 0;
+class HandlingBase {
+  constructor(events) {
+    this.events = events;
+  }
+  one(name, fn) {
+    this.events.get(name).one(fn);
+  }
+  has(name, fn) {
+    return this.events.get(name).has(fn);
+  }
+  subscribe(name, fn) {
+    this.events.get(name).subscribe(fn);
+  }
+  sub(name, fn) {
+    this.subscribe(name, fn);
+  }
+  unsubscribe(name, fn) {
+    this.events.get(name).unsubscribe(fn);
+  }
+  unsub(name, fn) {
+    this.unsubscribe(name, fn);
+  }
+}
+HandlingBase$1.HandlingBase = HandlingBase;
+var PromiseDispatcherBase$1 = {};
+var PromiseSubscription$1 = {};
+Object.defineProperty(PromiseSubscription$1, "__esModule", { value: true });
+PromiseSubscription$1.PromiseSubscription = void 0;
+class PromiseSubscription {
+  constructor(handler, isOnce) {
+    this.handler = handler;
+    this.isOnce = isOnce;
+    this.isExecuted = false;
+  }
+  async execute(executeAsync, scope, args) {
+    if (!this.isOnce || !this.isExecuted) {
+      this.isExecuted = true;
+      var fn = this.handler;
+      if (executeAsync) {
+        setTimeout(() => {
+          fn.apply(scope, args);
+        }, 1);
+        return;
+      }
+      let result = fn.apply(scope, args);
+      await result;
+    }
+  }
+}
+PromiseSubscription$1.PromiseSubscription = PromiseSubscription;
+Object.defineProperty(PromiseDispatcherBase$1, "__esModule", { value: true });
+PromiseDispatcherBase$1.PromiseDispatcherBase = void 0;
+const PromiseSubscription_1 = PromiseSubscription$1;
+const EventManagement_1 = EventManagement$1;
+const DispatcherBase_1 = DispatcherBase$1;
+const DispatchError_1 = DispatchError$1;
+class PromiseDispatcherBase extends DispatcherBase_1.DispatcherBase {
+  _dispatch(executeAsync, scope, args) {
+    throw new DispatchError_1.DispatchError("_dispatch not supported. Use _dispatchAsPromise.");
+  }
+  createSubscription(handler, isOnce) {
+    return new PromiseSubscription_1.PromiseSubscription(handler, isOnce);
+  }
+  async _dispatchAsPromise(executeAsync, scope, args) {
+    for (let sub of [...this._subscriptions]) {
+      let ev = new EventManagement_1.EventManagement(() => this.unsub(sub.handler));
+      let nargs = Array.prototype.slice.call(args);
+      nargs.push(ev);
+      let ps = sub;
+      await ps.execute(executeAsync, scope, nargs);
+      this.cleanup(sub);
+      if (!executeAsync && ev.propagationStopped) {
+        return { propagationStopped: true };
+      }
+    }
+    if (executeAsync) {
+      return null;
+    }
+    return { propagationStopped: false };
+  }
+}
+PromiseDispatcherBase$1.PromiseDispatcherBase = PromiseDispatcherBase;
+(function(exports2) {
+  /*!
+   * Strongly Typed Events for TypeScript - Core
+   * https://github.com/KeesCBakker/StronlyTypedEvents/
+   * http://keestalkstech.com
+   *
+   * Copyright Kees C. Bakker / KeesTalksTech
+   * Released under the MIT license
+   */
+  Object.defineProperty(exports2, "__esModule", { value: true });
+  exports2.SubscriptionChangeEventDispatcher = exports2.HandlingBase = exports2.PromiseDispatcherBase = exports2.PromiseSubscription = exports2.DispatchError = exports2.EventManagement = exports2.EventListBase = exports2.DispatcherWrapper = exports2.DispatcherBase = exports2.Subscription = void 0;
+  const DispatcherBase_12 = DispatcherBase$1;
+  Object.defineProperty(exports2, "DispatcherBase", { enumerable: true, get: function() {
+    return DispatcherBase_12.DispatcherBase;
+  } });
+  Object.defineProperty(exports2, "SubscriptionChangeEventDispatcher", { enumerable: true, get: function() {
+    return DispatcherBase_12.SubscriptionChangeEventDispatcher;
+  } });
+  const DispatchError_12 = DispatchError$1;
+  Object.defineProperty(exports2, "DispatchError", { enumerable: true, get: function() {
+    return DispatchError_12.DispatchError;
+  } });
+  const DispatcherWrapper_12 = DispatcherWrapper$1;
+  Object.defineProperty(exports2, "DispatcherWrapper", { enumerable: true, get: function() {
+    return DispatcherWrapper_12.DispatcherWrapper;
+  } });
+  const EventListBase_1 = EventListBase$1;
+  Object.defineProperty(exports2, "EventListBase", { enumerable: true, get: function() {
+    return EventListBase_1.EventListBase;
+  } });
+  const EventManagement_12 = EventManagement$1;
+  Object.defineProperty(exports2, "EventManagement", { enumerable: true, get: function() {
+    return EventManagement_12.EventManagement;
+  } });
+  const HandlingBase_1 = HandlingBase$1;
+  Object.defineProperty(exports2, "HandlingBase", { enumerable: true, get: function() {
+    return HandlingBase_1.HandlingBase;
+  } });
+  const PromiseDispatcherBase_1 = PromiseDispatcherBase$1;
+  Object.defineProperty(exports2, "PromiseDispatcherBase", { enumerable: true, get: function() {
+    return PromiseDispatcherBase_1.PromiseDispatcherBase;
+  } });
+  const PromiseSubscription_12 = PromiseSubscription$1;
+  Object.defineProperty(exports2, "PromiseSubscription", { enumerable: true, get: function() {
+    return PromiseSubscription_12.PromiseSubscription;
+  } });
+  const Subscription_12 = Subscription$1;
+  Object.defineProperty(exports2, "Subscription", { enumerable: true, get: function() {
+    return Subscription_12.Subscription;
+  } });
+})(dist);
+Object.defineProperty(SimpleEventDispatcher$1, "__esModule", { value: true });
+SimpleEventDispatcher$1.SimpleEventDispatcher = void 0;
+const ste_core_1$2 = dist;
+class SimpleEventDispatcher extends ste_core_1$2.DispatcherBase {
+  constructor() {
+    super();
+  }
+  dispatch(args) {
+    const result = this._dispatch(false, this, arguments);
+    if (result == null) {
+      throw new ste_core_1$2.DispatchError("Got `null` back from dispatch.");
+    }
+    return result;
+  }
+  dispatchAsync(args) {
+    this._dispatch(true, this, arguments);
+  }
+  asEvent() {
+    return super.asEvent();
+  }
+}
+SimpleEventDispatcher$1.SimpleEventDispatcher = SimpleEventDispatcher;
+var SimpleEventHandlingBase$1 = {};
+var SimpleEventList$1 = {};
+Object.defineProperty(SimpleEventList$1, "__esModule", { value: true });
+SimpleEventList$1.SimpleEventList = void 0;
+const ste_core_1$1 = dist;
+const SimpleEventDispatcher_1$1 = SimpleEventDispatcher$1;
+class SimpleEventList extends ste_core_1$1.EventListBase {
+  constructor() {
+    super();
+  }
+  createDispatcher() {
+    return new SimpleEventDispatcher_1$1.SimpleEventDispatcher();
+  }
+}
+SimpleEventList$1.SimpleEventList = SimpleEventList;
+Object.defineProperty(SimpleEventHandlingBase$1, "__esModule", { value: true });
+SimpleEventHandlingBase$1.SimpleEventHandlingBase = void 0;
+const ste_core_1 = dist;
+const SimpleEventList_1 = SimpleEventList$1;
+class SimpleEventHandlingBase extends ste_core_1.HandlingBase {
+  constructor() {
+    super(new SimpleEventList_1.SimpleEventList());
+  }
+}
+SimpleEventHandlingBase$1.SimpleEventHandlingBase = SimpleEventHandlingBase;
+var NonUniformSimpleEventList$1 = {};
+Object.defineProperty(NonUniformSimpleEventList$1, "__esModule", { value: true });
+NonUniformSimpleEventList$1.NonUniformSimpleEventList = void 0;
+const SimpleEventDispatcher_1 = SimpleEventDispatcher$1;
+class NonUniformSimpleEventList {
+  constructor() {
+    this._events = {};
+  }
+  get(name) {
+    if (this._events[name]) {
+      return this._events[name];
+    }
+    const event = this.createDispatcher();
+    this._events[name] = event;
+    return event;
+  }
+  remove(name) {
+    delete this._events[name];
+  }
+  createDispatcher() {
+    return new SimpleEventDispatcher_1.SimpleEventDispatcher();
+  }
+}
+NonUniformSimpleEventList$1.NonUniformSimpleEventList = NonUniformSimpleEventList;
+(function(exports2) {
+  Object.defineProperty(exports2, "__esModule", { value: true });
+  exports2.NonUniformSimpleEventList = exports2.SimpleEventList = exports2.SimpleEventHandlingBase = exports2.SimpleEventDispatcher = void 0;
+  const SimpleEventDispatcher_12 = SimpleEventDispatcher$1;
+  Object.defineProperty(exports2, "SimpleEventDispatcher", { enumerable: true, get: function() {
+    return SimpleEventDispatcher_12.SimpleEventDispatcher;
+  } });
+  const SimpleEventHandlingBase_1 = SimpleEventHandlingBase$1;
+  Object.defineProperty(exports2, "SimpleEventHandlingBase", { enumerable: true, get: function() {
+    return SimpleEventHandlingBase_1.SimpleEventHandlingBase;
+  } });
+  const NonUniformSimpleEventList_1 = NonUniformSimpleEventList$1;
+  Object.defineProperty(exports2, "NonUniformSimpleEventList", { enumerable: true, get: function() {
+    return NonUniformSimpleEventList_1.NonUniformSimpleEventList;
+  } });
+  const SimpleEventList_12 = SimpleEventList$1;
+  Object.defineProperty(exports2, "SimpleEventList", { enumerable: true, get: function() {
+    return SimpleEventList_12.SimpleEventList;
+  } });
+})(dist$1);
+class DefaultInputScheme {
+  constructor(viewer2) {
+    __publicField(this, "_viewer");
+    this._viewer = viewer2;
+  }
+  onMainAction(action) {
+    const camera = this._viewer.camera;
+    const selection = this._viewer.selection;
+    if (!(action == null ? void 0 : action.object)) {
+      selection.select(void 0);
+      if (action.type === "double") {
+        camera.frame("all", "none", camera.defaultLerpDuration);
+      }
+      return;
+    }
+    if (action.modifier !== "none") {
+      selection.toggle(action.object);
+    } else {
+      selection.select(action.object);
+    }
+    if (action.type === "double") {
+      camera.frame(action.object, "none", camera.defaultLerpDuration);
+    }
+    action.object.getBimElement().then((e) => {
+      var _a22;
+      e == null ? void 0 : e.set("Index", (_a22 = action.object) == null ? void 0 : _a22.element);
+      console.log(e);
+    });
+  }
+  onIdleAction(hit) {
+    this._viewer.selection.focus(hit == null ? void 0 : hit.object);
+  }
+  onKeyAction(key) {
+    const camera = this._viewer.camera;
+    const selection = this._viewer.selection;
+    switch (key) {
+      case KEYS.KEY_P:
+        camera.orthographic = !camera.orthographic;
+        return true;
+      case KEYS.KEY_ADD:
+      case KEYS.KEY_OEM_PLUS:
+        camera.speed += 1;
+        return true;
+      case KEYS.KEY_SUBTRACT:
+      case KEYS.KEY_OEM_MINUS:
+        camera.speed -= 1;
+        return true;
+      case KEYS.KEY_F8:
+      case KEYS.KEY_SPACE:
+        this._viewer.inputs.pointerActive = this._viewer.inputs.pointerFallback;
+        return true;
+      case KEYS.KEY_HOME:
+        camera.frame("all", 45, camera.defaultLerpDuration);
+        return true;
+      case KEYS.KEY_ESCAPE:
+        selection.clear();
+        return true;
+      case KEYS.KEY_Z:
+      case KEYS.KEY_F:
+        if (selection.count > 0) {
+          camera.frame(selection.getBoundingBox(), "center", camera.defaultLerpDuration);
+        } else {
+          camera.frame("all", "center", camera.defaultLerpDuration);
+        }
+        return true;
+      default:
+        return false;
+    }
+  }
+}
+class Input {
+  constructor(viewer2) {
+    __publicField(this, "_viewer");
+    __publicField(this, "touch");
+    __publicField(this, "mouse");
+    __publicField(this, "keyboard");
+    __publicField(this, "_pointerActive");
+    __publicField(this, "_pointerFallback");
+    __publicField(this, "_pointerOverride");
+    __publicField(this, "_onPointerModeChanged", new dist$3.SignalDispatcher());
+    __publicField(this, "_onPointerOverrideChanged", new dist$3.SignalDispatcher());
+    __publicField(this, "_onContextMenu", new dist$1.SimpleEventDispatcher());
+    __publicField(this, "_scheme");
+    __publicField(this, "unregisterAll", () => {
+      this.mouse.unregister();
+      this.keyboard.unregister();
+      this.touch.unregister();
+    });
+    this._viewer = viewer2;
+    this.keyboard = new KeyboardHandler(viewer2);
+    this.mouse = new MouseHandler(viewer2);
+    this.touch = new TouchHandler(viewer2);
+    this._scheme = new DefaultInputScheme(viewer2);
+    this.pointerActive = "orbit";
+    this._pointerFallback = "look";
+  }
+  get pointerFallback() {
+    return this._pointerFallback;
+  }
+  get pointerActive() {
+    return this._pointerActive;
+  }
+  get pointerOverride() {
+    return this._pointerOverride;
+  }
+  set pointerOverride(value) {
+    if (value === this._pointerOverride)
+      return;
+    this._pointerOverride = value;
+    this._onPointerOverrideChanged.dispatch();
+  }
+  set pointerActive(value) {
+    if (value === this._pointerActive)
+      return;
+    if (value === "look")
+      this._pointerFallback = "orbit";
+    else if (value === "orbit")
+      this._pointerFallback = "look";
+    this._viewer.gizmoRectangle.visible = false;
+    this._viewer.camera.orbitMode = value !== "look";
+    this._pointerActive = value;
+    this._onPointerModeChanged.dispatch();
+  }
+  get onPointerModeChanged() {
+    return this._onPointerModeChanged.asEvent();
+  }
+  get onPointerOverrideChanged() {
+    return this._onPointerOverrideChanged.asEvent();
+  }
+  get onContextMenu() {
+    return this._onContextMenu.asEvent();
+  }
+  get scheme() {
+    return this._scheme;
+  }
+  set scheme(value) {
+    this._scheme = value != null ? value : new DefaultInputScheme(this._viewer);
+  }
+  MainAction(action) {
+    this._scheme.onMainAction(action);
+  }
+  IdleAction(action) {
+    this._scheme.onIdleAction(action);
+  }
+  KeyAction(key) {
+    return this._scheme.onKeyAction(key);
+  }
+  ContextMenu(position) {
+    this._onContextMenu.dispatch(position);
+  }
+  registerAll() {
+    this.keyboard.register();
+    this.mouse.register();
+    this.touch.register();
+  }
+  resetAll() {
+    this.mouse.reset();
+    this.keyboard.reset();
+    this.touch.reset();
+  }
+}
+var Transparency;
+((Transparency2) => {
+  function isValid(value) {
+    return ["all", "opaqueOnly", "transparentOnly", "allAsOpaque"].includes(value);
+  }
+  Transparency2.isValid = isValid;
+  function requiresAlpha(mode) {
+    return mode === "all" || mode === "transparentOnly";
+  }
+  Transparency2.requiresAlpha = requiresAlpha;
+})(Transparency || (Transparency = {}));
+var Geometry;
+((Geometry2) => {
+  function createGeometryFromInstances(g3d, instances) {
+    return Geometry2.mergeInstanceMeshes(g3d, "all", false, instances).geometry;
+  }
+  Geometry2.createGeometryFromInstances = createGeometryFromInstances;
+  function createGeometryFromMesh(g3d, mesh, section, transparent) {
+    const colors = createVertexColors(g3d, mesh, transparent);
+    const positions = g3d.positions.subarray(g3d.getMeshVertexStart(mesh) * 3, g3d.getMeshVertexEnd(mesh) * 3);
+    const start = g3d.getMeshIndexStart(mesh, section);
+    const end = g3d.getMeshIndexEnd(mesh, section);
+    const indices = g3d.indices.subarray(start, end);
+    return createGeometryFromArrays(positions, indices, colors, transparent ? 4 : 3);
+  }
+  Geometry2.createGeometryFromMesh = createGeometryFromMesh;
+  function createVertexColors(g3d, mesh, useAlpha) {
+    const colorSize = useAlpha ? 4 : 3;
+    const result = new Float32Array(g3d.getMeshVertexCount(mesh) * colorSize);
+    const subStart = g3d.getMeshSubmeshStart(mesh);
+    const subEnd = g3d.getMeshSubmeshEnd(mesh);
+    for (let submesh = subStart; submesh < subEnd; submesh++) {
+      const color = g3d.getSubmeshColor(submesh);
+      const start = g3d.getSubmeshIndexStart(submesh);
+      const end = g3d.getSubmeshIndexEnd(submesh);
+      for (let i2 = start; i2 < end; i2++) {
+        const v2 = g3d.indices[i2] * colorSize;
+        result[v2] = color[0];
+        result[v2 + 1] = color[1];
+        result[v2 + 2] = color[2];
+        if (useAlpha)
+          result[v2 + 3] = color[3];
+      }
+    }
+    return result;
+  }
+  function getInstanceMatrix(g3d, instance, target = new Matrix4()) {
+    const matrixAsArray = g3d.getInstanceMatrix(instance);
+    target.fromArray(matrixAsArray);
+    return target;
+  }
+  Geometry2.getInstanceMatrix = getInstanceMatrix;
+  function createGeometryFromArrays(vertices, indices, vertexColors = void 0, colorSize = 3) {
+    const geometry = new BufferGeometry();
+    geometry.setAttribute("position", new BufferAttribute(vertices, 3));
+    geometry.setIndex(new Uint32BufferAttribute(indices, 1));
+    if (vertexColors) {
+      geometry.setAttribute("color", new BufferAttribute(vertexColors, colorSize));
+    }
+    return geometry;
+  }
+  Geometry2.createGeometryFromArrays = createGeometryFromArrays;
+  function mergeInstanceMeshes(g3d, section, transparent, instances) {
+    const info = getInstanceMergeInfo(g3d, instances, section);
+    return merge(g3d, info, transparent);
+  }
+  Geometry2.mergeInstanceMeshes = mergeInstanceMeshes;
+  function mergeUniqueMeshes(g3d, section, transparent) {
+    const info = getUniqueMeshMergeInfo(g3d, section);
+    return merge(g3d, info, transparent);
+  }
+  Geometry2.mergeUniqueMeshes = mergeUniqueMeshes;
+  function merge(g3d, info, transparent) {
+    const buffer = new MergeBuffer(info, g3d.POSITION_SIZE, transparent ? 4 : 3);
+    fillBuffers(g3d, buffer, info);
+    const geometry = buffer.toBufferGeometry();
+    return new MergeResult(geometry, info.instances, buffer.groups, buffer.boxes);
+  }
+  function getUniqueMeshMergeInfo(g3d, section) {
+    let vertexCount = 0;
+    let indexCount = 0;
+    const instances = [];
+    const meshCount = g3d.getMeshCount();
+    for (let mesh = 0; mesh < meshCount; mesh++) {
+      const meshInstances = g3d.meshInstances[mesh];
+      if (!meshInstances || meshInstances.length !== 1)
+        continue;
+      const instance = meshInstances[0];
+      if ((g3d.instanceFlags[instance] & 1) > 0)
+        continue;
+      const count = g3d.getMeshIndexCount(mesh, section);
+      if (count <= 0)
+        continue;
+      indexCount += count;
+      vertexCount += g3d.getMeshVertexCount(mesh);
+      instances.push(instance);
+    }
+    return new MergeInfo(section, instances, indexCount, vertexCount);
+  }
+  function getInstanceMergeInfo(g3d, instances, section) {
+    let vertexCount = 0;
+    let indexCount = 0;
+    const instancesFiltered = [];
+    for (let i2 = 0; i2 < instances.length; i2++) {
+      const instance = instances[i2];
+      const mesh = g3d.instanceMeshes[instance];
+      const start = g3d.getMeshIndexStart(mesh, section);
+      const end = g3d.getMeshIndexEnd(mesh, section);
+      const count = end - start;
+      if (count <= 0)
+        continue;
+      indexCount += count;
+      vertexCount += g3d.getMeshVertexCount(mesh);
+      instancesFiltered.push(instance);
+    }
+    return new MergeInfo(section, instancesFiltered, indexCount, vertexCount);
+  }
+  function fillBuffers(g3d, buffer, info) {
+    let index = 0;
+    let vertex2 = 0;
+    let offset = 0;
+    const matrix = new Matrix4();
+    const vector = new Vector3();
+    for (let i2 = 0; i2 < info.instances.length; i2++) {
+      const instance = info.instances[i2];
+      const mesh = g3d.getInstanceMesh(instance);
+      buffer.groups[i2] = index;
+      const subStart = g3d.getMeshSubmeshStart(mesh, info.section);
+      const subEnd = g3d.getMeshSubmeshEnd(mesh, info.section);
+      for (let sub = subStart; sub < subEnd; sub++) {
+        const subColor = g3d.getSubmeshColor(sub);
+        const start = g3d.getSubmeshIndexStart(sub);
+        const end = g3d.getSubmeshIndexEnd(sub);
+        for (let s = start; s < end; s++) {
+          const newIndex = g3d.indices[s] + offset;
+          buffer.indices[index++] = newIndex;
+          const v2 = newIndex * buffer.colorSize;
+          buffer.colors[v2] = subColor[0];
+          buffer.colors[v2 + 1] = subColor[1];
+          buffer.colors[v2 + 2] = subColor[2];
+          if (buffer.colorSize > 3) {
+            buffer.colors[v2 + 3] = subColor[3];
+          }
+        }
+      }
+      getInstanceMatrix(g3d, instance, matrix);
+      const vertexStart = g3d.getMeshVertexStart(mesh);
+      const vertexEnd = g3d.getMeshVertexEnd(mesh);
+      if (vertexEnd > vertexStart) {
+        vector.fromArray(g3d.positions, vertexStart * g3d.POSITION_SIZE);
+        vector.applyMatrix4(matrix);
+        vector.toArray(buffer.vertices, vertex2);
+        vertex2 += g3d.POSITION_SIZE;
+        buffer.boxes[i2] = new Box3(vector.clone(), vector.clone());
+      }
+      for (let p2 = vertexStart + 1; p2 < vertexEnd; p2++) {
+        vector.fromArray(g3d.positions, p2 * g3d.POSITION_SIZE);
+        vector.applyMatrix4(matrix);
+        vector.toArray(buffer.vertices, vertex2);
+        vertex2 += g3d.POSITION_SIZE;
+        buffer.boxes[i2].expandByPoint(vector);
+      }
+      offset += vertexEnd - vertexStart;
+    }
+  }
+  class MergeInfo {
+    constructor(section, instance, indexCount, vertexCount) {
+      __publicField(this, "section");
+      __publicField(this, "instances");
+      __publicField(this, "indexCount");
+      __publicField(this, "vertexCount");
+      this.section = section;
+      this.instances = instance;
+      this.indexCount = indexCount;
+      this.vertexCount = vertexCount;
+    }
+  }
+  class MergeBuffer {
+    constructor(info, positionSize, colorSize) {
+      __publicField(this, "indices");
+      __publicField(this, "vertices");
+      __publicField(this, "colors");
+      __publicField(this, "groups");
+      __publicField(this, "colorSize");
+      __publicField(this, "boxes");
+      this.indices = new Uint32Array(info.indexCount);
+      this.vertices = new Float32Array(info.vertexCount * positionSize);
+      this.colors = new Float32Array(info.vertexCount * colorSize);
+      this.groups = new Array(info.instances.length);
+      this.boxes = new Array(info.instances.length);
+      this.colorSize = colorSize;
+    }
+    toBufferGeometry() {
+      const geometry = createGeometryFromArrays(this.vertices, this.indices, this.colors, this.colorSize);
+      return geometry;
+    }
+  }
+  class MergeResult {
+    constructor(geometry, instance, submeshes, boxes) {
+      __publicField(this, "geometry");
+      __publicField(this, "instances");
+      __publicField(this, "submeshes");
+      __publicField(this, "boxes");
+      this.geometry = geometry;
+      this.instances = instance;
+      this.submeshes = submeshes;
+      this.boxes = boxes;
+    }
+  }
+})(Geometry || (Geometry = {}));
+class Object$1 {
+  constructor(vim, element, instances, meshes) {
+    __publicField(this, "vim");
+    __publicField(this, "element");
+    __publicField(this, "instances");
+    __publicField(this, "_color");
+    __publicField(this, "_visible", true);
+    __publicField(this, "_boundingBox");
+    __publicField(this, "_meshes");
+    __publicField(this, "onVisibilityChanged");
+    this.vim = vim;
+    this.element = element;
+    this.instances = instances;
+    this._meshes = meshes;
+  }
+  get meshBuilder() {
+    return this.vim.scene.builder.meshBuilder;
+  }
+  get hasMesh() {
+    var _a22;
+    return (_a22 = this._meshes) == null ? void 0 : _a22.length;
+  }
+  updateMeshes(meshes) {
+    this._meshes = meshes;
+    if (!meshes)
+      return;
+    if (this.color) {
+      this.color = this._color;
+    }
+  }
+  getBimElement() {
+    return this.vim.document.getElement(this.element);
+  }
+  async getBimElementValue(field, resolveString) {
+    const value = await this.vim.document.getElementValue(this.element, field);
+    if (!value)
+      return;
+    return resolveString ? this.vim.document.getString(value) : value;
+  }
+  async getBimParameters() {
+    return await this.vim.document.getElementParameters(this.element);
+  }
+  get elementId() {
+    return this.vim.document.getElementId(this.element);
+  }
+  getBoundingBox() {
+    if (!this.instances || !this._meshes)
+      return;
+    if (this._boundingBox)
+      return this._boundingBox;
+    let box;
+    this._meshes.forEach((m2) => {
+      const [mesh, index] = m2;
+      const b = mesh.userData.boxes[index];
+      box = box ? box.union(b) : b.clone();
+    });
+    box.applyMatrix4(this.vim.getMatrix());
+    this._boundingBox = box;
+    return this._boundingBox;
+  }
+  getCenter(target = new Vector3()) {
+    var _a22;
+    return (_a22 = this.getBoundingBox()) == null ? void 0 : _a22.getCenter(target);
+  }
+  createWireframe() {
+    if (!this.instances)
+      return;
+    const wireframe = this.meshBuilder.createWireframe(this.vim.document.g3d, this.instances);
+    wireframe.applyMatrix4(this.vim.getMatrix());
+    return wireframe;
+  }
+  createGeometry() {
+    if (!this.instances)
+      return;
+    const geometry = Geometry.createGeometryFromInstances(this.vim.document.g3d, this.instances);
+    geometry.applyMatrix4(this.vim.getMatrix());
+    return geometry;
+  }
+  get color() {
+    return this._color;
+  }
+  set color(color) {
+    if (!this._color || !color ? !this._color && !color : this._color.equals(color)) {
+      return;
+    }
+    this._color = color;
+    this.applyColor(color);
+  }
+  applyColor(color) {
+    if (!this._meshes)
+      return;
+    for (let m2 = 0; m2 < this._meshes.length; m2++) {
+      const [mesh, index] = this._meshes[m2];
+      if (mesh.userData.merged) {
+        this.applyMergedColor(mesh, index, color);
+      } else {
+        this.applyInstancedColor(mesh, index, color);
+      }
+    }
+  }
+  get visible() {
+    return this._visible;
+  }
+  set visible(value) {
+    if (this._visible === value)
+      return;
+    this._visible = value;
+    this.applyVisible(value);
+    this.vim.scene._visibilityChanged = true;
+  }
+  applyVisible(value) {
+    if (!this._meshes)
+      return;
+    for (let m2 = 0; m2 < this._meshes.length; m2++) {
+      const [mesh, index] = this._meshes[m2];
+      if (mesh.userData.merged) {
+        this.applyMergedVisible(mesh, index, value);
+      } else {
+        this.applyInstancedVisible(mesh, index, value);
+      }
+    }
+  }
+  getMergedMeshStart(mesh, index) {
+    return mesh.userData.submeshes[index];
+  }
+  getMergedMeshEnd(mesh, index) {
+    return index + 1 < mesh.userData.submeshes.length ? mesh.userData.submeshes[index + 1] : mesh.geometry.index.count;
+  }
+  applyMergedVisible(mesh, index, show) {
+    var _a22;
+    const positions = mesh.geometry.getAttribute("position");
+    const attribute = (_a22 = mesh.geometry.getAttribute("ignoreVertex")) != null ? _a22 : new Float32BufferAttribute(new Float32Array(positions.count), 1);
+    mesh.geometry.setAttribute("ignoreVertex", attribute);
+    const start = this.getMergedMeshStart(mesh, index);
+    const end = this.getMergedMeshEnd(mesh, index);
+    const indices = mesh.geometry.index;
+    for (let i2 = start; i2 < end; i2++) {
+      const v2 = indices.getX(i2);
+      attribute.setX(v2, show ? 0 : 1);
+    }
+    attribute.needsUpdate = true;
+  }
+  applyInstancedVisible(mesh, index, visible2) {
+    let attribute = mesh.geometry.getAttribute("ignoreInstance");
+    if (!attribute) {
+      attribute = new InstancedBufferAttribute(new Float32Array(mesh.count), 1);
+      mesh.geometry.setAttribute("ignoreInstance", attribute);
+    }
+    attribute.setX(index, visible2 ? 0 : 1);
+    attribute.needsUpdate = true;
+  }
+  applyMergedColor(mesh, index, color) {
+    if (!color) {
+      this.resetMergedColor(mesh, index);
+      return;
+    }
+    const start = this.getMergedMeshStart(mesh, index);
+    const end = this.getMergedMeshEnd(mesh, index);
+    const colors = mesh.geometry.getAttribute("color");
+    const colored = this.getOrAddColoredAttribute(mesh);
+    const indices = mesh.geometry.index;
+    for (let i2 = start; i2 < end; i2++) {
+      const v2 = indices.getX(i2);
+      colors.setXYZ(v2, color.r, color.g, color.b);
+      colored.setX(v2, 1);
+    }
+    colors.needsUpdate = true;
+    colored.needsUpdate = true;
+  }
+  resetMergedColor(mesh, index) {
+    const colors = mesh.geometry.getAttribute("color");
+    const colored = this.getOrAddColoredAttribute(mesh);
+    const indices = mesh.geometry.index;
+    let mergedIndex = this.getMergedMeshStart(mesh, index);
+    const instance = this.vim.scene.getInstanceFromMesh(mesh, index);
+    if (!instance)
+      throw new Error("Could not reset original color.");
+    const g3d = this.vim.document.g3d;
+    const g3dMesh = g3d.instanceMeshes[instance];
+    const subStart = g3d.getMeshSubmeshStart(g3dMesh);
+    const subEnd = g3d.getMeshSubmeshEnd(g3dMesh);
+    for (let sub = subStart; sub < subEnd; sub++) {
+      const start = g3d.getSubmeshIndexStart(sub);
+      const end = g3d.getSubmeshIndexEnd(sub);
+      const color = g3d.getSubmeshColor(sub);
+      for (let i2 = start; i2 < end; i2++) {
+        const v2 = indices.getX(mergedIndex);
+        colors.setXYZ(v2, color[0], color[1], color[2]);
+        colored.setX(v2, 0);
+        mergedIndex++;
+      }
+    }
+    colors.needsUpdate = true;
+    colored.needsUpdate = true;
+  }
+  applyInstancedColor(mesh, index, color) {
+    const colors = this.getOrAddInstanceColorAttribute(mesh);
+    const colored = this.getOrAddColoredAttribute(mesh);
+    if (color) {
+      colors.setXYZ(index, color.r, color.g, color.b);
+      colored.setX(index, 1);
+    } else {
+      colored.setX(index, 0);
+    }
+    colored.needsUpdate = true;
+    colors.needsUpdate = true;
+  }
+  getOrAddInstanceColorAttribute(mesh) {
+    if (mesh.instanceColor)
+      return mesh.instanceColor;
+    const count = mesh.instanceMatrix.count;
+    const colors = new Float32Array(count * 3);
+    const attribute = new InstancedBufferAttribute(colors, 3);
+    mesh.instanceColor = attribute;
+    return attribute;
+  }
+  getOrAddColoredAttribute(mesh) {
+    const colored = mesh.geometry.getAttribute("colored");
+    if (colored) {
+      return colored;
+    }
+    const count = mesh instanceof InstancedMesh ? mesh.instanceMatrix.count : mesh.geometry.getAttribute("position").count;
+    const array = new Float32Array(count);
+    const attribute = mesh instanceof InstancedMesh ? new InstancedBufferAttribute(array, 1) : new BufferAttribute(array, 1);
+    mesh.geometry.setAttribute("colored", attribute);
+    return attribute;
+  }
+}
+class Selection {
+  constructor(renderer) {
+    __publicField(this, "_renderer");
+    __publicField(this, "_objects", /* @__PURE__ */ new Set());
+    __publicField(this, "_vim");
+    __publicField(this, "_selectionMesh");
+    __publicField(this, "_focusMesh");
+    __publicField(this, "_focusMaterial");
+    __publicField(this, "_focusStart");
+    __publicField(this, "_onValueChanged", new dist$3.SignalDispatcher());
+    this._renderer = renderer;
+    this._focusMaterial = renderer.materials.focus.clone();
+  }
+  get onValueChanged() {
+    return this._onValueChanged.asEvent();
+  }
+  get vim() {
+    return this._vim;
+  }
+  get objects() {
+    return this._objects.values();
+  }
+  getBoundingBox(target = new Box3()) {
+    if (this._objects.size === 0)
+      return;
+    let initialized = false;
+    for (const o of this._objects) {
+      const other = o.getBoundingBox();
+      if (!other)
+        continue;
+      if (!initialized) {
+        target.copy(other);
+      } else {
+        target.union(other);
+      }
+      initialized = true;
+    }
+    if (!initialized) {
+      return;
+    }
+    return target;
+  }
+  focus(object) {
+    var _a22;
+    (_a22 = this._focusMesh) == null ? void 0 : _a22.geometry.dispose();
+    this._renderer.remove(this._focusMesh);
+    this._focusMaterial.opacity = 0;
+    this._focusStart = new Date().getTime();
+    if (!object)
+      return;
+    this._focusMesh = new Mesh(object.createGeometry(), this._focusMaterial);
+    this._renderer.add(this._focusMesh);
+    this.focusTransition();
+  }
+  focusTransition() {
+    const t2 = (new Date().getTime() - this._focusStart) / 90;
+    this._focusMaterial.opacity = t2 * 0.15;
+    if (t2 < 1) {
+      requestAnimationFrame(() => this.focusTransition());
+    }
+  }
+  select(object) {
+    object = object === void 0 ? [] : object instanceof Object$1 ? [object] : object;
+    object = object.filter((o) => o);
+    if (object.length === this._objects.size && object.every((o) => this._objects.has(o))) {
+      return;
+    }
+    this._objects.clear();
+    this._vim = void 0;
+    object == null ? void 0 : object.forEach((o) => {
+      this.clearOnNewVim(o.vim);
+      this._objects.add(o);
+    });
+    this.updateHighlight();
+  }
+  has(object) {
+    return this._objects.has(object);
+  }
+  get count() {
+    return this._objects.size;
+  }
+  add(...objects) {
+    if (!objects)
+      return;
+    if (objects.length === 0)
+      return;
+    const count = this._objects.size;
+    const oldVim = this._vim;
+    objects.forEach((o) => {
+      this.clearOnNewVim(o.vim);
+      this._objects.add(o);
+    });
+    if (oldVim === this._vim && this._objects.size === count)
+      return;
+    this.updateHighlight();
+  }
+  remove(...objects) {
+    if (!objects)
+      return;
+    if (objects.length === 0)
+      return;
+    const count = this._objects.size;
+    objects.forEach((o) => {
+      this._objects.delete(o);
+    });
+    if (this._objects.size === count)
+      return;
+    if (this._objects.size === 0) {
+      this._vim = void 0;
+    }
+    this.updateHighlight();
+  }
+  toggle(...objects) {
+    if (!objects)
+      return;
+    if (objects.length === 0)
+      return;
+    const count = this._objects.size;
+    const oldVim = this.vim;
+    objects.forEach((o) => {
+      if (this._objects.has(o)) {
+        this._objects.delete(o);
+      } else {
+        this.clearOnNewVim(o.vim);
+        this._objects.add(o);
+      }
+    });
+    if (oldVim === this._vim && this._objects.size === count)
+      return;
+    this.updateHighlight();
+  }
+  clear() {
+    this._vim = void 0;
+    if (this._objects.size === 0)
+      return;
+    this._objects.clear();
+    this.updateHighlight();
+  }
+  clearOnNewVim(vim) {
+    if (this._vim) {
+      if (this._vim !== vim) {
+        console.log("Cross vim selection. Clearing selection.");
+        this._objects.clear();
+        this._vim = vim;
+      }
+    } else {
+      this._vim = vim;
+    }
+  }
+  updateHighlight() {
+    this.removeHighlight();
+    this.createHighlights(this._objects);
+    this._onValueChanged.dispatch();
+  }
+  createHighlights(objects) {
+    if (objects.size === 0)
+      return;
+    let vim;
+    const instances = [];
+    for (const o of objects.values()) {
+      vim = vim != null ? vim : o.vim;
+      if (o.vim !== vim) {
+        console.error("Cannot multiselect across vim files");
+        return;
+      }
+      if (o.instances) {
+        instances.push(...o.instances);
+      }
+    }
+    const meshBuilder = vim.scene.builder.meshBuilder;
+    this._selectionMesh = meshBuilder.createWireframe(vim.document.g3d, instances);
+    this._selectionMesh.applyMatrix4(vim.getMatrix());
+    if (this._selectionMesh)
+      this._renderer.add(this._selectionMesh);
+  }
+  removeHighlight() {
+    if (this._selectionMesh) {
+      this._selectionMesh.geometry.dispose();
+      this._renderer.remove(this._selectionMesh);
+      this._selectionMesh = void 0;
+    }
+  }
+}
+class GroundPlane {
+  constructor() {
+    __publicField(this, "mesh");
+    __publicField(this, "_source");
+    __publicField(this, "_size", 1);
+    __publicField(this, "_geometry");
+    __publicField(this, "_material");
+    __publicField(this, "_texture");
+    this._geometry = new PlaneGeometry();
+    this._material = new MeshBasicMaterial({
+      transparent: true,
+      depthTest: true,
+      depthWrite: false
+    });
+    this.mesh = new Mesh(this._geometry, this._material);
+    this.mesh.renderOrder = -1;
+  }
+  applyViewerSettings(settings2) {
+    this._size = settings2.getGroundPlaneSize();
+    this.mesh.visible = settings2.getGroundPlaneVisible();
+    this.applyTexture(settings2.getGroundPlaneTextureUrl());
+    this._material.color.copy(settings2.getGroundPlaneColor());
+    this._material.opacity = settings2.getGroundPlaneOpacity();
+  }
+  adaptToContent(box) {
+    var _a22;
+    const center = box.getCenter(new Vector3());
+    const position = new Vector3(center.x, box.min.y - Math.abs(box.min.y) * 0.01, center.z);
+    this.mesh.position.copy(position);
+    this.mesh.quaternion.copy(new Quaternion().setFromEuler(new Euler(1.5 * Math.PI, 0, 0)));
+    const sphere = box == null ? void 0 : box.getBoundingSphere(new Sphere());
+    const size = ((_a22 = sphere == null ? void 0 : sphere.radius) != null ? _a22 : 1) * this._size;
+    const scale = new Vector3(1, 1, 1).multiplyScalar(size);
+    this.mesh.scale.copy(scale);
+  }
+  applyTexture(texUrl) {
+    var _a22;
+    if (texUrl === this._source)
+      return;
+    this._source = texUrl;
+    (_a22 = this._texture) == null ? void 0 : _a22.dispose();
+    this._texture = void 0;
+    if (!texUrl)
+      return;
+    const loader = new TextureLoader();
+    this._texture = loader.load(texUrl);
+    if (!this._texture) {
+      console.error("Failed to load texture: " + texUrl);
+      return;
+    }
+    this._material.map = this._texture;
+  }
+  dispose() {
+    var _a22, _b2, _c;
+    (_a22 = this._geometry) == null ? void 0 : _a22.dispose();
+    (_b2 = this._material) == null ? void 0 : _b2.dispose();
+    (_c = this._texture) == null ? void 0 : _c.dispose();
+    this._texture = void 0;
+  }
+}
+class Environment {
+  constructor(settings2) {
+    __publicField(this, "skyLight");
+    __publicField(this, "sunLights");
+    __publicField(this, "_groundPlane");
+    this._groundPlane = new GroundPlane();
+    this.skyLight = new HemisphereLight();
+    this.sunLights = [];
+    this.applySettings(settings2);
+  }
+  get groundPlane() {
+    return this._groundPlane.mesh;
+  }
+  loadGroundTexture(url2) {
+    this._groundPlane.applyTexture(url2);
+  }
+  getObjects() {
+    return [this._groundPlane.mesh, this.skyLight, ...this.sunLights];
+  }
+  applySettings(settings2) {
+    this._groundPlane.applyViewerSettings(settings2);
+    this.skyLight.color.copy(settings2.getSkylightColor());
+    this.skyLight.groundColor.copy(settings2.getSkylightGroundColor());
+    this.skyLight.intensity = settings2.getSkylightIntensity();
+    const count = settings2.getSunlightCount();
+    for (let i2 = 0; i2 < count; i2++) {
+      if (!this.sunLights[i2]) {
+        this.sunLights[i2] = new DirectionalLight();
+      }
+      this.sunLights[i2].color.copy(settings2.getSunlightColor(i2));
+      this.sunLights[i2].position.copy(settings2.getSunlightPosition(i2));
+      this.sunLights[i2].intensity = settings2.getSunlightIntensity(i2);
+    }
+  }
+  adaptToContent(box) {
+    this._groundPlane.adaptToContent(box);
+  }
+  dispose() {
+    this.sunLights.forEach((s) => s.dispose());
+    this.skyLight.dispose();
+    this._groundPlane.dispose();
+  }
+}
+class CameraGizmo {
+  constructor(renderer, camera, settings2) {
+    __publicField(this, "_renderer");
+    __publicField(this, "_camera");
+    __publicField(this, "_size", 0.01);
+    __publicField(this, "_fov", 50);
+    __publicField(this, "_color", new Color("blue"));
+    __publicField(this, "_opacity", 0.2);
+    __publicField(this, "_opacityAlways", 0.5);
+    __publicField(this, "_fadeDurationMs", 200);
+    __publicField(this, "_showDurationMs", 1e3);
+    __publicField(this, "_box");
+    __publicField(this, "_wireframe");
+    __publicField(this, "_material");
+    __publicField(this, "_materialAlways");
+    __publicField(this, "_gizmos");
+    __publicField(this, "_timeout");
+    __publicField(this, "_fadeEnd", 0);
+    __publicField(this, "_active", true);
+    this._renderer = renderer;
+    this._camera = camera;
+    this.applySettings(settings2);
+  }
+  dispose() {
+    var _a22, _b2, _c, _d;
+    clearTimeout(this._timeout);
+    (_a22 = this._box) == null ? void 0 : _a22.dispose();
+    (_b2 = this._wireframe) == null ? void 0 : _b2.dispose();
+    (_c = this._material) == null ? void 0 : _c.dispose();
+    (_d = this._materialAlways) == null ? void 0 : _d.dispose();
+    this._box = void 0;
+    this._wireframe = void 0;
+    this._material = void 0;
+    this._materialAlways = void 0;
+    if (this._gizmos) {
+      this._renderer.remove(this._gizmos);
+      this._gizmos = void 0;
+    }
+  }
+  get enabled() {
+    return this._active;
+  }
+  set enabled(value) {
+    this._active = value;
+  }
+  show(show = true) {
+    if (!this._active)
+      return;
+    if (!this._gizmos) {
+      this.createGizmo();
+    }
+    clearTimeout(this._timeout);
+    this._gizmos.visible = show;
+    if (show) {
+      this._timeout = setTimeout(() => this.fadeOut(), this._showDurationMs);
+    }
+  }
+  fadeOut(fading) {
+    const now2 = new Date().getTime();
+    if (!fading) {
+      this._fadeEnd = now2 + this._fadeDurationMs;
+    }
+    if (now2 > this._fadeEnd) {
+      this._gizmos.visible = false;
+      this._material.opacity = this._opacity;
+      this._materialAlways.opacity = this._opacityAlways;
+    } else {
+      requestAnimationFrame(() => this.fadeOut(true));
+      const t2 = Math.pow((this._fadeEnd - now2) / this._fadeDurationMs, 4);
+      this._material.opacity = MathUtils.lerp(0, this._opacity, t2);
+      this._materialAlways.opacity = MathUtils.lerp(0, this._opacityAlways, t2);
+    }
+  }
+  setPosition(position) {
+    var _a22;
+    (_a22 = this._gizmos) == null ? void 0 : _a22.position.copy(position);
+    this.updateScale();
+  }
+  setSize(size) {
+    this._size = size;
+  }
+  setOpacity(opacity, opacityAlways) {
+    this._opacity = opacity;
+    this._opacityAlways = opacityAlways;
+    if (!this._gizmos)
+      return;
+    this._material.opacity = opacity;
+    this._materialAlways.opacity = opacityAlways;
+  }
+  setColor(color) {
+    this._color = color;
+    if (!this._gizmos)
+      return;
+    this._material.color = color;
+    this._materialAlways.color = color;
+  }
+  applySettings(settings2) {
+    this._active = settings2.getCameraGizmoEnable();
+    this._fov = settings2.getCameraFov();
+    this.setColor(settings2.getCameraGizmoColor());
+    this.setSize(settings2.getCameraGizmoSize());
+    this.setOpacity(settings2.getCameraGizmoOpacity(), settings2.getCameraGizmoOpacityAlways());
+  }
+  updateScale() {
+    if (!this._gizmos)
+      return;
+    const dist2 = this._camera.camera.position.clone().distanceTo(this._gizmos.position);
+    let h = 0;
+    const cam = this._camera.camera;
+    if (cam instanceof OrthographicCamera) {
+      const dx = cam.right - cam.left;
+      const dy = cam.top - cam.bottom;
+      h = Math.min(dx, dy) * this._size;
+    } else {
+      h = dist2 * Math.tan(MathUtils.degToRad(this._fov) * this._size);
+    }
+    this._gizmos.scale.set(h, h, h);
+  }
+  createGizmo() {
+    this._box = new SphereGeometry(1);
+    this._wireframe = new WireframeGeometry(this._box);
+    this._wireframe.addGroup(0, Infinity, 0);
+    this._wireframe.addGroup(0, Infinity, 1);
+    this._material = new LineBasicMaterial({
+      depthTest: true,
+      opacity: this._opacity,
+      color: this._color,
+      transparent: true
+    });
+    this._materialAlways = new LineBasicMaterial({
+      depthTest: false,
+      opacity: this._opacityAlways,
+      color: this._color,
+      transparent: true
+    });
+    this._gizmos = new LineSegments(this._wireframe, [
+      this._material,
+      this._materialAlways
+    ]);
+    this._renderer.add(this._gizmos);
+    this.updateScale();
+  }
+}
+class Scene {
+  constructor(builder) {
+    __publicField(this, "builder");
+    __publicField(this, "meshes", []);
+    __publicField(this, "vim");
+    __publicField(this, "_boundingBox", new Box3());
+    __publicField(this, "_instanceToThreeMeshes", /* @__PURE__ */ new Map());
+    __publicField(this, "_threeMeshIdToInstances", /* @__PURE__ */ new Map());
+    __publicField(this, "_material");
+    __publicField(this, "_visibilityChanged");
+    this.builder = builder;
+  }
+  getBoundingBox(target = new Box3()) {
+    return target.copy(this._boundingBox);
+  }
+  getMeshFromInstance(instance) {
+    return this._instanceToThreeMeshes.get(instance);
+  }
+  getInstanceFromMesh(mesh, index) {
+    if (!mesh || index < 0)
+      return;
+    const instances = this._threeMeshIdToInstances.get(mesh.id);
+    if (!instances)
+      return;
+    return instances[index];
+  }
+  applyMatrix4(matrix) {
+    for (let m2 = 0; m2 < this.meshes.length; m2++) {
+      this.meshes[m2].matrixAutoUpdate = false;
+      this.meshes[m2].matrix.copy(matrix);
+    }
+    this._boundingBox.applyMatrix4(matrix);
+  }
+  setVim(vim) {
+    this.vim = vim;
+    for (let m2 = 0; m2 < this.meshes.length; m2++) {
+      this.meshes[m2].userData.vim = vim;
+    }
+  }
+  addMesh(mesh) {
+    var _a22, _b2, _c;
+    const instances = mesh.userData.instances;
+    if (!instances || instances.length === 0) {
+      throw new Error("Expected mesh to have userdata instances : number[] with at least one member");
+    }
+    for (let i2 = 0; i2 < instances.length; i2++) {
+      const set3 = (_a22 = this._instanceToThreeMeshes.get(instances[i2])) != null ? _a22 : [];
+      set3.push([mesh, i2]);
+      this._instanceToThreeMeshes.set(instances[i2], set3);
+    }
+    const box = mesh.userData.boxes[0].clone();
+    for (let i2 = 1; i2 < instances.length; i2++) {
+      box.union(mesh.userData.boxes[i2]);
+    }
+    this._boundingBox = (_c = (_b2 = this._boundingBox) == null ? void 0 : _b2.union(box)) != null ? _c : box.clone();
+    this._threeMeshIdToInstances.set(mesh.id, instances);
+    this.meshes.push(mesh);
+    return this;
+  }
+  merge(other) {
+    var _a22, _b2;
+    if (!other)
+      return this;
+    other.meshes.forEach((mesh) => this.meshes.push(mesh));
+    other._instanceToThreeMeshes.forEach((meshes, instance) => {
+      var _a3;
+      const set3 = (_a3 = this._instanceToThreeMeshes.get(instance)) != null ? _a3 : [];
+      meshes.forEach((m2) => set3.push(m2));
+      this._instanceToThreeMeshes.set(instance, set3);
+    });
+    other._threeMeshIdToInstances.forEach((value, key) => {
+      this._threeMeshIdToInstances.set(key, value);
+    });
+    this._boundingBox = (_b2 = (_a22 = this._boundingBox) == null ? void 0 : _a22.union(other._boundingBox)) != null ? _b2 : other._boundingBox.clone();
+    return this;
+  }
+  get material() {
+    return this._material;
+  }
+  set material(value) {
+    this._material = value;
+    if (value) {
+      this.meshes.forEach((m2) => {
+        if (!m2.userData.mat) {
+          m2.userData.mat = m2.material;
+        }
+        m2.material = value;
+      });
+    } else {
+      this.meshes.forEach((m2) => {
+        if (m2.userData.mat) {
+          m2.material = m2.userData.mat;
+          m2.userData.mat = void 0;
+        }
+      });
+    }
+  }
+  dispose() {
+    for (let i2 = 0; i2 < this.meshes.length; i2++) {
+      this.meshes[i2].geometry.dispose();
+    }
+    this.meshes.length = 0;
+    this._instanceToThreeMeshes.clear();
+    this._threeMeshIdToInstances.clear();
+  }
+}
+class RenderScene {
+  constructor() {
+    __publicField(this, "scene");
+    __publicField(this, "_scenes", []);
+    __publicField(this, "_boundingBox");
+    this.scene = new Scene$1();
+  }
+  getUpdatedScenes() {
+    const result = [];
+    for (const s of this._scenes) {
+      if (s._visibilityChanged)
+        result.push(s);
+    }
+    return result;
+  }
+  clearUpdateFlags() {
+    this._scenes.forEach((s) => s._visibilityChanged = false);
+  }
+  getBoundingBox(target = new Box3()) {
+    return this._boundingBox ? target.copy(this._boundingBox) : target.set(new Vector3(-1, -1, -1), new Vector3(1, 1, 1));
+  }
+  add(target) {
+    if (target instanceof Scene) {
+      this.addScene(target);
+    } else {
+      this.scene.add(target);
+    }
+  }
+  remove(target) {
+    if (target instanceof Scene) {
+      this.removeScene(target);
+    } else {
+      this.scene.remove(target);
+    }
+  }
+  clear() {
+    this.scene.clear();
+    this._boundingBox = void 0;
+  }
+  addScene(scene) {
+    this._scenes.push(scene);
+    scene.meshes.forEach((m2) => {
+      this.scene.add(m2);
+    });
+    this._boundingBox = this._boundingBox ? this._boundingBox.union(scene.getBoundingBox()) : scene.getBoundingBox();
+  }
+  removeScene(scene) {
+    this._scenes = this._scenes.filter((f2) => f2 !== scene);
+    for (let i2 = 0; i2 < scene.meshes.length; i2++) {
+      this.scene.remove(scene.meshes[i2]);
+    }
+    this._boundingBox = this._scenes.length > 0 ? this._scenes.map((s) => s.getBoundingBox()).reduce((b1, b2) => b1.union(b2)) : void 0;
+  }
+}
+class CSS2DObject extends Object3D {
+  constructor(element) {
+    super();
+    this.element = element || document.createElement("div");
+    this.element.style.position = "absolute";
+    this.element.style.userSelect = "none";
+    this.element.setAttribute("draggable", false);
+    this.addEventListener("removed", function() {
+      this.traverse(function(object) {
+        if (object.element instanceof Element && object.element.parentNode !== null) {
+          object.element.parentNode.removeChild(object.element);
+        }
+      });
+    });
+  }
+  copy(source, recursive) {
+    super.copy(source, recursive);
+    this.element = source.element.cloneNode(true);
+    return this;
+  }
+}
+CSS2DObject.prototype.isCSS2DObject = true;
+const _vector = new Vector3();
+const _viewMatrix = new Matrix4();
+const _viewProjectionMatrix = new Matrix4();
+const _a = new Vector3();
+const _b = new Vector3();
+class CSS2DRenderer {
+  constructor() {
+    const _this = this;
+    let _width, _height;
+    let _widthHalf, _heightHalf;
+    const cache = {
+      objects: /* @__PURE__ */ new WeakMap()
+    };
+    const domElement = document.createElement("div");
+    domElement.style.overflow = "hidden";
+    this.domElement = domElement;
+    this.getSize = function() {
+      return {
+        width: _width,
+        height: _height
+      };
+    };
+    this.render = function(scene, camera) {
+      if (scene.autoUpdate === true)
+        scene.updateMatrixWorld();
+      if (camera.parent === null)
+        camera.updateMatrixWorld();
+      _viewMatrix.copy(camera.matrixWorldInverse);
+      _viewProjectionMatrix.multiplyMatrices(camera.projectionMatrix, _viewMatrix);
+      renderObject(scene, scene, camera);
+      zOrder2(scene);
+    };
+    this.setSize = function(width, height) {
+      _width = width;
+      _height = height;
+      _widthHalf = _width / 2;
+      _heightHalf = _height / 2;
+      domElement.style.width = width + "px";
+      domElement.style.height = height + "px";
+    };
+    function renderObject(object, scene, camera) {
+      if (object.isCSS2DObject) {
+        object.onBeforeRender(_this, scene, camera);
+        _vector.setFromMatrixPosition(object.matrixWorld);
+        _vector.applyMatrix4(_viewProjectionMatrix);
+        const element = object.element;
+        if (/apple/i.test(navigator.vendor)) {
+          element.style.transform = "translate(-50%,-50%) translate(" + Math.round(_vector.x * _widthHalf + _widthHalf) + "px," + Math.round(-_vector.y * _heightHalf + _heightHalf) + "px)";
+        } else {
+          element.style.transform = "translate(-50%,-50%) translate(" + (_vector.x * _widthHalf + _widthHalf) + "px," + (-_vector.y * _heightHalf + _heightHalf) + "px)";
+        }
+        element.style.display = object.visible && _vector.z >= -1 && _vector.z <= 1 ? "" : "none";
+        const objectData = {
+          distanceToCameraSquared: getDistanceToSquared(camera, object)
+        };
+        cache.objects.set(object, objectData);
+        if (element.parentNode !== domElement) {
+          domElement.appendChild(element);
+        }
+        object.onAfterRender(_this, scene, camera);
+      }
+      for (let i2 = 0, l2 = object.children.length; i2 < l2; i2++) {
+        renderObject(object.children[i2], scene, camera);
+      }
+    }
+    function getDistanceToSquared(object1, object2) {
+      _a.setFromMatrixPosition(object1.matrixWorld);
+      _b.setFromMatrixPosition(object2.matrixWorld);
+      return _a.distanceToSquared(_b);
+    }
+    function filterAndFlatten(scene) {
+      const result = [];
+      scene.traverse(function(object) {
+        if (object.isCSS2DObject)
+          result.push(object);
+      });
+      return result;
+    }
+    function zOrder2(scene) {
+      const sorted = filterAndFlatten(scene).sort(function(a, b) {
+        const distanceA = cache.objects.get(a).distanceToCameraSquared;
+        const distanceB = cache.objects.get(b).distanceToCameraSquared;
+        return distanceA - distanceB;
+      });
+      const zMax = sorted.length;
+      for (let i2 = 0, l2 = sorted.length; i2 < l2; i2++) {
+        sorted[i2].element.style.zIndex = zMax - i2;
+      }
+    }
+  }
+}
+class Viewport {
+  constructor(settings2) {
+    __publicField(this, "canvas");
+    __publicField(this, "text");
+    __publicField(this, "_unregisterResize");
+    __publicField(this, "_ownedCanvas");
+    __publicField(this, "_resizeCallbacks", []);
+    const [canvas, owned] = Viewport.getOrCreateCanvas(settings2.getCanvasId());
+    this.canvas = canvas;
+    this._ownedCanvas = owned;
+    this.registerResize(settings2.getCanvasResizeDelay());
+  }
+  static getOrCreateCanvas(canvasId) {
+    let canvas = canvasId ? document.getElementById(canvasId) : void 0;
+    if (canvas)
+      return [canvas, false];
+    canvas = document.createElement("canvas");
+    canvas.className = "vim-canvas";
+    canvas.tabIndex = 0;
+    document.body.appendChild(canvas);
+    return [canvas, true];
+  }
+  createTextRenderer() {
+    const size = this.getParentSize();
+    const renderer = new CSS2DRenderer();
+    renderer.setSize(size.x, size.y);
+    this.text = renderer.domElement;
+    this.text.className = "vim-text-renderer";
+    this.text.style.position = "absolute";
+    this.text.style.top = "0px";
+    this.text.style.pointerEvents = "none";
+    this.canvas.parentElement.append(this.text);
+    return renderer;
+  }
+  dispose() {
+    var _a22;
+    (_a22 = this._unregisterResize) == null ? void 0 : _a22.call(this);
+    this._unregisterResize = void 0;
+    if (this._ownedCanvas)
+      this.canvas.remove();
+  }
+  getParentSize() {
+    var _a22, _b2, _c, _d;
+    return new Vector2((_b2 = (_a22 = this.canvas.parentElement) == null ? void 0 : _a22.clientWidth) != null ? _b2 : this.canvas.clientWidth, (_d = (_c = this.canvas.parentElement) == null ? void 0 : _c.clientHeight) != null ? _d : this.canvas.clientHeight);
+  }
+  getSize() {
+    return new Vector2(this.canvas.clientWidth, this.canvas.clientHeight);
+  }
+  getAspectRatio() {
+    const size = this.getParentSize();
+    return size.x / size.y;
+  }
+  onResize(callback) {
+    this._resizeCallbacks.push(callback);
+  }
+  ResizeToParent() {
+    this._resizeCallbacks.forEach((cb2) => cb2());
+  }
+  registerResize(timeout) {
+    let timerId;
+    const onResize = () => {
+      if (timerId !== void 0) {
+        clearTimeout(timerId);
+        timerId = void 0;
+      }
+      timerId = setTimeout(() => {
+        timerId = void 0;
+        this._resizeCallbacks.forEach((cb2) => cb2());
+      }, timeout);
+    };
+    window.addEventListener("resize", onResize);
+    this._unregisterResize = () => window.removeEventListener("resize", onResize);
+  }
+}
+class Axis {
+  constructor(init) {
+    __publicField(this, "axis");
+    __publicField(this, "direction");
+    __publicField(this, "size");
+    __publicField(this, "color");
+    __publicField(this, "colorSub");
+    __publicField(this, "position");
+    __publicField(this, "label");
+    __publicField(this, "line");
+    this.axis = init.axis;
+    this.direction = init.direction;
+    this.size = init.size;
+    this.position = init.position;
+    this.color = init.color;
+    this.colorSub = init.colorSub;
+    this.line = init.line;
+    this.label = init.label;
+  }
+}
+class GizmoOptions {
+  constructor(init) {
+    __publicField(this, "size", 96);
+    __publicField(this, "padding", 4);
+    __publicField(this, "bubbleSizePrimary", 8);
+    __publicField(this, "bubbleSizeSecondary", 6);
+    __publicField(this, "lineWidth", 2);
+    __publicField(this, "fontSize", "12px");
+    __publicField(this, "fontFamily", "arial");
+    __publicField(this, "fontWeight", "bold");
+    __publicField(this, "fontColor", "#222222");
+    __publicField(this, "className", "gizmo-axis-canvas");
+    __publicField(this, "colorX", "#f73c3c");
+    __publicField(this, "colorY", "#6ccb26");
+    __publicField(this, "colorZ", "#178cf0");
+    __publicField(this, "colorXSub", "#942424");
+    __publicField(this, "colorYSub", "#417a17");
+    __publicField(this, "colorZSub", "#0e5490");
+    var _a22, _b2, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p;
+    this.size = (_a22 = init == null ? void 0 : init.size) != null ? _a22 : this.size;
+    this.padding = (_b2 = init == null ? void 0 : init.padding) != null ? _b2 : this.padding;
+    this.bubbleSizePrimary = (_c = init == null ? void 0 : init.bubbleSizePrimary) != null ? _c : this.bubbleSizePrimary;
+    this.bubbleSizeSecondary = (_d = init == null ? void 0 : init.bubbleSizeSecondary) != null ? _d : this.bubbleSizeSecondary;
+    this.lineWidth = (_e = init == null ? void 0 : init.lineWidth) != null ? _e : this.lineWidth;
+    this.fontSize = (_f = init == null ? void 0 : init.fontSize) != null ? _f : this.fontSize;
+    this.fontFamily = (_g = init == null ? void 0 : init.fontFamily) != null ? _g : this.fontFamily;
+    this.fontWeight = (_h = init == null ? void 0 : init.fontWeight) != null ? _h : this.fontWeight;
+    this.fontColor = (_i = init == null ? void 0 : init.fontColor) != null ? _i : this.fontColor;
+    this.className = (_j = init == null ? void 0 : init.className) != null ? _j : this.className;
+    this.colorX = (_k = init == null ? void 0 : init.colorX) != null ? _k : this.colorX;
+    this.colorY = (_l = init == null ? void 0 : init.colorY) != null ? _l : this.colorY;
+    this.colorZ = (_m = init == null ? void 0 : init.colorZ) != null ? _m : this.colorZ;
+    this.colorXSub = (_n = init == null ? void 0 : init.colorXSub) != null ? _n : this.colorXSub;
+    this.colorYSub = (_o = init == null ? void 0 : init.colorYSub) != null ? _o : this.colorYSub;
+    this.colorZSub = (_p = init == null ? void 0 : init.colorZSub) != null ? _p : this.colorZSub;
+  }
+}
+class GizmoAxes {
+  constructor(camera, options) {
+    __publicField(this, "options");
+    __publicField(this, "axes");
+    __publicField(this, "camera");
+    __publicField(this, "canvas");
+    __publicField(this, "context");
+    __publicField(this, "rect");
+    __publicField(this, "isDragging");
+    __publicField(this, "isDragSignificant");
+    __publicField(this, "dragStart");
+    __publicField(this, "dragLast");
+    __publicField(this, "pointer");
+    __publicField(this, "center");
+    __publicField(this, "invRotMat", new Matrix4());
+    __publicField(this, "selectedAxis");
+    __publicField(this, "onTouchStart", (e) => {
+      e.preventDefault();
+      if (e.touches.length > 1)
+        return;
+      const touch = e.touches[0];
+      this.initDrag(touch.clientX, touch.clientY);
+      window.addEventListener("touchmove", this.onTouchMove, false);
+      window.addEventListener("touchend", this.onTouchEnd, false);
+    });
+    __publicField(this, "onTouchMove", (e) => {
+      if (e.touches.length > 1)
+        return;
+      const touch = e.touches[0];
+      this.updateDrag(touch.clientX, touch.clientY);
+    });
+    __publicField(this, "onTouchEnd", (e) => {
+      e.preventDefault();
+      this.endDrag();
+      this.selectedAxis = null;
+      window.removeEventListener("touchmove", this.onTouchMove, false);
+      window.removeEventListener("touchend", this.onTouchEnd, false);
+    });
+    __publicField(this, "onPointerDown", (e) => {
+      this.initDrag(e.clientX, e.clientY);
+      window.addEventListener("pointermove", this.onPointerDrag, false);
+      window.addEventListener("pointerup", this.onPointerUp, false);
+    });
+    __publicField(this, "onPointerUp", (event) => {
+      this.endDrag();
+      if (event.pointerType !== "mouse") {
+        this.pointer.set(0, 0, 0);
+      }
+      window.removeEventListener("pointermove", this.onPointerDrag, false);
+      window.removeEventListener("pointerup", this.onPointerUp, false);
+    });
+    __publicField(this, "onPointerEnter", () => {
+      this.rect = this.canvas.getBoundingClientRect();
+    });
+    __publicField(this, "onPointerMove", (e) => {
+      if (this.isDragging)
+        return;
+      if (e) {
+        this.pointer = this.toMouseVector(e, this.pointer);
+      }
+    });
+    __publicField(this, "onPointerDrag", (e) => {
+      this.updateDrag(e.clientX, e.clientY);
+    });
+    __publicField(this, "onMouseClick", () => {
+      if (this.isDragging || !this.selectedAxis)
+        return;
+      this.camera.orbit(this.selectedAxis.direction, this.camera.defaultLerpDuration);
+      this.selectedAxis = null;
+    });
+    __publicField(this, "update", () => {
+      this.camera.camera.updateMatrix();
+      this.invRotMat.extractRotation(this.camera.camera.matrix).invert();
+      for (let i2 = 0, length = this.axes.length; i2 < length; i2++) {
+        this.setAxisPosition(this.axes[i2]);
+      }
+      this.axes.sort((a, b) => a.position.z > b.position.z ? 1 : -1);
+      this.drawLayers(true);
+      if (!this.isDragging) {
+        this.pickAxes(this.pointer);
+      }
+    });
+    __publicField(this, "dispose", () => {
+      this.canvas.removeEventListener("pointerdown", this.onPointerDown, false);
+      this.canvas.removeEventListener("pointerenter", this.onPointerEnter, false);
+      this.canvas.removeEventListener("pointermove", this.onPointerDrag, false);
+      window.removeEventListener("pointermove", this.onPointerDrag, false);
+      window.removeEventListener("pointerup", this.onPointerUp, false);
+      this.canvas.remove();
+    });
+    this.options = new GizmoOptions(options);
+    this.camera = camera;
+    this.pointer = new Vector3();
+    this.dragStart = new Vector2();
+    this.dragLast = new Vector2();
+    this.center = new Vector3(this.options.size / 2, this.options.size / 2, 0);
+    this.axes = this.createAxes();
+    this.selectedAxis = null;
+    this.isDragging = false;
+    this.isDragSignificant = false;
+    this.canvas = this.createCanvas();
+    this.context = this.canvas.getContext("2d");
+    this.rect = this.canvas.getBoundingClientRect();
+    this.context.imageSmoothingEnabled = true;
+    this.context.imageSmoothingQuality = "high";
+    this.animate();
+  }
+  animate() {
+    this.update();
+    requestAnimationFrame(() => this.animate());
+  }
+  createAxes() {
+    return [
+      new Axis({
+        axis: "x",
+        direction: new Vector3(1, 0, 0),
+        size: this.options.bubbleSizePrimary,
+        color: this.options.colorX,
+        colorSub: this.options.colorXSub,
+        line: this.options.lineWidth,
+        label: "X",
+        position: new Vector3(0, 0, 0)
+      }),
+      new Axis({
+        axis: "y",
+        direction: new Vector3(0, 1, 0),
+        size: this.options.bubbleSizePrimary,
+        color: this.options.colorY,
+        colorSub: this.options.colorYSub,
+        line: this.options.lineWidth,
+        label: "Y",
+        position: new Vector3(0, 0, 0)
+      }),
+      new Axis({
+        axis: "z",
+        direction: new Vector3(0, 0, 1),
+        size: this.options.bubbleSizePrimary,
+        color: this.options.colorZ,
+        colorSub: this.options.colorZSub,
+        line: this.options.lineWidth,
+        label: "Z",
+        position: new Vector3(0, 0, 0)
+      }),
+      new Axis({
+        axis: "-x",
+        direction: new Vector3(-1, 0, 0),
+        size: this.options.bubbleSizeSecondary,
+        color: this.options.colorX,
+        colorSub: this.options.colorXSub,
+        line: void 0,
+        label: void 0,
+        position: new Vector3(0, 0, 0)
+      }),
+      new Axis({
+        axis: "-y",
+        direction: new Vector3(0, -1, 0),
+        size: this.options.bubbleSizeSecondary,
+        color: this.options.colorY,
+        colorSub: this.options.colorYSub,
+        line: void 0,
+        label: void 0,
+        position: new Vector3(0, 0, 0)
+      }),
+      new Axis({
+        axis: "-z",
+        direction: new Vector3(0, 0, -1),
+        size: this.options.bubbleSizeSecondary,
+        color: this.options.colorZ,
+        colorSub: this.options.colorZSub,
+        line: void 0,
+        label: void 0,
+        position: new Vector3(0, 0, 0)
+      })
+    ];
+  }
+  createCanvas() {
+    const canvas = document.createElement("canvas");
+    canvas.width = this.options.size;
+    canvas.height = this.options.size;
+    canvas.style.position = "fixed";
+    canvas.style.right = "24px";
+    canvas.style.top = "24px";
+    canvas.classList.add(this.options.className);
+    canvas.addEventListener("pointerdown", this.onPointerDown, false);
+    canvas.addEventListener("pointerenter", this.onPointerEnter, false);
+    canvas.addEventListener("pointermove", this.onPointerMove, false);
+    return canvas;
+  }
+  toMouseVector(e, target) {
+    return target.set(e.clientX - this.rect.left, e.clientY - this.rect.top, 0);
+  }
+  initDrag(x2, y2) {
+    this.dragStart.set(x2, y2);
+    this.dragLast.set(x2, y2);
+    this.isDragging = true;
+    this.isDragSignificant = false;
+    if (!this.isDragging) {
+      this.canvas.classList.add("dragging");
+    }
+  }
+  updateDrag(x2, y2) {
+    if (new Vector2(x2, y2).sub(this.dragStart).length() > 3) {
+      this.isDragSignificant = true;
+    }
+    const drag = new Vector2(x2, y2).sub(this.dragLast);
+    this.dragLast.set(x2, y2);
+    const rotX = drag.x / this.canvas.width;
+    const rotY = drag.y / this.canvas.height;
+    this.camera.rotate(new Vector2(rotX, rotY));
+  }
+  endDrag() {
+    this.isDragging = false;
+    if (!this.isDragSignificant) {
+      this.onMouseClick();
+      this.isDragSignificant = false;
+    }
+    this.canvas.classList.remove("dragging");
+  }
+  drawLayers(clear) {
+    if (clear) {
+      this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+    for (let i2 = 0, length = this.axes.length; i2 < length; i2++) {
+      const axis = this.axes[i2];
+      const highlight = this.selectedAxis === axis;
+      const color = axis.position.z >= -0.01 ? axis.color : axis.colorSub;
+      const center2 = new Vector2(this.center.x, this.center.y);
+      const pos2 = new Vector2(axis.position.x, axis.position.y);
+      if (axis.line)
+        this.drawLine(center2, pos2, axis.line, color);
+      this.drawCircle(axis.position, axis.size, highlight ? "#FFFFFF" : color);
+      if (axis.label) {
+        this.context.font = [
+          this.options.fontWeight,
+          this.options.fontSize,
+          this.options.fontFamily
+        ].join(" ");
+        this.context.fillStyle = this.options.fontColor;
+        this.context.textBaseline = "middle";
+        this.context.textAlign = "center";
+        this.context.fillText(axis.label, axis.position.x, axis.position.y);
+      }
+    }
+  }
+  drawCircle(pos, radius = 10, color = "#FF0000") {
+    this.context.beginPath();
+    this.context.arc(pos.x, pos.y, radius, 0, 2 * Math.PI, false);
+    this.context.fillStyle = color;
+    this.context.fill();
+    this.context.closePath();
+  }
+  drawLine(p1, p2, width = 1, color = "#FF0000") {
+    this.context.beginPath();
+    this.context.moveTo(p1.x, p1.y);
+    this.context.lineTo(p2.x, p2.y);
+    this.context.lineWidth = width;
+    this.context.strokeStyle = color;
+    this.context.stroke();
+    this.context.closePath();
+  }
+  setAxisPosition(axis) {
+    const position = axis.direction.clone().applyMatrix4(this.invRotMat);
+    const size = axis.size;
+    axis.position.set(position.x * (this.center.x - size / 2 - this.options.padding) + this.center.x, this.center.y - position.y * (this.center.y - size / 2 - this.options.padding), position.z);
+  }
+  pickAxes(mouse) {
+    const currentAxis = this.selectedAxis;
+    this.selectedAxis = null;
+    for (let i2 = 0, length = this.axes.length; i2 < length; i2++) {
+      const distance = mouse.distanceTo(this.axes[i2].position);
+      if (distance < this.axes[i2].size)
+        this.selectedAxis = this.axes[i2];
+    }
+    if (currentAxis !== this.selectedAxis)
+      this.drawLayers(false);
+  }
+}
+class BoxOutline extends LineSegments {
+  constructor() {
+    const vertices = new Float32Array([
+      -0.5,
+      -0.5,
+      -0.5,
+      0.5,
+      -0.5,
+      -0.5,
+      0.5,
+      0.5,
+      -0.5,
+      -0.5,
+      0.5,
+      -0.5,
+      -0.5,
+      -0.5,
+      0.5,
+      0.5,
+      -0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      -0.5,
+      0.5,
+      0.5
+    ]);
+    const indices = [
+      0.5,
+      1,
+      1,
+      2,
+      2,
+      3,
+      3,
+      0,
+      4,
+      5,
+      5,
+      6,
+      6,
+      7,
+      7,
+      4,
+      0,
+      4,
+      1,
+      5,
+      2,
+      6,
+      3,
+      7
+    ];
+    const geo = new BufferGeometry();
+    const mat = new LineBasicMaterial();
+    geo.setAttribute("position", new BufferAttribute(vertices, 3));
+    geo.setIndex(indices);
+    super(geo, mat);
+  }
+  fitBox(box) {
+    this.scale.set(box.max.x - box.min.x, box.max.y - box.min.y, box.max.z - box.min.z);
+    this.position.set((box.max.x + box.min.x) / 2, (box.max.y + box.min.y) / 2, (box.max.z + box.min.z) / 2);
+  }
+  dispose() {
+    this.geometry.dispose();
+    this.material.dispose();
+  }
+}
+class BoxMesh extends Mesh {
+  constructor() {
+    const geo = new BoxGeometry();
+    const mat = new MeshBasicMaterial({
+      opacity: 0.1,
+      transparent: true,
+      color: new Color(0, 0.5, 1),
+      depthTest: false
+    });
+    super(geo, mat);
+  }
+  fitBox(box) {
+    this.scale.set(box.max.x - box.min.x, box.max.y - box.min.y, box.max.z - box.min.z);
+    this.position.set((box.max.x + box.min.x) / 2, (box.max.y + box.min.y) / 2, (box.max.z + box.min.z) / 2);
+  }
+  dispose() {
+    this.geometry.dispose();
+    this.material.dispose();
+  }
+}
+class BoxHighlight extends Mesh {
+  constructor() {
+    const geo = new BufferGeometry();
+    geo.setAttribute("position", new BufferAttribute(new Float32Array(12), 3));
+    geo.setIndex([0, 1, 2, 0, 2, 3]);
+    const mat = new MeshBasicMaterial({
+      opacity: 0.5,
+      transparent: true,
+      depthTest: false,
+      side: DoubleSide
+    });
+    super(geo, mat);
+    this.frustumCulled = false;
+  }
+  highlight(box, normal) {
+    this.visible = false;
+    const positions = this.geometry.getAttribute("position");
+    if (normal.x > 0.1) {
+      positions.setXYZ(0, box.max.x, box.max.y, box.max.z);
+      positions.setXYZ(1, box.max.x, box.min.y, box.max.z);
+      positions.setXYZ(2, box.max.x, box.min.y, box.min.z);
+      positions.setXYZ(3, box.max.x, box.max.y, box.min.z);
+      this.visible = true;
+    }
+    if (normal.x < -0.1) {
+      positions.setXYZ(0, box.min.x, box.max.y, box.max.z);
+      positions.setXYZ(1, box.min.x, box.min.y, box.max.z);
+      positions.setXYZ(2, box.min.x, box.min.y, box.min.z);
+      positions.setXYZ(3, box.min.x, box.max.y, box.min.z);
+      this.visible = true;
+    }
+    if (normal.y > 0.1) {
+      positions.setXYZ(0, box.max.x, box.max.y, box.max.z);
+      positions.setXYZ(1, box.min.x, box.max.y, box.max.z);
+      positions.setXYZ(2, box.min.x, box.max.y, box.min.z);
+      positions.setXYZ(3, box.max.x, box.max.y, box.min.z);
+      this.visible = true;
+    }
+    if (normal.y < -0.1) {
+      positions.setXYZ(0, box.max.x, box.min.y, box.max.z);
+      positions.setXYZ(1, box.min.x, box.min.y, box.max.z);
+      positions.setXYZ(2, box.min.x, box.min.y, box.min.z);
+      positions.setXYZ(3, box.max.x, box.min.y, box.min.z);
+      this.visible = true;
+    }
+    if (normal.z > 0.1) {
+      positions.setXYZ(0, box.max.x, box.max.y, box.max.z);
+      positions.setXYZ(1, box.min.x, box.max.y, box.max.z);
+      positions.setXYZ(2, box.min.x, box.min.y, box.max.z);
+      positions.setXYZ(3, box.max.x, box.min.y, box.max.z);
+      this.visible = true;
+    }
+    if (normal.z < -0.1) {
+      positions.setXYZ(0, box.max.x, box.max.y, box.min.z);
+      positions.setXYZ(1, box.min.x, box.max.y, box.min.z);
+      positions.setXYZ(2, box.min.x, box.min.y, box.min.z);
+      positions.setXYZ(3, box.max.x, box.min.y, box.min.z);
+      this.visible = true;
+    }
+    positions.needsUpdate = true;
+  }
+  dispose() {
+    this.geometry.dispose();
+    this.material.dispose();
+  }
+}
+class BoxInputs {
+  constructor(viewer2, cube, box) {
+    __publicField(this, "viewer");
+    __publicField(this, "cube");
+    __publicField(this, "sharedBox");
+    __publicField(this, "faceNormal", new Vector3());
+    __publicField(this, "dragOrigin", new Vector3());
+    __publicField(this, "dragpPlane", new Plane());
+    __publicField(this, "mouseDown");
+    __publicField(this, "raycaster", new Raycaster$1());
+    __publicField(this, "lastBox", new Box3());
+    __publicField(this, "unregisters", []);
+    __publicField(this, "onFaceEnter");
+    __publicField(this, "onBoxStretch");
+    __publicField(this, "onBoxConfirm");
+    __publicField(this, "reg", (handler, type, listener2) => {
+      handler.addEventListener(type, listener2);
+      this.unregisters.push(() => handler.removeEventListener(type, listener2));
+    });
+    this.viewer = viewer2;
+    this.cube = cube;
+    this.sharedBox = box;
+  }
+  register() {
+    if (this.unregister.length > 0)
+      return;
+    const canvas = this.viewer.viewport.canvas;
+    this.reg(canvas, "pointerdown", this.onMouseClick.bind(this));
+    this.reg(canvas, "pointermove", this.onMouseMove.bind(this));
+    this.reg(canvas, "pointerup", this.onMouseUp.bind(this));
+  }
+  unregister() {
+    this.unregisters.forEach((unreg) => unreg());
+    this.unregisters.length = 0;
+  }
+  onMouseMove(event) {
+    var _a22, _b2, _c;
+    if (this.mouseDown) {
+      this.onDrag(event);
+      return;
+    }
+    const hits = this.raycast(new Vector2(event.offsetX, event.offsetY));
+    const hit = hits == null ? void 0 : hits[0];
+    const norm = (_a22 = hit == null ? void 0 : hit.face) == null ? void 0 : _a22.normal;
+    if (!norm) {
+      if (this.faceNormal.x !== 0 || this.faceNormal.y !== 0 || this.faceNormal.z !== 0) {
+        this.faceNormal.set(0, 0, 0);
+        (_b2 = this.onFaceEnter) == null ? void 0 : _b2.call(this, this.faceNormal);
+      }
+      return;
+    }
+    if (this.faceNormal.equals(norm)) {
+      return;
+    }
+    this.faceNormal = norm;
+    (_c = this.onFaceEnter) == null ? void 0 : _c.call(this, this.faceNormal);
+  }
+  onMouseUp(event) {
+    var _a22, _b2;
+    if (this.mouseDown) {
+      this.mouseDown = false;
+      this.viewer.inputs.registerAll();
+      if (event.pointerType === "mouse") {
+        this.onMouseMove(event);
+      } else {
+        this.faceNormal = new Vector3();
+        (_a22 = this.onFaceEnter) == null ? void 0 : _a22.call(this, this.faceNormal);
+      }
+      (_b2 = this.onBoxConfirm) == null ? void 0 : _b2.call(this, this.sharedBox);
+    }
+  }
+  onMouseClick(event) {
+    var _a22, _b2;
+    const hits = this.raycast(new Vector2(event.offsetX, event.offsetY));
+    const hit = hits == null ? void 0 : hits[0];
+    if (!((_a22 = hit == null ? void 0 : hit.face) == null ? void 0 : _a22.normal))
+      return;
+    this.lastBox.copy(this.sharedBox);
+    this.faceNormal = hit.face.normal;
+    this.dragOrigin.copy(hit.point);
+    const dist2 = hit.point.clone().dot(this.viewer.camera.forward);
+    this.dragpPlane.set(this.viewer.camera.forward, -dist2);
+    this.mouseDown = true;
+    this.viewer.inputs.unregisterAll();
+    (_b2 = this.onFaceEnter) == null ? void 0 : _b2.call(this, this.faceNormal);
+  }
+  onDrag(event) {
+    var _a22, _b2;
+    this.raycaster = this.viewer.raycaster.fromPoint2(new Vector2(event.offsetX, event.offsetY), this.raycaster);
+    const point = (_a22 = this.raycaster.ray.intersectPlane(this.dragpPlane, new Vector3())) != null ? _a22 : this.dragOrigin.clone();
+    const delta = point.sub(this.dragOrigin);
+    const amount = delta.dot(this.faceNormal);
+    const box = this.stretch(this.faceNormal, amount);
+    (_b2 = this.onBoxStretch) == null ? void 0 : _b2.call(this, box);
+  }
+  stretch(normal, amount) {
+    const result = this.sharedBox.clone();
+    if (normal.x > 0.1) {
+      result.max.setX(Math.max(this.lastBox.max.x + amount, result.min.x - 1));
+    }
+    if (normal.x < -0.1) {
+      result.min.setX(Math.min(this.lastBox.min.x - amount, result.max.x + 1));
+    }
+    if (normal.y > 0.1) {
+      result.max.setY(Math.max(this.lastBox.max.y + amount, result.min.y - 1));
+    }
+    if (normal.y < -0.1) {
+      result.min.setY(Math.min(this.lastBox.min.y - amount, result.max.y + 1));
+    }
+    if (normal.z > 0.1) {
+      result.max.setZ(Math.max(this.lastBox.max.z + amount, result.min.z - 1));
+    }
+    if (normal.z < -0.1) {
+      result.min.setZ(Math.min(this.lastBox.min.z - amount, result.max.z + 1));
+    }
+    return result;
+  }
+  raycast(position) {
+    this.raycaster = this.viewer.raycaster.fromPoint2(position, this.raycaster);
+    return this.raycaster.intersectObject(this.cube);
+  }
+}
+class SectionBox {
+  constructor(viewer2) {
+    __publicField(this, "_viewer");
+    __publicField(this, "_inputs");
+    __publicField(this, "_cube");
+    __publicField(this, "_outline");
+    __publicField(this, "_highlight");
+    __publicField(this, "_normal");
+    __publicField(this, "_clip");
+    __publicField(this, "_show");
+    __publicField(this, "_interactive");
+    __publicField(this, "_onStateChanged", new dist$3.SignalDispatcher());
+    __publicField(this, "_onBoxConfirm", new dist$1.SimpleEventDispatcher());
+    __publicField(this, "_onHover", new dist$1.SimpleEventDispatcher());
+    this._viewer = viewer2;
+    this._normal = new Vector3();
+    this._cube = new BoxMesh();
+    this._outline = new BoxOutline();
+    this._highlight = new BoxHighlight();
+    this.renderer.add(this._cube);
+    this.renderer.add(this._outline);
+    this.renderer.add(this._highlight);
+    this._inputs = new BoxInputs(viewer2, this._cube, this._viewer.renderer.section.box);
+    this._inputs.onFaceEnter = (normal) => {
+      this._normal = normal;
+      if (this.visible)
+        this._highlight.highlight(this.section.box, normal);
+      this._onHover.dispatch(normal.x !== 0 || normal.y !== 0 || normal.z !== 0);
+    };
+    this._inputs.onBoxStretch = (box) => {
+      this.renderer.section.fitBox(box);
+      this.update();
+    };
+    this._inputs.onBoxConfirm = (box) => this._onBoxConfirm.dispatch(box);
+    this.clip = false;
+    this.visible = false;
+    this.interactive = false;
+    this.update();
+  }
+  get onStateChanged() {
+    return this._onStateChanged.asEvent();
+  }
+  get onBoxConfirm() {
+    return this._onBoxConfirm.asEvent();
+  }
+  get onHover() {
+    return this._onHover.asEvent();
+  }
+  get renderer() {
+    return this._viewer.renderer;
+  }
+  get section() {
+    return this._viewer.renderer.section;
+  }
+  get box() {
+    return this.section.box;
+  }
+  get clip() {
+    return this._clip;
+  }
+  set clip(value) {
+    if (value === this._clip)
+      return;
+    this._clip = value;
+    this.renderer.section.active = value;
+    this._onStateChanged.dispatch();
+  }
+  get interactive() {
+    return this._interactive;
+  }
+  set interactive(value) {
+    if (value === this.interactive)
+      return;
+    if (!this._interactive && value)
+      this._inputs.register();
+    if (this._interactive && !value)
+      this._inputs.unregister();
+    this._interactive = value;
+    this._highlight.visible = false;
+    this._onStateChanged.dispatch();
+  }
+  get visible() {
+    return this._show;
+  }
+  set visible(value) {
+    if (value === this.visible)
+      return;
+    this._show = value;
+    this._cube.visible = value;
+    this._outline.visible = value;
+    this._highlight.visible = value;
+    if (value)
+      this.update();
+    this._onStateChanged.dispatch();
+  }
+  fitBox(box) {
+    this._cube.fitBox(box);
+    this._outline.fitBox(box);
+    this.renderer.section.fitBox(box);
+    this._onBoxConfirm.dispatch(this.box);
+  }
+  update() {
+    this.fitBox(this.section.box);
+    this._highlight.highlight(this.section.box, this._normal);
+  }
+  dispose() {
+    this.renderer.remove(this._cube);
+    this.renderer.remove(this._outline);
+    this.renderer.remove(this._highlight);
+    this._inputs.unregister();
+    this._cube.dispose();
+    this._outline.dispose();
+    this._highlight.dispose();
+  }
+}
+class MeasureFlow {
+  constructor(gizmoMeasure) {
+    __publicField(this, "_gizmoMeasure");
+    __publicField(this, "_stage", "ready");
+    __publicField(this, "removeMouseListener");
+    __publicField(this, "onProgress");
+    __publicField(this, "onComplete");
+    this._gizmoMeasure = gizmoMeasure;
+  }
+  get stage() {
+    return this._stage;
+  }
+  unregister() {
+    var _a22;
+    (_a22 = this.removeMouseListener) == null ? void 0 : _a22.call(this);
+    this.removeMouseListener = void 0;
+  }
+  abort() {
+    var _a22;
+    if (this.stage === "active" || this.stage === "ready") {
+      this._stage = void 0;
+      (_a22 = this.onComplete) == null ? void 0 : _a22.call(this, false);
+      this.unregister();
+    }
+  }
+  onMainAction(action) {
+    var _a22, _b2, _c;
+    switch (this._stage) {
+      case "ready":
+        if (!action.object)
+          return;
+        this._gizmoMeasure.onFirstClick(action);
+        this._stage = "active";
+        (_a22 = this.onProgress) == null ? void 0 : _a22.call(this, this._stage);
+        break;
+      case "active":
+        this._stage = this._gizmoMeasure.onSecondClick(action) ? "done" : "failed";
+        (_b2 = this.onProgress) == null ? void 0 : _b2.call(this, this._stage);
+        (_c = this.onComplete) == null ? void 0 : _c.call(this, this._stage === "done");
+        this.unregister();
+        break;
+    }
+  }
+  onIdleAction(action) {
+    if (this._stage === "active")
+      this._gizmoMeasure.onMouseIdle(action);
+  }
+  onKeyAction(key) {
+    return false;
+  }
+}
+class MeshLine extends BufferGeometry {
+  constructor() {
+    super();
+    this.isMeshLine = true;
+    this.type = "MeshLine";
+    this.positions = [];
+    this.previous = [];
+    this.next = [];
+    this.side = [];
+    this.width = [];
+    this.indices_array = [];
+    this.uvs = [];
+    this.counters = [];
+    this._points = [];
+    this._geom = null;
+    this.widthCallback = null;
+    this.matrixWorld = new Matrix4();
+    Object.defineProperties(this, {
+      geometry: {
+        enumerable: true,
+        get: function() {
+          return this;
+        }
+      },
+      geom: {
+        enumerable: true,
+        get: function() {
+          return this._geom;
+        },
+        set: function(value) {
+          this.setGeometry(value, this.widthCallback);
+        }
+      },
+      points: {
+        enumerable: true,
+        get: function() {
+          return this._points;
+        },
+        set: function(value) {
+          this.setPoints(value, this.widthCallback);
+        }
+      }
+    });
+  }
+}
+MeshLine.prototype.setMatrixWorld = function(matrixWorld) {
+  this.matrixWorld = matrixWorld;
+};
+MeshLine.prototype.setGeometry = function(g, c) {
+  this._geometry = g;
+  this.setPoints(g.getAttribute("position").array, c);
+};
+MeshLine.prototype.setPoints = function(points, wcb) {
+  if (!(points instanceof Float32Array) && !(points instanceof Array)) {
+    console.error("ERROR: The BufferArray of points is not instancied correctly.");
+    return;
+  }
+  this._points = points;
+  this.widthCallback = wcb;
+  this.positions = [];
+  this.counters = [];
+  if (points.length && points[0] instanceof Vector3) {
+    for (let j = 0; j < points.length; j++) {
+      const p2 = points[j];
+      const c = j / points.length;
+      this.positions.push(p2.x, p2.y, p2.z);
+      this.positions.push(p2.x, p2.y, p2.z);
+      this.counters.push(c);
+      this.counters.push(c);
+    }
+  } else {
+    for (let j = 0; j < points.length; j += 3) {
+      const c = j / points.length;
+      this.positions.push(points[j], points[j + 1], points[j + 2]);
+      this.positions.push(points[j], points[j + 1], points[j + 2]);
+      this.counters.push(c);
+      this.counters.push(c);
+    }
+  }
+  this.process();
+};
+function MeshLineRaycast(raycaster, intersects2) {
+  const inverseMatrix = new Matrix4();
+  const ray = new Ray();
+  const sphere = new Sphere();
+  const interRay = new Vector3();
+  const geometry = this.geometry;
+  if (!geometry.boundingSphere)
+    geometry.computeBoundingSphere();
+  sphere.copy(geometry.boundingSphere);
+  sphere.applyMatrix4(this.matrixWorld);
+  if (raycaster.ray.intersectSphere(sphere, interRay) === false) {
+    return;
+  }
+  inverseMatrix.copy(this.matrixWorld).invert();
+  ray.copy(raycaster.ray).applyMatrix4(inverseMatrix);
+  const vStart = new Vector3();
+  const vEnd = new Vector3();
+  const interSegment = new Vector3();
+  const step = this instanceof LineSegments ? 2 : 1;
+  const index = geometry.index;
+  const attributes = geometry.attributes;
+  if (index !== null) {
+    const indices = index.array;
+    const positions = attributes.position.array;
+    const widths = attributes.width.array;
+    for (let i2 = 0, l2 = indices.length - 1; i2 < l2; i2 += step) {
+      const a = indices[i2];
+      const b = indices[i2 + 1];
+      vStart.fromArray(positions, a * 3);
+      vEnd.fromArray(positions, b * 3);
+      const width = widths[Math.floor(i2 / 3)] !== void 0 ? widths[Math.floor(i2 / 3)] : 1;
+      const precision = raycaster.params.Line.threshold + this.material.lineWidth * width / 2;
+      const precisionSq = precision * precision;
+      const distSq = ray.distanceSqToSegment(vStart, vEnd, interRay, interSegment);
+      if (distSq > precisionSq)
+        continue;
+      interRay.applyMatrix4(this.matrixWorld);
+      const distance = raycaster.ray.origin.distanceTo(interRay);
+      if (distance < raycaster.near || distance > raycaster.far)
+        continue;
+      intersects2.push({
+        distance,
+        point: interSegment.clone().applyMatrix4(this.matrixWorld),
+        index: i2,
+        face: null,
+        faceIndex: null,
+        object: this
+      });
+      i2 = l2;
+    }
+  }
+}
+MeshLine.prototype.raycast = MeshLineRaycast;
+MeshLine.prototype.compareV3 = function(a, b) {
+  const aa2 = a * 6;
+  const ab2 = b * 6;
+  return this.positions[aa2] === this.positions[ab2] && this.positions[aa2 + 1] === this.positions[ab2 + 1] && this.positions[aa2 + 2] === this.positions[ab2 + 2];
+};
+MeshLine.prototype.copyV3 = function(a) {
+  const aa2 = a * 6;
+  return [this.positions[aa2], this.positions[aa2 + 1], this.positions[aa2 + 2]];
+};
+MeshLine.prototype.process = function() {
+  const l2 = this.positions.length / 6;
+  this.previous = [];
+  this.next = [];
+  this.side = [];
+  this.width = [];
+  this.indices_array = [];
+  this.uvs = [];
+  let w2;
+  let v2;
+  if (this.compareV3(0, l2 - 1)) {
+    v2 = this.copyV3(l2 - 2);
+  } else {
+    v2 = this.copyV3(0);
+  }
+  this.previous.push(v2[0], v2[1], v2[2]);
+  this.previous.push(v2[0], v2[1], v2[2]);
+  for (let j = 0; j < l2; j++) {
+    this.side.push(1);
+    this.side.push(-1);
+    if (this.widthCallback)
+      w2 = this.widthCallback(j / (l2 - 1));
+    else
+      w2 = 1;
+    this.width.push(w2);
+    this.width.push(w2);
+    this.uvs.push(j / (l2 - 1), 0);
+    this.uvs.push(j / (l2 - 1), 1);
+    if (j < l2 - 1) {
+      v2 = this.copyV3(j);
+      this.previous.push(v2[0], v2[1], v2[2]);
+      this.previous.push(v2[0], v2[1], v2[2]);
+      const n2 = j * 2;
+      this.indices_array.push(n2, n2 + 1, n2 + 2);
+      this.indices_array.push(n2 + 2, n2 + 1, n2 + 3);
+    }
+    if (j > 0) {
+      v2 = this.copyV3(j);
+      this.next.push(v2[0], v2[1], v2[2]);
+      this.next.push(v2[0], v2[1], v2[2]);
+    }
+  }
+  if (this.compareV3(l2 - 1, 0)) {
+    v2 = this.copyV3(1);
+  } else {
+    v2 = this.copyV3(l2 - 1);
+  }
+  this.next.push(v2[0], v2[1], v2[2]);
+  this.next.push(v2[0], v2[1], v2[2]);
+  if (!this._attributes || this._attributes.position.count !== this.positions.length) {
+    this._attributes = {
+      position: new BufferAttribute(new Float32Array(this.positions), 3),
+      previous: new BufferAttribute(new Float32Array(this.previous), 3),
+      next: new BufferAttribute(new Float32Array(this.next), 3),
+      side: new BufferAttribute(new Float32Array(this.side), 1),
+      width: new BufferAttribute(new Float32Array(this.width), 1),
+      uv: new BufferAttribute(new Float32Array(this.uvs), 2),
+      index: new BufferAttribute(new Uint16Array(this.indices_array), 1),
+      counters: new BufferAttribute(new Float32Array(this.counters), 1)
+    };
+  } else {
+    this._attributes.position.copyArray(new Float32Array(this.positions));
+    this._attributes.position.needsUpdate = true;
+    this._attributes.previous.copyArray(new Float32Array(this.previous));
+    this._attributes.previous.needsUpdate = true;
+    this._attributes.next.copyArray(new Float32Array(this.next));
+    this._attributes.next.needsUpdate = true;
+    this._attributes.side.copyArray(new Float32Array(this.side));
+    this._attributes.side.needsUpdate = true;
+    this._attributes.width.copyArray(new Float32Array(this.width));
+    this._attributes.width.needsUpdate = true;
+    this._attributes.uv.copyArray(new Float32Array(this.uvs));
+    this._attributes.uv.needsUpdate = true;
+    this._attributes.index.copyArray(new Uint16Array(this.indices_array));
+    this._attributes.index.needsUpdate = true;
+  }
+  this.setAttribute("position", this._attributes.position);
+  this.setAttribute("previous", this._attributes.previous);
+  this.setAttribute("next", this._attributes.next);
+  this.setAttribute("side", this._attributes.side);
+  this.setAttribute("width", this._attributes.width);
+  this.setAttribute("uv", this._attributes.uv);
+  this.setAttribute("counters", this._attributes.counters);
+  this.setIndex(this._attributes.index);
+  this.computeBoundingSphere();
+  this.computeBoundingBox();
+};
+function memcpy(src, srcOffset, dst, dstOffset, length) {
+  let i2;
+  src = src.subarray || src.slice ? src : src.buffer;
+  dst = dst.subarray || dst.slice ? dst : dst.buffer;
+  src = srcOffset ? src.subarray ? src.subarray(srcOffset, length && srcOffset + length) : src.slice(srcOffset, length && srcOffset + length) : src;
+  if (dst.set) {
+    dst.set(src, dstOffset);
+  } else {
+    for (i2 = 0; i2 < src.length; i2++) {
+      dst[i2 + dstOffset] = src[i2];
+    }
+  }
+  return dst;
+}
+MeshLine.prototype.advance = function(position) {
+  const positions = this._attributes.position.array;
+  const previous = this._attributes.previous.array;
+  const next = this._attributes.next.array;
+  const l2 = positions.length;
+  memcpy(positions, 0, previous, 0, l2);
+  memcpy(positions, 6, positions, 0, l2 - 6);
+  positions[l2 - 6] = position.x;
+  positions[l2 - 5] = position.y;
+  positions[l2 - 4] = position.z;
+  positions[l2 - 3] = position.x;
+  positions[l2 - 2] = position.y;
+  positions[l2 - 1] = position.z;
+  memcpy(positions, 6, next, 0, l2 - 6);
+  next[l2 - 6] = position.x;
+  next[l2 - 5] = position.y;
+  next[l2 - 4] = position.z;
+  next[l2 - 3] = position.x;
+  next[l2 - 2] = position.y;
+  next[l2 - 1] = position.z;
+  this._attributes.position.needsUpdate = true;
+  this._attributes.previous.needsUpdate = true;
+  this._attributes.next.needsUpdate = true;
+};
+ShaderChunk.meshline_vert = [
+  "",
+  ShaderChunk.common,
+  ShaderChunk.logdepthbuf_pars_vertex,
+  ShaderChunk.fog_pars_vertex,
+  "",
+  "attribute vec3 previous;",
+  "attribute vec3 next;",
+  "attribute float side;",
+  "attribute float width;",
+  "attribute float counters;",
+  "",
+  "uniform vec2 resolution;",
+  "uniform float lineWidth;",
+  "uniform vec3 color;",
+  "uniform float opacity;",
+  "uniform float sizeAttenuation;",
+  "",
+  "varying vec2 vUV;",
+  "varying vec4 vColor;",
+  "varying float vCounters;",
+  "",
+  "vec2 fix( vec4 i, float aspect ) {",
+  "",
+  "    vec2 res = i.xy / i.w;",
+  "    res.x *= aspect;",
+  "    vCounters = counters;",
+  "    return res;",
+  "",
+  "}",
+  "",
+  "void main() {",
+  "",
+  "    float aspect = resolution.x / resolution.y;",
+  "",
+  "    vColor = vec4( color, opacity );",
+  "    vUV = uv;",
+  "",
+  "    mat4 m = projectionMatrix * modelViewMatrix;",
+  "    vec4 finalPosition = m * vec4( position, 1.0 );",
+  "    vec4 prevPos = m * vec4( previous, 1.0 );",
+  "    vec4 nextPos = m * vec4( next, 1.0 );",
+  "",
+  "    vec2 currentP = fix( finalPosition, aspect );",
+  "    vec2 prevP = fix( prevPos, aspect );",
+  "    vec2 nextP = fix( nextPos, aspect );",
+  "",
+  "    float w = lineWidth * width;",
+  "",
+  "    vec2 dir;",
+  "    if( nextP == currentP ) dir = normalize( currentP - prevP );",
+  "    else if( prevP == currentP ) dir = normalize( nextP - currentP );",
+  "    else {",
+  "        vec2 dir1 = normalize( currentP - prevP );",
+  "        vec2 dir2 = normalize( nextP - currentP );",
+  "        dir = normalize( dir1 + dir2 );",
+  "",
+  "        vec2 perp = vec2( -dir1.y, dir1.x );",
+  "        vec2 miter = vec2( -dir.y, dir.x );",
+  "        //w = clamp( w / dot( miter, perp ), 0., 4. * lineWidth * width );",
+  "",
+  "    }",
+  "",
+  "    //vec2 normal = ( cross( vec3( dir, 0. ), vec3( 0., 0., 1. ) ) ).xy;",
+  "    vec4 normal = vec4( -dir.y, dir.x, 0., 1. );",
+  "    normal.xy *= .5 * w;",
+  "    normal *= projectionMatrix;",
+  "    if( sizeAttenuation == 0. ) {",
+  "        normal.xy *= finalPosition.w;",
+  "        normal.xy /= ( vec4( resolution, 0., 1. ) * projectionMatrix ).xy;",
+  "    }",
+  "",
+  "    finalPosition.xy += normal.xy * side;",
+  "",
+  "    gl_Position = finalPosition;",
+  "",
+  ShaderChunk.logdepthbuf_vertex,
+  ShaderChunk.fog_vertex && "    vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );",
+  ShaderChunk.fog_vertex,
+  "}"
+].join("\n");
+ShaderChunk.meshline_frag = [
+  "",
+  ShaderChunk.fog_pars_fragment,
+  ShaderChunk.logdepthbuf_pars_fragment,
+  "",
+  "uniform sampler2D map;",
+  "uniform sampler2D alphaMap;",
+  "uniform float useMap;",
+  "uniform float useAlphaMap;",
+  "uniform float useDash;",
+  "uniform float dashArray;",
+  "uniform float dashOffset;",
+  "uniform float dashRatio;",
+  "uniform float visibility;",
+  "uniform float alphaTest;",
+  "uniform vec2 repeat;",
+  "",
+  "varying vec2 vUV;",
+  "varying vec4 vColor;",
+  "varying float vCounters;",
+  "",
+  "void main() {",
+  "",
+  ShaderChunk.logdepthbuf_fragment,
+  "",
+  "    vec4 c = vColor;",
+  "    if( useMap == 1. ) c *= texture2D( map, vUV * repeat );",
+  "    if( useAlphaMap == 1. ) c.a *= texture2D( alphaMap, vUV * repeat ).a;",
+  "    if( c.a < alphaTest ) discard;",
+  "    if( useDash == 1. ){",
+  "        c.a *= ceil(mod(vCounters + dashOffset, dashArray) - (dashArray * dashRatio));",
+  "    }",
+  "    gl_FragColor = c;",
+  "    gl_FragColor.a *= step(vCounters, visibility);",
+  "",
+  ShaderChunk.fog_fragment,
+  "}"
+].join("\n");
+class MeshLineMaterial extends ShaderMaterial {
+  constructor(parameters) {
+    super({
+      uniforms: Object.assign({}, UniformsLib.fog, {
+        lineWidth: { value: 1 },
+        map: { value: null },
+        useMap: { value: 0 },
+        alphaMap: { value: null },
+        useAlphaMap: { value: 0 },
+        color: { value: new Color(16777215) },
+        opacity: { value: 1 },
+        resolution: { value: new Vector2(1, 1) },
+        sizeAttenuation: { value: 1 },
+        dashArray: { value: 0 },
+        dashOffset: { value: 0 },
+        dashRatio: { value: 0.5 },
+        useDash: { value: 0 },
+        visibility: { value: 1 },
+        alphaTest: { value: 0 },
+        repeat: { value: new Vector2(1, 1) }
+      }),
+      vertexShader: ShaderChunk.meshline_vert,
+      fragmentShader: ShaderChunk.meshline_frag
+    });
+    this.isMeshLineMaterial = true;
+    this.type = "MeshLineMaterial";
+    Object.defineProperties(this, {
+      lineWidth: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.lineWidth.value;
+        },
+        set: function(value) {
+          this.uniforms.lineWidth.value = value;
+        }
+      },
+      map: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.map.value;
+        },
+        set: function(value) {
+          this.uniforms.map.value = value;
+        }
+      },
+      useMap: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.useMap.value;
+        },
+        set: function(value) {
+          this.uniforms.useMap.value = value;
+        }
+      },
+      alphaMap: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.alphaMap.value;
+        },
+        set: function(value) {
+          this.uniforms.alphaMap.value = value;
+        }
+      },
+      useAlphaMap: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.useAlphaMap.value;
+        },
+        set: function(value) {
+          this.uniforms.useAlphaMap.value = value;
+        }
+      },
+      color: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.color.value;
+        },
+        set: function(value) {
+          this.uniforms.color.value = value;
+        }
+      },
+      opacity: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.opacity.value;
+        },
+        set: function(value) {
+          this.uniforms.opacity.value = value;
+        }
+      },
+      resolution: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.resolution.value;
+        },
+        set: function(value) {
+          this.uniforms.resolution.value.copy(value);
+        }
+      },
+      sizeAttenuation: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.sizeAttenuation.value;
+        },
+        set: function(value) {
+          this.uniforms.sizeAttenuation.value = value;
+        }
+      },
+      dashArray: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.dashArray.value;
+        },
+        set: function(value) {
+          this.uniforms.dashArray.value = value;
+          this.useDash = value !== 0 ? 1 : 0;
+        }
+      },
+      dashOffset: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.dashOffset.value;
+        },
+        set: function(value) {
+          this.uniforms.dashOffset.value = value;
+        }
+      },
+      dashRatio: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.dashRatio.value;
+        },
+        set: function(value) {
+          this.uniforms.dashRatio.value = value;
+        }
+      },
+      useDash: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.useDash.value;
+        },
+        set: function(value) {
+          this.uniforms.useDash.value = value;
+        }
+      },
+      visibility: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.visibility.value;
+        },
+        set: function(value) {
+          this.uniforms.visibility.value = value;
+        }
+      },
+      alphaTest: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.alphaTest.value;
+        },
+        set: function(value) {
+          this.uniforms.alphaTest.value = value;
+        }
+      },
+      repeat: {
+        enumerable: true,
+        get: function() {
+          return this.uniforms.repeat.value;
+        },
+        set: function(value) {
+          this.uniforms.repeat.value.copy(value);
+        }
+      }
+    });
+    this.setValues(parameters);
+  }
+}
+MeshLineMaterial.prototype.copy = function(source) {
+  ShaderMaterial.prototype.copy.call(this, source);
+  this.lineWidth = source.lineWidth;
+  this.map = source.map;
+  this.useMap = source.useMap;
+  this.alphaMap = source.alphaMap;
+  this.useAlphaMap = source.useAlphaMap;
+  this.color.copy(source.color);
+  this.opacity = source.opacity;
+  this.resolution.copy(source.resolution);
+  this.sizeAttenuation = source.sizeAttenuation;
+  this.dashArray.copy(source.dashArray);
+  this.dashOffset.copy(source.dashOffset);
+  this.dashRatio.copy(source.dashRatio);
+  this.useDash = source.useDash;
+  this.visibility = source.visibility;
+  this.alphaTest = source.alphaTest;
+  this.repeat.copy(source.repeat);
+  return this;
+};
+function createMeasureElement(style2) {
+  const div2 = document.createElement("div");
+  div2.className = "vim-measure";
+  const table = document.createElement("table");
+  div2.appendChild(table);
+  let distValue;
+  let xValue;
+  let yValue;
+  let zValue;
+  if (style2 === "all" || style2 === "Dist") {
+    const trDist = document.createElement("tr");
+    const tdDistLabel = document.createElement("td");
+    const tdDistValue = document.createElement("td");
+    table.appendChild(trDist);
+    trDist.appendChild(tdDistLabel);
+    trDist.appendChild(tdDistValue);
+    tdDistLabel.className = "vim-measure-label-d";
+    tdDistValue.className = "vim-measure-value-d";
+    tdDistLabel.textContent = "Dist";
+    distValue = tdDistValue;
+  }
+  if (style2 === "all" || style2 === "X") {
+    const trX = document.createElement("tr");
+    const tdXLabel = document.createElement("td");
+    const tdXValue = document.createElement("td");
+    table.appendChild(trX);
+    trX.appendChild(tdXLabel);
+    trX.appendChild(tdXValue);
+    tdXLabel.className = "vim-measure-label-x";
+    tdXValue.className = "vim-measure-value-x";
+    tdXLabel.textContent = "X";
+    xValue = tdXValue;
+  }
+  if (style2 === "all" || style2 === "Y") {
+    const trY = document.createElement("tr");
+    const tdYLabel = document.createElement("td");
+    const tdYValue = document.createElement("td");
+    table.appendChild(trY);
+    trY.appendChild(tdYLabel);
+    trY.appendChild(tdYValue);
+    tdYLabel.className = "vim-measure-label-y";
+    tdYValue.className = "vim-measure-value-y";
+    tdYLabel.textContent = "Y";
+    yValue = tdYValue;
+  }
+  if (style2 === "all" || style2 === "Z") {
+    const trZ = document.createElement("tr");
+    const tdZLabel = document.createElement("td");
+    const tdZValue = document.createElement("td");
+    table.appendChild(trZ);
+    trZ.appendChild(tdZLabel);
+    trZ.appendChild(tdZValue);
+    tdZLabel.className = "vim-measure-label-z";
+    tdZValue.className = "vim-measure-value-z";
+    tdZLabel.textContent = "Z";
+    zValue = tdZValue;
+  }
+  return {
+    div: div2,
+    value: style2 === "Dist" ? distValue : style2 === "X" ? xValue : style2 === "Y" ? yValue : style2 === "Z" ? zValue : void 0,
+    values: { dist: distValue, x: xValue, y: yValue, z: zValue }
+  };
+}
+class MeasureLine {
+  constructor(canvasSize, color, style2) {
+    __publicField(this, "mesh");
+    __publicField(this, "label");
+    __publicField(this, "position");
+    __publicField(this, "length");
+    __publicField(this, "_meshLine");
+    __publicField(this, "_material");
+    __publicField(this, "_materialAlways");
+    __publicField(this, "_text");
+    this._material = new MeshLineMaterial({
+      sizeAttenuation: 0,
+      lineWidth: 5,
+      resolution: canvasSize,
+      color
+    });
+    this._materialAlways = new MeshLineMaterial({
+      lineWidth: 5,
+      sizeAttenuation: 0,
+      depthTest: false,
+      transparent: true,
+      opacity: 0.5,
+      resolution: canvasSize,
+      color
+    });
+    this._meshLine = new MeshLine();
+    this.mesh = new Mesh(this._meshLine, [
+      this._material,
+      this._materialAlways
+    ]);
+    const element = createMeasureElement(style2);
+    this._text = element.value;
+    this.label = new CSS2DObject(element.div);
+    this.label.visible = false;
+    this._meshLine.geometry.addGroup(0, Infinity, 0);
+    this._meshLine.geometry.addGroup(0, Infinity, 1);
+    this.mesh.frustumCulled = false;
+  }
+  setPoints(start, end) {
+    this.position = start.clone().add(end).multiplyScalar(0.5);
+    this._meshLine.setPoints([start, end]);
+    this.label.position.copy(this.position);
+    this.length = start.distanceTo(end);
+    this.label.visible = this.length > 0;
+    this._text.textContent = `~${start.distanceTo(end).toFixed(2)}`;
+  }
+  dispose() {
+    this._meshLine.dispose();
+    this._material.dispose();
+    this._materialAlways.dispose();
+  }
+}
+class MeasureMarker {
+  constructor(color, camera, viewer2) {
+    __publicField(this, "MARKER_SIZE", 0.01);
+    __publicField(this, "mesh");
+    __publicField(this, "_material");
+    __publicField(this, "_materialAlways");
+    __publicField(this, "_camera");
+    __publicField(this, "disconnect");
+    this._material = new MeshBasicMaterial({
+      color
+    });
+    this._materialAlways = new MeshBasicMaterial({
+      transparent: true,
+      opacity: 0.2,
+      depthTest: false,
+      color: new Color(0, 0.75, 1)
+    });
+    const g = new SphereGeometry(1);
+    g.addGroup(0, Infinity, 0);
+    g.addGroup(0, Infinity, 1);
+    this.mesh = new Mesh(g, [this._material, this._materialAlways]);
+    this.mesh.visible = false;
+    this.disconnect = camera.onMoved.subscribe(() => this.updateScale());
+    this._camera = camera;
+    this.updateScale();
+  }
+  updateScale() {
+    const scale = this._camera.heightAt(this.mesh.position) * this.MARKER_SIZE;
+    this.mesh.scale.set(scale, scale, scale);
+    this.mesh.updateMatrix();
+  }
+  setPosition(position) {
+    this.mesh.position.copy(position);
+  }
+  dispose() {
+    this.mesh.geometry.dispose();
+    this._material.dispose();
+    this.disconnect();
+  }
+}
+class MeasureGizmo {
+  constructor(viewer2) {
+    __publicField(this, "_viewer");
+    __publicField(this, "_startMarker");
+    __publicField(this, "_endMarker");
+    __publicField(this, "_line");
+    __publicField(this, "_lineX");
+    __publicField(this, "_lineY");
+    __publicField(this, "_lineZ");
+    __publicField(this, "_group");
+    __publicField(this, "_label");
+    __publicField(this, "_html");
+    __publicField(this, "_animId");
+    this._viewer = viewer2;
+    const canvasSize = this._viewer.viewport.getSize();
+    this._startMarker = new MeasureMarker(new Color("#FFB700"), this._viewer.camera, this._viewer);
+    this._endMarker = new MeasureMarker(new Color("#0590CC"), this._viewer.camera, this._viewer);
+    this._line = new MeasureLine(canvasSize, new Color(1, 1, 1), "Dist");
+    this._lineX = new MeasureLine(canvasSize, new Color(1, 0, 0), "X");
+    this._lineY = new MeasureLine(canvasSize, new Color(0, 1, 0), "Y");
+    this._lineZ = new MeasureLine(canvasSize, new Color(0, 0, 1), "Z");
+    this._html = createMeasureElement("all");
+    this._label = new CSS2DObject(this._html.div);
+    this._label.visible = false;
+    this._group = new Group();
+    this._group.name = "GizmoMeasure";
+    this._group.add(this._startMarker.mesh, this._endMarker.mesh, this._line.mesh, this._line.label, this._lineX.mesh, this._lineX.label, this._lineY.mesh, this._lineY.label, this._lineZ.mesh, this._lineZ.label, this._label);
+    this._viewer.renderer.add(this._group);
+  }
+  _animate() {
+    this._animId = requestAnimationFrame(() => this._animate());
+    const lx = this.screenDist(this._line.position, this._lineX.position);
+    const ly = this.screenDist(this._line.position, this._lineY.position);
+    const lz = this.screenDist(this._line.position, this._lineZ.position);
+    const xy = this.screenDist(this._lineX.position, this._lineY.position);
+    const xz = this.screenDist(this._lineX.position, this._lineZ.position);
+    const yz = this.screenDist(this._lineY.position, this._lineZ.position);
+    let conflicts = 0;
+    if (lx < 0.1)
+      conflicts++;
+    if (ly < 0.1)
+      conflicts++;
+    if (lz < 0.1)
+      conflicts++;
+    if (xy < 0.1)
+      conflicts++;
+    if (xz < 0.1)
+      conflicts++;
+    if (yz < 0.1)
+      conflicts++;
+    const collapse2 = conflicts > 1;
+    this._label.visible = collapse2;
+    this._line.label.visible = !collapse2;
+    this._lineX.label.visible = !collapse2;
+    this._lineY.label.visible = !collapse2;
+    this._lineZ.label.visible = !collapse2;
+  }
+  screenDist(first, second) {
+    if (!first || !second)
+      return;
+    const length = first.distanceTo(second);
+    const ratio = length / this._viewer.camera.heightAt(first);
+    return ratio;
+  }
+  start(start) {
+    this._startMarker.setPosition(start);
+    this._startMarker.mesh.visible = true;
+  }
+  hide() {
+    if (this._line) {
+      this._line.mesh.visible = false;
+      this._line.label.visible = false;
+    }
+  }
+  update(start, pos) {
+    if (this._line) {
+      this._line.setPoints(start, pos);
+      this._line.mesh.visible = true;
+    }
+  }
+  finish(start, end) {
+    this._line.mesh.visible = true;
+    this._startMarker.setPosition(start);
+    this._endMarker.setPosition(end);
+    this._endMarker.mesh.visible = true;
+    const delta = end.clone().sub(start);
+    const endX = start.clone().setX(start.x + delta.x);
+    const endY = endX.clone().setY(endX.y + delta.y);
+    this._line.setPoints(start, end);
+    this._lineX.setPoints(start, endX);
+    this._lineY.setPoints(endX, endY);
+    this._lineZ.setPoints(endY, end);
+    this._label.position.copy(this._line.label.position);
+    this._html.values.dist.textContent = this._line.length.toFixed(2);
+    this._html.values.x.textContent = this._lineX.length.toFixed(2);
+    this._html.values.y.textContent = this._lineY.length.toFixed(2);
+    this._html.values.z.textContent = this._lineZ.length.toFixed(2);
+    this._animate();
+    return true;
+  }
+  dispose() {
+    cancelAnimationFrame(this._animId);
+    this._group.remove(this._label);
+    this._group.remove(this._line.label);
+    this._group.remove(this._lineX.label);
+    this._group.remove(this._lineY.label);
+    this._group.remove(this._lineZ.label);
+    this._viewer.renderer.remove(this._group);
+    this._startMarker.dispose();
+    this._endMarker.dispose();
+    this._line.dispose();
+    this._lineX.dispose();
+    this._lineY.dispose();
+    this._lineZ.dispose();
+  }
+}
+class Measure {
+  constructor(viewer2) {
+    __publicField(this, "_viewer");
+    __publicField(this, "_meshes");
+    __publicField(this, "_startPos");
+    __publicField(this, "_endPos");
+    __publicField(this, "_measurement");
+    __publicField(this, "_flow");
+    this._viewer = viewer2;
+  }
+  get startPoint() {
+    return this._startPos;
+  }
+  get endPoint() {
+    return this._endPos;
+  }
+  get measurement() {
+    return this._measurement;
+  }
+  get stage() {
+    var _a22;
+    return (_a22 = this._flow) == null ? void 0 : _a22.stage;
+  }
+  async start(onProgress) {
+    this.abort();
+    this._flow = new MeasureFlow(this);
+    this._viewer.inputs.scheme = this._flow;
+    this._flow.onProgress = onProgress;
+    return new Promise((resolve, reject) => {
+      this._flow.onComplete = (success) => {
+        this._viewer.inputs.scheme = void 0;
+        if (success)
+          resolve();
+        else {
+          reject(new Error("Measurement Aborted"));
+        }
+      };
+    });
+  }
+  onFirstClick(action) {
+    this.clear();
+    this._meshes = new MeasureGizmo(this._viewer);
+    this._startPos = action.raycast.position;
+    this._meshes.start(this._startPos);
+  }
+  onMouseMove() {
+    var _a22;
+    (_a22 = this._meshes) == null ? void 0 : _a22.hide();
+  }
+  onMouseIdle(action) {
+    var _a22, _b2, _c;
+    if (!action) {
+      (_a22 = this._meshes) == null ? void 0 : _a22.hide();
+      return;
+    }
+    const position = action.raycast.position;
+    this._measurement = action.object ? position.clone().sub(this._startPos) : void 0;
+    if (action.object) {
+      (_b2 = this._meshes) == null ? void 0 : _b2.update(this._startPos, position);
+    } else {
+      (_c = this._meshes) == null ? void 0 : _c.hide();
+    }
+  }
+  onSecondClick(action) {
+    if (!action.object) {
+      return false;
+    }
+    this._endPos = action.raycast.position;
+    this._measurement = this._endPos.clone().sub(this._startPos);
+    console.log(`Distance: ${this._measurement.length()}`);
+    console.log(`
+      X: ${this._measurement.x},
+      Y: ${this._measurement.y},
+      Z: ${this._measurement.z} 
+      `);
+    this._meshes.finish(this._startPos, this._endPos);
+    return true;
+  }
+  abort() {
+    var _a22;
+    (_a22 = this._flow) == null ? void 0 : _a22.abort();
+    this._flow = void 0;
+    this._startPos = void 0;
+    this._endPos = void 0;
+    this._measurement = void 0;
+  }
+  clear() {
+    var _a22;
+    (_a22 = this._meshes) == null ? void 0 : _a22.dispose();
+    this._meshes = void 0;
+  }
+}
+class GizmoRectangle {
+  constructor(viewer2) {
+    __publicField(this, "line");
+    __publicField(this, "viewer");
+    __publicField(this, "points");
+    this.viewer = viewer2;
+    const mat = new LineBasicMaterial({
+      depthTest: false,
+      color: new Color(0, 1, 0)
+    });
+    const vertices = new Float32Array([
+      -0.5,
+      -0.5,
+      0,
+      0.5,
+      -0.5,
+      0,
+      0.5,
+      -0.5,
+      0,
+      0.5,
+      0.5,
+      0,
+      0.5,
+      0.5,
+      0,
+      -0.5,
+      0.5,
+      0,
+      -0.5,
+      0.5,
+      0,
+      -0.5,
+      -0.5,
+      0
+    ]);
+    const geo = new BufferGeometry();
+    geo.setAttribute("position", new BufferAttribute(vertices, 3));
+    this.line = new LineSegments(geo, mat);
+    this.line.name = "GizmoSelection";
+    this.line.visible = false;
+    this.viewer.renderer.add(this.line);
+  }
+  dispose() {
+    this.viewer.renderer.remove(this.line);
+    this.line.geometry.dispose();
+    this.line.material.dispose();
+  }
+  get visible() {
+    return this.line.visible;
+  }
+  set visible(value) {
+    this.line.visible = value;
+  }
+  update(posA, posB) {
+    const plane = new Plane().setFromNormalAndCoplanarPoint(this.viewer.camera.forward, this.viewer.camera.orbitPosition);
+    const A2 = this.getIntersection(plane, posA);
+    const B2 = this.getIntersection(plane, posB);
+    const center = A2.clone().add(B2).multiplyScalar(0.5);
+    const [dx, dy] = this.getBoxSize(A2, B2);
+    this.updateRect(center, dx, dy);
+    const AB = this.getIntersection(plane, new Vector2(posA.x, posB.y));
+    const BA = this.getIntersection(plane, new Vector2(posB.x, posA.y));
+    this.points = [A2, B2, AB, BA, center];
+  }
+  getIntersection(plane, position) {
+    const raycaster = this.viewer.raycaster.fromPoint2(position);
+    return raycaster.ray.intersectPlane(plane, new Vector3());
+  }
+  updateRect(position, dx, dy) {
+    this.line.quaternion.copy(this.viewer.camera.camera.quaternion);
+    this.line.position.copy(position);
+    this.line.scale.set(dx, dy, 1);
+    this.line.updateMatrix();
+  }
+  getBoxSize(A2, B2) {
+    const cam = this.viewer.camera;
+    const up = new Vector3(0, 1, 0).applyQuaternion(cam.camera.quaternion);
+    const right = new Vector3(1, 0, 0).applyQuaternion(cam.camera.quaternion);
+    const Ax = A2.dot(right);
+    const Ay = A2.dot(up);
+    const Bx = B2.dot(right);
+    const By = B2.dot(up);
+    const dx = Math.abs(Ax - Bx);
+    const dy = Math.abs(Ay - By);
+    return [dx, dy];
+  }
+  getBoundingBox(target = new Box3()) {
+    const position = this.getClosestHit();
+    const projections = position ? this.projectPoints(position) : this.points;
+    return target.setFromPoints(projections);
+  }
+  getClosestHit() {
+    const hits = this.points.map((p2) => this.viewer.raycaster.raycast3(p2)).filter((h) => h.isHit);
+    let position;
+    let dist2;
+    hits.forEach((h) => {
+      if (dist2 === void 0 || h.distance < dist2) {
+        dist2 = h.distance;
+        position = h.position;
+      }
+    });
+    return position;
+  }
+  projectPoints(position) {
+    const plane = new Plane().setFromNormalAndCoplanarPoint(this.viewer.camera.forward, position);
+    return this.points.map((p2) => plane.projectPoint(p2, new Vector3()));
+  }
+}
+var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
+var freeGlobal$1 = freeGlobal;
+var freeSelf = typeof self == "object" && self && self.Object === Object && self;
+var root$1 = freeGlobal$1 || freeSelf || Function("return this")();
+var root$1$1 = root$1;
+var Symbol$1 = root$1$1.Symbol;
+var Symbol$2 = Symbol$1;
+var objectProto$c = Object.prototype;
+var hasOwnProperty$9 = objectProto$c.hasOwnProperty;
+var nativeObjectToString$1 = objectProto$c.toString;
+var symToStringTag$1 = Symbol$2 ? Symbol$2.toStringTag : void 0;
+function getRawTag(value) {
+  var isOwn = hasOwnProperty$9.call(value, symToStringTag$1), tag = value[symToStringTag$1];
+  try {
+    value[symToStringTag$1] = void 0;
+    var unmasked = true;
+  } catch (e) {
+  }
+  var result = nativeObjectToString$1.call(value);
+  if (unmasked) {
+    if (isOwn) {
+      value[symToStringTag$1] = tag;
+    } else {
+      delete value[symToStringTag$1];
+    }
+  }
+  return result;
+}
+var objectProto$b = Object.prototype;
+var nativeObjectToString = objectProto$b.toString;
+function objectToString(value) {
+  return nativeObjectToString.call(value);
+}
+var nullTag = "[object Null]", undefinedTag = "[object Undefined]";
+var symToStringTag = Symbol$2 ? Symbol$2.toStringTag : void 0;
+function baseGetTag(value) {
+  if (value == null) {
+    return value === void 0 ? undefinedTag : nullTag;
+  }
+  return symToStringTag && symToStringTag in Object(value) ? getRawTag(value) : objectToString(value);
+}
+function isObjectLike(value) {
+  return value != null && typeof value == "object";
+}
+var isArray2 = Array.isArray;
+var isArray$1 = isArray2;
+function isObject(value) {
+  var type = typeof value;
+  return value != null && (type == "object" || type == "function");
+}
+var asyncTag = "[object AsyncFunction]", funcTag$2 = "[object Function]", genTag$1 = "[object GeneratorFunction]", proxyTag = "[object Proxy]";
+function isFunction(value) {
+  if (!isObject(value)) {
+    return false;
+  }
+  var tag = baseGetTag(value);
+  return tag == funcTag$2 || tag == genTag$1 || tag == asyncTag || tag == proxyTag;
+}
+var coreJsData = root$1$1["__core-js_shared__"];
+var coreJsData$1 = coreJsData;
+var maskSrcKey = function() {
+  var uid2 = /[^.]+$/.exec(coreJsData$1 && coreJsData$1.keys && coreJsData$1.keys.IE_PROTO || "");
+  return uid2 ? "Symbol(src)_1." + uid2 : "";
+}();
+function isMasked(func) {
+  return !!maskSrcKey && maskSrcKey in func;
+}
+var funcProto$1 = Function.prototype;
+var funcToString$1 = funcProto$1.toString;
+function toSource(func) {
+  if (func != null) {
+    try {
+      return funcToString$1.call(func);
+    } catch (e) {
+    }
+    try {
+      return func + "";
+    } catch (e) {
+    }
+  }
+  return "";
+}
+var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
+var reIsHostCtor = /^\[object .+?Constructor\]$/;
+var funcProto = Function.prototype, objectProto$a = Object.prototype;
+var funcToString = funcProto.toString;
+var hasOwnProperty$8 = objectProto$a.hasOwnProperty;
+var reIsNative = RegExp("^" + funcToString.call(hasOwnProperty$8).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$");
+function baseIsNative(value) {
+  if (!isObject(value) || isMasked(value)) {
+    return false;
+  }
+  var pattern = isFunction(value) ? reIsNative : reIsHostCtor;
+  return pattern.test(toSource(value));
+}
+function getValue(object, key) {
+  return object == null ? void 0 : object[key];
+}
+function getNative(object, key) {
+  var value = getValue(object, key);
+  return baseIsNative(value) ? value : void 0;
+}
+var WeakMap$1 = getNative(root$1$1, "WeakMap");
+var WeakMap$2 = WeakMap$1;
+var objectCreate = Object.create;
+var baseCreate = function() {
+  function object() {
+  }
+  return function(proto) {
+    if (!isObject(proto)) {
+      return {};
+    }
+    if (objectCreate) {
+      return objectCreate(proto);
+    }
+    object.prototype = proto;
+    var result = new object();
+    object.prototype = void 0;
+    return result;
+  };
+}();
+var baseCreate$1 = baseCreate;
+function copyArray(source, array) {
+  var index = -1, length = source.length;
+  array || (array = Array(length));
+  while (++index < length) {
+    array[index] = source[index];
+  }
+  return array;
+}
+var defineProperty2 = function() {
+  try {
+    var func = getNative(Object, "defineProperty");
+    func({}, "", {});
+    return func;
+  } catch (e) {
+  }
+}();
+var defineProperty$1 = defineProperty2;
+function arrayEach(array, iteratee) {
+  var index = -1, length = array == null ? 0 : array.length;
+  while (++index < length) {
+    if (iteratee(array[index], index, array) === false) {
+      break;
+    }
+  }
+  return array;
+}
+var MAX_SAFE_INTEGER$1 = 9007199254740991;
+var reIsUint = /^(?:0|[1-9]\d*)$/;
+function isIndex(value, length) {
+  var type = typeof value;
+  length = length == null ? MAX_SAFE_INTEGER$1 : length;
+  return !!length && (type == "number" || type != "symbol" && reIsUint.test(value)) && (value > -1 && value % 1 == 0 && value < length);
+}
+function baseAssignValue(object, key, value) {
+  if (key == "__proto__" && defineProperty$1) {
+    defineProperty$1(object, key, {
+      "configurable": true,
+      "enumerable": true,
+      "value": value,
+      "writable": true
+    });
+  } else {
+    object[key] = value;
+  }
+}
+function eq(value, other) {
+  return value === other || value !== value && other !== other;
+}
+var objectProto$9 = Object.prototype;
+var hasOwnProperty$7 = objectProto$9.hasOwnProperty;
+function assignValue(object, key, value) {
+  var objValue = object[key];
+  if (!(hasOwnProperty$7.call(object, key) && eq(objValue, value)) || value === void 0 && !(key in object)) {
+    baseAssignValue(object, key, value);
+  }
+}
+function copyObject(source, props, object, customizer) {
+  var isNew = !object;
+  object || (object = {});
+  var index = -1, length = props.length;
+  while (++index < length) {
+    var key = props[index];
+    var newValue = customizer ? customizer(object[key], source[key], key, object, source) : void 0;
+    if (newValue === void 0) {
+      newValue = source[key];
+    }
+    if (isNew) {
+      baseAssignValue(object, key, newValue);
+    } else {
+      assignValue(object, key, newValue);
+    }
+  }
+  return object;
+}
+var MAX_SAFE_INTEGER = 9007199254740991;
+function isLength(value) {
+  return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+}
+function isArrayLike(value) {
+  return value != null && isLength(value.length) && !isFunction(value);
+}
+var objectProto$8 = Object.prototype;
+function isPrototype(value) {
+  var Ctor = value && value.constructor, proto = typeof Ctor == "function" && Ctor.prototype || objectProto$8;
+  return value === proto;
+}
+function baseTimes(n2, iteratee) {
+  var index = -1, result = Array(n2);
+  while (++index < n2) {
+    result[index] = iteratee(index);
+  }
+  return result;
+}
+var argsTag$2 = "[object Arguments]";
+function baseIsArguments(value) {
+  return isObjectLike(value) && baseGetTag(value) == argsTag$2;
+}
+var objectProto$7 = Object.prototype;
+var hasOwnProperty$6 = objectProto$7.hasOwnProperty;
+var propertyIsEnumerable$1 = objectProto$7.propertyIsEnumerable;
+var isArguments = baseIsArguments(function() {
+  return arguments;
+}()) ? baseIsArguments : function(value) {
+  return isObjectLike(value) && hasOwnProperty$6.call(value, "callee") && !propertyIsEnumerable$1.call(value, "callee");
+};
+var isArguments$1 = isArguments;
+function stubFalse() {
+  return false;
+}
+var freeExports$2 = typeof exports == "object" && exports && !exports.nodeType && exports;
+var freeModule$2 = freeExports$2 && typeof module == "object" && module && !module.nodeType && module;
+var moduleExports$2 = freeModule$2 && freeModule$2.exports === freeExports$2;
+var Buffer$1 = moduleExports$2 ? root$1$1.Buffer : void 0;
+var nativeIsBuffer = Buffer$1 ? Buffer$1.isBuffer : void 0;
+var isBuffer = nativeIsBuffer || stubFalse;
+var isBuffer$1 = isBuffer;
+var argsTag$1 = "[object Arguments]", arrayTag$1 = "[object Array]", boolTag$2 = "[object Boolean]", dateTag$2 = "[object Date]", errorTag$1 = "[object Error]", funcTag$1 = "[object Function]", mapTag$4 = "[object Map]", numberTag$2 = "[object Number]", objectTag$2 = "[object Object]", regexpTag$2 = "[object RegExp]", setTag$4 = "[object Set]", stringTag$2 = "[object String]", weakMapTag$2 = "[object WeakMap]";
+var arrayBufferTag$2 = "[object ArrayBuffer]", dataViewTag$3 = "[object DataView]", float32Tag$2 = "[object Float32Array]", float64Tag$2 = "[object Float64Array]", int8Tag$2 = "[object Int8Array]", int16Tag$2 = "[object Int16Array]", int32Tag$2 = "[object Int32Array]", uint8Tag$2 = "[object Uint8Array]", uint8ClampedTag$2 = "[object Uint8ClampedArray]", uint16Tag$2 = "[object Uint16Array]", uint32Tag$2 = "[object Uint32Array]";
+var typedArrayTags = {};
+typedArrayTags[float32Tag$2] = typedArrayTags[float64Tag$2] = typedArrayTags[int8Tag$2] = typedArrayTags[int16Tag$2] = typedArrayTags[int32Tag$2] = typedArrayTags[uint8Tag$2] = typedArrayTags[uint8ClampedTag$2] = typedArrayTags[uint16Tag$2] = typedArrayTags[uint32Tag$2] = true;
+typedArrayTags[argsTag$1] = typedArrayTags[arrayTag$1] = typedArrayTags[arrayBufferTag$2] = typedArrayTags[boolTag$2] = typedArrayTags[dataViewTag$3] = typedArrayTags[dateTag$2] = typedArrayTags[errorTag$1] = typedArrayTags[funcTag$1] = typedArrayTags[mapTag$4] = typedArrayTags[numberTag$2] = typedArrayTags[objectTag$2] = typedArrayTags[regexpTag$2] = typedArrayTags[setTag$4] = typedArrayTags[stringTag$2] = typedArrayTags[weakMapTag$2] = false;
+function baseIsTypedArray(value) {
+  return isObjectLike(value) && isLength(value.length) && !!typedArrayTags[baseGetTag(value)];
+}
+function baseUnary(func) {
+  return function(value) {
+    return func(value);
+  };
+}
+var freeExports$1 = typeof exports == "object" && exports && !exports.nodeType && exports;
+var freeModule$1 = freeExports$1 && typeof module == "object" && module && !module.nodeType && module;
+var moduleExports$1 = freeModule$1 && freeModule$1.exports === freeExports$1;
+var freeProcess = moduleExports$1 && freeGlobal$1.process;
+var nodeUtil = function() {
+  try {
+    var types = freeModule$1 && freeModule$1.require && freeModule$1.require("util").types;
+    if (types) {
+      return types;
+    }
+    return freeProcess && freeProcess.binding && freeProcess.binding("util");
+  } catch (e) {
+  }
+}();
+var nodeUtil$1 = nodeUtil;
+var nodeIsTypedArray = nodeUtil$1 && nodeUtil$1.isTypedArray;
+var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
+var isTypedArray$1 = isTypedArray;
+var objectProto$6 = Object.prototype;
+var hasOwnProperty$5 = objectProto$6.hasOwnProperty;
+function arrayLikeKeys(value, inherited) {
+  var isArr = isArray$1(value), isArg = !isArr && isArguments$1(value), isBuff = !isArr && !isArg && isBuffer$1(value), isType = !isArr && !isArg && !isBuff && isTypedArray$1(value), skipIndexes = isArr || isArg || isBuff || isType, result = skipIndexes ? baseTimes(value.length, String) : [], length = result.length;
+  for (var key in value) {
+    if ((inherited || hasOwnProperty$5.call(value, key)) && !(skipIndexes && (key == "length" || isBuff && (key == "offset" || key == "parent") || isType && (key == "buffer" || key == "byteLength" || key == "byteOffset") || isIndex(key, length)))) {
+      result.push(key);
+    }
+  }
+  return result;
+}
+function overArg(func, transform) {
+  return function(arg) {
+    return func(transform(arg));
+  };
+}
+var nativeKeys = overArg(Object.keys, Object);
+var nativeKeys$1 = nativeKeys;
+var objectProto$5 = Object.prototype;
+var hasOwnProperty$4 = objectProto$5.hasOwnProperty;
+function baseKeys(object) {
+  if (!isPrototype(object)) {
+    return nativeKeys$1(object);
+  }
+  var result = [];
+  for (var key in Object(object)) {
+    if (hasOwnProperty$4.call(object, key) && key != "constructor") {
+      result.push(key);
+    }
+  }
+  return result;
+}
+function keys2(object) {
+  return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
+}
+function nativeKeysIn(object) {
+  var result = [];
+  if (object != null) {
+    for (var key in Object(object)) {
+      result.push(key);
+    }
+  }
+  return result;
+}
+var objectProto$4 = Object.prototype;
+var hasOwnProperty$3 = objectProto$4.hasOwnProperty;
+function baseKeysIn(object) {
+  if (!isObject(object)) {
+    return nativeKeysIn(object);
+  }
+  var isProto = isPrototype(object), result = [];
+  for (var key in object) {
+    if (!(key == "constructor" && (isProto || !hasOwnProperty$3.call(object, key)))) {
+      result.push(key);
+    }
+  }
+  return result;
+}
+function keysIn(object) {
+  return isArrayLike(object) ? arrayLikeKeys(object, true) : baseKeysIn(object);
+}
+var nativeCreate = getNative(Object, "create");
+var nativeCreate$1 = nativeCreate;
+function hashClear() {
+  this.__data__ = nativeCreate$1 ? nativeCreate$1(null) : {};
+  this.size = 0;
+}
+function hashDelete(key) {
+  var result = this.has(key) && delete this.__data__[key];
+  this.size -= result ? 1 : 0;
+  return result;
+}
+var HASH_UNDEFINED$1 = "__lodash_hash_undefined__";
+var objectProto$3 = Object.prototype;
+var hasOwnProperty$2 = objectProto$3.hasOwnProperty;
+function hashGet(key) {
+  var data2 = this.__data__;
+  if (nativeCreate$1) {
+    var result = data2[key];
+    return result === HASH_UNDEFINED$1 ? void 0 : result;
+  }
+  return hasOwnProperty$2.call(data2, key) ? data2[key] : void 0;
+}
+var objectProto$2 = Object.prototype;
+var hasOwnProperty$1 = objectProto$2.hasOwnProperty;
+function hashHas(key) {
+  var data2 = this.__data__;
+  return nativeCreate$1 ? data2[key] !== void 0 : hasOwnProperty$1.call(data2, key);
+}
+var HASH_UNDEFINED = "__lodash_hash_undefined__";
+function hashSet(key, value) {
+  var data2 = this.__data__;
+  this.size += this.has(key) ? 0 : 1;
+  data2[key] = nativeCreate$1 && value === void 0 ? HASH_UNDEFINED : value;
+  return this;
+}
+function Hash(entries) {
+  var index = -1, length = entries == null ? 0 : entries.length;
+  this.clear();
+  while (++index < length) {
+    var entry = entries[index];
+    this.set(entry[0], entry[1]);
+  }
+}
+Hash.prototype.clear = hashClear;
+Hash.prototype["delete"] = hashDelete;
+Hash.prototype.get = hashGet;
+Hash.prototype.has = hashHas;
+Hash.prototype.set = hashSet;
+function listCacheClear() {
+  this.__data__ = [];
+  this.size = 0;
+}
+function assocIndexOf(array, key) {
+  var length = array.length;
+  while (length--) {
+    if (eq(array[length][0], key)) {
+      return length;
+    }
+  }
+  return -1;
+}
+var arrayProto = Array.prototype;
+var splice = arrayProto.splice;
+function listCacheDelete(key) {
+  var data2 = this.__data__, index = assocIndexOf(data2, key);
+  if (index < 0) {
+    return false;
+  }
+  var lastIndex = data2.length - 1;
+  if (index == lastIndex) {
+    data2.pop();
+  } else {
+    splice.call(data2, index, 1);
+  }
+  --this.size;
+  return true;
+}
+function listCacheGet(key) {
+  var data2 = this.__data__, index = assocIndexOf(data2, key);
+  return index < 0 ? void 0 : data2[index][1];
+}
+function listCacheHas(key) {
+  return assocIndexOf(this.__data__, key) > -1;
+}
+function listCacheSet(key, value) {
+  var data2 = this.__data__, index = assocIndexOf(data2, key);
+  if (index < 0) {
+    ++this.size;
+    data2.push([key, value]);
+  } else {
+    data2[index][1] = value;
+  }
+  return this;
+}
+function ListCache(entries) {
+  var index = -1, length = entries == null ? 0 : entries.length;
+  this.clear();
+  while (++index < length) {
+    var entry = entries[index];
+    this.set(entry[0], entry[1]);
+  }
+}
+ListCache.prototype.clear = listCacheClear;
+ListCache.prototype["delete"] = listCacheDelete;
+ListCache.prototype.get = listCacheGet;
+ListCache.prototype.has = listCacheHas;
+ListCache.prototype.set = listCacheSet;
+var Map$1 = getNative(root$1$1, "Map");
+var Map$2 = Map$1;
+function mapCacheClear() {
+  this.size = 0;
+  this.__data__ = {
+    "hash": new Hash(),
+    "map": new (Map$2 || ListCache)(),
+    "string": new Hash()
+  };
+}
+function isKeyable(value) {
+  var type = typeof value;
+  return type == "string" || type == "number" || type == "symbol" || type == "boolean" ? value !== "__proto__" : value === null;
+}
+function getMapData(map, key) {
+  var data2 = map.__data__;
+  return isKeyable(key) ? data2[typeof key == "string" ? "string" : "hash"] : data2.map;
+}
+function mapCacheDelete(key) {
+  var result = getMapData(this, key)["delete"](key);
+  this.size -= result ? 1 : 0;
+  return result;
+}
+function mapCacheGet(key) {
+  return getMapData(this, key).get(key);
+}
+function mapCacheHas(key) {
+  return getMapData(this, key).has(key);
+}
+function mapCacheSet(key, value) {
+  var data2 = getMapData(this, key), size = data2.size;
+  data2.set(key, value);
+  this.size += data2.size == size ? 0 : 1;
+  return this;
+}
+function MapCache(entries) {
+  var index = -1, length = entries == null ? 0 : entries.length;
+  this.clear();
+  while (++index < length) {
+    var entry = entries[index];
+    this.set(entry[0], entry[1]);
+  }
+}
+MapCache.prototype.clear = mapCacheClear;
+MapCache.prototype["delete"] = mapCacheDelete;
+MapCache.prototype.get = mapCacheGet;
+MapCache.prototype.has = mapCacheHas;
+MapCache.prototype.set = mapCacheSet;
+function arrayPush(array, values) {
+  var index = -1, length = values.length, offset = array.length;
+  while (++index < length) {
+    array[offset + index] = values[index];
+  }
+  return array;
+}
+var getPrototype = overArg(Object.getPrototypeOf, Object);
+var getPrototype$1 = getPrototype;
+function stackClear() {
+  this.__data__ = new ListCache();
+  this.size = 0;
+}
+function stackDelete(key) {
+  var data2 = this.__data__, result = data2["delete"](key);
+  this.size = data2.size;
+  return result;
+}
+function stackGet(key) {
+  return this.__data__.get(key);
+}
+function stackHas(key) {
+  return this.__data__.has(key);
+}
+var LARGE_ARRAY_SIZE = 200;
+function stackSet(key, value) {
+  var data2 = this.__data__;
+  if (data2 instanceof ListCache) {
+    var pairs = data2.__data__;
+    if (!Map$2 || pairs.length < LARGE_ARRAY_SIZE - 1) {
+      pairs.push([key, value]);
+      this.size = ++data2.size;
+      return this;
+    }
+    data2 = this.__data__ = new MapCache(pairs);
+  }
+  data2.set(key, value);
+  this.size = data2.size;
+  return this;
+}
+function Stack(entries) {
+  var data2 = this.__data__ = new ListCache(entries);
+  this.size = data2.size;
+}
+Stack.prototype.clear = stackClear;
+Stack.prototype["delete"] = stackDelete;
+Stack.prototype.get = stackGet;
+Stack.prototype.has = stackHas;
+Stack.prototype.set = stackSet;
+function baseAssign(object, source) {
+  return object && copyObject(source, keys2(source), object);
+}
+function baseAssignIn(object, source) {
+  return object && copyObject(source, keysIn(source), object);
+}
+var freeExports = typeof exports == "object" && exports && !exports.nodeType && exports;
+var freeModule = freeExports && typeof module == "object" && module && !module.nodeType && module;
+var moduleExports = freeModule && freeModule.exports === freeExports;
+var Buffer2 = moduleExports ? root$1$1.Buffer : void 0, allocUnsafe = Buffer2 ? Buffer2.allocUnsafe : void 0;
+function cloneBuffer(buffer, isDeep) {
+  if (isDeep) {
+    return buffer.slice();
+  }
+  var length = buffer.length, result = allocUnsafe ? allocUnsafe(length) : new buffer.constructor(length);
+  buffer.copy(result);
+  return result;
+}
+function arrayFilter(array, predicate) {
+  var index = -1, length = array == null ? 0 : array.length, resIndex = 0, result = [];
+  while (++index < length) {
+    var value = array[index];
+    if (predicate(value, index, array)) {
+      result[resIndex++] = value;
+    }
+  }
+  return result;
+}
+function stubArray() {
+  return [];
+}
+var objectProto$1 = Object.prototype;
+var propertyIsEnumerable2 = objectProto$1.propertyIsEnumerable;
+var nativeGetSymbols$1 = Object.getOwnPropertySymbols;
+var getSymbols = !nativeGetSymbols$1 ? stubArray : function(object) {
+  if (object == null) {
+    return [];
+  }
+  object = Object(object);
+  return arrayFilter(nativeGetSymbols$1(object), function(symbol) {
+    return propertyIsEnumerable2.call(object, symbol);
+  });
+};
+var getSymbols$1 = getSymbols;
+function copySymbols(source, object) {
+  return copyObject(source, getSymbols$1(source), object);
+}
+var nativeGetSymbols = Object.getOwnPropertySymbols;
+var getSymbolsIn = !nativeGetSymbols ? stubArray : function(object) {
+  var result = [];
+  while (object) {
+    arrayPush(result, getSymbols$1(object));
+    object = getPrototype$1(object);
+  }
+  return result;
+};
+var getSymbolsIn$1 = getSymbolsIn;
+function copySymbolsIn(source, object) {
+  return copyObject(source, getSymbolsIn$1(source), object);
+}
+function baseGetAllKeys(object, keysFunc, symbolsFunc) {
+  var result = keysFunc(object);
+  return isArray$1(object) ? result : arrayPush(result, symbolsFunc(object));
+}
+function getAllKeys(object) {
+  return baseGetAllKeys(object, keys2, getSymbols$1);
+}
+function getAllKeysIn(object) {
+  return baseGetAllKeys(object, keysIn, getSymbolsIn$1);
+}
+var DataView$1 = getNative(root$1$1, "DataView");
+var DataView$1$1 = DataView$1;
+var Promise$1 = getNative(root$1$1, "Promise");
+var Promise$2 = Promise$1;
+var Set$1 = getNative(root$1$1, "Set");
+var Set$2 = Set$1;
+var mapTag$3 = "[object Map]", objectTag$1 = "[object Object]", promiseTag = "[object Promise]", setTag$3 = "[object Set]", weakMapTag$1 = "[object WeakMap]";
+var dataViewTag$2 = "[object DataView]";
+var dataViewCtorString = toSource(DataView$1$1), mapCtorString = toSource(Map$2), promiseCtorString = toSource(Promise$2), setCtorString = toSource(Set$2), weakMapCtorString = toSource(WeakMap$2);
+var getTag = baseGetTag;
+if (DataView$1$1 && getTag(new DataView$1$1(new ArrayBuffer(1))) != dataViewTag$2 || Map$2 && getTag(new Map$2()) != mapTag$3 || Promise$2 && getTag(Promise$2.resolve()) != promiseTag || Set$2 && getTag(new Set$2()) != setTag$3 || WeakMap$2 && getTag(new WeakMap$2()) != weakMapTag$1) {
+  getTag = function(value) {
+    var result = baseGetTag(value), Ctor = result == objectTag$1 ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : "";
+    if (ctorString) {
+      switch (ctorString) {
+        case dataViewCtorString:
+          return dataViewTag$2;
+        case mapCtorString:
+          return mapTag$3;
+        case promiseCtorString:
+          return promiseTag;
+        case setCtorString:
+          return setTag$3;
+        case weakMapCtorString:
+          return weakMapTag$1;
+      }
+    }
+    return result;
+  };
+}
+var getTag$1 = getTag;
+var objectProto = Object.prototype;
+var hasOwnProperty = objectProto.hasOwnProperty;
+function initCloneArray(array) {
+  var length = array.length, result = new array.constructor(length);
+  if (length && typeof array[0] == "string" && hasOwnProperty.call(array, "index")) {
+    result.index = array.index;
+    result.input = array.input;
+  }
+  return result;
+}
+var Uint8Array$1 = root$1$1.Uint8Array;
+var Uint8Array$2 = Uint8Array$1;
+function cloneArrayBuffer(arrayBuffer) {
+  var result = new arrayBuffer.constructor(arrayBuffer.byteLength);
+  new Uint8Array$2(result).set(new Uint8Array$2(arrayBuffer));
+  return result;
+}
+function cloneDataView(dataView, isDeep) {
+  var buffer = isDeep ? cloneArrayBuffer(dataView.buffer) : dataView.buffer;
+  return new dataView.constructor(buffer, dataView.byteOffset, dataView.byteLength);
+}
+var reFlags = /\w*$/;
+function cloneRegExp(regexp) {
+  var result = new regexp.constructor(regexp.source, reFlags.exec(regexp));
+  result.lastIndex = regexp.lastIndex;
+  return result;
+}
+var symbolProto = Symbol$2 ? Symbol$2.prototype : void 0, symbolValueOf = symbolProto ? symbolProto.valueOf : void 0;
+function cloneSymbol(symbol) {
+  return symbolValueOf ? Object(symbolValueOf.call(symbol)) : {};
+}
+function cloneTypedArray(typedArray, isDeep) {
+  var buffer = isDeep ? cloneArrayBuffer(typedArray.buffer) : typedArray.buffer;
+  return new typedArray.constructor(buffer, typedArray.byteOffset, typedArray.length);
+}
+var boolTag$1 = "[object Boolean]", dateTag$1 = "[object Date]", mapTag$2 = "[object Map]", numberTag$1 = "[object Number]", regexpTag$1 = "[object RegExp]", setTag$2 = "[object Set]", stringTag$1 = "[object String]", symbolTag$1 = "[object Symbol]";
+var arrayBufferTag$1 = "[object ArrayBuffer]", dataViewTag$1 = "[object DataView]", float32Tag$1 = "[object Float32Array]", float64Tag$1 = "[object Float64Array]", int8Tag$1 = "[object Int8Array]", int16Tag$1 = "[object Int16Array]", int32Tag$1 = "[object Int32Array]", uint8Tag$1 = "[object Uint8Array]", uint8ClampedTag$1 = "[object Uint8ClampedArray]", uint16Tag$1 = "[object Uint16Array]", uint32Tag$1 = "[object Uint32Array]";
+function initCloneByTag(object, tag, isDeep) {
+  var Ctor = object.constructor;
+  switch (tag) {
+    case arrayBufferTag$1:
+      return cloneArrayBuffer(object);
+    case boolTag$1:
+    case dateTag$1:
+      return new Ctor(+object);
+    case dataViewTag$1:
+      return cloneDataView(object, isDeep);
+    case float32Tag$1:
+    case float64Tag$1:
+    case int8Tag$1:
+    case int16Tag$1:
+    case int32Tag$1:
+    case uint8Tag$1:
+    case uint8ClampedTag$1:
+    case uint16Tag$1:
+    case uint32Tag$1:
+      return cloneTypedArray(object, isDeep);
+    case mapTag$2:
+      return new Ctor();
+    case numberTag$1:
+    case stringTag$1:
+      return new Ctor(object);
+    case regexpTag$1:
+      return cloneRegExp(object);
+    case setTag$2:
+      return new Ctor();
+    case symbolTag$1:
+      return cloneSymbol(object);
+  }
+}
+function initCloneObject(object) {
+  return typeof object.constructor == "function" && !isPrototype(object) ? baseCreate$1(getPrototype$1(object)) : {};
+}
+var mapTag$1 = "[object Map]";
+function baseIsMap(value) {
+  return isObjectLike(value) && getTag$1(value) == mapTag$1;
+}
+var nodeIsMap = nodeUtil$1 && nodeUtil$1.isMap;
+var isMap = nodeIsMap ? baseUnary(nodeIsMap) : baseIsMap;
+var isMap$1 = isMap;
+var setTag$1 = "[object Set]";
+function baseIsSet(value) {
+  return isObjectLike(value) && getTag$1(value) == setTag$1;
+}
+var nodeIsSet = nodeUtil$1 && nodeUtil$1.isSet;
+var isSet = nodeIsSet ? baseUnary(nodeIsSet) : baseIsSet;
+var isSet$1 = isSet;
+var CLONE_DEEP_FLAG$1 = 1, CLONE_FLAT_FLAG = 2, CLONE_SYMBOLS_FLAG$1 = 4;
+var argsTag = "[object Arguments]", arrayTag = "[object Array]", boolTag = "[object Boolean]", dateTag = "[object Date]", errorTag = "[object Error]", funcTag = "[object Function]", genTag = "[object GeneratorFunction]", mapTag = "[object Map]", numberTag = "[object Number]", objectTag = "[object Object]", regexpTag = "[object RegExp]", setTag = "[object Set]", stringTag = "[object String]", symbolTag = "[object Symbol]", weakMapTag = "[object WeakMap]";
+var arrayBufferTag = "[object ArrayBuffer]", dataViewTag = "[object DataView]", float32Tag = "[object Float32Array]", float64Tag = "[object Float64Array]", int8Tag = "[object Int8Array]", int16Tag = "[object Int16Array]", int32Tag = "[object Int32Array]", uint8Tag = "[object Uint8Array]", uint8ClampedTag = "[object Uint8ClampedArray]", uint16Tag = "[object Uint16Array]", uint32Tag = "[object Uint32Array]";
+var cloneableTags = {};
+cloneableTags[argsTag] = cloneableTags[arrayTag] = cloneableTags[arrayBufferTag] = cloneableTags[dataViewTag] = cloneableTags[boolTag] = cloneableTags[dateTag] = cloneableTags[float32Tag] = cloneableTags[float64Tag] = cloneableTags[int8Tag] = cloneableTags[int16Tag] = cloneableTags[int32Tag] = cloneableTags[mapTag] = cloneableTags[numberTag] = cloneableTags[objectTag] = cloneableTags[regexpTag] = cloneableTags[setTag] = cloneableTags[stringTag] = cloneableTags[symbolTag] = cloneableTags[uint8Tag] = cloneableTags[uint8ClampedTag] = cloneableTags[uint16Tag] = cloneableTags[uint32Tag] = true;
+cloneableTags[errorTag] = cloneableTags[funcTag] = cloneableTags[weakMapTag] = false;
+function baseClone(value, bitmask, customizer, key, object, stack) {
+  var result, isDeep = bitmask & CLONE_DEEP_FLAG$1, isFlat = bitmask & CLONE_FLAT_FLAG, isFull = bitmask & CLONE_SYMBOLS_FLAG$1;
+  if (customizer) {
+    result = object ? customizer(value, key, object, stack) : customizer(value);
+  }
+  if (result !== void 0) {
+    return result;
+  }
+  if (!isObject(value)) {
+    return value;
+  }
+  var isArr = isArray$1(value);
+  if (isArr) {
+    result = initCloneArray(value);
+    if (!isDeep) {
+      return copyArray(value, result);
+    }
+  } else {
+    var tag = getTag$1(value), isFunc = tag == funcTag || tag == genTag;
+    if (isBuffer$1(value)) {
+      return cloneBuffer(value, isDeep);
+    }
+    if (tag == objectTag || tag == argsTag || isFunc && !object) {
+      result = isFlat || isFunc ? {} : initCloneObject(value);
+      if (!isDeep) {
+        return isFlat ? copySymbolsIn(value, baseAssignIn(result, value)) : copySymbols(value, baseAssign(result, value));
+      }
+    } else {
+      if (!cloneableTags[tag]) {
+        return object ? value : {};
+      }
+      result = initCloneByTag(value, tag, isDeep);
+    }
+  }
+  stack || (stack = new Stack());
+  var stacked = stack.get(value);
+  if (stacked) {
+    return stacked;
+  }
+  stack.set(value, result);
+  if (isSet$1(value)) {
+    value.forEach(function(subValue) {
+      result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
+    });
+  } else if (isMap$1(value)) {
+    value.forEach(function(subValue, key2) {
+      result.set(key2, baseClone(subValue, bitmask, customizer, key2, value, stack));
+    });
+  }
+  var keysFunc = isFull ? isFlat ? getAllKeysIn : getAllKeys : isFlat ? keysIn : keys2;
+  var props = isArr ? void 0 : keysFunc(value);
+  arrayEach(props || value, function(subValue, key2) {
+    if (props) {
+      key2 = subValue;
+      subValue = value[key2];
+    }
+    assignValue(result, key2, baseClone(subValue, bitmask, customizer, key2, value, stack));
+  });
+  return result;
+}
+var CLONE_DEEP_FLAG = 1, CLONE_SYMBOLS_FLAG = 4;
+function cloneDeep(value) {
+  return baseClone(value, CLONE_DEEP_FLAG | CLONE_SYMBOLS_FLAG);
+}
+class VimSettings {
+  constructor(options) {
+    __publicField(this, "options");
+    __publicField(this, "getOptions", () => cloneDeep(this.options));
+    __publicField(this, "getPosition", () => toVec(this.options.position));
+    __publicField(this, "getRotation", () => toQuaternion(this.options.rotation));
+    __publicField(this, "getScale", () => scalarToVec(this.options.scale));
+    __publicField(this, "getMatrix", () => new Matrix4().compose(this.getPosition(), this.getRotation(), this.getScale()));
+    __publicField(this, "getTransparency", () => this.options.transparency);
+    __publicField(this, "getDownloadMode", () => this.options.download);
+    const fallback = {
+      position: { x: 0, y: 0, z: 0 },
+      rotation: { x: 0, y: 0, z: 0 },
+      scale: 1,
+      transparency: "all",
+      download: "stream"
+    };
+    this.options = options ? cjs(fallback, options, void 0) : fallback;
+    this.options.transparency = Transparency.isValid(this.options.transparency) ? this.options.transparency : "all";
+  }
+}
+function toVec(obj) {
+  return new Vector3(obj.x, obj.y, obj.z);
+}
+function toQuaternion(rot) {
+  return new Quaternion().setFromEuler(toEuler(toVec(rot)));
+}
+function scalarToVec(x2) {
+  return new Vector3(x2, x2, x2);
+}
+function toEuler(rot) {
+  return new Euler(rot.x * Math.PI / 180, rot.y * Math.PI / 180, rot.z * Math.PI / 180);
+}
+class G3dAttributeDescriptor {
+  constructor(description, association, semantic, attributeTypeIndex, dataType, dataArity) {
+    __publicField(this, "description");
+    __publicField(this, "association");
+    __publicField(this, "semantic");
+    __publicField(this, "attributeTypeIndex");
+    __publicField(this, "dataType");
+    __publicField(this, "dataArity");
+    if (!description.startsWith("g3d:")) {
+      throw new Error(`${description} must start with 'g3d'`);
+    }
+    this.description = description;
+    this.association = association;
+    this.semantic = semantic;
+    this.attributeTypeIndex = attributeTypeIndex;
+    this.dataType = dataType;
+    this.dataArity = parseInt(dataArity);
+  }
+  static fromString(descriptor) {
+    const desc = descriptor.split(":");
+    if (desc.length !== 6) {
+      throw new Error(`${descriptor}, must have 6 components delimited by ':'`);
+    }
+    return new this(descriptor, desc[1], desc[2], desc[3], desc[4], desc[5]);
+  }
+  matches(other) {
+    const match2 = (a, b) => a === "*" || b === "*" || a === b;
+    return match2(this.association, other.association) && match2(this.semantic, other.semantic) && match2(this.attributeTypeIndex, other.attributeTypeIndex) && match2(this.dataType, other.dataType);
+  }
+}
+class G3dAttribute {
+  constructor(descriptor, bytes) {
+    __publicField(this, "descriptor");
+    __publicField(this, "bytes");
+    __publicField(this, "data");
+    this.descriptor = descriptor;
+    this.bytes = bytes;
+    this.data = G3dAttribute.castData(bytes, descriptor.dataType);
+  }
+  static fromString(descriptor, buffer) {
+    return new this(G3dAttributeDescriptor.fromString(descriptor), buffer);
+  }
+  static castData(bytes, dataType) {
+    switch (dataType) {
+      case "float32":
+        return new Float32Array(bytes.buffer, bytes.byteOffset, bytes.byteLength / 4);
+      case "float64":
+        throw new Float64Array(bytes.buffer, bytes.byteOffset, bytes.byteLength / 8);
+      case "uint8":
+      case "int8":
+        return bytes;
+      case "int16":
+        return new Int16Array(bytes.buffer, bytes.byteOffset, bytes.byteLength / 2);
+      case "uint16":
+        return new Uint16Array(bytes.buffer, bytes.byteOffset, bytes.byteLength / 2);
+      case "int32":
+        return new Int32Array(bytes.buffer, bytes.byteOffset, bytes.byteLength / 4);
+      case "uint32":
+        return new Uint32Array(bytes.buffer, bytes.byteOffset, bytes.byteLength / 4);
+      case "int64":
+      case "uint64":
+        console.error("G3d: 64-bit buffers unsuported");
+        return;
+      default:
+        console.error("Unrecognized attribute data type " + dataType);
+    }
+  }
+}
+class AbstractG3d {
+  constructor(meta, attributes) {
+    __publicField(this, "meta");
+    __publicField(this, "attributes");
+    this.meta = meta;
+    this.attributes = attributes;
+  }
+  findAttribute(descriptor) {
+    const filter = G3dAttributeDescriptor.fromString(descriptor);
+    for (let i2 = 0; i2 < this.attributes.length; ++i2) {
+      const attribute = this.attributes[i2];
+      if (attribute.descriptor.matches(filter))
+        return attribute;
+    }
+  }
+  static createFromBfast(bfast) {
+    const promises = VimAttributes.all.map((a) => bfast.getBytes(a).then((bytes) => bytes ? new G3dAttribute(G3dAttributeDescriptor.fromString(a), bytes) : void 0));
+    return Promise.all(promises).then((attributes) => new AbstractG3d("meta", attributes.filter((a) => a !== void 0)));
+  }
+}
+const _VimAttributes = class {
+};
+let VimAttributes = _VimAttributes;
+__publicField(VimAttributes, "positions", "g3d:vertex:position:0:float32:3");
+__publicField(VimAttributes, "indices", "g3d:corner:index:0:int32:1");
+__publicField(VimAttributes, "instanceMeshes", "g3d:instance:mesh:0:int32:1");
+__publicField(VimAttributes, "instanceTransforms", "g3d:instance:transform:0:float32:16");
+__publicField(VimAttributes, "instanceFlags", "g3d:instance:flags:0:uint16:1");
+__publicField(VimAttributes, "meshSubmeshes", "g3d:mesh:submeshoffset:0:int32:1");
+__publicField(VimAttributes, "submeshIndexOffsets", "g3d:submesh:indexoffset:0:int32:1");
+__publicField(VimAttributes, "submeshMaterials", "g3d:submesh:material:0:int32:1");
+__publicField(VimAttributes, "materialColors", "g3d:material:color:0:float32:4");
+__publicField(VimAttributes, "all", [
+  _VimAttributes.positions,
+  _VimAttributes.indices,
+  _VimAttributes.instanceMeshes,
+  _VimAttributes.instanceTransforms,
+  _VimAttributes.instanceFlags,
+  _VimAttributes.meshSubmeshes,
+  _VimAttributes.submeshIndexOffsets,
+  _VimAttributes.submeshMaterials,
+  _VimAttributes.materialColors
+]);
+class G3d {
+  constructor(g3d) {
+    __publicField(this, "positions");
+    __publicField(this, "indices");
+    __publicField(this, "instanceMeshes");
+    __publicField(this, "instanceTransforms");
+    __publicField(this, "instanceFlags");
+    __publicField(this, "meshSubmeshes");
+    __publicField(this, "submeshIndexOffset");
+    __publicField(this, "submeshMaterial");
+    __publicField(this, "materialColors");
+    __publicField(this, "meshVertexOffsets");
+    __publicField(this, "meshInstances");
+    __publicField(this, "meshOpaqueCount");
+    __publicField(this, "rawG3d");
+    __publicField(this, "MATRIX_SIZE", 16);
+    __publicField(this, "COLOR_SIZE", 4);
+    __publicField(this, "POSITION_SIZE", 3);
+    __publicField(this, "DEFAULT_COLOR", new Float32Array([1, 1, 1, 1]));
+    __publicField(this, "computeMeshInstances", () => {
+      const result = [];
+      for (let i2 = 0; i2 < this.instanceMeshes.length; i2++) {
+        const mesh = this.instanceMeshes[i2];
+        if (mesh < 0)
+          continue;
+        const instanceIndices = result[mesh];
+        if (instanceIndices)
+          instanceIndices.push(i2);
+        else
+          result[mesh] = [i2];
+      }
+      return result;
+    });
+    __publicField(this, "getVertexCount", () => this.positions.length / this.POSITION_SIZE);
+    __publicField(this, "getMeshCount", () => this.meshSubmeshes.length);
+    __publicField(this, "getInstanceCount", () => this.instanceMeshes.length);
+    __publicField(this, "getMaterialCount", () => this.materialColors.length / this.COLOR_SIZE);
+    var _a22, _b2, _c, _d, _e, _f, _g, _h, _i, _j;
+    this.rawG3d = g3d;
+    this.positions = (_a22 = g3d.findAttribute(VimAttributes.positions)) == null ? void 0 : _a22.data;
+    const tmp2 = (_b2 = g3d.findAttribute(VimAttributes.indices)) == null ? void 0 : _b2.data;
+    if (!tmp2)
+      throw new Error("No Index Buffer Found");
+    this.indices = new Uint32Array(tmp2.buffer, tmp2.byteOffset, tmp2.length);
+    this.meshSubmeshes = (_c = g3d.findAttribute(VimAttributes.meshSubmeshes)) == null ? void 0 : _c.data;
+    this.submeshIndexOffset = (_d = g3d.findAttribute(VimAttributes.submeshIndexOffsets)) == null ? void 0 : _d.data;
+    this.submeshMaterial = (_e = g3d.findAttribute(VimAttributes.submeshMaterials)) == null ? void 0 : _e.data;
+    this.materialColors = (_f = g3d.findAttribute(VimAttributes.materialColors)) == null ? void 0 : _f.data;
+    this.instanceMeshes = (_g = g3d.findAttribute(VimAttributes.instanceMeshes)) == null ? void 0 : _g.data;
+    this.instanceTransforms = (_h = g3d.findAttribute(VimAttributes.instanceTransforms)) == null ? void 0 : _h.data;
+    this.instanceFlags = (_j = (_i = g3d.findAttribute(VimAttributes.instanceFlags)) == null ? void 0 : _i.data) != null ? _j : new Uint16Array(this.instanceMeshes.length);
+    this.meshVertexOffsets = this.computeMeshVertexOffsets();
+    this.rebaseIndices();
+    this.meshInstances = this.computeMeshInstances();
+    this.meshOpaqueCount = this.computeMeshOpaqueCount();
+    this.sortSubmeshes();
+  }
+  computeMeshVertexOffsets() {
+    const result = new Int32Array(this.getMeshCount());
+    for (let m2 = 0; m2 < result.length; m2++) {
+      let min2 = Number.MAX_SAFE_INTEGER;
+      const start = this.getMeshIndexStart(m2, "all");
+      const end = this.getMeshIndexEnd(m2, "all");
+      for (let i2 = start; i2 < end; i2++) {
+        min2 = Math.min(min2, this.indices[i2]);
+      }
+      result[m2] = min2;
+    }
+    return result;
+  }
+  sortSubmeshes() {
+    const submeshEnd = this.computeSubmeshEnd();
+    const meshIndexOffsets = this.computeMeshIndexOffsets();
+    const meshCount = this.getMeshCount();
+    const meshReordered = new Array(meshCount);
+    const submeshArrays = [
+      this.submeshIndexOffset,
+      this.submeshMaterial,
+      submeshEnd
+    ];
+    const largestMesh = this.reorderSubmeshes(submeshArrays, meshReordered);
+    this.reorderIndices(meshIndexOffsets, submeshEnd, meshReordered, largestMesh);
+  }
+  computeSubmeshEnd() {
+    const submeshCount = this.getSubmeshCount();
+    const result = new Int32Array(submeshCount);
+    for (let s = 0; s < submeshCount; s++) {
+      result[s] = this.getSubmeshIndexEnd(s);
+    }
+    return result;
+  }
+  computeMeshIndexOffsets() {
+    const meshCount = this.getMeshCount();
+    const result = new Int32Array(meshCount);
+    for (let m2 = 0; m2 < meshCount; m2++) {
+      result[m2] = this.getMeshIndexStart(m2, "all");
+    }
+    return result;
+  }
+  reorderSubmeshes(submeshArrays, reordered) {
+    const meshCount = this.getMeshCount();
+    let largestMesh = 0;
+    for (let m2 = 0; m2 < meshCount; m2++) {
+      const subStart = this.getMeshSubmeshStart(m2, "all");
+      const subEnd = this.getMeshSubmeshEnd(m2, "all");
+      if (subEnd - subStart <= 1) {
+        continue;
+      }
+      largestMesh = Math.max(largestMesh, this.getMeshIndexCount(m2, "all"));
+      reordered[m2] = this.Sort(subStart, subEnd, (i2) => this.getSubmeshAlpha(i2), submeshArrays);
+    }
+    return largestMesh;
+  }
+  Sort(start, end, criterion, arrays) {
+    let swapped = false;
+    while (true) {
+      let loop = false;
+      for (let i2 = start; i2 < end - 1; i2++) {
+        if (criterion(i2) < criterion(i2 + 1)) {
+          loop = true;
+          swapped = true;
+          for (let j = 0; j < arrays.length; j++) {
+            const array = arrays[j];
+            const t2 = array[i2];
+            array[i2] = array[i2 + 1];
+            array[i2 + 1] = t2;
+          }
+        }
+      }
+      if (!loop) {
+        break;
+      }
+    }
+    return swapped;
+  }
+  reorderIndices(meshIndexOffsets, submeshEnd, meshReordered, bufferSize) {
+    const meshCount = this.getMeshCount();
+    const buffer = new Float32Array(bufferSize);
+    for (let m2 = 0; m2 < meshCount; m2++) {
+      if (!meshReordered[m2])
+        continue;
+      const meshOffset = meshIndexOffsets[m2];
+      const subStart = this.getMeshSubmeshStart(m2, "all");
+      const subEnd = this.getMeshSubmeshEnd(m2, "all");
+      let index = 0;
+      for (let s = subStart; s < subEnd; s++) {
+        const start = this.submeshIndexOffset[s];
+        const end = submeshEnd[s];
+        this.submeshIndexOffset[s] = meshOffset + index;
+        for (let i2 = start; i2 < end; i2++) {
+          buffer[index++] = this.indices[i2];
+        }
+      }
+      for (let i2 = 0; i2 < index; i2++) {
+        this.indices[meshOffset + i2] = buffer[i2];
+      }
+    }
+  }
+  rebaseIndices() {
+    const count = this.getMeshCount();
+    for (let m2 = 0; m2 < count; m2++) {
+      const offset = this.meshVertexOffsets[m2];
+      const start = this.getMeshIndexStart(m2, "all");
+      const end = this.getMeshIndexEnd(m2, "all");
+      for (let i2 = start; i2 < end; i2++) {
+        this.indices[i2] -= offset;
+      }
+    }
+  }
+  computeMeshOpaqueCount() {
+    const result = new Array(this.getMeshCount()).fill(0);
+    for (let m2 = 0; m2 < result.length; m2++) {
+      const subStart = this.getMeshSubmeshStart(m2, "all");
+      const subEnd = this.getMeshSubmeshEnd(m2, "all");
+      for (let s = subStart; s < subEnd; s++) {
+        const alpha = this.getSubmeshAlpha(s);
+        result[m2] += alpha === 1 ? 1 : 0;
+      }
+    }
+    return result;
+  }
+  getMeshIndexStart(mesh, section = "all") {
+    const sub = this.getMeshSubmeshStart(mesh, section);
+    return this.getSubmeshIndexStart(sub);
+  }
+  getMeshIndexEnd(mesh, section = "all") {
+    const sub = this.getMeshSubmeshEnd(mesh, section);
+    return this.getSubmeshIndexEnd(sub - 1);
+  }
+  getMeshIndexCount(mesh, section = "all") {
+    return this.getMeshIndexEnd(mesh, section) - this.getMeshIndexStart(mesh, section);
+  }
+  getMeshVertexStart(mesh) {
+    return this.meshVertexOffsets[mesh];
+  }
+  getMeshVertexEnd(mesh) {
+    return mesh < this.meshVertexOffsets.length - 1 ? this.meshVertexOffsets[mesh + 1] : this.getVertexCount();
+  }
+  getMeshVertexCount(mesh) {
+    return this.getMeshVertexEnd(mesh) - this.getMeshVertexStart(mesh);
+  }
+  getMeshSubmeshStart(mesh, section = "all") {
+    if (section === "transparent") {
+      return this.getMeshSubmeshEnd(mesh, "opaque");
+    }
+    return this.meshSubmeshes[mesh];
+  }
+  getMeshSubmeshEnd(mesh, section = "all") {
+    if (section === "opaque") {
+      return this.meshSubmeshes[mesh] + this.meshOpaqueCount[mesh];
+    }
+    return mesh < this.meshSubmeshes.length - 1 ? this.meshSubmeshes[mesh + 1] : this.submeshIndexOffset.length;
+  }
+  getMeshSubmeshCount(mesh, section = "all") {
+    const end = this.getMeshSubmeshEnd(mesh, section);
+    const start = this.getMeshSubmeshStart(mesh, section);
+    return end - start;
+  }
+  getMeshHasTransparency(mesh) {
+    return this.getMeshSubmeshCount(mesh, "transparent") > 0;
+  }
+  getSubmeshIndexStart(submesh) {
+    return submesh < this.submeshIndexOffset.length ? this.submeshIndexOffset[submesh] : this.indices.length;
+  }
+  getSubmeshIndexEnd(submesh) {
+    return submesh < this.submeshIndexOffset.length - 1 ? this.submeshIndexOffset[submesh + 1] : this.indices.length;
+  }
+  getSubmeshIndexCount(submesh) {
+    return this.getSubmeshIndexEnd(submesh) - this.getSubmeshIndexStart(submesh);
+  }
+  getSubmeshColor(submesh) {
+    return this.getMaterialColor(this.submeshMaterial[submesh]);
+  }
+  getSubmeshAlpha(submesh) {
+    return this.getMaterialAlpha(this.submeshMaterial[submesh]);
+  }
+  getSubmeshIsTransparent(submesh) {
+    return this.getSubmeshAlpha(submesh) < 1;
+  }
+  getSubmeshCount() {
+    return this.submeshMaterial.length;
+  }
+  getInstanceMesh(instance) {
+    return this.instanceMeshes[instance];
+  }
+  getInstanceMatrix(instance) {
+    return this.instanceTransforms.subarray(instance * this.MATRIX_SIZE, (instance + 1) * this.MATRIX_SIZE);
+  }
+  getMaterialColor(material) {
+    if (material < 0)
+      return this.DEFAULT_COLOR;
+    return this.materialColors.subarray(material * this.COLOR_SIZE, (material + 1) * this.COLOR_SIZE);
+  }
+  getMaterialAlpha(material) {
+    if (material < 0)
+      return 1;
+    const index = material * this.COLOR_SIZE + this.COLOR_SIZE - 1;
+    const result = this.materialColors[index];
+    return result;
+  }
+  static async createFromBfast(bfast) {
+    return AbstractG3d.createFromBfast(bfast).then((g3d) => new G3d(g3d));
+  }
+  validate() {
+    const isPresent = (attribute, label) => {
+      if (!attribute) {
+        throw new Error(`Missing Attribute Buffer: ${label}`);
+      }
+    };
+    isPresent(this.positions, "position");
+    isPresent(this.indices, "indices");
+    isPresent(this.instanceMeshes, "instanceMeshes");
+    isPresent(this.instanceTransforms, "instanceTransforms");
+    isPresent(this.meshSubmeshes, "meshSubmeshes");
+    isPresent(this.submeshIndexOffset, "submeshIndexOffset");
+    isPresent(this.submeshMaterial, "submeshMaterial");
+    isPresent(this.materialColors, "materialColors");
+    if (this.positions.length % this.POSITION_SIZE !== 0) {
+      throw new Error("Invalid position buffer, must be divisible by " + this.POSITION_SIZE);
+    }
+    if (this.indices.length % 3 !== 0) {
+      throw new Error("Invalid Index Count, must be divisible by 3");
+    }
+    for (let i2 = 0; i2 < this.indices.length; i2++) {
+      if (this.indices[i2] < 0 || this.indices[i2] >= this.positions.length) {
+        throw new Error("Vertex index out of bound");
+      }
+    }
+    if (this.instanceMeshes.length !== this.instanceTransforms.length / this.MATRIX_SIZE) {
+      throw new Error("Instance buffers mismatched");
+    }
+    if (this.instanceTransforms.length % this.MATRIX_SIZE !== 0) {
+      throw new Error("Invalid InstanceTransform buffer, must respect arity " + this.MATRIX_SIZE);
+    }
+    for (let i2 = 0; i2 < this.instanceMeshes.length; i2++) {
+      if (this.instanceMeshes[i2] >= this.meshSubmeshes.length) {
+        throw new Error("Instance Mesh Out of range.");
+      }
+    }
+    for (let i2 = 0; i2 < this.meshSubmeshes.length; i2++) {
+      if (this.meshSubmeshes[i2] < 0 || this.meshSubmeshes[i2] >= this.submeshIndexOffset.length) {
+        throw new Error("MeshSubmeshOffset out of bound at");
+      }
+    }
+    for (let i2 = 0; i2 < this.meshSubmeshes.length - 1; i2++) {
+      if (this.meshSubmeshes[i2] >= this.meshSubmeshes[i2 + 1]) {
+        throw new Error("MeshSubmesh out of sequence.");
+      }
+    }
+    if (this.submeshIndexOffset.length !== this.submeshMaterial.length) {
+      throw new Error("Mismatched submesh buffers");
+    }
+    for (let i2 = 0; i2 < this.submeshIndexOffset.length; i2++) {
+      if (this.submeshIndexOffset[i2] < 0 || this.submeshIndexOffset[i2] >= this.indices.length) {
+        throw new Error("SubmeshIndexOffset out of bound");
+      }
+    }
+    for (let i2 = 0; i2 < this.submeshIndexOffset.length; i2++) {
+      if (this.submeshIndexOffset[i2] % 3 !== 0) {
+        throw new Error("Invalid SubmeshIndexOffset, must be divisible by 3");
+      }
+    }
+    for (let i2 = 0; i2 < this.submeshIndexOffset.length - 1; i2++) {
+      if (this.submeshIndexOffset[i2] >= this.submeshIndexOffset[i2 + 1]) {
+        throw new Error("SubmeshIndexOffset out of sequence.");
+      }
+    }
+    for (let i2 = 0; i2 < this.submeshMaterial.length; i2++) {
+      if (this.submeshMaterial[i2] >= this.materialColors.length) {
+        throw new Error("submeshMaterial out of bound");
+      }
+    }
+    if (this.materialColors.length % this.COLOR_SIZE !== 0) {
+      throw new Error("Invalid material color buffer, must be divisible by " + this.COLOR_SIZE);
+    }
+    console.assert(this.meshInstances.length === this.getMeshCount());
+    console.assert(this.meshOpaqueCount.length === this.getMeshCount());
+    console.assert(this.meshSubmeshes.length === this.getMeshCount());
+    console.assert(this.meshVertexOffsets.length === this.getMeshCount());
+    for (let m2 = 0; m2 < this.getMeshCount(); m2++) {
+      console.assert(this.getMeshSubmeshCount(m2, "opaque") + this.getMeshSubmeshCount(m2, "transparent") === this.getMeshSubmeshCount(m2, "all"));
+      console.assert(this.getMeshIndexCount(m2, "opaque") + this.getMeshIndexCount(m2, "transparent") === this.getMeshIndexCount(m2, "all"));
+    }
+  }
+}
+const objectModel = {
+  header: "header",
+  entities: "entities",
+  bimDocument: {
+    table: "Vim.BimDocument",
+    columns: {
+      title: "string:Title",
+      version: "string:Version",
+      author: "string:Author",
+      date: "string:IssueDate"
+    }
+  },
+  category: {
+    table: "Vim.Category",
+    index: "index:Vim.Category:Category",
+    columns: {
+      name: "string:Name"
+    }
+  },
+  document: {
+    table: "Vim.BimDocument",
+    index: "index:Vim.BimDocument:BimDocument",
+    columns: {
+      name: "string:Name",
+      title: "string:Title"
+    }
+  },
+  element: {
+    table: "Vim.Element",
+    index: "index:Vim.Element:Element",
+    columns: {
+      name: "string:Name",
+      familyName: "string:FamilyName",
+      id: "int:Id"
+    }
+  },
+  familyInstance: {
+    table: "Vim.FamilyInstance",
+    columns: {}
+  },
+  familyType: {
+    table: "Vim.FamilyType",
+    index: "index:Vim.FamilyType:FamilyType",
+    columns: {
+      name: "string:Name"
+    }
+  },
+  family: {
+    table: "Vim.Family",
+    index: "index:Vim.Family:Family",
+    columns: {}
+  },
+  nodes: {
+    table: "Vim.Node"
+  },
+  parameter: {
+    table: "Vim.Parameter",
+    columns: {
+      value: "string:Value"
+    }
+  },
+  parameterDescriptor: {
+    table: "Vim.ParameterDescriptor",
+    index: "index:Vim.ParameterDescriptor:ParameterDescriptor",
+    columns: {
+      name: "string:Name",
+      group: "string:Group",
+      isInstance: "byte:IsInstance"
+    }
+  },
+  workset: {
+    table: "Vim.Workset",
+    index: "index:Vim.Workset:Workset",
+    columns: {
+      name: "string:Name"
+    }
+  }
+};
+class DocumentNoBim {
+  constructor(header, g3d) {
+    __publicField(this, "header");
+    __publicField(this, "g3d");
+    this.header = header;
+    this.g3d = g3d;
+  }
+  getAllElements() {
+    return [].keys();
+  }
+  hasElement(element) {
+    return false;
+  }
+  getInstancesFromElement(element) {
+    return void 0;
+  }
+  async getElement(element) {
+    return void 0;
+  }
+  async getElementValue(element, field) {
+    return void 0;
+  }
+  getElementFromInstance(instance) {
+    return void 0;
+  }
+  getElementsFromElementId(elementId) {
+    return [];
+  }
+  getElementId(element) {
+    return void 0;
+  }
+  async getEntity(name, index) {
+    return void 0;
+  }
+  getString(index) {
+    return void 0;
+  }
+  async getElementsSummary(elements) {
+    return void 0;
+  }
+  async getElementParameters(element) {
+    return void 0;
+  }
+  getBimDocumentSummary() {
+    return void 0;
+  }
+}
+class Document {
+  constructor(header, g3d, entities, strings, instanceToElement, elementToInstances, elementIds, elementIdToElements) {
+    __publicField(this, "header");
+    __publicField(this, "g3d");
+    __publicField(this, "entities");
+    __publicField(this, "_strings");
+    __publicField(this, "_instanceToElement");
+    __publicField(this, "_elementToInstances");
+    __publicField(this, "_elementIds");
+    __publicField(this, "_elementIdToElements");
+    this.header = header;
+    this.g3d = g3d;
+    this.entities = entities;
+    this._strings = strings;
+    this._instanceToElement = instanceToElement;
+    this._elementToInstances = elementToInstances;
+    this._elementIds = elementIds;
+    this._elementIdToElements = elementIdToElements;
+  }
+  static async createFromBfast(bfast, streamG3d = false) {
+    let header;
+    let g3d;
+    let entity;
+    let strings;
+    let instanceToElement;
+    let elementIds;
+    await Promise.all([
+      Document.requestHeader(bfast).then((h) => header = h),
+      Document.requestG3d(bfast, streamG3d).then((g) => g3d = g),
+      Document.requestStrings(bfast).then((strs) => strings = strs),
+      Document.requestEntities(bfast).then((ets) => entity = ets).then((ets) => Promise.all([
+        Document.requestInstanceToElement(ets).then((array) => instanceToElement = array),
+        Document.requestElementIds(ets).then((v2) => elementIds = v2)
+      ]))
+    ]);
+    if (!entity) {
+      return new DocumentNoBim(header, g3d);
+    }
+    const elementToInstance = Document.invert(instanceToElement);
+    const elementIdToElements = Document.invert(elementIds);
+    return new Document(header, g3d, entity, strings, instanceToElement, elementToInstance, elementIds, elementIdToElements);
+  }
+  static async requestHeader(bfast) {
+    const header = await bfast.getBuffer(objectModel.header);
+    const pairs = new TextDecoder("utf-8").decode(header).split("\n");
+    const map = new Map(pairs.map((p2) => p2.split("=")).map((p2) => [p2[0], p2[1]]));
+    return {
+      vim: map.get("vim"),
+      id: map.get("id"),
+      revision: map.get("revision"),
+      generator: map.get("generator"),
+      created: map.get("created"),
+      schema: map.get("schema")
+    };
+  }
+  static async requestG3d(bfast, streamG3d) {
+    const geometry = streamG3d ? await bfast.getBfast("geometry") : await bfast.getLocalBfast("geometry");
+    if (!geometry) {
+      throw new Error("Could not get G3d Data from VIM file.");
+    }
+    const g3d = await G3d.createFromBfast(geometry);
+    return g3d;
+  }
+  static async requestStrings(bfast) {
+    const buffer = await bfast.getBuffer("strings");
+    if (!buffer) {
+      console.error("Could not get String Data from VIM file. Bim features will be disabled.");
+      return;
+    }
+    const strings = new TextDecoder("utf-8").decode(buffer).split("\0");
+    return strings;
+  }
+  static async requestEntities(bfast) {
+    const entities = await bfast.getBfast(objectModel.entities);
+    if (!entities) {
+      console.error("Could not get String Data from VIM file. Bim features will be disabled.");
+    }
+    return entities;
+  }
+  static async requestInstanceToElement(entities) {
+    if (!entities)
+      return;
+    const nodes = await entities.getBfast(objectModel.nodes.table);
+    const instances = await (nodes == null ? void 0 : nodes.getArray(objectModel.element.index));
+    if (!instances) {
+      throw new Error("Could not get InstanceToElement from VIM file.");
+    }
+    return instances;
+  }
+  static async requestElementIds(entities) {
+    var _a22;
+    if (!entities)
+      return;
+    const elements = await entities.getBfast(objectModel.element.table);
+    const ids = (_a22 = await (elements == null ? void 0 : elements.getArray("int:Id"))) != null ? _a22 : await (elements == null ? void 0 : elements.getArray("numeric:Id"));
+    if (!ids) {
+      throw new Error("Could not get ElementIds from VIM file.");
+    }
+    return ids;
+  }
+  static invert(data2) {
+    const result = /* @__PURE__ */ new Map();
+    for (let i2 = 0; i2 < data2.length; i2++) {
+      const value = data2[i2];
+      const list = result.get(value);
+      if (list) {
+        list.push(i2);
+      } else {
+        result.set(value, [i2]);
+      }
+    }
+    return result;
+  }
+  hasElement(element) {
+    return element >= 0 && element < this._elementIds.length;
+  }
+  getAllElements() {
+    return this._elementIds.keys();
+  }
+  getInstancesFromElement(element) {
+    var _a22;
+    if (!this.hasElement(element))
+      return;
+    return (_a22 = this._elementToInstances.get(element)) != null ? _a22 : [];
+  }
+  async getElement(element) {
+    return this.getEntity(objectModel.element.table, element);
+  }
+  async getElementValue(element, field) {
+    const elements = await this.entities.getBfast(objectModel.element.table);
+    if (!elements)
+      return;
+    const value = await elements.getValue(field, element);
+    return value;
+  }
+  getElementFromInstance(instance) {
+    return this._instanceToElement[instance];
+  }
+  getElementsFromElementId(elementId) {
+    return this._elementIdToElements.get(elementId);
+  }
+  getElementId(element) {
+    return this._elementIds[element];
+  }
+  async getEntity(name, index) {
+    const elements = await this.entities.getBfast(name);
+    const row = await (elements == null ? void 0 : elements.getRow(index));
+    if (!row)
+      return;
+    this.resolveStrings(row);
+    return row;
+  }
+  getString(index) {
+    var _a22;
+    return (_a22 = this._strings) == null ? void 0 : _a22[index];
+  }
+  async getElementsSummary(elements) {
+    const set3 = elements ? new Set(elements) : void 0;
+    const elementTable = await this.entities.getBfast(objectModel.element.table);
+    const elementNameArray = await (elementTable == null ? void 0 : elementTable.getArray(objectModel.element.columns.name));
+    const elementIdArray = await (elementTable == null ? void 0 : elementTable.getArray(objectModel.element.columns.id));
+    const getElementName = (element) => {
+      if (!elementNameArray)
+        return;
+      return this.getString(elementNameArray == null ? void 0 : elementNameArray[element]);
+    };
+    const elementCategoryArray = await (elementTable == null ? void 0 : elementTable.getArray(objectModel.category.index));
+    const categoryTable = await this.entities.getBfast(objectModel.category.table);
+    const categoryNameArray = await (categoryTable == null ? void 0 : categoryTable.getArray(objectModel.category.columns.name));
+    const getCategory = (element) => {
+      if (!categoryNameArray)
+        return;
+      if (!elementCategoryArray)
+        return;
+      return this.getString(categoryNameArray[elementCategoryArray[element]]);
+    };
+    const familyInstanceTable = await this.entities.getBfast(objectModel.familyInstance.table);
+    const familyNameArray = await (elementTable == null ? void 0 : elementTable.getArray(objectModel.element.columns.familyName));
+    const getFamilyName = (element) => familyNameArray ? this.getString(familyNameArray[element]) : void 0;
+    const familyInstanceFamilyType = await (familyInstanceTable == null ? void 0 : familyInstanceTable.getArray(objectModel.familyType.index));
+    const familyTypeTable = await this.entities.getBfast(objectModel.familyType.table);
+    const familyTypeElementArray = await (familyTypeTable == null ? void 0 : familyTypeTable.getArray(objectModel.element.index));
+    const getFamilyTypeName = (family) => {
+      if (!elementNameArray)
+        return;
+      if (!familyTypeElementArray)
+        return;
+      if (!familyInstanceFamilyType)
+        return;
+      return this.getString(elementNameArray[familyTypeElementArray[familyInstanceFamilyType[family]]]);
+    };
+    const elementWorksetArray = await (elementTable == null ? void 0 : elementTable.getArray(objectModel.workset.index));
+    const worksetTable = await this.entities.getBfast(objectModel.workset.table);
+    const worksetNameArray = await (worksetTable == null ? void 0 : worksetTable.getArray(objectModel.workset.columns.name));
+    const getWorkset = (element) => {
+      if (!worksetNameArray)
+        return;
+      if (!elementWorksetArray)
+        return;
+      return this.getString(worksetNameArray[elementWorksetArray[element]]);
+    };
+    const elementDocumentArray = await (elementTable == null ? void 0 : elementTable.getArray(objectModel.document.index));
+    const documentTable = await this.entities.getBfast(objectModel.document.table);
+    const documentTitleArray = await (documentTable == null ? void 0 : documentTable.getArray(objectModel.document.columns.title));
+    const getDocument = (element) => {
+      if (!documentTitleArray)
+        return;
+      if (!elementDocumentArray)
+        return;
+      return this.getString(documentTitleArray[elementDocumentArray[element]]);
+    };
+    const familyInstanceElement = await (familyInstanceTable == null ? void 0 : familyInstanceTable.getArray(objectModel.element.index));
+    const summary = [];
+    familyInstanceElement == null ? void 0 : familyInstanceElement.forEach((e, f2) => {
+      if (!set3 || set3.has(e)) {
+        summary.push({
+          element: e,
+          id: elementIdArray == null ? void 0 : elementIdArray[e],
+          name: getElementName(e),
+          categoryName: getCategory(e),
+          familyName: getFamilyName(e),
+          familyTypeName: getFamilyTypeName(f2),
+          workset: getWorkset(e),
+          documentTitle: getDocument(e)
+        });
+      }
+    });
+    return summary;
+  }
+  async getElementParameters(element) {
+    const result = [];
+    const instance = await this.getElementsParameters([element], true);
+    instance == null ? void 0 : instance.forEach((i2) => result.push(i2));
+    const familyInstance = await this.getElementFamilyInstance(element);
+    const familyType = familyInstance ? await this.getFamilyInstanceFamilyType(familyInstance) : void 0;
+    const family = familyType ? await this.getFamilyTypeFamily(familyType) : void 0;
+    const familyTypeElement = familyType ? await this.getFamiltyTypeElement(familyType) : void 0;
+    const familyElement = family ? await this.getFamilyElement(family) : void 0;
+    const elements = [];
+    if (familyTypeElement)
+      elements.push(familyTypeElement);
+    if (familyElement)
+      elements.push(familyElement);
+    const type = await this.getElementsParameters(elements, false);
+    type == null ? void 0 : type.forEach((i2) => result.push(i2));
+    return result;
+  }
+  async getElementsParameters(elements, isInstance) {
+    const set3 = new Set(elements);
+    const parameterTable = await this.entities.getBfast(objectModel.parameter.table);
+    const parameterElement = parameterTable ? await parameterTable.getArray(objectModel.element.index) : void 0;
+    const parameterValue = parameterTable ? await parameterTable.getArray(objectModel.parameter.columns.value) : void 0;
+    const getParameterDisplayValue = (index) => {
+      var _a22;
+      if (!parameterValue)
+        return;
+      const value = (_a22 = this.getString(parameterValue[index])) == null ? void 0 : _a22.split("|");
+      const displayValue = value == null ? void 0 : value[value.length - 1];
+      return displayValue;
+    };
+    const parameterDescription = parameterTable ? await parameterTable.getArray(objectModel.parameterDescriptor.index) : void 0;
+    const parameterDescriptor = await this.entities.getBfast(objectModel.parameterDescriptor.table);
+    const parameterDescriptorName = parameterDescriptor ? await parameterDescriptor.getArray(objectModel.parameterDescriptor.columns.name) : void 0;
+    const getParameterName = (descriptor) => {
+      if (descriptor === void 0)
+        return;
+      if (!parameterDescriptorName)
+        return;
+      return this.getString(parameterDescriptorName[descriptor]);
+    };
+    const parameterDescriptorGroup = parameterDescriptor ? await parameterDescriptor.getArray(objectModel.parameterDescriptor.columns.group) : void 0;
+    const getParameterGroup = (descriptor) => {
+      if (!descriptor)
+        return;
+      if (!parameterDescriptorGroup)
+        return;
+      return this.getString(parameterDescriptorGroup[descriptor]);
+    };
+    const result = [];
+    if (!parameterElement)
+      return void 0;
+    parameterElement.forEach((e, i2) => {
+      if (set3.has(e)) {
+        const d = parameterDescription == null ? void 0 : parameterDescription[i2];
+        result.push({
+          name: getParameterName(d),
+          value: getParameterDisplayValue(i2),
+          group: getParameterGroup(d),
+          isInstance
+        });
+      }
+    });
+    return result;
+  }
+  async getElementFamilyInstance(element) {
+    const familyInstanceTable = await this.entities.getBfast(objectModel.familyInstance.table);
+    const familyInstanceElementArray = familyInstanceTable ? await familyInstanceTable.getArray(objectModel.element.index) : void 0;
+    let result;
+    familyInstanceElementArray == null ? void 0 : familyInstanceElementArray.forEach((e, i2) => {
+      if (e === element) {
+        result = i2;
+      }
+    });
+    return result;
+  }
+  async getFamilyInstanceFamilyType(familyInstance) {
+    const familyInstanceTable = await this.entities.getBfast(objectModel.familyInstance.table);
+    const result = await (familyInstanceTable == null ? void 0 : familyInstanceTable.getValue(objectModel.familyType.index, familyInstance));
+    return result;
+  }
+  async getFamilyTypeFamily(familyType) {
+    const familyTypeTable = await this.entities.getBfast(objectModel.familyType.table);
+    const result = await (familyTypeTable == null ? void 0 : familyTypeTable.getValue(objectModel.family.index, familyType));
+    return result;
+  }
+  async getFamiltyTypeElement(familyType) {
+    const familyTypeTable = await this.entities.getBfast(objectModel.familyType.table);
+    const result = await (familyTypeTable == null ? void 0 : familyTypeTable.getValue(objectModel.element.index, familyType));
+    return result;
+  }
+  async getBimDocumentSummary() {
+    const documentTable = await this.entities.getBfast(objectModel.bimDocument.table);
+    const titles = (await documentTable.getArray(objectModel.bimDocument.columns.title)).map((n2) => this._strings[n2]);
+    const versions2 = (await documentTable.getArray(objectModel.bimDocument.columns.version)).map((n2) => this._strings[n2]);
+    const authors = (await documentTable.getArray(objectModel.bimDocument.columns.author)).map((n2) => this._strings[n2]);
+    const dates = (await documentTable.getArray(objectModel.bimDocument.columns.date)).map((n2) => this._strings[n2]);
+    const max2 = Math.max(titles.length, versions2.length, authors.length, dates.length);
+    const summary = [];
+    for (let i2 = 0; i2 < max2; i2++) {
+      summary.push({
+        title: titles[i2],
+        version: versions2[i2],
+        author: authors[i2],
+        date: dates[i2]
+      });
+    }
+    return summary;
+  }
+  async getFamilyElement(family) {
+    const familyTable = await this.entities.getBfast(objectModel.family.table);
+    const result = await (familyTable == null ? void 0 : familyTable.getValue(objectModel.element.index, family));
+    return result;
+  }
+  resolveStrings(map) {
+    if (!this._strings)
+      return;
+    const result = map;
+    for (const key of map.keys()) {
+      if (key.startsWith("string:")) {
+        const v2 = map.get(key);
+        result.set(key, v2 ? this._strings[v2] : void 0);
+      }
+    }
+  }
+}
+class VimMaterials {
+  constructor(opaque, transparent, wireframe, isolation, focus) {
+    __publicField(this, "opaque");
+    __publicField(this, "transparent");
+    __publicField(this, "wireframe");
+    __publicField(this, "isolation");
+    __publicField(this, "focus");
+    this.opaque = opaque != null ? opaque : createOpaque();
+    this.transparent = transparent != null ? transparent : createTransparent();
+    this.wireframe = wireframe != null ? wireframe : createWireframe();
+    this.isolation = isolation != null ? isolation : createIsolationMaterial();
+    this.focus = focus != null ? focus : createFocus();
+  }
+  applyWireframeSettings(color, opacity) {
+    this.wireframe.color = color;
+    this.wireframe.opacity = opacity;
+  }
+  dispose() {
+    this.opaque.dispose();
+    this.transparent.dispose();
+    this.wireframe.dispose();
+    this.isolation.dispose();
+    this.focus.dispose();
+  }
+}
+function createBase() {
+  return new MeshPhongMaterial({
+    color: 10066329,
+    vertexColors: true,
+    flatShading: true,
+    side: DoubleSide,
+    shininess: 5
+  });
+}
+function createOpaque() {
+  const mat = createBase();
+  patchBaseMaterial(mat);
+  return mat;
+}
+function createTransparent() {
+  const mat = createBase();
+  mat.transparent = true;
+  mat.shininess = 70;
+  patchBaseMaterial(mat);
+  return mat;
+}
+function createWireframe() {
+  const material = new LineBasicMaterial({
+    depthTest: false,
+    opacity: 1,
+    color: new Color(255),
+    transparent: true
+  });
+  return material;
+}
+function createFocus() {
+  const material = new MeshBasicMaterial({
+    depthTest: false,
+    opacity: 0.15,
+    color: new Color(1, 1, 1),
+    transparent: true
+  });
+  return material;
+}
+function patchBaseMaterial(material) {
+  material.onBeforeCompile = (shader) => {
+    material.userData.shader = shader;
+    shader.vertexShader = shader.vertexShader.replace("#include <color_pars_vertex>", `
+        #include <color_pars_vertex>
+        
+        // COLORING
+
+        // attribute for color override
+        // merged meshes use it as vertex attribute
+        // instanced meshes use it as an instance attribute
+        attribute float colored;
+
+        // There seems to be an issue where setting mehs.instanceColor
+        // doesn't properly set USE_INSTANCING_COLOR
+        // so we always use it as a fix
+        #ifndef USE_INSTANCING_COLOR
+        attribute vec3 instanceColor;
+        #endif
+
+        // Passed to fragment to ignore phong model
+        varying float vColored;
+        
+        // VISIBILITY
+
+        // Instance or vertex attribute to hide objects 
+        #ifdef USE_INSTANCING
+          attribute float ignoreInstance;
+        #else
+          attribute float ignoreVertex;
+        #endif
+
+        // Passed to fragment to discard them
+        varying float vIgnore;
+
+        `).replace("#include <color_vertex>", `
+          // COLORING
+          vColor = color;
+          vColored = colored;
+
+          // colored == 1 -> instance color
+          // colored == 0 -> vertex color
+          #ifdef USE_INSTANCING
+            vColor.xyz = colored * instanceColor.xyz + (1.0f - colored) * color.xyz;
+          #endif
+
+
+          // VISIBILITY
+          // Set frag ignore from instance or vertex attribute
+          #ifdef USE_INSTANCING
+            vIgnore = ignoreInstance;
+          #else
+            vIgnore = ignoreVertex;
+          #endif
+
+        `);
+    shader.fragmentShader = shader.fragmentShader.replace("#include <clipping_planes_pars_fragment>", `
+        #include <clipping_planes_pars_fragment>
+        varying float vIgnore;
+        varying float vColored;
+        `).replace("#include <output_fragment>", `
+          // VISIBILITY
+          if (vIgnore > 0.0f)
+            discard;
+         
+          // COLORING
+          // vColored == 1 -> Vertex Color * light 
+          // vColored == 0 -> Phong Color 
+          float d = length(outgoingLight);
+          gl_FragColor = vec4(vColored * vColor.xyz * d + (1.0f - vColored) * outgoingLight.xyz, diffuseColor.a);
+        `);
+  };
+}
+function createIsolationMaterial() {
+  return new ShaderMaterial({
+    uniforms: {
+      opacity: { value: 0.1 },
+      fillColor: { value: new Vector3(0.5, 0.5, 0.5) }
+    },
+    vertexColors: true,
+    transparent: true,
+    clipping: true,
+    vertexShader: `
+
+      #include <common>
+      #include <logdepthbuf_pars_vertex>
+      #include <clipping_planes_pars_vertex>
+        
+      // VISIBILITY
+      // Instance or vertex attribute to hide objects 
+      #ifdef USE_INSTANCING
+        attribute float ignoreInstance;
+      #else
+        attribute float ignoreVertex;
+      #endif
+
+      // Passed to fragment to discard them
+      varying float vIgnore;
+      varying vec3 vPosition;
+
+
+      // COLORING
+      varying vec3 vColor;
+
+      // attribute for color override
+      // merged meshes use it as vertex attribute
+      // instanced meshes use it as an instance attribute
+      attribute float colored;
+
+      // There seems to be an issue where setting mehs.instanceColor
+      // doesn't properly set USE_INSTANCING_COLOR
+      // so we always use it as a fix
+      #ifndef USE_INSTANCING_COLOR
+      attribute vec3 instanceColor;
+      #endif
+
+      void main() {
+        #include <begin_vertex>
+        #include <project_vertex>
+        #include <clipping_planes_vertex>
+        #include <logdepthbuf_vertex>
+
+        // VISIBILITY
+        // Set frag ignore from instance or vertex attribute
+        #ifdef USE_INSTANCING
+          vIgnore = ignoreInstance;
+        #else
+          vIgnore = ignoreVertex;
+        #endif
+
+        // COLORING
+        vColor = color.xyz;
+
+        // colored == 1 -> instance color
+        // colored == 0 -> vertex color
+        #ifdef USE_INSTANCING
+          vColor.xyz = colored * instanceColor.xyz + (1.0f - colored) * color.xyz;
+        #endif
+
+
+        // ORDERING
+        if(vIgnore > 0.0f){
+          gl_Position.z = 1.0f;
+        }else{
+          gl_Position.z = -1.0f;
+        }
+        
+        // LIGHTING
+        vPosition = vec3(mvPosition ) / mvPosition .w;
+      }
+      `,
+    fragmentShader: `
+      #include <clipping_planes_pars_fragment>
+      varying float vIgnore;
+      uniform float opacity;
+      uniform vec3 fillColor;
+      varying vec3 vPosition;
+      varying vec3 vColor;
+
+      void main() {
+        #include <clipping_planes_fragment>
+
+        if (vIgnore > 0.0f){
+          gl_FragColor = vec4(fillColor, opacity);
+        }
+        else{ 
+          gl_FragColor = vec4(vColor.x, vColor.y, vColor.z, 1.0f);
+
+          // LIGHTING
+          vec3 normal = normalize( cross(dFdx(vPosition), dFdy(vPosition)) );
+          float light = dot(normal, normalize(vec3(1.4142f, 1.732f, 2.2360f)));
+          light = 0.5 + (light *0.5);
+          gl_FragColor.xyz *= light;
+        }
+      }
+      `
+  });
+}
+class MeshBuilder {
+  constructor(materials) {
+    __publicField(this, "materials");
+    this.materials = materials != null ? materials : new VimMaterials();
+  }
+  createInstancedMeshes(g3d, transparency, instances) {
+    const result = [];
+    const set3 = instances ? new Set(instances) : void 0;
+    for (let mesh = 0; mesh < g3d.getMeshCount(); mesh++) {
+      let meshInstances = g3d.meshInstances[mesh];
+      if (!meshInstances)
+        continue;
+      meshInstances = set3 ? meshInstances.filter((i2) => set3.has(i2)) : meshInstances.filter((i2) => (g3d.instanceFlags[i2] & 1) === 0);
+      if (meshInstances.length <= 1)
+        continue;
+      const createMesh = (section, transparent) => {
+        const count = g3d.getMeshSubmeshCount(mesh, section);
+        if (count <= 0)
+          return;
+        const geometry = Geometry.createGeometryFromMesh(g3d, mesh, section, transparent);
+        return this.createInstancedMesh(geometry, g3d, meshInstances, transparent);
+      };
+      switch (transparency) {
+        case "all": {
+          result.push(createMesh("opaque", false));
+          result.push(createMesh("transparent", true));
+          break;
+        }
+        case "allAsOpaque": {
+          result.push(createMesh("all", false));
+          break;
+        }
+        case "opaqueOnly": {
+          result.push(createMesh("opaque", false));
+          break;
+        }
+        case "transparentOnly": {
+          result.push(createMesh("transparent", true));
+          break;
+        }
+      }
+    }
+    const filter = result.filter((m2) => !!m2);
+    return filter;
+  }
+  createInstancedMesh(geometry, g3d, instances, useAlpha) {
+    const material = useAlpha ? this.materials.transparent : this.materials.opaque;
+    const result = new InstancedMesh(geometry, material, instances.length);
+    geometry.computeBoundingBox();
+    const boxes = [];
+    for (let i2 = 0; i2 < instances.length; i2++) {
+      const matrix = Geometry.getInstanceMatrix(g3d, instances[i2]);
+      result.setMatrixAt(i2, matrix);
+      boxes[i2] = geometry.boundingBox.clone().applyMatrix4(matrix);
+    }
+    result.userData.instances = instances;
+    result.userData.boxes = boxes;
+    return result;
+  }
+  createMergedMesh(g3d, section, transparent, instances) {
+    const merge = instances ? Geometry.mergeInstanceMeshes(g3d, section, transparent, instances) : Geometry.mergeUniqueMeshes(g3d, section, transparent);
+    const material = transparent ? this.materials.transparent : this.materials.opaque;
+    const mesh = new Mesh(merge.geometry, material);
+    mesh.userData.merged = true;
+    mesh.userData.instances = merge.instances;
+    mesh.userData.submeshes = merge.submeshes;
+    mesh.userData.boxes = merge.boxes;
+    return mesh;
+  }
+  createWireframe(g3d, instances) {
+    const geometry = Geometry.createGeometryFromInstances(g3d, instances);
+    const wireframe = new WireframeGeometry(geometry);
+    return new LineSegments(wireframe, this.materials.wireframe);
+  }
+}
+class SceneBuilder {
+  constructor(meshBuilder) {
+    __publicField(this, "meshBuilder");
+    this.meshBuilder = meshBuilder != null ? meshBuilder : new MeshBuilder();
+  }
+  createFromG3d(g3d, transparency = "all", instances = void 0) {
+    const scene = new Scene(this);
+    const shared2 = this.createFromInstanciableMeshes(g3d, transparency, instances);
+    scene.merge(shared2);
+    switch (transparency) {
+      case "all": {
+        scene.merge(this.createFromMergeableMeshes(g3d, "opaque", false, instances));
+        scene.merge(this.createFromMergeableMeshes(g3d, "transparent", true, instances));
+        break;
+      }
+      case "opaqueOnly": {
+        scene.merge(this.createFromMergeableMeshes(g3d, "opaque", false, instances));
+        break;
+      }
+      case "transparentOnly": {
+        scene.merge(this.createFromMergeableMeshes(g3d, "transparent", true, instances));
+        break;
+      }
+      case "allAsOpaque": {
+        scene.merge(this.createFromMergeableMeshes(g3d, "all", false, instances));
+        break;
+      }
+    }
+    return scene;
+  }
+  createFromInstanciableMeshes(g3d, transparency, instances = void 0) {
+    const meshes = this.meshBuilder.createInstancedMeshes(g3d, transparency, instances);
+    const scene = new Scene(this);
+    for (let m2 = 0; m2 < meshes.length; m2++) {
+      scene.addMesh(meshes[m2]);
+    }
+    return scene;
+  }
+  createFromMergeableMeshes(g3d, section, transparent, instances) {
+    const mesh = this.meshBuilder.createMergedMesh(g3d, section, transparent, instances);
+    return new Scene(this).addMesh(mesh);
+  }
+}
+class Vim {
+  constructor(vim, scene, settings2) {
+    __publicField(this, "source");
+    __publicField(this, "document");
+    __publicField(this, "index", -1);
+    __publicField(this, "settings");
+    __publicField(this, "scene");
+    __publicField(this, "_elementToObject", /* @__PURE__ */ new Map());
+    this.document = vim;
+    this.scene = scene;
+    this.scene.setVim(this);
+    this.settings = settings2;
+    this.scene.applyMatrix4(this.settings.getMatrix());
+  }
+  dispose() {
+    this.scene.dispose();
+  }
+  filter(instances) {
+    const next = this.scene.builder.createFromG3d(this.document.g3d, this.settings.getTransparency(), instances);
+    this.scene.dispose();
+    next.applyMatrix4(this.settings.getMatrix());
+    next.setVim(this);
+    this.scene = next;
+    for (const [element, object] of this._elementToObject.entries()) {
+      object.updateMeshes(this.getMeshesFromElement(element));
+    }
+  }
+  applySettings(settings2) {
+    this.settings = settings2;
+    this.scene.applyMatrix4(this.settings.getMatrix());
+  }
+  getMatrix() {
+    return this.settings.getMatrix();
+  }
+  getObjectFromMesh(mesh, index) {
+    const element = this.getElementFromMesh(mesh, index);
+    if (!element)
+      return;
+    return this.getObjectFromElement(element);
+  }
+  getObjectFromInstance(instance) {
+    const element = this.document.getElementFromInstance(instance);
+    if (!element)
+      return;
+    return this.getObjectFromElement(element);
+  }
+  getObjectsFromElementId(id2) {
+    const elements = this.document.getElementsFromElementId(id2);
+    return elements == null ? void 0 : elements.map((e) => this.getObjectFromElement(e)).filter((o) => o !== void 0);
+  }
+  getObjectFromElement(element) {
+    if (!this.document.hasElement(element))
+      return;
+    if (this._elementToObject.has(element)) {
+      return this._elementToObject.get(element);
+    }
+    const instances = this.document.getInstancesFromElement(element);
+    const meshes = this.getMeshesFromInstances(instances);
+    const result = new Object$1(this, element, instances, meshes);
+    this._elementToObject.set(element, result);
+    return result;
+  }
+  getObjectsInBox(box) {
+    const result = [];
+    for (const obj of this.getAllObjects()) {
+      const b = obj.getBoundingBox();
+      if (!b)
+        continue;
+      if (box.containsBox(b)) {
+        result.push(obj);
+      }
+    }
+    return result;
+  }
+  *getAllObjects() {
+    for (const e of this.document.getAllElements()) {
+      const obj = this.getObjectFromElement(e);
+      if (obj)
+        yield obj;
+    }
+  }
+  getMeshesFromElement(element) {
+    const instances = this.document.getInstancesFromElement(element);
+    if (!instances)
+      return;
+    return this.getMeshesFromInstances(instances);
+  }
+  getMeshesFromInstances(instances) {
+    if (!(instances == null ? void 0 : instances.length))
+      return;
+    const meshes = [];
+    for (let i2 = 0; i2 < instances.length; i2++) {
+      const instance = instances[i2];
+      if (instance < 0)
+        continue;
+      const pairs = this.scene.getMeshFromInstance(instance);
+      pairs == null ? void 0 : pairs.forEach((p2) => meshes.push(p2));
+    }
+    if (meshes.length === 0)
+      return;
+    return meshes;
+  }
+  getElementFromMesh(mesh, index) {
+    if (!mesh || index < 0)
+      return;
+    const instance = this.scene.getInstanceFromMesh(mesh, index);
+    if (!instance)
+      return;
+    return this.document.getElementFromInstance(instance);
+  }
+}
+class Loader {
+  constructor(materials) {
+    __publicField(this, "sceneBuilder");
+    __publicField(this, "meshBuilder");
+    this.meshBuilder = new MeshBuilder(materials);
+    this.sceneBuilder = new SceneBuilder(this.meshBuilder);
+  }
+  async load(bfast, settings2) {
+    let document2;
+    const mode = settings2.getDownloadMode();
+    if (mode === "download")
+      await bfast.forceDownload();
+    await Document.createFromBfast(bfast, mode === "stream").then((d) => document2 = d);
+    const scene = this.sceneBuilder.createFromG3d(document2.g3d, settings2.getTransparency());
+    const vim = new Vim(document2, scene, settings2);
+    return vim;
+  }
+}
+class RemoteValue {
+  constructor(getter, label) {
+    __publicField(this, "label");
+    __publicField(this, "_getter");
+    __publicField(this, "_value");
+    __publicField(this, "_request");
+    this._getter = getter;
+    this.label = label != null ? label : "";
+  }
+  get() {
+    if (this._value !== void 0) {
+      return Promise.resolve(this._value);
+    }
+    if (this._request) {
+      return this._request;
+    }
+    this._request = this._getter().then((value) => {
+      this._value = value;
+      this._request = void 0;
+      return this._value;
+    });
+    return this._request;
+  }
+}
+class Request {
+  constructor(field) {
+    __publicField(this, "status", "active");
+    __publicField(this, "field");
+    __publicField(this, "loaded", 0);
+    __publicField(this, "total", 0);
+    __publicField(this, "lengthComputable", true);
+    this.field = field;
+  }
+}
+class RequestLogger {
+  constructor(source) {
+    __publicField(this, "source");
+    __publicField(this, "all", /* @__PURE__ */ new Map());
+    __publicField(this, "lastUpdate", 0);
+    __publicField(this, "delay", 500);
+    __publicField(this, "sleeping", false);
+    __publicField(this, "onUpdate");
+    this.source = source;
+  }
+  get loaded() {
+    let result = 0;
+    this.all.forEach((request) => {
+      result += request.loaded;
+    });
+    return result;
+  }
+  get total() {
+    let result = 0;
+    this.all.forEach((request) => {
+      result += request.total;
+    });
+    return result;
+  }
+  start(field) {
+    this.all.set(field, new Request(field));
+    this.signal();
+  }
+  update(field, progress) {
+    const r2 = this.all.get(field);
+    if (!r2)
+      throw new Error("Updating missing download");
+    if (r2.status !== "active")
+      return;
+    r2.loaded = progress.loaded;
+    r2.total = progress.total;
+    r2.lengthComputable = progress.lengthComputable;
+    this.signal();
+  }
+  fail(field) {
+    console.error(`${field} failed`);
+    const download = this.all.get(field);
+    if (!download)
+      throw new Error("Failing missing download");
+    download.status = "failed";
+    this.signal();
+  }
+  end(field) {
+    var _a22;
+    console.log(`${field} completed`);
+    const download = this.all.get(field);
+    if (!download)
+      throw new Error("Failing missing download");
+    download.status = "completed";
+    (_a22 = this.onUpdate) == null ? void 0 : _a22.call(this, this);
+  }
+  signal() {
+    var _a22;
+    if (this.sleeping)
+      return;
+    this.sleeping = true;
+    setTimeout(() => this.sleeping = false, this.delay);
+    (_a22 = this.onUpdate) == null ? void 0 : _a22.call(this, this);
+  }
+}
+class RetryRequest {
+  constructor(url2, range2, responseType) {
+    __publicField(this, "url");
+    __publicField(this, "range");
+    __publicField(this, "responseType");
+    __publicField(this, "msg");
+    __publicField(this, "xhr");
+    __publicField(this, "onLoad");
+    __publicField(this, "onError");
+    __publicField(this, "onProgress");
+    this.url = url2;
+    this.range = range2;
+    this.responseType = responseType;
+  }
+  send() {
+    var _a22;
+    (_a22 = this.xhr) == null ? void 0 : _a22.abort();
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", this.url);
+    xhr.responseType = this.responseType;
+    if (this.range) {
+      xhr.setRequestHeader("Range", this.range);
+    }
+    xhr.onprogress = (e) => {
+      var _a3;
+      (_a3 = this.onProgress) == null ? void 0 : _a3.call(this, e);
+    };
+    xhr.onload = (e) => {
+      var _a3, _b2;
+      (_a3 = this.onProgress) == null ? void 0 : _a3.call(this, e);
+      (_b2 = this.onLoad) == null ? void 0 : _b2.call(this, xhr.response);
+    };
+    xhr.onerror = (_) => {
+      var _a3;
+      (_a3 = this.onError) == null ? void 0 : _a3.call(this);
+    };
+    xhr.send();
+    this.xhr = xhr;
+  }
+}
+class RemoteBuffer {
+  constructor(url2, logger = new RequestLogger(url2)) {
+    __publicField(this, "url");
+    __publicField(this, "logger");
+    __publicField(this, "queue", []);
+    __publicField(this, "active", /* @__PURE__ */ new Set());
+    __publicField(this, "maxConcurency", 10);
+    __publicField(this, "encoded");
+    this.url = url2;
+    this.logger = logger;
+    this.encoded = new RemoteValue(() => this.requestEncoding());
+  }
+  async requestEncoding() {
+    const xhr = new XMLHttpRequest();
+    xhr.open("HEAD", this.url);
+    xhr.send();
+    console.log(`Requesting header for ${this.url}`);
+    const promise = new Promise((resolve, reject) => {
+      xhr.onload = (_) => {
+        let encoding2 = null;
+        try {
+          encoding2 = xhr.getResponseHeader("content-encoding");
+        } catch (e) {
+          console.error(e);
+        }
+        resolve(encoding2);
+      };
+      xhr.onerror = (_) => resolve(null);
+    });
+    const encoding = await promise;
+    const encoded = !!encoding;
+    console.log(`Encoding for ${this.url} = ${encoding}`);
+    if (encoded) {
+      console.log(`Defaulting to download strategy for encoded content at ${this.url}`);
+    }
+    return encoded;
+  }
+  async http(range2, label) {
+    const useRange = range2 && !await this.encoded.get();
+    const rangeStr = useRange ? `bytes=${range2.start}-${range2.end - 1}` : void 0;
+    const request = new RetryRequest(this.url, rangeStr, "arraybuffer");
+    request.msg = useRange ? `${label} : [${range2.start}, ${range2.end}] of ${this.url}` : `${label} of ${this.url}`;
+    this.enqueue(request);
+    return new Promise((resolve, reject) => {
+      this.logger.start(label);
+      request.onProgress = (e) => {
+        this.logger.update(label, e);
+      };
+      request.onLoad = (result) => {
+        this.logger.end(label);
+        resolve(result);
+        this.end(request);
+      };
+      request.onError = () => {
+        this.logger.fail(label);
+        this.retry(request);
+      };
+    });
+  }
+  enqueue(xhr) {
+    this.queue.push(xhr);
+    this.next();
+  }
+  retry(xhr) {
+    this.active.delete(xhr);
+    this.maxConcurency = Math.max(1, this.maxConcurency - 1);
+    setTimeout(() => this.enqueue(xhr), 2e3);
+  }
+  end(xhr) {
+    this.active.delete(xhr);
+    this.next();
+  }
+  next() {
+    if (this.queue.length === 0) {
+      return;
+    }
+    if (this.active.size >= this.maxConcurency) {
+      return;
+    }
+    const next = this.queue[0];
+    this.queue.shift();
+    this.active.add(next);
+    next.send();
+    console.log("Starting " + next.msg);
+  }
+}
+class Range {
+  constructor(start, end) {
+    __publicField(this, "start");
+    __publicField(this, "end");
+    this.start = start;
+    this.end = end;
+  }
+  get count() {
+    return this.end - this.start;
+  }
+  offset(offset) {
+    return new Range(this.start + offset, this.end + offset);
+  }
+}
+function typeSize(type) {
+  switch (type) {
+    case "byte":
+      return 1;
+    case "short":
+      return 2;
+    case "int":
+    case "float":
+      return 4;
+    case "long":
+    case "double":
+      return 8;
+    default:
+      return 4;
+  }
+}
+function typeConstructor(type) {
+  switch (type) {
+    case "byte":
+      return Int8Array;
+    case "short":
+      return Int16Array;
+    case "int":
+      return Int32Array;
+    case "float":
+      return Float32Array;
+    case "long":
+    case "double":
+      return Float64Array;
+    default:
+      return Int32Array;
+  }
+}
+class BFastHeader {
+  constructor(magic, dataStart, dataEnd, numArrays) {
+    __publicField(this, "magic");
+    __publicField(this, "dataStart");
+    __publicField(this, "dataEnd");
+    __publicField(this, "numArrays");
+    if (magic !== 49061) {
+      throw new Error("Invalid Bfast. Invalid Magic number");
+    }
+    if (dataStart <= 32 || dataStart > Number.MAX_SAFE_INTEGER) {
+      throw new Error("Invalid Bfast. Data start is out of valid range");
+    }
+    if (dataEnd < dataStart || dataEnd > Number.MAX_SAFE_INTEGER) {
+      throw new Error("Invalid Bfast. Data end is out of valid range");
+    }
+    if (numArrays < 0 || numArrays > dataEnd) {
+      throw new Error("Invalid Bfast. Number of arrays is invalid");
+    }
+    this.magic = magic;
+    this.dataStart = dataStart;
+    this.dataEnd = dataEnd;
+    this.numArrays = numArrays;
+  }
+  static createFromArray(array) {
+    if (array[1] !== 0) {
+      throw new Error("Invalid Bfast. Expected 0 in byte position 0");
+    }
+    if (array[3] !== 0) {
+      throw new Error("Invalid Bfast. Expected 0 in byte position 8");
+    }
+    if (array[5] !== 0) {
+      throw new Error("Invalid Bfast. Expected 0 in position 16");
+    }
+    if (array[7] !== 0) {
+      throw new Error("Invalid Bfast. Expected 0 in position 24");
+    }
+    return new this(array[0], array[2], array[4], array[6]);
+  }
+  static createFromBuffer(array) {
+    return BFastHeader.createFromArray(new Uint32Array(array));
+  }
+}
+class BFast {
+  constructor(source, offset = 0, name = "") {
+    __publicField(this, "source");
+    __publicField(this, "offset");
+    __publicField(this, "name");
+    __publicField(this, "_header");
+    __publicField(this, "_ranges");
+    __publicField(this, "_children");
+    this.source = source;
+    this.offset = offset;
+    this.name = name;
+    this._header = new RemoteValue(() => this.requestHeader(), name + ".header");
+    this._children = /* @__PURE__ */ new Map();
+    this._ranges = new RemoteValue(() => this.requestRanges(), name + ".ranges");
+  }
+  async getHeader() {
+    return this._header.get();
+  }
+  async getRanges() {
+    return this._ranges.get();
+  }
+  async getBfast(name) {
+    let request = this._children.get(name);
+    if (!request) {
+      request = new RemoteValue(() => this.requestBfast(name));
+      this._children.set(name, request);
+    }
+    return request.get();
+  }
+  async getLocalBfast(name) {
+    const buffer = await this.getBuffer(name);
+    return new BFast(buffer, 0, name);
+  }
+  async getBuffer(name) {
+    const ranges = await this.getRanges();
+    const range2 = ranges.get(name);
+    if (!range2)
+      return;
+    const buffer = await this.request(range2, name);
+    return buffer;
+  }
+  async getArray(name) {
+    const buffer = await this.getBuffer(name);
+    if (!buffer)
+      return;
+    const type = name.split(":")[0];
+    const Ctor = typeConstructor(type);
+    const array = new Ctor(buffer);
+    return Array.from(array);
+  }
+  async getValue(name, index) {
+    const ranges = await this.getRanges();
+    const range2 = ranges.get(name);
+    if (!range2)
+      return;
+    const type = name.split(":")[0];
+    const size = typeSize(type);
+    const start = range2.start + index * size;
+    const buffer = await this.request(new Range(start, start + size), `${name}[${index.toString()}]`);
+    if (!buffer)
+      return;
+    const Ctor = typeConstructor(type);
+    const array = new Ctor(buffer);
+    return array[0];
+  }
+  async getBytes(name) {
+    const buffer = await this.getBuffer(name);
+    if (!buffer)
+      return;
+    const array = new Uint8Array(buffer);
+    return array;
+  }
+  async getRow(index) {
+    const ranges = await this.getRanges();
+    if (!ranges)
+      return;
+    const result = /* @__PURE__ */ new Map();
+    const promises = [];
+    for (const name of ranges.keys()) {
+      const p2 = this.getValue(name, index).then((v2) => result.set(name, v2));
+      promises.push(p2);
+    }
+    await Promise.all(promises);
+    return result;
+  }
+  async forceDownload() {
+    if (this.source instanceof ArrayBuffer) {
+      console.log("Ignoring forceDownload on local buffer.");
+      return;
+    }
+    const buffer = await this.remote(void 0, this.name);
+    if (!buffer)
+      throw new Error("Failed to download BFAST.");
+    this.source = buffer;
+  }
+  async requestBfast(name) {
+    const ranges = await this.getRanges();
+    const range2 = ranges.get(name);
+    if (!range2)
+      return;
+    const result = new BFast(this.source, this.offset + range2.start, this.name + "." + name);
+    return result;
+  }
+  async requestRanges() {
+    const header = await this.getHeader();
+    const buffer = await this.request(new Range(32, 32 + header.numArrays * 16), "Ranges");
+    if (!buffer)
+      throw new Error("Could not get BFAST Ranges.");
+    const array = new Uint32Array(buffer);
+    const ranges = [];
+    for (let i2 = 0; i2 < array.length; i2 += 4) {
+      if (array[i2 + 1] !== 0 || array[i2 + 3] !== 0) {
+        throw new Error("Invalid Bfast. 64 bit ranges not supported");
+      }
+      ranges.push(new Range(array[i2], array[i2 + 2]));
+    }
+    const names = await this.requestNames(ranges[0]);
+    if (ranges.length !== names.length + 1) {
+      throw new Error("Mismatched ranges and names count");
+    }
+    const map = /* @__PURE__ */ new Map();
+    for (let i2 = 0; i2 < names.length; i2++) {
+      map.set(names[i2], ranges[i2 + 1]);
+    }
+    return map;
+  }
+  async requestNames(range2) {
+    const buffer = await this.request(range2, "Names");
+    const names = new TextDecoder("utf-8").decode(buffer);
+    const result = names.slice(0, -1).split("\0");
+    return result;
+  }
+  async requestHeader() {
+    const buffer = await this.request(new Range(0, 32), "Header");
+    if (!buffer)
+      throw new Error("Could not get BFAST Header");
+    const result = BFastHeader.createFromBuffer(buffer);
+    return result;
+  }
+  async request(range2, label) {
+    var _a22, _b2;
+    const buffer = (_b2 = (_a22 = this.local(range2, label)) != null ? _a22 : await this.remote(range2, label)) != null ? _b2 : await this.remote(void 0, label);
+    if (!buffer) {
+      throw new Error(`Could not load vim at ${this.source}`);
+    }
+    if (buffer.byteLength > range2.count) {
+      this.source = buffer;
+      return this.local(range2, label);
+    }
+    return buffer;
+  }
+  local(range2, label) {
+    if (!(this.source instanceof ArrayBuffer))
+      return;
+    console.log(`Returning local ${this.name}.${label}`);
+    const r2 = range2.offset(this.offset);
+    return this.source.slice(r2.start, r2.end);
+  }
+  async remote(range2, label) {
+    var _a22;
+    if (!(this.source instanceof RemoteBuffer))
+      return;
+    const r2 = range2 == null ? void 0 : range2.offset(this.offset);
+    const buffer = await this.source.http(r2, `${this.name}.${label}`);
+    if (range2 && ((_a22 = buffer == null ? void 0 : buffer.byteLength) != null ? _a22 : 0) < range2.count) {
+      console.log("Range request request failed.");
+      return;
+    }
+    return buffer;
+  }
+}
+class Section {
+  constructor(renderer, materials) {
+    __publicField(this, "_renderer");
+    __publicField(this, "_materials");
+    __publicField(this, "_active");
+    __publicField(this, "box", new Box3(new Vector3(-100, -100, -100), new Vector3(100, 100, 100)));
+    __publicField(this, "maxX", new Plane(new Vector3(-1, 0, 0)));
+    __publicField(this, "minX", new Plane(new Vector3(1, 0, 0)));
+    __publicField(this, "maxY", new Plane(new Vector3(0, -1, 0)));
+    __publicField(this, "minY", new Plane(new Vector3(0, 1, 0)));
+    __publicField(this, "maxZ", new Plane(new Vector3(0, 0, -1)));
+    __publicField(this, "minZ", new Plane(new Vector3(0, 0, 1)));
+    __publicField(this, "planes", [
+      this.maxX,
+      this.minX,
+      this.maxY,
+      this.minY,
+      this.maxZ,
+      this.minZ
+    ]);
+    this._renderer = renderer;
+    this._materials = materials;
+  }
+  fitBox(box) {
+    this.maxX.constant = box.max.x;
+    this.minX.constant = -box.min.x;
+    this.maxY.constant = box.max.y;
+    this.minY.constant = -box.min.y;
+    this.maxZ.constant = box.max.z;
+    this.minZ.constant = -box.min.z;
+    this.box.copy(box);
+  }
+  set active(value) {
+    const p2 = value ? this.planes : void 0;
+    this._materials.opaque.clippingPlanes = p2;
+    this._materials.transparent.clippingPlanes = p2;
+    this._materials.wireframe.clippingPlanes = p2;
+    this._materials.isolation.clippingPlanes = p2;
+    this._renderer.localClippingEnabled = value;
+    this._active = value;
+  }
+  get active() {
+    return this._active;
+  }
+}
+class Renderer {
+  constructor(scene, viewport, materials) {
+    __publicField(this, "renderer");
+    __publicField(this, "textRenderer");
+    __publicField(this, "viewport");
+    __publicField(this, "scene");
+    __publicField(this, "section");
+    __publicField(this, "materials");
+    __publicField(this, "_onVisibilityChanged", new dist$1.SimpleEventDispatcher());
+    __publicField(this, "fitViewport", () => {
+      const size = this.viewport.getParentSize();
+      this.renderer.setPixelRatio(window.devicePixelRatio);
+      this.renderer.setSize(size.x, size.y);
+      this.textRenderer.setSize(size.x, size.y);
+    });
+    this.viewport = viewport;
+    this.scene = scene;
+    this.materials = materials;
+    this.renderer = new WebGLRenderer({
+      canvas: viewport.canvas,
+      antialias: true,
+      precision: "highp",
+      alpha: true,
+      stencil: false,
+      powerPreference: "high-performance",
+      logarithmicDepthBuffer: true
+    });
+    this.textRenderer = this.viewport.createTextRenderer();
+    this.fitViewport();
+    this.viewport.onResize(() => this.fitViewport());
+    this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.renderer.shadowMap.enabled = false;
+    this.section = new Section(this.renderer, this.materials);
+  }
+  get onVisibilityChanged() {
+    return this._onVisibilityChanged.asEvent();
+  }
+  dispose() {
+    this.clear();
+    this.renderer.clear();
+    this.renderer.forceContextLoss();
+    this.renderer.dispose();
+  }
+  getBoundingBox(target = new Box3()) {
+    return this.scene.getBoundingBox(target);
+  }
+  render(camera) {
+    this.renderer.render(this.scene.scene, camera);
+    this.textRenderer.render(this.scene.scene, camera);
+    this.scene.getUpdatedScenes().forEach((s) => this._onVisibilityChanged.dispatch(s.vim));
+    this.scene.clearUpdateFlags();
+  }
+  add(target) {
+    this.scene.add(target);
+  }
+  remove(target) {
+    this.scene.remove(target);
+  }
+  clear() {
+    this.scene.clear();
+  }
+  applyMaterialSettings(settings2) {
+    this.materials.applyWireframeSettings(settings2.getHighlightColor(), settings2.getHighlightOpacity());
+  }
+}
+class Viewer {
+  constructor(options) {
+    __publicField(this, "settings");
+    __publicField(this, "renderer");
+    __publicField(this, "viewport");
+    __publicField(this, "selection");
+    __publicField(this, "inputs");
+    __publicField(this, "raycaster");
+    __publicField(this, "sectionBox");
+    __publicField(this, "measure");
+    __publicField(this, "gizmoRectangle");
+    __publicField(this, "_environment");
+    __publicField(this, "_camera");
+    __publicField(this, "_loader");
+    __publicField(this, "_clock", new Clock());
+    __publicField(this, "_gizmoAxes");
+    __publicField(this, "_materials");
+    __publicField(this, "_vims", []);
+    __publicField(this, "_disposed", false);
+    __publicField(this, "_onVimLoaded", new dist$3.SignalDispatcher());
+    var _a22;
+    this.settings = new ViewerSettings(options);
+    const materials = new VimMaterials();
+    this._loader = new Loader(materials);
+    this._materials = materials;
+    const scene = new RenderScene();
+    this.viewport = new Viewport(this.settings);
+    this._camera = new Camera(scene, this.viewport, this.settings);
+    this.renderer = new Renderer(scene, this.viewport, materials);
+    if (this.settings.getCameraGizmoEnable()) {
+      this._camera.gizmo = new CameraGizmo(this.renderer, this._camera, this.settings);
+    }
+    this.renderer.applyMaterialSettings(this.settings);
+    this.measure = new Measure(this);
+    this._gizmoAxes = new GizmoAxes(this.camera);
+    (_a22 = this.viewport.canvas.parentElement) == null ? void 0 : _a22.prepend(this._gizmoAxes.canvas);
+    this.sectionBox = new SectionBox(this);
+    this.gizmoRectangle = new GizmoRectangle(this);
+    this._environment = new Environment(this.settings);
+    this._environment.getObjects().forEach((o) => this.renderer.add(o));
+    this.selection = new Selection(this.renderer);
+    this.raycaster = new Raycaster(this.viewport, this._camera, scene, this.renderer);
+    this.inputs = new Input(this);
+    this.inputs.registerAll();
+    this.animate();
+  }
+  get camera() {
+    return this._camera;
+  }
+  get environment() {
+    return this._environment;
+  }
+  get onVimLoaded() {
+    return this._onVimLoaded.asEvent();
+  }
+  get axesCanvas() {
+    return this._gizmoAxes.canvas;
+  }
+  dispose() {
+    if (this._disposed)
+      return;
+    this._environment.dispose();
+    this.selection.clear();
+    this._camera.dispose();
+    this.viewport.dispose();
+    this.renderer.dispose();
+    this.inputs.unregisterAll();
+    this._vims.forEach((v2) => v2 == null ? void 0 : v2.dispose());
+    this._materials.dispose();
+    this.gizmoRectangle.dispose();
+    this._disposed = true;
+  }
+  animate() {
+    if (this._disposed)
+      return;
+    requestAnimationFrame(() => this.animate());
+    this._camera.update(this._clock.getDelta());
+    if (this._vims.length)
+      this.renderer.render(this.camera.camera);
+  }
+  get vims() {
+    return this._vims.filter((v2) => v2 !== void 0);
+  }
+  get vimCount() {
+    return this._vims.length;
+  }
+  addVim(vim) {
+    for (let i2 = 0; i2 <= this._vims.length; i2++) {
+      if (this._vims[i2] === void 0) {
+        this._vims[i2] = vim;
+        vim.index = i2;
+        return;
+      }
+    }
+  }
+  removeVim(vim) {
+    this._vims[vim.index] = void 0;
+    vim.index = -1;
+  }
+  async loadVim(source, options, onProgress) {
+    let buffer;
+    let url2;
+    if (typeof source === "string") {
+      url2 = source;
+      buffer = new RemoteBuffer(source);
+      buffer.logger.onUpdate = (log) => onProgress == null ? void 0 : onProgress(log);
+    } else
+      buffer = source;
+    const settings2 = new VimSettings(options);
+    const bfast = new BFast(buffer, 0, "vim");
+    const vim = await this._loader.load(bfast, settings2);
+    vim.source = url2;
+    if (buffer instanceof RemoteBuffer)
+      buffer.logger.onUpdate = void 0;
+    this.onLoad(vim);
+    return vim;
+  }
+  onLoad(vim) {
+    this.addVim(vim);
+    this.renderer.add(vim.scene);
+    const box = this.renderer.getBoundingBox();
+    if (box) {
+      this._environment.adaptToContent(box);
+      this.sectionBox.fitBox(box);
+    }
+    this._camera.adaptToContent();
+    this._camera.frame("all", 45);
+    this._onVimLoaded.dispatch();
+  }
+  unloadVim(vim) {
+    this.removeVim(vim);
+    this.renderer.remove(vim.scene);
+    vim.dispose();
+    if (this.selection.vim === vim) {
+      this.selection.clear();
+    }
+    this._onVimLoaded.dispatch();
+  }
+  clear() {
+    this.vims.forEach((v2) => this.unloadVim(v2));
+  }
+  filterVim(vim, objects) {
+    const instances = objects == null ? void 0 : objects.flatMap((o) => o == null ? void 0 : o.instances).filter((i2) => i2 !== void 0);
+    this.renderer.remove(vim.scene);
+    vim.filter(instances);
+    this.renderer.add(vim.scene);
+  }
+}
+var vimWebglViewer_es = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  THREE,
+  BFast,
+  BFastHeader,
+  DefaultInputScheme,
+  Document,
+  DocumentNoBim,
+  G3d,
+  get Geometry() {
+    return Geometry;
+  },
+  HitTestResult: RaycastResult,
+  KEYS,
+  Loader,
+  MeshBuilder,
+  Object: Object$1,
+  Range,
+  Scene,
+  get Transparency() {
+    return Transparency;
+  },
+  Viewer,
+  ViewerSettings,
+  Vim,
+  VimMaterials,
+  VimSettings,
+  createBase,
+  createFocus,
+  createIsolationMaterial,
+  createOpaque,
+  createTransparent,
+  createWireframe,
+  patchBaseMaterial
+}, Symbol.toStringTag, { value: "Module" }));
 class ComponentInputs {
   constructor(viewer2, isolation) {
     this._viewer = viewer2;
-    this._default = new DefaultInputScheme(viewer2);
+    this._default = new DefaultInputScheme(viewer2.base);
     this._isolation = isolation;
   }
   onMainAction(hit) {
@@ -61230,8 +61187,7 @@ class ComponentInputs {
   onKeyAction(key) {
     switch (key) {
       case KEYS.KEY_F: {
-        const box = this._viewer.selection.count > 0 ? this._viewer.selection.getBoundingBox() : getVisibleBoundingBox(this._viewer);
-        this._viewer.camera.frame(box, "none", this._viewer.camera.defaultLerpDuration);
+        this._viewer.frameVisibleObjects();
         return true;
       }
       case KEYS.KEY_I: {
@@ -61251,6 +61207,13 @@ class Settings {
   clone() {
     return Object.assign(new Settings(), this);
   }
+}
+function useSettings(viewer2) {
+  const [settings2, setSettings] = react.exports.useState(new Settings());
+  react.exports.useEffect(() => {
+    applySettings(viewer2, settings2);
+  }, [settings2]);
+  return { get: settings2, set: setSettings };
 }
 function applySettings(viewer2, settings2) {
   const performance2 = document.getElementsByClassName("vim-performance")[0];
@@ -61279,176 +61242,48 @@ function applySettings(viewer2, settings2) {
     viewer2.environment.groundPlane.visible = settings2.showGroundPlane;
   });
 }
-function createContainer(viewer2) {
-  const root2 = document.createElement("div");
-  root2.className = "vim-component";
-  root2.style.height = "100%";
-  document.body.append(root2);
-  const gfx = document.createElement("div");
-  gfx.className = "vim-gfx";
-  gfx.style.height = "100%";
-  root2.append(gfx);
-  gfx.append(viewer2.viewport.canvas);
-  gfx.append(viewer2.viewport.text);
-  gfx.append(viewer2.axesCanvas);
-  const ui2 = document.createElement("div");
-  ui2.className = "vim-ui";
-  ui2.style.height = "100%";
-  root2.append(ui2);
-  viewer2.viewport.canvas.tabIndex = 0;
-  viewer2.sectionBox.clip = true;
-  return { root: root2, ui: ui2, gfx };
-}
-function VimComponent(props) {
-  const viewer2 = props.viewer;
-  const useLogo = props.logo === void 0 ? true : props.logo;
-  const useInspector = props.bimPanel === void 0 ? true : props.bimPanel;
-  const useMenu = props.menu === void 0 ? true : props.menu;
-  const useMenuTop = props.menuTop === void 0 ? true : props.menuTop;
-  const useLoading = props.loading === void 0 ? true : props.loading;
-  const [helpVisible, setHelpVisible] = react.exports.useState(false);
-  const [settings2, setSettings] = react.exports.useState(new Settings());
-  const side = createSideState(useInspector);
-  const isolation = createIsolationState(viewer2, settings2);
-  const [cursorManager] = react.exports.useState(new CursorManager(props.viewer));
-  const getVim = () => {
-    var _a22;
-    return (_a22 = viewer2.selection.vim) != null ? _a22 : viewer2.vims[0];
-  };
-  const [selection, setSelection] = react.exports.useState([
-    ...viewer2.selection.objects
-  ]);
-  const [vim, setVim] = react.exports.useState(getVim());
-  react.exports.useEffect(() => {
-    applySettings(viewer2, settings2);
-  }, [settings2]);
-  react.exports.useEffect(() => {
-    setBehind(helpVisible);
-  }, [helpVisible]);
-  react.exports.useEffect(() => {
-    props.onMount();
-    cursorManager.register();
-    const subVim = viewer2.onVimLoaded.subscribe(() => setVim(getVim()));
-    const subSel = viewer2.selection.onValueChanged.subscribe(() => {
-      setVim(getVim());
-      setSelection([...viewer2.selection.objects]);
-      if (viewer2.selection.count > 0) {
-        side.set("bim");
-      }
-    });
-    props.viewer.inputs.onContextMenu.subscribe(showContextMenu);
-    const subLoad = viewer2.onVimLoaded.subscribe(() => {
-      viewer2.camera.frame("all", 45);
-    });
-    props.viewer.inputs.scheme = new ComponentInputs(props.viewer, isolation);
-    return () => {
-      cursorManager.unregister();
-      subLoad();
-      subVim();
-      subSel();
-    };
-  }, []);
-  const sidePanel = /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(BimPanel, {
-    viewer: props.viewer,
-    vim,
-    selection,
-    visible: side.getCurrent() === "bim",
-    isolation
-  }), /* @__PURE__ */ React.createElement(MenuSettings, {
-    visible: side.getCurrent() === "settings",
-    viewer: props.viewer,
-    settings: settings2,
-    setSettings
-  }));
-  return /* @__PURE__ */ React.createElement(React.Fragment, null, helpVisible ? /* @__PURE__ */ React.createElement(MenuHelp, {
-    closeHelp: () => setHelpVisible(false)
-  }) : null, useLogo ? /* @__PURE__ */ React.createElement(Logo, null) : null, useLoading ? /* @__PURE__ */ React.createElement(LoadingBox, {
-    viewer: props.viewer
-  }) : null, useMenu ? /* @__PURE__ */ React.createElement(ControlBar, {
-    viewer: props.viewer,
-    helpVisible,
-    setHelpVisible,
-    side: side.getCurrent(),
-    toggleSide: side.toggleSide,
-    isolation,
-    setCursor: cursorManager.setCursor
-  }) : null, useMenuTop ? /* @__PURE__ */ React.createElement(MenuTop, {
-    viewer: props.viewer
-  }) : null, /* @__PURE__ */ React.createElement(SidePanel, {
-    visible: side.getCurrent() !== "none",
-    viewer: props.viewer,
-    content: sidePanel,
-    popSide: side.pop,
-    getSideNav: side.getNav
-  }), /* @__PURE__ */ React.createElement(ReactTooltip, {
-    delayShow: 200
-  }), /* @__PURE__ */ React.createElement(VimContextMenu, {
-    viewer: props.viewer,
-    settings: settings2,
-    helpVisible,
-    setHelpVisible,
-    isolation
-  }), react.exports.useMemo(() => /* @__PURE__ */ React.createElement(MenuToast, {
-    viewer: props.viewer
-  }), []));
-}
-const Logo = React.memo(() => /* @__PURE__ */ React.createElement("div", {
-  className: "vim-logo"
-}, /* @__PURE__ */ React.createElement("a", {
-  href: "https://vimaec.com"
-}, /* @__PURE__ */ React.createElement("img", {
-  src: logo
-}))));
-function createSideState(useInspector) {
-  const [side, setSide] = react.exports.useState(["bim"]);
-  const sideRef = react.exports.useRef(side);
-  const toggleSide = (content) => {
-    let r2;
-    const [A2, B2] = sideRef.current;
-    if (!A2 && !B2)
-      r2 = [content];
-    else if (A2 === content && !B2)
-      r2 = [];
-    else if (A2 !== content && !B2)
-      r2 = [A2, content];
-    else if (A2 && B2 === content)
-      r2 = [A2];
-    else if (A2 && B2 !== content)
-      r2 = [content];
-    sideRef.current = r2;
-    setSide(r2);
-  };
-  const pop = () => {
-    sideRef.current.pop();
-    setSide([...sideRef.current]);
-  };
-  const getNav = () => {
-    return sideRef.current.length > 1 ? "back" : "close";
-  };
-  const getCurrent = () => {
-    var _a22;
-    const result = (_a22 = sideRef.current[sideRef.current.length - 1]) != null ? _a22 : "none";
-    if (result && !useInspector)
-      return "none";
-    return result;
-  };
-  const set3 = (value) => {
-    sideRef.current = [value];
-    setSide([value]);
-  };
-  return { set: set3, getCurrent, toggleSide, pop, getNav };
-}
-function createIsolationState(viewer2, settings2) {
+function useIsolation(componentViewer, settings2) {
+  const viewer2 = componentViewer.base;
+  const helper = componentViewer;
   const isolationRef = react.exports.useRef();
   const lastIsolation = react.exports.useRef();
   const changed = react.exports.useRef();
   react.exports.useEffect(() => {
     viewer2.renderer.onVisibilityChanged.subscribe((vim) => {
-      if (getAllVisible(viewer2)) {
+      if (helper.areAllObjectsVisible()) {
         isolationRef.current = void 0;
       }
     });
   }, []);
+  const showAll = () => {
+    viewer2.vims.forEach((v2) => {
+      for (const obj of v2.getAllObjects()) {
+        obj.visible = true;
+      }
+      v2.scene.material = void 0;
+    });
+  };
+  const isolate = (viewer22, settings22, objects, frame = true) => {
+    if (!objects) {
+      showAll();
+    } else {
+      const set3 = new Set(objects);
+      let allVisible = true;
+      viewer22.vims.forEach((vim) => {
+        for (const obj of vim.getAllObjects()) {
+          const has2 = set3.has(obj);
+          obj.visible = has2;
+          if (!has2)
+            allVisible = false;
+        }
+        vim.scene.material = !allVisible && settings22.useIsolationMaterial ? viewer22.renderer.materials.isolation : void 0;
+      });
+    }
+    if (frame) {
+      helper.frameVisibleObjects();
+    }
+    viewer22.selection.clear();
+  };
   const onChange = (action) => {
     changed.current = action;
   };
@@ -61470,7 +61305,7 @@ function createIsolationState(viewer2, settings2) {
     }
     if (isolationRef.current) {
       if (selection.length === 0 || ArrayEquals(isolationRef.current, selection)) {
-        setAllVisible(viewer2);
+        showAll();
         isolationRef.current = void 0;
       } else {
         isolate(viewer2, settings2, selection);
@@ -61499,7 +61334,7 @@ function createIsolationState(viewer2, settings2) {
       if (!selection.has(obj))
         result.push(obj);
     }
-    isolate(viewer2, settings2, result);
+    isolate(viewer2, settings2, result, source !== "contextMenu");
     isolationRef.current = result;
     changed.current(source);
   };
@@ -61513,7 +61348,7 @@ function createIsolationState(viewer2, settings2) {
     changed.current(source);
   };
   const clear = (source) => {
-    setAllVisible(viewer2);
+    showAll();
     isolationRef.current = void 0;
     changed.current(source);
   };
@@ -61527,6 +61362,176 @@ function createIsolationState(viewer2, settings2) {
     current,
     onChange
   };
+}
+class ViewerWrapper {
+  constructor(viewer2) {
+    this.base = viewer2;
+  }
+  resetCamera() {
+    this.base.camera.reset();
+    this.base.camera.frame("all", 45);
+  }
+  frameContext() {
+    if (this.base.selection.count > 0) {
+      this.frameSelection();
+    } else {
+      this.frameVisibleObjects();
+    }
+  }
+  frameSelection() {
+    if (this.base.selection.count === 0)
+      return;
+    const box = this.base.selection.getBoundingBox();
+    if (box && this.base.sectionBox.box.intersectsBox(box)) {
+      this.base.camera.frame(box, "none", this.base.camera.defaultLerpDuration);
+    }
+  }
+  frameVisibleObjects(source) {
+    this.base.camera.frame(this.getVisibleBoundingBox(source), "none", this.base.camera.defaultLerpDuration);
+  }
+  areAllObjectsVisible(source) {
+    const vimAllVisible = (vim) => {
+      for (const obj of vim.getAllObjects()) {
+        if (!obj.visible)
+          return false;
+      }
+      return true;
+    };
+    if (source) {
+      return vimAllVisible(source);
+    } else {
+      for (const vim of this.base.vims) {
+        if (!vimAllVisible(vim))
+          return false;
+      }
+      return true;
+    }
+  }
+  getVisibleBoundingBox(source) {
+    let box;
+    const vimBoxUnion = (vim) => {
+      for (const obj of vim.getAllObjects()) {
+        if (!obj.visible)
+          continue;
+        const b = obj.getBoundingBox();
+        if (!b)
+          continue;
+        box = box ? box.union(b) : b == null ? void 0 : b.clone();
+      }
+    };
+    if (source) {
+      vimBoxUnion(source);
+    } else {
+      for (const vim of this.base.vims) {
+        vimBoxUnion(vim);
+      }
+    }
+    return box;
+  }
+}
+function createContainer(viewer2) {
+  const root2 = document.createElement("div");
+  root2.className = "vim-component";
+  root2.style.height = "100%";
+  document.body.append(root2);
+  const gfx = document.createElement("div");
+  gfx.className = "vim-gfx";
+  gfx.style.height = "100%";
+  root2.append(gfx);
+  gfx.append(viewer2.viewport.canvas);
+  gfx.append(viewer2.viewport.text);
+  gfx.append(viewer2.axesCanvas);
+  const ui2 = document.createElement("div");
+  ui2.className = "vim-ui";
+  ui2.style.height = "100%";
+  root2.append(ui2);
+  viewer2.viewport.canvas.tabIndex = 0;
+  viewer2.sectionBox.clip = true;
+  return { root: root2, ui: ui2, gfx };
+}
+function VimComponent(props) {
+  const useLogo = props.logo === void 0 ? true : props.logo;
+  const useInspector = props.bimPanel === void 0 ? true : props.bimPanel;
+  const useMenu = props.menu === void 0 ? true : props.menu;
+  const useMenuTop = props.menuTop === void 0 ? true : props.menuTop;
+  const useLoading = props.loading === void 0 ? true : props.loading;
+  const cursor = react.exports.useRef(new CursorManager(props.viewer)).current;
+  const viewer2 = react.exports.useRef(new ViewerWrapper(props.viewer)).current;
+  const settings2 = useSettings(props.viewer);
+  const isolation = useIsolation(viewer2, settings2.get);
+  const side = useSideState(useInspector);
+  const help2 = useHelp();
+  const [vim, selection] = useViewerState(props.viewer);
+  react.exports.useEffect(() => {
+    props.onMount();
+    cursor.register();
+    props.viewer.onVimLoaded.subscribe(() => {
+      props.viewer.camera.frame("all", 45);
+    });
+    props.viewer.inputs.scheme = new ComponentInputs(viewer2, isolation);
+    props.viewer.inputs.onContextMenu.subscribe(showContextMenu);
+  }, []);
+  const sidePanel = /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(BimPanel, {
+    viewer: viewer2,
+    vim,
+    selection,
+    visible: side.get() === "bim",
+    isolation
+  }), /* @__PURE__ */ React.createElement(MenuSettings, {
+    visible: side.get() === "settings",
+    viewer: props.viewer,
+    settings: settings2
+  }));
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(MenuHelp, {
+    help: help2
+  }), useLogo ? /* @__PURE__ */ React.createElement(Logo, null) : null, useLoading ? /* @__PURE__ */ React.createElement(LoadingBox, {
+    viewer: props.viewer
+  }) : null, useMenu ? /* @__PURE__ */ React.createElement(ControlBar, {
+    viewer: viewer2,
+    help: help2,
+    side,
+    isolation,
+    cursor
+  }) : null, useMenuTop ? /* @__PURE__ */ React.createElement(MenuTop, {
+    viewer: viewer2
+  }) : null, /* @__PURE__ */ React.createElement(SidePanel, {
+    viewer: props.viewer,
+    side,
+    content: sidePanel
+  }), /* @__PURE__ */ React.createElement(ReactTooltip, {
+    delayShow: 200
+  }), /* @__PURE__ */ React.createElement(VimContextMenu, {
+    viewer: viewer2,
+    help: help2,
+    isolation
+  }), /* @__PURE__ */ React.createElement(MenuToast, {
+    viewer: props.viewer
+  }));
+}
+const Logo = React.memo(() => /* @__PURE__ */ React.createElement("div", {
+  className: "vim-logo"
+}, /* @__PURE__ */ React.createElement("a", {
+  href: "https://vimaec.com"
+}, /* @__PURE__ */ React.createElement("img", {
+  src: logo
+}))));
+function useViewerState(viewer2) {
+  const getVim = () => {
+    var _a22;
+    return (_a22 = viewer2.selection.vim) != null ? _a22 : viewer2.vims[0];
+  };
+  const [vim, setVim] = react.exports.useState(getVim());
+  const [selection, setSelection] = react.exports.useState([
+    ...viewer2.selection.objects
+  ]);
+  react.exports.useEffect(() => {
+    viewer2.onVimLoaded.subscribe(() => setVim(getVim()));
+    viewer2.selection.onValueChanged.subscribe(() => {
+      setVim(getVim());
+      setSelection([...viewer2.selection.objects]);
+    });
+  }, []);
+  return [vim, selection];
 }
 const params = new URLSearchParams(window.location.search);
 let url = params.has("vim") || params.has("model") ? (_a2 = params.get("vim")) != null ? _a2 : params.get("model") : "https://vim.azureedge.net/samples/residence.vim";
