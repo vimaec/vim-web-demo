@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "react-dom": "^18.1.0",
-    "vim-webgl-component": "0.2.1-dev.11",
+    "vim-webgl-component": "0.2.1-dev.13",
     "stats-js": "^1.0.1"
   },
   "keywords": [
