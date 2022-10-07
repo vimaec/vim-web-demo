@@ -51573,9 +51573,9 @@ function showContextMenu(position) {
 }
 const VimContextMenu = React.memo(_VimContextMenu);
 function _VimContextMenu(props) {
+  var _a22;
   const viewer2 = props.viewer.base;
   const helper = props.viewer;
-  const [selection, setSelection] = react.exports.useState([]);
   const [section, setSection] = react.exports.useState({
     visible: viewer2.sectionBox.visible,
     clip: viewer2.sectionBox.clip
@@ -51584,20 +51584,13 @@ function _VimContextMenu(props) {
     return !viewer2.sectionBox.box.containsBox(viewer2.renderer.getBoundingBox());
   };
   const [clipping, setClipping] = react.exports.useState(isClipping());
-  const [hidden2, setHidden] = react.exports.useState(!helper.areAllObjectsVisible());
+  const hidden2 = props.isolation.any();
   react.exports.useEffect(() => {
-    viewer2.selection.onValueChanged.subscribe(() => {
-      setSelection([...viewer2.selection.objects]);
-    });
     viewer2.sectionBox.onStateChanged.subscribe(() => {
       setSection({
         visible: viewer2.sectionBox.visible,
         clip: viewer2.sectionBox.clip
       });
-    });
-    viewer2.renderer.onVisibilityChanged.subscribe((vim) => {
-      setHidden(!helper.areAllObjectsVisible(vim));
-      setSelection([...viewer2.selection.objects]);
     });
     viewer2.sectionBox.onBoxConfirm.subscribe(() => setClipping(isClipping()));
   }, []);
@@ -51658,9 +51651,9 @@ function _VimContextMenu(props) {
       divider: true
     }) : null;
   };
-  const hasSelection = (selection == null ? void 0 : selection.length) > 0;
+  const hasSelection = ((_a22 = props.selection) == null ? void 0 : _a22.length) > 0;
   const measuring = !!viewer2.measure.stage;
-  const isolated = ArrayEquals(selection, props.isolation.current());
+  const isolated = ArrayEquals(props.selection, props.isolation.current());
   return /* @__PURE__ */ React.createElement("div", {
     className: "vim-context-menu",
     onContextMenu: (e) => {
@@ -52448,9 +52441,9 @@ function BimPanel(props) {
       if (searching.current) {
         if (filter !== "") {
           const objects = result.map((e) => vim.getObjectFromElement(e.element));
-          props.isolation.search(objects, "search");
+          props.isolation.set(objects, "search");
         } else {
-          props.isolation.search(void 0, "search");
+          props.isolation.set(void 0, "search");
         }
       }
     }
@@ -61246,13 +61239,7 @@ function useIsolation(componentViewer, settings2) {
   const isolationRef = react.exports.useRef();
   const lastIsolation = react.exports.useRef();
   const changed = react.exports.useRef();
-  react.exports.useEffect(() => {
-    viewer2.renderer.onVisibilityChanged.subscribe((vim) => {
-      if (helper.areAllObjectsVisible()) {
-        isolationRef.current = void 0;
-      }
-    });
-  }, []);
+  const any = () => !!isolationRef.current;
   const showAll = () => {
     viewer2.vims.forEach((v2) => {
       for (const obj of v2.getAllObjects()) {
@@ -61262,14 +61249,14 @@ function useIsolation(componentViewer, settings2) {
     });
   };
   const isolate = (viewer22, settings22, objects, frame = true) => {
+    let allVisible = true;
     if (!objects) {
       showAll();
     } else {
-      const set3 = new Set(objects);
-      let allVisible = true;
+      const set22 = new Set(objects);
       viewer22.vims.forEach((vim) => {
         for (const obj of vim.getAllObjects()) {
-          const has2 = set3.has(obj);
+          const has2 = set22.has(obj);
           obj.visible = has2;
           if (!has2)
             allVisible = false;
@@ -61281,6 +61268,7 @@ function useIsolation(componentViewer, settings2) {
       helper.frameVisibleObjects();
     }
     viewer22.selection.clear();
+    return !allVisible;
   };
   const onChange = (action) => {
     changed.current = action;
@@ -61288,7 +61276,7 @@ function useIsolation(componentViewer, settings2) {
   const current = () => {
     return isolationRef.current;
   };
-  const search = (objects, source) => {
+  const set3 = (objects, source) => {
     if (isolationRef.current) {
       lastIsolation.current = isolationRef.current;
     }
@@ -61341,8 +61329,8 @@ function useIsolation(componentViewer, settings2) {
     const isolation = (_a22 = isolationRef.current) != null ? _a22 : [];
     objects.forEach((o) => isolation.push(o));
     const result = [...new Set(isolation)];
-    isolate(viewer2, settings2, result);
-    isolationRef.current = result;
+    const isolated = isolate(viewer2, settings2, result);
+    isolationRef.current = isolated ? result : void 0;
     changed.current(source);
   };
   const clear = (source) => {
@@ -61351,7 +61339,8 @@ function useIsolation(componentViewer, settings2) {
     changed.current(source);
   };
   return {
-    search,
+    any,
+    set: set3,
     show,
     hide,
     toggleContextual,
@@ -61386,24 +61375,6 @@ class ViewerWrapper {
   }
   frameVisibleObjects(source) {
     this.base.camera.frame(this.getVisibleBoundingBox(source), "none", this.base.camera.defaultLerpDuration);
-  }
-  areAllObjectsVisible(source) {
-    const vimAllVisible = (vim) => {
-      for (const obj of vim.getAllObjects()) {
-        if (!obj.visible)
-          return false;
-      }
-      return true;
-    };
-    if (source) {
-      return vimAllVisible(source);
-    } else {
-      for (const vim of this.base.vims) {
-        if (!vimAllVisible(vim))
-          return false;
-      }
-      return true;
-    }
   }
   getVisibleBoundingBox(source) {
     let box;
@@ -61501,7 +61472,8 @@ function VimComponent(props) {
   }), /* @__PURE__ */ React.createElement(VimContextMenu, {
     viewer: viewer2,
     help: help2,
-    isolation
+    isolation,
+    selection
   }), /* @__PURE__ */ React.createElement(MenuToast, {
     viewer: props.viewer
   }));
