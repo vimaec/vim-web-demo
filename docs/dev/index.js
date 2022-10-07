@@ -8872,7 +8872,15 @@ body {\r
 \r
 /* Tooltips */\r
 .__react_component_tooltip {\r
+  background-color: var(--c-white)!important;\r
+  color: var(--c-darkest-gray)!important;\r
+  font-size: 12.65px;\r
   transition: opacity 0.1s ease-out !important;\r
+  border: 1px solid var(--c-medium-gray)!important;\r
+  box-shadow: 2px 6px 15px #00000033;\r
+}\r
+.__react_component_tooltip:before, .__react_component_tooltip:after {\r
+  content: none!important;\r
 }\r
 \r
 /* Bim Panel */\r
@@ -9011,63 +9019,43 @@ body {\r
 }\r
 \r
 .rct-tree-item-title {\r
-  margin: 0px;\r
-  /*\r
-  Doesnt work\r
+  display: block;\r
+  overflow: hidden;\r
   text-overflow: ellipsis;\r
-  margin-right: 40px;\r
-  */\r
+  margin: 0px;\r
+  padding-right: 2.5rem;\r
 }\r
 \r
 /* Tree Visibilty Icons */\r
 .rct-tree-item-icons {\r
   position: absolute;\r
-  right: 0px;\r
-  top: 0px;\r
+  right: 12px;\r
+  top: 12px;\r
+  color: var(--c-darkest-gray);\r
 }\r
-\r
-.rct-tree-item-icon-visible,\r
-.rct-tree-item-icon-hidden {\r
-  width: 32px;\r
-  height: 32px;\r
-  padding: 8px;\r
-}\r
-\r
-.rct-tree-item-icons.vim-visible .rct-tree-item-icon-visible {\r
-  display: block;\r
-  opacity: 0;\r
-}\r
-.rct-tree-item-icons.vim-visible .rct-tree-item-icon-hidden {\r
+.rct-tree-item-icons svg {\r
   display: none;\r
 }\r
-.rct-tree-item-icons.vim-hidden .rct-tree-item-icon-visible {\r
-  display: none;\r
-}\r
-.rct-tree-item-icons.vim-hidden .rct-tree-item-icon-hidden {\r
+.vim-hidden .rct-tree-item-icon-hidden {\r
   display: block;\r
 }\r
 \r
-.rct-tree-item-icon.vim-hidden {\r
-  color: black;\r
-  opacity: 0.75;\r
-}\r
 \r
 /*Line hover*/\r
-.rct-tree-item:hover\r
-  .rct-tree-item-icons.vim-visible\r
-  .rct-tree-item-icon-visible {\r
-  color: black;\r
-  opacity: 0.25;\r
+.rct-tree-item-button:hover .rct-tree-item-icons .rct-tree-item-icon-hidden {\r
+  color: #C3BFB4;\r
+  display: block;\r
+}\r
+.rct-tree-item-title-container-selected .rct-tree-item-button:hover .rct-tree-item-icons .rct-tree-item-icon-hidden {\r
+  color: #9CB5D5;\r
+}\r
+.rct-tree-item-button:hover .rct-tree-item-icons .rct-tree-item-icon-hidden:hover {\r
+  color: var(--c-primary-royal);\r
+  display: block;\r
 }\r
 \r
+\r
 /* Hover Visible Object*/\r
-.rct-tree-item:hover\r
-  .rct-tree-item-icons.vim-visible:hover\r
-  .rct-tree-item-icon-hidden {\r
-  display: block;\r
-  opacity: 0.75;\r
-  color: #0000f5;\r
-}\r
 \r
 .rct-tree-item:hover\r
   .rct-tree-item-icons.vim-visible:hover\r
@@ -9080,8 +9068,7 @@ body {\r
   .rct-tree-item-icons.vim-hidden:hover\r
   .rct-tree-item-icon-visible {\r
   display: block;\r
-  opacity: 0.75;\r
-  color: #0000f5;\r
+  color: var(--c-primary-royal);\r
 }\r
 .rct-tree-item:hover\r
   .rct-tree-item-icons.vim-hidden:hover\r
@@ -52523,7 +52510,7 @@ function useHelp() {
   react.exports.useEffect(() => {
     setComponentBehind(visible2);
   }, [visible2]);
-  return { visible: visible2, setVisible };
+  return react.exports.useMemo(() => ({ visible: visible2, setVisible }), [visible2, setVisible]);
 }
 const MenuHelp = React.memo(_MenuHelp);
 function _MenuHelp(props) {
@@ -52635,7 +52622,13 @@ function useSideState(useInspector) {
     sideRef.current = [value];
     setSide([value]);
   };
-  return { set: set3, get: get3, toggle, pop, getNav };
+  return react.exports.useMemo(() => ({
+    set: set3,
+    get: get3,
+    toggle,
+    pop,
+    getNav
+  }), [side]);
 }
 function MenuSettings(props) {
   if (!props.visible)
@@ -57855,6 +57848,7 @@ class MeasureGizmo {
     this._group.name = "GizmoMeasure";
     this._group.add(this._startMarker.mesh, this._endMarker.mesh, this._line.mesh, this._line.label, this._lineX.mesh, this._lineX.label, this._lineY.mesh, this._lineY.label, this._lineZ.mesh, this._lineZ.label, this._label);
     this._viewer.renderer.add(this._group);
+    this._viewer.renderer.renderText = true;
   }
   _animate() {
     this._animId = requestAnimationFrame(() => this._animate());
@@ -57941,6 +57935,7 @@ class MeasureGizmo {
     this._lineX.dispose();
     this._lineY.dispose();
     this._lineZ.dispose();
+    this._viewer.renderer.renderText = false;
   }
 }
 class Measure {
@@ -60933,6 +60928,7 @@ class Renderer {
     __publicField(this, "section");
     __publicField(this, "materials");
     __publicField(this, "_onVisibilityChanged", new dist$1.SimpleEventDispatcher());
+    __publicField(this, "renderText");
     __publicField(this, "fitViewport", () => {
       const size = this.viewport.getParentSize();
       this.renderer.setPixelRatio(window.devicePixelRatio);
@@ -60972,7 +60968,9 @@ class Renderer {
   }
   render(camera) {
     this.renderer.render(this.scene.scene, camera);
-    this.textRenderer.render(this.scene.scene, camera);
+    if (this.renderText) {
+      this.textRenderer.render(this.scene.scene, camera);
+    }
     this.scene.getUpdatedScenes().forEach((s) => this._onVisibilityChanged.dispatch(s.vim));
     this.scene.clearUpdateFlags();
   }
@@ -61213,7 +61211,7 @@ function useSettings(viewer2) {
   react.exports.useEffect(() => {
     applySettings(viewer2, settings2);
   }, [settings2]);
-  return { get: settings2, set: setSettings };
+  return react.exports.useMemo(() => ({ get: settings2, set: setSettings }), [settings2]);
 }
 function applySettings(viewer2, settings2) {
   const performance2 = document.getElementsByClassName("vim-performance")[0];
