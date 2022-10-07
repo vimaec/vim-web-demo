@@ -61185,7 +61185,7 @@ class ComponentInputs {
   onKeyAction(key) {
     switch (key) {
       case KEYS.KEY_F: {
-        this._viewer.frameVisibleObjects();
+        this._viewer.frameContext();
         return true;
       }
       case KEYS.KEY_I: {
