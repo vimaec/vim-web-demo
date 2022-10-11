@@ -40711,9 +40711,12 @@ function _MenuTop(props) {
   const [ortho, setOrtho] = react.exports.useState(viewer2.camera.orthographic);
   const ui2 = react.exports.useRef();
   react.exports.useEffect(() => {
-    viewer2.camera.onValueChanged.subscribe(() => setOrtho(viewer2.camera.orthographic));
+    const subCam = viewer2.camera.onValueChanged.subscribe(() => setOrtho(viewer2.camera.orthographic));
     const axes = document.getElementsByClassName("gizmo-axis-canvas")[0];
     ui2.current.appendChild(axes);
+    return () => {
+      subCam();
+    };
   }, []);
   const onHomeBtn = () => {
     helper.resetCamera();
@@ -40835,7 +40838,7 @@ function ControlBar(props) {
     ReactTooltip.rebuild();
   });
   react.exports.useEffect(() => {
-    props.viewer.base.camera.onMoved.subscribe(() => {
+    const subCam = props.viewer.base.camera.onMoved.subscribe(() => {
       if (showRef.current) {
         showRef.current = false;
         setShow(false);
@@ -40848,6 +40851,10 @@ function ControlBar(props) {
         }
       }, 200);
     });
+    return () => {
+      subCam();
+      clearTimeout(barTimeout.current);
+    };
   }, []);
   return /* @__PURE__ */ React.createElement("div", {
     className: `vim-control-bar flex items-center justify-center w-full fixed px-2 bottom-0 py-2 mb-9 transition-opacity transition-all ${show ? "opacity-100" : "opacity-0"}`
@@ -40862,9 +40869,12 @@ function TabCamera(props) {
   const helper = props.viewer;
   const [mode, setMode] = react.exports.useState(viewer2.inputs.pointerActive);
   react.exports.useEffect(() => {
-    viewer2.inputs.onPointerModeChanged.subscribe(() => {
+    const subPointer = viewer2.inputs.onPointerModeChanged.subscribe(() => {
       setMode(viewer2.inputs.pointerActive);
     });
+    return () => {
+      subPointer();
+    };
   }, []);
   const onModeBtn = (target) => {
     const next = mode === target ? viewer2.inputs.pointerFallback : target;
@@ -40906,10 +40916,13 @@ function TabTools(props) {
   const measuringRef = react.exports.useRef();
   measuringRef.current = measuring;
   react.exports.useEffect(() => {
-    viewer2.sectionBox.onStateChanged.subscribe(() => setSection({
+    const subSection = viewer2.sectionBox.onStateChanged.subscribe(() => setSection({
       clip: viewer2.sectionBox.clip,
       active: viewer2.sectionBox.visible && viewer2.sectionBox.interactive
     }));
+    return () => {
+      subSection();
+    };
   }, []);
   const onSectionBtn = () => {
     ReactTooltip.hide();
@@ -40994,8 +41007,9 @@ function TabSettings(props) {
   const [fullScreen, setFullScreen] = react.exports.useState(!!document.fullscreenElement);
   const fullScreenRef = react.exports.useRef(fullScreen);
   react.exports.useEffect(() => {
+    let time;
     const refreshFullScreen = () => {
-      setTimeout(refreshFullScreen, 250);
+      time = setTimeout(refreshFullScreen, 250);
       const next = !!document.fullscreenElement;
       if (fullScreenRef.current !== next) {
         fullScreenRef.current = next;
@@ -41003,6 +41017,9 @@ function TabSettings(props) {
       }
     };
     refreshFullScreen();
+    return () => {
+      clearTimeout(time);
+    };
   }, []);
   const onHelpBtn = () => {
     props.help.setVisible(!props.help.visible);
@@ -41071,6 +41088,9 @@ function _LoadingBox(props) {
       return prevLoad(source, options, (p2) => {
         setProgress(p2.loaded);
       }).then((_2) => setProgress(void 0));
+    };
+    return () => {
+      props.viewer.loadVim = props.viewer.loadVim.bind(props.viewer);
     };
   }, []);
   react.exports.useEffect(() => {
@@ -51586,13 +51606,17 @@ function _VimContextMenu(props) {
   const [clipping, setClipping] = react.exports.useState(isClipping());
   const hidden2 = props.isolation.any();
   react.exports.useEffect(() => {
-    viewer2.sectionBox.onStateChanged.subscribe(() => {
+    const subState = viewer2.sectionBox.onStateChanged.subscribe(() => {
       setSection({
         visible: viewer2.sectionBox.visible,
         clip: viewer2.sectionBox.clip
       });
     });
-    viewer2.sectionBox.onBoxConfirm.subscribe(() => setClipping(isClipping()));
+    const subConfirm = viewer2.sectionBox.onBoxConfirm.subscribe(() => setClipping(isClipping()));
+    return () => {
+      subState();
+      subConfirm();
+    };
   }, []);
   const onShowControlsBtn = (e) => {
     props.help.setVisible(true);
@@ -51853,10 +51877,13 @@ function BimTree(props) {
     }
   }, [elements, objects]);
   react.exports.useEffect(() => {
-    viewer2.renderer.onVisibilityChanged.subscribe(() => {
+    const subVis = viewer2.renderer.onVisibilityChanged.subscribe(() => {
       treeRef.current.updateVisibility(viewer2);
       setVersion((v2) => v2 + 1);
     });
+    return () => {
+      subVis();
+    };
   }, []);
   if (props.elements && props.elements !== elements) {
     setElements(props.elements);
@@ -52423,6 +52450,9 @@ function BimPanel(props) {
       if (source !== "tree" && source !== "search")
         setFilter("");
     });
+    return () => {
+      props.isolation.onChange(void 0);
+    };
   }, []);
   react.exports.useEffect(() => {
     if (vim) {
@@ -52570,11 +52600,16 @@ function _SidePanel(props) {
   }, close(iconOptions)), props.content);
 }
 function resizeCanvas(viewer2, open) {
+  const tag = "bim-panel-open";
   const parent = viewer2.viewport.canvas.parentElement;
-  const previous = parent.className;
-  parent.className = parent.className.replace(" bim-panel-open", "");
-  parent.className += open ? " bim-panel-open" : "";
-  if (previous !== parent.className) {
+  if (parent) {
+    const has2 = parent.classList.contains(tag);
+    if (open === has2)
+      return;
+    if (open && !has2)
+      parent.classList.add(tag);
+    if (!open && has2)
+      parent.classList.remove(tag);
     viewer2.viewport.ResizeToParent();
   }
 }
@@ -52654,7 +52689,7 @@ function _MenuToast(props) {
   const speedRef = react.exports.useRef(speed);
   const toastTimeout = react.exports.useRef();
   react.exports.useEffect(() => {
-    props.viewer.camera.onValueChanged.subscribe(() => {
+    const subCam = props.viewer.camera.onValueChanged.subscribe(() => {
       if (props.viewer.camera.speed !== speedRef.current) {
         clearTimeout(toastTimeout.current);
         toastTimeout.current = setTimeout(() => setVisible(false), 1e3);
@@ -52663,6 +52698,10 @@ function _MenuToast(props) {
         setVisible(true);
       }
     });
+    return () => {
+      subCam();
+      clearTimeout(toastTimeout.current);
+    };
   }, []);
   return /* @__PURE__ */ React.createElement("div", {
     className: `vim-menu-toast rounded shadow-lg py-2 px-5 flex items-center justify-between transition-all ${visible2 ? "opacity-100" : "opacity-0"}`
@@ -55098,7 +55137,8 @@ var Transparency;
 var Geometry;
 ((Geometry2) => {
   function createGeometryFromInstances(g3d, instances) {
-    return Geometry2.mergeInstanceMeshes(g3d, "all", false, instances).geometry;
+    var _a22;
+    return (_a22 = Geometry2.mergeInstanceMeshes(g3d, "all", false, instances)) == null ? void 0 : _a22.geometry;
   }
   Geometry2.createGeometryFromInstances = createGeometryFromInstances;
   function createGeometryFromMesh(g3d, mesh, section, transparent) {
@@ -55148,11 +55188,15 @@ var Geometry;
   Geometry2.createGeometryFromArrays = createGeometryFromArrays;
   function mergeInstanceMeshes(g3d, section, transparent, instances) {
     const info = getInstanceMergeInfo(g3d, instances, section);
+    if (info.instances.length === 0 || info.indexCount === 0)
+      return;
     return merge(g3d, info, transparent);
   }
   Geometry2.mergeInstanceMeshes = mergeInstanceMeshes;
   function mergeUniqueMeshes(g3d, section, transparent) {
     const info = getUniqueMeshMergeInfo(g3d, section);
+    if (info.instances.length === 0 || info.indexCount === 0)
+      return;
     return merge(g3d, info, transparent);
   }
   Geometry2.mergeUniqueMeshes = mergeUniqueMeshes;
@@ -55303,7 +55347,6 @@ class Object$1 {
     __publicField(this, "_visible", true);
     __publicField(this, "_boundingBox");
     __publicField(this, "_meshes");
-    __publicField(this, "onVisibilityChanged");
     this.vim = vim;
     this.element = element;
     this.instances = instances;
@@ -55350,8 +55393,10 @@ class Object$1 {
       const b = mesh.userData.boxes[index];
       box = box ? box.union(b) : b.clone();
     });
-    box.applyMatrix4(this.vim.getMatrix());
-    this._boundingBox = box;
+    if (box) {
+      box.applyMatrix4(this.vim.getMatrix());
+      this._boundingBox = box;
+    }
     return this._boundingBox;
   }
   getCenter(target = new Vector3()) {
@@ -55362,14 +55407,14 @@ class Object$1 {
     if (!this.instances)
       return;
     const wireframe = this.meshBuilder.createWireframe(this.vim.document.g3d, this.instances);
-    wireframe.applyMatrix4(this.vim.getMatrix());
+    wireframe == null ? void 0 : wireframe.applyMatrix4(this.vim.getMatrix());
     return wireframe;
   }
   createGeometry() {
     if (!this.instances)
       return;
     const geometry = Geometry.createGeometryFromInstances(this.vim.document.g3d, this.instances);
-    geometry.applyMatrix4(this.vim.getMatrix());
+    geometry == null ? void 0 : geometry.applyMatrix4(this.vim.getMatrix());
     return geometry;
   }
   get color() {
@@ -55402,7 +55447,7 @@ class Object$1 {
       return;
     this._visible = value;
     this.applyVisible(value);
-    this.vim.scene._visibilityChanged = true;
+    this.vim.scene.visibilityChanged = true;
   }
   applyVisible(value) {
     if (!this._meshes)
@@ -55530,7 +55575,7 @@ class Selection {
     __publicField(this, "_selectionMesh");
     __publicField(this, "_focusMesh");
     __publicField(this, "_focusMaterial");
-    __publicField(this, "_focusStart");
+    __publicField(this, "_focusStart", 0);
     __publicField(this, "_onValueChanged", new dist$3.SignalDispatcher());
     this._renderer = renderer;
     this._focusMaterial = renderer.materials.focus.clone();
@@ -55565,16 +55610,20 @@ class Selection {
     return target;
   }
   focus(object) {
-    var _a22;
-    (_a22 = this._focusMesh) == null ? void 0 : _a22.geometry.dispose();
-    this._renderer.remove(this._focusMesh);
+    if (this._focusMesh) {
+      this._focusMesh.geometry.dispose();
+      this._renderer.remove(this._focusMesh);
+    }
     this._focusMaterial.opacity = 0;
     this._focusStart = new Date().getTime();
     if (!object)
       return;
-    this._focusMesh = new Mesh(object.createGeometry(), this._focusMaterial);
-    this._renderer.add(this._focusMesh);
-    this.focusTransition();
+    const geometry = object.createGeometry();
+    if (geometry) {
+      this._focusMesh = new Mesh(geometry, this._focusMaterial);
+      this._renderer.add(this._focusMesh);
+      this.focusTransition();
+    }
   }
   focusTransition() {
     const t2 = (new Date().getTime() - this._focusStart) / 90;
@@ -55693,9 +55742,11 @@ class Selection {
     }
     const meshBuilder = vim.scene.builder.meshBuilder;
     this._selectionMesh = meshBuilder.createWireframe(vim.document.g3d, instances);
-    this._selectionMesh.applyMatrix4(vim.getMatrix());
-    if (this._selectionMesh)
-      this._renderer.add(this._selectionMesh);
+    if (this._selectionMesh) {
+      this._selectionMesh.applyMatrix4(vim.getMatrix());
+      if (this._selectionMesh)
+        this._renderer.add(this._selectionMesh);
+    }
   }
   removeHighlight() {
     if (this._selectionMesh) {
@@ -55956,11 +56007,11 @@ class Scene {
     __publicField(this, "builder");
     __publicField(this, "meshes", []);
     __publicField(this, "vim");
+    __publicField(this, "visibilityChanged", false);
     __publicField(this, "_boundingBox", new Box3());
     __publicField(this, "_instanceToThreeMeshes", /* @__PURE__ */ new Map());
     __publicField(this, "_threeMeshIdToInstances", /* @__PURE__ */ new Map());
     __publicField(this, "_material");
-    __publicField(this, "_visibilityChanged");
     this.builder = builder;
   }
   getBoundingBox(target = new Box3()) {
@@ -56067,13 +56118,13 @@ class RenderScene {
   getUpdatedScenes() {
     const result = [];
     for (const s of this._scenes) {
-      if (s._visibilityChanged)
+      if (s.visibilityChanged)
         result.push(s);
     }
     return result;
   }
   clearUpdateFlags() {
-    this._scenes.forEach((s) => s._visibilityChanged = false);
+    this._scenes.forEach((s) => s.visibilityChanged = false);
   }
   getBoundingBox(target = new Box3()) {
     return this._boundingBox ? target.copy(this._boundingBox) : target.set(new Vector3(-1, -1, -1), new Vector3(1, 1, 1));
@@ -60196,6 +60247,8 @@ class MeshBuilder {
   }
   createMergedMesh(g3d, section, transparent, instances) {
     const merge = instances ? Geometry.mergeInstanceMeshes(g3d, section, transparent, instances) : Geometry.mergeUniqueMeshes(g3d, section, transparent);
+    if (!merge)
+      return;
     const material = transparent ? this.materials.transparent : this.materials.opaque;
     const mesh = new Mesh(merge.geometry, material);
     mesh.userData.merged = true;
@@ -60206,6 +60259,8 @@ class MeshBuilder {
   }
   createWireframe(g3d, instances) {
     const geometry = Geometry.createGeometryFromInstances(g3d, instances);
+    if (!geometry)
+      return;
     const wireframe = new WireframeGeometry(geometry);
     return new LineSegments(wireframe, this.materials.wireframe);
   }
@@ -60249,8 +60304,11 @@ class SceneBuilder {
     return scene;
   }
   createFromMergeableMeshes(g3d, section, transparent, instances) {
+    const scene = new Scene(this);
     const mesh = this.meshBuilder.createMergedMesh(g3d, section, transparent, instances);
-    return new Scene(this).addMesh(mesh);
+    if (mesh)
+      scene.addMesh(mesh);
+    return scene;
   }
 }
 class Vim {
@@ -61434,11 +61492,16 @@ function VimComponent(props) {
   react.exports.useEffect(() => {
     props.onMount();
     cursor.register();
-    props.viewer.onVimLoaded.subscribe(() => {
+    const subLoad = props.viewer.onVimLoaded.subscribe(() => {
       props.viewer.camera.frame("all", 45);
     });
     props.viewer.inputs.scheme = new ComponentInputs(viewer2, isolation);
-    props.viewer.inputs.onContextMenu.subscribe(showContextMenu);
+    const subContext = props.viewer.inputs.onContextMenu.subscribe(showContextMenu);
+    return () => {
+      subLoad();
+      subContext();
+      cursor.register();
+    };
   }, []);
   const sidePanel = /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(BimPanel, {
     viewer: viewer2,
@@ -61495,11 +61558,15 @@ function useViewerState(viewer2) {
     ...viewer2.selection.objects
   ]);
   react.exports.useEffect(() => {
-    viewer2.onVimLoaded.subscribe(() => setVim(getVim()));
-    viewer2.selection.onValueChanged.subscribe(() => {
+    const subLoad = viewer2.onVimLoaded.subscribe(() => setVim(getVim()));
+    const subSelect = viewer2.selection.onValueChanged.subscribe(() => {
       setVim(getVim());
       setSelection([...viewer2.selection.objects]);
     });
+    return () => {
+      subLoad();
+      subSelect();
+    };
   }, []);
   return [vim, selection];
 }
