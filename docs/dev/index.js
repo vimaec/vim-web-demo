@@ -8748,12 +8748,11 @@ body {\r
 }\r
 \r
 .overlay {\r
-  z-index: 100;\r
-  width: 480px;\r
+  z-index: 20;\r
+  width: 100%;\r
   height: 100%;\r
   position: absolute;\r
   top: 0;\r
-  left: 0;\r
   pointer-events: all;\r
 }\r
 \r
@@ -8825,6 +8824,10 @@ body {\r
 }\r
 \r
 /* MENU */\r
+\r
+.vim-control-bar {\r
+  z-index: 30;\r
+}\r
 \r
 .vim-control-bar td {\r
   pointer-events: all;\r
@@ -8942,6 +8945,7 @@ body {\r
 .rct-tree-root > div > .rct-tree-items-container {\r
   max-height: calc(50vh - 9rem);\r
   overflow-y: auto;\r
+  content-visibility: auto;\r
 }\r
 .rct-tree-items-container li .rct-tree-item-title-container {\r
   border: none;\r
@@ -61611,7 +61615,7 @@ function VimComponent(props) {
   const side = useSideState(useInspector);
   const help2 = useHelp();
   const [vim, selection] = useViewerState(props.viewer);
-  const [inside, setInside] = react.exports.useState(false);
+  const overlay = react.exports.useRef();
   react.exports.useEffect(() => {
     props.onMount();
     cursor.register();
@@ -61620,8 +61624,30 @@ function VimComponent(props) {
     });
     props.viewer.inputs.scheme = new ComponentInputs(viewer2, isolation);
     const subContext = props.viewer.inputs.onContextMenu.subscribe(showContextMenu);
-    props.viewer.viewport.canvas.addEventListener("mouseleave", () => setInside(false));
-    props.viewer.viewport.canvas.addEventListener("mouseenter", () => setInside(true));
+    overlay.current.addEventListener("mousedown", (e) => {
+      props.viewer.viewport.canvas.dispatchEvent(new MouseEvent("mousedown", e));
+      e.stopImmediatePropagation();
+    });
+    overlay.current.addEventListener("mouseup", (e) => {
+      props.viewer.viewport.canvas.dispatchEvent(new MouseEvent("mouseup", new MouseEvent("mousedown", e)));
+      e.stopImmediatePropagation();
+      e.preventDefault();
+    });
+    overlay.current.addEventListener("mousemove", (e) => {
+      props.viewer.viewport.canvas.dispatchEvent(new MouseEvent("mousemove", e));
+      e.stopImmediatePropagation();
+      e.preventDefault();
+    });
+    overlay.current.addEventListener("wheel", (e) => {
+      props.viewer.viewport.canvas.dispatchEvent(new WheelEvent("wheel", e));
+      e.stopImmediatePropagation();
+      e.preventDefault();
+    });
+    overlay.current.addEventListener("dblclick", (e) => {
+      props.viewer.viewport.canvas.dispatchEvent(new MouseEvent("dblclick", e));
+      e.stopImmediatePropagation();
+      e.preventDefault();
+    });
     return () => {
       subLoad();
       subContext();
@@ -61639,9 +61665,10 @@ function VimComponent(props) {
     viewer: props.viewer,
     settings: settings2
   }));
-  return /* @__PURE__ */ React.createElement(React.Fragment, null, inside ? /* @__PURE__ */ React.createElement("div", {
-    className: "overlay"
-  }) : null, /* @__PURE__ */ React.createElement(MenuHelp, {
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", {
+    ref: overlay,
+    className: `overlay ${side.get() !== "none" ? "bim-panel-open" : ""}`
+  }), /* @__PURE__ */ React.createElement(MenuHelp, {
     help: help2
   }), useLogo ? /* @__PURE__ */ React.createElement(Logo, null) : null, useLoading ? /* @__PURE__ */ React.createElement(LoadingBox, {
     viewer: props.viewer
