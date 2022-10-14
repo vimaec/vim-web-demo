@@ -8747,6 +8747,16 @@ body {\r
   font-family: 'Roboto', sans-serif;\r
 }\r
 \r
+.overlay {\r
+  z-index: 100;\r
+  width: 480px;\r
+  height: 100%;\r
+  position: absolute;\r
+  top: 0;\r
+  left: 0;\r
+  pointer-events: all;\r
+}\r
+\r
 /* Toast Notification */\r
 .vim-menu-toast {\r
   position: absolute;\r
@@ -61601,6 +61611,7 @@ function VimComponent(props) {
   const side = useSideState(useInspector);
   const help2 = useHelp();
   const [vim, selection] = useViewerState(props.viewer);
+  const [inside, setInside] = react.exports.useState(false);
   react.exports.useEffect(() => {
     props.onMount();
     cursor.register();
@@ -61609,6 +61620,8 @@ function VimComponent(props) {
     });
     props.viewer.inputs.scheme = new ComponentInputs(viewer2, isolation);
     const subContext = props.viewer.inputs.onContextMenu.subscribe(showContextMenu);
+    props.viewer.viewport.canvas.addEventListener("mouseleave", () => setInside(false));
+    props.viewer.viewport.canvas.addEventListener("mouseenter", () => setInside(true));
     return () => {
       subLoad();
       subContext();
@@ -61626,7 +61639,9 @@ function VimComponent(props) {
     viewer: props.viewer,
     settings: settings2
   }));
-  return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(MenuHelp, {
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, inside ? /* @__PURE__ */ React.createElement("div", {
+    className: "overlay"
+  }) : null, /* @__PURE__ */ React.createElement(MenuHelp, {
     help: help2
   }), useLogo ? /* @__PURE__ */ React.createElement(Logo, null) : null, useLoading ? /* @__PURE__ */ React.createElement(LoadingBox, {
     viewer: props.viewer
