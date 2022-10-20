@@ -9053,8 +9053,8 @@ body {\r
 }\r
 \r
 .rct-tree-item-visibility {\r
-  width: 16px;\r
-  height: 16px;\r
+  min-width: 16px;\r
+  min-height: 16px;\r
   background-repeat: no-repeat;\r
 }\r
 \r
