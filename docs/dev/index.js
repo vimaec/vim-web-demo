@@ -8305,14 +8305,17 @@ select {
 .isolate {
   isolation: isolate;
 }\r
+.z-20 {
+  z-index: 20;
+}\r
 .z-50 {
   z-index: 50;
 }\r
+.z-30 {
+  z-index: 30;
+}\r
 .z-10 {
   z-index: 10;
-}\r
-.z-20 {
-  z-index: 20;
 }\r
 .order-2 {
   order: 2;
@@ -8760,15 +8763,6 @@ body {\r
   font-family: 'Roboto', sans-serif;\r
 }\r
 \r
-.overlay {\r
-  z-index: 20;\r
-  width: 100%;\r
-  height: 100%;\r
-  position: absolute;\r
-  top: 0;\r
-  pointer-events: all;\r
-}\r
-\r
 /* Toast Notification */\r
 .vim-menu-toast {\r
   position: absolute;\r
@@ -8837,10 +8831,6 @@ body {\r
 }\r
 \r
 /* MENU */\r
-\r
-.vim-control-bar {\r
-  z-index: 30;\r
-}\r
 \r
 .vim-control-bar td {\r
   pointer-events: all;\r
@@ -9065,6 +9055,7 @@ body {\r
 .rct-tree-item-visibility {\r
   width: 16px;\r
   height: 16px;\r
+  background-repeat: no-repeat;\r
 }\r
 \r
 /*default state*/\r
@@ -40762,7 +40753,7 @@ function _MenuTop(props) {
   }));
   return /* @__PURE__ */ React.createElement("div", {
     ref: ui2,
-    className: "vim-top border border-white flex flex-col fixed right-6 top-6 w-[100px] h-[145px] rounded-2xl shadow-lg transition-all"
+    className: "vim-top border z-20 border-white flex flex-col fixed right-6 top-6 w-[100px] h-[145px] rounded-2xl shadow-lg transition-all"
   }, /* @__PURE__ */ React.createElement("div", {
     className: "vim-top-buttons order-2 flex p-1 rounded-b-xl pointer-events-auto justify-center bg-white mb-0 mt-auto"
   }, /* @__PURE__ */ React.createElement("div", {
@@ -40872,7 +40863,7 @@ function ControlBar(props) {
     };
   }, []);
   return /* @__PURE__ */ React.createElement("div", {
-    className: `vim-control-bar flex items-center justify-center w-full fixed px-2 bottom-0 py-2 mb-9 transition-opacity transition-all ${show ? "opacity-100" : "opacity-0"}`
+    className: `vim-control-bar flex z-20 items-center justify-center w-full fixed px-2 bottom-0 py-2 mb-9 transition-opacity transition-all ${show ? "opacity-100" : "opacity-0"}`
   }, /* @__PURE__ */ React.createElement("div", {
     className: "vim-control-bar-section flex items-center bg-white rounded-full px-2 shadow-md mx-2"
   }, /* @__PURE__ */ React.createElement(TabCamera, __spreadValues({}, props))), /* @__PURE__ */ React.createElement(TabTools, __spreadValues({}, props)), /* @__PURE__ */ React.createElement("div", {
@@ -41083,7 +41074,7 @@ function _LoadingBox(props) {
   if (!msg)
     return null;
   return /* @__PURE__ */ React.createElement("div", {
-    className: "loading-wrapper backdrop-blur fixed items-center justify-center top-0 left-0 w-full h-full z-10 bg-overflow"
+    className: "loading-wrapper backdrop-blur fixed items-center justify-center top-0 left-0 w-full h-full z-30 bg-overflow"
   }, /* @__PURE__ */ React.createElement("div", {
     className: "vim-loading-box w-[320px] text-gray-medium bg-white px-5 py-4 rounded shadow-lg z-20"
   }, /* @__PURE__ */ React.createElement("h1", {
@@ -52519,7 +52510,7 @@ function _MenuHelp(props) {
     window.open(urlSupport);
   };
   return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", {
-    className: "menu-help-overlay z-10 absolute inset-0 bg-black/80 w-full h-full flex items-center justify-center",
+    className: "menu-help-overlay z-30 absolute inset-0 bg-black/80 w-full h-full flex items-center justify-center",
     onClick: onCloseBtn
   }, /* @__PURE__ */ React.createElement("div", {
     className: "flex flex-col py-5",
@@ -52684,41 +52675,33 @@ function _MenuToast(props) {
 function Overlay(props) {
   const overlay = react.exports.useRef(null);
   react.exports.useEffect(() => {
-    var _a22, _b2, _c, _d, _e, _f;
-    (_a22 = overlay.current) == null ? void 0 : _a22.addEventListener("mousedown", (e) => {
-      props.viewer.viewport.canvas.dispatchEvent(new MouseEvent("mousedown", e));
-      e.stopImmediatePropagation();
-    });
-    (_b2 = overlay.current) == null ? void 0 : _b2.addEventListener("mouseup", (e) => {
-      props.viewer.viewport.canvas.dispatchEvent(new MouseEvent("mouseup", new MouseEvent("mousedown", e)));
-      e.stopImmediatePropagation();
-      e.preventDefault();
-    });
-    (_c = overlay.current) == null ? void 0 : _c.addEventListener("mousemove", (e) => {
-      props.viewer.viewport.canvas.dispatchEvent(new MouseEvent("mousemove", e));
-      e.stopImmediatePropagation();
-      e.preventDefault();
-    });
-    (_d = overlay.current) == null ? void 0 : _d.addEventListener("wheel", (e) => {
-      props.viewer.viewport.canvas.dispatchEvent(new WheelEvent("wheel", e));
-      e.stopImmediatePropagation();
-      e.preventDefault();
-    });
-    (_e = overlay.current) == null ? void 0 : _e.addEventListener("dblclick", (e) => {
-      props.viewer.viewport.canvas.dispatchEvent(new MouseEvent("dblclick", e));
-      e.stopImmediatePropagation();
-      e.preventDefault();
-    });
-    (_f = overlay.current) == null ? void 0 : _f.addEventListener("mouseout", (e) => {
-      props.viewer.viewport.canvas.dispatchEvent(new MouseEvent("mouseout", e));
-      e.stopImmediatePropagation();
-      e.preventDefault();
-    });
+    const relay = (evnt, construct, preventDefault = true) => {
+      var _a22;
+      (_a22 = overlay.current) == null ? void 0 : _a22.addEventListener(evnt, (e) => {
+        props.viewer.viewport.canvas.dispatchEvent(construct(evnt, e));
+        e.stopImmediatePropagation();
+        if (preventDefault) {
+          e.preventDefault();
+        }
+      });
+    };
+    relay("mousedown", (s, e) => new MouseEvent(s, e));
+    relay("mousemove", (s, e) => new MouseEvent(s, e));
+    relay("mouseup", (s, e) => new MouseEvent(s, e));
+    relay("dblclick", (s, e) => new MouseEvent(s, e));
+    relay("mouseout", (s, e) => new MouseEvent(s, e));
+    relay("wheel", (s, e) => new WheelEvent(s, e));
+    relay("pointerdown", (s, e) => new PointerEvent(s, e), false);
+    relay("pointermove", (s, e) => new PointerEvent(s, e), false);
+    relay("pointerup", (s, e) => new PointerEvent(s, e), false);
+    relay("touchstart", (s, e) => new TouchEvent(s, e), false);
+    relay("touchend", (s, e) => new TouchEvent(s, e), false);
+    relay("touchmove", (s, e) => new TouchEvent(s, e), false);
   }, []);
   return /* @__PURE__ */ React.createElement("div", {
     ref: overlay,
     onContextMenu: (e) => e.preventDefault(),
-    className: `overlay ${props.side.get() !== "none" ? "bim-panel-open" : ""}`
+    className: `vim-overlay absolute top-0 h-full w-full z-10 ${props.side.get() !== "none" ? "bim-panel-open" : ""}`
   });
 }
 var __defProp2 = Object.defineProperty;
