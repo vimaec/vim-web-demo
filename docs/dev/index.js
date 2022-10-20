@@ -8305,6 +8305,9 @@ select {
 .isolate {
   isolation: isolate;
 }\r
+.z-50 {
+  z-index: 50;
+}\r
 .z-10 {
   z-index: 10;
 }\r
@@ -8739,6 +8742,16 @@ select {
   --c-axe-z: #0000f5;\r
 \r
   --c-overflow: rgba(5, 12, 26, 0.8);\r
+\r
+  --visible-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='none' d='M0 0h256v256H0z'/%3E%3Cpath fill='%23212329' d='M128 36C57.308 36 0 97.054 0 128c0 32.943 57.308 92 128 92s128-59.057 128-92c0-30.946-57.308-92-128-92Zm75.346 131.751C190.404 178.301 163.406 196 128 196s-62.403-17.699-75.346-28.249C31.004 150.103 24 133.349 24 128c0-.047.071-4.846 6.247-14.452 5.34-8.308 13.341-17.061 22.527-24.648 6.833-5.643 17.521-13.282 31.163-19.291C71.664 81.27 64 97.734 64 116c0 35.346 28.654 64 64 64s64-28.654 64-64a63.79 63.79 0 0 0-5.004-24.847C186.913 106.546 174.413 119 159 119s-28-12.536-28-28c0-13.851 10.06-25.346 23.271-27.594 22.243 5.762 39.382 17.586 48.956 25.494 9.186 7.587 17.187 16.341 22.527 24.648 6.176 9.606 6.247 14.405 6.247 14.452 0 5.349-7.004 22.103-28.654 39.751Z'/%3E%3C/svg%3E%0A");\r
+  --visible-beige: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='none' d='M0 0h256v256H0z'/%3E%3Cpath fill='%23c3bfb4' d='M128 36C57.308 36 0 97.054 0 128c0 32.943 57.308 92 128 92s128-59.057 128-92c0-30.946-57.308-92-128-92Zm75.346 131.751C190.404 178.301 163.406 196 128 196s-62.403-17.699-75.346-28.249C31.004 150.103 24 133.349 24 128c0-.047.071-4.846 6.247-14.452 5.34-8.308 13.341-17.061 22.527-24.648 6.833-5.643 17.521-13.282 31.163-19.291C71.664 81.27 64 97.734 64 116c0 35.346 28.654 64 64 64s64-28.654 64-64a63.79 63.79 0 0 0-5.004-24.847C186.913 106.546 174.413 119 159 119s-28-12.536-28-28c0-13.851 10.06-25.346 23.271-27.594 22.243 5.762 39.382 17.586 48.956 25.494 9.186 7.587 17.187 16.341 22.527 24.648 6.176 9.606 6.247 14.405 6.247 14.452 0 5.349-7.004 22.103-28.654 39.751Z'/%3E%3C/svg%3E%0A");\r
+  --visible-light-blue: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='none' d='M0 0h256v256H0z'/%3E%3Cpath fill='%239cb5d5' d='M128 36C57.308 36 0 97.054 0 128c0 32.943 57.308 92 128 92s128-59.057 128-92c0-30.946-57.308-92-128-92Zm75.346 131.751C190.404 178.301 163.406 196 128 196s-62.403-17.699-75.346-28.249C31.004 150.103 24 133.349 24 128c0-.047.071-4.846 6.247-14.452 5.34-8.308 13.341-17.061 22.527-24.648 6.833-5.643 17.521-13.282 31.163-19.291C71.664 81.27 64 97.734 64 116c0 35.346 28.654 64 64 64s64-28.654 64-64a63.79 63.79 0 0 0-5.004-24.847C186.913 106.546 174.413 119 159 119s-28-12.536-28-28c0-13.851 10.06-25.346 23.271-27.594 22.243 5.762 39.382 17.586 48.956 25.494 9.186 7.587 17.187 16.341 22.527 24.648 6.176 9.606 6.247 14.405 6.247 14.452 0 5.349-7.004 22.103-28.654 39.751Z'/%3E%3C/svg%3E%0A");\r
+  --visible-royal-blue: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='none' d='M0 0h256v256H0z'/%3E%3Cpath fill='%23284ea2' d='M128 36C57.308 36 0 97.054 0 128c0 32.943 57.308 92 128 92s128-59.057 128-92c0-30.946-57.308-92-128-92Zm75.346 131.751C190.404 178.301 163.406 196 128 196s-62.403-17.699-75.346-28.249C31.004 150.103 24 133.349 24 128c0-.047.071-4.846 6.247-14.452 5.34-8.308 13.341-17.061 22.527-24.648 6.833-5.643 17.521-13.282 31.163-19.291C71.664 81.27 64 97.734 64 116c0 35.346 28.654 64 64 64s64-28.654 64-64a63.79 63.79 0 0 0-5.004-24.847C186.913 106.546 174.413 119 159 119s-28-12.536-28-28c0-13.851 10.06-25.346 23.271-27.594 22.243 5.762 39.382 17.586 48.956 25.494 9.186 7.587 17.187 16.341 22.527 24.648 6.176 9.606 6.247 14.405 6.247 14.452 0 5.349-7.004 22.103-28.654 39.751Z'/%3E%3C/svg%3E%0A");\r
+\r
+  --hidden-dark: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='%2321232' d='M154.271,63.406c22.243,5.762,39.382,17.586,48.956,25.494,9.186,7.587,17.187,16.341,22.527,24.648,6.176,9.606,6.247,14.405,6.247,14.452,0,4.764-5.566,18.577-22.079,34.01l16.973,16.972c18.185-17.247,29.106-36.602,29.106-50.982,0-30.946-57.308-92-128-92-13.307,0-26.139,2.165-38.205,5.884l42.099,42.099c2.731-10.572,11.479-18.722,22.376-20.577Z'/%3E%3Cpath fill='%2321232' d='M166.022,118.111l21.472,21.472c2.896-7.3,4.505-15.251,4.505-23.583,0-8.812-1.782-17.207-5.004-24.847-.07,12.971-8.957,23.853-20.974,26.958Z'/%3E%3Cpath fill='%2321232' d='M31.833,17.863c-4.687-4.686-12.284-4.686-16.971,0-4.686,4.687-4.686,12.285,0,16.971l29.92,29.92C17.38,84.825,0,110.966,0,128c0,32.943,57.308,92,128,92,21.088,0,40.972-5.269,58.51-13.52l37.657,37.657c4.687,4.686,12.284,4.686,16.971,0,4.686-4.687,4.686-12.285,0-16.971L31.833,17.863Zm96.167,178.137c-35.405,0-62.403-17.699-75.346-28.249-21.65-17.648-28.654-34.402-28.654-39.751,0-.047,.071-4.846,6.247-14.452,5.34-8.308,13.341-17.061,22.527-24.648,2.545-2.103,5.633-4.482,9.205-6.95l7.708,7.708c-3.643,8.034-5.686,16.946-5.686,26.343,0,35.346,28.654,64,64,64,9.397,0,18.31-2.043,26.345-5.684l13.936,13.936c-11.606,4.516-25.17,7.749-40.281,7.749Z'/%3E%3C/svg%3E%0A");\r
+  --hidden-beige: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='%23c3bfb4' d='M154.271,63.406c22.243,5.762,39.382,17.586,48.956,25.494,9.186,7.587,17.187,16.341,22.527,24.648,6.176,9.606,6.247,14.405,6.247,14.452,0,4.764-5.566,18.577-22.079,34.01l16.973,16.972c18.185-17.247,29.106-36.602,29.106-50.982,0-30.946-57.308-92-128-92-13.307,0-26.139,2.165-38.205,5.884l42.099,42.099c2.731-10.572,11.479-18.722,22.376-20.577Z'/%3E%3Cpath fill='%23c3bfb4' d='M166.022,118.111l21.472,21.472c2.896-7.3,4.505-15.251,4.505-23.583,0-8.812-1.782-17.207-5.004-24.847-.07,12.971-8.957,23.853-20.974,26.958Z'/%3E%3Cpath fill='%23c3bfb4' d='M31.833,17.863c-4.687-4.686-12.284-4.686-16.971,0-4.686,4.687-4.686,12.285,0,16.971l29.92,29.92C17.38,84.825,0,110.966,0,128c0,32.943,57.308,92,128,92,21.088,0,40.972-5.269,58.51-13.52l37.657,37.657c4.687,4.686,12.284,4.686,16.971,0,4.686-4.687,4.686-12.285,0-16.971L31.833,17.863Zm96.167,178.137c-35.405,0-62.403-17.699-75.346-28.249-21.65-17.648-28.654-34.402-28.654-39.751,0-.047,.071-4.846,6.247-14.452,5.34-8.308,13.341-17.061,22.527-24.648,2.545-2.103,5.633-4.482,9.205-6.95l7.708,7.708c-3.643,8.034-5.686,16.946-5.686,26.343,0,35.346,28.654,64,64,64,9.397,0,18.31-2.043,26.345-5.684l13.936,13.936c-11.606,4.516-25.17,7.749-40.281,7.749Z'/%3E%3C/svg%3E%0A");\r
+  --hidden-light-blue: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='%239cb5d5' d='M154.271,63.406c22.243,5.762,39.382,17.586,48.956,25.494,9.186,7.587,17.187,16.341,22.527,24.648,6.176,9.606,6.247,14.405,6.247,14.452,0,4.764-5.566,18.577-22.079,34.01l16.973,16.972c18.185-17.247,29.106-36.602,29.106-50.982,0-30.946-57.308-92-128-92-13.307,0-26.139,2.165-38.205,5.884l42.099,42.099c2.731-10.572,11.479-18.722,22.376-20.577Z'/%3E%3Cpath fill='%239cb5d5' d='M166.022,118.111l21.472,21.472c2.896-7.3,4.505-15.251,4.505-23.583,0-8.812-1.782-17.207-5.004-24.847-.07,12.971-8.957,23.853-20.974,26.958Z'/%3E%3Cpath fill='%239cb5d5' d='M31.833,17.863c-4.687-4.686-12.284-4.686-16.971,0-4.686,4.687-4.686,12.285,0,16.971l29.92,29.92C17.38,84.825,0,110.966,0,128c0,32.943,57.308,92,128,92,21.088,0,40.972-5.269,58.51-13.52l37.657,37.657c4.687,4.686,12.284,4.686,16.971,0,4.686-4.687,4.686-12.285,0-16.971L31.833,17.863Zm96.167,178.137c-35.405,0-62.403-17.699-75.346-28.249-21.65-17.648-28.654-34.402-28.654-39.751,0-.047,.071-4.846,6.247-14.452,5.34-8.308,13.341-17.061,22.527-24.648,2.545-2.103,5.633-4.482,9.205-6.95l7.708,7.708c-3.643,8.034-5.686,16.946-5.686,26.343,0,35.346,28.654,64,64,64,9.397,0,18.31-2.043,26.345-5.684l13.936,13.936c-11.606,4.516-25.17,7.749-40.281,7.749Z'/%3E%3C/svg%3E%0A");\r
+  --hidden-royal-blue: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='%23284ea2' d='M154.271,63.406c22.243,5.762,39.382,17.586,48.956,25.494,9.186,7.587,17.187,16.341,22.527,24.648,6.176,9.606,6.247,14.405,6.247,14.452,0,4.764-5.566,18.577-22.079,34.01l16.973,16.972c18.185-17.247,29.106-36.602,29.106-50.982,0-30.946-57.308-92-128-92-13.307,0-26.139,2.165-38.205,5.884l42.099,42.099c2.731-10.572,11.479-18.722,22.376-20.577Z'/%3E%3Cpath fill='%23284ea2' d='M166.022,118.111l21.472,21.472c2.896-7.3,4.505-15.251,4.505-23.583,0-8.812-1.782-17.207-5.004-24.847-.07,12.971-8.957,23.853-20.974,26.958Z'/%3E%3Cpath fill='%23284ea2' d='M31.833,17.863c-4.687-4.686-12.284-4.686-16.971,0-4.686,4.687-4.686,12.285,0,16.971l29.92,29.92C17.38,84.825,0,110.966,0,128c0,32.943,57.308,92,128,92,21.088,0,40.972-5.269,58.51-13.52l37.657,37.657c4.687,4.686,12.284,4.686,16.971,0,4.686-4.687,4.686-12.285,0-16.971L31.833,17.863Zm96.167,178.137c-35.405,0-62.403-17.699-75.346-28.249-21.65-17.648-28.654-34.402-28.654-39.751,0-.047,.071-4.846,6.247-14.452,5.34-8.308,13.341-17.061,22.527-24.648,2.545-2.103,5.633-4.482,9.205-6.95l7.708,7.708c-3.643,8.034-5.686,16.946-5.686,26.343,0,35.346,28.654,64,64,64,9.397,0,18.31-2.043,26.345-5.684l13.936,13.936c-11.606,4.516-25.17,7.749-40.281,7.749Z'/%3E%3C/svg%3E%0A");\r
 }\r
 \r
 body {\r
@@ -9040,57 +9053,69 @@ body {\r
   padding-right: 2.5rem;\r
 }\r
 \r
-/* Tree Visibilty Icons */\r
-.rct-tree-item-icons {\r
-  position: absolute;\r
-  right: 12px;\r
-  top: 12px;\r
-  color: var(--c-darkest-gray);\r
-}\r
-.rct-tree-item-icons svg {\r
-  display: none;\r
-}\r
-.vim-hidden .rct-tree-item-icon-hidden {\r
-  display: block;\r
+/* Tree View Visibily Toggles*/\r
+.rct-tree-item-button {\r
+  display: flex !important;\r
+  justify-content: space-between !important;\r
+  margin-left: 4px;\r
+  margin-right: 8px;\r
+  border-radius: 0px;\r
 }\r
 \r
-/*Line hover*/\r
-.rct-tree-item-button:hover .rct-tree-item-icons .rct-tree-item-icon-hidden {\r
-  color: #c3bfb4;\r
-  display: block;\r
+.rct-tree-item-visibility {\r
+  width: 16px;\r
+  height: 16px;\r
 }\r
+\r
+/*default state*/\r
+.rct-tree-item-visibility.vim-visible {\r
+  display: none;\r
+}\r
+.rct-tree-item-visibility.vim-hidden {\r
+  display: block;\r
+  background-image: var(--hidden-dark);\r
+}\r
+\r
+/* Hover unselected element */\r
+.rct-tree-item-button:hover .rct-tree-item-visibility.vim-visible {\r
+  display: block;\r
+  background-image: var(--visible-beige);\r
+}\r
+.rct-tree-item-button:hover .rct-tree-item-visibility.vim-hidden {\r
+  display: block;\r
+  background-image: var(--hidden-beige);\r
+}\r
+\r
+/* Hover selected element */\r
 .rct-tree-item-title-container-selected\r
   .rct-tree-item-button:hover\r
-  .rct-tree-item-icons\r
-  .rct-tree-item-icon-hidden {\r
-  color: #9cb5d5;\r
-}\r
-.rct-tree-item-button:hover\r
-  .rct-tree-item-icons\r
-  .rct-tree-item-icon-hidden:hover {\r
-  color: var(--c-primary-royal);\r
+  .rct-tree-item-visibility.vim-visible {\r
   display: block;\r
+  background-image: var(--visible-light-blue);\r
 }\r
 \r
-/* Hover Visible Object*/\r
-\r
-.rct-tree-item:hover\r
-  .rct-tree-item-icons.vim-visible:hover\r
-  .rct-tree-item-icon-visible {\r
-  display: none;\r
-}\r
-\r
-/* Hover Hidden Object*/\r
-.rct-tree-item:hover\r
-  .rct-tree-item-icons.vim-hidden:hover\r
-  .rct-tree-item-icon-visible {\r
+.rct-tree-item-title-container-selected\r
+  .rct-tree-item-button:hover\r
+  .rct-tree-item-visibility.vim-hidden {\r
   display: block;\r
-  color: var(--c-primary-royal);\r
+  background-image: var(--hidden-light-blue);\r
 }\r
-.rct-tree-item:hover\r
-  .rct-tree-item-icons.vim-hidden:hover\r
-  .rct-tree-item-icon-hidden {\r
-  display: none;\r
+\r
+/* Hover toggle button*/\r
+.rct-tree-item-title-container-selected\r
+  .rct-tree-item-button\r
+  .rct-tree-item-visibility.vim-visible:hover,\r
+.rct-tree-item-button .rct-tree-item-visibility.vim-visible:hover {\r
+  display: block;\r
+  background-image: var(--hidden-royal-blue);\r
+}\r
+\r
+.rct-tree-item-title-container-selected\r
+  .rct-tree-item-button\r
+  .rct-tree-item-visibility.vim-hidden:hover,\r
+.rct-tree-item-button .rct-tree-item-visibility.vim-hidden:hover {\r
+  display: block;\r
+  background-image: var(--visible-royal-blue);\r
 }\r
 \r
 /*Others*/\r
@@ -21816,8 +21841,8 @@ function WebGLShadowMap(_renderer, _objects, _capabilities) {
   function renderObject(object, camera, shadowCamera, light, type) {
     if (object.visible === false)
       return;
-    const visible2 = object.layers.test(camera.layers);
-    if (visible2 && (object.isMesh || object.isLine || object.isPoints)) {
+    const visible = object.layers.test(camera.layers);
+    if (visible && (object.isMesh || object.isLine || object.isPoints)) {
       if ((object.castShadow || object.receiveShadow && type === VSMShadowMap) && (!object.frustumCulled || _frustum.intersectsObject(object))) {
         object.modelViewMatrix.multiplyMatrices(shadowCamera.matrixWorldInverse, object.matrixWorld);
         const geometry = _objects.update(object);
@@ -24897,8 +24922,8 @@ function WebGLRenderer(parameters = {}) {
   function projectObject(object, camera, groupOrder, sortObjects) {
     if (object.visible === false)
       return;
-    const visible2 = object.layers.test(camera.layers);
-    if (visible2) {
+    const visible = object.layers.test(camera.layers);
+    if (visible) {
       if (object.isGroup) {
         groupOrder = object.renderOrder;
       } else if (object.isLOD) {
@@ -40402,33 +40427,6 @@ const collapse = ({ height, width, fill, className }) => /* @__PURE__ */ React.c
   fill,
   d: "m226.207 82.919-.017-.019c-5.937-6.547-16.057-7.04-22.602-1.102L128 150.367l-75.588-68.57c-6.546-5.938-16.666-5.444-22.602 1.102l-.017.019c-5.935 6.545-5.442 16.662 1.102 22.599l86.348 78.33c6.103 5.536 15.411 5.536 21.514 0l86.348-78.33c6.544-5.936 7.038-16.054 1.102-22.599Z"
 }));
-const visible = ({ height, width, fill, className }) => /* @__PURE__ */ React.createElement("svg", {
-  className,
-  height,
-  width,
-  viewBox: "0 0 256 256"
-}, /* @__PURE__ */ React.createElement("path", {
-  fill: "none",
-  d: "M0 0h256v256H0z"
-}), /* @__PURE__ */ React.createElement("path", {
-  fill,
-  d: "M128 36C57.308 36 0 97.054 0 128c0 32.943 57.308 92 128 92s128-59.057 128-92c0-30.946-57.308-92-128-92Zm75.346 131.751C190.404 178.301 163.406 196 128 196s-62.403-17.699-75.346-28.249C31.004 150.103 24 133.349 24 128c0-.047.071-4.846 6.247-14.452 5.34-8.308 13.341-17.061 22.527-24.648 6.833-5.643 17.521-13.282 31.163-19.291C71.664 81.27 64 97.734 64 116c0 35.346 28.654 64 64 64s64-28.654 64-64a63.79 63.79 0 0 0-5.004-24.847C186.913 106.546 174.413 119 159 119s-28-12.536-28-28c0-13.851 10.06-25.346 23.271-27.594 22.243 5.762 39.382 17.586 48.956 25.494 9.186 7.587 17.187 16.341 22.527 24.648 6.176 9.606 6.247 14.405 6.247 14.452 0 5.349-7.004 22.103-28.654 39.751Z"
-}));
-const hidden = ({ height, width, fill, className = "" }) => /* @__PURE__ */ React.createElement("svg", {
-  className,
-  height,
-  width,
-  viewBox: "0 0 256 256"
-}, /* @__PURE__ */ React.createElement("path", {
-  fill: "none",
-  d: "M0 0h256v256H0z"
-}), /* @__PURE__ */ React.createElement("path", {
-  fill,
-  d: "M154.271 63.406c22.243 5.762 39.382 17.586 48.956 25.494 9.186 7.587 17.187 16.341 22.527 24.648 6.176 9.606 6.247 14.405 6.247 14.452 0 4.764-5.566 18.577-22.079 34.01l16.973 16.972c18.185-17.247 29.106-36.602 29.106-50.982 0-30.946-57.308-92-128-92-13.307 0-26.139 2.165-38.205 5.884l42.099 42.099c2.731-10.572 11.479-18.722 22.376-20.577Z"
-}), /* @__PURE__ */ React.createElement("path", {
-  fill,
-  d: "m166.022 118.111 21.472 21.472A63.801 63.801 0 0 0 191.999 116a63.79 63.79 0 0 0-5.004-24.847c-.07 12.971-8.957 23.853-20.974 26.958ZM31.833 17.863c-4.687-4.686-12.284-4.686-16.971 0-4.686 4.687-4.686 12.285 0 16.971l29.92 29.92C17.38 84.825 0 110.966 0 128c0 32.943 57.308 92 128 92 21.088 0 40.972-5.269 58.51-13.52l37.657 37.657c4.687 4.686 12.284 4.686 16.971 0 4.686-4.687 4.686-12.285 0-16.971L31.833 17.863ZM128 196c-35.405 0-62.403-17.699-75.346-28.249C31.004 150.103 24 133.349 24 128c0-.047.071-4.846 6.247-14.452 5.34-8.308 13.341-17.061 22.527-24.648a134.832 134.832 0 0 1 9.205-6.95l7.708 7.708a63.612 63.612 0 0 0-5.686 26.343c0 35.346 28.654 64 64 64 9.397 0 18.31-2.043 26.345-5.684l13.936 13.936c-11.606 4.516-25.17 7.749-40.281 7.749Z"
-}));
 const orbit = ({ height, width, fill = "" }) => /* @__PURE__ */ React.createElement("svg", {
   height,
   width,
@@ -51057,7 +51055,7 @@ class SubMenu extends AbstractMenu {
       selected
     } = this.props;
     const {
-      visible: visible2
+      visible
     } = this.state;
     const menuProps = {
       ref: this.menuRef,
@@ -51071,7 +51069,7 @@ class SubMenu extends AbstractMenu {
     const menuItemProps = {
       className: cx(cssClasses.menuItem, attributes.className, {
         [cx(cssClasses.menuItemDisabled, attributes.disabledClassName)]: disabled,
-        [cx(cssClasses.menuItemActive, attributes.visibleClassName)]: visible2,
+        [cx(cssClasses.menuItemActive, attributes.visibleClassName)]: visible,
         [cx(cssClasses.menuItemSelected, attributes.selectedClassName)]: selected
       }),
       onMouseMove: this.props.onMouseMove,
@@ -51587,7 +51585,7 @@ function _VimContextMenu(props) {
     return !viewer2.sectionBox.box.containsBox(viewer2.renderer.getBoundingBox());
   };
   const [clipping, setClipping] = react.exports.useState(isClipping());
-  const hidden2 = props.isolation.any();
+  const hidden = props.isolation.any();
   react.exports.useEffect(() => {
     const subState = viewer2.sectionBox.onStateChanged.subscribe(() => {
       setSection({
@@ -51667,9 +51665,10 @@ function _VimContextMenu(props) {
       e.preventDefault();
     }
   }, /* @__PURE__ */ React.createElement(ContextMenu, {
-    className: "text-gray-darker bg-white py-1 w-[240px] rounded shadow-lg",
+    preventHideOnContextMenu: true,
+    className: "text-gray-darker bg-white py-1 w-[240px] rounded shadow-lg z-50",
     id: VIM_CONTEXT_MENU_ID
-  }, createButton("Show Controls", "F1", onShowControlsBtn), createDivider(), createButton("Reset Camera", "HOME", onCameraResetBtn), createButton("Zoom to Fit", "F", onCameraFrameBtn), createDivider(hasSelection || hidden2), createButton("Isolate Object", "I", onSelectionIsolateBtn, hasSelection && !isolated), createButton("Hide Object", "", onSelectionHideBtn, hasSelection), createButton("Clear Selection", "Esc", onSelectionClearBtn, hasSelection), createButton("Show All", "", onShowAllBtn, hidden2), createDivider(measuring), createButton("Delete Measurement", "", onMeasureDeleteBtn, measuring), createDivider(clipping || section.visible), createButton(section.clip ? "Ignore Section Box" : "Apply Section Box", "", onSectionToggleBtn, clipping), createButton("Reset Section Box", "", onSectionResetBtn, section.visible), createButton("Fit section box to selection", "", onFitSectionToSelectionBtn, section.visible && hasSelection)));
+  }, createButton("Show Controls", "F1", onShowControlsBtn), createDivider(), createButton("Reset Camera", "HOME", onCameraResetBtn), createButton("Zoom to Fit", "F", onCameraFrameBtn), createDivider(hasSelection || hidden), createButton("Isolate Object", "I", onSelectionIsolateBtn, hasSelection && !isolated), createButton("Hide Object", "", onSelectionHideBtn, hasSelection), createButton("Clear Selection", "Esc", onSelectionClearBtn, hasSelection), createButton("Show All", "", onShowAllBtn, hidden), createDivider(measuring), createButton("Delete Measurement", "", onMeasureDeleteBtn, measuring), createDivider(clipping || section.visible), createButton(section.clip ? "Ignore Section Box" : "Apply Section Box", "", onSectionToggleBtn, clipping), createButton("Reset Section Box", "", onSectionResetBtn, section.visible), createButton("Fit section box to selection", "", onFitSectionToSelectionBtn, section.visible && hasSelection)));
 }
 function toTreeData(viewer2, elements) {
   if (!elements)
@@ -51699,16 +51698,16 @@ class BimTreeData {
       }
       set3.add(node);
       if (node.hasChildren) {
-        let hidden2 = true;
-        let visible2 = true;
+        let hidden = true;
+        let visible = true;
         node.children.forEach((c) => {
           const r2 = updateOne(this.nodes[c]);
           if (r2 !== "vim-hidden")
-            hidden2 = false;
+            hidden = false;
           if (r2 !== "vim-visible")
-            visible2 = false;
+            visible = false;
         });
-        node.visible = visible2 ? "vim-visible" : hidden2 ? "vim-hidden" : "vim-undefined";
+        node.visible = visible ? "vim-visible" : hidden ? "vim-hidden" : "vim-undefined";
         return node.visible;
       } else {
         const obj = viewer2.vims[0].getObjectFromElement((_a22 = node.data) == null ? void 0 : _a22.element);
@@ -51901,28 +51900,16 @@ function BimTree(props) {
         selectedItems
       }
     },
-    renderItemTitle: ({ title, item, context }) => /* @__PURE__ */ React.createElement("div", {
-      className: `rct-tree-item ${context.isSelected ? "selected" : ""}`
-    }, /* @__PURE__ */ React.createElement("span", {
+    renderItemTitle: ({ title, item, context }) => /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("span", {
       className: "rct-tree-item-title",
       "data-tip": title
     }, title), /* @__PURE__ */ React.createElement("div", {
-      className: `rct-tree-item-icons ${treeRef.current.nodes[item.index].visible}`,
+      className: `rct-tree-item-visibility ${treeRef.current.nodes[item.index].visible}`,
       onClick: (e) => {
         toggleVisibility(viewer2, props.isolation, treeRef.current, item.index);
         e.stopPropagation();
       }
-    }, hidden({
-      width: 16,
-      height: 16,
-      fill: "currentColor",
-      className: "rct-tree-item-icon-hidden"
-    }), visible({
-      width: 16,
-      height: 16,
-      fill: "currentColor",
-      className: "rct-tree-item-icon-visible"
-    }))),
+    })),
     canRename: false,
     canSearchByStartingTyping: false,
     canSearch: false,
@@ -52070,14 +52057,14 @@ function BimObjectDetails(props) {
 function BimDocumentDetails(props) {
   return BimDetails(props.vim, getVimDocumentDetails, props.visible);
 }
-function BimDetails(input, toData, visible2) {
+function BimDetails(input, toData, visible) {
   const open = createOpenState();
   const [object, setObject] = react.exports.useState();
   const [details, setDetails] = react.exports.useState();
   react.exports.useEffect(() => {
     ReactTooltip.rebuild();
   });
-  if (!visible2)
+  if (!visible)
     return null;
   if (input !== object) {
     setObject(input);
@@ -52512,11 +52499,11 @@ var helpImage = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vc
 const urlSupport = "https://support.vimaec.com";
 const urlControls = "https://support.vimaec.com/en/articles/5872168-navigation-and-controls";
 function useHelp() {
-  const [visible2, setVisible] = react.exports.useState(false);
+  const [visible, setVisible] = react.exports.useState(false);
   react.exports.useEffect(() => {
-    setComponentBehind(visible2);
-  }, [visible2]);
-  return react.exports.useMemo(() => ({ visible: visible2, setVisible }), [visible2, setVisible]);
+    setComponentBehind(visible);
+  }, [visible]);
+  return react.exports.useMemo(() => ({ visible, setVisible }), [visible, setVisible]);
 }
 const MenuHelp = React.memo(_MenuHelp);
 function _MenuHelp(props) {
@@ -52667,7 +52654,7 @@ function MenuSettings(props) {
 }
 const MenuToast = React.memo(_MenuToast);
 function _MenuToast(props) {
-  const [visible2, setVisible] = react.exports.useState();
+  const [visible, setVisible] = react.exports.useState();
   const [speed, setSpeed] = react.exports.useState(-1);
   const speedRef = react.exports.useRef(speed);
   const toastTimeout = react.exports.useRef();
@@ -52687,12 +52674,52 @@ function _MenuToast(props) {
     };
   }, []);
   return /* @__PURE__ */ React.createElement("div", {
-    className: `vim-menu-toast rounded shadow-lg py-2 px-5 flex items-center justify-between transition-all ${visible2 ? "opacity-100" : "opacity-0"}`
+    className: `vim-menu-toast rounded shadow-lg py-2 px-5 flex items-center justify-between transition-all ${visible ? "opacity-100" : "opacity-0"}`
   }, /* @__PURE__ */ React.createElement("span", {
     className: "text-sm uppercase font-semibold text-gray-light"
   }, "Speed:"), /* @__PURE__ */ React.createElement("span", {
     className: "font-bold text-lg text-white ml-1"
   }, speed + 25));
+}
+function Overlay(props) {
+  const overlay = react.exports.useRef(null);
+  react.exports.useEffect(() => {
+    var _a22, _b2, _c, _d, _e, _f;
+    (_a22 = overlay.current) == null ? void 0 : _a22.addEventListener("mousedown", (e) => {
+      props.viewer.viewport.canvas.dispatchEvent(new MouseEvent("mousedown", e));
+      e.stopImmediatePropagation();
+    });
+    (_b2 = overlay.current) == null ? void 0 : _b2.addEventListener("mouseup", (e) => {
+      props.viewer.viewport.canvas.dispatchEvent(new MouseEvent("mouseup", new MouseEvent("mousedown", e)));
+      e.stopImmediatePropagation();
+      e.preventDefault();
+    });
+    (_c = overlay.current) == null ? void 0 : _c.addEventListener("mousemove", (e) => {
+      props.viewer.viewport.canvas.dispatchEvent(new MouseEvent("mousemove", e));
+      e.stopImmediatePropagation();
+      e.preventDefault();
+    });
+    (_d = overlay.current) == null ? void 0 : _d.addEventListener("wheel", (e) => {
+      props.viewer.viewport.canvas.dispatchEvent(new WheelEvent("wheel", e));
+      e.stopImmediatePropagation();
+      e.preventDefault();
+    });
+    (_e = overlay.current) == null ? void 0 : _e.addEventListener("dblclick", (e) => {
+      props.viewer.viewport.canvas.dispatchEvent(new MouseEvent("dblclick", e));
+      e.stopImmediatePropagation();
+      e.preventDefault();
+    });
+    (_f = overlay.current) == null ? void 0 : _f.addEventListener("mouseout", (e) => {
+      props.viewer.viewport.canvas.dispatchEvent(new MouseEvent("mouseout", e));
+      e.stopImmediatePropagation();
+      e.preventDefault();
+    });
+  }, []);
+  return /* @__PURE__ */ React.createElement("div", {
+    ref: overlay,
+    onContextMenu: (e) => e.preventDefault(),
+    className: `overlay ${props.side.get() !== "none" ? "bim-panel-open" : ""}`
+  });
 }
 var __defProp2 = Object.defineProperty;
 var __defNormalProp2 = (obj, key, value) => key in obj ? __defProp2(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -55823,13 +55850,13 @@ class Object$1 {
     }
     attribute.needsUpdate = true;
   }
-  applyInstancedVisible(mesh, index, visible2) {
+  applyInstancedVisible(mesh, index, visible) {
     let attribute = mesh.geometry.getAttribute("ignoreInstance");
     if (!attribute) {
       attribute = new InstancedBufferAttribute(new Float32Array(mesh.count), 1);
       mesh.geometry.setAttribute("ignoreInstance", attribute);
     }
-    attribute.setX(index, visible2 ? 0 : 1);
+    attribute.setX(index, visible ? 0 : 1);
     attribute.needsUpdate = true;
   }
   applyMergedColor(mesh, index, color) {
@@ -61403,14 +61430,14 @@ function applySettings(viewer2, settings2) {
       v2.scene.material = void 0;
       return;
     }
-    let hidden2 = false;
+    let hidden = false;
     for (const obj of v2.getAllObjects()) {
       if (!obj.visible) {
-        hidden2 = true;
+        hidden = true;
         break;
       }
     }
-    if (hidden2) {
+    if (hidden) {
       v2.scene.material = viewer2.renderer.materials.isolation;
     }
     viewer2.environment.groundPlane.visible = settings2.showGroundPlane;
@@ -61615,7 +61642,6 @@ function VimComponent(props) {
   const side = useSideState(useInspector);
   const help2 = useHelp();
   const [vim, selection] = useViewerState(props.viewer);
-  const overlay = react.exports.useRef();
   react.exports.useEffect(() => {
     props.onMount();
     cursor.register();
@@ -61624,30 +61650,6 @@ function VimComponent(props) {
     });
     props.viewer.inputs.scheme = new ComponentInputs(viewer2, isolation);
     const subContext = props.viewer.inputs.onContextMenu.subscribe(showContextMenu);
-    overlay.current.addEventListener("mousedown", (e) => {
-      props.viewer.viewport.canvas.dispatchEvent(new MouseEvent("mousedown", e));
-      e.stopImmediatePropagation();
-    });
-    overlay.current.addEventListener("mouseup", (e) => {
-      props.viewer.viewport.canvas.dispatchEvent(new MouseEvent("mouseup", new MouseEvent("mousedown", e)));
-      e.stopImmediatePropagation();
-      e.preventDefault();
-    });
-    overlay.current.addEventListener("mousemove", (e) => {
-      props.viewer.viewport.canvas.dispatchEvent(new MouseEvent("mousemove", e));
-      e.stopImmediatePropagation();
-      e.preventDefault();
-    });
-    overlay.current.addEventListener("wheel", (e) => {
-      props.viewer.viewport.canvas.dispatchEvent(new WheelEvent("wheel", e));
-      e.stopImmediatePropagation();
-      e.preventDefault();
-    });
-    overlay.current.addEventListener("dblclick", (e) => {
-      props.viewer.viewport.canvas.dispatchEvent(new MouseEvent("dblclick", e));
-      e.stopImmediatePropagation();
-      e.preventDefault();
-    });
     return () => {
       subLoad();
       subContext();
@@ -61665,9 +61667,9 @@ function VimComponent(props) {
     viewer: props.viewer,
     settings: settings2
   }));
-  return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", {
-    ref: overlay,
-    className: `overlay ${side.get() !== "none" ? "bim-panel-open" : ""}`
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Overlay, {
+    viewer: viewer2.base,
+    side
   }), /* @__PURE__ */ React.createElement(MenuHelp, {
     help: help2
   }), useLogo ? /* @__PURE__ */ React.createElement(Logo, null) : null, useLoading ? /* @__PURE__ */ React.createElement(LoadingBox, {
