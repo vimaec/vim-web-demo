@@ -8263,6 +8263,9 @@ select {
     max-width: 1536px;
   }
 }\r
+.pointer-events-none {
+  pointer-events: none;
+}\r
 .pointer-events-auto {
   pointer-events: auto;
 }\r
@@ -40863,7 +40866,7 @@ function ControlBar(props) {
     };
   }, []);
   return /* @__PURE__ */ React.createElement("div", {
-    className: `vim-control-bar flex z-20 items-center justify-center w-full fixed px-2 bottom-0 py-2 mb-9 transition-opacity transition-all ${show ? "opacity-100" : "opacity-0"}`
+    className: `vim-control-bar flex z-20 items-center justify-center w-full fixed px-2 bottom-0 py-2 mb-9 transition-opacity transition-all ${show ? "opacity-100 " : "opacity-0 pointer-events-none"}`
   }, /* @__PURE__ */ React.createElement("div", {
     className: "vim-control-bar-section flex items-center bg-white rounded-full px-2 shadow-md mx-2"
   }, /* @__PURE__ */ React.createElement(TabCamera, __spreadValues({}, props))), /* @__PURE__ */ React.createElement(TabTools, __spreadValues({}, props)), /* @__PURE__ */ React.createElement("div", {
@@ -41074,7 +41077,8 @@ function _LoadingBox(props) {
   if (!msg)
     return null;
   return /* @__PURE__ */ React.createElement("div", {
-    className: "loading-wrapper backdrop-blur fixed items-center justify-center top-0 left-0 w-full h-full z-30 bg-overflow"
+    className: "loading-wrapper backdrop-blur fixed items-center justify-center top-0 left-0 w-full h-full z-30 bg-overflow",
+    onContextMenu: (event) => event.preventDefault()
   }, /* @__PURE__ */ React.createElement("div", {
     className: "vim-loading-box w-[320px] text-gray-medium bg-white px-5 py-4 rounded shadow-lg z-20"
   }, /* @__PURE__ */ React.createElement("h1", {
@@ -51576,6 +51580,7 @@ function _VimContextMenu(props) {
     return !viewer2.sectionBox.box.containsBox(viewer2.renderer.getBoundingBox());
   };
   const [clipping, setClipping] = react.exports.useState(isClipping());
+  const [, setVersion] = react.exports.useState(0);
   const hidden = props.isolation.any();
   react.exports.useEffect(() => {
     const subState = viewer2.sectionBox.onStateChanged.subscribe(() => {
@@ -51585,6 +51590,7 @@ function _VimContextMenu(props) {
       });
     });
     const subConfirm = viewer2.sectionBox.onBoxConfirm.subscribe(() => setClipping(isClipping()));
+    props.isolation.onChange(() => setVersion((v2) => v2 + 1));
     return () => {
       subState();
       subConfirm();
@@ -52360,9 +52366,18 @@ function formatSource(source) {
   const parts = source.split("/");
   return parts[parts.length - 1];
 }
+const SEARCH_DELAY_MS = 200;
 function BimSearch(props) {
+  const [text, setText] = react.exports.useState("");
+  const changeTimeout = react.exports.useRef();
+  react.exports.useEffect(() => {
+    setText(props.filter);
+  }, [props.filter]);
   const onChange = (e) => {
-    props.setFilter(e.currentTarget.value);
+    const value = e.currentTarget.value;
+    setText(value);
+    clearTimeout(changeTimeout.current);
+    changeTimeout.current = setTimeout(() => props.setFilter(value), SEARCH_DELAY_MS);
   };
   const onFocus = () => {
     props.viewer.base.inputs.keyboard.unregister();
@@ -52388,11 +52403,11 @@ function BimSearch(props) {
     type: "search",
     name: "name",
     placeholder: "Type here to search",
-    value: props.filter,
+    value: text,
     onFocus,
     onBlur,
     onChange
-  }), props.count !== void 0 && props.filter ? /* @__PURE__ */ React.createElement("div", {
+  }), props.count !== void 0 && text ? /* @__PURE__ */ React.createElement("div", {
     className: "vim-bim-search-count rounded-full bg-primary-royal text-white text-xs font-bold py-1 px-2 absolute right-16"
   }, props.count) : null);
 }
@@ -52511,7 +52526,10 @@ function _MenuHelp(props) {
   };
   return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", {
     className: "menu-help-overlay z-30 absolute inset-0 bg-black/80 w-full h-full flex items-center justify-center",
-    onClick: onCloseBtn
+    onClick: onCloseBtn,
+    onContextMenu: (event) => {
+      event.preventDefault();
+    }
   }, /* @__PURE__ */ React.createElement("div", {
     className: "flex flex-col py-5",
     onClick: (e) => {
@@ -52650,6 +52668,7 @@ function _MenuToast(props) {
   const speedRef = react.exports.useRef(speed);
   const toastTimeout = react.exports.useRef();
   react.exports.useEffect(() => {
+    speedRef.current = props.viewer.camera.speed;
     const subCam = props.viewer.camera.onValueChanged.subscribe(() => {
       if (props.viewer.camera.speed !== speedRef.current) {
         clearTimeout(toastTimeout.current);
@@ -52831,7 +52850,7 @@ class Axis {
 }
 class GizmoOptions {
   constructor(init) {
-    __publicField(this, "size", 96);
+    __publicField(this, "size", 84);
     __publicField(this, "padding", 4);
     __publicField(this, "bubbleSizePrimary", 8);
     __publicField(this, "bubbleSizeSecondary", 6);
@@ -54669,7 +54688,8 @@ class MouseHandler extends InputHandler {
       this._lastPosition = this._downPosition = void 0;
       clearTimeout(this._idleTimeout);
     });
-    __publicField(this, "onMouseOut", (_) => {
+    __publicField(this, "onMouseOut", (event) => {
+      event.stopImmediatePropagation();
       this.buttonDown = void 0;
       this.hasMouseMoved = false;
       this._lastPosition = void 0;
@@ -54686,6 +54706,7 @@ class MouseHandler extends InputHandler {
       this.resetIdle();
     });
     __publicField(this, "onMouseMove", (event) => {
+      event.stopImmediatePropagation();
       this._lastPosition = new Vector2(event.offsetX, event.offsetY);
       if (!this._idlePosition || this._lastPosition.distanceTo(this._idlePosition) > 5) {
         this.resetIdle();
@@ -54695,6 +54716,7 @@ class MouseHandler extends InputHandler {
       this.onMouseDrag(event);
     });
     __publicField(this, "onMouseDown", (event) => {
+      event.stopImmediatePropagation();
       event.preventDefault();
       if (this.buttonDown)
         return;
@@ -54709,7 +54731,7 @@ class MouseHandler extends InputHandler {
     });
     __publicField(this, "onMouseWheel", (event) => {
       event.preventDefault();
-      event.stopPropagation();
+      event.stopImmediatePropagation();
       const scrollValue = Math.sign(event.deltaY);
       if (this.keyboard.isCtrlPressed) {
         this.camera.speed -= scrollValue;
@@ -54718,6 +54740,7 @@ class MouseHandler extends InputHandler {
       }
     });
     __publicField(this, "onMouseUp", (event) => {
+      event.stopImmediatePropagation();
       this.resetIdle();
       const btn = this.getButton(event);
       if (btn === this.buttonDown)
@@ -54738,6 +54761,7 @@ class MouseHandler extends InputHandler {
       this.inputs.pointerOverride = void 0;
     });
     __publicField(this, "onDoubleClick", (event) => {
+      event.stopImmediatePropagation();
       this.onMouseClick(new Vector2(event.offsetX, event.offsetY), true);
     });
     __publicField(this, "onMouseClick", (position, doubleClick) => {
@@ -54785,6 +54809,7 @@ class MouseHandler extends InputHandler {
   }
   onMouseDrag(event) {
     var _a22;
+    event.stopImmediatePropagation();
     event.preventDefault();
     const deltaX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
     const deltaY = event.movementY || event.mozMovementY || event.webkitMovementY || 0;
@@ -61431,7 +61456,7 @@ function useIsolation(componentViewer, settings2) {
   const helper = componentViewer;
   const isolationRef = react.exports.useRef();
   const lastIsolation = react.exports.useRef();
-  const changed = react.exports.useRef();
+  const changed = react.exports.useRef([]);
   const any = () => !!isolationRef.current;
   const showAll = () => {
     viewer2.vims.forEach((v2) => {
@@ -61464,7 +61489,7 @@ function useIsolation(componentViewer, settings2) {
     return !allVisible;
   };
   const onChange = (action) => {
-    changed.current = action;
+    changed.current.push(action);
   };
   const current = () => {
     return isolationRef.current;
@@ -61475,7 +61500,7 @@ function useIsolation(componentViewer, settings2) {
     }
     isolate(viewer2, settings2, objects);
     isolationRef.current = objects;
-    changed.current(source);
+    changed.current.forEach((f2) => f2(source));
   };
   const toggleContextual = (source) => {
     const selection = [...viewer2.selection.objects];
@@ -61499,7 +61524,7 @@ function useIsolation(componentViewer, settings2) {
         isolationRef.current = [...lastIsolation.current];
       }
     }
-    changed.current(source);
+    changed.current.forEach((f2) => f2(source));
   };
   const hideSelection = (source) => {
     hide([...viewer2.selection.objects], source);
@@ -61515,7 +61540,7 @@ function useIsolation(componentViewer, settings2) {
     }
     isolate(viewer2, settings2, result, source !== "contextMenu");
     isolationRef.current = result;
-    changed.current(source);
+    changed.current.forEach((f2) => f2(source));
   };
   const show = (objects, source) => {
     var _a22;
@@ -61524,13 +61549,13 @@ function useIsolation(componentViewer, settings2) {
     const result = [...new Set(isolation)];
     const isolated = isolate(viewer2, settings2, result);
     isolationRef.current = isolated ? result : void 0;
-    changed.current(source);
+    changed.current.forEach((f2) => f2(source));
   };
   const clear = (source) => {
     showAll();
     lastIsolation.current = isolationRef.current;
     isolationRef.current = void 0;
-    changed.current(source);
+    changed.current.forEach((f2) => f2(source));
   };
   return {
     any,

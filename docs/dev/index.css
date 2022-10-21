@@ -710,6 +710,9 @@ select {
     max-width: 1536px;
   }
 }
+.pointer-events-none {
+  pointer-events: none;
+}
 .pointer-events-auto {
   pointer-events: auto;
 }
