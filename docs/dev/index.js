@@ -40713,8 +40713,8 @@ const sectionBoxShrink = ({ height, width, fill }) => /* @__PURE__ */ React.crea
   fill,
   d: "M191.661 82.008 136 49.872a15.991 15.991 0 0 0-16 0L64.339 82.008a16 16 0 0 0-8 13.856v64.272a16 16 0 0 0 8 13.856L120 206.128a15.991 15.991 0 0 0 16 0l55.661-32.136a16 16 0 0 0 8-13.856V95.864a16 16 0 0 0-8-13.856ZM128 72.966l36.556 21.105L128 115.176 91.443 94.071 128 72.965Zm-47.661 42.408L116 135.961v40.145l-35.661-20.589v-40.143ZM140 176.106v-40.145l35.661-20.589v40.145L140 176.106ZM228.971 212H240c6.627 0 12-5.373 12-12s-5.373-12-12-12h-40a11.963 11.963 0 0 0-8.485 3.515A11.963 11.963 0 0 0 188 200v40c0 6.627 5.373 12 12 12s12-5.373 12-12v-11.03l19.515 19.515c4.687 4.686 12.284 4.686 16.971 0 4.686-4.686 4.686-12.284 0-16.971l-19.515-19.515ZM44 228.971V240c0 6.627 5.373 12 12 12s12-5.373 12-12v-40c0-3.071-1.172-6.142-3.515-8.485A11.963 11.963 0 0 0 56 188H16c-6.627 0-12 5.373-12 12s5.373 12 12 12h11.03L7.515 231.515c-4.686 4.687-4.686 12.284 0 16.971 4.686 4.686 12.284 4.686 16.971 0l19.515-19.515ZM27.029 44H16C9.373 44 4 49.373 4 56s5.373 12 12 12h40c3.071 0 6.142-1.172 8.485-3.515A11.963 11.963 0 0 0 68 56V16c0-6.627-5.373-12-12-12S44 9.373 44 16v11.03L24.485 7.515c-4.687-4.686-12.284-4.686-16.971 0-4.686 4.686-4.686 12.284 0 16.971l19.515 19.515ZM212 27.029V16c0-6.627-5.373-12-12-12s-12 5.373-12 12v40c0 3.071 1.172 6.142 3.515 8.485A11.963 11.963 0 0 0 200 68h40c6.627 0 12-5.373 12-12s-5.373-12-12-12h-11.03l19.515-19.515c4.686-4.687 4.686-12.284 0-16.971-4.686-4.686-12.284-4.686-16.971 0l-19.515 19.515Z"
 })));
-const MenuTop = React.memo(_MenuTop);
-function _MenuTop(props) {
+const AxesPanel = React.memo(_AxesPanel);
+function _AxesPanel(props) {
   const viewer2 = props.viewer.base;
   const helper = props.viewer;
   const [ortho, setOrtho] = react.exports.useState(viewer2.camera.orthographic);
@@ -41023,7 +41023,7 @@ function TabSettings(props) {
       document.body.requestFullscreen();
     }
   }, document.fullscreenElement ? minimize : fullsScreen, false);
-  return /* @__PURE__ */ React.createElement(React.Fragment, null, btnTreeView, btnSettings, btnHelp, btnFullScreen);
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, props.settings.useBimPanel ? btnTreeView : null, btnSettings, btnHelp, props.settings.useFullScreenBtn ? btnFullScreen : null);
 }
 function loopMeasure(viewer2, getMeasuring, setMeasure, setCursor) {
   const onMouseMove = () => {
@@ -41062,7 +41062,10 @@ function _LoadingBox(props) {
     props.viewer.loadVim = function(source, options, _) {
       return prevLoad(source, options, (p2) => {
         setProgress(p2.loaded);
-      }).then((_2) => setProgress(void 0));
+      }).then((vim) => {
+        setProgress(void 0);
+        return vim;
+      });
     };
     return () => {
       props.viewer.loadVim = props.viewer.loadVim.bind(props.viewer);
@@ -52621,7 +52624,7 @@ function useSideState(useInspector) {
   const get3 = () => {
     var _a22;
     const result = (_a22 = sideRef.current[sideRef.current.length - 1]) != null ? _a22 : "none";
-    if (result && !useInspector)
+    if (result === "bim" && !useInspector)
       return "none";
     return result;
   };
@@ -52650,9 +52653,9 @@ function MenuSettings(props) {
       className: "w-[18px] h-[18px] rounded border border-gray-medium checked:bg-primary-royal mr-2 "
     }), " ", label);
   };
-  const next = props.settings.get.clone();
+  const next = props.settings.value.clone();
   const settingsToggle = (label, getter, setter) => {
-    return toggleElement(label, getter(props.settings.get), () => {
+    return toggleElement(label, getter(props.settings.value), () => {
       setter(next, !getter(next));
       props.settings.set(next);
     });
@@ -52698,7 +52701,6 @@ function Overlay(props) {
       var _a22;
       (_a22 = overlay.current) == null ? void 0 : _a22.addEventListener(evnt, (e) => {
         props.viewer.viewport.canvas.dispatchEvent(construct(evnt, e));
-        e.stopImmediatePropagation();
         if (preventDefault) {
           e.preventDefault();
         }
@@ -61412,17 +61414,24 @@ class Settings {
     this.useIsolationMaterial = true;
     this.showGroundPlane = true;
     this.showPerformance = true;
+    this.useLogo = true;
+    this.useBimPanel = true;
+    this.useAxesPanel = true;
+    this.useControlBar = true;
+    this.useLoadingBox = true;
+    this.useFullScreenBtn = true;
   }
   clone() {
     return Object.assign(new Settings(), this);
   }
 }
-function useSettings(viewer2) {
-  const [settings2, setSettings] = react.exports.useState(new Settings());
+function useSettings(viewer2, value) {
+  const merge = Object.assign(new Settings(), value);
+  const [settings2, setSettings] = react.exports.useState(merge);
   react.exports.useEffect(() => {
     applySettings(viewer2, settings2);
   }, [settings2]);
-  return react.exports.useMemo(() => ({ get: settings2, set: setSettings }), [settings2]);
+  return react.exports.useMemo(() => ({ value: settings2, set: setSettings }), [settings2]);
 }
 function applySettings(viewer2, settings2) {
   const performance2 = document.getElementsByClassName("vim-performance")[0];
@@ -61638,16 +61647,11 @@ function createContainer(viewer2) {
   return { root: root2, ui: ui2, gfx };
 }
 function VimComponent(props) {
-  const useLogo = props.logo === void 0 ? true : props.logo;
-  const useInspector = props.bimPanel === void 0 ? true : props.bimPanel;
-  const useMenu = props.menu === void 0 ? true : props.menu;
-  const useMenuTop = props.menuTop === void 0 ? true : props.menuTop;
-  const useLoading = props.loading === void 0 ? true : props.loading;
   const cursor = react.exports.useRef(new CursorManager(props.viewer)).current;
   const viewer2 = react.exports.useRef(new ViewerWrapper(props.viewer)).current;
-  const settings2 = useSettings(props.viewer);
-  const isolation = useIsolation(viewer2, settings2.get);
-  const side = useSideState(useInspector);
+  const settings2 = useSettings(props.viewer, props.settings);
+  const isolation = useIsolation(viewer2, settings2.value);
+  const side = useSideState(settings2.value.useBimPanel);
   const help2 = useHelp();
   const [vim, selection] = useViewerState(props.viewer);
   react.exports.useEffect(() => {
@@ -61664,13 +61668,13 @@ function VimComponent(props) {
       cursor.register();
     };
   }, []);
-  const sidePanel = /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(BimPanel, {
+  const sidePanel = /* @__PURE__ */ React.createElement(React.Fragment, null, settings2.value.useBimPanel ? /* @__PURE__ */ React.createElement(BimPanel, {
     viewer: viewer2,
     vim,
     selection,
     visible: side.get() === "bim",
     isolation
-  }), /* @__PURE__ */ React.createElement(MenuSettings, {
+  }) : null, /* @__PURE__ */ React.createElement(MenuSettings, {
     visible: side.get() === "settings",
     viewer: props.viewer,
     settings: settings2
@@ -61680,15 +61684,16 @@ function VimComponent(props) {
     side
   }), /* @__PURE__ */ React.createElement(MenuHelp, {
     help: help2
-  }), useLogo ? /* @__PURE__ */ React.createElement(Logo, null) : null, useLoading ? /* @__PURE__ */ React.createElement(LoadingBox, {
+  }), settings2.value.useLogo ? /* @__PURE__ */ React.createElement(Logo, null) : null, settings2.value.useLoadingBox ? /* @__PURE__ */ React.createElement(LoadingBox, {
     viewer: props.viewer
-  }) : null, useMenu ? /* @__PURE__ */ React.createElement(ControlBar, {
+  }) : null, settings2.value.useControlBar ? /* @__PURE__ */ React.createElement(ControlBar, {
     viewer: viewer2,
     help: help2,
     side,
     isolation,
-    cursor
-  }) : null, useMenuTop ? /* @__PURE__ */ React.createElement(MenuTop, {
+    cursor,
+    settings: settings2.value
+  }) : null, settings2.value.useAxesPanel ? /* @__PURE__ */ React.createElement(AxesPanel, {
     viewer: viewer2
   }) : null, /* @__PURE__ */ React.createElement(SidePanel, {
     viewer: props.viewer,
