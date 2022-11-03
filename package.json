@@ -41,8 +41,8 @@
   },
   "dependencies": {
     "react-dom": "^18.1.0",
-    "vim-webgl-component": "0.2.3-dev.30",
-    "stats-js": "^1.0.1"
+    "stats-js": "^1.0.1",
+    "vim-webgl-component": "^0.2.4"
   },
   "keywords": [
     "3d",

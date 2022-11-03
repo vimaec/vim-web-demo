@@ -47190,6 +47190,8 @@ const objectModel = {
     table: "Vim.BimDocument",
     columns: {
       title: "string:Title",
+      pathName: "string:PathName",
+      isLinked: "byte:IsLinked",
       version: "string:Version",
       author: "string:Author",
       date: "string:IssueDate"
@@ -47633,29 +47635,36 @@ class Document {
     return result;
   }
   async getBimDocumentSummary() {
-    var _a22, _b2, _c, _d, _e, _f, _g, _h;
+    var _a22, _b2, _c, _d, _e, _f, _g, _h, _i;
     const documentTable = await this.entities.getBfast(objectModel.bimDocument.table);
     const titles = (_a22 = await (documentTable == null ? void 0 : documentTable.getArray(objectModel.bimDocument.columns.title))) == null ? void 0 : _a22.map((n2) => {
       var _a3;
       return (_a3 = this._strings) == null ? void 0 : _a3[n2];
     });
-    const versions2 = (_b2 = await (documentTable == null ? void 0 : documentTable.getArray(objectModel.bimDocument.columns.version))) == null ? void 0 : _b2.map((n2) => {
+    const isLinked = await (documentTable == null ? void 0 : documentTable.getArray(objectModel.bimDocument.columns.isLinked));
+    const pathName = (_b2 = await (documentTable == null ? void 0 : documentTable.getArray(objectModel.bimDocument.columns.pathName))) == null ? void 0 : _b2.map((n2) => {
       var _a3;
       return (_a3 = this._strings) == null ? void 0 : _a3[n2];
     });
-    const authors = (_c = await (documentTable == null ? void 0 : documentTable.getArray(objectModel.bimDocument.columns.author))) == null ? void 0 : _c.map((n2) => {
+    const versions2 = (_c = await (documentTable == null ? void 0 : documentTable.getArray(objectModel.bimDocument.columns.version))) == null ? void 0 : _c.map((n2) => {
       var _a3;
       return (_a3 = this._strings) == null ? void 0 : _a3[n2];
     });
-    const dates = (_d = await (documentTable == null ? void 0 : documentTable.getArray(objectModel.bimDocument.columns.date))) == null ? void 0 : _d.map((n2) => {
+    const authors = (_d = await (documentTable == null ? void 0 : documentTable.getArray(objectModel.bimDocument.columns.author))) == null ? void 0 : _d.map((n2) => {
       var _a3;
       return (_a3 = this._strings) == null ? void 0 : _a3[n2];
     });
-    const max2 = Math.max((_e = titles == null ? void 0 : titles.length) != null ? _e : 0, (_f = versions2 == null ? void 0 : versions2.length) != null ? _f : 0, (_g = authors == null ? void 0 : authors.length) != null ? _g : 0, (_h = dates == null ? void 0 : dates.length) != null ? _h : 0);
+    const dates = (_e = await (documentTable == null ? void 0 : documentTable.getArray(objectModel.bimDocument.columns.date))) == null ? void 0 : _e.map((n2) => {
+      var _a3;
+      return (_a3 = this._strings) == null ? void 0 : _a3[n2];
+    });
+    const max2 = Math.max((_f = titles == null ? void 0 : titles.length) != null ? _f : 0, (_g = versions2 == null ? void 0 : versions2.length) != null ? _g : 0, (_h = authors == null ? void 0 : authors.length) != null ? _h : 0, (_i = dates == null ? void 0 : dates.length) != null ? _i : 0);
     const summary = [];
     for (let i2 = 0; i2 < max2; i2++) {
       summary.push({
         title: titles == null ? void 0 : titles[i2],
+        pathName: pathName == null ? void 0 : pathName[i2],
+        isLinked: isLinked[i2] > 0,
         version: versions2 == null ? void 0 : versions2[i2],
         author: authors == null ? void 0 : authors[i2],
         date: dates == null ? void 0 : dates[i2]
@@ -53771,12 +53780,21 @@ async function getVimDocumentDetails(vim) {
   const data2 = new Map(documents.map((d) => [
     d.title,
     [
-      { name: "Revit Version", value: d.version, group: d.title },
-      { name: "Revit Author(s)", value: d.author, group: d.title },
-      { name: "Last Modified", value: d.date, group: d.title }
+      { name: "Product", value: formatProduct(d.version), group: d.title },
+      { name: "Author(s)", value: d.author, group: d.title },
+      { name: "Last Modified", value: formatDate$1(d.date), group: d.title }
     ]
   ]));
   return [{ section: "Source Files", content: data2 }];
+}
+function formatProduct(value) {
+  return value == null ? void 0 : value.replace("Autodesk", "");
+}
+function formatDate$1(value) {
+  const date = Date.parse(value);
+  if (isNaN(date))
+    return "";
+  return value;
 }
 async function getObjectParameterDetails(object) {
   let parameters = await (object == null ? void 0 : object.getBimParameters());
@@ -53963,10 +53981,21 @@ function getElementBimHeader(info) {
   ];
 }
 async function getVimBimHeader(vim) {
+  var _a22;
   const documents = await vim.document.getBimDocumentSummary();
+  const main = (_a22 = documents.find((d) => !d.isLinked)) != null ? _a22 : documents[0];
   return [
     [["Document", formatSource(vim.source), "w-3/12", "w-9/12"]],
-    [["Created on", vim.document.header.created, "w-3/12", "w-9/12"]],
+    [["Source Path", main.pathName, "w-3/12", "w-9/12"]],
+    [
+      [
+        "Created on",
+        formatDate(vim.document.header.created),
+        "w-3/12",
+        "w-9/12"
+      ]
+    ],
+    [["Created with", vim.document.header.generator, "w-3/12", "w-9/12"]],
     void 0,
     [
       [
@@ -53989,8 +54018,11 @@ async function getVimBimHeader(vim) {
   ];
 }
 function formatSource(source) {
-  const parts = source.split("/");
+  const parts = source == null ? void 0 : source.split("/");
   return parts[parts.length - 1];
+}
+function formatDate(source) {
+  return source == null ? void 0 : source.replace(/(..:..):../, "$1");
 }
 const SEARCH_DELAY_MS = 200;
 function BimSearch(props) {
