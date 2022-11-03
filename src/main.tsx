@@ -3,7 +3,7 @@ import Stats from 'stats-js'
 import {createRoot} from 'react-dom/client'
 import React from 'react'
 import 'vim-webgl-component/dist/style.css';
-import {VIM, VimComponent, createContainer } from 'vim-webgl-component'
+import {VIM, createVimComponent, VimComponentRef } from 'vim-webgl-component'
 
 // Parse URL
 const params = new URLSearchParams(window.location.search)
@@ -25,12 +25,11 @@ if (params.has('dev')) {
   devMode =  t === 'true'
 }
 
-const viewer = new VIM.Viewer()
-const container = createContainer(viewer)
-const root = createRoot(container.ui)
-root.render(<VimComponent root={container.root} viewer = {viewer} onMount = {loadVim}/>)
-function loadVim(){
-  viewer.loadVim(
+
+const ui = createVimComponent(loadVim, {capacity: {useOrthographicCamera: false}})
+
+function loadVim(ref: VimComponentRef){
+  ref.viewer.loadVim(
     url,
     {
       rotation: { x: 270, y: 0, z: 0 },
@@ -48,7 +47,7 @@ style.left = 'auto'
 style.top = '200px'
 style.zIndex = '1'
 // -half width
-container.root.appendChild(stats.dom)
+ui.container.root.appendChild(stats.dom)
 animate()
 
 function animate () {
