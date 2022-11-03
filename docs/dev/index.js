@@ -41935,7 +41935,8 @@ class KeyboardHandler extends InputHandler {
   addListeners() {
     this.reg(document, "keydown", (e) => this.onKeyDown(e));
     this.reg(document, "keyup", (e) => this.onKeyUp(e));
-    this.reg(document, "focusout", () => this.reset());
+    this.reg(this._viewer.viewport.canvas, "focusout", () => this.reset());
+    this.reg(window, "resize", () => this.reset());
   }
   reset() {
     this.isUpPressed = false;
