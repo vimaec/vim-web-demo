@@ -855,6 +855,9 @@ select {
 .left-0 {
   left: 0px;
 }\r
+.top-\\[10\\%\\] {
+  top: 10%;
+}\r
 .right-16 {
   right: 4rem;
 }\r
@@ -873,11 +876,11 @@ select {
 .z-10 {
   z-index: 10;
 }\r
-.z-30 {
-  z-index: 30;
-}\r
 .order-2 {
   order: 2;
+}\r
+.m-auto {
+  margin: auto;
 }\r
 .m-1 {
   margin: 0.25rem;
@@ -1003,11 +1006,6 @@ select {
 }\r
 .w-9\\/12 {
   width: 75%;
-}\r
-.w-max {
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
 }\r
 .w-\\[18px\\] {
   width: 18px;
@@ -1324,10 +1322,7 @@ body {\r
 \r
 /* Toast Notification */\r
 .vim-menu-toast {\r
-  position: absolute;\r
-  top: 10%;\r
-  left: calc(50% - 50px);\r
-  background-color: rgba(0, 0, 0, 0.6);\r
+  background-color: var(--c-dark-gray-warm);\r
 }\r
 \r
 /* Axes Gizmo*/\r
@@ -1456,28 +1451,6 @@ body {\r
 .__react_component_tooltip:before,\r
 .__react_component_tooltip:after {\r
   content: none !important;\r
-}\r
-\r
-/* Bim Panel */\r
-\r
-.vim-side-panel {\r
-  height: 100%;\r
-  width: 480px;\r
-}\r
-.bim-panel-open {\r
-  margin-left: 480px;\r
-  max-width: calc(100% - 480px);\r
-  -o-object-fit: cover;\r
-     object-fit: cover;\r
-}\r
-.vim-gfx.bim-panel-open + .vim-ui .vim-control-bar,\r
-.vim-gfx.bim-panel-open + .vim-ui .menu-help-controls,\r
-.vim-gfx.bim-panel-open + .vim-ui .menu-help-overlay h2 {\r
-  margin-left: 480px;\r
-  max-width: calc(100% - 480px);\r
-}\r
-.vim-gfx.bim-panel-open + .vim-ui .vim-menu-toast {\r
-  left: calc(50% + 190px);\r
 }\r
 \r
 .vim-loading-box {\r
@@ -1676,6 +1649,10 @@ body {\r
 }\r
 \r
 /* Cursors */\r
+.cursor-stretch:hover {\r
+  cursor: e-resize;\r
+}\r
+\r
 .cursor-orbit:hover {\r
   cursor: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojZmZmO30uY2xzLTJ7ZmlsbDojMjEyMzI5O30uY2xzLTN7ZmlsbDpub25lO308L3N0eWxlPjwvZGVmcz48ZyBpZD0iRlJBTUVTIj48ZyBpZD0iZnJhbWUiPjxyZWN0IGNsYXNzPSJjbHMtMyIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ii8+PC9nPjwvZz48ZyBpZD0iSUNPTlMiPjxnPjxnPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTE0LDIwLjIzNGMtNS42NTIsMC0xMC4yNS0yLjYzNi0xMC4yNS01Ljg3NSwwLTEuNzUxLDEuMzA2LTMuMzY2LDMuNjA0LTQuNDgtLjUwOC0uMzEyLS43MDYtLjk2Mi0uNDQtMS40ODgsLjE5NC0uMzg2LC41ODItLjYyNSwxLjAxLS42MjUsLjE0MiwwLC4yODIsLjAyNiwuNDE2LC4wNzlsLjA5NywuMDQyLDIuMTQ4LDEuMDg2Yy42OSwuMzQ5LC45NjksMS4xOTUsLjYyLDEuODg2bC0xLjA4MywyLjE0NWMtLjE5NSwuMzg2LS41ODIsLjYyNS0xLjAxMiwuNjI1LS4xNDEsMC0uMjgtLjAyNS0uNDE0LS4wNzdsLS4wOTgtLjA0NGMtLjU1LS4yNzgtLjY3OC0uODI4LS41NjctMS4zMDYtLjAyMSwuMDExLS4wNDEsLjAyMS0uMDYsLjAzMy0xLjE1NiwuNjUtMS44NDYsMS40NDQtMS44NDYsMi4xMjVzLjY5LDEuNDc2LDEuODQ2LDIuMTI2YzEuNTUzLC44NzMsMy43NTEsMS4zNzQsNi4wMjksMS4zNzRzNC40NzYtLjUwMSw2LjAyOS0xLjM3NGMxLjE1Ni0uNjUsMS44NDYtMS40NDUsMS44NDYtMi4xMjZzLS42OS0xLjQ3NS0xLjg0Ni0yLjEyNWMtMS41NTMtLjg3NC0zLjc1LTEuMzc1LTYuMDI5LTEuMzc1aC0uMTAyYy0uNjI0LDAtMS4xMzItLjQ1Ni0xLjE5Ni0xLjA2Mi0uMDM1LS4zMzQsLjA3My0uNjY4LC4yOTYtLjkxNywuMjIzLS4yNDgsLjU0Mi0uMzkzLC44NzUtLjM5NWguMTI2YzUuNjUyLDAsMTAuMjUsMi42MzUsMTAuMjUsNS44NzRzLTQuNTk4LDUuODc1LTEwLjI1LDUuODc1WiIvPjxwYXRoIGQ9Ik03LjkyNSw4LjAxNmMuMTA4LDAsLjIxNywuMDIsLjMyMywuMDYxLC4wMjYsLjAxMSwuMDUyLC4wMjIsLjA3OCwuMDM1bDIuMTQ1LDEuMDgzYy41NjgsLjI4NywuNzk3LC45ODIsLjUxLDEuNTVsLTEuMDgzLDIuMTQ2Yy0uMTU1LC4zMDgtLjQ2MywuNDg3LS43ODgsLjQ4Ny0uMTA4LDAtLjIxNy0uMDItLjMyNC0uMDYyLS4wMjYtLjAxLS4wNTItLjAyMi0uMDc4LS4wMzUtLjUxMi0uMjU5LS41MzEtLjc5MS0uMzkxLTEuMTY4bC4xNTItLjQxMWMtLjIxNiwuMDk5LS40MjUsLjIwMy0uNjIyLC4zMTMtMS4yNTQsLjcwNi0xLjk3MywxLjU2LTEuOTczLDIuMzQzcy43MTksMS42MzgsMS45NzMsMi4zNDNjMS41ODksLjg5NCwzLjgzMiwxLjQwNyw2LjE1MiwxLjQwN3M0LjU2Mi0uNTEzLDYuMTUyLTEuNDA3YzEuMjU0LS43MDUsMS45NzMtMS41NTksMS45NzMtMi4zNDNzLS43MTktMS42MzgtMS45NzMtMi4zNDNjLTEuNTg5LS44OTQtMy44MzItMS40MDctNi4xNTItMS40MDctLjAzNiwwLS4wNzMsMC0uMTA5LDBoLS4wMDhjLS40OCwwLS44ODMtLjM2Mi0uOTMyLS44NC0uMDU3LS41NSwuMzcyLTEuMDMxLC45MjUtMS4wMzUsLjA0MSwwLC4wODMsMCwuMTI0LDAsNS41MjMsMCwxMCwyLjUxOSwxMCw1LjYyNXMtNC40NzcsNS42MjUtMTAsNS42MjUtMTAtMi41MTgtMTAtNS42MjVjMC0xLjgxNywxLjUzMi0zLjQzMiwzLjkwOS00LjQ2bC0uMDA0LS4wMTEtLjM2Ni0uMTkxYy0uNDM4LS4yMjktLjYxOS0uNzY1LS40MDItMS4xOTQsLjE1Ni0uMzA4LC40NjQtLjQ4NywuNzg4LS40ODdtMC0uNWgwYy0uNTI0LDAtLjk5NywuMjkyLTEuMjM0LC43NjItLjI2MSwuNTE4LS4xNTcsMS4xMzEsLjIxNCwxLjU0OS0yLjE3NiwxLjE1MS0zLjQwNSwyLjc3Mi0zLjQwNSw0LjUzMywwLDMuNDM1LDQuNjEyLDYuMTI1LDEwLjUsNi4xMjVzMTAuNS0yLjY5LDEwLjUtNi4xMjUtNC42MTItNi4xMjUtMTAuNS02LjEyNWgtLjA2NXMtLjA1OSwwLS4wNTksMGMtLjQwNywuMDAzLS43OTMsLjE3Ny0xLjA2MywuNDc5LS4yNywuMzAyLS40MDEsLjcwNi0uMzU5LDEuMTA4LC4wNzYsLjczNCwuNjkxLDEuMjg4LDEuNDMsMS4yODhoLjA2NXMuMDUxLDAsLjA1MSwwYzIuMjM3LDAsNC4zOSwuNDg5LDUuOTA3LDEuMzQyLDEuMDc2LC42MDUsMS43MTgsMS4zMTksMS43MTgsMS45MDhzLS42NDIsMS4zMDItMS43MTgsMS45MDdjLTEuNTE3LC44NTQtMy42NywxLjM0My01LjkwNywxLjM0M3MtNC4zOS0uNDg5LTUuOTA3LTEuMzQyYy0xLjA3Ni0uNjA1LTEuNzE4LTEuMzE4LTEuNzE4LTEuOTA4LDAtLjUyMywuNTA3LTEuMTQ0LDEuMzc0LTEuNzAxLC4wMzgsLjQyMiwuMjU2LC44MjgsLjczNCwxLjA3LC4wNDIsLjAyMSwuMDgyLC4wMzksLjEyMSwuMDU0LC4xNjMsLjA2NCwuMzMzLC4wOTYsLjUwNiwuMDk2LC41MjQsMCwuOTk3LS4yOTIsMS4yMzQtLjc2MmwxLjA4My0yLjE0NWMuMTk5LS4zOTQsLjIzMy0uODQyLC4wOTQtMS4yNjJzLS40MzEtLjc2MS0uODI1LS45NmwtMi4xNDYtMS4wODNjLS4wMzUtLjAxOC0uMDc0LS4wMzUtLjExMy0uMDUxLS4xNzEtLjA2Ny0uMzQxLS4wOTktLjUxMy0uMDk5aDBaIi8+PC9nPjxnPjxjaXJjbGUgY2xhc3M9ImNscy0xIiBjeD0iMTQiIGN5PSIxNC4zNTkiIHI9IjIuNDM4Ii8+PHBhdGggZD0iTTE0LDEyLjE3MmMxLjIwNiwwLDIuMTg4LC45ODEsMi4xODgsMi4xODhzLS45ODEsMi4xODgtMi4xODgsMi4xODgtMi4xODgtLjk4MS0yLjE4OC0yLjE4OCwuOTgxLTIuMTg4LDIuMTg4LTIuMTg4bTAtLjVjLTEuNDgyLDAtMi42ODgsMS4yMDYtMi42ODgsMi42ODhzMS4yMDYsMi42ODgsMi42ODgsMi42ODgsMi42ODgtMS4yMDYsMi42ODgtMi42ODgtMS4yMDYtMi42ODgtMi42ODgtMi42ODhoMFoiLz48L2c+PC9nPjxnPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEuMDA3LDUuNzVjLS4zNzIsMC0uNzU3LS4yODEtLjc1Ny0uNzUyVjFDLjI1LC41ODcsLjU4NiwuMjUsMSwuMjVoMy45OThjLjM2OSwwLC42LC4yMzksLjY5MywuNDYzcy4wOTksLjU1Ny0uMTYzLC44MTdMMS41Myw1LjUyOGMtLjE4MywuMTg0LS4zODYsLjIyMi0uNTIzLC4yMjJaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNC45OTgsLjVjLjMxLDAsLjQzMiwuMjM2LC40NjIsLjMwOXMuMTExLC4zMjYtLjEwOCwuNTQ1TDEuMzU0LDUuMzUyYy0uMTIzLC4xMjMtLjI1NiwuMTQ4LS4zNDYsLjE0OC0uMjUsMC0uNTA3LS4xODgtLjUwNy0uNTAyVjFjMC0uMjc2LC4yMjQtLjUsLjUtLjVoMy45OThtMC0uNUgxQy40NDgsMCwwLC40NDgsMCwxdjMuOTk4YzAsLjYwMywuNDkzLDEuMDAyLDEuMDA3LDEuMDAyLC4yNDYsMCwuNDk2LS4wOTEsLjctLjI5NUw1LjcwNSwxLjcwN2MuNjMtLjYzLC4xODQtMS43MDctLjcwNy0xLjcwN2gwWiIvPjwvZz48L2c+PC9zdmc+'),\r
     auto;\r
@@ -1748,16 +1725,7 @@ input[type='search']::-webkit-search-cancel-button {\r
     right: 1.5rem;\r
   }\r
 }\r
-/* .behind canvas,\r
-.behind .vim-logo,\r
-.behind .vim-logo,\r
-.behind .vim-control-bar,\r
-.behind .vim-logo,\r
-.behind .vim-top,\r
-.behind .vim-side-panel,\r
-.behind .vim-logo {\r
-  filter: blur(10px);\r
-} */\r
+\r
 .loader {\r
   width: 100%;\r
   height: 10px;\r
@@ -2642,7 +2610,7 @@ function generateUUID$1() {
   const uuid = _lut[d0 & 255] + _lut[d0 >> 8 & 255] + _lut[d0 >> 16 & 255] + _lut[d0 >> 24 & 255] + "-" + _lut[d1 & 255] + _lut[d1 >> 8 & 255] + "-" + _lut[d1 >> 16 & 15 | 64] + _lut[d1 >> 24 & 255] + "-" + _lut[d2 & 63 | 128] + _lut[d2 >> 8 & 255] + "-" + _lut[d2 >> 16 & 255] + _lut[d2 >> 24 & 255] + _lut[d3 & 255] + _lut[d3 >> 8 & 255] + _lut[d3 >> 16 & 255] + _lut[d3 >> 24 & 255];
   return uuid.toUpperCase();
 }
-function clamp$1(value, min2, max2) {
+function clamp$2(value, min2, max2) {
   return Math.max(min2, Math.min(max2, value));
 }
 function euclideanModulo(n2, m2) {
@@ -2752,7 +2720,7 @@ var MathUtils = /* @__PURE__ */ Object.freeze({
   DEG2RAD,
   RAD2DEG,
   generateUUID: generateUUID$1,
-  clamp: clamp$1,
+  clamp: clamp$2,
   euclideanModulo,
   mapLinear,
   inverseLerp,
@@ -4258,7 +4226,7 @@ class Quaternion {
     return this.normalize();
   }
   angleTo(q2) {
-    return 2 * Math.acos(Math.abs(clamp$1(this.dot(q2), -1, 1)));
+    return 2 * Math.acos(Math.abs(clamp$2(this.dot(q2), -1, 1)));
   }
   rotateTowards(q2, step) {
     const angle = this.angleTo(q2);
@@ -4742,7 +4710,7 @@ class Vector3 {
     if (denominator === 0)
       return Math.PI / 2;
     const theta = this.dot(v2) / denominator;
-    return Math.acos(clamp$1(theta, -1, 1));
+    return Math.acos(clamp$2(theta, -1, 1));
   }
   distanceTo(v2) {
     return Math.sqrt(this.distanceToSquared(v2));
@@ -6156,7 +6124,7 @@ class Euler {
     const m31 = te2[2], m32 = te2[6], m33 = te2[10];
     switch (order) {
       case "XYZ":
-        this._y = Math.asin(clamp$1(m13, -1, 1));
+        this._y = Math.asin(clamp$2(m13, -1, 1));
         if (Math.abs(m13) < 0.9999999) {
           this._x = Math.atan2(-m23, m33);
           this._z = Math.atan2(-m12, m11);
@@ -6166,7 +6134,7 @@ class Euler {
         }
         break;
       case "YXZ":
-        this._x = Math.asin(-clamp$1(m23, -1, 1));
+        this._x = Math.asin(-clamp$2(m23, -1, 1));
         if (Math.abs(m23) < 0.9999999) {
           this._y = Math.atan2(m13, m33);
           this._z = Math.atan2(m21, m22);
@@ -6176,7 +6144,7 @@ class Euler {
         }
         break;
       case "ZXY":
-        this._x = Math.asin(clamp$1(m32, -1, 1));
+        this._x = Math.asin(clamp$2(m32, -1, 1));
         if (Math.abs(m32) < 0.9999999) {
           this._y = Math.atan2(-m31, m33);
           this._z = Math.atan2(-m12, m22);
@@ -6186,7 +6154,7 @@ class Euler {
         }
         break;
       case "ZYX":
-        this._y = Math.asin(-clamp$1(m31, -1, 1));
+        this._y = Math.asin(-clamp$2(m31, -1, 1));
         if (Math.abs(m31) < 0.9999999) {
           this._x = Math.atan2(m32, m33);
           this._z = Math.atan2(m21, m11);
@@ -6196,7 +6164,7 @@ class Euler {
         }
         break;
       case "YZX":
-        this._z = Math.asin(clamp$1(m21, -1, 1));
+        this._z = Math.asin(clamp$2(m21, -1, 1));
         if (Math.abs(m21) < 0.9999999) {
           this._x = Math.atan2(-m23, m22);
           this._y = Math.atan2(-m31, m11);
@@ -6206,7 +6174,7 @@ class Euler {
         }
         break;
       case "XZY":
-        this._z = Math.asin(-clamp$1(m12, -1, 1));
+        this._z = Math.asin(-clamp$2(m12, -1, 1));
         if (Math.abs(m12) < 0.9999999) {
           this._x = Math.atan2(m32, m22);
           this._y = Math.atan2(m13, m11);
@@ -7552,8 +7520,8 @@ class Color {
   }
   setHSL(h, s, l2) {
     h = euclideanModulo(h, 1);
-    s = clamp$1(s, 0, 1);
-    l2 = clamp$1(l2, 0, 1);
+    s = clamp$2(s, 0, 1);
+    l2 = clamp$2(l2, 0, 1);
     if (s === 0) {
       this.r = this.g = this.b = l2;
     } else {
@@ -20374,13 +20342,13 @@ class Curve {
       vec.crossVectors(tangents[i2 - 1], tangents[i2]);
       if (vec.length() > Number.EPSILON) {
         vec.normalize();
-        const theta = Math.acos(clamp$1(tangents[i2 - 1].dot(tangents[i2]), -1, 1));
+        const theta = Math.acos(clamp$2(tangents[i2 - 1].dot(tangents[i2]), -1, 1));
         normals[i2].applyMatrix4(mat.makeRotationAxis(vec, theta));
       }
       binormals[i2].crossVectors(tangents[i2], normals[i2]);
     }
     if (closed === true) {
-      let theta = Math.acos(clamp$1(normals[0].dot(normals[segments]), -1, 1));
+      let theta = Math.acos(clamp$2(normals[0].dot(normals[segments]), -1, 1));
       theta /= segments;
       if (tangents[0].dot(vec.crossVectors(normals[0], normals[segments])) > 0) {
         theta = -theta;
@@ -22223,7 +22191,7 @@ class LatheGeometry extends BufferGeometry {
       phiLength
     };
     segments = Math.floor(segments);
-    phiLength = clamp$1(phiLength, 0, Math.PI * 2);
+    phiLength = clamp$2(phiLength, 0, Math.PI * 2);
     const indices = [];
     const vertices = [];
     const uvs = [];
@@ -23024,7 +22992,7 @@ class MeshPhysicalMaterial extends MeshStandardMaterial {
     this.ior = 1.5;
     Object.defineProperty(this, "reflectivity", {
       get: function() {
-        return clamp$1(2.5 * (this.ior - 1) / (this.ior + 1), 0, 1);
+        return clamp$2(2.5 * (this.ior - 1) / (this.ior + 1), 0, 1);
       },
       set: function(reflectivity) {
         this.ior = (1 + 0.4 * reflectivity) / (1 - 0.4 * reflectivity);
@@ -28428,7 +28396,7 @@ class Spherical {
       this.phi = 0;
     } else {
       this.theta = Math.atan2(x2, z2);
-      this.phi = Math.acos(clamp$1(y2 / this.radius, -1, 1));
+      this.phi = Math.acos(clamp$2(y2 / this.radius, -1, 1));
     }
     return this;
   }
@@ -28607,7 +28575,7 @@ class Line3 {
     const startEnd_startP = _startEnd.dot(_startP);
     let t2 = startEnd_startP / startEnd2;
     if (clampToLine) {
-      t2 = clamp$1(t2, 0, 1);
+      t2 = clamp$2(t2, 0, 1);
     }
     return t2;
   }
@@ -40906,7 +40874,7 @@ function toVec$1(obj) {
 for (let i2 = 0; i2 < 256; i2++) {
   (i2 < 16 ? "0" : "") + i2.toString(16);
 }
-function clamp(value, min2, max2) {
+function clamp$1(value, min2, max2) {
   return Math.max(min2, Math.min(max2, value));
 }
 var dist$3 = {};
@@ -41428,7 +41396,7 @@ class Camera {
     return this._speed;
   }
   set speed(value) {
-    this._speed = clamp(value, -25, 25);
+    this._speed = clamp$1(value, -25, 25);
     this._onValueChanged.dispatch();
   }
   get localVelocity() {
@@ -49533,6 +49501,7 @@ function ControlBar(props) {
     };
   }, []);
   return /* @__PURE__ */ React__default.createElement("div", {
+    style: { paddingLeft: props.side.getWidth() },
     className: `vim-control-bar flex z-20 items-center justify-center w-full fixed px-2 bottom-0 py-2 mb-9 transition-opacity transition-all ${show ? "opacity-100 " : "opacity-0 pointer-events-none"}`
   }, /* @__PURE__ */ React__default.createElement("div", {
     className: "vim-control-bar-section flex items-center bg-white rounded-full px-2 shadow-md mx-2"
@@ -49678,13 +49647,13 @@ function TabSettings(props) {
     props.help.setVisible(!props.help.visible);
   };
   const onTreeViewBtn = () => {
-    props.side.toggle("bim");
+    props.side.toggleContent("bim");
   };
   const onSettingsBtn = () => {
-    props.side.toggle("settings");
+    props.side.toggleContent("settings");
   };
-  const btnTreeView = toggleButton("Project Inspector", onTreeViewBtn, treeView, () => props.side.get() === "bim");
-  const btnSettings = toggleButton("Settings", onSettingsBtn, settings, () => props.side.get() === "settings");
+  const btnTreeView = toggleButton("Project Inspector", onTreeViewBtn, treeView, () => props.side.getContent() === "bim");
+  const btnSettings = toggleButton("Settings", onSettingsBtn, settings, () => props.side.getContent() === "settings");
   const btnHelp = toggleButton("Help", onHelpBtn, help, () => props.help.visible);
   const btnFullScreen = actionButton(document.fullscreenElement ? "Fullscreen" : "Minimize", () => {
     if (document.fullscreenElement) {
@@ -49770,8 +49739,8 @@ var InteractionMode;
   InteractionMode2["ClickItemToExpand"] = "click-item-to-expand";
   InteractionMode2["ClickArrowToExpand"] = "click-arrow-to-expand";
 })(InteractionMode || (InteractionMode = {}));
-var __assign$b = globalThis && globalThis.__assign || function() {
-  __assign$b = Object.assign || function(t2) {
+var __assign$d = globalThis && globalThis.__assign || function() {
+  __assign$d = Object.assign || function(t2) {
     for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
       s = arguments[i2];
       for (var p2 in s)
@@ -49780,13 +49749,13 @@ var __assign$b = globalThis && globalThis.__assign || function() {
     }
     return t2;
   };
-  return __assign$b.apply(this, arguments);
+  return __assign$d.apply(this, arguments);
 };
 var mergeInteractionManagers = function(main, fallback) {
   return {
     mode: main.mode,
     createInteractiveElementProps: function(item, treeId, actions, renderFlags) {
-      return __assign$b(__assign$b({}, fallback.createInteractiveElementProps(item, treeId, actions, renderFlags)), main.createInteractiveElementProps(item, treeId, actions, renderFlags));
+      return __assign$d(__assign$d({}, fallback.createInteractiveElementProps(item, treeId, actions, renderFlags)), main.createInteractiveElementProps(item, treeId, actions, renderFlags));
     }
   };
 };
@@ -50177,8 +50146,8 @@ var useSideEffect = function(effect, deps, changeOn) {
     }
   }, __spreadArray$8(__spreadArray$8([], deps), changeOn));
 };
-var __assign$a = globalThis && globalThis.__assign || function() {
-  __assign$a = Object.assign || function(t2) {
+var __assign$c = globalThis && globalThis.__assign || function() {
+  __assign$c = Object.assign || function(t2) {
     for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
       s = arguments[i2];
       for (var p2 in s)
@@ -50187,7 +50156,7 @@ var __assign$a = globalThis && globalThis.__assign || function() {
     }
     return t2;
   };
-  return __assign$a.apply(this, arguments);
+  return __assign$c.apply(this, arguments);
 };
 var buildMapForTrees = function(treeIds, build) {
   return treeIds.map(function(id2) {
@@ -50195,7 +50164,7 @@ var buildMapForTrees = function(treeIds, build) {
   }).reduce(function(a, _a22) {
     var _b2;
     var id2 = _a22[0], obj = _a22[1];
-    return __assign$a(__assign$a({}, a), (_b2 = {}, _b2[id2] = obj, _b2));
+    return __assign$c(__assign$c({}, a), (_b2 = {}, _b2[id2] = obj, _b2));
   }, {});
 };
 function useCallSoon() {
@@ -50388,8 +50357,8 @@ var DragAndDropProvider = function(props) {
   }, [onDropHandler, resetState]);
   return react.exports.createElement(DragAndDropContext.Provider, { value: dnd }, props.children);
 };
-var __assign$9 = globalThis && globalThis.__assign || function() {
-  __assign$9 = Object.assign || function(t2) {
+var __assign$b = globalThis && globalThis.__assign || function() {
+  __assign$b = Object.assign || function(t2) {
     for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
       s = arguments[i2];
       for (var p2 in s)
@@ -50398,13 +50367,13 @@ var __assign$9 = globalThis && globalThis.__assign || function() {
     }
     return t2;
   };
-  return __assign$9.apply(this, arguments);
+  return __assign$b.apply(this, arguments);
 };
 var useCreatedEnvironmentRef = function(ref, actions) {
   var environment = useTreeEnvironment();
   var dnd = useDragAndDrop();
   react.exports.useImperativeHandle(ref, function() {
-    return __assign$9(__assign$9(__assign$9({}, actions), environment), { treeEnvironmentContext: environment, dragAndDropContext: dnd });
+    return __assign$b(__assign$b(__assign$b({}, actions), environment), { treeEnvironmentContext: environment, dragAndDropContext: dnd });
   });
 };
 var __spreadArray$7 = globalThis && globalThis.__spreadArray || function(to, from) {
@@ -50519,8 +50488,8 @@ var scrollIntoView = function(element) {
     }
   }
 };
-var __assign$8 = globalThis && globalThis.__assign || function() {
-  __assign$8 = Object.assign || function(t2) {
+var __assign$a = globalThis && globalThis.__assign || function() {
+  __assign$a = Object.assign || function(t2) {
     for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
       s = arguments[i2];
       for (var p2 in s)
@@ -50529,7 +50498,7 @@ var __assign$8 = globalThis && globalThis.__assign || function() {
     }
     return t2;
   };
-  return __assign$8.apply(this, arguments);
+  return __assign$a.apply(this, arguments);
 };
 var cx$1 = function() {
   var classNames = [];
@@ -50553,17 +50522,17 @@ var createDefaultRenderers = function(renderDepthOffset) {
     },
     renderItemArrow: function(_a22) {
       var item = _a22.item, context = _a22.context;
-      return React__default.createElement("div", __assign$8({ className: cx$1(item.hasChildren && "rct-tree-item-arrow-hasChildren", "rct-tree-item-arrow") }, context.arrowProps), item.hasChildren && (context.isExpanded ? React__default.createElement("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", xmlnsXlink: "http://www.w3.org/1999/xlink", x: "0px", y: "0px", viewBox: "0 0 16 16", enableBackground: "new 0 0 16 16", xmlSpace: "preserve" }, React__default.createElement("g", null, React__default.createElement("g", null, React__default.createElement("path", { fillRule: "evenodd", clipRule: "evenodd", d: "M12,5c-0.28,0-0.53,0.11-0.71,0.29L8,8.59L4.71,5.29C4.53,5.11,4.28,5,4,5\n                      C3.45,5,3,5.45,3,6c0,0.28,0.11,0.53,0.29,0.71l4,4C7.47,10.89,7.72,11,8,11s0.53-0.11,0.71-0.29l4-4C12.89,6.53,13,6.28,13,6\n                      C13,5.45,12.55,5,12,5z", className: "rct-tree-item-arrow-path" })))) : React__default.createElement("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", xmlnsXlink: "http://www.w3.org/1999/xlink", x: "0px", y: "0px", viewBox: "0 0 16 16", enableBackground: "new 0 0 16 16", xmlSpace: "preserve" }, React__default.createElement("g", null, React__default.createElement("g", null, React__default.createElement("path", { fillRule: "evenodd", clipRule: "evenodd", d: "M10.71,7.29l-4-4C6.53,3.11,6.28,3,6,3C5.45,3,5,3.45,5,4\n                      c0,0.28,0.11,0.53,0.29,0.71L8.59,8l-3.29,3.29C5.11,11.47,5,11.72,5,12c0,0.55,0.45,1,1,1c0.28,0,0.53-0.11,0.71-0.29l4-4\n                      C10.89,8.53,11,8.28,11,8C11,7.72,10.89,7.47,10.71,7.29z", className: "rct-tree-item-arrow-path" }))))));
+      return React__default.createElement("div", __assign$a({ className: cx$1(item.hasChildren && "rct-tree-item-arrow-hasChildren", "rct-tree-item-arrow") }, context.arrowProps), item.hasChildren && (context.isExpanded ? React__default.createElement("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", xmlnsXlink: "http://www.w3.org/1999/xlink", x: "0px", y: "0px", viewBox: "0 0 16 16", enableBackground: "new 0 0 16 16", xmlSpace: "preserve" }, React__default.createElement("g", null, React__default.createElement("g", null, React__default.createElement("path", { fillRule: "evenodd", clipRule: "evenodd", d: "M12,5c-0.28,0-0.53,0.11-0.71,0.29L8,8.59L4.71,5.29C4.53,5.11,4.28,5,4,5\n                      C3.45,5,3,5.45,3,6c0,0.28,0.11,0.53,0.29,0.71l4,4C7.47,10.89,7.72,11,8,11s0.53-0.11,0.71-0.29l4-4C12.89,6.53,13,6.28,13,6\n                      C13,5.45,12.55,5,12,5z", className: "rct-tree-item-arrow-path" })))) : React__default.createElement("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", xmlnsXlink: "http://www.w3.org/1999/xlink", x: "0px", y: "0px", viewBox: "0 0 16 16", enableBackground: "new 0 0 16 16", xmlSpace: "preserve" }, React__default.createElement("g", null, React__default.createElement("g", null, React__default.createElement("path", { fillRule: "evenodd", clipRule: "evenodd", d: "M10.71,7.29l-4-4C6.53,3.11,6.28,3,6,3C5.45,3,5,3.45,5,4\n                      c0,0.28,0.11,0.53,0.29,0.71L8.59,8l-3.29,3.29C5.11,11.47,5,11.72,5,12c0,0.55,0.45,1,1,1c0.28,0,0.53-0.11,0.71-0.29l4-4\n                      C10.89,8.53,11,8.28,11,8C11,7.72,10.89,7.47,10.71,7.29z", className: "rct-tree-item-arrow-path" }))))));
     },
     renderItem: function(_a22) {
       var item = _a22.item, depth = _a22.depth, children = _a22.children, title = _a22.title, context = _a22.context, arrow = _a22.arrow;
       var InteractiveComponent = context.isRenaming ? "div" : "button";
       var type = context.isRenaming ? void 0 : "button";
-      return React__default.createElement("li", __assign$8({}, context.itemContainerWithChildrenProps, { className: cx$1("rct-tree-item-li", item.hasChildren && "rct-tree-item-li-hasChildren", context.isSelected && "rct-tree-item-li-selected", context.isExpanded && "rct-tree-item-li-expanded", context.isFocused && "rct-tree-item-li-focused", context.isDraggingOver && "rct-tree-item-li-dragging-over", context.isSearchMatching && "rct-tree-item-li-search-match") }), React__default.createElement("div", __assign$8({}, context.itemContainerWithoutChildrenProps, { style: { paddingLeft: (depth + 1) * renderDepthOffset + "px" }, className: cx$1("rct-tree-item-title-container", item.hasChildren && "rct-tree-item-title-container-hasChildren", context.isSelected && "rct-tree-item-title-container-selected", context.isExpanded && "rct-tree-item-title-container-expanded", context.isFocused && "rct-tree-item-title-container-focused", context.isDraggingOver && "rct-tree-item-title-container-dragging-over", context.isSearchMatching && "rct-tree-item-title-container-search-match") }), arrow, React__default.createElement(InteractiveComponent, __assign$8({ type }, context.interactiveElementProps, { className: cx$1("rct-tree-item-button", item.hasChildren && "rct-tree-item-button-hasChildren", context.isSelected && "rct-tree-item-button-selected", context.isExpanded && "rct-tree-item-button-expanded", context.isFocused && "rct-tree-item-button-focused", context.isDraggingOver && "rct-tree-item-button-dragging-over", context.isSearchMatching && "rct-tree-item-button-search-match") }), title)), children);
+      return React__default.createElement("li", __assign$a({}, context.itemContainerWithChildrenProps, { className: cx$1("rct-tree-item-li", item.hasChildren && "rct-tree-item-li-hasChildren", context.isSelected && "rct-tree-item-li-selected", context.isExpanded && "rct-tree-item-li-expanded", context.isFocused && "rct-tree-item-li-focused", context.isDraggingOver && "rct-tree-item-li-dragging-over", context.isSearchMatching && "rct-tree-item-li-search-match") }), React__default.createElement("div", __assign$a({}, context.itemContainerWithoutChildrenProps, { style: { paddingLeft: (depth + 1) * renderDepthOffset + "px" }, className: cx$1("rct-tree-item-title-container", item.hasChildren && "rct-tree-item-title-container-hasChildren", context.isSelected && "rct-tree-item-title-container-selected", context.isExpanded && "rct-tree-item-title-container-expanded", context.isFocused && "rct-tree-item-title-container-focused", context.isDraggingOver && "rct-tree-item-title-container-dragging-over", context.isSearchMatching && "rct-tree-item-title-container-search-match") }), arrow, React__default.createElement(InteractiveComponent, __assign$a({ type }, context.interactiveElementProps, { className: cx$1("rct-tree-item-button", item.hasChildren && "rct-tree-item-button-hasChildren", context.isSelected && "rct-tree-item-button-selected", context.isExpanded && "rct-tree-item-button-expanded", context.isFocused && "rct-tree-item-button-focused", context.isDraggingOver && "rct-tree-item-button-dragging-over", context.isSearchMatching && "rct-tree-item-button-search-match") }), title)), children);
     },
     renderRenameInput: function(_a22) {
       var inputProps = _a22.inputProps, inputRef = _a22.inputRef, submitButtonProps = _a22.submitButtonProps, submitButtonRef = _a22.submitButtonRef, formProps = _a22.formProps;
-      return React__default.createElement("form", __assign$8({}, formProps, { className: "rct-tree-item-renaming-form" }), React__default.createElement("input", __assign$8({}, inputProps, { ref: inputRef, className: "rct-tree-item-renaming-input" })), React__default.createElement("input", __assign$8({}, submitButtonProps, { ref: submitButtonRef, type: "submit", className: "rct-tree-item-renaming-submit-button", value: "\u{1F5F8}" })));
+      return React__default.createElement("form", __assign$a({}, formProps, { className: "rct-tree-item-renaming-form" }), React__default.createElement("input", __assign$a({}, inputProps, { ref: inputRef, className: "rct-tree-item-renaming-input" })), React__default.createElement("input", __assign$a({}, submitButtonProps, { ref: submitButtonRef, type: "submit", className: "rct-tree-item-renaming-submit-button", value: "\u{1F5F8}" })));
     },
     renderDraggingItem: function() {
       return React__default.createElement("div", null);
@@ -50573,19 +50542,19 @@ var createDefaultRenderers = function(renderDepthOffset) {
     },
     renderTreeContainer: function(_a22) {
       var children = _a22.children, containerProps = _a22.containerProps, info = _a22.info;
-      return React__default.createElement("div", { className: cx$1("rct-tree-root", info.isFocused && "rct-tree-root-focus", info.isRenaming && "rct-tree-root-renaming", info.areItemsSelected && "rct-tree-root-itemsselected") }, React__default.createElement("div", __assign$8({}, containerProps), children));
+      return React__default.createElement("div", { className: cx$1("rct-tree-root", info.isFocused && "rct-tree-root-focus", info.isRenaming && "rct-tree-root-renaming", info.areItemsSelected && "rct-tree-root-itemsselected") }, React__default.createElement("div", __assign$a({}, containerProps), children));
     },
     renderItemsContainer: function(_a22) {
       var children = _a22.children, containerProps = _a22.containerProps;
-      return React__default.createElement("ul", __assign$8({}, containerProps, { className: "rct-tree-items-container" }), children);
+      return React__default.createElement("ul", __assign$a({}, containerProps, { className: "rct-tree-items-container" }), children);
     },
     renderDragBetweenLine: function(_a22) {
       var draggingPosition = _a22.draggingPosition, lineProps = _a22.lineProps;
-      return React__default.createElement("div", __assign$8({}, lineProps, { style: { left: draggingPosition.depth * renderDepthOffset + "px" }, className: cx$1("rct-tree-drag-between-line", draggingPosition.targetType === "between-items" && draggingPosition.linePosition === "top" && "rct-tree-drag-between-line-top", draggingPosition.targetType === "between-items" && draggingPosition.linePosition === "bottom" && "rct-tree-drag-between-line-bottom") }));
+      return React__default.createElement("div", __assign$a({}, lineProps, { style: { left: draggingPosition.depth * renderDepthOffset + "px" }, className: cx$1("rct-tree-drag-between-line", draggingPosition.targetType === "between-items" && draggingPosition.linePosition === "top" && "rct-tree-drag-between-line-top", draggingPosition.targetType === "between-items" && draggingPosition.linePosition === "bottom" && "rct-tree-drag-between-line-bottom") }));
     },
     renderSearchInput: function(_a22) {
       var inputProps = _a22.inputProps;
-      return React__default.createElement("div", { className: cx$1("rct-tree-search-input-container") }, React__default.createElement("input", __assign$8({}, inputProps, { className: cx$1("rct-tree-search-input") })));
+      return React__default.createElement("div", { className: cx$1("rct-tree-search-input-container") }, React__default.createElement("input", __assign$a({}, inputProps, { className: cx$1("rct-tree-search-input") })));
     },
     renderLiveDescriptorContainer: function(_a22) {
       var tree = _a22.tree, children = _a22.children;
@@ -50674,8 +50643,8 @@ var useStableHandler = function(handler) {
     return handlerRef.current.apply(handlerRef, args);
   }, [handlerRef]);
 };
-var __assign$7 = globalThis && globalThis.__assign || function() {
-  __assign$7 = Object.assign || function(t2) {
+var __assign$9 = globalThis && globalThis.__assign || function() {
+  __assign$9 = Object.assign || function(t2) {
     for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
       s = arguments[i2];
       for (var p2 in s)
@@ -50684,7 +50653,7 @@ var __assign$7 = globalThis && globalThis.__assign || function() {
     }
     return t2;
   };
-  return __assign$7.apply(this, arguments);
+  return __assign$9.apply(this, arguments);
 };
 var __rest = globalThis && globalThis.__rest || function(s, e) {
   var t2 = {};
@@ -50738,7 +50707,7 @@ var useControlledTreeEnvironmentProps = function(_a22) {
   var registerTree = react.exports.useCallback(function(tree) {
     setTrees(function(trees2) {
       var _a3;
-      return __assign$7(__assign$7({}, trees2), (_a3 = {}, _a3[tree.treeId] = tree, _a3));
+      return __assign$9(__assign$9({}, trees2), (_a3 = {}, _a3[tree.treeId] = tree, _a3));
     });
     onRegisterTree === null || onRegisterTree === void 0 ? void 0 : onRegisterTree(tree);
     updateLinearItems();
@@ -50786,7 +50755,7 @@ var useControlledTreeEnvironmentProps = function(_a22) {
     }
   }, [autoFocus]);
   var renderers = useRenderers(props);
-  return __assign$7(__assign$7(__assign$7({}, renderers), props), {
+  return __assign$9(__assign$9(__assign$9({}, renderers), props), {
     onFocusItem: onFocusItemHandler,
     registerTree,
     unregisterTree,
@@ -50800,8 +50769,8 @@ var useControlledTreeEnvironmentProps = function(_a22) {
     linearItems
   });
 };
-var __assign$6 = globalThis && globalThis.__assign || function() {
-  __assign$6 = Object.assign || function(t2) {
+var __assign$8 = globalThis && globalThis.__assign || function() {
+  __assign$8 = Object.assign || function(t2) {
     for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
       s = arguments[i2];
       for (var p2 in s)
@@ -50810,7 +50779,7 @@ var __assign$6 = globalThis && globalThis.__assign || function() {
     }
     return t2;
   };
-  return __assign$6.apply(this, arguments);
+  return __assign$8.apply(this, arguments);
 };
 var TreeEnvironmentContext = react.exports.createContext(null);
 var useTreeEnvironment = function() {
@@ -50823,7 +50792,7 @@ var ControlledTreeEnvironment = react.exports.forwardRef(function(props, ref) {
   for (var _i = 0, _d = Object.keys(environmentContextProps.trees); _i < _d.length; _i++) {
     var treeId = _d[_i];
     if (!((_a22 = viewState[treeId]) === null || _a22 === void 0 ? void 0 : _a22.focusedItem) && environmentContextProps.trees[treeId]) {
-      viewState[treeId] = __assign$6(__assign$6({}, viewState[treeId]), { focusedItem: (_c = (_b2 = props.items[environmentContextProps.trees[treeId].rootItem]) === null || _b2 === void 0 ? void 0 : _b2.children) === null || _c === void 0 ? void 0 : _c[0] });
+      viewState[treeId] = __assign$8(__assign$8({}, viewState[treeId]), { focusedItem: (_c = (_b2 = props.items[environmentContextProps.trees[treeId].rootItem]) === null || _b2 === void 0 ? void 0 : _b2.children) === null || _c === void 0 ? void 0 : _c[0] });
     }
   }
   return react.exports.createElement(TreeEnvironmentContext.Provider, { value: environmentContextProps }, react.exports.createElement(InteractionManagerProvider, null, react.exports.createElement(DragAndDropProvider, null, react.exports.createElement(EnvironmentActionsProvider, { ref }, props.children))));
@@ -50878,8 +50847,8 @@ var useSelectUpTo = function() {
     }
   }, [onSelectItems, linearItems, treeId, viewState]);
 };
-var __assign$5 = globalThis && globalThis.__assign || function() {
-  __assign$5 = Object.assign || function(t2) {
+var __assign$7 = globalThis && globalThis.__assign || function() {
+  __assign$7 = Object.assign || function(t2) {
     for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
       s = arguments[i2];
       for (var p2 in s)
@@ -50888,7 +50857,7 @@ var __assign$5 = globalThis && globalThis.__assign || function() {
     }
     return t2;
   };
-  return __assign$5.apply(this, arguments);
+  return __assign$7.apply(this, arguments);
 };
 var __spreadArray$5 = globalThis && globalThis.__spreadArray || function(to, from) {
   for (var i2 = 0, il2 = from.length, j = to.length; i2 < il2; i2++, j++)
@@ -51007,8 +50976,8 @@ var useTreeItemRenderContext = function(item) {
       canDrag,
       canDropOn
     };
-    var interactiveElementProps = __assign$5(__assign$5({}, interactionManager.createInteractiveElementProps(item, treeId, actions, renderFlags, viewState)), (_a3 = {}, _a3["data-rct-item-interactive"] = true, _a3["data-rct-item-focus"] = renderFlags.isFocused ? "true" : "false", _a3["data-rct-item-id"] = item.index, _a3));
-    var itemContainerWithoutChildrenProps = __assign$5({}, (_b3 = {}, _b3["data-rct-item-container"] = "true", _b3));
+    var interactiveElementProps = __assign$7(__assign$7({}, interactionManager.createInteractiveElementProps(item, treeId, actions, renderFlags, viewState)), (_a3 = {}, _a3["data-rct-item-interactive"] = true, _a3["data-rct-item-focus"] = renderFlags.isFocused ? "true" : "false", _a3["data-rct-item-id"] = item.index, _a3));
+    var itemContainerWithoutChildrenProps = __assign$7({}, (_b3 = {}, _b3["data-rct-item-container"] = "true", _b3));
     var itemContainerWithChildrenProps = {
       role: "treeitem",
       "aria-selected": renderFlags.isSelected,
@@ -51035,7 +51004,7 @@ var useTreeItemRenderContext = function(item) {
       acc[key] = Array.isArray(value) ? value.includes(item.index) : value === item.index;
       return acc;
     }, {});
-    return __assign$5(__assign$5(__assign$5({}, actions), renderFlags), {
+    return __assign$7(__assign$7(__assign$7({}, actions), renderFlags), {
       interactiveElementProps,
       itemContainerWithChildrenProps,
       itemContainerWithoutChildrenProps,
@@ -51088,8 +51057,8 @@ var defaultKeyboardBindings = {
   completeProgrammaticDnd: ["enter"],
   abortProgrammaticDnd: ["escape"]
 };
-var __assign$4 = globalThis && globalThis.__assign || function() {
-  __assign$4 = Object.assign || function(t2) {
+var __assign$6 = globalThis && globalThis.__assign || function() {
+  __assign$6 = Object.assign || function(t2) {
     for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
       s = arguments[i2];
       for (var p2 in s)
@@ -51098,13 +51067,13 @@ var __assign$4 = globalThis && globalThis.__assign || function() {
     }
     return t2;
   };
-  return __assign$4.apply(this, arguments);
+  return __assign$6.apply(this, arguments);
 };
 var useKeyboardBindings = function() {
   var environment = useTreeEnvironment();
   return react.exports.useMemo(function() {
     if (environment.keyboardBindings) {
-      return __assign$4(__assign$4({}, defaultKeyboardBindings), environment.keyboardBindings);
+      return __assign$6(__assign$6({}, defaultKeyboardBindings), environment.keyboardBindings);
     } else {
       return defaultKeyboardBindings;
     }
@@ -51562,8 +51531,8 @@ var useSearchMatchFocus = function() {
     }
   }, [doesSearchMatchItem, getItemTitle, linearItems, items, onFocusItem, search, treeId, callSoon], [search]);
 };
-var __assign$3 = globalThis && globalThis.__assign || function() {
-  __assign$3 = Object.assign || function(t2) {
+var __assign$5 = globalThis && globalThis.__assign || function() {
+  __assign$5 = Object.assign || function(t2) {
     for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
       s = arguments[i2];
       for (var p2 in s)
@@ -51572,7 +51541,7 @@ var __assign$3 = globalThis && globalThis.__assign || function() {
     }
     return t2;
   };
-  return __assign$3.apply(this, arguments);
+  return __assign$5.apply(this, arguments);
 };
 var SearchInput = function(props) {
   var _a22;
@@ -51608,7 +51577,7 @@ var SearchInput = function(props) {
     return null;
   }
   return renderers.renderSearchInput({
-    inputProps: __assign$3({ value: search, onChange: function(e) {
+    inputProps: __assign$5({ value: search, onChange: function(e) {
       return setSearch(e.target.value);
     }, onBlur: function() {
       clearSearch();
@@ -51695,8 +51664,8 @@ var MaybeLiveDescription = function() {
   }
   return react.exports.createElement(LiveDescription, null);
 };
-var __assign$2 = globalThis && globalThis.__assign || function() {
-  __assign$2 = Object.assign || function(t2) {
+var __assign$4 = globalThis && globalThis.__assign || function() {
+  __assign$4 = Object.assign || function(t2) {
     for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
       s = arguments[i2];
       for (var p2 in s)
@@ -51705,7 +51674,7 @@ var __assign$2 = globalThis && globalThis.__assign || function() {
     }
     return t2;
   };
-  return __assign$2.apply(this, arguments);
+  return __assign$4.apply(this, arguments);
 };
 var TreeManager = function() {
   var _a22;
@@ -51727,7 +51696,7 @@ var TreeManager = function() {
     throw Error("Root " + rootItem + " does not contain any children");
   }
   var treeChildren = react.exports.createElement(react.exports.Fragment, null, react.exports.createElement(MaybeLiveDescription, null), react.exports.createElement(TreeItemChildren, { depth: 0, parentId: treeId }, rootChildren), react.exports.createElement(DragBetweenLine, { treeId }), react.exports.createElement(SearchInput, { containerRef: containerRef.current }));
-  var containerProps = __assign$2({
+  var containerProps = __assign$4({
     onDragOver: function(e) {
       return dnd.onDragOverTreeHandler(e, treeId, containerRef);
     },
@@ -51773,8 +51742,8 @@ var useCreatedTreeInformation = function(tree, renamingItem, search) {
     dnd.isProgrammaticallyDragging
   ]);
 };
-var __assign$1 = globalThis && globalThis.__assign || function() {
-  __assign$1 = Object.assign || function(t2) {
+var __assign$3 = globalThis && globalThis.__assign || function() {
+  __assign$3 = Object.assign || function(t2) {
     for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
       s = arguments[i2];
       for (var p2 in s)
@@ -51783,14 +51752,14 @@ var __assign$1 = globalThis && globalThis.__assign || function() {
     }
     return t2;
   };
-  return __assign$1.apply(this, arguments);
+  return __assign$3.apply(this, arguments);
 };
 var useCreatedTreeRef = function(ref, actions) {
   var environment = useTreeEnvironment();
   var tree = useTree();
   var dnd = useDragAndDrop();
   react.exports.useImperativeHandle(ref, function() {
-    return __assign$1(__assign$1(__assign$1({}, actions), { treeEnvironmentContext: environment, dragAndDropContext: dnd, treeContext: tree }), tree.treeInformation);
+    return __assign$3(__assign$3(__assign$3({}, actions), { treeEnvironmentContext: environment, dragAndDropContext: dnd, treeContext: tree }), tree.treeInformation);
   });
 };
 var EnvironmentActionsContext = react.exports.createContext(null);
@@ -51857,8 +51826,8 @@ var TreeActionsProvider = react.exports.forwardRef(function(props, ref) {
   useCreatedTreeRef(ref, actions);
   return react.exports.createElement(EnvironmentActionsContext.Provider, { value: actions }, props.children);
 });
-var __assign = globalThis && globalThis.__assign || function() {
-  __assign = Object.assign || function(t2) {
+var __assign$2 = globalThis && globalThis.__assign || function() {
+  __assign$2 = Object.assign || function(t2) {
     for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
       s = arguments[i2];
       for (var p2 in s)
@@ -51867,7 +51836,7 @@ var __assign = globalThis && globalThis.__assign || function() {
     }
     return t2;
   };
-  return __assign.apply(this, arguments);
+  return __assign$2.apply(this, arguments);
 };
 var TreeContext = react.exports.createContext(null);
 var useTree = function() {
@@ -51877,7 +51846,7 @@ var Tree = react.exports.forwardRef(function(props, ref) {
   var _a22, _b2;
   var environment = useTreeEnvironment();
   var renderers = react.exports.useMemo(function() {
-    return __assign(__assign({}, environment), props);
+    return __assign$2(__assign$2({}, environment), props);
   }, [props, environment]);
   var _c = react.exports.useState(null), search = _c[0], setSearch = _c[1];
   var _d = react.exports.useState(null), renamingItem = _d[0], setRenamingItem = _d[1];
@@ -52521,19 +52490,19 @@ class SubMenu extends AbstractMenu {
     if (this.props.forceOpen || this.state.visible) {
       const wrapper = window.requestAnimationFrame || setTimeout;
       wrapper(() => {
-        const styles = this.props.rtl ? this.getRTLMenuPosition() : this.getMenuPosition();
+        const styles2 = this.props.rtl ? this.getRTLMenuPosition() : this.getMenuPosition();
         this.subMenu.style.removeProperty("top");
         this.subMenu.style.removeProperty("bottom");
         this.subMenu.style.removeProperty("left");
         this.subMenu.style.removeProperty("right");
-        if (hasOwnProp(styles, "top"))
-          this.subMenu.style.top = styles.top;
-        if (hasOwnProp(styles, "left"))
-          this.subMenu.style.left = styles.left;
-        if (hasOwnProp(styles, "bottom"))
-          this.subMenu.style.bottom = styles.bottom;
-        if (hasOwnProp(styles, "right"))
-          this.subMenu.style.right = styles.right;
+        if (hasOwnProp(styles2, "top"))
+          this.subMenu.style.top = styles2.top;
+        if (hasOwnProp(styles2, "left"))
+          this.subMenu.style.left = styles2.left;
+        if (hasOwnProp(styles2, "bottom"))
+          this.subMenu.style.bottom = styles2.bottom;
+        if (hasOwnProp(styles2, "right"))
+          this.subMenu.style.right = styles2.right;
         this.subMenu.classList.add(cssClasses.menuVisible);
         this.registerHandlers();
         this.setState({
@@ -53764,12 +53733,10 @@ function createTable(key, entries, open, setOpen) {
     }, /* @__PURE__ */ React__default.createElement("span", {
       "data-tip": p2.value,
       className: "w-1/2 border-r border-gray-light p-2 truncate select-none",
-      title: p2.name,
       key: "parameters-th-" + id2
     }, p2.name), /* @__PURE__ */ React__default.createElement("span", {
       "data-tip": p2.value,
       className: "w-1/2 text-gray-medium p-2 truncate",
-      title: p2.value,
       key: "parameters-td-" + id2
     }, p2.value));
   }) : null));
@@ -54190,7 +54157,11 @@ function _MenuHelp(props) {
   }, /* @__PURE__ */ React__default.createElement("div", {
     className: "flex justify-between mb-8"
   }, /* @__PURE__ */ React__default.createElement("h2", {
-    className: "text-white font-bold text-sm uppercase"
+    className: "text-white font-bold text-sm uppercase",
+    style: {
+      marginLeft: props.side.getWidth(),
+      maxWidth: `calc(100% - ${props.side.getWidth()}px)`
+    }
   }, "Key navigation controls"), /* @__PURE__ */ React__default.createElement("button", {
     className: "text-white",
     onClick: onCloseBtn
@@ -54202,7 +54173,11 @@ function _MenuHelp(props) {
     className: ""
   }, /* @__PURE__ */ React__default.createElement("img", {
     className: "menu-help-controls mb-8 mx-auto 2xl:w-[50vw]",
-    src: helpImage
+    src: helpImage,
+    style: {
+      marginLeft: props.side.getWidth(),
+      maxWidth: `calc(100% - ${props.side.getWidth()}px)`
+    }
   })), props.settings.capacity.canFollowUrl ? linkButtons() : null)));
 }
 function linkButtons() {
@@ -54222,41 +54197,841 @@ function linkButtons() {
     onClick: onHelpBtn
   }, "Help Center"));
 }
+var __extends$1 = globalThis && globalThis.__extends || function() {
+  var extendStatics = function(d, b) {
+    extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d2, b2) {
+      d2.__proto__ = b2;
+    } || function(d2, b2) {
+      for (var p2 in b2)
+        if (Object.prototype.hasOwnProperty.call(b2, p2))
+          d2[p2] = b2[p2];
+    };
+    return extendStatics(d, b);
+  };
+  return function(d, b) {
+    extendStatics(d, b);
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+}();
+var __assign$1 = globalThis && globalThis.__assign || function() {
+  __assign$1 = Object.assign || function(t2) {
+    for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
+      s = arguments[i2];
+      for (var p2 in s)
+        if (Object.prototype.hasOwnProperty.call(s, p2))
+          t2[p2] = s[p2];
+    }
+    return t2;
+  };
+  return __assign$1.apply(this, arguments);
+};
+var rowSizeBase = {
+  width: "100%",
+  height: "10px",
+  top: "0px",
+  left: "0px",
+  cursor: "row-resize"
+};
+var colSizeBase = {
+  width: "10px",
+  height: "100%",
+  top: "0px",
+  left: "0px",
+  cursor: "col-resize"
+};
+var edgeBase = {
+  width: "20px",
+  height: "20px",
+  position: "absolute"
+};
+var styles = {
+  top: __assign$1(__assign$1({}, rowSizeBase), { top: "-5px" }),
+  right: __assign$1(__assign$1({}, colSizeBase), { left: void 0, right: "-5px" }),
+  bottom: __assign$1(__assign$1({}, rowSizeBase), { top: void 0, bottom: "-5px" }),
+  left: __assign$1(__assign$1({}, colSizeBase), { left: "-5px" }),
+  topRight: __assign$1(__assign$1({}, edgeBase), { right: "-10px", top: "-10px", cursor: "ne-resize" }),
+  bottomRight: __assign$1(__assign$1({}, edgeBase), { right: "-10px", bottom: "-10px", cursor: "se-resize" }),
+  bottomLeft: __assign$1(__assign$1({}, edgeBase), { left: "-10px", bottom: "-10px", cursor: "sw-resize" }),
+  topLeft: __assign$1(__assign$1({}, edgeBase), { left: "-10px", top: "-10px", cursor: "nw-resize" })
+};
+var Resizer = function(_super) {
+  __extends$1(Resizer2, _super);
+  function Resizer2() {
+    var _this = _super !== null && _super.apply(this, arguments) || this;
+    _this.onMouseDown = function(e) {
+      _this.props.onResizeStart(e, _this.props.direction);
+    };
+    _this.onTouchStart = function(e) {
+      _this.props.onResizeStart(e, _this.props.direction);
+    };
+    return _this;
+  }
+  Resizer2.prototype.render = function() {
+    return react.exports.createElement("div", { className: this.props.className || "", style: __assign$1(__assign$1({ position: "absolute", userSelect: "none" }, styles[this.props.direction]), this.props.replaceStyles || {}), onMouseDown: this.onMouseDown, onTouchStart: this.onTouchStart }, this.props.children);
+  };
+  return Resizer2;
+}(react.exports.PureComponent);
+var __extends = globalThis && globalThis.__extends || function() {
+  var extendStatics = function(d, b) {
+    extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d2, b2) {
+      d2.__proto__ = b2;
+    } || function(d2, b2) {
+      for (var p2 in b2)
+        if (Object.prototype.hasOwnProperty.call(b2, p2))
+          d2[p2] = b2[p2];
+    };
+    return extendStatics(d, b);
+  };
+  return function(d, b) {
+    extendStatics(d, b);
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+}();
+var __assign = globalThis && globalThis.__assign || function() {
+  __assign = Object.assign || function(t2) {
+    for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
+      s = arguments[i2];
+      for (var p2 in s)
+        if (Object.prototype.hasOwnProperty.call(s, p2))
+          t2[p2] = s[p2];
+    }
+    return t2;
+  };
+  return __assign.apply(this, arguments);
+};
+var DEFAULT_SIZE = {
+  width: "auto",
+  height: "auto"
+};
+var clamp = function(n2, min2, max2) {
+  return Math.max(Math.min(n2, max2), min2);
+};
+var snap = function(n2, size) {
+  return Math.round(n2 / size) * size;
+};
+var hasDirection = function(dir, target) {
+  return new RegExp(dir, "i").test(target);
+};
+var isTouchEvent = function(event) {
+  return Boolean(event.touches && event.touches.length);
+};
+var isMouseEvent = function(event) {
+  return Boolean((event.clientX || event.clientX === 0) && (event.clientY || event.clientY === 0));
+};
+var findClosestSnap = function(n2, snapArray, snapGap) {
+  if (snapGap === void 0) {
+    snapGap = 0;
+  }
+  var closestGapIndex = snapArray.reduce(function(prev, curr, index) {
+    return Math.abs(curr - n2) < Math.abs(snapArray[prev] - n2) ? index : prev;
+  }, 0);
+  var gap = Math.abs(snapArray[closestGapIndex] - n2);
+  return snapGap === 0 || gap < snapGap ? snapArray[closestGapIndex] : n2;
+};
+var getStringSize = function(n2) {
+  n2 = n2.toString();
+  if (n2 === "auto") {
+    return n2;
+  }
+  if (n2.endsWith("px")) {
+    return n2;
+  }
+  if (n2.endsWith("%")) {
+    return n2;
+  }
+  if (n2.endsWith("vh")) {
+    return n2;
+  }
+  if (n2.endsWith("vw")) {
+    return n2;
+  }
+  if (n2.endsWith("vmax")) {
+    return n2;
+  }
+  if (n2.endsWith("vmin")) {
+    return n2;
+  }
+  return n2 + "px";
+};
+var getPixelSize = function(size, parentSize, innerWidth, innerHeight) {
+  if (size && typeof size === "string") {
+    if (size.endsWith("px")) {
+      return Number(size.replace("px", ""));
+    }
+    if (size.endsWith("%")) {
+      var ratio = Number(size.replace("%", "")) / 100;
+      return parentSize * ratio;
+    }
+    if (size.endsWith("vw")) {
+      var ratio = Number(size.replace("vw", "")) / 100;
+      return innerWidth * ratio;
+    }
+    if (size.endsWith("vh")) {
+      var ratio = Number(size.replace("vh", "")) / 100;
+      return innerHeight * ratio;
+    }
+  }
+  return size;
+};
+var calculateNewMax = function(parentSize, innerWidth, innerHeight, maxWidth, maxHeight, minWidth, minHeight) {
+  maxWidth = getPixelSize(maxWidth, parentSize.width, innerWidth, innerHeight);
+  maxHeight = getPixelSize(maxHeight, parentSize.height, innerWidth, innerHeight);
+  minWidth = getPixelSize(minWidth, parentSize.width, innerWidth, innerHeight);
+  minHeight = getPixelSize(minHeight, parentSize.height, innerWidth, innerHeight);
+  return {
+    maxWidth: typeof maxWidth === "undefined" ? void 0 : Number(maxWidth),
+    maxHeight: typeof maxHeight === "undefined" ? void 0 : Number(maxHeight),
+    minWidth: typeof minWidth === "undefined" ? void 0 : Number(minWidth),
+    minHeight: typeof minHeight === "undefined" ? void 0 : Number(minHeight)
+  };
+};
+var definedProps = [
+  "as",
+  "style",
+  "className",
+  "grid",
+  "snap",
+  "bounds",
+  "boundsByDirection",
+  "size",
+  "defaultSize",
+  "minWidth",
+  "minHeight",
+  "maxWidth",
+  "maxHeight",
+  "lockAspectRatio",
+  "lockAspectRatioExtraWidth",
+  "lockAspectRatioExtraHeight",
+  "enable",
+  "handleStyles",
+  "handleClasses",
+  "handleWrapperStyle",
+  "handleWrapperClass",
+  "children",
+  "onResizeStart",
+  "onResize",
+  "onResizeStop",
+  "handleComponent",
+  "scale",
+  "resizeRatio",
+  "snapGap"
+];
+var baseClassName = "__resizable_base__";
+var Resizable = function(_super) {
+  __extends(Resizable2, _super);
+  function Resizable2(props) {
+    var _this = _super.call(this, props) || this;
+    _this.ratio = 1;
+    _this.resizable = null;
+    _this.parentLeft = 0;
+    _this.parentTop = 0;
+    _this.resizableLeft = 0;
+    _this.resizableRight = 0;
+    _this.resizableTop = 0;
+    _this.resizableBottom = 0;
+    _this.targetLeft = 0;
+    _this.targetTop = 0;
+    _this.appendBase = function() {
+      if (!_this.resizable || !_this.window) {
+        return null;
+      }
+      var parent = _this.parentNode;
+      if (!parent) {
+        return null;
+      }
+      var element = _this.window.document.createElement("div");
+      element.style.width = "100%";
+      element.style.height = "100%";
+      element.style.position = "absolute";
+      element.style.transform = "scale(0, 0)";
+      element.style.left = "0";
+      element.style.flex = "0 0 100%";
+      if (element.classList) {
+        element.classList.add(baseClassName);
+      } else {
+        element.className += baseClassName;
+      }
+      parent.appendChild(element);
+      return element;
+    };
+    _this.removeBase = function(base) {
+      var parent = _this.parentNode;
+      if (!parent) {
+        return;
+      }
+      parent.removeChild(base);
+    };
+    _this.ref = function(c) {
+      if (c) {
+        _this.resizable = c;
+      }
+    };
+    _this.state = {
+      isResizing: false,
+      width: typeof (_this.propsSize && _this.propsSize.width) === "undefined" ? "auto" : _this.propsSize && _this.propsSize.width,
+      height: typeof (_this.propsSize && _this.propsSize.height) === "undefined" ? "auto" : _this.propsSize && _this.propsSize.height,
+      direction: "right",
+      original: {
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0
+      },
+      backgroundStyle: {
+        height: "100%",
+        width: "100%",
+        backgroundColor: "rgba(0,0,0,0)",
+        cursor: "auto",
+        opacity: 0,
+        position: "fixed",
+        zIndex: 9999,
+        top: "0",
+        left: "0",
+        bottom: "0",
+        right: "0"
+      },
+      flexBasis: void 0
+    };
+    _this.onResizeStart = _this.onResizeStart.bind(_this);
+    _this.onMouseMove = _this.onMouseMove.bind(_this);
+    _this.onMouseUp = _this.onMouseUp.bind(_this);
+    return _this;
+  }
+  Object.defineProperty(Resizable2.prototype, "parentNode", {
+    get: function() {
+      if (!this.resizable) {
+        return null;
+      }
+      return this.resizable.parentNode;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(Resizable2.prototype, "window", {
+    get: function() {
+      if (!this.resizable) {
+        return null;
+      }
+      if (!this.resizable.ownerDocument) {
+        return null;
+      }
+      return this.resizable.ownerDocument.defaultView;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(Resizable2.prototype, "propsSize", {
+    get: function() {
+      return this.props.size || this.props.defaultSize || DEFAULT_SIZE;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(Resizable2.prototype, "size", {
+    get: function() {
+      var width = 0;
+      var height = 0;
+      if (this.resizable && this.window) {
+        var orgWidth = this.resizable.offsetWidth;
+        var orgHeight = this.resizable.offsetHeight;
+        var orgPosition = this.resizable.style.position;
+        if (orgPosition !== "relative") {
+          this.resizable.style.position = "relative";
+        }
+        width = this.resizable.style.width !== "auto" ? this.resizable.offsetWidth : orgWidth;
+        height = this.resizable.style.height !== "auto" ? this.resizable.offsetHeight : orgHeight;
+        this.resizable.style.position = orgPosition;
+      }
+      return { width, height };
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(Resizable2.prototype, "sizeStyle", {
+    get: function() {
+      var _this = this;
+      var size = this.props.size;
+      var getSize = function(key) {
+        if (typeof _this.state[key] === "undefined" || _this.state[key] === "auto") {
+          return "auto";
+        }
+        if (_this.propsSize && _this.propsSize[key] && _this.propsSize[key].toString().endsWith("%")) {
+          if (_this.state[key].toString().endsWith("%")) {
+            return _this.state[key].toString();
+          }
+          var parentSize = _this.getParentSize();
+          var value = Number(_this.state[key].toString().replace("px", ""));
+          var percent = value / parentSize[key] * 100;
+          return percent + "%";
+        }
+        return getStringSize(_this.state[key]);
+      };
+      var width = size && typeof size.width !== "undefined" && !this.state.isResizing ? getStringSize(size.width) : getSize("width");
+      var height = size && typeof size.height !== "undefined" && !this.state.isResizing ? getStringSize(size.height) : getSize("height");
+      return { width, height };
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Resizable2.prototype.getParentSize = function() {
+    if (!this.parentNode) {
+      if (!this.window) {
+        return { width: 0, height: 0 };
+      }
+      return { width: this.window.innerWidth, height: this.window.innerHeight };
+    }
+    var base = this.appendBase();
+    if (!base) {
+      return { width: 0, height: 0 };
+    }
+    var wrapChanged = false;
+    var wrap = this.parentNode.style.flexWrap;
+    if (wrap !== "wrap") {
+      wrapChanged = true;
+      this.parentNode.style.flexWrap = "wrap";
+    }
+    base.style.position = "relative";
+    base.style.minWidth = "100%";
+    base.style.minHeight = "100%";
+    var size = {
+      width: base.offsetWidth,
+      height: base.offsetHeight
+    };
+    if (wrapChanged) {
+      this.parentNode.style.flexWrap = wrap;
+    }
+    this.removeBase(base);
+    return size;
+  };
+  Resizable2.prototype.bindEvents = function() {
+    if (this.window) {
+      this.window.addEventListener("mouseup", this.onMouseUp);
+      this.window.addEventListener("mousemove", this.onMouseMove);
+      this.window.addEventListener("mouseleave", this.onMouseUp);
+      this.window.addEventListener("touchmove", this.onMouseMove, {
+        capture: true,
+        passive: false
+      });
+      this.window.addEventListener("touchend", this.onMouseUp);
+    }
+  };
+  Resizable2.prototype.unbindEvents = function() {
+    if (this.window) {
+      this.window.removeEventListener("mouseup", this.onMouseUp);
+      this.window.removeEventListener("mousemove", this.onMouseMove);
+      this.window.removeEventListener("mouseleave", this.onMouseUp);
+      this.window.removeEventListener("touchmove", this.onMouseMove, true);
+      this.window.removeEventListener("touchend", this.onMouseUp);
+    }
+  };
+  Resizable2.prototype.componentDidMount = function() {
+    if (!this.resizable || !this.window) {
+      return;
+    }
+    var computedStyle = this.window.getComputedStyle(this.resizable);
+    this.setState({
+      width: this.state.width || this.size.width,
+      height: this.state.height || this.size.height,
+      flexBasis: computedStyle.flexBasis !== "auto" ? computedStyle.flexBasis : void 0
+    });
+  };
+  Resizable2.prototype.componentWillUnmount = function() {
+    if (this.window) {
+      this.unbindEvents();
+    }
+  };
+  Resizable2.prototype.createSizeForCssProperty = function(newSize, kind) {
+    var propsSize = this.propsSize && this.propsSize[kind];
+    return this.state[kind] === "auto" && this.state.original[kind] === newSize && (typeof propsSize === "undefined" || propsSize === "auto") ? "auto" : newSize;
+  };
+  Resizable2.prototype.calculateNewMaxFromBoundary = function(maxWidth, maxHeight) {
+    var boundsByDirection = this.props.boundsByDirection;
+    var direction = this.state.direction;
+    var widthByDirection = boundsByDirection && hasDirection("left", direction);
+    var heightByDirection = boundsByDirection && hasDirection("top", direction);
+    var boundWidth;
+    var boundHeight;
+    if (this.props.bounds === "parent") {
+      var parent_1 = this.parentNode;
+      if (parent_1) {
+        boundWidth = widthByDirection ? this.resizableRight - this.parentLeft : parent_1.offsetWidth + (this.parentLeft - this.resizableLeft);
+        boundHeight = heightByDirection ? this.resizableBottom - this.parentTop : parent_1.offsetHeight + (this.parentTop - this.resizableTop);
+      }
+    } else if (this.props.bounds === "window") {
+      if (this.window) {
+        boundWidth = widthByDirection ? this.resizableRight : this.window.innerWidth - this.resizableLeft;
+        boundHeight = heightByDirection ? this.resizableBottom : this.window.innerHeight - this.resizableTop;
+      }
+    } else if (this.props.bounds) {
+      boundWidth = widthByDirection ? this.resizableRight - this.targetLeft : this.props.bounds.offsetWidth + (this.targetLeft - this.resizableLeft);
+      boundHeight = heightByDirection ? this.resizableBottom - this.targetTop : this.props.bounds.offsetHeight + (this.targetTop - this.resizableTop);
+    }
+    if (boundWidth && Number.isFinite(boundWidth)) {
+      maxWidth = maxWidth && maxWidth < boundWidth ? maxWidth : boundWidth;
+    }
+    if (boundHeight && Number.isFinite(boundHeight)) {
+      maxHeight = maxHeight && maxHeight < boundHeight ? maxHeight : boundHeight;
+    }
+    return { maxWidth, maxHeight };
+  };
+  Resizable2.prototype.calculateNewSizeFromDirection = function(clientX, clientY) {
+    var scale = this.props.scale || 1;
+    var resizeRatio = this.props.resizeRatio || 1;
+    var _a22 = this.state, direction = _a22.direction, original = _a22.original;
+    var _b2 = this.props, lockAspectRatio = _b2.lockAspectRatio, lockAspectRatioExtraHeight = _b2.lockAspectRatioExtraHeight, lockAspectRatioExtraWidth = _b2.lockAspectRatioExtraWidth;
+    var newWidth = original.width;
+    var newHeight = original.height;
+    var extraHeight = lockAspectRatioExtraHeight || 0;
+    var extraWidth = lockAspectRatioExtraWidth || 0;
+    if (hasDirection("right", direction)) {
+      newWidth = original.width + (clientX - original.x) * resizeRatio / scale;
+      if (lockAspectRatio) {
+        newHeight = (newWidth - extraWidth) / this.ratio + extraHeight;
+      }
+    }
+    if (hasDirection("left", direction)) {
+      newWidth = original.width - (clientX - original.x) * resizeRatio / scale;
+      if (lockAspectRatio) {
+        newHeight = (newWidth - extraWidth) / this.ratio + extraHeight;
+      }
+    }
+    if (hasDirection("bottom", direction)) {
+      newHeight = original.height + (clientY - original.y) * resizeRatio / scale;
+      if (lockAspectRatio) {
+        newWidth = (newHeight - extraHeight) * this.ratio + extraWidth;
+      }
+    }
+    if (hasDirection("top", direction)) {
+      newHeight = original.height - (clientY - original.y) * resizeRatio / scale;
+      if (lockAspectRatio) {
+        newWidth = (newHeight - extraHeight) * this.ratio + extraWidth;
+      }
+    }
+    return { newWidth, newHeight };
+  };
+  Resizable2.prototype.calculateNewSizeFromAspectRatio = function(newWidth, newHeight, max2, min2) {
+    var _a22 = this.props, lockAspectRatio = _a22.lockAspectRatio, lockAspectRatioExtraHeight = _a22.lockAspectRatioExtraHeight, lockAspectRatioExtraWidth = _a22.lockAspectRatioExtraWidth;
+    var computedMinWidth = typeof min2.width === "undefined" ? 10 : min2.width;
+    var computedMaxWidth = typeof max2.width === "undefined" || max2.width < 0 ? newWidth : max2.width;
+    var computedMinHeight = typeof min2.height === "undefined" ? 10 : min2.height;
+    var computedMaxHeight = typeof max2.height === "undefined" || max2.height < 0 ? newHeight : max2.height;
+    var extraHeight = lockAspectRatioExtraHeight || 0;
+    var extraWidth = lockAspectRatioExtraWidth || 0;
+    if (lockAspectRatio) {
+      var extraMinWidth = (computedMinHeight - extraHeight) * this.ratio + extraWidth;
+      var extraMaxWidth = (computedMaxHeight - extraHeight) * this.ratio + extraWidth;
+      var extraMinHeight = (computedMinWidth - extraWidth) / this.ratio + extraHeight;
+      var extraMaxHeight = (computedMaxWidth - extraWidth) / this.ratio + extraHeight;
+      var lockedMinWidth = Math.max(computedMinWidth, extraMinWidth);
+      var lockedMaxWidth = Math.min(computedMaxWidth, extraMaxWidth);
+      var lockedMinHeight = Math.max(computedMinHeight, extraMinHeight);
+      var lockedMaxHeight = Math.min(computedMaxHeight, extraMaxHeight);
+      newWidth = clamp(newWidth, lockedMinWidth, lockedMaxWidth);
+      newHeight = clamp(newHeight, lockedMinHeight, lockedMaxHeight);
+    } else {
+      newWidth = clamp(newWidth, computedMinWidth, computedMaxWidth);
+      newHeight = clamp(newHeight, computedMinHeight, computedMaxHeight);
+    }
+    return { newWidth, newHeight };
+  };
+  Resizable2.prototype.setBoundingClientRect = function() {
+    if (this.props.bounds === "parent") {
+      var parent_2 = this.parentNode;
+      if (parent_2) {
+        var parentRect = parent_2.getBoundingClientRect();
+        this.parentLeft = parentRect.left;
+        this.parentTop = parentRect.top;
+      }
+    }
+    if (this.props.bounds && typeof this.props.bounds !== "string") {
+      var targetRect = this.props.bounds.getBoundingClientRect();
+      this.targetLeft = targetRect.left;
+      this.targetTop = targetRect.top;
+    }
+    if (this.resizable) {
+      var _a22 = this.resizable.getBoundingClientRect(), left = _a22.left, top_1 = _a22.top, right = _a22.right, bottom = _a22.bottom;
+      this.resizableLeft = left;
+      this.resizableRight = right;
+      this.resizableTop = top_1;
+      this.resizableBottom = bottom;
+    }
+  };
+  Resizable2.prototype.onResizeStart = function(event, direction) {
+    if (!this.resizable || !this.window) {
+      return;
+    }
+    var clientX = 0;
+    var clientY = 0;
+    if (event.nativeEvent && isMouseEvent(event.nativeEvent)) {
+      clientX = event.nativeEvent.clientX;
+      clientY = event.nativeEvent.clientY;
+    } else if (event.nativeEvent && isTouchEvent(event.nativeEvent)) {
+      clientX = event.nativeEvent.touches[0].clientX;
+      clientY = event.nativeEvent.touches[0].clientY;
+    }
+    if (this.props.onResizeStart) {
+      if (this.resizable) {
+        var startResize = this.props.onResizeStart(event, direction, this.resizable);
+        if (startResize === false) {
+          return;
+        }
+      }
+    }
+    if (this.props.size) {
+      if (typeof this.props.size.height !== "undefined" && this.props.size.height !== this.state.height) {
+        this.setState({ height: this.props.size.height });
+      }
+      if (typeof this.props.size.width !== "undefined" && this.props.size.width !== this.state.width) {
+        this.setState({ width: this.props.size.width });
+      }
+    }
+    this.ratio = typeof this.props.lockAspectRatio === "number" ? this.props.lockAspectRatio : this.size.width / this.size.height;
+    var flexBasis;
+    var computedStyle = this.window.getComputedStyle(this.resizable);
+    if (computedStyle.flexBasis !== "auto") {
+      var parent_3 = this.parentNode;
+      if (parent_3) {
+        var dir = this.window.getComputedStyle(parent_3).flexDirection;
+        this.flexDir = dir.startsWith("row") ? "row" : "column";
+        flexBasis = computedStyle.flexBasis;
+      }
+    }
+    this.setBoundingClientRect();
+    this.bindEvents();
+    var state = {
+      original: {
+        x: clientX,
+        y: clientY,
+        width: this.size.width,
+        height: this.size.height
+      },
+      isResizing: true,
+      backgroundStyle: __assign(__assign({}, this.state.backgroundStyle), { cursor: this.window.getComputedStyle(event.target).cursor || "auto" }),
+      direction,
+      flexBasis
+    };
+    this.setState(state);
+  };
+  Resizable2.prototype.onMouseMove = function(event) {
+    var _this = this;
+    if (!this.state.isResizing || !this.resizable || !this.window) {
+      return;
+    }
+    if (this.window.TouchEvent && isTouchEvent(event)) {
+      try {
+        event.preventDefault();
+        event.stopPropagation();
+      } catch (e) {
+      }
+    }
+    var _a22 = this.props, maxWidth = _a22.maxWidth, maxHeight = _a22.maxHeight, minWidth = _a22.minWidth, minHeight = _a22.minHeight;
+    var clientX = isTouchEvent(event) ? event.touches[0].clientX : event.clientX;
+    var clientY = isTouchEvent(event) ? event.touches[0].clientY : event.clientY;
+    var _b2 = this.state, direction = _b2.direction, original = _b2.original, width = _b2.width, height = _b2.height;
+    var parentSize = this.getParentSize();
+    var max2 = calculateNewMax(parentSize, this.window.innerWidth, this.window.innerHeight, maxWidth, maxHeight, minWidth, minHeight);
+    maxWidth = max2.maxWidth;
+    maxHeight = max2.maxHeight;
+    minWidth = max2.minWidth;
+    minHeight = max2.minHeight;
+    var _c = this.calculateNewSizeFromDirection(clientX, clientY), newHeight = _c.newHeight, newWidth = _c.newWidth;
+    var boundaryMax = this.calculateNewMaxFromBoundary(maxWidth, maxHeight);
+    if (this.props.snap && this.props.snap.x) {
+      newWidth = findClosestSnap(newWidth, this.props.snap.x, this.props.snapGap);
+    }
+    if (this.props.snap && this.props.snap.y) {
+      newHeight = findClosestSnap(newHeight, this.props.snap.y, this.props.snapGap);
+    }
+    var newSize = this.calculateNewSizeFromAspectRatio(newWidth, newHeight, { width: boundaryMax.maxWidth, height: boundaryMax.maxHeight }, { width: minWidth, height: minHeight });
+    newWidth = newSize.newWidth;
+    newHeight = newSize.newHeight;
+    if (this.props.grid) {
+      var newGridWidth = snap(newWidth, this.props.grid[0]);
+      var newGridHeight = snap(newHeight, this.props.grid[1]);
+      var gap = this.props.snapGap || 0;
+      newWidth = gap === 0 || Math.abs(newGridWidth - newWidth) <= gap ? newGridWidth : newWidth;
+      newHeight = gap === 0 || Math.abs(newGridHeight - newHeight) <= gap ? newGridHeight : newHeight;
+    }
+    var delta = {
+      width: newWidth - original.width,
+      height: newHeight - original.height
+    };
+    if (width && typeof width === "string") {
+      if (width.endsWith("%")) {
+        var percent = newWidth / parentSize.width * 100;
+        newWidth = percent + "%";
+      } else if (width.endsWith("vw")) {
+        var vw = newWidth / this.window.innerWidth * 100;
+        newWidth = vw + "vw";
+      } else if (width.endsWith("vh")) {
+        var vh2 = newWidth / this.window.innerHeight * 100;
+        newWidth = vh2 + "vh";
+      }
+    }
+    if (height && typeof height === "string") {
+      if (height.endsWith("%")) {
+        var percent = newHeight / parentSize.height * 100;
+        newHeight = percent + "%";
+      } else if (height.endsWith("vw")) {
+        var vw = newHeight / this.window.innerWidth * 100;
+        newHeight = vw + "vw";
+      } else if (height.endsWith("vh")) {
+        var vh2 = newHeight / this.window.innerHeight * 100;
+        newHeight = vh2 + "vh";
+      }
+    }
+    var newState = {
+      width: this.createSizeForCssProperty(newWidth, "width"),
+      height: this.createSizeForCssProperty(newHeight, "height")
+    };
+    if (this.flexDir === "row") {
+      newState.flexBasis = newState.width;
+    } else if (this.flexDir === "column") {
+      newState.flexBasis = newState.height;
+    }
+    reactDom.exports.flushSync(function() {
+      _this.setState(newState);
+    });
+    if (this.props.onResize) {
+      this.props.onResize(event, direction, this.resizable, delta);
+    }
+  };
+  Resizable2.prototype.onMouseUp = function(event) {
+    var _a22 = this.state, isResizing = _a22.isResizing, direction = _a22.direction, original = _a22.original;
+    if (!isResizing || !this.resizable) {
+      return;
+    }
+    var delta = {
+      width: this.size.width - original.width,
+      height: this.size.height - original.height
+    };
+    if (this.props.onResizeStop) {
+      this.props.onResizeStop(event, direction, this.resizable, delta);
+    }
+    if (this.props.size) {
+      this.setState(this.props.size);
+    }
+    this.unbindEvents();
+    this.setState({
+      isResizing: false,
+      backgroundStyle: __assign(__assign({}, this.state.backgroundStyle), { cursor: "auto" })
+    });
+  };
+  Resizable2.prototype.updateSize = function(size) {
+    this.setState({ width: size.width, height: size.height });
+  };
+  Resizable2.prototype.renderResizer = function() {
+    var _this = this;
+    var _a22 = this.props, enable = _a22.enable, handleStyles = _a22.handleStyles, handleClasses = _a22.handleClasses, handleWrapperStyle = _a22.handleWrapperStyle, handleWrapperClass = _a22.handleWrapperClass, handleComponent = _a22.handleComponent;
+    if (!enable) {
+      return null;
+    }
+    var resizers = Object.keys(enable).map(function(dir) {
+      if (enable[dir] !== false) {
+        return react.exports.createElement(Resizer, { key: dir, direction: dir, onResizeStart: _this.onResizeStart, replaceStyles: handleStyles && handleStyles[dir], className: handleClasses && handleClasses[dir] }, handleComponent && handleComponent[dir] ? handleComponent[dir] : null);
+      }
+      return null;
+    });
+    return react.exports.createElement("div", { className: handleWrapperClass, style: handleWrapperStyle }, resizers);
+  };
+  Resizable2.prototype.render = function() {
+    var _this = this;
+    var extendsProps = Object.keys(this.props).reduce(function(acc, key) {
+      if (definedProps.indexOf(key) !== -1) {
+        return acc;
+      }
+      acc[key] = _this.props[key];
+      return acc;
+    }, {});
+    var style2 = __assign(__assign(__assign({ position: "relative", userSelect: this.state.isResizing ? "none" : "auto" }, this.props.style), this.sizeStyle), { maxWidth: this.props.maxWidth, maxHeight: this.props.maxHeight, minWidth: this.props.minWidth, minHeight: this.props.minHeight, boxSizing: "border-box", flexShrink: 0 });
+    if (this.state.flexBasis) {
+      style2.flexBasis = this.state.flexBasis;
+    }
+    var Wrapper = this.props.as || "div";
+    return react.exports.createElement(Wrapper, __assign({ ref: this.ref, style: style2, className: this.props.className }, extendsProps), this.state.isResizing && react.exports.createElement("div", { style: this.state.backgroundStyle }), this.props.children, this.renderResizer());
+  };
+  Resizable2.defaultProps = {
+    as: "div",
+    onResizeStart: function() {
+    },
+    onResize: function() {
+    },
+    onResizeStop: function() {
+    },
+    enable: {
+      top: true,
+      right: true,
+      bottom: true,
+      left: true,
+      topRight: true,
+      bottomRight: true,
+      bottomLeft: true,
+      topLeft: true
+    },
+    style: {},
+    grid: [1, 1],
+    lockAspectRatio: false,
+    lockAspectRatioExtraWidth: 0,
+    lockAspectRatioExtraHeight: 0,
+    scale: 1,
+    resizeRatio: 1,
+    snapGap: 0
+  };
+  return Resizable2;
+}(react.exports.PureComponent);
 const SidePanel = React__default.memo(_SidePanel);
 function _SidePanel(props) {
   react.exports.useEffect(() => {
     props.viewer.viewport.canvas.focus();
-    resizeCanvas(props.viewer, props.side.get() !== "none");
+    resizeCanvas(props.viewer, props.side.getContent() !== "none", props.side.getWidth());
+    props.viewer.viewport.ResizeToParent();
   });
   const onNavBtn = () => {
-    props.side.pop();
+    props.side.popContent();
   };
   const iconOptions = { height: "20", width: "20", fill: "currentColor" };
-  return /* @__PURE__ */ React__default.createElement("div", {
-    className: `vim-side-panel z-30 fixed left-0 top-0 bg-gray-lightest p-6 text-gray-darker h-full ${props.side.get() !== "none" ? "" : "hidden"}`
+  return /* @__PURE__ */ React__default.createElement(Resizable, {
+    onResizeStop: (e, direction, ref, d) => {
+      props.side.setWidth(ref.clientWidth);
+      console.log(ref.clientWidth);
+    },
+    defaultSize: { width: props.side.getWidth(), height: "100%" },
+    minWidth: 240,
+    maxWidth: "50%",
+    style: {
+      position: "fixed"
+    },
+    className: `vim-side-panel-test left-0 top-0 bg-gray-lightest p-6 text-gray-darker z-20 ${props.side.getContent() !== "none" ? "" : "hidden"}`
   }, /* @__PURE__ */ React__default.createElement("button", {
     className: "vim-side-panel-nav text-gray-medium absolute right-6 top-6",
     onClick: onNavBtn
   }, close(iconOptions)), props.content);
 }
-function resizeCanvas(viewer, open) {
-  const tag = "bim-panel-open";
+function resizeCanvas(viewer, visible, width) {
+  console.log("RESIZE");
+  console.log(visible);
+  console.log(width);
   const parent = viewer.viewport.canvas.parentElement;
-  if (parent) {
-    const has2 = parent.classList.contains(tag);
-    if (open === has2)
-      return;
-    if (open && !has2)
-      parent.classList.add(tag);
-    if (!open && has2)
-      parent.classList.remove(tag);
-    viewer.viewport.ResizeToParent();
+  const full = parent.parentElement.clientWidth;
+  if (visible) {
+    parent.style.width = `${full - width}px`;
+    parent.style.marginLeft = `${width}px`;
+  } else {
+    parent.style.width = "100%";
+    parent.style.marginLeft = "0px";
   }
 }
-function useSideState(useInspector) {
+function useSideState(useInspector, defaultWidth) {
   const [side, setSide] = react.exports.useState(["bim"]);
+  const [width, setWidth] = react.exports.useState(defaultWidth);
   const sideRef = react.exports.useRef(side);
-  const toggle = (content) => {
+  const toggleContent = (content) => {
     let r2;
     const [A2, B2] = sideRef.current;
     if (!A2 && !B2)
@@ -54272,31 +55047,33 @@ function useSideState(useInspector) {
     sideRef.current = r2;
     setSide(r2);
   };
-  const pop = () => {
+  const popContent = () => {
     sideRef.current.pop();
     setSide([...sideRef.current]);
   };
   const getNav = () => {
     return sideRef.current.length > 1 ? "back" : "close";
   };
-  const get3 = () => {
+  const getContent = () => {
     var _a22;
     const result = (_a22 = sideRef.current[sideRef.current.length - 1]) != null ? _a22 : "none";
     if (result === "bim" && !useInspector)
       return "none";
     return result;
   };
-  const set3 = (value) => {
+  const setContent = (value) => {
     sideRef.current = [value];
     setSide([value]);
   };
   return react.exports.useMemo(() => ({
-    set: set3,
-    get: get3,
-    toggle,
-    pop,
-    getNav
-  }), [side]);
+    setContent,
+    getContent,
+    toggleContent,
+    popContent,
+    getNav,
+    getWidth: () => width,
+    setWidth
+  }), [side, width]);
 }
 var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
 var freeGlobal$1 = freeGlobal;
@@ -55095,7 +55872,7 @@ function MenuSettings(props) {
     return null;
   const toggleElement = (label, state, action) => {
     return /* @__PURE__ */ React__default.createElement("label", {
-      className: "text-gray-warm m-1 w-max py-1 flex items-center select-none"
+      className: "text-gray-warm m-1 py-1 flex items-center select-none"
     }, /* @__PURE__ */ React__default.createElement("input", {
       type: "checkbox",
       checked: state,
@@ -55137,12 +55914,18 @@ function _MenuToast(props) {
     };
   }, []);
   return /* @__PURE__ */ React__default.createElement("div", {
-    className: `vim-menu-toast rounded shadow-lg py-2 px-5 flex items-center justify-between transition-all ${visible ? "opacity-100" : "opacity-0"}`
+    className: "vim-menu-toast-outer absolute top-[10%] flex pointer-events-none",
+    style: {
+      marginLeft: props.side.getWidth(),
+      width: `calc(100% - ${props.side.getWidth()}px)`
+    }
+  }, /* @__PURE__ */ React__default.createElement("div", {
+    className: `vim-menu-toast rounded shadow-lg py-2 px-5 flex items-center justify-between transition-all m-auto ${visible ? "opacity-100" : "opacity-0"}`
   }, /* @__PURE__ */ React__default.createElement("span", {
     className: "text-sm uppercase font-semibold text-gray-light"
   }, "Speed:"), /* @__PURE__ */ React__default.createElement("span", {
     className: "font-bold text-lg text-white ml-1"
-  }, speed + 25));
+  }, speed + 25)));
 }
 function Overlay(props) {
   const overlay = react.exports.useRef(null);
@@ -55172,7 +55955,11 @@ function Overlay(props) {
   return /* @__PURE__ */ React__default.createElement("div", {
     ref: overlay,
     onContextMenu: (e) => e.preventDefault(),
-    className: `vim-overlay absolute top-0 h-full w-full z-10 ${props.side.get() !== "none" ? "bim-panel-open" : ""}`
+    className: `vim-overlay absolute top-0 left- h-full z-10 ${props.side.getContent() !== "none" ? "bim-panel-open" : ""}`,
+    style: {
+      marginLeft: `${props.side.getWidth()}px`,
+      width: `calc(100% - ${props.side.getWidth()}px)`
+    }
   });
 }
 class ComponentInputs {
@@ -56003,7 +56790,7 @@ function VimComponent(props) {
   const cursor = react.exports.useRef(new CursorManager(props.viewer)).current;
   const settings2 = useSettings(props.viewer, props.settings);
   const isolation = useIsolation(viewer, settings2.value);
-  const side = useSideState(settings2.value.ui.bimPanel);
+  const side = useSideState(settings2.value.ui.bimPanel, 480);
   const [contextMenu, setcontextMenu] = react.exports.useState();
   const help2 = useHelp();
   const [vim, selection] = useViewerState(props.viewer);
@@ -56032,10 +56819,10 @@ function VimComponent(props) {
     viewer,
     vim,
     selection,
-    visible: side.get() === "bim",
+    visible: side.getContent() === "bim",
     isolation
   }) : null, /* @__PURE__ */ React__default.createElement(MenuSettings, {
-    visible: side.get() === "settings",
+    visible: side.getContent() === "settings",
     viewer: props.viewer,
     settings: settings2
   }));
@@ -56044,7 +56831,8 @@ function VimComponent(props) {
     side
   }), /* @__PURE__ */ React__default.createElement(MenuHelp, {
     help: help2,
-    settings: settings2.value
+    settings: settings2.value,
+    side
   }), settings2.value.ui.logo ? /* @__PURE__ */ React__default.createElement(Logo, null) : null, settings2.value.ui.loadingBox ? /* @__PURE__ */ React__default.createElement(LoadingBox, {
     viewer: props.viewer,
     msg
@@ -56071,7 +56859,8 @@ function VimComponent(props) {
     selection,
     customization: contextMenu
   }), /* @__PURE__ */ React__default.createElement(MenuToast, {
-    viewer: props.viewer
+    viewer: props.viewer,
+    side
   }));
 }
 const Logo = React__default.memo(() => /* @__PURE__ */ React__default.createElement("div", {
