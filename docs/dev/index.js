@@ -1026,6 +1026,9 @@ select {
      -moz-user-select: none;
           user-select: none;
 }\r
+.resize {
+  resize: both;
+}\r
 .flex-col {
   flex-direction: column;
 }\r
@@ -53732,11 +53735,11 @@ function createTable(key, entries, open, setOpen) {
       key: "parameters-tr-" + id2
     }, /* @__PURE__ */ React__default.createElement("span", {
       "data-tip": p2.value,
-      className: "w-1/2 border-r border-gray-light p-2 truncate select-none",
+      className: "bim-details-title w-1/2 border-r border-gray-light p-2 truncate select-none",
       key: "parameters-th-" + id2
     }, p2.name), /* @__PURE__ */ React__default.createElement("span", {
       "data-tip": p2.value,
-      className: "w-1/2 text-gray-medium p-2 truncate",
+      className: "bim-details-value w-1/2 text-gray-medium p-2 truncate",
       key: "parameters-td-" + id2
     }, p2.value));
   }) : null));
@@ -53920,12 +53923,12 @@ function createHeader(header) {
       return [
         /* @__PURE__ */ React__default.createElement("dt", {
           "data-tip": pair[1],
-          className: "text-gray-medium py-1 truncate select-none " + pair[2],
+          className: "bim-header-title text-gray-medium py-1 truncate select-none " + pair[2],
           key: `dt-${rowIndex}-${columnIndex}`
         }, pair[0]),
         /* @__PURE__ */ React__default.createElement("dd", {
           "data-tip": pair[1],
-          className: "py-1 truncate " + pair[3],
+          className: "bim-header-value py-1 truncate " + pair[3],
           key: `dd-${rowIndex}-${columnIndex}`
         }, pair[1])
       ];
@@ -54985,25 +54988,47 @@ var Resizable = function(_super) {
   };
   return Resizable2;
 }(react.exports.PureComponent);
+const MAX_WIDTH = 0.5;
+const MIN_WIDTH = 240;
 const SidePanel = React__default.memo(_SidePanel);
 function _SidePanel(props) {
-  react.exports.useEffect(() => {
-    props.viewer.viewport.canvas.focus();
+  const getParentWidth = () => {
+    const parent = props.viewer.viewport.canvas.parentElement;
+    return parent.parentElement.clientWidth;
+  };
+  const [, setParentWidth] = react.exports.useState(getParentWidth());
+  const resize = () => {
     resizeCanvas(props.viewer, props.side.getContent() !== "none", props.side.getWidth());
     props.viewer.viewport.ResizeToParent();
+  };
+  const getMaxSize = () => {
+    return getParentWidth() * MAX_WIDTH;
+  };
+  const getClampedSize = () => {
+    const next = Math.min(props.side.getWidth(), getMaxSize());
+    return Math.max(next, MIN_WIDTH);
+  };
+  react.exports.useEffect(() => {
+    resize();
   });
+  react.exports.useEffect(() => {
+    window.addEventListener("resize", () => {
+      setParentWidth((w2) => getParentWidth());
+      props.side.setWidth(getClampedSize());
+    });
+  }, []);
   const onNavBtn = () => {
     props.side.popContent();
   };
   const iconOptions = { height: "20", width: "20", fill: "currentColor" };
   return /* @__PURE__ */ React__default.createElement(Resizable, {
-    onResizeStop: (e, direction, ref, d) => {
+    size: { width: props.side.getWidth(), height: "100%" },
+    minWidth: 240,
+    maxWidth: getMaxSize(),
+    onResize: (e, direction, ref, d) => {
       props.side.setWidth(ref.clientWidth);
       console.log(ref.clientWidth);
     },
-    defaultSize: { width: props.side.getWidth(), height: "100%" },
-    minWidth: 240,
-    maxWidth: "50%",
     style: {
       position: "fixed"
     },
@@ -55014,9 +55039,6 @@ function _SidePanel(props) {
   }, close(iconOptions)), props.content);
 }
 function resizeCanvas(viewer, visible, width) {
-  console.log("RESIZE");
-  console.log(visible);
-  console.log(width);
   const parent = viewer.viewport.canvas.parentElement;
   const full = parent.parentElement.clientWidth;
   if (visible) {
@@ -55029,8 +55051,9 @@ function resizeCanvas(viewer, visible, width) {
 }
 function useSideState(useInspector, defaultWidth) {
   const [side, setSide] = react.exports.useState(["bim"]);
-  const [width, setWidth] = react.exports.useState(defaultWidth);
+  const [width, _setWidth] = react.exports.useState(defaultWidth);
   const sideRef = react.exports.useRef(side);
+  const widthRef = react.exports.useRef(width);
   const toggleContent = (content) => {
     let r2;
     const [A2, B2] = sideRef.current;
@@ -55065,13 +55088,17 @@ function useSideState(useInspector, defaultWidth) {
     sideRef.current = [value];
     setSide([value]);
   };
+  const setWidth = (value) => {
+    widthRef.current = value;
+    _setWidth(value);
+  };
   return react.exports.useMemo(() => ({
     setContent,
     getContent,
     toggleContent,
     popContent,
     getNav,
-    getWidth: () => width,
+    getWidth: () => widthRef.current,
     setWidth
   }), [side, width]);
 }

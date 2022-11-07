@@ -920,6 +920,9 @@ select {
      -moz-user-select: none;
           user-select: none;
 }
+.resize {
+  resize: both;
+}
 .flex-col {
   flex-direction: column;
 }
