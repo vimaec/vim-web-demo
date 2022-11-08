@@ -1056,6 +1056,9 @@ select {
 .overflow-y-auto {
   overflow-y: auto;
 }\r
+.overflow-x-hidden {
+  overflow-x: hidden;
+}\r
 .truncate {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -54151,7 +54154,7 @@ function BimPanel(props) {
   }), /* @__PURE__ */ React__default.createElement("h2", {
     className: "text-xs font-bold uppercase mb-4"
   }, "Bim Inspector"), /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-bim-lower h-1/2 overflow-y-auto"
+    className: "vim-bim-lower h-1/2 overflow-y-auto overflow-x-hidden"
   }, /* @__PURE__ */ React__default.createElement(BimObjectHeader, {
     elements: filteredElements,
     object: last,
