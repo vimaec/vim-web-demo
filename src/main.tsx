@@ -1,7 +1,5 @@
 //import { settingsGui } from './settingsGui'
 import Stats from 'stats-js'
-import {createRoot} from 'react-dom/client'
-import React from 'react'
 import 'vim-webgl-component/dist/style.css';
 import {VIM, createVimComponent, VimComponentRef } from 'vim-webgl-component'
 
@@ -26,7 +24,7 @@ if (params.has('dev')) {
 }
 
 
-const ui = createVimComponent(loadVim, {capacity: {useOrthographicCamera: false}})
+const ui = createVimComponent(loadVim, undefined, {capacity: {useOrthographicCamera: false}})
 
 function loadVim(ref: VimComponentRef){
   ref.viewer.loadVim(
