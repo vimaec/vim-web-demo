@@ -783,565 +783,514 @@ select {
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
 }\r
-.container {
-  width: 100%;
-}\r
-@media (min-width: 640px) {
-
-  .container {
-    max-width: 640px;
-  }
-}\r
-@media (min-width: 768px) {
-
-  .container {
-    max-width: 768px;
-  }
-}\r
-@media (min-width: 1024px) {
-
-  .container {
-    max-width: 1024px;
-  }
-}\r
-@media (min-width: 1280px) {
-
-  .container {
-    max-width: 1280px;
-  }
-}\r
-@media (min-width: 1536px) {
-
-  .container {
-    max-width: 1536px;
-  }
-}\r
-.pointer-events-none {
+.vc-pointer-events-none {
   pointer-events: none;
 }\r
-.pointer-events-auto {
+.vc-pointer-events-auto {
   pointer-events: auto;
 }\r
-.visible {
-  visibility: visible;
-}\r
-.\\!visible {
-  visibility: visible !important;
-}\r
-.\\!static {
+.\\!vc-static {
   position: static !important;
 }\r
-.fixed {
+.vc-fixed {
   position: fixed;
 }\r
-.absolute {
+.vc-absolute {
   position: absolute;
 }\r
-.inset-0 {
+.vc-inset-0 {
   top: 0px;
   right: 0px;
   bottom: 0px;
   left: 0px;
 }\r
-.right-6 {
+.vc-right-6 {
   right: 1.5rem;
 }\r
-.top-6 {
+.vc-top-6 {
   top: 1.5rem;
 }\r
-.top-4 {
-  top: 1rem;
-}\r
-.left-4 {
-  left: 1rem;
-}\r
-.bottom-0 {
-  bottom: 0px;
-}\r
-.top-0 {
+.vc-top-0 {
   top: 0px;
 }\r
-.left-0 {
+.vc-left-0 {
   left: 0px;
 }\r
-.top-\\[calc\\(50\\%-37px\\)\\] {
+.vc-top-4 {
+  top: 1rem;
+}\r
+.vc-left-4 {
+  left: 1rem;
+}\r
+.vc-bottom-0 {
+  bottom: 0px;
+}\r
+.vc-top-\\[calc\\(50\\%-37px\\)\\] {
   top: calc(50% - 37px);
 }\r
-.left-\\[calc\\(50\\%-160px\\)\\] {
+.vc-left-\\[calc\\(50\\%-160px\\)\\] {
   left: calc(50% - 160px);
 }\r
-.top-\\[10\\%\\] {
+.vc-top-\\[10\\%\\] {
   top: 10%;
 }\r
-.right-16 {
+.vc-right-16 {
   right: 4rem;
 }\r
-.isolate {
-  isolation: isolate;
-}\r
-.z-20 {
+.vc-z-20 {
   z-index: 20;
 }\r
-.z-50 {
+.vc-z-50 {
   z-index: 50;
 }\r
-.z-40 {
+.vc-z-40 {
   z-index: 40;
 }\r
-.z-10 {
+.vc-z-10 {
   z-index: 10;
 }\r
-.order-1 {
+.vc-order-1 {
   order: 1;
 }\r
-.order-2 {
+.vc-order-2 {
   order: 2;
 }\r
-.m-auto {
+.vc-m-auto {
   margin: auto;
 }\r
-.m-1 {
+.vc-m-1 {
   margin: 0.25rem;
 }\r
-.mx-auto {
+.vc-mx-auto {
   margin-left: auto;
   margin-right: auto;
 }\r
-.mx-1 {
+.vc-mx-1 {
   margin-left: 0.25rem;
   margin-right: 0.25rem;
 }\r
-.my-1 {
+.vc-my-1 {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
 }\r
-.mx-2 {
+.vc-mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
 }\r
-.-mx-6 {
+.-vc-mx-6 {
   margin-left: -1.5rem;
   margin-right: -1.5rem;
 }\r
-.mb-0 {
+.vc-mb-0 {
   margin-bottom: 0px;
 }\r
-.mt-auto {
+.vc-mt-auto {
   margin-top: auto;
 }\r
-.mb-9 {
+.vc-mb-9 {
   margin-bottom: 2.25rem;
 }\r
-.mb-8 {
+.vc-mb-8 {
   margin-bottom: 2rem;
 }\r
-.mr-4 {
+.vc-mr-4 {
   margin-right: 1rem;
 }\r
-.mb-2 {
+.vc-mb-2 {
   margin-bottom: 0.5rem;
 }\r
-.ml-1 {
+.vc-ml-1 {
   margin-left: 0.25rem;
 }\r
-.mb-6 {
+.vc-mb-6 {
   margin-bottom: 1.5rem;
 }\r
-.mt-5 {
-  margin-top: 1.25rem;
-}\r
-.mb-5 {
+.vc-mb-5 {
   margin-bottom: 1.25rem;
 }\r
-.mb-4 {
+.vc-mb-4 {
   margin-bottom: 1rem;
 }\r
-.-mr-4 {
+.-vc-mr-4 {
   margin-right: -1rem;
 }\r
-.mr-2 {
+.vc-mr-2 {
   margin-right: 0.5rem;
 }\r
-.block {
+.vc-block {
   display: block;
 }\r
-.flex {
+.vc-flex {
   display: flex;
 }\r
-.inline-flex {
+.vc-inline-flex {
   display: inline-flex;
 }\r
-.hidden {
+.vc-hidden {
   display: none;
 }\r
-.h-8 {
+.vc-h-8 {
   height: 2rem;
 }\r
-.h-\\[145px\\] {
+.vc-h-\\[145px\\] {
   height: 145px;
 }\r
-.h-12 {
-  height: 3rem;
-}\r
-.h-10 {
-  height: 2.5rem;
-}\r
-.h-5 {
-  height: 1.25rem;
-}\r
-.h-full {
+.vc-h-full {
   height: 100%;
 }\r
-.h-1\\/2 {
+.vc-h-12 {
+  height: 3rem;
+}\r
+.vc-h-10 {
+  height: 2.5rem;
+}\r
+.vc-h-5 {
+  height: 1.25rem;
+}\r
+.vc-h-1\\/2 {
   height: 50%;
 }\r
-.h-\\[18px\\] {
+.vc-h-\\[18px\\] {
   height: 18px;
 }\r
-.w-8 {
+.vc-w-8 {
   width: 2rem;
 }\r
-.w-\\[100px\\] {
+.vc-w-\\[100px\\] {
   width: 100px;
 }\r
-.w-32 {
-  width: 8rem;
-}\r
-.w-\\[240px\\] {
-  width: 240px;
-}\r
-.w-10 {
-  width: 2.5rem;
-}\r
-.w-full {
+.vc-w-full {
   width: 100%;
 }\r
-.w-px {
+.vc-w-32 {
+  width: 8rem;
+}\r
+.vc-w-\\[240px\\] {
+  width: 240px;
+}\r
+.vc-w-10 {
+  width: 2.5rem;
+}\r
+.vc-w-px {
   width: 1px;
 }\r
-.w-\\[320px\\] {
+.vc-w-\\[320px\\] {
   width: 320px;
 }\r
-.w-auto {
+.vc-w-auto {
   width: auto;
 }\r
-.w-1\\/2 {
+.vc-w-1\\/2 {
   width: 50%;
 }\r
-.w-3\\/12 {
+.vc-w-3\\/12 {
   width: 25%;
 }\r
-.w-9\\/12 {
+.vc-w-9\\/12 {
   width: 75%;
 }\r
-.w-\\[18px\\] {
+.vc-w-\\[18px\\] {
   width: 18px;
 }\r
-.min-w-\\[100px\\] {
+.vc-min-w-\\[100px\\] {
   min-width: 100px;
 }\r
-.shrink-0 {
+.vc-shrink-0 {
   flex-shrink: 0;
 }\r
-.rotate-180 {
+.vc-rotate-180 {
   --tw-rotate: 180deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }\r
-.rotate-0 {
+.vc-rotate-0 {
   --tw-rotate: 0deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }\r
-.cursor-pointer {
+.vc-cursor-pointer {
   cursor: pointer;
 }\r
-.select-none {
+.vc-select-none {
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
 }\r
-.resize {
-  resize: both;
-}\r
-.flex-col {
+.vc-flex-col {
   flex-direction: column;
 }\r
-.flex-wrap {
+.vc-flex-wrap {
   flex-wrap: wrap;
 }\r
-.items-center {
+.vc-items-center {
   align-items: center;
 }\r
-.justify-end {
+.vc-justify-end {
   justify-content: flex-end;
 }\r
-.justify-center {
+.vc-justify-center {
   justify-content: center;
 }\r
-.justify-between {
+.vc-justify-between {
   justify-content: space-between;
 }\r
-.self-center {
+.vc-self-center {
   align-self: center;
 }\r
-.overflow-y-auto {
+.vc-overflow-y-auto {
   overflow-y: auto;
 }\r
-.overflow-x-hidden {
+.vc-overflow-x-hidden {
   overflow-x: hidden;
 }\r
-.truncate {
+.vc-truncate {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }\r
-.whitespace-nowrap {
+.vc-whitespace-nowrap {
   white-space: nowrap;
 }\r
-.rounded-full {
+.vc-rounded-full {
   border-radius: 9999px;
 }\r
-.rounded-2xl {
+.vc-rounded-2xl {
   border-radius: 1rem;
 }\r
-.rounded {
+.vc-rounded {
   border-radius: 0.25rem;
 }\r
-.rounded-b-xl {
+.vc-rounded-b-xl {
   border-bottom-right-radius: 0.75rem;
   border-bottom-left-radius: 0.75rem;
 }\r
-.rounded-t {
+.vc-rounded-t {
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
 }\r
-.border {
+.vc-border {
   border-width: 1px;
 }\r
-.\\!border {
+.\\!vc-border {
   border-width: 1px !important;
 }\r
-.border-t {
+.vc-border-t {
   border-top-width: 1px;
 }\r
-.border-l {
+.vc-border-l {
   border-left-width: 1px;
 }\r
-.border-r {
+.vc-border-r {
   border-right-width: 1px;
 }\r
-.border-b {
+.vc-border-b {
   border-bottom-width: 1px;
 }\r
-.border-t-0 {
+.vc-border-t-0 {
   border-top-width: 0px;
 }\r
-.border-l-0 {
+.vc-border-l-0 {
   border-left-width: 0px;
 }\r
-.border-r-0 {
+.vc-border-r-0 {
   border-right-width: 0px;
 }\r
-.\\!border-solid {
+.\\!vc-border-solid {
   border-style: solid !important;
 }\r
-.border-white {
+.vc-border-white {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
 }\r
-.\\!border-gray-medium {
+.\\!vc-border-gray-medium {
   border-color: var(--c-medium-gray) !important;
 }\r
-.border-gray-lighter {
+.vc-border-gray-lighter {
   border-color: var(--c-lighter-gray);
 }\r
-.border-gray-light {
+.vc-border-gray-light {
   border-color: var(--c-light-gray);
 }\r
-.border-gray-divider {
+.vc-border-gray-divider {
   border-color: var(--c-gray-divider);
 }\r
-.border-gray-medium {
+.vc-border-gray-medium {
   border-color: var(--c-medium-gray);
 }\r
-.bg-white {
+.vc-bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }\r
-.\\!bg-white {
+.\\!vc-bg-white {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
 }\r
-.bg-primary {
+.vc-bg-primary {
   background-color: var(--c-primary);
 }\r
-.bg-white\\/\\[\\.5\\] {
+.vc-bg-white\\/\\[\\.5\\] {
   background-color: rgb(255 255 255 / .5);
 }\r
-.bg-black\\/80 {
+.vc-bg-black\\/80 {
   background-color: rgb(0 0 0 / 0.8);
 }\r
-.bg-overflow {
+.vc-bg-overflow {
   background-color: var(--c-overflow);
 }\r
-.bg-gray-warm {
+.vc-bg-gray-warm {
   background-color: var(--c-dark-gray-warm);
 }\r
-.bg-gray-light {
+.vc-bg-gray-light {
   background-color: var(--c-light-gray);
 }\r
-.bg-transparent {
+.vc-bg-transparent {
   background-color: transparent;
 }\r
-.bg-primary-royal {
+.vc-bg-primary-royal {
   background-color: var(--c-primary-royal);
 }\r
-.bg-gray-lightest {
+.vc-bg-gray-lightest {
   background-color: var(--c-lightest-gray);
 }\r
-.p-1 {
+.vc-p-1 {
   padding: 0.25rem;
 }\r
-.p-2 {
+.vc-p-2 {
   padding: 0.5rem;
 }\r
-.p-6 {
+.vc-p-6 {
   padding: 1.5rem;
 }\r
-.px-5 {
+.vc-px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
 }\r
-.py-2 {
+.vc-py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }\r
-.py-1 {
+.vc-py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
 }\r
-.px-2 {
+.vc-px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }\r
-.py-5 {
+.vc-py-5 {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
 }\r
-.px-8 {
+.vc-px-8 {
   padding-left: 2rem;
   padding-right: 2rem;
 }\r
-.py-4 {
+.vc-py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }\r
-.pl-6 {
+.vc-pl-6 {
   padding-left: 1.5rem;
 }\r
-.\\!text-xs {
+.\\!vc-text-xs {
   font-size: 0.75rem !important;
   line-height: 1rem !important;
 }\r
-.text-sm {
+.vc-text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
 }\r
-.text-xs {
+.vc-text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
 }\r
-.text-lg {
+.vc-text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
 }\r
-.font-bold {
+.vc-font-bold {
   font-weight: 700;
 }\r
-.font-semibold {
+.vc-font-semibold {
   font-weight: 600;
 }\r
-.uppercase {
+.vc-uppercase {
   text-transform: uppercase;
 }\r
-.text-gray-medium {
+.vc-text-gray-medium {
   color: var(--c-medium-gray);
 }\r
-.\\!text-gray-darkest {
+.\\!vc-text-gray-darkest {
   color: var(--c-darkest-gray) !important;
 }\r
-.text-gray-darker {
+.vc-text-gray-darker {
   color: var(--c-darker-gray);
 }\r
-.text-primary {
+.vc-text-primary {
   color: var(--c-primary);
 }\r
-.text-white {
+.vc-text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }\r
-.text-gray-light {
+.vc-text-gray-light {
   color: var(--c-light-gray);
 }\r
-.text-gray-warm {
+.vc-text-gray-warm {
   color: var(--c-dark-gray-warm);
 }\r
-.opacity-50 {
+.vc-opacity-50 {
   opacity: 0.5;
 }\r
-.\\!opacity-100 {
+.\\!vc-opacity-100 {
   opacity: 1 !important;
 }\r
-.opacity-60 {
+.vc-opacity-60 {
   opacity: 0.6;
 }\r
-.opacity-100 {
+.vc-opacity-100 {
   opacity: 1;
 }\r
-.opacity-0 {
+.vc-opacity-0 {
   opacity: 0;
 }\r
-.shadow-lg {
+.vc-shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }\r
-.\\!shadow-\\[2px_6px_15px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.3\\)\\] {
+.\\!vc-shadow-\\[2px_6px_15px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.3\\)\\] {
   --tw-shadow: 2px 6px 15px rgba(0,0,0,0.3) !important;
   --tw-shadow-colored: 2px 6px 15px var(--tw-shadow-color) !important;
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
 }\r
-.shadow-md {
+.vc-shadow-md {
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }\r
-.outline-none {
+.vc-outline-none {
   outline: 2px solid transparent;
   outline-offset: 2px;
 }\r
-.saturate-0 {
+.vc-saturate-0 {
   --tw-saturate: saturate(0);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }\r
-.filter {
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}\r
-.backdrop-blur {
+.vc-backdrop-blur {
   --tw-backdrop-blur: blur(8px);
   -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
           backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
 }\r
-.transition-all {
+.vc-transition-all {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }\r
-.\\!transition-opacity {
+.\\!vc-transition-opacity {
   transition-property: opacity !important;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
   transition-duration: 150ms !important;
 }\r
-.transition-opacity {
+.vc-transition-opacity {
   transition-property: opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
@@ -1704,7 +1653,7 @@ input[type='search']::-webkit-search-cancel-button {\r
 \r
 /* === Loader ===*/\r
 \r
-.loader {\r
+.vim-loading-widget {\r
   width: 100%;\r
   height: 10px;\r
   border-radius: 5px;\r
@@ -1714,7 +1663,7 @@ input[type='search']::-webkit-search-cancel-button {\r
   overflow: hidden;\r
 }\r
 \r
-.loader::after {\r
+.vim-loading-widget::after {\r
   content: '';\r
   width: 130px;\r
   height: 10px;\r
@@ -1752,82 +1701,62 @@ input[type='search']::-webkit-search-cancel-button {\r
   }\r
 }\r
 \r
-.odd\\:bg-gray-zebra:nth-child(odd) {
-  background-color: var(--c-gray-zebra);
-}\r
-\r
-.even\\:bg-white:nth-child(even) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}\r
-\r
-.checked\\:bg-primary-royal:checked {
-  background-color: var(--c-primary-royal);
-}\r
-\r
-.focus-within\\:border-b-primary-royal:focus-within {
+.focus-within\\:vc-border-b-primary-royal:focus-within {
   border-bottom-color: var(--c-primary-royal);
 }\r
 \r
-.focus-within\\:text-primary-royal:focus-within {
+.focus-within\\:vc-text-primary-royal:focus-within {
   color: var(--c-primary-royal);
 }\r
 \r
-.focus-within\\:outline-none:focus-within {
+.focus-within\\:vc-outline-none:focus-within {
   outline: 2px solid transparent;
   outline-offset: 2px;
 }\r
 \r
-.hover\\:scale-110:hover {
+.hover\\:vc-scale-110:hover {
   --tw-scale-x: 1.1;
   --tw-scale-y: 1.1;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }\r
 \r
-.hover\\:border-primary-royal:hover {
+.hover\\:vc-border-primary-royal:hover {
   border-color: var(--c-primary-royal);
 }\r
 \r
-.hover\\:bg-gray-lightest:hover {
+.hover\\:vc-bg-gray-lightest:hover {
   background-color: var(--c-lightest-gray);
 }\r
 \r
-.hover\\:bg-primary-royal:hover {
+.hover\\:vc-bg-primary-royal:hover {
   background-color: var(--c-primary-royal);
 }\r
 \r
-.hover\\:text-primary-royal:hover {
+.hover\\:vc-text-primary-royal:hover {
   color: var(--c-primary-royal);
 }\r
 \r
-.hover\\:text-white:hover {
+.hover\\:vc-text-white:hover {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }\r
 \r
-.hover\\:opacity-100:hover {
+.hover\\:vc-opacity-100:hover {
   opacity: 1;
 }\r
 \r
-.hover\\:saturate-100:hover {
+.hover\\:vc-saturate-100:hover {
   --tw-saturate: saturate(1);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }\r
 \r
-.focus\\:outline-none:focus {
+.focus\\:vc-outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
 }\r
 \r
-.active\\:text-primary-royal:active {
+.active\\:vc-text-primary-royal:active {
   color: var(--c-primary-royal);
-}\r
-\r
-@media (min-width: 1536px) {
-
-  .\\32xl\\:w-\\[50vw\\] {
-    width: 50vw;
-  }
 }\r
 .vim-measure {\r
   background-color: white;\r
@@ -49344,7 +49273,7 @@ function _AxesPanel(props) {
     const subCam = viewer.camera.onValueChanged.subscribe(() => setOrtho(viewer.camera.orthographic));
     const axes = document.getElementsByClassName("gizmo-axis-canvas")[0];
     ui2.current.appendChild(axes);
-    axes.classList.add("block", "!static", "order-1", "mx-auto", "mb-0", "mt-auto");
+    axes.classList.add("vc-block", "!vc-static", "vc-order-1", "vc-mx-auto", "vc-mb-0", "vc-mt-auto");
     return () => {
       subCam();
     };
@@ -49355,7 +49284,7 @@ function _AxesPanel(props) {
   const btnHome = /* @__PURE__ */ React__default.createElement("button", {
     "data-tip": "Reset Camera",
     onClick: onHomeBtn,
-    className: "rounded-full text-gray-medium h-8 w-8 flex items-center justify-center transition-all hover:text-primary-royal",
+    className: "vim-home-btn vc-flex vc-h-8 vc-w-8 vc-items-center vc-justify-center vc-rounded-full vc-text-gray-medium vc-transition-all hover:vc-text-primary-royal",
     type: "button"
   }, /* @__PURE__ */ React__default.createElement(home, {
     height: "20",
@@ -49365,7 +49294,7 @@ function _AxesPanel(props) {
   const btnOrtho = /* @__PURE__ */ React__default.createElement("button", {
     "data-tip": ortho ? "Orthographic" : "Perspective",
     onClick: () => props.viewer.base.camera.orthographic = !ortho,
-    className: "rounded-full text-gray-medium h-8 w-8 flex items-center justify-center transition-all hover:text-primary-royal",
+    className: "vim-camera-btn vc-flex vc-h-8 vc-w-8 vc-items-center vc-justify-center vc-rounded-full vc-text-gray-medium vc-transition-all hover:vc-text-primary-royal",
     type: "button"
   }, ortho ? /* @__PURE__ */ React__default.createElement(orthographic, {
     height: "20",
@@ -49378,13 +49307,13 @@ function _AxesPanel(props) {
   }));
   return /* @__PURE__ */ React__default.createElement("div", {
     ref: ui2,
-    className: "vim-axes-panel border z-20 border-white flex flex-col fixed right-6 top-6 w-[100px] h-[145px] rounded-2xl shadow-lg transition-all saturate-0 hover:saturate-100 opacity-50 hover:opacity-100"
+    className: "vim-axes-panel vc-fixed vc-right-6 vc-top-6 vc-z-20 vc-flex vc-h-[145px] vc-w-[100px] vc-flex-col vc-rounded-2xl vc-border vc-border-white vc-opacity-50 vc-shadow-lg vc-saturate-0 vc-transition-all hover:vc-opacity-100 hover:vc-saturate-100"
   }, /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-top-buttons order-2 flex p-1 rounded-b-xl pointer-events-auto justify-center bg-white mb-0 mt-auto"
+    className: "vim-top-buttons vc-pointer-events-auto vc-order-2 vc-mb-0 vc-mt-auto vc-flex vc-justify-center vc-rounded-b-xl vc-bg-white vc-p-1"
   }, /* @__PURE__ */ React__default.createElement("div", {
-    className: "mx-1"
+    className: "vc-mx-1"
   }, props.settings.capacity.useOrthographicCamera ? btnOrtho : null), /* @__PURE__ */ React__default.createElement("div", {
-    className: "mx-1"
+    className: "vc-mx-1"
   }, btnHome)));
 }
 function pointerToCursor(pointer) {
@@ -49444,7 +49373,7 @@ class CursorManager {
   }
 }
 const toggleButton = (tip, action, icon, isOn) => {
-  const style2 = isOn() ? "control-bar-button rounded-full mx-1 h-10 w-10 flex items-center justify-center transition-all hover:scale-110 hover:text-primary-royal text-primary" : "control-bar-button rounded-full mx-1 h-10 w-10 flex items-center justify-center transition-all hover:scale-110 hover:text-primary-royal text-gray-medium";
+  const style2 = isOn() ? "vim-control-bar-button vc-rounded-full vc-mx-1 vc-h-10 vc-w-10 vc-flex vc-items-center vc-justify-center vc-transition-all hover:vc-scale-110 hover:vc-text-primary-royal vc-text-primary" : "vim-control-bar-button vc-rounded-full vc-mx-1 vc-h-10 vc-w-10 vc-flex vc-items-center vc-justify-center vc-transition-all hover:vc-scale-110 hover:vc-text-primary-royal vc-text-gray-medium";
   return /* @__PURE__ */ React__default.createElement("button", {
     "data-tip": tip,
     onClick: action,
@@ -49453,7 +49382,7 @@ const toggleButton = (tip, action, icon, isOn) => {
   }, icon({ height: "20", width: "20", fill: "currentColor" }));
 };
 const actionButton = (tip, action, icon, state) => {
-  const style2 = state ? "control-bar-button rounded-full mx-1 text-white h-10 w-10 flex items-center justify-center transition-all hover:scale-110 opacity-60 hover:opacity-100" : "control-bar-button rounded-full mx-1 text-gray-medium h-10 w-10 flex items-center justify-center transition-all hover:scale-110 hover:text-primary-royal";
+  const style2 = state ? "vim-control-bar-button vc-rounded-full vc-mx-1 vc-text-white vc-h-10 vc-w-10 vc-flex vc-items-center vc-justify-center vc-transition-all hover:vc-scale-110 vc-opacity-60 hover:vc-opacity-100" : "vim-control-bar-button vc-rounded-full vc-mx-1 vc-text-gray-medium vc-h-10 vc-w-10 vc-flex vc-items-center vc-justify-center vc-transition-all hover:vc-scale-110 hover:vc-text-primary-royal";
   return /* @__PURE__ */ React__default.createElement("button", {
     "data-tip": tip,
     onClick: action,
@@ -49489,11 +49418,11 @@ function ControlBar(props) {
   }, []);
   return /* @__PURE__ */ React__default.createElement("div", {
     style: { paddingLeft: props.side.getWidth() },
-    className: `vim-control-bar flex z-20 items-center justify-center w-full fixed px-2 bottom-0 py-2 mb-9 transition-opacity transition-all ${show ? "opacity-100 " : "opacity-0 pointer-events-none"}`
+    className: `vim-control-bar vc-fixed vc-bottom-0 vc-z-20 vc-mb-9 vc-flex vc-w-full vc-items-center vc-justify-center vc-px-2 vc-py-2 vc-transition-opacity vc-transition-all ${show ? "vc-opacity-100" : "vc-pointer-events-none vc-opacity-0"}`
   }, /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-control-bar-section flex items-center bg-white rounded-full px-2 shadow-md mx-2"
+    className: "vc-vim-control-bar-section vc-mx-2 vc-flex vc-items-center vc-rounded-full vc-bg-white vc-px-2 vc-shadow-md"
   }, /* @__PURE__ */ React__default.createElement(TabCamera, __spreadValues({}, props))), /* @__PURE__ */ React__default.createElement(TabTools, __spreadValues({}, props)), /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-control-bar-section flex items-center bg-white rounded-full px-2 shadow-md mx-2"
+    className: "vim-control-bar-section vc-mx-2 vc-flex vc-items-center vc-rounded-full vc-bg-white vc-px-2 vc-shadow-md"
   }, /* @__PURE__ */ React__default.createElement(TabSettings, __spreadValues({}, props))));
 }
 function TabCamera(props) {
@@ -49587,18 +49516,18 @@ function TabTools(props) {
     props.viewer.frameVisibleObjects();
   }, toggleIsolation, false);
   const toolsTab = /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-control-bar-section flex items-center bg-white rounded-full px-2 mx-2 shadow-md"
+    className: "vim-control-bar-section vc-mx-2 vc-flex vc-items-center vc-rounded-full vc-bg-white vc-px-2 vc-shadow-md"
   }, btnSection, btnMeasure, btnIsolation);
   const btnMeasureDelete = actionButton("Delete", onMeasureDeleteBtn, trash, !!measuring);
   const btnMeasureConfirm = actionButton("Done", onMeasureBtn, checkmark, !!measuring);
   const measureTab = /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-control-bar-section flex items-center bg-primary rounded-full px-2 mx-2 shadow-md"
+    className: "vim-control-bar-section vc-mx-2 vc-flex vc-items-center vc-rounded-full vc-bg-primary vc-px-2 vc-shadow-md"
   }, /* @__PURE__ */ React__default.createElement("div", {
-    className: "mx-1"
+    className: "vc-mx-1"
   }, btnMeasureDelete), /* @__PURE__ */ React__default.createElement("div", {
-    className: "mx-1 py-1 bg-white/[.5] h-5 w-px"
+    className: "vc-mx-1 vc-h-5 vc-w-px vc-bg-white/[.5] vc-py-1"
   }), /* @__PURE__ */ React__default.createElement("div", {
-    className: "mx-1"
+    className: "vc-mx-1"
   }, btnMeasureConfirm));
   const btnSectionReset = actionButton("Reset Section Box", onResetSectionBtn, sectionBoxReset, section.active);
   const btnSectionShrink = actionButton("Shrink to Selection", () => viewer.sectionBox.fitBox(viewer.selection.getBoundingBox()), sectionBoxShrink, section.active);
@@ -49606,9 +49535,9 @@ function TabTools(props) {
   const btnSectionNoClip = actionButton("Ignore Section Box", onSectionNoClip, sectionBoxClip, section.active);
   const btnSectionConfirm = actionButton("Done", onSectionBtn, checkmark, section.active);
   const sectionTab = /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-control-bar-section flex items-center bg-primary rounded-full px-2 mx-2 shadow-md"
+    className: "vim-control-bar-section vc-mx-2 vc-flex vc-items-center vc-rounded-full vc-bg-primary vc-px-2 vc-shadow-md"
   }, btnSectionReset, btnSectionShrink, section.clip ? btnSectionNoClip : btnSectionClip, /* @__PURE__ */ React__default.createElement("div", {
-    className: "mx-1 py-1 bg-white/[.5] h-5 w-px"
+    className: "vc-mx-1 vc-h-5 vc-w-px vc-bg-white/[.5] vc-py-1"
   }), btnSectionConfirm);
   return measuring ? measureTab : section.active ? sectionTab : toolsTab;
 }
@@ -49705,19 +49634,19 @@ function _LoadingBox(props) {
   if (!msg)
     return null;
   return /* @__PURE__ */ React__default.createElement("div", {
-    className: "loading-wrapper backdrop-blur fixed items-center justify-center top-0 left-0 w-full h-full z-40 bg-overflow",
+    className: "vim-loading-wrapper vc-fixed vc-top-0 vc-left-0 vc-z-40 vc-h-full vc-w-full vc-items-center vc-justify-center vc-bg-overflow vc-backdrop-blur",
     onContextMenu: (event) => event.preventDefault()
   }, /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-loading-box m-auto self-center absolute top-[calc(50%-37px)] left-[calc(50%-160px)] w-[320px] bg-white px-5 py-4 rounded shadow-lg z-20"
+    className: "vim-loading-box vc-absolute vc-top-[calc(50%-37px)] vc-left-[calc(50%-160px)] vc-z-20 vc-m-auto vc-w-[320px] vc-self-center vc-rounded vc-bg-white vc-px-5 vc-py-4 vc-shadow-lg"
   }, /* @__PURE__ */ React__default.createElement("h1", {
-    className: "w-full mb-2 text-gray-medium"
+    className: "vim-loading-title vc-mb-2 vc-w-full vc-text-gray-medium"
   }, " ", msg, " "), /* @__PURE__ */ React__default.createElement("span", {
-    className: "loader"
+    className: "vim-loading-widget"
   })));
 }
 function formatProgress(progress) {
   return progress === "processing" ? "Processing" : typeof progress === "number" ? /* @__PURE__ */ React__default.createElement("div", {
-    className: "flex justify-between w-full"
+    className: "vc-flex vc-w-full vc-justify-between"
   }, /* @__PURE__ */ React__default.createElement("span", null, "Loading..."), /* @__PURE__ */ React__default.createElement("span", null, Math.round(progress / 1e6), " MB")) : typeof progress === "string" ? `Error: ${progress}` : void 0;
 }
 var InteractionMode;
@@ -53138,16 +53067,16 @@ function _VimContextMenu(props) {
       return null;
     return /* @__PURE__ */ React__default.createElement(MenuItem, {
       key: button.id,
-      className: "hover:bg-gray-lightest px-5 py-2 flex items-center justify-between cursor-pointer select-none",
+      className: "vim-context-menu-item vc-flex vc-cursor-pointer vc-select-none vc-items-center vc-justify-between vc-px-5 vc-py-2 hover:vc-bg-gray-lightest",
       onClick: button.action
     }, /* @__PURE__ */ React__default.createElement("span", null, button.label), /* @__PURE__ */ React__default.createElement("span", {
-      className: "text-gray-medium"
+      className: "vc-text-gray-medium"
     }, button.keyboard));
   };
   const createDivider = (divider) => {
     return divider.enabled ? /* @__PURE__ */ React__default.createElement(MenuItem, {
       key: divider.id,
-      className: "border-t border-gray-lighter my-1",
+      className: "vim-context-menu-item vc-my-1 vc-border-t vc-border-gray-lighter",
       divider: true
     }) : null;
   };
@@ -53251,7 +53180,7 @@ function _VimContextMenu(props) {
     }
   }, /* @__PURE__ */ React__default.createElement(ContextMenu, {
     preventHideOnContextMenu: true,
-    className: "text-gray-darker bg-white py-1 w-[240px] rounded shadow-lg z-50",
+    className: "vc-z-50 vc-w-[240px] vc-rounded vc-bg-white vc-py-1 vc-text-gray-darker vc-shadow-lg",
     id: VIM_CONTEXT_MENU_ID
   }, elements.map((e) => {
     return "label" in e ? createButton(e) : createDivider(e);
@@ -53472,7 +53401,7 @@ function BimTree(props) {
     setSelectedItems(selection);
   }
   return /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-bim-tree mb-5",
+    className: "vim-bim-tree vc-mb-5",
     ref: div2,
     tabIndex: 0,
     onFocus: () => viewer.inputs.keyboard.unregister(),
@@ -53679,7 +53608,7 @@ function createTables(title, entries, getOpen, setOpen) {
   const createTitle = (value) => {
     return /* @__PURE__ */ React__default.createElement("h2", {
       key: `title-${value}`,
-      className: "text-xs font-bold uppercase text-gray-medium p-2 rounded-t border-t border-l border-r border-gray-light w-auto inline-flex"
+      className: "vc-inline-flex vc-w-auto vc-rounded-t vc-border-t vc-border-l vc-border-r vc-border-gray-light vc-p-2 vc-text-xs vc-font-bold vc-uppercase vc-text-gray-medium"
     }, value);
   };
   return [
@@ -53696,34 +53625,34 @@ function createTable(key, entries, open, setOpen) {
   }, /* @__PURE__ */ React__default.createElement("li", {
     key: "title-" + key
   }, /* @__PURE__ */ React__default.createElement("h3", {
-    className: "text-xs font-bold uppercase bg-gray-light px-2 py-2 flex justify-between"
+    className: "vc-flex vc-justify-between vc-bg-gray-light vc-px-2 vc-py-2 vc-text-xs vc-font-bold vc-uppercase"
   }, /* @__PURE__ */ React__default.createElement("span", {
     className: ""
   }, key), /* @__PURE__ */ React__default.createElement("button", {
-    className: "text-gray-medium",
+    className: "vc-text-gray-medium",
     onClick: () => setOpen(!open)
   }, " ", open ? /* @__PURE__ */ React__default.createElement(collapse, {
-    className: "transition-all rotate-180",
+    className: "vc-rotate-180 vc-transition-all",
     height: "15",
     width: "15",
     fill: "currentColor"
   }) : /* @__PURE__ */ React__default.createElement(collapse, {
-    className: "transition-all rotate-0",
+    className: "vc-rotate-0 vc-transition-all",
     height: "15",
     width: "15",
     fill: "currentColor"
   })))), open ? entries.map((p2, i2) => {
     const id2 = key + p2.name + i2;
     return /* @__PURE__ */ React__default.createElement("li", {
-      className: "even:bg-white odd:bg-gray-zebra flex",
+      className: "vc-even:bg-white vc-odd:bg-gray-zebra vc-flex",
       key: "parameters-tr-" + id2
     }, /* @__PURE__ */ React__default.createElement("span", {
       "data-tip": p2.value,
-      className: "bim-details-title w-1/2 border-r border-gray-light p-2 truncate select-none",
+      className: "bim-details-title vc-w-1/2 vc-select-none vc-truncate vc-border-r vc-border-gray-light vc-p-2",
       key: "parameters-th-" + id2
     }, p2.name), /* @__PURE__ */ React__default.createElement("span", {
       "data-tip": p2.value,
-      className: "bim-details-value w-1/2 text-gray-medium p-2 truncate",
+      className: "bim-details-value vc-w-1/2 vc-truncate vc-p-2 vc-text-gray-medium",
       key: "parameters-td-" + id2
     }, p2.value));
   }) : null));
@@ -53905,30 +53834,38 @@ function createHeader(header) {
       return null;
     return row.map((pair, columnIndex) => {
       return /* @__PURE__ */ React__default.createElement("dl", {
-        className: "flex w-full " + pair[4]
+        className: `vc-flex vc-w-full ${pair[4]}`
       }, /* @__PURE__ */ React__default.createElement("dt", {
         "data-tip": pair[1],
-        className: "bim-header-title text-gray-medium py-1 shrink-0 whitespace-nowrap min-w-[100px] select-none " + pair[2],
+        className: `bim-header-title vc-min-w-[100px] vc-shrink-0 vc-select-none vc-whitespace-nowrap vc-py-1 vc-text-gray-medium ${pair[2]}`,
         key: `dt-${rowIndex}-${columnIndex}`
       }, pair[0]), /* @__PURE__ */ React__default.createElement("dd", {
         "data-tip": pair[1],
-        className: "bim-header-value py-1 shrink-1 truncate " + pair[3],
+        className: `bim-header-value vc-shrink-1 vc-truncate vc-py-1 ${pair[3]}`,
         key: `dd-${rowIndex}-${columnIndex}`
       }, pair[1]));
     });
   });
   return /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-bim-inspector flex flex-wrap mb-6"
+    className: "vim-bim-inspector vc-mb-6 vc-flex vc-flex-wrap"
   }, rows);
 }
 function getElementBimHeader(info) {
   return [
-    [["Document", info.documentTitle, "w-3/12", "w-9/12", "w-full"]],
-    [["Workset", info.workset, "w-3/12", "w-9/12", "w-full"]],
-    [["Category", info.categoryName, "w-3/12", "w-9/12", "w-full"]],
-    [["Family Name", info.familyName, "w-3/12", "w-9/12", "w-full"]],
-    [["Family Type", info.familyTypeName, "w-3/12", "w-9/12", "w-full"]],
-    [["Element Id", info.id, "w-3/12", "w-9/12", "w-full"]]
+    [["Document", info.documentTitle, "vc-w-3/12", "vc-w-9/12", "vc-w-full"]],
+    [["Workset", info.workset, "vc-w-3/12", "vc-w-9/12", "vc-w-full"]],
+    [["Category", info.categoryName, "vc-w-3/12", "vc-w-9/12", "vc-w-full"]],
+    [["Family Name", info.familyName, "vc-w-3/12", "vc-w-9/12", "vc-w-full"]],
+    [
+      [
+        "Family Type",
+        info.familyTypeName,
+        "vc-w-3/12",
+        "vc-w-9/12",
+        "vc-w-full"
+      ]
+    ],
+    [["Element Id", info.id, "vc-w-3/12", "vc-w-9/12", "vc-w-full"]]
   ];
 }
 async function getVimBimHeader(vim) {
@@ -53936,38 +53873,60 @@ async function getVimBimHeader(vim) {
   const documents = await vim.document.getBimDocumentSummary();
   const main = (_a22 = documents.find((d) => !d.isLinked)) != null ? _a22 : documents[0];
   return [
-    [["Document", formatSource(vim.source), "w-3/12", "w-9/12", "w-full"]],
-    [["Source Path", main.pathName, "w-3/12", "w-9/12", "w-full"]],
+    [
+      [
+        "Document",
+        formatSource(vim.source),
+        "vc-w-3/12",
+        "vc-w-9/12",
+        "vc-w-full"
+      ]
+    ],
+    [["Source Path", main.pathName, "vc-w-3/12", "vc-w-9/12", "vc-w-full"]],
     [
       [
         "Created on",
         formatDate(vim.document.header.created),
-        "w-3/12",
-        "w-9/12",
-        "w-full"
+        "vc-w-3/12",
+        "vc-w-9/12",
+        "vc-w-full"
       ]
     ],
-    [["Created with", vim.document.header.generator, "w-3/12", "w-9/12", "w-full"]],
+    [
+      [
+        "Created with",
+        vim.document.header.generator,
+        "vc-w-3/12",
+        "vc-w-9/12",
+        "vc-w-full"
+      ]
+    ],
     void 0,
     [
       [
         "BIM Count",
         [...vim.document.getAllElements()].length,
-        "w-3/12",
-        "w-3/12",
-        "w-1/2 mt-5"
+        "vc-w-3/12",
+        "vc-w-3/12",
+        "vc-w-1/2 mt-5"
       ],
       [
         "Node Count",
         vim.document.g3d.getInstanceCount(),
-        "w-3/12",
-        "w-3/12",
-        "w-1/2 mt-5"
+        "vc-w-3/12",
+        "vc-w-3/12",
+        "vc-w-1/2 mt-5"
       ]
     ],
     [
-      ["Mesh Count", vim.document.g3d.getMeshCount(), "w-3/12", "w-3/12", "w-1/2"],
-      ["Revit Files", documents == null ? void 0 : documents.length, "w-3/12", "w-3/12", "w-1/2"]
+      [
+        "Mesh Count",
+        vim.document.g3d.getMeshCount(),
+        "vc-w-3/12",
+        "vc-w-3/12",
+        "vc-w-1/2"
+      ],
+      ["Revit Files", documents == null ? void 0 : documents.length, "vc-w-3/12", "vc-w-3/12", "vc-w-1/2"]
     ]
   ];
 }
@@ -54000,9 +53959,9 @@ function BimSearch(props) {
     props.setSearching(false);
   };
   return /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-bim-search mb-4 flex items-center"
+    className: "vim-bim-search vc-mb-4 vc-flex vc-items-center"
   }, /* @__PURE__ */ React__default.createElement("svg", {
-    className: "text-gray-light -mr-4",
+    className: "-vc-mr-4 vc-text-gray-light",
     xmlns: "http://www.w3.org/2000/svg",
     width: "16",
     viewBox: "0 0 256 256"
@@ -54011,7 +53970,7 @@ function BimSearch(props) {
     id: "ICONS",
     d: "m244.485 216.201-39.552-39.552a11.956 11.956 0 0 0-8.81-3.5C208.621 155.986 216 134.856 216 112 216 54.562 169.438 8 112 8S8 54.562 8 112s46.562 104 104 104c22.856 0 43.986-7.379 61.149-19.877a11.956 11.956 0 0 0 3.5 8.81l39.552 39.552c4.686 4.686 12.284 4.686 16.971 0l11.313-11.313c4.686-4.687 4.686-12.285 0-16.971ZM112 184c-39.701 0-72-32.299-72-72s32.299-72 72-72 72 32.299 72 72-32.299 72-72 72Z"
   })), /* @__PURE__ */ React__default.createElement("input", {
-    className: "w-full bg-transparent border-b border-t-0 border-l-0 border-r-0 border-gray-light outline-none focus:outline-none focus-within:outline-none focus-within:border-b-primary-royal active:text-primary-royal focus-within:text-primary-royal placeholder-text-gray-medium py-1 pl-6",
+    className: "vc-placeholder-text-gray-medium vc-w-full vc-border-b vc-border-t-0 vc-border-l-0 vc-border-r-0 vc-border-gray-light vc-bg-transparent vc-py-1 vc-pl-6 vc-outline-none focus-within:vc-border-b-primary-royal focus-within:vc-text-primary-royal focus-within:vc-outline-none focus:vc-outline-none active:vc-text-primary-royal",
     type: "search",
     name: "name",
     placeholder: "Type here to search",
@@ -54020,7 +53979,7 @@ function BimSearch(props) {
     onBlur,
     onChange
   }), props.count !== void 0 && text ? /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-bim-search-count rounded-full bg-primary-royal text-white text-xs font-bold py-1 px-2 absolute right-16"
+    className: "vim-bim-search-count vc-absolute vc-right-16 vc-rounded-full vc-bg-primary-royal vc-py-1 vc-px-2 vc-text-xs vc-font-bold vc-text-white"
   }, props.count) : null);
 }
 function BimPanel(props) {
@@ -54071,11 +54030,11 @@ function BimPanel(props) {
   };
   const last = props.selection[props.selection.length - 1];
   return /* @__PURE__ */ React__default.createElement("div", {
-    className: `vim-bim-panel ${props.visible ? "" : "hidden"}`
+    className: `vim-bim-panel ${props.visible ? "" : "vc-hidden"}`
   }, /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-bim-upper h-1/2"
+    className: "vim-bim-upper vc-h-1/2"
   }, /* @__PURE__ */ React__default.createElement("h2", {
-    className: "text-xs font-bold uppercase mb-6"
+    className: "vim-bim-upper-title vc-mb-6 vc-text-xs vc-font-bold vc-uppercase"
   }, "Project Inspector"), /* @__PURE__ */ React__default.createElement(BimSearch, {
     viewer,
     filter,
@@ -54088,11 +54047,11 @@ function BimPanel(props) {
     objects: props.selection,
     isolation: props.isolation
   })), /* @__PURE__ */ React__default.createElement("hr", {
-    className: "border-gray-divider mb-5 -mx-6"
+    className: "-vc-mx-6 vc-mb-5 vc-border-gray-divider"
   }), /* @__PURE__ */ React__default.createElement("h2", {
-    className: "text-xs font-bold uppercase mb-4"
+    className: "vc-mb-4 vc-text-xs vc-font-bold vc-uppercase"
   }, "Bim Inspector"), /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-bim-lower h-1/2 overflow-y-auto overflow-x-hidden"
+    className: "vim-bim-lower vc-h-1/2 vc-overflow-y-auto vc-overflow-x-hidden"
   }, /* @__PURE__ */ React__default.createElement(BimObjectHeader, {
     elements: filteredElements,
     object: last,
@@ -54131,26 +54090,26 @@ function _MenuHelp(props) {
     props.help.setVisible(false);
   };
   return /* @__PURE__ */ React__default.createElement(React__default.Fragment, null, /* @__PURE__ */ React__default.createElement("div", {
-    className: "menu-help-overlay z-40 absolute inset-0 bg-black/80 w-full h-full flex items-center justify-center",
+    className: "vim-help-overlay vc-absolute vc-inset-0 vc-z-40 vc-flex vc-h-full vc-w-full vc-items-center vc-justify-center vc-bg-black/80",
     onClick: onCloseBtn,
     onContextMenu: (event) => {
       event.preventDefault();
     }
   }, /* @__PURE__ */ React__default.createElement("div", {
-    className: "flex flex-col py-5",
+    className: "vim-help-blocker vc-flex vc-flex-col vc-py-5",
     onClick: (e) => {
       e.stopPropagation();
     }
   }, /* @__PURE__ */ React__default.createElement("div", {
-    className: "flex justify-between mb-8"
+    className: "vim-help vc-mb-8 vc-flex vc-justify-between"
   }, /* @__PURE__ */ React__default.createElement("h2", {
-    className: "text-white font-bold text-sm uppercase",
+    className: "vim-help-title vc-text-sm vc-font-bold vc-uppercase vc-text-white",
     style: {
       marginLeft: props.side.getWidth(),
       maxWidth: `calc(100% - ${props.side.getWidth()}px)`
     }
   }, "Key navigation controls"), /* @__PURE__ */ React__default.createElement("button", {
-    className: "text-white",
+    className: "vim-help-close vc-text-white",
     onClick: onCloseBtn
   }, close({
     height: "20px",
@@ -54159,7 +54118,7 @@ function _MenuHelp(props) {
   }))), /* @__PURE__ */ React__default.createElement("div", {
     className: ""
   }, /* @__PURE__ */ React__default.createElement("img", {
-    className: "menu-help-controls mb-8 mx-auto 2xl:w-[50vw]",
+    className: "vim-help-img vc-2xl:w-[50vw] vc-mx-auto vc-mb-8",
     src: helpImage,
     style: {
       marginLeft: props.side.getWidth(),
@@ -54175,12 +54134,12 @@ function linkButtons() {
     window.open(urlSupport);
   };
   return /* @__PURE__ */ React__default.createElement("div", {
-    className: "flex justify-end"
+    className: "vc-flex vc-justify-end"
   }, /* @__PURE__ */ React__default.createElement("button", {
-    className: "text-white text-xs font-bold uppercase border border-white hover:border-primary-royal hover:bg-primary-royal rounded-full py-2 px-8 mr-4",
+    className: "vc-hover:border-primary-royal vc-hover:bg-primary-royal vc-mr-4 vc-rounded-full vc-border vc-border-white vc-py-2 vc-px-8 vc-text-xs vc-font-bold vc-uppercase vc-text-white",
     onClick: onControlsBtn
   }, "Full Control List"), /* @__PURE__ */ React__default.createElement("button", {
-    className: "text-primary text-xs font-bold border border-white uppercase bg-white hover:border-primary-royal hover:text-white hover:bg-primary-royal rounded-full py-2 px-8",
+    className: "vc-rounded-full vc-border vc-border-white vc-bg-white vc-py-2 vc-px-8 vc-text-xs vc-font-bold vc-uppercase vc-text-primary hover:vc-border-primary-royal hover:vc-bg-primary-royal hover:vc-text-white",
     onClick: onHelpBtn
   }, "Help Center"));
 }
@@ -55015,9 +54974,9 @@ function _SidePanel(props) {
     style: {
       position: "fixed"
     },
-    className: `vim-side-panel-test left-0 top-0 bg-gray-lightest p-6 text-gray-darker z-20 ${props.side.getContent() !== "none" ? "" : "hidden"}`
+    className: `vim-side-panel vc-top-0 vc-left-0 vc-z-20 vc-bg-gray-lightest vc-p-6 vc-text-gray-darker ${props.side.getContent() !== "none" ? "" : "vc-hidden"}`
   }, /* @__PURE__ */ React__default.createElement("button", {
-    className: "vim-side-panel-nav text-gray-medium absolute right-6 top-6",
+    className: "vim-side-panel-nav vc-absolute vc-right-6 vc-top-6 vc-text-gray-medium",
     onClick: onNavBtn
   }, close(iconOptions)), props.content);
 }
@@ -55885,12 +55844,12 @@ function MenuSettings(props) {
     return null;
   const toggleElement = (label, state, action) => {
     return /* @__PURE__ */ React__default.createElement("label", {
-      className: "text-gray-warm m-1 py-1 flex items-center select-none"
+      className: "vc-m-1 vc-flex vc-select-none vc-items-center vc-py-1 vc-text-gray-warm"
     }, /* @__PURE__ */ React__default.createElement("input", {
       type: "checkbox",
       checked: state,
       onChange: action,
-      className: "w-[18px] h-[18px] rounded border border-gray-medium checked:bg-primary-royal mr-2 "
+      className: "vc-checked:bg-primary-royal vc-mr-2 vc-h-[18px] vc-w-[18px] vc-rounded vc-border vc-border-gray-medium "
     }), " ", label);
   };
   const next = cloneDeep(props.settings.value);
@@ -55901,7 +55860,7 @@ function MenuSettings(props) {
     });
   };
   return /* @__PURE__ */ React__default.createElement(React__default.Fragment, null, /* @__PURE__ */ React__default.createElement("h2", {
-    className: "text-xs font-bold uppercase mb-6"
+    className: "vc-mb-6 vc-text-xs vc-font-bold vc-uppercase"
   }, "Display Settings"), settingsToggle("Show hidden object with ghost effect", (settings2) => settings2.viewer.isolationMaterial, (settings2, value) => settings2.viewer.isolationMaterial = value), settingsToggle("Show ground plane", (settings2) => settings2.viewer.groundPlane, (settings2, value) => settings2.viewer.groundPlane = value), settingsToggle("Show performance", (settings2) => settings2.ui.performance, (settings2, value) => settings2.ui.performance = value));
 }
 const MenuToast = React__default.memo(_MenuToast);
@@ -55927,17 +55886,17 @@ function _MenuToast(props) {
     };
   }, []);
   return /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-menu-toast-outer absolute top-[10%] flex pointer-events-none",
+    className: "vim-menu-toast vc-pointer-events-none vc-absolute vc-top-[10%] vc-flex",
     style: {
       marginLeft: props.side.getWidth(),
       width: `calc(100% - ${props.side.getWidth()}px)`
     }
   }, /* @__PURE__ */ React__default.createElement("div", {
-    className: `vim-menu-toast rounded shadow-lg py-2 px-5 flex items-center justify-between transition-all m-auto bg-gray-warm ${visible ? "opacity-100" : "opacity-0"}`
+    className: `vim-menu-toast vc-m-auto vc-flex vc-items-center vc-justify-between vc-rounded vc-bg-gray-warm vc-py-2 vc-px-5 vc-shadow-lg vc-transition-all ${visible ? "vc-opacity-100" : "vc-opacity-0"}`
   }, /* @__PURE__ */ React__default.createElement("span", {
-    className: "text-sm uppercase font-semibold text-gray-light"
+    className: "vc-text-sm vc-font-semibold vc-uppercase vc-text-gray-light"
   }, "Speed:"), /* @__PURE__ */ React__default.createElement("span", {
-    className: "font-bold text-lg text-white ml-1"
+    className: "vc-ml-1 vc-text-lg vc-font-bold vc-text-white"
   }, speed + 25)));
 }
 function Overlay(props) {
@@ -55968,7 +55927,7 @@ function Overlay(props) {
   return /* @__PURE__ */ React__default.createElement("div", {
     ref: overlay,
     onContextMenu: (e) => e.preventDefault(),
-    className: "vim-overlay absolute top-0 left- h-full z-10",
+    className: "vim-overlay vc-absolute vc-top-0 vc-left-0 vc-z-10 vc-h-full",
     style: {
       marginLeft: `${props.side.getWidth()}px`,
       width: `calc(100% - ${props.side.getWidth()}px)`
@@ -56780,19 +56739,16 @@ function createVimComponent(onMount, container, settings2 = {}) {
 }
 function createContainer(viewer) {
   const root2 = document.createElement("div");
-  root2.className = "vim-component";
-  root2.style.height = "100%";
+  root2.className = "vim-component vc-absolute vc-top-0 vc-left-0 vc-h-full vc-w-full";
   document.body.append(root2);
   const gfx = document.createElement("div");
-  gfx.className = "vim-gfx";
-  gfx.style.height = "100%";
+  gfx.className = "vim-gfx vc-absolute vc-top-0 vc-left-0 vc-h-full vc-w-full";
   root2.append(gfx);
   gfx.append(viewer.viewport.canvas);
   gfx.append(viewer.viewport.text);
   gfx.append(viewer.axesCanvas);
   const ui2 = document.createElement("div");
-  ui2.className = "vim-ui";
-  ui2.style.height = "100%";
+  ui2.className = "vim-ui vc-absolute vc-top-0 vc-left-0 vc-h-full vc-w-full";
   root2.append(ui2);
   viewer.viewport.canvas.tabIndex = 0;
   viewer.sectionBox.clip = true;
@@ -56866,7 +56822,7 @@ function VimComponent(props) {
   }), /* @__PURE__ */ React__default.createElement(ReactTooltip, {
     arrowColor: "transparent",
     type: "light",
-    className: "!bg-white !text-xs !text-gray-darkest !opacity-100 !border !border-solid !border-gray-medium !shadow-[2px_6px_15px_rgba(0,0,0,0.3)] !transition-opacity",
+    className: "!vc-border !vc-border-solid !vc-border-gray-medium !vc-bg-white !vc-text-xs !vc-text-gray-darkest !vc-opacity-100 !vc-shadow-[2px_6px_15px_rgba(0,0,0,0.3)] !vc-transition-opacity",
     delayShow: 200
   }), /* @__PURE__ */ React__default.createElement(VimContextMenu, {
     viewer,
@@ -56880,11 +56836,11 @@ function VimComponent(props) {
   }));
 }
 const Logo = React__default.memo(() => /* @__PURE__ */ React__default.createElement("div", {
-  className: "vim-logo fixed top-4 left-4"
+  className: "vim-logo vc-fixed vc-top-4 vc-left-4"
 }, /* @__PURE__ */ React__default.createElement("a", {
   href: "https://vimaec.com"
 }, /* @__PURE__ */ React__default.createElement("img", {
-  className: "vim-logo-img h-12 w-32",
+  className: "vim-logo-img vc-h-12 vc-w-32",
   src: logo
 }))));
 function useViewerState(viewer) {
