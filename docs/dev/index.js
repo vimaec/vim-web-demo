@@ -828,6 +828,9 @@ select {
 .\\!visible {
   visibility: visible !important;
 }\r
+.\\!static {
+  position: static !important;
+}\r
 .fixed {
   position: fixed;
 }\r
@@ -846,6 +849,12 @@ select {
 .top-6 {
   top: 1.5rem;
 }\r
+.top-4 {
+  top: 1rem;
+}\r
+.left-4 {
+  left: 1rem;
+}\r
 .bottom-0 {
   bottom: 0px;
 }\r
@@ -854,6 +863,12 @@ select {
 }\r
 .left-0 {
   left: 0px;
+}\r
+.top-\\[calc\\(50\\%-37px\\)\\] {
+  top: calc(50% - 37px);
+}\r
+.left-\\[calc\\(50\\%-160px\\)\\] {
+  left: calc(50% - 160px);
 }\r
 .top-\\[10\\%\\] {
   top: 10%;
@@ -876,6 +891,9 @@ select {
 .z-10 {
   z-index: 10;
 }\r
+.order-1 {
+  order: 1;
+}\r
 .order-2 {
   order: 2;
 }\r
@@ -884,6 +902,10 @@ select {
 }\r
 .m-1 {
   margin: 0.25rem;
+}\r
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
 }\r
 .mx-1 {
   margin-left: 0.25rem;
@@ -896,10 +918,6 @@ select {
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
-}\r
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
 }\r
 .-mx-6 {
   margin-left: -1.5rem;
@@ -944,6 +962,9 @@ select {
 .mr-2 {
   margin-right: 0.5rem;
 }\r
+.block {
+  display: block;
+}\r
 .flex {
   display: flex;
 }\r
@@ -958,6 +979,9 @@ select {
 }\r
 .h-\\[145px\\] {
   height: 145px;
+}\r
+.h-12 {
+  height: 3rem;
 }\r
 .h-10 {
   height: 2.5rem;
@@ -979,6 +1003,9 @@ select {
 }\r
 .w-\\[100px\\] {
   width: 100px;
+}\r
+.w-32 {
+  width: 8rem;
 }\r
 .w-\\[240px\\] {
   width: 240px;
@@ -1053,6 +1080,9 @@ select {
 .justify-between {
   justify-content: space-between;
 }\r
+.self-center {
+  align-self: center;
+}\r
 .overflow-y-auto {
   overflow-y: auto;
 }\r
@@ -1087,6 +1117,9 @@ select {
 .border {
   border-width: 1px;
 }\r
+.\\!border {
+  border-width: 1px !important;
+}\r
 .border-t {
   border-top-width: 1px;
 }\r
@@ -1108,9 +1141,15 @@ select {
 .border-r-0 {
   border-right-width: 0px;
 }\r
+.\\!border-solid {
+  border-style: solid !important;
+}\r
 .border-white {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
+}\r
+.\\!border-gray-medium {
+  border-color: var(--c-medium-gray) !important;
 }\r
 .border-gray-lighter {
   border-color: var(--c-lighter-gray);
@@ -1128,6 +1167,10 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }\r
+.\\!bg-white {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
+}\r
 .bg-primary {
   background-color: var(--c-primary);
 }\r
@@ -1139,6 +1182,9 @@ select {
 }\r
 .bg-overflow {
   background-color: var(--c-overflow);
+}\r
+.bg-gray-warm {
+  background-color: var(--c-dark-gray-warm);
 }\r
 .bg-gray-light {
   background-color: var(--c-light-gray);
@@ -1192,6 +1238,10 @@ select {
 .pl-6 {
   padding-left: 1.5rem;
 }\r
+.\\!text-xs {
+  font-size: 0.75rem !important;
+  line-height: 1rem !important;
+}\r
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -1216,6 +1266,9 @@ select {
 .text-gray-medium {
   color: var(--c-medium-gray);
 }\r
+.\\!text-gray-darkest {
+  color: var(--c-darkest-gray) !important;
+}\r
 .text-gray-darker {
   color: var(--c-darker-gray);
 }\r
@@ -1232,6 +1285,12 @@ select {
 .text-gray-warm {
   color: var(--c-dark-gray-warm);
 }\r
+.opacity-50 {
+  opacity: 0.5;
+}\r
+.\\!opacity-100 {
+  opacity: 1 !important;
+}\r
 .opacity-60 {
   opacity: 0.6;
 }\r
@@ -1246,6 +1305,11 @@ select {
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }\r
+.\\!shadow-\\[2px_6px_15px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.3\\)\\] {
+  --tw-shadow: 2px 6px 15px rgba(0,0,0,0.3) !important;
+  --tw-shadow-colored: 2px 6px 15px var(--tw-shadow-color) !important;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+}\r
 .shadow-md {
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
@@ -1254,6 +1318,10 @@ select {
 .outline-none {
   outline: 2px solid transparent;
   outline-offset: 2px;
+}\r
+.saturate-0 {
+  --tw-saturate: saturate(0);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }\r
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
@@ -1267,6 +1335,11 @@ select {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}\r
+.\\!transition-opacity {
+  transition-property: opacity !important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition-duration: 150ms !important;
 }\r
 .transition-opacity {
   transition-property: opacity;
@@ -1329,56 +1402,6 @@ select {
   --hidden-royal-blue: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='%23284ea2' d='M154.271,63.406c22.243,5.762,39.382,17.586,48.956,25.494,9.186,7.587,17.187,16.341,22.527,24.648,6.176,9.606,6.247,14.405,6.247,14.452,0,4.764-5.566,18.577-22.079,34.01l16.973,16.972c18.185-17.247,29.106-36.602,29.106-50.982,0-30.946-57.308-92-128-92-13.307,0-26.139,2.165-38.205,5.884l42.099,42.099c2.731-10.572,11.479-18.722,22.376-20.577Z'/%3E%3Cpath fill='%23284ea2' d='M166.022,118.111l21.472,21.472c2.896-7.3,4.505-15.251,4.505-23.583,0-8.812-1.782-17.207-5.004-24.847-.07,12.971-8.957,23.853-20.974,26.958Z'/%3E%3Cpath fill='%23284ea2' d='M31.833,17.863c-4.687-4.686-12.284-4.686-16.971,0-4.686,4.687-4.686,12.285,0,16.971l29.92,29.92C17.38,84.825,0,110.966,0,128c0,32.943,57.308,92,128,92,21.088,0,40.972-5.269,58.51-13.52l37.657,37.657c4.687,4.686,12.284,4.686,16.971,0,4.686-4.687,4.686-12.285,0-16.971L31.833,17.863Zm96.167,178.137c-35.405,0-62.403-17.699-75.346-28.249-21.65-17.648-28.654-34.402-28.654-39.751,0-.047,.071-4.846,6.247-14.452,5.34-8.308,13.341-17.061,22.527-24.648,2.545-2.103,5.633-4.482,9.205-6.95l7.708,7.708c-3.643,8.034-5.686,16.946-5.686,26.343,0,35.346,28.654,64,64,64,9.397,0,18.31-2.043,26.345-5.684l13.936,13.936c-11.606,4.516-25.17,7.749-40.281,7.749Z'/%3E%3C/svg%3E%0A");\r
 }\r
 \r
-body {\r
-  -webkit-font-smoothing: antialiased;\r
-  -moz-osx-font-smoothing: grayscale;\r
-  font-family: 'Roboto', sans-serif;\r
-}\r
-\r
-/* Toast Notification */\r
-.vim-menu-toast {\r
-  background-color: var(--c-dark-gray-warm);\r
-}\r
-\r
-/* Axes Gizmo*/\r
-.gizmo-axis-canvas {\r
-  display: block;\r
-  position: static !important;\r
-  order: 1;\r
-  margin: auto auto 0 auto;\r
-  filter: saturate(0%);\r
-}\r
-\r
-.vim-top:hover .gizmo-axis-canvas {\r
-  filter: saturate(100%);\r
-}\r
-\r
-.vim-top {\r
-  opacity: 0.5;\r
-}\r
-\r
-.vim-top:hover {\r
-  opacity: 1;\r
-}\r
-\r
-/* Context Menu */\r
-.checked {\r
-  font-weight: bold;\r
-}\r
-\r
-/* Logo */\r
-\r
-.vim-logo {\r
-  position: fixed;\r
-  top: 16px;\r
-  left: 16px;\r
-}\r
-\r
-.vim-logo img {\r
-  height: 48px;\r
-  width: 128px;\r
-}\r
-\r
 /*Makes full screen and remove scrollbars*/\r
 html,\r
 body {\r
@@ -1387,126 +1410,39 @@ body {\r
   padding: 0;\r
   overflow: hidden;\r
   background: radial-gradient(circle at center, #f0f0ff, #999999);\r
+  -webkit-font-smoothing: antialiased;\r
+  -moz-osx-font-smoothing: grayscale;\r
+  font-family: 'Roboto', sans-serif;\r
 }\r
 \r
-.VimLoadingBox h1 {\r
-  color: #050c1a;\r
-}\r
-\r
-.vim-section {\r
-  position: fixed;\r
-  bottom: 0px;\r
-  right: 64px;\r
-  width: 64px;\r
-  pointer-events: all;\r
-}\r
-\r
-/* MENU */\r
-\r
-.vim-control-bar td {\r
-  pointer-events: all;\r
-}\r
-\r
-.vim-control-bar td.empty {\r
-  pointer-events: none;\r
-}\r
-\r
-.vim-control-bar table {\r
-  width: 64px;\r
-}\r
-\r
-.vim-control-bar button:focus,\r
-.vim-bim-search input[type='search']:focus {\r
+/*No focus states*/\r
+[type='checkbox']:focus,\r
+[type='radio']:focus,\r
+button:focus,\r
+input[type='search']:focus {\r
   outline: 0;\r
   box-shadow: none;\r
 }\r
 \r
-.vim-control-bar .iconButton {\r
-  color: var(--c-white);\r
-  border: none;\r
-  background-color: transparent;\r
+input[type='search']::-webkit-search-cancel-button {\r
+  -webkit-appearance: none;\r
+  height: 1rem;\r
+  width: 1rem;\r
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16.25' height='16.25' viewBox='0 0 16.25 16.25'%3E%3Cpath id='icon' d='M32.125,24a8.125,8.125,0,1,0,8.125,8.125A8.125,8.125,0,0,0,32.125,24ZM35.6,34.275A.937.937,0,0,1,34.275,35.6l-2.15-2.15-2.15,2.15a.937.937,0,0,1-1.326-1.326l2.15-2.15-2.15-2.15a.937.937,0,0,1,1.326-1.326l2.15,2.15,2.15-2.15A.937.937,0,1,1,35.6,29.975l-2.15,2.15Z' transform='translate(-24 -24)' fill='%238a8d95'/%3E%3C/svg%3E%0A");\r
 }\r
 \r
-.vim-control-bar .iconButton.active {\r
-  background-color: var(--c-primary-royal);\r
+@-moz-document url-prefix() {\r
+  .vim-bim-search-count {\r
+    right: 1.5rem;\r
+  }\r
 }\r
 \r
-.vim-control-bar .iconButton img {\r
-  width: 42px;\r
-  height: 42px;\r
-}\r
-\r
-.vim-control-bar .iconButton:hover img {\r
-  transform: scale(1.1);\r
-}\r
-\r
-.vim-control-bar .iconButton:active img {\r
-  transform: scale(1.1);\r
-  filter: brightness(1.5);\r
-}\r
-\r
-.vim-control-bar .iconButton:disabled img {\r
-  filter: brightness(0.5);\r
-  transform: scale(1);\r
-}\r
-\r
-/* Help Controls Widget */\r
-.vim-help-controls {\r
-  position: fixed;\r
-  bottom: 64px;\r
-  width: 100%;\r
-  pointer-events: none;\r
-}\r
-\r
-/* Tooltips */\r
-.__react_component_tooltip {\r
-  background-color: var(--c-white) !important;\r
-  color: var(--c-darkest-gray) !important;\r
-  font-size: 12.65px;\r
-  transition: opacity 0.1s ease-out !important;\r
-  border: 1px solid var(--c-medium-gray) !important;\r
-  box-shadow: 2px 6px 15px #00000033;\r
-}\r
-\r
-.vim-ui .__react_component_tooltip.show {\r
-  opacity: 1;\r
-  background-color: var(--c-white);\r
-}\r
-\r
-.__react_component_tooltip:before,\r
-.__react_component_tooltip:after {\r
-  content: none !important;\r
-}\r
-\r
-.vim-loading-box {\r
-  margin: auto;\r
-  align-self: center;\r
-  position: absolute;\r
-  top: calc(50% - 37px);\r
-  left: calc(50% - 160px);\r
-}\r
-\r
-.submenu-item-active {\r
-  position: relative;\r
-}\r
-\r
-.submenu-item-active::before {\r
-  content: '';\r
-  display: block;\r
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='%230590cc' d='M228.693 61.741c5.379-7.011 4.057-17.055-2.954-22.434-7.01-5.379-17.054-4.057-22.434 2.954l-.008.011L99.864 177.069l-39.607-47.203c-5.68-6.769-15.772-7.652-22.542-1.972s-7.652 15.772-1.972 22.542l52.416 62.467.006.007c.018.021.038.039.056.06.214.252.448.492.681.733.153.159.3.326.458.478s.331.291.497.437c.251.222.5.445.763.648l.062.053c.108.083.225.151.334.231.304.221.608.44.924.638.166.104.335.192.503.289.284.164.567.328.859.473.221.11.447.204.671.303.245.107.487.219.736.313.268.103.54.188.812.275.214.069.428.142.645.202.293.081.588.144.884.208.206.044.411.093.619.129.294.051.589.085.884.12.219.026.437.055.656.071.275.021.55.026.825.033.245.006.489.015.735.009.246-.005.491-.024.736-.042.274-.018.548-.036.821-.068.22-.026.437-.065.654-.101.293-.047.585-.094.876-.158.207-.045.41-.103.615-.157.292-.076.584-.152.873-.245.215-.069.425-.152.637-.23.267-.099.535-.196.798-.31.245-.105.483-.228.723-.346.219-.108.44-.211.656-.331.286-.158.562-.334.839-.511.163-.104.328-.199.488-.31.307-.211.603-.444.896-.678.106-.085.219-.157.324-.245.021-.018.039-.038.06-.056.253-.215.492-.449.733-.681.159-.153.326-.301.478-.458.152-.159.292-.332.438-.498.221-.25.444-.5.647-.761.017-.022.037-.041.054-.063L228.693 61.741Z'/%3E%3C/svg%3E");\r
-  background-size: contain;\r
-  position: absolute;\r
-  left: 20px;\r
-  top: 12px;\r
-  width: 20px;\r
-  height: 17px;\r
-}\r
-\r
+/* === React Tree === */\r
 .rct-tree-root {\r
   font-family: inherit;\r
 }\r
 \r
-.rct-tree-root>div>.rct-tree-items-container {\r
+.rct-tree-root > div > .rct-tree-items-container {\r
   max-height: calc(50vh - 9rem);\r
   overflow-y: auto;\r
   content-visibility: auto;\r
@@ -1516,7 +1452,10 @@ body {\r
   border: none;\r
 }\r
 \r
-.rct-tree-items-container li .rct-tree-item-title-container .rct-tree-item-button {\r
+.rct-tree-items-container\r
+  li\r
+  .rct-tree-item-title-container\r
+  .rct-tree-item-button {\r
   display: block;\r
   overflow: hidden;\r
   text-overflow: ellipsis;\r
@@ -1530,11 +1469,11 @@ body {\r
           user-select: none;\r
 }\r
 \r
-.rct-tree-items-container>li:nth-child(odd) {\r
+.rct-tree-items-container > li:nth-child(odd) {\r
   background-color: var(--c-white);\r
 }\r
 \r
-.rct-tree-items-container>li:nth-child(even) {\r
+.rct-tree-items-container > li:nth-child(even) {\r
   background-color: var(--c-gray-zebra);\r
 }\r
 \r
@@ -1575,7 +1514,7 @@ body {\r
   transition: 0.3s;\r
 }\r
 \r
-.rct-tree-item-title-container-expanded>.rct-tree-item-arrow::before {\r
+.rct-tree-item-title-container-expanded > .rct-tree-item-arrow::before {\r
   transform: rotate(90deg);\r
   transition: 0.3s;\r
 }\r
@@ -1584,7 +1523,7 @@ body {\r
   fill: var(--c-medium-gray);\r
 }\r
 \r
-.parameters:first-child>ul>li h3 {\r
+.parameters:first-child > ul > li h3 {\r
   border-top-right-radius: 4px;\r
 }\r
 \r
@@ -1592,8 +1531,12 @@ body {\r
   max-height: 44vh;\r
 }\r
 \r
-.vim-bim-tree .rct-tree-root:not(.rct-tree-root-focus) .rct-tree-item-title-container-selected,\r
-.vim-bim-tree .rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-selected {\r
+.vim-bim-tree\r
+  .rct-tree-root:not(.rct-tree-root-focus)\r
+  .rct-tree-item-title-container-selected,\r
+.vim-bim-tree\r
+  .rct-tree-root.rct-tree-root-focus\r
+  .rct-tree-item-title-container-selected {\r
   background-color: var(--c-lightest-blue);\r
 }\r
 \r
@@ -1650,41 +1593,38 @@ body {\r
 }\r
 \r
 /* Hover selected element */\r
-.rct-tree-item-title-container-selected .rct-tree-item-button:hover .rct-tree-item-visibility.vim-visible {\r
+.rct-tree-item-title-container-selected\r
+  .rct-tree-item-button:hover\r
+  .rct-tree-item-visibility.vim-visible {\r
   display: block;\r
   background-image: var(--visible-light-blue);\r
 }\r
 \r
-.rct-tree-item-title-container-selected .rct-tree-item-button:hover .rct-tree-item-visibility.vim-hidden {\r
+.rct-tree-item-title-container-selected\r
+  .rct-tree-item-button:hover\r
+  .rct-tree-item-visibility.vim-hidden {\r
   display: block;\r
   background-image: var(--hidden-light-blue);\r
 }\r
 \r
 /* Hover toggle button*/\r
-.rct-tree-item-title-container-selected .rct-tree-item-button .rct-tree-item-visibility.vim-visible:hover,\r
+.rct-tree-item-title-container-selected\r
+  .rct-tree-item-button\r
+  .rct-tree-item-visibility.vim-visible:hover,\r
 .rct-tree-item-button .rct-tree-item-visibility.vim-visible:hover {\r
   display: block;\r
   background-image: var(--hidden-royal-blue);\r
 }\r
 \r
-.rct-tree-item-title-container-selected .rct-tree-item-button .rct-tree-item-visibility.vim-hidden:hover,\r
+.rct-tree-item-title-container-selected\r
+  .rct-tree-item-button\r
+  .rct-tree-item-visibility.vim-hidden:hover,\r
 .rct-tree-item-button .rct-tree-item-visibility.vim-hidden:hover {\r
   display: block;\r
   background-image: var(--visible-royal-blue);\r
 }\r
 \r
-/*Others*/\r
-[type='checkbox']:focus,\r
-[type='radio']:focus {\r
-  outline: none;\r
-  box-shadow: none;\r
-}\r
-\r
-/* Cursors */\r
-.cursor-stretch:hover {\r
-  cursor: e-resize;\r
-}\r
-\r
+/* === Cursors ===*/\r
 .cursor-orbit:hover {\r
   cursor: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojZmZmO30uY2xzLTJ7ZmlsbDojMjEyMzI5O30uY2xzLTN7ZmlsbDpub25lO308L3N0eWxlPjwvZGVmcz48ZyBpZD0iRlJBTUVTIj48ZyBpZD0iZnJhbWUiPjxyZWN0IGNsYXNzPSJjbHMtMyIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ii8+PC9nPjwvZz48ZyBpZD0iSUNPTlMiPjxnPjxnPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTE0LDIwLjIzNGMtNS42NTIsMC0xMC4yNS0yLjYzNi0xMC4yNS01Ljg3NSwwLTEuNzUxLDEuMzA2LTMuMzY2LDMuNjA0LTQuNDgtLjUwOC0uMzEyLS43MDYtLjk2Mi0uNDQtMS40ODgsLjE5NC0uMzg2LC41ODItLjYyNSwxLjAxLS42MjUsLjE0MiwwLC4yODIsLjAyNiwuNDE2LC4wNzlsLjA5NywuMDQyLDIuMTQ4LDEuMDg2Yy42OSwuMzQ5LC45NjksMS4xOTUsLjYyLDEuODg2bC0xLjA4MywyLjE0NWMtLjE5NSwuMzg2LS41ODIsLjYyNS0xLjAxMiwuNjI1LS4xNDEsMC0uMjgtLjAyNS0uNDE0LS4wNzdsLS4wOTgtLjA0NGMtLjU1LS4yNzgtLjY3OC0uODI4LS41NjctMS4zMDYtLjAyMSwuMDExLS4wNDEsLjAyMS0uMDYsLjAzMy0xLjE1NiwuNjUtMS44NDYsMS40NDQtMS44NDYsMi4xMjVzLjY5LDEuNDc2LDEuODQ2LDIuMTI2YzEuNTUzLC44NzMsMy43NTEsMS4zNzQsNi4wMjksMS4zNzRzNC40NzYtLjUwMSw2LjAyOS0xLjM3NGMxLjE1Ni0uNjUsMS44NDYtMS40NDUsMS44NDYtMi4xMjZzLS42OS0xLjQ3NS0xLjg0Ni0yLjEyNWMtMS41NTMtLjg3NC0zLjc1LTEuMzc1LTYuMDI5LTEuMzc1aC0uMTAyYy0uNjI0LDAtMS4xMzItLjQ1Ni0xLjE5Ni0xLjA2Mi0uMDM1LS4zMzQsLjA3My0uNjY4LC4yOTYtLjkxNywuMjIzLS4yNDgsLjU0Mi0uMzkzLC44NzUtLjM5NWguMTI2YzUuNjUyLDAsMTAuMjUsMi42MzUsMTAuMjUsNS44NzRzLTQuNTk4LDUuODc1LTEwLjI1LDUuODc1WiIvPjxwYXRoIGQ9Ik03LjkyNSw4LjAxNmMuMTA4LDAsLjIxNywuMDIsLjMyMywuMDYxLC4wMjYsLjAxMSwuMDUyLC4wMjIsLjA3OCwuMDM1bDIuMTQ1LDEuMDgzYy41NjgsLjI4NywuNzk3LC45ODIsLjUxLDEuNTVsLTEuMDgzLDIuMTQ2Yy0uMTU1LC4zMDgtLjQ2MywuNDg3LS43ODgsLjQ4Ny0uMTA4LDAtLjIxNy0uMDItLjMyNC0uMDYyLS4wMjYtLjAxLS4wNTItLjAyMi0uMDc4LS4wMzUtLjUxMi0uMjU5LS41MzEtLjc5MS0uMzkxLTEuMTY4bC4xNTItLjQxMWMtLjIxNiwuMDk5LS40MjUsLjIwMy0uNjIyLC4zMTMtMS4yNTQsLjcwNi0xLjk3MywxLjU2LTEuOTczLDIuMzQzcy43MTksMS42MzgsMS45NzMsMi4zNDNjMS41ODksLjg5NCwzLjgzMiwxLjQwNyw2LjE1MiwxLjQwN3M0LjU2Mi0uNTEzLDYuMTUyLTEuNDA3YzEuMjU0LS43MDUsMS45NzMtMS41NTksMS45NzMtMi4zNDNzLS43MTktMS42MzgtMS45NzMtMi4zNDNjLTEuNTg5LS44OTQtMy44MzItMS40MDctNi4xNTItMS40MDctLjAzNiwwLS4wNzMsMC0uMTA5LDBoLS4wMDhjLS40OCwwLS44ODMtLjM2Mi0uOTMyLS44NC0uMDU3LS41NSwuMzcyLTEuMDMxLC45MjUtMS4wMzUsLjA0MSwwLC4wODMsMCwuMTI0LDAsNS41MjMsMCwxMCwyLjUxOSwxMCw1LjYyNXMtNC40NzcsNS42MjUtMTAsNS42MjUtMTAtMi41MTgtMTAtNS42MjVjMC0xLjgxNywxLjUzMi0zLjQzMiwzLjkwOS00LjQ2bC0uMDA0LS4wMTEtLjM2Ni0uMTkxYy0uNDM4LS4yMjktLjYxOS0uNzY1LS40MDItMS4xOTQsLjE1Ni0uMzA4LC40NjQtLjQ4NywuNzg4LS40ODdtMC0uNWgwYy0uNTI0LDAtLjk5NywuMjkyLTEuMjM0LC43NjItLjI2MSwuNTE4LS4xNTcsMS4xMzEsLjIxNCwxLjU0OS0yLjE3NiwxLjE1MS0zLjQwNSwyLjc3Mi0zLjQwNSw0LjUzMywwLDMuNDM1LDQuNjEyLDYuMTI1LDEwLjUsNi4xMjVzMTAuNS0yLjY5LDEwLjUtNi4xMjUtNC42MTItNi4xMjUtMTAuNS02LjEyNWgtLjA2NXMtLjA1OSwwLS4wNTksMGMtLjQwNywuMDAzLS43OTMsLjE3Ny0xLjA2MywuNDc5LS4yNywuMzAyLS40MDEsLjcwNi0uMzU5LDEuMTA4LC4wNzYsLjczNCwuNjkxLDEuMjg4LDEuNDMsMS4yODhoLjA2NXMuMDUxLDAsLjA1MSwwYzIuMjM3LDAsNC4zOSwuNDg5LDUuOTA3LDEuMzQyLDEuMDc2LC42MDUsMS43MTgsMS4zMTksMS43MTgsMS45MDhzLS42NDIsMS4zMDItMS43MTgsMS45MDdjLTEuNTE3LC44NTQtMy42NywxLjM0My01LjkwNywxLjM0M3MtNC4zOS0uNDg5LTUuOTA3LTEuMzQyYy0xLjA3Ni0uNjA1LTEuNzE4LTEuMzE4LTEuNzE4LTEuOTA4LDAtLjUyMywuNTA3LTEuMTQ0LDEuMzc0LTEuNzAxLC4wMzgsLjQyMiwuMjU2LC44MjgsLjczNCwxLjA3LC4wNDIsLjAyMSwuMDgyLC4wMzksLjEyMSwuMDU0LC4xNjMsLjA2NCwuMzMzLC4wOTYsLjUwNiwuMDk2LC41MjQsMCwuOTk3LS4yOTIsMS4yMzQtLjc2MmwxLjA4My0yLjE0NWMuMTk5LS4zOTQsLjIzMy0uODQyLC4wOTQtMS4yNjJzLS40MzEtLjc2MS0uODI1LS45NmwtMi4xNDYtMS4wODNjLS4wMzUtLjAxOC0uMDc0LS4wMzUtLjExMy0uMDUxLS4xNzEtLjA2Ny0uMzQxLS4wOTktLjUxMy0uMDk5aDBaIi8+PC9nPjxnPjxjaXJjbGUgY2xhc3M9ImNscy0xIiBjeD0iMTQiIGN5PSIxNC4zNTkiIHI9IjIuNDM4Ii8+PHBhdGggZD0iTTE0LDEyLjE3MmMxLjIwNiwwLDIuMTg4LC45ODEsMi4xODgsMi4xODhzLS45ODEsMi4xODgtMi4xODgsMi4xODgtMi4xODgtLjk4MS0yLjE4OC0yLjE4OCwuOTgxLTIuMTg4LDIuMTg4LTIuMTg4bTAtLjVjLTEuNDgyLDAtMi42ODgsMS4yMDYtMi42ODgsMi42ODhzMS4yMDYsMi42ODgsMi42ODgsMi42ODgsMi42ODgtMS4yMDYsMi42ODgtMi42ODgtMS4yMDYtMi42ODgtMi42ODgtMi42ODhoMFoiLz48L2c+PC9nPjxnPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEuMDA3LDUuNzVjLS4zNzIsMC0uNzU3LS4yODEtLjc1Ny0uNzUyVjFDLjI1LC41ODcsLjU4NiwuMjUsMSwuMjVoMy45OThjLjM2OSwwLC42LC4yMzksLjY5MywuNDYzcy4wOTksLjU1Ny0uMTYzLC44MTdMMS41Myw1LjUyOGMtLjE4MywuMTg0LS4zODYsLjIyMi0uNTIzLC4yMjJaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNC45OTgsLjVjLjMxLDAsLjQzMiwuMjM2LC40NjIsLjMwOXMuMTExLC4zMjYtLjEwOCwuNTQ1TDEuMzU0LDUuMzUyYy0uMTIzLC4xMjMtLjI1NiwuMTQ4LS4zNDYsLjE0OC0uMjUsMC0uNTA3LS4xODgtLjUwNy0uNTAyVjFjMC0uMjc2LC4yMjQtLjUsLjUtLjVoMy45OThtMC0uNUgxQy40NDgsMCwwLC40NDgsMCwxdjMuOTk4YzAsLjYwMywuNDkzLDEuMDAyLDEuMDA3LDEuMDAyLC4yNDYsMCwuNDk2LS4wOTEsLjctLjI5NUw1LjcwNSwxLjcwN2MuNjMtLjYzLC4xODQtMS43MDctLjcwNy0xLjcwN2gwWiIvPjwvZz48L2c+PC9zdmc+'),\r
     auto;\r
@@ -1725,12 +1665,7 @@ body {\r
     auto;\r
 }\r
 \r
-input[type='search']::-webkit-search-cancel-button {\r
-  -webkit-appearance: none;\r
-  height: 1rem;\r
-  width: 1rem;\r
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16.25' height='16.25' viewBox='0 0 16.25 16.25'%3E%3Cpath id='icon' d='M32.125,24a8.125,8.125,0,1,0,8.125,8.125A8.125,8.125,0,0,0,32.125,24ZM35.6,34.275A.937.937,0,0,1,34.275,35.6l-2.15-2.15-2.15,2.15a.937.937,0,0,1-1.326-1.326l2.15-2.15-2.15-2.15a.937.937,0,0,1,1.326-1.326l2.15,2.15,2.15-2.15A.937.937,0,1,1,35.6,29.975l-2.15,2.15Z' transform='translate(-24 -24)' fill='%238a8d95'/%3E%3C/svg%3E%0A");\r
-}\r
+/* === Measure ===*/\r
 \r
 .vim-text-renderer .vim-measure {\r
   font-size: 1rem;\r
@@ -1767,11 +1702,7 @@ input[type='search']::-webkit-search-cancel-button {\r
   border: 1px solid var(--c-darkest-gray);\r
 }\r
 \r
-@-moz-document url-prefix() {\r
-  .vim-bim-search-count {\r
-    right: 1.5rem;\r
-  }\r
-}\r
+/* === Loader ===*/\r
 \r
 .loader {\r
   width: 100%;\r
@@ -1878,6 +1809,11 @@ input[type='search']::-webkit-search-cancel-button {\r
   opacity: 1;
 }\r
 \r
+.hover\\:saturate-100:hover {
+  --tw-saturate: saturate(1);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}\r
+\r
 .focus\\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -1892,7 +1828,8 @@ input[type='search']::-webkit-search-cancel-button {\r
   .\\32xl\\:w-\\[50vw\\] {
     width: 50vw;
   }
-}.vim-measure {\r
+}\r
+.vim-measure {\r
   background-color: white;\r
 }\r
 \r
@@ -49407,6 +49344,7 @@ function _AxesPanel(props) {
     const subCam = viewer.camera.onValueChanged.subscribe(() => setOrtho(viewer.camera.orthographic));
     const axes = document.getElementsByClassName("gizmo-axis-canvas")[0];
     ui2.current.appendChild(axes);
+    axes.classList.add("block", "!static", "order-1", "mx-auto", "mb-0", "mt-auto");
     return () => {
       subCam();
     };
@@ -49440,7 +49378,7 @@ function _AxesPanel(props) {
   }));
   return /* @__PURE__ */ React__default.createElement("div", {
     ref: ui2,
-    className: "vim-top border z-20 border-white flex flex-col fixed right-6 top-6 w-[100px] h-[145px] rounded-2xl shadow-lg transition-all"
+    className: "vim-axes-panel border z-20 border-white flex flex-col fixed right-6 top-6 w-[100px] h-[145px] rounded-2xl shadow-lg transition-all saturate-0 hover:saturate-100 opacity-50 hover:opacity-100"
   }, /* @__PURE__ */ React__default.createElement("div", {
     className: "vim-top-buttons order-2 flex p-1 rounded-b-xl pointer-events-auto justify-center bg-white mb-0 mt-auto"
   }, /* @__PURE__ */ React__default.createElement("div", {
@@ -49770,9 +49708,9 @@ function _LoadingBox(props) {
     className: "loading-wrapper backdrop-blur fixed items-center justify-center top-0 left-0 w-full h-full z-40 bg-overflow",
     onContextMenu: (event) => event.preventDefault()
   }, /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-loading-box w-[320px] text-gray-medium bg-white px-5 py-4 rounded shadow-lg z-20"
+    className: "vim-loading-box m-auto self-center absolute top-[calc(50%-37px)] left-[calc(50%-160px)] w-[320px] bg-white px-5 py-4 rounded shadow-lg z-20"
   }, /* @__PURE__ */ React__default.createElement("h1", {
-    className: "w-full mb-2"
+    className: "w-full mb-2 text-gray-medium"
   }, " ", msg, " "), /* @__PURE__ */ React__default.createElement("span", {
     className: "loader"
   })));
@@ -55995,7 +55933,7 @@ function _MenuToast(props) {
       width: `calc(100% - ${props.side.getWidth()}px)`
     }
   }, /* @__PURE__ */ React__default.createElement("div", {
-    className: `vim-menu-toast rounded shadow-lg py-2 px-5 flex items-center justify-between transition-all m-auto ${visible ? "opacity-100" : "opacity-0"}`
+    className: `vim-menu-toast rounded shadow-lg py-2 px-5 flex items-center justify-between transition-all m-auto bg-gray-warm ${visible ? "opacity-100" : "opacity-0"}`
   }, /* @__PURE__ */ React__default.createElement("span", {
     className: "text-sm uppercase font-semibold text-gray-light"
   }, "Speed:"), /* @__PURE__ */ React__default.createElement("span", {
@@ -56926,6 +56864,9 @@ function VimComponent(props) {
     side,
     content: sidePanel
   }), /* @__PURE__ */ React__default.createElement(ReactTooltip, {
+    arrowColor: "transparent",
+    type: "light",
+    className: "!bg-white !text-xs !text-gray-darkest !opacity-100 !border !border-solid !border-gray-medium !shadow-[2px_6px_15px_rgba(0,0,0,0.3)] !transition-opacity",
     delayShow: 200
   }), /* @__PURE__ */ React__default.createElement(VimContextMenu, {
     viewer,
@@ -56939,10 +56880,11 @@ function VimComponent(props) {
   }));
 }
 const Logo = React__default.memo(() => /* @__PURE__ */ React__default.createElement("div", {
-  className: "vim-logo"
+  className: "vim-logo fixed top-4 left-4"
 }, /* @__PURE__ */ React__default.createElement("a", {
   href: "https://vimaec.com"
 }, /* @__PURE__ */ React__default.createElement("img", {
+  className: "vim-logo-img h-12 w-32",
   src: logo
 }))));
 function useViewerState(viewer) {
