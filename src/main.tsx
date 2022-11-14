@@ -24,7 +24,7 @@ if (params.has('dev')) {
 }
 
 
-const ui = createVimComponent(loadVim, undefined, {capacity: {useOrthographicCamera: false}})
+createVimComponent(loadVim, undefined, {capacity: {useOrthographicCamera: false}})
 
 function loadVim(ref: VimComponentRef){
   ref.viewer.loadVim(
@@ -35,26 +35,6 @@ function loadVim(ref: VimComponentRef){
   ).then(_ => console.log("Vim Successfully loaded"))
 }
 
-// Add the FPS Counter
-const stats = new Stats()
-const style = stats.dom.style as CSSStyleDeclaration
-const div = stats.dom as HTMLDivElement
-div.className = 'vim-performance'
-style.right = '24px'
-style.left = 'auto'
-style.top = '200px'
-style.zIndex = '1'
-// -half width
-ui.container.root.appendChild(stats.dom)
-animate()
-
-function animate () {
-  requestAnimationFrame(() => animate())
-
-  if (stats) {
-    stats.update()
-  }
-}
 
 
 
