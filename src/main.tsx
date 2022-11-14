@@ -27,6 +27,7 @@ if (params.has('dev')) {
 createVimComponent(loadVim, undefined, {capacity: {useOrthographicCamera: false}})
 
 function loadVim(ref: VimComponentRef){
+  globalThis.vimComponent = ref
   ref.viewer.loadVim(
     url,
     {
