@@ -692,6 +692,9 @@ select {
 .vc-absolute {
   position: absolute;
 }
+.\!vc-absolute {
+  position: absolute !important;
+}
 .vc-inset-0 {
   top: 0px;
   right: 0px;
@@ -715,6 +718,15 @@ select {
 }
 .vc-left-4 {
   left: 1rem;
+}
+.\!vc-right-6 {
+  right: 1.5rem !important;
+}
+.\!vc-left-auto {
+  left: auto !important;
+}
+.\!vc-top-52 {
+  top: 13rem !important;
 }
 .vc-bottom-0 {
   bottom: 0px;
