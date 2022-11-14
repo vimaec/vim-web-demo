@@ -56975,6 +56975,7 @@ if (params.has("dev")) {
 }
 createVimComponent(loadVim, void 0, { capacity: { useOrthographicCamera: false } });
 function loadVim(ref) {
+  globalThis.vimComponent = ref;
   ref.viewer.loadVim(url, {
     rotation: { x: 270, y: 0, z: 0 }
   }).then((_) => console.log("Vim Successfully loaded"));
