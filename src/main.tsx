@@ -1,5 +1,4 @@
 //import { settingsGui } from './settingsGui'
-import Stats from 'stats-js'
 import 'vim-webgl-component/dist/style.css';
 import {VIM, createVimComponent, VimComponentRef } from 'vim-webgl-component'
 
