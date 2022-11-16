@@ -754,6 +754,9 @@ select {
 .\\!vc-absolute {
   position: absolute !important;
 }\r
+.vc-relative {
+  position: relative;
+}\r
 .vc-inset-0 {
   top: 0px;
   right: 0px;
@@ -798,6 +801,9 @@ select {
 }\r
 .vc-top-\\[10\\%\\] {
   top: 10%;
+}\r
+.vc-right-0 {
+  right: 0px;
 }\r
 .vc-right-16 {
   right: 4rem;
@@ -915,6 +921,9 @@ select {
 .vc-h-1\\/2 {
   height: 50%;
 }\r
+.vc-h-4 {
+  height: 1rem;
+}\r
 .vc-h-\\[18px\\] {
   height: 18px;
 }\r
@@ -953,6 +962,9 @@ select {
 }\r
 .vc-w-9\\/12 {
   width: 75%;
+}\r
+.vc-w-4 {
+  width: 1rem;
 }\r
 .vc-w-\\[18px\\] {
   width: 18px;
@@ -1108,6 +1120,9 @@ select {
 }\r
 .vc-bg-transparent {
   background-color: transparent;
+}\r
+.vc-bg-gray-medium {
+  background-color: var(--c-medium-gray);
 }\r
 .vc-bg-primary-royal {
   background-color: var(--c-primary-royal);
@@ -40773,7 +40788,7 @@ class ViewerSettings {
         },
         section: {
           strokeWidth: 0.01,
-          strokeFalloff: 0.65,
+          strokeFalloff: 0.75,
           strokeColor: { r: 246, g: 246, b: 246 }
         }
       },
@@ -42881,7 +42896,9 @@ class DefaultInputScheme {
     });
   }
   onIdleAction(hit) {
-    this._viewer.selection.focus(hit == null ? void 0 : hit.object);
+    if (!this._viewer.sectionBox.interactive) {
+      this._viewer.selection.focus(hit == null ? void 0 : hit.object);
+    }
   }
   onKeyAction(key) {
     const camera = this._viewer.camera;
@@ -43469,7 +43486,7 @@ class Selection {
     __publicField(this, "_focusStart", 0);
     __publicField(this, "_onValueChanged", new dist$3.SignalDispatcher());
     this._renderer = renderer;
-    this._focusMaterial = renderer.materials.focus.clone();
+    this._focusMaterial = renderer.materials.focus;
   }
   get onValueChanged() {
     return this._onValueChanged.asEvent();
@@ -48672,11 +48689,12 @@ class Section {
     this.box.copy(box);
   }
   set active(value) {
-    const p2 = value ? this.planes : void 0;
+    const p2 = value ? this.planes : null;
     this._materials.opaque.clippingPlanes = p2;
     this._materials.transparent.clippingPlanes = p2;
     this._materials.wireframe.clippingPlanes = p2;
     this._materials.isolation.clippingPlanes = p2;
+    this._materials.focus.clippingPlanes = p2;
     this._renderer.localClippingEnabled = value;
     this._active = value;
   }
@@ -49384,16 +49402,19 @@ function _AxesPanel(props) {
     width: "20",
     fill: "currentColor"
   }));
+  const createButton = (button, condition = true) => {
+    if (!condition)
+      return null;
+    return /* @__PURE__ */ React__default.createElement("div", {
+      className: "vc-mx-1 "
+    }, button);
+  };
   return /* @__PURE__ */ React__default.createElement("div", {
     ref: ui2,
     className: "vim-axes-panel vc-fixed vc-right-6 vc-top-6 vc-z-20 vc-flex vc-h-[145px] vc-w-[100px] vc-flex-col vc-rounded-2xl vc-border vc-border-white vc-opacity-50 vc-shadow-lg vc-saturate-0 vc-transition-all hover:vc-opacity-100 hover:vc-saturate-100"
   }, /* @__PURE__ */ React__default.createElement("div", {
     className: "vim-top-buttons vc-pointer-events-auto vc-order-2 vc-mb-0 vc-mt-auto vc-flex vc-justify-center vc-rounded-b-xl vc-bg-white vc-p-1"
-  }, /* @__PURE__ */ React__default.createElement("div", {
-    className: "vc-mx-1"
-  }, props.settings.capacity.useOrthographicCamera ? btnOrtho : null), /* @__PURE__ */ React__default.createElement("div", {
-    className: "vc-mx-1"
-  }, btnHome)));
+  }, createButton(btnOrtho, props.settings.capacity.useOrthographicCamera), createButton(btnHome)));
 }
 function pointerToCursor(pointer) {
   switch (pointer) {
@@ -53980,33 +54001,7 @@ async function getVimBimHeader(vim) {
         "vc-w-full"
       ]
     ],
-    void 0,
-    [
-      [
-        "BIM Count",
-        [...vim.document.getAllElements()].length,
-        "vc-w-3/12",
-        "vc-w-3/12",
-        "vc-w-1/2 mt-5"
-      ],
-      [
-        "Node Count",
-        vim.document.g3d.getInstanceCount(),
-        "vc-w-3/12",
-        "vc-w-3/12",
-        "vc-w-1/2 mt-5"
-      ]
-    ],
-    [
-      [
-        "Mesh Count",
-        vim.document.g3d.getMeshCount(),
-        "vc-w-3/12",
-        "vc-w-3/12",
-        "vc-w-1/2"
-      ],
-      ["Revit Files", documents == null ? void 0 : documents.length, "vc-w-3/12", "vc-w-3/12", "vc-w-1/2"]
-    ]
+    void 0
   ];
 }
 function formatSource(source) {
@@ -54045,7 +54040,7 @@ function BimSearch(props) {
     props.viewer.base.inputs.keyboard.register();
   };
   return /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-bim-search vc-mb-4 vc-flex vc-items-center"
+    className: "vim-bim-search vc-mb-4 vc-flex vc-items-center vc-relative"
   }, /* @__PURE__ */ React__default.createElement("svg", {
     className: "search-icon -vc-mr-4 vc-text-gray-light",
     xmlns: "http://www.w3.org/2000/svg",
@@ -54064,10 +54059,10 @@ function BimSearch(props) {
     onFocus,
     onBlur,
     onChange
-  }), /* @__PURE__ */ React__default.createElement("button", {
-    className: "search-clear",
+  }), text.length > 0 ? /* @__PURE__ */ React__default.createElement("button", {
+    className: "search-clear vc-text-white vc-bg-gray-medium vc-w-4 vc-h-4 vc-flex vc-items-center vc-justify-center vc-rounded-full vc-shrink-0 vc-absolute vc-right-0",
     onClick: onClear
-  }, text.length > 0 ? close({ width: 16, height: 16, fill: "currentColor" }) : null), props.count !== void 0 && text ? /* @__PURE__ */ React__default.createElement("div", {
+  }, close({ width: 10, height: 10, fill: "currentColor" }), " ") : null, props.count !== void 0 && text ? /* @__PURE__ */ React__default.createElement("div", {
     className: "search-count vc-absolute vc-right-16 vc-rounded-full vc-bg-primary-royal vc-py-1 vc-px-2 vc-text-xs vc-font-bold vc-text-white"
   }, props.count) : null);
 }
@@ -55052,7 +55047,7 @@ function _SidePanel(props) {
   const iconOptions = { height: "20", width: "20", fill: "currentColor" };
   return /* @__PURE__ */ React__default.createElement(Resizable, {
     size: { width: props.side.getWidth(), height: "100%" },
-    minWidth: 240,
+    minWidth: 300,
     maxWidth: getMaxSize(),
     onResize: (e, direction, ref, d) => {
       props.side.setWidth(ref.clientWidth);
@@ -56178,6 +56173,7 @@ function useSettings(viewer, value) {
   react.exports.useEffect(() => {
     applySettings(viewer, settings2);
   }, [settings2]);
+  applySettings(viewer, merge);
   return react.exports.useMemo(() => ({ value: settings2, set: setSettings }), [settings2]);
 }
 function applySettings(viewer, settings2) {

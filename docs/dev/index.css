@@ -695,6 +695,9 @@ select {
 .\!vc-absolute {
   position: absolute !important;
 }
+.vc-relative {
+  position: relative;
+}
 .vc-inset-0 {
   top: 0px;
   right: 0px;
@@ -739,6 +742,9 @@ select {
 }
 .vc-top-\[10\%\] {
   top: 10%;
+}
+.vc-right-0 {
+  right: 0px;
 }
 .vc-right-16 {
   right: 4rem;
@@ -856,6 +862,9 @@ select {
 .vc-h-1\/2 {
   height: 50%;
 }
+.vc-h-4 {
+  height: 1rem;
+}
 .vc-h-\[18px\] {
   height: 18px;
 }
@@ -894,6 +903,9 @@ select {
 }
 .vc-w-9\/12 {
   width: 75%;
+}
+.vc-w-4 {
+  width: 1rem;
 }
 .vc-w-\[18px\] {
   width: 18px;
@@ -1049,6 +1061,9 @@ select {
 }
 .vc-bg-transparent {
   background-color: transparent;
+}
+.vc-bg-gray-medium {
+  background-color: var(--c-medium-gray);
 }
 .vc-bg-primary-royal {
   background-color: var(--c-primary-royal);
