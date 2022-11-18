@@ -41551,7 +41551,7 @@ class Camera {
       offset.setY(y2);
     }
     offset.normalize();
-    offset.multiplyScalar(sphere.radius * 3);
+    offset.multiplyScalar(Math.max(sphere.radius * 3, 1));
     this._targetPosition = sphere.center.clone().add(offset);
     this._orbitTarget = sphere.center;
     this.startLerp(duration, "Both");
@@ -47491,11 +47491,11 @@ class Document {
     const parameterElement = parameterTable ? await parameterTable.getArray(objectModel.element.index) : void 0;
     const parameterValue = parameterTable ? await parameterTable.getArray(objectModel.parameter.columns.value) : void 0;
     const getParameterDisplayValue = (index) => {
-      var _a22;
+      var _a22, _b2;
       if (!parameterValue)
         return;
-      const value = (_a22 = this.getString(parameterValue[index])) == null ? void 0 : _a22.split("|");
-      const displayValue = value == null ? void 0 : value[value.length - 1];
+      const value = (_a22 = this.getString(parameterValue[index])) == null ? void 0 : _a22.split("|").filter((s) => s.length > 0);
+      const displayValue = (_b2 = value == null ? void 0 : value[value.length - 1]) != null ? _b2 : value == null ? void 0 : value[0];
       return displayValue;
     };
     const parameterDescription = parameterTable ? await parameterTable.getArray(objectModel.parameterDescriptor.index) : void 0;
@@ -49613,7 +49613,6 @@ function TabTools(props) {
   const btnMeasure = actionButton("Measuring Mode", onMeasureBtn, measure, false);
   const btnIsolation = actionButton("Toggle Isolation", () => {
     props.isolation.toggleIsolation("controlBar");
-    props.viewer.frameVisibleObjects();
   }, toggleIsolation, false);
   const toolsTab = /* @__PURE__ */ React__default.createElement("div", {
     className: "vim-control-bar-section vc-mx-2 vc-flex vc-items-center vc-rounded-full vc-bg-white vc-px-2 vc-shadow-md"
@@ -53082,6 +53081,7 @@ const contextMenuElementIds = {
   dividerSelection: "dividerSelection",
   isolateSelection: "isolateObject",
   hideObject: "hideObject",
+  showObject: "showObject",
   clearSelection: "clearSelection",
   showAll: "showAll",
   dividerMeasure: "dividerMeasure",
@@ -53093,7 +53093,7 @@ const contextMenuElementIds = {
 };
 const VimContextMenu = React__default.memo(_VimContextMenu);
 function _VimContextMenu(props) {
-  var _a22, _b2, _c;
+  var _a22, _b2, _c, _d;
   const viewer = props.viewer.base;
   const helper = props.viewer;
   const [section, setSection] = react.exports.useState({
@@ -53141,6 +53141,10 @@ function _VimContextMenu(props) {
     props.isolation.hide([...viewer.selection.objects], "contextMenu");
     e.stopPropagation();
   };
+  const onSelectionShowBtn = (e) => {
+    props.isolation.show([...viewer.selection.objects], "contextMenu");
+    e.stopPropagation();
+  };
   const onSelectionClearBtn = (e) => {
     viewer.selection.clear();
     e.stopPropagation();
@@ -53181,6 +53185,7 @@ function _VimContextMenu(props) {
     }) : null;
   };
   const hasSelection = ((_a22 = props.selection) == null ? void 0 : _a22.length) > 0;
+  const hasVisibleSelection = ((_b2 = props.selection) == null ? void 0 : _b2.findIndex((o) => o.visible)) >= 0;
   const measuring = !!viewer.measure.stage;
   const isolated = ArrayEquals(props.selection, props.isolation.current());
   let elements = [
@@ -53202,7 +53207,7 @@ function _VimContextMenu(props) {
     {
       id: contextMenuElementIds.zoomToFit,
       label: "Zoom to Fit",
-      keyboard: "HOME",
+      keyboard: "F",
       action: onCameraFrameBtn,
       enabled: true
     },
@@ -53220,9 +53225,16 @@ function _VimContextMenu(props) {
     {
       id: contextMenuElementIds.hideObject,
       label: "Hide Object",
-      keyboard: "",
+      keyboard: "V",
       action: onSelectionHideBtn,
-      enabled: hasSelection
+      enabled: hasVisibleSelection
+    },
+    {
+      id: contextMenuElementIds.showObject,
+      label: "Show Object",
+      keyboard: "V",
+      action: onSelectionShowBtn,
+      enabled: hasSelection && !hasVisibleSelection
     },
     {
       id: contextMenuElementIds.clearSelection,
@@ -53234,7 +53246,7 @@ function _VimContextMenu(props) {
     {
       id: contextMenuElementIds.showAll,
       label: "Show All",
-      keyboard: "",
+      keyboard: "Esc",
       action: onShowAllBtn,
       enabled: hidden
     },
@@ -53272,7 +53284,7 @@ function _VimContextMenu(props) {
       enabled: section.visible && hasSelection
     }
   ];
-  elements = (_c = (_b2 = props.customization) == null ? void 0 : _b2.call(props, elements)) != null ? _c : elements;
+  elements = (_d = (_c = props.customization) == null ? void 0 : _c.call(props, elements)) != null ? _d : elements;
   return /* @__PURE__ */ React__default.createElement("div", {
     className: "vim-context-menu",
     onContextMenu: (e) => {
@@ -53606,7 +53618,6 @@ function toggleVisibility(viewer, isolation, tree, index) {
   } else {
     isolation.hide(objs, "tree");
   }
-  viewer.frameVisibleObjects();
 }
 function updateViewerFocus(viewer, tree, index) {
   var _a22;
@@ -56035,7 +56046,6 @@ class ComponentInputs {
       }
       case KEYS.KEY_I: {
         this._isolation.toggleIsolation("keyboard");
-        this._viewer.frameVisibleObjects();
         return true;
       }
       case KEYS.KEY_ESCAPE: {
@@ -56047,6 +56057,20 @@ class ComponentInputs {
           this._isolation.clear("keyboard");
           return true;
         }
+        break;
+      }
+      case KEYS.KEY_V: {
+        if (this._viewer.base.selection.count === 0)
+          return;
+        const objs = [...this._viewer.base.selection.objects];
+        const visible = objs.findIndex((o) => o.visible) >= 0;
+        if (visible) {
+          this._isolation.hide([...this._viewer.base.selection.objects], "keyboard");
+          this._viewer.base.selection.clear();
+        } else {
+          this._isolation.show([...this._viewer.base.selection.objects], "keyboard");
+        }
+        return true;
       }
     }
     return this._default.onKeyAction(key);
@@ -56172,8 +56196,10 @@ function useSettings(viewer, value) {
   const [settings2, setSettings] = react.exports.useState(merge);
   react.exports.useEffect(() => {
     applySettings(viewer, settings2);
+  }, []);
+  react.exports.useEffect(() => {
+    applySettings(viewer, settings2);
   }, [settings2]);
-  applySettings(viewer, merge);
   return react.exports.useMemo(() => ({ value: settings2, set: setSettings }), [settings2]);
 }
 function applySettings(viewer, settings2) {
@@ -56647,121 +56673,119 @@ NonUniformSimpleEventList$1.NonUniformSimpleEventList = NonUniformSimpleEventLis
     return SimpleEventList_12.SimpleEventList;
   } });
 })(dist$1);
-function useIsolation(componentViewer, settings2) {
-  const viewer = componentViewer.base;
-  const isolationRef = react.exports.useRef();
-  const lastIsolation = react.exports.useRef();
-  const onChanged = react.exports.useRef(new dist$1.SimpleEventDispatcher()).current;
-  react.exports.useEffect(() => {
+class Isolation {
+  constructor(componentViewer, settings2) {
+    this.onChanged = new dist$1.SimpleEventDispatcher();
+    this.viewer = componentViewer.base;
+    this.helper = componentViewer;
+    this.updateSettings(settings2);
+  }
+  updateSettings(settings2) {
     var _a22;
-    const set3 = new Set((_a22 = isolationRef.current) == null ? void 0 : _a22.map((o) => o.vim));
-    viewer.vims.forEach((v2) => {
-      v2.scene.material = set3.has(v2) && settings2.viewer.isolationMaterial ? viewer.renderer.materials.isolation : void 0;
+    this.settings = settings2;
+    const set3 = new Set((_a22 = this.isolation) == null ? void 0 : _a22.map((o) => o.vim));
+    this.viewer.vims.forEach((v2) => {
+      v2.scene.material = set3.has(v2) && this.settings.viewer.isolationMaterial ? this.viewer.renderer.materials.isolation : void 0;
     });
-  }, [settings2, viewer]);
-  const any = () => !!isolationRef.current;
-  const showAll = () => {
-    viewer.vims.forEach((v2) => {
+  }
+  any() {
+    return this.isolation !== void 0;
+  }
+  showAll() {
+    this.viewer.vims.forEach((v2) => {
       for (const obj of v2.getAllObjects()) {
         obj.visible = true;
       }
       v2.scene.material = void 0;
     });
-  };
-  const _isolate = (viewer2, settings22, objects) => {
+  }
+  _isolate(viewer, settings2, objects) {
     let allVisible = true;
     if (!objects) {
-      showAll();
+      this.showAll();
     } else {
       const set3 = new Set(objects);
-      viewer2.vims.forEach((vim) => {
+      viewer.vims.forEach((vim) => {
         for (const obj of vim.getAllObjects()) {
           const has2 = set3.has(obj);
           obj.visible = has2;
           if (obj.hasMesh && !has2)
             allVisible = false;
         }
-        vim.scene.material = !allVisible && settings22.viewer.isolationMaterial ? viewer2.renderer.materials.isolation : void 0;
+        vim.scene.material = !allVisible && settings2.viewer.isolationMaterial ? viewer.renderer.materials.isolation : void 0;
       });
     }
     return !allVisible;
-  };
-  const current = () => {
-    return isolationRef.current;
-  };
-  const isolate = (objects, source) => {
-    if (isolationRef.current) {
-      lastIsolation.current = isolationRef.current;
+  }
+  current() {
+    return this.isolation;
+  }
+  isolate(objects, source) {
+    if (this.isolation) {
+      this.lastIsolation = this.isolation;
     }
-    const isolated = _isolate(viewer, settings2, objects);
-    isolationRef.current = isolated ? objects : void 0;
-    onChanged.dispatch(source);
-  };
-  const toggleIsolation2 = (source) => {
-    const selection = [...viewer.selection.objects];
-    if (isolationRef.current) {
-      lastIsolation.current = isolationRef.current;
+    const isolated = this._isolate(this.viewer, this.settings, objects);
+    this.isolation = isolated ? objects : void 0;
+    this.helper.frameVisibleObjects();
+    this.onChanged.dispatch(source);
+  }
+  toggleIsolation(source) {
+    const selection = [...this.viewer.selection.objects];
+    if (this.isolation) {
+      this.lastIsolation = this.isolation;
     }
-    if (isolationRef.current) {
-      if (selection.length === 0 || ArrayEquals(isolationRef.current, selection)) {
-        showAll();
-        isolationRef.current = void 0;
+    if (this.isolation) {
+      if (selection.length === 0 || ArrayEquals(this.isolation, selection)) {
+        this.showAll();
+        this.isolation = void 0;
       } else {
-        const isolated = _isolate(viewer, settings2, selection);
-        isolationRef.current = isolated ? selection : void 0;
-        viewer.selection.clear();
+        const isolated = this._isolate(this.viewer, this.settings, selection);
+        this.isolation = isolated ? selection : void 0;
+        this.helper.frameVisibleObjects();
+        this.viewer.selection.clear();
       }
     } else {
       if (selection.length > 0) {
-        const isolated = _isolate(viewer, settings2, selection);
-        isolationRef.current = isolated ? selection : void 0;
-        viewer.selection.clear();
-      } else if (lastIsolation.current) {
-        const isolated = _isolate(viewer, settings2, lastIsolation.current);
-        isolationRef.current = isolated ? [...lastIsolation.current] : void 0;
+        const isolated = this._isolate(this.viewer, this.settings, selection);
+        this.isolation = isolated ? selection : void 0;
+        this.helper.frameVisibleObjects();
+        this.viewer.selection.clear();
+      } else if (this.lastIsolation) {
+        const isolated = this._isolate(this.viewer, this.settings, this.lastIsolation);
+        this.isolation = isolated ? [...this.lastIsolation] : void 0;
       }
     }
-    onChanged.dispatch(source);
-  };
-  const hide = (objects, source) => {
+    this.onChanged.dispatch(source);
+  }
+  hide(objects, source) {
     var _a22;
     const selection = new Set(objects);
-    const initial = (_a22 = isolationRef.current) != null ? _a22 : viewer.vims[0].getAllObjects();
+    const initial = (_a22 = this.isolation) != null ? _a22 : this.viewer.vims[0].getAllObjects();
     const result = [];
     for (const obj of initial) {
       if (!selection.has(obj))
         result.push(obj);
     }
-    const isolated = _isolate(viewer, settings2, result);
-    isolationRef.current = isolated ? result : void 0;
-    onChanged.dispatch(source);
-    objects.forEach((o) => viewer.selection.remove(o));
-  };
-  const show = (objects, source) => {
+    const isolated = this._isolate(this.viewer, this.settings, result);
+    this.isolation = isolated ? result : void 0;
+    this.onChanged.dispatch(source);
+    objects.forEach((o) => this.viewer.selection.remove(o));
+  }
+  show(objects, source) {
     var _a22;
-    const isolation = (_a22 = isolationRef.current) != null ? _a22 : [];
+    const isolation = (_a22 = this.isolation) != null ? _a22 : [];
     objects.forEach((o) => isolation.push(o));
     const result = [...new Set(isolation)];
-    const isolated = _isolate(viewer, settings2, result);
-    isolationRef.current = isolated ? result : void 0;
-    onChanged.dispatch(source);
-  };
-  const clear = (source) => {
-    showAll();
-    lastIsolation.current = isolationRef.current;
-    isolationRef.current = void 0;
-    onChanged.dispatch(source);
-  };
-  return {
-    any,
-    isolate,
-    show,
-    hide,
-    toggleIsolation: toggleIsolation2,
-    clear,
-    current,
-    onChanged
-  };
+    const isolated = this._isolate(this.viewer, this.settings, result);
+    this.isolation = isolated ? result : void 0;
+    this.onChanged.dispatch(source);
+  }
+  clear(source) {
+    this.showAll();
+    this.lastIsolation = this.isolation;
+    this.isolation = void 0;
+    this.onChanged.dispatch(source);
+  }
 }
 class ViewerWrapper {
   constructor(viewer) {
@@ -56840,7 +56864,8 @@ function VimComponent(props) {
   const viewer = react.exports.useRef(new ViewerWrapper(props.viewer)).current;
   const cursor = react.exports.useRef(new CursorManager(props.viewer)).current;
   const settings2 = useSettings(props.viewer, props.settings);
-  const isolation = useIsolation(viewer, settings2.value);
+  const [isolation] = react.exports.useState(() => new Isolation(viewer, settings2.value));
+  react.exports.useEffect(() => isolation.updateSettings(settings2.value), [settings2]);
   const side = useSideState(settings2.value.ui.bimPanel, 480);
   const [contextMenu, setcontextMenu] = react.exports.useState();
   const help2 = useHelp();
