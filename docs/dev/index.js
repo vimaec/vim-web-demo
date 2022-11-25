@@ -43352,20 +43352,163 @@ var Geometry;
     }
   }
 })(Geometry || (Geometry = {}));
+class ObjectAttribute {
+  constructor(value, vertexAttribute, instanceAttribute, meshes, toNumber) {
+    __publicField(this, "value");
+    __publicField(this, "vertexAttribute");
+    __publicField(this, "instanceAttribute");
+    __publicField(this, "_meshes");
+    __publicField(this, "toNumber");
+    this.value = value;
+    this.vertexAttribute = vertexAttribute;
+    this.instanceAttribute = instanceAttribute;
+    this._meshes = meshes;
+    this.toNumber = toNumber;
+  }
+  apply(value) {
+    if (this.value === value)
+      return;
+    this.value = value;
+    if (!this._meshes)
+      return;
+    const number = this.toNumber(value);
+    for (let m2 = 0; m2 < this._meshes.length; m2++) {
+      const [mesh, index] = this._meshes[m2];
+      if (mesh.userData.merged) {
+        this.applyMerged(mesh, index, number);
+      } else {
+        this.applyInstanced(mesh, index, number);
+      }
+    }
+  }
+  applyInstanced(mesh, index, number) {
+    let attribute = mesh.geometry.getAttribute(this.instanceAttribute);
+    if (!attribute) {
+      attribute = new InstancedBufferAttribute(new Float32Array(mesh.count), 1);
+      mesh.geometry.setAttribute(this.instanceAttribute, attribute);
+    }
+    attribute.setX(index, number);
+    attribute.needsUpdate = true;
+  }
+  applyMerged(mesh, index, number) {
+    var _a22;
+    const positions = mesh.geometry.getAttribute("position");
+    const attribute = (_a22 = mesh.geometry.getAttribute(this.vertexAttribute)) != null ? _a22 : new Float32BufferAttribute(new Float32Array(positions.count), 1);
+    mesh.geometry.setAttribute(this.vertexAttribute, attribute);
+    const start = getMergedMeshStart(mesh, index);
+    const end = getMergedMeshEnd(mesh, index);
+    const indices = mesh.geometry.index;
+    for (let i2 = start; i2 < end; i2++) {
+      const v2 = indices.getX(i2);
+      attribute.setX(v2, number);
+    }
+    attribute.needsUpdate = true;
+  }
+}
+class ColorAttribute {
+  constructor(meshes, value, vim) {
+    __publicField(this, "_meshes");
+    __publicField(this, "value");
+    __publicField(this, "vim");
+    this._meshes = meshes;
+    this.value = value;
+    this.vim = vim;
+  }
+  apply(color) {
+    if (!this._meshes)
+      return;
+    for (let m2 = 0; m2 < this._meshes.length; m2++) {
+      const [mesh, index] = this._meshes[m2];
+      if (mesh.userData.merged) {
+        this.applyMergedColor(mesh, index, color);
+      } else {
+        this.applyInstancedColor(mesh, index, color);
+      }
+    }
+  }
+  applyMergedColor(mesh, index, color) {
+    if (!color) {
+      this.resetMergedColor(mesh, index);
+      return;
+    }
+    const start = getMergedMeshStart(mesh, index);
+    const end = getMergedMeshEnd(mesh, index);
+    const colors = mesh.geometry.getAttribute("color");
+    const indices = mesh.geometry.index;
+    for (let i2 = start; i2 < end; i2++) {
+      const v2 = indices.getX(i2);
+      colors.setXYZ(v2, color.r, color.g, color.b);
+    }
+    colors.needsUpdate = true;
+  }
+  resetMergedColor(mesh, index) {
+    if (!this.vim)
+      return;
+    const colors = mesh.geometry.getAttribute("color");
+    const indices = mesh.geometry.index;
+    let mergedIndex = getMergedMeshStart(mesh, index);
+    const instance = this.vim.scene.getInstanceFromMesh(mesh, index);
+    if (!instance)
+      throw new Error("Could not reset original color.");
+    const g3d = this.vim.document.g3d;
+    const g3dMesh = g3d.instanceMeshes[instance];
+    const subStart = g3d.getMeshSubmeshStart(g3dMesh);
+    const subEnd = g3d.getMeshSubmeshEnd(g3dMesh);
+    for (let sub = subStart; sub < subEnd; sub++) {
+      const start = g3d.getSubmeshIndexStart(sub);
+      const end = g3d.getSubmeshIndexEnd(sub);
+      const color = g3d.getSubmeshColor(sub);
+      for (let i2 = start; i2 < end; i2++) {
+        const v2 = indices.getX(mergedIndex);
+        colors.setXYZ(v2, color[0], color[1], color[2]);
+        mergedIndex++;
+      }
+    }
+    colors.needsUpdate = true;
+  }
+  applyInstancedColor(mesh, index, color) {
+    const colors = this.getOrAddInstanceColorAttribute(mesh);
+    if (color) {
+      colors.setXYZ(index, color.r, color.g, color.b);
+      colors.needsUpdate = true;
+    }
+  }
+  getOrAddInstanceColorAttribute(mesh) {
+    if (mesh.instanceColor)
+      return mesh.instanceColor;
+    const count = mesh.instanceMatrix.count;
+    const colors = new Float32Array(count * 3);
+    const attribute = new InstancedBufferAttribute(colors, 3);
+    mesh.instanceColor = attribute;
+    return attribute;
+  }
+}
+function getMergedMeshStart(mesh, index) {
+  return mesh.userData.submeshes[index];
+}
+function getMergedMeshEnd(mesh, index) {
+  return index + 1 < mesh.userData.submeshes.length ? mesh.userData.submeshes[index + 1] : mesh.geometry.index.count;
+}
 class Object$1 {
   constructor(vim, element, instances, meshes) {
     __publicField(this, "vim");
     __publicField(this, "element");
     __publicField(this, "instances");
     __publicField(this, "_color");
-    __publicField(this, "_visible", true);
     __publicField(this, "_boundingBox");
     __publicField(this, "_meshes");
-    __publicField(this, "_selected");
+    __publicField(this, "selectedAttribute");
+    __publicField(this, "visibleAttribute");
+    __publicField(this, "coloredAttribute");
+    __publicField(this, "colorAttribute");
     this.vim = vim;
     this.element = element;
     this.instances = instances;
     this._meshes = meshes;
+    this.selectedAttribute = new ObjectAttribute(false, "vertexSelected", "instanceSelected", meshes, (v2) => v2 ? 1 : 0);
+    this.visibleAttribute = new ObjectAttribute(true, "ignoreVertex", "ignoreInstance", meshes, (v2) => v2 ? 0 : 1);
+    this.coloredAttribute = new ObjectAttribute(false, "colored", "colored", meshes, (v2) => v2 ? 1 : 0);
+    this.colorAttribute = new ColorAttribute(meshes, void 0, vim);
   }
   get meshBuilder() {
     return this.vim.scene.builder.meshBuilder;
@@ -43373,6 +43516,29 @@ class Object$1 {
   get hasMesh() {
     var _a22;
     return (_a22 = this._meshes) == null ? void 0 : _a22.length;
+  }
+  get selected() {
+    return this.selectedAttribute.value;
+  }
+  set selected(value) {
+    this.selectedAttribute.apply(value);
+  }
+  get visible() {
+    return this.visibleAttribute.value;
+  }
+  set visible(value) {
+    this.visibleAttribute.apply(value);
+  }
+  get color() {
+    return this.colorAttribute.value;
+  }
+  set color(color) {
+    if (!this._color || !color ? !this._color && !color : this._color.equals(color)) {
+      return;
+    }
+    this._color = color;
+    this.coloredAttribute.apply(color !== void 0);
+    this.colorAttribute.apply(color);
   }
   updateMeshes(meshes) {
     this._meshes = meshes;
@@ -43431,201 +43597,6 @@ class Object$1 {
     const geometry = Geometry.createGeometryFromInstances(this.vim.document.g3d, this.instances);
     geometry == null ? void 0 : geometry.applyMatrix4(this.vim.getMatrix());
     return geometry;
-  }
-  get color() {
-    return this._color;
-  }
-  set color(color) {
-    if (!this._color || !color ? !this._color && !color : this._color.equals(color)) {
-      return;
-    }
-    this._color = color;
-    this.applyColor(color);
-  }
-  applyColor(color) {
-    if (!this._meshes)
-      return;
-    for (let m2 = 0; m2 < this._meshes.length; m2++) {
-      const [mesh, index] = this._meshes[m2];
-      if (mesh.userData.merged) {
-        this.applyMergedColor(mesh, index, color);
-      } else {
-        this.applyInstancedColor(mesh, index, color);
-      }
-    }
-  }
-  get selected() {
-    return this._selected;
-  }
-  set selected(value) {
-    if (this._selected === value)
-      return;
-    this._selected = value;
-    this.applySelected(value);
-  }
-  applySelected(value) {
-    if (!this._meshes)
-      return;
-    for (let m2 = 0; m2 < this._meshes.length; m2++) {
-      const [mesh, index] = this._meshes[m2];
-      if (mesh.userData.merged) {
-        this.applyMergedSelected(mesh, index, value);
-      } else {
-        this.applyInstancedSelected(mesh, index, value);
-      }
-    }
-  }
-  applyInstancedSelected(mesh, index, value) {
-    let attribute = mesh.geometry.getAttribute("instanceSelected");
-    if (!attribute) {
-      attribute = new InstancedBufferAttribute(new Float32Array(mesh.count), 1);
-      mesh.geometry.setAttribute("instanceSelected", attribute);
-    }
-    attribute.setX(index, value ? 1 : 0);
-    attribute.needsUpdate = true;
-  }
-  applyMergedSelected(mesh, index, value) {
-    var _a22;
-    const positions = mesh.geometry.getAttribute("position");
-    const attribute = (_a22 = mesh.geometry.getAttribute("vertexSelected")) != null ? _a22 : new Float32BufferAttribute(new Float32Array(positions.count), 1);
-    mesh.geometry.setAttribute("vertexSelected", attribute);
-    const start = this.getMergedMeshStart(mesh, index);
-    const end = this.getMergedMeshEnd(mesh, index);
-    const indices = mesh.geometry.index;
-    for (let i2 = start; i2 < end; i2++) {
-      const v2 = indices.getX(i2);
-      attribute.setX(v2, value ? 1 : 0);
-    }
-    attribute.needsUpdate = true;
-  }
-  get visible() {
-    return this._visible;
-  }
-  set visible(value) {
-    if (this._visible === value)
-      return;
-    this._visible = value;
-    this.applyVisible(value);
-    this.vim.scene.visibilityChanged = true;
-  }
-  applyVisible(value) {
-    if (!this._meshes)
-      return;
-    for (let m2 = 0; m2 < this._meshes.length; m2++) {
-      const [mesh, index] = this._meshes[m2];
-      if (mesh.userData.merged) {
-        this.applyMergedVisible(mesh, index, value);
-      } else {
-        this.applyInstancedVisible(mesh, index, value);
-      }
-    }
-  }
-  getMergedMeshStart(mesh, index) {
-    return mesh.userData.submeshes[index];
-  }
-  getMergedMeshEnd(mesh, index) {
-    return index + 1 < mesh.userData.submeshes.length ? mesh.userData.submeshes[index + 1] : mesh.geometry.index.count;
-  }
-  applyMergedVisible(mesh, index, show) {
-    var _a22;
-    const positions = mesh.geometry.getAttribute("position");
-    const attribute = (_a22 = mesh.geometry.getAttribute("ignoreVertex")) != null ? _a22 : new Float32BufferAttribute(new Float32Array(positions.count), 1);
-    mesh.geometry.setAttribute("ignoreVertex", attribute);
-    const start = this.getMergedMeshStart(mesh, index);
-    const end = this.getMergedMeshEnd(mesh, index);
-    const indices = mesh.geometry.index;
-    for (let i2 = start; i2 < end; i2++) {
-      const v2 = indices.getX(i2);
-      attribute.setX(v2, show ? 0 : 1);
-    }
-    attribute.needsUpdate = true;
-  }
-  applyInstancedVisible(mesh, index, visible) {
-    let attribute = mesh.geometry.getAttribute("ignoreInstance");
-    if (!attribute) {
-      attribute = new InstancedBufferAttribute(new Float32Array(mesh.count), 1);
-      mesh.geometry.setAttribute("ignoreInstance", attribute);
-    }
-    attribute.setX(index, visible ? 0 : 1);
-    attribute.needsUpdate = true;
-  }
-  applyMergedColor(mesh, index, color) {
-    if (!color) {
-      this.resetMergedColor(mesh, index);
-      return;
-    }
-    const start = this.getMergedMeshStart(mesh, index);
-    const end = this.getMergedMeshEnd(mesh, index);
-    const colors = mesh.geometry.getAttribute("color");
-    const colored = this.getOrAddColoredAttribute(mesh);
-    const indices = mesh.geometry.index;
-    for (let i2 = start; i2 < end; i2++) {
-      const v2 = indices.getX(i2);
-      colors.setXYZ(v2, color.r, color.g, color.b);
-      colored.setX(v2, 1);
-    }
-    colors.needsUpdate = true;
-    colored.needsUpdate = true;
-  }
-  resetMergedColor(mesh, index) {
-    if (!this.vim.document.g3d)
-      return;
-    const colors = mesh.geometry.getAttribute("color");
-    const colored = this.getOrAddColoredAttribute(mesh);
-    const indices = mesh.geometry.index;
-    let mergedIndex = this.getMergedMeshStart(mesh, index);
-    const instance = this.vim.scene.getInstanceFromMesh(mesh, index);
-    if (!instance)
-      throw new Error("Could not reset original color.");
-    const g3d = this.vim.document.g3d;
-    const g3dMesh = g3d.instanceMeshes[instance];
-    const subStart = g3d.getMeshSubmeshStart(g3dMesh);
-    const subEnd = g3d.getMeshSubmeshEnd(g3dMesh);
-    for (let sub = subStart; sub < subEnd; sub++) {
-      const start = g3d.getSubmeshIndexStart(sub);
-      const end = g3d.getSubmeshIndexEnd(sub);
-      const color = g3d.getSubmeshColor(sub);
-      for (let i2 = start; i2 < end; i2++) {
-        const v2 = indices.getX(mergedIndex);
-        colors.setXYZ(v2, color[0], color[1], color[2]);
-        colored.setX(v2, 0);
-        mergedIndex++;
-      }
-    }
-    colors.needsUpdate = true;
-    colored.needsUpdate = true;
-  }
-  applyInstancedColor(mesh, index, color) {
-    const colors = this.getOrAddInstanceColorAttribute(mesh);
-    const colored = this.getOrAddColoredAttribute(mesh);
-    if (color) {
-      colors.setXYZ(index, color.r, color.g, color.b);
-      colored.setX(index, 1);
-    } else {
-      colored.setX(index, 0);
-    }
-    colored.needsUpdate = true;
-    colors.needsUpdate = true;
-  }
-  getOrAddInstanceColorAttribute(mesh) {
-    if (mesh.instanceColor)
-      return mesh.instanceColor;
-    const count = mesh.instanceMatrix.count;
-    const colors = new Float32Array(count * 3);
-    const attribute = new InstancedBufferAttribute(colors, 3);
-    mesh.instanceColor = attribute;
-    return attribute;
-  }
-  getOrAddColoredAttribute(mesh) {
-    const colored = mesh.geometry.getAttribute("colored");
-    if (colored) {
-      return colored;
-    }
-    const count = mesh instanceof InstancedMesh ? mesh.instanceMatrix.count : mesh.geometry.getAttribute("position").count;
-    const array = new Float32Array(count);
-    const attribute = mesh instanceof InstancedMesh ? new InstancedBufferAttribute(array, 1) : new BufferAttribute(array, 1);
-    mesh.geometry.setAttribute("colored", attribute);
-    return attribute;
   }
 }
 class Selection {
@@ -47765,6 +47736,14 @@ class VimMaterials {
     applySectionUniforms(this.opaque.userData.shader, strokeWidth, strokeFalloff, strokeColor);
     applySectionUniforms(this.transparent.userData.shader, strokeWidth, strokeFalloff, strokeColor);
   }
+  applyClippingPlanes(planes) {
+    this.opaque.clippingPlanes = planes;
+    this.transparent.clippingPlanes = planes;
+    this.wireframe.clippingPlanes = planes;
+    this.isolation.clippingPlanes = planes;
+    this.focus.clippingPlanes = planes;
+    this.outline.clippingPlanes = planes;
+  }
   dispose() {
     this.opaque.dispose();
     this.transparent.dispose();
@@ -48832,6 +48811,77 @@ class BFast {
     return buffer;
   }
 }
+class RenderingSection {
+  constructor(renderer, materials) {
+    __publicField(this, "_renderer");
+    __publicField(this, "_materials");
+    __publicField(this, "_active", true);
+    __publicField(this, "box", new Box3(new Vector3(-100, -100, -100), new Vector3(100, 100, 100)));
+    __publicField(this, "maxX", new Plane(new Vector3(-1, 0, 0)));
+    __publicField(this, "minX", new Plane(new Vector3(1, 0, 0)));
+    __publicField(this, "maxY", new Plane(new Vector3(0, -1, 0)));
+    __publicField(this, "minY", new Plane(new Vector3(0, 1, 0)));
+    __publicField(this, "maxZ", new Plane(new Vector3(0, 0, -1)));
+    __publicField(this, "minZ", new Plane(new Vector3(0, 0, 1)));
+    __publicField(this, "planes", [
+      this.maxX,
+      this.minX,
+      this.maxY,
+      this.minY,
+      this.maxZ,
+      this.minZ
+    ]);
+    this._renderer = renderer;
+    this._materials = materials;
+  }
+  fitBox(box) {
+    this.maxX.constant = box.max.x;
+    this.minX.constant = -box.min.x;
+    this.maxY.constant = box.max.y;
+    this.minY.constant = -box.min.y;
+    this.maxZ.constant = box.max.z;
+    this.minZ.constant = -box.min.z;
+    this.box.copy(box);
+  }
+  set active(value) {
+    this._materials.applyClippingPlanes(value ? this.planes : null);
+    this._renderer.localClippingEnabled = value;
+    this._active = value;
+  }
+  get active() {
+    return this._active;
+  }
+}
+var CopyShader = {
+  uniforms: {
+    "tDiffuse": { value: null },
+    "opacity": { value: 1 }
+  },
+  vertexShader: `
+
+		varying vec2 vUv;
+
+		void main() {
+
+			vUv = uv;
+			gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+
+		}`,
+  fragmentShader: `
+
+		uniform float opacity;
+
+		uniform sampler2D tDiffuse;
+
+		varying vec2 vUv;
+
+		void main() {
+
+			vec4 texel = texture2D( tDiffuse, vUv );
+			gl_FragColor = opacity * texel;
+
+		}`
+};
 class Pass {
   constructor() {
     this.enabled = true;
@@ -48866,175 +48916,6 @@ class FullScreenQuad {
     this._mesh.material = value;
   }
 }
-class CustomOutlinePass extends Pass {
-  constructor(resolution, scene, camera) {
-    super();
-    this.renderScene = scene;
-    this.renderCamera = camera;
-    this.resolution = new Vector2(resolution.x, resolution.y);
-    this.fsQuad = new FullScreenQuad(null);
-    this.fsQuad.material = this.createOutlinePostProcessMaterial();
-  }
-  dispose() {
-    this.fsQuad.dispose();
-  }
-  setSize(width, height) {
-    this.resolution.set(width, height);
-    this.fsQuad.material.uniforms.screenSize.value.set(this.resolution.x, this.resolution.y, 1 / this.resolution.x, 1 / this.resolution.y);
-  }
-  render(renderer, writeBuffer, readBuffer) {
-    const depthBufferValue = writeBuffer.depthBuffer;
-    writeBuffer.depthBuffer = false;
-    this.fsQuad.material.uniforms.depthBuffer.value = readBuffer.depthTexture;
-    if (this.renderToScreen) {
-      renderer.setRenderTarget(null);
-      this.fsQuad.render(renderer);
-    } else {
-      renderer.setRenderTarget(writeBuffer);
-      this.fsQuad.render(renderer);
-    }
-    writeBuffer.depthBuffer = depthBufferValue;
-  }
-  get vertexShader() {
-    return `
-      varying vec2 vUv;
-      void main() {
-        vUv = uv;
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-      }
-      `;
-  }
-  get fragmentShader() {
-    return `
-    #include <packing>
-    // The above include imports "perspectiveDepthToViewZ"
-    // and other GLSL functions from ThreeJS we need for reading depth.
-    uniform sampler2D sceneColorBuffer;
-    uniform sampler2D depthBuffer;
-    uniform float cameraNear;
-    uniform float cameraFar;
-    uniform vec4 screenSize;
-    uniform vec3 outlineColor;
-    uniform vec4 multiplierParameters;
-    uniform int debugVisualize;
-
-    varying vec2 vUv;
-
-    // Helper functions for reading from depth buffer.
-    float readDepth (sampler2D depthSampler, vec2 coord) {
-      float fragCoordZ = texture2D(depthSampler, coord).x;
-      float viewZ = perspectiveDepthToViewZ( fragCoordZ, cameraNear, cameraFar );
-      return viewZToOrthographicDepth( viewZ, cameraNear, cameraFar );
-    }
-    float getLinearDepth(vec3 pos) {
-      return -(viewMatrix * vec4(pos, 1.0)).z;
-    }
-
-    float getLinearScreenDepth(sampler2D map) {
-        vec2 uv = gl_FragCoord.xy * screenSize.zw;
-        return readDepth(map,uv);
-    }
-    // Helper functions for reading normals and depth of neighboring pixels.
-    float getPixelDepth(int x, int y) {
-      // screenSize.zw is pixel size 
-      // vUv is current position
-      return readDepth(depthBuffer, vUv + screenSize.zw * vec2(x, y));
-    }
-
-    float saturate(float num) {
-      return clamp(num, 0.0, 1.0);
-    }
-
-    void main() {
-      vec4 sceneColor = texture2D(sceneColorBuffer, vUv);
-      float depth = getPixelDepth(0, 0);
-
-      // Get the difference between depth of neighboring pixels and current.
-      float depthDiff = 0.0;
-      depthDiff += abs(depth - getPixelDepth(1, 0));
-      depthDiff += abs(depth - getPixelDepth(-1, 0));
-      depthDiff += abs(depth - getPixelDepth(0, 1));
-      depthDiff += abs(depth - getPixelDepth(0, -1));
-
-      // Apply multiplier & bias to each 
-      float depthBias = multiplierParameters.x;
-      float depthMultiplier = multiplierParameters.y;
-
-      depthDiff = depthDiff * depthMultiplier;
-      depthDiff = saturate(depthDiff);
-      depthDiff = pow(depthDiff, depthBias);
-
-      float outline = depthDiff;
-
-      // Combine outline with scene color.
-      vec4 outlineColor = vec4(outlineColor, 1.0);
-      vec4 black = vec4(0.0f,0.0f,0.0f,0.0f);
-      //gl_FragColor = vec4(outline,outline,outline, 1.0f);
-      gl_FragColor = vec4(mix(sceneColor, outlineColor, outline));
-      //gl_FragColor = sceneColor;
-
-      // For debug visualization of the different inputs to this shader.
-      if (debugVisualize == 1) {
-        gl_FragColor = sceneColor;
-      }
-      if (debugVisualize == 2) {
-        gl_FragColor = vec4(vec3(depth), 1.0);
-      }
-      if (debugVisualize == 4) {
-        gl_FragColor = vec4(vec3(outline * outlineColor), 1.0);
-      }
-    }
-    `;
-  }
-  createOutlinePostProcessMaterial() {
-    return new ShaderMaterial({
-      uniforms: {
-        debugVisualize: { value: 0 },
-        sceneColorBuffer: {},
-        depthBuffer: {},
-        outlineColor: { value: new Color(16777215) },
-        multiplierParameters: { value: new Vector4(1, 1, 1, 1) },
-        cameraNear: { value: this.renderCamera.near },
-        cameraFar: { value: this.renderCamera.far },
-        screenSize: {
-          value: new Vector4(this.resolution.x, this.resolution.y, 1 / this.resolution.x, 1 / this.resolution.y)
-        }
-      },
-      vertexShader: this.vertexShader,
-      fragmentShader: this.fragmentShader
-    });
-  }
-}
-var CopyShader = {
-  uniforms: {
-    "tDiffuse": { value: null },
-    "opacity": { value: 1 }
-  },
-  vertexShader: `
-
-		varying vec2 vUv;
-
-		void main() {
-
-			vUv = uv;
-			gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-
-		}`,
-  fragmentShader: `
-
-		uniform float opacity;
-
-		uniform sampler2D tDiffuse;
-
-		varying vec2 vUv;
-
-		void main() {
-
-			vec4 texel = texture2D( tDiffuse, vUv );
-			gl_FragColor = opacity * texel;
-
-		}`
-};
 class ShaderPass extends Pass {
   constructor(shader, textureID) {
     super();
@@ -50358,51 +50239,247 @@ const FXAAShader = {
 			gl_FragColor.a = texture2D(tDiffuse, vUv).a;
 		}`
 };
-class Section {
-  constructor(renderer, materials) {
+class CustomOutlinePass extends Pass {
+  constructor(resolution, scene, camera) {
+    super();
+    this.renderScene = scene;
+    this.renderCamera = camera;
+    this.resolution = new Vector2(resolution.x, resolution.y);
+    this.fsQuad = new FullScreenQuad(null);
+    this.fsQuad.material = this.createOutlinePostProcessMaterial();
+  }
+  dispose() {
+    this.fsQuad.dispose();
+  }
+  setSize(width, height) {
+    this.resolution.set(width, height);
+    this.fsQuad.material.uniforms.screenSize.value.set(this.resolution.x, this.resolution.y, 1 / this.resolution.x, 1 / this.resolution.y);
+  }
+  render(renderer, writeBuffer, readBuffer) {
+    const depthBufferValue = writeBuffer.depthBuffer;
+    writeBuffer.depthBuffer = false;
+    this.fsQuad.material.uniforms.depthBuffer.value = readBuffer.depthTexture;
+    if (this.renderToScreen) {
+      renderer.setRenderTarget(null);
+      this.fsQuad.render(renderer);
+    } else {
+      renderer.setRenderTarget(writeBuffer);
+      this.fsQuad.render(renderer);
+    }
+    writeBuffer.depthBuffer = depthBufferValue;
+  }
+  get vertexShader() {
+    return `
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+      `;
+  }
+  get fragmentShader() {
+    return `
+    #include <packing>
+    // The above include imports "perspectiveDepthToViewZ"
+    // and other GLSL functions from ThreeJS we need for reading depth.
+    uniform sampler2D sceneColorBuffer;
+    uniform sampler2D depthBuffer;
+    uniform float cameraNear;
+    uniform float cameraFar;
+    uniform vec4 screenSize;
+    uniform vec3 outlineColor;
+    uniform vec4 multiplierParameters;
+    uniform int debugVisualize;
+
+    varying vec2 vUv;
+
+    // Helper functions for reading from depth buffer.
+    float readDepth (sampler2D depthSampler, vec2 coord) {
+      float fragCoordZ = texture2D(depthSampler, coord).x;
+      float viewZ = perspectiveDepthToViewZ( fragCoordZ, cameraNear, cameraFar );
+      return viewZToOrthographicDepth( viewZ, cameraNear, cameraFar );
+    }
+    float getLinearDepth(vec3 pos) {
+      return -(viewMatrix * vec4(pos, 1.0)).z;
+    }
+
+    float getLinearScreenDepth(sampler2D map) {
+        vec2 uv = gl_FragCoord.xy * screenSize.zw;
+        return readDepth(map,uv);
+    }
+    // Helper functions for reading normals and depth of neighboring pixels.
+    float getPixelDepth(int x, int y) {
+      // screenSize.zw is pixel size 
+      // vUv is current position
+      return readDepth(depthBuffer, vUv + screenSize.zw * vec2(x, y));
+    }
+
+    float saturate(float num) {
+      return clamp(num, 0.0, 1.0);
+    }
+
+    void main() {
+      vec4 sceneColor = texture2D(sceneColorBuffer, vUv);
+      float depth = getPixelDepth(0, 0);
+
+      // Get the difference between depth of neighboring pixels and current.
+      float depthDiff = 0.0;
+      depthDiff += abs(depth - getPixelDepth(1, 0));
+      depthDiff += abs(depth - getPixelDepth(-1, 0));
+      depthDiff += abs(depth - getPixelDepth(0, 1));
+      depthDiff += abs(depth - getPixelDepth(0, -1));
+
+      // Apply multiplier & bias to each 
+      float depthBias = multiplierParameters.x;
+      float depthMultiplier = multiplierParameters.y;
+
+      depthDiff = depthDiff * depthMultiplier;
+      depthDiff = saturate(depthDiff);
+      depthDiff = pow(depthDiff, depthBias);
+
+      float outline = depthDiff;
+
+      // Combine outline with scene color.
+      vec4 outlineColor = vec4(outlineColor, 1.0);
+      vec4 black = vec4(0.0f,0.0f,0.0f,0.0f);
+      //gl_FragColor = vec4(outline,outline,outline, 1.0f);
+      gl_FragColor = vec4(mix(sceneColor, outlineColor, outline));
+      //gl_FragColor = sceneColor;
+
+      // For debug visualization of the different inputs to this shader.
+      if (debugVisualize == 1) {
+        gl_FragColor = sceneColor;
+      }
+      if (debugVisualize == 2) {
+        gl_FragColor = vec4(vec3(depth), 1.0);
+      }
+      if (debugVisualize == 4) {
+        gl_FragColor = vec4(vec3(outline * outlineColor), 1.0);
+      }
+    }
+    `;
+  }
+  createOutlinePostProcessMaterial() {
+    return new ShaderMaterial({
+      uniforms: {
+        debugVisualize: { value: 0 },
+        sceneColorBuffer: {},
+        depthBuffer: {},
+        outlineColor: { value: new Color(16777215) },
+        multiplierParameters: { value: new Vector4(1, 1, 1, 1) },
+        cameraNear: { value: this.renderCamera.near },
+        cameraFar: { value: this.renderCamera.far },
+        screenSize: {
+          value: new Vector4(this.resolution.x, this.resolution.y, 1 / this.resolution.x, 1 / this.resolution.y)
+        }
+      },
+      vertexShader: this.vertexShader,
+      fragmentShader: this.fragmentShader
+    });
+  }
+}
+class SelectionRenderer {
+  constructor(renderer, scene, viewport, materials, camera) {
     __publicField(this, "_renderer");
+    __publicField(this, "_scene");
     __publicField(this, "_materials");
-    __publicField(this, "_active", true);
-    __publicField(this, "box", new Box3(new Vector3(-100, -100, -100), new Vector3(100, 100, 100)));
-    __publicField(this, "maxX", new Plane(new Vector3(-1, 0, 0)));
-    __publicField(this, "minX", new Plane(new Vector3(1, 0, 0)));
-    __publicField(this, "maxY", new Plane(new Vector3(0, -1, 0)));
-    __publicField(this, "minY", new Plane(new Vector3(0, 1, 0)));
-    __publicField(this, "maxZ", new Plane(new Vector3(0, 0, -1)));
-    __publicField(this, "minZ", new Plane(new Vector3(0, 0, 1)));
-    __publicField(this, "planes", [
-      this.maxX,
-      this.minX,
-      this.maxY,
-      this.minY,
-      this.maxZ,
-      this.minZ
-    ]);
+    __publicField(this, "_camera");
+    __publicField(this, "_selectionComposer");
+    __publicField(this, "_sceneComposer");
+    __publicField(this, "_aaPass");
+    __publicField(this, "_outlinePass");
+    __publicField(this, "_selectionTarget");
+    __publicField(this, "_sceneTarget");
+    __publicField(this, "_depthTexture");
     this._renderer = renderer;
+    this._scene = scene;
     this._materials = materials;
+    this._camera = camera.camera;
+    const size = viewport.getSize();
+    this.setup(size.x, size.y);
   }
-  fitBox(box) {
-    this.maxX.constant = box.max.x;
-    this.minX.constant = -box.min.x;
-    this.maxY.constant = box.max.y;
-    this.minY.constant = -box.min.y;
-    this.maxZ.constant = box.max.z;
-    this.minZ.constant = -box.min.z;
-    this.box.copy(box);
+  setup(width, height) {
+    this._sceneTarget = new WebGLRenderTarget(width, height);
+    this._sceneComposer = new EffectComposer(this._renderer, this._sceneTarget);
+    this._sceneComposer.renderToScreen = false;
+    this._sceneComposer.addPass(new RenderPass(this._scene.scene, this._camera));
+    this._depthTexture = new DepthTexture(width, height);
+    this._selectionTarget = new WebGLRenderTarget(width, height, {
+      depthTexture: this._depthTexture,
+      depthBuffer: true
+    });
+    this._selectionComposer = new EffectComposer(this._renderer, this._selectionTarget);
+    this._selectionComposer.addPass(new RenderPass(this._scene.scene, this._camera, this._materials.outline));
+    this._outlinePass = new CustomOutlinePass(new Vector2(width, height), this._scene.scene, this._camera);
+    this._selectionComposer.addPass(this._outlinePass);
+    const uniforms = this._outlinePass.fsQuad.material.uniforms;
+    uniforms.sceneColorBuffer.value = this._sceneComposer.readBuffer.texture;
+    this._aaPass = new ShaderPass(FXAAShader);
+    this._aaPass.uniforms.resolution.value.set(1 / width, 1 / height);
+    this._selectionComposer.addPass(this._aaPass);
   }
-  set active(value) {
-    const p2 = value ? this.planes : null;
-    this._materials.opaque.clippingPlanes = p2;
-    this._materials.transparent.clippingPlanes = p2;
-    this._materials.wireframe.clippingPlanes = p2;
-    this._materials.isolation.clippingPlanes = p2;
-    this._materials.focus.clippingPlanes = p2;
-    this._materials.outline.clippingPlanes = p2;
-    this._renderer.localClippingEnabled = value;
-    this._active = value;
+  get camera() {
+    return this._camera;
   }
-  get active() {
-    return this._active;
+  set camera(value) {
+    this._camera = value;
+  }
+  setSize(width, height) {
+    this._sceneComposer.setSize(width, height);
+    this._selectionComposer.setSize(width, height);
+    this._aaPass.uniforms.resolution.value.set(1 / width, 1 / height);
+  }
+  render() {
+    this._sceneComposer.render();
+    this._selectionComposer.render();
+  }
+  dispose() {
+    this._sceneTarget.dispose();
+    this._selectionTarget.dispose();
+    this._depthTexture.dispose();
+    this._outlinePass.dispose();
+  }
+}
+class StandardRenderer {
+  constructor(renderer, scene, viewport, camera) {
+    __publicField(this, "_renderer");
+    __publicField(this, "_scene");
+    __publicField(this, "_viewport");
+    __publicField(this, "_camera");
+    __publicField(this, "_renderTarget");
+    __publicField(this, "_renderPass");
+    __publicField(this, "_aaPass");
+    __publicField(this, "_sceneComposer");
+    this._renderer = renderer;
+    this._scene = scene;
+    this._camera = camera.camera;
+    const size = viewport.getSize();
+    this.setup(size.x, size.y);
+  }
+  setup(width, height) {
+    this._renderTarget = new WebGLRenderTarget(width, height);
+    this._sceneComposer = new EffectComposer(this._renderer);
+    this._renderPass = new RenderPass(this._scene.scene, this._camera);
+    this._sceneComposer.addPass(this._renderPass);
+    this._aaPass = new ShaderPass(FXAAShader);
+    this._aaPass.uniforms.resolution.value.set(1 / width, 1 / height);
+    this._sceneComposer.addPass(this._aaPass);
+  }
+  get camera() {
+    return this._renderPass.camera;
+  }
+  set camera(value) {
+    this._renderPass.camera = value;
+  }
+  setSize(width, height) {
+    this._aaPass.uniforms.resolution.value.set(1 / width, 1 / height);
+    this._sceneComposer.setSize(width, height);
+  }
+  render() {
+    this._sceneComposer.render();
+  }
+  dispose() {
+    this._renderTarget.dispose();
   }
 }
 class Renderer {
@@ -50411,22 +50488,20 @@ class Renderer {
     __publicField(this, "textRenderer");
     __publicField(this, "viewport");
     __publicField(this, "scene");
-    __publicField(this, "section");
     __publicField(this, "materials");
     __publicField(this, "camera");
-    __publicField(this, "selectionComposer");
-    __publicField(this, "selectionTarget");
-    __publicField(this, "sceneComposer");
-    __publicField(this, "sceneTarget");
-    __publicField(this, "depthTexture");
-    __publicField(this, "outlinePass");
+    __publicField(this, "section");
+    __publicField(this, "selectionRenderer");
+    __publicField(this, "standardRenderer");
     __publicField(this, "_onVisibilityChanged", new dist$1$1.SimpleEventDispatcher());
     __publicField(this, "_renderText");
     __publicField(this, "fitViewport", () => {
-      const size2 = this.viewport.getParentSize();
+      const size = this.viewport.getParentSize();
       this.renderer.setPixelRatio(window.devicePixelRatio);
-      this.renderer.setSize(size2.x, size2.y);
-      this.textRenderer.setSize(size2.x, size2.y);
+      this.renderer.setSize(size.x, size.y);
+      this.standardRenderer.setSize(size.x, size.y);
+      this.selectionRenderer.setSize(size.x, size.y);
+      this.textRenderer.setSize(size.x, size.y);
     });
     this.viewport = viewport;
     this.scene = scene;
@@ -50441,31 +50516,13 @@ class Renderer {
       powerPreference: "high-performance",
       logarithmicDepthBuffer: true
     });
-    this.section = new Section(this.renderer, this.materials);
     this.textRenderer = this.viewport.createTextRenderer();
     this.renderText = false;
+    this.selectionRenderer = new SelectionRenderer(this.renderer, scene, viewport, materials, camera);
+    this.standardRenderer = new StandardRenderer(this.renderer, scene, viewport, camera);
+    this.section = new RenderingSection(this.renderer, this.materials);
     this.fitViewport();
     this.viewport.onResize(() => this.fitViewport());
-    this.renderer.setPixelRatio(window.devicePixelRatio);
-    const size = this.viewport.getSize();
-    this.sceneTarget = new WebGLRenderTarget(size.x, size.y);
-    this.sceneComposer = new EffectComposer(this.renderer, this.sceneTarget);
-    this.sceneComposer.renderToScreen = false;
-    this.sceneComposer.addPass(new RenderPass(this.scene.scene, this.camera.camera));
-    this.depthTexture = new DepthTexture(size.x, size.y);
-    this.selectionTarget = new WebGLRenderTarget(size.x, size.y, {
-      depthTexture: this.depthTexture,
-      depthBuffer: true
-    });
-    this.selectionComposer = new EffectComposer(this.renderer, this.selectionTarget);
-    this.selectionComposer.addPass(new RenderPass(this.scene.scene, this.camera.camera, materials.outline));
-    this.outlinePass = new CustomOutlinePass(new Vector2(size.x, size.y), this.scene.scene, this.camera.camera);
-    this.selectionComposer.addPass(this.outlinePass);
-    const uniforms = this.outlinePass.fsQuad.material.uniforms;
-    uniforms.sceneColorBuffer.value = this.sceneComposer.readBuffer.texture;
-    const effectFXAA = new ShaderPass(FXAAShader);
-    effectFXAA.uniforms.resolution.value.set(1 / size.x, 1 / size.y);
-    this.selectionComposer.addPass(effectFXAA);
   }
   get onVisibilityChanged() {
     return this._onVisibilityChanged.asEvent();
@@ -50485,16 +50542,15 @@ class Renderer {
     this.renderer.clear();
     this.renderer.forceContextLoss();
     this.renderer.dispose();
-    this.sceneTarget.dispose();
-    this.selectionTarget.dispose();
-    this.depthTexture.dispose();
+    this.standardRenderer.dispose();
+    this.selectionRenderer.dispose();
   }
   getBoundingBox(target = new Box3()) {
     return this.scene.getBoundingBox(target);
   }
-  render(camera) {
-    this.sceneComposer.render();
-    this.selectionComposer.render();
+  render(camera, hasSelection) {
+    const r2 = hasSelection ? this.selectionRenderer : this.standardRenderer;
+    r2.render();
     if (this.renderText) {
       this.textRenderer.render(this.scene.scene, camera);
     }
@@ -50595,8 +50651,9 @@ class Viewer {
       return;
     requestAnimationFrame(() => this.animate());
     this._camera.update(this._clock.getDelta());
-    if (this._vims.length)
-      this.renderer.render(this.camera.camera);
+    if (this._vims.length) {
+      this.renderer.render(this.camera.camera, this.selection.count > 0);
+    }
   }
   get vims() {
     return this._vims.filter((v2) => v2 !== void 0);
