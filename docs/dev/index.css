@@ -746,8 +746,8 @@ select {
 .vc-right-0 {
   right: 0px;
 }
-.vc-right-8 {
-  right: 2rem;
+.vc-right-16 {
+  right: 4rem;
 }
 .vc-z-20 {
   z-index: 20;
