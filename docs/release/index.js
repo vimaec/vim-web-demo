@@ -57,54 +57,7 @@ const p$2 = function polyfill() {
   }
 };
 p$2();
-var commonjsGlobal$1 = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
-var stats_min = { exports: {} };
-(function(module2, exports2) {
-  !function(e, t2) {
-    module2.exports = t2();
-  }(commonjsGlobal$1, function() {
-    var c = function() {
-      var n2 = 0, l2 = document.createElement("div");
-      function e(e2) {
-        return l2.appendChild(e2.dom), e2;
-      }
-      function t2(e2) {
-        for (var t3 = 0; t3 < l2.children.length; t3++)
-          l2.children[t3].style.display = t3 === e2 ? "block" : "none";
-        n2 = e2;
-      }
-      l2.style.cssText = "position:fixed;top:0;left:0;cursor:pointer;opacity:0.9;z-index:10000", l2.addEventListener("click", function(e2) {
-        e2.preventDefault(), t2(++n2 % l2.children.length);
-      }, false);
-      var i2 = (performance || Date).now(), a = i2, o = 0, f2 = e(new c.Panel("FPS", "#0ff", "#002")), r2 = e(new c.Panel("MS", "#0f0", "#020"));
-      if (self.performance && self.performance.memory)
-        var d = e(new c.Panel("MB", "#f08", "#201"));
-      return t2(0), { REVISION: 16, dom: l2, addPanel: e, showPanel: t2, begin: function() {
-        i2 = (performance || Date).now();
-      }, end: function() {
-        o++;
-        var e2 = (performance || Date).now();
-        if (r2.update(e2 - i2, 200), a + 1e3 <= e2 && (f2.update(1e3 * o / (e2 - a), 100), a = e2, o = 0, d)) {
-          var t3 = performance.memory;
-          d.update(t3.usedJSHeapSize / 1048576, t3.jsHeapSizeLimit / 1048576);
-        }
-        return e2;
-      }, update: function() {
-        i2 = this.end();
-      }, domElement: l2, setMode: t2 };
-    };
-    return c.Panel = function(n2, l2, i2) {
-      var a = 1 / 0, o = 0, f2 = Math.round, r2 = f2(window.devicePixelRatio || 1), d = 80 * r2, e = 48 * r2, c2 = 3 * r2, p2 = 2 * r2, u2 = 3 * r2, s = 15 * r2, m2 = 74 * r2, h = 30 * r2, y2 = document.createElement("canvas");
-      y2.width = d, y2.height = e, y2.style.cssText = "width:80px;height:48px";
-      var v2 = y2.getContext("2d");
-      return v2.font = "bold " + 9 * r2 + "px Helvetica,Arial,sans-serif", v2.textBaseline = "top", v2.fillStyle = i2, v2.fillRect(0, 0, d, e), v2.fillStyle = l2, v2.fillText(n2, c2, p2), v2.fillRect(u2, s, m2, h), v2.fillStyle = i2, v2.globalAlpha = 0.9, v2.fillRect(u2, s, m2, h), { dom: y2, update: function(e2, t2) {
-        a = Math.min(a, e2), o = Math.max(o, e2), v2.fillStyle = i2, v2.globalAlpha = 1, v2.fillRect(0, 0, d, s), v2.fillStyle = l2, v2.fillText(f2(e2) + " " + n2 + " (" + f2(a) + "-" + f2(o) + ")", c2, p2), v2.drawImage(y2, u2 + r2, s, m2 - r2, h, u2, s, m2 - r2, h), v2.fillRect(u2 + m2 - r2, s, r2, h), v2.fillStyle = i2, v2.globalAlpha = 0.9, v2.fillRect(u2 + m2 - r2, s, r2, f2((1 - e2 / t2) * h));
-      } };
-    }, c;
-  });
-})(stats_min);
-var Stats = stats_min.exports;
-var style$1 = /* @__PURE__ */ (() => `/*
+var style = /* @__PURE__ */ (() => `/*
 ! tailwindcss v3.1.6 | MIT License | https://tailwindcss.com
 *//*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
@@ -783,479 +736,541 @@ select {
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
 }\r
-.container {
-  width: 100%;
-}\r
-@media (min-width: 640px) {
-
-  .container {
-    max-width: 640px;
-  }
-}\r
-@media (min-width: 768px) {
-
-  .container {
-    max-width: 768px;
-  }
-}\r
-@media (min-width: 1024px) {
-
-  .container {
-    max-width: 1024px;
-  }
-}\r
-@media (min-width: 1280px) {
-
-  .container {
-    max-width: 1280px;
-  }
-}\r
-@media (min-width: 1536px) {
-
-  .container {
-    max-width: 1536px;
-  }
-}\r
-.pointer-events-none {
+.vc-pointer-events-none {
   pointer-events: none;
 }\r
-.pointer-events-auto {
+.vc-pointer-events-auto {
   pointer-events: auto;
 }\r
-.visible {
-  visibility: visible;
+.\\!vc-static {
+  position: static !important;
 }\r
-.\\!visible {
-  visibility: visible !important;
-}\r
-.fixed {
+.vc-fixed {
   position: fixed;
 }\r
-.absolute {
+.vc-absolute {
   position: absolute;
 }\r
-.inset-0 {
+.\\!vc-absolute {
+  position: absolute !important;
+}\r
+.vc-relative {
+  position: relative;
+}\r
+.vc-inset-0 {
   top: 0px;
   right: 0px;
   bottom: 0px;
   left: 0px;
 }\r
-.right-6 {
+.vc-right-6 {
   right: 1.5rem;
 }\r
-.top-6 {
+.vc-top-6 {
   top: 1.5rem;
 }\r
-.bottom-0 {
-  bottom: 0px;
-}\r
-.top-0 {
+.vc-top-0 {
   top: 0px;
 }\r
-.left-0 {
+.vc-left-0 {
   left: 0px;
 }\r
-.right-16 {
-  right: 4rem;
+.vc-top-4 {
+  top: 1rem;
 }\r
-.isolate {
-  isolation: isolate;
+.vc-left-4 {
+  left: 1rem;
 }\r
-.z-20 {
+.\\!vc-right-6 {
+  right: 1.5rem !important;
+}\r
+.\\!vc-left-auto {
+  left: auto !important;
+}\r
+.\\!vc-top-52 {
+  top: 13rem !important;
+}\r
+.vc-bottom-0 {
+  bottom: 0px;
+}\r
+.vc-top-\\[calc\\(50\\%-37px\\)\\] {
+  top: calc(50% - 37px);
+}\r
+.vc-left-\\[calc\\(50\\%-160px\\)\\] {
+  left: calc(50% - 160px);
+}\r
+.vc-top-\\[10\\%\\] {
+  top: 10%;
+}\r
+.vc-right-0 {
+  right: 0px;
+}\r
+.vc-right-8 {
+  right: 2rem;
+}\r
+.vc-z-20 {
   z-index: 20;
 }\r
-.z-50 {
+.vc-z-50 {
   z-index: 50;
 }\r
-.z-40 {
+.vc-z-40 {
   z-index: 40;
 }\r
-.z-10 {
+.vc-z-10 {
   z-index: 10;
 }\r
-.z-30 {
-  z-index: 30;
+.vc-order-1 {
+  order: 1;
 }\r
-.order-2 {
+.vc-order-2 {
   order: 2;
 }\r
-.m-1 {
+.vc-m-auto {
+  margin: auto;
+}\r
+.vc-m-1 {
   margin: 0.25rem;
 }\r
-.mx-1 {
-  margin-left: 0.25rem;
-  margin-right: 0.25rem;
-}\r
-.my-1 {
-  margin-top: 0.25rem;
-  margin-bottom: 0.25rem;
-}\r
-.mx-2 {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-}\r
-.mx-auto {
+.vc-mx-auto {
   margin-left: auto;
   margin-right: auto;
 }\r
-.-mx-6 {
+.vc-mx-1 {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}\r
+.vc-my-1 {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}\r
+.vc-mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}\r
+.-vc-mx-6 {
   margin-left: -1.5rem;
   margin-right: -1.5rem;
 }\r
-.mb-0 {
+.vc-mb-0 {
   margin-bottom: 0px;
 }\r
-.mt-auto {
+.vc-mt-auto {
   margin-top: auto;
 }\r
-.mb-9 {
+.vc-mb-9 {
   margin-bottom: 2.25rem;
 }\r
-.mb-8 {
+.vc-mb-8 {
   margin-bottom: 2rem;
 }\r
-.mr-4 {
+.vc-mr-4 {
   margin-right: 1rem;
 }\r
-.mb-2 {
+.vc-mb-2 {
   margin-bottom: 0.5rem;
 }\r
-.ml-1 {
+.vc-ml-1 {
   margin-left: 0.25rem;
 }\r
-.mb-6 {
+.vc-mb-6 {
   margin-bottom: 1.5rem;
 }\r
-.mt-5 {
-  margin-top: 1.25rem;
-}\r
-.mb-5 {
+.vc-mb-5 {
   margin-bottom: 1.25rem;
 }\r
-.mb-4 {
+.vc-mb-4 {
   margin-bottom: 1rem;
 }\r
-.-mr-4 {
+.-vc-mr-4 {
   margin-right: -1rem;
 }\r
-.mr-2 {
+.vc-mr-2 {
   margin-right: 0.5rem;
 }\r
-.flex {
+.vc-block {
+  display: block;
+}\r
+.vc-flex {
   display: flex;
 }\r
-.inline-flex {
+.vc-inline-flex {
   display: inline-flex;
 }\r
-.hidden {
+.vc-hidden {
   display: none;
 }\r
-.h-8 {
+.vc-h-8 {
   height: 2rem;
 }\r
-.h-\\[145px\\] {
+.vc-h-\\[145px\\] {
   height: 145px;
 }\r
-.h-10 {
-  height: 2.5rem;
-}\r
-.h-5 {
-  height: 1.25rem;
-}\r
-.h-full {
+.vc-h-full {
   height: 100%;
 }\r
-.h-1\\/2 {
+.vc-h-12 {
+  height: 3rem;
+}\r
+.vc-h-10 {
+  height: 2.5rem;
+}\r
+.vc-h-5 {
+  height: 1.25rem;
+}\r
+.vc-h-1\\/2 {
   height: 50%;
 }\r
-.h-\\[18px\\] {
+.vc-h-4 {
+  height: 1rem;
+}\r
+.vc-h-\\[18px\\] {
   height: 18px;
 }\r
-.w-8 {
+.vc-w-8 {
   width: 2rem;
 }\r
-.w-\\[100px\\] {
+.vc-w-\\[100px\\] {
   width: 100px;
 }\r
-.w-\\[240px\\] {
-  width: 240px;
-}\r
-.w-10 {
-  width: 2.5rem;
-}\r
-.w-full {
+.vc-w-full {
   width: 100%;
 }\r
-.w-px {
+.vc-w-32 {
+  width: 8rem;
+}\r
+.vc-w-\\[240px\\] {
+  width: 240px;
+}\r
+.vc-w-10 {
+  width: 2.5rem;
+}\r
+.vc-w-px {
   width: 1px;
 }\r
-.w-\\[320px\\] {
+.vc-w-\\[320px\\] {
   width: 320px;
 }\r
-.w-auto {
+.vc-w-auto {
   width: auto;
 }\r
-.w-1\\/2 {
+.vc-w-1\\/2 {
   width: 50%;
 }\r
-.w-3\\/12 {
+.vc-w-3\\/12 {
   width: 25%;
 }\r
-.w-9\\/12 {
+.vc-w-9\\/12 {
   width: 75%;
 }\r
-.w-max {
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
+.vc-w-4 {
+  width: 1rem;
 }\r
-.w-\\[18px\\] {
+.vc-w-\\[18px\\] {
   width: 18px;
 }\r
-.rotate-180 {
+.vc-min-w-\\[100px\\] {
+  min-width: 100px;
+}\r
+.vc-shrink-0 {
+  flex-shrink: 0;
+}\r
+.vc-rotate-180 {
   --tw-rotate: 180deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }\r
-.rotate-0 {
+.vc-rotate-0 {
   --tw-rotate: 0deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }\r
-.cursor-pointer {
+.vc-cursor-pointer {
   cursor: pointer;
 }\r
-.select-none {
+.vc-select-none {
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
 }\r
-.flex-col {
+.vc-flex-col {
   flex-direction: column;
 }\r
-.flex-wrap {
+.vc-flex-wrap {
   flex-wrap: wrap;
 }\r
-.items-center {
+.vc-items-center {
   align-items: center;
 }\r
-.justify-end {
+.vc-justify-end {
   justify-content: flex-end;
 }\r
-.justify-center {
+.vc-justify-center {
   justify-content: center;
 }\r
-.justify-between {
+.vc-justify-between {
   justify-content: space-between;
 }\r
-.overflow-y-auto {
+.vc-self-center {
+  align-self: center;
+}\r
+.vc-overflow-y-auto {
   overflow-y: auto;
 }\r
-.truncate {
+.vc-overflow-x-hidden {
+  overflow-x: hidden;
+}\r
+.vc-truncate {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }\r
-.rounded-full {
+.vc-whitespace-nowrap {
+  white-space: nowrap;
+}\r
+.vc-rounded-full {
   border-radius: 9999px;
 }\r
-.rounded-2xl {
+.vc-rounded-2xl {
   border-radius: 1rem;
 }\r
-.rounded {
+.vc-rounded {
   border-radius: 0.25rem;
 }\r
-.rounded-b-xl {
+.vc-rounded-b-xl {
   border-bottom-right-radius: 0.75rem;
   border-bottom-left-radius: 0.75rem;
 }\r
-.rounded-t {
+.vc-rounded-t {
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
 }\r
-.border {
+.vc-border {
   border-width: 1px;
 }\r
-.border-t {
+.\\!vc-border {
+  border-width: 1px !important;
+}\r
+.vc-border-t {
   border-top-width: 1px;
 }\r
-.border-l {
+.vc-border-l {
   border-left-width: 1px;
 }\r
-.border-r {
+.vc-border-r {
   border-right-width: 1px;
 }\r
-.border-b {
+.vc-border-b {
   border-bottom-width: 1px;
 }\r
-.border-t-0 {
+.vc-border-t-0 {
   border-top-width: 0px;
 }\r
-.border-l-0 {
+.vc-border-l-0 {
   border-left-width: 0px;
 }\r
-.border-r-0 {
+.vc-border-r-0 {
   border-right-width: 0px;
 }\r
-.border-white {
+.\\!vc-border-solid {
+  border-style: solid !important;
+}\r
+.vc-border-white {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
 }\r
-.border-gray-lighter {
+.\\!vc-border-gray-medium {
+  border-color: var(--c-medium-gray) !important;
+}\r
+.vc-border-gray-lighter {
   border-color: var(--c-lighter-gray);
 }\r
-.border-gray-light {
+.vc-border-gray-light {
   border-color: var(--c-light-gray);
 }\r
-.border-gray-divider {
+.vc-border-gray-divider {
   border-color: var(--c-gray-divider);
 }\r
-.border-gray-medium {
+.vc-border-gray-medium {
   border-color: var(--c-medium-gray);
 }\r
-.bg-white {
+.vc-bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }\r
-.bg-primary {
+.\\!vc-bg-white {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
+}\r
+.vc-bg-primary {
   background-color: var(--c-primary);
 }\r
-.bg-white\\/\\[\\.5\\] {
+.vc-bg-white\\/\\[\\.5\\] {
   background-color: rgb(255 255 255 / .5);
 }\r
-.bg-black\\/80 {
+.vc-bg-black\\/80 {
   background-color: rgb(0 0 0 / 0.8);
 }\r
-.bg-overflow {
+.vc-bg-overflow {
   background-color: var(--c-overflow);
 }\r
-.bg-gray-light {
+.vc-bg-gray-warm {
+  background-color: var(--c-dark-gray-warm);
+}\r
+.vc-bg-gray-light {
   background-color: var(--c-light-gray);
 }\r
-.bg-transparent {
+.vc-bg-transparent {
   background-color: transparent;
 }\r
-.bg-primary-royal {
+.vc-bg-gray-medium {
+  background-color: var(--c-medium-gray);
+}\r
+.vc-bg-primary-royal {
   background-color: var(--c-primary-royal);
 }\r
-.bg-gray-lightest {
+.vc-bg-gray-lightest {
   background-color: var(--c-lightest-gray);
 }\r
-.p-1 {
+.vc-p-1 {
   padding: 0.25rem;
 }\r
-.p-2 {
+.vc-p-2 {
   padding: 0.5rem;
 }\r
-.p-6 {
+.vc-p-6 {
   padding: 1.5rem;
 }\r
-.px-5 {
+.vc-px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
 }\r
-.py-2 {
+.vc-py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }\r
-.py-1 {
+.vc-py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
 }\r
-.px-2 {
+.vc-px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }\r
-.py-5 {
+.vc-py-5 {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
 }\r
-.px-8 {
+.vc-px-8 {
   padding-left: 2rem;
   padding-right: 2rem;
 }\r
-.py-4 {
+.vc-py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }\r
-.pl-6 {
+.vc-pl-6 {
   padding-left: 1.5rem;
 }\r
-.text-sm {
+.\\!vc-text-xs {
+  font-size: 0.75rem !important;
+  line-height: 1rem !important;
+}\r
+.vc-text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
 }\r
-.text-xs {
+.vc-text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
 }\r
-.text-lg {
+.vc-text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
 }\r
-.font-bold {
+.vc-font-bold {
   font-weight: 700;
 }\r
-.font-semibold {
+.vc-font-semibold {
   font-weight: 600;
 }\r
-.uppercase {
+.vc-uppercase {
   text-transform: uppercase;
 }\r
-.text-gray-medium {
+.vc-text-gray-medium {
   color: var(--c-medium-gray);
 }\r
-.text-gray-darker {
+.\\!vc-text-gray-darkest {
+  color: var(--c-darkest-gray) !important;
+}\r
+.vc-text-gray-darker {
   color: var(--c-darker-gray);
 }\r
-.text-primary {
+.vc-text-primary {
   color: var(--c-primary);
 }\r
-.text-white {
+.vc-text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }\r
-.text-gray-light {
+.vc-text-gray-light {
   color: var(--c-light-gray);
 }\r
-.text-gray-warm {
+.vc-text-gray-warm {
   color: var(--c-dark-gray-warm);
 }\r
-.opacity-60 {
+.vc-opacity-50 {
+  opacity: 0.5;
+}\r
+.\\!vc-opacity-100 {
+  opacity: 1 !important;
+}\r
+.vc-opacity-60 {
   opacity: 0.6;
 }\r
-.opacity-100 {
+.vc-opacity-100 {
   opacity: 1;
 }\r
-.opacity-0 {
+.vc-opacity-0 {
   opacity: 0;
 }\r
-.shadow-lg {
+.vc-shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }\r
-.shadow-md {
+.\\!vc-shadow-\\[2px_6px_15px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.3\\)\\] {
+  --tw-shadow: 2px 6px 15px rgba(0,0,0,0.3) !important;
+  --tw-shadow-colored: 2px 6px 15px var(--tw-shadow-color) !important;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+}\r
+.vc-shadow-md {
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }\r
-.outline-none {
+.vc-outline-none {
   outline: 2px solid transparent;
   outline-offset: 2px;
 }\r
-.filter {
+.vc-saturate-0 {
+  --tw-saturate: saturate(0);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }\r
-.backdrop-blur {
+.vc-backdrop-blur {
   --tw-backdrop-blur: blur(8px);
   -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
           backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
 }\r
-.transition-all {
+.vc-transition-all {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }\r
-.transition-opacity {
+.\\!vc-transition-opacity {
+  transition-property: opacity !important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition-duration: 150ms !important;
+}\r
+.vc-transition-opacity {
   transition-property: opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
@@ -1316,57 +1331,6 @@ select {
   --hidden-royal-blue: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='%23284ea2' d='M154.271,63.406c22.243,5.762,39.382,17.586,48.956,25.494,9.186,7.587,17.187,16.341,22.527,24.648,6.176,9.606,6.247,14.405,6.247,14.452,0,4.764-5.566,18.577-22.079,34.01l16.973,16.972c18.185-17.247,29.106-36.602,29.106-50.982,0-30.946-57.308-92-128-92-13.307,0-26.139,2.165-38.205,5.884l42.099,42.099c2.731-10.572,11.479-18.722,22.376-20.577Z'/%3E%3Cpath fill='%23284ea2' d='M166.022,118.111l21.472,21.472c2.896-7.3,4.505-15.251,4.505-23.583,0-8.812-1.782-17.207-5.004-24.847-.07,12.971-8.957,23.853-20.974,26.958Z'/%3E%3Cpath fill='%23284ea2' d='M31.833,17.863c-4.687-4.686-12.284-4.686-16.971,0-4.686,4.687-4.686,12.285,0,16.971l29.92,29.92C17.38,84.825,0,110.966,0,128c0,32.943,57.308,92,128,92,21.088,0,40.972-5.269,58.51-13.52l37.657,37.657c4.687,4.686,12.284,4.686,16.971,0,4.686-4.687,4.686-12.285,0-16.971L31.833,17.863Zm96.167,178.137c-35.405,0-62.403-17.699-75.346-28.249-21.65-17.648-28.654-34.402-28.654-39.751,0-.047,.071-4.846,6.247-14.452,5.34-8.308,13.341-17.061,22.527-24.648,2.545-2.103,5.633-4.482,9.205-6.95l7.708,7.708c-3.643,8.034-5.686,16.946-5.686,26.343,0,35.346,28.654,64,64,64,9.397,0,18.31-2.043,26.345-5.684l13.936,13.936c-11.606,4.516-25.17,7.749-40.281,7.749Z'/%3E%3C/svg%3E%0A");\r
 }\r
 \r
-body {\r
-  -webkit-font-smoothing: antialiased;\r
-  -moz-osx-font-smoothing: grayscale;\r
-  font-family: 'Roboto', sans-serif;\r
-}\r
-\r
-/* Toast Notification */\r
-.vim-menu-toast {\r
-  position: absolute;\r
-  top: 10%;\r
-  left: calc(50% - 50px);\r
-  background-color: rgba(0, 0, 0, 0.6);\r
-}\r
-\r
-/* Axes Gizmo*/\r
-.gizmo-axis-canvas {\r
-  display: block;\r
-  position: static !important;\r
-  order: 1;\r
-  margin: auto auto 0 auto;\r
-  filter: saturate(0%);\r
-}\r
-\r
-.vim-top:hover .gizmo-axis-canvas {\r
-  filter: saturate(100%);\r
-}\r
-.vim-top {\r
-  opacity: 0.5;\r
-}\r
-.vim-top:hover {\r
-  opacity: 1;\r
-}\r
-\r
-/* Context Menu */\r
-.checked {\r
-  font-weight: bold;\r
-}\r
-\r
-/* Logo */\r
-\r
-.vim-logo {\r
-  position: fixed;\r
-  top: 16px;\r
-  left: 16px;\r
-}\r
-\r
-.vim-logo img {\r
-  height: 48px;\r
-  width: 128px;\r
-}\r
-\r
 /*Makes full screen and remove scrollbars*/\r
 html,\r
 body {\r
@@ -1375,143 +1339,48 @@ body {\r
   padding: 0;\r
   overflow: hidden;\r
   background: radial-gradient(circle at center, #f0f0ff, #999999);\r
+  -webkit-font-smoothing: antialiased;\r
+  -moz-osx-font-smoothing: grayscale;\r
+  font-family: 'Roboto', sans-serif;\r
 }\r
 \r
-.VimLoadingBox h1 {\r
-  color: #050c1a;\r
-}\r
-\r
-.vim-section {\r
-  position: fixed;\r
-  bottom: 0px;\r
-  right: 64px;\r
-  width: 64px;\r
-  pointer-events: all;\r
-}\r
-\r
-/* MENU */\r
-\r
-.vim-control-bar td {\r
-  pointer-events: all;\r
-}\r
-\r
-.vim-control-bar td.empty {\r
-  pointer-events: none;\r
-}\r
-\r
-.vim-control-bar table {\r
-  width: 64px;\r
-}\r
-\r
-.vim-control-bar button:focus,\r
-.vim-bim-search input[type='search']:focus {\r
+/*No focus states*/\r
+[type='checkbox']:focus,\r
+[type='radio']:focus,\r
+button:focus,\r
+input[type='search']:focus {\r
   outline: 0;\r
   box-shadow: none;\r
 }\r
 \r
-.vim-control-bar .iconButton {\r
-  color: var(--c-white);\r
-  border: none;\r
-  background-color: transparent;\r
-}\r
-.vim-control-bar .iconButton.active {\r
-  background-color: var(--c-primary-royal);\r
-}\r
-.vim-control-bar .iconButton img {\r
-  width: 42px;\r
-  height: 42px;\r
+input[type='search']::-webkit-search-cancel-button {\r
+  -webkit-appearance: none;\r
+  height: 1rem;\r
+  width: 1rem;\r
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16.25' height='16.25' viewBox='0 0 16.25 16.25'%3E%3Cpath id='icon' d='M32.125,24a8.125,8.125,0,1,0,8.125,8.125A8.125,8.125,0,0,0,32.125,24ZM35.6,34.275A.937.937,0,0,1,34.275,35.6l-2.15-2.15-2.15,2.15a.937.937,0,0,1-1.326-1.326l2.15-2.15-2.15-2.15a.937.937,0,0,1,1.326-1.326l2.15,2.15,2.15-2.15A.937.937,0,1,1,35.6,29.975l-2.15,2.15Z' transform='translate(-24 -24)' fill='%238a8d95'/%3E%3C/svg%3E%0A");\r
 }\r
 \r
-.vim-control-bar .iconButton:hover img {\r
-  transform: scale(1.1);\r
+@-moz-document url-prefix() {\r
+  .vim-bim-search-count {\r
+    right: 1.5rem;\r
+  }\r
 }\r
 \r
-.vim-control-bar .iconButton:active img {\r
-  transform: scale(1.1);\r
-  filter: brightness(1.5);\r
-}\r
-\r
-.vim-control-bar .iconButton:disabled img {\r
-  filter: brightness(0.5);\r
-  transform: scale(1);\r
-}\r
-\r
-/* Help Controls Widget */\r
-.vim-help-controls {\r
-  position: fixed;\r
-  bottom: 64px;\r
-  width: 100%;\r
-  pointer-events: none;\r
-}\r
-\r
-/* Tooltips */\r
-.__react_component_tooltip {\r
-  background-color: var(--c-white) !important;\r
-  color: var(--c-darkest-gray) !important;\r
-  font-size: 12.65px;\r
-  transition: opacity 0.1s ease-out !important;\r
-  border: 1px solid var(--c-medium-gray) !important;\r
-  box-shadow: 2px 6px 15px #00000033;\r
-}\r
-.__react_component_tooltip:before,\r
-.__react_component_tooltip:after {\r
-  content: none !important;\r
-}\r
-\r
-/* Bim Panel */\r
-\r
-.vim-side-panel {\r
-  height: 100%;\r
-  width: 480px;\r
-}\r
-.bim-panel-open {\r
-  margin-left: 480px;\r
-  max-width: calc(100% - 480px);\r
-  -o-object-fit: cover;\r
-     object-fit: cover;\r
-}\r
-.vim-gfx.bim-panel-open + .vim-ui .vim-control-bar,\r
-.vim-gfx.bim-panel-open + .vim-ui .menu-help-controls,\r
-.vim-gfx.bim-panel-open + .vim-ui .menu-help-overlay h2 {\r
-  margin-left: 480px;\r
-  max-width: calc(100% - 480px);\r
-}\r
-.vim-gfx.bim-panel-open + .vim-ui .vim-menu-toast {\r
-  left: calc(50% + 190px);\r
-}\r
-\r
-.vim-loading-box {\r
-  margin: auto;\r
-  align-self: center;\r
-  position: absolute;\r
-  top: calc(50% - 37px);\r
-  left: calc(50% - 160px);\r
-}\r
-.submenu-item-active {\r
-  position: relative;\r
-}\r
-.submenu-item-active::before {\r
-  content: '';\r
-  display: block;\r
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='%230590cc' d='M228.693 61.741c5.379-7.011 4.057-17.055-2.954-22.434-7.01-5.379-17.054-4.057-22.434 2.954l-.008.011L99.864 177.069l-39.607-47.203c-5.68-6.769-15.772-7.652-22.542-1.972s-7.652 15.772-1.972 22.542l52.416 62.467.006.007c.018.021.038.039.056.06.214.252.448.492.681.733.153.159.3.326.458.478s.331.291.497.437c.251.222.5.445.763.648l.062.053c.108.083.225.151.334.231.304.221.608.44.924.638.166.104.335.192.503.289.284.164.567.328.859.473.221.11.447.204.671.303.245.107.487.219.736.313.268.103.54.188.812.275.214.069.428.142.645.202.293.081.588.144.884.208.206.044.411.093.619.129.294.051.589.085.884.12.219.026.437.055.656.071.275.021.55.026.825.033.245.006.489.015.735.009.246-.005.491-.024.736-.042.274-.018.548-.036.821-.068.22-.026.437-.065.654-.101.293-.047.585-.094.876-.158.207-.045.41-.103.615-.157.292-.076.584-.152.873-.245.215-.069.425-.152.637-.23.267-.099.535-.196.798-.31.245-.105.483-.228.723-.346.219-.108.44-.211.656-.331.286-.158.562-.334.839-.511.163-.104.328-.199.488-.31.307-.211.603-.444.896-.678.106-.085.219-.157.324-.245.021-.018.039-.038.06-.056.253-.215.492-.449.733-.681.159-.153.326-.301.478-.458.152-.159.292-.332.438-.498.221-.25.444-.5.647-.761.017-.022.037-.041.054-.063L228.693 61.741Z'/%3E%3C/svg%3E");\r
-  background-size: contain;\r
-  position: absolute;\r
-  left: 20px;\r
-  top: 12px;\r
-  width: 20px;\r
-  height: 17px;\r
-}\r
+/* === React Tree === */\r
 .rct-tree-root {\r
   font-family: inherit;\r
 }\r
+\r
 .rct-tree-root > div > .rct-tree-items-container {\r
   max-height: calc(50vh - 9rem);\r
   overflow-y: auto;\r
   content-visibility: auto;\r
 }\r
+\r
 .rct-tree-items-container li .rct-tree-item-title-container {\r
   border: none;\r
 }\r
+\r
 .rct-tree-items-container\r
   li\r
   .rct-tree-item-title-container\r
@@ -1528,9 +1397,11 @@ body {\r
   -webkit-user-select: none;\r
           user-select: none;\r
 }\r
+\r
 .rct-tree-items-container > li:nth-child(odd) {\r
   background-color: var(--c-white);\r
 }\r
+\r
 .rct-tree-items-container > li:nth-child(even) {\r
   background-color: var(--c-gray-zebra);\r
 }\r
@@ -1538,9 +1409,11 @@ body {\r
 .vim-inspector-properties {\r
   max-height: 500px;\r
 }\r
+\r
 .rct-tree-root-focus {\r
   outline: none;\r
 }\r
+\r
 .rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-focused {\r
   border: none;\r
 }\r
@@ -1549,12 +1422,15 @@ body {\r
   font-size: 1rem;\r
   position: relative;\r
 }\r
+\r
 .rct-tree-item-arrow {\r
   width: 20px;\r
 }\r
+\r
 .rct-tree-item-arrow:has(svg) svg path {\r
   opacity: 0;\r
 }\r
+\r
 .rct-tree-item-arrow:has(svg):before {\r
   content: '';\r
   background-image: url("data:image/svg+xml,%3Csvg id='Arrow' xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Crect id='frame' width='20' height='20' fill='%238a8d95' opacity='0'/%3E%3Cpath id='icon' d='M100.072,70.536l-3.987,3.987a.938.938,0,0,1-1.6-.663V65.886a.938.938,0,0,1,1.6-.663l3.987,3.987A.937.937,0,0,1,100.072,70.536Z' transform='translate(-87.104 -59.873)' fill='%238a8d95'/%3E%3C/svg%3E%0A");\r
@@ -1566,19 +1442,24 @@ body {\r
   left: -4px;\r
   transition: 0.3s;\r
 }\r
+\r
 .rct-tree-item-title-container-expanded > .rct-tree-item-arrow::before {\r
   transform: rotate(90deg);\r
   transition: 0.3s;\r
 }\r
+\r
 .rct-tree-item-arrow-path {\r
   fill: var(--c-medium-gray);\r
 }\r
+\r
 .parameters:first-child > ul > li h3 {\r
   border-top-right-radius: 4px;\r
 }\r
+\r
 .vim-bim-lower {\r
   max-height: 44vh;\r
 }\r
+\r
 .vim-bim-tree\r
   .rct-tree-root:not(.rct-tree-root-focus)\r
   .rct-tree-item-title-container-selected,\r
@@ -1587,9 +1468,11 @@ body {\r
   .rct-tree-item-title-container-selected {\r
   background-color: var(--c-lightest-blue);\r
 }\r
+\r
 .rct-tree-item-title-container:hover {\r
   background-color: var(--c-list-hover);\r
 }\r
+\r
 .rct-tree-items-:hover {\r
   background-color: var(--c-list-hover);\r
 }\r
@@ -1621,6 +1504,7 @@ body {\r
 .rct-tree-item-visibility.vim-visible {\r
   display: none;\r
 }\r
+\r
 .rct-tree-item-visibility.vim-hidden {\r
   display: block;\r
   background-image: var(--hidden-dark);\r
@@ -1631,6 +1515,7 @@ body {\r
   display: block;\r
   background-image: var(--visible-beige);\r
 }\r
+\r
 .rct-tree-item-button:hover .rct-tree-item-visibility.vim-hidden {\r
   display: block;\r
   background-image: var(--hidden-beige);\r
@@ -1668,52 +1553,48 @@ body {\r
   background-image: var(--visible-royal-blue);\r
 }\r
 \r
-/*Others*/\r
-[type='checkbox']:focus,\r
-[type='radio']:focus {\r
-  outline: none;\r
-  box-shadow: none;\r
-}\r
-\r
-/* Cursors */\r
+/* === Cursors ===*/\r
 .cursor-orbit:hover {\r
   cursor: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojZmZmO30uY2xzLTJ7ZmlsbDojMjEyMzI5O30uY2xzLTN7ZmlsbDpub25lO308L3N0eWxlPjwvZGVmcz48ZyBpZD0iRlJBTUVTIj48ZyBpZD0iZnJhbWUiPjxyZWN0IGNsYXNzPSJjbHMtMyIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ii8+PC9nPjwvZz48ZyBpZD0iSUNPTlMiPjxnPjxnPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTE0LDIwLjIzNGMtNS42NTIsMC0xMC4yNS0yLjYzNi0xMC4yNS01Ljg3NSwwLTEuNzUxLDEuMzA2LTMuMzY2LDMuNjA0LTQuNDgtLjUwOC0uMzEyLS43MDYtLjk2Mi0uNDQtMS40ODgsLjE5NC0uMzg2LC41ODItLjYyNSwxLjAxLS42MjUsLjE0MiwwLC4yODIsLjAyNiwuNDE2LC4wNzlsLjA5NywuMDQyLDIuMTQ4LDEuMDg2Yy42OSwuMzQ5LC45NjksMS4xOTUsLjYyLDEuODg2bC0xLjA4MywyLjE0NWMtLjE5NSwuMzg2LS41ODIsLjYyNS0xLjAxMiwuNjI1LS4xNDEsMC0uMjgtLjAyNS0uNDE0LS4wNzdsLS4wOTgtLjA0NGMtLjU1LS4yNzgtLjY3OC0uODI4LS41NjctMS4zMDYtLjAyMSwuMDExLS4wNDEsLjAyMS0uMDYsLjAzMy0xLjE1NiwuNjUtMS44NDYsMS40NDQtMS44NDYsMi4xMjVzLjY5LDEuNDc2LDEuODQ2LDIuMTI2YzEuNTUzLC44NzMsMy43NTEsMS4zNzQsNi4wMjksMS4zNzRzNC40NzYtLjUwMSw2LjAyOS0xLjM3NGMxLjE1Ni0uNjUsMS44NDYtMS40NDUsMS44NDYtMi4xMjZzLS42OS0xLjQ3NS0xLjg0Ni0yLjEyNWMtMS41NTMtLjg3NC0zLjc1LTEuMzc1LTYuMDI5LTEuMzc1aC0uMTAyYy0uNjI0LDAtMS4xMzItLjQ1Ni0xLjE5Ni0xLjA2Mi0uMDM1LS4zMzQsLjA3My0uNjY4LC4yOTYtLjkxNywuMjIzLS4yNDgsLjU0Mi0uMzkzLC44NzUtLjM5NWguMTI2YzUuNjUyLDAsMTAuMjUsMi42MzUsMTAuMjUsNS44NzRzLTQuNTk4LDUuODc1LTEwLjI1LDUuODc1WiIvPjxwYXRoIGQ9Ik03LjkyNSw4LjAxNmMuMTA4LDAsLjIxNywuMDIsLjMyMywuMDYxLC4wMjYsLjAxMSwuMDUyLC4wMjIsLjA3OCwuMDM1bDIuMTQ1LDEuMDgzYy41NjgsLjI4NywuNzk3LC45ODIsLjUxLDEuNTVsLTEuMDgzLDIuMTQ2Yy0uMTU1LC4zMDgtLjQ2MywuNDg3LS43ODgsLjQ4Ny0uMTA4LDAtLjIxNy0uMDItLjMyNC0uMDYyLS4wMjYtLjAxLS4wNTItLjAyMi0uMDc4LS4wMzUtLjUxMi0uMjU5LS41MzEtLjc5MS0uMzkxLTEuMTY4bC4xNTItLjQxMWMtLjIxNiwuMDk5LS40MjUsLjIwMy0uNjIyLC4zMTMtMS4yNTQsLjcwNi0xLjk3MywxLjU2LTEuOTczLDIuMzQzcy43MTksMS42MzgsMS45NzMsMi4zNDNjMS41ODksLjg5NCwzLjgzMiwxLjQwNyw2LjE1MiwxLjQwN3M0LjU2Mi0uNTEzLDYuMTUyLTEuNDA3YzEuMjU0LS43MDUsMS45NzMtMS41NTksMS45NzMtMi4zNDNzLS43MTktMS42MzgtMS45NzMtMi4zNDNjLTEuNTg5LS44OTQtMy44MzItMS40MDctNi4xNTItMS40MDctLjAzNiwwLS4wNzMsMC0uMTA5LDBoLS4wMDhjLS40OCwwLS44ODMtLjM2Mi0uOTMyLS44NC0uMDU3LS41NSwuMzcyLTEuMDMxLC45MjUtMS4wMzUsLjA0MSwwLC4wODMsMCwuMTI0LDAsNS41MjMsMCwxMCwyLjUxOSwxMCw1LjYyNXMtNC40NzcsNS42MjUtMTAsNS42MjUtMTAtMi41MTgtMTAtNS42MjVjMC0xLjgxNywxLjUzMi0zLjQzMiwzLjkwOS00LjQ2bC0uMDA0LS4wMTEtLjM2Ni0uMTkxYy0uNDM4LS4yMjktLjYxOS0uNzY1LS40MDItMS4xOTQsLjE1Ni0uMzA4LC40NjQtLjQ4NywuNzg4LS40ODdtMC0uNWgwYy0uNTI0LDAtLjk5NywuMjkyLTEuMjM0LC43NjItLjI2MSwuNTE4LS4xNTcsMS4xMzEsLjIxNCwxLjU0OS0yLjE3NiwxLjE1MS0zLjQwNSwyLjc3Mi0zLjQwNSw0LjUzMywwLDMuNDM1LDQuNjEyLDYuMTI1LDEwLjUsNi4xMjVzMTAuNS0yLjY5LDEwLjUtNi4xMjUtNC42MTItNi4xMjUtMTAuNS02LjEyNWgtLjA2NXMtLjA1OSwwLS4wNTksMGMtLjQwNywuMDAzLS43OTMsLjE3Ny0xLjA2MywuNDc5LS4yNywuMzAyLS40MDEsLjcwNi0uMzU5LDEuMTA4LC4wNzYsLjczNCwuNjkxLDEuMjg4LDEuNDMsMS4yODhoLjA2NXMuMDUxLDAsLjA1MSwwYzIuMjM3LDAsNC4zOSwuNDg5LDUuOTA3LDEuMzQyLDEuMDc2LC42MDUsMS43MTgsMS4zMTksMS43MTgsMS45MDhzLS42NDIsMS4zMDItMS43MTgsMS45MDdjLTEuNTE3LC44NTQtMy42NywxLjM0My01LjkwNywxLjM0M3MtNC4zOS0uNDg5LTUuOTA3LTEuMzQyYy0xLjA3Ni0uNjA1LTEuNzE4LTEuMzE4LTEuNzE4LTEuOTA4LDAtLjUyMywuNTA3LTEuMTQ0LDEuMzc0LTEuNzAxLC4wMzgsLjQyMiwuMjU2LC44MjgsLjczNCwxLjA3LC4wNDIsLjAyMSwuMDgyLC4wMzksLjEyMSwuMDU0LC4xNjMsLjA2NCwuMzMzLC4wOTYsLjUwNiwuMDk2LC41MjQsMCwuOTk3LS4yOTIsMS4yMzQtLjc2MmwxLjA4My0yLjE0NWMuMTk5LS4zOTQsLjIzMy0uODQyLC4wOTQtMS4yNjJzLS40MzEtLjc2MS0uODI1LS45NmwtMi4xNDYtMS4wODNjLS4wMzUtLjAxOC0uMDc0LS4wMzUtLjExMy0uMDUxLS4xNzEtLjA2Ny0uMzQxLS4wOTktLjUxMy0uMDk5aDBaIi8+PC9nPjxnPjxjaXJjbGUgY2xhc3M9ImNscy0xIiBjeD0iMTQiIGN5PSIxNC4zNTkiIHI9IjIuNDM4Ii8+PHBhdGggZD0iTTE0LDEyLjE3MmMxLjIwNiwwLDIuMTg4LC45ODEsMi4xODgsMi4xODhzLS45ODEsMi4xODgtMi4xODgsMi4xODgtMi4xODgtLjk4MS0yLjE4OC0yLjE4OCwuOTgxLTIuMTg4LDIuMTg4LTIuMTg4bTAtLjVjLTEuNDgyLDAtMi42ODgsMS4yMDYtMi42ODgsMi42ODhzMS4yMDYsMi42ODgsMi42ODgsMi42ODgsMi42ODgtMS4yMDYsMi42ODgtMi42ODgtMS4yMDYtMi42ODgtMi42ODgtMi42ODhoMFoiLz48L2c+PC9nPjxnPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEuMDA3LDUuNzVjLS4zNzIsMC0uNzU3LS4yODEtLjc1Ny0uNzUyVjFDLjI1LC41ODcsLjU4NiwuMjUsMSwuMjVoMy45OThjLjM2OSwwLC42LC4yMzksLjY5MywuNDYzcy4wOTksLjU1Ny0uMTYzLC44MTdMMS41Myw1LjUyOGMtLjE4MywuMTg0LS4zODYsLjIyMi0uNTIzLC4yMjJaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNC45OTgsLjVjLjMxLDAsLjQzMiwuMjM2LC40NjIsLjMwOXMuMTExLC4zMjYtLjEwOCwuNTQ1TDEuMzU0LDUuMzUyYy0uMTIzLC4xMjMtLjI1NiwuMTQ4LS4zNDYsLjE0OC0uMjUsMC0uNTA3LS4xODgtLjUwNy0uNTAyVjFjMC0uMjc2LC4yMjQtLjUsLjUtLjVoMy45OThtMC0uNUgxQy40NDgsMCwwLC40NDgsMCwxdjMuOTk4YzAsLjYwMywuNDkzLDEuMDAyLDEuMDA3LDEuMDAyLC4yNDYsMCwuNDk2LS4wOTEsLjctLjI5NUw1LjcwNSwxLjcwN2MuNjMtLjYzLC4xODQtMS43MDctLjcwNy0xLjcwN2gwWiIvPjwvZz48L2c+PC9zdmc+'),\r
     auto;\r
 }\r
+\r
 .cursor-look:hover {\r
   cursor: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojZmZmO30uY2xzLTJ7ZmlsbDojMjEyMzI5O30uY2xzLTN7ZmlsbDpub25lO308L3N0eWxlPjwvZGVmcz48ZyBpZD0iRlJBTUVTIj48ZyBpZD0iZnJhbWUiPjxyZWN0IGNsYXNzPSJjbHMtMyIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ii8+PC9nPjwvZz48ZyBpZD0iSUNPTlMiPjxnPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTIxLjQ0NywyMy4zMTJjLS4xOTYsMC0uMzkyLS4wNS0uNTY3LS4xNDVMNS45ODMsMTUuMDQzYy0uMzgxLS4yMDgtLjYxOS0uNjA3LS42MTktMS4wNDNzLjIzNy0uODM1LC42MTktMS4wNDNMMjAuODc5LDQuODMyYy4xNzQtLjA5NSwuMzctLjE0NSwuNTY3LS4xNDUsLjQzNSwwLC44MzUsLjIzNiwxLjA0MywuNjE4LC4zMTMsLjU3NSwuMTAxLDEuMjk5LS40NzQsMS42MTJsLTQuNTA1LDIuNDU3Yy45NTksMS4zNDcsMS40ODUsMi45NzgsMS40ODUsNC42MjVzLS41MjUsMy4yNzgtMS40ODUsNC42MjVsNC41MDUsMi40NTdjLjU3NCwuMzEzLC43ODcsMS4wMzcsLjQ3NCwxLjYxMS0uMjA5LC4zODItLjYwOSwuNjE5LTEuMDQ0LC42MTlabS02LjA0Mi01LjgzN2MuMDQzLS4wNTUsLjA4NC0uMTA5LC4xMjUtLjE2NS0xLjAwMS0uMzAyLTEuNzIyLTEuNjQ3LTEuNzIyLTMuMzExcy43MjgtMy4wMjIsMS43MTgtMy4zMTVjLS4wNC0uMDU1LS4wODEtLjEwNy0uMTIyLS4xNmwtNi4zNzMsMy40NzYsNi4zNzMsMy40NzZaIi8+PHBhdGggZD0iTTIxLjQ0Nyw0LjkzOGMuMzMyLDAsLjY1NCwuMTc3LC44MjQsLjQ4OSwuMjQ4LC40NTUsLjA4MSwxLjAyNC0uMzc0LDEuMjcybC00Ljc1NywyLjU5NWMxLjAzMSwxLjM0LDEuNjA2LDIuOTk5LDEuNjA2LDQuNzA3cy0uNTc1LDMuMzY3LTEuNjA2LDQuNzA3bDQuNzU3LDIuNTk1Yy40NTUsLjI0OCwuNjIyLC44MTcsLjM3NCwxLjI3Mi0uMTcsLjMxMi0uNDkyLC40ODktLjgyNCwuNDg5LS4xNTIsMC0uMzA2LS4wMzctLjQ0OC0uMTE0TDYuMTAzLDE0LjgyM2MtLjMwMS0uMTY1LS40ODktLjQ4LS40ODktLjgyM3MuMTg4LS42NTksLjQ4OS0uODIzTDIwLjk5OSw1LjA1MmMuMTQzLS4wNzgsLjI5Ni0uMTE0LC40NDgtLjExNG0tNS45OCwxMi44NTdjLjE4MS0uMjEyLC4zNDUtLjQzNywuNDk0LS42Ny0uMDA5LDAtLjAxOCwwLS4wMjYsMC0xLjAzNiwwLTEuODc1LTEuMzk5LTEuODc1LTMuMTI1cy44MzktMy4xMjUsMS44NzUtMy4xMjVjLjAwOSwwLC4wMTgsMCwuMDI2LDAtLjE0OC0uMjM0LS4zMTMtLjQ1OC0uNDk0LS42N2wtNi45NTYsMy43OTQsNi45NTYsMy43OTRtNS45OC0xMy4zNTdjLS4yMzksMC0uNDc2LC4wNjEtLjY4NywuMTc1TDUuODY0LDEyLjczOGMtLjQ2MiwuMjUyLS43NDksLjczNi0uNzQ5LDEuMjYycy4yODcsMS4wMSwuNzQ5LDEuMjYybDE0Ljg5Niw4LjEyNWMuMjExLC4xMTUsLjQ0OCwuMTc1LC42ODgsLjE3NSwuNTI3LDAsMS4wMS0uMjg3LDEuMjYzLS43NSwuMzgtLjY5NSwuMTIyLTEuNTctLjU3My0xLjk1bC00LjI2Mi0yLjMyNWMuODg4LTEuMzQyLDEuMzcyLTIuOTMzLDEuMzcyLTQuNTM4cy0uNDg0LTMuMTk2LTEuMzcyLTQuNTM4bDQuMjYyLTIuMzI1Yy42OTYtLjM4LC45NTMtMS4yNTUsLjU3My0xLjk1LS4yNTItLjQ2Mi0uNzM2LS43NS0xLjI2My0uNzVoMFpNOS41NTQsMTRsNC42ODMtMi41NTRjLS40MjMsLjY1LS42NzgsMS41NDgtLjY3OCwyLjU1NHMuMjU1LDEuOTAxLC42NzMsMi41NTFsLTQuNjc4LTIuNTUxaDBaIi8+PC9nPjxnPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEuMDA3LDUuNzVjLS4zNzIsMC0uNzU3LS4yODEtLjc1Ny0uNzUyVjFDLjI1LC41ODcsLjU4NiwuMjUsMSwuMjVoMy45OThjLjM2OSwwLC42LC4yMzksLjY5MywuNDYzcy4wOTksLjU1Ny0uMTYzLC44MTdMMS41Myw1LjUyOGMtLjE4MywuMTg0LS4zODYsLjIyMi0uNTIzLC4yMjJaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNC45OTgsLjVjLjMxLDAsLjQzMiwuMjM2LC40NjIsLjMwOXMuMTExLC4zMjYtLjEwOCwuNTQ1TDEuMzU0LDUuMzUyYy0uMTIzLC4xMjMtLjI1NiwuMTQ4LS4zNDYsLjE0OC0uMjUsMC0uNTA3LS4xODgtLjUwNy0uNTAyVjFjMC0uMjc2LC4yMjQtLjUsLjUtLjVoMy45OThtMC0uNUgxQy40NDgsMCwwLC40NDgsMCwxdjMuOTk4YzAsLjYwMywuNDkzLDEuMDAyLDEuMDA3LDEuMDAyLC4yNDYsMCwuNDk2LS4wOTEsLjctLjI5NUw1LjcwNSwxLjcwN2MuNjMtLjYzLC4xODQtMS43MDctLjcwNy0xLjcwN2gwWiIvPjwvZz48L2c+PC9zdmc+'),\r
     auto;\r
 }\r
+\r
 .cursor-pan:hover {\r
   cursor: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojZmZmO30uY2xzLTJ7ZmlsbDojMjEyMzI5O30uY2xzLTN7ZmlsbDpub25lO308L3N0eWxlPjwvZGVmcz48ZyBpZD0iRlJBTUVTIj48ZyBpZD0iZnJhbWUiPjxyZWN0IGNsYXNzPSJjbHMtMyIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ii8+PC9nPjwvZz48ZyBpZD0iSUNPTlMiPjxnPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEuMDA3LDUuNzVjLS4zNzIsMC0uNzU3LS4yODEtLjc1Ny0uNzUyVjFDLjI1LC41ODcsLjU4NiwuMjUsMSwuMjVoMy45OThjLjM2OSwwLC42LC4yMzksLjY5MywuNDYzcy4wOTksLjU1Ny0uMTYzLC44MTdMMS41Myw1LjUyOGMtLjE4MywuMTg0LS4zODYsLjIyMi0uNTIzLC4yMjJaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNC45OTgsLjVjLjMxLDAsLjQzMiwuMjM2LC40NjIsLjMwOXMuMTExLC4zMjYtLjEwOCwuNTQ1TDEuMzU0LDUuMzUyYy0uMTIzLC4xMjMtLjI1NiwuMTQ4LS4zNDYsLjE0OC0uMjUsMC0uNTA3LS4xODgtLjUwNy0uNTAyVjFjMC0uMjc2LC4yMjQtLjUsLjUtLjVoMy45OThtMC0uNUgxQy40NDgsMCwwLC40NDgsMCwxdjMuOTk4YzAsLjYwMywuNDkzLDEuMDAyLDEuMDA3LDEuMDAyLC4yNDYsMCwuNDk2LS4wOTEsLjctLjI5NUw1LjcwNSwxLjcwN2MuNjMtLjYzLC4xODQtMS43MDctLjcwNy0xLjcwN2gwWiIvPjwvZz48Zz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xNC4xOTcsMjMuMDYyYy0xLjY2NiwwLTMuMTgzLS44MDgtNC4wNTctMi4xNjJsLTQuNTY3LTYuOTdjLS4yMDktLjMxOC0uMjc1LS42OTUtLjE4Ni0xLjA2MXMuMzIyLS42NzgsLjY1Ni0uODc2Yy4yMzUtLjE0LC41MDUtLjIxNCwuNzgxLS4yMTQsLjUxNCwwLC45ODIsLjI0NywxLjI1NCwuNjYxbDEuOTkzLDMuMDM4VjcuNjkxYzAtLjY0MiwuNTEzLTEuMTY5LDEuMTY5LTEuMiwuMDIxLDAsLjA0MS0uMDAxLC4wNjItLjAwMSwuNjc4LDAsMS4yMywuNTI2LDEuMjMsMS4xNzJ2NS45NDdjMCwuMDg2LC4wNzQsLjE1NiwuMTY0LC4xNTZzLjE2NC0uMDcsLjE2NC0uMTU2VjUuODE2YzAtLjY0MiwuNTEzLTEuMTY5LDEuMTY5LTEuMiwuMDIxLDAsLjA0MS0uMDAxLC4wNjItLjAwMSwuNjc4LDAsMS4yMywuNTI2LDEuMjMsMS4xNzJ2Ny4xOTdjMCwuMDg2LC4wNzQsLjE1NiwuMTY0LC4xNTZzLjE2NC0uMDcsLjE2NC0uMTU2VjcuMDY2YzAtLjY0MiwuNTEzLTEuMTY5LDEuMTY5LTEuMiwuMDIxLDAsLjA0MS0uMDAxLC4wNjItLjAwMSwuNjc4LDAsMS4yMywuNTI2LDEuMjMsMS4xNzJ2Ny4xOTdjMCwuMDg2LC4wNzQsLjE1NiwuMTY0LC4xNTZzLjE2NC0uMDcsLjE2NC0uMTU2di01LjI5M2MwLS42NDIsLjUxMy0xLjE2OSwxLjE2OS0xLjIsLjAyMSwwLC4wNDEtLjAwMSwuMDYyLS4wMDEsLjY3OCwwLDEuMjMsLjUyNiwxLjIzLDEuMTcydjkuNjE5YzAsMi40OTktMi4xMzQsNC41MzEtNC43NTgsNC41MzFoLTEuOTQ0WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTIwLjczNSwxNi44MTJ2MS43MTljMCwyLjQxNi0yLjA1Nyw0LjM3NS00LjU5NCw0LjM3NWgtMS45NDRjLTEuNjA5LDAtMy4wNzMtLjc4MS0zLjkxNy0yLjA4OHYtLjAwMnMtLjAwMi0uMDAyLS4wMDItLjAwMmwtNC41NjYtNi45NjdjLS4zODQtLjU4NS0uMTk2LTEuMzU3LC40MTgtMS43MjIsLjIwOS0uMTI0LC40NDktLjE5LC42OTQtLjE5LC40NTcsMCwuODczLC4yMiwxLjExNSwuNTg4bDEuMDgzLDEuNjUxLDEuMjEzLDEuODQ4VjcuNjkxYzAtLjU0NiwuNDQtMS4wMTcsMS4wMTMtMS4wNDQsLjYxMi0uMDI5LDEuMTIsLjQzNywxLjEyLDEuMDE0djUuOTQ3YzAsLjE3MywuMTQ3LC4zMTIsLjMyOCwuMzEyaDBjLjE4MSwwLC4zMjgtLjE0LC4zMjgtLjMxMlY1LjgxNmMwLS41NDYsLjQ0LTEuMDE3LDEuMDEzLTEuMDQ0LC42MTItLjAyOSwxLjEyLC40MzcsMS4xMiwxLjAxNHY3LjE5N2MwLC4xNzMsLjE0NywuMzEyLC4zMjgsLjMxMmgwYy4xODEsMCwuMzI4LS4xNCwuMzI4LS4zMTJWNy4wNjZjMC0uNTQ2LC40NC0xLjAxNywxLjAxMy0xLjA0NCwuNjEyLS4wMjksMS4xMiwuNDM3LDEuMTIsMS4wMTR2Ny4xOTdjMCwuMTczLC4xNDcsLjMxMiwuMzI4LC4zMTJoMGMuMTgxLDAsLjMyOC0uMTQsLjMyOC0uMzEydi01LjI5M2MwLS41NDYsLjQ0LTEuMDE3LDEuMDEzLTEuMDQ0LC42MTItLjAyOSwxLjEyLC40MzcsMS4xMiwxLjAxNHY3LjkwMVoiLz48cGF0aCBkPSJNMTkuNjY4LDcuMjcxYy0uNDAzLDAtLjc3MywuMTMzLTEuMDY2LC4zNTR2LS41ODhjMC0uOTA2LS43NzEtMS42NDEtMS43MjMtMS42NDEtLjQwNCwwLS43NzUsLjEzMy0xLjA2OCwuMzU1LS4wMi0uODktLjc4Mi0xLjYwNS0xLjcyMS0xLjYwNS0uOTUxLDAtMS43MjMsLjczNS0xLjcyMywxLjY0MXYuNTg4Yy0uMjkzLS4yMjEtLjY2My0uMzU0LTEuMDY2LS4zNTQtLjk1MSwwLTEuNzIzLC43MzUtMS43MjMsMS42NDF2Ni4xOGwtMS4wODMtMS42NTFjLS4zNzMtLjU2OS0xLjAxNS0uODgyLTEuNjcxLS44ODItLjM1NiwwLS43MTcsLjA5Mi0xLjA0MSwuMjg1LS45MjIsLjU0OS0xLjIwMywxLjcwNi0uNjI2LDIuNTg0bDQuNTY1LDYuOTY3Yy45MjQsMS40MzEsMi41ODMsMi4zODYsNC40NzYsMi4zODZoMS45NDRjMi44OTksMCw1LjI1LTIuMjM5LDUuMjUtNVY4LjkxMmMwLS45MDYtLjc3MS0xLjY0MS0xLjcyMy0xLjY0MVptMS4wNjYsOS41NDF2MS43MTljMCwyLjQxNi0yLjA1Nyw0LjM3NS00LjU5NCw0LjM3NWgtMS45NDRjLTEuNjA5LDAtMy4wNzMtLjc4MS0zLjkxNy0yLjA4OHYtLjAwMnMtLjAwMi0uMDAyLS4wMDItLjAwMmwtNC41NjYtNi45NjdjLS4zODQtLjU4NS0uMTk2LTEuMzU3LC40MTgtMS43MjIsLjIwOS0uMTI0LC40NDktLjE5LC42OTQtLjE5LC40NTcsMCwuODczLC4yMiwxLjExNSwuNTg4bDEuMDgzLDEuNjUxLDEuMjEzLDEuODQ4VjcuNjkxYzAtLjU0NiwuNDQtMS4wMTcsMS4wMTMtMS4wNDQsLjYxMi0uMDI5LDEuMTIsLjQzNywxLjEyLDEuMDE0djUuOTQ3YzAsLjE3MywuMTQ3LC4zMTIsLjMyOCwuMzEyaDBjLjE4MSwwLC4zMjgtLjE0LC4zMjgtLjMxMlY1LjgxNmMwLS41NDYsLjQ0LTEuMDE3LDEuMDEzLTEuMDQ0LC42MTItLjAyOSwxLjEyLC40MzcsMS4xMiwxLjAxNHY3LjE5N2MwLC4xNzMsLjE0NywuMzEyLC4zMjgsLjMxMmgwYy4xODEsMCwuMzI4LS4xNCwuMzI4LS4zMTJWNy4wNjZjMC0uNTQ2LC40NC0xLjAxNywxLjAxMy0xLjA0NCwuNjEyLS4wMjksMS4xMiwuNDM3LDEuMTIsMS4wMTR2Ny4xOTdjMCwuMTczLC4xNDcsLjMxMiwuMzI4LC4zMTJoMGMuMTgxLDAsLjMyOC0uMTQsLjMyOC0uMzEydi01LjI5M2MwLS41NDYsLjQ0LTEuMDE3LDEuMDEzLTEuMDQ0LC42MTItLjAyOSwxLjEyLC40MzcsMS4xMiwxLjAxNHY3LjkwMVoiLz48L2c+PC9nPjwvc3ZnPg=='),\r
     auto;\r
 }\r
+\r
 .cursor-pan:active {\r
   cursor: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojZmZmO30uY2xzLTJ7ZmlsbDojMjEyMzI5O30uY2xzLTN7ZmlsbDpub25lO308L3N0eWxlPjwvZGVmcz48ZyBpZD0iRlJBTUVTIj48ZyBpZD0iZnJhbWUiPjxyZWN0IGNsYXNzPSJjbHMtMyIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ii8+PC9nPjwvZz48ZyBpZD0iSUNPTlMiPjxnPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEuMDA3LDUuNzVjLS4zNzIsMC0uNzU3LS4yODEtLjc1Ny0uNzUyVjFDLjI1LC41ODcsLjU4NiwuMjUsMSwuMjVoMy45OThjLjM2OSwwLC42LC4yMzksLjY5MywuNDYzcy4wOTksLjU1Ny0uMTYzLC44MTdMMS41Myw1LjUyOGMtLjE4MywuMTg0LS4zODYsLjIyMi0uNTIzLC4yMjJaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNC45OTgsLjVjLjMxLDAsLjQzMiwuMjM2LC40NjIsLjMwOXMuMTExLC4zMjYtLjEwOCwuNTQ1TDEuMzU0LDUuMzUyYy0uMTIzLC4xMjMtLjI1NiwuMTQ4LS4zNDYsLjE0OC0uMjUsMC0uNTA3LS4xODgtLjUwNy0uNTAyVjFjMC0uMjc2LC4yMjQtLjUsLjUtLjVoMy45OThtMC0uNUgxQy40NDgsMCwwLC40NDgsMCwxdjMuOTk4YzAsLjYwMywuNDkzLDEuMDAyLDEuMDA3LDEuMDAyLC4yNDYsMCwuNDk2LS4wOTEsLjctLjI5NUw1LjcwNSwxLjcwN2MuNjMtLjYzLC4xODQtMS43MDctLjcwNy0xLjcwN2gwWiIvPjwvZz48Zz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xNC4xMzksMjMuMDYyYy0xLjY0NywwLTMuMTUzLS43OTMtNC4wMy0yLjEyMmwtMi4xNTktMy4yOTFjLS4yMDktLjMxOS0uMjc1LS42OTUtLjE4Ny0xLjA2MSwuMDg5LS4zNjYsLjMyMi0uNjc3LC42NTYtLjg3NiwuMjM1LS4xNCwuNTA1LS4yMTQsLjc4MS0uMjE0LC4wOCwwLC4xNjEsLjAwNiwuMjQxLC4wMTlsLjU3MiwuMDl2LTMuNjg3YzAtLjY0MiwuNTEzLTEuMTY5LDEuMTY5LTEuMiwuMDIxLDAsLjA0MS0uMDAxLC4wNjItLjAwMSwuNjc4LDAsMS4yMywuNTI2LDEuMjMsMS4xNzJ2LjM5MWMwLC4wODYsLjA3NCwuMTU2LC4xNjQsLjE1NnMuMTY0LS4wNywuMTY0LS4xNTZ2LTEuMjk5YzAtLjY0MiwuNTEzLTEuMTY5LDEuMTY5LTEuMiwuMDIxLDAsLjA0MS0uMDAxLC4wNjItLjAwMSwuNjc4LDAsMS4yMywuNTI2LDEuMjMsMS4xNzJ2MS40ODRjMCwuMDg2LC4wNzQsLjE1NiwuMTY0LC4xNTZzLjE2NC0uMDcsLjE2NC0uMTU2di0uODNjMC0uNjQyLC41MTMtMS4xNjksMS4xNjktMS4yLC4wMjEsMCwuMDQxLS4wMDEsLjA2Mi0uMDAxLC42NzgsMCwxLjIzLC41MjYsMS4yMywxLjE3MnYxLjAxNmMwLC4wODYsLjA3NCwuMTU2LC4xNjQsLjE1NnMuMTY0LS4wNywuMTY0LS4xNTZ2LS4zNjFjMC0uNjQyLC41MTMtMS4xNjksMS4xNjktMS4yLC4wMjEsMCwuMDQxLS4wMDEsLjA2Mi0uMDAxLC42NzgsMCwxLjIzLC41MjYsMS4yMywxLjE3MnY2LjMyOGMwLDIuNDk5LTIuMTM0LDQuNTMxLTQuNzU4LDQuNTMxaC0xLjk0NFoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0yMC42NzcsMTIuOTA2djUuNjI1YzAsMi40MTYtMi4wNTcsNC4zNzUtNC41OTQsNC4zNzVoLTEuOTQ0Yy0xLjU5LDAtMy4wNDUtLjc2Ni0zLjg5MS0yLjA0OWwtMi4xNTktMy4yOWMtLjE4Ni0uMjgzLS4yNDUtLjYxOC0uMTY2LS45NDQsLjA3OS0uMzI1LC4yODYtLjYwMiwuNTgzLS43NzksLjIwOS0uMTI0LC40NDktLjE5LC42OTQtLjE5LC4wNzEsMCwuMTQzLC4wMDYsLjIxNCwuMDE3bC43NjMsLjExOXYtLjczNnMwLTMuMTM0LDAtMy4xMzRjMC0uNTQ2LC40NC0xLjAxNywxLjAxMy0xLjA0NCwuNjEyLS4wMjksMS4xMiwuNDM3LDEuMTIsMS4wMTR2LjM5MWMwLC4xNzMsLjE0NywuMzEyLC4zMjgsLjMxMmgwYy4xODEsMCwuMzI4LS4xNCwuMzI4LS4zMTJ2LTEuMjk5YzAtLjU0NiwuNDQtMS4wMTcsMS4wMTMtMS4wNDQsLjYxMi0uMDI5LDEuMTIsLjQzNywxLjEyLDEuMDE0djEuNDg0YzAsLjE3MywuMTQ3LC4zMTIsLjMyOCwuMzEyaDBjLjE4MSwwLC4zMjgtLjE0LC4zMjgtLjMxMnYtLjgzYzAtLjU0NiwuNDQtMS4wMTcsMS4wMTMtMS4wNDQsLjYxMi0uMDI5LDEuMTIsLjQzNywxLjEyLDEuMDE0djEuMDE2YzAsLjE3MywuMTQ3LC4zMTIsLjMyOCwuMzEyaDBjLjE4MSwwLC4zMjgtLjE0LC4zMjgtLjMxMnYtLjM2MWMwLS41NDYsLjQ0LTEuMDE3LDEuMDEzLTEuMDQ0LC42MTItLjAyOSwxLjEyLC40MzcsMS4xMiwxLjAxNHYuNzAzWiIvPjxwYXRoIGQ9Ik0yMS4zMzMsMTIuMjAzYzAtLjkwNi0uNzcxLTEuNjQxLTEuNzIzLTEuNjQxLS40NTUsMC0uODY4LC4xNjktMS4xNzYsLjQ0NC0uMjQ0LS42MjQtLjg3My0xLjA2OS0xLjYxMy0xLjA2OWgwYy0uNDU1LDAtLjg2OCwuMTY5LTEuMTc2LC40NDQtLjI0NC0uNjI0LS44NzMtMS4wNjktMS42MTMtMS4wNjktLjgzNSwwLTEuNTMsLjU2Ni0xLjY4OSwxLjMxNi0uMjk4LS4yMzYtLjY4Mi0uMzc5LTEuMS0uMzc5aDBjLS45NTEsMC0xLjcyMywuNzM1LTEuNzIzLDEuNjQxdjMuMTY0Yy0uMTA2LS4wMTctLjIxMy0uMDI1LS4zMjEtLjAyNS0uMzU2LDAtLjcxNywuMDkyLTEuMDQxLC4yODUtLjkyMiwuNTQ5LTEuMjAzLDEuNzA2LS42MjYsMi41ODRsMi4xNTksMy4yOWMuOTI5LDEuNDA3LDIuNTc0LDIuMzQzLDQuNDQ4LDIuMzQzaDEuOTQ0YzIuOSwwLDUuMjUtMi4yMzksNS4yNS01di02LjMyOFptLS42NTYsLjcwM3Y1LjYyNWMwLDIuNDE2LTIuMDU3LDQuMzc1LTQuNTk0LDQuMzc1aC0xLjk0NGMtMS41OSwwLTMuMDQ1LS43NjYtMy44OTEtMi4wNDlsLTIuMTU5LTMuMjljLS4xODYtLjI4My0uMjQ1LS42MTgtLjE2Ni0uOTQ0LC4wNzktLjMyNSwuMjg2LS42MDIsLjU4My0uNzc5LC4yMDktLjEyNCwuNDQ5LS4xOSwuNjk0LS4xOSwuMDcxLDAsLjE0MywuMDA2LC4yMTQsLjAxN2wuNzYzLC4xMTl2LS43MzZzMC0zLjEzNCwwLTMuMTM0YzAtLjU0NiwuNDQtMS4wMTcsMS4wMTMtMS4wNDQsLjYxMi0uMDI5LDEuMTIsLjQzNywxLjEyLDEuMDE0di4zOTFjMCwuMTczLC4xNDcsLjMxMiwuMzI4LC4zMTJoMGMuMTgxLDAsLjMyOC0uMTQsLjMyOC0uMzEydi0xLjI5OWMwLS41NDYsLjQ0LTEuMDE3LDEuMDEzLTEuMDQ0LC42MTItLjAyOSwxLjEyLC40MzcsMS4xMiwxLjAxNHYxLjQ4NGMwLC4xNzMsLjE0NywuMzEyLC4zMjgsLjMxMmgwYy4xODEsMCwuMzI4LS4xNCwuMzI4LS4zMTJ2LS44M2MwLS41NDYsLjQ0LTEuMDE3LDEuMDEzLTEuMDQ0LC42MTItLjAyOSwxLjEyLC40MzcsMS4xMiwxLjAxNHYxLjAxNmMwLC4xNzMsLjE0NywuMzEyLC4zMjgsLjMxMmgwYy4xODEsMCwuMzI4LS4xNCwuMzI4LS4zMTJ2LS4zNjFjMC0uNTQ2LC40NC0xLjAxNywxLjAxMy0xLjA0NCwuNjEyLS4wMjksMS4xMiwuNDM3LDEuMTIsMS4wMTR2LjcwM1oiLz48L2c+PC9nPjwvc3ZnPg=='),\r
     auto;\r
 }\r
+\r
 .cursor-zoom:hover {\r
   cursor: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCI+DQogIDxnIGlkPSJhIiBkYXRhLW5hbWU9IkZSQU1FUyI+DQogICAgPGcgaWQ9ImIiIGRhdGEtbmFtZT0iZnJhbWUiPg0KICAgICAgPHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiBmaWxsPSJub25lIi8+DQogICAgPC9nPg0KICA8L2c+DQogIDxnIGlkPSJjIiBkYXRhLW5hbWU9IklDT05TIj4NCiAgICA8cGF0aCBpZD0iZCIgZGF0YS1uYW1lPSJQYXRoIDE1MDc4IiBkPSJNMTQsNC43ODFjLS4wNTYsMC0uMTEyLC4wMDMtLjE2NywuMDA4cy0uMTExLC4wMTMtLjE2NSwuMDI0LS4xMDgsLjAyNC0uMTYxLC4wMzljLS4wNTMsLjAxNi0uMTA0LC4wMzQtLjE1NSwuMDU1bC00LjIyMSwxLjc2Yy0uMTU0LC4wNjMtLjI5NiwuMTUzLS40MTksLjI2NS0uMTA4LC4wOTktLjE5MywuMjE5LS4yNTEsLjM1Mi0uMDU0LC4xMjUtLjA3NiwuMjYxLS4wNjUsLjM5NywuMDE0LC4xNDIsLjA2NCwuMjc3LC4xNDUsLjM5NCwuMDU5LC4wODYsLjEzMSwuMTYzLC4yMTIsLjIyOCwuMDg1LC4wNjgsLjE3OSwuMTI1LC4yNzgsLjE2OSwuMTA0LC4wNDcsLjIxMywuMDgyLC4zMjUsLjEwNSwuMTE2LC4wMjQsLjIzNCwuMDM2LC4zNTIsLjAzNiwuMDU3LDAsLjExNC0uMDAzLC4xNzItLjAwOHMuMTE1LS4wMTQsLjE3MS0uMDI1Yy4wNTctLjAxMSwuMTEzLS4wMjUsLjE2OS0uMDQyLC4wNTYtLjAxNywuMTExLS4wMzcsLjE2NS0uMDZsMi4yNTgtLjk2NS0uNzcsMTEuOTU2LTMuMzA3LTEuNzE3Yy0uMDU5LS4wMy0uMTE5LS4wNTctLjE4MS0uMDgtLjA2Mi0uMDIzLS4xMjUtLjA0MS0uMTg5LS4wNTYtLjA2NC0uMDE1LS4xMjgtLjAyNi0uMTkzLS4wMzMtLjA2NS0uMDA3LS4xMy0uMDExLS4xOTYtLjAxMS0uMTI3LDAtLjI1NCwuMDE0LS4zNzgsLjA0LS4xMjQsLjAyNi0uMjQ0LC4wNjYtLjM1OSwuMTE4LS4xMTQsLjA1Mi0uMjIzLC4xMTYtLjMyMiwuMTkzLS4xLC4wNzYtLjE4OSwuMTY1LS4yNjYsLjI2NC0uMTExLC4xNDEtLjE5MSwuMzA0LS4yMzQsLjQ3OS0uMDM5LC4xNjItLjA0LC4zMzEtLjAwNCwuNDk0LC4wMzcsLjE2NSwuMTExLC4zMTksLjIxNiwuNDUyLC4xMTUsLjE0NSwuMjYsLjI2NSwuNDI1LC4zNTFsNi4zMDksMy4zNjhjLjA2MiwuMDMzLC4xMjYsLjA2MiwuMTkyLC4wODcsLjA2NiwuMDI1LC4xMzMsLjA0NiwuMjAxLC4wNjIsLjI3NCwuMDY2LC41NiwuMDY2LC44MzQsMCwuMDY4LS4wMTcsLjEzNS0uMDM3LC4yMDEtLjA2MiwuMDY2LS4wMjUsLjEzLS4wNTQsLjE5Mi0uMDg3bDYuMzA3LTMuMzY4Yy4xNjQtLjA4NiwuMzA5LS4yMDYsLjQyNC0uMzUxLC4xMDUtLjEzMywuMTc4LS4yODcsLjIxNi0uNDUyLC4wMzYtLjE2MywuMDM1LS4zMzItLjAwNC0uNDk0LS4wNDMtLjE3NC0uMTIyLS4zMzgtLjIzNC0uNDc5LS4wNzctLjA5OS0uMTY3LS4xODgtLjI2Ni0uMjY0LS4xLS4wNzYtLjIwOC0uMTQxLS4zMjItLjE5My0uMTE1LS4wNTItLjIzNi0uMDkyLS4zNTktLjExOC0uMTI0LS4wMjctLjI1MS0uMDQtLjM3OC0uMDQtLjA2NSwwLS4xMzEsLjAwNC0uMTk2LC4wMTEtLjA2NSwuMDA3LS4xMywuMDE4LS4xOTMsLjAzMy0uMDY0LC4wMTUtLjEyNywuMDM0LS4xODksLjA1Ni0uMDYyLC4wMjMtLjEyMiwuMDQ5LS4xODEsLjA4bC0zLjMwNywxLjcxNy0uNzcyLTExLjk1NywyLjI1OCwuOTY1Yy4wNTQsLjAyMywuMTA5LC4wNDMsLjE2NSwuMDYsLjA1NiwuMDE3LC4xMTIsLjAzMSwuMTY5LC4wNDIsLjA1NywuMDExLC4xMTQsLjAyLC4xNzEsLjAyNXMuMTE1LC4wMDgsLjE3MiwuMDA4Yy4xMTgsMCwuMjM2LS4wMTIsLjM1Mi0uMDM2LC4xMTItLjAyMywuMjIxLS4wNTgsLjMyNS0uMTA1LC4wOTktLjA0NCwuMTkzLS4xMDEsLjI3OC0uMTY5LC4wODItLjA2NSwuMTUzLS4xNDIsLjIxMi0uMjI4LC4wODEtLjExNywuMTMxLS4yNTMsLjE0NS0uMzk0LC4wMTItLjEzNS0uMDExLS4yNzEtLjA2NC0uMzk2LS4wNTgtLjEzNC0uMTQ0LS4yNTQtLjI1Mi0uMzUyLS4xMjMtLjExMi0uMjY1LS4yMDItLjQxOS0uMjY1bC00LjIyMS0xLjc2MWMtLjA1MS0uMDIxLS4xMDItLjA0LS4xNTUtLjA1NS0uMDUyLS4wMTYtLjEwNi0uMDI5LS4xNjEtLjAzOXMtLjEwOS0uMDE4LS4xNjUtLjAyNC0uMTExLS4wMDgtLjE2Ny0uMDA4IiBmaWxsPSIjZmZmIiBzdHJva2U9IiMwMDAiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgc3Ryb2tlLXdpZHRoPSIuNSIvPg0KICAgIDxnPg0KICAgICAgPHBhdGggZD0iTTEuMDA3LDUuNzVjLS4zNzIsMC0uNzU3LS4yODEtLjc1Ny0uNzUyVjFDLjI1LC41ODcsLjU4NiwuMjUsMSwuMjVoMy45OThjLjM2OSwwLC42LC4yMzksLjY5MywuNDYzcy4wOTksLjU1Ny0uMTYzLC44MTdMMS41Myw1LjUyOGMtLjE4MywuMTg0LS4zODYsLjIyMi0uNTIzLC4yMjJaIiBmaWxsPSIjZmZmIi8+DQogICAgICA8cGF0aCBkPSJNNC45OTgsLjVjLjMxLDAsLjQzMiwuMjM2LC40NjIsLjMwOXMuMTExLC4zMjYtLjEwOCwuNTQ1TDEuMzU0LDUuMzUyYy0uMTIzLC4xMjMtLjI1NiwuMTQ4LS4zNDYsLjE0OC0uMjUsMC0uNTA3LS4xODgtLjUwNy0uNTAyVjFjMC0uMjc2LC4yMjQtLjUsLjUtLjVoMy45OThtMC0uNUgxQy40NDgsMCwwLC40NDgsMCwxdjMuOTk4YzAsLjYwMywuNDkzLDEuMDAyLDEuMDA3LDEuMDAyLC4yNDYsMCwuNDk2LS4wOTEsLjctLjI5NUw1LjcwNSwxLjcwN2MuNjMtLjYzLC4xODQtMS43MDctLjcwNy0xLjcwN2gwWiIgZmlsbD0iIzIxMjMyOSIvPg0KICAgIDwvZz4NCiAgPC9nPg0KPC9zdmc+'),\r
     auto;\r
 }\r
+\r
 .cursor-rect:hover {\r
   cursor: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojZmZmO30uY2xzLTJ7ZmlsbDojMjEyMzI5O30uY2xzLTN7ZmlsbDpub25lO308L3N0eWxlPjwvZGVmcz48ZyBpZD0iRlJBTUVTIj48ZyBpZD0iZnJhbWUiPjxyZWN0IGNsYXNzPSJjbHMtMyIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ii8+PC9nPjwvZz48ZyBpZD0iSUNPTlMiPjxnPjxnPjxnPjxyZWN0IGNsYXNzPSJjbHMtMSIgeD0iMTUuNDY5IiB5PSI0LjI5NSIgd2lkdGg9IjMiIGhlaWdodD0iMi4zNzUiIHJ4PSIxLjAzMSIgcnk9IjEuMDMxIi8+PHBhdGggZD0iTTE3LjQzOCw0LjU0NWMuNDMsMCwuNzgxLC4zNTIsLjc4MSwuNzgxdi4zMTJjMCwuNDMtLjM1MiwuNzgxLS43ODEsLjc4MWgtLjkzOGMtLjQzLDAtLjc4MS0uMzUyLS43ODEtLjc4MXYtLjMxMmMwLS40MywuMzUyLS43ODEsLjc4MS0uNzgxaC45MzhtMC0uNWgtLjkzOGMtLjcwNiwwLTEuMjgxLC41NzUtMS4yODEsMS4yODF2LjMxMmMwLC43MDcsLjU3NSwxLjI4MSwxLjI4MSwxLjI4MWguOTM4Yy43MDYsMCwxLjI4MS0uNTc1LDEuMjgxLTEuMjgxdi0uMzEyYzAtLjcwNy0uNTc1LTEuMjgxLTEuMjgxLTEuMjgxaDBaIi8+PC9nPjxnPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTIxLjM0NCw3LjkyYy0uNTY5LDAtMS4wMzEtLjQ2My0xLjAzMS0xLjAzMSwwLS4xMjEtLjA5OC0uMjE5LS4yMTktLjIxOS0uNTY5LDAtMS4wMzEtLjQ2My0xLjAzMS0xLjAzMXYtLjMxMmMwLS41NjgsLjQ2Mi0xLjAzMSwxLjAzMS0xLjAzMWguNzgxYzEsMCwxLjgxMiwuODEzLDEuODEyLDEuODEydi43ODFjMCwuNTY4LS40NjIsMS4wMzEtMS4wMzEsMS4wMzFoLS4zMTJaIi8+PHBhdGggZD0iTTIwLjg3NSw0LjU0NWMuODU5LDAsMS41NjIsLjcwMywxLjU2MiwxLjU2MnYuNzgxYzAsLjQzLS4zNTIsLjc4MS0uNzgxLC43ODFoLS4zMTJjLS40MywwLS43ODEtLjM1Mi0uNzgxLS43ODEsMC0uMjU5LS4yMS0uNDY5LS40NjktLjQ2OS0uNDMsMC0uNzgxLS4zNTItLjc4MS0uNzgxdi0uMzEyYzAtLjQzLC4zNTItLjc4MSwuNzgxLS43ODFoLjc4MW0wLS41aC0uNzgxYy0uNzA2LDAtMS4yODEsLjU3NS0xLjI4MSwxLjI4MXYuMzEyYzAsLjcwNywuNTc1LDEuMjgxLDEuMjgxLDEuMjgxLS4wMzEsLjY3NSwuNTQ0LDEuMjUsMS4yNSwxLjI1aC4zMTJjLjcwNiwwLDEuMjgxLS41NzUsMS4yODEtMS4yODF2LS43ODFjMC0xLjEzNy0uOTI1LTIuMDYyLTIuMDYyLTIuMDYyaDBaIi8+PC9nPjxnPjxyZWN0IGNsYXNzPSJjbHMtMSIgeD0iMjAuMzEzIiB5PSI4LjUxNCIgd2lkdGg9IjIuMzc1IiBoZWlnaHQ9IjMiIHJ4PSIxLjAzMSIgcnk9IjEuMDMxIi8+PHBhdGggZD0iTTIxLjY1Niw4Ljc2NGMuNDMsMCwuNzgxLC4zNTIsLjc4MSwuNzgxdi45MzhjMCwuNDMtLjM1MiwuNzgxLS43ODEsLjc4MWgtLjMxMmMtLjQzLDAtLjc4MS0uMzUyLS43ODEtLjc4MXYtLjkzOGMwLS40MywuMzUyLS43ODEsLjc4MS0uNzgxaC4zMTJtMC0uNWgtLjMxMmMtLjcwNiwwLTEuMjgxLC41NzUtMS4yODEsMS4yODF2LjkzOGMwLC43MDcsLjU3NSwxLjI4MSwxLjI4MSwxLjI4MWguMzEyYy43MDYsMCwxLjI4MS0uNTc1LDEuMjgxLTEuMjgxdi0uOTM4YzAtLjcwNy0uNTc1LTEuMjgxLTEuMjgxLTEuMjgxaDBaIi8+PC9nPjxnPjxyZWN0IGNsYXNzPSJjbHMtMSIgeD0iOC4yODEiIHk9IjQuMjk1IiB3aWR0aD0iMyIgaGVpZ2h0PSIyLjM3NSIgcng9IjEuMDMxIiByeT0iMS4wMzEiLz48cGF0aCBkPSJNMTAuMjUsNC41NDVjLjQzLDAsLjc4MSwuMzUyLC43ODEsLjc4MXYuMzEyYzAsLjQzLS4zNTIsLjc4MS0uNzgxLC43ODFoLS45MzhjLS40MywwLS43ODEtLjM1Mi0uNzgxLS43ODF2LS4zMTJjMC0uNDMsLjM1Mi0uNzgxLC43ODEtLjc4MWguOTM4bTAtLjVoLS45MzhjLS43MDYsMC0xLjI4MSwuNTc1LTEuMjgxLDEuMjgxdi4zMTJjMCwuNzA3LC41NzUsMS4yODEsMS4yODEsMS4yODFoLjkzOGMuNzA2LDAsMS4yODEtLjU3NSwxLjI4MS0xLjI4MXYtLjMxMmMwLS43MDctLjU3NS0xLjI4MS0xLjI4MS0xLjI4MWgwWiIvPjwvZz48Zz48cmVjdCBjbGFzcz0iY2xzLTEiIHg9IjguMjgxIiB5PSIyMC41NDUiIHdpZHRoPSIzIiBoZWlnaHQ9IjIuMzc1IiByeD0iMS4wMzEiIHJ5PSIxLjAzMSIvPjxwYXRoIGQ9Ik0xMC4yNSwyMC43OTVjLjQzLDAsLjc4MSwuMzUyLC43ODEsLjc4MXYuMzEyYzAsLjQzLS4zNTIsLjc4MS0uNzgxLC43ODFoLS45MzhjLS40MywwLS43ODEtLjM1Mi0uNzgxLS43ODF2LS4zMTJjMC0uNDMsLjM1Mi0uNzgxLC43ODEtLjc4MWguOTM4bTAtLjVoLS45MzhjLS43MDYsMC0xLjI4MSwuNTc1LTEuMjgxLDEuMjgxdi4zMTJjMCwuNzA3LC41NzUsMS4yODEsMS4yODEsMS4yODFoLjkzOGMuNzA2LDAsMS4yODEtLjU3NSwxLjI4MS0xLjI4MXYtLjMxMmMwLS43MDctLjU3NS0xLjI4MS0xLjI4MS0xLjI4MWgwWiIvPjwvZz48Zz48cmVjdCBjbGFzcz0iY2xzLTEiIHg9IjExLjg3NSIgeT0iNC4yOTUiIHdpZHRoPSIzIiBoZWlnaHQ9IjIuMzc1IiByeD0iMS4wMzEiIHJ5PSIxLjAzMSIvPjxwYXRoIGQ9Ik0xMy44NDQsNC41NDVjLjQzLDAsLjc4MSwuMzUyLC43ODEsLjc4MXYuMzEyYzAsLjQzLS4zNTIsLjc4MS0uNzgxLC43ODFoLS45MzhjLS40MywwLS43ODEtLjM1Mi0uNzgxLS43ODF2LS4zMTJjMC0uNDMsLjM1Mi0uNzgxLC43ODEtLjc4MWguOTM4bTAtLjVoLS45MzhjLS43MDYsMC0xLjI4MSwuNTc1LTEuMjgxLDEuMjgxdi4zMTJjMCwuNzA3LC41NzUsMS4yODEsMS4yODEsMS4yODFoLjkzOGMuNzA2LDAsMS4yODEtLjU3NSwxLjI4MS0xLjI4MXYtLjMxMmMwLS43MDctLjU3NS0xLjI4MS0xLjI4MS0xLjI4MWgwWiIvPjwvZz48Zz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik01LjA5NCw3LjkyYy0uNTY5LDAtMS4wMzEtLjQ2My0xLjAzMS0xLjAzMXYtLjc4MWMwLS45OTksLjgxMy0xLjgxMiwxLjgxMi0xLjgxMmguNzgxYy41NjksMCwxLjAzMSwuNDYzLDEuMDMxLDEuMDMxdi4zMTJjMCwuNTY4LS40NjIsMS4wMzEtMS4wMzEsMS4wMzEtLjEyMSwwLS4yMTksLjA5OC0uMjE5LC4yMTksMCwuNTY4LS40NjIsMS4wMzEtMS4wMzEsMS4wMzFoLS4zMTJaIi8+PHBhdGggZD0iTTYuNjU2LDQuNTQ1Yy40MywwLC43ODEsLjM1MiwuNzgxLC43ODF2LjMxMmMwLC40My0uMzUyLC43ODEtLjc4MSwuNzgxLS4yNTksMC0uNDY5LC4yMS0uNDY5LC40NjksMCwuNDMtLjM1MiwuNzgxLS43ODEsLjc4MWgtLjMxMmMtLjQzLDAtLjc4MS0uMzUyLS43ODEtLjc4MXYtLjc4MWMwLS44NTksLjcwMy0xLjU2MiwxLjU2Mi0xLjU2MmguNzgxbTAtLjVoLS43ODFjLTEuMTM3LDAtMi4wNjIsLjkyNS0yLjA2MiwyLjA2MnYuNzgxYzAsLjcwNywuNTc1LDEuMjgxLDEuMjgxLDEuMjgxaC4zMTJjLjcwNiwwLDEuMjgxLS41NzUsMS4yODEtMS4yODEsLjAxOCwwLC4wMzUsMCwuMDUzLDAsLjY1MiwwLDEuMTk3LS41NjMsMS4xOTctMS4yNTF2LS4zMTJjMC0uNzA3LS41NzUtMS4yODEtMS4yODEtMS4yODFoMFoiLz48L2c+PGc+PHJlY3QgY2xhc3M9ImNscy0xIiB4PSI0LjA2MiIgeT0iOC41MTQiIHdpZHRoPSIyLjM3NSIgaGVpZ2h0PSIzIiByeD0iMS4wMzEiIHJ5PSIxLjAzMSIvPjxwYXRoIGQ9Ik01LjQwNiw4Ljc2NGMuNDMsMCwuNzgxLC4zNTIsLjc4MSwuNzgxdi45MzhjMCwuNDMtLjM1MiwuNzgxLS43ODEsLjc4MWgtLjMxMmMtLjQzLDAtLjc4MS0uMzUyLS43ODEtLjc4MXYtLjkzOGMwLS40MywuMzUyLS43ODEsLjc4MS0uNzgxaC4zMTJtMC0uNWgtLjMxMmMtLjcwNiwwLTEuMjgxLC41NzUtMS4yODEsMS4yODF2LjkzOGMwLC43MDcsLjU3NSwxLjI4MSwxLjI4MSwxLjI4MWguMzEyYy43MDYsMCwxLjI4MS0uNTc1LDEuMjgxLTEuMjgxdi0uOTM4YzAtLjcwNy0uNTc1LTEuMjgxLTEuMjgxLTEuMjgxaDBaIi8+PC9nPjxnPjxyZWN0IGNsYXNzPSJjbHMtMSIgeD0iNC4wNjIiIHk9IjEyLjEwNyIgd2lkdGg9IjIuMzc1IiBoZWlnaHQ9IjMiIHJ4PSIxLjAzMSIgcnk9IjEuMDMxIi8+PHBhdGggZD0iTTUuNDA2LDEyLjM1OGMuNDMsMCwuNzgxLC4zNTIsLjc4MSwuNzgxdi45MzhjMCwuNDMtLjM1MiwuNzgxLS43ODEsLjc4MWgtLjMxMmMtLjQzLDAtLjc4MS0uMzUyLS43ODEtLjc4MXYtLjkzOGMwLS40MywuMzUyLS43ODEsLjc4MS0uNzgxaC4zMTJtMC0uNWgtLjMxMmMtLjcwNiwwLTEuMjgxLC41NzUtMS4yODEsMS4yODF2LjkzOGMwLC43MDcsLjU3NSwxLjI4MSwxLjI4MSwxLjI4MWguMzEyYy43MDYsMCwxLjI4MS0uNTc1LDEuMjgxLTEuMjgxdi0uOTM4YzAtLjcwNy0uNTc1LTEuMjgxLTEuMjgxLTEuMjgxaDBaIi8+PC9nPjxnPjxyZWN0IGNsYXNzPSJjbHMtMSIgeD0iNC4wNjIiIHk9IjE1LjcwMSIgd2lkdGg9IjIuMzc1IiBoZWlnaHQ9IjMiIHJ4PSIxLjAzMSIgcnk9IjEuMDMxIi8+PHBhdGggZD0iTTUuNDA2LDE1Ljk1MmMuNDMsMCwuNzgxLC4zNTIsLjc4MSwuNzgxdi45MzhjMCwuNDMtLjM1MiwuNzgxLS43ODEsLjc4MWgtLjMxMmMtLjQzLDAtLjc4MS0uMzUyLS43ODEtLjc4MXYtLjkzOGMwLS40MywuMzUyLS43ODEsLjc4MS0uNzgxaC4zMTJtMC0uNWgtLjMxMmMtLjcwNiwwLTEuMjgxLC41NzUtMS4yODEsMS4yODF2LjkzOGMwLC43MDcsLjU3NSwxLjI4MSwxLjI4MSwxLjI4MWguMzEyYy43MDYsMCwxLjI4MS0uNTc1LDEuMjgxLTEuMjgxdi0uOTM4YzAtLjcwNy0uNTc1LTEuMjgxLTEuMjgxLTEuMjgxaDBaIi8+PC9nPjxnPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTUuODc1LDIyLjkyYy0xLDAtMS44MTItLjgxMy0xLjgxMi0xLjgxMnYtLjc4MWMwLS41NjgsLjQ2Mi0xLjAzMSwxLjAzMS0xLjAzMWguMzEyYy41NjksMCwxLjAzMSwuNDYzLDEuMDMxLDEuMDMxLDAsLjEyMSwuMDk4LC4yMTksLjIxOSwuMjE5LC41NjksMCwxLjAzMSwuNDYzLDEuMDMxLDEuMDMxdi4zMTJjMCwuNTY4LS40NjIsMS4wMzEtMS4wMzEsMS4wMzFoLS43ODFaIi8+PHBhdGggZD0iTTUuNDA2LDE5LjU0NWMuNDMsMCwuNzgxLC4zNTIsLjc4MSwuNzgxLDAsLjI1OSwuMjEsLjQ2OSwuNDY5LC40NjksLjQzLDAsLjc4MSwuMzUyLC43ODEsLjc4MXYuMzEyYzAsLjQzLS4zNTIsLjc4MS0uNzgxLC43ODFoLS43ODFjLS44NTksMC0xLjU2Mi0uNzAzLTEuNTYyLTEuNTYydi0uNzgxYzAtLjQzLC4zNTItLjc4MSwuNzgxLS43ODFoLjMxMm0wLS41aC0uMzEyYy0uNzA2LDAtMS4yODEsLjU3NS0xLjI4MSwxLjI4MXYuNzgxYzAsMS4xMzcsLjkyNSwyLjA2MiwyLjA2MiwyLjA2MmguNzgxYy43MDYsMCwxLjI4MS0uNTc1LDEuMjgxLTEuMjgxdi0uMzEyYzAtLjcwNy0uNTc1LTEuMjgxLTEuMjgxLTEuMjgxLC4wMzEtLjY3NS0uNTQ0LTEuMjUtMS4yNS0xLjI1aDBaIi8+PC9nPjwvZz48Zz48Zz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0yMi42MjIsMjQuMjVjLS4zMTgsMC0uNjE2LS4xMjMtLjgzOS0uMzQ3bC0xLjE5MS0xLjE5Yy0xLjEyMywuNzUtMi40MjQsMS4xNDUtMy43OCwxLjE0NWwtLjE4Mi0uMDAyYy0zLjY1MS0uMDk2LTYuNTYzLTMuMDMyLTYuNjI4LTYuNjg1LS4wMzMtMS44NDUsLjY2LTMuNTg1LDEuOTUyLTQuODk5LDEuMjkyLTEuMzE1LDMuMDE3LTIuMDM5LDQuODYtMi4wMzloLjEyM2MzLjY1MywuMDY1LDYuNTksMi45NzcsNi42ODgsNi42MjgsLjAzNSwxLjMwMi0uMjk3LDIuNTY5LS45NjIsMy42NzhsMS4yNDMsMS4yNDRjLjIyNCwuMjI0LC4zNDcsLjUyMSwuMzQ3LC44NHMtLjEyMywuNjE1LS4zNDcsLjgzOWwtLjQ0MiwuNDQyYy0uMjI0LC4yMjQtLjUyMiwuMzQ3LS44NCwuMzQ3Wm0tNS44MS0xMS4xMzFjLTEuMDc4LDAtMi4xMjIsLjQ1My0yLjg2MiwxLjI0Mi0uNzUxLC44LTEuMTI1LDEuODQ1LTEuMDU2LDIuOTQxLC4xMjUsMS45NjIsMS43LDMuNTM1LDMuNjYxLDMuNjYxLC4wODYsLjAwNSwuMTcyLC4wMDgsLjI1NywuMDA4LDEuMDc4LDAsMi4xMjItLjQ1MywyLjg2Mi0xLjI0MiwuNzUxLS44LDEuMTI1LTEuODQ1LDEuMDU2LTIuOTQxLS4xMjUtMS45NjItMS43LTMuNTM1LTMuNjYxLTMuNjYxLS4wODYtLjAwNS0uMTcyLS4wMDgtLjI1Ny0uMDA4WiIvPjxwYXRoIGQ9Ik0xNi44MTIsMTAuNDgzYy4wMzksMCwuMDc5LDAsLjExOCwwLDMuNDkxLC4wNjIsNi4zNDksMi44OTMsNi40NDIsNi4zODMsLjAzNiwxLjM2OC0uMzQ3LDIuNjQzLTEuMDI5LDMuNzA5bDEuMzgzLDEuMzgzYy4zNjUsLjM2NCwuMzY1LC45NjEsMCwxLjMyNmwtLjQ0MiwuNDQyYy0uMTgyLC4xODMtLjQyMywuMjczLS42NjMsLjI3M3MtLjQ4MS0uMDkxLS42NjMtLjI3M2wtMS4zMzgtMS4zMzhjLTEuMDc0LC43NjctMi4zODgsMS4yMi0zLjgwOSwxLjIyLS4wNTgsMC0uMTE3LDAtLjE3Ni0uMDAyLTMuNDktLjA5Mi02LjMyMi0yLjk0OS02LjM4NS02LjQzOS0uMDY2LTMuNjgsMi44OTctNi42ODMsNi41NjEtNi42ODNtMCwxMC43MzljMi4zOTMsMCw0LjMyMy0yLjAyMyw0LjE2OC00LjQ0OS0uMTMzLTIuMDgxLTEuODE0LTMuNzYyLTMuODk0LTMuODk1LS4wOTItLjAwNi0uMTgzLS4wMDktLjI3My0uMDA5LTIuMzkzLDAtNC4zMjIsMi4wMjMtNC4xNjcsNC40NDksLjEzMywyLjA4MSwxLjgxNCwzLjc2MSwzLjg5NCwzLjg5NSwuMDkxLC4wMDYsLjE4MiwuMDA5LC4yNzIsLjAwOW0wLTExLjIzOWMtMS45MTEsMC0zLjcsLjc1LTUuMDM5LDIuMTE0LTEuMzM5LDEuMzYzLTIuMDU3LDMuMTY2LTIuMDIyLDUuMDc4LC4wNjgsMy43ODYsMy4wODYsNi44MzEsNi44NzEsNi45MzFsLjE4OSwuMDAyYzEuMzM3LDAsMi42MjMtLjM3MSwzLjc0Ni0xLjA3NmwxLjA0OCwxLjA0OGMuMjcxLC4yNzEsLjYzMiwuNDIsMS4wMTYsLjQycy43NDYtLjE0OSwxLjAxNy0uNDJsLjQ0Mi0uNDQyYy4yNzEtLjI3MSwuNDItLjYzMiwuNDItMS4wMTdzLS4xNDktLjc0Ni0uNDItMS4wMTZsLTEuMTA3LTEuMTA3Yy42MjQtMS4xMSwuOTM0LTIuMzYyLC45LTMuNjQ1LS4xMDEtMy43ODUtMy4xNDYtNi44MDMtNi45MzMtNi44N2gtLjEyN1ptMCwxMC43MzhjLS4wOCwwLS4xNi0uMDAyLS4yNDEtLjAwOC0xLjgzNi0uMTE4LTMuMzEtMS41OTEtMy40MjctMy40MjctLjA2Ni0xLjAyNywuMjg1LTIuMDA1LC45ODgtMi43NTQsLjcwNC0uNzUsMS42NTYtMS4xNjQsMi42OC0xLjE2NCwuMDgsMCwuMTYsLjAwMiwuMjQxLC4wMDgsMS44MzcsLjExNywzLjMxLDEuNTkxLDMuNDI3LDMuNDI3LC4wNjYsMS4wMjctLjI4NSwyLjAwNS0uOTg4LDIuNzU0LS43MDQsLjc1LTEuNjU2LDEuMTY0LTIuNjgxLDEuMTY0aDBaIi8+PC9nPjxnPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTE2LjgxMiwyMC4xMDRjLS42NTUsMC0xLjE4OC0uNTMyLTEuMTg4LTEuMTg4di0uNjg4aC0uNjg4Yy0uNjU1LDAtMS4xODgtLjUzMi0xLjE4OC0xLjE4OHMuNTMzLTEuMTg4LDEuMTg4LTEuMTg4aC42ODh2LS42ODhjMC0uNjU1LC41MzMtMS4xODgsMS4xODgtMS4xODhzMS4xODgsLjUzMiwxLjE4OCwxLjE4OHYuNjg4aC42ODhjLjY1NSwwLDEuMTg4LC41MzIsMS4xODgsMS4xODhzLS41MzMsMS4xODgtMS4xODgsMS4xODhoLS42ODh2LjY4OGMwLC42NTUtLjUzMywxLjE4OC0xLjE4OCwxLjE4OFoiLz48cGF0aCBkPSJNMTYuODEyLDE0LjIyOWMuNTE4LDAsLjkzOCwuNDE5LC45MzgsLjkzOHYuOTM4aC45MzhjLjUxOCwwLC45MzgsLjQxOSwuOTM4LC45MzhzLS40MiwuOTM4LS45MzgsLjkzOGgtLjkzOHYuOTM4YzAsLjUxOC0uNDIsLjkzOC0uOTM4LC45MzhzLS45MzgtLjQyLS45MzgtLjkzOHYtLjkzOGgtLjkzOGMtLjUxOCwwLS45MzgtLjQyLS45MzgtLjkzOHMuNDItLjkzOCwuOTM4LS45MzhoLjkzOHYtLjkzOGMwLS41MTgsLjQyLS45MzgsLjkzOC0uOTM4bTAtLjVjLS43OTMsMC0xLjQzOCwuNjQ1LTEuNDM4LDEuNDM4di40MzhoLS40MzhjLS43OTMsMC0xLjQzOCwuNjQ1LTEuNDM4LDEuNDM4cy42NDUsMS40MzgsMS40MzgsMS40MzhoLjQzOHYuNDM4YzAsLjc5MiwuNjQ1LDEuNDM4LDEuNDM4LDEuNDM4czEuNDM4LS42NDUsMS40MzgtMS40Mzh2LS40MzhoLjQzOGMuNzkzLDAsMS40MzgtLjY0NSwxLjQzOC0xLjQzOHMtLjY0NS0xLjQzOC0xLjQzOC0xLjQzOGgtLjQzOHYtLjQzOGMwLS43OTItLjY0NS0xLjQzOC0xLjQzOC0xLjQzOGgwWiIvPjwvZz48L2c+PC9nPjxnPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEuMDA3LDUuNzVjLS4zNzIsMC0uNzU3LS4yODEtLjc1Ny0uNzUyVjFDLjI1LC41ODcsLjU4NiwuMjUsMSwuMjVoMy45OThjLjM2OSwwLC42LC4yMzksLjY5MywuNDYzcy4wOTksLjU1Ny0uMTYzLC44MTdMMS41Myw1LjUyOGMtLjE4MywuMTg0LS4zODYsLjIyMi0uNTIzLC4yMjJaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNC45OTgsLjVjLjMxLDAsLjQzMiwuMjM2LC40NjIsLjMwOXMuMTExLC4zMjYtLjEwOCwuNTQ1TDEuMzU0LDUuMzUyYy0uMTIzLC4xMjMtLjI1NiwuMTQ4LS4zNDYsLjE0OC0uMjQ5LDAtLjUwNy0uMTg4LS41MDctLjUwMlYxYzAtLjI3NiwuMjI0LS41LC41LS41aDMuOTk4bTAtLjVIMUMuNDQ4LDAsMCwuNDQ4LDAsMXYzLjk5OGMwLC42MDMsLjQ5MywxLjAwMiwxLjAwNywxLjAwMiwuMjQ2LDAsLjQ5Ni0uMDkxLC43LS4yOTVMNS43MDUsMS43MDdjLjYzLS42MywuMTg0LTEuNzA3LS43MDctMS43MDdoMFoiLz48L2c+PC9nPjwvc3ZnPg=='),\r
     auto;\r
 }\r
+\r
 .cursor-measure:hover {\r
   cursor: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxkZWZzPjxzdHlsZT4uY2xzLTEsLmNscy0ye2ZpbGw6I2ZmZjt9LmNscy0ye3N0cm9rZTojMDAwO3N0cm9rZS1taXRlcmxpbWl0OjEwO3N0cm9rZS13aWR0aDouNXB4O30uY2xzLTN7ZmlsbDojMjEyMzI5O30uY2xzLTR7ZmlsbDpub25lO308L3N0eWxlPjwvZGVmcz48ZyBpZD0iRlJBTUVTIj48ZyBpZD0iZnJhbWUiPjxyZWN0IGNsYXNzPSJjbHMtNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ii8+PC9nPjwvZz48ZyBpZD0iSUNPTlMiPjxnPjxnPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTQuNjI1LDE2LjEyNWMtLjQ4MiwwLS44NzUtLjM5My0uODc1LS44NzVWNS4yNWMwLS40ODIsLjM5My0uODc1LC44NzUtLjg3NUgyMi44NzVjLjQ4MiwwLC44NzUsLjM5MywuODc1LC44NzVWMTUuMjVjMCwuNDgyLS4zOTMsLjg3NS0uODc1LC44NzVINC42MjVabTE2Ljc1LTIuMzc1VjYuNzVINi4xMjV2N2guODc1di0yYzAtLjU1MiwuNDQ5LTEsMS0xczEsLjQ0OCwxLDF2MmguODc1di0zLjVjMC0uNTUyLC40NDktMSwxLTFzMSwuNDQ4LDEsMXYzLjVoLjg3NXYtMmMwLS41NTIsLjQ0OS0xLDEtMXMxLC40NDgsMSwxdjJoLjg3NXYtMy41YzAtLjU1MiwuNDQ5LTEsMS0xczEsLjQ0OCwxLDF2My41aC44NzV2LTJjMC0uNTUyLC40NDktMSwxLTFzMSwuNDQ4LDEsMXYyaC44NzVaIi8+PHBhdGggZD0iTTIyLjg3NSw0LjYyNWMuMzQ0LDAsLjYyNSwuMjgxLC42MjUsLjYyNVYxNS4yNWMwLC4zNDQtLjI4MSwuNjI1LS42MjUsLjYyNUg0LjYyNWMtLjM0NCwwLS42MjUtLjI4MS0uNjI1LS42MjVWNS4yNWMwLS4zNDQsLjI4MS0uNjI1LC42MjUtLjYyNUgyMi44NzVNNS44NzUsMTRoMS4zNzV2LTIuMjVjMC0uNDE0LC4zMzYtLjc1LC43NS0uNzVzLjc1LC4zMzYsLjc1LC43NXYyLjI1aDEuMzc1di0zLjc1YzAtLjQxNCwuMzM2LS43NSwuNzUtLjc1cy43NSwuMzM2LC43NSwuNzV2My43NWgxLjM3NXYtMi4yNWMwLS40MTQsLjMzNi0uNzUsLjc1LS43NXMuNzUsLjMzNiwuNzUsLjc1djIuMjVoMS4zNzV2LTMuNzVjMC0uNDE0LC4zMzYtLjc1LC43NS0uNzVzLjc1LC4zMzYsLjc1LC43NXYzLjc1aDEuMzc1di0yLjI1YzAtLjQxNCwuMzM2LS43NSwuNzUtLjc1cy43NSwuMzM2LC43NSwuNzV2Mi4yNWgxLjM3NVY2LjVINS44NzV2Ny41TTIyLjg3NSw0LjEyNUg0LjYyNWMtLjYyLDAtMS4xMjUsLjUwNS0xLjEyNSwxLjEyNVYxNS4yNWMwLC42MiwuNTA1LDEuMTI1LDEuMTI1LDEuMTI1SDIyLjg3NWMuNjIsMCwxLjEyNS0uNTA1LDEuMTI1LTEuMTI1VjUuMjVjMC0uNjItLjUwNS0xLjEyNS0xLjEyNS0xLjEyNWgwWk02LjM3NSw3aDE0Ljc1djYuNWgtLjM3NXYtMS43NWMwLS42ODktLjU2MS0xLjI1LTEuMjUtMS4yNXMtMS4yNSwuNTYxLTEuMjUsMS4yNXYxLjc1aC0uMzc1di0zLjI1YzAtLjY4OS0uNTYxLTEuMjUtMS4yNS0xLjI1cy0xLjI1LC41NjEtMS4yNSwxLjI1djMuMjVoLS4zNzV2LTEuNzVjMC0uNjg5LS41NjEtMS4yNS0xLjI1LTEuMjVzLTEuMjUsLjU2MS0xLjI1LDEuMjV2MS43NWgtLjM3NXYtMy4yNWMwLS42ODktLjU2MS0xLjI1LTEuMjUtMS4yNXMtMS4yNSwuNTYxLTEuMjUsMS4yNXYzLjI1aC0uMzc1di0xLjc1YzAtLjY4OS0uNTYxLTEuMjUtMS4yNS0xLjI1cy0xLjI1LC41NjEtMS4yNSwxLjI1djEuNzVoLS4zNzVWN2gwWiIvPjwvZz48Zz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0yMi41NjIsMjMuNjI1Yy0uNjU1LDAtMS4xODgtLjUzMi0xLjE4OC0xLjE4OHYtNC4zNzVjMC0uNjU1LC41MzMtMS4xODgsMS4xODgtMS4xODhzMS4xODgsLjUzMiwxLjE4OCwxLjE4OHY0LjM3NWMwLC42NTUtLjUzMywxLjE4OC0xLjE4OCwxLjE4OFoiLz48cGF0aCBkPSJNMjIuNTYyLDE3LjEyNWMuNTE4LDAsLjkzOCwuNDIsLjkzOCwuOTM4djQuMzc1YzAsLjUxOC0uNDIsLjkzOC0uOTM4LC45MzhzLS45MzgtLjQyLS45MzgtLjkzOHYtNC4zNzVjMC0uNTE4LC40Mi0uOTM4LC45MzgtLjkzOG0wLS41Yy0uNzkzLDAtMS40MzgsLjY0NS0xLjQzOCwxLjQzOHY0LjM3NWMwLC43OTIsLjY0NSwxLjQzOCwxLjQzOCwxLjQzOHMxLjQzOC0uNjQ1LDEuNDM4LTEuNDM4di00LjM3NWMwLS43OTItLjY0NS0xLjQzOC0xLjQzOC0xLjQzOGgwWiIvPjwvZz48Zz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00LjkzOCwyMy42MjVjLS42NTUsMC0xLjE4OC0uNTMyLTEuMTg4LTEuMTg4di00LjM3NWMwLS42NTUsLjUzMy0xLjE4OCwxLjE4OC0xLjE4OHMxLjE4OCwuNTMyLDEuMTg4LDEuMTg4djQuMzc1YzAsLjY1NS0uNTMzLDEuMTg4LTEuMTg4LDEuMTg4WiIvPjxwYXRoIGQ9Ik00LjkzOCwxNy4xMjVjLjUxOCwwLC45MzgsLjQyLC45MzgsLjkzOHY0LjM3NWMwLC41MTgtLjQyLC45MzgtLjkzOCwuOTM4cy0uOTM4LS40Mi0uOTM4LS45Mzh2LTQuMzc1YzAtLjUxOCwuNDItLjkzOCwuOTM4LS45MzhtMC0uNWMtLjc5MywwLTEuNDM4LC42NDUtMS40MzgsMS40Mzh2NC4zNzVjMCwuNzkyLC42NDUsMS40MzgsMS40MzgsMS40MzhzMS40MzgtLjY0NSwxLjQzOC0xLjQzOHYtNC4zNzVjMC0uNzkyLS42NDUtMS40MzgtMS40MzgtMS40MzhoMFoiLz48L2c+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNOS43MDEsMjEuMTg3aDguMDk4cy0uNTg1LC41ODYtLjU4NSwuNTg2Yy0uMzY2LC4zNjYtLjM2NiwuOTYsMCwxLjMyNiwuMzY2LC4zNjYsLjk2LC4zNjYsMS4zMjYsMGwyLjE4Ni0yLjE4NmMuMTctLjE3LC4yNzUtLjQwNCwuMjc1LS42NjNzLS4xMDUtLjQ5My0uMjc1LS42NjNsLTIuMTg3LTIuMTg3Yy0uMzY2LS4zNjYtLjk2LS4zNjYtMS4zMjYsMC0uMzY2LC4zNjYtLjM2NiwuOTYsMCwxLjMyNmwuNTg2LC41ODZIOS43MDFzLjU4NS0uNTg2LC41ODUtLjU4NmMuMzY2LS4zNjYsLjM2Ni0uOTYsMC0xLjMyNnMtLjk2LS4zNjYtMS4zMjYsMGwtMi4xODYsMi4xODZjLS4xNywuMTctLjI3NSwuNDA0LS4yNzUsLjY2M3MuMTA1LC40OTMsLjI3NSwuNjYzbDIuMTg3LDIuMTg3Yy4zNjYsLjM2NiwuOTYsLjM2NiwxLjMyNiwwLC4zNjYtLjM2NiwuMzY2LS45NiwwLTEuMzI2bC0uNTg2LS41ODZaIi8+PC9nPjxnPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEuMDA3LDUuNzVjLS4zNzIsMC0uNzU3LS4yODEtLjc1Ny0uNzUyVjFDLjI1LC41ODcsLjU4NiwuMjUsMSwuMjVoMy45OThjLjM2OSwwLC42LC4yMzksLjY5MywuNDYzcy4wOTksLjU1Ny0uMTYzLC44MTdMMS41Myw1LjUyOGMtLjE4MywuMTg0LS4zODYsLjIyMi0uNTIzLC4yMjJaIi8+PHBhdGggY2xhc3M9ImNscy0zIiBkPSJNNC45OTgsLjVjLjMxLDAsLjQzMiwuMjM2LC40NjIsLjMwOXMuMTExLC4zMjYtLjEwOCwuNTQ1TDEuMzU0LDUuMzUyYy0uMTIzLC4xMjMtLjI1NiwuMTQ4LS4zNDYsLjE0OC0uMjQ5LDAtLjUwNy0uMTg4LS41MDctLjUwMlYxYzAtLjI3NiwuMjI0LS41LC41LS41aDMuOTk4bTAtLjVIMUMuNDQ4LDAsMCwuNDQ4LDAsMXYzLjk5OGMwLC42MDMsLjQ5MywxLjAwMiwxLjAwNywxLjAwMiwuMjQ2LDAsLjQ5Ni0uMDkxLC43LS4yOTVMNS43MDUsMS43MDdjLjYzLS42MywuMTg0LTEuNzA3LS43MDctMS43MDdoMFoiLz48L2c+PC9nPjwvc3ZnPg=='),\r
     auto;\r
 }\r
+\r
 .cursor-section-box:hover {\r
   cursor: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCI+DQogIDxnIGlkPSJhIiBkYXRhLW5hbWU9IkZSQU1FUyI+DQogICAgPGcgaWQ9ImIiIGRhdGEtbmFtZT0iZnJhbWUiPg0KICAgICAgPHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiBmaWxsPSJub25lIi8+DQogICAgPC9nPg0KICA8L2c+DQogIDxnIGlkPSJjIiBkYXRhLW5hbWU9IklDT05TIj4NCiAgICA8Zz4NCiAgICAgIDxwYXRoIGQ9Ik0xLjAwNyw1Ljc1Yy0uMzcyLDAtLjc1Ny0uMjgxLS43NTctLjc1MlYxQy4yNSwuNTg3LC41ODYsLjI1LDEsLjI1aDMuOTk4Yy4zNjksMCwuNiwuMjM5LC42OTMsLjQ2M3MuMDk5LC41NTctLjE2MywuODE3TDEuNTMsNS41MjhjLS4xODMsLjE4NC0uMzg2LC4yMjItLjUyMywuMjIyWiIgZmlsbD0iI2ZmZiIvPg0KICAgICAgPHBhdGggZD0iTTQuOTk4LC41Yy4zMSwwLC40MzIsLjIzNiwuNDYyLC4zMDlzLjExMSwuMzI2LS4xMDgsLjU0NUwxLjM1NCw1LjM1MmMtLjEyMywuMTIzLS4yNTYsLjE0OC0uMzQ2LC4xNDgtLjI1LDAtLjUwNy0uMTg4LS41MDctLjUwMlYxYzAtLjI3NiwuMjI0LS41LC41LS41aDMuOTk4bTAtLjVIMUMuNDQ4LDAsMCwuNDQ4LDAsMXYzLjk5OGMwLC42MDMsLjQ5MywxLjAwMiwxLjAwNywxLjAwMiwuMjQ2LDAsLjQ5Ni0uMDkxLC43LS4yOTVMNS43MDUsMS43MDdjLjYzLS42MywuMTg0LTEuNzA3LS43MDctMS43MDdoMFoiIGZpbGw9IiMyMTIzMjkiLz4NCiAgICA8L2c+DQogICAgPGc+DQogICAgICA8Zz4NCiAgICAgICAgPHBhdGggZD0iTTEyLjgyMSwyMi44OTdsLS4xMzgtLjA1Ni03LjQzLTQuMjc5Yy0uNDY5LS4yNzEtLjc2LS43NzQtLjc2LTEuMzE0VjguOTI4YzAtLjU0LC4yOTEtMS4wNDQsLjc2LTEuMzE0TDEyLjQ3MywzLjQ1M2MuMjMxLS4xMzMsLjQ5NC0uMjAzLC43Ni0uMjAzcy41MjksLjA3LC43NiwuMjAzbDcuNDMxLDQuMjhjLjEyNywuMDc0LC4yMDUsLjIxLC4yMDUsLjM1NSwwLC4xNDctLjA3OCwuMjc5LS4yMDYsLjM1M2wtOC4xMjUsNC42ODN2OS4zNjVjMCwuMTEyLS4wNDQsLjIxNy0uMTI1LC4yOTQtLjA3NywuMDc0LS4xNzgsLjExNC0uMjgzLC4xMTRoLS4wNjhabS0xLjYxMS0zLjMxdi02LjUzN2wtNC42MjktMi42Njd2Ni41MzdsNC42MjksMi42NjdabTEuMDUyLTguMjczbDUuNTk5LTMuMjI3LTQuNjI5LTIuNjY3LTUuNTk5LDMuMjI4LDQuNjI5LDIuNjY2WiIgZmlsbD0iI2ZmZiIvPg0KICAgICAgICA8cGF0aCBkPSJNMTMuMjMyLDMuNWMuMjE5LDAsLjQzOCwuMDU3LC42MzUsLjE3bDcuNDMxLDQuMjhjLjEwNiwuMDYxLC4xMDYsLjIxMywwLC4yNzRsLTguMjUxLDQuNzU1djkuNTFjMCwuMDkzLS4wNzYsLjE1OS0uMTU5LC4xNTktLjAyNywwLS4wNTQtLjAwNy0uMDc5LS4wMjFsLTcuNDMxLTQuMjgxYy0uMzkzLS4yMjYtLjYzNS0uNjQ1LS42MzUtMS4wOTdWOC45MjhjMC0uNDUzLC4yNDItLjg3MSwuNjM1LTEuMDk4TDEyLjU5OCwzLjY3Yy4xOTctLjExMywuNDE2LS4xNywuNjM1LS4xN20tLjk3LDguMTAzbDYuMS0zLjUxNi01LjEzLTIuOTU1LTYuMSwzLjUxNiw1LjEzLDIuOTU1bS0uODAyLDguNDE3di03LjExNGwtNS4xMy0yLjk1NXY3LjExNGw1LjEzLDIuOTU1TTEzLjIzMiwzYy0uMzEsMC0uNjE2LC4wODItLjg4NSwuMjM3TDUuMTI4LDcuMzk3Yy0uNTQ2LC4zMTUtLjg4NSwuOTAxLS44ODUsMS41MzF2OC4zMjFjMCwuNjMsLjMzOSwxLjIxNiwuODg1LDEuNTMxbDcuNDMxLDQuMjhjLjEsLjA1OCwuMjE0LC4wODgsLjMyOSwuMDg4LC4zNjMsMCwuNjU5LS4yOTUsLjY1OS0uNjU5VjEzLjI2OWw4LjAwMS00LjYxMWMuMjAzLS4xMTcsLjMzLS4zMzUsLjMzLS41NywwLS4yMzUtLjEyNi0uNDUzLS4zMy0uNTdMMTQuMTE3LDMuMjM3Yy0uMjY4LS4xNTUtLjU3NC0uMjM3LS44ODQtLjIzN2gwWm0tNS4wOTgsNS42NDhsNS4wOTgtMi45MzgsNC4xMjgsMi4zNzctNS4wOTgsMi45MzgtNC4xMjgtMi4zNzdoMFptLTEuMzA0LDguMTI4di01Ljk2bDQuMTMsMi4zNzh2NS45NmwtNC4xMy0yLjM3OGgwWiIvPg0KICAgICAgPC9nPg0KICAgICAgPGc+DQogICAgICAgIDxwYXRoIGQ9Ik0xNC45NzcsMjMuNzVjLS4yMjUsMC0uNDA4LS4xODMtLjQwOC0uNDA3VjE0LjA3MmMwLS4yMDIsLjEwOS0uMzksLjI4NC0uNDg5bDguMTAxLTQuNjY5LC4xNDUtLjAyMWMuMjI1LDAsLjQwOCwuMTg0LC40MDgsLjQwOHY4LjcyNWMwLC41MzgtLjI5LDEuMDM5LS43NTYsMS4zMDhsLTcuNjI3LDQuMzk2LS4xNDYsLjAyMVoiIGZpbGw9IiNmZmYiLz4NCiAgICAgICAgPHBhdGggZD0iTTIzLjA5OSw5LjE0M2MuMDgyLDAsLjE1OCwuMDY2LC4xNTgsLjE1OHY4LjcyNWMwLC40NS0uMjQsLjg2Ni0uNjMxLDEuMDkxbC03LjU3LDQuMzYyYy0uMDI1LC4wMTUtLjA1MiwuMDIxLS4wNzksLjAyMS0uMDgzLDAtLjE1OC0uMDY2LS4xNTgtLjE1OFYxNC4wNzJjMC0uMTEzLC4wNi0uMjE2LC4xNTgtLjI3M2w4LjA0My00LjYzNWMuMDI1LS4wMTUsLjA1Mi0uMDIxLC4wNzktLjAyMW0wLS41Yy0uMTE1LDAtLjIyOCwuMDMxLS4zMjgsLjA4OGwtOC4wNDMsNC42MzVjLS4yNTIsLjE0Ni0uNDA4LC40MTctLjQwOCwuNzA2djkuMjdjMCwuMzYzLC4yOTUsLjY1OCwuNjU4LC42NTgsLjExNSwwLC4yMjgtLjAzMSwuMzI4LS4wODhsNy41NzEtNC4zNjNjLjU0My0uMzEzLC44ODEtLjg5NywuODgxLTEuNTI0VjkuMzAxYzAtLjM2My0uMjk1LS42NTgtLjY1OC0uNjU4aDBaIi8+DQogICAgICA8L2c+DQogICAgPC9nPg0KICA8L2c+DQo8L3N2Zz4='),\r
     auto;\r
 }\r
-input[type='search']::-webkit-search-cancel-button {\r
-  -webkit-appearance: none;\r
-  height: 1rem;\r
-  width: 1rem;\r
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16.25' height='16.25' viewBox='0 0 16.25 16.25'%3E%3Cpath id='icon' d='M32.125,24a8.125,8.125,0,1,0,8.125,8.125A8.125,8.125,0,0,0,32.125,24ZM35.6,34.275A.937.937,0,0,1,34.275,35.6l-2.15-2.15-2.15,2.15a.937.937,0,0,1-1.326-1.326l2.15-2.15-2.15-2.15a.937.937,0,0,1,1.326-1.326l2.15,2.15,2.15-2.15A.937.937,0,1,1,35.6,29.975l-2.15,2.15Z' transform='translate(-24 -24)' fill='%238a8d95'/%3E%3C/svg%3E%0A");\r
-}\r
+\r
+/* === Measure ===*/\r
 \r
 .vim-text-renderer .vim-measure {\r
   font-size: 1rem;\r
@@ -1721,44 +1602,38 @@ input[type='search']::-webkit-search-cancel-button {\r
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);\r
   border-radius: 2px;\r
 }\r
+\r
 .vim-text-renderer .vim-measure table tr {\r
   border: none;\r
 }\r
+\r
 .vim-text-renderer .vim-measure-label-x {\r
   background-color: var(--c-axe-x);\r
   padding: 0.25rem 0.75rem;\r
 }\r
+\r
 .vim-text-renderer .vim-measure-label-y {\r
   background-color: var(--c-axe-y);\r
   padding: 0.25rem 0.75rem;\r
 }\r
+\r
 .vim-text-renderer .vim-measure-label-z {\r
   background-color: var(--c-axe-z);\r
   padding: 0.25rem 0.75rem;\r
 }\r
+\r
 .vim-text-renderer .vim-measure-label-d {\r
   background-color: var(--c-darkest-gray);\r
   padding: 0.25rem 0.75rem;\r
 }\r
+\r
 .vim-text-renderer .vim-measure:nth-of-type(5) table tr {\r
   border: 1px solid var(--c-darkest-gray);\r
 }\r
-@-moz-document url-prefix() {\r
-  .vim-bim-search-count {\r
-    right: 1.5rem;\r
-  }\r
-}\r
-/* .behind canvas,\r
-.behind .vim-logo,\r
-.behind .vim-logo,\r
-.behind .vim-control-bar,\r
-.behind .vim-logo,\r
-.behind .vim-top,\r
-.behind .vim-side-panel,\r
-.behind .vim-logo {\r
-  filter: blur(10px);\r
-} */\r
-.loader {\r
+\r
+/* === Loader ===*/\r
+\r
+.vim-loading-widget {\r
   width: 100%;\r
   height: 10px;\r
   border-radius: 5px;\r
@@ -1767,7 +1642,8 @@ input[type='search']::-webkit-search-cancel-button {\r
   background: var(--c-lighter-gray);\r
   overflow: hidden;\r
 }\r
-.loader::after {\r
+\r
+.vim-loading-widget::after {\r
   content: '';\r
   width: 130px;\r
   height: 10px;\r
@@ -1786,6 +1662,7 @@ input[type='search']::-webkit-search-cancel-button {\r
     left: 0;\r
     transform: translateX(-100%);\r
   }\r
+\r
   100% {\r
     left: 100%;\r
     transform: translateX(0%);\r
@@ -1797,83 +1674,69 @@ input[type='search']::-webkit-search-cancel-button {\r
     left: 0;\r
     transform: translateX(-100%);\r
   }\r
+\r
   100% {\r
     left: 100%;\r
     transform: translateX(0%);\r
   }\r
 }\r
 \r
-.odd\\:bg-gray-zebra:nth-child(odd) {
-  background-color: var(--c-gray-zebra);
-}\r
-\r
-.even\\:bg-white:nth-child(even) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}\r
-\r
-.checked\\:bg-primary-royal:checked {
-  background-color: var(--c-primary-royal);
-}\r
-\r
-.focus-within\\:border-b-primary-royal:focus-within {
+.focus-within\\:vc-border-b-primary-royal:focus-within {
   border-bottom-color: var(--c-primary-royal);
 }\r
 \r
-.focus-within\\:text-primary-royal:focus-within {
+.focus-within\\:vc-text-primary-royal:focus-within {
   color: var(--c-primary-royal);
 }\r
 \r
-.focus-within\\:outline-none:focus-within {
+.focus-within\\:vc-outline-none:focus-within {
   outline: 2px solid transparent;
   outline-offset: 2px;
 }\r
 \r
-.hover\\:scale-110:hover {
+.hover\\:vc-scale-110:hover {
   --tw-scale-x: 1.1;
   --tw-scale-y: 1.1;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }\r
 \r
-.hover\\:border-primary-royal:hover {
+.hover\\:vc-border-primary-royal:hover {
   border-color: var(--c-primary-royal);
 }\r
 \r
-.hover\\:bg-gray-lightest:hover {
+.hover\\:vc-bg-gray-lightest:hover {
   background-color: var(--c-lightest-gray);
 }\r
 \r
-.hover\\:bg-primary-royal:hover {
+.hover\\:vc-bg-primary-royal:hover {
   background-color: var(--c-primary-royal);
 }\r
 \r
-.hover\\:text-primary-royal:hover {
+.hover\\:vc-text-primary-royal:hover {
   color: var(--c-primary-royal);
 }\r
 \r
-.hover\\:text-white:hover {
+.hover\\:vc-text-white:hover {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }\r
 \r
-.hover\\:opacity-100:hover {
+.hover\\:vc-opacity-100:hover {
   opacity: 1;
 }\r
 \r
-.focus\\:outline-none:focus {
+.hover\\:vc-saturate-100:hover {
+  --tw-saturate: saturate(1);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}\r
+\r
+.focus\\:vc-outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
 }\r
 \r
-.active\\:text-primary-royal:active {
+.active\\:vc-text-primary-royal:active {
   color: var(--c-primary-royal);
-}\r
-\r
-@media (min-width: 1536px) {
-
-  .\\32xl\\:w-\\[50vw\\] {
-    width: 50vw;
-  }
 }\r
 .vim-measure {\r
   background-color: white;\r
@@ -2642,7 +2505,7 @@ function generateUUID$1() {
   const uuid = _lut[d0 & 255] + _lut[d0 >> 8 & 255] + _lut[d0 >> 16 & 255] + _lut[d0 >> 24 & 255] + "-" + _lut[d1 & 255] + _lut[d1 >> 8 & 255] + "-" + _lut[d1 >> 16 & 15 | 64] + _lut[d1 >> 24 & 255] + "-" + _lut[d2 & 63 | 128] + _lut[d2 >> 8 & 255] + "-" + _lut[d2 >> 16 & 255] + _lut[d2 >> 24 & 255] + _lut[d3 & 255] + _lut[d3 >> 8 & 255] + _lut[d3 >> 16 & 255] + _lut[d3 >> 24 & 255];
   return uuid.toUpperCase();
 }
-function clamp$1(value, min2, max2) {
+function clamp$2(value, min2, max2) {
   return Math.max(min2, Math.min(max2, value));
 }
 function euclideanModulo(n2, m2) {
@@ -2752,7 +2615,7 @@ var MathUtils = /* @__PURE__ */ Object.freeze({
   DEG2RAD,
   RAD2DEG,
   generateUUID: generateUUID$1,
-  clamp: clamp$1,
+  clamp: clamp$2,
   euclideanModulo,
   mapLinear,
   inverseLerp,
@@ -4258,7 +4121,7 @@ class Quaternion {
     return this.normalize();
   }
   angleTo(q2) {
-    return 2 * Math.acos(Math.abs(clamp$1(this.dot(q2), -1, 1)));
+    return 2 * Math.acos(Math.abs(clamp$2(this.dot(q2), -1, 1)));
   }
   rotateTowards(q2, step) {
     const angle = this.angleTo(q2);
@@ -4742,7 +4605,7 @@ class Vector3 {
     if (denominator === 0)
       return Math.PI / 2;
     const theta = this.dot(v2) / denominator;
-    return Math.acos(clamp$1(theta, -1, 1));
+    return Math.acos(clamp$2(theta, -1, 1));
   }
   distanceTo(v2) {
     return Math.sqrt(this.distanceToSquared(v2));
@@ -6156,7 +6019,7 @@ class Euler {
     const m31 = te2[2], m32 = te2[6], m33 = te2[10];
     switch (order) {
       case "XYZ":
-        this._y = Math.asin(clamp$1(m13, -1, 1));
+        this._y = Math.asin(clamp$2(m13, -1, 1));
         if (Math.abs(m13) < 0.9999999) {
           this._x = Math.atan2(-m23, m33);
           this._z = Math.atan2(-m12, m11);
@@ -6166,7 +6029,7 @@ class Euler {
         }
         break;
       case "YXZ":
-        this._x = Math.asin(-clamp$1(m23, -1, 1));
+        this._x = Math.asin(-clamp$2(m23, -1, 1));
         if (Math.abs(m23) < 0.9999999) {
           this._y = Math.atan2(m13, m33);
           this._z = Math.atan2(m21, m22);
@@ -6176,7 +6039,7 @@ class Euler {
         }
         break;
       case "ZXY":
-        this._x = Math.asin(clamp$1(m32, -1, 1));
+        this._x = Math.asin(clamp$2(m32, -1, 1));
         if (Math.abs(m32) < 0.9999999) {
           this._y = Math.atan2(-m31, m33);
           this._z = Math.atan2(-m12, m22);
@@ -6186,7 +6049,7 @@ class Euler {
         }
         break;
       case "ZYX":
-        this._y = Math.asin(-clamp$1(m31, -1, 1));
+        this._y = Math.asin(-clamp$2(m31, -1, 1));
         if (Math.abs(m31) < 0.9999999) {
           this._x = Math.atan2(m32, m33);
           this._z = Math.atan2(m21, m11);
@@ -6196,7 +6059,7 @@ class Euler {
         }
         break;
       case "YZX":
-        this._z = Math.asin(clamp$1(m21, -1, 1));
+        this._z = Math.asin(clamp$2(m21, -1, 1));
         if (Math.abs(m21) < 0.9999999) {
           this._x = Math.atan2(-m23, m22);
           this._y = Math.atan2(-m31, m11);
@@ -6206,7 +6069,7 @@ class Euler {
         }
         break;
       case "XZY":
-        this._z = Math.asin(-clamp$1(m12, -1, 1));
+        this._z = Math.asin(-clamp$2(m12, -1, 1));
         if (Math.abs(m12) < 0.9999999) {
           this._x = Math.atan2(m32, m22);
           this._y = Math.atan2(m13, m11);
@@ -7552,8 +7415,8 @@ class Color {
   }
   setHSL(h, s, l2) {
     h = euclideanModulo(h, 1);
-    s = clamp$1(s, 0, 1);
-    l2 = clamp$1(l2, 0, 1);
+    s = clamp$2(s, 0, 1);
+    l2 = clamp$2(l2, 0, 1);
     if (s === 0) {
       this.r = this.g = this.b = l2;
     } else {
@@ -20374,13 +20237,13 @@ class Curve {
       vec.crossVectors(tangents[i2 - 1], tangents[i2]);
       if (vec.length() > Number.EPSILON) {
         vec.normalize();
-        const theta = Math.acos(clamp$1(tangents[i2 - 1].dot(tangents[i2]), -1, 1));
+        const theta = Math.acos(clamp$2(tangents[i2 - 1].dot(tangents[i2]), -1, 1));
         normals[i2].applyMatrix4(mat.makeRotationAxis(vec, theta));
       }
       binormals[i2].crossVectors(tangents[i2], normals[i2]);
     }
     if (closed === true) {
-      let theta = Math.acos(clamp$1(normals[0].dot(normals[segments]), -1, 1));
+      let theta = Math.acos(clamp$2(normals[0].dot(normals[segments]), -1, 1));
       theta /= segments;
       if (tangents[0].dot(vec.crossVectors(normals[0], normals[segments])) > 0) {
         theta = -theta;
@@ -22223,7 +22086,7 @@ class LatheGeometry extends BufferGeometry {
       phiLength
     };
     segments = Math.floor(segments);
-    phiLength = clamp$1(phiLength, 0, Math.PI * 2);
+    phiLength = clamp$2(phiLength, 0, Math.PI * 2);
     const indices = [];
     const vertices = [];
     const uvs = [];
@@ -23024,7 +22887,7 @@ class MeshPhysicalMaterial extends MeshStandardMaterial {
     this.ior = 1.5;
     Object.defineProperty(this, "reflectivity", {
       get: function() {
-        return clamp$1(2.5 * (this.ior - 1) / (this.ior + 1), 0, 1);
+        return clamp$2(2.5 * (this.ior - 1) / (this.ior + 1), 0, 1);
       },
       set: function(reflectivity) {
         this.ior = (1 + 0.4 * reflectivity) / (1 - 0.4 * reflectivity);
@@ -28428,7 +28291,7 @@ class Spherical {
       this.phi = 0;
     } else {
       this.theta = Math.atan2(x2, z2);
-      this.phi = Math.acos(clamp$1(y2 / this.radius, -1, 1));
+      this.phi = Math.acos(clamp$2(y2 / this.radius, -1, 1));
     }
     return this;
   }
@@ -28607,7 +28470,7 @@ class Line3 {
     const startEnd_startP = _startEnd.dot(_startP);
     let t2 = startEnd_startP / startEnd2;
     if (clampToLine) {
-      t2 = clamp$1(t2, 0, 1);
+      t2 = clamp$2(t2, 0, 1);
     }
     return t2;
   }
@@ -31081,6 +30944,7 @@ var __spreadValues = (a, b) => {
   return a;
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
+var commonjsGlobal$1 = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
 var reactDom = { exports: {} };
 var reactDom_production_min = {};
 var scheduler = { exports: {} };
@@ -34677,7 +34541,7 @@ function ti(a, b, c, d) {
   N.flags |= a;
   e.memoizedState = li(1 | b, c, void 0, d === void 0 ? null : d);
 }
-function ui$1(a, b, c, d) {
+function ui(a, b, c, d) {
   var e = di();
   d = d === void 0 ? null : d;
   var f2 = void 0;
@@ -34696,13 +34560,13 @@ function vi(a, b) {
   return ti(8390656, 8, a, b);
 }
 function ji(a, b) {
-  return ui$1(2048, 8, a, b);
+  return ui(2048, 8, a, b);
 }
 function wi(a, b) {
-  return ui$1(4, 2, a, b);
+  return ui(4, 2, a, b);
 }
 function xi(a, b) {
-  return ui$1(4, 4, a, b);
+  return ui(4, 4, a, b);
 }
 function yi(a, b) {
   if (typeof b === "function")
@@ -34716,7 +34580,7 @@ function yi(a, b) {
 }
 function zi(a, b, c) {
   c = c !== null && c !== void 0 ? c.concat([a]) : null;
-  return ui$1(4, 4, yi.bind(null, b, a), c);
+  return ui(4, 4, yi.bind(null, b, a), c);
 }
 function Ai() {
 }
@@ -40327,6 +40191,52 @@ var ReactTooltip = staticMethods(_class = windowListener(_class = customEvent(_c
   "span"
 ]), _defineProperty(_class2, "displayName", "ReactTooltip"), _temp)) || _class) || _class) || _class) || _class) || _class) || _class) || _class;
 var logo = "data:image/png;base64,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";
+var stats_min = { exports: {} };
+(function(module2, exports2) {
+  !function(e, t2) {
+    module2.exports = t2();
+  }(commonjsGlobal$1, function() {
+    var c = function() {
+      var n2 = 0, l2 = document.createElement("div");
+      function e(e2) {
+        return l2.appendChild(e2.dom), e2;
+      }
+      function t2(e2) {
+        for (var t22 = 0; t22 < l2.children.length; t22++)
+          l2.children[t22].style.display = t22 === e2 ? "block" : "none";
+        n2 = e2;
+      }
+      l2.style.cssText = "position:fixed;top:0;left:0;cursor:pointer;opacity:0.9;z-index:10000", l2.addEventListener("click", function(e2) {
+        e2.preventDefault(), t2(++n2 % l2.children.length);
+      }, false);
+      var i2 = (performance || Date).now(), a = i2, o = 0, f2 = e(new c.Panel("FPS", "#0ff", "#002")), r2 = e(new c.Panel("MS", "#0f0", "#020"));
+      if (self.performance && self.performance.memory)
+        var d = e(new c.Panel("MB", "#f08", "#201"));
+      return t2(0), { REVISION: 16, dom: l2, addPanel: e, showPanel: t2, begin: function() {
+        i2 = (performance || Date).now();
+      }, end: function() {
+        o++;
+        var e2 = (performance || Date).now();
+        if (r2.update(e2 - i2, 200), a + 1e3 <= e2 && (f2.update(1e3 * o / (e2 - a), 100), a = e2, o = 0, d)) {
+          var t22 = performance.memory;
+          d.update(t22.usedJSHeapSize / 1048576, t22.jsHeapSizeLimit / 1048576);
+        }
+        return e2;
+      }, update: function() {
+        i2 = this.end();
+      }, domElement: l2, setMode: t2 };
+    };
+    return c.Panel = function(n2, l2, i2) {
+      var a = 1 / 0, o = 0, f2 = Math.round, r2 = f2(window.devicePixelRatio || 1), d = 80 * r2, e = 48 * r2, c2 = 3 * r2, p2 = 2 * r2, u2 = 3 * r2, s = 15 * r2, m2 = 74 * r2, h = 30 * r2, y2 = document.createElement("canvas");
+      y2.width = d, y2.height = e, y2.style.cssText = "width:80px;height:48px";
+      var v2 = y2.getContext("2d");
+      return v2.font = "bold " + 9 * r2 + "px Helvetica,Arial,sans-serif", v2.textBaseline = "top", v2.fillStyle = i2, v2.fillRect(0, 0, d, e), v2.fillStyle = l2, v2.fillText(n2, c2, p2), v2.fillRect(u2, s, m2, h), v2.fillStyle = i2, v2.globalAlpha = 0.9, v2.fillRect(u2, s, m2, h), { dom: y2, update: function(e2, t2) {
+        a = Math.min(a, e2), o = Math.max(o, e2), v2.fillStyle = i2, v2.globalAlpha = 1, v2.fillRect(0, 0, d, s), v2.fillStyle = l2, v2.fillText(f2(e2) + " " + n2 + " (" + f2(a) + "-" + f2(o) + ")", c2, p2), v2.drawImage(y2, u2 + r2, s, m2 - r2, h, u2, s, m2 - r2, h), v2.fillRect(u2 + m2 - r2, s, r2, h), v2.fillStyle = i2, v2.globalAlpha = 0.9, v2.fillRect(u2 + m2 - r2, s, r2, f2((1 - e2 / t2) * h));
+      } };
+    }, c;
+  });
+})(stats_min);
+var Stats = stats_min.exports;
 var __defProp2 = Object.defineProperty;
 var __defNormalProp2 = (obj, key, value) => key in obj ? __defProp2(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => {
@@ -40799,6 +40709,9 @@ class ViewerSettings {
     __publicField(this, "getHighlightOpacity", () => this.highlight.opacity);
     __publicField(this, "getIsolationColor", () => toRGBColor(this.isolation.color));
     __publicField(this, "getIsolationOpacity", () => this.isolation.opacity);
+    __publicField(this, "getSectionStrokeWidth", () => this.section.strokeWidth);
+    __publicField(this, "getSectionStrokeFalloff", () => this.section.strokeFalloff);
+    __publicField(this, "getSectionStrokeColor", () => toRGBColor(this.section.strokeColor));
     __publicField(this, "getCameraNear", () => this.camera.near);
     __publicField(this, "getCameraFar", () => this.camera.far);
     __publicField(this, "getCameraFov", () => this.camera.fov);
@@ -40872,6 +40785,11 @@ class ViewerSettings {
         isolation: {
           color: { r: 64, g: 64, b: 64 },
           opacity: 0.1
+        },
+        section: {
+          strokeWidth: 0.01,
+          strokeFalloff: 0.75,
+          strokeColor: { r: 246, g: 246, b: 246 }
         }
       },
       axes: new GizmoOptions()
@@ -40886,6 +40804,9 @@ class ViewerSettings {
   }
   get isolation() {
     return this.options.materials.isolation;
+  }
+  get section() {
+    return this.options.materials.section;
   }
   get camera() {
     return this.options.camera;
@@ -40903,10 +40824,7 @@ function toHSLColor(obj) {
 function toVec$1(obj) {
   return new Vector3(obj.x, obj.y, obj.z);
 }
-for (let i2 = 0; i2 < 256; i2++) {
-  (i2 < 16 ? "0" : "") + i2.toString(16);
-}
-function clamp(value, min2, max2) {
+function clamp$1(value, min2, max2) {
   return Math.max(min2, Math.min(max2, value));
 }
 var dist$3 = {};
@@ -41428,7 +41346,7 @@ class Camera {
     return this._speed;
   }
   set speed(value) {
-    this._speed = clamp(value, -25, 25);
+    this._speed = clamp$1(value, -25, 25);
     this._onValueChanged.dispatch();
   }
   get localVelocity() {
@@ -41630,7 +41548,7 @@ class Camera {
       offset.setY(y2);
     }
     offset.normalize();
-    offset.multiplyScalar(sphere.radius * 3);
+    offset.multiplyScalar(Math.max(sphere.radius * 3, 1));
     this._targetPosition = sphere.center.clone().add(offset);
     this._orbitTarget = sphere.center;
     this.startLerp(duration, "Both");
@@ -42975,7 +42893,9 @@ class DefaultInputScheme {
     });
   }
   onIdleAction(hit) {
-    this._viewer.selection.focus(hit == null ? void 0 : hit.object);
+    if (!this._viewer.sectionBox.interactive) {
+      this._viewer.selection.focus(hit == null ? void 0 : hit.object);
+    }
   }
   onKeyAction(key) {
     const camera = this._viewer.camera;
@@ -43563,7 +43483,7 @@ class Selection {
     __publicField(this, "_focusStart", 0);
     __publicField(this, "_onValueChanged", new dist$3.SignalDispatcher());
     this._renderer = renderer;
-    this._focusMaterial = renderer.materials.focus.clone();
+    this._focusMaterial = renderer.materials.focus;
   }
   get onValueChanged() {
     return this._onValueChanged.asEvent();
@@ -44737,14 +44657,15 @@ class SectionBox {
       this.update();
     this._onStateChanged.dispatch();
   }
-  fitBox(box) {
-    this._cube.fitBox(box);
-    this._outline.fitBox(box);
-    this.renderer.section.fitBox(box);
+  fitBox(box, padding = 1) {
+    const b = box.expandByScalar(padding);
+    this._cube.fitBox(b);
+    this._outline.fitBox(b);
+    this.renderer.section.fitBox(b);
     this._onBoxConfirm.dispatch(this.box);
   }
   update() {
-    this.fitBox(this.section.box);
+    this.fitBox(this.section.box, 0);
     this._highlight.highlight(this.section.box, this._normal);
   }
   dispose() {
@@ -45393,10 +45314,10 @@ MeshLineMaterial.prototype.copy = function(source) {
   return this;
 };
 function createMeasureElement(style2) {
-  const div2 = document.createElement("div");
-  div2.className = "vim-measure";
+  const div = document.createElement("div");
+  div.className = "vim-measure";
   const table = document.createElement("table");
-  div2.appendChild(table);
+  div.appendChild(table);
   let distValue;
   let xValue;
   let yValue;
@@ -45450,7 +45371,7 @@ function createMeasureElement(style2) {
     zValue = tdZValue;
   }
   return {
-    div: div2,
+    div,
     value: style2 === "Dist" ? distValue : style2 === "X" ? xValue : style2 === "Y" ? yValue : style2 === "Z" ? zValue : void 0,
     values: { dist: distValue, x: xValue, y: yValue, z: zValue }
   };
@@ -47192,7 +47113,9 @@ const objectModel = {
       title: "string:Title",
       pathName: "string:PathName",
       isLinked: "byte:IsLinked",
+      product: "string:Product",
       version: "string:Version",
+      user: "string:User",
       author: "string:Author",
       date: "string:IssueDate"
     }
@@ -47567,11 +47490,11 @@ class Document {
     const parameterElement = parameterTable ? await parameterTable.getArray(objectModel.element.index) : void 0;
     const parameterValue = parameterTable ? await parameterTable.getArray(objectModel.parameter.columns.value) : void 0;
     const getParameterDisplayValue = (index) => {
-      var _a22;
+      var _a22, _b2;
       if (!parameterValue)
         return;
-      const value = (_a22 = this.getString(parameterValue[index])) == null ? void 0 : _a22.split("|");
-      const displayValue = value == null ? void 0 : value[value.length - 1];
+      const value = (_a22 = this.getString(parameterValue[index])) == null ? void 0 : _a22.split("|").filter((s) => s.length > 0);
+      const displayValue = (_b2 = value == null ? void 0 : value[value.length - 1]) != null ? _b2 : value == null ? void 0 : value[0];
       return displayValue;
     };
     const parameterDescription = parameterTable ? await parameterTable.getArray(objectModel.parameterDescriptor.index) : void 0;
@@ -47635,39 +47558,50 @@ class Document {
     return result;
   }
   async getBimDocumentSummary() {
-    var _a22, _b2, _c, _d, _e, _f, _g, _h, _i;
+    var _a22, _b2, _c, _d, _e, _f, _g, _h, _i, _j, _k;
+    this.entities.getLocalBfast("Vim.BimDocument");
     const documentTable = await this.entities.getBfast(objectModel.bimDocument.table);
     const titles = (_a22 = await (documentTable == null ? void 0 : documentTable.getArray(objectModel.bimDocument.columns.title))) == null ? void 0 : _a22.map((n2) => {
       var _a3;
       return (_a3 = this._strings) == null ? void 0 : _a3[n2];
     });
-    const isLinked = await (documentTable == null ? void 0 : documentTable.getArray(objectModel.bimDocument.columns.isLinked));
+    const isLinkedArray = await (documentTable == null ? void 0 : documentTable.getArray(objectModel.bimDocument.columns.isLinked));
     const pathName = (_b2 = await (documentTable == null ? void 0 : documentTable.getArray(objectModel.bimDocument.columns.pathName))) == null ? void 0 : _b2.map((n2) => {
       var _a3;
       return (_a3 = this._strings) == null ? void 0 : _a3[n2];
     });
-    const versions2 = (_c = await (documentTable == null ? void 0 : documentTable.getArray(objectModel.bimDocument.columns.version))) == null ? void 0 : _c.map((n2) => {
+    const product = (_c = await (documentTable == null ? void 0 : documentTable.getArray(objectModel.bimDocument.columns.product))) == null ? void 0 : _c.map((n2) => {
       var _a3;
       return (_a3 = this._strings) == null ? void 0 : _a3[n2];
     });
-    const authors = (_d = await (documentTable == null ? void 0 : documentTable.getArray(objectModel.bimDocument.columns.author))) == null ? void 0 : _d.map((n2) => {
+    const version2 = (_d = await (documentTable == null ? void 0 : documentTable.getArray(objectModel.bimDocument.columns.version))) == null ? void 0 : _d.map((n2) => {
       var _a3;
       return (_a3 = this._strings) == null ? void 0 : _a3[n2];
     });
-    const dates = (_e = await (documentTable == null ? void 0 : documentTable.getArray(objectModel.bimDocument.columns.date))) == null ? void 0 : _e.map((n2) => {
+    const user = (_e = await (documentTable == null ? void 0 : documentTable.getArray(objectModel.bimDocument.columns.user))) == null ? void 0 : _e.map((n2) => {
       var _a3;
       return (_a3 = this._strings) == null ? void 0 : _a3[n2];
     });
-    const max2 = Math.max((_f = titles == null ? void 0 : titles.length) != null ? _f : 0, (_g = versions2 == null ? void 0 : versions2.length) != null ? _g : 0, (_h = authors == null ? void 0 : authors.length) != null ? _h : 0, (_i = dates == null ? void 0 : dates.length) != null ? _i : 0);
+    const author = (_f = await (documentTable == null ? void 0 : documentTable.getArray(objectModel.bimDocument.columns.author))) == null ? void 0 : _f.map((n2) => {
+      var _a3;
+      return (_a3 = this._strings) == null ? void 0 : _a3[n2];
+    });
+    const date = (_g = await (documentTable == null ? void 0 : documentTable.getArray(objectModel.bimDocument.columns.date))) == null ? void 0 : _g.map((n2) => {
+      var _a3;
+      return (_a3 = this._strings) == null ? void 0 : _a3[n2];
+    });
+    const max2 = Math.max((_h = titles == null ? void 0 : titles.length) != null ? _h : 0, (_i = version2 == null ? void 0 : version2.length) != null ? _i : 0, (_j = author == null ? void 0 : author.length) != null ? _j : 0, (_k = date == null ? void 0 : date.length) != null ? _k : 0);
     const summary = [];
     for (let i2 = 0; i2 < max2; i2++) {
       summary.push({
         title: titles == null ? void 0 : titles[i2],
         pathName: pathName == null ? void 0 : pathName[i2],
-        isLinked: isLinked[i2] > 0,
-        version: versions2 == null ? void 0 : versions2[i2],
-        author: authors == null ? void 0 : authors[i2],
-        date: dates == null ? void 0 : dates[i2]
+        isLinked: (isLinkedArray == null ? void 0 : isLinkedArray[i2]) > 0,
+        product: product == null ? void 0 : product[i2],
+        version: version2 == null ? void 0 : version2[i2],
+        user: user == null ? void 0 : user[i2],
+        author: author == null ? void 0 : author[i2],
+        date: date == null ? void 0 : date[i2]
       });
     }
     return summary;
@@ -47705,6 +47639,16 @@ class VimMaterials {
   applyWireframeSettings(color, opacity) {
     this.wireframe.color = color;
     this.wireframe.opacity = opacity;
+  }
+  applySectionSettings(strokeWidth, strokeFalloff, strokeColor) {
+    this.opaque.userData.strokeWidth = strokeWidth;
+    this.opaque.userData.strokeFalloff = strokeFalloff;
+    this.opaque.userData.strokeColor = strokeColor;
+    this.transparent.userData.strokeWidth = strokeWidth;
+    this.transparent.userData.strokeFalloff = strokeFalloff;
+    this.transparent.userData.strokeColor = strokeColor;
+    applySectionUniforms(this.opaque.userData.shader, strokeWidth, strokeFalloff, strokeColor);
+    applySectionUniforms(this.transparent.userData.shader, strokeWidth, strokeFalloff, strokeColor);
   }
   dispose() {
     this.opaque.dispose();
@@ -47753,8 +47697,22 @@ function createFocus() {
   });
   return material;
 }
+function applySectionUniforms(shader, strokeWidth, strokeFalloff, strokeColor) {
+  if (!shader)
+    return;
+  if (shader.uniforms.sectionWidth && shader.uniforms.sectionFalloff && shader.uniforms.sectionColor) {
+    shader.uniforms.sectionWidth.value = strokeWidth;
+    shader.uniforms.sectionFalloff.value = strokeFalloff;
+    shader.uniforms.sectionColor.value = strokeColor;
+  } else {
+    shader.uniforms.sectionWidth = { value: strokeWidth };
+    shader.uniforms.sectionFalloff = { value: strokeFalloff };
+    shader.uniforms.sectionColor = { value: strokeColor };
+  }
+}
 function patchBaseMaterial(material) {
   material.onBeforeCompile = (shader) => {
+    applySectionUniforms(shader, material.userData.strokeWidth, material.userData.strokeFalloff, material.userData.strokeColor);
     material.userData.shader = shader;
     shader.vertexShader = shader.vertexShader.replace("#include <color_pars_vertex>", `
         #include <color_pars_vertex>
@@ -47813,6 +47771,9 @@ function patchBaseMaterial(material) {
         #include <clipping_planes_pars_fragment>
         varying float vIgnore;
         varying float vColored;
+        uniform float sectionWidth;
+        uniform float sectionFalloff;
+        uniform vec3 sectionColor;
         `).replace("#include <output_fragment>", `
           // VISIBILITY
           if (vIgnore > 0.0f)
@@ -47823,6 +47784,33 @@ function patchBaseMaterial(material) {
           // vColored == 0 -> Phong Color 
           float d = length(outgoingLight);
           gl_FragColor = vec4(vColored * vColor.xyz * d + (1.0f - vColored) * outgoingLight.xyz, diffuseColor.a);
+
+
+          // STROKES WHERE GEOMETRY INTERSECTS CLIPPING PLANE
+          #if NUM_CLIPPING_PLANES > 0
+            vec4 strokePlane;
+            float strokeDot;
+            float thick = pow(vFragDepth,sectionFalloff) * sectionWidth;
+            #pragma unroll_loop_start
+            for ( int i = 0; i < UNION_CLIPPING_PLANES; i ++ ) {
+              strokePlane = clippingPlanes[ i ];
+              strokeDot = dot(vClipPosition, strokePlane.xyz);
+              if (strokeDot > strokePlane.w) discard;
+              if ((strokePlane.w - strokeDot) < thick) {
+                float strength = (strokePlane.w - strokeDot) / thick;
+
+                gl_FragColor = vec4(
+                  sectionColor.x + (gl_FragColor.x - sectionColor.x) * strength,
+                  sectionColor.y + (gl_FragColor.y - sectionColor.y) * strength,
+                  sectionColor.z + (gl_FragColor.z - sectionColor.z) * strength,
+                  1.0f);
+
+                return;
+              }
+            }
+            #pragma unroll_loop_end
+          #endif  
+
         `);
   };
 }
@@ -48711,11 +48699,12 @@ class Section {
     this.box.copy(box);
   }
   set active(value) {
-    const p2 = value ? this.planes : void 0;
+    const p2 = value ? this.planes : null;
     this._materials.opaque.clippingPlanes = p2;
     this._materials.transparent.clippingPlanes = p2;
     this._materials.wireframe.clippingPlanes = p2;
     this._materials.isolation.clippingPlanes = p2;
+    this._materials.focus.clippingPlanes = p2;
     this._renderer.localClippingEnabled = value;
     this._active = value;
   }
@@ -48803,6 +48792,7 @@ class Renderer {
   }
   applyMaterialSettings(settings2) {
     this.materials.applyWireframeSettings(settings2.getHighlightColor(), settings2.getHighlightOpacity());
+    this.materials.applySectionSettings(settings2.getSectionStrokeWidth(), settings2.getSectionStrokeFalloff(), settings2.getSectionStrokeColor());
   }
 }
 class Viewer {
@@ -49390,6 +49380,7 @@ function _AxesPanel(props) {
     const subCam = viewer.camera.onValueChanged.subscribe(() => setOrtho(viewer.camera.orthographic));
     const axes = document.getElementsByClassName("gizmo-axis-canvas")[0];
     ui2.current.appendChild(axes);
+    axes.classList.add("vc-block", "!vc-static", "vc-order-1", "vc-mx-auto", "vc-mb-0", "vc-mt-auto");
     return () => {
       subCam();
     };
@@ -49400,7 +49391,7 @@ function _AxesPanel(props) {
   const btnHome = /* @__PURE__ */ React__default.createElement("button", {
     "data-tip": "Reset Camera",
     onClick: onHomeBtn,
-    className: "rounded-full text-gray-medium h-8 w-8 flex items-center justify-center transition-all hover:text-primary-royal",
+    className: "vim-home-btn vc-flex vc-h-8 vc-w-8 vc-items-center vc-justify-center vc-rounded-full vc-text-gray-medium vc-transition-all hover:vc-text-primary-royal",
     type: "button"
   }, /* @__PURE__ */ React__default.createElement(home, {
     height: "20",
@@ -49410,7 +49401,7 @@ function _AxesPanel(props) {
   const btnOrtho = /* @__PURE__ */ React__default.createElement("button", {
     "data-tip": ortho ? "Orthographic" : "Perspective",
     onClick: () => props.viewer.base.camera.orthographic = !ortho,
-    className: "rounded-full text-gray-medium h-8 w-8 flex items-center justify-center transition-all hover:text-primary-royal",
+    className: "vim-camera-btn vc-flex vc-h-8 vc-w-8 vc-items-center vc-justify-center vc-rounded-full vc-text-gray-medium vc-transition-all hover:vc-text-primary-royal",
     type: "button"
   }, ortho ? /* @__PURE__ */ React__default.createElement(orthographic, {
     height: "20",
@@ -49421,16 +49412,19 @@ function _AxesPanel(props) {
     width: "20",
     fill: "currentColor"
   }));
+  const createButton = (button, condition = true) => {
+    if (!condition)
+      return null;
+    return /* @__PURE__ */ React__default.createElement("div", {
+      className: "vc-mx-1 "
+    }, button);
+  };
   return /* @__PURE__ */ React__default.createElement("div", {
     ref: ui2,
-    className: "vim-top border z-20 border-white flex flex-col fixed right-6 top-6 w-[100px] h-[145px] rounded-2xl shadow-lg transition-all"
+    className: "vim-axes-panel vc-fixed vc-right-6 vc-top-6 vc-z-20 vc-flex vc-h-[145px] vc-w-[100px] vc-flex-col vc-rounded-2xl vc-border vc-border-white vc-opacity-50 vc-shadow-lg vc-saturate-0 vc-transition-all hover:vc-opacity-100 hover:vc-saturate-100"
   }, /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-top-buttons order-2 flex p-1 rounded-b-xl pointer-events-auto justify-center bg-white mb-0 mt-auto"
-  }, /* @__PURE__ */ React__default.createElement("div", {
-    className: "mx-1"
-  }, props.settings.capacity.useOrthographicCamera ? btnOrtho : null), /* @__PURE__ */ React__default.createElement("div", {
-    className: "mx-1"
-  }, btnHome)));
+    className: "vim-top-buttons vc-pointer-events-auto vc-order-2 vc-mb-0 vc-mt-auto vc-flex vc-justify-center vc-rounded-b-xl vc-bg-white vc-p-1"
+  }, createButton(btnOrtho, props.settings.capacity.useOrthographicCamera), createButton(btnHome)));
 }
 function pointerToCursor(pointer) {
   switch (pointer) {
@@ -49489,7 +49483,7 @@ class CursorManager {
   }
 }
 const toggleButton = (tip, action, icon, isOn) => {
-  const style2 = isOn() ? "control-bar-button rounded-full mx-1 h-10 w-10 flex items-center justify-center transition-all hover:scale-110 hover:text-primary-royal text-primary" : "control-bar-button rounded-full mx-1 h-10 w-10 flex items-center justify-center transition-all hover:scale-110 hover:text-primary-royal text-gray-medium";
+  const style2 = isOn() ? "vim-control-bar-button vc-rounded-full vc-mx-1 vc-h-10 vc-w-10 vc-flex vc-items-center vc-justify-center vc-transition-all hover:vc-scale-110 hover:vc-text-primary-royal vc-text-primary" : "vim-control-bar-button vc-rounded-full vc-mx-1 vc-h-10 vc-w-10 vc-flex vc-items-center vc-justify-center vc-transition-all hover:vc-scale-110 hover:vc-text-primary-royal vc-text-gray-medium";
   return /* @__PURE__ */ React__default.createElement("button", {
     "data-tip": tip,
     onClick: action,
@@ -49498,7 +49492,7 @@ const toggleButton = (tip, action, icon, isOn) => {
   }, icon({ height: "20", width: "20", fill: "currentColor" }));
 };
 const actionButton = (tip, action, icon, state) => {
-  const style2 = state ? "control-bar-button rounded-full mx-1 text-white h-10 w-10 flex items-center justify-center transition-all hover:scale-110 opacity-60 hover:opacity-100" : "control-bar-button rounded-full mx-1 text-gray-medium h-10 w-10 flex items-center justify-center transition-all hover:scale-110 hover:text-primary-royal";
+  const style2 = state ? "vim-control-bar-button vc-rounded-full vc-mx-1 vc-text-white vc-h-10 vc-w-10 vc-flex vc-items-center vc-justify-center vc-transition-all hover:vc-scale-110 vc-opacity-60 hover:vc-opacity-100" : "vim-control-bar-button vc-rounded-full vc-mx-1 vc-text-gray-medium vc-h-10 vc-w-10 vc-flex vc-items-center vc-justify-center vc-transition-all hover:vc-scale-110 hover:vc-text-primary-royal";
   return /* @__PURE__ */ React__default.createElement("button", {
     "data-tip": tip,
     onClick: action,
@@ -49533,11 +49527,12 @@ function ControlBar(props) {
     };
   }, []);
   return /* @__PURE__ */ React__default.createElement("div", {
-    className: `vim-control-bar flex z-20 items-center justify-center w-full fixed px-2 bottom-0 py-2 mb-9 transition-opacity transition-all ${show ? "opacity-100 " : "opacity-0 pointer-events-none"}`
+    style: { paddingLeft: props.side.getWidth() },
+    className: `vim-control-bar vc-fixed vc-bottom-0 vc-z-20 vc-mb-9 vc-flex vc-w-full vc-items-center vc-justify-center vc-px-2 vc-py-2 vc-transition-opacity vc-transition-all ${show ? "vc-opacity-100" : "vc-pointer-events-none vc-opacity-0"}`
   }, /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-control-bar-section flex items-center bg-white rounded-full px-2 shadow-md mx-2"
+    className: "vc-vim-control-bar-section vc-mx-2 vc-flex vc-items-center vc-rounded-full vc-bg-white vc-px-2 vc-shadow-md"
   }, /* @__PURE__ */ React__default.createElement(TabCamera, __spreadValues({}, props))), /* @__PURE__ */ React__default.createElement(TabTools, __spreadValues({}, props)), /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-control-bar-section flex items-center bg-white rounded-full px-2 shadow-md mx-2"
+    className: "vim-control-bar-section vc-mx-2 vc-flex vc-items-center vc-rounded-full vc-bg-white vc-px-2 vc-shadow-md"
   }, /* @__PURE__ */ React__default.createElement(TabSettings, __spreadValues({}, props))));
 }
 function TabCamera(props) {
@@ -49628,21 +49623,20 @@ function TabTools(props) {
   const btnMeasure = actionButton("Measuring Mode", onMeasureBtn, measure, false);
   const btnIsolation = actionButton("Toggle Isolation", () => {
     props.isolation.toggleIsolation("controlBar");
-    props.viewer.frameVisibleObjects();
   }, toggleIsolation, false);
   const toolsTab = /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-control-bar-section flex items-center bg-white rounded-full px-2 mx-2 shadow-md"
+    className: "vim-control-bar-section vc-mx-2 vc-flex vc-items-center vc-rounded-full vc-bg-white vc-px-2 vc-shadow-md"
   }, btnSection, btnMeasure, btnIsolation);
   const btnMeasureDelete = actionButton("Delete", onMeasureDeleteBtn, trash, !!measuring);
   const btnMeasureConfirm = actionButton("Done", onMeasureBtn, checkmark, !!measuring);
   const measureTab = /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-control-bar-section flex items-center bg-primary rounded-full px-2 mx-2 shadow-md"
+    className: "vim-control-bar-section vc-mx-2 vc-flex vc-items-center vc-rounded-full vc-bg-primary vc-px-2 vc-shadow-md"
   }, /* @__PURE__ */ React__default.createElement("div", {
-    className: "mx-1"
+    className: "vc-mx-1"
   }, btnMeasureDelete), /* @__PURE__ */ React__default.createElement("div", {
-    className: "mx-1 py-1 bg-white/[.5] h-5 w-px"
+    className: "vc-mx-1 vc-h-5 vc-w-px vc-bg-white/[.5] vc-py-1"
   }), /* @__PURE__ */ React__default.createElement("div", {
-    className: "mx-1"
+    className: "vc-mx-1"
   }, btnMeasureConfirm));
   const btnSectionReset = actionButton("Reset Section Box", onResetSectionBtn, sectionBoxReset, section.active);
   const btnSectionShrink = actionButton("Shrink to Selection", () => viewer.sectionBox.fitBox(viewer.selection.getBoundingBox()), sectionBoxShrink, section.active);
@@ -49650,9 +49644,9 @@ function TabTools(props) {
   const btnSectionNoClip = actionButton("Ignore Section Box", onSectionNoClip, sectionBoxClip, section.active);
   const btnSectionConfirm = actionButton("Done", onSectionBtn, checkmark, section.active);
   const sectionTab = /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-control-bar-section flex items-center bg-primary rounded-full px-2 mx-2 shadow-md"
+    className: "vim-control-bar-section vc-mx-2 vc-flex vc-items-center vc-rounded-full vc-bg-primary vc-px-2 vc-shadow-md"
   }, btnSectionReset, btnSectionShrink, section.clip ? btnSectionNoClip : btnSectionClip, /* @__PURE__ */ React__default.createElement("div", {
-    className: "mx-1 py-1 bg-white/[.5] h-5 w-px"
+    className: "vc-mx-1 vc-h-5 vc-w-px vc-bg-white/[.5] vc-py-1"
   }), btnSectionConfirm);
   return measuring ? measureTab : section.active ? sectionTab : toolsTab;
 }
@@ -49678,13 +49672,13 @@ function TabSettings(props) {
     props.help.setVisible(!props.help.visible);
   };
   const onTreeViewBtn = () => {
-    props.side.toggle("bim");
+    props.side.toggleContent("bim");
   };
   const onSettingsBtn = () => {
-    props.side.toggle("settings");
+    props.side.toggleContent("settings");
   };
-  const btnTreeView = toggleButton("Project Inspector", onTreeViewBtn, treeView, () => props.side.get() === "bim");
-  const btnSettings = toggleButton("Settings", onSettingsBtn, settings, () => props.side.get() === "settings");
+  const btnTreeView = toggleButton("Project Inspector", onTreeViewBtn, treeView, () => props.side.getContent() === "bim");
+  const btnSettings = toggleButton("Settings", onSettingsBtn, settings, () => props.side.getContent() === "settings");
   const btnHelp = toggleButton("Help", onHelpBtn, help, () => props.help.visible);
   const btnFullScreen = actionButton(document.fullscreenElement ? "Fullscreen" : "Minimize", () => {
     if (document.fullscreenElement) {
@@ -49749,19 +49743,19 @@ function _LoadingBox(props) {
   if (!msg)
     return null;
   return /* @__PURE__ */ React__default.createElement("div", {
-    className: "loading-wrapper backdrop-blur fixed items-center justify-center top-0 left-0 w-full h-full z-40 bg-overflow",
+    className: "vim-loading-wrapper vc-fixed vc-top-0 vc-left-0 vc-z-40 vc-h-full vc-w-full vc-items-center vc-justify-center vc-bg-overflow vc-backdrop-blur",
     onContextMenu: (event) => event.preventDefault()
   }, /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-loading-box w-[320px] text-gray-medium bg-white px-5 py-4 rounded shadow-lg z-20"
+    className: "vim-loading-box vc-absolute vc-top-[calc(50%-37px)] vc-left-[calc(50%-160px)] vc-z-20 vc-m-auto vc-w-[320px] vc-self-center vc-rounded vc-bg-white vc-px-5 vc-py-4 vc-shadow-lg"
   }, /* @__PURE__ */ React__default.createElement("h1", {
-    className: "w-full mb-2"
+    className: "vim-loading-title vc-mb-2 vc-w-full vc-text-gray-medium"
   }, " ", msg, " "), /* @__PURE__ */ React__default.createElement("span", {
-    className: "loader"
+    className: "vim-loading-widget"
   })));
 }
 function formatProgress(progress) {
   return progress === "processing" ? "Processing" : typeof progress === "number" ? /* @__PURE__ */ React__default.createElement("div", {
-    className: "flex justify-between w-full"
+    className: "vc-flex vc-w-full vc-justify-between"
   }, /* @__PURE__ */ React__default.createElement("span", null, "Loading..."), /* @__PURE__ */ React__default.createElement("span", null, Math.round(progress / 1e6), " MB")) : typeof progress === "string" ? `Error: ${progress}` : void 0;
 }
 var InteractionMode;
@@ -49770,8 +49764,8 @@ var InteractionMode;
   InteractionMode2["ClickItemToExpand"] = "click-item-to-expand";
   InteractionMode2["ClickArrowToExpand"] = "click-arrow-to-expand";
 })(InteractionMode || (InteractionMode = {}));
-var __assign$b = globalThis && globalThis.__assign || function() {
-  __assign$b = Object.assign || function(t2) {
+var __assign$d = globalThis && globalThis.__assign || function() {
+  __assign$d = Object.assign || function(t2) {
     for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
       s = arguments[i2];
       for (var p2 in s)
@@ -49780,13 +49774,13 @@ var __assign$b = globalThis && globalThis.__assign || function() {
     }
     return t2;
   };
-  return __assign$b.apply(this, arguments);
+  return __assign$d.apply(this, arguments);
 };
 var mergeInteractionManagers = function(main, fallback) {
   return {
     mode: main.mode,
     createInteractiveElementProps: function(item, treeId, actions, renderFlags) {
-      return __assign$b(__assign$b({}, fallback.createInteractiveElementProps(item, treeId, actions, renderFlags)), main.createInteractiveElementProps(item, treeId, actions, renderFlags));
+      return __assign$d(__assign$d({}, fallback.createInteractiveElementProps(item, treeId, actions, renderFlags)), main.createInteractiveElementProps(item, treeId, actions, renderFlags));
     }
   };
 };
@@ -50177,8 +50171,8 @@ var useSideEffect = function(effect, deps, changeOn) {
     }
   }, __spreadArray$8(__spreadArray$8([], deps), changeOn));
 };
-var __assign$a = globalThis && globalThis.__assign || function() {
-  __assign$a = Object.assign || function(t2) {
+var __assign$c = globalThis && globalThis.__assign || function() {
+  __assign$c = Object.assign || function(t2) {
     for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
       s = arguments[i2];
       for (var p2 in s)
@@ -50187,7 +50181,7 @@ var __assign$a = globalThis && globalThis.__assign || function() {
     }
     return t2;
   };
-  return __assign$a.apply(this, arguments);
+  return __assign$c.apply(this, arguments);
 };
 var buildMapForTrees = function(treeIds, build) {
   return treeIds.map(function(id2) {
@@ -50195,7 +50189,7 @@ var buildMapForTrees = function(treeIds, build) {
   }).reduce(function(a, _a22) {
     var _b2;
     var id2 = _a22[0], obj = _a22[1];
-    return __assign$a(__assign$a({}, a), (_b2 = {}, _b2[id2] = obj, _b2));
+    return __assign$c(__assign$c({}, a), (_b2 = {}, _b2[id2] = obj, _b2));
   }, {});
 };
 function useCallSoon() {
@@ -50388,8 +50382,8 @@ var DragAndDropProvider = function(props) {
   }, [onDropHandler, resetState]);
   return react.exports.createElement(DragAndDropContext.Provider, { value: dnd }, props.children);
 };
-var __assign$9 = globalThis && globalThis.__assign || function() {
-  __assign$9 = Object.assign || function(t2) {
+var __assign$b = globalThis && globalThis.__assign || function() {
+  __assign$b = Object.assign || function(t2) {
     for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
       s = arguments[i2];
       for (var p2 in s)
@@ -50398,13 +50392,13 @@ var __assign$9 = globalThis && globalThis.__assign || function() {
     }
     return t2;
   };
-  return __assign$9.apply(this, arguments);
+  return __assign$b.apply(this, arguments);
 };
 var useCreatedEnvironmentRef = function(ref, actions) {
   var environment = useTreeEnvironment();
   var dnd = useDragAndDrop();
   react.exports.useImperativeHandle(ref, function() {
-    return __assign$9(__assign$9(__assign$9({}, actions), environment), { treeEnvironmentContext: environment, dragAndDropContext: dnd });
+    return __assign$b(__assign$b(__assign$b({}, actions), environment), { treeEnvironmentContext: environment, dragAndDropContext: dnd });
   });
 };
 var __spreadArray$7 = globalThis && globalThis.__spreadArray || function(to, from) {
@@ -50519,8 +50513,8 @@ var scrollIntoView = function(element) {
     }
   }
 };
-var __assign$8 = globalThis && globalThis.__assign || function() {
-  __assign$8 = Object.assign || function(t2) {
+var __assign$a = globalThis && globalThis.__assign || function() {
+  __assign$a = Object.assign || function(t2) {
     for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
       s = arguments[i2];
       for (var p2 in s)
@@ -50529,7 +50523,7 @@ var __assign$8 = globalThis && globalThis.__assign || function() {
     }
     return t2;
   };
-  return __assign$8.apply(this, arguments);
+  return __assign$a.apply(this, arguments);
 };
 var cx$1 = function() {
   var classNames = [];
@@ -50553,17 +50547,17 @@ var createDefaultRenderers = function(renderDepthOffset) {
     },
     renderItemArrow: function(_a22) {
       var item = _a22.item, context = _a22.context;
-      return React__default.createElement("div", __assign$8({ className: cx$1(item.hasChildren && "rct-tree-item-arrow-hasChildren", "rct-tree-item-arrow") }, context.arrowProps), item.hasChildren && (context.isExpanded ? React__default.createElement("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", xmlnsXlink: "http://www.w3.org/1999/xlink", x: "0px", y: "0px", viewBox: "0 0 16 16", enableBackground: "new 0 0 16 16", xmlSpace: "preserve" }, React__default.createElement("g", null, React__default.createElement("g", null, React__default.createElement("path", { fillRule: "evenodd", clipRule: "evenodd", d: "M12,5c-0.28,0-0.53,0.11-0.71,0.29L8,8.59L4.71,5.29C4.53,5.11,4.28,5,4,5\n                      C3.45,5,3,5.45,3,6c0,0.28,0.11,0.53,0.29,0.71l4,4C7.47,10.89,7.72,11,8,11s0.53-0.11,0.71-0.29l4-4C12.89,6.53,13,6.28,13,6\n                      C13,5.45,12.55,5,12,5z", className: "rct-tree-item-arrow-path" })))) : React__default.createElement("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", xmlnsXlink: "http://www.w3.org/1999/xlink", x: "0px", y: "0px", viewBox: "0 0 16 16", enableBackground: "new 0 0 16 16", xmlSpace: "preserve" }, React__default.createElement("g", null, React__default.createElement("g", null, React__default.createElement("path", { fillRule: "evenodd", clipRule: "evenodd", d: "M10.71,7.29l-4-4C6.53,3.11,6.28,3,6,3C5.45,3,5,3.45,5,4\n                      c0,0.28,0.11,0.53,0.29,0.71L8.59,8l-3.29,3.29C5.11,11.47,5,11.72,5,12c0,0.55,0.45,1,1,1c0.28,0,0.53-0.11,0.71-0.29l4-4\n                      C10.89,8.53,11,8.28,11,8C11,7.72,10.89,7.47,10.71,7.29z", className: "rct-tree-item-arrow-path" }))))));
+      return React__default.createElement("div", __assign$a({ className: cx$1(item.hasChildren && "rct-tree-item-arrow-hasChildren", "rct-tree-item-arrow") }, context.arrowProps), item.hasChildren && (context.isExpanded ? React__default.createElement("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", xmlnsXlink: "http://www.w3.org/1999/xlink", x: "0px", y: "0px", viewBox: "0 0 16 16", enableBackground: "new 0 0 16 16", xmlSpace: "preserve" }, React__default.createElement("g", null, React__default.createElement("g", null, React__default.createElement("path", { fillRule: "evenodd", clipRule: "evenodd", d: "M12,5c-0.28,0-0.53,0.11-0.71,0.29L8,8.59L4.71,5.29C4.53,5.11,4.28,5,4,5\n                      C3.45,5,3,5.45,3,6c0,0.28,0.11,0.53,0.29,0.71l4,4C7.47,10.89,7.72,11,8,11s0.53-0.11,0.71-0.29l4-4C12.89,6.53,13,6.28,13,6\n                      C13,5.45,12.55,5,12,5z", className: "rct-tree-item-arrow-path" })))) : React__default.createElement("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", xmlnsXlink: "http://www.w3.org/1999/xlink", x: "0px", y: "0px", viewBox: "0 0 16 16", enableBackground: "new 0 0 16 16", xmlSpace: "preserve" }, React__default.createElement("g", null, React__default.createElement("g", null, React__default.createElement("path", { fillRule: "evenodd", clipRule: "evenodd", d: "M10.71,7.29l-4-4C6.53,3.11,6.28,3,6,3C5.45,3,5,3.45,5,4\n                      c0,0.28,0.11,0.53,0.29,0.71L8.59,8l-3.29,3.29C5.11,11.47,5,11.72,5,12c0,0.55,0.45,1,1,1c0.28,0,0.53-0.11,0.71-0.29l4-4\n                      C10.89,8.53,11,8.28,11,8C11,7.72,10.89,7.47,10.71,7.29z", className: "rct-tree-item-arrow-path" }))))));
     },
     renderItem: function(_a22) {
       var item = _a22.item, depth = _a22.depth, children = _a22.children, title = _a22.title, context = _a22.context, arrow = _a22.arrow;
       var InteractiveComponent = context.isRenaming ? "div" : "button";
       var type = context.isRenaming ? void 0 : "button";
-      return React__default.createElement("li", __assign$8({}, context.itemContainerWithChildrenProps, { className: cx$1("rct-tree-item-li", item.hasChildren && "rct-tree-item-li-hasChildren", context.isSelected && "rct-tree-item-li-selected", context.isExpanded && "rct-tree-item-li-expanded", context.isFocused && "rct-tree-item-li-focused", context.isDraggingOver && "rct-tree-item-li-dragging-over", context.isSearchMatching && "rct-tree-item-li-search-match") }), React__default.createElement("div", __assign$8({}, context.itemContainerWithoutChildrenProps, { style: { paddingLeft: (depth + 1) * renderDepthOffset + "px" }, className: cx$1("rct-tree-item-title-container", item.hasChildren && "rct-tree-item-title-container-hasChildren", context.isSelected && "rct-tree-item-title-container-selected", context.isExpanded && "rct-tree-item-title-container-expanded", context.isFocused && "rct-tree-item-title-container-focused", context.isDraggingOver && "rct-tree-item-title-container-dragging-over", context.isSearchMatching && "rct-tree-item-title-container-search-match") }), arrow, React__default.createElement(InteractiveComponent, __assign$8({ type }, context.interactiveElementProps, { className: cx$1("rct-tree-item-button", item.hasChildren && "rct-tree-item-button-hasChildren", context.isSelected && "rct-tree-item-button-selected", context.isExpanded && "rct-tree-item-button-expanded", context.isFocused && "rct-tree-item-button-focused", context.isDraggingOver && "rct-tree-item-button-dragging-over", context.isSearchMatching && "rct-tree-item-button-search-match") }), title)), children);
+      return React__default.createElement("li", __assign$a({}, context.itemContainerWithChildrenProps, { className: cx$1("rct-tree-item-li", item.hasChildren && "rct-tree-item-li-hasChildren", context.isSelected && "rct-tree-item-li-selected", context.isExpanded && "rct-tree-item-li-expanded", context.isFocused && "rct-tree-item-li-focused", context.isDraggingOver && "rct-tree-item-li-dragging-over", context.isSearchMatching && "rct-tree-item-li-search-match") }), React__default.createElement("div", __assign$a({}, context.itemContainerWithoutChildrenProps, { style: { paddingLeft: (depth + 1) * renderDepthOffset + "px" }, className: cx$1("rct-tree-item-title-container", item.hasChildren && "rct-tree-item-title-container-hasChildren", context.isSelected && "rct-tree-item-title-container-selected", context.isExpanded && "rct-tree-item-title-container-expanded", context.isFocused && "rct-tree-item-title-container-focused", context.isDraggingOver && "rct-tree-item-title-container-dragging-over", context.isSearchMatching && "rct-tree-item-title-container-search-match") }), arrow, React__default.createElement(InteractiveComponent, __assign$a({ type }, context.interactiveElementProps, { className: cx$1("rct-tree-item-button", item.hasChildren && "rct-tree-item-button-hasChildren", context.isSelected && "rct-tree-item-button-selected", context.isExpanded && "rct-tree-item-button-expanded", context.isFocused && "rct-tree-item-button-focused", context.isDraggingOver && "rct-tree-item-button-dragging-over", context.isSearchMatching && "rct-tree-item-button-search-match") }), title)), children);
     },
     renderRenameInput: function(_a22) {
       var inputProps = _a22.inputProps, inputRef = _a22.inputRef, submitButtonProps = _a22.submitButtonProps, submitButtonRef = _a22.submitButtonRef, formProps = _a22.formProps;
-      return React__default.createElement("form", __assign$8({}, formProps, { className: "rct-tree-item-renaming-form" }), React__default.createElement("input", __assign$8({}, inputProps, { ref: inputRef, className: "rct-tree-item-renaming-input" })), React__default.createElement("input", __assign$8({}, submitButtonProps, { ref: submitButtonRef, type: "submit", className: "rct-tree-item-renaming-submit-button", value: "\u{1F5F8}" })));
+      return React__default.createElement("form", __assign$a({}, formProps, { className: "rct-tree-item-renaming-form" }), React__default.createElement("input", __assign$a({}, inputProps, { ref: inputRef, className: "rct-tree-item-renaming-input" })), React__default.createElement("input", __assign$a({}, submitButtonProps, { ref: submitButtonRef, type: "submit", className: "rct-tree-item-renaming-submit-button", value: "\u{1F5F8}" })));
     },
     renderDraggingItem: function() {
       return React__default.createElement("div", null);
@@ -50573,19 +50567,19 @@ var createDefaultRenderers = function(renderDepthOffset) {
     },
     renderTreeContainer: function(_a22) {
       var children = _a22.children, containerProps = _a22.containerProps, info = _a22.info;
-      return React__default.createElement("div", { className: cx$1("rct-tree-root", info.isFocused && "rct-tree-root-focus", info.isRenaming && "rct-tree-root-renaming", info.areItemsSelected && "rct-tree-root-itemsselected") }, React__default.createElement("div", __assign$8({}, containerProps), children));
+      return React__default.createElement("div", { className: cx$1("rct-tree-root", info.isFocused && "rct-tree-root-focus", info.isRenaming && "rct-tree-root-renaming", info.areItemsSelected && "rct-tree-root-itemsselected") }, React__default.createElement("div", __assign$a({}, containerProps), children));
     },
     renderItemsContainer: function(_a22) {
       var children = _a22.children, containerProps = _a22.containerProps;
-      return React__default.createElement("ul", __assign$8({}, containerProps, { className: "rct-tree-items-container" }), children);
+      return React__default.createElement("ul", __assign$a({}, containerProps, { className: "rct-tree-items-container" }), children);
     },
     renderDragBetweenLine: function(_a22) {
       var draggingPosition = _a22.draggingPosition, lineProps = _a22.lineProps;
-      return React__default.createElement("div", __assign$8({}, lineProps, { style: { left: draggingPosition.depth * renderDepthOffset + "px" }, className: cx$1("rct-tree-drag-between-line", draggingPosition.targetType === "between-items" && draggingPosition.linePosition === "top" && "rct-tree-drag-between-line-top", draggingPosition.targetType === "between-items" && draggingPosition.linePosition === "bottom" && "rct-tree-drag-between-line-bottom") }));
+      return React__default.createElement("div", __assign$a({}, lineProps, { style: { left: draggingPosition.depth * renderDepthOffset + "px" }, className: cx$1("rct-tree-drag-between-line", draggingPosition.targetType === "between-items" && draggingPosition.linePosition === "top" && "rct-tree-drag-between-line-top", draggingPosition.targetType === "between-items" && draggingPosition.linePosition === "bottom" && "rct-tree-drag-between-line-bottom") }));
     },
     renderSearchInput: function(_a22) {
       var inputProps = _a22.inputProps;
-      return React__default.createElement("div", { className: cx$1("rct-tree-search-input-container") }, React__default.createElement("input", __assign$8({}, inputProps, { className: cx$1("rct-tree-search-input") })));
+      return React__default.createElement("div", { className: cx$1("rct-tree-search-input-container") }, React__default.createElement("input", __assign$a({}, inputProps, { className: cx$1("rct-tree-search-input") })));
     },
     renderLiveDescriptorContainer: function(_a22) {
       var tree = _a22.tree, children = _a22.children;
@@ -50674,8 +50668,8 @@ var useStableHandler = function(handler) {
     return handlerRef.current.apply(handlerRef, args);
   }, [handlerRef]);
 };
-var __assign$7 = globalThis && globalThis.__assign || function() {
-  __assign$7 = Object.assign || function(t2) {
+var __assign$9 = globalThis && globalThis.__assign || function() {
+  __assign$9 = Object.assign || function(t2) {
     for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
       s = arguments[i2];
       for (var p2 in s)
@@ -50684,7 +50678,7 @@ var __assign$7 = globalThis && globalThis.__assign || function() {
     }
     return t2;
   };
-  return __assign$7.apply(this, arguments);
+  return __assign$9.apply(this, arguments);
 };
 var __rest = globalThis && globalThis.__rest || function(s, e) {
   var t2 = {};
@@ -50738,7 +50732,7 @@ var useControlledTreeEnvironmentProps = function(_a22) {
   var registerTree = react.exports.useCallback(function(tree) {
     setTrees(function(trees2) {
       var _a3;
-      return __assign$7(__assign$7({}, trees2), (_a3 = {}, _a3[tree.treeId] = tree, _a3));
+      return __assign$9(__assign$9({}, trees2), (_a3 = {}, _a3[tree.treeId] = tree, _a3));
     });
     onRegisterTree === null || onRegisterTree === void 0 ? void 0 : onRegisterTree(tree);
     updateLinearItems();
@@ -50786,7 +50780,7 @@ var useControlledTreeEnvironmentProps = function(_a22) {
     }
   }, [autoFocus]);
   var renderers = useRenderers(props);
-  return __assign$7(__assign$7(__assign$7({}, renderers), props), {
+  return __assign$9(__assign$9(__assign$9({}, renderers), props), {
     onFocusItem: onFocusItemHandler,
     registerTree,
     unregisterTree,
@@ -50800,8 +50794,8 @@ var useControlledTreeEnvironmentProps = function(_a22) {
     linearItems
   });
 };
-var __assign$6 = globalThis && globalThis.__assign || function() {
-  __assign$6 = Object.assign || function(t2) {
+var __assign$8 = globalThis && globalThis.__assign || function() {
+  __assign$8 = Object.assign || function(t2) {
     for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
       s = arguments[i2];
       for (var p2 in s)
@@ -50810,7 +50804,7 @@ var __assign$6 = globalThis && globalThis.__assign || function() {
     }
     return t2;
   };
-  return __assign$6.apply(this, arguments);
+  return __assign$8.apply(this, arguments);
 };
 var TreeEnvironmentContext = react.exports.createContext(null);
 var useTreeEnvironment = function() {
@@ -50823,7 +50817,7 @@ var ControlledTreeEnvironment = react.exports.forwardRef(function(props, ref) {
   for (var _i = 0, _d = Object.keys(environmentContextProps.trees); _i < _d.length; _i++) {
     var treeId = _d[_i];
     if (!((_a22 = viewState[treeId]) === null || _a22 === void 0 ? void 0 : _a22.focusedItem) && environmentContextProps.trees[treeId]) {
-      viewState[treeId] = __assign$6(__assign$6({}, viewState[treeId]), { focusedItem: (_c = (_b2 = props.items[environmentContextProps.trees[treeId].rootItem]) === null || _b2 === void 0 ? void 0 : _b2.children) === null || _c === void 0 ? void 0 : _c[0] });
+      viewState[treeId] = __assign$8(__assign$8({}, viewState[treeId]), { focusedItem: (_c = (_b2 = props.items[environmentContextProps.trees[treeId].rootItem]) === null || _b2 === void 0 ? void 0 : _b2.children) === null || _c === void 0 ? void 0 : _c[0] });
     }
   }
   return react.exports.createElement(TreeEnvironmentContext.Provider, { value: environmentContextProps }, react.exports.createElement(InteractionManagerProvider, null, react.exports.createElement(DragAndDropProvider, null, react.exports.createElement(EnvironmentActionsProvider, { ref }, props.children))));
@@ -50878,8 +50872,8 @@ var useSelectUpTo = function() {
     }
   }, [onSelectItems, linearItems, treeId, viewState]);
 };
-var __assign$5 = globalThis && globalThis.__assign || function() {
-  __assign$5 = Object.assign || function(t2) {
+var __assign$7 = globalThis && globalThis.__assign || function() {
+  __assign$7 = Object.assign || function(t2) {
     for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
       s = arguments[i2];
       for (var p2 in s)
@@ -50888,7 +50882,7 @@ var __assign$5 = globalThis && globalThis.__assign || function() {
     }
     return t2;
   };
-  return __assign$5.apply(this, arguments);
+  return __assign$7.apply(this, arguments);
 };
 var __spreadArray$5 = globalThis && globalThis.__spreadArray || function(to, from) {
   for (var i2 = 0, il2 = from.length, j = to.length; i2 < il2; i2++, j++)
@@ -51007,8 +51001,8 @@ var useTreeItemRenderContext = function(item) {
       canDrag,
       canDropOn
     };
-    var interactiveElementProps = __assign$5(__assign$5({}, interactionManager.createInteractiveElementProps(item, treeId, actions, renderFlags, viewState)), (_a3 = {}, _a3["data-rct-item-interactive"] = true, _a3["data-rct-item-focus"] = renderFlags.isFocused ? "true" : "false", _a3["data-rct-item-id"] = item.index, _a3));
-    var itemContainerWithoutChildrenProps = __assign$5({}, (_b3 = {}, _b3["data-rct-item-container"] = "true", _b3));
+    var interactiveElementProps = __assign$7(__assign$7({}, interactionManager.createInteractiveElementProps(item, treeId, actions, renderFlags, viewState)), (_a3 = {}, _a3["data-rct-item-interactive"] = true, _a3["data-rct-item-focus"] = renderFlags.isFocused ? "true" : "false", _a3["data-rct-item-id"] = item.index, _a3));
+    var itemContainerWithoutChildrenProps = __assign$7({}, (_b3 = {}, _b3["data-rct-item-container"] = "true", _b3));
     var itemContainerWithChildrenProps = {
       role: "treeitem",
       "aria-selected": renderFlags.isSelected,
@@ -51035,7 +51029,7 @@ var useTreeItemRenderContext = function(item) {
       acc[key] = Array.isArray(value) ? value.includes(item.index) : value === item.index;
       return acc;
     }, {});
-    return __assign$5(__assign$5(__assign$5({}, actions), renderFlags), {
+    return __assign$7(__assign$7(__assign$7({}, actions), renderFlags), {
       interactiveElementProps,
       itemContainerWithChildrenProps,
       itemContainerWithoutChildrenProps,
@@ -51088,8 +51082,8 @@ var defaultKeyboardBindings = {
   completeProgrammaticDnd: ["enter"],
   abortProgrammaticDnd: ["escape"]
 };
-var __assign$4 = globalThis && globalThis.__assign || function() {
-  __assign$4 = Object.assign || function(t2) {
+var __assign$6 = globalThis && globalThis.__assign || function() {
+  __assign$6 = Object.assign || function(t2) {
     for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
       s = arguments[i2];
       for (var p2 in s)
@@ -51098,13 +51092,13 @@ var __assign$4 = globalThis && globalThis.__assign || function() {
     }
     return t2;
   };
-  return __assign$4.apply(this, arguments);
+  return __assign$6.apply(this, arguments);
 };
 var useKeyboardBindings = function() {
   var environment = useTreeEnvironment();
   return react.exports.useMemo(function() {
     if (environment.keyboardBindings) {
-      return __assign$4(__assign$4({}, defaultKeyboardBindings), environment.keyboardBindings);
+      return __assign$6(__assign$6({}, defaultKeyboardBindings), environment.keyboardBindings);
     } else {
       return defaultKeyboardBindings;
     }
@@ -51562,8 +51556,8 @@ var useSearchMatchFocus = function() {
     }
   }, [doesSearchMatchItem, getItemTitle, linearItems, items, onFocusItem, search, treeId, callSoon], [search]);
 };
-var __assign$3 = globalThis && globalThis.__assign || function() {
-  __assign$3 = Object.assign || function(t2) {
+var __assign$5 = globalThis && globalThis.__assign || function() {
+  __assign$5 = Object.assign || function(t2) {
     for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
       s = arguments[i2];
       for (var p2 in s)
@@ -51572,7 +51566,7 @@ var __assign$3 = globalThis && globalThis.__assign || function() {
     }
     return t2;
   };
-  return __assign$3.apply(this, arguments);
+  return __assign$5.apply(this, arguments);
 };
 var SearchInput = function(props) {
   var _a22;
@@ -51608,7 +51602,7 @@ var SearchInput = function(props) {
     return null;
   }
   return renderers.renderSearchInput({
-    inputProps: __assign$3({ value: search, onChange: function(e) {
+    inputProps: __assign$5({ value: search, onChange: function(e) {
       return setSearch(e.target.value);
     }, onBlur: function() {
       clearSearch();
@@ -51695,8 +51689,8 @@ var MaybeLiveDescription = function() {
   }
   return react.exports.createElement(LiveDescription, null);
 };
-var __assign$2 = globalThis && globalThis.__assign || function() {
-  __assign$2 = Object.assign || function(t2) {
+var __assign$4 = globalThis && globalThis.__assign || function() {
+  __assign$4 = Object.assign || function(t2) {
     for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
       s = arguments[i2];
       for (var p2 in s)
@@ -51705,7 +51699,7 @@ var __assign$2 = globalThis && globalThis.__assign || function() {
     }
     return t2;
   };
-  return __assign$2.apply(this, arguments);
+  return __assign$4.apply(this, arguments);
 };
 var TreeManager = function() {
   var _a22;
@@ -51727,7 +51721,7 @@ var TreeManager = function() {
     throw Error("Root " + rootItem + " does not contain any children");
   }
   var treeChildren = react.exports.createElement(react.exports.Fragment, null, react.exports.createElement(MaybeLiveDescription, null), react.exports.createElement(TreeItemChildren, { depth: 0, parentId: treeId }, rootChildren), react.exports.createElement(DragBetweenLine, { treeId }), react.exports.createElement(SearchInput, { containerRef: containerRef.current }));
-  var containerProps = __assign$2({
+  var containerProps = __assign$4({
     onDragOver: function(e) {
       return dnd.onDragOverTreeHandler(e, treeId, containerRef);
     },
@@ -51773,8 +51767,8 @@ var useCreatedTreeInformation = function(tree, renamingItem, search) {
     dnd.isProgrammaticallyDragging
   ]);
 };
-var __assign$1 = globalThis && globalThis.__assign || function() {
-  __assign$1 = Object.assign || function(t2) {
+var __assign$3 = globalThis && globalThis.__assign || function() {
+  __assign$3 = Object.assign || function(t2) {
     for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
       s = arguments[i2];
       for (var p2 in s)
@@ -51783,14 +51777,14 @@ var __assign$1 = globalThis && globalThis.__assign || function() {
     }
     return t2;
   };
-  return __assign$1.apply(this, arguments);
+  return __assign$3.apply(this, arguments);
 };
 var useCreatedTreeRef = function(ref, actions) {
   var environment = useTreeEnvironment();
   var tree = useTree();
   var dnd = useDragAndDrop();
   react.exports.useImperativeHandle(ref, function() {
-    return __assign$1(__assign$1(__assign$1({}, actions), { treeEnvironmentContext: environment, dragAndDropContext: dnd, treeContext: tree }), tree.treeInformation);
+    return __assign$3(__assign$3(__assign$3({}, actions), { treeEnvironmentContext: environment, dragAndDropContext: dnd, treeContext: tree }), tree.treeInformation);
   });
 };
 var EnvironmentActionsContext = react.exports.createContext(null);
@@ -51857,8 +51851,8 @@ var TreeActionsProvider = react.exports.forwardRef(function(props, ref) {
   useCreatedTreeRef(ref, actions);
   return react.exports.createElement(EnvironmentActionsContext.Provider, { value: actions }, props.children);
 });
-var __assign = globalThis && globalThis.__assign || function() {
-  __assign = Object.assign || function(t2) {
+var __assign$2 = globalThis && globalThis.__assign || function() {
+  __assign$2 = Object.assign || function(t2) {
     for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
       s = arguments[i2];
       for (var p2 in s)
@@ -51867,7 +51861,7 @@ var __assign = globalThis && globalThis.__assign || function() {
     }
     return t2;
   };
-  return __assign.apply(this, arguments);
+  return __assign$2.apply(this, arguments);
 };
 var TreeContext = react.exports.createContext(null);
 var useTree = function() {
@@ -51877,7 +51871,7 @@ var Tree = react.exports.forwardRef(function(props, ref) {
   var _a22, _b2;
   var environment = useTreeEnvironment();
   var renderers = react.exports.useMemo(function() {
-    return __assign(__assign({}, environment), props);
+    return __assign$2(__assign$2({}, environment), props);
   }, [props, environment]);
   var _c = react.exports.useState(null), search = _c[0], setSearch = _c[1];
   var _d = react.exports.useState(null), renamingItem = _d[0], setRenamingItem = _d[1];
@@ -52521,19 +52515,19 @@ class SubMenu extends AbstractMenu {
     if (this.props.forceOpen || this.state.visible) {
       const wrapper = window.requestAnimationFrame || setTimeout;
       wrapper(() => {
-        const styles = this.props.rtl ? this.getRTLMenuPosition() : this.getMenuPosition();
+        const styles2 = this.props.rtl ? this.getRTLMenuPosition() : this.getMenuPosition();
         this.subMenu.style.removeProperty("top");
         this.subMenu.style.removeProperty("bottom");
         this.subMenu.style.removeProperty("left");
         this.subMenu.style.removeProperty("right");
-        if (hasOwnProp(styles, "top"))
-          this.subMenu.style.top = styles.top;
-        if (hasOwnProp(styles, "left"))
-          this.subMenu.style.left = styles.left;
-        if (hasOwnProp(styles, "bottom"))
-          this.subMenu.style.bottom = styles.bottom;
-        if (hasOwnProp(styles, "right"))
-          this.subMenu.style.right = styles.right;
+        if (hasOwnProp(styles2, "top"))
+          this.subMenu.style.top = styles2.top;
+        if (hasOwnProp(styles2, "left"))
+          this.subMenu.style.left = styles2.left;
+        if (hasOwnProp(styles2, "bottom"))
+          this.subMenu.style.bottom = styles2.bottom;
+        if (hasOwnProp(styles2, "right"))
+          this.subMenu.style.right = styles2.right;
         this.subMenu.classList.add(cssClasses.menuVisible);
         this.registerHandlers();
         this.setState({
@@ -53097,6 +53091,7 @@ const contextMenuElementIds = {
   dividerSelection: "dividerSelection",
   isolateSelection: "isolateObject",
   hideObject: "hideObject",
+  showObject: "showObject",
   clearSelection: "clearSelection",
   showAll: "showAll",
   dividerMeasure: "dividerMeasure",
@@ -53108,7 +53103,7 @@ const contextMenuElementIds = {
 };
 const VimContextMenu = React__default.memo(_VimContextMenu);
 function _VimContextMenu(props) {
-  var _a22, _b2, _c;
+  var _a22, _b2, _c, _d;
   const viewer = props.viewer.base;
   const helper = props.viewer;
   const [section, setSection] = react.exports.useState({
@@ -53156,6 +53151,10 @@ function _VimContextMenu(props) {
     props.isolation.hide([...viewer.selection.objects], "contextMenu");
     e.stopPropagation();
   };
+  const onSelectionShowBtn = (e) => {
+    props.isolation.show([...viewer.selection.objects], "contextMenu");
+    e.stopPropagation();
+  };
   const onSelectionClearBtn = (e) => {
     viewer.selection.clear();
     e.stopPropagation();
@@ -53182,20 +53181,21 @@ function _VimContextMenu(props) {
       return null;
     return /* @__PURE__ */ React__default.createElement(MenuItem, {
       key: button.id,
-      className: "hover:bg-gray-lightest px-5 py-2 flex items-center justify-between cursor-pointer select-none",
+      className: "vim-context-menu-item vc-flex vc-cursor-pointer vc-select-none vc-items-center vc-justify-between vc-px-5 vc-py-2 hover:vc-bg-gray-lightest",
       onClick: button.action
     }, /* @__PURE__ */ React__default.createElement("span", null, button.label), /* @__PURE__ */ React__default.createElement("span", {
-      className: "text-gray-medium"
+      className: "vc-text-gray-medium"
     }, button.keyboard));
   };
   const createDivider = (divider) => {
     return divider.enabled ? /* @__PURE__ */ React__default.createElement(MenuItem, {
       key: divider.id,
-      className: "border-t border-gray-lighter my-1",
+      className: "vim-context-menu-item vc-my-1 vc-border-t vc-border-gray-lighter",
       divider: true
     }) : null;
   };
   const hasSelection = ((_a22 = props.selection) == null ? void 0 : _a22.length) > 0;
+  const hasVisibleSelection = ((_b2 = props.selection) == null ? void 0 : _b2.findIndex((o) => o.visible)) >= 0;
   const measuring = !!viewer.measure.stage;
   const isolated = ArrayEquals(props.selection, props.isolation.current());
   let elements = [
@@ -53217,7 +53217,7 @@ function _VimContextMenu(props) {
     {
       id: contextMenuElementIds.zoomToFit,
       label: "Zoom to Fit",
-      keyboard: "HOME",
+      keyboard: "F",
       action: onCameraFrameBtn,
       enabled: true
     },
@@ -53235,9 +53235,16 @@ function _VimContextMenu(props) {
     {
       id: contextMenuElementIds.hideObject,
       label: "Hide Object",
-      keyboard: "",
+      keyboard: "V",
       action: onSelectionHideBtn,
-      enabled: hasSelection
+      enabled: hasVisibleSelection
+    },
+    {
+      id: contextMenuElementIds.showObject,
+      label: "Show Object",
+      keyboard: "V",
+      action: onSelectionShowBtn,
+      enabled: hasSelection && !hasVisibleSelection
     },
     {
       id: contextMenuElementIds.clearSelection,
@@ -53249,7 +53256,7 @@ function _VimContextMenu(props) {
     {
       id: contextMenuElementIds.showAll,
       label: "Show All",
-      keyboard: "",
+      keyboard: "Esc",
       action: onShowAllBtn,
       enabled: hidden
     },
@@ -53287,7 +53294,7 @@ function _VimContextMenu(props) {
       enabled: section.visible && hasSelection
     }
   ];
-  elements = (_c = (_b2 = props.customization) == null ? void 0 : _b2.call(props, elements)) != null ? _c : elements;
+  elements = (_d = (_c = props.customization) == null ? void 0 : _c.call(props, elements)) != null ? _d : elements;
   return /* @__PURE__ */ React__default.createElement("div", {
     className: "vim-context-menu",
     onContextMenu: (e) => {
@@ -53295,7 +53302,7 @@ function _VimContextMenu(props) {
     }
   }, /* @__PURE__ */ React__default.createElement(ContextMenu, {
     preventHideOnContextMenu: true,
-    className: "text-gray-darker bg-white py-1 w-[240px] rounded shadow-lg z-50",
+    className: "vc-z-50 vc-w-[240px] vc-rounded vc-bg-white vc-py-1 vc-text-gray-darker vc-shadow-lg",
     id: VIM_CONTEXT_MENU_ID
   }, elements.map((e) => {
     return "label" in e ? createButton(e) : createDivider(e);
@@ -53475,7 +53482,7 @@ function BimTree(props) {
   const [doubleClick] = react.exports.useState(new DoubleClickManager());
   const [, setVersion] = react.exports.useState(0);
   const focus = react.exports.useRef(0);
-  const div2 = react.exports.useRef();
+  const div = react.exports.useRef();
   react.exports.useMemo(() => {
     return treeRef.current = toTreeData(props.viewer.base, elements);
   }, [elements]);
@@ -53484,7 +53491,7 @@ function BimTree(props) {
   }, [expandedItems, elements]);
   react.exports.useEffect(() => {
     if (elements && objects.length === 1) {
-      scrollToSelection(div2.current);
+      scrollToSelection(div.current);
       const [first] = viewer.selection.objects;
       focus.current = treeRef.current.getNodeFromElement(first.element);
     }
@@ -53504,7 +53511,7 @@ function BimTree(props) {
   if (!elements) {
     return /* @__PURE__ */ React__default.createElement("div", {
       className: "vim-bim-tree",
-      ref: div2
+      ref: div
     }, "Loading . . .");
   }
   if (!ArrayEquals(props.objects, objects)) {
@@ -53516,8 +53523,8 @@ function BimTree(props) {
     setSelectedItems(selection);
   }
   return /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-bim-tree mb-5",
-    ref: div2,
+    className: "vim-bim-tree vc-mb-5",
+    ref: div,
     tabIndex: 0,
     onFocus: () => viewer.inputs.keyboard.unregister(),
     onBlur: () => viewer.inputs.keyboard.register()
@@ -53621,7 +53628,6 @@ function toggleVisibility(viewer, isolation, tree, index) {
   } else {
     isolation.hide(objs, "tree");
   }
-  viewer.frameVisibleObjects();
 }
 function updateViewerFocus(viewer, tree, index) {
   var _a22;
@@ -53649,13 +53655,13 @@ function updateViewerSelection(tree, viewer, nodes, operation) {
       break;
   }
 }
-function scrollToSelection(div2) {
-  const selectedItems = div2 == null ? void 0 : div2.querySelectorAll('[aria-selected="true"]');
+function scrollToSelection(div) {
+  const selectedItems = div == null ? void 0 : div.querySelectorAll('[aria-selected="true"]');
   const selection = selectedItems == null ? void 0 : selectedItems[(selectedItems == null ? void 0 : selectedItems.length) - 1];
   if (!selection)
     return;
   const rectElem = selection.getBoundingClientRect();
-  const rectContainer = div2.getBoundingClientRect();
+  const rectContainer = div.getBoundingClientRect();
   if (rectElem.bottom > rectContainer.bottom || rectElem.bottom > window.innerHeight) {
     selection.scrollIntoView(false);
     return;
@@ -53723,7 +53729,7 @@ function createTables(title, entries, getOpen, setOpen) {
   const createTitle = (value) => {
     return /* @__PURE__ */ React__default.createElement("h2", {
       key: `title-${value}`,
-      className: "text-xs font-bold uppercase text-gray-medium p-2 rounded-t border-t border-l border-r border-gray-light w-auto inline-flex"
+      className: "vc-inline-flex vc-w-auto vc-rounded-t vc-border-t vc-border-l vc-border-r vc-border-gray-light vc-p-2 vc-text-xs vc-font-bold vc-uppercase vc-text-gray-medium"
     }, value);
   };
   return [
@@ -53740,36 +53746,34 @@ function createTable(key, entries, open, setOpen) {
   }, /* @__PURE__ */ React__default.createElement("li", {
     key: "title-" + key
   }, /* @__PURE__ */ React__default.createElement("h3", {
-    className: "text-xs font-bold uppercase bg-gray-light px-2 py-2 flex justify-between"
+    className: "vc-flex vc-justify-between vc-bg-gray-light vc-px-2 vc-py-2 vc-text-xs vc-font-bold vc-uppercase"
   }, /* @__PURE__ */ React__default.createElement("span", {
-    className: "w-1/2"
+    className: ""
   }, key), /* @__PURE__ */ React__default.createElement("button", {
-    className: "text-gray-medium",
+    className: "vc-text-gray-medium",
     onClick: () => setOpen(!open)
   }, " ", open ? /* @__PURE__ */ React__default.createElement(collapse, {
-    className: "transition-all rotate-180",
+    className: "vc-rotate-180 vc-transition-all",
     height: "15",
     width: "15",
     fill: "currentColor"
   }) : /* @__PURE__ */ React__default.createElement(collapse, {
-    className: "transition-all rotate-0",
+    className: "vc-rotate-0 vc-transition-all",
     height: "15",
     width: "15",
     fill: "currentColor"
   })))), open ? entries.map((p2, i2) => {
     const id2 = key + p2.name + i2;
     return /* @__PURE__ */ React__default.createElement("li", {
-      className: "even:bg-white odd:bg-gray-zebra flex",
+      className: "vc-even:bg-white vc-odd:bg-gray-zebra vc-flex",
       key: "parameters-tr-" + id2
     }, /* @__PURE__ */ React__default.createElement("span", {
       "data-tip": p2.value,
-      className: "w-1/2 border-r border-gray-light p-2 truncate select-none",
-      title: p2.name,
+      className: "bim-details-title vc-w-1/2 vc-select-none vc-truncate vc-border-r vc-border-gray-light vc-p-2",
       key: "parameters-th-" + id2
     }, p2.name), /* @__PURE__ */ React__default.createElement("span", {
       "data-tip": p2.value,
-      className: "w-1/2 text-gray-medium p-2 truncate",
-      title: p2.value,
+      className: "bim-details-value vc-w-1/2 vc-truncate vc-p-2 vc-text-gray-medium",
       key: "parameters-td-" + id2
     }, p2.value));
   }) : null));
@@ -53780,21 +53784,21 @@ async function getVimDocumentDetails(vim) {
   const data2 = new Map(documents.map((d) => [
     d.title,
     [
-      { name: "Product", value: formatProduct(d.version), group: d.title },
-      { name: "Author(s)", value: d.author, group: d.title },
-      { name: "Last Modified", value: formatDate$1(d.date), group: d.title }
+      { name: "Product", value: formatProduct(d.product), group: d.title },
+      {
+        name: "Version",
+        value: formatVersion(d.version, d.product),
+        group: d.title
+      }
     ]
   ]));
   return [{ section: "Source Files", content: data2 }];
 }
 function formatProduct(value) {
-  return value == null ? void 0 : value.replace("Autodesk", "");
+  return value == null ? void 0 : value.replace("Autodesk", "").trim();
 }
-function formatDate$1(value) {
-  const date = Date.parse(value);
-  if (isNaN(date))
-    return "";
-  return value;
+function formatVersion(value, product) {
+  return value == null ? void 0 : value.replace("Autodesk", "").replace(product, "").trim();
 }
 async function getObjectParameterDetails(object) {
   let parameters = await (object == null ? void 0 : object.getBimParameters());
@@ -53950,34 +53954,39 @@ function createHeader(header) {
     if (!row)
       return null;
     return row.map((pair, columnIndex) => {
-      return [
-        /* @__PURE__ */ React__default.createElement("dt", {
-          "data-tip": pair[1],
-          className: "text-gray-medium py-1 truncate select-none " + pair[2],
-          key: `dt-${rowIndex}-${columnIndex}`
-        }, pair[0]),
-        /* @__PURE__ */ React__default.createElement("dd", {
-          "data-tip": pair[1],
-          className: "py-1 truncate " + pair[3],
-          key: `dd-${rowIndex}-${columnIndex}`
-        }, pair[1])
-      ];
+      return /* @__PURE__ */ React__default.createElement("dl", {
+        className: `vc-flex vc-w-full ${pair[4]}`
+      }, /* @__PURE__ */ React__default.createElement("dt", {
+        "data-tip": pair[1],
+        className: `bim-header-title vc-min-w-[100px] vc-shrink-0 vc-select-none vc-whitespace-nowrap vc-py-1 vc-text-gray-medium ${pair[2]}`,
+        key: `dt-${rowIndex}-${columnIndex}`
+      }, pair[0]), /* @__PURE__ */ React__default.createElement("dd", {
+        "data-tip": pair[1],
+        className: `bim-header-value vc-shrink-1 vc-truncate vc-py-1 ${pair[3]}`,
+        key: `dd-${rowIndex}-${columnIndex}`
+      }, pair[1]));
     });
   });
   return /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-bim-inspector mb-6"
-  }, /* @__PURE__ */ React__default.createElement("dl", {
-    className: "flex flex-wrap"
-  }, rows));
+    className: "vim-bim-inspector vc-mb-6 vc-flex vc-flex-wrap"
+  }, rows);
 }
 function getElementBimHeader(info) {
   return [
-    [["Document", info.documentTitle, "w-3/12", "w-9/12"]],
-    [["Workset", info.workset, "w-3/12", "w-9/12"]],
-    [["Category", info.categoryName, "w-3/12", "w-9/12"]],
-    [["Family Name", info.familyName, "w-3/12", "w-9/12"]],
-    [["Family Type", info.familyTypeName, "w-3/12", "w-9/12"]],
-    [["Element Id", info.id, "w-3/12", "w-9/12"]]
+    [["Document", info.documentTitle, "vc-w-3/12", "vc-w-9/12", "vc-w-full"]],
+    [["Workset", info.workset, "vc-w-3/12", "vc-w-9/12", "vc-w-full"]],
+    [["Category", info.categoryName, "vc-w-3/12", "vc-w-9/12", "vc-w-full"]],
+    [["Family Name", info.familyName, "vc-w-3/12", "vc-w-9/12", "vc-w-full"]],
+    [
+      [
+        "Family Type",
+        info.familyTypeName,
+        "vc-w-3/12",
+        "vc-w-9/12",
+        "vc-w-full"
+      ]
+    ],
+    [["Element Id", info.id, "vc-w-3/12", "vc-w-9/12", "vc-w-full"]]
   ];
 }
 async function getVimBimHeader(vim) {
@@ -53985,36 +53994,36 @@ async function getVimBimHeader(vim) {
   const documents = await vim.document.getBimDocumentSummary();
   const main = (_a22 = documents.find((d) => !d.isLinked)) != null ? _a22 : documents[0];
   return [
-    [["Document", formatSource(vim.source), "w-3/12", "w-9/12"]],
-    [["Source Path", main.pathName, "w-3/12", "w-9/12"]],
+    [
+      [
+        "Document",
+        formatSource(vim.source),
+        "vc-w-3/12",
+        "vc-w-9/12",
+        "vc-w-full"
+      ]
+    ],
+    [["Source Path", main.pathName, "vc-w-3/12", "vc-w-9/12", "vc-w-full"]],
     [
       [
         "Created on",
         formatDate(vim.document.header.created),
-        "w-3/12",
-        "w-9/12"
-      ]
-    ],
-    [["Created with", vim.document.header.generator, "w-3/12", "w-9/12"]],
-    void 0,
-    [
-      [
-        "BIM Count",
-        [...vim.document.getAllElements()].length,
-        "w-3/12 mt-5",
-        "w-3/12 mt-5"
-      ],
-      [
-        "Node Count",
-        vim.document.g3d.getInstanceCount(),
-        "w-3/12 mt-5",
-        "w-3/12 mt-5"
+        "vc-w-3/12",
+        "vc-w-9/12",
+        "vc-w-full"
       ]
     ],
     [
-      ["Mesh Count", vim.document.g3d.getMeshCount(), "w-3/12", "w-3/12"],
-      ["Revit Files", documents == null ? void 0 : documents.length, "w-3/12", "w-3/12"]
-    ]
+      [
+        "Created with",
+        vim.document.header.generator,
+        "vc-w-3/12",
+        "vc-w-9/12",
+        "vc-w-full"
+      ]
+    ],
+    [["Created by", main.user, "vc-w-3/12", "vc-w-9/12", "vc-w-full"]],
+    void 0
   ];
 }
 function formatSource(source) {
@@ -54035,20 +54044,27 @@ function BimSearch(props) {
     const value = e.currentTarget.value;
     setText(value);
     clearTimeout(changeTimeout.current);
-    changeTimeout.current = setTimeout(() => props.setFilter(value), SEARCH_DELAY_MS);
+    changeTimeout.current = setTimeout(() => {
+      props.setFilter(value);
+      console.log("set filter " + value);
+    }, SEARCH_DELAY_MS);
+  };
+  const onClear = () => {
+    console.log("clear filter");
+    setText("");
+    clearTimeout(changeTimeout.current);
+    props.setFilter("");
   };
   const onFocus = () => {
     props.viewer.base.inputs.keyboard.unregister();
-    props.setSearching(true);
   };
   const onBlur = () => {
     props.viewer.base.inputs.keyboard.register();
-    props.setSearching(false);
   };
   return /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-bim-search mb-4 flex items-center"
+    className: "vim-bim-search vc-mb-4 vc-flex vc-items-center vc-relative"
   }, /* @__PURE__ */ React__default.createElement("svg", {
-    className: "text-gray-light -mr-4",
+    className: "search-icon -vc-mr-4 vc-text-gray-light",
     xmlns: "http://www.w3.org/2000/svg",
     width: "16",
     viewBox: "0 0 256 256"
@@ -54057,16 +54073,19 @@ function BimSearch(props) {
     id: "ICONS",
     d: "m244.485 216.201-39.552-39.552a11.956 11.956 0 0 0-8.81-3.5C208.621 155.986 216 134.856 216 112 216 54.562 169.438 8 112 8S8 54.562 8 112s46.562 104 104 104c22.856 0 43.986-7.379 61.149-19.877a11.956 11.956 0 0 0 3.5 8.81l39.552 39.552c4.686 4.686 12.284 4.686 16.971 0l11.313-11.313c4.686-4.687 4.686-12.285 0-16.971ZM112 184c-39.701 0-72-32.299-72-72s32.299-72 72-72 72 32.299 72 72-32.299 72-72 72Z"
   })), /* @__PURE__ */ React__default.createElement("input", {
-    className: "w-full bg-transparent border-b border-t-0 border-l-0 border-r-0 border-gray-light outline-none focus:outline-none focus-within:outline-none focus-within:border-b-primary-royal active:text-primary-royal focus-within:text-primary-royal placeholder-text-gray-medium py-1 pl-6",
-    type: "search",
+    className: "search-input vc-placeholder-text-gray-medium vc-w-full vc-border-b vc-border-t-0 vc-border-l-0 vc-border-r-0 vc-border-gray-light vc-bg-transparent vc-py-1 vc-pl-6 vc-outline-none focus-within:vc-border-b-primary-royal focus-within:vc-text-primary-royal focus-within:vc-outline-none focus:vc-outline-none active:vc-text-primary-royal",
+    type: "input",
     name: "name",
     placeholder: "Type here to search",
     value: text,
     onFocus,
     onBlur,
     onChange
-  }), props.count !== void 0 && text ? /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-bim-search-count rounded-full bg-primary-royal text-white text-xs font-bold py-1 px-2 absolute right-16"
+  }), text.length > 0 ? /* @__PURE__ */ React__default.createElement("button", {
+    className: "search-clear vc-text-white vc-bg-gray-medium vc-w-4 vc-h-4 vc-flex vc-items-center vc-justify-center vc-rounded-full vc-shrink-0 vc-absolute vc-right-0",
+    onClick: onClear
+  }, close({ width: 10, height: 10, fill: "currentColor" }), " ") : null, props.count !== void 0 && text ? /* @__PURE__ */ React__default.createElement("div", {
+    className: "search-count vc-absolute vc-right-8 vc-rounded-full vc-bg-primary-royal vc-py-1 vc-px-2 vc-text-xs vc-font-bold vc-text-white"
   }, props.count) : null);
 }
 function BimPanel(props) {
@@ -54075,7 +54094,6 @@ function BimPanel(props) {
   const [vim, setVim] = react.exports.useState();
   const [elements, setElements] = react.exports.useState();
   const [filteredElements, setFilteredElements] = react.exports.useState();
-  const searching = react.exports.useRef(false);
   if (props.vim !== vim) {
     setVim(props.vim);
   }
@@ -54098,17 +54116,16 @@ function BimPanel(props) {
     }
   }, [vim]);
   react.exports.useEffect(() => {
+    console.log("effect filter " + filter);
     if (vim && elements) {
       const meshElements = elements.filter((e) => vim.getObjectFromElement(e.element).hasMesh);
       const result = filterElements(vim, meshElements, filter);
       setFilteredElements(result);
-      if (searching.current) {
-        if (filter !== "") {
-          const objects = result.map((e) => vim.getObjectFromElement(e.element));
-          props.isolation.isolate(objects, "search");
-        } else {
-          props.isolation.isolate(void 0, "search");
-        }
+      if (filter !== "") {
+        const objects = result.map((e) => vim.getObjectFromElement(e.element));
+        props.isolation.isolate(objects, "search");
+      } else {
+        props.isolation.isolate(void 0, "search");
       }
     }
   }, [filter, elements]);
@@ -54117,28 +54134,27 @@ function BimPanel(props) {
   };
   const last = props.selection[props.selection.length - 1];
   return /* @__PURE__ */ React__default.createElement("div", {
-    className: `vim-bim-panel ${props.visible ? "" : "hidden"}`
+    className: `vim-bim-panel ${props.visible ? "" : "vc-hidden"}`
   }, /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-bim-upper h-1/2"
+    className: "vim-bim-upper vc-h-1/2"
   }, /* @__PURE__ */ React__default.createElement("h2", {
-    className: "text-xs font-bold uppercase mb-6"
+    className: "vim-bim-upper-title vc-mb-6 vc-text-xs vc-font-bold vc-uppercase"
   }, "Project Inspector"), /* @__PURE__ */ React__default.createElement(BimSearch, {
     viewer,
     filter,
     setFilter: updateFilter,
-    count: filteredElements == null ? void 0 : filteredElements.length,
-    setSearching: (value) => searching.current = value
+    count: filteredElements == null ? void 0 : filteredElements.length
   }), /* @__PURE__ */ React__default.createElement(BimTree, {
     viewer,
     elements: filteredElements,
     objects: props.selection,
     isolation: props.isolation
   })), /* @__PURE__ */ React__default.createElement("hr", {
-    className: "border-gray-divider mb-5 -mx-6"
+    className: "-vc-mx-6 vc-mb-5 vc-border-gray-divider"
   }), /* @__PURE__ */ React__default.createElement("h2", {
-    className: "text-xs font-bold uppercase mb-4"
+    className: "vc-mb-4 vc-text-xs vc-font-bold vc-uppercase"
   }, "Bim Inspector"), /* @__PURE__ */ React__default.createElement("div", {
-    className: "vim-bim-lower h-1/2 overflow-y-auto"
+    className: "vim-bim-lower vc-h-1/2 vc-overflow-y-auto vc-overflow-x-hidden"
   }, /* @__PURE__ */ React__default.createElement(BimObjectHeader, {
     elements: filteredElements,
     object: last,
@@ -54177,22 +54193,26 @@ function _MenuHelp(props) {
     props.help.setVisible(false);
   };
   return /* @__PURE__ */ React__default.createElement(React__default.Fragment, null, /* @__PURE__ */ React__default.createElement("div", {
-    className: "menu-help-overlay z-40 absolute inset-0 bg-black/80 w-full h-full flex items-center justify-center",
+    className: "vim-help-overlay vc-absolute vc-inset-0 vc-z-40 vc-flex vc-h-full vc-w-full vc-items-center vc-justify-center vc-bg-black/80",
     onClick: onCloseBtn,
     onContextMenu: (event) => {
       event.preventDefault();
     }
   }, /* @__PURE__ */ React__default.createElement("div", {
-    className: "flex flex-col py-5",
+    className: "vim-help-blocker vc-flex vc-flex-col vc-py-5",
     onClick: (e) => {
       e.stopPropagation();
     }
   }, /* @__PURE__ */ React__default.createElement("div", {
-    className: "flex justify-between mb-8"
+    className: "vim-help vc-mb-8 vc-flex vc-justify-between"
   }, /* @__PURE__ */ React__default.createElement("h2", {
-    className: "text-white font-bold text-sm uppercase"
+    className: "vim-help-title vc-text-sm vc-font-bold vc-uppercase vc-text-white",
+    style: {
+      marginLeft: props.side.getWidth(),
+      maxWidth: `calc(100% - ${props.side.getWidth()}px)`
+    }
   }, "Key navigation controls"), /* @__PURE__ */ React__default.createElement("button", {
-    className: "text-white",
+    className: "vim-help-close vc-text-white",
     onClick: onCloseBtn
   }, close({
     height: "20px",
@@ -54201,8 +54221,12 @@ function _MenuHelp(props) {
   }))), /* @__PURE__ */ React__default.createElement("div", {
     className: ""
   }, /* @__PURE__ */ React__default.createElement("img", {
-    className: "menu-help-controls mb-8 mx-auto 2xl:w-[50vw]",
-    src: helpImage
+    className: "vim-help-img vc-2xl:w-[50vw] vc-mx-auto vc-mb-8",
+    src: helpImage,
+    style: {
+      marginLeft: props.side.getWidth(),
+      maxWidth: `calc(100% - ${props.side.getWidth()}px)`
+    }
   })), props.settings.capacity.canFollowUrl ? linkButtons() : null)));
 }
 function linkButtons() {
@@ -54213,50 +54237,869 @@ function linkButtons() {
     window.open(urlSupport);
   };
   return /* @__PURE__ */ React__default.createElement("div", {
-    className: "flex justify-end"
+    className: "vc-flex vc-justify-end"
   }, /* @__PURE__ */ React__default.createElement("button", {
-    className: "text-white text-xs font-bold uppercase border border-white hover:border-primary-royal hover:bg-primary-royal rounded-full py-2 px-8 mr-4",
+    className: "vc-hover:border-primary-royal vc-hover:bg-primary-royal vc-mr-4 vc-rounded-full vc-border vc-border-white vc-py-2 vc-px-8 vc-text-xs vc-font-bold vc-uppercase vc-text-white",
     onClick: onControlsBtn
   }, "Full Control List"), /* @__PURE__ */ React__default.createElement("button", {
-    className: "text-primary text-xs font-bold border border-white uppercase bg-white hover:border-primary-royal hover:text-white hover:bg-primary-royal rounded-full py-2 px-8",
+    className: "vc-rounded-full vc-border vc-border-white vc-bg-white vc-py-2 vc-px-8 vc-text-xs vc-font-bold vc-uppercase vc-text-primary hover:vc-border-primary-royal hover:vc-bg-primary-royal hover:vc-text-white",
     onClick: onHelpBtn
   }, "Help Center"));
 }
+var __extends$1 = globalThis && globalThis.__extends || function() {
+  var extendStatics = function(d, b) {
+    extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d2, b2) {
+      d2.__proto__ = b2;
+    } || function(d2, b2) {
+      for (var p2 in b2)
+        if (Object.prototype.hasOwnProperty.call(b2, p2))
+          d2[p2] = b2[p2];
+    };
+    return extendStatics(d, b);
+  };
+  return function(d, b) {
+    extendStatics(d, b);
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+}();
+var __assign$1 = globalThis && globalThis.__assign || function() {
+  __assign$1 = Object.assign || function(t2) {
+    for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
+      s = arguments[i2];
+      for (var p2 in s)
+        if (Object.prototype.hasOwnProperty.call(s, p2))
+          t2[p2] = s[p2];
+    }
+    return t2;
+  };
+  return __assign$1.apply(this, arguments);
+};
+var rowSizeBase = {
+  width: "100%",
+  height: "10px",
+  top: "0px",
+  left: "0px",
+  cursor: "row-resize"
+};
+var colSizeBase = {
+  width: "10px",
+  height: "100%",
+  top: "0px",
+  left: "0px",
+  cursor: "col-resize"
+};
+var edgeBase = {
+  width: "20px",
+  height: "20px",
+  position: "absolute"
+};
+var styles = {
+  top: __assign$1(__assign$1({}, rowSizeBase), { top: "-5px" }),
+  right: __assign$1(__assign$1({}, colSizeBase), { left: void 0, right: "-5px" }),
+  bottom: __assign$1(__assign$1({}, rowSizeBase), { top: void 0, bottom: "-5px" }),
+  left: __assign$1(__assign$1({}, colSizeBase), { left: "-5px" }),
+  topRight: __assign$1(__assign$1({}, edgeBase), { right: "-10px", top: "-10px", cursor: "ne-resize" }),
+  bottomRight: __assign$1(__assign$1({}, edgeBase), { right: "-10px", bottom: "-10px", cursor: "se-resize" }),
+  bottomLeft: __assign$1(__assign$1({}, edgeBase), { left: "-10px", bottom: "-10px", cursor: "sw-resize" }),
+  topLeft: __assign$1(__assign$1({}, edgeBase), { left: "-10px", top: "-10px", cursor: "nw-resize" })
+};
+var Resizer = function(_super) {
+  __extends$1(Resizer2, _super);
+  function Resizer2() {
+    var _this = _super !== null && _super.apply(this, arguments) || this;
+    _this.onMouseDown = function(e) {
+      _this.props.onResizeStart(e, _this.props.direction);
+    };
+    _this.onTouchStart = function(e) {
+      _this.props.onResizeStart(e, _this.props.direction);
+    };
+    return _this;
+  }
+  Resizer2.prototype.render = function() {
+    return react.exports.createElement("div", { className: this.props.className || "", style: __assign$1(__assign$1({ position: "absolute", userSelect: "none" }, styles[this.props.direction]), this.props.replaceStyles || {}), onMouseDown: this.onMouseDown, onTouchStart: this.onTouchStart }, this.props.children);
+  };
+  return Resizer2;
+}(react.exports.PureComponent);
+var __extends = globalThis && globalThis.__extends || function() {
+  var extendStatics = function(d, b) {
+    extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d2, b2) {
+      d2.__proto__ = b2;
+    } || function(d2, b2) {
+      for (var p2 in b2)
+        if (Object.prototype.hasOwnProperty.call(b2, p2))
+          d2[p2] = b2[p2];
+    };
+    return extendStatics(d, b);
+  };
+  return function(d, b) {
+    extendStatics(d, b);
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+}();
+var __assign = globalThis && globalThis.__assign || function() {
+  __assign = Object.assign || function(t2) {
+    for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
+      s = arguments[i2];
+      for (var p2 in s)
+        if (Object.prototype.hasOwnProperty.call(s, p2))
+          t2[p2] = s[p2];
+    }
+    return t2;
+  };
+  return __assign.apply(this, arguments);
+};
+var DEFAULT_SIZE = {
+  width: "auto",
+  height: "auto"
+};
+var clamp = function(n2, min2, max2) {
+  return Math.max(Math.min(n2, max2), min2);
+};
+var snap = function(n2, size) {
+  return Math.round(n2 / size) * size;
+};
+var hasDirection = function(dir, target) {
+  return new RegExp(dir, "i").test(target);
+};
+var isTouchEvent = function(event) {
+  return Boolean(event.touches && event.touches.length);
+};
+var isMouseEvent = function(event) {
+  return Boolean((event.clientX || event.clientX === 0) && (event.clientY || event.clientY === 0));
+};
+var findClosestSnap = function(n2, snapArray, snapGap) {
+  if (snapGap === void 0) {
+    snapGap = 0;
+  }
+  var closestGapIndex = snapArray.reduce(function(prev, curr, index) {
+    return Math.abs(curr - n2) < Math.abs(snapArray[prev] - n2) ? index : prev;
+  }, 0);
+  var gap = Math.abs(snapArray[closestGapIndex] - n2);
+  return snapGap === 0 || gap < snapGap ? snapArray[closestGapIndex] : n2;
+};
+var getStringSize = function(n2) {
+  n2 = n2.toString();
+  if (n2 === "auto") {
+    return n2;
+  }
+  if (n2.endsWith("px")) {
+    return n2;
+  }
+  if (n2.endsWith("%")) {
+    return n2;
+  }
+  if (n2.endsWith("vh")) {
+    return n2;
+  }
+  if (n2.endsWith("vw")) {
+    return n2;
+  }
+  if (n2.endsWith("vmax")) {
+    return n2;
+  }
+  if (n2.endsWith("vmin")) {
+    return n2;
+  }
+  return n2 + "px";
+};
+var getPixelSize = function(size, parentSize, innerWidth, innerHeight) {
+  if (size && typeof size === "string") {
+    if (size.endsWith("px")) {
+      return Number(size.replace("px", ""));
+    }
+    if (size.endsWith("%")) {
+      var ratio = Number(size.replace("%", "")) / 100;
+      return parentSize * ratio;
+    }
+    if (size.endsWith("vw")) {
+      var ratio = Number(size.replace("vw", "")) / 100;
+      return innerWidth * ratio;
+    }
+    if (size.endsWith("vh")) {
+      var ratio = Number(size.replace("vh", "")) / 100;
+      return innerHeight * ratio;
+    }
+  }
+  return size;
+};
+var calculateNewMax = function(parentSize, innerWidth, innerHeight, maxWidth, maxHeight, minWidth, minHeight) {
+  maxWidth = getPixelSize(maxWidth, parentSize.width, innerWidth, innerHeight);
+  maxHeight = getPixelSize(maxHeight, parentSize.height, innerWidth, innerHeight);
+  minWidth = getPixelSize(minWidth, parentSize.width, innerWidth, innerHeight);
+  minHeight = getPixelSize(minHeight, parentSize.height, innerWidth, innerHeight);
+  return {
+    maxWidth: typeof maxWidth === "undefined" ? void 0 : Number(maxWidth),
+    maxHeight: typeof maxHeight === "undefined" ? void 0 : Number(maxHeight),
+    minWidth: typeof minWidth === "undefined" ? void 0 : Number(minWidth),
+    minHeight: typeof minHeight === "undefined" ? void 0 : Number(minHeight)
+  };
+};
+var definedProps = [
+  "as",
+  "style",
+  "className",
+  "grid",
+  "snap",
+  "bounds",
+  "boundsByDirection",
+  "size",
+  "defaultSize",
+  "minWidth",
+  "minHeight",
+  "maxWidth",
+  "maxHeight",
+  "lockAspectRatio",
+  "lockAspectRatioExtraWidth",
+  "lockAspectRatioExtraHeight",
+  "enable",
+  "handleStyles",
+  "handleClasses",
+  "handleWrapperStyle",
+  "handleWrapperClass",
+  "children",
+  "onResizeStart",
+  "onResize",
+  "onResizeStop",
+  "handleComponent",
+  "scale",
+  "resizeRatio",
+  "snapGap"
+];
+var baseClassName = "__resizable_base__";
+var Resizable = function(_super) {
+  __extends(Resizable2, _super);
+  function Resizable2(props) {
+    var _this = _super.call(this, props) || this;
+    _this.ratio = 1;
+    _this.resizable = null;
+    _this.parentLeft = 0;
+    _this.parentTop = 0;
+    _this.resizableLeft = 0;
+    _this.resizableRight = 0;
+    _this.resizableTop = 0;
+    _this.resizableBottom = 0;
+    _this.targetLeft = 0;
+    _this.targetTop = 0;
+    _this.appendBase = function() {
+      if (!_this.resizable || !_this.window) {
+        return null;
+      }
+      var parent = _this.parentNode;
+      if (!parent) {
+        return null;
+      }
+      var element = _this.window.document.createElement("div");
+      element.style.width = "100%";
+      element.style.height = "100%";
+      element.style.position = "absolute";
+      element.style.transform = "scale(0, 0)";
+      element.style.left = "0";
+      element.style.flex = "0 0 100%";
+      if (element.classList) {
+        element.classList.add(baseClassName);
+      } else {
+        element.className += baseClassName;
+      }
+      parent.appendChild(element);
+      return element;
+    };
+    _this.removeBase = function(base) {
+      var parent = _this.parentNode;
+      if (!parent) {
+        return;
+      }
+      parent.removeChild(base);
+    };
+    _this.ref = function(c) {
+      if (c) {
+        _this.resizable = c;
+      }
+    };
+    _this.state = {
+      isResizing: false,
+      width: typeof (_this.propsSize && _this.propsSize.width) === "undefined" ? "auto" : _this.propsSize && _this.propsSize.width,
+      height: typeof (_this.propsSize && _this.propsSize.height) === "undefined" ? "auto" : _this.propsSize && _this.propsSize.height,
+      direction: "right",
+      original: {
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0
+      },
+      backgroundStyle: {
+        height: "100%",
+        width: "100%",
+        backgroundColor: "rgba(0,0,0,0)",
+        cursor: "auto",
+        opacity: 0,
+        position: "fixed",
+        zIndex: 9999,
+        top: "0",
+        left: "0",
+        bottom: "0",
+        right: "0"
+      },
+      flexBasis: void 0
+    };
+    _this.onResizeStart = _this.onResizeStart.bind(_this);
+    _this.onMouseMove = _this.onMouseMove.bind(_this);
+    _this.onMouseUp = _this.onMouseUp.bind(_this);
+    return _this;
+  }
+  Object.defineProperty(Resizable2.prototype, "parentNode", {
+    get: function() {
+      if (!this.resizable) {
+        return null;
+      }
+      return this.resizable.parentNode;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(Resizable2.prototype, "window", {
+    get: function() {
+      if (!this.resizable) {
+        return null;
+      }
+      if (!this.resizable.ownerDocument) {
+        return null;
+      }
+      return this.resizable.ownerDocument.defaultView;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(Resizable2.prototype, "propsSize", {
+    get: function() {
+      return this.props.size || this.props.defaultSize || DEFAULT_SIZE;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(Resizable2.prototype, "size", {
+    get: function() {
+      var width = 0;
+      var height = 0;
+      if (this.resizable && this.window) {
+        var orgWidth = this.resizable.offsetWidth;
+        var orgHeight = this.resizable.offsetHeight;
+        var orgPosition = this.resizable.style.position;
+        if (orgPosition !== "relative") {
+          this.resizable.style.position = "relative";
+        }
+        width = this.resizable.style.width !== "auto" ? this.resizable.offsetWidth : orgWidth;
+        height = this.resizable.style.height !== "auto" ? this.resizable.offsetHeight : orgHeight;
+        this.resizable.style.position = orgPosition;
+      }
+      return { width, height };
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(Resizable2.prototype, "sizeStyle", {
+    get: function() {
+      var _this = this;
+      var size = this.props.size;
+      var getSize = function(key) {
+        if (typeof _this.state[key] === "undefined" || _this.state[key] === "auto") {
+          return "auto";
+        }
+        if (_this.propsSize && _this.propsSize[key] && _this.propsSize[key].toString().endsWith("%")) {
+          if (_this.state[key].toString().endsWith("%")) {
+            return _this.state[key].toString();
+          }
+          var parentSize = _this.getParentSize();
+          var value = Number(_this.state[key].toString().replace("px", ""));
+          var percent = value / parentSize[key] * 100;
+          return percent + "%";
+        }
+        return getStringSize(_this.state[key]);
+      };
+      var width = size && typeof size.width !== "undefined" && !this.state.isResizing ? getStringSize(size.width) : getSize("width");
+      var height = size && typeof size.height !== "undefined" && !this.state.isResizing ? getStringSize(size.height) : getSize("height");
+      return { width, height };
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Resizable2.prototype.getParentSize = function() {
+    if (!this.parentNode) {
+      if (!this.window) {
+        return { width: 0, height: 0 };
+      }
+      return { width: this.window.innerWidth, height: this.window.innerHeight };
+    }
+    var base = this.appendBase();
+    if (!base) {
+      return { width: 0, height: 0 };
+    }
+    var wrapChanged = false;
+    var wrap = this.parentNode.style.flexWrap;
+    if (wrap !== "wrap") {
+      wrapChanged = true;
+      this.parentNode.style.flexWrap = "wrap";
+    }
+    base.style.position = "relative";
+    base.style.minWidth = "100%";
+    base.style.minHeight = "100%";
+    var size = {
+      width: base.offsetWidth,
+      height: base.offsetHeight
+    };
+    if (wrapChanged) {
+      this.parentNode.style.flexWrap = wrap;
+    }
+    this.removeBase(base);
+    return size;
+  };
+  Resizable2.prototype.bindEvents = function() {
+    if (this.window) {
+      this.window.addEventListener("mouseup", this.onMouseUp);
+      this.window.addEventListener("mousemove", this.onMouseMove);
+      this.window.addEventListener("mouseleave", this.onMouseUp);
+      this.window.addEventListener("touchmove", this.onMouseMove, {
+        capture: true,
+        passive: false
+      });
+      this.window.addEventListener("touchend", this.onMouseUp);
+    }
+  };
+  Resizable2.prototype.unbindEvents = function() {
+    if (this.window) {
+      this.window.removeEventListener("mouseup", this.onMouseUp);
+      this.window.removeEventListener("mousemove", this.onMouseMove);
+      this.window.removeEventListener("mouseleave", this.onMouseUp);
+      this.window.removeEventListener("touchmove", this.onMouseMove, true);
+      this.window.removeEventListener("touchend", this.onMouseUp);
+    }
+  };
+  Resizable2.prototype.componentDidMount = function() {
+    if (!this.resizable || !this.window) {
+      return;
+    }
+    var computedStyle = this.window.getComputedStyle(this.resizable);
+    this.setState({
+      width: this.state.width || this.size.width,
+      height: this.state.height || this.size.height,
+      flexBasis: computedStyle.flexBasis !== "auto" ? computedStyle.flexBasis : void 0
+    });
+  };
+  Resizable2.prototype.componentWillUnmount = function() {
+    if (this.window) {
+      this.unbindEvents();
+    }
+  };
+  Resizable2.prototype.createSizeForCssProperty = function(newSize, kind) {
+    var propsSize = this.propsSize && this.propsSize[kind];
+    return this.state[kind] === "auto" && this.state.original[kind] === newSize && (typeof propsSize === "undefined" || propsSize === "auto") ? "auto" : newSize;
+  };
+  Resizable2.prototype.calculateNewMaxFromBoundary = function(maxWidth, maxHeight) {
+    var boundsByDirection = this.props.boundsByDirection;
+    var direction = this.state.direction;
+    var widthByDirection = boundsByDirection && hasDirection("left", direction);
+    var heightByDirection = boundsByDirection && hasDirection("top", direction);
+    var boundWidth;
+    var boundHeight;
+    if (this.props.bounds === "parent") {
+      var parent_1 = this.parentNode;
+      if (parent_1) {
+        boundWidth = widthByDirection ? this.resizableRight - this.parentLeft : parent_1.offsetWidth + (this.parentLeft - this.resizableLeft);
+        boundHeight = heightByDirection ? this.resizableBottom - this.parentTop : parent_1.offsetHeight + (this.parentTop - this.resizableTop);
+      }
+    } else if (this.props.bounds === "window") {
+      if (this.window) {
+        boundWidth = widthByDirection ? this.resizableRight : this.window.innerWidth - this.resizableLeft;
+        boundHeight = heightByDirection ? this.resizableBottom : this.window.innerHeight - this.resizableTop;
+      }
+    } else if (this.props.bounds) {
+      boundWidth = widthByDirection ? this.resizableRight - this.targetLeft : this.props.bounds.offsetWidth + (this.targetLeft - this.resizableLeft);
+      boundHeight = heightByDirection ? this.resizableBottom - this.targetTop : this.props.bounds.offsetHeight + (this.targetTop - this.resizableTop);
+    }
+    if (boundWidth && Number.isFinite(boundWidth)) {
+      maxWidth = maxWidth && maxWidth < boundWidth ? maxWidth : boundWidth;
+    }
+    if (boundHeight && Number.isFinite(boundHeight)) {
+      maxHeight = maxHeight && maxHeight < boundHeight ? maxHeight : boundHeight;
+    }
+    return { maxWidth, maxHeight };
+  };
+  Resizable2.prototype.calculateNewSizeFromDirection = function(clientX, clientY) {
+    var scale = this.props.scale || 1;
+    var resizeRatio = this.props.resizeRatio || 1;
+    var _a22 = this.state, direction = _a22.direction, original = _a22.original;
+    var _b2 = this.props, lockAspectRatio = _b2.lockAspectRatio, lockAspectRatioExtraHeight = _b2.lockAspectRatioExtraHeight, lockAspectRatioExtraWidth = _b2.lockAspectRatioExtraWidth;
+    var newWidth = original.width;
+    var newHeight = original.height;
+    var extraHeight = lockAspectRatioExtraHeight || 0;
+    var extraWidth = lockAspectRatioExtraWidth || 0;
+    if (hasDirection("right", direction)) {
+      newWidth = original.width + (clientX - original.x) * resizeRatio / scale;
+      if (lockAspectRatio) {
+        newHeight = (newWidth - extraWidth) / this.ratio + extraHeight;
+      }
+    }
+    if (hasDirection("left", direction)) {
+      newWidth = original.width - (clientX - original.x) * resizeRatio / scale;
+      if (lockAspectRatio) {
+        newHeight = (newWidth - extraWidth) / this.ratio + extraHeight;
+      }
+    }
+    if (hasDirection("bottom", direction)) {
+      newHeight = original.height + (clientY - original.y) * resizeRatio / scale;
+      if (lockAspectRatio) {
+        newWidth = (newHeight - extraHeight) * this.ratio + extraWidth;
+      }
+    }
+    if (hasDirection("top", direction)) {
+      newHeight = original.height - (clientY - original.y) * resizeRatio / scale;
+      if (lockAspectRatio) {
+        newWidth = (newHeight - extraHeight) * this.ratio + extraWidth;
+      }
+    }
+    return { newWidth, newHeight };
+  };
+  Resizable2.prototype.calculateNewSizeFromAspectRatio = function(newWidth, newHeight, max2, min2) {
+    var _a22 = this.props, lockAspectRatio = _a22.lockAspectRatio, lockAspectRatioExtraHeight = _a22.lockAspectRatioExtraHeight, lockAspectRatioExtraWidth = _a22.lockAspectRatioExtraWidth;
+    var computedMinWidth = typeof min2.width === "undefined" ? 10 : min2.width;
+    var computedMaxWidth = typeof max2.width === "undefined" || max2.width < 0 ? newWidth : max2.width;
+    var computedMinHeight = typeof min2.height === "undefined" ? 10 : min2.height;
+    var computedMaxHeight = typeof max2.height === "undefined" || max2.height < 0 ? newHeight : max2.height;
+    var extraHeight = lockAspectRatioExtraHeight || 0;
+    var extraWidth = lockAspectRatioExtraWidth || 0;
+    if (lockAspectRatio) {
+      var extraMinWidth = (computedMinHeight - extraHeight) * this.ratio + extraWidth;
+      var extraMaxWidth = (computedMaxHeight - extraHeight) * this.ratio + extraWidth;
+      var extraMinHeight = (computedMinWidth - extraWidth) / this.ratio + extraHeight;
+      var extraMaxHeight = (computedMaxWidth - extraWidth) / this.ratio + extraHeight;
+      var lockedMinWidth = Math.max(computedMinWidth, extraMinWidth);
+      var lockedMaxWidth = Math.min(computedMaxWidth, extraMaxWidth);
+      var lockedMinHeight = Math.max(computedMinHeight, extraMinHeight);
+      var lockedMaxHeight = Math.min(computedMaxHeight, extraMaxHeight);
+      newWidth = clamp(newWidth, lockedMinWidth, lockedMaxWidth);
+      newHeight = clamp(newHeight, lockedMinHeight, lockedMaxHeight);
+    } else {
+      newWidth = clamp(newWidth, computedMinWidth, computedMaxWidth);
+      newHeight = clamp(newHeight, computedMinHeight, computedMaxHeight);
+    }
+    return { newWidth, newHeight };
+  };
+  Resizable2.prototype.setBoundingClientRect = function() {
+    if (this.props.bounds === "parent") {
+      var parent_2 = this.parentNode;
+      if (parent_2) {
+        var parentRect = parent_2.getBoundingClientRect();
+        this.parentLeft = parentRect.left;
+        this.parentTop = parentRect.top;
+      }
+    }
+    if (this.props.bounds && typeof this.props.bounds !== "string") {
+      var targetRect = this.props.bounds.getBoundingClientRect();
+      this.targetLeft = targetRect.left;
+      this.targetTop = targetRect.top;
+    }
+    if (this.resizable) {
+      var _a22 = this.resizable.getBoundingClientRect(), left = _a22.left, top_1 = _a22.top, right = _a22.right, bottom = _a22.bottom;
+      this.resizableLeft = left;
+      this.resizableRight = right;
+      this.resizableTop = top_1;
+      this.resizableBottom = bottom;
+    }
+  };
+  Resizable2.prototype.onResizeStart = function(event, direction) {
+    if (!this.resizable || !this.window) {
+      return;
+    }
+    var clientX = 0;
+    var clientY = 0;
+    if (event.nativeEvent && isMouseEvent(event.nativeEvent)) {
+      clientX = event.nativeEvent.clientX;
+      clientY = event.nativeEvent.clientY;
+    } else if (event.nativeEvent && isTouchEvent(event.nativeEvent)) {
+      clientX = event.nativeEvent.touches[0].clientX;
+      clientY = event.nativeEvent.touches[0].clientY;
+    }
+    if (this.props.onResizeStart) {
+      if (this.resizable) {
+        var startResize = this.props.onResizeStart(event, direction, this.resizable);
+        if (startResize === false) {
+          return;
+        }
+      }
+    }
+    if (this.props.size) {
+      if (typeof this.props.size.height !== "undefined" && this.props.size.height !== this.state.height) {
+        this.setState({ height: this.props.size.height });
+      }
+      if (typeof this.props.size.width !== "undefined" && this.props.size.width !== this.state.width) {
+        this.setState({ width: this.props.size.width });
+      }
+    }
+    this.ratio = typeof this.props.lockAspectRatio === "number" ? this.props.lockAspectRatio : this.size.width / this.size.height;
+    var flexBasis;
+    var computedStyle = this.window.getComputedStyle(this.resizable);
+    if (computedStyle.flexBasis !== "auto") {
+      var parent_3 = this.parentNode;
+      if (parent_3) {
+        var dir = this.window.getComputedStyle(parent_3).flexDirection;
+        this.flexDir = dir.startsWith("row") ? "row" : "column";
+        flexBasis = computedStyle.flexBasis;
+      }
+    }
+    this.setBoundingClientRect();
+    this.bindEvents();
+    var state = {
+      original: {
+        x: clientX,
+        y: clientY,
+        width: this.size.width,
+        height: this.size.height
+      },
+      isResizing: true,
+      backgroundStyle: __assign(__assign({}, this.state.backgroundStyle), { cursor: this.window.getComputedStyle(event.target).cursor || "auto" }),
+      direction,
+      flexBasis
+    };
+    this.setState(state);
+  };
+  Resizable2.prototype.onMouseMove = function(event) {
+    var _this = this;
+    if (!this.state.isResizing || !this.resizable || !this.window) {
+      return;
+    }
+    if (this.window.TouchEvent && isTouchEvent(event)) {
+      try {
+        event.preventDefault();
+        event.stopPropagation();
+      } catch (e) {
+      }
+    }
+    var _a22 = this.props, maxWidth = _a22.maxWidth, maxHeight = _a22.maxHeight, minWidth = _a22.minWidth, minHeight = _a22.minHeight;
+    var clientX = isTouchEvent(event) ? event.touches[0].clientX : event.clientX;
+    var clientY = isTouchEvent(event) ? event.touches[0].clientY : event.clientY;
+    var _b2 = this.state, direction = _b2.direction, original = _b2.original, width = _b2.width, height = _b2.height;
+    var parentSize = this.getParentSize();
+    var max2 = calculateNewMax(parentSize, this.window.innerWidth, this.window.innerHeight, maxWidth, maxHeight, minWidth, minHeight);
+    maxWidth = max2.maxWidth;
+    maxHeight = max2.maxHeight;
+    minWidth = max2.minWidth;
+    minHeight = max2.minHeight;
+    var _c = this.calculateNewSizeFromDirection(clientX, clientY), newHeight = _c.newHeight, newWidth = _c.newWidth;
+    var boundaryMax = this.calculateNewMaxFromBoundary(maxWidth, maxHeight);
+    if (this.props.snap && this.props.snap.x) {
+      newWidth = findClosestSnap(newWidth, this.props.snap.x, this.props.snapGap);
+    }
+    if (this.props.snap && this.props.snap.y) {
+      newHeight = findClosestSnap(newHeight, this.props.snap.y, this.props.snapGap);
+    }
+    var newSize = this.calculateNewSizeFromAspectRatio(newWidth, newHeight, { width: boundaryMax.maxWidth, height: boundaryMax.maxHeight }, { width: minWidth, height: minHeight });
+    newWidth = newSize.newWidth;
+    newHeight = newSize.newHeight;
+    if (this.props.grid) {
+      var newGridWidth = snap(newWidth, this.props.grid[0]);
+      var newGridHeight = snap(newHeight, this.props.grid[1]);
+      var gap = this.props.snapGap || 0;
+      newWidth = gap === 0 || Math.abs(newGridWidth - newWidth) <= gap ? newGridWidth : newWidth;
+      newHeight = gap === 0 || Math.abs(newGridHeight - newHeight) <= gap ? newGridHeight : newHeight;
+    }
+    var delta = {
+      width: newWidth - original.width,
+      height: newHeight - original.height
+    };
+    if (width && typeof width === "string") {
+      if (width.endsWith("%")) {
+        var percent = newWidth / parentSize.width * 100;
+        newWidth = percent + "%";
+      } else if (width.endsWith("vw")) {
+        var vw = newWidth / this.window.innerWidth * 100;
+        newWidth = vw + "vw";
+      } else if (width.endsWith("vh")) {
+        var vh2 = newWidth / this.window.innerHeight * 100;
+        newWidth = vh2 + "vh";
+      }
+    }
+    if (height && typeof height === "string") {
+      if (height.endsWith("%")) {
+        var percent = newHeight / parentSize.height * 100;
+        newHeight = percent + "%";
+      } else if (height.endsWith("vw")) {
+        var vw = newHeight / this.window.innerWidth * 100;
+        newHeight = vw + "vw";
+      } else if (height.endsWith("vh")) {
+        var vh2 = newHeight / this.window.innerHeight * 100;
+        newHeight = vh2 + "vh";
+      }
+    }
+    var newState = {
+      width: this.createSizeForCssProperty(newWidth, "width"),
+      height: this.createSizeForCssProperty(newHeight, "height")
+    };
+    if (this.flexDir === "row") {
+      newState.flexBasis = newState.width;
+    } else if (this.flexDir === "column") {
+      newState.flexBasis = newState.height;
+    }
+    reactDom.exports.flushSync(function() {
+      _this.setState(newState);
+    });
+    if (this.props.onResize) {
+      this.props.onResize(event, direction, this.resizable, delta);
+    }
+  };
+  Resizable2.prototype.onMouseUp = function(event) {
+    var _a22 = this.state, isResizing = _a22.isResizing, direction = _a22.direction, original = _a22.original;
+    if (!isResizing || !this.resizable) {
+      return;
+    }
+    var delta = {
+      width: this.size.width - original.width,
+      height: this.size.height - original.height
+    };
+    if (this.props.onResizeStop) {
+      this.props.onResizeStop(event, direction, this.resizable, delta);
+    }
+    if (this.props.size) {
+      this.setState(this.props.size);
+    }
+    this.unbindEvents();
+    this.setState({
+      isResizing: false,
+      backgroundStyle: __assign(__assign({}, this.state.backgroundStyle), { cursor: "auto" })
+    });
+  };
+  Resizable2.prototype.updateSize = function(size) {
+    this.setState({ width: size.width, height: size.height });
+  };
+  Resizable2.prototype.renderResizer = function() {
+    var _this = this;
+    var _a22 = this.props, enable = _a22.enable, handleStyles = _a22.handleStyles, handleClasses = _a22.handleClasses, handleWrapperStyle = _a22.handleWrapperStyle, handleWrapperClass = _a22.handleWrapperClass, handleComponent = _a22.handleComponent;
+    if (!enable) {
+      return null;
+    }
+    var resizers = Object.keys(enable).map(function(dir) {
+      if (enable[dir] !== false) {
+        return react.exports.createElement(Resizer, { key: dir, direction: dir, onResizeStart: _this.onResizeStart, replaceStyles: handleStyles && handleStyles[dir], className: handleClasses && handleClasses[dir] }, handleComponent && handleComponent[dir] ? handleComponent[dir] : null);
+      }
+      return null;
+    });
+    return react.exports.createElement("div", { className: handleWrapperClass, style: handleWrapperStyle }, resizers);
+  };
+  Resizable2.prototype.render = function() {
+    var _this = this;
+    var extendsProps = Object.keys(this.props).reduce(function(acc, key) {
+      if (definedProps.indexOf(key) !== -1) {
+        return acc;
+      }
+      acc[key] = _this.props[key];
+      return acc;
+    }, {});
+    var style2 = __assign(__assign(__assign({ position: "relative", userSelect: this.state.isResizing ? "none" : "auto" }, this.props.style), this.sizeStyle), { maxWidth: this.props.maxWidth, maxHeight: this.props.maxHeight, minWidth: this.props.minWidth, minHeight: this.props.minHeight, boxSizing: "border-box", flexShrink: 0 });
+    if (this.state.flexBasis) {
+      style2.flexBasis = this.state.flexBasis;
+    }
+    var Wrapper = this.props.as || "div";
+    return react.exports.createElement(Wrapper, __assign({ ref: this.ref, style: style2, className: this.props.className }, extendsProps), this.state.isResizing && react.exports.createElement("div", { style: this.state.backgroundStyle }), this.props.children, this.renderResizer());
+  };
+  Resizable2.defaultProps = {
+    as: "div",
+    onResizeStart: function() {
+    },
+    onResize: function() {
+    },
+    onResizeStop: function() {
+    },
+    enable: {
+      top: true,
+      right: true,
+      bottom: true,
+      left: true,
+      topRight: true,
+      bottomRight: true,
+      bottomLeft: true,
+      topLeft: true
+    },
+    style: {},
+    grid: [1, 1],
+    lockAspectRatio: false,
+    lockAspectRatioExtraWidth: 0,
+    lockAspectRatioExtraHeight: 0,
+    scale: 1,
+    resizeRatio: 1,
+    snapGap: 0
+  };
+  return Resizable2;
+}(react.exports.PureComponent);
+const MAX_WIDTH = 0.5;
+const MIN_WIDTH = 240;
 const SidePanel = React__default.memo(_SidePanel);
 function _SidePanel(props) {
+  const getParentWidth = () => {
+    const parent = props.viewer.viewport.canvas.parentElement;
+    return parent.parentElement.clientWidth;
+  };
+  const [, setParentWidth] = react.exports.useState(getParentWidth());
+  const resize = () => {
+    resizeCanvas(props.viewer, props.side.getContent() !== "none", props.side.getWidth());
+    props.viewer.viewport.ResizeToParent();
+  };
+  const getMaxSize = () => {
+    return getParentWidth() * MAX_WIDTH;
+  };
+  const getClampedSize = () => {
+    const next = Math.min(props.side.getWidth(), getMaxSize());
+    return Math.max(next, MIN_WIDTH);
+  };
   react.exports.useEffect(() => {
-    props.viewer.viewport.canvas.focus();
-    resizeCanvas(props.viewer, props.side.get() !== "none");
+    resize();
   });
+  react.exports.useEffect(() => {
+    window.addEventListener("resize", () => {
+      setParentWidth((w2) => getParentWidth());
+      props.side.setWidth(getClampedSize());
+    });
+  }, []);
   const onNavBtn = () => {
-    props.side.pop();
+    props.side.popContent();
   };
   const iconOptions = { height: "20", width: "20", fill: "currentColor" };
-  return /* @__PURE__ */ React__default.createElement("div", {
-    className: `vim-side-panel z-30 fixed left-0 top-0 bg-gray-lightest p-6 text-gray-darker h-full ${props.side.get() !== "none" ? "" : "hidden"}`
+  return /* @__PURE__ */ React__default.createElement(Resizable, {
+    size: { width: props.side.getWidth(), height: "100%" },
+    minWidth: 300,
+    maxWidth: getMaxSize(),
+    onResize: (e, direction, ref, d) => {
+      props.side.setWidth(ref.clientWidth);
+    },
+    style: {
+      position: "fixed"
+    },
+    className: `vim-side-panel vc-top-0 vc-left-0 vc-z-20 vc-bg-gray-lightest vc-p-6 vc-text-gray-darker ${props.side.getContent() !== "none" ? "" : "vc-hidden"}`
   }, /* @__PURE__ */ React__default.createElement("button", {
-    className: "vim-side-panel-nav text-gray-medium absolute right-6 top-6",
+    className: "vim-side-panel-nav vc-absolute vc-right-6 vc-top-6 vc-text-gray-medium",
     onClick: onNavBtn
   }, close(iconOptions)), props.content);
 }
-function resizeCanvas(viewer, open) {
-  const tag = "bim-panel-open";
+function resizeCanvas(viewer, visible, width) {
   const parent = viewer.viewport.canvas.parentElement;
-  if (parent) {
-    const has2 = parent.classList.contains(tag);
-    if (open === has2)
-      return;
-    if (open && !has2)
-      parent.classList.add(tag);
-    if (!open && has2)
-      parent.classList.remove(tag);
-    viewer.viewport.ResizeToParent();
+  const full = parent.parentElement.clientWidth;
+  if (visible) {
+    parent.style.width = `${full - width}px`;
+    parent.style.marginLeft = `${width}px`;
+  } else {
+    parent.style.width = "100%";
+    parent.style.marginLeft = "0px";
   }
 }
-function useSideState(useInspector) {
+function useSideState(useInspector, defaultWidth) {
   const [side, setSide] = react.exports.useState(["bim"]);
+  const [width, _setWidth] = react.exports.useState(defaultWidth);
   const sideRef = react.exports.useRef(side);
-  const toggle = (content) => {
+  const widthRef = react.exports.useRef(width);
+  const toggleContent = (content) => {
     let r2;
     const [A2, B2] = sideRef.current;
     if (!A2 && !B2)
@@ -54272,31 +55115,40 @@ function useSideState(useInspector) {
     sideRef.current = r2;
     setSide(r2);
   };
-  const pop = () => {
+  const popContent = () => {
     sideRef.current.pop();
     setSide([...sideRef.current]);
   };
   const getNav = () => {
     return sideRef.current.length > 1 ? "back" : "close";
   };
-  const get3 = () => {
+  const getContent = () => {
     var _a22;
     const result = (_a22 = sideRef.current[sideRef.current.length - 1]) != null ? _a22 : "none";
     if (result === "bim" && !useInspector)
       return "none";
     return result;
   };
-  const set3 = (value) => {
+  const setContent = (value) => {
     sideRef.current = [value];
     setSide([value]);
   };
+  const setWidth = (value) => {
+    widthRef.current = value;
+    _setWidth(value);
+  };
+  const getWidth = () => {
+    return getContent() === "none" ? 0 : widthRef.current;
+  };
   return react.exports.useMemo(() => ({
-    set: set3,
-    get: get3,
-    toggle,
-    pop,
-    getNav
-  }), [side]);
+    setContent,
+    getContent,
+    toggleContent,
+    popContent,
+    getNav,
+    getWidth,
+    setWidth
+  }), [side, width]);
 }
 var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
 var freeGlobal$1 = freeGlobal;
@@ -55095,12 +55947,12 @@ function MenuSettings(props) {
     return null;
   const toggleElement = (label, state, action) => {
     return /* @__PURE__ */ React__default.createElement("label", {
-      className: "text-gray-warm m-1 w-max py-1 flex items-center select-none"
+      className: "vc-m-1 vc-flex vc-select-none vc-items-center vc-py-1 vc-text-gray-warm"
     }, /* @__PURE__ */ React__default.createElement("input", {
       type: "checkbox",
       checked: state,
       onChange: action,
-      className: "w-[18px] h-[18px] rounded border border-gray-medium checked:bg-primary-royal mr-2 "
+      className: "vc-checked:bg-primary-royal vc-mr-2 vc-h-[18px] vc-w-[18px] vc-rounded vc-border vc-border-gray-medium "
     }), " ", label);
   };
   const next = cloneDeep(props.settings.value);
@@ -55111,7 +55963,7 @@ function MenuSettings(props) {
     });
   };
   return /* @__PURE__ */ React__default.createElement(React__default.Fragment, null, /* @__PURE__ */ React__default.createElement("h2", {
-    className: "text-xs font-bold uppercase mb-6"
+    className: "vc-mb-6 vc-text-xs vc-font-bold vc-uppercase"
   }, "Display Settings"), settingsToggle("Show hidden object with ghost effect", (settings2) => settings2.viewer.isolationMaterial, (settings2, value) => settings2.viewer.isolationMaterial = value), settingsToggle("Show ground plane", (settings2) => settings2.viewer.groundPlane, (settings2, value) => settings2.viewer.groundPlane = value), settingsToggle("Show performance", (settings2) => settings2.ui.performance, (settings2, value) => settings2.ui.performance = value));
 }
 const MenuToast = React__default.memo(_MenuToast);
@@ -55137,12 +55989,18 @@ function _MenuToast(props) {
     };
   }, []);
   return /* @__PURE__ */ React__default.createElement("div", {
-    className: `vim-menu-toast rounded shadow-lg py-2 px-5 flex items-center justify-between transition-all ${visible ? "opacity-100" : "opacity-0"}`
+    className: "vim-menu-toast vc-pointer-events-none vc-absolute vc-top-[10%] vc-flex",
+    style: {
+      marginLeft: props.side.getWidth(),
+      width: `calc(100% - ${props.side.getWidth()}px)`
+    }
+  }, /* @__PURE__ */ React__default.createElement("div", {
+    className: `vim-menu-toast vc-m-auto vc-flex vc-items-center vc-justify-between vc-rounded vc-bg-gray-warm vc-py-2 vc-px-5 vc-shadow-lg vc-transition-all ${visible ? "vc-opacity-100" : "vc-opacity-0"}`
   }, /* @__PURE__ */ React__default.createElement("span", {
-    className: "text-sm uppercase font-semibold text-gray-light"
+    className: "vc-text-sm vc-font-semibold vc-uppercase vc-text-gray-light"
   }, "Speed:"), /* @__PURE__ */ React__default.createElement("span", {
-    className: "font-bold text-lg text-white ml-1"
-  }, speed + 25));
+    className: "vc-ml-1 vc-text-lg vc-font-bold vc-text-white"
+  }, speed + 25)));
 }
 function Overlay(props) {
   const overlay = react.exports.useRef(null);
@@ -55172,7 +56030,11 @@ function Overlay(props) {
   return /* @__PURE__ */ React__default.createElement("div", {
     ref: overlay,
     onContextMenu: (e) => e.preventDefault(),
-    className: `vim-overlay absolute top-0 h-full w-full z-10 ${props.side.get() !== "none" ? "bim-panel-open" : ""}`
+    className: "vim-overlay vc-absolute vc-top-0 vc-left-0 vc-z-10 vc-h-full",
+    style: {
+      marginLeft: `${props.side.getWidth()}px`,
+      width: `calc(100% - ${props.side.getWidth()}px)`
+    }
   });
 }
 class ComponentInputs {
@@ -55195,7 +56057,6 @@ class ComponentInputs {
       }
       case KEYS.KEY_I: {
         this._isolation.toggleIsolation("keyboard");
-        this._viewer.frameVisibleObjects();
         return true;
       }
       case KEYS.KEY_ESCAPE: {
@@ -55207,6 +56068,20 @@ class ComponentInputs {
           this._isolation.clear("keyboard");
           return true;
         }
+        break;
+      }
+      case KEYS.KEY_V: {
+        if (this._viewer.base.selection.count === 0)
+          return;
+        const objs = [...this._viewer.base.selection.objects];
+        const visible = objs.findIndex((o) => o.visible) >= 0;
+        if (visible) {
+          this._isolation.hide([...this._viewer.base.selection.objects], "keyboard");
+          this._viewer.base.selection.clear();
+        } else {
+          this._isolation.show([...this._viewer.base.selection.objects], "keyboard");
+        }
+        return true;
       }
     }
     return this._default.onKeyAction(key);
@@ -55332,6 +56207,9 @@ function useSettings(viewer, value) {
   const [settings2, setSettings] = react.exports.useState(merge);
   react.exports.useEffect(() => {
     applySettings(viewer, settings2);
+  }, []);
+  react.exports.useEffect(() => {
+    applySettings(viewer, settings2);
   }, [settings2]);
   return react.exports.useMemo(() => ({ value: settings2, set: setSettings }), [settings2]);
 }
@@ -55339,9 +56217,9 @@ function applySettings(viewer, settings2) {
   const performance2 = document.getElementsByClassName("vim-performance")[0];
   if (performance2) {
     if (settings2.ui.performance) {
-      performance2.classList.remove("hidden");
+      performance2.classList.remove("vc-hidden");
     } else {
-      performance2.classList.add("hidden");
+      performance2.classList.add("vc-hidden");
     }
   }
   viewer.environment.groundPlane.visible = settings2.viewer.groundPlane;
@@ -55806,121 +56684,119 @@ NonUniformSimpleEventList$1.NonUniformSimpleEventList = NonUniformSimpleEventLis
     return SimpleEventList_12.SimpleEventList;
   } });
 })(dist$1);
-function useIsolation(componentViewer, settings2) {
-  const viewer = componentViewer.base;
-  const isolationRef = react.exports.useRef();
-  const lastIsolation = react.exports.useRef();
-  const onChanged = react.exports.useRef(new dist$1.SimpleEventDispatcher()).current;
-  react.exports.useEffect(() => {
+class Isolation {
+  constructor(componentViewer, settings2) {
+    this.onChanged = new dist$1.SimpleEventDispatcher();
+    this.viewer = componentViewer.base;
+    this.helper = componentViewer;
+    this.updateSettings(settings2);
+  }
+  updateSettings(settings2) {
     var _a22;
-    const set3 = new Set((_a22 = isolationRef.current) == null ? void 0 : _a22.map((o) => o.vim));
-    viewer.vims.forEach((v2) => {
-      v2.scene.material = set3.has(v2) && settings2.viewer.isolationMaterial ? viewer.renderer.materials.isolation : void 0;
+    this.settings = settings2;
+    const set3 = new Set((_a22 = this.isolation) == null ? void 0 : _a22.map((o) => o.vim));
+    this.viewer.vims.forEach((v2) => {
+      v2.scene.material = set3.has(v2) && this.settings.viewer.isolationMaterial ? this.viewer.renderer.materials.isolation : void 0;
     });
-  }, [settings2, viewer]);
-  const any = () => !!isolationRef.current;
-  const showAll = () => {
-    viewer.vims.forEach((v2) => {
+  }
+  any() {
+    return this.isolation !== void 0;
+  }
+  showAll() {
+    this.viewer.vims.forEach((v2) => {
       for (const obj of v2.getAllObjects()) {
         obj.visible = true;
       }
       v2.scene.material = void 0;
     });
-  };
-  const _isolate = (viewer2, settings22, objects) => {
+  }
+  _isolate(viewer, settings2, objects) {
     let allVisible = true;
     if (!objects) {
-      showAll();
+      this.showAll();
     } else {
       const set3 = new Set(objects);
-      viewer2.vims.forEach((vim) => {
+      viewer.vims.forEach((vim) => {
         for (const obj of vim.getAllObjects()) {
           const has2 = set3.has(obj);
           obj.visible = has2;
           if (obj.hasMesh && !has2)
             allVisible = false;
         }
-        vim.scene.material = !allVisible && settings22.viewer.isolationMaterial ? viewer2.renderer.materials.isolation : void 0;
+        vim.scene.material = !allVisible && settings2.viewer.isolationMaterial ? viewer.renderer.materials.isolation : void 0;
       });
     }
     return !allVisible;
-  };
-  const current = () => {
-    return isolationRef.current;
-  };
-  const isolate = (objects, source) => {
-    if (isolationRef.current) {
-      lastIsolation.current = isolationRef.current;
+  }
+  current() {
+    return this.isolation;
+  }
+  isolate(objects, source) {
+    if (this.isolation) {
+      this.lastIsolation = this.isolation;
     }
-    const isolated = _isolate(viewer, settings2, objects);
-    isolationRef.current = isolated ? objects : void 0;
-    onChanged.dispatch(source);
-  };
-  const toggleIsolation2 = (source) => {
-    const selection = [...viewer.selection.objects];
-    if (isolationRef.current) {
-      lastIsolation.current = isolationRef.current;
+    const isolated = this._isolate(this.viewer, this.settings, objects);
+    this.isolation = isolated ? objects : void 0;
+    this.helper.frameVisibleObjects();
+    this.onChanged.dispatch(source);
+  }
+  toggleIsolation(source) {
+    const selection = [...this.viewer.selection.objects];
+    if (this.isolation) {
+      this.lastIsolation = this.isolation;
     }
-    if (isolationRef.current) {
-      if (selection.length === 0 || ArrayEquals(isolationRef.current, selection)) {
-        showAll();
-        isolationRef.current = void 0;
+    if (this.isolation) {
+      if (selection.length === 0 || ArrayEquals(this.isolation, selection)) {
+        this.showAll();
+        this.isolation = void 0;
       } else {
-        const isolated = _isolate(viewer, settings2, selection);
-        isolationRef.current = isolated ? selection : void 0;
-        viewer.selection.clear();
+        const isolated = this._isolate(this.viewer, this.settings, selection);
+        this.isolation = isolated ? selection : void 0;
+        this.helper.frameVisibleObjects();
+        this.viewer.selection.clear();
       }
     } else {
       if (selection.length > 0) {
-        const isolated = _isolate(viewer, settings2, selection);
-        isolationRef.current = isolated ? selection : void 0;
-        viewer.selection.clear();
-      } else if (lastIsolation.current) {
-        const isolated = _isolate(viewer, settings2, lastIsolation.current);
-        isolationRef.current = isolated ? [...lastIsolation.current] : void 0;
+        const isolated = this._isolate(this.viewer, this.settings, selection);
+        this.isolation = isolated ? selection : void 0;
+        this.helper.frameVisibleObjects();
+        this.viewer.selection.clear();
+      } else if (this.lastIsolation) {
+        const isolated = this._isolate(this.viewer, this.settings, this.lastIsolation);
+        this.isolation = isolated ? [...this.lastIsolation] : void 0;
       }
     }
-    onChanged.dispatch(source);
-  };
-  const hide = (objects, source) => {
+    this.onChanged.dispatch(source);
+  }
+  hide(objects, source) {
     var _a22;
     const selection = new Set(objects);
-    const initial = (_a22 = isolationRef.current) != null ? _a22 : viewer.vims[0].getAllObjects();
+    const initial = (_a22 = this.isolation) != null ? _a22 : this.viewer.vims[0].getAllObjects();
     const result = [];
     for (const obj of initial) {
       if (!selection.has(obj))
         result.push(obj);
     }
-    const isolated = _isolate(viewer, settings2, result);
-    isolationRef.current = isolated ? result : void 0;
-    onChanged.dispatch(source);
-    objects.forEach((o) => viewer.selection.remove(o));
-  };
-  const show = (objects, source) => {
+    const isolated = this._isolate(this.viewer, this.settings, result);
+    this.isolation = isolated ? result : void 0;
+    this.onChanged.dispatch(source);
+    objects.forEach((o) => this.viewer.selection.remove(o));
+  }
+  show(objects, source) {
     var _a22;
-    const isolation = (_a22 = isolationRef.current) != null ? _a22 : [];
+    const isolation = (_a22 = this.isolation) != null ? _a22 : [];
     objects.forEach((o) => isolation.push(o));
     const result = [...new Set(isolation)];
-    const isolated = _isolate(viewer, settings2, result);
-    isolationRef.current = isolated ? result : void 0;
-    onChanged.dispatch(source);
-  };
-  const clear = (source) => {
-    showAll();
-    lastIsolation.current = isolationRef.current;
-    isolationRef.current = void 0;
-    onChanged.dispatch(source);
-  };
-  return {
-    any,
-    isolate,
-    show,
-    hide,
-    toggleIsolation: toggleIsolation2,
-    clear,
-    current,
-    onChanged
-  };
+    const isolated = this._isolate(this.viewer, this.settings, result);
+    this.isolation = isolated ? result : void 0;
+    this.onChanged.dispatch(source);
+  }
+  clear(source) {
+    this.showAll();
+    this.lastIsolation = this.isolation;
+    this.isolation = void 0;
+    this.onChanged.dispatch(source);
+  }
 }
 class ViewerWrapper {
   constructor(viewer) {
@@ -55970,9 +56846,9 @@ class ViewerWrapper {
     return box;
   }
 }
-function createVimComponent(onMount, settings2 = {}) {
+function createVimComponent(onMount, container, settings2 = {}) {
   const viewer = new Viewer();
-  const container = createContainer(viewer);
+  container = container != null ? container : createContainer(viewer);
   const reactRoot = createRoot(container.ui);
   const component = React__default.createFactory(VimComponent);
   reactRoot.render(component({ viewer, onMount, settings: settings2 }));
@@ -55980,19 +56856,16 @@ function createVimComponent(onMount, settings2 = {}) {
 }
 function createContainer(viewer) {
   const root2 = document.createElement("div");
-  root2.className = "vim-component";
-  root2.style.height = "100%";
+  root2.className = "vim-component vc-absolute vc-top-0 vc-left-0 vc-h-full vc-w-full";
   document.body.append(root2);
   const gfx = document.createElement("div");
-  gfx.className = "vim-gfx";
-  gfx.style.height = "100%";
+  gfx.className = "vim-gfx vc-absolute vc-top-0 vc-left-0 vc-h-full vc-w-full";
   root2.append(gfx);
   gfx.append(viewer.viewport.canvas);
   gfx.append(viewer.viewport.text);
   gfx.append(viewer.axesCanvas);
   const ui2 = document.createElement("div");
-  ui2.className = "vim-ui";
-  ui2.style.height = "100%";
+  ui2.className = "vim-ui vc-absolute vc-top-0 vc-left-0 vc-h-full vc-w-full";
   root2.append(ui2);
   viewer.viewport.canvas.tabIndex = 0;
   viewer.sectionBox.clip = true;
@@ -56002,13 +56875,15 @@ function VimComponent(props) {
   const viewer = react.exports.useRef(new ViewerWrapper(props.viewer)).current;
   const cursor = react.exports.useRef(new CursorManager(props.viewer)).current;
   const settings2 = useSettings(props.viewer, props.settings);
-  const isolation = useIsolation(viewer, settings2.value);
-  const side = useSideState(settings2.value.ui.bimPanel);
+  const [isolation] = react.exports.useState(() => new Isolation(viewer, settings2.value));
+  react.exports.useEffect(() => isolation.updateSettings(settings2.value), [settings2]);
+  const side = useSideState(settings2.value.ui.bimPanel, 480);
   const [contextMenu, setcontextMenu] = react.exports.useState();
   const help2 = useHelp();
   const [vim, selection] = useViewerState(props.viewer);
   const [msg, setMsg] = react.exports.useState();
   react.exports.useEffect(() => {
+    addPerformanceCounter();
     props.onMount({
       viewer: props.viewer,
       helpers: viewer,
@@ -56032,10 +56907,10 @@ function VimComponent(props) {
     viewer,
     vim,
     selection,
-    visible: side.get() === "bim",
+    visible: side.getContent() === "bim",
     isolation
   }) : null, /* @__PURE__ */ React__default.createElement(MenuSettings, {
-    visible: side.get() === "settings",
+    visible: side.getContent() === "settings",
     viewer: props.viewer,
     settings: settings2
   }));
@@ -56044,7 +56919,8 @@ function VimComponent(props) {
     side
   }), /* @__PURE__ */ React__default.createElement(MenuHelp, {
     help: help2,
-    settings: settings2.value
+    settings: settings2.value,
+    side
   }), settings2.value.ui.logo ? /* @__PURE__ */ React__default.createElement(Logo, null) : null, settings2.value.ui.loadingBox ? /* @__PURE__ */ React__default.createElement(LoadingBox, {
     viewer: props.viewer,
     msg
@@ -56063,6 +56939,9 @@ function VimComponent(props) {
     side,
     content: sidePanel
   }), /* @__PURE__ */ React__default.createElement(ReactTooltip, {
+    arrowColor: "transparent",
+    type: "light",
+    className: "!vc-border !vc-border-solid !vc-border-gray-medium !vc-bg-white !vc-text-xs !vc-text-gray-darkest !vc-opacity-100 !vc-shadow-[2px_6px_15px_rgba(0,0,0,0.3)] !vc-transition-opacity",
     delayShow: 200
   }), /* @__PURE__ */ React__default.createElement(VimContextMenu, {
     viewer,
@@ -56071,14 +56950,16 @@ function VimComponent(props) {
     selection,
     customization: contextMenu
   }), /* @__PURE__ */ React__default.createElement(MenuToast, {
-    viewer: props.viewer
+    viewer: props.viewer,
+    side
   }));
 }
 const Logo = React__default.memo(() => /* @__PURE__ */ React__default.createElement("div", {
-  className: "vim-logo"
+  className: "vim-logo vc-fixed vc-top-4 vc-left-4"
 }, /* @__PURE__ */ React__default.createElement("a", {
   href: "https://vimaec.com"
 }, /* @__PURE__ */ React__default.createElement("img", {
+  className: "vim-logo-img vc-h-12 vc-w-32",
   src: logo
 }))));
 function useViewerState(viewer) {
@@ -56103,6 +56984,18 @@ function useViewerState(viewer) {
   }, []);
   return [vim, selection];
 }
+function addPerformanceCounter() {
+  const ui2 = document.getElementsByClassName("vim-ui")[0];
+  const stats = new Stats();
+  const div = stats.dom;
+  div.className = "vim-performance !vc-absolute !vc-right-6 !vc-left-auto !vc-top-52 !vc-z-1";
+  ui2.appendChild(stats.dom);
+  function animate() {
+    requestAnimationFrame(() => animate());
+    stats.update();
+  }
+  animate();
+}
 const params = new URLSearchParams(window.location.search);
 let url = params.has("vim") || params.has("model") ? (_a2 = params.get("vim")) != null ? _a2 : params.get("model") : "https://vim.azureedge.net/samples/residence.vim";
 if (params.has("transparency")) {
@@ -56112,26 +57005,11 @@ if (params.has("transparency")) {
 if (params.has("dev")) {
   params.get("dev");
 }
-const ui = createVimComponent(loadVim, { capacity: { useOrthographicCamera: false } });
+createVimComponent(loadVim, void 0, { capacity: { useOrthographicCamera: false } });
 function loadVim(ref) {
+  globalThis.vimComponent = ref;
   ref.viewer.loadVim(url, {
     rotation: { x: 270, y: 0, z: 0 }
   }).then((_) => console.log("Vim Successfully loaded"));
-}
-const stats = new Stats();
-const style = stats.dom.style;
-const div = stats.dom;
-div.className = "vim-performance";
-style.right = "24px";
-style.left = "auto";
-style.top = "200px";
-style.zIndex = "1";
-ui.container.root.appendChild(stats.dom);
-animate();
-function animate() {
-  requestAnimationFrame(() => animate());
-  if (stats) {
-    stats.update();
-  }
 }
 //# sourceMappingURL=index.js.map
