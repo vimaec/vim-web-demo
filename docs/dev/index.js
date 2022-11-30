@@ -43500,6 +43500,7 @@ class Object$1 {
     __publicField(this, "selectedAttribute");
     __publicField(this, "visibleAttribute");
     __publicField(this, "coloredAttribute");
+    __publicField(this, "focusedAttribute");
     __publicField(this, "colorAttribute");
     this.vim = vim;
     this.element = element;
@@ -43507,6 +43508,7 @@ class Object$1 {
     this._meshes = meshes;
     this.selectedAttribute = new ObjectAttribute(false, "selected", "selected", meshes, (v2) => v2 ? 1 : 0);
     this.visibleAttribute = new ObjectAttribute(true, "ignore", "ignore", meshes, (v2) => v2 ? 0 : 1);
+    this.focusedAttribute = new ObjectAttribute(false, "focused", "focused", meshes, (v2) => v2 ? 1 : 0);
     this.coloredAttribute = new ObjectAttribute(false, "colored", "colored", meshes, (v2) => v2 ? 1 : 0);
     this.colorAttribute = new ColorAttribute(meshes, void 0, vim);
   }
@@ -43522,6 +43524,12 @@ class Object$1 {
   }
   set selected(value) {
     this.selectedAttribute.apply(value);
+  }
+  get focused() {
+    return this.focusedAttribute.value;
+  }
+  set focused(value) {
+    this.focusedAttribute.apply(value);
   }
   get visible() {
     return this.visibleAttribute.value;
@@ -43601,16 +43609,11 @@ class Object$1 {
   }
 }
 class Selection {
-  constructor(renderer) {
-    __publicField(this, "_renderer");
+  constructor() {
     __publicField(this, "_objects", /* @__PURE__ */ new Set());
+    __publicField(this, "_focusedObject");
     __publicField(this, "_vim");
-    __publicField(this, "_focusMesh");
-    __publicField(this, "_focusMaterial");
-    __publicField(this, "_focusStart", 0);
     __publicField(this, "_onValueChanged", new dist$3.SignalDispatcher());
-    this._renderer = renderer;
-    this._focusMaterial = renderer.materials.focus;
   }
   get onValueChanged() {
     return this._onValueChanged.asEvent();
@@ -43642,27 +43645,13 @@ class Selection {
     return target;
   }
   focus(object) {
-    if (this._focusMesh) {
-      this._focusMesh.geometry.dispose();
-      this._renderer.remove(this._focusMesh);
-    }
-    this._focusMaterial.opacity = 0;
-    this._focusStart = new Date().getTime();
-    if (!object)
+    if (this._focusedObject === object)
       return;
-    const geometry = object.createGeometry();
-    if (geometry) {
-      this._focusMesh = new Mesh(geometry, this._focusMaterial);
-      this._renderer.add(this._focusMesh);
-      this.focusTransition();
-    }
-  }
-  focusTransition() {
-    const t2 = (new Date().getTime() - this._focusStart) / 90;
-    this._focusMaterial.opacity = t2 * 0.15;
-    if (t2 < 1) {
-      requestAnimationFrame(() => this.focusTransition());
-    }
+    if (this._focusedObject)
+      this._focusedObject.focused = false;
+    if (object)
+      object.focused = true;
+    this._focusedObject = object;
   }
   select(object) {
     object = object === void 0 ? [] : object instanceof Object$1 ? [object] : object;
@@ -47855,6 +47844,13 @@ function patchBaseMaterial(material) {
         // Passed to fragment to discard them
         varying float vIgnore;
 
+        // FOCUS
+
+        // Instance or vertex attribute to higlight objects
+        // Used as instance attribute for instanced mesh and as vertex attribute for merged meshes. 
+        attribute float focused; 
+
+        varying float vHighlight;
         `).replace("#include <color_vertex>", `
           // COLORING
           vColor = color;
@@ -47868,11 +47864,16 @@ function patchBaseMaterial(material) {
 
           // VISIBILITY
           vIgnore = ignore;
+          
+          // FOCUS
+          vHighlight = focused;
         `);
     shader.fragmentShader = shader.fragmentShader.replace("#include <clipping_planes_pars_fragment>", `
         #include <clipping_planes_pars_fragment>
         varying float vIgnore;
         varying float vColored;
+        varying float vHighlight;
+
         uniform float sectionWidth;
         uniform float sectionFalloff;
         uniform vec3 sectionColor;
@@ -47887,7 +47888,9 @@ function patchBaseMaterial(material) {
           float d = length(outgoingLight);
           gl_FragColor = vec4(vColored * vColor.xyz * d + (1.0f - vColored) * outgoingLight.xyz, diffuseColor.a);
 
-
+          // FOCUS
+          gl_FragColor = mix(gl_FragColor, vec4(1,1,1,1), vHighlight * 0.5f);
+          
           // STROKES WHERE GEOMETRY INTERSECTS CLIPPING PLANE
           #if NUM_CLIPPING_PLANES > 0
             vec4 strokePlane;
@@ -49572,7 +49575,7 @@ class Viewer {
     this.gizmoRectangle = new GizmoRectangle(this);
     this._environment = new Environment(this.settings);
     this._environment.getObjects().forEach((o) => this.renderer.add(o));
-    this.selection = new Selection(this.renderer);
+    this.selection = new Selection();
     this.raycaster = new Raycaster(this.viewport, this._camera, scene, this.renderer);
     this.inputs = new Input(this);
     this.inputs.registerAll();
