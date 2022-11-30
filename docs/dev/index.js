@@ -789,8 +789,8 @@ select {
 .vc-right-0 {
   right: 0px;
 }\r
-.vc-right-16 {
-  right: 4rem;
+.vc-right-8 {
+  right: 2rem;
 }\r
 .vc-z-20 {
   z-index: 20;
@@ -43527,6 +43527,7 @@ class Object$1 {
     return this.visibleAttribute.value;
   }
   set visible(value) {
+    this.vim.scene.visibilityChanged = true;
     this.visibleAttribute.apply(value);
   }
   get color() {
@@ -49209,6 +49210,24 @@ class SelectionOutlinePass extends Pass {
     this._resolution.set(width, height);
     this._uniforms.screenSize.value.set(this._resolution.x, this._resolution.y, 1 / this._resolution.x, 1 / this._resolution.y);
   }
+  get strokeBias() {
+    return this._uniforms.strokeBias.value;
+  }
+  set strokeBias(value) {
+    this._uniforms.strokeBias.value = value;
+  }
+  get strokeMultiplier() {
+    return this._uniforms.strokeMultiplier.value;
+  }
+  set strokeMultiplier(value) {
+    this._uniforms.strokeMultiplier.value = value;
+  }
+  get color() {
+    return this._uniforms.outlineColor.value;
+  }
+  set color(value) {
+    this._uniforms.outlineColor.value.set(value);
+  }
   render(renderer, writeBuffer, readBuffer) {
     const depthBufferValue = writeBuffer.depthBuffer;
     writeBuffer.depthBuffer = false;
@@ -49242,7 +49261,8 @@ class SelectionOutlinePass extends Pass {
     uniform float cameraFar;
     uniform vec4 screenSize;
     uniform vec3 outlineColor;
-    uniform vec4 multiplierParameters;
+    uniform float strokeMultiplier;
+    uniform float strokeBias;
     uniform int debugVisualize;
 
     varying vec2 vUv;
@@ -49283,19 +49303,28 @@ class SelectionOutlinePass extends Pass {
       depthDiff += abs(depth - getPixelDepth(0, 1));
       depthDiff += abs(depth - getPixelDepth(0, -1));
 
-      // Apply multiplier & bias to each 
-      float depthBias = multiplierParameters.x;
-      float depthMultiplier = multiplierParameters.y;
+      depthDiff += abs(depth - getPixelDepth(1, 1));
+      depthDiff += abs(depth - getPixelDepth(1, -1));
+      depthDiff += abs(depth - getPixelDepth(-1, 1));
+      depthDiff += abs(depth - getPixelDepth(-1, -1));
 
-      depthDiff = depthDiff * depthMultiplier;
+      depthDiff += abs(depth - getPixelDepth(2, 0));
+      depthDiff += abs(depth - getPixelDepth(-2, 0));
+      depthDiff += abs(depth - getPixelDepth(0, 2));
+      depthDiff += abs(depth - getPixelDepth(0, -2));
+
+      depthDiff = depthDiff  / 12.0f; 
+      
+      depthDiff = depthDiff * strokeMultiplier;
       depthDiff = saturate(depthDiff);
-      depthDiff = pow(depthDiff, depthBias);
+      depthDiff = pow(depthDiff, strokeBias);
 
       float outline = depthDiff;
 
       // Combine outline with scene color.
       vec4 outlineColor = vec4(outlineColor, 1.0f);
       gl_FragColor = vec4(mix(sceneColor, outlineColor, outline));
+      //gl_FragColor = vec4( outline,outline,outline,outline);
 
       // For debug visualization of the different inputs to this shader.
       if (debugVisualize == 1) {
@@ -49317,7 +49346,8 @@ class SelectionOutlinePass extends Pass {
         sceneColorBuffer: { value: null },
         depthBuffer: { value: null },
         outlineColor: { value: new Color(16777215) },
-        multiplierParameters: { value: new Vector4(1, 1, 1, 1) },
+        strokeMultiplier: { value: 3 },
+        strokeBias: { value: 2 },
         cameraNear: { value: this._camera.near },
         cameraFar: { value: this._camera.far },
         screenSize: {
@@ -49380,6 +49410,24 @@ class SelectionRenderer {
   setSize(width, height) {
     this._sceneComposer.setSize(width, height);
     this._selectionComposer.setSize(width, height);
+  }
+  get strokeBias() {
+    return this._outlinePass.strokeBias;
+  }
+  set strokeBias(value) {
+    this._outlinePass.strokeBias = value;
+  }
+  get strokeMultiplier() {
+    return this._outlinePass.strokeMultiplier;
+  }
+  set strokeMultiplier(value) {
+    this._outlinePass.strokeMultiplier = value;
+  }
+  get strokeColor() {
+    return this._outlinePass.color;
+  }
+  set strokeColor(value) {
+    this._outlinePass.color = value;
   }
   render() {
     this._sceneComposer.render();
@@ -54195,7 +54243,8 @@ function BimTree(props) {
   }, [elements, objects]);
   react.exports.useEffect(() => {
     const subVis = viewer.renderer.onVisibilityChanged.subscribe(() => {
-      treeRef.current.updateVisibility(viewer);
+      var _a22;
+      (_a22 = treeRef.current) == null ? void 0 : _a22.updateVisibility(viewer);
       setVersion((v2) => v2 + 1);
     });
     return () => {
@@ -54481,21 +54530,15 @@ async function getVimDocumentDetails(vim) {
   const data2 = new Map(documents.map((d) => [
     d.title,
     [
-      { name: "Product", value: formatProduct(d.version), group: d.title },
-      { name: "Author(s)", value: d.author, group: d.title },
-      { name: "Last Modified", value: formatDate$1(d.date), group: d.title }
+      { name: "Product", value: d.product, group: d.title },
+      {
+        name: "Version",
+        value: d.version,
+        group: d.title
+      }
     ]
   ]));
   return [{ section: "Source Files", content: data2 }];
-}
-function formatProduct(value) {
-  return value == null ? void 0 : value.replace("Autodesk", "");
-}
-function formatDate$1(value) {
-  const date = Date.parse(value);
-  if (isNaN(date))
-    return "";
-  return value;
 }
 async function getObjectParameterDetails(object) {
   let parameters = await (object == null ? void 0 : object.getBimParameters());
@@ -54650,18 +54693,19 @@ function createHeader(header) {
   const rows = header.map((row, rowIndex) => {
     if (!row)
       return null;
-    return row.map((pair, columnIndex) => {
+    return row.map((entry, columnIndex) => {
       return /* @__PURE__ */ React__default.createElement("dl", {
-        className: `vc-flex vc-w-full ${pair[4]}`
+        key: `dl-${entry.key}`,
+        className: `vc-flex vc-w-full ${entry.dlStyle}`
       }, /* @__PURE__ */ React__default.createElement("dt", {
-        "data-tip": pair[1],
-        className: `bim-header-title vc-min-w-[100px] vc-shrink-0 vc-select-none vc-whitespace-nowrap vc-py-1 vc-text-gray-medium ${pair[2]}`,
-        key: `dt-${rowIndex}-${columnIndex}`
-      }, pair[0]), /* @__PURE__ */ React__default.createElement("dd", {
-        "data-tip": pair[1],
-        className: `bim-header-value vc-shrink-1 vc-truncate vc-py-1 ${pair[3]}`,
-        key: `dd-${rowIndex}-${columnIndex}`
-      }, pair[1]));
+        "data-tip": entry.label,
+        className: `bim-header-title vc-min-w-[100px] vc-shrink-0 vc-select-none vc-whitespace-nowrap vc-py-1 vc-text-gray-medium ${entry.dtStyle}`,
+        key: `dt-${entry.key}`
+      }, entry.label), /* @__PURE__ */ React__default.createElement("dd", {
+        "data-tip": entry.label,
+        className: `bim-header-value vc-shrink-1 vc-truncate vc-py-1 ${entry.ddStyle}`,
+        key: `dd-${entry.key}`
+      }, entry.label));
     });
   });
   return /* @__PURE__ */ React__default.createElement("div", {
@@ -54670,20 +54714,66 @@ function createHeader(header) {
 }
 function getElementBimHeader(info) {
   return [
-    [["Document", info.documentTitle, "vc-w-3/12", "vc-w-9/12", "vc-w-full"]],
-    [["Workset", info.workset, "vc-w-3/12", "vc-w-9/12", "vc-w-full"]],
-    [["Category", info.categoryName, "vc-w-3/12", "vc-w-9/12", "vc-w-full"]],
-    [["Family Name", info.familyName, "vc-w-3/12", "vc-w-9/12", "vc-w-full"]],
     [
-      [
-        "Family Type",
-        info.familyTypeName,
-        "vc-w-3/12",
-        "vc-w-9/12",
-        "vc-w-full"
-      ]
+      {
+        key: "document",
+        label: "Document",
+        value: info.documentTitle,
+        dtStyle: "vc-w-3/12",
+        ddStyle: "vc-w-9/12",
+        dlStyle: "vc-w-full"
+      }
     ],
-    [["Element Id", info.id, "vc-w-3/12", "vc-w-9/12", "vc-w-full"]]
+    [
+      {
+        key: "workset",
+        label: "Workset",
+        value: info.workset,
+        dtStyle: "vc-w-3/12",
+        ddStyle: "vc-w-9/12",
+        dlStyle: "vc-w-full"
+      }
+    ],
+    [
+      {
+        key: "category",
+        label: "Category",
+        value: info.categoryName,
+        dtStyle: "vc-w-3/12",
+        ddStyle: "vc-w-9/12",
+        dlStyle: "vc-w-full"
+      }
+    ],
+    [
+      {
+        key: "familyName",
+        label: "Family Name",
+        value: info.familyName,
+        dtStyle: "vc-w-3/12",
+        ddStyle: "vc-w-9/12",
+        dlStyle: "vc-w-full"
+      }
+    ],
+    [
+      {
+        key: "familyTypeName",
+        label: "Family Type",
+        value: info.familyTypeName,
+        dtStyle: "vc-w-3/12",
+        ddStyle: "vc-w-9/12",
+        dlStyle: "vc-w-full"
+      }
+    ],
+    [
+      {
+        key: "elementId",
+        label: "Element Id",
+        value: info.id,
+        dtStyle: "vc-w-3/12",
+        ddStyle: "vc-w-9/12",
+        dlStyle: "vc-w-full"
+      }
+    ]
   ];
 }
 async function getVimBimHeader(vim) {
@@ -54692,34 +54782,55 @@ async function getVimBimHeader(vim) {
   const main = (_a22 = documents.find((d) => !d.isLinked)) != null ? _a22 : documents[0];
   return [
     [
-      [
-        "Document",
-        formatSource(vim.source),
-        "vc-w-3/12",
-        "vc-w-9/12",
-        "vc-w-full"
-      ]
-    ],
-    [["Source Path", main.pathName, "vc-w-3/12", "vc-w-9/12", "vc-w-full"]],
-    [
-      [
-        "Created on",
-        formatDate(vim.document.header.created),
-        "vc-w-3/12",
-        "vc-w-9/12",
-        "vc-w-full"
-      ]
+      {
+        key: "document",
+        label: "Document",
+        value: formatSource(vim.source),
+        dtStyle: "vc-w-3/12",
+        ddStyle: "vc-w-9/12",
+        dlStyle: "vc-w-full"
+      }
     ],
     [
-      [
-        "Created with",
-        vim.document.header.generator,
-        "vc-w-3/12",
-        "vc-w-9/12",
-        "vc-w-full"
-      ]
+      {
+        key: "sourcePath",
+        label: "Source Path",
+        value: main.pathName,
+        dtStyle: "vc-w-3/12",
+        ddStyle: "vc-w-9/12",
+        dlStyle: "vc-w-full"
+      }
     ],
-    void 0
+    [
+      {
+        key: "createdOn",
+        label: "Created on",
+        value: formatDate(vim.document.header.created),
+        dtStyle: "vc-w-3/12",
+        ddStyle: "vc-w-9/12",
+        dlStyle: "vc-w-full"
+      }
+    ],
+    [
+      {
+        key: "createdWith",
+        label: "Created with",
+        value: vim.document.header.generator,
+        dtStyle: "vc-w-3/12",
+        ddStyle: "vc-w-9/12",
+        dlStyle: "vc-w-full"
+      }
+    ],
+    [
+      {
+        key: "createdBy",
+        label: "Created by",
+        value: vim.document.header.generator,
+        dtStyle: "vc-w-3/12",
+        ddStyle: "vc-w-9/12",
+        dlStyle: "vc-w-full"
+      }
+    ]
   ];
 }
 function formatSource(source) {
@@ -54781,7 +54892,7 @@ function BimSearch(props) {
     className: "search-clear vc-text-white vc-bg-gray-medium vc-w-4 vc-h-4 vc-flex vc-items-center vc-justify-center vc-rounded-full vc-shrink-0 vc-absolute vc-right-0",
     onClick: onClear
   }, close({ width: 10, height: 10, fill: "currentColor" }), " ") : null, props.count !== void 0 && text ? /* @__PURE__ */ React__default.createElement("div", {
-    className: "search-count vc-absolute vc-right-16 vc-rounded-full vc-bg-primary-royal vc-py-1 vc-px-2 vc-text-xs vc-font-bold vc-text-white"
+    className: "search-count vc-absolute vc-right-8 vc-rounded-full vc-bg-primary-royal vc-py-1 vc-px-2 vc-text-xs vc-font-bold vc-text-white"
   }, props.count) : null);
 }
 function BimPanel(props) {
