@@ -47727,7 +47727,6 @@ class VimMaterials {
     this.isolation = isolation != null ? isolation : createIsolationMaterial();
     this.focus = focus != null ? focus : createFocus();
     this.outline = createOutlineMaterial();
-    this.outline.onBeforeCompile = (s) => console.log(s.fragmentShader);
   }
   applyWireframeSettings(color, opacity) {
     this.wireframe.color = color;
@@ -49349,7 +49348,7 @@ class SelectionOutlinePass extends Pass {
         sceneColorBuffer: { value: null },
         depthBuffer: { value: null },
         outlineColor: { value: new Color(16777215) },
-        strokeMultiplier: { value: 3 },
+        strokeMultiplier: { value: 2 },
         strokeBias: { value: 2 },
         cameraNear: { value: this._camera.near },
         cameraFar: { value: this._camera.far },
@@ -49368,6 +49367,7 @@ class SelectionRenderer {
     __publicField(this, "_scene");
     __publicField(this, "_materials");
     __publicField(this, "_camera");
+    __publicField(this, "_samples", 4);
     __publicField(this, "_selectionComposer");
     __publicField(this, "_sceneComposer");
     __publicField(this, "_renderPass");
@@ -49385,7 +49385,7 @@ class SelectionRenderer {
   }
   setup(width, height) {
     this._sceneTarget = new WebGLRenderTarget(width, height);
-    this._sceneTarget.samples = 4;
+    this._sceneTarget.samples = this._samples;
     this._sceneComposer = new EffectComposer(this._renderer, this._sceneTarget);
     this._sceneComposer.renderToScreen = false;
     this._renderPass = new RenderPass(this._scene.scene, this._camera);
@@ -49395,6 +49395,7 @@ class SelectionRenderer {
       depthTexture: this._depthTexture,
       depthBuffer: true
     });
+    this._sceneTarget.samples = this._samples;
     this._selectionComposer = new EffectComposer(this._renderer, this._selectionTarget);
     this._selectionRenderPass = new RenderPass(this._scene.scene, this._camera, this._materials.outline);
     this._selectionComposer.addPass(this._selectionRenderPass);
@@ -49431,6 +49432,14 @@ class SelectionRenderer {
   }
   set strokeColor(value) {
     this._outlinePass.color = value;
+  }
+  get samples() {
+    return this._samples;
+  }
+  set samples(value) {
+    this._samples = value;
+    this._sceneTarget.samples = value;
+    this._selectionTarget.samples = value;
   }
   render() {
     this._sceneComposer.render();
