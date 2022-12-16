@@ -41649,6 +41649,7 @@ class Camera {
     __publicField2(this, "_onValueChanged", new dist$3.SignalDispatcher());
     __publicField2(this, "_hasMoved");
     __publicField2(this, "_onMoved", new dist$3.SignalDispatcher());
+    __publicField2(this, "freeze");
     __publicField2(this, "defaultLerpDuration", 2);
     __publicField2(this, "_vimReferenceSize", 1);
     __publicField2(this, "_sceneSizeMultiplier", 1);
@@ -41995,6 +41996,8 @@ class Camera {
   }
   update(deltaTime) {
     var _a22;
+    if (this.freeze)
+      return;
     if (this.shouldLerp()) {
       if (this._lerpPosition && !this.isNearTarget()) {
         this.applyPositionLerp();
@@ -44046,6 +44049,7 @@ class GroundPlane {
       depthWrite: false
     });
     this.mesh = new Mesh(this._geometry, this._material);
+    this.mesh.renderOrder = -1;
   }
   applyViewerSettings(settings2) {
     this._size = settings2.groundPlane.size;
@@ -47290,12 +47294,9 @@ class StandardMaterial {
         varying float vIgnore;
 
         // FOCUS
-
         // Instance or vertex attribute to higlight objects
         // Used as instance attribute for instanced mesh and as vertex attribute for merged meshes. 
         attribute float focused; 
-        
-
         varying float vHighlight;
         `).replace("#include <color_vertex>", `
           // COLORING
@@ -47349,27 +47350,29 @@ class StandardMaterial {
           #if NUM_CLIPPING_PLANES > 0
             vec4 strokePlane;
             float strokeDot;
+            vec3 worldNormal;
+            vec3 worldPlane;
+            float worldDot;
             float thick = pow(vFragDepth,sectionStrokeFalloff) * sectionStrokeWidth;
             #pragma unroll_loop_start
             for ( int i = 0; i < UNION_CLIPPING_PLANES; i ++ ) {
               strokePlane = clippingPlanes[ i ];
               strokeDot = dot(vClipPosition, strokePlane.xyz);
+
+              // We don't want fully perpendicular surface to become colored.
+              worldNormal =  inverseTransformDirection(normal, viewMatrix);
+              worldPlane = inverseTransformDirection(strokePlane.xyz, viewMatrix);
+              worldDot = abs(dot(worldNormal, worldPlane));
+
               if (strokeDot > strokePlane.w) discard;
               if ((strokePlane.w - strokeDot) < thick) {
-                float strength = (strokePlane.w - strokeDot) / thick;
-
-                gl_FragColor = vec4(
-                  sectionStrokeColor.x + (gl_FragColor.x - sectionStrokeColor.x) * strength,
-                  sectionStrokeColor.y + (gl_FragColor.y - sectionStrokeColor.y) * strength,
-                  sectionStrokeColor.z + (gl_FragColor.z - sectionStrokeColor.z) * strength,
-                  1.0f);
-
+                float strength = (strokePlane.w - strokeDot) * pow(1.0f - worldDot, 2.0f) / thick;
+                gl_FragColor = vec4(mix(gl_FragColor.xyz, sectionStrokeColor, strength), 1.0f);
                 return;
               }
             }
             #pragma unroll_loop_end
           #endif  
-
         `);
     };
   }
@@ -54597,8 +54600,8 @@ function BimTree(props) {
     className: "vim-bim-tree vc-mb-5",
     ref: div,
     tabIndex: 0,
-    onFocus: () => viewer.inputs.keyboard.unregister(),
-    onBlur: () => viewer.inputs.keyboard.register()
+    onFocus: () => viewer.camera.freeze = true,
+    onBlur: () => viewer.camera.freeze = false
   }, /* @__PURE__ */ React__default.createElement(ControlledTreeEnvironment, {
     items: treeRef.current.nodes,
     getItemTitle: (item) => item.title,
