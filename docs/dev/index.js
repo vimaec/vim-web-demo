@@ -47798,6 +47798,8 @@ class VimMaterials {
     return this._focusIntensity;
   }
   set focusIntensity(value) {
+    if (this._focusIntensity === value)
+      return;
     this._focusIntensity = value;
     this.opaque.focusIntensity = value;
     this.transparent.focusIntensity = value;
@@ -47807,6 +47809,8 @@ class VimMaterials {
     return this._focusColor;
   }
   set focusColor(value) {
+    if (this._focusColor === value)
+      return;
     this._focusColor = value;
     this.opaque.focusColor = value;
     this.transparent.focusColor = value;
@@ -47816,6 +47820,8 @@ class VimMaterials {
     return this.wireframe.color;
   }
   set wireframeColor(value) {
+    if (this.wireframe.color === value)
+      return;
     this.wireframe.color = value;
     this._onUpdate.dispatch();
   }
@@ -47823,6 +47829,8 @@ class VimMaterials {
     return this.wireframe.opacity;
   }
   set wireframeOpacity(value) {
+    if (this.wireframe.opacity === value)
+      return;
     this.wireframe.opacity = value;
     this._onUpdate.dispatch();
   }
@@ -47842,6 +47850,8 @@ class VimMaterials {
     return this._sectionStrokeWitdh;
   }
   set sectionStrokeWitdh(value) {
+    if (this._sectionStrokeWitdh === value)
+      return;
     this._sectionStrokeWitdh = value;
     this.opaque.sectionStrokeWitdh = value;
     this.transparent.sectionStrokeWitdh = value;
@@ -47851,6 +47861,8 @@ class VimMaterials {
     return this._sectionStrokeFallof;
   }
   set sectionStrokeFallof(value) {
+    if (this._sectionStrokeFallof === value)
+      return;
     this._sectionStrokeFallof = value;
     this.opaque.sectionStrokeFallof = value;
     this.transparent.sectionStrokeFallof = value;
@@ -47860,6 +47872,8 @@ class VimMaterials {
     return this._sectionStrokeColor;
   }
   set sectionStrokeColor(value) {
+    if (this._sectionStrokeColor === value)
+      return;
     this._sectionStrokeColor = value;
     this.opaque.sectionStrokeColor = value;
     this.transparent.sectionStrokeColor = value;
@@ -47869,6 +47883,8 @@ class VimMaterials {
     return this.merge.color;
   }
   set outlineColor(value) {
+    if (this.merge.color === value)
+      return;
     this.merge.color = value;
     this._onUpdate.dispatch();
   }
@@ -47876,6 +47892,8 @@ class VimMaterials {
     return this.outline.strokeBlur;
   }
   set outlineBlur(value) {
+    if (this.outline.strokeBlur === value)
+      return;
     this.outline.strokeBlur = value;
     this._onUpdate.dispatch();
   }
@@ -47883,6 +47901,8 @@ class VimMaterials {
     return this.outline.strokeBias;
   }
   set outlineFalloff(value) {
+    if (this.outline.strokeBias === value)
+      return;
     this.outline.strokeBias = value;
     this._onUpdate.dispatch();
   }
@@ -47890,6 +47910,8 @@ class VimMaterials {
     return this.outline.strokeMultiplier;
   }
   set outlineIntensity(value) {
+    if (this.outline.strokeMultiplier === value)
+      return;
     this.outline.strokeMultiplier = value;
     this._onUpdate.dispatch();
   }
