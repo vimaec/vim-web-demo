@@ -54685,8 +54685,8 @@ function BimTree(props) {
     className: "vim-bim-tree vc-mb-5",
     ref: div,
     tabIndex: 0,
-    onFocus: () => viewer.inputs.keyboard.arrowsEnabled = true,
-    onBlur: () => viewer.inputs.keyboard.arrowsEnabled = false
+    onFocus: () => viewer.inputs.keyboard.arrowsEnabled = false,
+    onBlur: () => viewer.inputs.keyboard.arrowsEnabled = true
   }, /* @__PURE__ */ React__default.createElement(ControlledTreeEnvironment, {
     items: treeRef.current.nodes,
     getItemTitle: (item) => item.title,
