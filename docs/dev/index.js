@@ -41171,7 +41171,10 @@ const defaultConfig$1 = {
       color: new Color(0, 1, 1)
     }
   },
-  axes: new GizmoOptions()
+  axes: new GizmoOptions(),
+  rendering: {
+    onDemand: true
+  }
 };
 function getConfig(options) {
   return options ? cjs$1(defaultConfig$1, options, void 0) : defaultConfig$1;
@@ -42022,6 +42025,7 @@ class Camera {
     }
     this._lastPosition.copy(this.camera.position);
     this._lastQuaternion.copy(this.camera.quaternion);
+    return this._hasMoved;
   }
   isNearTarget() {
     return this.camera.position.distanceTo(this._targetPosition) < 0.1;
@@ -42214,6 +42218,7 @@ class KeyboardHandler extends InputHandler {
     __publicField2(this, "isQPressed", false);
     __publicField2(this, "isShiftPressed", false);
     __publicField2(this, "isCtrlPressed", false);
+    __publicField2(this, "arrowsEnabled", true);
   }
   addListeners() {
     this.reg(document, "keydown", (e) => this.onKeyDown(e));
@@ -42297,7 +42302,9 @@ class KeyboardHandler extends InputHandler {
     const move = new Vector3((this.isRightPressed ? 1 : 0) - (this.isLeftPressed ? 1 : 0), (this.isEPressed ? 1 : 0) - (this.isQPressed ? 1 : 0), (this.isUpPressed ? 1 : 0) - (this.isDownPressed ? 1 : 0));
     const speed = this.isShiftPressed ? this.SHIFT_MULTIPLIER : 1;
     move.multiplyScalar(speed);
-    this.camera.localVelocity = move;
+    if (this.arrowsEnabled) {
+      this.camera.localVelocity = move;
+    }
   }
 }
 class RaycastResult {
@@ -43290,9 +43297,9 @@ class DefaultInputScheme {
       case KEYS.KEY_Z:
       case KEYS.KEY_F:
         if (selection.count > 0) {
-          camera.frame(selection.getBoundingBox(), "center", camera.defaultLerpDuration);
+          camera.frame(selection.getBoundingBox(), "none", camera.defaultLerpDuration);
         } else {
-          camera.frame("all", "center", camera.defaultLerpDuration);
+          camera.frame("all", 45, camera.defaultLerpDuration);
         }
         return true;
       default:
@@ -43626,10 +43633,10 @@ class ObjectAttribute {
   }
   apply(value) {
     if (this.value === value)
-      return;
+      return false;
     this.value = value;
     if (!this._meshes)
-      return;
+      return false;
     const number = this.toNumber(value);
     for (let m2 = 0; m2 < this._meshes.length; m2++) {
       const [mesh, index] = this._meshes[m2];
@@ -43639,6 +43646,7 @@ class ObjectAttribute {
         this.applyInstanced(mesh, index, number);
       }
     }
+    return true;
   }
   applyInstanced(mesh, index, number) {
     let attribute = mesh.geometry.getAttribute(this.instanceAttribute);
@@ -43778,24 +43786,23 @@ class Object$1 {
     var _a22;
     return (_a22 = this._meshes) == null ? void 0 : _a22.length;
   }
-  get selected() {
+  get outline() {
     return this.selectedAttribute.value;
   }
-  set selected(value) {
-    this.selectedAttribute.apply(value);
+  set outline(value) {
+    this.vim.scene.updated = this.selectedAttribute.apply(value);
   }
   get focused() {
     return this.focusedAttribute.value;
   }
   set focused(value) {
-    this.focusedAttribute.apply(value);
+    this.vim.scene.updated = this.focusedAttribute.apply(value);
   }
   get visible() {
     return this.visibleAttribute.value;
   }
   set visible(value) {
-    this.vim.scene.visibilityChanged = true;
-    this.visibleAttribute.apply(value);
+    this.vim.scene.updated = this.visibleAttribute.apply(value);
   }
   get color() {
     return this.colorAttribute.value;
@@ -43804,6 +43811,7 @@ class Object$1 {
     if (!this._color || !color ? !this._color && !color : this._color.equals(color)) {
       return;
     }
+    this.vim.scene.updated = true;
     this._color = color;
     this.coloredAttribute.apply(color !== void 0);
     this.colorAttribute.apply(color);
@@ -43812,6 +43820,7 @@ class Object$1 {
     this._meshes = meshes;
     if (!meshes)
       return;
+    this.vim.scene.updated = true;
     if (this.color) {
       this.color = this._color;
     }
@@ -43868,11 +43877,8 @@ class Object$1 {
   }
 }
 class Selection {
-  constructor(materials, camera, config) {
+  constructor(materials) {
     __publicField2(this, "_materials");
-    __publicField2(this, "_camera");
-    __publicField2(this, "maxOutlineBlur", 7);
-    __publicField2(this, "minOutlineBlur", 3);
     __publicField2(this, "_objects", /* @__PURE__ */ new Set());
     __publicField2(this, "_focusedObject");
     __publicField2(this, "_vim");
@@ -43881,9 +43887,6 @@ class Selection {
     __publicField2(this, "_onValueChanged", new dist$3.SignalDispatcher());
     __publicField2(this, "_unsub", []);
     this._materials = materials;
-    this._camera = camera;
-    this.maxOutlineBlur = config.materials.outline.blur;
-    this.minOutlineBlur = 2 + this.maxOutlineBlur % 2;
     this.animate();
   }
   get onValueChanged() {
@@ -43932,13 +43935,13 @@ class Selection {
     if (object.length === this._objects.size && object.every((o) => this._objects.has(o))) {
       return;
     }
-    this._objects.forEach((o) => o.selected = false);
+    this._objects.forEach((o) => o.outline = false);
     this._objects.clear();
     this._vim = void 0;
     object == null ? void 0 : object.forEach((o) => {
       this.clearOnNewVim(o.vim);
       this._objects.add(o);
-      o.selected = true;
+      o.outline = true;
     });
     this._onValueChanged.dispatch();
   }
@@ -43958,7 +43961,7 @@ class Selection {
     objects.forEach((o) => {
       this.clearOnNewVim(o.vim);
       this._objects.add(o);
-      o.selected = true;
+      o.outline = true;
     });
     if (oldVim === this._vim && this._objects.size === count)
       return;
@@ -43971,7 +43974,7 @@ class Selection {
       return;
     const count = this._objects.size;
     objects.forEach((o) => {
-      o.selected = false;
+      o.outline = false;
       this._objects.delete(o);
     });
     if (this._objects.size === count)
@@ -43991,11 +43994,11 @@ class Selection {
     objects.forEach((o) => {
       if (this._objects.has(o)) {
         this._objects.delete(o);
-        o.selected = false;
+        o.outline = false;
       } else {
         this.clearOnNewVim(o.vim);
         this._objects.add(o);
-        o.selected = true;
+        o.outline = true;
       }
     });
     if (oldVim === this._vim && this._objects.size === count)
@@ -44006,7 +44009,7 @@ class Selection {
     this._vim = void 0;
     if (this._objects.size === 0)
       return;
-    this._objects.forEach((o) => o.selected = false);
+    this._objects.forEach((o) => o.outline = false);
     this._objects.clear();
     this._onValueChanged.dispatch();
   }
@@ -44308,12 +44311,21 @@ class Scene {
     __publicField2(this, "builder");
     __publicField2(this, "meshes", []);
     __publicField2(this, "vim");
-    __publicField2(this, "visibilityChanged", false);
+    __publicField2(this, "_updated", false);
     __publicField2(this, "_boundingBox", new Box3());
     __publicField2(this, "_instanceToThreeMeshes", /* @__PURE__ */ new Map());
     __publicField2(this, "_threeMeshIdToInstances", /* @__PURE__ */ new Map());
     __publicField2(this, "_material");
     this.builder = builder;
+  }
+  get updated() {
+    return this._updated;
+  }
+  set updated(value) {
+    this._updated = this._updated || value;
+  }
+  clearUpdateFlag() {
+    this._updated = false;
   }
   getBoundingBox(target = new Box3()) {
     return target.copy(this._boundingBox);
@@ -44360,6 +44372,7 @@ class Scene {
     this._boundingBox = (_c = (_b2 = this._boundingBox) == null ? void 0 : _b2.union(box)) != null ? _c : box.clone();
     this._threeMeshIdToInstances.set(mesh.id, instances);
     this.meshes.push(mesh);
+    this.updated = true;
     return this;
   }
   merge(other) {
@@ -44377,12 +44390,16 @@ class Scene {
       this._threeMeshIdToInstances.set(key, value);
     });
     this._boundingBox = (_b2 = (_a22 = this._boundingBox) == null ? void 0 : _a22.union(other._boundingBox)) != null ? _b2 : other._boundingBox.clone();
+    this.updated = true;
     return this;
   }
   get material() {
     return this._material;
   }
   set material(value) {
+    if (this._material === value)
+      return;
+    this.updated = true;
     this._material = value;
     if (value) {
       this.meshes.forEach((m2) => {
@@ -44423,13 +44440,13 @@ class RenderScene {
   getUpdatedScenes() {
     const result = [];
     for (const s of this._scenes) {
-      if (s.visibilityChanged)
+      if (s.updated)
         result.push(s);
     }
     return result;
   }
   clearUpdateFlags() {
-    this._scenes.forEach((s) => s.visibilityChanged = false);
+    this._scenes.forEach((s) => s.clearUpdateFlag());
   }
   getBoundingBox(target = new Box3()) {
     return this._boundingBox ? target.copy(this._boundingBox) : target.set(new Vector3(-1, -1, -1), new Vector3(1, 1, 1));
@@ -44965,6 +44982,7 @@ class SectionBox {
       if (this.visible)
         this._highlight.highlight(this.section.box, normal);
       this._onHover.dispatch(normal.x !== 0 || normal.y !== 0 || normal.z !== 0);
+      this.renderer.needsUpdate = true;
     };
     this._inputs.onBoxStretch = (box) => {
       this.renderer.section.fitBox(box);
@@ -45034,6 +45052,7 @@ class SectionBox {
     if (value)
       this.update();
     this._onStateChanged.dispatch();
+    this.renderer.needsUpdate = true;
   }
   fitBox(box, padding = 1) {
     const b = box.expandByScalar(padding);
@@ -45041,10 +45060,12 @@ class SectionBox {
     this._outline.fitBox(b);
     this.renderer.section.fitBox(b);
     this._onBoxConfirm.dispatch(this.box);
+    this.renderer.needsUpdate = true;
   }
   update() {
     this.fitBox(this.section.box, 0);
     this._highlight.highlight(this.section.box, this._normal);
+    this.renderer.needsUpdate = true;
   }
   dispose() {
     this.renderer.remove(this._cube);
@@ -45907,6 +45928,7 @@ class MeasureGizmo {
     this._lineX.label.visible = !collapse2;
     this._lineY.label.visible = !collapse2;
     this._lineZ.label.visible = !collapse2;
+    this._viewer.renderer.needsUpdate = true;
   }
   screenDist(first, second) {
     if (!first || !second)
@@ -45918,18 +45940,21 @@ class MeasureGizmo {
   start(start) {
     this._startMarker.setPosition(start);
     this._startMarker.mesh.visible = true;
+    this._viewer.renderer.needsUpdate = true;
   }
   hide() {
     if (this._line) {
       this._line.mesh.visible = false;
       this._line.label.visible = false;
     }
+    this._viewer.renderer.needsUpdate = true;
   }
   update(start, pos) {
     if (this._line) {
       this._line.setPoints(start, pos);
       this._line.mesh.visible = true;
     }
+    this._viewer.renderer.needsUpdate = true;
   }
   finish(start, end) {
     var _a22, _b2, _c, _d, _e, _f, _g, _h;
@@ -46134,6 +46159,7 @@ class GizmoRectangle {
     return this.line.visible;
   }
   set visible(value) {
+    this.viewer.renderer.needsUpdate = true;
     this.line.visible = value;
   }
   setCorners(posA, posB) {
@@ -46161,6 +46187,7 @@ class GizmoRectangle {
     this.line.position.copy(position);
     this.line.scale.set(dx, dy, 1);
     this.line.updateMatrix();
+    this.viewer.renderer.needsUpdate = true;
   }
   getBoxSize(A2, B2) {
     const cam = this.viewer.camera;
@@ -47744,6 +47771,7 @@ class VimMaterials {
     __publicField2(this, "_sectionStrokeColor", new Color(246, 246, 246));
     __publicField2(this, "_focusIntensity", 0.75);
     __publicField2(this, "_focusColor", new Color(1, 1, 1));
+    __publicField2(this, "_onUpdate", new dist$3.SignalDispatcher());
     this.opaque = opaque != null ? opaque : new StandardMaterial(createOpaque());
     this.transparent = transparent != null ? transparent : new StandardMaterial(createTransparent());
     this.wireframe = wireframe != null ? wireframe : createWireframe();
@@ -47763,6 +47791,9 @@ class VimMaterials {
     this.outlineBlur = settings2.materials.outline.blur;
     this.outlineColor = settings2.materials.outline.color;
   }
+  get onUpdate() {
+    return this._onUpdate.asEvent();
+  }
   get focusIntensity() {
     return this._focusIntensity;
   }
@@ -47770,6 +47801,7 @@ class VimMaterials {
     this._focusIntensity = value;
     this.opaque.focusIntensity = value;
     this.transparent.focusIntensity = value;
+    this._onUpdate.dispatch();
   }
   get focusColor() {
     return this._focusColor;
@@ -47778,18 +47810,21 @@ class VimMaterials {
     this._focusColor = value;
     this.opaque.focusColor = value;
     this.transparent.focusColor = value;
+    this._onUpdate.dispatch();
   }
   get wireframeColor() {
     return this.wireframe.color;
   }
   set wireframeColor(value) {
     this.wireframe.color = value;
+    this._onUpdate.dispatch();
   }
   get wireframeOpacity() {
     return this.wireframe.opacity;
   }
   set wireframeOpacity(value) {
     this.wireframe.opacity = value;
+    this._onUpdate.dispatch();
   }
   get clippingPlanes() {
     return this._clippingPlanes;
@@ -47801,6 +47836,7 @@ class VimMaterials {
     this.wireframe.clippingPlanes = value != null ? value : null;
     this.isolation.clippingPlanes = value != null ? value : null;
     this.mask.clippingPlanes = value != null ? value : null;
+    this._onUpdate.dispatch();
   }
   get sectionStrokeWitdh() {
     return this._sectionStrokeWitdh;
@@ -47809,6 +47845,7 @@ class VimMaterials {
     this._sectionStrokeWitdh = value;
     this.opaque.sectionStrokeWitdh = value;
     this.transparent.sectionStrokeWitdh = value;
+    this._onUpdate.dispatch();
   }
   get sectionStrokeFallof() {
     return this._sectionStrokeFallof;
@@ -47817,6 +47854,7 @@ class VimMaterials {
     this._sectionStrokeFallof = value;
     this.opaque.sectionStrokeFallof = value;
     this.transparent.sectionStrokeFallof = value;
+    this._onUpdate.dispatch();
   }
   get sectionStrokeColor() {
     return this._sectionStrokeColor;
@@ -47825,30 +47863,35 @@ class VimMaterials {
     this._sectionStrokeColor = value;
     this.opaque.sectionStrokeColor = value;
     this.transparent.sectionStrokeColor = value;
+    this._onUpdate.dispatch();
   }
   get outlineColor() {
     return this.merge.color;
   }
   set outlineColor(value) {
     this.merge.color = value;
+    this._onUpdate.dispatch();
   }
   get outlineBlur() {
     return this.outline.strokeBlur;
   }
   set outlineBlur(value) {
     this.outline.strokeBlur = value;
+    this._onUpdate.dispatch();
   }
   get outlineFalloff() {
     return this.outline.strokeBias;
   }
   set outlineFalloff(value) {
     this.outline.strokeBias = value;
+    this._onUpdate.dispatch();
   }
   get outlineIntensity() {
     return this.outline.strokeMultiplier;
   }
   set outlineIntensity(value) {
     this.outline.strokeMultiplier = value;
+    this._onUpdate.dispatch();
   }
   dispose() {
     this.opaque.dispose();
@@ -48685,11 +48728,13 @@ class RenderingSection {
     this.maxZ.constant = box.max.z;
     this.minZ.constant = -box.min.z;
     this.box.copy(box);
+    this._renderer.needsUpdate = true;
   }
   set active(value) {
     this._materials.clippingPlanes = this.planes;
-    this._renderer.localClippingEnabled = value;
+    this._renderer.renderer.localClippingEnabled = value;
     this._active = value;
+    this._renderer.needsUpdate = true;
   }
   get active() {
     return this._active;
@@ -49679,7 +49724,7 @@ class RenderingComposer {
   }
 }
 class Renderer {
-  constructor(scene, viewport, materials, camera) {
+  constructor(scene, viewport, materials, camera, config) {
     __publicField2(this, "renderer");
     __publicField2(this, "textRenderer");
     __publicField2(this, "section");
@@ -49688,8 +49733,10 @@ class Renderer {
     __publicField2(this, "_camera");
     __publicField2(this, "_composer");
     __publicField2(this, "_materials");
-    __publicField2(this, "_onVisibilityChanged", new dist$1$1.SimpleEventDispatcher());
+    __publicField2(this, "_onSceneUpdate", new dist$1$1.SimpleEventDispatcher());
     __publicField2(this, "_renderText");
+    __publicField2(this, "_needsUpdate");
+    __publicField2(this, "_renderOnDemand");
     __publicField2(this, "fitViewport", () => {
       const size = this._viewport.getParentSize();
       this.renderer.setPixelRatio(window.devicePixelRatio);
@@ -49701,6 +49748,7 @@ class Renderer {
     this._scene = scene;
     this._materials = materials;
     this._camera = camera;
+    this._renderOnDemand = config.rendering.onDemand;
     this.renderer = new WebGLRenderer({
       canvas: viewport.canvas,
       antialias: true,
@@ -49713,10 +49761,20 @@ class Renderer {
     this.textRenderer = this._viewport.createTextRenderer();
     this.textEnabled = false;
     this._composer = new RenderingComposer(this.renderer, scene, viewport, materials, camera);
-    this.section = new RenderingSection(this.renderer, this._materials);
+    this.section = new RenderingSection(this, this._materials);
     this.fitViewport();
     this._viewport.onResize.subscribe(() => this.fitViewport());
-    this._camera.onValueChanged.sub(() => this._composer.camera = this._camera.camera);
+    this._camera.onValueChanged.sub(() => {
+      this._composer.camera = this._camera.camera;
+      this.needsUpdate = true;
+    });
+    this._materials.onUpdate.sub(() => this.needsUpdate = true);
+  }
+  get needsUpdate() {
+    return this._needsUpdate;
+  }
+  set needsUpdate(value) {
+    this._needsUpdate = this._needsUpdate || value;
   }
   dispose() {
     this.clear();
@@ -49725,8 +49783,8 @@ class Renderer {
     this.renderer.dispose();
     this._composer.dispose();
   }
-  get onVisibilityChanged() {
-    return this._onVisibilityChanged.asEvent();
+  get onSceneUpdated() {
+    return this._onSceneUpdate.asEvent();
   }
   get textEnabled() {
     var _a22;
@@ -49735,6 +49793,7 @@ class Renderer {
   set textEnabled(value) {
     if (value === this._renderText)
       return;
+    this.needsUpdate = true;
     this._renderText = value;
     this.textRenderer.domElement.style.display = value ? "block" : "none";
   }
@@ -49742,15 +49801,19 @@ class Renderer {
     return this._scene.getBoundingBox(target);
   }
   render(camera, hasSelection) {
+    this._scene.getUpdatedScenes().forEach((s) => {
+      this.needsUpdate = true;
+      if (s.vim)
+        this._onSceneUpdate.dispatch(s.vim);
+    });
+    if (this._renderOnDemand && !this.needsUpdate)
+      return;
+    this._needsUpdate = false;
     this._composer.outlines = hasSelection;
     this._composer.render();
     if (this.textEnabled) {
       this.textRenderer.render(this._scene.scene, camera);
     }
-    this._scene.getUpdatedScenes().forEach((s) => {
-      if (s.vim)
-        this._onVisibilityChanged.dispatch(s.vim);
-    });
     this._scene.clearUpdateFlags();
   }
   add(target) {
@@ -49797,7 +49860,7 @@ class Viewer {
     const scene = new RenderScene();
     this.viewport = new Viewport(this.config);
     this._camera = new Camera(scene, this.viewport, this.config);
-    this.renderer = new Renderer(scene, this.viewport, materials, this._camera);
+    this.renderer = new Renderer(scene, this.viewport, materials, this._camera, this.config);
     if (this.config.camera.gizmo.enable) {
       this._camera.gizmo = new CameraGizmo(this.renderer, this._camera, this.config);
     }
@@ -49809,7 +49872,7 @@ class Viewer {
     this.gizmoRectangle = new GizmoRectangle(this);
     this._environment = new Environment(this.config);
     this._environment.getObjects().forEach((o) => this.renderer.add(o));
-    this.selection = new Selection(materials, this._camera, this.config);
+    this.selection = new Selection(materials);
     this.raycaster = new Raycaster(this.viewport, this._camera, scene, this.renderer);
     this.inputs = new Input(this);
     this.inputs.registerAll();
@@ -49846,7 +49909,7 @@ class Viewer {
     if (this._disposed)
       return;
     requestAnimationFrame(() => this.animate());
-    this._camera.update(this._clock.getDelta());
+    this.renderer.needsUpdate = this._camera.update(this._clock.getDelta());
     this.renderer.render(this.camera.camera, this.selection.count > 0);
   }
   get vims() {
@@ -54573,7 +54636,7 @@ function BimTree(props) {
     }
   }, [elements, objects]);
   react.exports.useEffect(() => {
-    const subVis = viewer.renderer.onVisibilityChanged.subscribe(() => {
+    const subVis = viewer.renderer.onSceneUpdated.subscribe(() => {
       var _a22;
       (_a22 = treeRef.current) == null ? void 0 : _a22.updateVisibility(viewer);
       setVersion((v2) => v2 + 1);
@@ -54600,8 +54663,8 @@ function BimTree(props) {
     className: "vim-bim-tree vc-mb-5",
     ref: div,
     tabIndex: 0,
-    onFocus: () => viewer.camera.freeze = true,
-    onBlur: () => viewer.camera.freeze = false
+    onFocus: () => viewer.inputs.keyboard.arrowsEnabled = true,
+    onBlur: () => viewer.inputs.keyboard.arrowsEnabled = false
   }, /* @__PURE__ */ React__default.createElement(ControlledTreeEnvironment, {
     items: treeRef.current.nodes,
     getItemTitle: (item) => item.title,
