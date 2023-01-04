@@ -43790,7 +43790,12 @@ class Object$1 {
     return this.selectedAttribute.value;
   }
   set outline(value) {
-    this.vim.scene.updated = this.selectedAttribute.apply(value);
+    if (this.selectedAttribute.apply(value)) {
+      if (value)
+        this.vim.scene.addOutline();
+      else
+        this.vim.scene.removeOutline();
+    }
   }
   get focused() {
     return this.focusedAttribute.value;
@@ -44312,6 +44317,7 @@ class Scene {
     __publicField2(this, "meshes", []);
     __publicField2(this, "vim");
     __publicField2(this, "_updated", false);
+    __publicField2(this, "_outlineCount", 0);
     __publicField2(this, "_boundingBox", new Box3());
     __publicField2(this, "_instanceToThreeMeshes", /* @__PURE__ */ new Map());
     __publicField2(this, "_threeMeshIdToInstances", /* @__PURE__ */ new Map());
@@ -44323,6 +44329,17 @@ class Scene {
   }
   set updated(value) {
     this._updated = this._updated || value;
+  }
+  hasOutline() {
+    return this._outlineCount > 0;
+  }
+  addOutline() {
+    this._outlineCount++;
+    this.updated = true;
+  }
+  removeOutline() {
+    this._outlineCount--;
+    this.updated = true;
   }
   clearUpdateFlag() {
     this._updated = false;
@@ -44444,6 +44461,13 @@ class RenderScene {
         result.push(s);
     }
     return result;
+  }
+  hasOutline() {
+    for (const s of this._scenes) {
+      if (s.hasOutline)
+        return true;
+    }
+    return false;
   }
   clearUpdateFlags() {
     this._scenes.forEach((s) => s.clearUpdateFlag());
@@ -45928,7 +45952,6 @@ class MeasureGizmo {
     this._lineX.label.visible = !collapse2;
     this._lineY.label.visible = !collapse2;
     this._lineZ.label.visible = !collapse2;
-    this._viewer.renderer.needsUpdate = true;
   }
   screenDist(first, second) {
     if (!first || !second)
@@ -45983,6 +46006,7 @@ class MeasureGizmo {
       this._html.values.z.textContent = (_h = (_g = this._lineZ.length) == null ? void 0 : _g.toFixed(2)) != null ? _h : "";
     }
     this._animate();
+    this._viewer.renderer.needsUpdate = true;
     return true;
   }
   dispose() {
@@ -46778,6 +46802,10 @@ const objectModel = {
     columns: {
       name: "string:Name"
     }
+  },
+  level: {
+    table: "Vim.Level",
+    index: "index:Vim.Level:Level"
   }
 };
 class DocumentNoBim {
@@ -47042,6 +47070,10 @@ class Document {
         return;
       return this.getString(documentTitleArray[elementDocumentArray[element]]);
     };
+    const elementLevelArray = await (elementTable == null ? void 0 : elementTable.getArray(objectModel.level.index));
+    const levelTable = await this.entities.getBfast(objectModel.level.table);
+    const levelElementArrays = await (levelTable == null ? void 0 : levelTable.getArray(objectModel.element.index));
+    const getLevel = (element) => this.getString(elementNameArray[levelElementArrays[elementLevelArray[element]]]);
     const familyInstanceElement = await (familyInstanceTable == null ? void 0 : familyInstanceTable.getArray(objectModel.element.index));
     const summary = [];
     familyInstanceElement == null ? void 0 : familyInstanceElement.forEach((e, f) => {
@@ -47054,7 +47086,8 @@ class Document {
           familyName: getFamilyName(e),
           familyTypeName: getFamilyTypeName(f),
           workset: getWorkset(e),
-          documentTitle: getDocument(e)
+          documentTitle: getDocument(e),
+          level: getLevel(e)
         });
       }
     });
@@ -48751,6 +48784,7 @@ class RenderingSection {
     this.minZ.constant = -box.min.z;
     this.box.copy(box);
     this._renderer.needsUpdate = true;
+    this._renderer.skipAntialias = true;
   }
   set active(value) {
     this._materials.clippingPlanes = this.planes;
@@ -49518,16 +49552,23 @@ const FXAAShader = {
 	`
 };
 class OutlinePass extends Pass {
-  constructor(sceneBuffer, material) {
+  constructor(sceneBuffer, camera, material) {
     super();
     __publicField2(this, "_fsQuad");
     __publicField2(this, "material");
     this.material = material != null ? material : new OutlineMaterial();
     this.material.sceneBuffer = sceneBuffer;
+    this.material.camera = camera;
     this._fsQuad = new FullScreenQuad(this.material.material);
   }
   setSize(width, height) {
     this.material.resolution = new Vector2(width, height);
+  }
+  get camera() {
+    return this.material.camera;
+  }
+  set camera(value) {
+    this.material.camera = value;
   }
   dispose() {
     this._fsQuad.dispose();
@@ -49620,7 +49661,6 @@ class TransferPass extends Pass {
 }
 class RenderingComposer {
   constructor(renderer, scene, viewport, materials, camera) {
-    __publicField2(this, "_cam");
     __publicField2(this, "_renderer");
     __publicField2(this, "_scene");
     __publicField2(this, "_materials");
@@ -49634,19 +49674,19 @@ class RenderingComposer {
     __publicField2(this, "_transferPass");
     __publicField2(this, "_outlines");
     __publicField2(this, "_clock", new Clock());
-    __publicField2(this, "_aaResumeTime");
+    __publicField2(this, "_nextAATime");
+    __publicField2(this, "onDemand");
     __publicField2(this, "_outlinePass");
     __publicField2(this, "_fxaaPass");
     __publicField2(this, "_mergePass");
     __publicField2(this, "_outlineTarget");
     __publicField2(this, "_sceneTarget");
-    this._cam = camera;
     this._samples = renderer.capabilities.isWebGL2 ? renderer.capabilities.maxSamples : 0;
     this._renderer = renderer;
     this._scene = scene;
     this._materials = materials;
-    this._camera = camera.camera;
     this._size = viewport.getSize();
+    this._camera = camera.camera;
     this.setup();
     this._clock = new Clock();
     this._scene.scene.background = new Color("#d8d8e6");
@@ -49679,7 +49719,7 @@ class RenderingComposer {
     this._composer = new EffectComposer(this._renderer, this._outlineTarget);
     this._selectionRenderPass = new RenderPass(this._scene.scene, this._camera, this._materials.mask);
     this._composer.addPass(this._selectionRenderPass);
-    this._outlinePass = new OutlinePass(this._sceneTarget.texture, this._materials.outline);
+    this._outlinePass = new OutlinePass(this._sceneTarget.texture, this._camera, this._materials.outline);
     this._composer.addPass(this._outlinePass);
     this._fxaaPass = new ShaderPass(FXAAShader);
     this._composer.addPass(this._fxaaPass);
@@ -49707,6 +49747,7 @@ class RenderingComposer {
   }
   set camera(value) {
     this._renderPass.camera = value;
+    this._ssaaRenderPass.camera = value;
     this._selectionRenderPass.camera = value;
     this._outlinePass.material.camera = value;
     this._camera = value;
@@ -49727,15 +49768,19 @@ class RenderingComposer {
     this._samples = value;
     this.setup();
   }
-  render() {
+  render(updated, antialias) {
     const time = new Date().getTime();
-    if (this._cam.hasMoved) {
-      this._aaResumeTime = time + 20;
-      this._renderPass.render(this._renderer, void 0, this._sceneTarget, this._clock.getDelta(), false);
-    } else if (time > this._aaResumeTime) {
-      this._ssaaRenderPass.render(this._renderer, this._sceneTarget, this._ssaaRenderPass.sampleRenderTarget, this._clock.getDelta(), false);
+    if (updated) {
+      this._nextAATime = time + 20;
     }
-    this._composer.render();
+    if (updated && !antialias) {
+      this._renderPass.render(this._renderer, void 0, this._sceneTarget, this._clock.getDelta(), false);
+      this._composer.render();
+    } else if (!this.onDemand || time > this._nextAATime) {
+      this._ssaaRenderPass.render(this._renderer, this._sceneTarget, this._ssaaRenderPass.sampleRenderTarget, this._clock.getDelta(), false);
+      this._nextAATime = Number.MAX_VALUE;
+      this._composer.render();
+    }
   }
   dispose() {
     this._sceneTarget.dispose();
@@ -49750,6 +49795,7 @@ class Renderer {
     __publicField2(this, "renderer");
     __publicField2(this, "textRenderer");
     __publicField2(this, "section");
+    __publicField2(this, "antialias", true);
     __publicField2(this, "_scene");
     __publicField2(this, "_viewport");
     __publicField2(this, "_camera");
@@ -49758,19 +49804,19 @@ class Renderer {
     __publicField2(this, "_onSceneUpdate", new dist$1$1.SimpleEventDispatcher());
     __publicField2(this, "_renderText");
     __publicField2(this, "_needsUpdate");
-    __publicField2(this, "_renderOnDemand");
+    __publicField2(this, "_skipAntialias");
     __publicField2(this, "fitViewport", () => {
       const size = this._viewport.getParentSize();
       this.renderer.setPixelRatio(window.devicePixelRatio);
       this.renderer.setSize(size.x, size.y);
       this._composer.setSize(size.x, size.y);
       this.textRenderer.setSize(size.x, size.y);
+      this.needsUpdate = true;
     });
     this._viewport = viewport;
     this._scene = scene;
     this._materials = materials;
     this._camera = camera;
-    this._renderOnDemand = config.rendering.onDemand;
     this.renderer = new WebGLRenderer({
       canvas: viewport.canvas,
       antialias: true,
@@ -49783,6 +49829,7 @@ class Renderer {
     this.textRenderer = this._viewport.createTextRenderer();
     this.textEnabled = false;
     this._composer = new RenderingComposer(this.renderer, scene, viewport, materials, camera);
+    this._composer.onDemand = config.rendering.onDemand;
     this.section = new RenderingSection(this, this._materials);
     this.fitViewport();
     this._viewport.onResize.subscribe(() => this.fitViewport());
@@ -49797,6 +49844,12 @@ class Renderer {
   }
   set needsUpdate(value) {
     this._needsUpdate = this._needsUpdate || value;
+  }
+  get skipAntialias() {
+    return this._skipAntialias;
+  }
+  set skipAntialias(value) {
+    this._skipAntialias = this._skipAntialias || value;
   }
   dispose() {
     this.clear();
@@ -49822,19 +49875,18 @@ class Renderer {
   getBoundingBox(target = new Box3()) {
     return this._scene.getBoundingBox(target);
   }
-  render(camera, hasSelection) {
+  render() {
     this._scene.getUpdatedScenes().forEach((s) => {
       this.needsUpdate = true;
       if (s.vim)
         this._onSceneUpdate.dispatch(s.vim);
     });
-    if (this._renderOnDemand && !this.needsUpdate)
-      return;
+    this._composer.outlines = this._scene.hasOutline();
+    this._composer.render(this.needsUpdate, this.antialias && !this.skipAntialias && !this._camera.hasMoved);
     this._needsUpdate = false;
-    this._composer.outlines = hasSelection;
-    this._composer.render();
+    this.skipAntialias = false;
     if (this.textEnabled) {
-      this.textRenderer.render(this._scene.scene, camera);
+      this.textRenderer.render(this._scene.scene, this._camera.camera);
     }
     this._scene.clearUpdateFlags();
   }
@@ -49932,7 +49984,7 @@ class Viewer {
       return;
     requestAnimationFrame(() => this.animate());
     this.renderer.needsUpdate = this._camera.update(this._clock.getDelta());
-    this.renderer.render(this.camera.camera, this.selection.count > 0);
+    this.renderer.render();
   }
   get vims() {
     return this._vims.filter((v2) => v2 !== void 0);
@@ -54465,11 +54517,12 @@ function VimContextMenu(props) {
     return "label" in e ? createButton(e) : createDivider(e);
   })));
 }
-function toTreeData(viewer, elements) {
+function toTreeData(viewer, elements, grouping) {
   if (!elements)
     return;
+  const main = grouping === "Family" ? (e) => e.categoryName : grouping === "Level" ? (e) => e.level : grouping === "Workset" ? (e) => e.workset : null;
   const tree = toMapTree(elements, [
-    (e) => e.categoryName,
+    main,
     (e) => e.familyName,
     (e) => e.familyTypeName
   ]);
@@ -54635,7 +54688,6 @@ function BimTree(props) {
   const viewer = props.viewer.viewer;
   const helper = props.viewer;
   const [objects, setObjects] = react.exports.useState([]);
-  const [elements, setElements] = react.exports.useState();
   const treeRef = react.exports.useRef();
   const [expandedItems, setExpandedItems] = react.exports.useState([]);
   const [selectedItems, setSelectedItems] = react.exports.useState([]);
@@ -54644,19 +54696,33 @@ function BimTree(props) {
   const [, setVersion] = react.exports.useState(0);
   const focus = react.exports.useRef(0);
   const div = react.exports.useRef();
+  props.actionRef.current = {
+    showAll: () => {
+      props.isolation.clear("tree");
+    },
+    hideAll: () => {
+      props.isolation.isolate([], "tree");
+    },
+    collapseAll: () => {
+      setExpandedItems([]);
+    }
+  };
   react.exports.useMemo(() => {
-    return treeRef.current = toTreeData(props.viewer.viewer, elements);
-  }, [elements]);
+    return treeRef.current = toTreeData(props.viewer.viewer, props.elements, props.grouping);
+  }, [props.elements, props.grouping]);
+  react.exports.useEffect(() => {
+    setExpandedItems([]);
+  }, [props.grouping]);
   react.exports.useEffect(() => {
     ReactTooltip.rebuild();
-  }, [expandedItems, elements]);
+  }, [expandedItems, props.elements]);
   react.exports.useEffect(() => {
-    if (elements && objects.length === 1) {
+    if (props.elements && objects.length === 1) {
       scrollToSelection(div.current);
       const [first] = viewer.selection.objects;
       focus.current = treeRef.current.getNodeFromElement(first.element);
     }
-  }, [elements, objects]);
+  }, [props.elements, objects]);
   react.exports.useEffect(() => {
     const subVis = viewer.renderer.onSceneUpdated.subscribe(() => {
       var _a22;
@@ -54667,10 +54733,7 @@ function BimTree(props) {
       subVis();
     };
   }, []);
-  if (props.elements && props.elements !== elements) {
-    setElements(props.elements);
-  }
-  if (!elements) {
+  if (!props.elements) {
     return /* @__PURE__ */ React__default.createElement("div", { className: "vim-bim-tree", ref: div }, "Loading . . .");
   }
   if (!ArrayEquals(props.objects, objects)) {
@@ -55294,6 +55357,8 @@ function BimPanel(props) {
   const [vim, setVim] = react.exports.useState();
   const [elements, setElements] = react.exports.useState();
   const [filteredElements, setFilteredElements] = react.exports.useState();
+  const [grouping, setGrouping] = react.exports.useState("Family");
+  const treeRef = react.exports.useRef();
   if (props.vim !== vim) {
     setVim(props.vim);
   }
@@ -55332,17 +55397,45 @@ function BimPanel(props) {
   const updateFilter = (value) => {
     setFilter(value);
   };
+  const updateGrouping = (value) => {
+    console.log("group : " + value);
+    setGrouping(value);
+  };
   const last = props.selection[props.selection.length - 1];
   return /* @__PURE__ */ React__default.createElement("div", { className: `vim-bim-panel ${props.visible ? "" : "vc-hidden"}` }, /* @__PURE__ */ React__default.createElement("div", { className: "vim-bim-upper vc-h-1/2" }, /* @__PURE__ */ React__default.createElement("h2", { className: "vim-bim-upper-title vc-mb-6 vc-text-xs vc-font-bold vc-uppercase" }, "Project Inspector"), /* @__PURE__ */ React__default.createElement(BimSearch, {
     viewer,
     filter,
     setFilter: updateFilter,
     count: filteredElements == null ? void 0 : filteredElements.length
-  }), /* @__PURE__ */ React__default.createElement(BimTree, {
+  }), /* @__PURE__ */ React__default.createElement("select", {
+    className: "vim-bim-grouping",
+    onChange: (e) => updateGrouping(e.target.value)
+  }, /* @__PURE__ */ React__default.createElement("option", { value: "Family" }, "Family"), /* @__PURE__ */ React__default.createElement("option", { value: "Level" }, "Level"), /* @__PURE__ */ React__default.createElement("option", { value: "Workset" }, "Workset")), /* @__PURE__ */ React__default.createElement("select", {
+    className: "vim-bim-actions",
+    onChange: (e) => {
+      var _a22, _b2, _c;
+      switch (e.target.value) {
+        case "show":
+          (_a22 = treeRef.current) == null ? void 0 : _a22.showAll();
+          e.target.value = "";
+          break;
+        case "hide":
+          (_b2 = treeRef.current) == null ? void 0 : _b2.hideAll();
+          e.target.value = "";
+          break;
+        case "collapse":
+          (_c = treeRef.current) == null ? void 0 : _c.collapseAll();
+          e.target.value = "";
+          break;
+      }
+    }
+  }, /* @__PURE__ */ React__default.createElement("option", { value: "" }, "..."), /* @__PURE__ */ React__default.createElement("option", { value: "show" }, "Show All"), /* @__PURE__ */ React__default.createElement("option", { value: "hide" }, "Hide All"), /* @__PURE__ */ React__default.createElement("option", { value: "collapse" }, "Collapse All")), /* @__PURE__ */ React__default.createElement(BimTree, {
+    actionRef: treeRef,
     viewer,
     elements: filteredElements,
     objects: props.selection,
-    isolation: props.isolation
+    isolation: props.isolation,
+    grouping
   })), /* @__PURE__ */ React__default.createElement("hr", { className: "-vc-mx-6 vc-mb-5 vc-border-gray-divider" }), /* @__PURE__ */ React__default.createElement("h2", { className: "vc-mb-4 vc-text-xs vc-font-bold vc-uppercase" }, "Bim Inspector"), /* @__PURE__ */ React__default.createElement("div", { className: "vim-bim-lower vc-h-1/2 vc-overflow-y-auto vc-overflow-x-hidden" }, /* @__PURE__ */ React__default.createElement(BimObjectHeader, {
     elements: filteredElements,
     object: last,
