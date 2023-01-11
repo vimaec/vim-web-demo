@@ -496,8 +496,7 @@ select {
   background-repeat: no-repeat;
   background-size: 1.5em 1.5em;
   padding-right: 2.5rem;
-  -webkit-print-color-adjust: exact;
-          print-color-adjust: exact;
+  print-color-adjust: exact;
 }
 
 [multiple] {
@@ -506,8 +505,7 @@ select {
   background-repeat: unset;
   background-size: initial;
   padding-right: 0.75rem;
-  -webkit-print-color-adjust: unset;
-          print-color-adjust: unset;
+  print-color-adjust: unset;
 }
 
 [type='checkbox'],[type='radio'] {
@@ -515,8 +513,7 @@ select {
      -moz-appearance: none;
           appearance: none;
   padding: 0;
-  -webkit-print-color-adjust: exact;
-          print-color-adjust: exact;
+  print-color-adjust: exact;
   display: inline-block;
   vertical-align: middle;
   background-origin: border-box;
@@ -44315,7 +44312,7 @@ class Scene {
   constructor(builder) {
     __publicField2(this, "builder");
     __publicField2(this, "meshes", []);
-    __publicField2(this, "vim");
+    __publicField2(this, "_vim");
     __publicField2(this, "_updated", false);
     __publicField2(this, "_outlineCount", 0);
     __publicField2(this, "_boundingBox", new Box3());
@@ -44365,10 +44362,13 @@ class Scene {
     }
     this._boundingBox.applyMatrix4(matrix);
   }
-  setVim(vim) {
-    this.vim = vim;
+  get vim() {
+    return this._vim;
+  }
+  set vim(value) {
+    this._vim = value;
     for (let m2 = 0; m2 < this.meshes.length; m2++) {
-      this.meshes[m2].userData.vim = vim;
+      this.meshes[m2].userData.vim = value;
     }
   }
   addMesh(mesh) {
@@ -48122,10 +48122,9 @@ class Vim {
     __publicField2(this, "settings");
     __publicField2(this, "scene");
     __publicField2(this, "_elementToObject", /* @__PURE__ */ new Map());
-    var _a22;
     this.document = vim;
     this.scene = scene;
-    (_a22 = this.scene) == null ? void 0 : _a22.setVim(this);
+    this.scene.vim = this;
     this.settings = settings2;
     this.scene.applyMatrix4(this.settings.matrix);
   }
@@ -48138,7 +48137,7 @@ class Vim {
     const next = this.scene.builder.createFromG3d(this.document.g3d, this.settings.transparency, instances);
     this.scene.dispose();
     next.applyMatrix4(this.settings.matrix);
-    next.setVim(this);
+    next.vim = this;
     this.scene = next;
     for (const [element, object] of this._elementToObject.entries()) {
       object.updateMeshes(this.getMeshesFromElement(element));
@@ -48147,9 +48146,10 @@ class Vim {
   loadMore(flagTest) {
     if (!this.document.g3d)
       return;
-    const scene = this.scene.builder.createFromFlag(this.document.g3d, flagTest);
-    scene.applyMatrix4(this.settings.matrix);
-    return scene;
+    const more = this.scene.builder.createFromFlag(this.document.g3d, flagTest);
+    more.vim = this;
+    more.applyMatrix4(this.settings.matrix);
+    return more;
   }
   applySettings(settings2) {
     this.settings = settings2;
@@ -50062,6 +50062,205 @@ class Viewer {
     return more;
   }
 }
+function createGridMaterial() {
+  return new ShaderMaterial({
+    transparent: true,
+    side: DoubleSide,
+    vertexColors: true,
+    vertexShader: `
+    #include <common>
+    #include <logdepthbuf_pars_vertex>
+
+    varying vec3 vPosition;
+    varying vec3 vColor;
+    void main() {
+
+      vec4 pos = modelMatrix * vec4(position, 1.0);
+      vPosition = pos.xyz / pos.w;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      vColor = color;
+      #include <logdepthbuf_vertex>
+    }
+    `,
+    fragmentShader: `
+    #include <common>
+    #include <logdepthbuf_pars_fragment>
+    varying vec3 vPosition;
+    varying vec3 vColor;
+
+    void main() {
+      #include <logdepthbuf_fragment>
+      float a = (2.0f*PI)/30.0f;
+      float b = 10.0f;
+      float x = sin(a* vPosition.x + b);
+      x = x > 0.999f ? x : 0.0f;
+
+      float y = sin(a * vPosition.y + b);
+      y = y > 0.999f ? y : 0.0f;
+
+      float z = sin(a*vPosition.z + b);
+      z = z > 0.999f ? z : 0.0f;
+
+      float p = min(x + y + z, 1.0f);
+
+      gl_FragColor = vec4(vColor, 0.2f);
+      //gl_FragDepthEXT = p > 0.0f ? gl_FragDepthEXT : 100.0f;
+    }
+    `
+  });
+}
+class Grid {
+  constructor(size, scale) {
+    __publicField2(this, "size");
+    __publicField2(this, "center");
+    __publicField2(this, "box");
+    __publicField2(this, "mesh");
+    __publicField2(this, "_scale");
+    __publicField2(this, "_colors", /* @__PURE__ */ new Map());
+    __publicField2(this, "_material");
+    this.size = size;
+    this.box = new Box3().setFromCenterAndSize(new Vector3(0, 0, 0), size.clone().multiply(scale));
+    this._scale = scale;
+    this.build();
+  }
+  static createFromBox(box, scale) {
+    const size = box.getSize(new Vector3()).divide(scale).ceil();
+    const g = new Grid(size, scale);
+    const center = box.getCenter(new Vector3());
+    g.mesh.position.copy(center);
+    g.box.translate(center);
+    return g;
+  }
+  getIndex(x2, y2, z2) {
+    return x2 * this.size.y * this.size.z + y2 * this.size.z + z2;
+  }
+  getCellFromIndex(index) {
+    let r2 = index;
+    const x2 = Math.trunc(r2 / (this.size.y * this.size.z));
+    r2 = r2 % (this.size.y * this.size.z);
+    const y2 = Math.trunc(r2 / this.size.z);
+    r2 = r2 % this.size.z;
+    const z2 = r2;
+    return new Vector3(x2, y2, z2);
+  }
+  getCellFromPosition(position) {
+    if (!this.box.containsPoint(position))
+      return;
+    return position.clone().sub(this.box.min).divide(this._scale).floor();
+  }
+  getCellBox(cell) {
+    const min2 = this.box.min.clone().add(cell.multiply(this._scale));
+    const max2 = min2.clone().add(this._scale);
+    return new Box3(min2, max2);
+  }
+  raycast(raycaster) {
+    const hits = raycaster.intersectObject(this.mesh);
+    const position = raycaster.ray.at(hits[0].distance + 0.1, new Vector3());
+    if (!hits[0])
+      return;
+    return this.getCellFromPosition(position);
+  }
+  color(cell, color) {
+    const index = this.getIndex(cell.x, cell.y, cell.z);
+    this._colors.set(index, color);
+    const colors = this.mesh.geometry.getAttribute("color");
+    const c = index * 8;
+    for (let i2 = 0; i2 < 8; i2++) {
+      colors.setXYZ(c + i2, color.r, color.g, color.b);
+    }
+    colors.needsUpdate = true;
+  }
+  getColor(cell) {
+    const index = this.getIndex(cell.x, cell.y, cell.z);
+    return this._colors.get(index);
+  }
+  build() {
+    const cellCount = this.size.x * this.size.y * this.size.z;
+    const vertices = new Float32Array(cellCount * 24);
+    const indices = new Int32Array(cellCount * 36);
+    for (let x2 = 0; x2 < this.size.x; x2++) {
+      for (let y2 = 0; y2 < this.size.y; y2++) {
+        for (let z2 = 0; z2 < this.size.z; z2++) {
+          const cell = this.getIndex(x2, y2, z2);
+          const vertex2 = cell * 8;
+          const v2 = vertex2 * 3;
+          vertices[v2] = (0 + x2) * this._scale.x + this.box.min.x;
+          vertices[v2 + 1] = (0 + y2) * this._scale.y + this.box.min.y;
+          vertices[v2 + 2] = (0 + z2) * this._scale.z + this.box.min.z;
+          vertices[v2 + 3] = (0 + x2) * this._scale.x + this.box.min.x;
+          vertices[v2 + 4] = (0 + y2) * this._scale.y + this.box.min.y;
+          vertices[v2 + 5] = (1 + z2) * this._scale.z + this.box.min.z;
+          vertices[v2 + 6] = (0 + x2) * this._scale.x + this.box.min.x;
+          vertices[v2 + 7] = (1 + y2) * this._scale.y + this.box.min.y;
+          vertices[v2 + 8] = (0 + z2) * this._scale.z + this.box.min.z;
+          vertices[v2 + 9] = (0 + x2) * this._scale.x + this.box.min.x;
+          vertices[v2 + 10] = (1 + y2) * this._scale.y + this.box.min.y;
+          vertices[v2 + 11] = (1 + z2) * this._scale.z + this.box.min.z;
+          vertices[v2 + 12] = (1 + x2) * this._scale.x + this.box.min.x;
+          vertices[v2 + 13] = (0 + y2) * this._scale.y + this.box.min.y;
+          vertices[v2 + 14] = (0 + z2) * this._scale.z + this.box.min.z;
+          vertices[v2 + 15] = (1 + x2) * this._scale.x + this.box.min.x;
+          vertices[v2 + 16] = (0 + y2) * this._scale.y + this.box.min.y;
+          vertices[v2 + 17] = (1 + z2) * this._scale.z + this.box.min.z;
+          vertices[v2 + 18] = (1 + x2) * this._scale.x + this.box.min.x;
+          vertices[v2 + 19] = (1 + y2) * this._scale.y + this.box.min.y;
+          vertices[v2 + 20] = (0 + z2) * this._scale.z + this.box.min.z;
+          vertices[v2 + 21] = (1 + x2) * this._scale.x + this.box.min.x;
+          vertices[v2 + 22] = (1 + y2) * this._scale.y + this.box.min.y;
+          vertices[v2 + 23] = (1 + z2) * this._scale.z + this.box.min.z;
+          const i2 = cell * 36;
+          indices[i2] = vertex2;
+          indices[i2 + 1] = vertex2 + 1;
+          indices[i2 + 2] = vertex2 + 2;
+          indices[i2 + 3] = vertex2 + 1;
+          indices[i2 + 4] = vertex2 + 3;
+          indices[i2 + 5] = vertex2 + 2;
+          indices[i2 + 6] = vertex2 + 1;
+          indices[i2 + 7] = vertex2 + 5;
+          indices[i2 + 8] = vertex2 + 3;
+          indices[i2 + 9] = vertex2 + 3;
+          indices[i2 + 10] = vertex2 + 5;
+          indices[i2 + 11] = vertex2 + 7;
+          indices[i2 + 12] = vertex2 + 5;
+          indices[i2 + 13] = vertex2 + 6;
+          indices[i2 + 14] = vertex2 + 7;
+          indices[i2 + 15] = vertex2 + 5;
+          indices[i2 + 16] = vertex2 + 4;
+          indices[i2 + 17] = vertex2 + 6;
+          indices[i2 + 18] = vertex2 + 2;
+          indices[i2 + 19] = vertex2 + 6;
+          indices[i2 + 20] = vertex2 + 4;
+          indices[i2 + 21] = vertex2 + 0;
+          indices[i2 + 22] = vertex2 + 2;
+          indices[i2 + 23] = vertex2 + 4;
+          indices[i2 + 24] = vertex2 + 2;
+          indices[i2 + 25] = vertex2 + 3;
+          indices[i2 + 26] = vertex2 + 6;
+          indices[i2 + 27] = vertex2 + 3;
+          indices[i2 + 28] = vertex2 + 7;
+          indices[i2 + 29] = vertex2 + 6;
+          indices[i2 + 30] = vertex2 + 0;
+          indices[i2 + 31] = vertex2 + 4;
+          indices[i2 + 32] = vertex2 + 1;
+          indices[i2 + 33] = vertex2 + 1;
+          indices[i2 + 34] = vertex2 + 4;
+          indices[i2 + 35] = vertex2 + 5;
+        }
+      }
+    }
+    this._material = createGridMaterial();
+    const color = new Float32Array(cellCount * 24).fill(0.5);
+    const geometry = new BufferGeometry();
+    geometry.setAttribute("position", new Float32BufferAttribute(vertices, 3));
+    geometry.setIndex(new Uint32BufferAttribute(indices, 1));
+    geometry.setAttribute("color", new Float32BufferAttribute(color, 3));
+    this.mesh = new Mesh(geometry, this._material);
+  }
+  dispose() {
+    this.mesh.geometry.dispose();
+    this._material.dispose();
+  }
+}
 const VIM = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   AbstractG3d,
@@ -50077,6 +50276,7 @@ const VIM = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty(
     return Geometry;
   },
   GizmoOptions,
+  Grid,
   HitTestResult: RaycastResult,
   InputAction,
   KEYS,
@@ -55408,9 +55608,11 @@ function BimPanel(props) {
     setFilter: updateFilter,
     count: filteredElements == null ? void 0 : filteredElements.length
   }), /* @__PURE__ */ React__default.createElement("select", {
+    hidden: true,
     className: "vim-bim-grouping",
     onChange: (e) => updateGrouping(e.target.value)
   }, /* @__PURE__ */ React__default.createElement("option", { value: "Family" }, "Family"), /* @__PURE__ */ React__default.createElement("option", { value: "Level" }, "Level"), /* @__PURE__ */ React__default.createElement("option", { value: "Workset" }, "Workset")), /* @__PURE__ */ React__default.createElement("select", {
+    hidden: true,
     className: "vim-bim-actions",
     onChange: (e) => {
       var _a22, _b2, _c;
