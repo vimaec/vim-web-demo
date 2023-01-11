@@ -46035,6 +46035,7 @@ class Measure {
     __publicField2(this, "_endPos");
     __publicField2(this, "_measurement");
     __publicField2(this, "_flow");
+    __publicField2(this, "_previousScheme");
     this._viewer = viewer;
   }
   get startPoint() {
@@ -46053,12 +46054,16 @@ class Measure {
   async start(onProgress) {
     this.abort();
     this._flow = new MeasureFlow(this);
+    this._previousScheme = this._viewer.inputs.scheme;
     this._viewer.inputs.scheme = this._flow;
     this._flow.onProgress = () => onProgress == null ? void 0 : onProgress();
     return new Promise((resolve, reject) => {
       if (this._flow) {
         this._flow.onComplete = (success) => {
-          this._viewer.inputs.scheme = void 0;
+          if (this._previousScheme) {
+            this._viewer.inputs.scheme = this._previousScheme;
+            this._previousScheme = void 0;
+          }
           if (success)
             resolve();
           else {
