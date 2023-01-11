@@ -42610,6 +42610,7 @@ class MouseHandler extends InputHandler {
       event.preventDefault();
       if (this._buttonDown)
         return;
+      this.inputs.ContextMenu(void 0);
       this._hasCameraMoved = false;
       this._downPosition = new Vector2(event.offsetX, event.offsetY);
       this._hasMouseMoved = false;
@@ -42644,7 +42645,6 @@ class MouseHandler extends InputHandler {
         this.onRectEnd();
       } else if (event.button === 0 && !this._hasMouseMoved) {
         this.onMouseClick(new Vector2(event.offsetX, event.offsetY), false, this.getModifier(event));
-        this.inputs.ContextMenu(void 0);
       } else if (event.button === 2 && !this._hasMouseMoved) {
         this.inputs.ContextMenu(new Vector2(event.clientX, event.clientY));
       }
