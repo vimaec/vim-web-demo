@@ -42644,6 +42644,7 @@ class MouseHandler extends InputHandler {
         this.onRectEnd();
       } else if (event.button === 0 && !this._hasMouseMoved) {
         this.onMouseClick(new Vector2(event.offsetX, event.offsetY), false, this.getModifier(event));
+        this.inputs.ContextMenu(void 0);
       } else if (event.button === 2 && !this._hasMouseMoved) {
         this.inputs.ContextMenu(new Vector2(event.clientX, event.clientY));
       }
@@ -53568,7 +53569,8 @@ class MenuItem extends react.exports.Component {
       className,
       disabled,
       divider,
-      selected
+      selected,
+      role
     } = this.props;
     const menuItemClassNames = cx(className, cssClasses.menuItem, attributes.className, {
       [cx(cssClasses.menuItemDisabled, attributes.disabledClassName)]: disabled,
@@ -53577,7 +53579,7 @@ class MenuItem extends react.exports.Component {
     });
     return /* @__PURE__ */ React__default.createElement("div", _extends$1({}, attributes, {
       className: menuItemClassNames,
-      role: "menuitem",
+      role,
       tabIndex: "-1",
       "aria-disabled": disabled ? "true" : "false",
       "aria-orientation": divider ? "horizontal" : null,
@@ -53602,7 +53604,8 @@ MenuItem.propTypes = {
   onMouseLeave: propTypes.exports.func,
   onMouseMove: propTypes.exports.func,
   preventClose: propTypes.exports.bool,
-  selected: propTypes.exports.bool
+  selected: propTypes.exports.bool,
+  role: propTypes.exports.string
 };
 MenuItem.defaultProps = {
   attributes: {},
@@ -53617,7 +53620,8 @@ MenuItem.defaultProps = {
   onMouseMove: () => null,
   onMouseLeave: () => null,
   preventClose: false,
-  selected: false
+  selected: false,
+  role: "menuitem"
 };
 class AbstractMenu extends react.exports.Component {
   constructor(_props) {
@@ -54492,8 +54496,13 @@ function sort(map) {
 }
 const VIM_CONTEXT_MENU_ID = "vim-context-menu-id";
 function showContextMenu(position) {
+  console.log(position);
+  hideMenu();
+  if (!position) {
+    return;
+  }
   const showMenuConfig = {
-    position: { x: position.x, y: position.y },
+    position: { x: position.x - 10, y: position.y - 10 },
     target: window,
     id: VIM_CONTEXT_MENU_ID
   };
