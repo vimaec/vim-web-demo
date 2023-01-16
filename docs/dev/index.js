@@ -8665,7 +8665,7 @@ const _uvB$1 = /* @__PURE__ */ new Vector2();
 const _uvC$1 = /* @__PURE__ */ new Vector2();
 const _intersectionPoint = /* @__PURE__ */ new Vector3();
 const _intersectionPointWorld = /* @__PURE__ */ new Vector3();
-class Mesh extends Object3D {
+class Mesh$1 extends Object3D {
   constructor(geometry = new BufferGeometry(), material = new MeshBasicMaterial()) {
     super();
     this.isMesh = true;
@@ -9412,7 +9412,7 @@ class WebGLCubeRenderTarget extends WebGLRenderTarget {
       blending: NoBlending
     });
     material.uniforms.tEquirect.value = texture;
-    const mesh = new Mesh(geometry, material);
+    const mesh = new Mesh$1(geometry, material);
     const currentMinFilter = texture.minFilter;
     if (texture.minFilter === LinearMipmapLinearFilter)
       texture.minFilter = LinearFilter;
@@ -10502,7 +10502,7 @@ function WebGLBackground(renderer, cubemaps, state, objects, alpha, premultiplie
     }
     if (background && (background.isCubeTexture || background.mapping === CubeUVReflectionMapping)) {
       if (boxMesh === void 0) {
-        boxMesh = new Mesh(new BoxGeometry(1, 1, 1), new ShaderMaterial({
+        boxMesh = new Mesh$1(new BoxGeometry(1, 1, 1), new ShaderMaterial({
           name: "BackgroundCubeMaterial",
           uniforms: cloneUniforms(ShaderLib.cube.uniforms),
           vertexShader: ShaderLib.cube.vertexShader,
@@ -10536,7 +10536,7 @@ function WebGLBackground(renderer, cubemaps, state, objects, alpha, premultiplie
       renderList.unshift(boxMesh, boxMesh.geometry, boxMesh.material, 0, 0, null);
     } else if (background && background.isTexture) {
       if (planeMesh === void 0) {
-        planeMesh = new Mesh(new PlaneGeometry(2, 2), new ShaderMaterial({
+        planeMesh = new Mesh$1(new PlaneGeometry(2, 2), new ShaderMaterial({
           name: "BackgroundMaterial",
           uniforms: cloneUniforms(ShaderLib.background.uniforms),
           vertexShader: ShaderLib.background.vertexShader,
@@ -11384,7 +11384,7 @@ class PMREMGenerator {
     return cubeUVRenderTarget;
   }
   _compileMaterial(material) {
-    const tmpMesh = new Mesh(this._lodPlanes[0], material);
+    const tmpMesh = new Mesh$1(this._lodPlanes[0], material);
     this._renderer.compile(tmpMesh, _flatCamera);
   }
   _sceneToCubeUV(scene, near, far, cubeUVRenderTarget) {
@@ -11405,7 +11405,7 @@ class PMREMGenerator {
       depthWrite: false,
       depthTest: false
     });
-    const backgroundBox = new Mesh(new BoxGeometry(), backgroundMaterial);
+    const backgroundBox = new Mesh$1(new BoxGeometry(), backgroundMaterial);
     let useSolidColor = false;
     const background = scene.background;
     if (background) {
@@ -11458,7 +11458,7 @@ class PMREMGenerator {
       }
     }
     const material = isCubeTexture ? this._cubemapMaterial : this._equirectMaterial;
-    const mesh = new Mesh(this._lodPlanes[0], material);
+    const mesh = new Mesh$1(this._lodPlanes[0], material);
     const uniforms = material.uniforms;
     uniforms["envMap"].value = texture;
     const size = this._cubeSize;
@@ -11489,7 +11489,7 @@ class PMREMGenerator {
       console.error("blur direction must be either latitudinal or longitudinal!");
     }
     const STANDARD_DEVIATIONS = 3;
-    const blurMesh = new Mesh(this._lodPlanes[lodOut], blurMaterial);
+    const blurMesh = new Mesh$1(this._lodPlanes[lodOut], blurMaterial);
     const blurUniforms = blurMaterial.uniforms;
     const pixels = this._sizeLods[lodIn] - 1;
     const radiansPerPixel = isFinite(sigmaRadians) ? Math.PI / (2 * pixels) : 2 * Math.PI / (2 * MAX_SAMPLES - 1);
@@ -14528,7 +14528,7 @@ function WebGLShadowMap(_renderer, _objects, _capabilities) {
   shadowMaterialHorizontal.defines.HORIZONTAL_PASS = 1;
   const fullScreenTri = new BufferGeometry();
   fullScreenTri.setAttribute("position", new BufferAttribute(new Float32Array([-1, -1, 0.5, 3, -1, 0.5, -1, 3, 0.5]), 3));
-  const fullScreenMesh = new Mesh(fullScreenTri, shadowMaterialVertical);
+  const fullScreenMesh = new Mesh$1(fullScreenTri, shadowMaterialVertical);
   const scope = this;
   this.enabled = false;
   this.autoUpdate = true;
@@ -19451,7 +19451,7 @@ const _skinIndex = /* @__PURE__ */ new Vector4();
 const _skinWeight = /* @__PURE__ */ new Vector4();
 const _vector$5 = /* @__PURE__ */ new Vector3();
 const _matrix = /* @__PURE__ */ new Matrix4();
-class SkinnedMesh extends Mesh {
+class SkinnedMesh extends Mesh$1 {
   constructor(geometry, material) {
     super(geometry, material);
     this.isSkinnedMesh = true;
@@ -19707,8 +19707,8 @@ class InstancedBufferAttribute extends BufferAttribute {
 const _instanceLocalMatrix = /* @__PURE__ */ new Matrix4();
 const _instanceWorldMatrix = /* @__PURE__ */ new Matrix4();
 const _instanceIntersects = [];
-const _mesh = /* @__PURE__ */ new Mesh();
-class InstancedMesh extends Mesh {
+const _mesh = /* @__PURE__ */ new Mesh$1();
+class InstancedMesh extends Mesh$1 {
   constructor(geometry, material, count) {
     super(geometry, material);
     this.isInstancedMesh = true;
@@ -26794,7 +26794,7 @@ class ObjectLoader extends Loader$1 {
       case "Mesh":
         geometry = getGeometry(data2.geometry);
         material = getMaterial(data2.material);
-        object = new Mesh(geometry, material);
+        object = new Mesh$1(geometry, material);
         break;
       case "InstancedMesh":
         geometry = getGeometry(data2.geometry);
@@ -29398,7 +29398,7 @@ function getBoneList(object) {
   }
   return boneList;
 }
-class PointLightHelper extends Mesh {
+class PointLightHelper extends Mesh$1 {
   constructor(light, sphereSize, color) {
     const geometry = new SphereGeometry(sphereSize, 4, 2);
     const material = new MeshBasicMaterial({ wireframe: true, fog: false, toneMapped: false });
@@ -29442,7 +29442,7 @@ class HemisphereLightHelper extends Object3D {
     const position = geometry.getAttribute("position");
     const colors = new Float32Array(position.count * 3);
     geometry.setAttribute("color", new BufferAttribute(colors, 3));
-    this.add(new Mesh(geometry, this.material));
+    this.add(new Mesh$1(geometry, this.material));
     this.update();
   }
   dispose() {
@@ -29861,7 +29861,7 @@ class PlaneHelper extends Line {
     const geometry2 = new BufferGeometry();
     geometry2.setAttribute("position", new Float32BufferAttribute(positions2, 3));
     geometry2.computeBoundingSphere();
-    this.add(new Mesh(geometry2, new MeshBasicMaterial({ color, opacity: 0.2, transparent: true, depthWrite: false, toneMapped: false })));
+    this.add(new Mesh$1(geometry2, new MeshBasicMaterial({ color, opacity: 0.2, transparent: true, depthWrite: false, toneMapped: false })));
   }
   updateMatrixWorld(force) {
     this.position.set(0, 0, 0);
@@ -29887,7 +29887,7 @@ class ArrowHelper extends Object3D {
     this.line = new Line(_lineGeometry, new LineBasicMaterial({ color, toneMapped: false }));
     this.line.matrixAutoUpdate = false;
     this.add(this.line);
-    this.cone = new Mesh(_coneGeometry, new MeshBasicMaterial({ color, toneMapped: false }));
+    this.cone = new Mesh$1(_coneGeometry, new MeshBasicMaterial({ color, toneMapped: false }));
     this.cone.matrixAutoUpdate = false;
     this.add(this.cone);
     this.setDirection(dir);
@@ -30510,7 +30510,7 @@ var THREE = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty(
   Matrix3,
   Matrix4,
   MaxEquation,
-  Mesh,
+  Mesh: Mesh$1,
   MeshBasicMaterial,
   MeshDepthMaterial,
   MeshDistanceMaterial,
@@ -42323,35 +42323,11 @@ class RaycastResult {
     return [];
   }
   getVimObjectFromHit(hit) {
-    const vim = hit.object.userData.vim;
-    if (!vim)
+    const mesh = hit.object.userData.vim;
+    if (!mesh)
       return;
-    if (hit.object.userData.merged) {
-      if (!hit.faceIndex) {
-        throw new Error("Raycast hit has no face index.");
-      }
-      const index = this.binarySearch(hit.object.userData.submeshes, hit.faceIndex * 3);
-      const instance = hit.object.userData.instances[index];
-      return vim.getObjectFromInstance(instance);
-    } else if (hit.instanceId !== void 0) {
-      return vim.getObjectFromMesh(hit.object, hit.instanceId);
-    }
-  }
-  binarySearch(array, element) {
-    let m2 = 0;
-    let n2 = array.length - 1;
-    while (m2 <= n2) {
-      const k = n2 + m2 >> 1;
-      const cmp = element - array[k];
-      if (cmp > 0) {
-        m2 = k + 1;
-      } else if (cmp < 0) {
-        n2 = k - 1;
-      } else {
-        return k;
-      }
-    }
-    return m2 - 1;
+    const sub = mesh.merged ? mesh.getSubmeshFromFace(hit.faceIndex) : mesh.getSubMesh(hit.instanceId);
+    return sub.object;
   }
   get isHit() {
     return !!this.firstHit;
@@ -42427,6 +42403,9 @@ class InputAction {
     this.modifier = modifier;
     this.position = position;
     this._raycaster = raycaster;
+  }
+  get raycaster() {
+    return this._raycaster.fromPoint2(this.position);
   }
   get raycast() {
     var _a22;
@@ -43637,32 +43616,34 @@ class ObjectAttribute {
       return false;
     const number = this.toNumber(value);
     for (let m2 = 0; m2 < this._meshes.length; m2++) {
-      const [mesh, index] = this._meshes[m2];
-      if (mesh.userData.merged) {
-        this.applyMerged(mesh, index, number);
+      const sub = this._meshes[m2];
+      if (sub.merged) {
+        this.applyMerged(sub, number);
       } else {
-        this.applyInstanced(mesh, index, number);
+        this.applyInstanced(sub, number);
       }
     }
     return true;
   }
-  applyInstanced(mesh, index, number) {
-    let attribute = mesh.geometry.getAttribute(this.instanceAttribute);
+  applyInstanced(sub, number) {
+    const three = sub.three;
+    let attribute = three.geometry.getAttribute(this.instanceAttribute);
     if (!attribute) {
-      attribute = new InstancedBufferAttribute(new Float32Array(mesh.count), 1);
-      mesh.geometry.setAttribute(this.instanceAttribute, attribute);
+      attribute = new InstancedBufferAttribute(new Float32Array(three.count), 1);
+      three.geometry.setAttribute(this.instanceAttribute, attribute);
     }
-    attribute.setX(index, number);
+    attribute.setX(sub.index, number);
     attribute.needsUpdate = true;
   }
-  applyMerged(mesh, index, number) {
+  applyMerged(sub, number) {
     var _a22;
-    const positions = mesh.geometry.getAttribute("position");
-    const attribute = (_a22 = mesh.geometry.getAttribute(this.vertexAttribute)) != null ? _a22 : new Float32BufferAttribute(new Float32Array(positions.count), 1);
-    mesh.geometry.setAttribute(this.vertexAttribute, attribute);
-    const start = getMergedMeshStart(mesh, index);
-    const end = getMergedMeshEnd(mesh, index);
-    const indices = mesh.geometry.index;
+    const three = sub.three;
+    const positions = three.geometry.getAttribute("position");
+    const attribute = (_a22 = three.geometry.getAttribute(this.vertexAttribute)) != null ? _a22 : new Float32BufferAttribute(new Float32Array(positions.count), 1);
+    three.geometry.setAttribute(this.vertexAttribute, attribute);
+    const start = sub.meshStart;
+    const end = sub.meshEnd;
+    const indices = sub.three.geometry.index;
     for (let i2 = start; i2 < end; i2++) {
       const v2 = indices.getX(i2);
       attribute.setX(v2, number);
@@ -43683,46 +43664,43 @@ class ColorAttribute {
     if (!this._meshes)
       return;
     for (let m2 = 0; m2 < this._meshes.length; m2++) {
-      const [mesh, index] = this._meshes[m2];
-      if (mesh.userData.merged) {
-        this.applyMergedColor(mesh, index, color);
+      const sub = this._meshes[m2];
+      if (sub.merged) {
+        this.applyMergedColor(sub, color);
       } else {
-        this.applyInstancedColor(mesh, index, color);
+        this.applyInstancedColor(sub, color);
       }
     }
   }
-  applyMergedColor(mesh, index, color) {
+  applyMergedColor(sub, color) {
     if (!color) {
-      this.resetMergedColor(mesh, index);
+      this.resetMergedColor(sub);
       return;
     }
-    const start = getMergedMeshStart(mesh, index);
-    const end = getMergedMeshEnd(mesh, index);
-    const colors = mesh.geometry.getAttribute("color");
-    const indices = mesh.geometry.index;
+    const start = sub.meshStart;
+    const end = sub.meshEnd;
+    const colors = sub.three.geometry.getAttribute("color");
+    const indices = sub.three.geometry.index;
     for (let i2 = start; i2 < end; i2++) {
       const v2 = indices.getX(i2);
       colors.setXYZ(v2, color.r, color.g, color.b);
     }
     colors.needsUpdate = true;
   }
-  resetMergedColor(mesh, index) {
+  resetMergedColor(sub) {
     if (!this.vim)
       return;
-    const colors = mesh.geometry.getAttribute("color");
-    const indices = mesh.geometry.index;
-    let mergedIndex = getMergedMeshStart(mesh, index);
-    const instance = this.vim.scene.getInstanceFromMesh(mesh, index);
-    if (!instance)
-      throw new Error("Could not reset original color.");
+    const colors = sub.three.geometry.getAttribute("color");
+    const indices = sub.three.geometry.index;
+    let mergedIndex = sub.meshStart;
     const g3d = this.vim.document.g3d;
-    const g3dMesh = g3d.instanceMeshes[instance];
+    const g3dMesh = g3d.instanceMeshes[sub.instance];
     const subStart = g3d.getMeshSubmeshStart(g3dMesh);
     const subEnd = g3d.getMeshSubmeshEnd(g3dMesh);
-    for (let sub = subStart; sub < subEnd; sub++) {
-      const start = g3d.getSubmeshIndexStart(sub);
-      const end = g3d.getSubmeshIndexEnd(sub);
-      const color = g3d.getSubmeshColor(sub);
+    for (let sub2 = subStart; sub2 < subEnd; sub2++) {
+      const start = g3d.getSubmeshIndexStart(sub2);
+      const end = g3d.getSubmeshIndexEnd(sub2);
+      const color = g3d.getSubmeshColor(sub2);
       for (let i2 = start; i2 < end; i2++) {
         const v2 = indices.getX(mergedIndex);
         colors.setXYZ(v2, color[0], color[1], color[2]);
@@ -43731,10 +43709,10 @@ class ColorAttribute {
     }
     colors.needsUpdate = true;
   }
-  applyInstancedColor(mesh, index, color) {
-    const colors = this.getOrAddInstanceColorAttribute(mesh);
+  applyInstancedColor(sub, color) {
+    const colors = this.getOrAddInstanceColorAttribute(sub.three);
     if (color) {
-      colors.setXYZ(index, color.r, color.g, color.b);
+      colors.setXYZ(sub.index, color.r, color.g, color.b);
       colors.needsUpdate = true;
     }
   }
@@ -43747,12 +43725,6 @@ class ColorAttribute {
     mesh.instanceColor = attribute;
     return attribute;
   }
-}
-function getMergedMeshStart(mesh, index) {
-  return mesh.userData.submeshes[index];
-}
-function getMergedMeshEnd(mesh, index) {
-  return index + 1 < mesh.userData.submeshes.length ? mesh.userData.submeshes[index + 1] : mesh.geometry.index.count;
 }
 class Object$1 {
   constructor(vim, element, instances, meshes) {
@@ -43850,8 +43822,8 @@ class Object$1 {
       return this._boundingBox;
     let box;
     this._meshes.forEach((m2) => {
-      const [mesh, index] = m2;
-      const b = mesh.userData.boxes[index];
+      const sub = m2;
+      const b = sub.boundingBox;
       box = box ? box.union(b) : b.clone();
     });
     if (box) {
@@ -44054,7 +44026,7 @@ class GroundPlane {
       depthTest: true,
       depthWrite: false
     });
-    this.mesh = new Mesh(this._geometry, this._material);
+    this.mesh = new Mesh$1(this._geometry, this._material);
     this.mesh.renderOrder = -1;
   }
   applyViewerSettings(settings2) {
@@ -44317,8 +44289,7 @@ class Scene {
     __publicField2(this, "_updated", false);
     __publicField2(this, "_outlineCount", 0);
     __publicField2(this, "_boundingBox", new Box3());
-    __publicField2(this, "_instanceToThreeMeshes", /* @__PURE__ */ new Map());
-    __publicField2(this, "_threeMeshIdToInstances", /* @__PURE__ */ new Map());
+    __publicField2(this, "_instanceToMeshes", /* @__PURE__ */ new Map());
     __publicField2(this, "_material");
     this.builder = builder;
   }
@@ -44346,20 +44317,12 @@ class Scene {
     return target.copy(this._boundingBox);
   }
   getMeshFromInstance(instance) {
-    return this._instanceToThreeMeshes.get(instance);
-  }
-  getInstanceFromMesh(mesh, index) {
-    if (!mesh || index < 0)
-      return;
-    const instances = this._threeMeshIdToInstances.get(mesh.id);
-    if (!instances)
-      return;
-    return instances[index];
+    return this._instanceToMeshes.get(instance);
   }
   applyMatrix4(matrix) {
     for (let m2 = 0; m2 < this.meshes.length; m2++) {
-      this.meshes[m2].matrixAutoUpdate = false;
-      this.meshes[m2].matrix.copy(matrix);
+      this.meshes[m2].three.matrixAutoUpdate = false;
+      this.meshes[m2].three.matrix.copy(matrix);
     }
     this._boundingBox.applyMatrix4(matrix);
   }
@@ -44368,27 +44331,18 @@ class Scene {
   }
   set vim(value) {
     this._vim = value;
-    for (let m2 = 0; m2 < this.meshes.length; m2++) {
-      this.meshes[m2].userData.vim = value;
-    }
+    this.meshes.forEach((m2) => m2.vim = value);
   }
   addMesh(mesh) {
-    var _a22, _b2, _c;
-    const instances = mesh.userData.instances;
-    if (!instances || instances.length === 0) {
-      throw new Error("Expected mesh to have userdata instances : number[] with at least one member");
-    }
-    for (let i2 = 0; i2 < instances.length; i2++) {
-      const set3 = (_a22 = this._instanceToThreeMeshes.get(instances[i2])) != null ? _a22 : [];
-      set3.push([mesh, i2]);
-      this._instanceToThreeMeshes.set(instances[i2], set3);
-    }
-    const box = mesh.userData.boxes[0].clone();
-    for (let i2 = 1; i2 < instances.length; i2++) {
-      box.union(mesh.userData.boxes[i2]);
-    }
-    this._boundingBox = (_c = (_b2 = this._boundingBox) == null ? void 0 : _b2.union(box)) != null ? _c : box.clone();
-    this._threeMeshIdToInstances.set(mesh.id, instances);
+    var _a22, _b2;
+    const subs = mesh.getSubmeshes();
+    subs.forEach((s) => {
+      var _a3;
+      const set3 = (_a3 = this._instanceToMeshes.get(s.instance)) != null ? _a3 : [];
+      set3.push(s);
+      this._instanceToMeshes.set(s.instance, set3);
+    });
+    this._boundingBox = (_b2 = (_a22 = this._boundingBox) == null ? void 0 : _a22.union(mesh.boundingBox)) != null ? _b2 : mesh.boundingBox.clone();
     this.meshes.push(mesh);
     this.updated = true;
     return this;
@@ -44398,14 +44352,11 @@ class Scene {
     if (!other)
       return this;
     other.meshes.forEach((mesh) => this.meshes.push(mesh));
-    other._instanceToThreeMeshes.forEach((meshes, instance) => {
+    other._instanceToMeshes.forEach((meshes, instance) => {
       var _a3;
-      const set3 = (_a3 = this._instanceToThreeMeshes.get(instance)) != null ? _a3 : [];
+      const set3 = (_a3 = this._instanceToMeshes.get(instance)) != null ? _a3 : [];
       meshes.forEach((m2) => set3.push(m2));
-      this._instanceToThreeMeshes.set(instance, set3);
-    });
-    other._threeMeshIdToInstances.forEach((value, key) => {
-      this._threeMeshIdToInstances.set(key, value);
+      this._instanceToMeshes.set(instance, set3);
     });
     this._boundingBox = (_b2 = (_a22 = this._boundingBox) == null ? void 0 : _a22.union(other._boundingBox)) != null ? _b2 : other._boundingBox.clone();
     this.updated = true;
@@ -44419,33 +44370,14 @@ class Scene {
       return;
     this.updated = true;
     this._material = value;
-    if (value) {
-      this.meshes.forEach((m2) => {
-        if (!m2.userData.ignoreSceneMaterial) {
-          if (!m2.userData.mat) {
-            m2.userData.mat = m2.material;
-          }
-          m2.material = value;
-        }
-      });
-    } else {
-      this.meshes.forEach((m2) => {
-        if (!m2.userData.ignoreSceneMaterial) {
-          if (m2.userData.mat) {
-            m2.material = m2.userData.mat;
-            m2.userData.mat = void 0;
-          }
-        }
-      });
-    }
+    this.meshes.forEach((m2) => m2.setMaterial(value));
   }
   dispose() {
     for (let i2 = 0; i2 < this.meshes.length; i2++) {
-      this.meshes[i2].geometry.dispose();
+      this.meshes[i2].three.geometry.dispose();
     }
     this.meshes.length = 0;
-    this._instanceToThreeMeshes.clear();
-    this._threeMeshIdToInstances.clear();
+    this._instanceToMeshes.clear();
   }
 }
 class RenderScene {
@@ -44497,14 +44429,14 @@ class RenderScene {
   addScene(scene) {
     this._scenes.push(scene);
     scene.meshes.forEach((m2) => {
-      this.scene.add(m2);
+      this.scene.add(m2.three);
     });
     this._boundingBox = this._boundingBox ? this._boundingBox.union(scene.getBoundingBox()) : scene.getBoundingBox();
   }
   removeScene(scene) {
     this._scenes = this._scenes.filter((f) => f !== scene);
     for (let i2 = 0; i2 < scene.meshes.length; i2++) {
-      this.scene.remove(scene.meshes[i2]);
+      this.scene.remove(scene.meshes[i2].three);
     }
     this._boundingBox = this._scenes.length > 0 ? this._scenes.map((s) => s.getBoundingBox()).reduce((b1, b2) => b1.union(b2)) : void 0;
   }
@@ -44771,7 +44703,7 @@ class BoxOutline extends LineSegments {
     this.material.dispose();
   }
 }
-class BoxMesh extends Mesh {
+class BoxMesh extends Mesh$1 {
   constructor() {
     const geo = new BoxGeometry();
     const mat = new MeshBasicMaterial({
@@ -44791,7 +44723,7 @@ class BoxMesh extends Mesh {
     this.material.dispose();
   }
 }
-class BoxHighlight extends Mesh {
+class BoxHighlight extends Mesh$1 {
   constructor() {
     const geo = new BufferGeometry();
     geo.setAttribute("position", new BufferAttribute(new Float32Array(12), 3));
@@ -45826,7 +45758,7 @@ class MeasureLine {
       color
     });
     this._meshLine = new MeshLine();
-    this.mesh = new Mesh(this._meshLine, [
+    this.mesh = new Mesh$1(this._meshLine, [
       this._material,
       this._materialAlways
     ]);
@@ -45875,7 +45807,7 @@ class MeasureMarker {
     const g = new SphereGeometry(1);
     g.addGroup(0, Infinity, 0);
     g.addGroup(0, Infinity, 1);
-    this.mesh = new Mesh(g, [this._material, this._materialAlways]);
+    this.mesh = new Mesh$1(g, [this._material, this._materialAlways]);
     this.mesh.visible = false;
     this.disconnect = camera.onMoved.subscribe(() => this.updateScale());
     this._camera = camera;
@@ -47795,8 +47727,46 @@ function createMergeMaterial() {
        `
   });
 }
+function createGridMaterial() {
+  return new ShaderMaterial({
+    transparent: true,
+    side: DoubleSide,
+    vertexColors: true,
+    depthWrite: false,
+    clipping: true,
+    vertexShader: `
+    #include <common>
+    #include <logdepthbuf_pars_vertex>
+    #include <clipping_planes_pars_vertex>
+
+    varying vec4 vColor;
+    void main() {
+      #include <begin_vertex>
+      #include <project_vertex>
+      #include <logdepthbuf_vertex>
+      #include <clipping_planes_vertex>
+
+      vColor = color;
+    }
+    `,
+    fragmentShader: `
+    #include <common>
+    #include <logdepthbuf_pars_fragment>
+    #include <clipping_planes_pars_fragment>
+    varying vec4 vColor;
+
+    void main() {
+      
+      #include <clipping_planes_fragment>
+      #include <logdepthbuf_fragment>
+
+      gl_FragColor = vColor;
+    }
+    `
+  });
+}
 class VimMaterials {
-  constructor(opaque, transparent, wireframe, isolation, mask, outline, merge) {
+  constructor(opaque, transparent, wireframe, isolation, mask, outline, merge, grid) {
     __publicField2(this, "opaque");
     __publicField2(this, "transparent");
     __publicField2(this, "wireframe");
@@ -47804,6 +47774,7 @@ class VimMaterials {
     __publicField2(this, "mask");
     __publicField2(this, "outline");
     __publicField2(this, "merge");
+    __publicField2(this, "grid");
     __publicField2(this, "_clippingPlanes");
     __publicField2(this, "_sectionStrokeWitdh", 0.01);
     __publicField2(this, "_sectionStrokeFallof", 0.75);
@@ -47818,6 +47789,7 @@ class VimMaterials {
     this.mask = mask != null ? mask : createMaskMaterial();
     this.outline = outline != null ? outline : new OutlineMaterial();
     this.merge = merge != null ? merge : new MergeMaterial();
+    this.grid = grid != null ? grid : createGridMaterial();
   }
   applySettings(settings2) {
     this.wireframeColor = settings2.materials.highlight.color;
@@ -47883,6 +47855,7 @@ class VimMaterials {
     this.wireframe.clippingPlanes = value != null ? value : null;
     this.isolation.clippingPlanes = value != null ? value : null;
     this.mask.clippingPlanes = value != null ? value : null;
+    this.grid.clippingPlanes = value != null ? value : null;
     this._onUpdate.dispatch();
   }
   get sectionStrokeWitdh() {
@@ -47987,6 +47960,117 @@ function createWireframe() {
   });
   return material;
 }
+class Mesh {
+  constructor(mesh, instance, boxes) {
+    __publicField2(this, "three");
+    __publicField2(this, "vim");
+    __publicField2(this, "merged");
+    __publicField2(this, "instances");
+    __publicField2(this, "submeshes");
+    __publicField2(this, "boxes");
+    __publicField2(this, "ignoreSceneMaterial");
+    __publicField2(this, "boundingBox");
+    __publicField2(this, "_material");
+    this.three = mesh;
+    this.three.userData.vim = this;
+    this.instances = instance;
+    this.boxes = boxes;
+    this.boundingBox = this.unionAllBox(boxes);
+  }
+  static createMerged(mesh, instances, boxes, submeshes) {
+    const result = new Mesh(mesh, instances, boxes);
+    result.merged = true;
+    result.submeshes = submeshes;
+    return result;
+  }
+  static createInstanced(mesh, instances, boxes) {
+    const result = new Mesh(mesh, instances, boxes);
+    result.merged = false;
+    return result;
+  }
+  setMaterial(value) {
+    if (this._material === value)
+      return;
+    if (this.ignoreSceneMaterial)
+      return;
+    if (value) {
+      if (!this._material) {
+        this._material = this.three.material;
+      }
+      this.three.material = value;
+    } else {
+      if (this._material) {
+        this.three.material = this._material;
+        this._material = void 0;
+      }
+    }
+  }
+  getSubMesh(index) {
+    return new Submesh(this, index);
+  }
+  getSubmeshFromFace(faceIndex) {
+    if (!this.merged) {
+      throw new Error("Can only be called when mesh.merged = true");
+    }
+    const index = this.binarySearch(this.submeshes, faceIndex * 3);
+    return new Submesh(this, index);
+  }
+  getSubmeshes() {
+    return this.instances.map((s, i2) => new Submesh(this, i2));
+  }
+  binarySearch(array, element) {
+    let m2 = 0;
+    let n2 = array.length - 1;
+    while (m2 <= n2) {
+      const k = n2 + m2 >> 1;
+      const cmp = element - array[k];
+      if (cmp > 0) {
+        m2 = k + 1;
+      } else if (cmp < 0) {
+        n2 = k - 1;
+      } else {
+        return k;
+      }
+    }
+    return m2 - 1;
+  }
+  unionAllBox(boxes) {
+    const box = boxes[0].clone();
+    for (let i2 = 1; i2 < boxes.length; i2++) {
+      box.union(boxes[i2]);
+    }
+    return box;
+  }
+}
+class Submesh {
+  constructor(mesh, index) {
+    __publicField2(this, "mesh");
+    __publicField2(this, "index");
+    this.mesh = mesh;
+    this.index = index;
+  }
+  get three() {
+    return this.mesh.three;
+  }
+  get merged() {
+    return this.mesh.merged;
+  }
+  get instance() {
+    return this.mesh.instances[this.index];
+  }
+  get boundingBox() {
+    return this.mesh.boxes[this.index];
+  }
+  get meshStart() {
+    return this.mesh.submeshes[this.index];
+  }
+  get meshEnd() {
+    return this.index + 1 < this.mesh.submeshes.length ? this.mesh.submeshes[this.index + 1] : this.three.geometry.index.count;
+  }
+  get object() {
+    return this.mesh.vim.getObjectFromInstance(this.instance);
+  }
+}
 class MeshBuilder {
   constructor(materials) {
     __publicField2(this, "materials");
@@ -48034,16 +48118,15 @@ class MeshBuilder {
   }
   createInstancedMesh(geometry, g3d, instances, useAlpha) {
     const material = useAlpha ? this.materials.transparent : this.materials.opaque;
-    const result = new InstancedMesh(geometry, material.material, instances.length);
+    const mesh = new InstancedMesh(geometry, material.material, instances.length);
     geometry.computeBoundingBox();
     const boxes = [];
     for (let i2 = 0; i2 < instances.length; i2++) {
       const matrix = Geometry.getInstanceMatrix(g3d, instances[i2]);
-      result.setMatrixAt(i2, matrix);
+      mesh.setMatrixAt(i2, matrix);
       boxes[i2] = geometry.boundingBox.clone().applyMatrix4(matrix);
     }
-    result.userData.instances = instances;
-    result.userData.boxes = boxes;
+    const result = Mesh.createInstanced(mesh, instances, boxes);
     return result;
   }
   createMergedMesh(g3d, section, transparent, instances) {
@@ -48051,12 +48134,9 @@ class MeshBuilder {
     if (!merge)
       return;
     const material = transparent ? this.materials.transparent : this.materials.opaque;
-    const mesh = new Mesh(merge.geometry, material.material);
-    mesh.userData.merged = true;
-    mesh.userData.instances = merge.instances;
-    mesh.userData.submeshes = merge.submeshes;
-    mesh.userData.boxes = merge.boxes;
-    return mesh;
+    const mesh = new Mesh$1(merge.geometry, material.material);
+    const result = Mesh.createMerged(mesh, merge.instances, merge.boxes, merge.submeshes);
+    return result;
   }
   createWireframe(g3d, instances) {
     const geometry = Geometry.createGeometryFromInstances(g3d, instances);
@@ -48164,12 +48244,6 @@ class Vim {
   getMatrix() {
     return this.settings.matrix;
   }
-  getObjectFromMesh(mesh, index) {
-    const element = this.getElementFromMesh(mesh, index);
-    if (!element)
-      return;
-    return this.getObjectFromElement(element);
-  }
   getObjectFromInstance(instance) {
     const element = this.document.getElementFromInstance(instance);
     if (!element)
@@ -48225,20 +48299,12 @@ class Vim {
       const instance = instances[i2];
       if (instance < 0)
         continue;
-      const pairs = this.scene.getMeshFromInstance(instance);
-      pairs == null ? void 0 : pairs.forEach((p2) => meshes.push(p2));
+      const submeshes = this.scene.getMeshFromInstance(instance);
+      submeshes == null ? void 0 : submeshes.forEach((s) => meshes.push(s));
     }
     if (meshes.length === 0)
       return;
     return meshes;
-  }
-  getElementFromMesh(mesh, index) {
-    if (!mesh || index < 0)
-      return;
-    const instance = this.scene.getInstanceFromMesh(mesh, index);
-    if (!instance)
-      return;
-    return this.document.getElementFromInstance(instance);
   }
 }
 class Loader {
@@ -48852,7 +48918,7 @@ _geometry$1.setAttribute("position", new Float32BufferAttribute([-1, 3, 0, -1, -
 _geometry$1.setAttribute("uv", new Float32BufferAttribute([0, 2, 0, 0, 2, 0], 2));
 class FullScreenQuad {
   constructor(material) {
-    this._mesh = new Mesh(_geometry$1, material);
+    this._mesh = new Mesh$1(_geometry$1, material);
   }
   dispose() {
     this._mesh.geometry.dispose();
@@ -49923,6 +49989,7 @@ class Viewer {
     __publicField2(this, "sectionBox");
     __publicField2(this, "measure");
     __publicField2(this, "gizmoRectangle");
+    __publicField2(this, "grid");
     __publicField2(this, "materials");
     __publicField2(this, "_environment");
     __publicField2(this, "_camera");
@@ -49950,6 +50017,7 @@ class Viewer {
     (_a22 = this.viewport.canvas.parentElement) == null ? void 0 : _a22.prepend(this._gizmoAxes.canvas);
     this.sectionBox = new SectionBox(this);
     this.gizmoRectangle = new GizmoRectangle(this);
+    this.grid = new GizmoGrid(this.renderer, this.materials);
     this._environment = new Environment(this.config);
     this._environment.getObjects().forEach((o) => this.renderer.add(o));
     this.selection = new Selection(materials);
@@ -50068,70 +50136,44 @@ class Viewer {
     return more;
   }
 }
-function createGridMaterial() {
-  return new ShaderMaterial({
-    transparent: true,
-    side: DoubleSide,
-    vertexColors: true,
-    vertexShader: `
-    #include <common>
-    #include <logdepthbuf_pars_vertex>
-
-    varying vec3 vPosition;
-    varying vec3 vColor;
-    void main() {
-
-      vec4 pos = modelMatrix * vec4(position, 1.0);
-      vPosition = pos.xyz / pos.w;
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-      vColor = color;
-      #include <logdepthbuf_vertex>
+class GizmoGrid {
+  constructor(renderer, materials) {
+    __publicField2(this, "renderer");
+    __publicField2(this, "material");
+    __publicField2(this, "grid");
+    this.renderer = renderer;
+    this.material = materials.grid;
+  }
+  initGrid(vim, scale) {
+    if (this.grid) {
+      this.renderer.remove(this.grid.mesh);
+      this.grid.dispose();
     }
-    `,
-    fragmentShader: `
-    #include <common>
-    #include <logdepthbuf_pars_fragment>
-    varying vec3 vPosition;
-    varying vec3 vColor;
-
-    void main() {
-      #include <logdepthbuf_fragment>
-      float a = (2.0f*PI)/30.0f;
-      float b = 10.0f;
-      float x = sin(a* vPosition.x + b);
-      x = x > 0.999f ? x : 0.0f;
-
-      float y = sin(a * vPosition.y + b);
-      y = y > 0.999f ? y : 0.0f;
-
-      float z = sin(a*vPosition.z + b);
-      z = z > 0.999f ? z : 0.0f;
-
-      float p = min(x + y + z, 1.0f);
-
-      gl_FragColor = vec4(vColor, 0.2f);
-      //gl_FragDepthEXT = p > 0.0f ? gl_FragDepthEXT : 100.0f;
-    }
-    `
-  });
+    this.grid = Grid.createFromBox(vim.scene.getBoundingBox(), scale, this.material);
+    this.renderer.add(this.grid.mesh);
+  }
 }
 class Grid {
-  constructor(size, scale) {
+  constructor(size, scale, material, color, opacity) {
     __publicField2(this, "size");
     __publicField2(this, "center");
     __publicField2(this, "box");
     __publicField2(this, "mesh");
+    __publicField2(this, "cellCount");
     __publicField2(this, "_scale");
     __publicField2(this, "_colors", /* @__PURE__ */ new Map());
+    __publicField2(this, "_alpha", /* @__PURE__ */ new Map());
     __publicField2(this, "_material");
+    __publicField2(this, "_ownedMaterial");
     this.size = size;
-    this.box = new Box3().setFromCenterAndSize(new Vector3(0, 0, 0), size.clone().multiply(scale));
     this._scale = scale;
-    this.build();
+    this.box = new Box3().setFromCenterAndSize(new Vector3(0, 0, 0), size.clone().multiply(scale));
+    this.cellCount = this.size.x * this.size.y * this.size.z;
+    this.build(color, opacity, material);
   }
-  static createFromBox(box, scale) {
+  static createFromBox(box, scale, material) {
     const size = box.getSize(new Vector3()).divide(scale).ceil();
-    const g = new Grid(size, scale);
+    const g = new Grid(size, scale, material);
     const center = box.getCenter(new Vector3());
     g.mesh.position.copy(center);
     g.box.translate(center);
@@ -50140,7 +50182,7 @@ class Grid {
   getIndex(x2, y2, z2) {
     return x2 * this.size.y * this.size.z + y2 * this.size.z + z2;
   }
-  getCellFromIndex(index) {
+  getCell(index) {
     let r2 = index;
     const x2 = Math.trunc(r2 / (this.size.y * this.size.z));
     r2 = r2 % (this.size.y * this.size.z);
@@ -50149,25 +50191,44 @@ class Grid {
     const z2 = r2;
     return new Vector3(x2, y2, z2);
   }
-  getCellFromPosition(position) {
+  getCellAtPosition(position) {
     if (!this.box.containsPoint(position))
       return;
     return position.clone().sub(this.box.min).divide(this._scale).floor();
   }
-  getCellBox(cell) {
-    const min2 = this.box.min.clone().add(cell.multiply(this._scale));
+  getBox(cell) {
+    const c = typeof cell === "number" ? this.getCell(cell) : cell;
+    const min2 = this.box.min.clone().add(c.multiply(this._scale));
     const max2 = min2.clone().add(this._scale);
     return new Box3(min2, max2);
   }
   raycast(raycaster) {
     const hits = raycaster.intersectObject(this.mesh);
-    const position = raycaster.ray.at(hits[0].distance + 0.1, new Vector3());
-    if (!hits[0])
-      return;
-    return this.getCellFromPosition(position);
+    for (let i2 = 0; i2 < hits.length; i2++) {
+      const position = raycaster.ray.at(hits[i2].distance + 0.1, new Vector3());
+      const cell = this.getCellAtPosition(position);
+      if (cell !== void 0 && this.getOpacity(cell) > 0) {
+        return cell;
+      }
+    }
+    return void 0;
   }
-  color(cell, color) {
-    const index = this.getIndex(cell.x, cell.y, cell.z);
+  getOpacity(cell) {
+    const index = typeof cell === "number" ? cell : this.getIndex(cell.x, cell.y, cell.z);
+    return this._alpha.get(index);
+  }
+  setOpacity(cell, opacity) {
+    const index = typeof cell === "number" ? cell : this.getIndex(cell.x, cell.y, cell.z);
+    const colors = this.mesh.geometry.getAttribute("color");
+    this._alpha.set(index, opacity);
+    const c = index * 8;
+    for (let i2 = 0; i2 < 8; i2++) {
+      colors.setW(c + i2, opacity);
+    }
+    colors.needsUpdate = true;
+  }
+  setColor(cell, color) {
+    const index = typeof cell === "number" ? cell : this.getIndex(cell.x, cell.y, cell.z);
     this._colors.set(index, color);
     const colors = this.mesh.geometry.getAttribute("color");
     const c = index * 8;
@@ -50177,13 +50238,12 @@ class Grid {
     colors.needsUpdate = true;
   }
   getColor(cell) {
-    const index = this.getIndex(cell.x, cell.y, cell.z);
+    const index = typeof cell === "number" ? cell : this.getIndex(cell.x, cell.y, cell.z);
     return this._colors.get(index);
   }
-  build() {
-    const cellCount = this.size.x * this.size.y * this.size.z;
-    const vertices = new Float32Array(cellCount * 24);
-    const indices = new Int32Array(cellCount * 36);
+  build(color = new Color(0.25, 0.25, 0.25), opacity = 0.25, material) {
+    const vertices = new Float32Array(this.cellCount * 24);
+    const indices = new Int32Array(this.cellCount * 36);
     for (let x2 = 0; x2 < this.size.x; x2++) {
       for (let y2 = 0; y2 < this.size.y; y2++) {
         for (let z2 = 0; z2 < this.size.z; z2++) {
@@ -50254,17 +50314,22 @@ class Grid {
         }
       }
     }
-    this._material = createGridMaterial();
-    const color = new Float32Array(cellCount * 24).fill(0.5);
+    [this._material, this._ownedMaterial] = material ? [material, false] : [createGridMaterial(), true];
     const geometry = new BufferGeometry();
     geometry.setAttribute("position", new Float32BufferAttribute(vertices, 3));
     geometry.setIndex(new Uint32BufferAttribute(indices, 1));
-    geometry.setAttribute("color", new Float32BufferAttribute(color, 3));
-    this.mesh = new Mesh(geometry, this._material);
+    geometry.setAttribute("color", new Float32BufferAttribute(new Float32Array(this.cellCount * 32), 4));
+    this.mesh = new Mesh$1(geometry, this._material);
+    for (let i2 = 0; i2 < this.cellCount; i2++) {
+      this.setOpacity(i2, opacity);
+      this.setColor(i2, color);
+    }
   }
   dispose() {
     this.mesh.geometry.dispose();
-    this._material.dispose();
+    if (this._ownedMaterial) {
+      this._material.dispose();
+    }
   }
 }
 const VIM = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
@@ -50281,6 +50346,7 @@ const VIM = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty(
   get Geometry() {
     return Geometry;
   },
+  GizmoGrid,
   GizmoOptions,
   Grid,
   HitTestResult: RaycastResult,
