@@ -63118,6 +63118,7 @@ function BimPanel(props) {
     setFilter,
     count: filteredElements == null ? void 0 : filteredElements.length
   }), /* @__PURE__ */ React__default.createElement("select", {
+    hidden: true,
     className: "vim-bim-grouping",
     onChange: (e) => setGrouping(e.target.value)
   }, /* @__PURE__ */ React__default.createElement("option", { value: "Family" }, "Family"), /* @__PURE__ */ React__default.createElement("option", { value: "Level" }, "Level"), /* @__PURE__ */ React__default.createElement("option", { value: "Workset" }, "Workset")), /* @__PURE__ */ React__default.createElement("select", {
