@@ -1,6 +1,6 @@
 //import { settingsGui } from './settingsGui'
 import 'vim-webgl-component/dist/style.css';
-import {VIM, createVimComponent, VimComponentRef, getLocalSettings } from 'vim-webgl-component'
+import {VIM, createVimComponent, VimComponentRef, getLocalSettings, clearLocalSettings  } from 'vim-webgl-component'
 
 // Parse URL
 const params = new URLSearchParams(window.location.search)
@@ -22,17 +22,19 @@ if (params.has('dev')) {
   devMode =  t === 'true'
 }
 
+createVimComponent(loadVim, undefined, getLocalSettings())
 
-createVimComponent(loadVim, undefined, getLocalSettings() ?? {capacity: {useOrthographicCamera: false}})
+async function loadVim(ref: VimComponentRef){
 
-function loadVim(ref: VimComponentRef){
   globalThis.vimComponent = ref
-  ref.viewer.loadVim(
-    url,
+  const vim = await ref.loader.load(url,
     {
       rotation: new VIM.THREE.Vector3(270, 0, 0)
-    } 
-  ).then(_ => console.log("Vim Successfully loaded"))
+    }
+  )
+  ref.viewer.add(vim)
+
+  console.log("Vim Successfully loaded")
 }
 
 
