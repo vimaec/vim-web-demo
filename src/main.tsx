@@ -1,6 +1,6 @@
 //import { settingsGui } from './settingsGui'
 import 'vim-webgl-component/dist/style.css';
-import {VIM, createVimComponent, VimComponentRef, getLocalSettings, clearLocalSettings  } from 'vim-webgl-component'
+import {VIM, createVimComponent, VimComponentRef, getLocalSettings } from 'vim-webgl-component'
 
 // Parse URL
 const params = new URLSearchParams(window.location.search)
@@ -33,7 +33,7 @@ async function loadVim(ref: VimComponentRef){
     }
   )
   ref.viewer.add(vim)
-
+  globalThis.VIM = VIM
   console.log("Vim Successfully loaded")
 }
 
