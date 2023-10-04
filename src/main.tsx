@@ -29,7 +29,8 @@ async function loadVim(ref: VimComponentRef){
   globalThis.vimComponent = ref
   const vim = await ref.loader.load(url,
     {
-      rotation: new VIM.THREE.Vector3(270, 0, 0)
+      rotation: new VIM.THREE.Vector3(270, 0, 0),
+      legacy: true
     }
   )
   ref.viewer.add(vim)
