@@ -40871,7 +40871,8 @@ class RetryRequest {
     this.responseType = responseType;
   }
   abort() {
-    this.xhr.abort();
+    var _a22;
+    (_a22 = this.xhr) == null ? void 0 : _a22.abort();
   }
   send() {
     var _a22;
@@ -45204,20 +45205,11 @@ class BFast {
     }
     return request.get();
   }
-  async getLocalBfast(name, unzip = false) {
+  async getLocalBfast(name, inflate2 = false) {
     let buffer = await this.getBuffer(name);
     if (!buffer)
       return void 0;
-    if (unzip) {
-      buffer = pako.inflate(buffer).buffer;
-    }
-    return new BFast(buffer, 0, name);
-  }
-  async getLocalBfastRaw(name, unzip = false) {
-    let buffer = await this.getBuffer(name);
-    if (!buffer)
-      return void 0;
-    if (unzip) {
+    if (inflate2) {
       buffer = pako.inflateRaw(buffer).buffer;
     }
     return new BFast(buffer, 0, name);
@@ -45380,7 +45372,6 @@ class BFast {
   }
 }
 bfast.BFast = BFast;
-var g3d = {};
 var abstractG3d = {};
 var g3dAttributes = {};
 Object.defineProperty(g3dAttributes, "__esModule", { value: true });
@@ -45476,6 +45467,7 @@ class AbstractG3d {
   }
 }
 abstractG3d.AbstractG3d = AbstractG3d;
+var g3d = {};
 Object.defineProperty(g3d, "__esModule", { value: true });
 g3d.G3d = g3d.VimAttributes = void 0;
 const abstractG3d_1$3 = abstractG3d;
@@ -46181,28 +46173,34 @@ const g3d_1$1 = g3d;
 class SceneAttributes {
 }
 g3dScene.SceneAttributes = SceneAttributes;
-SceneAttributes.instanceFiles = "g3d:instance:file:0:int32:1";
-SceneAttributes.instanceIndices = "g3d:instance:index:0:int32:1";
+SceneAttributes.chunkCount = "g3d:chunk:count:0:int32:1";
+SceneAttributes.instanceMesh = "g3d:instance:mesh:0:int32:1";
+SceneAttributes.instanceTransform = "g3d:instance:transform:0:int32:1";
 SceneAttributes.instanceNodes = "g3d:instance:node:0:int32:1";
 SceneAttributes.instanceGroups = "g3d:instance:group:0:int32:1";
 SceneAttributes.instanceTags = "g3d:instance:tag:0:int64:1";
 SceneAttributes.instanceFlags = "g3d:instance:tag:0:uint16:1";
 SceneAttributes.instanceMins = "g3d:instance:min:0:float32:3";
 SceneAttributes.instanceMaxs = "g3d:instance:max:0:float32:3";
+SceneAttributes.meshChunk = "g3d:mesh:chunk:0:int32:1";
+SceneAttributes.meshChunkIndices = "g3d:mesh:chunkindex:0:int32:1";
 SceneAttributes.meshInstanceCounts = "g3d:mesh:instancecount:0:int32:1";
 SceneAttributes.meshIndexCounts = "g3d:mesh:indexcount:0:int32:1";
 SceneAttributes.meshVertexCounts = "g3d:mesh:vertexcount:0:int32:1";
 SceneAttributes.meshOpaqueIndexCount = "g3d:mesh:opaqueindexcount:0:int32:1";
 SceneAttributes.meshOpaqueVertexCount = "g3d:mesh:opaquevertexcount:0:int32:1";
 SceneAttributes.all = [
-  SceneAttributes.instanceFiles,
-  SceneAttributes.instanceIndices,
+  SceneAttributes.chunkCount,
+  SceneAttributes.instanceMesh,
+  SceneAttributes.instanceTransform,
   SceneAttributes.instanceNodes,
   SceneAttributes.instanceGroups,
   SceneAttributes.instanceTags,
   SceneAttributes.instanceFlags,
   SceneAttributes.instanceMins,
   SceneAttributes.instanceMaxs,
+  SceneAttributes.meshChunk,
+  SceneAttributes.meshChunkIndices,
   SceneAttributes.meshInstanceCounts,
   SceneAttributes.meshIndexCounts,
   SceneAttributes.meshVertexCounts,
@@ -46210,16 +46208,19 @@ SceneAttributes.all = [
   SceneAttributes.meshOpaqueVertexCount
 ];
 class G3dScene {
-  constructor(rawG3d, instanceFiles, instanceIndices, instanceNodes, instanceGroups, instanceTags, instanceFlags, instanceMins, instanceMaxs, meshInstanceCounts, meshIndexCounts, meshVertexCounts, meshOpaqueIndexCounts, meshOpaqueVertexCounts) {
+  constructor(rawG3d, chunkCount, instanceMeshes, instanceTransform, instanceNodes, instanceGroups, instanceTags, instanceFlags, instanceMins, instanceMaxs, meshChunks, meshChunkIndices, meshInstanceCounts, meshIndexCounts, meshVertexCounts, meshOpaqueIndexCounts, meshOpaqueVertexCounts) {
     this.rawG3d = rawG3d;
-    this.instanceMeshes = instanceFiles;
-    this.instanceIndices = instanceIndices;
+    this.chunkCount = chunkCount[0];
+    this.instanceMeshes = instanceMeshes;
+    this.instanceTransforms = instanceTransform;
     this.instanceNodes = instanceNodes;
     this.instanceGroups = instanceGroups;
     this.instanceTags = instanceTags;
     this.instanceFlags = instanceFlags;
     this.instanceMins = instanceMins;
     this.instanceMaxs = instanceMaxs;
+    this.meshChunks = meshChunks;
+    this.meshChunkIndices = meshChunkIndices;
     this.meshInstanceCounts = meshInstanceCounts;
     this.meshIndexCounts = meshIndexCounts;
     this.meshVertexCounts = meshVertexCounts;
@@ -46236,7 +46237,7 @@ class G3dScene {
     const map = /* @__PURE__ */ new Map();
     for (let i2 = 0; i2 < this.instanceMeshes.length; i2++) {
       const mesh = this.instanceMeshes[i2];
-      const index2 = this.instanceIndices[i2];
+      const index2 = this.instanceTransforms[i2];
       const indices = (_a22 = map.get(mesh)) != null ? _a22 : /* @__PURE__ */ new Map();
       indices.set(index2, i2);
       map.set(mesh, indices);
@@ -46248,7 +46249,7 @@ class G3dScene {
       var _a22;
       return (_a22 = g3d2.findAttribute(attribute)) == null ? void 0 : _a22.data;
     }
-    return new G3dScene(g3d2, getArray(SceneAttributes.instanceFiles), getArray(SceneAttributes.instanceIndices), getArray(SceneAttributes.instanceNodes), getArray(SceneAttributes.instanceGroups), getArray(SceneAttributes.instanceTags), getArray(SceneAttributes.instanceFlags), getArray(SceneAttributes.instanceMins), getArray(SceneAttributes.instanceMaxs), getArray(SceneAttributes.meshInstanceCounts), getArray(SceneAttributes.meshIndexCounts), getArray(SceneAttributes.meshVertexCounts), getArray(SceneAttributes.meshOpaqueIndexCount), getArray(SceneAttributes.meshOpaqueVertexCount));
+    return new G3dScene(g3d2, getArray(SceneAttributes.chunkCount), getArray(SceneAttributes.instanceMesh), getArray(SceneAttributes.instanceTransform), getArray(SceneAttributes.instanceNodes), getArray(SceneAttributes.instanceGroups), getArray(SceneAttributes.instanceTags), getArray(SceneAttributes.instanceFlags), getArray(SceneAttributes.instanceMins), getArray(SceneAttributes.instanceMaxs), getArray(SceneAttributes.meshChunk), getArray(SceneAttributes.meshChunkIndices), getArray(SceneAttributes.meshInstanceCounts), getArray(SceneAttributes.meshIndexCounts), getArray(SceneAttributes.meshVertexCounts), getArray(SceneAttributes.meshOpaqueIndexCount), getArray(SceneAttributes.meshOpaqueVertexCount));
   }
   static async createFromPath(path) {
     const f = await fetch(path);
@@ -46286,14 +46287,14 @@ class G3dScene {
   }
   getNodeMin(node) {
     const instance = this.nodeToInstance.get(node);
-    if (!node) {
+    if (!instance) {
       return void 0;
     }
     return this.getInstanceMin(instance);
   }
   getNodeMax(node) {
     const instance = this.nodeToInstance.get(node);
-    if (!node) {
+    if (!instance) {
       return void 0;
     }
     return this.getInstanceMax(instance);
@@ -46316,9 +46317,9 @@ const remoteBuffer_1$1 = remoteBuffer;
 const remoteValue_1 = remoteValue;
 class RemoteVimx {
   constructor(bfast2) {
+    this.chunkCache = /* @__PURE__ */ new Map();
     this.bfast = bfast2;
-    this.scene = new remoteValue_1.RemoteValue(() => this.requestIndex());
-    this.sceneRaw = new remoteValue_1.RemoteValue(() => this.requestIndexRaw());
+    this.scene = new remoteValue_1.RemoteValue(() => this.requestScene());
   }
   static async fromPath(path) {
     const buffer = new remoteBuffer_1$1.RemoteBuffer(path);
@@ -46331,43 +46332,40 @@ class RemoteVimx {
   async download() {
     this.bfast.forceDownload();
   }
-  async requestIndex() {
+  async requestScene() {
     const index2 = await this.bfast.getLocalBfast("scene", true);
     return g3dScene_1.G3dScene.createFromBfast(index2);
   }
-  async requestIndexRaw() {
-    const index2 = await this.bfast.getLocalBfastRaw("scene", true);
-    return g3dScene_1.G3dScene.createFromBfast(index2);
-  }
-  async getIndex() {
+  async getScene() {
     return this.scene.get();
-  }
-  async getIndexRaw() {
-    return this.sceneRaw.get();
   }
   async getMaterials() {
     const mat = await this.bfast.getLocalBfast("materials", true);
     return g3dMaterials_1.G3dMaterial.createFromBfast(mat);
   }
+  async getChunk(chunk) {
+    var cached = this.chunkCache.get(chunk);
+    if (cached !== void 0) {
+      return cached.get();
+    }
+    var value = new remoteValue_1.RemoteValue(() => this.requestChunk(chunk));
+    this.chunkCache.set(chunk, value);
+    return value.get();
+  }
+  async requestChunk(chunk) {
+    const chunkBFast = await this.bfast.getLocalBfast(`chunk_${chunk}`, true);
+    var ranges = await chunkBFast.getRanges();
+    const keys3 = [...ranges.keys()];
+    var bfasts = await Promise.all(keys3.map((k) => chunkBFast.getBfast(k)));
+    var meshes = await Promise.all(bfasts.map((b) => g3dMesh_1.G3dMesh.createFromBfast(b)));
+    return meshes;
+  }
   async getMesh(mesh) {
-    const m2 = await this.bfast.getLocalBfast(`mesh_${mesh}`, true);
-    const result = await g3dMesh_1.G3dMesh.createFromBfast(m2);
-    const scene = await this.scene.get();
-    result.scene = scene;
-    result.meshIndex = mesh;
-    return result;
-  }
-  async getMaterialsRaw() {
-    const mat = await this.bfast.getLocalBfastRaw("materials", true);
-    return g3dMaterials_1.G3dMaterial.createFromBfast(mat);
-  }
-  async getMeshRaw(mesh) {
-    const m2 = await this.bfast.getLocalBfastRaw(`mesh_${mesh}`, true);
-    const result = await g3dMesh_1.G3dMesh.createFromBfast(m2);
-    const scene = await this.sceneRaw.get();
-    result.scene = scene;
-    result.meshIndex = mesh;
-    return result;
+    var scene = await this.scene.get();
+    var chunk = scene.meshChunks[mesh];
+    var meshes = await this.getChunk(chunk);
+    var index2 = scene.meshChunkIndices[mesh];
+    return meshes[index2];
   }
 }
 remoteVimx.RemoteVimx = RemoteVimx;
@@ -46945,9 +46943,9 @@ var vimLoader = {};
 Object.defineProperty(vimLoader, "__esModule", { value: true });
 vimLoader.VimLoader = void 0;
 class VimLoader {
-  static async loadFromBfast(bfast2, ignoreStrings) {
+  static async loadFromBfast(bfast2, download, ignoreStrings) {
     const [entity, strings2] = await Promise.all([
-      VimLoader.requestEntities(bfast2),
+      VimLoader.requestEntities(bfast2, download),
       ignoreStrings ? Promise.resolve(void 0) : VimLoader.requestStrings(bfast2)
     ]);
     return [entity, strings2];
@@ -46961,8 +46959,8 @@ class VimLoader {
     const strings2 = new TextDecoder("utf-8").decode(buffer).split("\0");
     return strings2;
   }
-  static async requestEntities(bfast2) {
-    const entities = await bfast2.getBfast("entities");
+  static async requestEntities(bfast2, download) {
+    const entities = download ? await bfast2.getLocalBfast("entities") : await bfast2.getBfast("entities");
     if (!entities) {
       console.error("Could not get String Data from VIM file. Bim features will be disabled.");
     }
@@ -53631,8 +53629,8 @@ class VimDocument {
     this.entities = entities;
     this.strings = strings2;
   }
-  static async createFromBfast(bfast2, ignoreStrings = false) {
-    const loaded = await vimLoader_1.VimLoader.loadFromBfast(bfast2, ignoreStrings);
+  static async createFromBfast(bfast2, download, ignoreStrings = false) {
+    const loaded = await vimLoader_1.VimLoader.loadFromBfast(bfast2, download, ignoreStrings);
     if (loaded[0] === void 0)
       return void 0;
     let doc = new VimDocument(loaded[0], loaded[1]);
@@ -53797,6 +53795,7 @@ async function getElementFamilyInstance(document2, element) {
   Object.defineProperty(exports, "__esModule", { value: true });
   exports.VimHelpers = void 0;
   __exportStar(bfast, exports);
+  __exportStar(abstractG3d, exports);
   __exportStar(g3d, exports);
   __exportStar(remoteVimx, exports);
   __exportStar(g3dMaterials, exports);
@@ -54603,7 +54602,7 @@ class ElementMapping2 {
     __publicField2(this, "_elementIdToInstances");
     this._instanceToElement = /* @__PURE__ */ new Map();
     this._instanceToElementId = /* @__PURE__ */ new Map();
-    for (let i2 = 0; i2 < scene.instanceIndices.length; i2++) {
+    for (let i2 = 0; i2 < scene.instanceTransforms.length; i2++) {
       this._instanceToElement.set(scene.instanceNodes[i2], scene.instanceGroups[i2]);
       this._instanceToElementId.set(scene.instanceNodes[i2], scene.instanceTags[i2]);
     }
@@ -55666,7 +55665,7 @@ class G3dSubset {
     }
   }
   getSourceInstance(index2) {
-    return this._source instanceof dist$3.G3dScene ? this._source.instanceIndices[index2] : index2;
+    return this._source instanceof dist$3.G3dScene ? this._source.instanceTransforms[index2] : index2;
   }
   getMesh(index2) {
     return this._meshes[index2];
@@ -55839,11 +55838,11 @@ class LoadingSynchronizer {
     return promises;
   }
   async merge(mesh, index2) {
-    const m2 = await this.geometry.getMeshRaw(mesh);
+    const m2 = await this.geometry.getMesh(mesh);
     this.mergeQueue.push(() => this.mergeAction(m2, index2));
   }
   async instance(mesh, index2) {
-    const m2 = await this.geometry.getMeshRaw(mesh);
+    const m2 = await this.geometry.getMesh(mesh);
     this.instanceQueue.push(() => this.instanceAction(m2, index2));
   }
 }
@@ -56136,9 +56135,10 @@ class VimX {
       await geometry.bfast.forceDownload();
     }
     console.log("Downloading Scene Index..");
+    console.log(geometry);
     const [index2, materials] = await Promise.all([
-      geometry.getIndexRaw(),
-      geometry.getMaterialsRaw()
+      geometry.getScene(),
+      geometry.getMaterials()
     ]);
     console.log("Scene Index Downloaded.");
     const scene = await SceneManager.create(geometry, index2, materials, settings2);
@@ -56160,7 +56160,7 @@ class VimX {
     const materials = new dist$3.G3dMaterial(g3d2.materialColors);
     const factory = new LegacyMeshFactory(g3d2, materials, settings2);
     const scene = factory.createScene();
-    const doc = await dist$3.VimDocument.createFromBfast(bfast2);
+    const doc = await dist$3.VimDocument.createFromBfast(bfast2, true);
     const mapping = await ElementMapping.fromG3d(g3d2, doc);
     const vim = new Vim(void 0, doc, g3d2, scene, fullSettings, mapping);
     return vim;
@@ -63109,10 +63109,10 @@ class VimBuilder {
   }
   async load(bfast2, settings2) {
     const getBim = async () => {
-      const doc = await dist$3.VimDocument.createFromBfast(bfast2);
+      const doc = await dist$3.VimDocument.createFromBfast(bfast2, true);
       const [instanceToElement, elementIds] = await Promise.all([
         settings2.noMap ? void 0 : doc.node.getAllElementIndex(),
-        settings2.noMap ? void 0 : doc.element.getAllId()
+        settings2.noMap ? void 0 : this.getElementIds(doc)
       ]);
       return { doc, instanceToElement, elementIds };
     };
@@ -63133,7 +63133,7 @@ class VimBuilder {
     const [header, instanceToElement, elementIds] = await Promise.all([
       settings2.noHeader ? void 0 : VimBuilder.requestHeader(bfast2),
       settings2.noMap ? void 0 : doc.node.getAllElementIndex(),
-      settings2.noMap ? void 0 : doc.element.getAllId()
+      settings2.noMap ? void 0 : this.getElementIds(doc)
     ]);
     const g3d2 = settings2.instances ? await (remoteG3d2 == null ? void 0 : remoteG3d2.filter(settings2.instances)) : await (remoteG3d2 == null ? void 0 : remoteG3d2.toG3d());
     const copy = __spreadProps(__spreadValues({}, settings2), { instances: void 0 });
@@ -63141,6 +63141,19 @@ class VimBuilder {
     const mapping = settings2.noMap ? void 0 : new ElementMapping(Array.from(g3d2.instanceNodes), instanceToElement, elementIds);
     const vim = new Vim(header, doc, g3d2, scene, settings2, mapping);
     return vim;
+  }
+  async getElementIds(doc) {
+    const ids = await doc.element.getAllId();
+    if (ids !== void 0) {
+      return ids;
+    }
+    const count = await doc.element.getCount();
+    if (count === 0) {
+      return void 0;
+    }
+    const fill = new BigInt64Array(count);
+    fill.fill(BigInt(-1));
+    return fill;
   }
   static async requestHeader(bfast2) {
     const header = await dist$3.requestHeader(bfast2);
@@ -63150,7 +63163,7 @@ class VimBuilder {
     return header;
   }
   static async requestG3d(bfast2) {
-    const geometry = await bfast2.getLocalBfast("geometry");
+    const geometry = await bfast2.getBfast("geometry");
     if (!geometry) {
       throw new Error("Could not get G3d Data from VIM file.");
     }
