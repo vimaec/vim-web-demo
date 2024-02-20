@@ -71054,7 +71054,7 @@ function addPerformanceCounter(parent) {
   animate();
 }
 const params = new URLSearchParams(window.location.search);
-let url = params.has("vim") || params.has("model") ? (_a2 = params.get("vim")) != null ? _a2 : params.get("model") : "https://vim.azureedge.net/samples/residence.vim";
+let url = params.has("vim") || params.has("model") ? (_a2 = params.get("vim")) != null ? _a2 : params.get("model") : "https://vim02.azureedge.net/samples/residence.v1.2.75.vim";
 if (params.has("transparency")) {
   const t2 = params.get("transparency");
   VIM.Transparency.isValid(t2) ? t2 : "all";

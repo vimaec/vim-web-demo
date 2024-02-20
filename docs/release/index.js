@@ -47010,7 +47010,8 @@ class AssetTable {
       })()
     ]);
     let asset = [];
-    for (let i2 = 0; i2 < bufferName.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       asset.push({
         index: i2,
         bufferName: bufferName ? bufferName[i2] : void 0
@@ -47072,7 +47073,8 @@ class DisplayUnitTable {
       })()
     ]);
     let displayUnit = [];
-    for (let i2 = 0; i2 < spec.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       displayUnit.push({
         index: i2,
         spec: spec ? spec[i2] : void 0,
@@ -47179,7 +47181,8 @@ class ParameterDescriptorTable {
       })()
     ]);
     let parameterDescriptor = [];
-    for (let i2 = 0; i2 < name.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       parameterDescriptor.push({
         index: i2,
         name: name ? name[i2] : void 0,
@@ -47306,7 +47309,8 @@ class ParameterTable {
       })()
     ]);
     let parameter = [];
-    for (let i2 = 0; i2 < value.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       parameter.push({
         index: i2,
         value: value ? value[i2] : void 0,
@@ -47485,7 +47489,8 @@ class ElementTable {
       })()
     ]);
     let element = [];
-    for (let i2 = 0; i2 < id2.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       element.push({
         index: i2,
         id: id2 ? id2[i2] : void 0,
@@ -47796,7 +47801,8 @@ class WorksetTable {
       })()
     ]);
     let workset = [];
-    for (let i2 = 0; i2 < id2.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       workset.push({
         index: i2,
         id: id2 ? id2[i2] : void 0,
@@ -47926,7 +47932,8 @@ class AssemblyInstanceTable {
       })()
     ]);
     let assemblyInstance = [];
-    for (let i2 = 0; i2 < assemblyTypeName.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       assemblyInstance.push({
         index: i2,
         assemblyTypeName: assemblyTypeName ? assemblyTypeName[i2] : void 0,
@@ -48035,7 +48042,8 @@ class GroupTable {
       })()
     ]);
     let group = [];
-    for (let i2 = 0; i2 < groupType.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       group.push({
         index: i2,
         groupType: groupType ? groupType[i2] : void 0,
@@ -48129,7 +48137,8 @@ class DesignOptionTable {
       })()
     ]);
     let designOption = [];
-    for (let i2 = 0; i2 < isPrimary.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       designOption.push({
         index: i2,
         isPrimary: isPrimary ? isPrimary[i2] : void 0,
@@ -48207,7 +48216,8 @@ class LevelTable {
       })()
     ]);
     let level = [];
-    for (let i2 = 0; i2 < elevation.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       level.push({
         index: i2,
         elevation: elevation ? elevation[i2] : void 0,
@@ -48290,7 +48300,8 @@ class PhaseTable {
       })()
     ]);
     let phase = [];
-    for (let i2 = 0; i2 < elementIndex.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       phase.push({
         index: i2,
         elementIndex: elementIndex ? elementIndex[i2] : void 0
@@ -48391,7 +48402,8 @@ class RoomTable {
       })()
     ]);
     let room = [];
-    for (let i2 = 0; i2 < baseOffset.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       room.push({
         index: i2,
         baseOffset: baseOffset ? baseOffset[i2] : void 0,
@@ -48671,7 +48683,8 @@ class BimDocumentTable {
       })()
     ]);
     let bimDocument = [];
-    for (let i2 = 0; i2 < title.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       bimDocument.push({
         index: i2,
         title: title ? title[i2] : void 0,
@@ -48978,7 +48991,8 @@ class DisplayUnitInBimDocumentTable {
       })()
     ]);
     let displayUnitInBimDocument = [];
-    for (let i2 = 0; i2 < displayUnitIndex.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       displayUnitInBimDocument.push({
         index: i2,
         displayUnitIndex: displayUnitIndex ? displayUnitIndex[i2] : void 0,
@@ -49064,7 +49078,8 @@ class PhaseOrderInBimDocumentTable {
       })()
     ]);
     let phaseOrderInBimDocument = [];
-    for (let i2 = 0; i2 < orderIndex.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       phaseOrderInBimDocument.push({
         index: i2,
         orderIndex: orderIndex ? orderIndex[i2] : void 0,
@@ -49188,7 +49203,8 @@ class CategoryTable {
       })()
     ]);
     let category = [];
-    for (let i2 = 0; i2 < name.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       category.push({
         index: i2,
         name: name ? name[i2] : void 0,
@@ -49340,7 +49356,8 @@ class FamilyTable {
       })()
     ]);
     let family = [];
-    for (let i2 = 0; i2 < structuralMaterialType.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       family.push({
         index: i2,
         structuralMaterialType: structuralMaterialType ? structuralMaterialType[i2] : void 0,
@@ -49459,7 +49476,8 @@ class FamilyTypeTable {
       })()
     ]);
     let familyType = [];
-    for (let i2 = 0; i2 < isSystemFamilyType.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       familyType.push({
         index: i2,
         isSystemFamilyType: isSystemFamilyType ? isSystemFamilyType[i2] : void 0,
@@ -49692,7 +49710,8 @@ class FamilyInstanceTable {
       })()
     ]);
     let familyInstance = [];
-    for (let i2 = 0; i2 < facingFlipped.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       familyInstance.push({
         index: i2,
         facingFlipped: facingFlipped ? facingFlipped[i2] : void 0,
@@ -50099,7 +50118,8 @@ class ViewTable {
       })()
     ]);
     let view = [];
-    for (let i2 = 0; i2 < title.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       view.push({
         index: i2,
         title: title ? title[i2] : void 0,
@@ -50356,7 +50376,8 @@ class ElementInViewTable {
       })()
     ]);
     let elementInView = [];
-    for (let i2 = 0; i2 < viewIndex.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       elementInView.push({
         index: i2,
         viewIndex: viewIndex ? viewIndex[i2] : void 0,
@@ -50437,7 +50458,8 @@ class ShapeInViewTable {
       })()
     ]);
     let shapeInView = [];
-    for (let i2 = 0; i2 < shapeIndex.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       shapeInView.push({
         index: i2,
         shapeIndex: shapeIndex ? shapeIndex[i2] : void 0,
@@ -50518,7 +50540,8 @@ class AssetInViewTable {
       })()
     ]);
     let assetInView = [];
-    for (let i2 = 0; i2 < assetIndex.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       assetInView.push({
         index: i2,
         assetIndex: assetIndex ? assetIndex[i2] : void 0,
@@ -50599,7 +50622,8 @@ class AssetInViewSheetTable {
       })()
     ]);
     let assetInViewSheet = [];
-    for (let i2 = 0; i2 < assetIndex.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       assetInViewSheet.push({
         index: i2,
         assetIndex: assetIndex ? assetIndex[i2] : void 0,
@@ -50710,7 +50734,8 @@ class LevelInViewTable {
       })()
     ]);
     let levelInView = [];
-    for (let i2 = 0; i2 < extents_Min_X.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       levelInView.push({
         index: i2,
         extents_Min_X: extents_Min_X ? extents_Min_X[i2] : void 0,
@@ -50867,7 +50892,8 @@ class CameraTable {
       })()
     ]);
     let camera = [];
-    for (let i2 = 0; i2 < id2.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       camera.push({
         index: i2,
         id: id2 ? id2[i2] : void 0,
@@ -51071,7 +51097,8 @@ class MaterialTable {
       })()
     ]);
     let material = [];
-    for (let i2 = 0; i2 < name.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       material.push({
         index: i2,
         name: name ? name[i2] : void 0,
@@ -51301,7 +51328,8 @@ class MaterialInElementTable {
       })()
     ]);
     let materialInElement = [];
-    for (let i2 = 0; i2 < area2.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       materialInElement.push({
         index: i2,
         area: area2 ? area2[i2] : void 0,
@@ -51418,7 +51446,8 @@ class CompoundStructureLayerTable {
       })()
     ]);
     let compoundStructureLayer = [];
-    for (let i2 = 0; i2 < orderIndex.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       compoundStructureLayer.push({
         index: i2,
         orderIndex: orderIndex ? orderIndex[i2] : void 0,
@@ -51520,7 +51549,8 @@ class CompoundStructureTable {
       })()
     ]);
     let compoundStructure = [];
-    for (let i2 = 0; i2 < width.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       compoundStructure.push({
         index: i2,
         width: width ? width[i2] : void 0,
@@ -51588,7 +51618,8 @@ class NodeTable {
       })()
     ]);
     let node = [];
-    for (let i2 = 0; i2 < elementIndex.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       node.push({
         index: i2,
         elementIndex: elementIndex ? elementIndex[i2] : void 0
@@ -51683,7 +51714,8 @@ class GeometryTable {
       })()
     ]);
     let geometry = [];
-    for (let i2 = 0; i2 < box_Min_X.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       geometry.push({
         index: i2,
         box_Min_X: box_Min_X ? box_Min_X[i2] : void 0,
@@ -51785,7 +51817,8 @@ class ShapeTable {
       })()
     ]);
     let shape = [];
-    for (let i2 = 0; i2 < elementIndex.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       shape.push({
         index: i2,
         elementIndex: elementIndex ? elementIndex[i2] : void 0
@@ -51846,7 +51879,8 @@ class ShapeCollectionTable {
       })()
     ]);
     let shapeCollection = [];
-    for (let i2 = 0; i2 < elementIndex.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       shapeCollection.push({
         index: i2,
         elementIndex: elementIndex ? elementIndex[i2] : void 0
@@ -51912,7 +51946,8 @@ class ShapeInShapeCollectionTable {
       })()
     ]);
     let shapeInShapeCollection = [];
-    for (let i2 = 0; i2 < shapeIndex.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       shapeInShapeCollection.push({
         index: i2,
         shapeIndex: shapeIndex ? shapeIndex[i2] : void 0,
@@ -51998,7 +52033,8 @@ class SystemTable {
       })()
     ]);
     let system = [];
-    for (let i2 = 0; i2 < systemType.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       system.push({
         index: i2,
         systemType: systemType ? systemType[i2] : void 0,
@@ -52091,7 +52127,8 @@ class ElementInSystemTable {
       })()
     ]);
     let elementInSystem = [];
-    for (let i2 = 0; i2 < roles.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       elementInSystem.push({
         index: i2,
         roles: roles ? roles[i2] : void 0,
@@ -52189,7 +52226,8 @@ class WarningTable {
       })()
     ]);
     let warning = [];
-    for (let i2 = 0; i2 < guid.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       warning.push({
         index: i2,
         guid: guid ? guid[i2] : void 0,
@@ -52276,7 +52314,8 @@ class ElementInWarningTable {
       })()
     ]);
     let elementInWarning = [];
-    for (let i2 = 0; i2 < warningIndex.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       elementInWarning.push({
         index: i2,
         warningIndex: warningIndex ? warningIndex[i2] : void 0,
@@ -52387,7 +52426,8 @@ class BasePointTable {
       })()
     ]);
     let basePoint = [];
-    for (let i2 = 0; i2 < isSurveyPoint.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       basePoint.push({
         index: i2,
         isSurveyPoint: isSurveyPoint ? isSurveyPoint[i2] : void 0,
@@ -52517,7 +52557,8 @@ class PhaseFilterTable {
       })()
     ]);
     let phaseFilter = [];
-    for (let i2 = 0; i2 < _new.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       phaseFilter.push({
         index: i2,
         _new: _new ? _new[i2] : void 0,
@@ -52676,7 +52717,8 @@ class GridTable {
       })()
     ]);
     let grid = [];
-    for (let i2 = 0; i2 < startPoint_X.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       grid.push({
         index: i2,
         startPoint_X: startPoint_X ? startPoint_X[i2] : void 0,
@@ -52868,7 +52910,8 @@ class AreaTable {
       })()
     ]);
     let area2 = [];
-    for (let i2 = 0; i2 < value.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       area2.push({
         index: i2,
         value: value ? value[i2] : void 0,
@@ -52977,7 +53020,8 @@ class AreaSchemeTable {
       })()
     ]);
     let areaScheme = [];
-    for (let i2 = 0; i2 < isGrossBuildingArea.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       areaScheme.push({
         index: i2,
         isGrossBuildingArea: isGrossBuildingArea ? isGrossBuildingArea[i2] : void 0,
@@ -53045,7 +53089,8 @@ class ScheduleTable {
       })()
     ]);
     let schedule = [];
-    for (let i2 = 0; i2 < elementIndex.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       schedule.push({
         index: i2,
         elementIndex: elementIndex ? elementIndex[i2] : void 0
@@ -53116,7 +53161,8 @@ class ScheduleColumnTable {
       })()
     ]);
     let scheduleColumn = [];
-    for (let i2 = 0; i2 < name.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       scheduleColumn.push({
         index: i2,
         name: name ? name[i2] : void 0,
@@ -53201,7 +53247,8 @@ class ScheduleCellTable {
       })()
     ]);
     let scheduleCell = [];
-    for (let i2 = 0; i2 < value.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       scheduleCell.push({
         index: i2,
         value: value ? value[i2] : void 0,
@@ -53276,7 +53323,8 @@ class ViewSheetSetTable {
       })()
     ]);
     let viewSheetSet = [];
-    for (let i2 = 0; i2 < elementIndex.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       viewSheetSet.push({
         index: i2,
         elementIndex: elementIndex ? elementIndex[i2] : void 0
@@ -53342,7 +53390,8 @@ class ViewSheetTable {
       })()
     ]);
     let viewSheet = [];
-    for (let i2 = 0; i2 < familyTypeIndex.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       viewSheet.push({
         index: i2,
         familyTypeIndex: familyTypeIndex ? familyTypeIndex[i2] : void 0,
@@ -53423,7 +53472,8 @@ class ViewSheetInViewSheetSetTable {
       })()
     ]);
     let viewSheetInViewSheetSet = [];
-    for (let i2 = 0; i2 < viewSheetIndex.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       viewSheetInViewSheetSet.push({
         index: i2,
         viewSheetIndex: viewSheetIndex ? viewSheetIndex[i2] : void 0,
@@ -53504,7 +53554,8 @@ class ViewInViewSheetSetTable {
       })()
     ]);
     let viewInViewSheetSet = [];
-    for (let i2 = 0; i2 < viewIndex.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       viewInViewSheetSet.push({
         index: i2,
         viewIndex: viewIndex ? viewIndex[i2] : void 0,
@@ -53585,7 +53636,8 @@ class ViewInViewSheetTable {
       })()
     ]);
     let viewInViewSheet = [];
-    for (let i2 = 0; i2 < viewIndex.length; i2++) {
+    const rowCount = await this.getCount();
+    for (let i2 = 0; i2 < rowCount; i2++) {
       viewInViewSheet.push({
         index: i2,
         viewIndex: viewIndex ? viewIndex[i2] : void 0,
@@ -53726,6 +53778,10 @@ async function getElementsParameters(document2, elements) {
   ]);
   if (!parameterElements)
     return void 0;
+  if (!parameterValues)
+    return void 0;
+  if (!getParameterDescriptorIndices)
+    return void 0;
   const getParameterDisplayValue = (index2) => {
     const value = parameterValues[index2];
     const split2 = value.indexOf("|");
@@ -53743,8 +53799,8 @@ async function getElementsParameters(document2, elements) {
   return parameters.map(([parameter, isInstance]) => {
     const descriptor = getParameterDescriptorIndices[parameter];
     const value = getParameterDisplayValue(parameter);
-    const name = Number.isInteger(descriptor) ? parameterDescriptorNames[descriptor] : void 0;
-    const group = Number.isInteger(descriptor) ? parameterDescriptorGroups[descriptor] : void 0;
+    const name = Number.isInteger(descriptor) ? parameterDescriptorNames == null ? void 0 : parameterDescriptorNames[descriptor] : void 0;
+    const group = Number.isInteger(descriptor) ? parameterDescriptorGroups == null ? void 0 : parameterDescriptorGroups[descriptor] : void 0;
     return { name, value, group, isInstance };
   });
 }
@@ -68216,17 +68272,17 @@ function BimDetails(input, toData, visible) {
   react.exports.useEffect(() => {
     ReactTooltip.rebuild();
   });
-  if (!visible)
-    return null;
   if (input !== object) {
     setObject(input);
     toData(input).then((data2) => {
+      if (!data2)
+        return null;
       setDetails(data2);
       open.init(data2.flatMap((d) => [...d.content.keys()]));
     });
   }
-  if (!details) {
-    return /* @__PURE__ */ React__default.createElement("div", { className: "vim-inspector-properties" }, " Loading . . .");
+  if (!visible || !details) {
+    return null;
   }
   return /* @__PURE__ */ React__default.createElement("div", { className: "vim-inspector-properties" }, details.map((d, i2) => [
     createTables(d.section, d.content, open.get, open.set),
@@ -68293,6 +68349,8 @@ async function getVimDocumentDetails(vim) {
 }
 async function getObjectParameterDetails(object) {
   let parameters = await (object == null ? void 0 : object.getBimParameters());
+  if (!parameters)
+    return null;
   parameters = parameters.filter((p2) => acceptParameter(p2));
   parameters = parameters.sort((a, b) => compare(a.group, b.group));
   const instance = groupBy(parameters.filter((p2) => p2.isInstance), (p2) => p2.group);
@@ -68441,11 +68499,8 @@ function BimDocumentHeader(props) {
     setVim(props.vim);
     getVimBimHeader(props.vim).then((h) => setHeader(h));
   }
-  if (!props.visible)
+  if (!props.visible || !header)
     return null;
-  if (!header) {
-    return /* @__PURE__ */ React__default.createElement(React__default.Fragment, null, "Loading...");
-  }
   return createHeader(header);
 }
 function createHeader(header) {
@@ -68535,9 +68590,11 @@ function getElementBimHeader(info) {
   ];
 }
 async function getVimBimHeader(vim) {
-  var _a22;
-  const documents = await vim.bim.bimDocument.getAll();
-  const main = (_a22 = documents.find((d) => !d.isLinked)) != null ? _a22 : documents[0];
+  var _a22, _b2;
+  const documents = await ((_a22 = vim.bim.bimDocument) == null ? void 0 : _a22.getAll());
+  if (!documents)
+    return null;
+  const main = (_b2 = documents.find((d) => !d.isLinked)) != null ? _b2 : documents[0];
   return [
     [
       {
@@ -68811,7 +68868,7 @@ class BimTreeData {
           this.nodes[++i2] = {
             index: i2,
             parent: self2,
-            title: `${e.name} [${e.id}]`,
+            title: `${e.name} ${e.id ? `[${e.id}]` : ""}`,
             isFolder: false,
             data: e,
             children: [],
@@ -68904,17 +68961,32 @@ function divider() {
   return /* @__PURE__ */ React__default.createElement("hr", { className: "-vc-mx-6 vc-mb-5 vc-border-gray-divider" });
 }
 function bimInfo(object, vim, elements) {
-  return /* @__PURE__ */ React__default.createElement(React__default.Fragment, null, /* @__PURE__ */ React__default.createElement("h2", { className: "vc-mb-4 vc-text-xs vc-font-bold vc-uppercase" }, "Bim Inspector"), /* @__PURE__ */ React__default.createElement("div", { className: "vim-bim-lower vc-h-1/2 vc-overflow-y-auto vc-overflow-x-hidden" }, /* @__PURE__ */ React__default.createElement(BimObjectHeader, {
+  const objectHeader = BimObjectHeader({
     elements,
     object,
     visible: object !== void 0
-  }), /* @__PURE__ */ React__default.createElement(BimObjectDetails, { object, visible: object !== void 0 }), /* @__PURE__ */ React__default.createElement(BimDocumentHeader, { vim, visible: object === void 0 }), /* @__PURE__ */ React__default.createElement(BimDocumentDetails, { vim, visible: object === void 0 })));
+  });
+  const objectDetails = BimObjectDetails({
+    object,
+    visible: object !== void 0
+  });
+  const docHeader = BimDocumentHeader({
+    vim,
+    visible: object === void 0
+  });
+  const docDetails = BimDocumentDetails({
+    vim,
+    visible: object === void 0
+  });
+  const title = /* @__PURE__ */ React__default.createElement("h2", { className: "vc-mb-4 vc-text-xs vc-font-bold vc-uppercase" }, "Bim Inspector");
+  const any = objectHeader || objectDetails || docHeader || docDetails;
+  return /* @__PURE__ */ React__default.createElement(React__default.Fragment, null, any ? title : null, /* @__PURE__ */ React__default.createElement("div", { className: "vim-bim-lower vc-h-1/2 vc-overflow-y-auto vc-overflow-x-hidden" }, objectHeader, objectDetails, docHeader, docDetails));
 }
 function filterElements(vim, elements, filter) {
   const filterLower = filter.toLocaleLowerCase();
   const filtered = elements.filter((e) => {
-    var _a22;
-    return e.id.toString().toLocaleLowerCase().includes(filterLower) || e.name.toLocaleLowerCase().includes(filterLower) || ((_a22 = e.category) == null ? void 0 : _a22.name.toLocaleLowerCase().includes(filterLower)) || e.familyName.toLocaleLowerCase().includes(filterLower) || e.type.toLocaleLowerCase().includes(filterLower);
+    var _a22, _b2, _c, _d, _e, _f, _g;
+    return ((_b2 = (_a22 = e.id) == null ? void 0 : _a22.toString()) != null ? _b2 : "").toLocaleLowerCase().includes(filterLower) || ((_c = e.name) != null ? _c : "").toLocaleLowerCase().includes(filterLower) || ((_e = (_d = e.category) == null ? void 0 : _d.name) != null ? _e : "").toLocaleLowerCase().includes(filterLower) || ((_f = e.familyName) != null ? _f : "").toLocaleLowerCase().includes(filterLower) || ((_g = e.type) != null ? _g : "").toLocaleLowerCase().includes(filterLower);
   });
   return filtered;
 }
@@ -70982,7 +71054,7 @@ function addPerformanceCounter(parent) {
   animate();
 }
 const params = new URLSearchParams(window.location.search);
-let url = params.has("vim") || params.has("model") ? (_a2 = params.get("vim")) != null ? _a2 : params.get("model") : "https://vim.azureedge.net/samples/residence.vim";
+let url = params.has("vim") || params.has("model") ? (_a2 = params.get("vim")) != null ? _a2 : params.get("model") : "https://vim02.azureedge.net/samples/residence.v1.2.75.vim";
 if (params.has("transparency")) {
   const t2 = params.get("transparency");
   VIM.Transparency.isValid(t2) ? t2 : "all";
