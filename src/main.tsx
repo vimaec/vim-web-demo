@@ -1,4 +1,3 @@
-//import { settingsGui } from './settingsGui'
 import 'vim-webgl-component/dist/style.css';
 import {VIM, createVimComponent, VimComponentRef, getLocalSettings } from 'vim-webgl-component'
 
@@ -6,7 +5,7 @@ import {VIM, createVimComponent, VimComponentRef, getLocalSettings } from 'vim-w
 const params = new URLSearchParams(window.location.search)
 let url = params.has('vim') || params.has('model')
   ? params.get('vim') ?? params.get('model') 
-  : 'https://vim.azureedge.net/samples/residence.vim'
+  : 'https://vim02.azureedge.net/samples/residence.v1.2.75.vim'
 
 // Parse Transparency
 let transparency = 'all' as VIM.Transparency.Mode
