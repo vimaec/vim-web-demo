@@ -1761,6 +1761,130 @@ input[type='search']::-webkit-search-cancel-button {\r
   text-align: center;\r
   padding: 5px;\r
 }\r
+\r
+.lds-roller {\r
+  display: block;\r
+  top: 10px;\r
+  left: 10px;\r
+  position: absolute;\r
+  width: 20px;\r
+  height: 20px;\r
+}\r
+.lds-roller div {\r
+  animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;\r
+  transform-origin: 20px 20px;\r
+}\r
+.lds-roller div:after {\r
+  content: ' ';\r
+  display: block;\r
+  position: absolute;\r
+  width: 4px;\r
+  height: 4px;\r
+  border-radius: 50%;\r
+  background: #40a6de;\r
+  margin: -4px 0 0 -4px;\r
+}\r
+.lds-roller div:nth-child(1) {\r
+  animation-delay: -0.036s;\r
+}\r
+.lds-roller div:nth-child(1):after {\r
+  top: 32px;\r
+  left: 32px;\r
+}\r
+.lds-roller div:nth-child(2) {\r
+  animation-delay: -0.072s;\r
+}\r
+.lds-roller div:nth-child(2):after {\r
+  top: 35px;\r
+  left: 28px;\r
+}\r
+.lds-roller div:nth-child(3) {\r
+  animation-delay: -0.108s;\r
+}\r
+.lds-roller div:nth-child(3):after {\r
+  top: 37px;\r
+  left: 24px;\r
+}\r
+.lds-roller div:nth-child(4) {\r
+  animation-delay: -0.144s;\r
+}\r
+.lds-roller div:nth-child(4):after {\r
+  top: 38px;\r
+  left: 20px;\r
+}\r
+.lds-roller div:nth-child(5) {\r
+  animation-delay: -0.18s;\r
+}\r
+.lds-roller div:nth-child(5):after {\r
+  top: 37px;\r
+  left: 16px;\r
+}\r
+.lds-roller div:nth-child(6) {\r
+  animation-delay: -0.216s;\r
+}\r
+.lds-roller div:nth-child(6):after {\r
+  top: 35px;\r
+  left: 12px;\r
+}\r
+.lds-roller div:nth-child(7) {\r
+  animation-delay: -0.252s;\r
+}\r
+.lds-roller div:nth-child(7):after {\r
+  top: 32px;\r
+  left: 8px;\r
+}\r
+.lds-roller div:nth-child(8) {\r
+  animation-delay: -0.288s;\r
+}\r
+.lds-roller div:nth-child(8):after {\r
+  top: 28px;\r
+  left: 5px;\r
+}\r
+@keyframes lds-roller {\r
+  0% {\r
+    transform: rotate(0deg);\r
+  }\r
+  100% {\r
+    transform: rotate(360deg);\r
+  }\r
+}\r
+\r
+.loader {\r
+  width: 100%;\r
+  height: 4px;\r
+  display: block;\r
+  top: 0px;\r
+  position: absolute;\r
+  overflow: hidden;\r
+}\r
+.loader::after {\r
+  content: '';\r
+  width: 30%;\r
+  height: 4.8px;\r
+  background: linear-gradient(\r
+    to right,\r
+    #40a6de00 0%,\r
+    #40a6deff 20%,\r
+    #40a6deff 80%,\r
+    #40a6de00 100%\r
+  );\r
+  position: absolute;\r
+  top: 0;\r
+  left: 0;\r
+  box-sizing: border-box;\r
+  animation: animloader 2s linear infinite;\r
+}\r
+\r
+@keyframes animloader {\r
+  0% {\r
+    left: 0;\r
+    transform: translateX(-100%);\r
+  }\r
+  100% {\r
+    left: 100%;\r
+    transform: translateX(0%);\r
+  }\r
+}\r
 :root {
   --rct-color-tree-bg: #f6f8fa;
   --rct-color-tree-focus-outline: #0366d6;
@@ -40733,6 +40857,9 @@ class RemoteValue {
     this._getter = getter;
     this.label = label != null ? label : "";
   }
+  abort() {
+    this._request = void 0;
+  }
   get() {
     if (this._value !== void 0) {
       return Promise.resolve(this._value);
@@ -45066,7 +45193,7 @@ var __importStar = commonjsGlobal && commonjsGlobal.__importStar || function(mod
 Object.defineProperty(bfast, "__esModule", { value: true });
 bfast.BFast = bfast.BFastHeader = bfast.typeSize = bfast.parseName = bfast.Range = void 0;
 const remoteValue_1$1 = remoteValue;
-const remoteBuffer_1$2 = remoteBuffer;
+const remoteBuffer_1$1 = remoteBuffer;
 const pako = __importStar(pako$1);
 class Range {
   constructor(start, end) {
@@ -45178,18 +45305,21 @@ class BFastHeader {
 }
 bfast.BFastHeader = BFastHeader;
 class BFast {
-  constructor(source, offset = 0, name = "") {
-    this.source = source;
+  constructor(source, offset = 0, name) {
+    this.source = typeof source === "string" ? new remoteBuffer_1$1.RemoteBuffer(source) : source;
     this.offset = offset;
-    this.name = name;
+    this.name = name != null ? name : typeof source === "string" ? source : "";
     this._header = new remoteValue_1$1.RemoteValue(() => this.requestHeader(), name + ".header");
     this._children = /* @__PURE__ */ new Map();
     this._ranges = new remoteValue_1$1.RemoteValue(() => this.requestRanges(), name + ".ranges");
   }
   abort() {
-    if (this.source instanceof remoteBuffer_1$2.RemoteBuffer) {
+    if (this.source instanceof remoteBuffer_1$1.RemoteBuffer) {
       this.source.abort();
     }
+    this._header.abort();
+    this._ranges.abort();
+    this._children.forEach((c) => c.abort());
   }
   async getHeader() {
     return this._header.get();
@@ -45230,6 +45360,30 @@ class BFast {
     const Ctor = typeConstructor(type);
     const array = new Ctor(buffer);
     return array;
+  }
+  async getInt32Array(name) {
+    const buffer = await this.getBuffer(name);
+    if (!buffer)
+      return;
+    return new Int32Array(buffer);
+  }
+  async getFloat32Array(name) {
+    const buffer = await this.getBuffer(name);
+    if (!buffer)
+      return;
+    return new Float32Array(buffer);
+  }
+  async getBigInt64Array(name) {
+    const buffer = await this.getBuffer(name);
+    if (!buffer)
+      return;
+    return new BigInt64Array(buffer);
+  }
+  async getUint16Array(name) {
+    const buffer = await this.getBuffer(name);
+    if (!buffer)
+      return;
+    return new Uint16Array(buffer);
   }
   async getValue(name, index2) {
     const array = await this.getValues(name, index2, 1);
@@ -45353,7 +45507,7 @@ class BFast {
   }
   async remote(range2, label) {
     var _a22;
-    if (!(this.source instanceof remoteBuffer_1$2.RemoteBuffer))
+    if (!(this.source instanceof remoteBuffer_1$1.RemoteBuffer))
       return void 0;
     const r2 = range2 == null ? void 0 : range2.offset(this.offset);
     const buffer = await this.source.http(r2, `${this.name}.${label}`);
@@ -45372,106 +45526,10 @@ class BFast {
   }
 }
 bfast.BFast = BFast;
-var abstractG3d = {};
-var g3dAttributes = {};
-Object.defineProperty(g3dAttributes, "__esModule", { value: true });
-g3dAttributes.G3dAttribute = g3dAttributes.G3dAttributeDescriptor = void 0;
-class G3dAttributeDescriptor {
-  constructor(description, association, semantic, attributeTypeIndex, dataType, dataArity) {
-    if (!description.startsWith("g3d:")) {
-      throw new Error(`${description} must start with 'g3d'`);
-    }
-    this.description = description;
-    this.association = association;
-    this.semantic = semantic;
-    this.attributeTypeIndex = attributeTypeIndex;
-    this.dataType = dataType;
-    this.dataArity = parseInt(dataArity);
-  }
-  static fromString(descriptor) {
-    const desc = descriptor.split(":");
-    if (desc.length !== 6) {
-      throw new Error(`${descriptor}, must have 6 components delimited by ':'`);
-    }
-    return new this(descriptor, desc[1], desc[2], desc[3], desc[4], desc[5]);
-  }
-  matches(other) {
-    const match2 = (a, b) => a === "*" || b === "*" || a === b;
-    return match2(this.association, other.association) && match2(this.semantic, other.semantic) && match2(this.attributeTypeIndex, other.attributeTypeIndex) && match2(this.dataType, other.dataType);
-  }
-}
-g3dAttributes.G3dAttributeDescriptor = G3dAttributeDescriptor;
-class G3dAttribute {
-  constructor(descriptor, bytes) {
-    this.descriptor = descriptor;
-    this.bytes = bytes;
-    this.data = G3dAttribute.castData(bytes, descriptor.dataType);
-  }
-  static fromString(descriptor, buffer) {
-    return new this(G3dAttributeDescriptor.fromString(descriptor), buffer);
-  }
-  static castData(bytes, dataType) {
-    switch (dataType) {
-      case "float32":
-        return new Float32Array(bytes.buffer, bytes.byteOffset, bytes.byteLength / 4);
-      case "float64":
-        throw new Float64Array(bytes.buffer, bytes.byteOffset, bytes.byteLength / 8);
-      case "uint8":
-      case "int8":
-        return bytes;
-      case "int16":
-        return new Int16Array(bytes.buffer, bytes.byteOffset, bytes.byteLength / 2);
-      case "uint16":
-        return new Uint16Array(bytes.buffer, bytes.byteOffset, bytes.byteLength / 2);
-      case "int32":
-        return new Int32Array(bytes.buffer, bytes.byteOffset, bytes.byteLength / 4);
-      case "uint32":
-        return new Uint32Array(bytes.buffer, bytes.byteOffset, bytes.byteLength / 4);
-      case "int64":
-        return new BigInt64Array(bytes.buffer, bytes.byteOffset, bytes.byteLength / 8);
-      case "uint64":
-        return new BigUint64Array(bytes.buffer, bytes.byteOffset, bytes.byteLength / 8);
-      default:
-        console.error("Unrecognized attribute data type " + dataType);
-    }
-  }
-}
-g3dAttributes.G3dAttribute = G3dAttribute;
-Object.defineProperty(abstractG3d, "__esModule", { value: true });
-abstractG3d.AbstractG3d = void 0;
-const g3dAttributes_1$1 = g3dAttributes;
-class AbstractG3d {
-  constructor(meta, attributes) {
-    this.meta = meta;
-    this.attributes = attributes;
-  }
-  findAttribute(descriptor) {
-    const filter = g3dAttributes_1$1.G3dAttributeDescriptor.fromString(descriptor);
-    for (let i2 = 0; i2 < this.attributes.length; ++i2) {
-      const attribute = this.attributes[i2];
-      if (attribute.descriptor.matches(filter))
-        return attribute;
-    }
-  }
-  static async createFromBfast(bfast2, names) {
-    const attributes = await Promise.all(names.map(async (a) => {
-      const bytes = await bfast2.getBytes(a);
-      if (!bytes)
-        return;
-      const decriptor = g3dAttributes_1$1.G3dAttributeDescriptor.fromString(a);
-      return new g3dAttributes_1$1.G3dAttribute(decriptor, bytes);
-    }));
-    const validAttributes = attributes.filter((a) => a !== void 0);
-    const g3d2 = new AbstractG3d("meta", validAttributes);
-    return g3d2;
-  }
-}
-abstractG3d.AbstractG3d = AbstractG3d;
 var g3d = {};
 Object.defineProperty(g3d, "__esModule", { value: true });
 g3d.G3d = g3d.VimAttributes = void 0;
-const abstractG3d_1$3 = abstractG3d;
-const bfast_1$5 = bfast;
+const bfast_1$1 = bfast;
 class VimAttributes {
 }
 g3d.VimAttributes = VimAttributes;
@@ -45551,31 +45609,26 @@ class G3d {
     }
     return { start, end };
   }
-  static createFromAbstract(g3d2) {
-    var _a22, _b2, _c, _d, _e, _f, _g, _h, _i, _j, _k;
-    const instanceMeshes = (_a22 = g3d2.findAttribute(VimAttributes.instanceMeshes)) == null ? void 0 : _a22.data;
-    const instanceTransforms = (_b2 = g3d2.findAttribute(VimAttributes.instanceTransforms)) == null ? void 0 : _b2.data;
-    const instanceFlags = (_d = (_c = g3d2.findAttribute(VimAttributes.instanceFlags)) == null ? void 0 : _c.data) != null ? _d : new Uint16Array(instanceMeshes.length);
-    const instanceNodes = (_e = g3d2.findAttribute(VimAttributes.instanceNodes)) == null ? void 0 : _e.data;
-    const meshSubmeshes = (_f = g3d2.findAttribute(VimAttributes.meshSubmeshes)) == null ? void 0 : _f.data;
-    const submeshIndexOffset = (_g = g3d2.findAttribute(VimAttributes.submeshIndexOffsets)) == null ? void 0 : _g.data;
-    const submeshMaterial = (_h = g3d2.findAttribute(VimAttributes.submeshMaterials)) == null ? void 0 : _h.data;
-    const indices = (_i = g3d2.findAttribute(VimAttributes.indices)) == null ? void 0 : _i.data;
-    const positions = (_j = g3d2.findAttribute(VimAttributes.positions)) == null ? void 0 : _j.data;
-    const materialColors = (_k = g3d2.findAttribute(VimAttributes.materialColors)) == null ? void 0 : _k.data;
-    const result = new G3d(instanceMeshes, instanceFlags, instanceTransforms, instanceNodes, meshSubmeshes, submeshIndexOffset, submeshMaterial, indices, positions, materialColors);
-    result.rawG3d = g3d2;
-    return result;
-  }
   static async createFromPath(path) {
     const f = await fetch(path);
     const buffer = await f.arrayBuffer();
-    const bfast2 = new bfast_1$5.BFast(buffer);
+    const bfast2 = new bfast_1$1.BFast(buffer);
     return this.createFromBfast(bfast2);
   }
   static async createFromBfast(bfast2) {
-    const g3d2 = await abstractG3d_1$3.AbstractG3d.createFromBfast(bfast2, VimAttributes.all);
-    return G3d.createFromAbstract(g3d2);
+    const values = await Promise.all([
+      bfast2.getInt32Array(VimAttributes.instanceMeshes),
+      bfast2.getUint16Array(VimAttributes.instanceFlags),
+      bfast2.getFloat32Array(VimAttributes.instanceTransforms),
+      bfast2.getInt32Array(VimAttributes.instanceNodes),
+      bfast2.getInt32Array(VimAttributes.meshSubmeshes),
+      bfast2.getInt32Array(VimAttributes.submeshIndexOffsets),
+      bfast2.getInt32Array(VimAttributes.submeshMaterials),
+      bfast2.getInt32Array(VimAttributes.indices),
+      bfast2.getFloat32Array(VimAttributes.positions),
+      bfast2.getFloat32Array(VimAttributes.materialColors)
+    ]);
+    return new G3d(...values);
   }
   computeMeshVertexOffsets() {
     const result = new Int32Array(this.getMeshCount());
@@ -45953,48 +46006,22 @@ var remoteVimx = {};
 var g3dMaterials = {};
 Object.defineProperty(g3dMaterials, "__esModule", { value: true });
 g3dMaterials.G3dMaterial = g3dMaterials.MaterialAttributes = void 0;
-const abstractG3d_1$2 = abstractG3d;
-const bfast_1$4 = bfast;
 class MaterialAttributes {
 }
 g3dMaterials.MaterialAttributes = MaterialAttributes;
 MaterialAttributes.materialColors = "g3d:material:color:0:float32:4";
-MaterialAttributes.all = [
-  MaterialAttributes.materialColors
-];
 class G3dMaterial {
   constructor(materialColors) {
-    this.DEFAULT_COLOR = new Float32Array([1, 1, 1, 1]);
     this.getMaterialCount = () => this.materialColors.length / G3dMaterial.COLOR_SIZE;
     this.materialColors = materialColors;
   }
-  static createFromAbstract(g3d2) {
-    var _a22;
-    const materialColors = (_a22 = g3d2.findAttribute(MaterialAttributes.materialColors)) == null ? void 0 : _a22.data;
-    const result = new G3dMaterial(materialColors);
-    result.rawG3d = g3d2;
-    return result;
-  }
-  static async createFromPath(path) {
-    const f = await fetch(path);
-    const buffer = await f.arrayBuffer();
-    var g3d2 = this.createFromBuffer(buffer);
-    return g3d2;
-  }
-  static async createFromBuffer(buffer) {
-    const bfast2 = new bfast_1$4.BFast(buffer);
-    return this.createFromBfast(bfast2);
-  }
   static async createFromBfast(bfast2) {
-    const g3d2 = await abstractG3d_1$2.AbstractG3d.createFromBfast(bfast2, MaterialAttributes.all);
-    return G3dMaterial.createFromAbstract(g3d2);
-  }
-  toG3d() {
-    return new G3dMaterial(this.materialColors);
+    const mats = await bfast2.getFloat32Array(MaterialAttributes.materialColors);
+    return new G3dMaterial(mats);
   }
   getMaterialColor(material) {
     if (material < 0)
-      return this.DEFAULT_COLOR;
+      return G3dMaterial.DEFAULT_COLOR;
     return this.materialColors.subarray(material * G3dMaterial.COLOR_SIZE, (material + 1) * G3dMaterial.COLOR_SIZE);
   }
   getMaterialAlpha(material) {
@@ -46007,36 +46034,23 @@ class G3dMaterial {
 }
 g3dMaterials.G3dMaterial = G3dMaterial;
 G3dMaterial.COLOR_SIZE = 4;
-var g3dMesh = {};
-Object.defineProperty(g3dMesh, "__esModule", { value: true });
-g3dMesh.G3dMesh = g3dMesh.MeshAttributes = void 0;
-const abstractG3d_1$1 = abstractG3d;
-const bfast_1$3 = bfast;
-const g3d_1$2 = g3d;
-class MeshAttributes {
+G3dMaterial.DEFAULT_COLOR = new Float32Array([1, 1, 1, 1]);
+var g3dChunk = {};
+Object.defineProperty(g3dChunk, "__esModule", { value: true });
+g3dChunk.G3dChunk = g3dChunk.MeshAttributes = void 0;
+class MeshAttributes$1 {
 }
-g3dMesh.MeshAttributes = MeshAttributes;
-MeshAttributes.instanceTransforms = "g3d:instance:transform:0:float32:16";
-MeshAttributes.meshOpaqueSubmeshCount = "g3d:mesh:opaquesubmeshcount:0:int32:1";
-MeshAttributes.submeshIndexOffsets = "g3d:submesh:indexoffset:0:int32:1";
-MeshAttributes.submeshVertexOffsets = "g3d:submesh:vertexoffset:0:int32:1";
-MeshAttributes.submeshMaterials = "g3d:submesh:material:0:int32:1";
-MeshAttributes.positions = "g3d:vertex:position:0:float32:3";
-MeshAttributes.indices = "g3d:corner:index:0:int32:1";
-MeshAttributes.all = [
-  MeshAttributes.instanceTransforms,
-  MeshAttributes.meshOpaqueSubmeshCount,
-  MeshAttributes.submeshIndexOffsets,
-  MeshAttributes.submeshVertexOffsets,
-  MeshAttributes.submeshMaterials,
-  MeshAttributes.positions,
-  MeshAttributes.indices
-];
-class G3dMesh {
-  constructor(instanceTransforms, meshOpaqueSubmeshCount, submeshIndexOffsets, submeshVertexOffsets, submeshMaterials, indices, positions) {
-    this.DEFAULT_COLOR = new Float32Array([1, 1, 1, 1]);
-    this.getInstanceCount = () => this.instanceTransforms.length;
-    this.instanceTransforms = instanceTransforms;
+g3dChunk.MeshAttributes = MeshAttributes$1;
+MeshAttributes$1.meshSubmeshOffset = "g3d:mesh:submeshOffset:0:int32:1";
+MeshAttributes$1.meshOpaqueSubmeshCount = "g3d:mesh:opaquesubmeshcount:0:int32:1";
+MeshAttributes$1.submeshIndexOffsets = "g3d:submesh:indexoffset:0:int32:1";
+MeshAttributes$1.submeshVertexOffsets = "g3d:submesh:vertexoffset:0:int32:1";
+MeshAttributes$1.submeshMaterials = "g3d:submesh:material:0:int32:1";
+MeshAttributes$1.positions = "g3d:vertex:position:0:float32:3";
+MeshAttributes$1.indices = "g3d:corner:index:0:int32:1";
+class G3dChunk {
+  constructor(meshSubmeshOffset, meshOpaqueSubmeshCount, submeshIndexOffsets, submeshVertexOffsets, submeshMaterials, indices, positions) {
+    this.meshSubmeshOffset = meshSubmeshOffset;
     this.meshOpaqueSubmeshCount = meshOpaqueSubmeshCount;
     this.submeshIndexOffset = submeshIndexOffsets;
     this.submeshVertexOffset = submeshVertexOffsets;
@@ -46044,60 +46058,152 @@ class G3dMesh {
     this.indices = indices instanceof Uint32Array ? indices : new Uint32Array(indices.buffer);
     this.positions = positions;
   }
-  static createFromAbstract(g3d2) {
-    var _a22, _b2, _c, _d, _e, _f, _g;
-    const instanceTransforms = (_a22 = g3d2.findAttribute(MeshAttributes.instanceTransforms)) == null ? void 0 : _a22.data;
-    const meshOpaqueSubmeshCountArray = (_b2 = g3d2.findAttribute(MeshAttributes.meshOpaqueSubmeshCount)) == null ? void 0 : _b2.data;
-    const meshOpaqueSubmeshCount = meshOpaqueSubmeshCountArray[0];
-    const submeshIndexOffsets = (_c = g3d2.findAttribute(MeshAttributes.submeshIndexOffsets)) == null ? void 0 : _c.data;
-    const submeshVertexOffsets = (_d = g3d2.findAttribute(MeshAttributes.submeshVertexOffsets)) == null ? void 0 : _d.data;
-    const submeshMaterial = (_e = g3d2.findAttribute(MeshAttributes.submeshMaterials)) == null ? void 0 : _e.data;
-    const indices = (_f = g3d2.findAttribute(MeshAttributes.indices)) == null ? void 0 : _f.data;
-    const positions = (_g = g3d2.findAttribute(MeshAttributes.positions)) == null ? void 0 : _g.data;
-    const result = new G3dMesh(instanceTransforms, meshOpaqueSubmeshCount, submeshIndexOffsets, submeshVertexOffsets, submeshMaterial, indices, positions);
-    result.rawG3d = g3d2;
-    return result;
+  static async createFromBfast(bfast2) {
+    const values = await Promise.all([
+      bfast2.getInt32Array(MeshAttributes$1.meshSubmeshOffset),
+      bfast2.getInt32Array(MeshAttributes$1.meshOpaqueSubmeshCount),
+      bfast2.getInt32Array(MeshAttributes$1.submeshIndexOffsets),
+      bfast2.getInt32Array(MeshAttributes$1.submeshVertexOffsets),
+      bfast2.getInt32Array(MeshAttributes$1.submeshMaterials),
+      bfast2.getInt32Array(MeshAttributes$1.indices),
+      bfast2.getFloat32Array(MeshAttributes$1.positions)
+    ]);
+    return new G3dChunk(...values);
   }
-  static async createFromPath(path) {
-    const f = await fetch(path);
-    const buffer = await f.arrayBuffer();
-    var g3d2 = this.createFromBuffer(buffer);
-    return g3d2;
-  }
-  static async createFromBuffer(buffer) {
-    const bfast2 = new bfast_1$3.BFast(buffer);
-    return this.createFromBfast(bfast2);
+}
+g3dChunk.G3dChunk = G3dChunk;
+G3dChunk.COLOR_SIZE = 4;
+G3dChunk.POSITION_SIZE = 3;
+G3dChunk.DEFAULT_COLOR = new Float32Array([1, 1, 1, 1]);
+var g3dScene = {};
+Object.defineProperty(g3dScene, "__esModule", { value: true });
+g3dScene.G3dScene = g3dScene.SceneAttributes = void 0;
+const g3d_1$1 = g3d;
+class SceneAttributes {
+}
+g3dScene.SceneAttributes = SceneAttributes;
+SceneAttributes.chunkCount = "g3d:chunk:count:0:int32:1";
+SceneAttributes.instanceMesh = "g3d:instance:mesh:0:int32:1";
+SceneAttributes.instanceMatrix = "g3d:instance:transform:0:float32:16";
+SceneAttributes.instanceNodes = "g3d:instance:node:0:int32:1";
+SceneAttributes.instanceGroups = "g3d:instance:group:0:int32:1";
+SceneAttributes.instanceTags = "g3d:instance:tag:0:int64:1";
+SceneAttributes.instanceFlags = "g3d:instance:tag:0:uint16:1";
+SceneAttributes.instanceMins = "g3d:instance:min:0:float32:3";
+SceneAttributes.instanceMaxs = "g3d:instance:max:0:float32:3";
+SceneAttributes.meshChunk = "g3d:mesh:chunk:0:int32:1";
+SceneAttributes.meshChunkIndices = "g3d:mesh:chunkindex:0:int32:1";
+SceneAttributes.meshIndexCounts = "g3d:mesh:indexcount:0:int32:1";
+SceneAttributes.meshVertexCounts = "g3d:mesh:vertexcount:0:int32:1";
+SceneAttributes.meshOpaqueIndexCount = "g3d:mesh:opaqueindexcount:0:int32:1";
+SceneAttributes.meshOpaqueVertexCount = "g3d:mesh:opaquevertexcount:0:int32:1";
+class G3dScene {
+  constructor(chunkCount, instanceMeshes, instanceMatrices, instanceNodes, instanceGroups, instanceTags, instanceFlags, instanceMins, instanceMaxs, meshChunks, meshChunkIndices, meshIndexCounts, meshVertexCounts, meshOpaqueIndexCounts, meshOpaqueVertexCounts) {
+    this.chunkCount = chunkCount[0];
+    this.instanceMeshes = instanceMeshes;
+    this.instanceMatrices = instanceMatrices;
+    this.instanceNodes = instanceNodes;
+    this.instanceGroups = instanceGroups;
+    this.instanceTags = instanceTags;
+    this.instanceFlags = instanceFlags;
+    this.instanceMins = instanceMins;
+    this.instanceMaxs = instanceMaxs;
+    this.meshChunks = meshChunks;
+    this.meshChunkIndices = meshChunkIndices;
+    this.meshIndexCounts = meshIndexCounts;
+    this.meshVertexCounts = meshVertexCounts;
+    this.meshOpaqueIndexCounts = meshOpaqueIndexCounts;
+    this.meshOpaqueVertexCounts = meshOpaqueVertexCounts;
+    this.nodeToInstance = /* @__PURE__ */ new Map();
+    for (let i2 = 0; i2 < this.instanceNodes.length; i2++) {
+      this.nodeToInstance.set(this.instanceNodes[i2], i2);
+    }
   }
   static async createFromBfast(bfast2) {
-    const g3d2 = await abstractG3d_1$1.AbstractG3d.createFromBfast(bfast2, MeshAttributes.all);
-    return G3dMesh.createFromAbstract(g3d2);
+    const values = await Promise.all([
+      bfast2.getInt32Array(SceneAttributes.chunkCount),
+      bfast2.getInt32Array(SceneAttributes.instanceMesh),
+      bfast2.getFloat32Array(SceneAttributes.instanceMatrix),
+      bfast2.getInt32Array(SceneAttributes.instanceNodes),
+      bfast2.getInt32Array(SceneAttributes.instanceGroups),
+      bfast2.getBigInt64Array(SceneAttributes.instanceTags),
+      bfast2.getUint16Array(SceneAttributes.instanceFlags),
+      bfast2.getFloat32Array(SceneAttributes.instanceMins),
+      bfast2.getFloat32Array(SceneAttributes.instanceMaxs),
+      bfast2.getInt32Array(SceneAttributes.meshChunk),
+      bfast2.getInt32Array(SceneAttributes.meshChunkIndices),
+      bfast2.getInt32Array(SceneAttributes.meshIndexCounts),
+      bfast2.getInt32Array(SceneAttributes.meshVertexCounts),
+      bfast2.getInt32Array(SceneAttributes.meshOpaqueIndexCount),
+      bfast2.getInt32Array(SceneAttributes.meshOpaqueVertexCount)
+    ]);
+    return new G3dScene(...values);
   }
-  getBimInstance(meshInstance) {
-    const sceneInstance = this.scene.getMeshSceneInstance(this.meshIndex, meshInstance);
-    return this.scene.instanceNodes[sceneInstance];
+  getMeshCount() {
+    return this.meshChunks.length;
   }
-  getInstanceMax(meshInstance) {
-    const sceneInstance = this.scene.getMeshSceneInstance(this.meshIndex, meshInstance);
-    return this.scene.instanceMaxs.subarray(sceneInstance * 3, (sceneInstance + 1) * 3);
+  getMeshIndexCount(mesh, section) {
+    const all = this.meshIndexCounts[mesh];
+    if (section === "all")
+      return all;
+    const opaque = this.meshOpaqueIndexCounts[mesh];
+    return section === "opaque" ? opaque : all - opaque;
   }
-  getInstanceMin(meshInstance) {
-    const sceneInstance = this.scene.getMeshSceneInstance(this.meshIndex, meshInstance);
-    return this.scene.instanceMins.subarray(sceneInstance * 3, (sceneInstance + 1) * 3);
+  getMeshVertexCount(mesh, section) {
+    const all = this.meshVertexCounts[mesh];
+    if (section === "all")
+      return all;
+    const opaque = this.meshOpaqueVertexCounts[mesh];
+    return section === "opaque" ? opaque : all - opaque;
   }
-  getInstanceGroup(meshInstance) {
-    const sceneInstance = this.scene.getMeshSceneInstance(this.meshIndex, meshInstance);
-    return this.scene.instanceGroups[sceneInstance];
+  getInstanceMin(instance) {
+    return this.instanceMins.subarray(instance * g3d_1$1.G3d.POSITION_SIZE);
   }
-  getInstanceTag(meshInstance) {
-    const sceneInstance = this.scene.getMeshSceneInstance(this.meshIndex, meshInstance);
-    return this.scene.instanceTags[sceneInstance];
-  }
-  getInstanceHasFlag(meshInstance, flag) {
-    const sceneInstance = this.scene.getMeshSceneInstance(this.meshIndex, meshInstance);
-    return (this.scene.instanceFlags[sceneInstance] & flag) > 0;
+  getInstanceMax(instance) {
+    return this.instanceMaxs.subarray(instance * g3d_1$1.G3d.POSITION_SIZE);
   }
   getInstanceMatrix(instance) {
-    return this.instanceTransforms.subarray(instance * G3dMesh.MATRIX_SIZE, (instance + 1) * G3dMesh.MATRIX_SIZE);
+    return this.instanceMatrices.subarray(instance * g3d_1$1.G3d.MATRIX_SIZE, (instance + 1) * g3d_1$1.G3d.MATRIX_SIZE);
+  }
+}
+g3dScene.G3dScene = G3dScene;
+var vimHeader = {};
+Object.defineProperty(vimHeader, "__esModule", { value: true });
+vimHeader.requestHeader = void 0;
+async function requestHeader(bfast2) {
+  const header = await bfast2.getBuffer("header");
+  const pairs = new TextDecoder("utf-8").decode(header).split("\n");
+  const map = new Map(pairs.map((p2) => p2.split("=")).map((p2) => [p2[0], p2[1]]));
+  return {
+    vim: map.get("vim"),
+    vimx: map.get("vimx"),
+    id: map.get("id"),
+    revision: map.get("revision"),
+    generator: map.get("generator"),
+    created: map.get("created"),
+    schema: map.get("schema")
+  };
+}
+vimHeader.requestHeader = requestHeader;
+var g3dMesh = {};
+Object.defineProperty(g3dMesh, "__esModule", { value: true });
+g3dMesh.G3dMesh = g3dMesh.MeshAttributes = void 0;
+const g3d_1 = g3d;
+class MeshAttributes {
+}
+g3dMesh.MeshAttributes = MeshAttributes;
+MeshAttributes.meshSubmeshOffset = "g3d:mesh:submeshOffset:0:int32:1";
+MeshAttributes.meshOpaqueSubmeshCount = "g3d:mesh:opaquesubmeshcount:0:int32:1";
+MeshAttributes.submeshIndexOffsets = "g3d:submesh:indexoffset:0:int32:1";
+MeshAttributes.submeshVertexOffsets = "g3d:submesh:vertexoffset:0:int32:1";
+MeshAttributes.submeshMaterials = "g3d:submesh:material:0:int32:1";
+MeshAttributes.positions = "g3d:vertex:position:0:float32:3";
+MeshAttributes.indices = "g3d:corner:index:0:int32:1";
+class G3dMesh {
+  constructor(scene, chunk, index2) {
+    this.scene = scene;
+    this.chunk = chunk;
+    this.index = index2;
   }
   getVertexStart(section = "all") {
     const sub = this.getSubmeshStart(section);
@@ -46121,213 +46227,66 @@ class G3dMesh {
   getIndexCount(section = "all") {
     return this.getIndexEnd(section) - this.getIndexStart(section);
   }
-  getHasTransparency() {
-    return this.meshOpaqueSubmeshCount < this.submeshIndexOffset.length;
+  getHasTransparency(mesh) {
+    return this.getSubmeshCount("transparent") > 0;
   }
   getSubmeshStart(section) {
-    if (section === "all")
-      return 0;
-    if (section === "opaque")
-      return 0;
-    return this.meshOpaqueSubmeshCount;
+    if (section === "all" || section === "opaque") {
+      return this.chunk.meshSubmeshOffset[this.index];
+    }
+    return this.chunk.meshSubmeshOffset[this.index] + this.chunk.meshOpaqueSubmeshCount[this.index];
   }
   getSubmeshEnd(section) {
-    if (section === "all")
-      return this.submeshIndexOffset.length;
-    if (section === "transparent")
-      return this.submeshIndexOffset.length;
-    return this.meshOpaqueSubmeshCount;
+    if (section === "opaque") {
+      return this.chunk.meshSubmeshOffset[this.index] + this.chunk.meshOpaqueSubmeshCount[this.index];
+    }
+    if (this.index + 1 < this.chunk.meshSubmeshOffset.length) {
+      return this.chunk.meshSubmeshOffset[this.index + 1];
+    }
+    return this.chunk.submeshIndexOffset.length;
   }
   getSubmeshCount(section) {
     return this.getSubmeshEnd(section) - this.getSubmeshStart(section);
   }
   getSubmeshIndexStart(submesh) {
-    return submesh < this.submeshIndexOffset.length ? this.submeshIndexOffset[submesh] : this.indices.length;
+    return submesh < this.chunk.submeshIndexOffset.length ? this.chunk.submeshIndexOffset[submesh] : this.chunk.indices.length;
   }
   getSubmeshIndexEnd(submesh) {
-    return submesh < this.submeshIndexOffset.length - 1 ? this.submeshIndexOffset[submesh + 1] : this.indices.length;
+    return submesh < this.chunk.submeshIndexOffset.length - 1 ? this.chunk.submeshIndexOffset[submesh + 1] : this.chunk.indices.length;
   }
   getSubmeshIndexCount(submesh) {
     return this.getSubmeshIndexEnd(submesh) - this.getSubmeshIndexStart(submesh);
   }
   getSubmeshVertexStart(submesh) {
-    return submesh < this.submeshIndexOffset.length ? this.submeshVertexOffset[submesh] : this.positions.length / g3d_1$2.G3d.POSITION_SIZE;
+    return submesh < this.chunk.submeshIndexOffset.length ? this.chunk.submeshVertexOffset[submesh] : this.chunk.positions.length / g3d_1.G3d.POSITION_SIZE;
   }
   getSubmeshVertexEnd(submesh) {
-    return submesh < this.submeshVertexOffset.length - 1 ? this.submeshVertexOffset[submesh + 1] : this.positions.length / g3d_1$2.G3d.POSITION_SIZE;
+    return submesh < this.chunk.submeshVertexOffset.length - 1 ? this.chunk.submeshVertexOffset[submesh + 1] : this.chunk.positions.length / g3d_1.G3d.POSITION_SIZE;
   }
   getSubmeshVertexCount(submesh) {
     return this.getSubmeshVertexEnd(submesh) - this.getSubmeshVertexStart(submesh);
   }
 }
 g3dMesh.G3dMesh = G3dMesh;
-G3dMesh.MATRIX_SIZE = 16;
-G3dMesh.COLOR_SIZE = 4;
-G3dMesh.POSITION_SIZE = 3;
-var g3dScene = {};
-Object.defineProperty(g3dScene, "__esModule", { value: true });
-g3dScene.G3dScene = g3dScene.SceneAttributes = void 0;
-const abstractG3d_1 = abstractG3d;
-const bfast_1$2 = bfast;
-const g3d_1$1 = g3d;
-class SceneAttributes {
-}
-g3dScene.SceneAttributes = SceneAttributes;
-SceneAttributes.chunkCount = "g3d:chunk:count:0:int32:1";
-SceneAttributes.instanceMesh = "g3d:instance:mesh:0:int32:1";
-SceneAttributes.instanceTransform = "g3d:instance:transform:0:int32:1";
-SceneAttributes.instanceNodes = "g3d:instance:node:0:int32:1";
-SceneAttributes.instanceGroups = "g3d:instance:group:0:int32:1";
-SceneAttributes.instanceTags = "g3d:instance:tag:0:int64:1";
-SceneAttributes.instanceFlags = "g3d:instance:tag:0:uint16:1";
-SceneAttributes.instanceMins = "g3d:instance:min:0:float32:3";
-SceneAttributes.instanceMaxs = "g3d:instance:max:0:float32:3";
-SceneAttributes.meshChunk = "g3d:mesh:chunk:0:int32:1";
-SceneAttributes.meshChunkIndices = "g3d:mesh:chunkindex:0:int32:1";
-SceneAttributes.meshInstanceCounts = "g3d:mesh:instancecount:0:int32:1";
-SceneAttributes.meshIndexCounts = "g3d:mesh:indexcount:0:int32:1";
-SceneAttributes.meshVertexCounts = "g3d:mesh:vertexcount:0:int32:1";
-SceneAttributes.meshOpaqueIndexCount = "g3d:mesh:opaqueindexcount:0:int32:1";
-SceneAttributes.meshOpaqueVertexCount = "g3d:mesh:opaquevertexcount:0:int32:1";
-SceneAttributes.all = [
-  SceneAttributes.chunkCount,
-  SceneAttributes.instanceMesh,
-  SceneAttributes.instanceTransform,
-  SceneAttributes.instanceNodes,
-  SceneAttributes.instanceGroups,
-  SceneAttributes.instanceTags,
-  SceneAttributes.instanceFlags,
-  SceneAttributes.instanceMins,
-  SceneAttributes.instanceMaxs,
-  SceneAttributes.meshChunk,
-  SceneAttributes.meshChunkIndices,
-  SceneAttributes.meshInstanceCounts,
-  SceneAttributes.meshIndexCounts,
-  SceneAttributes.meshVertexCounts,
-  SceneAttributes.meshOpaqueIndexCount,
-  SceneAttributes.meshOpaqueVertexCount
-];
-class G3dScene {
-  constructor(rawG3d, chunkCount, instanceMeshes, instanceTransform, instanceNodes, instanceGroups, instanceTags, instanceFlags, instanceMins, instanceMaxs, meshChunks, meshChunkIndices, meshInstanceCounts, meshIndexCounts, meshVertexCounts, meshOpaqueIndexCounts, meshOpaqueVertexCounts) {
-    this.rawG3d = rawG3d;
-    this.chunkCount = chunkCount[0];
-    this.instanceMeshes = instanceMeshes;
-    this.instanceTransforms = instanceTransform;
-    this.instanceNodes = instanceNodes;
-    this.instanceGroups = instanceGroups;
-    this.instanceTags = instanceTags;
-    this.instanceFlags = instanceFlags;
-    this.instanceMins = instanceMins;
-    this.instanceMaxs = instanceMaxs;
-    this.meshChunks = meshChunks;
-    this.meshChunkIndices = meshChunkIndices;
-    this.meshInstanceCounts = meshInstanceCounts;
-    this.meshIndexCounts = meshIndexCounts;
-    this.meshVertexCounts = meshVertexCounts;
-    this.meshOpaqueIndexCounts = meshOpaqueIndexCounts;
-    this.meshOpaqueVertexCounts = meshOpaqueVertexCounts;
-    this.nodeToInstance = /* @__PURE__ */ new Map();
-    for (let i2 = 0; i2 < this.instanceNodes.length; i2++) {
-      this.nodeToInstance.set(this.instanceNodes[i2], i2);
-    }
-    this.meshSceneInstances = this.createMap();
-  }
-  createMap() {
-    var _a22;
-    const map = /* @__PURE__ */ new Map();
-    for (let i2 = 0; i2 < this.instanceMeshes.length; i2++) {
-      const mesh = this.instanceMeshes[i2];
-      const index2 = this.instanceTransforms[i2];
-      const indices = (_a22 = map.get(mesh)) != null ? _a22 : /* @__PURE__ */ new Map();
-      indices.set(index2, i2);
-      map.set(mesh, indices);
-    }
-    return map;
-  }
-  static createFromAbstract(g3d2) {
-    function getArray(attribute) {
-      var _a22;
-      return (_a22 = g3d2.findAttribute(attribute)) == null ? void 0 : _a22.data;
-    }
-    return new G3dScene(g3d2, getArray(SceneAttributes.chunkCount), getArray(SceneAttributes.instanceMesh), getArray(SceneAttributes.instanceTransform), getArray(SceneAttributes.instanceNodes), getArray(SceneAttributes.instanceGroups), getArray(SceneAttributes.instanceTags), getArray(SceneAttributes.instanceFlags), getArray(SceneAttributes.instanceMins), getArray(SceneAttributes.instanceMaxs), getArray(SceneAttributes.meshChunk), getArray(SceneAttributes.meshChunkIndices), getArray(SceneAttributes.meshInstanceCounts), getArray(SceneAttributes.meshIndexCounts), getArray(SceneAttributes.meshVertexCounts), getArray(SceneAttributes.meshOpaqueIndexCount), getArray(SceneAttributes.meshOpaqueVertexCount));
-  }
-  static async createFromPath(path) {
-    const f = await fetch(path);
-    const buffer = await f.arrayBuffer();
-    const bfast2 = new bfast_1$2.BFast(buffer);
-    return this.createFromBfast(bfast2);
-  }
-  static async createFromBfast(bfast2) {
-    const g3d2 = await abstractG3d_1.AbstractG3d.createFromBfast(bfast2, SceneAttributes.all);
-    return G3dScene.createFromAbstract(g3d2);
-  }
-  getMeshSceneInstance(mesh, meshIndex) {
-    var _a22;
-    return (_a22 = this.meshSceneInstances.get(mesh)) == null ? void 0 : _a22.get(meshIndex);
-  }
-  getMeshCount() {
-    return this.meshInstanceCounts.length;
-  }
-  getMeshIndexCount(mesh, section) {
-    const all = this.meshIndexCounts[mesh];
-    if (section === "all")
-      return all;
-    const opaque = this.meshOpaqueIndexCounts[mesh];
-    return section === "opaque" ? opaque : all - opaque;
-  }
-  getMeshVertexCount(mesh, section) {
-    const all = this.meshVertexCounts[mesh];
-    if (section === "all")
-      return all;
-    const opaque = this.meshOpaqueVertexCounts[mesh];
-    return section === "opaque" ? opaque : all - opaque;
-  }
-  getMeshInstanceCount(mesh) {
-    return this.meshInstanceCounts[mesh];
-  }
-  getNodeMin(node) {
-    const instance = this.nodeToInstance.get(node);
-    if (!instance) {
-      return void 0;
-    }
-    return this.getInstanceMin(instance);
-  }
-  getNodeMax(node) {
-    const instance = this.nodeToInstance.get(node);
-    if (!instance) {
-      return void 0;
-    }
-    return this.getInstanceMax(instance);
-  }
-  getInstanceMin(instance) {
-    return this.instanceMins.subarray(instance * g3d_1$1.G3d.POSITION_SIZE);
-  }
-  getInstanceMax(instance) {
-    return this.instanceMaxs.subarray(instance * g3d_1$1.G3d.POSITION_SIZE);
-  }
-}
-g3dScene.G3dScene = G3dScene;
 Object.defineProperty(remoteVimx, "__esModule", { value: true });
 remoteVimx.RemoteVimx = void 0;
-const bfast_1$1 = bfast;
+const bfast_1 = bfast;
 const g3dMaterials_1 = g3dMaterials;
-const g3dMesh_1 = g3dMesh;
+const g3dChunk_1 = g3dChunk;
 const g3dScene_1 = g3dScene;
-const remoteBuffer_1$1 = remoteBuffer;
 const remoteValue_1 = remoteValue;
+const vimHeader_1 = vimHeader;
+const g3dMesh_1 = g3dMesh;
 class RemoteVimx {
-  constructor(bfast2) {
+  constructor(source) {
     this.chunkCache = /* @__PURE__ */ new Map();
-    this.bfast = bfast2;
+    this.bfast = source instanceof bfast_1.BFast ? source : new bfast_1.BFast(source);
     this.scene = new remoteValue_1.RemoteValue(() => this.requestScene());
-  }
-  static async fromPath(path) {
-    const buffer = new remoteBuffer_1$1.RemoteBuffer(path);
-    const bfast2 = new bfast_1$1.BFast(buffer);
-    return new RemoteVimx(bfast2);
   }
   abort() {
     this.bfast.abort();
+    this.scene.abort();
+    this.chunkCache.forEach((c) => c.abort());
   }
   async download() {
     this.bfast.forceDownload();
@@ -46335,6 +46294,9 @@ class RemoteVimx {
   async requestScene() {
     const index2 = await this.bfast.getLocalBfast("scene", true);
     return g3dScene_1.G3dScene.createFromBfast(index2);
+  }
+  async getHeader() {
+    return (0, vimHeader_1.requestHeader)(this.bfast);
   }
   async getScene() {
     return this.scene.get();
@@ -46354,381 +46316,20 @@ class RemoteVimx {
   }
   async requestChunk(chunk) {
     const chunkBFast = await this.bfast.getLocalBfast(`chunk_${chunk}`, true);
-    var ranges = await chunkBFast.getRanges();
-    const keys3 = [...ranges.keys()];
-    var bfasts = await Promise.all(keys3.map((k) => chunkBFast.getBfast(k)));
-    var meshes = await Promise.all(bfasts.map((b) => g3dMesh_1.G3dMesh.createFromBfast(b)));
-    return meshes;
+    return g3dChunk_1.G3dChunk.createFromBfast(chunkBFast);
   }
   async getMesh(mesh) {
     var scene = await this.scene.get();
-    var chunk = scene.meshChunks[mesh];
-    var meshes = await this.getChunk(chunk);
-    var index2 = scene.meshChunkIndices[mesh];
-    return meshes[index2];
+    var meshChunk = scene.meshChunks[mesh];
+    if (meshChunk === void 0)
+      return void 0;
+    var chunk = await this.getChunk(meshChunk);
+    if (chunk === void 0)
+      return void 0;
+    return new g3dMesh_1.G3dMesh(scene, chunk, scene.meshChunkIndices[mesh]);
   }
 }
 remoteVimx.RemoteVimx = RemoteVimx;
-var remoteG3d = {};
-Object.defineProperty(remoteG3d, "__esModule", { value: true });
-remoteG3d.RemoteG3d = remoteG3d.RemoteAbstractG3d = void 0;
-const bfast_1 = bfast;
-const g3d_1 = g3d;
-const g3dAttributes_1 = g3dAttributes;
-class G3dRemoteAttribute {
-  constructor(descriptor, bfast2) {
-    this.descriptor = descriptor;
-    this.bfast = bfast2;
-  }
-  async getAll() {
-    const bytes = await this.bfast.getBytes(this.descriptor.description);
-    if (!bytes)
-      return;
-    const data2 = g3dAttributes_1.G3dAttribute.castData(bytes, this.descriptor.dataType);
-    return data2;
-  }
-  async getByte(index2) {
-    return await this.bfast.getValue(this.descriptor.description, index2);
-  }
-  async getNumber(index2) {
-    return Number(await this.bfast.getValue(this.descriptor.description, index2));
-  }
-  async getValue(index2) {
-    const value = await this.bfast.getValues(this.descriptor.description, index2 * this.descriptor.dataArity, this.descriptor.dataArity);
-    return value;
-  }
-  async getValues(index2, count) {
-    const value = await this.bfast.getValues(this.descriptor.description, index2 * this.descriptor.dataArity, count * this.descriptor.dataArity);
-    return value;
-  }
-  async getCount() {
-    const range2 = await this.bfast.getRange(this.descriptor.description);
-    const count = range2.length / (this.descriptor.dataArity * (0, bfast_1.typeSize)(this.descriptor.dataType));
-    return count;
-  }
-  static fromString(description, bfast2) {
-    return new G3dRemoteAttribute(g3dAttributes_1.G3dAttributeDescriptor.fromString(description), bfast2);
-  }
-}
-class RemoteAbstractG3d {
-  constructor(meta, attributes) {
-    this.meta = meta;
-    this.attributes = attributes;
-  }
-  findAttribute(descriptor) {
-    const filter = g3dAttributes_1.G3dAttributeDescriptor.fromString(descriptor);
-    for (let i2 = 0; i2 < this.attributes.length; ++i2) {
-      const attribute = this.attributes[i2];
-      if (attribute.descriptor.matches(filter))
-        return attribute;
-    }
-  }
-  static createFromBfast(bfast2) {
-    const attributes = g3d_1.VimAttributes.all.map((a) => G3dRemoteAttribute.fromString(a, bfast2));
-    return new RemoteAbstractG3d("meta", attributes);
-  }
-}
-remoteG3d.RemoteAbstractG3d = RemoteAbstractG3d;
-class RemoteG3d {
-  constructor(g3d2) {
-    this.getVertexCount = () => this.positions.getCount();
-    this.getMeshCount = () => this.meshSubmeshes.getCount();
-    this.getSubmeshCount = () => this.submeshIndexOffsets.getCount();
-    this.rawG3d = g3d2;
-    this.positions = g3d2.findAttribute(g3d_1.VimAttributes.positions);
-    this.indices = g3d2.findAttribute(g3d_1.VimAttributes.indices);
-    this.meshSubmeshes = g3d2.findAttribute(g3d_1.VimAttributes.meshSubmeshes);
-    this.submeshIndexOffsets = g3d2.findAttribute(g3d_1.VimAttributes.submeshIndexOffsets);
-    this.submeshMaterials = g3d2.findAttribute(g3d_1.VimAttributes.submeshMaterials);
-    this.materialColors = g3d2.findAttribute(g3d_1.VimAttributes.materialColors);
-    this.instanceMeshes = g3d2.findAttribute(g3d_1.VimAttributes.instanceMeshes);
-    this.instanceTransforms = g3d2.findAttribute(g3d_1.VimAttributes.instanceTransforms);
-    this.instanceFlags = g3d2.findAttribute(g3d_1.VimAttributes.instanceFlags);
-  }
-  static createFromBfast(bfast2) {
-    const abstract = RemoteAbstractG3d.createFromBfast(bfast2);
-    return new RemoteG3d(abstract);
-  }
-  async getMeshIndexStart(mesh) {
-    const sub = await this.getMeshSubmeshStart(mesh);
-    return this.getSubmeshIndexStart(sub);
-  }
-  async getMeshIndexEnd(mesh) {
-    const sub = await this.getMeshSubmeshEnd(mesh);
-    return this.getSubmeshIndexEnd(sub - 1);
-  }
-  async getMeshIndexCount(mesh) {
-    const start = await this.getMeshIndexStart(mesh);
-    const end = await this.getMeshIndexEnd(mesh);
-    return end - start;
-  }
-  async getMeshIndices(mesh) {
-    const start = await this.getMeshIndexStart(mesh);
-    const end = await this.getMeshIndexEnd(mesh);
-    const indices = await this.indices.getValues(start, end - start);
-    return new Uint32Array(indices.buffer);
-  }
-  async getMeshSubmeshEnd(mesh) {
-    const meshCount = await this.getMeshCount();
-    const submeshCount = await this.getSubmeshCount();
-    return mesh + 1 < meshCount ? await this.meshSubmeshes.getNumber(mesh + 1) : submeshCount;
-  }
-  async getMeshSubmeshStart(mesh) {
-    return this.meshSubmeshes.getNumber(mesh);
-  }
-  async getMeshSubmeshCount(mesh) {
-    const end = await this.getMeshSubmeshEnd(mesh);
-    const start = await this.getMeshSubmeshStart(mesh);
-    return end - start;
-  }
-  async getSubmeshIndexStart(submesh) {
-    const submeshCount = await this.submeshIndexOffsets.getCount();
-    return submesh < submeshCount ? this.submeshIndexOffsets.getNumber(submesh) : await this.indices.getCount();
-  }
-  async getSubmeshIndexEnd(submesh) {
-    const submeshCount = await this.submeshIndexOffsets.getCount();
-    return submesh < submeshCount - 1 ? this.submeshIndexOffsets.getNumber(submesh + 1) : await this.indices.getCount();
-  }
-  async getSubmeshIndexCount(submesh) {
-    const start = await this.getSubmeshIndexStart(submesh);
-    const end = await this.getSubmeshIndexEnd(submesh);
-    return end - start;
-  }
-  async toG3d() {
-    const attributes = await Promise.all([
-      this.instanceMeshes.getAll(),
-      this.instanceFlags.getAll(),
-      this.instanceTransforms.getAll(),
-      Promise.resolve(void 0),
-      this.meshSubmeshes.getAll(),
-      this.submeshIndexOffsets.getAll(),
-      this.submeshMaterials.getAll(),
-      this.indices.getAll(),
-      this.positions.getAll(),
-      this.materialColors.getAll()
-    ]);
-    return new g3d_1.G3d(...attributes);
-  }
-  async slice(instance) {
-    return this.filter([instance]);
-  }
-  async filter(instances) {
-    const instanceData = await this.filterInstances(instances);
-    const meshes = await this.filterMesh(instanceData.meshes);
-    if (!meshes.hasMeshes)
-      return instanceData.toG3d();
-    instanceData.remapMeshes(meshes.map);
-    const [indiceCount, submeshCount] = await meshes.getAttributeCounts(this);
-    let submeshes;
-    let materials;
-    const A2 = async () => {
-      submeshes = await this.filterSubmeshes(meshes, submeshCount);
-      materials = await this.filterMaterials(submeshes.materials);
-    };
-    let vertices;
-    let positions;
-    const B2 = async () => {
-      vertices = await this.filterIndices(meshes, indiceCount);
-      positions = await this.filterPositions(vertices, meshes);
-    };
-    await Promise.all([A2(), B2()]);
-    submeshes.remapMaterials(materials.map);
-    return new g3d_1.G3d(instanceData.meshes, instanceData.flags, instanceData.transforms, instanceData.nodes, meshes.submeshes, submeshes.indexOffsets, submeshes.materials, vertices.indices, positions, materials.colors);
-  }
-  async filterInstances(instances) {
-    const instanceSet = new Set(instances);
-    const attributes = new InstanceData(instanceSet.size);
-    let instance_i = 0;
-    const instanceCount = await this.instanceMeshes.getCount();
-    const promises = [];
-    for (let i2 = 0; i2 < instanceCount; i2++) {
-      if (!instanceSet.has(i2))
-        continue;
-      const current = instance_i;
-      promises.push(this.instanceFlags.getNumber(i2).then((v2) => attributes.flags[current] = v2));
-      promises.push(this.instanceMeshes.getNumber(i2).then((v2) => attributes.meshes[current] = v2));
-      promises.push(this.instanceTransforms.getValue(i2).then((v2) => attributes.transforms.set(v2, current * 16)));
-      attributes.nodes[current] = i2;
-      instance_i++;
-    }
-    await Promise.all(promises);
-    return attributes;
-  }
-  async filterMesh(instanceMeshes) {
-    const meshes = new MeshData(instanceMeshes);
-    if (meshes.hasMeshes) {
-      meshes.originalCount = await this.meshSubmeshes.getCount();
-      let last = -1;
-      let mesh_i = 0;
-      for (let i2 = 0; i2 < meshes.originalCount; i2++) {
-        if (!meshes.set.has(i2))
-          continue;
-        const offset = mesh_i > 0 ? meshes.submeshes[mesh_i - 1] : 0;
-        const lastCount = last < 0 ? 0 : await this.getMeshSubmeshCount(last);
-        meshes.submeshes[mesh_i] = lastCount + offset;
-        meshes.map.set(i2, mesh_i);
-        last = i2;
-        mesh_i++;
-      }
-    }
-    return meshes;
-  }
-  async filterSubmeshes(meshes, submeshCount) {
-    let submesh_i = 0;
-    let submeshOffset = 0;
-    const submeshes = new SubmeshData(submeshCount);
-    for (let mesh = 0; mesh < meshes.originalCount; mesh++) {
-      if (!meshes.set.has(mesh))
-        continue;
-      const subStart = await this.getMeshSubmeshStart(mesh);
-      const subEnd = await this.getMeshSubmeshEnd(mesh);
-      const promises = [];
-      for (let j = subStart; j < subEnd; j++) {
-        const current = submesh_i;
-        promises.push(this.submeshIndexOffsets.getNumber(subStart).then((start) => this.submeshIndexOffsets.getNumber(j).then((v2) => submeshes.indexOffsets[current] = v2 - start + submeshOffset)));
-        promises.push(this.submeshMaterials.getNumber(j).then((v2) => submeshes.materials[current] = v2));
-        submesh_i++;
-      }
-      await Promise.all(promises);
-      submeshOffset += await this.getMeshIndexCount(mesh);
-    }
-    return submeshes;
-  }
-  async filterIndices(meshes, indicesCount) {
-    let indices_i = 0;
-    let mesh_i = 0;
-    const result = new VertexData(meshes, indicesCount);
-    for (let mesh = 0; mesh < meshes.originalCount; mesh++) {
-      if (!meshes.set.has(mesh))
-        continue;
-      const [indexStart, indexEnd] = await Promise.all([
-        this.getMeshIndexStart(mesh),
-        this.getMeshIndexEnd(mesh)
-      ]);
-      const indices = await this.indices.getValues(indexStart, indexEnd - indexStart);
-      result.indices.set(indices, indices_i);
-      let min2 = Number.MAX_SAFE_INTEGER;
-      let max2 = Number.MIN_SAFE_INTEGER;
-      for (let i2 = 0; i2 < indices.length; i2++) {
-        min2 = Math.min(indices[i2], min2);
-        max2 = Math.max(indices[i2] + 1, max2);
-      }
-      for (let i2 = 0; i2 < indices.length; i2++) {
-        result.indices[indices_i + i2] = result.indices[indices_i + i2] - min2 + result.positionCount;
-      }
-      result.meshVertexStart[mesh_i] = min2;
-      result.meshVertexEnd[mesh_i] = max2;
-      result.positionCount += max2 - min2;
-      if (mesh_i > 0) {
-        const previous = result.vertexOffsets[mesh_i - 1];
-        const previousLength = result.meshVertexEnd[mesh_i - 1] - result.meshVertexStart[mesh_i - 1];
-        result.vertexOffsets[mesh_i] = previous + previousLength;
-      }
-      mesh_i++;
-      indices_i += indices.length;
-    }
-    return result;
-  }
-  async filterPositions(indices, meshes) {
-    const _positions = new Float32Array(indices.positionCount * g3d_1.G3d.POSITION_SIZE);
-    const promises = [];
-    let mesh_i = 0;
-    for (let mesh = 0; mesh < meshes.originalCount; mesh++) {
-      if (!meshes.set.has(mesh))
-        continue;
-      const vertexStart = indices.meshVertexStart[mesh_i];
-      const vertexEnd = indices.meshVertexEnd[mesh_i];
-      const current = mesh_i;
-      promises.push(this.positions.getValues(vertexStart, vertexEnd - vertexStart).then((v2) => _positions.set(v2, indices.vertexOffsets[current] * g3d_1.G3d.POSITION_SIZE)));
-      mesh_i++;
-    }
-    await Promise.all(promises);
-    return _positions;
-  }
-  async filterMaterials(submeshMaterials) {
-    const materialCount = await this.materialColors.getCount();
-    let color_i = 0;
-    const materials = new MaterialData(submeshMaterials);
-    const promises = [];
-    for (let i2 = 0; i2 < materialCount; i2++) {
-      if (materials.set.has(i2)) {
-        materials.map.set(i2, color_i);
-        const current = color_i;
-        promises.push(this.materialColors.getValue(i2).then((c) => materials.colors.set(c, current * g3d_1.G3d.COLOR_SIZE)));
-        color_i++;
-      }
-    }
-    await Promise.all(promises);
-    return materials;
-  }
-}
-remoteG3d.RemoteG3d = RemoteG3d;
-class InstanceData {
-  constructor(count) {
-    this.meshes = new Int32Array(count);
-    this.flags = new Uint16Array(count);
-    this.transforms = new Float32Array(count * 16);
-    this.nodes = new Int32Array(count);
-  }
-  remapMeshes(map) {
-    var _a22;
-    for (let i2 = 0; i2 < this.meshes.length; i2++) {
-      this.meshes[i2] = (_a22 = map.get(this.meshes[i2])) != null ? _a22 : -1;
-    }
-  }
-  toG3d() {
-    return new g3d_1.G3d(this.meshes, this.flags, this.transforms, this.nodes, new Int32Array(), new Int32Array(), new Int32Array(), new Uint32Array(), new Float32Array(), new Float32Array());
-  }
-}
-class MeshData {
-  constructor(instanceMeshes) {
-    this.set = new Set(instanceMeshes);
-    this.set.delete(-1);
-    this.hasMeshes = this.set.size > 0;
-    this.submeshes = this.hasMeshes ? new Int32Array(this.set.size) : void 0;
-    this.map = this.hasMeshes ? /* @__PURE__ */ new Map() : void 0;
-  }
-  async getAttributeCounts(g3d2) {
-    let submeshCount = 0;
-    let indiceCount = 0;
-    const promises = [];
-    for (let mesh = 0; mesh < this.originalCount; mesh++) {
-      if (!this.set.has(mesh))
-        continue;
-      promises.push(g3d2.getMeshIndexCount(mesh).then((v2) => indiceCount += v2));
-      promises.push(g3d2.getMeshSubmeshCount(mesh).then((v2) => submeshCount += v2));
-    }
-    await Promise.all(promises);
-    return [indiceCount, submeshCount];
-  }
-}
-class SubmeshData {
-  constructor(count) {
-    this.indexOffsets = new Int32Array(count);
-    this.materials = new Int32Array(count);
-  }
-  remapMaterials(map) {
-    for (let i2 = 0; i2 < this.materials.length; i2++) {
-      this.materials[i2] = this.materials[i2] < 0 ? -1 : map.get(this.materials[i2]);
-    }
-  }
-}
-class VertexData {
-  constructor(meshes, indicesCount) {
-    this.positionCount = 0;
-    this.indices = new Uint32Array(indicesCount);
-    this.meshVertexStart = new Int32Array(meshes.set.size);
-    this.meshVertexEnd = new Int32Array(meshes.set.size);
-    this.vertexOffsets = new Int32Array(meshes.set.size);
-  }
-}
-class MaterialData {
-  constructor(submeshMaterials) {
-    this.set = new Set(submeshMaterials);
-    this.map = /* @__PURE__ */ new Map();
-    this.colors = new Float32Array(this.set.size * g3d_1.G3d.COLOR_SIZE);
-  }
-}
 var requester = {};
 Object.defineProperty(requester, "__esModule", { value: true });
 requester.Requester = void 0;
@@ -46802,23 +46403,6 @@ class Requester {
   }
 }
 requester.Requester = Requester;
-var vimHeader = {};
-Object.defineProperty(vimHeader, "__esModule", { value: true });
-vimHeader.requestHeader = void 0;
-async function requestHeader(bfast2) {
-  const header = await bfast2.getBuffer("header");
-  const pairs = new TextDecoder("utf-8").decode(header).split("\n");
-  const map = new Map(pairs.map((p2) => p2.split("=")).map((p2) => [p2[0], p2[1]]));
-  return {
-    vim: map.get("vim"),
-    id: map.get("id"),
-    revision: map.get("revision"),
-    generator: map.get("generator"),
-    created: map.get("created"),
-    schema: map.get("schema")
-  };
-}
-vimHeader.requestHeader = requestHeader;
 var objectModel = {};
 var entityTable = {};
 Object.defineProperty(entityTable, "__esModule", { value: true });
@@ -53851,13 +53435,11 @@ async function getElementFamilyInstance(document2, element) {
   Object.defineProperty(exports, "__esModule", { value: true });
   exports.VimHelpers = void 0;
   __exportStar(bfast, exports);
-  __exportStar(abstractG3d, exports);
   __exportStar(g3d, exports);
   __exportStar(remoteVimx, exports);
   __exportStar(g3dMaterials, exports);
   __exportStar(g3dMesh, exports);
   __exportStar(g3dScene, exports);
-  __exportStar(remoteG3d, exports);
   __exportStar(remoteBuffer, exports);
   __exportStar(requestTracker, exports);
   __exportStar(requester, exports);
@@ -54204,9 +53786,10 @@ const defaultConfig$1 = {
   scale: 1,
   matrix: new Matrix4(),
   transparency: "all",
+  fileType: void 0,
   legacy: false,
   progressive: false,
-  vimx: void 0,
+  bimPath: void 0,
   filter: void 0,
   filterMode: void 0,
   refreshInterval: 1e3,
@@ -54217,72 +53800,40 @@ const defaultConfig$1 = {
   noHeader: false,
   loghttp: false
 };
-function getFullSettings(options) {
+function getFullSettings$1(options) {
   const merge = options ? cjs$1(defaultConfig$1, options, void 0) : defaultConfig$1;
   merge.transparency = Transparency.isValid(merge.transparency) ? merge.transparency : "all";
   merge.matrix = new Matrix4().compose(merge.position, new Quaternion().setFromEuler(new Euler(merge.rotation.x * Math.PI / 180, merge.rotation.y * Math.PI / 180, merge.rotation.z * Math.PI / 180)), new Vector3(merge.scale, merge.scale, merge.scale));
   return merge;
 }
-class InsertableSubmesh {
-  constructor(mesh, index2) {
-    __publicField2(this, "mesh");
-    __publicField2(this, "index");
-    __publicField2(this, "_colors");
-    this.mesh = mesh;
-    this.index = index2;
-  }
-  get three() {
-    return this.mesh.mesh;
-  }
-  get merged() {
-    return this.mesh.merged;
-  }
-  get submesh() {
-    return this.mesh.geometry.submeshes[this.index];
-  }
-  get instance() {
-    return this.submesh.instance;
-  }
-  get boundingBox() {
-    return this.submesh.boundingBox;
-  }
-  get meshStart() {
-    return this.submesh.start;
-  }
-  get meshEnd() {
-    return this.submesh.end;
-  }
-  get object() {
-    return this.mesh.vim.getObjectFromInstance(this.instance);
-  }
-  saveColors(colors) {
-    if (this._colors)
-      return;
-    this._colors = colors;
-  }
-  popColors() {
-    const result = this._colors;
-    this._colors = void 0;
-    return result;
-  }
-}
 class ObjectAttribute {
   constructor(value, vertexAttribute, instanceAttribute, meshes, toNumber) {
-    __publicField2(this, "value");
     __publicField2(this, "vertexAttribute");
     __publicField2(this, "instanceAttribute");
-    __publicField2(this, "_meshes");
+    __publicField2(this, "defaultValue");
     __publicField2(this, "toNumber");
-    this.value = value;
+    __publicField2(this, "_value");
+    __publicField2(this, "_meshes");
+    this._value = value;
+    this.defaultValue = value;
     this.vertexAttribute = vertexAttribute;
     this.instanceAttribute = instanceAttribute;
     this._meshes = meshes;
     this.toNumber = toNumber;
   }
+  updateMeshes(meshes) {
+    this._meshes = meshes;
+    const v2 = this._value;
+    this._value = this.defaultValue;
+    this.apply(v2);
+  }
+  get value() {
+    return this._value;
+  }
   apply(value) {
-    if (this.value === value)
+    if (this._value === value)
       return false;
-    this.value = value;
+    this._value = value;
     if (!this._meshes)
       return false;
     const number = this.toNumber(value);
@@ -54315,7 +53866,8 @@ class ObjectAttribute {
     const positions = geometry.getAttribute("position");
     let attribute = geometry.getAttribute(this.vertexAttribute);
     if (!attribute) {
-      const array = new Float32Array(positions.count);
+      const count = positions.array.length / positions.itemSize;
+      const array = new Float32Array(count);
       attribute = new Float32BufferAttribute(array, 1);
       geometry.setAttribute(this.vertexAttribute, attribute);
     }
@@ -54331,16 +53883,72 @@ class ObjectAttribute {
     attribute.updateRange.count = -1;
   }
 }
+class InsertableSubmesh {
+  constructor(mesh, index2) {
+    __publicField2(this, "mesh");
+    __publicField2(this, "index");
+    __publicField2(this, "_colors");
+    this.mesh = mesh;
+    this.index = index2;
+  }
+  equals(other) {
+    return this.mesh === other.mesh && this.index === other.index;
+  }
+  get three() {
+    return this.mesh.mesh;
+  }
+  get merged() {
+    return true;
+  }
+  get submesh() {
+    return this.mesh.geometry.submeshes[this.index];
+  }
+  get instance() {
+    return this.submesh.instance;
+  }
+  get boundingBox() {
+    return this.submesh.boundingBox;
+  }
+  get meshStart() {
+    return this.submesh.start;
+  }
+  get meshEnd() {
+    return this.submesh.end;
+  }
+  get object() {
+    return this.mesh.vim.getObjectFromInstance(this.instance);
+  }
+  saveColors(colors) {
+    if (this._colors)
+      return;
+    this._colors = colors;
+  }
+  popColors() {
+    const result = this._colors;
+    this._colors = void 0;
+    return result;
+  }
+}
 class ColorAttribute {
   constructor(meshes, value, vim) {
-    __publicField2(this, "_meshes");
-    __publicField2(this, "value");
     __publicField2(this, "vim");
+    __publicField2(this, "_meshes");
+    __publicField2(this, "_value");
     this._meshes = meshes;
-    this.value = value;
+    this._value = value;
     this.vim = vim;
   }
+  updateMeshes(meshes) {
+    this._meshes = meshes;
+    if (this._value !== void 0) {
+      this.apply(this._value);
+    }
+  }
+  get value() {
+    return this._value;
+  }
   apply(color) {
+    this._value = color;
     if (!this._meshes)
       return;
     for (let m2 = 0; m2 < this._meshes.length; m2++) {
@@ -54409,9 +54017,11 @@ class ColorAttribute {
     colors.updateRange.count = -1;
   }
   resetMergedInsertableColor(sub) {
-    const colors = sub.three.geometry.getAttribute("color");
-    const indices = sub.three.geometry.index;
     const previous = sub.popColors();
+    if (previous === void 0)
+      return;
+    const indices = sub.three.geometry.index;
+    const colors = sub.three.geometry.getAttribute("color");
     let c = 0;
     for (let i2 = sub.meshStart; i2 < sub.meshEnd; i2++) {
       const v2 = indices.getX(i2);
@@ -54443,6 +54053,7 @@ class ColorAttribute {
 }
 class Object$1 {
   constructor(vim, element, instances, meshes) {
+    __publicField2(this, "type", "Architectural");
     __publicField2(this, "vim");
     __publicField2(this, "document");
     __publicField2(this, "element");
@@ -54450,20 +54061,20 @@ class Object$1 {
     __publicField2(this, "_color");
     __publicField2(this, "_boundingBox");
     __publicField2(this, "_meshes");
-    __publicField2(this, "selectedAttribute");
-    __publicField2(this, "visibleAttribute");
-    __publicField2(this, "coloredAttribute");
-    __publicField2(this, "focusedAttribute");
-    __publicField2(this, "colorAttribute");
+    __publicField2(this, "_outlineAttribute");
+    __publicField2(this, "_visibleAttribute");
+    __publicField2(this, "_coloredAttribute");
+    __publicField2(this, "_focusedAttribute");
+    __publicField2(this, "_colorAttribute");
     this.vim = vim;
     this.element = element;
     this.instances = instances;
     this._meshes = meshes;
-    this.selectedAttribute = new ObjectAttribute(false, "selected", "selected", meshes, (v2) => v2 ? 1 : 0);
-    this.visibleAttribute = new ObjectAttribute(true, "ignore", "ignore", meshes, (v2) => v2 ? 0 : 1);
-    this.focusedAttribute = new ObjectAttribute(false, "focused", "focused", meshes, (v2) => v2 ? 1 : 0);
-    this.coloredAttribute = new ObjectAttribute(false, "colored", "colored", meshes, (v2) => v2 ? 1 : 0);
-    this.colorAttribute = new ColorAttribute(meshes, void 0, vim);
+    this._outlineAttribute = new ObjectAttribute(false, "selected", "selected", meshes, (v2) => v2 ? 1 : 0);
+    this._visibleAttribute = new ObjectAttribute(true, "ignore", "ignore", meshes, (v2) => v2 ? 0 : 1);
+    this._focusedAttribute = new ObjectAttribute(false, "focused", "focused", meshes, (v2) => v2 ? 1 : 0);
+    this._coloredAttribute = new ObjectAttribute(false, "colored", "colored", meshes, (v2) => v2 ? 1 : 0);
+    this._colorAttribute = new ColorAttribute(meshes, void 0, vim);
   }
   get meshBuilder() {
     return this.vim.scene.builder.meshBuilder;
@@ -54473,10 +54084,10 @@ class Object$1 {
     return ((_b2 = (_a22 = this._meshes) == null ? void 0 : _a22.length) != null ? _b2 : 0) > 0;
   }
   get outline() {
-    return this.selectedAttribute.value;
+    return this._outlineAttribute.value;
   }
   set outline(value) {
-    if (this.selectedAttribute.apply(value)) {
+    if (this._outlineAttribute.apply(value)) {
       if (value)
         this.vim.scene.addOutline();
       else
@@ -54484,36 +54095,52 @@ class Object$1 {
     }
   }
   get focused() {
-    return this.focusedAttribute.value;
+    return this._focusedAttribute.value;
   }
   set focused(value) {
-    this.vim.scene.updated = this.focusedAttribute.apply(value);
+    if (this._focusedAttribute.apply(value)) {
+      this.vim.scene.setDirty();
+    }
   }
   get visible() {
-    return this.visibleAttribute.value;
+    return this._visibleAttribute.value;
   }
   set visible(value) {
-    this.vim.scene.updated = this.visibleAttribute.apply(value);
+    if (this._visibleAttribute.apply(value)) {
+      this.vim.scene.setDirty();
+    }
   }
   get color() {
-    return this.colorAttribute.value;
+    return this._color;
   }
   set color(color) {
-    if (!this._color || !color ? !this._color && !color : this._color.equals(color)) {
-      return;
-    }
-    this.vim.scene.updated = true;
     this._color = color;
-    this.coloredAttribute.apply(color !== void 0);
-    this.colorAttribute.apply(color);
+    this.vim.scene.setDirty();
+    this._color = this._color;
+    this._coloredAttribute.apply(this._color !== void 0);
+    this._colorAttribute.apply(this._color);
   }
   updateMeshes(meshes) {
     this._meshes = meshes;
-    if (!meshes)
-      return;
-    this.vim.scene.updated = true;
-    if (this.color) {
-      this.color = this._color;
+    this.vim.scene.setDirty();
+    this._outlineAttribute.updateMeshes(meshes);
+    this._visibleAttribute.updateMeshes(meshes);
+    this._focusedAttribute.updateMeshes(meshes);
+    this._coloredAttribute.updateMeshes(meshes);
+    this._colorAttribute.updateMeshes(meshes);
+  }
+  addMesh(mesh) {
+    if (this.instances.findIndex((i2) => i2 === mesh.instance) < 0) {
+      throw new Error("Cannot update mismatched instance");
+    }
+    if (this._meshes) {
+      if (this._meshes.findIndex((m2) => m2.equals(mesh)) < 0) {
+        this._meshes.push(mesh);
+        this.updateMeshes(this._meshes);
+      }
+    } else {
+      this._meshes = [mesh];
+      this.updateMeshes(this._meshes);
     }
   }
   getBimElement() {
@@ -54557,6 +54184,7 @@ class Object$1 {
     if (!this.instances || !this.vim.g3d)
       return;
     const geometry = Geometry.createGeometryFromInstances(this.vim.g3d, {
+      matrix: this.vim.settings.matrix,
       section: "all",
       transparent: false,
       instances: this.instances,
@@ -54573,7 +54201,7 @@ class ElementNoMapping {
   hasElement(element) {
     return false;
   }
-  getAllElements() {
+  getElements() {
     return [];
   }
   getInstancesFromElement(element) {
@@ -54587,8 +54215,9 @@ class ElementNoMapping {
   }
 }
 class ElementMapping {
-  constructor(instances, instanceToElement, elementIds) {
+  constructor(instances, instanceToElement, elementIds, instanceMeshes) {
     __publicField2(this, "_instanceToElement");
+    __publicField2(this, "_instanceMeshes");
     __publicField2(this, "_elementToInstances");
     __publicField2(this, "_elementIds");
     __publicField2(this, "_elementIdToElements");
@@ -54597,11 +54226,12 @@ class ElementMapping {
     this._elementToInstances = ElementMapping.invertMap(this._instanceToElement);
     this._elementIds = elementIds;
     this._elementIdToElements = ElementMapping.invertArray(elementIds);
+    this._instanceMeshes = instanceMeshes;
   }
   static async fromG3d(g3d2, bim) {
     const instanceToElement = await bim.node.getAllElementIndex();
     const elementIds = await bim.element.getAllId();
-    return new ElementMapping(Array.from(g3d2.instanceNodes), instanceToElement, elementIds);
+    return new ElementMapping(Array.from(g3d2.instanceNodes), instanceToElement, elementIds, g3d2.instanceMeshes);
   }
   getElementsFromElementId(id2) {
     return this._elementIdToElements.get(BigInt(id2));
@@ -54609,7 +54239,18 @@ class ElementMapping {
   hasElement(element) {
     return element >= 0 && element < this._elementIds.length;
   }
-  getAllElements() {
+  hasMesh(element) {
+    if (!this._instanceMeshes)
+      return true;
+    const instances = this._elementToInstances.get(element);
+    for (const i2 of instances) {
+      if (this._instanceMeshes[i2] >= 0) {
+        return true;
+      }
+    }
+    return false;
+  }
+  getElements() {
     return this._elementIds.keys();
   }
   getInstancesFromElement(element) {
@@ -54658,7 +54299,7 @@ class ElementMapping2 {
     __publicField2(this, "_elementIdToInstances");
     this._instanceToElement = /* @__PURE__ */ new Map();
     this._instanceToElementId = /* @__PURE__ */ new Map();
-    for (let i2 = 0; i2 < scene.instanceTransforms.length; i2++) {
+    for (let i2 = 0; i2 < scene.instanceNodes.length; i2++) {
       this._instanceToElement.set(scene.instanceNodes[i2], scene.instanceGroups[i2]);
       this._instanceToElementId.set(scene.instanceNodes[i2], scene.instanceTags[i2]);
     }
@@ -54671,7 +54312,10 @@ class ElementMapping2 {
   hasElement(element) {
     return this._elementToInstances.has(element);
   }
-  getAllElements() {
+  hasMesh(element) {
+    return this.hasElement(element);
+  }
+  getElements() {
     return this._elementToInstances.keys();
   }
   getInstancesFromElement(element) {
@@ -55138,6 +54782,137 @@ SignalHandlingBase$1.SignalHandlingBase = SignalHandlingBase;
     return SignalList_12.SignalList;
   } });
 })(dist$2);
+class Vim {
+  constructor(header, document2, g3d2, scene, settings2, map, builder, source, format) {
+    __publicField2(this, "format", "vim");
+    __publicField2(this, "source");
+    __publicField2(this, "header");
+    __publicField2(this, "bim");
+    __publicField2(this, "g3d");
+    __publicField2(this, "settings");
+    __publicField2(this, "scene");
+    __publicField2(this, "map");
+    __publicField2(this, "_builder");
+    __publicField2(this, "_loadedInstances", /* @__PURE__ */ new Set());
+    __publicField2(this, "_elementToObject", /* @__PURE__ */ new Map());
+    __publicField2(this, "_onDispose", new dist$2.SignalDispatcher());
+    this.header = header;
+    this.bim = document2;
+    this.g3d = g3d2;
+    scene.vim = this;
+    this.scene = scene;
+    this.settings = settings2;
+    this.map = map != null ? map : new ElementNoMapping();
+    this._builder = builder;
+    this.source = source;
+    this.format = format;
+  }
+  get onLoadingUpdate() {
+    return this._builder.onUpdate;
+  }
+  get isLoading() {
+    return this._builder.isLoading;
+  }
+  get onDispose() {
+    return this._onDispose;
+  }
+  getMatrix() {
+    return this.settings.matrix;
+  }
+  getObjectFromInstance(instance) {
+    var _a22;
+    const element = (_a22 = this.map) == null ? void 0 : _a22.getElementFromInstance(instance);
+    if (element === void 0)
+      return;
+    return this.getObjectFromElement(element);
+  }
+  getObjectsFromElementId(id2) {
+    const elements = this.map.getElementsFromElementId(id2);
+    return elements == null ? void 0 : elements.map((e) => this.getObjectFromElement(e)).filter((o) => o !== void 0);
+  }
+  getObjectFromElement(element) {
+    if (!this.map.hasElement(element))
+      return;
+    if (this._elementToObject.has(element)) {
+      return this._elementToObject.get(element);
+    }
+    const instances = this.map.getInstancesFromElement(element);
+    const meshes = this.scene.getMeshesFromInstances(instances);
+    const result = new Object$1(this, element, instances, meshes);
+    this._elementToObject.set(element, result);
+    return result;
+  }
+  getObjectsInBox(box) {
+    const result = [];
+    for (const obj of this.getObjects()) {
+      const b = obj.getBoundingBox();
+      if (!b)
+        continue;
+      if (box.containsBox(b)) {
+        result.push(obj);
+      }
+    }
+    return result;
+  }
+  getObjects() {
+    const result = new Array();
+    for (const e of this.map.getElements()) {
+      const obj = this.getObjectFromElement(e);
+      result.push(obj);
+    }
+    return result;
+  }
+  getObjectsInSubset(subset) {
+    const set3 = /* @__PURE__ */ new Set();
+    const result = new Array();
+    const count = subset.getInstanceCount();
+    for (let i2 = 0; i2 < count; i2++) {
+      const instance = subset.getVimInstance(i2);
+      const obj = this.getObjectFromInstance(instance);
+      if (!set3.has(obj)) {
+        result.push(obj);
+        set3.add(obj);
+      }
+    }
+    return result;
+  }
+  getFullSet() {
+    return this._builder.getFullSet();
+  }
+  async loadAll(settings2) {
+    return this.loadSubset(this.getFullSet(), settings2);
+  }
+  async loadSubset(subset, settings2) {
+    subset = subset.except("instance", this._loadedInstances);
+    const count = subset.getInstanceCount();
+    for (let i2 = 0; i2 < count; i2++) {
+      this._loadedInstances.add(subset.getVimInstance(i2));
+    }
+    const box = subset.getBoundingBox();
+    this.scene.updateBox(box);
+    if (subset.getInstanceCount() === 0) {
+      console.log("Empty subset. Ignoring");
+      return;
+    }
+    await this._builder.loadSubset(subset, settings2);
+  }
+  async loadFilter(filterMode, filter, settings2) {
+    const subset = this.getFullSet().filter(filterMode, filter);
+    await this.loadSubset(subset, settings2);
+  }
+  clear() {
+    this._elementToObject.clear();
+    this.scene.clear();
+    this._builder.clear();
+    this._loadedInstances.clear();
+  }
+  dispose() {
+    this._builder.dispose();
+    this._onDispose.dispatch();
+    this._onDispose.clear();
+    this.scene.dispose();
+  }
+}
 class GeometrySubmesh {
   constructor() {
     __publicField2(this, "instance");
@@ -55158,7 +54933,6 @@ class InsertableGeometry {
     __publicField2(this, "geometry");
     __publicField2(this, "submeshes", new Array());
     __publicField2(this, "boundingBox");
-    __publicField2(this, "onSubmeshAdded");
     __publicField2(this, "_computeBoundingBox", false);
     __publicField2(this, "_indexAttribute");
     __publicField2(this, "_vertexAttribute");
@@ -55191,70 +54965,83 @@ class InsertableGeometry {
   get progress() {
     return this._indexAttribute.count / this._indexAttribute.array.length;
   }
-  insert(g3d2, mesh) {
-    var _a22;
+  insert(mesh, at) {
+    const added = new Array();
     const section = this.offsets.section;
-    const indexStart = g3d2.getIndexStart(section);
-    const indexEnd = g3d2.getIndexEnd(section);
+    const indexStart = mesh.getIndexStart(section);
+    const indexEnd = mesh.getIndexEnd(section);
     if (indexStart === indexEnd) {
-      this._meshToUpdate.add(mesh);
-      return;
+      this._meshToUpdate.add(at);
+      return added;
     }
     const matrix = new Matrix4();
     const vector = new Vector3();
-    const vertexStart = g3d2.getVertexStart(section);
-    const vertexEnd = g3d2.getVertexEnd(section);
+    const vertexStart = mesh.getVertexStart(section);
+    const vertexEnd = mesh.getVertexEnd(section);
     const vertexCount = vertexEnd - vertexStart;
-    const sectionOffset = g3d2.getVertexStart(section);
-    const subStart = g3d2.getSubmeshStart(section);
-    const subEnd = g3d2.getSubmeshEnd(section);
-    const indexOffset = this.offsets.getIndexOffset(mesh);
-    const vertexOffset = this.offsets.getVertexOffset(mesh);
+    const sectionOffset = mesh.getVertexStart(section);
+    const subStart = mesh.getSubmeshStart(section);
+    const subEnd = mesh.getSubmeshEnd(section);
+    const indexOffset = this.offsets.getIndexOffset(at);
+    const vertexOffset = this.offsets.getVertexOffset(at);
     let indexOut = 0;
     let vertexOut = 0;
     let colorOut = 0;
-    const instanceCount = this.offsets.getMeshInstanceCount(mesh);
+    const instanceCount = this.offsets.getMeshInstanceCount(at);
     for (let instance_i = 0; instance_i < instanceCount; instance_i++) {
-      const instance = this.offsets.getMeshInstance(mesh, instance_i);
-      matrix.fromArray(g3d2.getInstanceMatrix(instance));
+      const instance = this.offsets.getMeshInstance(at, instance_i);
+      const arr1 = mesh.scene.getInstanceMatrix(instance);
+      matrix.fromArray(arr1);
       const submesh = new GeometrySubmesh();
-      submesh.instance = g3d2.getBimInstance(instance);
+      submesh.instance = mesh.scene.instanceNodes[instance];
       submesh.start = indexOffset + indexOut;
       const vertexMergeOffset = vertexCount * instance_i;
       for (let index2 = indexStart; index2 < indexEnd; index2++) {
-        this.setIndex(indexOffset + indexOut, vertexOffset + vertexMergeOffset + g3d2.indices[index2] - sectionOffset);
+        this.setIndex(indexOffset + indexOut, vertexOffset + vertexMergeOffset + mesh.chunk.indices[index2] - sectionOffset);
         indexOut++;
       }
       submesh.end = indexOffset + indexOut;
       for (let vertex2 = vertexStart; vertex2 < vertexEnd; vertex2++) {
-        vector.fromArray(g3d2.positions, vertex2 * dist$3.G3d.POSITION_SIZE);
+        vector.fromArray(mesh.chunk.positions, vertex2 * dist$3.G3d.POSITION_SIZE);
         vector.applyMatrix4(matrix);
         this.setVertex(vertexOffset + vertexOut, vector);
         vertexOut++;
       }
       for (let sub = subStart; sub < subEnd; sub++) {
-        const color = this.materials.getMaterialColor(g3d2.submeshMaterial[sub]);
-        const vertexCount2 = g3d2.getSubmeshVertexCount(sub);
+        const color = this.materials.getMaterialColor(mesh.chunk.submeshMaterial[sub]);
+        const vertexCount2 = mesh.getSubmeshVertexCount(sub);
         for (let v2 = 0; v2 < vertexCount2; v2++) {
           this.setColor(vertexOffset + colorOut, color, 0.25);
           colorOut++;
         }
       }
-      submesh.boundingBox.min.fromArray(g3d2.getInstanceMin(instance));
-      submesh.boundingBox.max.fromArray(g3d2.getInstanceMax(instance));
+      submesh.boundingBox.min.fromArray(mesh.scene.getInstanceMin(instance));
+      submesh.boundingBox.max.fromArray(mesh.scene.getInstanceMax(instance));
       this.submeshes.push(submesh);
-      (_a22 = this.onSubmeshAdded) == null ? void 0 : _a22.call(this, submesh, this.submeshes.length - 1);
+      added.push(this.submeshes.length - 1);
     }
-    this._meshToUpdate.add(mesh);
+    this._meshToUpdate.add(at);
+    return added;
+  }
+  float32ArraysAreEqual(array1, array2) {
+    if (array1.length !== array2.length) {
+      return false;
+    }
+    for (let i2 = 0; i2 < array1.length; i2++) {
+      if (array1[i2] !== array2[i2]) {
+        return false;
+      }
+    }
+    return true;
   }
   insertFromG3d(g3d2, mesh) {
-    var _a22;
-    const meshG3dIndex = this.offsets.getMesh(mesh);
+    const added = new Array();
+    const meshG3dIndex = this.offsets.getSourceMesh(mesh);
     const subStart = g3d2.getMeshSubmeshStart(meshG3dIndex, this.offsets.section);
     const subEnd = g3d2.getMeshSubmeshEnd(meshG3dIndex, this.offsets.section);
     if (subStart === subEnd) {
       this._meshToUpdate.add(mesh);
-      return;
+      return added;
     }
     const matrix = new Matrix4();
     const vector = new Vector3();
@@ -55294,9 +55081,10 @@ class InsertableGeometry {
       submesh.end = indexOffset + indexOut;
       this.expandBox(submesh.boundingBox);
       this.submeshes.push(submesh);
-      (_a22 = this.onSubmeshAdded) == null ? void 0 : _a22.call(this, submesh, this.submeshes.length - 1);
+      added.push(this.submeshes.length - 1);
     }
     this._meshToUpdate.add(mesh);
+    return added;
   }
   setIndex(index2, value) {
     this._indexAttribute.setX(index2, value);
@@ -55355,27 +55143,19 @@ class InsertableMesh {
     __publicField2(this, "offsets");
     __publicField2(this, "mesh");
     __publicField2(this, "vim");
-    __publicField2(this, "onSubmeshAdded");
-    __publicField2(this, "_onUpdate", new dist$2.SignalDispatcher());
-    __publicField2(this, "merged");
     __publicField2(this, "transparent");
     __publicField2(this, "ignoreSceneMaterial");
     __publicField2(this, "_material");
     __publicField2(this, "geometry");
     this.offsets = offsets;
     this.transparent = transparent;
-    this.merged = true;
     this.geometry = new InsertableGeometry(offsets, materials, transparent);
-    this.geometry.onSubmeshAdded = (submesh, index2) => {
-      var _a22;
-      (_a22 = this.onSubmeshAdded) == null ? void 0 : _a22.call(this, new InsertableSubmesh(this, index2));
-    };
     this._material = transparent ? VimMaterials.getInstance().transparent.material : VimMaterials.getInstance().opaque.material;
     this.mesh = new Mesh$1(this.geometry.geometry, this._material);
     this.mesh.userData.vim = this;
   }
-  get onUpdate() {
-    return this._onUpdate.asEvent();
+  get merged() {
+    return true;
   }
   get boundingBox() {
     return this.geometry.boundingBox;
@@ -55384,14 +55164,19 @@ class InsertableMesh {
     return this.geometry.progress;
   }
   insert(g3d2, mesh) {
-    this.geometry.insert(g3d2, mesh);
+    const added = this.geometry.insert(g3d2, mesh);
+    if (!this.vim) {
+      return;
+    }
+    for (const i2 of added) {
+      this.vim.scene.addSubmesh(new InsertableSubmesh(this, i2));
+    }
   }
   insertFromVim(g3d2, mesh) {
     this.geometry.insertFromG3d(g3d2, mesh);
   }
   update() {
     this.geometry.update();
-    this._onUpdate.dispatch();
   }
   clearUpdate() {
     this.geometry.flushUpdate();
@@ -55439,11 +55224,14 @@ class InstancedSubmesh {
     this.mesh = mesh;
     this.index = index2;
   }
+  equals(other) {
+    return this.mesh === other.mesh && this.index === other.index;
+  }
   get three() {
     return this.mesh.mesh;
   }
   get merged() {
-    return this.mesh.merged;
+    return false;
   }
   get instance() {
     return this.mesh.bimInstances[this.index];
@@ -55469,7 +55257,7 @@ class InstancedMesh {
     this.g3dMesh = g3d2;
     this.mesh = mesh;
     this.mesh.userData.vim = this;
-    this.bimInstances = g3d2 instanceof dist$3.G3dMesh ? instances.map((i2) => g3d2.getBimInstance(i2)) : instances;
+    this.bimInstances = g3d2 instanceof dist$3.G3dMesh ? instances.map((i2) => g3d2.scene.instanceNodes[i2]) : instances;
     this.meshInstances = instances;
     this.boxes = g3d2 instanceof dist$3.G3dMesh ? this.importBoundingBoxes() : this.computeBoundingBoxes();
     this.boundingBox = this.computeBoundingBox(this.boxes);
@@ -55521,8 +55309,8 @@ class InstancedMesh {
     for (let i2 = 0; i2 < this.meshInstances.length; i2++) {
       const box = new Box3();
       const instance = this.meshInstances[i2];
-      box.min.fromArray(this.g3dMesh.getInstanceMin(instance));
-      box.max.fromArray(this.g3dMesh.getInstanceMax(instance));
+      box.min.fromArray(this.g3dMesh.scene.getInstanceMin(instance));
+      box.max.fromArray(this.g3dMesh.scene.getInstanceMax(instance));
       boxes[i2] = box;
     }
     return boxes;
@@ -55536,11 +55324,9 @@ class InstancedMesh {
   }
 }
 class InstancedMeshFactory {
-  constructor(settings2, materials) {
-    __publicField2(this, "settings");
+  constructor(materials) {
     __publicField2(this, "materials");
     this.materials = materials;
-    this.settings = settings2;
   }
   createTransparent(mesh, instances) {
     return this.createFromVimx(mesh, instances, "transparent", true);
@@ -55555,14 +55341,13 @@ class InstancedMeshFactory {
     return this.createFromVim(g3d2, mesh, instances, "transparent", true);
   }
   createFromVimx(mesh, instances, section, transparent) {
-    var _a22;
     if (mesh.getIndexCount(section) <= 1) {
       return void 0;
     }
     const geometry = this.createGeometry(this.computeIndices(mesh, section), this.computeVertices(mesh, section), this.computeColors(mesh, section, transparent ? 4 : 3));
     const material = transparent ? VimMaterials.getInstance().transparent : VimMaterials.getInstance().opaque;
-    const threeMesh = new InstancedMesh$1(geometry, material.material, (_a22 = instances == null ? void 0 : instances.length) != null ? _a22 : mesh.getInstanceCount());
-    this.setMatricesFromVimx(threeMesh, mesh, instances);
+    const threeMesh = new InstancedMesh$1(geometry, material.material, instances.length);
+    this.setMatricesFromVimx(threeMesh, mesh.scene, instances);
     const result = new InstancedMesh(mesh, threeMesh, instances);
     return result;
   }
@@ -55588,14 +55373,14 @@ class InstancedMeshFactory {
     const vertexOffset = mesh.getVertexStart(section);
     const indices = new Uint32Array(indexCount);
     for (let i2 = 0; i2 < indexCount; i2++) {
-      indices[i2] = mesh.indices[indexStart + i2] - vertexOffset;
+      indices[i2] = mesh.chunk.indices[indexStart + i2] - vertexOffset;
     }
     return new Uint32BufferAttribute(indices, 1);
   }
   computeVertices(mesh, section) {
     const vertexStart = mesh.getVertexStart(section);
     const vertexEnd = mesh.getVertexEnd(section);
-    const vertices = mesh.positions.subarray(vertexStart * dist$3.G3d.POSITION_SIZE, vertexEnd * dist$3.G3d.POSITION_SIZE);
+    const vertices = mesh.chunk.positions.subarray(vertexStart * dist$3.G3d.POSITION_SIZE, vertexEnd * dist$3.G3d.POSITION_SIZE);
     return new Float32BufferAttribute(vertices, dist$3.G3d.POSITION_SIZE);
   }
   computeColors(mesh, section, colorSize) {
@@ -55604,7 +55389,7 @@ class InstancedMeshFactory {
     const submeshStart = mesh.getSubmeshStart(section);
     const submeshEnd = mesh.getSubmeshEnd(section);
     for (let sub = submeshStart; sub < submeshEnd; sub++) {
-      const mat = mesh.submeshMaterial[sub];
+      const mat = mesh.chunk.submeshMaterial[sub];
       const color = this.materials.getMaterialColor(mat);
       const subVertexCount = mesh.getSubmeshVertexCount(sub);
       for (let i2 = 0; i2 < subVertexCount; i2++) {
@@ -55621,20 +55406,181 @@ class InstancedMeshFactory {
   }
   setMatricesFromVimx(three, source, instances) {
     const matrix = new Matrix4();
-    const setMatrix = (instance, at) => {
-      const array = source.getInstanceMatrix(instance);
+    for (let i2 = 0; i2 < instances.length; i2++) {
+      const array = source.getInstanceMatrix(instances[i2]);
       matrix.fromArray(array);
-      three.setMatrixAt(at, matrix);
-    };
-    if (instances) {
-      for (let i2 = 0; i2 < instances.length; i2++) {
-        setMatrix(instances[i2], i2);
+      three.setMatrixAt(i2, matrix);
+    }
+  }
+}
+class LoadingSynchronizer {
+  constructor(uniques, nonUniques, getMesh, mergeAction, instanceAction) {
+    __publicField2(this, "done", false);
+    __publicField2(this, "uniques");
+    __publicField2(this, "nonUniques");
+    __publicField2(this, "getMesh");
+    __publicField2(this, "mergeAction");
+    __publicField2(this, "instanceAction");
+    __publicField2(this, "mergeQueue", new Array());
+    __publicField2(this, "instanceQueue", new Array());
+    this.uniques = uniques;
+    this.nonUniques = nonUniques;
+    this.getMesh = getMesh;
+    this.mergeAction = mergeAction;
+    this.instanceAction = instanceAction;
+  }
+  get isDone() {
+    return this.done;
+  }
+  abort() {
+    this.done = true;
+    this.mergeQueue.length = 0;
+    this.instanceQueue.length = 0;
+  }
+  async loadAll() {
+    const promises = this.getSortedPromises();
+    Promise.all(promises).then(() => this.done = true);
+    await this.consumeQueues();
+  }
+  async consumeQueues() {
+    while (!(this.done && this.mergeQueue.length === 0 && this.instanceQueue.length === 0)) {
+      while (this.mergeQueue.length > 0) {
+        this.mergeQueue.pop()();
       }
-    } else {
-      for (let i2 = 0; i2 < source.instanceTransforms.length; i2++) {
-        setMatrix(i2, i2);
+      while (this.instanceQueue.length > 0) {
+        this.instanceQueue.pop()();
+      }
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    }
+  }
+  getSortedPromises() {
+    const promises = new Array();
+    const uniqueCount = this.uniques.getMeshCount();
+    const nonUniquesCount = this.nonUniques.getMeshCount();
+    let uniqueIndex = 0;
+    let nonUniqueIndex = 0;
+    let uniqueMesh = 0;
+    let nonUniqueMesh = 0;
+    while (!this.isDone) {
+      const mergeDone = uniqueIndex >= uniqueCount;
+      const instanceDone = nonUniqueIndex >= nonUniquesCount;
+      if (mergeDone && instanceDone) {
+        break;
+      }
+      if (!mergeDone && (uniqueMesh <= nonUniqueMesh || instanceDone)) {
+        uniqueMesh = this.uniques.getSourceMesh(uniqueIndex);
+        promises.push(this.merge(uniqueMesh, uniqueIndex++));
+      }
+      if (!instanceDone && (nonUniqueMesh <= uniqueMesh || mergeDone)) {
+        nonUniqueMesh = this.nonUniques.getSourceMesh(nonUniqueIndex);
+        promises.push(this.instance(nonUniqueMesh, nonUniqueIndex++));
       }
     }
+    return promises;
+  }
+  async merge(mesh, index2) {
+    const m2 = await this.getMesh(mesh);
+    this.mergeQueue.push(() => this.mergeAction(m2, index2));
+  }
+  async instance(mesh, index2) {
+    const m2 = await this.getMesh(mesh);
+    this.instanceQueue.push(() => this.instanceAction(m2, index2));
+  }
+}
+function getFullSettings(option) {
+  var _a22, _b2;
+  return {
+    updateDelayMs: (_a22 = option == null ? void 0 : option.updateDelayMs) != null ? _a22 : 400,
+    delayRender: (_b2 = option == null ? void 0 : option.delayRender) != null ? _b2 : false
+  };
+}
+class SubsetRequest {
+  constructor(scene, localVimx, subset) {
+    __publicField2(this, "_subset");
+    __publicField2(this, "_uniques");
+    __publicField2(this, "_nonUniques");
+    __publicField2(this, "_opaqueMesh");
+    __publicField2(this, "_transparentMesh");
+    __publicField2(this, "_synchronizer");
+    __publicField2(this, "_meshFactory");
+    __publicField2(this, "_meshes", new Array());
+    __publicField2(this, "_pushedMesh", 0);
+    __publicField2(this, "_disposed", false);
+    __publicField2(this, "_started", false);
+    __publicField2(this, "_scene");
+    this._subset = subset;
+    this._scene = scene;
+    this._uniques = this._subset.filterUniqueMeshes();
+    this._nonUniques = this._subset.filterNonUniqueMeshes();
+    const opaqueOffsets = this._uniques.getOffsets("opaque");
+    this._opaqueMesh = new InsertableMesh(opaqueOffsets, localVimx.materials, false);
+    this._opaqueMesh.mesh.name = "Opaque_Merged_Mesh";
+    const transparentOffsets = this._uniques.getOffsets("transparent");
+    this._transparentMesh = new InsertableMesh(transparentOffsets, localVimx.materials, true);
+    this._transparentMesh.mesh.name = "Transparent_Merged_Mesh";
+    this._scene.addMesh(this._transparentMesh);
+    this._scene.addMesh(this._opaqueMesh);
+    this._meshFactory = new InstancedMeshFactory(localVimx.materials);
+    this._synchronizer = new LoadingSynchronizer(this._uniques, this._nonUniques, (mesh) => localVimx.getMesh(mesh), (mesh, index2) => this.mergeMesh(mesh, index2), (mesh, index2) => this.instanceMesh(mesh, this._nonUniques.getMeshInstances(index2)));
+    return this;
+  }
+  getBoundingBox() {
+    return this._subset.getBoundingBox();
+  }
+  dispose() {
+    if (!this._disposed) {
+      this._disposed = true;
+      this._synchronizer.abort();
+    }
+  }
+  async start(settings2) {
+    if (this._started) {
+      return;
+    }
+    this._started = true;
+    const fullSettings = getFullSettings(settings2);
+    this._synchronizer.loadAll();
+    let lastUpdate = Date.now();
+    while (true) {
+      await this.nextFrame();
+      if (this._disposed) {
+        return;
+      }
+      if (this._synchronizer.isDone) {
+        this.updateMeshes();
+        return;
+      }
+      if (!fullSettings.delayRender && Date.now() - lastUpdate > fullSettings.updateDelayMs) {
+        this.updateMeshes();
+        lastUpdate = Date.now();
+      }
+    }
+  }
+  async nextFrame() {
+    return new Promise((resolve) => setTimeout(resolve, 0));
+  }
+  mergeMesh(g3dMesh2, index2) {
+    this._transparentMesh.insert(g3dMesh2, index2);
+    this._opaqueMesh.insert(g3dMesh2, index2);
+  }
+  instanceMesh(g3dMesh2, instances) {
+    const opaque = this._meshFactory.createOpaque(g3dMesh2, instances);
+    const transparent = this._meshFactory.createTransparent(g3dMesh2, instances);
+    if (opaque) {
+      this._meshes.push(opaque);
+    }
+    if (transparent) {
+      this._meshes.push(transparent);
+    }
+  }
+  updateMeshes() {
+    while (this._pushedMesh < this._meshes.length) {
+      const mesh = this._meshes[this._pushedMesh++];
+      this._scene.addMesh(mesh);
+    }
+    this._transparentMesh.update();
+    this._opaqueMesh.update();
+    this._scene.setDirty();
   }
 }
 class G3dMeshCounts {
@@ -55646,35 +55592,31 @@ class G3dMeshCounts {
   }
 }
 class G3dMeshOffsets {
-  constructor() {
+  constructor(subset, section) {
     __publicField2(this, "subset");
     __publicField2(this, "section");
     __publicField2(this, "counts");
-    __publicField2(this, "indexOffsets");
-    __publicField2(this, "vertexOffsets");
+    __publicField2(this, "_indexOffsets");
+    __publicField2(this, "_vertexOffsets");
+    this.subset = subset;
+    this.section = section;
+    this.counts = subset.getAttributeCounts(section);
+    this._indexOffsets = this.computeOffsets(subset, (m2) => subset.getMeshIndexCount(m2, section));
+    this._vertexOffsets = this.computeOffsets(subset, (m2) => subset.getMeshVertexCount(m2, section));
   }
-  static fromSubset(subset, section) {
-    const result = new G3dMeshOffsets();
-    result.subset = subset;
-    result.section = section;
-    function computeOffsets(getter) {
-      const meshCount = subset.getMeshCount();
-      const offsets = new Int32Array(meshCount);
-      for (let i2 = 1; i2 < meshCount; i2++) {
-        offsets[i2] = offsets[i2 - 1] + getter(i2 - 1);
-      }
-      return offsets;
+  computeOffsets(subset, getter) {
+    const meshCount = subset.getMeshCount();
+    const offsets = new Int32Array(meshCount);
+    for (let i2 = 1; i2 < meshCount; i2++) {
+      offsets[i2] = offsets[i2 - 1] + getter(i2 - 1);
     }
-    result.counts = subset.getAttributeCounts(section);
-    result.indexOffsets = computeOffsets((m2) => subset.getMeshIndexCount(m2, section));
-    result.vertexOffsets = computeOffsets((m2) => subset.getMeshVertexCount(m2, section));
-    return result;
+    return offsets;
   }
   getIndexOffset(mesh) {
-    return mesh < this.counts.meshes ? this.indexOffsets[mesh] : this.counts.indices;
+    return mesh < this.counts.meshes ? this._indexOffsets[mesh] : this.counts.indices;
   }
   getVertexOffset(mesh) {
-    return mesh < this.counts.meshes ? this.vertexOffsets[mesh] : this.counts.vertices;
+    return mesh < this.counts.meshes ? this._vertexOffsets[mesh] : this.counts.vertices;
   }
   getMeshInstanceCount(mesh) {
     return this.subset.getMeshInstanceCount(mesh);
@@ -55682,8 +55624,8 @@ class G3dMeshOffsets {
   getMeshInstance(mesh, index2) {
     return this.subset.getMeshInstance(mesh, index2);
   }
-  getMesh(index2) {
-    return this.subset.getMesh(index2);
+  getSourceMesh(index2) {
+    return this.subset.getSourceMesh(index2);
   }
 }
 class G3dSubset {
@@ -55703,16 +55645,17 @@ class G3dSubset {
       }
     }
     this._instances = instances;
+    for (const instance of instances) {
+    }
     this._meshes = new Array();
     const map = /* @__PURE__ */ new Map();
     for (const instance of instances) {
       const mesh = source.instanceMeshes[instance];
-      const index2 = this.getSourceInstance(instance);
       if (!map.has(mesh)) {
         this._meshes.push(mesh);
-        map.set(mesh, [index2]);
+        map.set(mesh, [instance]);
       } else {
-        (_a22 = map.get(mesh)) == null ? void 0 : _a22.push(index2);
+        (_a22 = map.get(mesh)) == null ? void 0 : _a22.push(instance);
       }
     }
     this._meshInstances = new Array(this._meshes.length);
@@ -55720,10 +55663,21 @@ class G3dSubset {
       this._meshInstances[i2] = map.get(this._meshes[i2]);
     }
   }
-  getSourceInstance(index2) {
-    return this._source instanceof dist$3.G3dScene ? this._source.instanceTransforms[index2] : index2;
+  getInstanceCount() {
+    return this._instances.length;
   }
-  getMesh(index2) {
+  getVimInstance(subsetIndex) {
+    const vimIndex = this._instances[subsetIndex];
+    return this._source.instanceNodes[vimIndex];
+  }
+  getVimInstances() {
+    const results = new Array(this._instances.length);
+    for (let i2 = 0; i2 < results.length; i2++) {
+      results[i2] = this.getVimInstance(i2);
+    }
+    return results;
+  }
+  getSourceMesh(index2) {
     return this._meshes[index2];
   }
   getMeshCount() {
@@ -55731,12 +55685,12 @@ class G3dSubset {
   }
   getMeshIndexCount(mesh, section) {
     const instances = this.getMeshInstanceCount(mesh);
-    const indices = this._source.getMeshIndexCount(this.getMesh(mesh), section);
+    const indices = this._source.getMeshIndexCount(this.getSourceMesh(mesh), section);
     return indices * instances;
   }
   getMeshVertexCount(mesh, section) {
     const instances = this.getMeshInstanceCount(mesh);
-    const vertices = this._source.getMeshVertexCount(this.getMesh(mesh), section);
+    const vertices = this._source.getMeshVertexCount(this.getSourceMesh(mesh), section);
     return vertices * instances;
   }
   getMeshInstanceCount(mesh) {
@@ -55750,6 +55704,24 @@ class G3dSubset {
   }
   filterUniqueMeshes() {
     return this.filterByCount((count) => count === 1);
+  }
+  filterLargests(count) {
+    if (this._source instanceof dist$3.G3d) {
+      throw new Error("Feature requires a vimx file");
+    }
+    const min2 = new Vector3();
+    const max2 = new Vector3();
+    const values = new Array(this._instances.length);
+    for (let i2 = 0; i2 < this._instances.length; i2++) {
+      const instance = this._instances[i2];
+      min2.fromArray(this._source.getInstanceMin(instance));
+      max2.fromArray(this._source.getInstanceMax(instance));
+      const size = min2.distanceToSquared(max2);
+      values.push([i2, size]);
+    }
+    values.sort((v1, v2) => v2[1] - v1[1]);
+    const instances = values.slice(0, count).map((v2) => v2[0]);
+    return new G3dSubset(this._source, instances);
   }
   filterNonUniqueMeshes() {
     return this.filterByCount((count) => count > 1);
@@ -55765,7 +55737,7 @@ class G3dSubset {
     return new G3dSubset(this._source, instances);
   }
   getOffsets(section) {
-    return G3dMeshOffsets.fromSubset(this, section);
+    return new G3dMeshOffsets(this, section);
   }
   getAttributeCounts(section = "all") {
     const result = new G3dMeshCounts();
@@ -55778,30 +55750,41 @@ class G3dSubset {
     result.meshes = count;
     return result;
   }
+  reverse() {
+    const reverse = [...this._instances].reverse();
+    return new G3dSubset(this._source, reverse);
+  }
+  except(mode, filter) {
+    return this._filter(mode, filter, false);
+  }
   filter(mode, filter) {
+    return this._filter(mode, filter, true);
+  }
+  _filter(mode, filter, has2) {
     if (filter === void 0 || mode === void 0) {
       return new G3dSubset(this._source, void 0);
     }
     if (mode === "instance") {
-      const instances = this.filterOnArray(filter, this._source.instanceNodes);
+      const instances = this.filterOnArray(filter, this._source.instanceNodes, has2);
       return new G3dSubset(this._source, instances);
     }
     if (mode === "mesh") {
-      const instances = this.filterOnArray(filter, this._source.instanceMeshes);
+      const instances = this.filterOnArray(filter, this._source.instanceMeshes, has2);
       return new G3dSubset(this._source, instances);
     }
     if (mode === "tag" || mode === "group") {
       throw new Error("Filter Mode Not implemented");
     }
   }
-  filterOnArray(filter, array) {
-    const set3 = new Set(filter);
+  filterOnArray(filter, array, has2 = true) {
+    const set3 = filter instanceof Set ? filter : new Set(filter);
     const result = new Array();
-    array.forEach((mesh, i2) => {
-      if (set3.has(mesh) && this._source.instanceMeshes[i2] >= 0) {
+    for (const i2 of this._instances) {
+      const value = array[i2];
+      if (set3.has(value) === has2 && this._source.instanceMeshes[i2] >= 0) {
         result.push(i2);
       }
-    });
+    }
     return result;
   }
   getBoundingBox() {
@@ -55831,287 +55814,88 @@ function maxBox(box, other) {
   box.max.y = Math.max(box.max.y, other[1]);
   box.max.z = Math.max(box.max.z, other[2]);
 }
-class LoadingSynchronizer {
-  constructor(uniques, nonUniques, geometry, mergeAction, instanceAction) {
-    __publicField2(this, "done", false);
-    __publicField2(this, "uniques");
-    __publicField2(this, "nonUniques");
-    __publicField2(this, "geometry");
-    __publicField2(this, "mergeAction");
-    __publicField2(this, "instanceAction");
-    __publicField2(this, "mergeQueue", new Array());
-    __publicField2(this, "instanceQueue", new Array());
-    this.uniques = uniques;
-    this.nonUniques = nonUniques;
-    this.geometry = geometry;
-    this.mergeAction = mergeAction;
-    this.instanceAction = instanceAction;
-  }
-  get isDone() {
-    return this.done;
-  }
-  abort() {
-  }
-  async loadAll() {
-    const promises = this.getSortedPromises();
-    Promise.all(promises).then(() => this.done = true);
-    await this.consumeQueues();
-  }
-  async consumeQueues() {
-    while (!(this.done && this.mergeQueue.length === 0 && this.instanceQueue.length === 0)) {
-      while (this.mergeQueue.length > 0) {
-        this.mergeQueue.pop()();
-      }
-      while (this.instanceQueue.length > 0) {
-        this.instanceQueue.pop()();
-      }
-      await new Promise((resolve) => setTimeout(resolve, 0));
-    }
-  }
-  getSortedPromises() {
-    const promises = new Array();
-    const uniqueCount = this.uniques.getMeshCount();
-    const nonUniquesCount = this.nonUniques.getMeshCount();
-    let uniqueIndex = 0;
-    let nonUniqueIndex = 0;
-    let uniqueMesh = 0;
-    let nonUniqueMesh = 0;
-    while (true) {
-      const mergeDone = uniqueIndex >= uniqueCount;
-      const instanceDone = nonUniqueIndex >= nonUniquesCount;
-      if (mergeDone && instanceDone) {
-        break;
-      }
-      if (!mergeDone && (uniqueMesh <= nonUniqueMesh || instanceDone)) {
-        uniqueMesh = this.uniques.getMesh(uniqueIndex);
-        promises.push(this.merge(uniqueMesh, uniqueIndex++));
-      }
-      if (!instanceDone && (nonUniqueMesh <= uniqueMesh || mergeDone)) {
-        nonUniqueMesh = this.nonUniques.getMesh(nonUniqueIndex);
-        promises.push(this.instance(nonUniqueMesh, nonUniqueIndex++));
-      }
-    }
-    return promises;
-  }
-  async merge(mesh, index2) {
-    const m2 = await this.geometry.getMesh(mesh);
-    this.mergeQueue.push(() => this.mergeAction(m2, index2));
-  }
-  async instance(mesh, index2) {
-    const m2 = await this.geometry.getMesh(mesh);
-    this.instanceQueue.push(() => this.instanceAction(m2, index2));
-  }
-}
-class SceneManager {
-  constructor() {
-    __publicField2(this, "settings");
-    __publicField2(this, "subset");
-    __publicField2(this, "_uniques");
-    __publicField2(this, "_nonUniques");
-    __publicField2(this, "_opaqueMesh");
-    __publicField2(this, "_transparentMesh");
-    __publicField2(this, "_synchronizer");
-    __publicField2(this, "_meshFactory");
-    __publicField2(this, "_meshQueue", new Array());
-    __publicField2(this, "_disposed", false);
-    __publicField2(this, "_started", false);
-    __publicField2(this, "scene");
+class VimSubsetBuilder {
+  constructor(factory) {
+    __publicField2(this, "factory");
     __publicField2(this, "_onUpdate", new dist$2.SignalDispatcher());
-    __publicField2(this, "_onCompleted", new dist$2.SignalDispatcher());
-  }
-  getBoundingBox() {
-    const box = this.subset.getBoundingBox();
-    box.applyMatrix4(this.settings.matrix);
-    return box;
-  }
-  get vim() {
-    return this.scene.vim;
-  }
-  set vim(value) {
-    this.scene.vim = value;
+    this.factory = factory;
   }
   get onUpdate() {
     return this._onUpdate.asEvent();
   }
-  get onCompleted() {
-    return this._onCompleted.asEvent();
+  get isLoading() {
+    return false;
   }
-  static async create(vimx, index2, materials, settings2) {
-    const self2 = new SceneManager();
-    self2.settings = settings2;
-    self2.subset = new G3dSubset(index2).filter(settings2.filterMode, settings2.filter);
-    self2._uniques = self2.subset.filterUniqueMeshes();
-    self2._nonUniques = self2.subset.filterNonUniqueMeshes();
-    const opaqueOffsets = self2._uniques.getOffsets("opaque");
-    self2._opaqueMesh = new InsertableMesh(opaqueOffsets, materials, false);
-    self2._opaqueMesh.mesh.name = "Opaque_Merged_Mesh";
-    const transparentOffsets = self2._uniques.getOffsets("transparent");
-    self2._transparentMesh = new InsertableMesh(transparentOffsets, materials, true);
-    self2._transparentMesh.mesh.name = "Transparent_Merged_Mesh";
-    self2.scene = new Scene(void 0);
-    self2.scene.addMesh(self2._transparentMesh);
-    self2.scene.addMesh(self2._opaqueMesh);
-    self2._meshFactory = new InstancedMeshFactory(settings2, materials);
-    self2._synchronizer = new LoadingSynchronizer(self2._uniques, self2._nonUniques, vimx, (mesh, index22) => self2.mergeMesh(mesh, index22), (mesh, index22) => self2.instanceMesh(mesh, self2._nonUniques.getMeshInstances(index22)));
-    return self2;
+  getFullSet() {
+    return new G3dSubset(this.factory.g3d);
   }
-  dispose() {
-    if (!this._disposed) {
-      this._disposed = true;
-      this._synchronizer.abort();
-      this._onUpdate.clear();
-      this._onCompleted.clear();
-      this.scene.dispose();
-    }
-  }
-  async start() {
-    if (this._started) {
-      return;
-    }
-    this._started = true;
-    this._synchronizer.loadAll();
-    while (!this._synchronizer.isDone) {
-      await this.wait(this.settings.refreshInterval);
-      if (this._disposed) {
-        return;
-      }
-      this.updateMeshes();
-    }
-    this.updateMeshes();
-    this._onCompleted.dispatch();
-  }
-  async wait(delay = 0) {
-    return new Promise((resolve) => setTimeout(resolve, delay));
-  }
-  mergeMesh(g3dMesh2, index2) {
-    this._transparentMesh.insert(g3dMesh2, index2);
-    this._opaqueMesh.insert(g3dMesh2, index2);
-  }
-  instanceMesh(g3dMesh2, instances) {
-    const opaque = this._meshFactory.createOpaque(g3dMesh2, instances);
-    const transparent = this._meshFactory.createTransparent(g3dMesh2, instances);
-    if (opaque) {
-      this._meshQueue.push(opaque);
-    }
-    if (transparent) {
-      this._meshQueue.push(transparent);
-    }
-  }
-  updateMeshes() {
-    while (this._meshQueue.length > 0) {
-      const mesh = this._meshQueue.pop();
-      this.scene.addMesh(mesh);
-    }
-    this._transparentMesh.update();
-    this._opaqueMesh.update();
+  loadSubset(subset, settings2) {
+    this.factory.add(subset);
     this._onUpdate.dispatch();
   }
-}
-class Vim {
-  constructor(header, document2, g3d2, scene, settings2, map) {
-    __publicField2(this, "source");
-    __publicField2(this, "header");
-    __publicField2(this, "bim");
-    __publicField2(this, "g3d");
-    __publicField2(this, "settings");
-    __publicField2(this, "scene");
-    __publicField2(this, "map");
-    __publicField2(this, "_elementToObject", /* @__PURE__ */ new Map());
-    __publicField2(this, "_onDispose", new dist$2.SignalDispatcher());
-    this.header = header;
-    this.bim = document2;
-    this.g3d = g3d2;
-    scene.vim = this;
-    this.scene = scene instanceof SceneManager ? scene.scene : scene;
-    this.settings = settings2;
-    this.scene.applyMatrix4(this.settings.matrix);
-    this.map = map != null ? map : new ElementNoMapping();
-  }
-  get onDispose() {
-    return this._onDispose;
+  clear() {
   }
   dispose() {
-    this._onDispose.dispatch();
-    this._onDispose.clear();
-    this.scene.dispose();
   }
-  getMatrix() {
-    return this.settings.matrix;
+}
+class VimxSubsetBuilder {
+  constructor(localVimx, scene) {
+    __publicField2(this, "_localVimx");
+    __publicField2(this, "_scene");
+    __publicField2(this, "_set", /* @__PURE__ */ new Set());
+    __publicField2(this, "_onUpdate", new dist$2.SignalDispatcher());
+    this._localVimx = localVimx;
+    this._scene = scene;
   }
-  getObjectFromInstance(instance) {
-    var _a22;
-    const element = (_a22 = this.map) == null ? void 0 : _a22.getElementFromInstance(instance);
-    if (!element)
-      return;
-    return this.getObjectFromElement(element);
+  get onUpdate() {
+    return this._onUpdate.asEvent();
   }
-  getObjectsFromElementId(id2) {
-    const elements = this.map.getElementsFromElementId(id2);
-    return elements == null ? void 0 : elements.map((e) => this.getObjectFromElement(e)).filter((o) => o !== void 0);
+  get isLoading() {
+    return this._set.size > 0;
   }
-  getObjectFromElement(element) {
-    if (!this.map.hasElement(element))
-      return;
-    if (this._elementToObject.has(element)) {
-      return this._elementToObject.get(element);
-    }
-    const instances = this.map.getInstancesFromElement(element);
-    const meshes = this.getMeshesFromInstances(instances);
-    const result = new Object$1(this, element, instances, meshes);
-    this._elementToObject.set(element, result);
-    return result;
+  getFullSet() {
+    return new G3dSubset(this._localVimx.scene);
   }
-  getObjectsInBox(box) {
-    const result = [];
-    for (const obj of this.getAllObjects()) {
-      const b = obj.getBoundingBox();
-      if (!b)
-        continue;
-      if (box.containsBox(b)) {
-        result.push(obj);
-      }
-    }
-    return result;
+  async loadSubset(subset, settings2) {
+    const request = new SubsetRequest(this._scene, this._localVimx, subset);
+    this._set.add(request);
+    this._onUpdate.dispatch();
+    await request.start(settings2);
+    this._set.delete(request);
+    this._onUpdate.dispatch();
   }
-  *getAllObjects() {
-    for (const e of this.map.getAllElements()) {
-      const obj = this.getObjectFromElement(e);
-      if (obj)
-        yield obj;
-    }
+  clear() {
+    this._localVimx.abort();
+    this._set.forEach((s) => s.dispose());
+    this._set.clear();
   }
-  getMeshesFromInstances(instances) {
-    if (!(instances == null ? void 0 : instances.length))
-      return;
-    const meshes = [];
-    for (let i2 = 0; i2 < instances.length; i2++) {
-      const instance = instances[i2];
-      if (instance < 0)
-        continue;
-      const submeshes = this.scene.getMeshFromInstance(instance);
-      submeshes == null ? void 0 : submeshes.forEach((s) => meshes.push(s));
-    }
-    if (meshes.length === 0)
-      return;
-    return meshes;
+  dispose() {
+    this.clear();
   }
 }
 class LegacyMeshFactory {
-  constructor(g3d2, materials, settings2) {
+  constructor(g3d2, materials, scene) {
     __publicField2(this, "g3d");
-    __publicField2(this, "materials");
-    __publicField2(this, "settings");
-    __publicField2(this, "instancedFactory");
+    __publicField2(this, "_materials");
+    __publicField2(this, "_settings");
+    __publicField2(this, "_instancedFactory");
+    __publicField2(this, "_scene");
     this.g3d = g3d2;
-    this.materials = materials;
-    this.settings = settings2;
-    this.instancedFactory = new InstancedMeshFactory(settings2, materials);
+    this._materials = materials;
+    this._scene = scene;
+    this._instancedFactory = new InstancedMeshFactory(materials);
   }
-  createScene() {
-    const subset = new G3dSubset(this.g3d).filter(this.settings.filterMode, this.settings.filter);
+  add(subset) {
     const uniques = subset.filterUniqueMeshes();
     const nonUniques = subset.filterNonUniqueMeshes();
-    const scene = new Scene(void 0);
+    this.addInstancedMeshes(this._scene, nonUniques);
+    this.addMergedMesh(this._scene, uniques);
+  }
+  createScene() {
+    const subset = new G3dSubset(this.g3d).filter(this._settings.filterMode, this._settings.filter);
+    const uniques = subset.filterUniqueMeshes();
+    const nonUniques = subset.filterNonUniqueMeshes();
+    const scene = new Scene(void 0, this._settings.matrix);
     this.addInstancedMeshes(scene, nonUniques);
     this.addMergedMesh(scene, uniques);
     return scene;
@@ -56124,7 +55908,7 @@ class LegacyMeshFactory {
   }
   createMergedMesh(subset, section, transparent) {
     const offsets = subset.getOffsets(section);
-    const opaque = new InsertableMesh(offsets, this.materials, transparent);
+    const opaque = new InsertableMesh(offsets, this._materials, transparent);
     const count = subset.getMeshCount();
     for (let m2 = 0; m2 < count; m2++) {
       opaque.insertFromVim(this.g3d, m2);
@@ -56134,98 +55918,126 @@ class LegacyMeshFactory {
   }
   addInstancedMeshes(scene, subset) {
     var _a22;
-    const factory = new InstancedMeshFactory(this.settings, this.materials);
     const count2 = subset.getMeshCount();
     for (let m2 = 0; m2 < count2; m2++) {
-      const mesh = subset.getMesh(m2);
+      const mesh = subset.getSourceMesh(m2);
       const instances = (_a22 = subset.getMeshInstances(m2)) != null ? _a22 : this.g3d.meshInstances[mesh];
-      const opaque = factory.createOpaqueFromVim(this.g3d, mesh, instances);
-      const transparent = factory.createTransparentFromVim(this.g3d, mesh, instances);
+      const opaque = this._instancedFactory.createOpaqueFromVim(this.g3d, mesh, instances);
+      const transparent = this._instancedFactory.createTransparentFromVim(this.g3d, mesh, instances);
       scene.addMesh(opaque);
       scene.addMesh(transparent);
     }
   }
 }
-class VimX {
-  constructor(settings2, geometry, materials, bim, scene, mapping) {
-    __publicField2(this, "settings");
-    __publicField2(this, "geometry");
-    __publicField2(this, "materials");
-    __publicField2(this, "bim");
-    __publicField2(this, "scene");
-    __publicField2(this, "sceneLegacy");
-    __publicField2(this, "mapping");
-    __publicField2(this, "vim");
-    this.scene = scene;
-    this.sceneLegacy = this.scene.scene;
-    this.settings = getFullSettings(settings2);
-    this.geometry = geometry;
-    this.bim = bim;
-    this.materials = materials;
-    this.mapping = mapping;
-    this.vim = new Vim(void 0, bim, void 0, this.scene.scene, settings2, mapping);
-  }
-  get onUpdate() {
-    return this.scene.onUpdate;
-  }
-  get onCompleted() {
-    return this.scene.onCompleted;
-  }
-  static async load(vimPath, settings2) {
-    const fullSettings = getFullSettings(settings2);
-    if (settings2.legacy || vimPath instanceof ArrayBuffer) {
-      return new Loader().createRequest(vimPath, fullSettings);
+class VimxLoader {
+  static async loadAny(source, settings2, onProgress) {
+    const fullSettings = getFullSettings$1(settings2);
+    const type = await this.determineFileType(source, fullSettings);
+    if (fullSettings.legacy) {
+      if (type === "vimx") {
+        throw new Error("Cannot open a vimx using legacy pipeline.");
+      }
+      const request = new Loader().createRequest(source, settings2);
+      const unsub = request.onProgress.sub(onProgress);
+      const vim = await request.send();
+      unsub();
+      return vim;
     }
-    if (settings2.vimx) {
-      console.log(vimPath);
-      console.log(fullSettings);
-      return VimX.fromVimX(vimPath, fullSettings);
-    } else {
-      return VimX.fromVim(vimPath, fullSettings);
+    if (type === "vim") {
+      return VimxLoader.loadFromVim(source, fullSettings, onProgress);
+    }
+    if (type === "vimx") {
+      return VimxLoader.loadFromVimX(source, fullSettings, onProgress);
     }
   }
-  static async fromVimX(bimPath, settings2) {
-    const bimPromise = bimPath ? VimX.createBim(bimPath, settings2) : null;
-    const geometry = await dist$3.RemoteVimx.fromPath(settings2.vimx);
-    if (!settings2.progressive) {
-      await geometry.bfast.forceDownload();
+  static async determineFileType(vimPath, settings2) {
+    if ((settings2 == null ? void 0 : settings2.fileType) === "vim")
+      return "vim";
+    if ((settings2 == null ? void 0 : settings2.fileType) === "vimx")
+      return "vimx";
+    return this.requestFileType(vimPath);
+  }
+  static async requestFileType(vimPath) {
+    if (typeof vimPath === "string") {
+      if (vimPath.endsWith("vim"))
+        return "vim";
+      if (vimPath.endsWith("vimx"))
+        return "vimx";
+    }
+    const bfast2 = new dist$3.BFast(vimPath);
+    const header = await dist$3.requestHeader(bfast2);
+    if (header.vim !== void 0)
+      return "vim";
+    if (header.vimx !== void 0)
+      return "vimx";
+    throw new Error("Cannot determine file type from header.");
+  }
+  static async loadFromVimX(source, settings2, onProgress) {
+    const remoteVimx2 = new dist$3.RemoteVimx(source);
+    if (remoteVimx2.bfast.source instanceof dist$3.RemoteBuffer) {
+      remoteVimx2.bfast.source.onProgress = onProgress;
     }
     console.log("Downloading Scene Index..");
-    console.log(geometry);
-    const [index2, materials] = await Promise.all([
-      geometry.getScene(),
-      geometry.getMaterials()
-    ]);
+    const vimx = await Vimx.fromRemote(remoteVimx2, !settings2.progressive);
     console.log("Scene Index Downloaded.");
-    const scene = await SceneManager.create(geometry, index2, materials, settings2);
-    const mapping = settings2.noMap ? new ElementNoMapping() : new ElementMapping2(index2);
-    const bim = bimPromise ? await bimPromise : void 0;
-    return new VimX(settings2, geometry, materials, bim, scene, mapping);
+    const scene = new Scene(void 0, settings2.matrix);
+    const mapping = new ElementMapping2(vimx.scene);
+    const builder = new VimxSubsetBuilder(vimx, scene);
+    const vim = new Vim(vimx.header, void 0, void 0, scene, settings2, mapping, builder, typeof source === "string" ? source : void 0, "vimx");
+    if (remoteVimx2.bfast.source instanceof dist$3.RemoteBuffer) {
+      remoteVimx2.bfast.source.onProgress = void 0;
+    }
+    return vim;
   }
-  static async createBim(path, settings2) {
-    const buffer = new dist$3.RemoteBuffer(path, settings2.loghttp);
-    const bfast2 = new dist$3.BFast(buffer);
-    return dist$3.VimDocument.createFromBfast(bfast2, settings2.noStrings);
-  }
-  static async fromVim(vimPath, settings2) {
-    const fullSettings = getFullSettings(settings2);
-    const buffer = new dist$3.RemoteBuffer(vimPath);
-    const bfast2 = new dist$3.BFast(buffer);
+  static async loadFromVim(source, settings2, onProgress) {
+    const fullSettings = getFullSettings$1(settings2);
+    const bfast2 = new dist$3.BFast(source);
+    if (bfast2.source instanceof dist$3.RemoteBuffer) {
+      bfast2.source.onProgress = onProgress;
+    }
     const geometry = await bfast2.getBfast("geometry");
     const g3d2 = await dist$3.G3d.createFromBfast(geometry);
     const materials = new dist$3.G3dMaterial(g3d2.materialColors);
-    const factory = new LegacyMeshFactory(g3d2, materials, settings2);
-    const scene = factory.createScene();
+    const scene = new Scene(void 0, settings2.matrix);
+    const factory = new LegacyMeshFactory(g3d2, materials, scene);
     const doc = await dist$3.VimDocument.createFromBfast(bfast2, true);
     const mapping = await ElementMapping.fromG3d(g3d2, doc);
-    const vim = new Vim(void 0, doc, g3d2, scene, fullSettings, mapping);
+    const header = await dist$3.requestHeader(bfast2);
+    const builder = new VimSubsetBuilder(factory);
+    const vim = new Vim(header, doc, g3d2, scene, fullSettings, mapping, builder, typeof source === "string" ? source : void 0, "vim");
+    if (bfast2.source instanceof dist$3.RemoteBuffer) {
+      bfast2.source.onProgress = void 0;
+    }
     return vim;
   }
-  abort() {
+}
+class Vimx {
+  constructor(vimx, header, scene, material) {
+    __publicField2(this, "vimx");
+    __publicField2(this, "scene");
+    __publicField2(this, "materials");
+    __publicField2(this, "header");
+    this.vimx = vimx;
+    this.header = header;
+    this.scene = scene;
+    this.materials = material;
   }
-  dispose() {
-    this.geometry.abort();
-    this.scene.dispose();
+  static async fromRemote(vimx, downloadMeshes) {
+    if (downloadMeshes) {
+      await vimx.bfast.forceDownload();
+    }
+    const [header, scene, materials] = await Promise.all([
+      await vimx.getHeader(),
+      await vimx.getScene(),
+      await vimx.getMaterials()
+    ]);
+    return new Vimx(vimx, header, scene, materials);
+  }
+  getMesh(mesh) {
+    return this.vimx.getMesh(mesh);
+  }
+  abort() {
+    this.vimx.abort();
   }
 }
 const floor = `
@@ -56692,6 +56504,84 @@ class OrthographicWrapper {
     this.camera.updateProjectionMatrix();
   }
 }
+class GizmoMarker {
+  constructor(viewer) {
+    __publicField2(this, "type", "Marker");
+    __publicField2(this, "_viewer");
+    __publicField2(this, "_sprite");
+    __publicField2(this, "_material");
+    __publicField2(this, "vim");
+    __publicField2(this, "document");
+    __publicField2(this, "element");
+    __publicField2(this, "instances");
+    this._viewer = viewer;
+    const map = new TextureLoader().load("dot.png", () => this._viewer.renderer.needsUpdate = true);
+    this._material = new SpriteMaterial({ map, depthTest: false });
+    this._sprite = new Sprite(this._material);
+    this._sprite.userData.vim = this;
+    this.focused = false;
+  }
+  get position() {
+    return this._sprite.position;
+  }
+  load() {
+    this._viewer.renderer.add(this._sprite);
+  }
+  unload() {
+    this._viewer.renderer.remove(this._sprite);
+  }
+  get hasMesh() {
+    return false;
+  }
+  get outline() {
+    return !this.color.equals(new Color("white"));
+  }
+  set outline(value) {
+    this.color = value ? new Color("red") : new Color("white");
+  }
+  get focused() {
+    return this._sprite.scale.x === 8;
+  }
+  set focused(value) {
+    if (value) {
+      this._sprite.scale.set(8, 8, 8);
+    } else {
+      this._sprite.scale.set(5, 5, 5);
+    }
+    this._viewer.renderer.needsUpdate = true;
+  }
+  get visible() {
+    throw new Error("Method not implemented.");
+  }
+  set visible(value) {
+    throw new Error("Method not implemented.");
+  }
+  get color() {
+    return this._material.color;
+  }
+  set color(color) {
+    this._material.color.copy(color);
+    this._viewer.renderer.needsUpdate = true;
+  }
+  addMesh(mesh) {
+    throw new Error("Method not implemented.");
+  }
+  getBimElement() {
+    throw new Error("Method not implemented.");
+  }
+  getBimParameters() {
+    throw new Error("Method not implemented.");
+  }
+  get elementId() {
+    throw new Error("Method not implemented.");
+  }
+  getBoundingBox() {
+    return new Box3().setFromCenterAndSize(this.position.clone(), new Vector3(1, 1, 1));
+  }
+  getCenter(target) {
+    return (target != null ? target : new Vector3()).copy(this.position);
+  }
+}
 class CameraMovement {
   constructor(camera) {
     __publicField2(this, "_camera");
@@ -56717,7 +56607,7 @@ class CameraMovement {
     this.orbit(angle);
   }
   frame(target, forward) {
-    if (target instanceof Object$1) {
+    if (target instanceof GizmoMarker || target instanceof Object$1) {
       target = target.getBoundingBox();
     }
     if (target === "all") {
@@ -57131,7 +57021,8 @@ class Camera {
   getVelocityMultiplier() {
     const rotated = !this._lastQuaternion.equals(this.quaternion);
     const mod = rotated ? 1 : 1.66;
-    return Math.pow(1.25, this.speed) * this._moveSpeed * mod * 100;
+    const frustrum = this.frustrumSizeAt(this.target).length();
+    return Math.pow(1.25, this.speed) * this._moveSpeed * mod * frustrum;
   }
   checkForMovement() {
     this._hasMoved = false;
@@ -57362,8 +57253,14 @@ class RaycastResult {
     __publicField2(this, "intersections");
     __publicField2(this, "firstHit");
     this.intersections = intersections;
-    const [hit, obj] = this.GetFirstVimHit(intersections);
-    this.firstHit = hit;
+    const [markerHit, marker] = this.GetFirstMarkerHit(intersections);
+    if (marker) {
+      this.object = marker;
+      this.firstHit = markerHit;
+      return;
+    }
+    const [objectHit, obj] = this.GetFirstVimHit(intersections);
+    this.firstHit = objectHit;
     this.object = obj;
   }
   GetFirstVimHit(intersections) {
@@ -57371,6 +57268,17 @@ class RaycastResult {
       const obj = this.getVimObjectFromHit(intersections[i2]);
       if (obj == null ? void 0 : obj.visible)
         return [intersections[i2], obj];
+    }
+    return [];
+  }
+  GetFirstMarkerHit(intersections) {
+    for (let i2 = 0; i2 < intersections.length; i2++) {
+      if (intersections[i2].object instanceof Sprite) {
+        const sprite = intersections[i2].object;
+        if (sprite.userData.vim instanceof GizmoMarker) {
+          return [intersections[i2], sprite.userData.vim];
+        }
+      }
     }
     return [];
   }
@@ -57610,7 +57518,6 @@ class MouseHandler extends InputHandler {
     super(viewer);
     __publicField2(this, "_idleDelayMs", 150);
     __publicField2(this, "zoomSpeed", 1);
-    __publicField2(this, "panSpeed", 100);
     __publicField2(this, "rotateSpeed", 1);
     __publicField2(this, "orbitSpeed", 1);
     __publicField2(this, "_buttonDown");
@@ -57676,17 +57583,16 @@ class MouseHandler extends InputHandler {
       if (event.ctrlKey) {
         this.camera.speed -= scrollValue;
       } else {
-        const zoom2 = Math.pow(1.3, scrollValue);
+        const zoom2 = Math.pow(1.5, scrollValue);
         this.camera.lerp(0.75).zoom(zoom2);
       }
     });
     __publicField2(this, "onMouseUp", (event) => {
       event.stopImmediatePropagation();
-      this.resetIdle();
       const btn = this.getButton(event);
       if (btn === this._buttonDown)
         return;
-      this._viewer.gizmoRectangle.visible = false;
+      this._viewer.gizmos.rectangle.visible = false;
       event.preventDefault();
       if (!this._buttonDown)
         return;
@@ -57727,7 +57633,7 @@ class MouseHandler extends InputHandler {
     return this._viewer.inputs;
   }
   get gizmoRect() {
-    return this._viewer.gizmoRectangle;
+    return this._viewer.gizmos.rectangle;
   }
   addListeners() {
     this.reg(this.canvas, "mousedown", this.onMouseDown);
@@ -57787,7 +57693,7 @@ class MouseHandler extends InputHandler {
         this.camera.do().rotate(this.toRotation(delta, this.rotateSpeed));
         break;
       case "pan":
-        this.camera.do().move2(delta.multiplyScalar(this.panSpeed), "XY");
+        this.pan(delta);
         break;
       case "zoom":
         this.camera.do().zoom(1 + delta.y * this.zoomSpeed);
@@ -57801,7 +57707,12 @@ class MouseHandler extends InputHandler {
     }
   }
   onMouseMiddleDrag(delta) {
-    this.camera.do().move2(delta.multiplyScalar(100), "XY");
+    this.pan(delta);
+  }
+  pan(delta) {
+    const size = this.camera.frustrumSizeAt(this.camera.target);
+    size.multiply(delta).multiplyScalar(2);
+    this.camera.do().move2(size, "XY");
   }
   onMouseRightDrag(delta) {
     this.camera.do().rotate(this.toRotation(delta, this.rotateSpeed));
@@ -57946,7 +57857,7 @@ class DefaultInputScheme {
     }
   }
   onIdleAction(hit) {
-    if (!this._viewer.sectionBox.interactive) {
+    if (!this._viewer.gizmos.section.interactive) {
       this._viewer.selection.focus(hit == null ? void 0 : hit.object);
     }
   }
@@ -58036,7 +57947,7 @@ class Input {
       this._pointerFallback = "orbit";
     else if (value === "orbit")
       this._pointerFallback = "look";
-    this._viewer.gizmoRectangle.visible = false;
+    this._viewer.gizmos.rectangle.visible = false;
     this._pointerActive = value;
     this._onPointerModeChanged.dispatch();
   }
@@ -58132,7 +58043,7 @@ class Selection {
     this._materials.focusIntensity = 0;
   }
   select(object) {
-    object = object === void 0 ? [] : object instanceof Object$1 ? [object] : object;
+    object = object === void 0 ? [] : Array.isArray(object) ? object : [object];
     object = object.filter((o) => o);
     if (object.length === this._objects.size && object.every((o) => this._objects.has(o))) {
       return;
@@ -58363,166 +58274,6 @@ class Environment {
     this._groundPlane.dispose();
   }
 }
-class GizmoOrbit {
-  constructor(renderer, camera, input, settings2) {
-    __publicField2(this, "_renderer");
-    __publicField2(this, "_camera");
-    __publicField2(this, "_inputs");
-    __publicField2(this, "_size", 1);
-    __publicField2(this, "_fov", 50);
-    __publicField2(this, "_color", new Color("blue"));
-    __publicField2(this, "_opacity", 0.2);
-    __publicField2(this, "_opacityAlways", 0.5);
-    __publicField2(this, "_fadeDurationMs", 200);
-    __publicField2(this, "_showDurationMs", 1e3);
-    __publicField2(this, "_box");
-    __publicField2(this, "_wireframe");
-    __publicField2(this, "_material");
-    __publicField2(this, "_materialAlways");
-    __publicField2(this, "_gizmos");
-    __publicField2(this, "_disconnectCamera");
-    __publicField2(this, "_timeout");
-    __publicField2(this, "_fadeEnd", 0);
-    __publicField2(this, "_active", true);
-    __publicField2(this, "_animation", 0);
-    this._renderer = renderer;
-    this._camera = camera;
-    this._inputs = input;
-    this.applySettings(settings2);
-    this.connect();
-  }
-  connect() {
-    const onMode = this._inputs.onPointerModeChanged.subscribe(() => this.onUpdate());
-    const onMove = this._camera.onMoved.subscribe(() => this.onUpdate());
-    const onChange = this._camera.onValueChanged.subscribe(() => this.onUpdate());
-    this._disconnectCamera = () => {
-      onMode();
-      onMove();
-      onChange();
-    };
-  }
-  onUpdate() {
-    this.updateScale();
-    this.setPosition(this._camera.target);
-    this.show(true);
-  }
-  dispose() {
-    var _a22, _b2, _c, _d, _e;
-    cancelAnimationFrame(this._animation);
-    clearTimeout(this._timeout);
-    (_a22 = this._box) == null ? void 0 : _a22.dispose();
-    (_b2 = this._wireframe) == null ? void 0 : _b2.dispose();
-    (_c = this._material) == null ? void 0 : _c.dispose();
-    (_d = this._materialAlways) == null ? void 0 : _d.dispose();
-    (_e = this._disconnectCamera) == null ? void 0 : _e.call(this);
-    this._box = void 0;
-    this._wireframe = void 0;
-    this._material = void 0;
-    this._materialAlways = void 0;
-    this._disconnectCamera = void 0;
-    if (this._gizmos) {
-      this._renderer.remove(this._gizmos);
-      this._gizmos = void 0;
-    }
-  }
-  get enabled() {
-    return this._active;
-  }
-  set enabled(value) {
-    this._active = value;
-  }
-  show(show = true) {
-    if (!this._active)
-      return;
-    if (!this._gizmos) {
-      this.createGizmo();
-    }
-    clearTimeout(this._timeout);
-    this._gizmos.visible = show;
-    if (show) {
-      this._timeout = setTimeout(() => this.fadeOut(), this._showDurationMs);
-    }
-  }
-  fadeOut(fading) {
-    const now2 = new Date().getTime();
-    if (!fading) {
-      this._fadeEnd = now2 + this._fadeDurationMs;
-    }
-    if (now2 > this._fadeEnd) {
-      this._gizmos.visible = false;
-      this._material.opacity = this._opacity;
-      this._materialAlways.opacity = this._opacityAlways;
-    } else {
-      this._animation = requestAnimationFrame(() => this.fadeOut(true));
-      const t2 = Math.pow((this._fadeEnd - now2) / this._fadeDurationMs, 4);
-      this._material.opacity = MathUtils.lerp(0, this._opacity, t2);
-      this._materialAlways.opacity = MathUtils.lerp(0, this._opacityAlways, t2);
-    }
-    this._renderer.needsUpdate = true;
-  }
-  setPosition(position) {
-    var _a22;
-    (_a22 = this._gizmos) == null ? void 0 : _a22.position.copy(position);
-    this.updateScale();
-  }
-  setSize(size) {
-    this._size = size;
-  }
-  setOpacity(opacity, opacityAlways) {
-    this._opacity = opacity;
-    this._opacityAlways = opacityAlways;
-    if (!this._gizmos)
-      return;
-    this._material.opacity = opacity;
-    this._materialAlways.opacity = opacityAlways;
-  }
-  setColor(color) {
-    this._color = color;
-    if (!this._gizmos)
-      return;
-    this._material.color = color;
-    this._materialAlways.color = color;
-  }
-  applySettings(settings2) {
-    this._active = settings2.camera.gizmo.enable;
-    this._fov = settings2.camera.fov;
-    this.setColor(settings2.camera.gizmo.color);
-    this.setSize(settings2.camera.gizmo.size);
-    this.setOpacity(settings2.camera.gizmo.opacity, settings2.camera.gizmo.opacityAlways);
-  }
-  updateScale() {
-    if (!this._gizmos)
-      return;
-    const frustrum = this._camera.frustrumSizeAt(this._gizmos.position);
-    const min2 = Math.min(frustrum.x, frustrum.y);
-    const h = min2 * this._size;
-    this._gizmos.scale.set(h, h, h);
-  }
-  createGizmo() {
-    this._box = new SphereGeometry(1);
-    this._wireframe = new WireframeGeometry(this._box);
-    this._wireframe.addGroup(0, Infinity, 0);
-    this._wireframe.addGroup(0, Infinity, 1);
-    this._material = new LineBasicMaterial({
-      depthTest: true,
-      opacity: this._opacity,
-      color: this._color,
-      transparent: true
-    });
-    this._materialAlways = new LineBasicMaterial({
-      depthTest: false,
-      opacity: this._opacityAlways,
-      color: this._color,
-      transparent: true
-    });
-    this._gizmos = new LineSegments(this._wireframe, [
-      this._material,
-      this._materialAlways
-    ]);
-    this._renderer.add(this._gizmos);
-    this.updateScale();
-  }
-}
 function estimateBytesUsed(geometry) {
   let mem = 0;
   for (const name in geometry.attributes) {
@@ -58534,43 +58285,48 @@ function estimateBytesUsed(geometry) {
   return mem;
 }
 class Scene {
-  constructor(builder) {
+  constructor(builder, matrix) {
     __publicField2(this, "builder");
+    __publicField2(this, "_renderer");
+    __publicField2(this, "_vim");
+    __publicField2(this, "_matrix", new Matrix4());
     __publicField2(this, "insertables", new Array());
     __publicField2(this, "meshes", []);
-    __publicField2(this, "_vim");
-    __publicField2(this, "_renderer");
-    __publicField2(this, "_matrix", new Matrix4());
-    __publicField2(this, "_updated", false);
     __publicField2(this, "_outlineCount", 0);
     __publicField2(this, "_boundingBox");
     __publicField2(this, "_instanceToMeshes", /* @__PURE__ */ new Map());
     __publicField2(this, "_material");
+    this._matrix = matrix;
     this.builder = builder;
   }
-  get updated() {
-    return this._updated;
-  }
-  set updated(value) {
-    this._updated = this._updated || value;
+  setDirty() {
+    var _a22;
+    (_a22 = this.renderer) == null ? void 0 : _a22.notifySceneUpdate();
   }
   hasOutline() {
     return this._outlineCount > 0;
   }
   addOutline() {
     this._outlineCount++;
-    this.updated = true;
+    this.setDirty();
   }
   removeOutline() {
     this._outlineCount--;
-    this.updated = true;
+    this.setDirty();
   }
   clearUpdateFlag() {
-    this._updated = false;
     this.insertables.forEach((mesh) => mesh.clearUpdate());
   }
   getBoundingBox(target = new Box3()) {
     return this._boundingBox ? target.copy(this._boundingBox) : void 0;
+  }
+  updateBox(box) {
+    var _a22, _b2, _c;
+    if (box !== void 0) {
+      const b = box.clone().applyMatrix4(this._matrix);
+      this._boundingBox = (_b2 = (_a22 = this._boundingBox) == null ? void 0 : _a22.union(b)) != null ? _b2 : b;
+      (_c = this.renderer) == null ? void 0 : _c.updateBox(this._boundingBox);
+    }
   }
   getMemory() {
     return this.meshes.map((m2) => estimateBytesUsed(m2.mesh.geometry)).reduce((n1, n2) => n1 + n2, 0);
@@ -58578,15 +58334,20 @@ class Scene {
   getMeshFromInstance(instance) {
     return this._instanceToMeshes.get(instance);
   }
-  applyMatrix4(matrix) {
-    var _a22, _b2;
-    for (let m2 = 0; m2 < this.meshes.length; m2++) {
-      this.meshes[m2].mesh.matrixAutoUpdate = false;
-      this.meshes[m2].mesh.matrix.copy(matrix);
+  getMeshesFromInstances(instances) {
+    if (!(instances == null ? void 0 : instances.length))
+      return;
+    const meshes = [];
+    for (let i2 = 0; i2 < instances.length; i2++) {
+      const instance = instances[i2];
+      if (instance < 0)
+        continue;
+      const submeshes = this.getMeshFromInstance(instance);
+      submeshes == null ? void 0 : submeshes.forEach((s) => meshes.push(s));
     }
-    (_a22 = this._boundingBox) == null ? void 0 : _a22.applyMatrix4(this._matrix.invert());
-    this._matrix.copy(matrix);
-    (_b2 = this._boundingBox) == null ? void 0 : _b2.applyMatrix4(this._matrix);
+    if (meshes.length === 0)
+      return;
+    return meshes;
   }
   get renderer() {
     return this._renderer;
@@ -58603,10 +58364,14 @@ class Scene {
   }
   addSubmesh(submesh) {
     var _a22;
-    const set3 = (_a22 = this._instanceToMeshes.get(submesh.instance)) != null ? _a22 : [];
-    set3.push(submesh);
-    this._instanceToMeshes.set(submesh.instance, set3);
-    this.updated = true;
+    const meshes = (_a22 = this._instanceToMeshes.get(submesh.instance)) != null ? _a22 : [];
+    meshes.push(submesh);
+    this._instanceToMeshes.set(submesh.instance, meshes);
+    this.setDirty();
+    if (this.vim) {
+      const obj = this.vim.getObjectFromInstance(submesh.instance);
+      obj.addMesh(submesh);
+    }
   }
   addMesh(mesh) {
     var _a22;
@@ -58616,21 +58381,10 @@ class Scene {
     mesh.mesh.matrix.copy(this._matrix);
     this.updateBox(mesh.boundingBox);
     mesh.getSubmeshes().forEach((s) => this.addSubmesh(s));
-    if (mesh instanceof InsertableMesh) {
-      this.insertables.push(mesh);
-      mesh.onUpdate.sub(() => this.updated = true);
-      mesh.onSubmeshAdded = (submesh) => this.addSubmesh(submesh);
-    }
+    mesh.setMaterial(this.material);
     this.meshes.push(mesh);
-    this.updated = true;
+    this.setDirty();
     return this;
-  }
-  updateBox(box) {
-    var _a22, _b2;
-    if (box !== void 0) {
-      const b = box.clone().applyMatrix4(this._matrix);
-      this._boundingBox = (_b2 = (_a22 = this._boundingBox) == null ? void 0 : _a22.union(b)) != null ? _b2 : b;
-    }
   }
   merge(other) {
     var _a22, _b2;
@@ -58646,7 +58400,7 @@ class Scene {
     if (other._boundingBox) {
       this._boundingBox = (_b2 = (_a22 = this._boundingBox) == null ? void 0 : _a22.union(other._boundingBox)) != null ? _b2 : other._boundingBox.clone();
     }
-    this.updated = true;
+    this.setDirty();
     return this;
   }
   get material() {
@@ -58655,21 +58409,29 @@ class Scene {
   set material(value) {
     if (this._material === value)
       return;
-    this.updated = true;
+    this.setDirty();
     this._material = value;
     this.meshes.forEach((m2) => m2.setMaterial(value));
   }
-  dispose() {
-    for (let i2 = 0; i2 < this.meshes.length; i2++) {
-      this.meshes[i2].mesh.geometry.dispose();
+  clear() {
+    var _a22, _b2;
+    (_a22 = this.renderer) == null ? void 0 : _a22.remove(this);
+    for (const m2 of this.meshes) {
+      m2.mesh.geometry.dispose();
     }
     this.meshes.length = 0;
     this._instanceToMeshes.clear();
+    (_b2 = this.renderer) == null ? void 0 : _b2.add(this);
+  }
+  dispose() {
+    this.clear();
+    this._renderer = null;
   }
 }
 class RenderScene {
   constructor() {
     __publicField2(this, "scene");
+    __publicField2(this, "boxUpdated", false);
     __publicField2(this, "_scenes", []);
     __publicField2(this, "_boundingBox");
     __publicField2(this, "_memory", 0);
@@ -58677,14 +58439,6 @@ class RenderScene {
   }
   get estimatedMemory() {
     return this._memory;
-  }
-  getUpdatedScenes() {
-    const result = [];
-    for (const s of this._scenes) {
-      if (s.updated)
-        result.push(s);
-    }
-    return result;
   }
   hasOutline() {
     for (const s of this._scenes) {
@@ -58729,6 +58483,7 @@ class RenderScene {
   updateBox(box) {
     if (!box)
       return;
+    this.boxUpdated = true;
     this._boundingBox = this._boundingBox ? this._boundingBox.union(box) : box;
   }
   removeScene(scene) {
@@ -58934,6 +58689,44 @@ class Viewport {
     this._unregisterResize = () => window.removeEventListener("resize", onResize);
   }
 }
+function createGridMaterial() {
+  return new ShaderMaterial({
+    transparent: true,
+    side: DoubleSide,
+    vertexColors: true,
+    depthWrite: false,
+    clipping: true,
+    vertexShader: `
+    #include <common>
+    #include <logdepthbuf_pars_vertex>
+    #include <clipping_planes_pars_vertex>
+
+    varying vec4 vColor;
+    void main() {
+      #include <begin_vertex>
+      #include <project_vertex>
+      #include <logdepthbuf_vertex>
+      #include <clipping_planes_vertex>
+
+      vColor = color;
+    }
+    `,
+    fragmentShader: `
+    #include <common>
+    #include <logdepthbuf_pars_fragment>
+    #include <clipping_planes_pars_fragment>
+    varying vec4 vColor;
+
+    void main() {
+      
+      #include <clipping_planes_fragment>
+      #include <logdepthbuf_fragment>
+
+      gl_FragColor = vColor;
+    }
+    `
+  });
+}
 class BoxOutline extends LineSegments {
   constructor() {
     const vertices = new Float32Array([
@@ -59089,249 +58882,582 @@ class BoxHighlight extends Mesh$1 {
     this.material.dispose();
   }
 }
-class BoxInputs {
-  constructor(viewer, cube, box) {
-    __publicField2(this, "viewer");
-    __publicField2(this, "cube");
-    __publicField2(this, "sharedBox");
-    __publicField2(this, "faceNormal", new Vector3());
-    __publicField2(this, "dragOrigin", new Vector3());
-    __publicField2(this, "dragpPlane", new Plane());
-    __publicField2(this, "mouseDown");
-    __publicField2(this, "raycaster", new Raycaster$1());
-    __publicField2(this, "lastBox", new Box3());
-    __publicField2(this, "unregisters", []);
-    __publicField2(this, "onFaceEnter");
-    __publicField2(this, "onBoxStretch");
-    __publicField2(this, "onBoxConfirm");
-    __publicField2(this, "reg", (handler, type, listener2) => {
-      handler.addEventListener(type, listener2);
-      this.unregisters.push(() => handler.removeEventListener(type, listener2));
-    });
-    this.viewer = viewer;
-    this.cube = cube;
-    this.sharedBox = box;
+class GizmoGrid {
+  constructor(renderer, materials) {
+    __publicField2(this, "_renderer");
+    __publicField2(this, "_material");
+    __publicField2(this, "grid");
+    __publicField2(this, "outline");
+    this._renderer = renderer;
+    this._material = materials.grid;
   }
-  register() {
-    if (this.unregister.length > 0)
-      return;
-    const canvas = this.viewer.viewport.canvas;
-    this.reg(canvas, "pointerdown", this.onMouseClick.bind(this));
-    this.reg(canvas, "pointermove", this.onMouseMove.bind(this));
-    this.reg(canvas, "pointerup", this.onMouseUp.bind(this));
+  init(target, scale) {
+    this.dispose();
+    const box = target instanceof Vim ? target.scene.getBoundingBox() : target;
+    this.grid = Grid.createFromBox(box, scale, this._material);
+    this._renderer.add(this.grid.mesh);
+    this.outline = new BoxOutline();
+    this._renderer.add(this.outline);
+    this.outline.visible = false;
   }
-  unregister() {
-    this.unregisters.forEach((unreg) => unreg());
-    this.unregisters.length = 0;
-  }
-  onMouseMove(event) {
-    var _a22, _b2, _c;
-    if (this.mouseDown) {
-      this.onDrag(event);
+  highlight(cell) {
+    const box = this.grid.getBox(cell);
+    if (!box) {
+      this.outline.visible = false;
       return;
     }
-    const hits = this.raycast(new Vector2(event.offsetX, event.offsetY));
-    const hit = hits == null ? void 0 : hits[0];
-    const norm = (_a22 = hit == null ? void 0 : hit.face) == null ? void 0 : _a22.normal;
-    if (!norm) {
-      if (this.faceNormal.x !== 0 || this.faceNormal.y !== 0 || this.faceNormal.z !== 0) {
-        this.faceNormal.set(0, 0, 0);
-        (_b2 = this.onFaceEnter) == null ? void 0 : _b2.call(this, this.faceNormal);
-      }
-      return;
-    }
-    if (this.faceNormal.equals(norm)) {
-      return;
-    }
-    this.faceNormal = norm;
-    (_c = this.onFaceEnter) == null ? void 0 : _c.call(this, this.faceNormal);
-  }
-  onMouseUp(event) {
-    var _a22, _b2;
-    if (this.mouseDown) {
-      this.mouseDown = false;
-      this.viewer.inputs.registerAll();
-      if (event.pointerType === "mouse") {
-        this.onMouseMove(event);
-      } else {
-        this.faceNormal = new Vector3();
-        (_a22 = this.onFaceEnter) == null ? void 0 : _a22.call(this, this.faceNormal);
-      }
-      (_b2 = this.onBoxConfirm) == null ? void 0 : _b2.call(this, this.sharedBox);
-    }
-  }
-  onMouseClick(event) {
-    var _a22, _b2;
-    const hits = this.raycast(new Vector2(event.offsetX, event.offsetY));
-    const hit = hits == null ? void 0 : hits[0];
-    if (!((_a22 = hit == null ? void 0 : hit.face) == null ? void 0 : _a22.normal))
-      return;
-    this.lastBox.copy(this.sharedBox);
-    this.faceNormal = hit.face.normal;
-    this.dragOrigin.copy(hit.point);
-    const dist2 = hit.point.clone().dot(this.viewer.camera.forward);
-    this.dragpPlane.set(this.viewer.camera.forward, -dist2);
-    this.mouseDown = true;
-    this.viewer.inputs.unregisterAll();
-    (_b2 = this.onFaceEnter) == null ? void 0 : _b2.call(this, this.faceNormal);
-  }
-  onDrag(event) {
-    var _a22, _b2;
-    this.raycaster = this.viewer.raycaster.fromPoint2(new Vector2(event.offsetX, event.offsetY), this.raycaster);
-    const point = (_a22 = this.raycaster.ray.intersectPlane(this.dragpPlane, new Vector3())) != null ? _a22 : this.dragOrigin.clone();
-    const delta = point.sub(this.dragOrigin);
-    const amount = delta.dot(this.faceNormal);
-    const box = this.stretch(this.faceNormal, amount);
-    (_b2 = this.onBoxStretch) == null ? void 0 : _b2.call(this, box);
-  }
-  stretch(normal, amount) {
-    const result = this.sharedBox.clone();
-    if (normal.x > 0.1) {
-      result.max.setX(Math.max(this.lastBox.max.x + amount, result.min.x - 1));
-    }
-    if (normal.x < -0.1) {
-      result.min.setX(Math.min(this.lastBox.min.x - amount, result.max.x + 1));
-    }
-    if (normal.y > 0.1) {
-      result.max.setY(Math.max(this.lastBox.max.y + amount, result.min.y - 1));
-    }
-    if (normal.y < -0.1) {
-      result.min.setY(Math.min(this.lastBox.min.y - amount, result.max.y + 1));
-    }
-    if (normal.z > 0.1) {
-      result.max.setZ(Math.max(this.lastBox.max.z + amount, result.min.z - 1));
-    }
-    if (normal.z < -0.1) {
-      result.min.setZ(Math.min(this.lastBox.min.z - amount, result.max.z + 1));
-    }
-    return result;
-  }
-  raycast(position) {
-    this.raycaster = this.viewer.raycaster.fromPoint2(position, this.raycaster);
-    return this.raycaster.intersectObject(this.cube);
-  }
-}
-class SectionBox {
-  constructor(viewer) {
-    __publicField2(this, "_viewer");
-    __publicField2(this, "_inputs");
-    __publicField2(this, "_cube");
-    __publicField2(this, "_outline");
-    __publicField2(this, "_highlight");
-    __publicField2(this, "_normal");
-    __publicField2(this, "_clip");
-    __publicField2(this, "_visible");
-    __publicField2(this, "_interactive");
-    __publicField2(this, "_onStateChanged", new dist$2.SignalDispatcher());
-    __publicField2(this, "_onBoxConfirm", new dist$4.SimpleEventDispatcher());
-    __publicField2(this, "_onHover", new dist$4.SimpleEventDispatcher());
-    this._viewer = viewer;
-    this._normal = new Vector3();
-    this._cube = new BoxMesh();
-    this._outline = new BoxOutline();
-    this._highlight = new BoxHighlight();
-    this.renderer.add(this._cube);
-    this.renderer.add(this._outline);
-    this.renderer.add(this._highlight);
-    this._inputs = new BoxInputs(viewer, this._cube, this._viewer.renderer.section.box);
-    this._inputs.onFaceEnter = (normal) => {
-      this._normal = normal;
-      if (this.visible)
-        this._highlight.highlight(this.section.box, normal);
-      this._onHover.dispatch(normal.x !== 0 || normal.y !== 0 || normal.z !== 0);
-      this.renderer.needsUpdate = true;
-    };
-    this._inputs.onBoxStretch = (box) => {
-      this.renderer.section.fitBox(box);
-      this.update();
-    };
-    this._inputs.onBoxConfirm = (box) => this._onBoxConfirm.dispatch(box);
-    this.clip = false;
-    this.visible = false;
-    this.interactive = false;
-    this.update();
-  }
-  get onStateChanged() {
-    return this._onStateChanged.asEvent();
-  }
-  get onBoxConfirm() {
-    return this._onBoxConfirm.asEvent();
-  }
-  get onHover() {
-    return this._onHover.asEvent();
-  }
-  get renderer() {
-    return this._viewer.renderer;
-  }
-  get section() {
-    return this._viewer.renderer.section;
-  }
-  get box() {
-    return this.section.box;
-  }
-  get clip() {
-    var _a22;
-    return (_a22 = this._clip) != null ? _a22 : false;
-  }
-  set clip(value) {
-    if (value === this._clip)
-      return;
-    this._clip = value;
-    this.renderer.section.active = value;
-    this._onStateChanged.dispatch();
-  }
-  get interactive() {
-    var _a22;
-    return (_a22 = this._interactive) != null ? _a22 : false;
-  }
-  set interactive(value) {
-    if (value === this._interactive)
-      return;
-    if (!this._interactive && value)
-      this._inputs.register();
-    if (this._interactive && !value)
-      this._inputs.unregister();
-    this._interactive = value;
-    this._highlight.visible = false;
-    this._onStateChanged.dispatch();
-  }
-  get visible() {
-    var _a22;
-    return (_a22 = this._visible) != null ? _a22 : false;
-  }
-  set visible(value) {
-    if (value === this._visible)
-      return;
-    this._visible = value;
-    this._cube.visible = value;
-    this._outline.visible = value;
-    this._highlight.visible = value;
-    if (value)
-      this.update();
-    this._onStateChanged.dispatch();
-    this.renderer.needsUpdate = true;
-  }
-  fitBox(box, padding = 1) {
-    const b = box.expandByScalar(padding);
-    this._cube.fitBox(b);
-    this._outline.fitBox(b);
-    this.renderer.section.fitBox(b);
-    this._onBoxConfirm.dispatch(this.box);
-    this.renderer.needsUpdate = true;
-  }
-  update() {
-    this.fitBox(this.section.box, 0);
-    this._highlight.highlight(this.section.box, this._normal);
-    this.renderer.needsUpdate = true;
+    box.getCenter(this.outline.position);
+    box.getSize(this.outline.scale);
+    this.outline.visible = true;
+    this._renderer.needsUpdate = true;
   }
   dispose() {
-    this.renderer.remove(this._cube);
-    this.renderer.remove(this._outline);
-    this.renderer.remove(this._highlight);
-    this._inputs.unregister();
-    this._cube.dispose();
-    this._outline.dispose();
-    this._highlight.dispose();
+    var _a22;
+    if (this.grid) {
+      this._renderer.remove(this.grid.mesh);
+      this.grid.dispose();
+      this.grid = void 0;
+    }
+    if (this.outline) {
+      this._renderer.remove(this.outline);
+      (_a22 = this.outline) == null ? void 0 : _a22.dispose();
+      this.outline = void 0;
+    }
+  }
+}
+class Grid {
+  constructor(size, scale, material, color, opacity) {
+    __publicField2(this, "size");
+    __publicField2(this, "box");
+    __publicField2(this, "mesh");
+    __publicField2(this, "_cellCount");
+    __publicField2(this, "_scale");
+    __publicField2(this, "_colors", /* @__PURE__ */ new Map());
+    __publicField2(this, "_alpha", /* @__PURE__ */ new Map());
+    __publicField2(this, "_material");
+    __publicField2(this, "_ownedMaterial");
+    this.size = size;
+    this._scale = scale;
+    this.box = new Box3().setFromCenterAndSize(new Vector3(0, 0, 0), size.clone().multiply(scale));
+    this._cellCount = this.size.x * this.size.y * this.size.z;
+    this.build(color, opacity, material);
+  }
+  static createFromBox(box, scale, material) {
+    const size = box.getSize(new Vector3()).divide(scale).ceil();
+    const g = new Grid(size, scale, material);
+    box.getCenter(g.mesh.position);
+    g.box.translate(g.mesh.position);
+    return g;
+  }
+  get cellCount() {
+    return this._cellCount;
+  }
+  isCell(cell) {
+    if (!cell)
+      return false;
+    if (!Number.isInteger(cell.x) || !Number.isInteger(cell.y) || !Number.isInteger(cell.z)) {
+      return false;
+    }
+    if (cell.x < 0 || cell.y < 0 || cell.z < 0) {
+      return false;
+    }
+    if (cell.x >= this.size.x || cell.y >= this.size.y || cell.z >= this.size.z) {
+      return false;
+    }
+    return true;
+  }
+  isIndex(index2) {
+    return index2 !== void 0 || index2 >= 0 || index2 <= this._cellCount;
+  }
+  getIndex(cell) {
+    if (!this.isCell(cell))
+      return;
+    return cell.x * this.size.y * this.size.z + cell.y * this.size.z + cell.z;
+  }
+  getCell(index2) {
+    if (!this.isIndex(index2))
+      return;
+    let r2 = index2;
+    const x2 = Math.trunc(r2 / (this.size.y * this.size.z));
+    r2 = r2 % (this.size.y * this.size.z);
+    const y2 = Math.trunc(r2 / this.size.z);
+    r2 = r2 % this.size.z;
+    const z2 = r2;
+    return new Vector3(x2, y2, z2);
+  }
+  getCellAtPosition(position) {
+    if (!this.box.containsPoint(position))
+      return;
+    return position.clone().sub(this.box.min).divide(this._scale).floor();
+  }
+  getBox(cell) {
+    const c = typeof cell === "number" ? this.getCell(cell) : cell == null ? void 0 : cell.clone();
+    if (!this.isCell(c))
+      return;
+    const min2 = c.multiply(this._scale).add(this.box.min);
+    const max2 = min2.clone().add(this._scale);
+    return new Box3(min2, max2);
+  }
+  raycast(raycaster) {
+    const hits = raycaster.intersectObject(this.mesh);
+    for (let i2 = 0; i2 < hits.length; i2++) {
+      const position = raycaster.ray.at(hits[i2].distance + 0.1, new Vector3());
+      const cell = this.getCellAtPosition(position);
+      if (cell !== void 0 && this.getOpacity(cell) > 0) {
+        return cell;
+      }
+    }
+    return void 0;
+  }
+  getOpacity(cell) {
+    const index2 = typeof cell === "number" ? cell : this.getIndex(cell);
+    if (!this.isIndex(index2))
+      return;
+    return this._alpha.get(index2);
+  }
+  setOpacity(cell, opacity) {
+    const index2 = typeof cell === "number" ? cell : this.getIndex(cell);
+    if (!this.isIndex(index2))
+      return;
+    const colors = this.mesh.geometry.getAttribute("color");
+    this._alpha.set(index2, opacity);
+    const c = index2 * 8;
+    for (let i2 = 0; i2 < 8; i2++) {
+      colors.setW(c + i2, opacity);
+    }
+    colors.needsUpdate = true;
+  }
+  setColor(cell, color) {
+    const index2 = typeof cell === "number" ? cell : this.getIndex(cell);
+    if (!this.isIndex(index2))
+      return;
+    this._colors.set(index2, color);
+    const colors = this.mesh.geometry.getAttribute("color");
+    const c = index2 * 8;
+    for (let i2 = 0; i2 < 8; i2++) {
+      colors.setXYZ(c + i2, color.r, color.g, color.b);
+    }
+    colors.needsUpdate = true;
+  }
+  getColor(cell) {
+    const index2 = typeof cell === "number" ? cell : this.getIndex(cell);
+    if (!this.isIndex(index2))
+      return;
+    return this._colors.get(index2);
+  }
+  build(color = new Color(0.25, 0.25, 0.25), opacity = 0.25, material) {
+    const vertices = new Float32Array(this._cellCount * 24);
+    const indices = new Int32Array(this._cellCount * 36);
+    const cell = new Vector3();
+    for (let x2 = 0; x2 < this.size.x; x2++) {
+      for (let y2 = 0; y2 < this.size.y; y2++) {
+        for (let z2 = 0; z2 < this.size.z; z2++) {
+          const index2 = this.getIndex(cell.set(x2, y2, z2));
+          const vertex2 = index2 * 8;
+          const v2 = vertex2 * 3;
+          vertices[v2] = (0 + x2) * this._scale.x + this.box.min.x;
+          vertices[v2 + 1] = (0 + y2) * this._scale.y + this.box.min.y;
+          vertices[v2 + 2] = (0 + z2) * this._scale.z + this.box.min.z;
+          vertices[v2 + 3] = (0 + x2) * this._scale.x + this.box.min.x;
+          vertices[v2 + 4] = (0 + y2) * this._scale.y + this.box.min.y;
+          vertices[v2 + 5] = (1 + z2) * this._scale.z + this.box.min.z;
+          vertices[v2 + 6] = (0 + x2) * this._scale.x + this.box.min.x;
+          vertices[v2 + 7] = (1 + y2) * this._scale.y + this.box.min.y;
+          vertices[v2 + 8] = (0 + z2) * this._scale.z + this.box.min.z;
+          vertices[v2 + 9] = (0 + x2) * this._scale.x + this.box.min.x;
+          vertices[v2 + 10] = (1 + y2) * this._scale.y + this.box.min.y;
+          vertices[v2 + 11] = (1 + z2) * this._scale.z + this.box.min.z;
+          vertices[v2 + 12] = (1 + x2) * this._scale.x + this.box.min.x;
+          vertices[v2 + 13] = (0 + y2) * this._scale.y + this.box.min.y;
+          vertices[v2 + 14] = (0 + z2) * this._scale.z + this.box.min.z;
+          vertices[v2 + 15] = (1 + x2) * this._scale.x + this.box.min.x;
+          vertices[v2 + 16] = (0 + y2) * this._scale.y + this.box.min.y;
+          vertices[v2 + 17] = (1 + z2) * this._scale.z + this.box.min.z;
+          vertices[v2 + 18] = (1 + x2) * this._scale.x + this.box.min.x;
+          vertices[v2 + 19] = (1 + y2) * this._scale.y + this.box.min.y;
+          vertices[v2 + 20] = (0 + z2) * this._scale.z + this.box.min.z;
+          vertices[v2 + 21] = (1 + x2) * this._scale.x + this.box.min.x;
+          vertices[v2 + 22] = (1 + y2) * this._scale.y + this.box.min.y;
+          vertices[v2 + 23] = (1 + z2) * this._scale.z + this.box.min.z;
+          const i2 = index2 * 36;
+          indices[i2] = vertex2;
+          indices[i2 + 1] = vertex2 + 1;
+          indices[i2 + 2] = vertex2 + 2;
+          indices[i2 + 3] = vertex2 + 1;
+          indices[i2 + 4] = vertex2 + 3;
+          indices[i2 + 5] = vertex2 + 2;
+          indices[i2 + 6] = vertex2 + 1;
+          indices[i2 + 7] = vertex2 + 5;
+          indices[i2 + 8] = vertex2 + 3;
+          indices[i2 + 9] = vertex2 + 3;
+          indices[i2 + 10] = vertex2 + 5;
+          indices[i2 + 11] = vertex2 + 7;
+          indices[i2 + 12] = vertex2 + 5;
+          indices[i2 + 13] = vertex2 + 6;
+          indices[i2 + 14] = vertex2 + 7;
+          indices[i2 + 15] = vertex2 + 5;
+          indices[i2 + 16] = vertex2 + 4;
+          indices[i2 + 17] = vertex2 + 6;
+          indices[i2 + 18] = vertex2 + 2;
+          indices[i2 + 19] = vertex2 + 6;
+          indices[i2 + 20] = vertex2 + 4;
+          indices[i2 + 21] = vertex2 + 0;
+          indices[i2 + 22] = vertex2 + 2;
+          indices[i2 + 23] = vertex2 + 4;
+          indices[i2 + 24] = vertex2 + 2;
+          indices[i2 + 25] = vertex2 + 3;
+          indices[i2 + 26] = vertex2 + 6;
+          indices[i2 + 27] = vertex2 + 3;
+          indices[i2 + 28] = vertex2 + 7;
+          indices[i2 + 29] = vertex2 + 6;
+          indices[i2 + 30] = vertex2 + 0;
+          indices[i2 + 31] = vertex2 + 4;
+          indices[i2 + 32] = vertex2 + 1;
+          indices[i2 + 33] = vertex2 + 1;
+          indices[i2 + 34] = vertex2 + 4;
+          indices[i2 + 35] = vertex2 + 5;
+        }
+      }
+    }
+    [this._material, this._ownedMaterial] = material ? [material, false] : [createGridMaterial(), true];
+    const geometry = new BufferGeometry();
+    geometry.setAttribute("position", new Float32BufferAttribute(vertices, 3));
+    geometry.setIndex(new Uint32BufferAttribute(indices, 1));
+    geometry.setAttribute("color", new Float32BufferAttribute(new Float32Array(this._cellCount * 32), 4));
+    this.mesh = new Mesh$1(geometry, this._material);
+    for (let i2 = 0; i2 < this._cellCount; i2++) {
+      this.setOpacity(i2, opacity);
+      this.setColor(i2, color);
+    }
+  }
+  dispose() {
+    this.mesh.geometry.dispose();
+    if (this._ownedMaterial) {
+      this._material.dispose();
+    }
+  }
+}
+class GizmoLoading {
+  constructor(viewer) {
+    __publicField2(this, "_viewer");
+    __publicField2(this, "_spinner");
+    __publicField2(this, "_visible");
+    this._viewer = viewer;
+    this._spinner = this.createBar();
+    this._viewer.viewport.canvas.parentElement.appendChild(this._spinner);
+  }
+  createSpinner() {
+    const div = document.createElement("div");
+    div.className = "lds-roller";
+    for (let i2 = 0; i2 < 8; i2++) {
+      div.appendChild(document.createElement("div"));
+    }
+    return div;
+  }
+  createBar() {
+    const div = document.createElement("span");
+    div.className = "loader";
+    return div;
+  }
+  get visible() {
+    return this._visible;
+  }
+  set visible(value) {
+    if (!this._visible && value) {
+      this._viewer.viewport.canvas.parentElement.appendChild(this._spinner);
+      this._visible = true;
+    }
+    if (this._visible && !value) {
+      this._viewer.viewport.canvas.parentElement.removeChild(this._spinner);
+      this._visible = false;
+    }
+  }
+  dispose() {
+    this.visible = false;
+  }
+}
+class GizmoOrbit {
+  constructor(renderer, camera, input, settings2) {
+    __publicField2(this, "_renderer");
+    __publicField2(this, "_camera");
+    __publicField2(this, "_inputs");
+    __publicField2(this, "_size", 1);
+    __publicField2(this, "_fov", 50);
+    __publicField2(this, "_color", new Color("blue"));
+    __publicField2(this, "_opacity", 0.2);
+    __publicField2(this, "_opacityAlways", 0.5);
+    __publicField2(this, "_fadeDurationMs", 200);
+    __publicField2(this, "_showDurationMs", 1e3);
+    __publicField2(this, "_box");
+    __publicField2(this, "_wireframe");
+    __publicField2(this, "_material");
+    __publicField2(this, "_materialAlways");
+    __publicField2(this, "_gizmos");
+    __publicField2(this, "_disconnectCamera");
+    __publicField2(this, "_timeout");
+    __publicField2(this, "_fadeEnd", 0);
+    __publicField2(this, "_active", true);
+    __publicField2(this, "_animation", 0);
+    this._renderer = renderer;
+    this._camera = camera;
+    this._inputs = input;
+    this.applySettings(settings2);
+    this.connect();
+  }
+  connect() {
+    const onMode = this._inputs.onPointerModeChanged.subscribe(() => this.onUpdate());
+    const onMove = this._camera.onMoved.subscribe(() => this.onUpdate());
+    const onChange = this._camera.onValueChanged.subscribe(() => this.onUpdate());
+    this._disconnectCamera = () => {
+      onMode();
+      onMove();
+      onChange();
+    };
+  }
+  onUpdate() {
+    this.updateScale();
+    this.setPosition(this._camera.target);
+    this.show(true);
+  }
+  dispose() {
+    var _a22, _b2, _c, _d, _e;
+    cancelAnimationFrame(this._animation);
+    clearTimeout(this._timeout);
+    (_a22 = this._box) == null ? void 0 : _a22.dispose();
+    (_b2 = this._wireframe) == null ? void 0 : _b2.dispose();
+    (_c = this._material) == null ? void 0 : _c.dispose();
+    (_d = this._materialAlways) == null ? void 0 : _d.dispose();
+    (_e = this._disconnectCamera) == null ? void 0 : _e.call(this);
+    this._box = void 0;
+    this._wireframe = void 0;
+    this._material = void 0;
+    this._materialAlways = void 0;
+    this._disconnectCamera = void 0;
+    if (this._gizmos) {
+      this._renderer.remove(this._gizmos);
+      this._gizmos = void 0;
+    }
+  }
+  get enabled() {
+    return this._active;
+  }
+  set enabled(value) {
+    this._active = value;
+  }
+  show(show = true) {
+    if (!this._active)
+      return;
+    if (!this._gizmos) {
+      this.createGizmo();
+    }
+    clearTimeout(this._timeout);
+    this._gizmos.visible = show;
+    if (show) {
+      this._timeout = setTimeout(() => this.fadeOut(), this._showDurationMs);
+    }
+  }
+  fadeOut(fading) {
+    const now2 = new Date().getTime();
+    if (!fading) {
+      this._fadeEnd = now2 + this._fadeDurationMs;
+    }
+    if (now2 > this._fadeEnd) {
+      this._gizmos.visible = false;
+      this._material.opacity = this._opacity;
+      this._materialAlways.opacity = this._opacityAlways;
+    } else {
+      this._animation = requestAnimationFrame(() => this.fadeOut(true));
+      const t2 = Math.pow((this._fadeEnd - now2) / this._fadeDurationMs, 4);
+      this._material.opacity = MathUtils.lerp(0, this._opacity, t2);
+      this._materialAlways.opacity = MathUtils.lerp(0, this._opacityAlways, t2);
+    }
+    this._renderer.needsUpdate = true;
+  }
+  setPosition(position) {
+    var _a22;
+    (_a22 = this._gizmos) == null ? void 0 : _a22.position.copy(position);
+    this.updateScale();
+  }
+  setSize(size) {
+    this._size = size;
+  }
+  setOpacity(opacity, opacityAlways) {
+    this._opacity = opacity;
+    this._opacityAlways = opacityAlways;
+    if (!this._gizmos)
+      return;
+    this._material.opacity = opacity;
+    this._materialAlways.opacity = opacityAlways;
+  }
+  setColor(color) {
+    this._color = color;
+    if (!this._gizmos)
+      return;
+    this._material.color = color;
+    this._materialAlways.color = color;
+  }
+  applySettings(settings2) {
+    this._active = settings2.camera.gizmo.enable;
+    this._fov = settings2.camera.fov;
+    this.setColor(settings2.camera.gizmo.color);
+    this.setSize(settings2.camera.gizmo.size);
+    this.setOpacity(settings2.camera.gizmo.opacity, settings2.camera.gizmo.opacityAlways);
+  }
+  updateScale() {
+    if (!this._gizmos)
+      return;
+    const frustrum = this._camera.frustrumSizeAt(this._gizmos.position);
+    const min2 = Math.min(frustrum.x, frustrum.y);
+    const h = min2 * this._size;
+    this._gizmos.scale.set(h, h, h);
+  }
+  createGizmo() {
+    this._box = new SphereGeometry(1);
+    this._wireframe = new WireframeGeometry(this._box);
+    this._wireframe.addGroup(0, Infinity, 0);
+    this._wireframe.addGroup(0, Infinity, 1);
+    this._material = new LineBasicMaterial({
+      depthTest: true,
+      opacity: this._opacity,
+      color: this._color,
+      transparent: true
+    });
+    this._materialAlways = new LineBasicMaterial({
+      depthTest: false,
+      opacity: this._opacityAlways,
+      color: this._color,
+      transparent: true
+    });
+    this._gizmos = new LineSegments(this._wireframe, [
+      this._material,
+      this._materialAlways
+    ]);
+    this._renderer.add(this._gizmos);
+    this.updateScale();
+  }
+}
+class GizmoRectangle {
+  constructor(viewer) {
+    __publicField2(this, "line");
+    __publicField2(this, "viewer");
+    __publicField2(this, "points");
+    this.viewer = viewer;
+    const mat = new LineBasicMaterial({
+      depthTest: false,
+      color: new Color(0, 1, 0),
+      transparent: true,
+      opacity: 1
+    });
+    const vertices = new Float32Array([
+      -0.5,
+      -0.5,
+      0,
+      0.5,
+      -0.5,
+      0,
+      0.5,
+      -0.5,
+      0,
+      0.5,
+      0.5,
+      0,
+      0.5,
+      0.5,
+      0,
+      -0.5,
+      0.5,
+      0,
+      -0.5,
+      0.5,
+      0,
+      -0.5,
+      -0.5,
+      0
+    ]);
+    const geo = new BufferGeometry();
+    geo.setAttribute("position", new BufferAttribute(vertices, 3));
+    this.line = new LineSegments(geo, mat);
+    this.line.renderOrder = 1;
+    this.line.name = "GizmoSelection";
+    this.line.visible = false;
+    this.viewer.renderer.add(this.line);
+  }
+  dispose() {
+    this.viewer.renderer.remove(this.line);
+    this.line.geometry.dispose();
+    this.line.material.dispose();
+  }
+  get visible() {
+    return this.line.visible;
+  }
+  set visible(value) {
+    this.viewer.renderer.needsUpdate = true;
+    this.line.visible = value;
+  }
+  setCorners(posA, posB) {
+    const plane = new Plane().setFromNormalAndCoplanarPoint(this.viewer.camera.forward, this.viewer.camera.target);
+    const A2 = this.getIntersection(plane, posA);
+    const B2 = this.getIntersection(plane, posB);
+    if (!A2 || !B2)
+      return;
+    const center = A2.clone().add(B2).multiplyScalar(0.5);
+    const [dx, dy] = this.getBoxSize(A2, B2);
+    this.updateRect(center, dx, dy);
+    const AB = this.getIntersection(plane, new Vector2(posA.x, posB.y));
+    const BA = this.getIntersection(plane, new Vector2(posB.x, posA.y));
+    if (!AB || !BA)
+      return;
+    this.points = [A2, B2, AB, BA, center];
+  }
+  getIntersection(plane, position) {
+    var _a22;
+    const raycaster = this.viewer.raycaster.fromPoint2(position);
+    return (_a22 = raycaster.ray.intersectPlane(plane, new Vector3())) != null ? _a22 : void 0;
+  }
+  updateRect(position, dx, dy) {
+    this.line.quaternion.copy(this.viewer.camera.quaternion);
+    this.line.position.copy(position);
+    this.line.scale.set(dx, dy, 1);
+    this.line.updateMatrix();
+    this.viewer.renderer.needsUpdate = true;
+  }
+  getBoxSize(A2, B2) {
+    const cam = this.viewer.camera;
+    const up = new Vector3(0, 1, 0).applyQuaternion(cam.quaternion);
+    const right = new Vector3(1, 0, 0).applyQuaternion(cam.quaternion);
+    const Ax = A2.dot(right);
+    const Ay = A2.dot(up);
+    const Bx = B2.dot(right);
+    const By = B2.dot(up);
+    const dx = Math.abs(Ax - Bx);
+    const dy = Math.abs(Ay - By);
+    return [dx, dy];
+  }
+  getBoundingBox(target = new Box3()) {
+    const position = this.getClosestHit();
+    const projections = position ? this.projectPoints(position) : this.points;
+    if (!projections)
+      return;
+    return target.setFromPoints(projections);
+  }
+  getClosestHit() {
+    if (!this.points)
+      return;
+    const hits = this.points.map((p2) => this.viewer.raycaster.raycast3(p2)).filter((h) => h.isHit);
+    let position;
+    let dist2;
+    hits.forEach((h) => {
+      if (h.distance !== void 0 && h.position !== void 0 && (dist2 === void 0 || h.distance < dist2)) {
+        dist2 = h.distance;
+        position = h.position;
+      }
+    });
+    return position;
+  }
+  projectPoints(position) {
+    var _a22;
+    const plane = new Plane().setFromNormalAndCoplanarPoint(this.viewer.camera.forward, position);
+    return (_a22 = this.points) == null ? void 0 : _a22.map((p2) => plane.projectPoint(p2, new Vector3()));
   }
 }
 class MeasureFlow {
@@ -60156,7 +60282,6 @@ class MeasureGizmo {
     this._group.name = "GizmoMeasure";
     this._group.add(this._startMarker.mesh, this._endMarker.mesh, this._line.mesh, this._line.label, this._lineX.mesh, this._lineX.label, this._lineY.mesh, this._lineY.label, this._lineZ.mesh, this._lineZ.label, this._label);
     this._viewer.renderer.add(this._group);
-    this._viewer.renderer.textEnabled = true;
   }
   _animate() {
     this._animId = requestAnimationFrame(() => this._animate());
@@ -60257,7 +60382,6 @@ class MeasureGizmo {
     this._lineX.dispose();
     this._lineY.dispose();
     this._lineZ.dispose();
-    this._viewer.renderer.textEnabled = false;
   }
 }
 class Measure {
@@ -60366,128 +60490,307 @@ class Measure {
     this._meshes = void 0;
   }
 }
-class GizmoRectangle {
-  constructor(viewer) {
-    __publicField2(this, "line");
+class BoxInputs {
+  constructor(viewer, cube, box) {
     __publicField2(this, "viewer");
-    __publicField2(this, "points");
-    this.viewer = viewer;
-    const mat = new LineBasicMaterial({
-      depthTest: false,
-      color: new Color(0, 1, 0),
-      transparent: true,
-      opacity: 1
+    __publicField2(this, "cube");
+    __publicField2(this, "sharedBox");
+    __publicField2(this, "faceNormal", new Vector3());
+    __publicField2(this, "dragOrigin", new Vector3());
+    __publicField2(this, "dragpPlane", new Plane());
+    __publicField2(this, "mouseDown");
+    __publicField2(this, "raycaster", new Raycaster$1());
+    __publicField2(this, "lastBox", new Box3());
+    __publicField2(this, "unregisters", []);
+    __publicField2(this, "onFaceEnter");
+    __publicField2(this, "onBoxStretch");
+    __publicField2(this, "onBoxConfirm");
+    __publicField2(this, "reg", (handler, type, listener2) => {
+      handler.addEventListener(type, listener2);
+      this.unregisters.push(() => handler.removeEventListener(type, listener2));
     });
-    const vertices = new Float32Array([
-      -0.5,
-      -0.5,
-      0,
-      0.5,
-      -0.5,
-      0,
-      0.5,
-      -0.5,
-      0,
-      0.5,
-      0.5,
-      0,
-      0.5,
-      0.5,
-      0,
-      -0.5,
-      0.5,
-      0,
-      -0.5,
-      0.5,
-      0,
-      -0.5,
-      -0.5,
-      0
-    ]);
-    const geo = new BufferGeometry();
-    geo.setAttribute("position", new BufferAttribute(vertices, 3));
-    this.line = new LineSegments(geo, mat);
-    this.line.renderOrder = 1;
-    this.line.name = "GizmoSelection";
-    this.line.visible = false;
-    this.viewer.renderer.add(this.line);
+    this.viewer = viewer;
+    this.cube = cube;
+    this.sharedBox = box;
   }
-  dispose() {
-    this.viewer.renderer.remove(this.line);
-    this.line.geometry.dispose();
-    this.line.material.dispose();
+  register() {
+    if (this.unregister.length > 0)
+      return;
+    const canvas = this.viewer.viewport.canvas;
+    this.reg(canvas, "pointerdown", this.onMouseClick.bind(this));
+    this.reg(canvas, "pointermove", this.onMouseMove.bind(this));
+    this.reg(canvas, "pointerup", this.onMouseUp.bind(this));
+  }
+  unregister() {
+    this.unregisters.forEach((unreg) => unreg());
+    this.unregisters.length = 0;
+  }
+  onMouseMove(event) {
+    var _a22, _b2, _c;
+    if (this.mouseDown) {
+      this.onDrag(event);
+      return;
+    }
+    const hits = this.raycast(new Vector2(event.offsetX, event.offsetY));
+    const hit = hits == null ? void 0 : hits[0];
+    const norm = (_a22 = hit == null ? void 0 : hit.face) == null ? void 0 : _a22.normal;
+    if (!norm) {
+      if (this.faceNormal.x !== 0 || this.faceNormal.y !== 0 || this.faceNormal.z !== 0) {
+        this.faceNormal.set(0, 0, 0);
+        (_b2 = this.onFaceEnter) == null ? void 0 : _b2.call(this, this.faceNormal);
+      }
+      return;
+    }
+    if (this.faceNormal.equals(norm)) {
+      return;
+    }
+    this.faceNormal = norm;
+    (_c = this.onFaceEnter) == null ? void 0 : _c.call(this, this.faceNormal);
+  }
+  onMouseUp(event) {
+    var _a22, _b2;
+    if (this.mouseDown) {
+      this.mouseDown = false;
+      this.viewer.inputs.registerAll();
+      if (event.pointerType === "mouse") {
+        this.onMouseMove(event);
+      } else {
+        this.faceNormal = new Vector3();
+        (_a22 = this.onFaceEnter) == null ? void 0 : _a22.call(this, this.faceNormal);
+      }
+      (_b2 = this.onBoxConfirm) == null ? void 0 : _b2.call(this, this.sharedBox);
+    }
+  }
+  onMouseClick(event) {
+    var _a22, _b2;
+    const hits = this.raycast(new Vector2(event.offsetX, event.offsetY));
+    const hit = hits == null ? void 0 : hits[0];
+    if (!((_a22 = hit == null ? void 0 : hit.face) == null ? void 0 : _a22.normal))
+      return;
+    this.lastBox.copy(this.sharedBox);
+    this.faceNormal = hit.face.normal;
+    this.dragOrigin.copy(hit.point);
+    const dist2 = hit.point.clone().dot(this.viewer.camera.forward);
+    this.dragpPlane.set(this.viewer.camera.forward, -dist2);
+    this.mouseDown = true;
+    this.viewer.inputs.unregisterAll();
+    (_b2 = this.onFaceEnter) == null ? void 0 : _b2.call(this, this.faceNormal);
+  }
+  onDrag(event) {
+    var _a22, _b2;
+    this.raycaster = this.viewer.raycaster.fromPoint2(new Vector2(event.offsetX, event.offsetY), this.raycaster);
+    const point = (_a22 = this.raycaster.ray.intersectPlane(this.dragpPlane, new Vector3())) != null ? _a22 : this.dragOrigin.clone();
+    const delta = point.sub(this.dragOrigin);
+    const amount = delta.dot(this.faceNormal);
+    const box = this.stretch(this.faceNormal, amount);
+    (_b2 = this.onBoxStretch) == null ? void 0 : _b2.call(this, box);
+  }
+  stretch(normal, amount) {
+    const result = this.sharedBox.clone();
+    if (normal.x > 0.1) {
+      result.max.setX(Math.max(this.lastBox.max.x + amount, result.min.x - 1));
+    }
+    if (normal.x < -0.1) {
+      result.min.setX(Math.min(this.lastBox.min.x - amount, result.max.x + 1));
+    }
+    if (normal.y > 0.1) {
+      result.max.setY(Math.max(this.lastBox.max.y + amount, result.min.y - 1));
+    }
+    if (normal.y < -0.1) {
+      result.min.setY(Math.min(this.lastBox.min.y - amount, result.max.y + 1));
+    }
+    if (normal.z > 0.1) {
+      result.max.setZ(Math.max(this.lastBox.max.z + amount, result.min.z - 1));
+    }
+    if (normal.z < -0.1) {
+      result.min.setZ(Math.min(this.lastBox.min.z - amount, result.max.z + 1));
+    }
+    return result;
+  }
+  raycast(position) {
+    this.raycaster = this.viewer.raycaster.fromPoint2(position, this.raycaster);
+    return this.raycaster.intersectObject(this.cube);
+  }
+}
+class SectionBox {
+  constructor(viewer) {
+    __publicField2(this, "_viewer");
+    __publicField2(this, "_inputs");
+    __publicField2(this, "_cube");
+    __publicField2(this, "_outline");
+    __publicField2(this, "_highlight");
+    __publicField2(this, "_normal");
+    __publicField2(this, "_clip");
+    __publicField2(this, "_visible");
+    __publicField2(this, "_interactive");
+    __publicField2(this, "_onStateChanged", new dist$2.SignalDispatcher());
+    __publicField2(this, "_onBoxConfirm", new dist$4.SimpleEventDispatcher());
+    __publicField2(this, "_onHover", new dist$4.SimpleEventDispatcher());
+    this._viewer = viewer;
+    this._normal = new Vector3();
+    this._cube = new BoxMesh();
+    this._outline = new BoxOutline();
+    this._highlight = new BoxHighlight();
+    this.renderer.add(this._cube);
+    this.renderer.add(this._outline);
+    this.renderer.add(this._highlight);
+    this._inputs = new BoxInputs(viewer, this._cube, this._viewer.renderer.section.box);
+    this._inputs.onFaceEnter = (normal) => {
+      this._normal = normal;
+      if (this.visible)
+        this._highlight.highlight(this.section.box, normal);
+      this._onHover.dispatch(normal.x !== 0 || normal.y !== 0 || normal.z !== 0);
+      this.renderer.needsUpdate = true;
+    };
+    this._inputs.onBoxStretch = (box) => {
+      this.renderer.section.fitBox(box);
+      this.update();
+    };
+    this._inputs.onBoxConfirm = (box) => this._onBoxConfirm.dispatch(box);
+    this.clip = false;
+    this.visible = false;
+    this.interactive = false;
+    this.update();
+  }
+  get onStateChanged() {
+    return this._onStateChanged.asEvent();
+  }
+  get onBoxConfirm() {
+    return this._onBoxConfirm.asEvent();
+  }
+  get onHover() {
+    return this._onHover.asEvent();
+  }
+  get renderer() {
+    return this._viewer.renderer;
+  }
+  get section() {
+    return this._viewer.renderer.section;
+  }
+  get box() {
+    return this.section.box;
+  }
+  get clip() {
+    var _a22;
+    return (_a22 = this._clip) != null ? _a22 : false;
+  }
+  set clip(value) {
+    if (value === this._clip)
+      return;
+    this._clip = value;
+    this.renderer.section.active = value;
+    this._onStateChanged.dispatch();
+  }
+  get interactive() {
+    var _a22;
+    return (_a22 = this._interactive) != null ? _a22 : false;
+  }
+  set interactive(value) {
+    if (value === this._interactive)
+      return;
+    if (!this._interactive && value)
+      this._inputs.register();
+    if (this._interactive && !value)
+      this._inputs.unregister();
+    this._interactive = value;
+    this._highlight.visible = false;
+    this._onStateChanged.dispatch();
   }
   get visible() {
-    return this.line.visible;
+    var _a22;
+    return (_a22 = this._visible) != null ? _a22 : false;
   }
   set visible(value) {
-    this.viewer.renderer.needsUpdate = true;
-    this.line.visible = value;
-  }
-  setCorners(posA, posB) {
-    const plane = new Plane().setFromNormalAndCoplanarPoint(this.viewer.camera.forward, this.viewer.camera.target);
-    const A2 = this.getIntersection(plane, posA);
-    const B2 = this.getIntersection(plane, posB);
-    if (!A2 || !B2)
+    if (value === this._visible)
       return;
-    const center = A2.clone().add(B2).multiplyScalar(0.5);
-    const [dx, dy] = this.getBoxSize(A2, B2);
-    this.updateRect(center, dx, dy);
-    const AB = this.getIntersection(plane, new Vector2(posA.x, posB.y));
-    const BA = this.getIntersection(plane, new Vector2(posB.x, posA.y));
-    if (!AB || !BA)
-      return;
-    this.points = [A2, B2, AB, BA, center];
+    this._visible = value;
+    this._cube.visible = value;
+    this._outline.visible = value;
+    this._highlight.visible = value;
+    if (value)
+      this.update();
+    this._onStateChanged.dispatch();
+    this.renderer.needsUpdate = true;
   }
-  getIntersection(plane, position) {
+  fitBox(box, padding = 1) {
+    const b = box.expandByScalar(padding);
+    this._cube.fitBox(b);
+    this._outline.fitBox(b);
+    this.renderer.section.fitBox(b);
+    this._onBoxConfirm.dispatch(this.box);
+    this.renderer.needsUpdate = true;
+  }
+  update() {
+    this.fitBox(this.section.box, 0);
+    this._highlight.highlight(this.section.box, this._normal);
+    this.renderer.needsUpdate = true;
+  }
+  dispose() {
+    this.renderer.remove(this._cube);
+    this.renderer.remove(this._outline);
+    this.renderer.remove(this._highlight);
+    this._inputs.unregister();
+    this._cube.dispose();
+    this._outline.dispose();
+    this._highlight.dispose();
+  }
+}
+class GizmoMarkers {
+  constructor(viewer) {
+    __publicField2(this, "_viewer");
+    __publicField2(this, "_markers", []);
+    this._viewer = viewer;
+  }
+  add(position) {
+    var marker = new GizmoMarker(this._viewer);
+    marker.position.copy(position);
+    marker.load();
+    this._markers.push(marker);
+  }
+  remove(marker) {
+    marker.unload();
+    var index2 = this._markers.findIndex((m2) => m2 === marker);
+    this._markers[index2] = this._markers[this._markers.length - 1];
+    this._markers.length -= 1;
+  }
+  clear() {
+    this._markers.forEach((m2) => m2.unload());
+    this._markers.length = 0;
+  }
+}
+class Gizmos {
+  constructor(viewer) {
+    __publicField2(this, "viewer");
+    __publicField2(this, "measure");
+    __publicField2(this, "section");
+    __publicField2(this, "loading");
+    __publicField2(this, "grid");
+    __publicField2(this, "orbit");
+    __publicField2(this, "rectangle");
+    __publicField2(this, "axes");
+    __publicField2(this, "markers");
     var _a22;
-    const raycaster = this.viewer.raycaster.fromPoint2(position);
-    return (_a22 = raycaster.ray.intersectPlane(plane, new Vector3())) != null ? _a22 : void 0;
+    this.viewer = viewer;
+    this.measure = new Measure(viewer);
+    this.section = new SectionBox(viewer);
+    this.loading = new GizmoLoading(viewer);
+    this.grid = new GizmoGrid(viewer.renderer, viewer.materials);
+    this.orbit = new GizmoOrbit(viewer.renderer, viewer.camera, viewer.inputs, viewer.settings);
+    this.rectangle = new GizmoRectangle(viewer);
+    this.axes = new GizmoAxes(viewer.camera, viewer.settings.axes);
+    this.markers = new GizmoMarkers(viewer);
+    (_a22 = viewer.viewport.canvas.parentElement) == null ? void 0 : _a22.prepend(this.axes.canvas);
   }
-  updateRect(position, dx, dy) {
-    this.line.quaternion.copy(this.viewer.camera.quaternion);
-    this.line.position.copy(position);
-    this.line.scale.set(dx, dy, 1);
-    this.line.updateMatrix();
-    this.viewer.renderer.needsUpdate = true;
-  }
-  getBoxSize(A2, B2) {
-    const cam = this.viewer.camera;
-    const up = new Vector3(0, 1, 0).applyQuaternion(cam.quaternion);
-    const right = new Vector3(1, 0, 0).applyQuaternion(cam.quaternion);
-    const Ax = A2.dot(right);
-    const Ay = A2.dot(up);
-    const Bx = B2.dot(right);
-    const By = B2.dot(up);
-    const dx = Math.abs(Ax - Bx);
-    const dy = Math.abs(Ay - By);
-    return [dx, dy];
-  }
-  getBoundingBox(target = new Box3()) {
-    const position = this.getClosestHit();
-    const projections = position ? this.projectPoints(position) : this.points;
-    if (!projections)
-      return;
-    return target.setFromPoints(projections);
-  }
-  getClosestHit() {
-    if (!this.points)
-      return;
-    const hits = this.points.map((p2) => this.viewer.raycaster.raycast3(p2)).filter((h) => h.isHit);
-    let position;
-    let dist2;
-    hits.forEach((h) => {
-      if (h.distance !== void 0 && h.position !== void 0 && (dist2 === void 0 || h.distance < dist2)) {
-        dist2 = h.distance;
-        position = h.position;
-      }
-    });
-    return position;
-  }
-  projectPoints(position) {
+  dispose() {
     var _a22;
-    const plane = new Plane().setFromNormalAndCoplanarPoint(this.viewer.camera.forward, position);
-    return (_a22 = this.points) == null ? void 0 : _a22.map((p2) => plane.projectPoint(p2, new Vector3()));
+    (_a22 = this.viewer.viewport.canvas.parentElement) == null ? void 0 : _a22.removeChild(this.axes.canvas);
+    this.measure.clear();
+    this.section.dispose();
+    this.loading.dispose();
+    this.grid.dispose();
+    this.orbit.dispose();
+    this.rectangle.dispose();
+    this.axes.dispose();
   }
 }
 class RenderingSection {
@@ -61752,10 +62055,12 @@ class Renderer {
     __publicField2(this, "_camera");
     __publicField2(this, "_composer");
     __publicField2(this, "_materials");
-    __publicField2(this, "_onSceneUpdate", new dist$4.SimpleEventDispatcher());
     __publicField2(this, "_renderText");
-    __publicField2(this, "_needsUpdate");
     __publicField2(this, "_skipAntialias");
+    __publicField2(this, "_needsUpdate");
+    __publicField2(this, "_onSceneUpdate", new dist$2.SignalDispatcher());
+    __publicField2(this, "_onBoxUpdated", new dist$2.SignalDispatcher());
+    __publicField2(this, "_sceneUpdated", false);
     __publicField2(this, "maxMemory", 3 * Math.pow(10, 9));
     __publicField2(this, "fitViewport", () => {
       const size = this._viewport.getParentSize();
@@ -61779,7 +62084,7 @@ class Renderer {
       logarithmicDepthBuffer: true
     });
     this.textRenderer = this._viewport.createTextRenderer();
-    this.textEnabled = false;
+    this.textEnabled = true;
     this._composer = new RenderingComposer(this.renderer, scene, viewport, materials, camera);
     this._composer.onDemand = settings2.rendering.onDemand;
     this.section = new RenderingSection(this, this._materials);
@@ -61821,6 +62126,9 @@ class Renderer {
   get onSceneUpdated() {
     return this._onSceneUpdate.asEvent();
   }
+  get onBoxUpdated() {
+    return this._onBoxUpdated.asEvent();
+  }
   get textEnabled() {
     var _a22;
     return (_a22 = this._renderText) != null ? _a22 : false;
@@ -61835,12 +62143,22 @@ class Renderer {
   getBoundingBox(target = new Box3()) {
     return this._scene.getBoundingBox(target);
   }
+  updateBox(box) {
+    this._scene.updateBox(box);
+  }
+  notifySceneUpdate() {
+    this._sceneUpdated = true;
+    this.needsUpdate = true;
+  }
   render() {
-    this._scene.getUpdatedScenes().forEach((s) => {
-      this.needsUpdate = true;
-      if (s.vim)
-        this._onSceneUpdate.dispatch(s.vim);
-    });
+    if (this._scene.boxUpdated) {
+      this._onBoxUpdated.dispatch();
+      this._scene.boxUpdated = false;
+    }
+    if (this._sceneUpdated) {
+      this._onSceneUpdate.dispatch();
+      this._sceneUpdated = false;
+    }
     this._composer.outlines = this._scene.hasOutline();
     this._composer.render(this.needsUpdate, this.antialias && !this.skipAntialias && !this._camera.hasMoved);
     this._needsUpdate = false;
@@ -61851,10 +62169,6 @@ class Renderer {
     this._scene.clearUpdateFlags();
   }
   add(target) {
-    if (target instanceof SceneManager) {
-      target = target.scene;
-      target.renderer = this;
-    }
     if (target instanceof Scene) {
       const mem = target.getMemory();
       const remaining = this.maxMemory - this.estimatedMemory;
@@ -61862,18 +62176,15 @@ class Renderer {
         return false;
       }
       target.renderer = this;
+      this._sceneUpdated = true;
     }
     this._scene.add(target);
-    this._needsUpdate = true;
+    this.notifySceneUpdate();
     return true;
   }
   remove(target) {
-    if (target instanceof SceneManager) {
-      target = target.scene;
-      target.renderer = void 0;
-    }
     this._scene.remove(target);
-    this._needsUpdate = true;
+    this.notifySceneUpdate();
   }
   clear() {
     this._scene.clear();
@@ -61897,39 +62208,29 @@ class Viewer {
     __publicField2(this, "selection");
     __publicField2(this, "inputs");
     __publicField2(this, "raycaster");
-    __publicField2(this, "sectionBox");
-    __publicField2(this, "measure");
-    __publicField2(this, "gizmoRectangle");
-    __publicField2(this, "grid");
     __publicField2(this, "materials");
     __publicField2(this, "_environment");
     __publicField2(this, "_camera");
     __publicField2(this, "_clock", new Clock());
-    __publicField2(this, "_gizmoAxes");
-    __publicField2(this, "_gizmoOrbit");
+    __publicField2(this, "gizmos");
     __publicField2(this, "_vims", /* @__PURE__ */ new Set());
     __publicField2(this, "_onVimLoaded", new dist$2.SignalDispatcher());
     __publicField2(this, "_updateId");
-    var _a22;
     this.settings = getSettings(options);
     this.materials = VimMaterials.getInstance();
     const scene = new RenderScene();
     this.viewport = new Viewport(this.settings);
     this._camera = new Camera(scene, this.viewport, this.settings);
     this.renderer = new Renderer(scene, this.viewport, this.materials, this._camera, this.settings);
-    this.gizmoRectangle = new GizmoRectangle(this);
     this.inputs = new Input(this);
-    if (this.settings.camera.gizmo.enable) {
-      this._gizmoOrbit = new GizmoOrbit(this.renderer, this._camera, this.inputs, this.settings);
-    }
+    this.gizmos = new Gizmos(this);
     this.materials.applySettings(this.settings);
-    this.measure = new Measure(this);
-    this._gizmoAxes = new GizmoAxes(this.camera, this.settings.axes);
-    (_a22 = this.viewport.canvas.parentElement) == null ? void 0 : _a22.prepend(this._gizmoAxes.canvas);
-    this.sectionBox = new SectionBox(this);
-    this.grid = new GizmoGrid(this.renderer, this.materials);
     this._environment = new Environment(this.settings);
     this._environment.getObjects().forEach((o) => this.renderer.add(o));
+    this.renderer.onBoxUpdated.subscribe((_) => {
+      const box = this.renderer.getBoundingBox();
+      this._environment.adaptToContent(box);
+    });
     this.selection = new Selection(this.materials);
     this.raycaster = new Raycaster(this.viewport, this._camera, scene, this.renderer);
     this.inputs.registerAll();
@@ -61944,24 +62245,18 @@ class Viewer {
   get onVimLoaded() {
     return this._onVimLoaded.asEvent();
   }
-  get axesCanvas() {
-    return this._gizmoAxes.canvas;
-  }
   animate() {
     this._updateId = requestAnimationFrame(() => this.animate());
     this.renderer.needsUpdate = this._camera.update(this._clock.getDelta());
     this.renderer.render();
   }
   get vims() {
-    return this.vimxs.map((v2) => v2 instanceof VimX ? v2.vim : v2);
-  }
-  get vimxs() {
-    return Array.from(this._vims);
+    return [...this._vims];
   }
   get vimCount() {
     return this._vims.size;
   }
-  add(vim, frameCamera = true) {
+  add(vim) {
     if (this._vims.has(vim)) {
       throw new Error("Vim cannot be added again, unless removed first.");
     }
@@ -61969,18 +62264,8 @@ class Viewer {
     if (!success) {
       throw new Error("Could not load vim. Max geometry memory reached.");
     }
-    const box = this.renderer.getBoundingBox();
-    this._environment.adaptToContent(box);
-    this.sectionBox.fitBox(box);
-    if (frameCamera) {
-      this._camera.do(true).frame(box, this._camera.defaultForward);
-      this._camera.save();
-    }
     this._vims.add(vim);
     this._onVimLoaded.dispatch();
-  }
-  fitBox(box) {
-    return box;
   }
   remove(vim) {
     if (!this._vims.has(vim)) {
@@ -62001,13 +62286,12 @@ class Viewer {
     this.selection.dispose();
     this._environment.dispose();
     this.selection.clear();
-    this._gizmoOrbit.dispose();
     this.viewport.dispose();
     this.renderer.dispose();
     this.inputs.unregisterAll();
     this._vims.forEach((v2) => v2 == null ? void 0 : v2.dispose());
     this.materials.dispose();
-    this.gizmoRectangle.dispose();
+    this.gizmos.dispose();
   }
 }
 class VimRequest {
@@ -62039,8 +62323,7 @@ class VimRequest {
     return this._onLoaded;
   }
   async send() {
-    this.vim = this.settings.streamGeometry ? await this.loader.loadRemote(this.bfast, this.settings) : await this.loader.load(this.bfast, this.settings);
-    this.vim.source = this.url;
+    this.vim = this.settings.streamGeometry ? await this.loader.loadRemote(this.bfast, this.settings, this.url) : await this.loader.load(this.bfast, this.settings, this.url);
     this.vim.onDispose.sub(() => this.abort());
     this._onLoaded.dispatch(this.vim);
     return this.vim;
@@ -62051,299 +62334,6 @@ class VimRequest {
       this.buffer.abort();
     }
     (_a22 = this.requester) == null ? void 0 : _a22.abort();
-  }
-}
-function createGridMaterial() {
-  return new ShaderMaterial({
-    transparent: true,
-    side: DoubleSide,
-    vertexColors: true,
-    depthWrite: false,
-    clipping: true,
-    vertexShader: `
-    #include <common>
-    #include <logdepthbuf_pars_vertex>
-    #include <clipping_planes_pars_vertex>
-
-    varying vec4 vColor;
-    void main() {
-      #include <begin_vertex>
-      #include <project_vertex>
-      #include <logdepthbuf_vertex>
-      #include <clipping_planes_vertex>
-
-      vColor = color;
-    }
-    `,
-    fragmentShader: `
-    #include <common>
-    #include <logdepthbuf_pars_fragment>
-    #include <clipping_planes_pars_fragment>
-    varying vec4 vColor;
-
-    void main() {
-      
-      #include <clipping_planes_fragment>
-      #include <logdepthbuf_fragment>
-
-      gl_FragColor = vColor;
-    }
-    `
-  });
-}
-class GizmoGrid {
-  constructor(renderer, materials) {
-    __publicField2(this, "_renderer");
-    __publicField2(this, "_material");
-    __publicField2(this, "grid");
-    __publicField2(this, "outline");
-    this._renderer = renderer;
-    this._material = materials.grid;
-  }
-  init(target, scale) {
-    this.dispose();
-    const box = target instanceof Vim ? target.scene.getBoundingBox() : target;
-    this.grid = Grid.createFromBox(box, scale, this._material);
-    this._renderer.add(this.grid.mesh);
-    this.outline = new BoxOutline();
-    this._renderer.add(this.outline);
-    this.outline.visible = false;
-  }
-  highlight(cell) {
-    const box = this.grid.getBox(cell);
-    if (!box) {
-      this.outline.visible = false;
-      return;
-    }
-    box.getCenter(this.outline.position);
-    box.getSize(this.outline.scale);
-    this.outline.visible = true;
-    this._renderer.needsUpdate = true;
-  }
-  dispose() {
-    var _a22;
-    if (this.grid) {
-      this._renderer.remove(this.grid.mesh);
-      this.grid.dispose();
-      this.grid = void 0;
-    }
-    if (this.outline) {
-      this._renderer.remove(this.outline);
-      (_a22 = this.outline) == null ? void 0 : _a22.dispose();
-      this.outline = void 0;
-    }
-  }
-}
-class Grid {
-  constructor(size, scale, material, color, opacity) {
-    __publicField2(this, "size");
-    __publicField2(this, "box");
-    __publicField2(this, "mesh");
-    __publicField2(this, "_cellCount");
-    __publicField2(this, "_scale");
-    __publicField2(this, "_colors", /* @__PURE__ */ new Map());
-    __publicField2(this, "_alpha", /* @__PURE__ */ new Map());
-    __publicField2(this, "_material");
-    __publicField2(this, "_ownedMaterial");
-    this.size = size;
-    this._scale = scale;
-    this.box = new Box3().setFromCenterAndSize(new Vector3(0, 0, 0), size.clone().multiply(scale));
-    this._cellCount = this.size.x * this.size.y * this.size.z;
-    this.build(color, opacity, material);
-  }
-  static createFromBox(box, scale, material) {
-    const size = box.getSize(new Vector3()).divide(scale).ceil();
-    const g = new Grid(size, scale, material);
-    box.getCenter(g.mesh.position);
-    g.box.translate(g.mesh.position);
-    return g;
-  }
-  get cellCount() {
-    return this._cellCount;
-  }
-  isCell(cell) {
-    if (!cell)
-      return false;
-    if (!Number.isInteger(cell.x) || !Number.isInteger(cell.y) || !Number.isInteger(cell.z)) {
-      return false;
-    }
-    if (cell.x < 0 || cell.y < 0 || cell.z < 0) {
-      return false;
-    }
-    if (cell.x >= this.size.x || cell.y >= this.size.y || cell.z >= this.size.z) {
-      return false;
-    }
-    return true;
-  }
-  isIndex(index2) {
-    return index2 !== void 0 || index2 >= 0 || index2 <= this._cellCount;
-  }
-  getIndex(cell) {
-    if (!this.isCell(cell))
-      return;
-    return cell.x * this.size.y * this.size.z + cell.y * this.size.z + cell.z;
-  }
-  getCell(index2) {
-    if (!this.isIndex(index2))
-      return;
-    let r2 = index2;
-    const x2 = Math.trunc(r2 / (this.size.y * this.size.z));
-    r2 = r2 % (this.size.y * this.size.z);
-    const y2 = Math.trunc(r2 / this.size.z);
-    r2 = r2 % this.size.z;
-    const z2 = r2;
-    return new Vector3(x2, y2, z2);
-  }
-  getCellAtPosition(position) {
-    if (!this.box.containsPoint(position))
-      return;
-    return position.clone().sub(this.box.min).divide(this._scale).floor();
-  }
-  getBox(cell) {
-    const c = typeof cell === "number" ? this.getCell(cell) : cell == null ? void 0 : cell.clone();
-    if (!this.isCell(c))
-      return;
-    const min2 = c.multiply(this._scale).add(this.box.min);
-    const max2 = min2.clone().add(this._scale);
-    return new Box3(min2, max2);
-  }
-  raycast(raycaster) {
-    const hits = raycaster.intersectObject(this.mesh);
-    for (let i2 = 0; i2 < hits.length; i2++) {
-      const position = raycaster.ray.at(hits[i2].distance + 0.1, new Vector3());
-      const cell = this.getCellAtPosition(position);
-      if (cell !== void 0 && this.getOpacity(cell) > 0) {
-        return cell;
-      }
-    }
-    return void 0;
-  }
-  getOpacity(cell) {
-    const index2 = typeof cell === "number" ? cell : this.getIndex(cell);
-    if (!this.isIndex(index2))
-      return;
-    return this._alpha.get(index2);
-  }
-  setOpacity(cell, opacity) {
-    const index2 = typeof cell === "number" ? cell : this.getIndex(cell);
-    if (!this.isIndex(index2))
-      return;
-    const colors = this.mesh.geometry.getAttribute("color");
-    this._alpha.set(index2, opacity);
-    const c = index2 * 8;
-    for (let i2 = 0; i2 < 8; i2++) {
-      colors.setW(c + i2, opacity);
-    }
-    colors.needsUpdate = true;
-  }
-  setColor(cell, color) {
-    const index2 = typeof cell === "number" ? cell : this.getIndex(cell);
-    if (!this.isIndex(index2))
-      return;
-    this._colors.set(index2, color);
-    const colors = this.mesh.geometry.getAttribute("color");
-    const c = index2 * 8;
-    for (let i2 = 0; i2 < 8; i2++) {
-      colors.setXYZ(c + i2, color.r, color.g, color.b);
-    }
-    colors.needsUpdate = true;
-  }
-  getColor(cell) {
-    const index2 = typeof cell === "number" ? cell : this.getIndex(cell);
-    if (!this.isIndex(index2))
-      return;
-    return this._colors.get(index2);
-  }
-  build(color = new Color(0.25, 0.25, 0.25), opacity = 0.25, material) {
-    const vertices = new Float32Array(this._cellCount * 24);
-    const indices = new Int32Array(this._cellCount * 36);
-    const cell = new Vector3();
-    for (let x2 = 0; x2 < this.size.x; x2++) {
-      for (let y2 = 0; y2 < this.size.y; y2++) {
-        for (let z2 = 0; z2 < this.size.z; z2++) {
-          const index2 = this.getIndex(cell.set(x2, y2, z2));
-          const vertex2 = index2 * 8;
-          const v2 = vertex2 * 3;
-          vertices[v2] = (0 + x2) * this._scale.x + this.box.min.x;
-          vertices[v2 + 1] = (0 + y2) * this._scale.y + this.box.min.y;
-          vertices[v2 + 2] = (0 + z2) * this._scale.z + this.box.min.z;
-          vertices[v2 + 3] = (0 + x2) * this._scale.x + this.box.min.x;
-          vertices[v2 + 4] = (0 + y2) * this._scale.y + this.box.min.y;
-          vertices[v2 + 5] = (1 + z2) * this._scale.z + this.box.min.z;
-          vertices[v2 + 6] = (0 + x2) * this._scale.x + this.box.min.x;
-          vertices[v2 + 7] = (1 + y2) * this._scale.y + this.box.min.y;
-          vertices[v2 + 8] = (0 + z2) * this._scale.z + this.box.min.z;
-          vertices[v2 + 9] = (0 + x2) * this._scale.x + this.box.min.x;
-          vertices[v2 + 10] = (1 + y2) * this._scale.y + this.box.min.y;
-          vertices[v2 + 11] = (1 + z2) * this._scale.z + this.box.min.z;
-          vertices[v2 + 12] = (1 + x2) * this._scale.x + this.box.min.x;
-          vertices[v2 + 13] = (0 + y2) * this._scale.y + this.box.min.y;
-          vertices[v2 + 14] = (0 + z2) * this._scale.z + this.box.min.z;
-          vertices[v2 + 15] = (1 + x2) * this._scale.x + this.box.min.x;
-          vertices[v2 + 16] = (0 + y2) * this._scale.y + this.box.min.y;
-          vertices[v2 + 17] = (1 + z2) * this._scale.z + this.box.min.z;
-          vertices[v2 + 18] = (1 + x2) * this._scale.x + this.box.min.x;
-          vertices[v2 + 19] = (1 + y2) * this._scale.y + this.box.min.y;
-          vertices[v2 + 20] = (0 + z2) * this._scale.z + this.box.min.z;
-          vertices[v2 + 21] = (1 + x2) * this._scale.x + this.box.min.x;
-          vertices[v2 + 22] = (1 + y2) * this._scale.y + this.box.min.y;
-          vertices[v2 + 23] = (1 + z2) * this._scale.z + this.box.min.z;
-          const i2 = index2 * 36;
-          indices[i2] = vertex2;
-          indices[i2 + 1] = vertex2 + 1;
-          indices[i2 + 2] = vertex2 + 2;
-          indices[i2 + 3] = vertex2 + 1;
-          indices[i2 + 4] = vertex2 + 3;
-          indices[i2 + 5] = vertex2 + 2;
-          indices[i2 + 6] = vertex2 + 1;
-          indices[i2 + 7] = vertex2 + 5;
-          indices[i2 + 8] = vertex2 + 3;
-          indices[i2 + 9] = vertex2 + 3;
-          indices[i2 + 10] = vertex2 + 5;
-          indices[i2 + 11] = vertex2 + 7;
-          indices[i2 + 12] = vertex2 + 5;
-          indices[i2 + 13] = vertex2 + 6;
-          indices[i2 + 14] = vertex2 + 7;
-          indices[i2 + 15] = vertex2 + 5;
-          indices[i2 + 16] = vertex2 + 4;
-          indices[i2 + 17] = vertex2 + 6;
-          indices[i2 + 18] = vertex2 + 2;
-          indices[i2 + 19] = vertex2 + 6;
-          indices[i2 + 20] = vertex2 + 4;
-          indices[i2 + 21] = vertex2 + 0;
-          indices[i2 + 22] = vertex2 + 2;
-          indices[i2 + 23] = vertex2 + 4;
-          indices[i2 + 24] = vertex2 + 2;
-          indices[i2 + 25] = vertex2 + 3;
-          indices[i2 + 26] = vertex2 + 6;
-          indices[i2 + 27] = vertex2 + 3;
-          indices[i2 + 28] = vertex2 + 7;
-          indices[i2 + 29] = vertex2 + 6;
-          indices[i2 + 30] = vertex2 + 0;
-          indices[i2 + 31] = vertex2 + 4;
-          indices[i2 + 32] = vertex2 + 1;
-          indices[i2 + 33] = vertex2 + 1;
-          indices[i2 + 34] = vertex2 + 4;
-          indices[i2 + 35] = vertex2 + 5;
-        }
-      }
-    }
-    [this._material, this._ownedMaterial] = material ? [material, false] : [createGridMaterial(), true];
-    const geometry = new BufferGeometry();
-    geometry.setAttribute("position", new Float32BufferAttribute(vertices, 3));
-    geometry.setIndex(new Uint32BufferAttribute(indices, 1));
-    geometry.setAttribute("color", new Float32BufferAttribute(new Float32Array(this._cellCount * 32), 4));
-    this.mesh = new Mesh$1(geometry, this._material);
-    for (let i2 = 0; i2 < this._cellCount; i2++) {
-      this.setOpacity(i2, opacity);
-      this.setColor(i2, color);
-    }
-  }
-  dispose() {
-    this.mesh.geometry.dispose();
-    if (this._ownedMaterial) {
-      this._material.dispose();
-    }
   }
 }
 class StandardMaterial {
@@ -62985,6 +62975,9 @@ class StandardSubmesh {
     this.mesh = mesh;
     this.index = index2;
   }
+  equals(other) {
+    return this.mesh === other.mesh && this.index === other.index;
+  }
   get three() {
     return this.mesh.mesh;
   }
@@ -63084,6 +63077,7 @@ class MeshBuilder {
   }
   createWireframe(g3d2, instances) {
     const geometry = Geometry.createGeometryFromInstances(g3d2, {
+      matrix: new Matrix4(),
       section: "all",
       transparent: false,
       instances,
@@ -63101,7 +63095,7 @@ class SceneBuilder {
     this.meshBuilder = meshBuilder != null ? meshBuilder : new MeshBuilder();
   }
   createFromG3d(g3d2, settings2) {
-    const scene = new Scene(this);
+    const scene = new Scene(this, settings2.matrix);
     const shared2 = this.createFromInstanciableMeshes(g3d2, __spreadValues({}, settings2));
     scene.merge(shared2);
     switch (settings2.transparency) {
@@ -63142,14 +63136,14 @@ class SceneBuilder {
   }
   createFromInstanciableMeshes(g3d2, args) {
     const meshes = this.meshBuilder.createInstancedMeshes(g3d2, args);
-    const scene = new Scene(this);
+    const scene = new Scene(this, args.matrix);
     for (let m2 = 0; m2 < meshes.length; m2++) {
       scene.addMesh(meshes[m2]);
     }
     return scene;
   }
   createFromMergeableMeshes(g3d2, args) {
-    const scene = new Scene(this);
+    const scene = new Scene(this, args.matrix);
     const mesh = this.meshBuilder.createMergedMesh(g3d2, args);
     if (mesh)
       scene.addMesh(mesh);
@@ -63163,7 +63157,7 @@ class VimBuilder {
     this.meshBuilder = new MeshBuilder(VimMaterials.getInstance());
     this.sceneBuilder = new SceneBuilder(this.meshBuilder);
   }
-  async load(bfast2, settings2) {
+  async load(bfast2, settings2, source) {
     const getBim = async () => {
       const doc = await dist$3.VimDocument.createFromBfast(bfast2, true);
       const [instanceToElement, elementIds] = await Promise.all([
@@ -63177,25 +63171,24 @@ class VimBuilder {
       VimBuilder.requestG3d(bfast2),
       getBim()
     ]);
-    const scene = g3d2 ? this.sceneBuilder.createFromG3d(g3d2, settings2) : new Scene(this.sceneBuilder);
+    const scene = g3d2 ? this.sceneBuilder.createFromG3d(g3d2, settings2) : new Scene(this.sceneBuilder, settings2.matrix);
     const mapping = settings2.noMap ? void 0 : new ElementMapping(Array.from(g3d2.instanceNodes), bim.instanceToElement, bim.elementIds);
-    const vim = new Vim(header, bim.doc, g3d2, scene, settings2, mapping);
+    const vim = new Vim(header, bim.doc, g3d2, scene, settings2, mapping, void 0, source, "vim");
     return vim;
   }
-  async loadRemote(bfast2, settings2) {
+  async loadRemote(bfast2, settings2, source) {
     const doc = await dist$3.VimDocument.createFromBfast(bfast2, settings2.noStrings);
     const geometry = await bfast2.getBfast("geometry");
-    const remoteG3d2 = dist$3.RemoteG3d.createFromBfast(geometry);
+    const g3d2 = await dist$3.G3d.createFromBfast(geometry);
     const [header, instanceToElement, elementIds] = await Promise.all([
       settings2.noHeader ? void 0 : VimBuilder.requestHeader(bfast2),
       settings2.noMap ? void 0 : doc.node.getAllElementIndex(),
       settings2.noMap ? void 0 : this.getElementIds(doc)
     ]);
-    const g3d2 = settings2.instances ? await (remoteG3d2 == null ? void 0 : remoteG3d2.filter(settings2.instances)) : await (remoteG3d2 == null ? void 0 : remoteG3d2.toG3d());
-    const copy = __spreadProps(__spreadValues({}, settings2), { instances: void 0 });
-    const scene = g3d2 ? this.sceneBuilder.createFromG3d(g3d2, copy) : new Scene(this.sceneBuilder);
+    const copy = __spreadProps(__spreadValues({}, settings2), { instances: settings2.instances });
+    const scene = g3d2 ? this.sceneBuilder.createFromG3d(g3d2, copy) : new Scene(this.sceneBuilder, copy.matrix);
     const mapping = settings2.noMap ? void 0 : new ElementMapping(Array.from(g3d2.instanceNodes), instanceToElement, elementIds);
-    const vim = new Vim(header, doc, g3d2, scene, settings2, mapping);
+    const vim = new Vim(header, doc, g3d2, scene, settings2, mapping, void 0, source, "vim");
     return vim;
   }
   async getElementIds(doc) {
@@ -63233,7 +63226,7 @@ class Loader {
     __publicField2(this, "_builder", new VimBuilder());
   }
   createRequest(source, settings2) {
-    const fullSettings = getFullSettings(settings2);
+    const fullSettings = getFullSettings$1(settings2);
     return new VimRequest(this._builder, source, fullSettings);
   }
   async load(source, settings2) {
@@ -63264,6 +63257,7 @@ const VIM = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty(
   __proto__: null,
   DefaultInputScheme,
   Format: index$1,
+  G3dSubset,
   get Geometry() {
     return Geometry;
   },
@@ -63287,13 +63281,14 @@ const VIM = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty(
   VimBuilder,
   VimMaterials,
   VimRequest,
-  VimX,
+  Vimx,
+  VimxLoader,
   createBoxes,
   createOpaque,
   createTransparent,
   createWireframe,
   defaultConfig: defaultConfig$1,
-  getFullSettings,
+  getFullSettings: getFullSettings$1,
   getSettings
 }, Symbol.toStringTag, { value: "Module" }));
 function settings({ height, width, fill }) {
@@ -63708,6 +63703,7 @@ function anyUiSettingButton(settings2) {
 }
 const defaultSettings = {
   viewer: {
+    disableIsolation: false,
     isolationMaterial: true,
     groundPlane: true
   },
@@ -63757,10 +63753,13 @@ function getLocalSettings(value = {}) {
 function useSettings(viewer, value) {
   const merge = cjs(defaultSettings, value);
   const [settings2, setSettings] = react.exports.useState(merge);
+  const onUpdate = react.exports.useRef(void 0);
   const update = function(updater) {
-    const next = structuredClone(settings2);
+    var _a22;
+    const next = __spreadValues({}, settings2);
     updater(next);
     setSettings(next);
+    (_a22 = onUpdate.current) == null ? void 0 : _a22.call(onUpdate, next);
   };
   react.exports.useEffect(() => {
     applySettings(viewer, settings2);
@@ -63768,7 +63767,11 @@ function useSettings(viewer, value) {
   react.exports.useEffect(() => {
     applySettings(viewer, settings2);
   }, [settings2]);
-  return react.exports.useMemo(() => ({ value: settings2, update }), [settings2]);
+  return react.exports.useMemo(() => ({
+    value: settings2,
+    update,
+    register: (v2) => onUpdate.current = v2
+  }), [settings2]);
 }
 function removeRestricted(settings2) {
   const clone = structuredClone(settings2);
@@ -63813,9 +63816,9 @@ function AxesPanel(props) {
   const ui = react.exports.useRef();
   react.exports.useEffect(() => {
     const subCam = viewer.camera.onValueChanged.subscribe(() => setOrtho(viewer.camera.orthographic));
-    if (viewer.axesCanvas) {
-      ui.current.appendChild(viewer.axesCanvas);
-      viewer.axesCanvas.classList.add("vc-block", "!vc-static", "vc-order-1", "vc-mx-auto", "vc-mb-0", "vc-mt-auto");
+    if (viewer.gizmos.axes.canvas) {
+      ui.current.appendChild(viewer.gizmos.axes.canvas);
+      viewer.gizmos.axes.canvas.classList.add("vc-block", "!vc-static", "vc-order-1", "vc-mx-auto", "vc-mb-0", "vc-mt-auto");
     }
     return () => {
       subCam();
@@ -63905,13 +63908,13 @@ class CursorManager {
     this.setCursor(pointerToCursor(this._viewer.inputs.pointerActive));
     const sub1 = this._viewer.inputs.onPointerModeChanged.subscribe(() => this._updateCursor());
     const sub2 = this._viewer.inputs.onPointerOverrideChanged.subscribe(() => this._updateCursor());
-    const sub3 = this._viewer.sectionBox.onStateChanged.subscribe(() => {
-      if (!this._viewer.sectionBox.visible) {
+    const sub3 = this._viewer.gizmos.section.onStateChanged.subscribe(() => {
+      if (!this._viewer.gizmos.section.visible) {
         this._boxHover = false;
         this._updateCursor();
       }
     });
-    const sub4 = this._viewer.sectionBox.onHover.subscribe((hover) => {
+    const sub4 = this._viewer.gizmos.section.onHover.subscribe((hover) => {
       this._boxHover = hover;
       this._updateCursor();
     });
@@ -63989,8 +63992,8 @@ function TabCamera(props) {
   const btnZoom = toggleButton(() => props.settings.ui.zoom === true, "Zoom", () => onModeBtn("zoom"), zoom, () => mode === "zoom");
   const btnFrameRect = toggleButton(() => props.settings.ui.zoomWindow === true, "Zoom Window", () => {
     onModeBtn("rect");
-    viewer.sectionBox.visible = false;
-    viewer.sectionBox.interactive = false;
+    viewer.gizmos.section.visible = false;
+    viewer.gizmos.section.interactive = false;
   }, frameRect, () => mode === "rect");
   const btnFrame = actionButton(() => props.settings.ui.zoomToFit === true, "Zoom to Fit", () => helper.frameContext(), frameSelection, false);
   return /* @__PURE__ */ React__default.createElement("div", { className: "vc-vim-control-bar-section vc-mx-2 vc-flex vc-items-center vc-rounded-full vc-bg-white vc-px-2 vc-shadow-md" }, btnOrbit, btnLook, btnPan, btnZoom, btnFrameRect, btnFrame);
@@ -63998,17 +64001,18 @@ function TabCamera(props) {
 function TabTools(props) {
   const viewer = props.viewer.viewer;
   const [measuring, setMeasuring] = react.exports.useState(false);
+  const firstSection = react.exports.useRef(true);
   const [measurement, setMeasurement] = react.exports.useState();
   const [section, setSection] = react.exports.useState({
-    clip: viewer.sectionBox.clip,
-    active: viewer.sectionBox.visible && viewer.sectionBox.interactive
+    clip: viewer.gizmos.section.clip,
+    active: viewer.gizmos.section.visible && viewer.gizmos.section.interactive
   });
   const measuringRef = react.exports.useRef();
   measuringRef.current = measuring;
   react.exports.useEffect(() => {
-    const subSection = viewer.sectionBox.onStateChanged.subscribe(() => setSection({
-      clip: viewer.sectionBox.clip,
-      active: viewer.sectionBox.visible && viewer.sectionBox.interactive
+    const subSection = viewer.gizmos.section.onStateChanged.subscribe(() => setSection({
+      clip: viewer.gizmos.section.clip,
+      active: viewer.gizmos.section.visible && viewer.gizmos.section.interactive
     }));
     return () => {
       subSection();
@@ -64019,17 +64023,23 @@ function TabTools(props) {
     if (viewer.inputs.pointerActive === "rect") {
       viewer.inputs.pointerActive = viewer.inputs.pointerFallback;
     }
-    const next = !(viewer.sectionBox.visible && viewer.sectionBox.interactive);
-    viewer.sectionBox.interactive = next;
-    viewer.sectionBox.visible = next;
-    if (next && viewer.sectionBox.box.containsPoint(viewer.camera.position)) {
-      viewer.camera.lerp(1).frame(viewer.renderer.section.box);
+    const next = !(viewer.gizmos.section.visible && viewer.gizmos.section.interactive);
+    viewer.gizmos.section.interactive = next;
+    viewer.gizmos.section.visible = next;
+    if (next) {
+      if (firstSection) {
+        viewer.gizmos.section.fitBox(viewer.renderer.getBoundingBox().expandByScalar(1));
+      }
+      if (viewer.gizmos.section.box.containsPoint(viewer.camera.position)) {
+        viewer.camera.lerp(1).frame(viewer.renderer.section.box);
+      }
     }
+    firstSection.current = false;
   };
   const onMeasureBtn = () => {
     ReactTooltip.hide();
     if (measuring) {
-      viewer.measure.abort();
+      viewer.gizmos.measure.abort();
       setMeasuring(false);
     } else {
       setMeasuring(true);
@@ -64037,17 +64047,17 @@ function TabTools(props) {
     }
   };
   const onResetSectionBtn = () => {
-    viewer.sectionBox.fitBox(viewer.renderer.getBoundingBox());
+    viewer.gizmos.section.fitBox(viewer.renderer.getBoundingBox());
   };
   const onSectionClip = () => {
-    viewer.sectionBox.clip = true;
+    viewer.gizmos.section.clip = true;
   };
   const onSectionNoClip = () => {
-    viewer.sectionBox.clip = false;
+    viewer.gizmos.section.clip = false;
   };
   const onMeasureDeleteBtn = () => {
     ReactTooltip.hide();
-    viewer.measure.abort();
+    viewer.gizmos.measure.abort();
     onMeasureBtn();
   };
   const btnSection = actionButton(() => props.settings.ui.sectioningMode === true, "Sectioning Mode", onSectionBtn, sectionBox, false);
@@ -64060,7 +64070,7 @@ function TabTools(props) {
   const btnMeasureConfirm = actionButton(() => true, "Done", onMeasureBtn, checkmark, !!measuring);
   const measureTab = /* @__PURE__ */ React__default.createElement("div", { className: "vim-control-bar-section vc-mx-2 vc-flex vc-items-center vc-rounded-full vc-bg-primary vc-px-2 vc-shadow-md" }, /* @__PURE__ */ React__default.createElement("div", { className: "vc-mx-1" }, btnMeasureDelete), /* @__PURE__ */ React__default.createElement("div", { className: "vc-mx-1 vc-h-5 vc-w-px vc-bg-white/[.5] vc-py-1" }), /* @__PURE__ */ React__default.createElement("div", { className: "vc-mx-1" }, btnMeasureConfirm));
   const btnSectionReset = actionButton(() => true, "Reset Section Box", onResetSectionBtn, sectionBoxReset, section.active);
-  const btnSectionShrink = actionButton(() => true, "Shrink to Selection", () => viewer.sectionBox.fitBox(viewer.selection.getBoundingBox()), sectionBoxShrink, section.active);
+  const btnSectionShrink = actionButton(() => true, "Shrink to Selection", () => viewer.gizmos.section.fitBox(viewer.selection.getBoundingBox()), sectionBoxShrink, section.active);
   const btnSectionClip = actionButton(() => true, "Apply Section Box", onSectionClip, sectionBoxNoClip, section.active);
   const btnSectionNoClip = actionButton(() => true, "Ignore Section Box", onSectionNoClip, sectionBoxClip, section.active);
   const btnSectionConfirm = actionButton(() => true, "Done", onSectionBtn, checkmark, section.active);
@@ -64109,12 +64119,12 @@ function TabSettings(props) {
 }
 function loopMeasure(viewer, getMeasuring, setMeasure, setCursor) {
   const onMouseMove = () => {
-    setMeasure(viewer.measure.measurement);
+    setMeasure(viewer.gizmos.measure.measurement);
   };
   setCursor("cursor-measure");
   viewer.viewport.canvas.addEventListener("mousemove", onMouseMove);
-  viewer.measure.start().then(() => {
-    setMeasure(viewer.measure.measurement);
+  viewer.gizmos.measure.start().then(() => {
+    setMeasure(viewer.gizmos.measure.measurement);
   }).catch(() => {
     setMeasure(void 0);
   }).finally(() => {
@@ -64123,7 +64133,7 @@ function loopMeasure(viewer, getMeasuring, setMeasure, setCursor) {
     if (getMeasuring()) {
       loopMeasure(viewer, getMeasuring, setMeasure, setCursor);
     } else {
-      viewer.measure.clear();
+      viewer.gizmos.measure.clear();
     }
   });
 }
@@ -67816,23 +67826,23 @@ function VimContextMenu(props) {
   const viewer = props.viewer.viewer;
   const helper = props.viewer;
   const [section, setSection] = react.exports.useState({
-    visible: viewer.sectionBox.visible,
-    clip: viewer.sectionBox.clip
+    visible: viewer.gizmos.section.visible,
+    clip: viewer.gizmos.section.clip
   });
   const isClipping = () => {
-    return !viewer.sectionBox.box.containsBox(viewer.renderer.getBoundingBox());
+    return !viewer.gizmos.section.box.containsBox(viewer.renderer.getBoundingBox());
   };
   const [clipping, setClipping] = react.exports.useState(isClipping());
   const [, setVersion] = react.exports.useState(0);
   const hidden = props.isolation.any();
   react.exports.useEffect(() => {
-    const subState = viewer.sectionBox.onStateChanged.subscribe(() => {
+    const subState = viewer.gizmos.section.onStateChanged.subscribe(() => {
       setSection({
-        visible: viewer.sectionBox.visible,
-        clip: viewer.sectionBox.clip
+        visible: viewer.gizmos.section.visible,
+        clip: viewer.gizmos.section.clip
       });
     });
-    const subConfirm = viewer.sectionBox.onBoxConfirm.subscribe(() => setClipping(isClipping()));
+    const subConfirm = viewer.gizmos.section.onBoxConfirm.subscribe(() => setClipping(isClipping()));
     props.isolation.onChanged.subscribe(() => setVersion((v2) => v2 + 1));
     return () => {
       subState();
@@ -67878,17 +67888,17 @@ function VimContextMenu(props) {
     e.stopPropagation();
   };
   const onSectionToggleBtn = (e) => {
-    viewer.sectionBox.clip = !viewer.sectionBox.clip;
+    viewer.gizmos.section.clip = !viewer.gizmos.section.clip;
   };
   const onSectionResetBtn = (e) => {
-    viewer.sectionBox.fitBox(viewer.renderer.getBoundingBox());
+    viewer.gizmos.section.fitBox(viewer.renderer.getBoundingBox());
     e.stopPropagation();
   };
   const onMeasureDeleteBtn = (e) => {
-    viewer.measure.abort();
+    viewer.gizmos.measure.abort();
   };
   const onFitSectionToSelectionBtn = (e) => {
-    viewer.sectionBox.fitBox(viewer.selection.getBoundingBox());
+    viewer.gizmos.section.fitBox(viewer.selection.getBoundingBox());
   };
   const createButton = (button) => {
     if (!button.enabled)
@@ -67908,7 +67918,7 @@ function VimContextMenu(props) {
   };
   const hasSelection = ((_a22 = props.selection) == null ? void 0 : _a22.length) > 0;
   const hasVisibleSelection = ((_b2 = props.selection) == null ? void 0 : _b2.findIndex((o) => o.visible)) >= 0;
-  const measuring = !!viewer.measure.stage;
+  const measuring = !!viewer.gizmos.measure.stage;
   const isolated = ArrayEquals(props.selection, props.isolation.current());
   let elements = [
     {
@@ -68332,7 +68342,10 @@ function createTable(key, entries, open, setOpen) {
   }) : null));
 }
 async function getVimDocumentDetails(vim) {
-  let documents = await (vim == null ? void 0 : vim.bim.bimDocument.getAll());
+  var _a22;
+  let documents = await ((_a22 = vim == null ? void 0 : vim.bim) == null ? void 0 : _a22.bimDocument.getAll());
+  if (!documents)
+    return void 0;
   documents = documents.sort((a, b) => compare(a.title, b.title));
   const data2 = new Map(documents.map((d) => [
     d.title,
@@ -68590,11 +68603,9 @@ function getElementBimHeader(info) {
   ];
 }
 async function getVimBimHeader(vim) {
-  var _a22, _b2;
-  const documents = await ((_a22 = vim.bim.bimDocument) == null ? void 0 : _a22.getAll());
-  if (!documents)
-    return null;
-  const main = (_b2 = documents.find((d) => !d.isLinked)) != null ? _b2 : documents[0];
+  var _a22, _b2, _c, _d;
+  const documents = await ((_b2 = (_a22 = vim.bim) == null ? void 0 : _a22.bimDocument) == null ? void 0 : _b2.getAll());
+  const main = documents ? (_c = documents.find((d) => !d.isLinked)) != null ? _c : documents[0] : void 0;
   return [
     [
       {
@@ -68610,7 +68621,7 @@ async function getVimBimHeader(vim) {
       {
         key: "sourcePath",
         label: "Source Path",
-        value: main.pathName,
+        value: (_d = main == null ? void 0 : main.pathName) != null ? _d : "",
         dtStyle: "vc-w-3/12",
         ddStyle: "vc-w-9/12",
         dlStyle: "vc-w-full"
@@ -68885,7 +68896,7 @@ function range(size, startAt = 0) {
   return [...Array(size).keys()].map((i2) => i2 + startAt);
 }
 function BimPanel(props) {
-  if (props.settings.ui.bimTreePanel === false && props.settings.ui.bimInfoPanel === false) {
+  if (props.settings.ui.bimTreePanel === false && props.settings.ui.bimInfoPanel === false || props.viewerState.elements === void 0) {
     return null;
   }
   const [filter, setFilter] = react.exports.useState("");
@@ -68904,6 +68915,8 @@ function BimPanel(props) {
     return toTreeData(props.viewerState.vim, filteredElements, grouping);
   }, [props.viewerState.vim, filteredElements, grouping]);
   react.exports.useEffect(() => {
+    if (props.settings.ui.bimInfoPanel !== true)
+      return;
     if (filter !== "") {
       const objects = filteredElements.map((e) => props.viewerState.vim.getObjectFromElement(e.index));
       props.isolation.isolate(objects, "search");
@@ -69918,9 +69931,11 @@ function SidePanel(props) {
 }
 function useSideState(useInspector, defaultWidth) {
   const [side, setSide] = react.exports.useState(["bim"]);
+  const [hasBim, _setHasBim] = react.exports.useState(false);
   const [width, _setWidth] = react.exports.useState(defaultWidth);
   const sideRef = react.exports.useRef(side);
   const widthRef = react.exports.useRef(width);
+  const hasBimRef = react.exports.useRef(false);
   const toggleContent = (content) => {
     let r2;
     const [A2, B2] = sideRef.current;
@@ -69947,9 +69962,13 @@ function useSideState(useInspector, defaultWidth) {
   const getContent = () => {
     var _a22;
     const result = (_a22 = sideRef.current[sideRef.current.length - 1]) != null ? _a22 : "none";
-    if (result === "bim" && !useInspector)
+    if (result === "bim" && (!useInspector || !hasBimRef.current))
       return "none";
     return result;
+  };
+  const setHasBim = (value) => {
+    hasBimRef.current = value;
+    _setHasBim(value);
   };
   const setContent = (value) => {
     sideRef.current = [value];
@@ -69963,6 +69982,7 @@ function useSideState(useInspector, defaultWidth) {
     return getContent() === "none" ? 0 : widthRef.current;
   };
   return react.exports.useMemo(() => ({
+    setHasBim,
     setContent,
     getContent,
     toggleContent,
@@ -70646,6 +70666,8 @@ class Isolation {
   applySettings(settings2) {
     var _a22;
     this._settings = settings2;
+    if (this._settings.viewer.disableIsolation)
+      return;
     const set3 = new Set((_a22 = this._isolation) == null ? void 0 : _a22.map((o) => o.vim));
     this._viewer.vims.forEach((v2) => {
       v2.scene.material = set3.has(v2) && this._settings.viewer.isolationMaterial ? this._viewer.materials.isolation : void 0;
@@ -70668,6 +70690,8 @@ class Isolation {
     return this._isolation;
   }
   isolate(objects, source) {
+    if (this._settings.viewer.disableIsolation)
+      return;
     if (this._isolation) {
       this._lastIsolation = this._isolation;
     }
@@ -70678,6 +70702,8 @@ class Isolation {
     return isolated;
   }
   toggleIsolation(source) {
+    if (this._settings.viewer.disableIsolation)
+      return;
     const selection = [...this._viewer.selection.objects];
     if (this._isolation) {
       this._lastIsolation = this._isolation;
@@ -70707,8 +70733,10 @@ class Isolation {
   }
   hide(objects, source) {
     var _a22;
+    if (this._settings.viewer.disableIsolation)
+      return;
     const selection = new Set(objects);
-    const initial = (_a22 = this._isolation) != null ? _a22 : this._viewer.vims[0].getAllObjects();
+    const initial = (_a22 = this._isolation) != null ? _a22 : this._viewer.vims[0].getObjects();
     const result = [];
     for (const obj of initial) {
       if (!selection.has(obj))
@@ -70721,6 +70749,8 @@ class Isolation {
   }
   show(objects, source) {
     var _a22;
+    if (this._settings.viewer.disableIsolation)
+      return;
     const isolation = (_a22 = this._isolation) != null ? _a22 : [];
     objects.forEach((o) => isolation.push(o));
     const result = [...new Set(isolation)];
@@ -70729,6 +70759,8 @@ class Isolation {
     this._onChanged.dispatch(source);
   }
   clear(source) {
+    if (this._settings.viewer.disableIsolation)
+      return;
     this._showAll();
     this._lastIsolation = this._isolation;
     this._isolation = void 0;
@@ -70736,7 +70768,7 @@ class Isolation {
   }
   _showAll() {
     this._viewer.vims.forEach((v2) => {
-      for (const obj of v2.getAllObjects()) {
+      for (const obj of v2.getObjects()) {
         obj.visible = true;
       }
       v2.scene.material = void 0;
@@ -70750,10 +70782,7 @@ class Isolation {
       const set3 = new Set(objects);
       let all = true;
       viewer.vims.forEach((vim) => {
-        if (vim instanceof VimX) {
-          vim = vim.vim;
-        }
-        for (const obj of vim.getAllObjects()) {
+        for (const obj of vim.getObjects()) {
           if (obj.hasMesh) {
             obj.visible = set3.has(obj);
             all = all && obj.visible;
@@ -70790,11 +70819,7 @@ class ViewerWrapper {
     this.viewer = viewer;
   }
   getVim(index2) {
-    const vim = this.viewer.vims[index2];
-    if (vim instanceof VimX) {
-      return vim.vim;
-    }
-    return vim;
+    return this.viewer.vims[index2];
   }
   resetCamera() {
     this.viewer.camera.lerp(1).reset();
@@ -70810,7 +70835,7 @@ class ViewerWrapper {
     if (this.viewer.selection.count === 0)
       return;
     const box = this.viewer.selection.getBoundingBox();
-    if (box && this.viewer.sectionBox.box.intersectsBox(box)) {
+    if (box && this.viewer.gizmos.section.box.intersectsBox(box)) {
       this.viewer.camera.lerp(1).frame(box);
     }
   }
@@ -70820,7 +70845,7 @@ class ViewerWrapper {
   getVisibleBoundingBox(source) {
     let box;
     const vimBoxUnion = (vim) => {
-      for (const obj of vim.getAllObjects()) {
+      for (const obj of vim.getObjects()) {
         if (!obj.visible)
           continue;
         const b = obj.getBoundingBox();
@@ -70833,11 +70858,7 @@ class ViewerWrapper {
       vimBoxUnion(source);
     } else {
       for (const vim of this.viewer.vims) {
-        if (vim instanceof VimX) {
-          vimBoxUnion(vim.vim);
-        } else {
-          vimBoxUnion(vim);
-        }
+        vimBoxUnion(vim);
       }
     }
     return box;
@@ -70845,6 +70866,8 @@ class ViewerWrapper {
 }
 async function getElements(vim) {
   var _a22, _b2, _c, _d, _e;
+  if (!vim.bim)
+    return void 0;
   const [elements, bimDocument, category, levels, worksets] = await Promise.all([
     (_a22 = vim.bim.element) == null ? void 0 : _a22.getAll(),
     (_b2 = vim.bim.bimDocument) == null ? void 0 : _b2.getAllTitle(),
@@ -70854,7 +70877,7 @@ async function getElements(vim) {
   ]);
   const familyTypeMap = await getFamilyTypeNameMap(vim.bim);
   if (!elements)
-    return;
+    return void 0;
   const result = elements.map((e) => {
     var _a3, _b3, _c2;
     return __spreadProps(__spreadValues({}, e), {
@@ -70907,15 +70930,16 @@ function createContainer(viewer) {
   root.append(gfx);
   gfx.append(viewer.viewport.canvas);
   gfx.append(viewer.viewport.text);
-  gfx.append(viewer.axesCanvas);
+  gfx.append(viewer.gizmos.axes.canvas);
   const ui = document.createElement("div");
   ui.className = "vim-ui vc-top-0 vc-left-0 vc-h-full vc-w-full";
   root.append(ui);
   viewer.viewport.canvas.tabIndex = 0;
-  viewer.sectionBox.clip = true;
+  viewer.gizmos.section.clip = true;
   return { root, ui, gfx };
 }
 function VimComponent(props) {
+  var _a22;
   const viewer = react.exports.useMemo(() => new ViewerWrapper(props.viewer), []);
   const cursor = react.exports.useMemo(() => new CursorManager(props.viewer), []);
   const loader = react.exports.useMemo(() => new Loader(), []);
@@ -70930,6 +70954,10 @@ function VimComponent(props) {
   const logs = useLogState();
   const treeRef = react.exports.useRef();
   const prefRef = react.exports.useRef(null);
+  react.exports.useEffect(() => {
+    var _a3;
+    side.setHasBim(((_a3 = viewerState.vim) == null ? void 0 : _a3.bim) !== void 0);
+  }, [(_a22 = viewerState.vim) == null ? void 0 : _a22.bim]);
   react.exports.useEffect(() => {
     addPerformanceCounter(prefRef.current);
     cursor.register();
@@ -70950,7 +70978,8 @@ function VimComponent(props) {
       updateSettings: (updater) => {
         settings2.update(updater);
       },
-      selectSibbings: (o) => treeRef.current.selectSiblings(o)
+      selectSibbings: (o) => treeRef.current.selectSiblings(o),
+      registerToSettings: (action) => settings2.register((s) => action(s))
     });
     return () => {
       subLoad();
@@ -71005,11 +71034,7 @@ const LogoMemo = React__default.memo(() => /* @__PURE__ */ React__default.create
 function useViewerState(viewer) {
   const getVim = () => {
     var _a22;
-    const vim2 = (_a22 = viewer.selection.vim) != null ? _a22 : viewer.vims[0];
-    if (vim2 instanceof VimX) {
-      return vim2.vim;
-    }
-    return vim2;
+    return (_a22 = viewer.selection.vim) != null ? _a22 : viewer.vims[0];
   };
   const [vim, setVim] = react.exports.useState(getVim());
   const [selection, setSelection] = react.exports.useState([
