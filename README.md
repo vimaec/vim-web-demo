@@ -7,7 +7,7 @@
 npm install
 npm run dev
 
-# Open your browser to localhost:3000
+# Open your browser at http://localhost:3000
 # By default, it should load a VIM file from a hard-coded URL.
 ```
 
