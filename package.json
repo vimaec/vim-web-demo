@@ -42,7 +42,9 @@
   "dependencies": {
     "react-dom": "^18.1.0",
     "stats-js": "^1.0.1",
-    "vim-webgl-component": "0.2.35-dev.32"
+    "vim-webgl-component": "0.3.17",
+    "vim-webgl-viewer": "^2.0.10",
+    "vim-format": "^1.0.14"
   },
   "keywords": [
     "3d",
