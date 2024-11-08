@@ -1,11 +1,12 @@
 import 'vim-webgl-component/dist/style.css';
-import {VIM, createVimComponent, VimComponentRef, getLocalSettings } from 'vim-webgl-component'
+import {THREE, VIM, createVimComponent, getLocalSettings } from 'vim-webgl-component'
+import { Object3D } from 'vim-webgl-viewer';
 
 // Parse URL
 const params = new URLSearchParams(window.location.search)
 let url = params.has('vim') || params.has('model')
   ? params.get('vim') ?? params.get('model') 
-  : 'https://vim02.azureedge.net/samples/residence.v1.2.75.vim'
+  : 'https://vim.azureedge.net/samples/residence.v1.2.75.vim'
 
 // Parse Transparency
 let transparency = 'all' as VIM.Transparency.Mode
@@ -21,22 +22,36 @@ if (params.has('dev')) {
   devMode =  t === 'true'
 }
 
-createVimComponent(loadVim, undefined, getLocalSettings())
+demo()
+async function demo () {
+  const cmp = await createVimComponent(undefined, getLocalSettings())
 
-async function loadVim(ref: VimComponentRef){
+  const request = await cmp.loader.request({
+    url: url ?? 'https://vim.azureedge.com/samples/Wolford_Residence.r2025.vim'
+  }, {
+    rotation: new THREE.Vector3(270, 0, 0)
+  })
 
-  globalThis.vimComponent = ref
-  const vim = await ref.loader.load(url,
-    {
-      rotation: new VIM.THREE.Vector3(270, 0, 0),
-      legacy: true
-    }
-  )
-  ref.viewer.add(vim)
-  globalThis.VIM = VIM
-  console.log("Vim Successfully loaded")
+  for await (const progress of request.getProgress()) {
+    console.log(`Downloading Vim (${(progress.loaded / 1000).toFixed(0)} kb)`)
+  }
+  const result = await request.getResult()
+  if (result.isError()) {
+    console.error(result.error)
+    return
+  }
+  const vim = result.result
+  cmp.loader.add(vim)
+
+  globalThis.THREE = THREE
+  globalThis.component = cmp
+  globalThis.vim = vim
+
+  // Example: select a specific element in the file and log its bimElement data to the console
+  // var [obj] = vim.getObjectsFromElementId(348218) as Object3D[]
+  // cmp.viewer.selection.add(obj)
+  // var bimElement = await obj.getBimElement()
+  // console.log(bimElement)
 }
-
-
 
 
