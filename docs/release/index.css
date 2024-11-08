@@ -1,21 +1,19 @@
 /*
-! tailwindcss v3.2.7 | MIT License | https://tailwindcss.com
-*//*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
 */
 
-*,
-::before,
-::after {
+*:where(.vim-component,.vim-component *),
+::before:where(.vim-component,.vim-component *),
+::after:where(.vim-component,.vim-component *) {
   box-sizing: border-box; /* 1 */
   border-width: 0; /* 2 */
   border-style: solid; /* 2 */
   border-color: currentColor; /* 2 */
 }
 
-::before,
-::after {
+::before:where(.vim-component,.vim-component *),
+::after:where(.vim-component,.vim-component *) {
   --tw-content: '';
 }
 
@@ -27,7 +25,7 @@
 5. Use the user's configured `sans` font-feature-settings by default.
 */
 
-html {
+.vim-component {
   line-height: 1.5; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
   -moz-tab-size: 4; /* 3 */
@@ -42,7 +40,7 @@ html {
 2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
 */
 
-body {
+.vim-component {
   margin: 0; /* 1 */
   line-height: inherit; /* 2 */
 }
@@ -53,7 +51,7 @@ body {
 3. Ensure horizontal rules are visible by default.
 */
 
-hr {
+hr:where(.vim-component,.vim-component *) {
   height: 0; /* 1 */
   color: inherit; /* 2 */
   border-top-width: 1px; /* 3 */
@@ -63,7 +61,7 @@ hr {
 Add the correct text decoration in Chrome, Edge, and Safari.
 */
 
-abbr:where([title]) {
+abbr:where([title]):where(.vim-component,.vim-component *) {
   -webkit-text-decoration: underline dotted;
           text-decoration: underline dotted;
 }
@@ -72,12 +70,12 @@ abbr:where([title]) {
 Remove the default font size and weight for headings.
 */
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1:where(.vim-component,.vim-component *),
+h2:where(.vim-component,.vim-component *),
+h3:where(.vim-component,.vim-component *),
+h4:where(.vim-component,.vim-component *),
+h5:where(.vim-component,.vim-component *),
+h6:where(.vim-component,.vim-component *) {
   font-size: inherit;
   font-weight: inherit;
 }
@@ -86,7 +84,7 @@ h6 {
 Reset links to optimize for opt-in styling instead of opt-out.
 */
 
-a {
+a:where(.vim-component,.vim-component *) {
   color: inherit;
   text-decoration: inherit;
 }
@@ -95,8 +93,8 @@ a {
 Add the correct font weight in Edge and Safari.
 */
 
-b,
-strong {
+b:where(.vim-component,.vim-component *),
+strong:where(.vim-component,.vim-component *) {
   font-weight: bolder;
 }
 
@@ -105,10 +103,10 @@ strong {
 2. Correct the odd `em` font sizing in all browsers.
 */
 
-code,
-kbd,
-samp,
-pre {
+code:where(.vim-component,.vim-component *),
+kbd:where(.vim-component,.vim-component *),
+samp:where(.vim-component,.vim-component *),
+pre:where(.vim-component,.vim-component *) {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; /* 1 */
   font-size: 1em; /* 2 */
 }
@@ -117,7 +115,7 @@ pre {
 Add the correct font size in all browsers.
 */
 
-small {
+small:where(.vim-component,.vim-component *) {
   font-size: 80%;
 }
 
@@ -125,19 +123,19 @@ small {
 Prevent `sub` and `sup` elements from affecting the line height in all browsers.
 */
 
-sub,
-sup {
+sub:where(.vim-component,.vim-component *),
+sup:where(.vim-component,.vim-component *) {
   font-size: 75%;
   line-height: 0;
   position: relative;
   vertical-align: baseline;
 }
 
-sub {
+sub:where(.vim-component,.vim-component *) {
   bottom: -0.25em;
 }
 
-sup {
+sup:where(.vim-component,.vim-component *) {
   top: -0.5em;
 }
 
@@ -147,7 +145,7 @@ sup {
 3. Remove gaps between table borders by default.
 */
 
-table {
+table:where(.vim-component,.vim-component *) {
   text-indent: 0; /* 1 */
   border-color: inherit; /* 2 */
   border-collapse: collapse; /* 3 */
@@ -159,11 +157,11 @@ table {
 3. Remove default padding in all browsers.
 */
 
-button,
-input,
-optgroup,
-select,
-textarea {
+button:where(.vim-component,.vim-component *),
+input:where(.vim-component,.vim-component *),
+optgroup:where(.vim-component,.vim-component *),
+select:where(.vim-component,.vim-component *),
+textarea:where(.vim-component,.vim-component *) {
   font-family: inherit; /* 1 */
   font-size: 100%; /* 1 */
   font-weight: inherit; /* 1 */
@@ -177,8 +175,8 @@ textarea {
 Remove the inheritance of text transform in Edge and Firefox.
 */
 
-button,
-select {
+button:where(.vim-component,.vim-component *),
+select:where(.vim-component,.vim-component *) {
   text-transform: none;
 }
 
@@ -187,10 +185,10 @@ select {
 2. Remove default button styles.
 */
 
-button,
-[type='button'],
-[type='reset'],
-[type='submit'] {
+button:where(.vim-component,.vim-component *),
+[type='button']:where(.vim-component,.vim-component *),
+[type='reset']:where(.vim-component,.vim-component *),
+[type='submit']:where(.vim-component,.vim-component *) {
   -webkit-appearance: button; /* 1 */
   background-color: transparent; /* 2 */
   background-image: none; /* 2 */
@@ -200,7 +198,7 @@ button,
 Use the modern Firefox focus style for all focusable elements.
 */
 
-:-moz-focusring {
+:-moz-focusring:where(.vim-component,.vim-component *) {
   outline: auto;
 }
 
@@ -208,7 +206,7 @@ Use the modern Firefox focus style for all focusable elements.
 Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
 */
 
-:-moz-ui-invalid {
+:-moz-ui-invalid:where(.vim-component,.vim-component *) {
   box-shadow: none;
 }
 
@@ -216,7 +214,7 @@ Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/
 Add the correct vertical alignment in Chrome and Firefox.
 */
 
-progress {
+progress:where(.vim-component,.vim-component *) {
   vertical-align: baseline;
 }
 
@@ -224,8 +222,8 @@ progress {
 Correct the cursor style of increment and decrement buttons in Safari.
 */
 
-::-webkit-inner-spin-button,
-::-webkit-outer-spin-button {
+::-webkit-inner-spin-button:where(.vim-component,.vim-component *),
+::-webkit-outer-spin-button:where(.vim-component,.vim-component *) {
   height: auto;
 }
 
@@ -234,7 +232,7 @@ Correct the cursor style of increment and decrement buttons in Safari.
 2. Correct the outline style in Safari.
 */
 
-[type='search'] {
+[type='search']:where(.vim-component,.vim-component *) {
   -webkit-appearance: textfield; /* 1 */
   outline-offset: -2px; /* 2 */
 }
@@ -243,7 +241,7 @@ Correct the cursor style of increment and decrement buttons in Safari.
 Remove the inner padding in Chrome and Safari on macOS.
 */
 
-::-webkit-search-decoration {
+::-webkit-search-decoration:where(.vim-component,.vim-component *) {
   -webkit-appearance: none;
 }
 
@@ -252,7 +250,7 @@ Remove the inner padding in Chrome and Safari on macOS.
 2. Change font properties to `inherit` in Safari.
 */
 
-::-webkit-file-upload-button {
+::-webkit-file-upload-button:where(.vim-component,.vim-component *) {
   -webkit-appearance: button; /* 1 */
   font: inherit; /* 2 */
 }
@@ -261,7 +259,7 @@ Remove the inner padding in Chrome and Safari on macOS.
 Add the correct display in Chrome and Safari.
 */
 
-summary {
+summary:where(.vim-component,.vim-component *) {
   display: list-item;
 }
 
@@ -269,34 +267,34 @@ summary {
 Removes the default spacing and border for appropriate elements.
 */
 
-blockquote,
-dl,
-dd,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-hr,
-figure,
-p,
-pre {
+blockquote:where(.vim-component,.vim-component *),
+dl:where(.vim-component,.vim-component *),
+dd:where(.vim-component,.vim-component *),
+h1:where(.vim-component,.vim-component *),
+h2:where(.vim-component,.vim-component *),
+h3:where(.vim-component,.vim-component *),
+h4:where(.vim-component,.vim-component *),
+h5:where(.vim-component,.vim-component *),
+h6:where(.vim-component,.vim-component *),
+hr:where(.vim-component,.vim-component *),
+figure:where(.vim-component,.vim-component *),
+p:where(.vim-component,.vim-component *),
+pre:where(.vim-component,.vim-component *) {
   margin: 0;
 }
 
-fieldset {
+fieldset:where(.vim-component,.vim-component *) {
   margin: 0;
   padding: 0;
 }
 
-legend {
+legend:where(.vim-component,.vim-component *) {
   padding: 0;
 }
 
-ol,
-ul,
-menu {
+ol:where(.vim-component,.vim-component *),
+ul:where(.vim-component,.vim-component *),
+menu:where(.vim-component,.vim-component *) {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -306,7 +304,7 @@ menu {
 Prevent resizing textareas horizontally by default.
 */
 
-textarea {
+textarea:where(.vim-component,.vim-component *) {
   resize: vertical;
 }
 
@@ -315,13 +313,13 @@ textarea {
 2. Set the default placeholder color to the user's configured gray 400 color.
 */
 
-input::-moz-placeholder, textarea::-moz-placeholder {
+input::-moz-placeholder:where(.vim-component,.vim-component *), textarea::-moz-placeholder:where(.vim-component,.vim-component *) {
   opacity: 1; /* 1 */
   color: #9ca3af; /* 2 */
 }
 
-input::placeholder,
-textarea::placeholder {
+input::placeholder:where(.vim-component,.vim-component *),
+textarea::placeholder:where(.vim-component,.vim-component *) {
   opacity: 1; /* 1 */
   color: #9ca3af; /* 2 */
 }
@@ -330,15 +328,15 @@ textarea::placeholder {
 Set the default cursor for buttons.
 */
 
-button,
-[role="button"] {
+button:where(.vim-component,.vim-component *),
+[role="button"]:where(.vim-component,.vim-component *) {
   cursor: pointer;
 }
 
 /*
 Make sure disabled buttons don't get the pointer cursor.
 */
-:disabled {
+:disabled:where(.vim-component,.vim-component *) {
   cursor: default;
 }
 
@@ -348,14 +346,14 @@ Make sure disabled buttons don't get the pointer cursor.
    This can trigger a poorly considered lint error in some tools but is included by design.
 */
 
-img,
-svg,
-video,
-canvas,
-audio,
-iframe,
-embed,
-object {
+img:where(.vim-component,.vim-component *),
+svg:where(.vim-component,.vim-component *),
+video:where(.vim-component,.vim-component *),
+canvas:where(.vim-component,.vim-component *),
+audio:where(.vim-component,.vim-component *),
+iframe:where(.vim-component,.vim-component *),
+embed:where(.vim-component,.vim-component *),
+object:where(.vim-component,.vim-component *) {
   display: block; /* 1 */
   vertical-align: middle; /* 2 */
 }
@@ -364,178 +362,15 @@ object {
 Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
 */
 
-img,
-video {
+img:where(.vim-component,.vim-component *),
+video:where(.vim-component,.vim-component *) {
   max-width: 100%;
   height: auto;
 }
 
 /* Make elements with the HTML hidden attribute stay hidden by default */
-[hidden] {
+[hidden]:where(.vim-component,.vim-component *) {
   display: none;
-}
-
-[type='text'],[type='email'],[type='url'],[type='password'],[type='number'],[type='date'],[type='datetime-local'],[type='month'],[type='search'],[type='tel'],[type='time'],[type='week'],[multiple],textarea,select {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  background-color: #fff;
-  border-color: #6b7280;
-  border-width: 1px;
-  border-radius: 0px;
-  padding-top: 0.5rem;
-  padding-right: 0.75rem;
-  padding-bottom: 0.5rem;
-  padding-left: 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  --tw-shadow: 0 0 #0000;
-}
-
-[type='text']:focus, [type='email']:focus, [type='url']:focus, [type='password']:focus, [type='number']:focus, [type='date']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='week']:focus, [multiple]:focus, textarea:focus, select:focus {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-  --tw-ring-inset: var(--tw-empty,/*!*/ /*!*/);
-  --tw-ring-offset-width: 0px;
-  --tw-ring-offset-color: #fff;
-  --tw-ring-color: #2563eb;
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
-  border-color: #2563eb;
-}
-
-input::-moz-placeholder, textarea::-moz-placeholder {
-  color: #6b7280;
-  opacity: 1;
-}
-
-input::placeholder,textarea::placeholder {
-  color: #6b7280;
-  opacity: 1;
-}
-
-::-webkit-datetime-edit-fields-wrapper {
-  padding: 0;
-}
-
-::-webkit-date-and-time-value {
-  min-height: 1.5em;
-}
-
-::-webkit-datetime-edit,::-webkit-datetime-edit-year-field,::-webkit-datetime-edit-month-field,::-webkit-datetime-edit-day-field,::-webkit-datetime-edit-hour-field,::-webkit-datetime-edit-minute-field,::-webkit-datetime-edit-second-field,::-webkit-datetime-edit-millisecond-field,::-webkit-datetime-edit-meridiem-field {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-select {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-  background-position: right 0.5rem center;
-  background-repeat: no-repeat;
-  background-size: 1.5em 1.5em;
-  padding-right: 2.5rem;
-  print-color-adjust: exact;
-}
-
-[multiple] {
-  background-image: initial;
-  background-position: initial;
-  background-repeat: unset;
-  background-size: initial;
-  padding-right: 0.75rem;
-  print-color-adjust: unset;
-}
-
-[type='checkbox'],[type='radio'] {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  padding: 0;
-  print-color-adjust: exact;
-  display: inline-block;
-  vertical-align: middle;
-  background-origin: border-box;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
-  flex-shrink: 0;
-  height: 1rem;
-  width: 1rem;
-  color: #2563eb;
-  background-color: #fff;
-  border-color: #6b7280;
-  border-width: 1px;
-  --tw-shadow: 0 0 #0000;
-}
-
-[type='checkbox'] {
-  border-radius: 0px;
-}
-
-[type='radio'] {
-  border-radius: 100%;
-}
-
-[type='checkbox']:focus,[type='radio']:focus {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-  --tw-ring-inset: var(--tw-empty,/*!*/ /*!*/);
-  --tw-ring-offset-width: 2px;
-  --tw-ring-offset-color: #fff;
-  --tw-ring-color: #2563eb;
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
-}
-
-[type='checkbox']:checked,[type='radio']:checked {
-  border-color: transparent;
-  background-color: currentColor;
-  background-size: 100% 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-[type='checkbox']:checked {
-  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
-}
-
-[type='radio']:checked {
-  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
-}
-
-[type='checkbox']:checked:hover,[type='checkbox']:checked:focus,[type='radio']:checked:hover,[type='radio']:checked:focus {
-  border-color: transparent;
-  background-color: currentColor;
-}
-
-[type='checkbox']:indeterminate {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 16'%3e%3cpath stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 8h8'/%3e%3c/svg%3e");
-  border-color: transparent;
-  background-color: currentColor;
-  background-size: 100% 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-[type='checkbox']:indeterminate:hover,[type='checkbox']:indeterminate:focus {
-  border-color: transparent;
-  background-color: currentColor;
-}
-
-[type='file'] {
-  background: unset;
-  border-color: inherit;
-  border-width: 0;
-  border-radius: 0;
-  padding: 0;
-  font-size: unset;
-  line-height: inherit;
-}
-
-[type='file']:focus {
-  outline: 1px solid ButtonText;
-  outline: 1px auto -webkit-focus-ring-color;
 }
 
 *, ::before, ::after {
@@ -637,12 +472,6 @@ select {
 .vc-pointer-events-auto {
   pointer-events: auto;
 }
-.\!vc-static {
-  position: static !important;
-}
-.vc-fixed {
-  position: fixed;
-}
 .\!vc-absolute {
   position: absolute !important;
 }
@@ -676,20 +505,23 @@ select {
 .vc-left-4 {
   left: 1rem;
 }
-.vc-left-\[calc\(50\%-160px\)\] {
-  left: calc(50% - 160px);
-}
 .vc-right-0 {
   right: 0px;
 }
-.vc-right-6 {
-  right: 1.5rem;
+.vc-right-1 {
+  right: 0.25rem;
 }
 .vc-right-8 {
   right: 2rem;
 }
+.vc-right-\[20px\] {
+  right: 20px;
+}
 .vc-top-0 {
   top: 0px;
+}
+.vc-top-1 {
+  top: 0.25rem;
 }
 .vc-top-4 {
   top: 1rem;
@@ -700,14 +532,23 @@ select {
 .vc-top-\[10\%\] {
   top: 10%;
 }
-.vc-top-\[calc\(50\%-37px\)\] {
-  top: calc(50% - 37px);
+.vc-top-\[20px\] {
+  top: 20px;
+}
+.vc-top-\[50\%\] {
+  top: 50%;
+}
+.vc-top-\[75\%\] {
+  top: 75%;
 }
 .vc-z-10 {
   z-index: 10;
 }
 .vc-z-20 {
   z-index: 20;
+}
+.vc-z-30 {
+  z-index: 30;
 }
 .vc-z-40 {
   z-index: 40;
@@ -727,70 +568,38 @@ select {
 .vc-m-auto {
   margin: auto;
 }
-.-vc-mx-6 {
-  margin-left: -1.5rem;
-  margin-right: -1.5rem;
-}
-.vc-mx-1 {
-  margin-left: 0.25rem;
-  margin-right: 0.25rem;
-}
 .vc-mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
-}
-.vc-mx-auto {
-  margin-left: auto;
-  margin-right: auto;
 }
 .vc-my-1 {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
 }
+.vc-my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
+}
 .-vc-mr-4 {
   margin-right: -1rem;
-}
-.vc-mb-0 {
-  margin-bottom: 0px;
 }
 .vc-mb-2 {
   margin-bottom: 0.5rem;
 }
-.vc-mb-4 {
-  margin-bottom: 1rem;
-}
-.vc-mb-5 {
-  margin-bottom: 1.25rem;
-}
-.vc-mb-6 {
-  margin-bottom: 1.5rem;
-}
-.vc-mb-8 {
-  margin-bottom: 2rem;
-}
-.vc-mb-9 {
-  margin-bottom: 2.25rem;
-}
 .vc-ml-1 {
   margin-left: 0.25rem;
 }
-.vc-ml-12 {
-  margin-left: 3rem;
-}
-.vc-ml-28 {
-  margin-left: 7rem;
+.vc-mr-1 {
+  margin-right: 0.25rem;
 }
 .vc-mr-2 {
   margin-right: 0.5rem;
 }
-.vc-mr-4 {
-  margin-right: 1rem;
-}
 .vc-mt-2 {
   margin-top: 0.5rem;
 }
-.vc-mt-auto {
-  margin-top: auto;
+.vc-box-content {
+  box-sizing: content-box;
 }
 .vc-block {
   display: block;
@@ -807,68 +616,59 @@ select {
 .vc-hidden {
   display: none;
 }
-.vc-h-1\/2 {
-  height: 50%;
-}
-.vc-h-10 {
-  height: 2.5rem;
-}
-.vc-h-12 {
-  height: 3rem;
+.vc-h-2 {
+  height: 0.5rem;
 }
 .vc-h-4 {
   height: 1rem;
 }
-.vc-h-5 {
-  height: 1.25rem;
+.vc-h-\[49\%\] {
+  height: 49%;
 }
-.vc-h-8 {
-  height: 2rem;
+.vc-h-\[50\%\] {
+  height: 50%;
 }
-.vc-h-\[144px\] {
-  height: 144px;
-}
-.vc-h-\[18px\] {
-  height: 18px;
+.vc-h-\[80\%\] {
+  height: 80%;
 }
 .vc-h-full {
   height: 100%;
 }
-.vc-max-h-\[95\%\] {
-  max-height: 95%;
+.vc-max-h-\[60px\] {
+  max-height: 60px;
 }
-.vc-w-1\/2 {
-  width: 50%;
+.vc-max-h-\[80\%\] {
+  max-height: 80%;
 }
-.vc-w-10 {
-  width: 2.5rem;
+.vc-max-h-full {
+  max-height: 100%;
 }
-.vc-w-3\/12 {
-  width: 25%;
+.vc-min-h-0 {
+  min-height: 0px;
 }
-.vc-w-32 {
-  width: 8rem;
+.vc-w-1\/3 {
+  width: 33.333333%;
+}
+.vc-w-14 {
+  width: 3.5rem;
+}
+.vc-w-2\/3 {
+  width: 66.666667%;
+}
+.vc-w-3 {
+  width: 0.75rem;
 }
 .vc-w-4 {
   width: 1rem;
 }
-.vc-w-6 {
-  width: 1.5rem;
-}
-.vc-w-9\/12 {
-  width: 75%;
-}
-.vc-w-\[112px\] {
-  width: 112px;
-}
-.vc-w-\[18px\] {
-  width: 18px;
-}
 .vc-w-\[240px\] {
   width: 240px;
 }
-.vc-w-\[320px\] {
-  width: 320px;
+.vc-w-\[72\%\] {
+  width: 72%;
+}
+.vc-w-\[90\%\] {
+  width: 90%;
 }
 .vc-w-auto {
   width: auto;
@@ -876,14 +676,23 @@ select {
 .vc-w-full {
   width: 100%;
 }
-.vc-w-px {
-  width: 1px;
-}
-.vc-min-w-\[100px\] {
-  min-width: 100px;
+.vc-min-w-0 {
+  min-width: 0px;
 }
 .\!vc-max-w-xs {
   max-width: 20rem !important;
+}
+.vc-max-w-\[320px\] {
+  max-width: 320px;
+}
+.vc-max-w-\[900px\] {
+  max-width: 900px;
+}
+.vc-max-w-full {
+  max-width: 100%;
+}
+.vc-flex-1 {
+  flex: 1 1 0%;
 }
 .vc-shrink-0 {
   flex-shrink: 0;
@@ -913,17 +722,26 @@ select {
 .vc-items-center {
   align-items: center;
 }
-.vc-justify-end {
-  justify-content: flex-end;
-}
 .vc-justify-center {
   justify-content: center;
 }
 .vc-justify-between {
   justify-content: space-between;
 }
+.vc-justify-evenly {
+  justify-content: space-evenly;
+}
+.vc-gap-2 {
+  gap: 0.5rem;
+}
+.vc-gap-4 {
+  gap: 1rem;
+}
 .vc-self-center {
   align-self: center;
+}
+.vc-overflow-hidden {
+  overflow: hidden;
 }
 .vc-overflow-y-auto {
   overflow-y: auto;
@@ -936,21 +754,17 @@ select {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.vc-text-clip {
+  text-overflow: clip;
+}
 .vc-whitespace-nowrap {
   white-space: nowrap;
 }
 .vc-rounded {
   border-radius: 0.25rem;
 }
-.vc-rounded-2xl {
-  border-radius: 1rem;
-}
 .vc-rounded-full {
   border-radius: 9999px;
-}
-.vc-rounded-b-xl {
-  border-bottom-right-radius: 0.75rem;
-  border-bottom-left-radius: 0.75rem;
 }
 .vc-rounded-t {
   border-top-left-radius: 0.25rem;
@@ -1001,9 +815,6 @@ select {
 .vc-border-gray-medium {
   border-color: var(--c-medium-gray);
 }
-.vc-border-light-blue {
-  border-color: var(--c-light-blue);
-}
 .vc-border-white {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
@@ -1012,8 +823,8 @@ select {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
 }
-.vc-bg-black\/80 {
-  background-color: rgb(0 0 0 / 0.8);
+.vc-bg-black\/90 {
+  background-color: rgb(0 0 0 / 0.9);
 }
 .vc-bg-gray-light {
   background-color: var(--c-light-gray);
@@ -1043,17 +854,11 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
-.vc-bg-white\/\[\.5\] {
-  background-color: rgb(255 255 255 / .5);
-}
 .vc-p-1 {
   padding: 0.25rem;
 }
-.vc-p-2 {
-  padding: 0.5rem;
-}
-.vc-p-6 {
-  padding: 1.5rem;
+.vc-p-5 {
+  padding: 1.25rem;
 }
 .vc-px-2 {
   padding-left: 0.5rem;
@@ -1063,9 +868,13 @@ select {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
 }
-.vc-px-8 {
-  padding-left: 2rem;
-  padding-right: 2rem;
+.vc-py-0 {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+.vc-py-0\.5 {
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
 }
 .vc-py-1 {
   padding-top: 0.25rem;
@@ -1078,10 +887,6 @@ select {
 .vc-py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
-}
-.vc-py-5 {
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
 }
 .vc-pl-6 {
   padding-left: 1.5rem;
@@ -1117,6 +922,9 @@ select {
 .\!vc-text-gray-darkest {
   color: var(--c-darkest-gray) !important;
 }
+.vc-text-gray {
+  color: var(--c-gray);
+}
 .vc-text-gray-darker {
   color: var(--c-darker-gray);
 }
@@ -1128,9 +936,6 @@ select {
 }
 .vc-text-gray-warm {
   color: var(--c-dark-gray-warm);
-}
-.vc-text-light-blue {
-  color: var(--c-light-blue);
 }
 .vc-text-primary {
   color: var(--c-primary);
@@ -1150,9 +955,6 @@ select {
 }
 .vc-opacity-50 {
   opacity: 0.5;
-}
-.vc-opacity-60 {
-  opacity: 0.6;
 }
 .\!vc-shadow-\[2px_6px_15px_rgba\(0\2c 0\2c 0\2c 0\.3\)\] {
   --tw-shadow: 2px 6px 15px rgba(0,0,0,0.3) !important;
@@ -1189,11 +991,6 @@ select {
 }
 .vc-transition-all {
   transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-.vc-transition-opacity {
-  transition-property: opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
@@ -1253,136 +1050,247 @@ select {
   --hidden-royal-blue: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='%23284ea2' d='M154.271,63.406c22.243,5.762,39.382,17.586,48.956,25.494,9.186,7.587,17.187,16.341,22.527,24.648,6.176,9.606,6.247,14.405,6.247,14.452,0,4.764-5.566,18.577-22.079,34.01l16.973,16.972c18.185-17.247,29.106-36.602,29.106-50.982,0-30.946-57.308-92-128-92-13.307,0-26.139,2.165-38.205,5.884l42.099,42.099c2.731-10.572,11.479-18.722,22.376-20.577Z'/%3E%3Cpath fill='%23284ea2' d='M166.022,118.111l21.472,21.472c2.896-7.3,4.505-15.251,4.505-23.583,0-8.812-1.782-17.207-5.004-24.847-.07,12.971-8.957,23.853-20.974,26.958Z'/%3E%3Cpath fill='%23284ea2' d='M31.833,17.863c-4.687-4.686-12.284-4.686-16.971,0-4.686,4.687-4.686,12.285,0,16.971l29.92,29.92C17.38,84.825,0,110.966,0,128c0,32.943,57.308,92,128,92,21.088,0,40.972-5.269,58.51-13.52l37.657,37.657c4.687,4.686,12.284,4.686,16.971,0,4.686-4.687,4.686-12.285,0-16.971L31.833,17.863Zm96.167,178.137c-35.405,0-62.403-17.699-75.346-28.249-21.65-17.648-28.654-34.402-28.654-39.751,0-.047,.071-4.846,6.247-14.452,5.34-8.308,13.341-17.061,22.527-24.648,2.545-2.103,5.633-4.482,9.205-6.95l7.708,7.708c-3.643,8.034-5.686,16.946-5.686,26.343,0,35.346,28.654,64,64,64,9.397,0,18.31-2.043,26.345-5.684l13.936,13.936c-11.606,4.516-25.17,7.749-40.281,7.749Z'/%3E%3C/svg%3E%0A");
 }
 
-/*Makes full screen and remove scrollbars*/
-html,
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background: radial-gradient(circle at center, #f0f0ff, #999999);
+.vim-component {
+  font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'Roboto', sans-serif;
+  overflow: hidden;
 }
 
+
 /*No focus states*/
-[type='checkbox']:focus,
-[type='radio']:focus,
-button:focus,
-input[type='search']:focus {
+.vim-component [type='checkbox']:focus,
+.vim-component [type='radio']:focus,
+.vim-component button:focus,
+.vim-component input[type='search']:focus {
   outline: 0;
   box-shadow: none;
 }
 
-input[type='search']::-webkit-search-cancel-button {
+
+/* Fix for search cancel button on IOS */
+.vim-component input[type='search']::-webkit-search-cancel-button {
   -webkit-appearance: none;
   height: 1rem;
   width: 1rem;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16.25' height='16.25' viewBox='0 0 16.25 16.25'%3E%3Cpath id='icon' d='M32.125,24a8.125,8.125,0,1,0,8.125,8.125A8.125,8.125,0,0,0,32.125,24ZM35.6,34.275A.937.937,0,0,1,34.275,35.6l-2.15-2.15-2.15,2.15a.937.937,0,0,1-1.326-1.326l2.15-2.15-2.15-2.15a.937.937,0,0,1,1.326-1.326l2.15,2.15,2.15-2.15A.937.937,0,1,1,35.6,29.975l-2.15,2.15Z' transform='translate(-24 -24)' fill='%238a8d95'/%3E%3C/svg%3E%0A");
 }
 
-@-moz-document url-prefix() {
-  .vim-bim-search-count {
-    right: 1.5rem;
+.vim-help-overlay  {
+  container-type: size;
+}
+
+.vim-loading-container  {
+  container-type: size;
+}
+
+.vim-rest-of-screen {
+  container-type: size;
+}
+
+.vim-side-panel {
+  container-type: size;
+}
+
+@container (width > 0px){
+  .vim-side-panel-content {
+    font-size: min(5.5cqmin, 0.8rem);
+    left: min(5cqmin, 1rem);
+    right: min(5cqmin, 1rem);
+    top:0px;
+    bottom:0px;
+  }
+  .vim-side-panel-nav{
+    height: min(6cqmin, 1.5rem);;
+  }
+
+  .vc-title{
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: min(5cqmin, 0.70rem);
+    line-height: min(12cqmin, 2rem);
+  }
+  .vc-subtitle{
+    font-weight: bold;
+    font-size: min(5cqmin, 0.70rem);
+    line-height: min(8cqmin, 1.5rem);
+  }
+
+  .vim-help-blocker{
+    gap:min(3cqh, 1rem)
+  }
+  
+  .vim-help-bottom{
+    min-height: min(4cqmin, 2rem);
+  }
+
+  .vim-help-title{
+    font-size: min(2.5cqmin, 0.9rem);
+  }
+  .vim-help-button {
+    font-size: min(2.5cqmin, 0.9rem);
+    padding-left:  min(2cqmin, 1rem);
+    padding-right:  min(2cqmin, 1rem);
+  }
+  
+  .vim-control-bar-button {
+    height: min(8cqmin, 2.5rem);
+    width: min(8cqmin, 2.5rem);
+  }
+  .vim-control-bar-section {
+    gap: min(2cqmin, 0.5rem)
+  }
+  .vim-axes-panel{
+    border-radius: min(3cqmin, 1rem);
+    top: min(2cqmin, 1.5rem);
+    right: min(2cqmin, 1.5rem);
+    width: min(22cqmin, 112px);
+    height: min(28cqmin, 144px);
+  }
+
+  .vim-axes-panel-gizmo{
+    top: min(1cqmin, 0.5rem);
+    left: min(1cqmin, 0.5rem);
+    right: min(1cqmin, 0.5rem);
+    bottom: calc(20% + min(1cqmin, 0.5rem));
+  }
+  .vim-axes-button{
+    height: min(5cqmin, 1.25rem);
+    width: min(5cqmin, 1.25rem);
+  }
+
+  .vim-loading-box{
+    font-size: min(5cqmin, 1rem);
+  }
+  .vim-loading-widget, .vim-loading-widget::after{
+    height: min(5cqmin, 1rem);;
+  }
+  .vim-bim-lower-content{
+    gap: min(3cqmin, 1.5rem);
+  } 
+  .vim-bim-header-entry{
+    line-height: min(10cqmin, 1.5rem);
+  }
+  .vim-bim-body-entry{
+    line-height: min(10cqmin, 2rem);
+  }
+  .vim-bim-tree .rct-tree-item-title-container {
+    height: min(10cqmin, 2rem);
+  }
+  .vim-bim-tree .rct-tree-item-visibility {
+    width: min(6cqmin, 1rem);
+    height: min(6cqmin, 1rem);
+  }
+  .vim-bim-tree .rct-tree-item-arrow {
+    width: min(6cqmin, 1rem);
+  }
+  .vim-bim-tree .rct-tree-item-arrow:has(svg):before {
+    background-size: min(8cqmin, 1rem);
+  }
+
+  .vim-bim-actions{
+    height: min(8cqmin, 2rem);
+  }
+  .vim-settings-checkbox{
+    height: min(8cqmin, 1rem);
+    width: min(8cqmin, 1rem);
+  }
+  .vim-settings-textbox{
+    height: min(8cqmin, 1.5rem);
+  }
+
+  .vim-group-collapse-button{
+    height: min(6cqmin, 1.5rem);
   }
 }
 
+.vim-settings-textbox{
+  font-size: inherit;
+}
+
 /* === React Tree === */
-.rct-tree-root {
-  font-family: inherit;
-}
-
-.rct-tree-root > div > .rct-tree-items-container {
-  max-height: calc(50vh - 9rem);
+.vim-bim-tree .rct-tree-root {
+  padding: 0;
+  width: 100%;
+  flex:1;
+  min-height: 0px;
   overflow-y: auto;
-  content-visibility: auto;
+  overflow-x: hidden;
 }
 
-.rct-tree-items-container li .rct-tree-item-title-container {
-  border: none;
+.vim-bim-tree .rct-tree-item-button{
+  gap: 4px;
+  padding: 0px;
+  margin-right: 8px;
+  min-width: 0px;
+}
+.vim-bim-tree .rct-tree-item-title{
+  flex:1;
 }
 
-.rct-tree-items-container
-  li
-  .rct-tree-item-title-container
-  .rct-tree-item-button {
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  min-height: 2.5rem;
-  webkit-user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-          user-select: none;
+.vim-bim-tree .rct-tree-item-li{
+  padding: 0;
+  font-size: inherit;
 }
 
-.rct-tree-items-container > li:nth-child(odd) {
-  background-color: var(--c-white);
-}
-
-.rct-tree-items-container > li:nth-child(even) {
-  background-color: var(--c-gray-zebra);
-}
-
-.vim-inspector-properties {
-  max-height: 500px;
-}
-
-.rct-tree-root-focus {
+.vim-bim-tree .rct-tree-item-title-container,
+.vim-bim-tree .rct-tree-items-container,
+.vim-bim-tree .rct-tree-root.rct-tree-root-focus,
+.vim-bim-tree .rct-tree-item-title-container-focused,
+.vim-bim-tree .rct-tree-root-focus
+{
+  border: 0px;
   outline: none;
 }
 
-.rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-focused {
-  border: none;
+.vim-bim-tree .rct-tree-item-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.rct-tree-items-container .rct-tree-item-li {
-  font-size: 1rem;
-  position: relative;
+/* Treeview Arrow */
+.vim-bim-tree .rct-tree-item-arrow {
+  flex-shrink: 0;
+  display: flex;
 }
 
-.rct-tree-item-arrow {
-  width: 20px !important;
-  padding-bottom: 4px;
-}
-
-.rct-tree-item-arrow:has(svg) svg path {
+.vim-bim-tree .rct-tree-item-arrow:has(svg) svg path {
   opacity: 0;
 }
 
-.rct-tree-item-arrow:has(svg):before {
+.vim-bim-tree .rct-tree-item-arrow:has(svg):before {
   content: '';
+  background-position: center;
+  background-repeat: no-repeat;
   background-image: url("data:image/svg+xml,%3Csvg id='Arrow' xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Crect id='frame' width='20' height='20' fill='%238a8d95' opacity='0'/%3E%3Cpath id='icon' d='M100.072,70.536l-3.987,3.987a.938.938,0,0,1-1.6-.663V65.886a.938.938,0,0,1,1.6-.663l3.987,3.987A.937.937,0,0,1,100.072,70.536Z' transform='translate(-87.104 -59.873)' fill='%238a8d95'/%3E%3C/svg%3E%0A");
-  height: 20px;
-  width: 20px;
   position: relative;
   display: block;
-  top: 8px;
-  left: -4px;
+  height: 20px;
+  width: 20px;
   transition: 0.3s;
 }
 
-.rct-tree-item-title-container-expanded > .rct-tree-item-arrow::before {
+.vim-bim-tree .rct-tree-item-title-container-expanded > .rct-tree-item-arrow::before {
   transform: rotate(90deg);
   transition: 0.3s;
 }
 
-.rct-tree-item-arrow-path {
+.vim-bim-tree .rct-tree-item-arrow-path {
   fill: var(--c-medium-gray);
 }
 
-.parameters:first-child > ul > li h3 {
-  border-top-right-radius: 4px;
+/* Tree View Zebra Effect*/
+
+.vim-bim-tree .rct-tree-items-container > li:nth-child(odd) {
+  background-color: var(--c-white);
 }
 
-.vim-bim-lower {
-  max-height: 44vh;
+.vim-bim-tree .rct-tree-items-container > li:nth-child(even) {
+  background-color: var(--c-gray-zebra);
 }
 
+/* Tree View Select*/
 .vim-bim-tree
   .rct-tree-root:not(.rct-tree-root-focus)
   .rct-tree-item-title-container-selected,
@@ -1392,67 +1300,61 @@ input[type='search']::-webkit-search-cancel-button {
   background-color: var(--c-lightest-blue);
 }
 
-.rct-tree-item-title-container:hover {
+.vim-bim-tree .parameters:first-child > ul > li h3 {
+  border-top-right-radius: 4px;
+}
+
+/* Tree View Hover*/
+.vim-bim-tree .rct-tree-item-title-container:hover {
   background-color: var(--c-list-hover);
 }
 
-.rct-tree-items-:hover {
+.vim-bim-tree .rct-tree-items-:hover {
   background-color: var(--c-list-hover);
-}
-
-.rct-tree-item-title {
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin: 0px;
-  padding-right: 2.5rem;
 }
 
 /* Tree View Visibily Toggles*/
-.rct-tree-item-button {
+.vim-bim-tree .rct-tree-item-button {
   display: flex !important;
   justify-content: space-between !important;
-  margin-left: 4px;
   margin-right: 8px;
-  border-radius: 0px;
 }
 
-.rct-tree-item-visibility {
-  min-width: 16px;
-  min-height: 16px;
+.vim-bim-tree .rct-tree-item-visibility {
+  flex-shrink: 0;
   background-repeat: no-repeat;
 }
 
 /*default state*/
-.rct-tree-item-visibility.vim-visible {
+.vim-bim-tree .rct-tree-item-visibility.vim-visible {
   display: none;
 }
 
-.rct-tree-item-visibility.vim-hidden {
+.vim-bim-tree .rct-tree-item-visibility.vim-hidden {
   display: block;
   background-image: var(--hidden-dark);
 }
 
 /* Hover unselected element */
-.rct-tree-item-button:hover .rct-tree-item-visibility.vim-visible {
+.vim-bim-tree .rct-tree-item-button:hover .rct-tree-item-visibility.vim-visible {
   display: block;
   background-image: var(--visible-beige);
 }
 
-.rct-tree-item-button:hover .rct-tree-item-visibility.vim-hidden {
+.vim-bim-tree .rct-tree-item-button:hover .rct-tree-item-visibility.vim-hidden {
   display: block;
   background-image: var(--hidden-beige);
 }
 
 /* Hover selected element */
-.rct-tree-item-title-container-selected
+.vim-bim-tree .rct-tree-item-title-container-selected
   .rct-tree-item-button:hover
   .rct-tree-item-visibility.vim-visible {
   display: block;
   background-image: var(--visible-light-blue);
 }
 
-.rct-tree-item-title-container-selected
+.vim-bim-tree .rct-tree-item-title-container-selected
   .rct-tree-item-button:hover
   .rct-tree-item-visibility.vim-hidden {
   display: block;
@@ -1460,7 +1362,7 @@ input[type='search']::-webkit-search-cancel-button {
 }
 
 /* Hover toggle button*/
-.rct-tree-item-title-container-selected
+.vim-bim-tree .rct-tree-item-title-container-selected
   .rct-tree-item-button
   .rct-tree-item-visibility.vim-visible:hover,
 .rct-tree-item-button .rct-tree-item-visibility.vim-visible:hover {
@@ -1468,10 +1370,10 @@ input[type='search']::-webkit-search-cancel-button {
   background-image: var(--hidden-royal-blue);
 }
 
-.rct-tree-item-title-container-selected
+.vim-bim-tree .rct-tree-item-title-container-selected
   .rct-tree-item-button
   .rct-tree-item-visibility.vim-hidden:hover,
-.rct-tree-item-button .rct-tree-item-visibility.vim-hidden:hover {
+  .vim-bim-tree .rct-tree-item-button .rct-tree-item-visibility.vim-hidden:hover {
   display: block;
   background-image: var(--visible-royal-blue);
 }
@@ -1558,7 +1460,8 @@ input[type='search']::-webkit-search-cancel-button {
 
 .vim-loading-widget {
   width: 100%;
-  height: 10px;
+  min-height: 5px;
+  max-height: 10px;
   border-radius: 5px;
   display: inline-block;
   position: relative;
@@ -1569,7 +1472,8 @@ input[type='search']::-webkit-search-cancel-button {
 .vim-loading-widget::after {
   content: '';
   width: 130px;
-  height: 10px;
+  min-height: 5px;
+  max-height: 10px;
   border-radius: 5px;
   background: var(--c-primary);
   position: absolute;
@@ -1614,16 +1518,8 @@ input[type='search']::-webkit-search-cancel-button {
   border-color: var(--c-primary-royal);
 }
 
-.hover\:vc-border-transparent:hover {
-  border-color: transparent;
-}
-
 .hover\:vc-bg-gray-lightest:hover {
   background-color: var(--c-lightest-gray);
-}
-
-.hover\:vc-bg-light-blue:hover {
-  background-color: var(--c-light-blue);
 }
 
 .hover\:vc-bg-primary-royal:hover {
@@ -1698,6 +1594,130 @@ input[type='search']::-webkit-search-cancel-button {
 .vim-measure-value-z {
   text-align: center;
   padding: 5px;
+}
+
+.lds-roller {
+  display: block;
+  top: 10px;
+  left: 10px;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+}
+.lds-roller div {
+  animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  transform-origin: 20px 20px;
+}
+.lds-roller div:after {
+  content: ' ';
+  display: block;
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #40a6de;
+  margin: -4px 0 0 -4px;
+}
+.lds-roller div:nth-child(1) {
+  animation-delay: -0.036s;
+}
+.lds-roller div:nth-child(1):after {
+  top: 32px;
+  left: 32px;
+}
+.lds-roller div:nth-child(2) {
+  animation-delay: -0.072s;
+}
+.lds-roller div:nth-child(2):after {
+  top: 35px;
+  left: 28px;
+}
+.lds-roller div:nth-child(3) {
+  animation-delay: -0.108s;
+}
+.lds-roller div:nth-child(3):after {
+  top: 37px;
+  left: 24px;
+}
+.lds-roller div:nth-child(4) {
+  animation-delay: -0.144s;
+}
+.lds-roller div:nth-child(4):after {
+  top: 38px;
+  left: 20px;
+}
+.lds-roller div:nth-child(5) {
+  animation-delay: -0.18s;
+}
+.lds-roller div:nth-child(5):after {
+  top: 37px;
+  left: 16px;
+}
+.lds-roller div:nth-child(6) {
+  animation-delay: -0.216s;
+}
+.lds-roller div:nth-child(6):after {
+  top: 35px;
+  left: 12px;
+}
+.lds-roller div:nth-child(7) {
+  animation-delay: -0.252s;
+}
+.lds-roller div:nth-child(7):after {
+  top: 32px;
+  left: 8px;
+}
+.lds-roller div:nth-child(8) {
+  animation-delay: -0.288s;
+}
+.lds-roller div:nth-child(8):after {
+  top: 28px;
+  left: 5px;
+}
+@keyframes lds-roller {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loader {
+  width: 100%;
+  height: 4px;
+  display: block;
+  top: 0px;
+  position: absolute;
+  overflow: hidden;
+}
+.loader::after {
+  content: '';
+  width: 30%;
+  height: 4.8px;
+  background: linear-gradient(
+    to right,
+    #40a6de00 0%,
+    #40a6deff 20%,
+    #40a6deff 80%,
+    #40a6de00 100%
+  );
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  animation: animloader 2s linear infinite;
+}
+
+@keyframes animloader {
+  0% {
+    left: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    left: 100%;
+    transform: translateX(0%);
+  }
 }
 :root {
   --rct-color-tree-bg: #f6f8fa;
