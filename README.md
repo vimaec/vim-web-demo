@@ -1,4 +1,6 @@
-# VIM WebGL Test App
+# VIM Web Demo App
+
+This repository demonstrates how to load and use the VIM Web NPM package.
 
 ## Setup
 
