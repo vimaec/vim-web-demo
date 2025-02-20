@@ -1,19 +1,292 @@
-/*
+.vim-measure {
+  background-color: white;
+}
+
+.vim-measure table {
+  border-collapse: collapse;
+}
+
+.vim-measure table tr {
+  border: 1px solid;
+  border-color: black;
+}
+
+.vim-measure-label-d,
+.vim-measure-label-x,
+.vim-measure-label-y,
+.vim-measure-label-z {
+  color: white;
+  width: 10px;
+  text-align: center;
+  padding: 5px;
+}
+
+.vim-measure-label-d {
+  background-color: black;
+}
+.vim-measure-label-x {
+  background-color: red;
+}
+.vim-measure-label-y {
+  background-color: green;
+}
+.vim-measure-label-z {
+  background-color: blue;
+}
+
+.vim-measure-value-d,
+.vim-measure-value-x,
+.vim-measure-value-y,
+.vim-measure-value-z {
+  text-align: center;
+  padding: 5px;
+}
+
+.lds-roller {
+  display: block;
+  top: 10px;
+  left: 10px;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+}
+.lds-roller div {
+  animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  transform-origin: 20px 20px;
+}
+.lds-roller div:after {
+  content: ' ';
+  display: block;
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #40a6de;
+  margin: -4px 0 0 -4px;
+}
+.lds-roller div:nth-child(1) {
+  animation-delay: -0.036s;
+}
+.lds-roller div:nth-child(1):after {
+  top: 32px;
+  left: 32px;
+}
+.lds-roller div:nth-child(2) {
+  animation-delay: -0.072s;
+}
+.lds-roller div:nth-child(2):after {
+  top: 35px;
+  left: 28px;
+}
+.lds-roller div:nth-child(3) {
+  animation-delay: -0.108s;
+}
+.lds-roller div:nth-child(3):after {
+  top: 37px;
+  left: 24px;
+}
+.lds-roller div:nth-child(4) {
+  animation-delay: -0.144s;
+}
+.lds-roller div:nth-child(4):after {
+  top: 38px;
+  left: 20px;
+}
+.lds-roller div:nth-child(5) {
+  animation-delay: -0.18s;
+}
+.lds-roller div:nth-child(5):after {
+  top: 37px;
+  left: 16px;
+}
+.lds-roller div:nth-child(6) {
+  animation-delay: -0.216s;
+}
+.lds-roller div:nth-child(6):after {
+  top: 35px;
+  left: 12px;
+}
+.lds-roller div:nth-child(7) {
+  animation-delay: -0.252s;
+}
+.lds-roller div:nth-child(7):after {
+  top: 32px;
+  left: 8px;
+}
+.lds-roller div:nth-child(8) {
+  animation-delay: -0.288s;
+}
+.lds-roller div:nth-child(8):after {
+  top: 28px;
+  left: 5px;
+}
+@keyframes lds-roller {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loader {
+  width: 100%;
+  height: 4px;
+  display: block;
+  top: 0px;
+  position: absolute;
+  overflow: hidden;
+}
+.loader::after {
+  content: '';
+  width: 30%;
+  height: 4.8px;
+  background: linear-gradient(
+    to right,
+    #40a6de00 0%,
+    #40a6deff 20%,
+    #40a6deff 80%,
+    #40a6de00 100%
+  );
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  animation: animloader 2s linear infinite;
+}
+
+@keyframes animloader {
+  0% {
+    left: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    left: 100%;
+    transform: translateX(0%);
+  }
+}
+*, ::before, ::after {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}
+
+::backdrop {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}/*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
 */
 
 *:where(.vim-component,.vim-component *),
-::before:where(.vim-component,.vim-component *),
-::after:where(.vim-component,.vim-component *) {
+:where(.vim-component,.vim-component *)::before,
+:where(.vim-component,.vim-component *)::after {
   box-sizing: border-box; /* 1 */
   border-width: 0; /* 2 */
   border-style: solid; /* 2 */
   border-color: currentColor; /* 2 */
 }
 
-::before:where(.vim-component,.vim-component *),
-::after:where(.vim-component,.vim-component *) {
+:where(.vim-component,.vim-component *)::before,
+:where(.vim-component,.vim-component *)::after {
   --tw-content: '';
 }
 
@@ -23,6 +296,8 @@
 3. Use a more readable tab size.
 4. Use the user's configured `sans` font-family by default.
 5. Use the user's configured `sans` font-feature-settings by default.
+6. Use the user's configured `sans` font-variation-settings by default.
+7. Disable tap highlights on iOS
 */
 
 .vim-component {
@@ -31,8 +306,10 @@
   -moz-tab-size: 4; /* 3 */
   -o-tab-size: 4;
      tab-size: 4; /* 3 */
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
   font-feature-settings: normal; /* 5 */
+  font-variation-settings: normal; /* 6 */
+  -webkit-tap-highlight-color: transparent; /* 7 */
 }
 
 /*
@@ -99,8 +376,10 @@ strong:where(.vim-component,.vim-component *) {
 }
 
 /*
-1. Use the user's configured `mono` font family by default.
-2. Correct the odd `em` font sizing in all browsers.
+1. Use the user's configured `mono` font-family by default.
+2. Use the user's configured `mono` font-feature-settings by default.
+3. Use the user's configured `mono` font-variation-settings by default.
+4. Correct the odd `em` font sizing in all browsers.
 */
 
 code:where(.vim-component,.vim-component *),
@@ -108,7 +387,9 @@ kbd:where(.vim-component,.vim-component *),
 samp:where(.vim-component,.vim-component *),
 pre:where(.vim-component,.vim-component *) {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; /* 1 */
-  font-size: 1em; /* 2 */
+  font-feature-settings: normal; /* 2 */
+  font-variation-settings: normal; /* 3 */
+  font-size: 1em; /* 4 */
 }
 
 /*
@@ -163,9 +444,12 @@ optgroup:where(.vim-component,.vim-component *),
 select:where(.vim-component,.vim-component *),
 textarea:where(.vim-component,.vim-component *) {
   font-family: inherit; /* 1 */
+  font-feature-settings: inherit; /* 1 */
+  font-variation-settings: inherit; /* 1 */
   font-size: 100%; /* 1 */
   font-weight: inherit; /* 1 */
   line-height: inherit; /* 1 */
+  letter-spacing: inherit; /* 1 */
   color: inherit; /* 1 */
   margin: 0; /* 2 */
   padding: 0; /* 3 */
@@ -186,9 +470,9 @@ select:where(.vim-component,.vim-component *) {
 */
 
 button:where(.vim-component,.vim-component *),
-[type='button']:where(.vim-component,.vim-component *),
-[type='reset']:where(.vim-component,.vim-component *),
-[type='submit']:where(.vim-component,.vim-component *) {
+input:where([type='button']):where(.vim-component,.vim-component *),
+input:where([type='reset']):where(.vim-component,.vim-component *),
+input:where([type='submit']):where(.vim-component,.vim-component *) {
   -webkit-appearance: button; /* 1 */
   background-color: transparent; /* 2 */
   background-image: none; /* 2 */
@@ -222,8 +506,8 @@ progress:where(.vim-component,.vim-component *) {
 Correct the cursor style of increment and decrement buttons in Safari.
 */
 
-::-webkit-inner-spin-button:where(.vim-component,.vim-component *),
-::-webkit-outer-spin-button:where(.vim-component,.vim-component *) {
+:where(.vim-component,.vim-component *) ::-webkit-inner-spin-button,
+:where(.vim-component,.vim-component *) ::-webkit-outer-spin-button {
   height: auto;
 }
 
@@ -241,7 +525,7 @@ Correct the cursor style of increment and decrement buttons in Safari.
 Remove the inner padding in Chrome and Safari on macOS.
 */
 
-::-webkit-search-decoration:where(.vim-component,.vim-component *) {
+:where(.vim-component,.vim-component *) ::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
@@ -250,7 +534,7 @@ Remove the inner padding in Chrome and Safari on macOS.
 2. Change font properties to `inherit` in Safari.
 */
 
-::-webkit-file-upload-button:where(.vim-component,.vim-component *) {
+:where(.vim-component,.vim-component *) ::-webkit-file-upload-button {
   -webkit-appearance: button; /* 1 */
   font: inherit; /* 2 */
 }
@@ -301,6 +585,13 @@ menu:where(.vim-component,.vim-component *) {
 }
 
 /*
+Reset default styling for dialogs.
+*/
+dialog:where(.vim-component,.vim-component *) {
+  padding: 0;
+}
+
+/*
 Prevent resizing textareas horizontally by default.
 */
 
@@ -313,13 +604,13 @@ textarea:where(.vim-component,.vim-component *) {
 2. Set the default placeholder color to the user's configured gray 400 color.
 */
 
-input::-moz-placeholder:where(.vim-component,.vim-component *), textarea::-moz-placeholder:where(.vim-component,.vim-component *) {
+:where(.vim-component,.vim-component *) input::-moz-placeholder, :where(.vim-component,.vim-component *) textarea::-moz-placeholder {
   opacity: 1; /* 1 */
   color: #9ca3af; /* 2 */
 }
 
-input::placeholder:where(.vim-component,.vim-component *),
-textarea::placeholder:where(.vim-component,.vim-component *) {
+:where(.vim-component,.vim-component *) input::placeholder,
+:where(.vim-component,.vim-component *) textarea::placeholder {
   opacity: 1; /* 1 */
   color: #9ca3af; /* 2 */
 }
@@ -369,108 +660,17 @@ video:where(.vim-component,.vim-component *) {
 }
 
 /* Make elements with the HTML hidden attribute stay hidden by default */
-[hidden]:where(.vim-component,.vim-component *) {
+[hidden]:where(:not([hidden="until-found"])):where(.vim-component,.vim-component *) {
   display: none;
-}
-
-*, ::before, ::after {
-  --tw-border-spacing-x: 0;
-  --tw-border-spacing-y: 0;
-  --tw-translate-x: 0;
-  --tw-translate-y: 0;
-  --tw-rotate: 0;
-  --tw-skew-x: 0;
-  --tw-skew-y: 0;
-  --tw-scale-x: 1;
-  --tw-scale-y: 1;
-  --tw-pan-x:  ;
-  --tw-pan-y:  ;
-  --tw-pinch-zoom:  ;
-  --tw-scroll-snap-strictness: proximity;
-  --tw-ordinal:  ;
-  --tw-slashed-zero:  ;
-  --tw-numeric-figure:  ;
-  --tw-numeric-spacing:  ;
-  --tw-numeric-fraction:  ;
-  --tw-ring-inset:  ;
-  --tw-ring-offset-width: 0px;
-  --tw-ring-offset-color: #fff;
-  --tw-ring-color: rgb(59 130 246 / 0.5);
-  --tw-ring-offset-shadow: 0 0 #0000;
-  --tw-ring-shadow: 0 0 #0000;
-  --tw-shadow: 0 0 #0000;
-  --tw-shadow-colored: 0 0 #0000;
-  --tw-blur:  ;
-  --tw-brightness:  ;
-  --tw-contrast:  ;
-  --tw-grayscale:  ;
-  --tw-hue-rotate:  ;
-  --tw-invert:  ;
-  --tw-saturate:  ;
-  --tw-sepia:  ;
-  --tw-drop-shadow:  ;
-  --tw-backdrop-blur:  ;
-  --tw-backdrop-brightness:  ;
-  --tw-backdrop-contrast:  ;
-  --tw-backdrop-grayscale:  ;
-  --tw-backdrop-hue-rotate:  ;
-  --tw-backdrop-invert:  ;
-  --tw-backdrop-opacity:  ;
-  --tw-backdrop-saturate:  ;
-  --tw-backdrop-sepia:  ;
-}
-
-::backdrop {
-  --tw-border-spacing-x: 0;
-  --tw-border-spacing-y: 0;
-  --tw-translate-x: 0;
-  --tw-translate-y: 0;
-  --tw-rotate: 0;
-  --tw-skew-x: 0;
-  --tw-skew-y: 0;
-  --tw-scale-x: 1;
-  --tw-scale-y: 1;
-  --tw-pan-x:  ;
-  --tw-pan-y:  ;
-  --tw-pinch-zoom:  ;
-  --tw-scroll-snap-strictness: proximity;
-  --tw-ordinal:  ;
-  --tw-slashed-zero:  ;
-  --tw-numeric-figure:  ;
-  --tw-numeric-spacing:  ;
-  --tw-numeric-fraction:  ;
-  --tw-ring-inset:  ;
-  --tw-ring-offset-width: 0px;
-  --tw-ring-offset-color: #fff;
-  --tw-ring-color: rgb(59 130 246 / 0.5);
-  --tw-ring-offset-shadow: 0 0 #0000;
-  --tw-ring-shadow: 0 0 #0000;
-  --tw-shadow: 0 0 #0000;
-  --tw-shadow-colored: 0 0 #0000;
-  --tw-blur:  ;
-  --tw-brightness:  ;
-  --tw-contrast:  ;
-  --tw-grayscale:  ;
-  --tw-hue-rotate:  ;
-  --tw-invert:  ;
-  --tw-saturate:  ;
-  --tw-sepia:  ;
-  --tw-drop-shadow:  ;
-  --tw-backdrop-blur:  ;
-  --tw-backdrop-brightness:  ;
-  --tw-backdrop-contrast:  ;
-  --tw-backdrop-grayscale:  ;
-  --tw-backdrop-hue-rotate:  ;
-  --tw-backdrop-invert:  ;
-  --tw-backdrop-opacity:  ;
-  --tw-backdrop-saturate:  ;
-  --tw-backdrop-sepia:  ;
 }
 .vc-pointer-events-none {
   pointer-events: none;
 }
 .vc-pointer-events-auto {
   pointer-events: auto;
+}
+.vc-fixed {
+  position: fixed;
 }
 .\!vc-absolute {
   position: absolute !important;
@@ -482,10 +682,7 @@ video:where(.vim-component,.vim-component *) {
   position: relative;
 }
 .vc-inset-0 {
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
+  inset: 0px;
 }
 .\!vc-left-auto {
   left: auto !important;
@@ -501,6 +698,9 @@ video:where(.vim-component,.vim-component *) {
 }
 .vc-left-0 {
   left: 0px;
+}
+.vc-left-1\/2 {
+  left: 50%;
 }
 .vc-left-4 {
   left: 1rem;
@@ -531,6 +731,9 @@ video:where(.vim-component,.vim-component *) {
 }
 .vc-top-\[10\%\] {
   top: 10%;
+}
+.vc-top-\[150px\] {
+  top: 150px;
 }
 .vc-top-\[20px\] {
   top: 20px;
@@ -576,18 +779,27 @@ video:where(.vim-component,.vim-component *) {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
 }
-.vc-my-auto {
-  margin-top: auto;
-  margin-bottom: auto;
+.vc-my-6 {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 .-vc-mr-4 {
   margin-right: -1rem;
 }
+.vc-mb-1 {
+  margin-bottom: 0.25rem;
+}
 .vc-mb-2 {
   margin-bottom: 0.5rem;
 }
+.vc-mb-4 {
+  margin-bottom: 1rem;
+}
 .vc-ml-1 {
   margin-left: 0.25rem;
+}
+.vc-ml-5 {
+  margin-left: 1.25rem;
 }
 .vc-mr-1 {
   margin-right: 0.25rem;
@@ -598,14 +810,14 @@ video:where(.vim-component,.vim-component *) {
 .vc-mt-2 {
   margin-top: 0.5rem;
 }
+.vc-mt-6 {
+  margin-top: 1.5rem;
+}
 .vc-box-content {
   box-sizing: content-box;
 }
 .vc-block {
   display: block;
-}
-.vc-inline {
-  display: inline;
 }
 .vc-flex {
   display: flex;
@@ -634,8 +846,8 @@ video:where(.vim-component,.vim-component *) {
 .vc-h-full {
   height: 100%;
 }
-.vc-max-h-\[60px\] {
-  max-height: 60px;
+.vc-max-h-\[48px\] {
+  max-height: 48px;
 }
 .vc-max-h-\[80\%\] {
   max-height: 80%;
@@ -664,6 +876,9 @@ video:where(.vim-component,.vim-component *) {
 .vc-w-\[240px\] {
   width: 240px;
 }
+.vc-w-\[424px\] {
+  width: 424px;
+}
 .vc-w-\[72\%\] {
   width: 72%;
 }
@@ -685,6 +900,9 @@ video:where(.vim-component,.vim-component *) {
 .vc-max-w-\[320px\] {
   max-width: 320px;
 }
+.vc-max-w-\[80\%\] {
+  max-width: 80%;
+}
 .vc-max-w-\[900px\] {
   max-width: 900px;
 }
@@ -696,6 +914,10 @@ video:where(.vim-component,.vim-component *) {
 }
 .vc-shrink-0 {
   flex-shrink: 0;
+}
+.vc--translate-x-1\/2 {
+  --tw-translate-x: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 .vc-rotate-0 {
   --tw-rotate: 0deg;
@@ -713,6 +935,12 @@ video:where(.vim-component,.vim-component *) {
      -moz-user-select: none;
           user-select: none;
 }
+.vc-list-decimal {
+  list-style-type: decimal;
+}
+.vc-list-disc {
+  list-style-type: disc;
+}
 .vc-flex-col {
   flex-direction: column;
 }
@@ -721,6 +949,9 @@ video:where(.vim-component,.vim-component *) {
 }
 .vc-items-center {
   align-items: center;
+}
+.vc-justify-start {
+  justify-content: flex-start;
 }
 .vc-justify-center {
   justify-content: center;
@@ -736,6 +967,11 @@ video:where(.vim-component,.vim-component *) {
 }
 .vc-gap-4 {
   gap: 1rem;
+}
+.vc-space-y-1 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
 }
 .vc-self-center {
   align-self: center;
@@ -760,11 +996,23 @@ video:where(.vim-component,.vim-component *) {
 .vc-whitespace-nowrap {
   white-space: nowrap;
 }
+.vc-whitespace-pre-wrap {
+  white-space: pre-wrap;
+}
+.vc-break-words {
+  overflow-wrap: break-word;
+}
+.vc-break-all {
+  word-break: break-all;
+}
 .vc-rounded {
   border-radius: 0.25rem;
 }
 .vc-rounded-full {
   border-radius: 9999px;
+}
+.vc-rounded-md {
+  border-radius: 0.375rem;
 }
 .vc-rounded-t {
   border-top-left-radius: 0.25rem;
@@ -803,6 +1051,10 @@ video:where(.vim-component,.vim-component *) {
 .\!vc-border-gray-medium {
   border-color: var(--c-medium-gray) !important;
 }
+.vc-border-\[\#DFDFE1\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(223 223 225 / var(--tw-border-opacity, 1));
+}
 .vc-border-gray-divider {
   border-color: var(--c-gray-divider);
 }
@@ -817,14 +1069,11 @@ video:where(.vim-component,.vim-component *) {
 }
 .vc-border-white {
   --tw-border-opacity: 1;
-  border-color: rgb(255 255 255 / var(--tw-border-opacity));
+  border-color: rgb(255 255 255 / var(--tw-border-opacity, 1));
 }
 .\!vc-bg-white {
   --tw-bg-opacity: 1 !important;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
-}
-.vc-bg-black\/90 {
-  background-color: rgb(0 0 0 / 0.9);
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1)) !important;
 }
 .vc-bg-gray-light {
   background-color: var(--c-light-gray);
@@ -852,13 +1101,19 @@ video:where(.vim-component,.vim-component *) {
 }
 .vc-bg-white {
   --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
 }
 .vc-p-1 {
   padding: 0.25rem;
 }
+.vc-p-4 {
+  padding: 1rem;
+}
 .vc-p-5 {
   padding: 1.25rem;
+}
+.vc-p-6 {
+  padding: 1.5rem;
 }
 .vc-px-2 {
   padding-left: 0.5rem;
@@ -867,10 +1122,6 @@ video:where(.vim-component,.vim-component *) {
 .vc-px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
-}
-.vc-py-0 {
-  padding-top: 0px;
-  padding-bottom: 0px;
 }
 .vc-py-0\.5 {
   padding-top: 0.125rem;
@@ -894,9 +1145,19 @@ video:where(.vim-component,.vim-component *) {
 .vc-text-center {
   text-align: center;
 }
+.vc-font-\[\\\'Roboto\\\'\,sans-serif\] {
+  font-family: \'Roboto\',sans-serif;
+}
 .\!vc-text-xs {
   font-size: 0.75rem !important;
   line-height: 1rem !important;
+}
+.vc-text-\[16pt\] {
+  font-size: 16pt;
+}
+.vc-text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 .vc-text-lg {
   font-size: 1.125rem;
@@ -906,6 +1167,10 @@ video:where(.vim-component,.vim-component *) {
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
+.vc-text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
 .vc-text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
@@ -913,14 +1178,39 @@ video:where(.vim-component,.vim-component *) {
 .vc-font-bold {
   font-weight: 700;
 }
+.vc-font-medium {
+  font-weight: 500;
+}
+.vc-font-normal {
+  font-weight: 400;
+}
 .vc-font-semibold {
   font-weight: 600;
 }
 .vc-uppercase {
   text-transform: uppercase;
 }
+.vc-italic {
+  font-style: italic;
+}
 .\!vc-text-gray-darkest {
   color: var(--c-darkest-gray) !important;
+}
+.vc-text-\[\#0590CC\] {
+  --tw-text-opacity: 1;
+  color: rgb(5 144 204 / var(--tw-text-opacity, 1));
+}
+.vc-text-\[\#212733\] {
+  --tw-text-opacity: 1;
+  color: rgb(33 39 51 / var(--tw-text-opacity, 1));
+}
+.vc-text-\[\#3F444F\] {
+  --tw-text-opacity: 1;
+  color: rgb(63 68 79 / var(--tw-text-opacity, 1));
+}
+.vc-text-\[\#787C83\] {
+  --tw-text-opacity: 1;
+  color: rgb(120 124 131 / var(--tw-text-opacity, 1));
 }
 .vc-text-gray {
   color: var(--c-gray);
@@ -942,7 +1232,10 @@ video:where(.vim-component,.vim-component *) {
 }
 .vc-text-white {
   --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+.vc-underline {
+  text-decoration-line: underline;
 }
 .\!vc-opacity-100 {
   opacity: 1 !important;
@@ -960,6 +1253,11 @@ video:where(.vim-component,.vim-component *) {
   --tw-shadow: 2px 6px 15px rgba(0,0,0,0.3) !important;
   --tw-shadow-colored: 2px 6px 15px var(--tw-shadow-color) !important;
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+}
+.vc-shadow-\[0px_4px_16px_rgba\(33\,39\,51\,0\.5\)\] {
+  --tw-shadow: 0px 4px 16px rgba(33,39,51,0.5);
+  --tw-shadow-colored: 0px 4px 16px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 .vc-shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -982,7 +1280,7 @@ video:where(.vim-component,.vim-component *) {
 .vc-backdrop-blur {
   --tw-backdrop-blur: blur(8px);
   -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
-          backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
 }
 .\!vc-transition-opacity {
   transition-property: opacity !important;
@@ -1050,6 +1348,12 @@ video:where(.vim-component,.vim-component *) {
   --hidden-royal-blue: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='%23284ea2' d='M154.271,63.406c22.243,5.762,39.382,17.586,48.956,25.494,9.186,7.587,17.187,16.341,22.527,24.648,6.176,9.606,6.247,14.405,6.247,14.452,0,4.764-5.566,18.577-22.079,34.01l16.973,16.972c18.185-17.247,29.106-36.602,29.106-50.982,0-30.946-57.308-92-128-92-13.307,0-26.139,2.165-38.205,5.884l42.099,42.099c2.731-10.572,11.479-18.722,22.376-20.577Z'/%3E%3Cpath fill='%23284ea2' d='M166.022,118.111l21.472,21.472c2.896-7.3,4.505-15.251,4.505-23.583,0-8.812-1.782-17.207-5.004-24.847-.07,12.971-8.957,23.853-20.974,26.958Z'/%3E%3Cpath fill='%23284ea2' d='M31.833,17.863c-4.687-4.686-12.284-4.686-16.971,0-4.686,4.687-4.686,12.285,0,16.971l29.92,29.92C17.38,84.825,0,110.966,0,128c0,32.943,57.308,92,128,92,21.088,0,40.972-5.269,58.51-13.52l37.657,37.657c4.687,4.686,12.284,4.686,16.971,0,4.686-4.687,4.686-12.285,0-16.971L31.833,17.863Zm96.167,178.137c-35.405,0-62.403-17.699-75.346-28.249-21.65-17.648-28.654-34.402-28.654-39.751,0-.047,.071-4.846,6.247-14.452,5.34-8.308,13.341-17.061,22.527-24.648,2.545-2.103,5.633-4.482,9.205-6.95l7.708,7.708c-3.643,8.034-5.686,16.946-5.686,26.343,0,35.346,28.654,64,64,64,9.397,0,18.31-2.043,26.345-5.684l13.936,13.936c-11.606,4.516-25.17,7.749-40.281,7.749Z'/%3E%3C/svg%3E%0A");
 }
 
+/* Removes the shadow of the arrow that was cutting text in the tooltip */
+.__react_component_tooltip::after,
+.__react_component_tooltip::before {
+  content: none !important;
+}
+
 .vim-component {
   font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -1092,7 +1396,48 @@ video:where(.vim-component,.vim-component *) {
   container-type: size;
 }
 
+.vim-modal {
+  container-type: size;
+}
+
 @container (width > 0px){
+  .vim-message-box .vc-text-xs{
+    font-size: min(5.5cqmin, 0.8rem);
+    line-height: min(6.5cqmin, 1rem);
+  }
+  .vim-message-box .vc-text-sm{
+    font-size: min(6cqmin, 0.875rem);
+    line-height: min(6.5cqmin, 1rem);
+  }
+  .vim-message-box .vc-text-base{
+    font-size: min(6.5cqmin, 1rem);
+    line-height: min(7cqmin, 1.15rem);
+  }
+  .vim-message-box .vc-text-lg{
+    font-size: min(7cqmin, 1.15rem);
+    line-height: min(7.5cqmin, 1.25rem);
+  }
+  .vim-message-box .vc-text-xl{
+    font-size: min(7.5cqmin, 1.25rem);
+    line-height: min(8cqmin, 1.35rem);
+  }
+  .vim-message-box {
+    padding: min(6cqmin, 1.5rem);
+  }
+
+  .vim-message-box .vim-divider{
+    margin-top: min(6cqmin, 1.5rem);
+    margin-bottom: min(6cqmin, 1.5rem);
+  }
+
+  .vim-message-box .vim-footer{
+    margin-top: min(6cqmin, 1.5rem);
+  }
+
+  .vim-message-box .vim-main-text{
+    margin-bottom: min(6cqmin, 1.5rem);
+  }
+
   .vim-side-panel-content {
     font-size: min(5.5cqmin, 0.8rem);
     left: min(5cqmin, 1rem);
@@ -1532,7 +1877,7 @@ video:where(.vim-component,.vim-component *) {
 
 .hover\:vc-text-white:hover {
   --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 
 .hover\:vc-opacity-100:hover {
@@ -1551,173 +1896,6 @@ video:where(.vim-component,.vim-component *) {
 
 .active\:vc-text-primary-royal:active {
   color: var(--c-primary-royal);
-}
-.vim-measure {
-  background-color: white;
-}
-
-.vim-measure table {
-  border-collapse: collapse;
-}
-
-.vim-measure table tr {
-  border: 1px solid;
-  border-color: black;
-}
-
-.vim-measure-label-d,
-.vim-measure-label-x,
-.vim-measure-label-y,
-.vim-measure-label-z {
-  color: white;
-  width: 10px;
-  text-align: center;
-  padding: 5px;
-}
-
-.vim-measure-label-d {
-  background-color: black;
-}
-.vim-measure-label-x {
-  background-color: red;
-}
-.vim-measure-label-y {
-  background-color: green;
-}
-.vim-measure-label-z {
-  background-color: blue;
-}
-
-.vim-measure-value-d,
-.vim-measure-value-x,
-.vim-measure-value-y,
-.vim-measure-value-z {
-  text-align: center;
-  padding: 5px;
-}
-
-.lds-roller {
-  display: block;
-  top: 10px;
-  left: 10px;
-  position: absolute;
-  width: 20px;
-  height: 20px;
-}
-.lds-roller div {
-  animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  transform-origin: 20px 20px;
-}
-.lds-roller div:after {
-  content: ' ';
-  display: block;
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: #40a6de;
-  margin: -4px 0 0 -4px;
-}
-.lds-roller div:nth-child(1) {
-  animation-delay: -0.036s;
-}
-.lds-roller div:nth-child(1):after {
-  top: 32px;
-  left: 32px;
-}
-.lds-roller div:nth-child(2) {
-  animation-delay: -0.072s;
-}
-.lds-roller div:nth-child(2):after {
-  top: 35px;
-  left: 28px;
-}
-.lds-roller div:nth-child(3) {
-  animation-delay: -0.108s;
-}
-.lds-roller div:nth-child(3):after {
-  top: 37px;
-  left: 24px;
-}
-.lds-roller div:nth-child(4) {
-  animation-delay: -0.144s;
-}
-.lds-roller div:nth-child(4):after {
-  top: 38px;
-  left: 20px;
-}
-.lds-roller div:nth-child(5) {
-  animation-delay: -0.18s;
-}
-.lds-roller div:nth-child(5):after {
-  top: 37px;
-  left: 16px;
-}
-.lds-roller div:nth-child(6) {
-  animation-delay: -0.216s;
-}
-.lds-roller div:nth-child(6):after {
-  top: 35px;
-  left: 12px;
-}
-.lds-roller div:nth-child(7) {
-  animation-delay: -0.252s;
-}
-.lds-roller div:nth-child(7):after {
-  top: 32px;
-  left: 8px;
-}
-.lds-roller div:nth-child(8) {
-  animation-delay: -0.288s;
-}
-.lds-roller div:nth-child(8):after {
-  top: 28px;
-  left: 5px;
-}
-@keyframes lds-roller {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.loader {
-  width: 100%;
-  height: 4px;
-  display: block;
-  top: 0px;
-  position: absolute;
-  overflow: hidden;
-}
-.loader::after {
-  content: '';
-  width: 30%;
-  height: 4.8px;
-  background: linear-gradient(
-    to right,
-    #40a6de00 0%,
-    #40a6deff 20%,
-    #40a6deff 80%,
-    #40a6de00 100%
-  );
-  position: absolute;
-  top: 0;
-  left: 0;
-  box-sizing: border-box;
-  animation: animloader 2s linear infinite;
-}
-
-@keyframes animloader {
-  0% {
-    left: 0;
-    transform: translateX(-100%);
-  }
-  100% {
-    left: 100%;
-    transform: translateX(0%);
-  }
 }
 :root {
   --rct-color-tree-bg: #f6f8fa;
@@ -1770,6 +1948,7 @@ video:where(.vim-component,.vim-component *) {
   align-items: center;
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
+  padding-left: var(--depthOffset, 0px);
 }
 
 .rct-tree-child-list {
@@ -1846,7 +2025,7 @@ video:where(.vim-component,.vim-component *) {
 }
 
 .rct-tree-drag-between-line-top {
-  top: 0px;
+  top: 0;
 }
 
 .rct-tree-drag-between-line-bottom {
