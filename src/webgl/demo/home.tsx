@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 
-import * as Urls from '../../devUrls'
+import * as Urls from '../../urls'
 import * as VIM from 'vim-web'
 
 

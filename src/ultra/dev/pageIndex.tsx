@@ -6,38 +6,39 @@ import { LoadError } from './loadError';
 import { OpenError } from './openError';
 import { type Page } from '../../page';
 import { AccessToken } from './accessToken';
+import { gitRoot } from '../../urls';
 
-export const gitRoot = 'https://github.com/vimaec/vim-web-demo/src/pages/webgl/dev';
+export const root =  gitRoot + '/ultra/dev'; 
 
 export const pages: Page[] = [
   {
     name: 'Access Token',
-    github: `${gitRoot}/accessToken.tsx`,
+    github: `${root}/accessToken.tsx`,
     content: () => <AccessToken />,
   },
   {
     name: 'Abort Error',
-    github: `${gitRoot}/abortError.tsx`,
+    github: `${root}/abortError.tsx`,
     content: () => <AbortError />,
   },
   {
     name: 'Connection Error',
-    github: `${gitRoot}/connectionError.tsx`,
+    github: `${root}/connectionError.tsx`,
     content: () => <ConnectionError />,
   },
   {
     name: 'Download Error',
-    github: `${gitRoot}/downloadError.tsx`,
+    github: `${root}/downloadError.tsx`,
     content: () => <DownloadError />,
   },
   {
     name: 'Load Error',
-    github: `${gitRoot}/loadError.tsx`,
+    github: `${root}/loadError.tsx`,
     content: () => <LoadError />,
   },
   {
     name: 'Open Error',
-    github: `${gitRoot}/openError.tsx`,
+    github: `${root}/openError.tsx`,
     content: () => <OpenError />,
   },
 ];

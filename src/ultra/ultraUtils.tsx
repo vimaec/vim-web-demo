@@ -1,5 +1,5 @@
 import * as VIM from 'vim-web'
-import * as Urls from '../devUrls'
+import * as Urls from '../urls'
 import { useRef, useEffect, RefObject } from 'react'
 
 import Ultra = VIM.React.Ultra

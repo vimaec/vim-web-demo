@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import * as VIM from 'vim-web'
 import { LocalTextBox } from '../utils/localTextBox'
-import * as Urls from '../devUrls'
+import * as Urls from '../urls'
 
 type ViewerRef = VIM.React.Webgl.ViewerRef | VIM.React.Ultra.ViewerRef
 

@@ -7,44 +7,45 @@ import { NodeEffects } from './nodeEffects';
 import { Resize } from './resize';
 import { SectionBox } from './sectionBox';
 import { type Page } from '../../page';
+import { gitRoot } from '../../urls';
 
-export const gitRoot = 'https://github.com/vimaec/vim-web-demo/src/ultra/demo';
+export const root =  gitRoot + '/ultra/demo'; 
 
 export const pages: Page[] = [
   {
     name: 'Home',
-    github: `${gitRoot}/home.tsx`,
+    github: `${root}/home.tsx`,
     content: () => <Home />,
   },
 
   {
     name: 'Camera',
-    github: `${gitRoot}/camera.tsx`,
+    github: `${root}/camera.tsx`,
     content: () => <Camera />,
   },
   {
     name: 'Colors',
-    github: `${gitRoot}/colors.tsx`,
+    github: `${root}/colors.tsx`,
     content: () => <Colors />,
   },
   {
     name: 'Ghost Color',
-    github: `${gitRoot}/ghostColor.tsx`,
+    github: `${root}/ghostColor.tsx`,
     content: () => <GhostColor />,
   },
   {
     name: 'Node Effects',
-    github: `${gitRoot}/nodeEffects.tsx`,
+    github: `${root}/nodeEffects.tsx`,
     content: () => <NodeEffects />,
   },
   {
     name: 'Resize',
-    github: `${gitRoot}/resize.tsx`,
+    github: `${root}/resize.tsx`,
     content: () => <Resize />,
   },
   {
     name: 'Section Box',
-    github: `${gitRoot}/sectionBox.tsx`,
+    github: `${root}/sectionBox.tsx`,
     content: () => <SectionBox />,
   },
 ];

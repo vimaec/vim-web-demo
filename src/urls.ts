@@ -1,3 +1,5 @@
+export const gitRoot = 'https://github.com/vimaec/vim-web-demo/blob/main/src';
+
 // Residence
 export const residence = 'https://storage.cdn.vimaec.com/samples/residence.v1.2.75.vim'
 export const residenceZipped = 'https://storage.cdn.vimaec.com/samples/residence.vim'

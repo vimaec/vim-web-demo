@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import * as VIM from 'vim-web';
 import { useUltraNoModel } from '../ultraUtils';
-import { residence } from '../../devUrls';
+import { residence } from '../../urls';
 import ViewerRef = VIM.React.Ultra.ViewerRef;
 
 export function SectionBox() {

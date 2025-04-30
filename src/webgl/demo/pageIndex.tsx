@@ -16,12 +16,13 @@ import { CustomContextMenu} from './customContextMenu';
 import { CustomControlBar } from './customControlBar';
 import { CustomGenericPanel } from './customGenericPanels';
 import { CustomBimPanel } from './customBimPanel';
+import { gitRoot } from '../../urls';
 
-export const gitRoot = 'https://github.com/vimaec/vim-web-demo/src/pages/webgl/demo';
+export const root =  gitRoot + '/webgl/demo'; 
 
 export const home =   {
   name: 'Home',
-  github: `${gitRoot}/00_home.tsx`,
+  github: `${root}/home.tsx`,
   content: () => <WebglHome />
 }
 
@@ -29,75 +30,75 @@ export const pages: Page[] = [
   home,
   {
     name: 'Local File',
-    github: `${gitRoot}/localFile.tsx`,
+    github: `${root}/localFile.tsx`,
     content: () => <WebglLocalFile />,
   },
   {
     name: 'Camera',
-    github: `${gitRoot}/camera.tsx`,
+    github: `${root}/camera.tsx`,
     content: () => <Camera />,
   },
   {
     name: 'Coloring',
-    github: `${gitRoot}/coloring.tsx`,
+    github: `${root}/coloring.tsx`,
     content: () => <Coloring />,
   },
   {
     name: 'Outlines',
-    github: `${gitRoot}/outlines.tsx`,
+    github: `${root}/outlines.tsx`,
     content: () => <Outlines />,
   },
   {
     name: 'Isolation',
-    github: `${gitRoot}/isolation.tsx`,
+    github: `${root}/isolation.tsx`,
     content: () => <Isolation />,
   },
   {
     name: 'Section Box',
-    github: `${gitRoot}/sectionBox.tsx`,
+    github: `${root}/sectionBox.tsx`,
     content: () => <SectionBox />,
   },
   /*
   {
     name: 'Plan View',
-    github: `${gitRoot}/planView.tsx`,
+    github: `${root}/planView.tsx`,
     content: <PlanView />,
   },
   */
   {
     name: 'Iframe',
-    github: `${gitRoot}/iframe.tsx`,
+    github: `${root}/iframe.tsx`,
     content: () => <WebglIframe />,
   },
   {
     name: 'Markers',
-    github: `${gitRoot}/markers.tsx`,
+    github: `${root}/markers.tsx`,
     content: () => <WebglMarkers />,
   },
   
   {
     name: 'Custom Inputs',
-    github: `${gitRoot}/customInputs.tsx`,
+    github: `${root}/customInputs.tsx`,
     content: () => <CustomInputs />,
   },
   {
     name: 'Custom Context Menu',
-    github: `${gitRoot}/customContextMenu.tsx`,
+    github: `${root}/customContextMenu.tsx`,
     content: () => <CustomContextMenu />,
   },
   {
     name: 'Custom Control Bar',
-    github: `${gitRoot}/customControlBar.tsx`,
+    github: `${root}/customControlBar.tsx`,
     content: () => <CustomControlBar />,
   },
   {
     name: 'Custom Generic Panels',
-    github: `${gitRoot}/genericPanels.tsx`,
+    github: `${root}/customGenericPanels.tsx`,
     content: () => <CustomGenericPanel />,
   },
   {
     name: 'Custom Bim Panels',
-    github: `${gitRoot}/genericPanels.tsx`,
+    github: `${root}/customBimPanel.tsx`,
     content: () => <CustomBimPanel />,
   }
 ];

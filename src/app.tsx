@@ -57,9 +57,9 @@ export function App() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()} // prevent selecting the page when clicking the icon
-            style={{ fontSize: "0.8rem", textDecoration: "none" }}
+            style={{ fontSize: "1rem", textDecoration: "none" }}
           >
-            🔗
+            {'('}🔗{'source)'}
           </a>
         )}
       </div>

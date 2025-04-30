@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { useWebglViewerWithResidence } from '../webglUtils'
-import * as DevUrls from '../../devUrls'
+import * as DevUrls from '../../urls'
 
 export function WebglUnload () {
   const div = useRef<HTMLDivElement>(null)

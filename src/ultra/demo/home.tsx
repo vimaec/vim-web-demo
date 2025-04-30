@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { useUltra } from '../ultraUtils'
-import * as Urls from '../../devUrls'
+import * as Urls from '../../urls'
 import * as VIM from 'vim-web'
 
 import ViewerRef = VIM.React.Ultra.ViewerRef

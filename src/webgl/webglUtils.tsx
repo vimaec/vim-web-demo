@@ -1,6 +1,6 @@
 import React, { RefObject, useEffect, useRef } from 'react'
 import * as VIM from 'vim-web'
-import * as DevUrls from '../devUrls'
+import * as DevUrls from '../urls'
 
 import ViewerRef = VIM.React.Webgl.ViewerRef
 import Webgl = VIM.React.Webgl
