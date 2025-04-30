@@ -81677,14 +81677,14 @@ function WebglIframe() {
     /* @__PURE__ */ jsxRuntimeExports$1.jsx(
       "iframe",
       {
-        src: "http://localhost:5173",
+        src: "./",
         className: "vc-left-1/2 vc-w-full vc-h-1/2"
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports$1.jsx(
       "iframe",
       {
-        src: "http://localhost:5173",
+        src: "./",
         className: "vc-left-1/2 vc-w-full vc-h-1/2"
       }
     )
