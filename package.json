@@ -14,11 +14,8 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "npm run replace-version && vite build",
-    "replace-version": "node replace.js",
-    "serve-dev": "http-server ./docs/dev -o",
-    "release": "robocopy /mir ./docs/dev ./docs/release",
-    "eslint": "eslint --ext .js,.ts src --fix"
+    "build": "vite build",
+    "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
     "@types/react": "^17.0.39",
@@ -44,7 +41,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "stats-js": "^1.0.1",
-    "vim-web": "0.3.44-dev.2"
+    "vim-web": "0.4.1-dev.4"
   },
   "keywords": [
     "3d",

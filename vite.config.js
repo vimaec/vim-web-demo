@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: "./",
+  base: '/vim-web-demo/', // Must match your GitHub repo name
   build: {
     outDir: "./docs/dev",
     //emptyOutDir: true,
