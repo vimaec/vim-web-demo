@@ -82126,17 +82126,6 @@ const pages$2 = [
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(WebglUnload, {})
   }
 ];
-function AccessToken() {
-  return AccessTokenPanel(createComponent);
-}
-async function createComponent(div, url, token) {
-  const ultra = await index.Ultra.createViewer(div);
-  await ultra.core.connect();
-  const request = ultra.load({ url, authToken: token });
-  await request.getResult();
-  await ultra.core.camera.frameAll(0);
-  return ultra;
-}
 const Ultra = index.Ultra;
 function useUltra(div, onCreated) {
   const cmp = reactExports.useRef();
@@ -82501,11 +82490,6 @@ const pages$1 = [
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(Home, {})
   },
   {
-    name: "Access Token",
-    github: `${gitRoot$1}/accessToken.tsx`,
-    content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(AccessToken, {})
-  },
-  {
     name: "Camera",
     github: `${gitRoot$1}/camera.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(Camera4, {})
@@ -82591,8 +82575,24 @@ async function badPath(ultra) {
   await ultra.core.connect();
   ultra.load({ url: "C:/Users/username/Downloads/invalid.vim" });
 }
+function AccessToken() {
+  return AccessTokenPanel(createComponent);
+}
+async function createComponent(div, url, token) {
+  const ultra = await index.Ultra.createViewer(div);
+  await ultra.core.connect();
+  const request = ultra.load({ url, authToken: token });
+  await request.getResult();
+  await ultra.core.camera.frameAll(0);
+  return ultra;
+}
 const gitRoot = "https://github.com/vimaec/vim-web-demo/src/pages/webgl/dev";
 const pages = [
+  {
+    name: "Access Token",
+    github: `${gitRoot}/accessToken.tsx`,
+    content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(AccessToken, {})
+  },
   {
     name: "Abort Error",
     github: `${gitRoot}/abortError.tsx`,
