@@ -5,10 +5,16 @@ import { DownloadError } from './downloadError';
 import { LoadError } from './loadError';
 import { OpenError } from './openError';
 import { type Page } from '../../page';
+import { AccessToken } from './accessToken';
 
 export const gitRoot = 'https://github.com/vimaec/vim-web-demo/src/pages/webgl/dev';
 
 export const pages: Page[] = [
+  {
+    name: 'Access Token',
+    github: `${gitRoot}/accessToken.tsx`,
+    content: () => <AccessToken />,
+  },
   {
     name: 'Abort Error',
     github: `${gitRoot}/abortError.tsx`,

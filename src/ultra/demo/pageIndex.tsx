@@ -1,5 +1,4 @@
 import React from 'react';
-import { AccessToken } from './accessToken';
 import { Camera } from './camera';
 import { Colors } from './colors';
 import { GhostColor } from './ghostColor';
@@ -17,11 +16,7 @@ export const pages: Page[] = [
     github: `${gitRoot}/home.tsx`,
     content: () => <Home />,
   },
-  {
-    name: 'Access Token',
-    github: `${gitRoot}/accessToken.tsx`,
-    content: () => <AccessToken />,
-  },
+
   {
     name: 'Camera',
     github: `${gitRoot}/camera.tsx`,
