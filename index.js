@@ -7056,6 +7056,7 @@ function requireClient$1() {
 var clientExports$1 = requireClient$1();
 var reactExports = requireReact();
 const React__default = /* @__PURE__ */ getDefaultExportFromCjs$1(reactExports);
+const gitRoot = "https://github.com/vimaec/vim-web-demo/blob/main/src";
 const residence = "https://storage.cdn.vimaec.com/samples/residence.v1.2.75.vim";
 const residenceZipped = "https://storage.cdn.vimaec.com/samples/residence.vim";
 const localResidence = "./residence.vim";
@@ -81912,84 +81913,84 @@ function CustomBimPanel() {
     };
   });
 }
-const gitRoot$3 = "https://github.com/vimaec/vim-web-demo/src/pages/webgl/demo";
+const root$4 = gitRoot + "/webgl/demo";
 const home = {
   name: "Home",
-  github: `${gitRoot$3}/00_home.tsx`,
+  github: `${root$4}/home.tsx`,
   content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(WebglHome, {})
 };
 const pages$3 = [
   home,
   {
     name: "Local File",
-    github: `${gitRoot$3}/localFile.tsx`,
+    github: `${root$4}/localFile.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(WebglLocalFile, {})
   },
   {
     name: "Camera",
-    github: `${gitRoot$3}/camera.tsx`,
+    github: `${root$4}/camera.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(Camera$1, {})
   },
   {
     name: "Coloring",
-    github: `${gitRoot$3}/coloring.tsx`,
+    github: `${root$4}/coloring.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(Coloring, {})
   },
   {
     name: "Outlines",
-    github: `${gitRoot$3}/outlines.tsx`,
+    github: `${root$4}/outlines.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(Outlines, {})
   },
   {
     name: "Isolation",
-    github: `${gitRoot$3}/isolation.tsx`,
+    github: `${root$4}/isolation.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(Isolation, {})
   },
   {
     name: "Section Box",
-    github: `${gitRoot$3}/sectionBox.tsx`,
+    github: `${root$4}/sectionBox.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(SectionBox$1, {})
   },
   /*
   {
     name: 'Plan View',
-    github: `${gitRoot}/planView.tsx`,
+    github: `${root}/planView.tsx`,
     content: <PlanView />,
   },
   */
   {
     name: "Iframe",
-    github: `${gitRoot$3}/iframe.tsx`,
+    github: `${root$4}/iframe.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(WebglIframe, {})
   },
   {
     name: "Markers",
-    github: `${gitRoot$3}/markers.tsx`,
+    github: `${root$4}/markers.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(WebglMarkers, {})
   },
   {
     name: "Custom Inputs",
-    github: `${gitRoot$3}/customInputs.tsx`,
+    github: `${root$4}/customInputs.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(CustomInputs, {})
   },
   {
     name: "Custom Context Menu",
-    github: `${gitRoot$3}/customContextMenu.tsx`,
+    github: `${root$4}/customContextMenu.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(CustomContextMenu, {})
   },
   {
     name: "Custom Control Bar",
-    github: `${gitRoot$3}/customControlBar.tsx`,
+    github: `${root$4}/customControlBar.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(CustomControlBar, {})
   },
   {
     name: "Custom Generic Panels",
-    github: `${gitRoot$3}/genericPanels.tsx`,
+    github: `${root$4}/customGenericPanels.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(CustomGenericPanel, {})
   },
   {
     name: "Custom Bim Panels",
-    github: `${gitRoot$3}/genericPanels.tsx`,
+    github: `${root$4}/customBimPanel.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(CustomBimPanel, {})
   }
 ];
@@ -82103,26 +82104,26 @@ function WebglUnload() {
   });
   return /* @__PURE__ */ jsxRuntimeExports$1.jsx("div", { ref: div, className: "vc-inset-0 vc-absolute" });
 }
-const gitRoot$2 = "https://github.com/vimaec/vim-web-demo/src/pages/webgl/dev";
+const root$3 = gitRoot + "/webgl/dev";
 const pages$2 = [
   {
     name: "Access Token",
-    github: `${gitRoot$2}/01_accessToken.tsx`,
+    github: `${root$3}/01_accessToken.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(WebglAccessToken, {})
   },
   {
     name: "Zipped File",
-    github: `${gitRoot$2}/03_zippedFile.tsx`,
+    github: `${root$3}/03_zippedFile.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(WebglZippedFile, {})
   },
   {
     name: "Invalid File",
-    github: `${gitRoot$2}/02_invalidFile.tsx`,
+    github: `${root$3}/02_invalidFile.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(WebglInvalidFile, {})
   },
   {
     name: "Unload",
-    github: `${gitRoot$2}/06_unload.tsx`,
+    github: `${root$3}/06_unload.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(WebglUnload, {})
   }
 ];
@@ -82482,41 +82483,41 @@ function renderBoxInput(label, get3, set3) {
     )
   ] });
 }
-const gitRoot$1 = "https://github.com/vimaec/vim-web-demo/src/ultra/demo";
+const root$2 = gitRoot + "/ultra/demo";
 const pages$1 = [
   {
     name: "Home",
-    github: `${gitRoot$1}/home.tsx`,
+    github: `${root$2}/home.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(Home, {})
   },
   {
     name: "Camera",
-    github: `${gitRoot$1}/camera.tsx`,
+    github: `${root$2}/camera.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(Camera4, {})
   },
   {
     name: "Colors",
-    github: `${gitRoot$1}/colors.tsx`,
+    github: `${root$2}/colors.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(Colors, {})
   },
   {
     name: "Ghost Color",
-    github: `${gitRoot$1}/ghostColor.tsx`,
+    github: `${root$2}/ghostColor.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(GhostColor, {})
   },
   {
     name: "Node Effects",
-    github: `${gitRoot$1}/nodeEffects.tsx`,
+    github: `${root$2}/nodeEffects.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(NodeEffects, {})
   },
   {
     name: "Resize",
-    github: `${gitRoot$1}/resize.tsx`,
+    github: `${root$2}/resize.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(Resize, {})
   },
   {
     name: "Section Box",
-    github: `${gitRoot$1}/sectionBox.tsx`,
+    github: `${root$2}/sectionBox.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(SectionBox3, {})
   }
 ];
@@ -82586,36 +82587,36 @@ async function createComponent(div, url, token) {
   await ultra.core.camera.frameAll(0);
   return ultra;
 }
-const gitRoot = "https://github.com/vimaec/vim-web-demo/src/pages/webgl/dev";
+const root$1 = gitRoot + "/ultra/dev";
 const pages = [
   {
     name: "Access Token",
-    github: `${gitRoot}/accessToken.tsx`,
+    github: `${root$1}/accessToken.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(AccessToken, {})
   },
   {
     name: "Abort Error",
-    github: `${gitRoot}/abortError.tsx`,
+    github: `${root$1}/abortError.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(AbortError, {})
   },
   {
     name: "Connection Error",
-    github: `${gitRoot}/connectionError.tsx`,
+    github: `${root$1}/connectionError.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(ConnectionError, {})
   },
   {
     name: "Download Error",
-    github: `${gitRoot}/downloadError.tsx`,
+    github: `${root$1}/downloadError.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(DownloadError, {})
   },
   {
     name: "Load Error",
-    github: `${gitRoot}/loadError.tsx`,
+    github: `${root$1}/loadError.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(LoadError2, {})
   },
   {
     name: "Open Error",
-    github: `${gitRoot}/openError.tsx`,
+    github: `${root$1}/openError.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(OpenError, {})
   }
 ];
@@ -82651,15 +82652,19 @@ function App() {
         onClick: () => setSelectedPageId(page),
         children: [
           page.name,
-          isSelected && /* @__PURE__ */ jsxRuntimeExports$1.jsx(
+          isSelected && /* @__PURE__ */ jsxRuntimeExports$1.jsxs(
             "a",
             {
               href: page.github,
               target: "_blank",
               rel: "noopener noreferrer",
               onClick: (e) => e.stopPropagation(),
-              style: { fontSize: "0.8rem", textDecoration: "none" },
-              children: "🔗"
+              style: { fontSize: "1rem", textDecoration: "none" },
+              children: [
+                "(",
+                "🔗",
+                "source)"
+              ]
             }
           )
         ]
