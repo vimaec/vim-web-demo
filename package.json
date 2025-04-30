@@ -10,12 +10,12 @@
   "author": "VIM <hello@vimaec.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/vimaec/vim-web-demo.git"
+    "url": "https://github.com/vimaec/vim-web-demo"
   },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "devDependencies": {
     "@types/react": "^17.0.39",

@@ -4,8 +4,9 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   base: '/vim-web-demo/', // Must match your GitHub repo name
+  assetsInclude: ['**/*.vim'], // Allows to import .vim files as assets
   build: {
-    outDir: "./docs/dev",
+    outDir: "./dist",
     //emptyOutDir: true,
     sourcemap: true,
     // Minify set to true will break the IIFE output
