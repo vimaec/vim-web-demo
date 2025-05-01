@@ -5,12 +5,37 @@ import { pages as ultraDemoPages } from "./ultra/demo/pageIndex";
 import { pages as ultraDevPages } from "./ultra/dev/pageIndex";
 import {type Page} from "./page"
 
+const allPages = [
+  ...webglDemoPages,
+  ...webglDevPages,
+  ...ultraDemoPages,
+  ...ultraDevPages
+]
 
+function ParseUrl(url: string) : undefined | 'dev' | Page {
+  const last = url.split("/").at(-1)
+  if(last === undefined || last === "" || last === "vim-web-demo") {
+    return undefined
+  }
+
+  if(last === "dev") {
+    return 'dev'
+  }
+
+  return allPages.find((page) => {
+    const pageLink = page.github.split("/").at(-1).replace('.tsx', '')
+    return pageLink === last
+  })
+}
 
 
 export function App() {
+
+  const arg = ParseUrl(window.location.pathname)
+  console.log(arg)
+
   const pages = new Map<string, Page[]>()
-  if(window.location.pathname.includes("dev")) {
+  if(arg === 'dev') {
     pages.set("webgl", webglDevPages)
     pages.set("ultra", ultraDevPages)
 
@@ -18,12 +43,10 @@ export function App() {
   else{
     pages.set("webgl", webglDemoPages)
     pages.set('ultra', ultraDemoPages)
-    
   }
 
-
-  const [selectedPage, setSelectedPageId] = useState(webglHome); // Initialize with the first page's path
-
+  const landingPage = arg === undefined || arg === 'dev' ? webglHome : arg
+  const [selectedPage, setSelectedPageId] = useState(landingPage); 
 
   function renderSection(section: string, pages: Page[]) {
     return (

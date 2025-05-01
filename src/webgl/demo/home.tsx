@@ -11,24 +11,13 @@ export function WebglHome () {
   const div = useRef<HTMLDivElement>(null)
   const viewerRef = useRef<ViewerRef>()
   useEffect(() => {
-    console.log('WebglHome Effect')
-
-    let disposed = false
     VIM.React.Webgl.createViewer(div.current).then((viewer) => {
-      // If was disposed before finished creating, dispose it
-      if(disposed){
-        console.log('WebglHome Dispose')
-        viewer.dispose()
-        return
-      }
       viewerRef.current = viewer
       globalThis.viewer = viewer // for testing in browser console
       loadFile(viewerRef.current)
     })
 
     return () => {
-      disposed = true
-      console.log('WebglHome Dispose')
       viewerRef.current?.dispose()
     }
   }, [])

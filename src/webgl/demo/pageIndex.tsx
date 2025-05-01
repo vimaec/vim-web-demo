@@ -11,6 +11,7 @@ import { Coloring } from './coloring';
 import { Outlines } from './outlines';
 import { Isolation } from './isolation';
 import { SectionBox } from './sectionBox';
+import { AccessingBim } from './accessingBim';
 import { CustomInputs } from './customInputs';
 import { CustomContextMenu} from './customContextMenu';
 import { CustomControlBar } from './customControlBar';
@@ -73,6 +74,21 @@ export const pages: Page[] = [
   {
     name: 'Markers',
     github: `${root}/markers.tsx`,
+    content: () => <WebglMarkers />,
+  },
+  {
+    name: 'Accessing BIM',
+    github: `${root}/accessingBim.tsx`,
+    content: () => <AccessingBim />,
+  },
+  {
+    name: 'Custom Markers',
+    github: `${root}/customMarkers.tsx`,
+    content: () => <WebglMarkers />,
+  },
+  {
+    name: 'Custom Context',
+    github: `${root}/customContext.tsx`,
     content: () => <WebglMarkers />,
   },
   
