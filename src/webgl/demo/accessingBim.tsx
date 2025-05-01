@@ -1,6 +1,4 @@
-import React from 'react';
 import { WebglViewerWithResidence } from '../webglUtils'
-import * as VIM from 'vim-web'
 
 export function AccessingBim () {
   return WebglViewerWithResidence((viewer, vim) =>{
