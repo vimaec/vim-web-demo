@@ -82662,11 +82662,11 @@ function App() {
   const parsedPage = parseInitialPage();
   const groupedPages = new Map(
     parsedPage === "dev" ? [
-      ["webgl", pages$2],
-      ["ultra", pages]
+      ["Webgl", pages$2],
+      ["Ultra", pages]
     ] : [
-      ["webgl", pages$3],
-      ["ultra", pages$1]
+      ["Webgl", pages$3],
+      ["Ultra", pages$1]
     ]
   );
   const initialPage = parsedPage === "dev" || parsedPage === void 0 ? home : parsedPage;
@@ -82680,12 +82680,14 @@ function App() {
       "div",
       {
         style: {
-          marginBottom: "1rem",
           cursor: "pointer",
-          fontWeight: isSelected ? "bold" : "normal",
+          fontWeight: isSelected ? "bold" : "",
           display: "flex",
           alignItems: "center",
+          fontSize: "14px",
+          lineHeight: "1.5rem",
           gap: "0.5rem"
+          // <-- This adds spacing between name and source link
         },
         onClick: () => setSelectedPage(page),
         children: [
@@ -82697,7 +82699,7 @@ function App() {
               target: "_blank",
               rel: "noopener noreferrer",
               onClick: (e) => e.stopPropagation(),
-              style: { fontSize: "1rem", textDecoration: "none" },
+              style: { fontSize: "1rem" },
               children: "(🔗source)"
             }
           )
@@ -82707,10 +82709,14 @@ function App() {
     );
   };
   const renderSection = (title2, pages2) => /* @__PURE__ */ jsxRuntimeExports$1.jsxs("div", { style: { marginBottom: "2rem" }, children: [
-    /* @__PURE__ */ jsxRuntimeExports$1.jsx("h2", { children: title2 }),
+    /* @__PURE__ */ jsxRuntimeExports$1.jsx("h3", { children: title2 }),
     pages2.map(renderLink)
   ] }, title2);
-  return /* @__PURE__ */ jsxRuntimeExports$1.jsxs("div", { className: "APP", style: { display: "flex", height: "100vh" }, children: [
+  return /* @__PURE__ */ jsxRuntimeExports$1.jsxs("div", { className: "APP", style: {
+    display: "flex",
+    height: "100vh",
+    fontFamily: "'Roboto', sans-serif"
+  }, children: [
     /* @__PURE__ */ jsxRuntimeExports$1.jsx(
       "div",
       {
