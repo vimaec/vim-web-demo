@@ -81664,22 +81664,13 @@ function delay$1(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 function WebglIframe() {
-  return /* @__PURE__ */ jsxRuntimeExports$1.jsxs(jsxRuntimeExports$1.Fragment, { children: [
-    /* @__PURE__ */ jsxRuntimeExports$1.jsx(
-      "iframe",
-      {
-        src: "./",
-        className: "vc-left-1/2 vc-w-full vc-h-1/2"
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports$1.jsx(
-      "iframe",
-      {
-        src: "./",
-        className: "vc-left-1/2 vc-w-full vc-h-1/2"
-      }
-    )
-  ] });
+  return /* @__PURE__ */ jsxRuntimeExports$1.jsx(jsxRuntimeExports$1.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports$1.jsx(
+    "iframe",
+    {
+      style: { border: "none", width: "50%", height: "50%", marginLeft: "25%", marginTop: "25%" },
+      src: "./"
+    }
+  ) });
 }
 const Webgl$1 = index.Webgl;
 function useWebglViewer(div, onReady) {
@@ -81832,10 +81823,18 @@ function AccessingBim() {
       const bimElement = await (first == null ? void 0 : first.getBimElement());
       if (!bimElement) return;
       console.log("Element Id:", bimElement.id);
-      console.log("Element Name", bimElement.name);
+      console.log("Element Name:", bimElement.name);
       console.log("Element Type:", bimElement.type);
-      console.log("Family Name:", bimElement.familyName);
-      console.log(bimElement);
+      const category = await vim.bim.category.get(bimElement.categoryIndex);
+      console.log("Element Category:", category.name);
+      const level = await vim.bim.level.get(bimElement.levelIndex);
+      const levelElement = await vim.bim.element.get(level.elementIndex);
+      console.log("Element Level:", levelElement.name);
+      const familyInstances = await vim.bim.familyInstance.getAll();
+      const familyInstance = familyInstances.find((fi) => fi.elementIndex === bimElement.index);
+      const familyType = await vim.bim.familyType.get(familyInstance.familyTypeIndex);
+      const familyTypeElement = await vim.bim.element.get(familyType.elementIndex);
+      console.log("Family Type Name:", familyTypeElement.name);
     });
   });
 }
