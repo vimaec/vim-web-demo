@@ -36,12 +36,12 @@ export function App() {
   const groupedPages = new Map<string, Page[]>(
     parsedPage === "dev"
       ? [
-          ["webgl", webglDevPages],
-          ["ultra", ultraDevPages],
+          ["Webgl", webglDevPages],
+          ["Ultra", ultraDevPages],
         ]
       : [
-          ["webgl", webglDemoPages],
-          ["ultra", ultraDemoPages],
+          ["Webgl", webglDemoPages],
+          ["Ultra", ultraDemoPages],
         ]
   );
 
@@ -52,7 +52,7 @@ export function App() {
 
   // Sync URL with selection
   useEffect(() => {
-    window.history.pushState({}, "", getPageSlug(selectedPage));
+    window.history.replaceState({}, "", getPageSlug(selectedPage));
   }, [selectedPage]);
 
   const renderLink = (page: Page) => {
@@ -61,12 +61,13 @@ export function App() {
       <div
         key={page.name}
         style={{
-          marginBottom: "1rem",
           cursor: "pointer",
-          fontWeight: isSelected ? "bold" : "normal",
+          fontWeight: isSelected ? 'bold' : '',
           display: "flex",
           alignItems: "center",
-          gap: "0.5rem",
+          fontSize: "14px",
+          lineHeight: "1.5rem",
+          gap: "0.5rem", // <-- This adds spacing between name and source link
         }}
         onClick={() => setSelectedPage(page)}
       >
@@ -77,7 +78,7 @@ export function App() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            style={{ fontSize: "1rem", textDecoration: "none" }}
+            style={{ fontSize: "1rem" }}
           >
             (🔗source)
           </a>
@@ -88,13 +89,17 @@ export function App() {
 
   const renderSection = (title: string, pages: Page[]) => (
     <div key={title} style={{ marginBottom: "2rem" }}>
-      <h2>{title}</h2>
+      <h3>{title}</h3>
       {pages.map(renderLink)}
     </div>
   );
 
   return (
-    <div className="APP" style={{ display: "flex", height: "100vh" }}>
+    <div className="APP" style={{
+        display: "flex",
+        height: "100vh",
+        fontFamily: "'Roboto', sans-serif"
+      }}>
       {/* Sidebar */}
       <div
         className="Menu"
