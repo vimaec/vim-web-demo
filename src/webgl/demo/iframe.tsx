@@ -3,15 +3,9 @@ import React from 'react';
 export function WebglIframe () {
   
   return (
-    <>
-    <iframe
+  <>
+    <iframe style={{border:"none", width:"50%", height:"50%", marginLeft:"25%", marginTop:"25%"}}
      src='./'
-     className='vc-left-1/2 vc-w-full vc-h-1/2'
-  />
-  <iframe
-     src='./'
-     className='vc-left-1/2 vc-w-full vc-h-1/2'
-  /></>
-
-)
-}
+    />
+  </>
+)}
