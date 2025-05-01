@@ -81824,10 +81824,13 @@ function SectionBox$1() {
 }
 function AccessingBim() {
   return WebglViewerWithResidence((viewer, vim) => {
+    viewer.modal.message({ title: "Bim Demo", body: "Check console for BIM element info" });
+    setTimeout(() => viewer.modal.message(void 0), 2e3);
     viewer.core.selection.onSelectionChanged.sub(async () => {
       const elements = viewer.core.selection.getAll().filter((e) => e.type === "Element3D");
       const first = elements[0];
-      const bimElement = await first.getBimElement();
+      const bimElement = await (first == null ? void 0 : first.getBimElement());
+      if (!bimElement) return;
       console.log("Element Id:", bimElement.id);
       console.log("Element Name", bimElement.name);
       console.log("Element Type:", bimElement.type);
@@ -82714,8 +82717,7 @@ function App() {
   ] }, title2);
   return /* @__PURE__ */ jsxRuntimeExports$1.jsxs("div", { className: "APP", style: {
     display: "flex",
-    height: "100vh",
-    fontFamily: "'Roboto', sans-serif"
+    height: "100vh"
   }, children: [
     /* @__PURE__ */ jsxRuntimeExports$1.jsx(
       "div",
@@ -82725,7 +82727,8 @@ function App() {
           width: "200px",
           borderRight: "1px solid #ccc",
           padding: "1rem",
-          overflowY: "auto"
+          overflowY: "auto",
+          fontFamily: "'Roboto', sans-serif"
         },
         children: [...groupedPages.entries()].map(
           ([label, pages2]) => renderSection(label, pages2)
