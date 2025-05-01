@@ -82646,40 +82646,36 @@ const allPages = [
   ...pages$1,
   ...pages
 ];
-function ParseUrl(url) {
-  const last = url.split("/").at(-1);
-  if (last === void 0 || last === "" || last === "vim-web-demo") {
-    return void 0;
-  }
-  if (last === "dev") {
-    return "dev";
-  }
-  return allPages.find((page) => {
-    const pageLink = page.github.split("/").at(-1).replace(".tsx", "");
-    return pageLink === last;
-  });
+function getPageSlug(page) {
+  return page.github.split("/").at(-1).replace(".tsx", "");
+}
+function getCurrentSlugFromUrl() {
+  return window.location.pathname.split("/").at(-1);
+}
+function parseInitialPage() {
+  const slug = getCurrentSlugFromUrl();
+  if (!slug || slug === "vim-web-demo") return void 0;
+  if (slug === "dev") return "dev";
+  return allPages.find((p) => getPageSlug(p) === slug);
 }
 function App() {
-  const arg = ParseUrl(window.location.pathname);
-  console.log(arg);
-  const pages$4 = /* @__PURE__ */ new Map();
-  if (arg === "dev") {
-    pages$4.set("webgl", pages$2);
-    pages$4.set("ultra", pages);
-  } else {
-    pages$4.set("webgl", pages$3);
-    pages$4.set("ultra", pages$1);
-  }
-  const landingPage = arg === void 0 || arg === "dev" ? home : arg;
-  const [selectedPage, setSelectedPageId] = reactExports.useState(landingPage);
-  function renderSection(section, pages2) {
-    return /* @__PURE__ */ jsxRuntimeExports$1.jsxs("div", { style: { marginBottom: "2rem" }, children: [
-      /* @__PURE__ */ jsxRuntimeExports$1.jsx("h2", { children: section }),
-      pages2.map((page) => renderLink(page))
-    ] }, section);
-  }
-  function renderLink(page) {
-    const isSelected = page === selectedPage;
+  const parsedPage = parseInitialPage();
+  const groupedPages = new Map(
+    parsedPage === "dev" ? [
+      ["webgl", pages$2],
+      ["ultra", pages]
+    ] : [
+      ["webgl", pages$3],
+      ["ultra", pages$1]
+    ]
+  );
+  const initialPage = parsedPage === "dev" || parsedPage === void 0 ? home : parsedPage;
+  const [selectedPage, setSelectedPage] = reactExports.useState(initialPage);
+  reactExports.useEffect(() => {
+    window.history.pushState({}, "", getPageSlug(selectedPage));
+  }, [selectedPage]);
+  const renderLink = (page) => {
+    const isSelected = selectedPage === page;
     return /* @__PURE__ */ jsxRuntimeExports$1.jsxs(
       "div",
       {
@@ -82691,10 +82687,10 @@ function App() {
           alignItems: "center",
           gap: "0.5rem"
         },
-        onClick: () => setSelectedPageId(page),
+        onClick: () => setSelectedPage(page),
         children: [
           page.name,
-          isSelected && /* @__PURE__ */ jsxRuntimeExports$1.jsxs(
+          isSelected && /* @__PURE__ */ jsxRuntimeExports$1.jsx(
             "a",
             {
               href: page.github,
@@ -82702,20 +82698,34 @@ function App() {
               rel: "noopener noreferrer",
               onClick: (e) => e.stopPropagation(),
               style: { fontSize: "1rem", textDecoration: "none" },
-              children: [
-                "(",
-                "🔗",
-                "source)"
-              ]
+              children: "(🔗source)"
             }
           )
         ]
       },
       page.name
     );
-  }
+  };
+  const renderSection = (title2, pages2) => /* @__PURE__ */ jsxRuntimeExports$1.jsxs("div", { style: { marginBottom: "2rem" }, children: [
+    /* @__PURE__ */ jsxRuntimeExports$1.jsx("h2", { children: title2 }),
+    pages2.map(renderLink)
+  ] }, title2);
   return /* @__PURE__ */ jsxRuntimeExports$1.jsxs("div", { className: "APP", style: { display: "flex", height: "100vh" }, children: [
-    /* @__PURE__ */ jsxRuntimeExports$1.jsx("div", { className: "Menu", style: { width: "200px", borderRight: "1px solid #ccc", padding: "1rem", overflowY: "auto" }, children: [...pages$4.entries()].map(([index2, page]) => renderSection(index2, page)) }),
+    /* @__PURE__ */ jsxRuntimeExports$1.jsx(
+      "div",
+      {
+        className: "Menu",
+        style: {
+          width: "200px",
+          borderRight: "1px solid #ccc",
+          padding: "1rem",
+          overflowY: "auto"
+        },
+        children: [...groupedPages.entries()].map(
+          ([label, pages2]) => renderSection(label, pages2)
+        )
+      }
+    ),
     /* @__PURE__ */ jsxRuntimeExports$1.jsx("div", { style: { flexGrow: 1, position: "relative" }, children: selectedPage == null ? void 0 : selectedPage.content() })
   ] });
 }
