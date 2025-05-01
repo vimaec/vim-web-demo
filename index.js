@@ -82672,7 +82672,7 @@ function App() {
   const initialPage = parsedPage === "dev" || parsedPage === void 0 ? home : parsedPage;
   const [selectedPage, setSelectedPage] = reactExports.useState(initialPage);
   reactExports.useEffect(() => {
-    window.history.pushState({}, "", getPageSlug(selectedPage));
+    window.history.replaceState({}, "", getPageSlug(selectedPage));
   }, [selectedPage]);
   const renderLink = (page) => {
     const isSelected = selectedPage === page;
