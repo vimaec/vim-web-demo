@@ -81578,22 +81578,13 @@ function WebglHome() {
   const div = reactExports.useRef(null);
   const viewerRef = reactExports.useRef();
   reactExports.useEffect(() => {
-    console.log("WebglHome Effect");
-    let disposed = false;
     index.Webgl.createViewer(div.current).then((viewer) => {
-      if (disposed) {
-        console.log("WebglHome Dispose");
-        viewer.dispose();
-        return;
-      }
       viewerRef.current = viewer;
       globalThis.viewer = viewer;
       loadFile$1(viewerRef.current);
     });
     return () => {
       var _a3;
-      disposed = true;
-      console.log("WebglHome Dispose");
       (_a3 = viewerRef.current) == null ? void 0 : _a3.dispose();
     };
   }, []);
@@ -81831,6 +81822,20 @@ function SectionBox$1() {
     viewer.sectionBox.sectionBox.call(box);
   });
 }
+function AccessingBim() {
+  return WebglViewerWithResidence((viewer, vim) => {
+    viewer.core.selection.onSelectionChanged.sub(async () => {
+      const elements = viewer.core.selection.getAll().filter((e) => e.type === "Element3D");
+      const first = elements[0];
+      const bimElement = await first.getBimElement();
+      console.log("Element Id:", bimElement.id);
+      console.log("Element Name", bimElement.name);
+      console.log("Element Type:", bimElement.type);
+      console.log("Family Name:", bimElement.familyName);
+      console.log(bimElement);
+    });
+  });
+}
 function CustomInputs() {
   return WebglViewerWithResidence(async (viewer, vim) => {
     viewer.core.selection.onSelectionChanged.subscribe(() => {
@@ -81966,6 +81971,21 @@ const pages$3 = [
   {
     name: "Markers",
     github: `${root$4}/markers.tsx`,
+    content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(WebglMarkers, {})
+  },
+  {
+    name: "Accessing BIM",
+    github: `${root$4}/accessingBim.tsx`,
+    content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(AccessingBim, {})
+  },
+  {
+    name: "Custom Markers",
+    github: `${root$4}/customMarkers.tsx`,
+    content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(WebglMarkers, {})
+  },
+  {
+    name: "Custom Context",
+    github: `${root$4}/customContext.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(WebglMarkers, {})
   },
   {
@@ -82620,16 +82640,38 @@ const pages = [
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(OpenError, {})
   }
 ];
+const allPages = [
+  ...pages$3,
+  ...pages$2,
+  ...pages$1,
+  ...pages
+];
+function ParseUrl(url) {
+  const last = url.split("/").at(-1);
+  if (last === void 0 || last === "" || last === "vim-web-demo") {
+    return void 0;
+  }
+  if (last === "dev") {
+    return "dev";
+  }
+  return allPages.find((page) => {
+    const pageLink = page.github.split("/").at(-1).replace(".tsx", "");
+    return pageLink === last;
+  });
+}
 function App() {
+  const arg = ParseUrl(window.location.pathname);
+  console.log(arg);
   const pages$4 = /* @__PURE__ */ new Map();
-  if (window.location.pathname.includes("dev")) {
+  if (arg === "dev") {
     pages$4.set("webgl", pages$2);
     pages$4.set("ultra", pages);
   } else {
     pages$4.set("webgl", pages$3);
     pages$4.set("ultra", pages$1);
   }
-  const [selectedPage, setSelectedPageId] = reactExports.useState(home);
+  const landingPage = arg === void 0 || arg === "dev" ? home : arg;
+  const [selectedPage, setSelectedPageId] = reactExports.useState(landingPage);
   function renderSection(section, pages2) {
     return /* @__PURE__ */ jsxRuntimeExports$1.jsxs("div", { style: { marginBottom: "2rem" }, children: [
       /* @__PURE__ */ jsxRuntimeExports$1.jsx("h2", { children: section }),
