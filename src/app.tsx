@@ -98,7 +98,7 @@ export function App() {
     <div className="APP" style={{
         display: "flex",
         height: "100vh",
-        fontFamily: "'Roboto', sans-serif"
+
       }}>
       {/* Sidebar */}
       <div
@@ -108,6 +108,7 @@ export function App() {
           borderRight: "1px solid #ccc",
           padding: "1rem",
           overflowY: "auto",
+          fontFamily: "'Roboto', sans-serif"
         }}
       >
         {[...groupedPages.entries()].map(([label, pages]) =>
