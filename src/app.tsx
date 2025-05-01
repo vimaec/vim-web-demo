@@ -1,65 +1,62 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { pages as webglDemoPages, home as webglHome } from "./webgl/demo/pageIndex";
 import { pages as webglDevPages } from "./webgl/dev/pageIndex";
 import { pages as ultraDemoPages } from "./ultra/demo/pageIndex";
 import { pages as ultraDevPages } from "./ultra/dev/pageIndex";
-import {type Page} from "./page"
+import { type Page } from "./page";
 
-const allPages = [
+// Combine all known pages
+const allPages: Page[] = [
   ...webglDemoPages,
   ...webglDevPages,
   ...ultraDemoPages,
-  ...ultraDevPages
-]
+  ...ultraDevPages,
+];
 
-function ParseUrl(url: string) : undefined | 'dev' | Page {
-  const last = url.split("/").at(-1)
-  if(last === undefined || last === "" || last === "vim-web-demo") {
-    return undefined
-  }
-
-  if(last === "dev") {
-    return 'dev'
-  }
-
-  return allPages.find((page) => {
-    const pageLink = page.github.split("/").at(-1).replace('.tsx', '')
-    return pageLink === last
-  })
+// Helpers
+function getPageSlug(page: Page): string {
+  return page.github.split("/").at(-1)!.replace(".tsx", "");
 }
 
+function getCurrentSlugFromUrl(): string | undefined {
+  return window.location.pathname.split("/").at(-1);
+}
 
+function parseInitialPage(): "dev" | Page | undefined {
+  const slug = getCurrentSlugFromUrl();
+  if (!slug || slug === "vim-web-demo") return undefined;
+  if (slug === "dev") return "dev";
+  return allPages.find((p) => getPageSlug(p) === slug);
+}
+
+// Main component
 export function App() {
+  const parsedPage = parseInitialPage();
 
-  const arg = ParseUrl(window.location.pathname)
-  console.log(arg)
+  const groupedPages = new Map<string, Page[]>(
+    parsedPage === "dev"
+      ? [
+          ["webgl", webglDevPages],
+          ["ultra", ultraDevPages],
+        ]
+      : [
+          ["webgl", webglDemoPages],
+          ["ultra", ultraDemoPages],
+        ]
+  );
 
-  const pages = new Map<string, Page[]>()
-  if(arg === 'dev') {
-    pages.set("webgl", webglDevPages)
-    pages.set("ultra", ultraDevPages)
+  const initialPage: Page =
+    parsedPage === "dev" || parsedPage === undefined ? webglHome : parsedPage;
 
-  }
-  else{
-    pages.set("webgl", webglDemoPages)
-    pages.set('ultra', ultraDemoPages)
-  }
+  const [selectedPage, setSelectedPage] = useState<Page>(initialPage);
 
-  const landingPage = arg === undefined || arg === 'dev' ? webglHome : arg
-  const [selectedPage, setSelectedPageId] = useState(landingPage); 
+  // Sync URL with selection
+  useEffect(() => {
+    window.history.pushState({}, "", getPageSlug(selectedPage));
+  }, [selectedPage]);
 
-  function renderSection(section: string, pages: Page[]) {
-    return (
-      <div key={section} style={{ marginBottom: "2rem" }}>
-        <h2>{section}</h2>
-        {pages.map((page) => renderLink(page))}
-      </div>
-    );
-  }
-
-  function renderLink(page: Page) {
-    const isSelected = page === selectedPage;
-
+  const renderLink = (page: Page) => {
+    const isSelected = selectedPage === page;
     return (
       <div
         key={page.name}
@@ -69,9 +66,9 @@ export function App() {
           fontWeight: isSelected ? "bold" : "normal",
           display: "flex",
           alignItems: "center",
-          gap: "0.5rem"
+          gap: "0.5rem",
         }}
-        onClick={() => setSelectedPageId(page)}
+        onClick={() => setSelectedPage(page)}
       >
         {page.name}
         {isSelected && (
@@ -79,24 +76,41 @@ export function App() {
             href={page.github}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()} // prevent selecting the page when clicking the icon
+            onClick={(e) => e.stopPropagation()}
             style={{ fontSize: "1rem", textDecoration: "none" }}
           >
-            {'('}🔗{'source)'}
+            (🔗source)
           </a>
         )}
       </div>
     );
-  }
+  };
+
+  const renderSection = (title: string, pages: Page[]) => (
+    <div key={title} style={{ marginBottom: "2rem" }}>
+      <h2>{title}</h2>
+      {pages.map(renderLink)}
+    </div>
+  );
 
   return (
     <div className="APP" style={{ display: "flex", height: "100vh" }}>
-      {/* Left side: Page list */}
-      <div className="Menu" style={{ width: "200px", borderRight: "1px solid #ccc", padding: "1rem", overflowY: "auto" }}>
-        {[...pages.entries()].map(([index, page]) => renderSection(index, page))}
+      {/* Sidebar */}
+      <div
+        className="Menu"
+        style={{
+          width: "200px",
+          borderRight: "1px solid #ccc",
+          padding: "1rem",
+          overflowY: "auto",
+        }}
+      >
+        {[...groupedPages.entries()].map(([label, pages]) =>
+          renderSection(label, pages)
+        )}
       </div>
 
-      {/* Right side: Selected page content */}
+      {/* Main content */}
       <div style={{ flexGrow: 1, position: "relative" }}>
         {selectedPage?.content()}
       </div>
