@@ -709,9 +709,6 @@ video:where(.vim-component,.vim-component *) {
 .vc-left-0 {
   left: 0px;
 }
-.vc-left-1\/2 {
-  left: 50%;
-}
 .vc-left-4 {
   left: 1rem;
 }
@@ -733,9 +730,6 @@ video:where(.vim-component,.vim-component *) {
 .vc-top-1 {
   top: 0.25rem;
 }
-.vc-top-10 {
-  top: 2.5rem;
-}
 .vc-top-4 {
   top: 1rem;
 }
@@ -744,9 +738,6 @@ video:where(.vim-component,.vim-component *) {
 }
 .vc-top-\[10\%\] {
   top: 10%;
-}
-.vc-top-\[150px\] {
-  top: 150px;
 }
 .vc-top-\[20px\] {
   top: 20px;
@@ -855,9 +846,6 @@ video:where(.vim-component,.vim-component *) {
 .vc-hidden {
   display: none;
 }
-.vc-h-1\/2 {
-  height: 50%;
-}
 .vc-h-2 {
   height: 0.5rem;
 }
@@ -945,10 +933,6 @@ video:where(.vim-component,.vim-component *) {
 .vc-shrink-0 {
   flex-shrink: 0;
 }
-.vc--translate-x-1\/2 {
-  --tw-translate-x: -50%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
 .vc-rotate-0 {
   --tw-rotate: 0deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -991,9 +975,6 @@ video:where(.vim-component,.vim-component *) {
 }
 .vc-justify-evenly {
   justify-content: space-evenly;
-}
-.vc-gap-1 {
-  gap: 0.25rem;
 }
 .vc-gap-2 {
   gap: 0.5rem;
@@ -1139,9 +1120,6 @@ video:where(.vim-component,.vim-component *) {
 .vc-p-1 {
   padding: 0.25rem;
 }
-.vc-p-4 {
-  padding: 1rem;
-}
 .vc-p-5 {
   padding: 1.25rem;
 }
@@ -1214,9 +1192,6 @@ video:where(.vim-component,.vim-component *) {
 }
 .vc-font-bold {
   font-weight: 700;
-}
-.vc-font-medium {
-  font-weight: 500;
 }
 .vc-font-normal {
   font-weight: 400;

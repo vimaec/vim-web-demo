@@ -7059,6 +7059,7 @@ const React__default = /* @__PURE__ */ getDefaultExportFromCjs$1(reactExports);
 const gitRoot = "https://github.com/vimaec/vim-web-demo/blob/main/src";
 const residence = "https://storage.cdn.vimaec.com/samples/residence.v1.2.75.vim";
 const residenceZipped = "https://storage.cdn.vimaec.com/samples/residence.vim";
+const localResidence = "./residence.vim";
 const residenceWithAccessToken = "https://saas-api-v2.vimaec.com/api/public/542c2335-992d-4af0-ffd9-08dd0262dd9c/2024-11-11T15:09:43";
 const medicalTower = "https://storage.cdn.vimaec.com/samples/Medical_Tower.vim";
 const notAVim = "https://storage.cdn.vimaec.com/samples/not_a_vim.vim";
@@ -52335,7 +52336,7 @@ class InsertableSubmesh {
    * Returns vim object for this submesh.
    */
   get object() {
-    return this.mesh.vim.getElementFromInstanceIndex(this.instance);
+    return this.mesh.vim.getElement(this.instance);
   }
   saveColors(colors) {
     if (this._colors) return;
@@ -53820,6 +53821,7 @@ let Vim$1 = class Vim {
   * @param {boolean} isLegacy - Indicates whether the Vim object uses a legacy loading pipeline.
   */
   constructor(header, document2, g3d2, scene, settings2, map, builder, source, format) {
+    __publicField(this, "type", "webgl");
     __publicField(this, "format");
     __publicField(this, "source");
     __publicField(this, "header");
@@ -53880,7 +53882,7 @@ let Vim$1 = class Vim {
    * @param {number} instance - The instance number of the object.
    * @returns {THREE.Object3D | undefined} The object corresponding to the instance, or undefined if not found.
    */
-  getElementFromInstanceIndex(instance) {
+  getElement(instance) {
     const element = this.map.getElementFromInstance(instance);
     if (element === void 0) return;
     return this.getElementFromIndex(element);
@@ -53933,7 +53935,7 @@ let Vim$1 = class Vim {
     const count = subset.getInstanceCount();
     for (let i = 0; i < count; i++) {
       const instance = subset.getVimInstance(i);
-      const obj = this.getElementFromInstanceIndex(instance);
+      const obj = this.getElement(instance);
       if (!set3.has(obj)) {
         result.push(obj);
         set3.add(obj);
@@ -54292,7 +54294,7 @@ class Scene2 {
     this._instanceToMeshes.set(submesh.instance, meshes);
     this.setDirty();
     if (this.vim) {
-      const obj = this.vim.getElementFromInstanceIndex(submesh.instance);
+      const obj = this.vim.getElement(submesh.instance);
       obj._addMesh(submesh);
     }
   }
@@ -55885,7 +55887,7 @@ class InstancedSubmesh {
    * Returns vim object for this submesh.
    */
   get object() {
-    return this.mesh.vim.getElementFromInstanceIndex(this.instance);
+    return this.mesh.vim.getElement(this.instance);
   }
 }
 class InstancedMesh2 {
@@ -57790,6 +57792,164 @@ function isFilePathOrUri(input) {
   }
   return true;
 }
+class Segment {
+  constructor(origin = new Vector3(), target = new Vector3()) {
+    __publicField(this, "origin");
+    __publicField(this, "target");
+    this.origin = origin;
+    this.target = target;
+  }
+  static fromArray(array) {
+    return new Segment(
+      new Vector3(array[0], array[1], array[2]),
+      new Vector3(array[3], array[4], array[5])
+    );
+  }
+  toArray() {
+    return [this.origin.x, this.origin.y, this.origin.z, this.target.x, this.target.y, this.target.z];
+  }
+  isValid() {
+    return !this.origin.equals(this.target);
+  }
+  equals(segment) {
+    return this.origin.equals(segment.origin) && this.target.equals(segment.target);
+  }
+}
+let RGBA$1 = class RGBA {
+  constructor(r, g, b, a = 1) {
+    __publicField(this, "r");
+    __publicField(this, "g");
+    __publicField(this, "b");
+    __publicField(this, "a");
+    this.r = r;
+    this.g = g;
+    this.b = b;
+    this.a = a;
+  }
+  static fromThree(color, opacity = 1) {
+    return new RGBA(color.r, color.g, color.b, opacity);
+  }
+  toThree() {
+    return new Color(this.r, this.g, this.b);
+  }
+  clone() {
+    return new RGBA(this.r, this.g, this.b, this.a);
+  }
+  isValid() {
+    return Number.isFinite(this.r) && Number.isFinite(this.g) && Number.isFinite(this.b) && Number.isFinite(this.a);
+  }
+  equals(color) {
+    return this.r === color.r && this.g === color.g && this.b === color.b && this.a === color.a;
+  }
+  static fromString(str) {
+    str = str.trim();
+    if (str.startsWith("(")) {
+      str = str.substring(1);
+    }
+    if (str.endsWith(")")) {
+      str = str.substring(0, str.length - 1);
+    }
+    const parts = str.split(",");
+    if (parts.length < 3 || parts.length > 4) {
+      throw new Error("Invalid color string format. Expected 3 or 4 components.");
+    }
+    const r = parseFloat(parts[0]);
+    const g = parseFloat(parts[1]);
+    const b = parseFloat(parts[2]);
+    const a = parts.length === 4 ? parseFloat(parts[3]) : 1;
+    if ([r, g, b, a].some((n) => isNaN(n))) {
+      throw new Error("Invalid number in color string.");
+    }
+    return new RGBA(r, g, b, a);
+  }
+};
+class RGB {
+  constructor(r, g, b) {
+    __publicField(this, "r");
+    __publicField(this, "g");
+    __publicField(this, "b");
+    this.r = r;
+    this.g = g;
+    this.b = b;
+  }
+}
+let RGBA32$1 = class RGBA32 {
+  constructor(hex) {
+    __publicField(this, "hex");
+    if (!Number.isInteger(hex) || hex < 0 || hex > 4294967295) {
+      throw new Error("Invalid value: must be a 32-bit unsigned integer");
+    }
+    this.hex = hex;
+  }
+  static fromThree(color, opacity = 1) {
+    return this.fromFloats(color.r, color.g, color.b, opacity);
+  }
+  static fromInts(r, g, b, a = 1) {
+    if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255 || a < 0 || a > 255) {
+      throw new Error("Each RGBA component must be in the range 0-255.");
+    }
+    const hex = r * 2 ** 24 + g * 2 ** 16 + b * 2 ** 8 + a;
+    return new RGBA32(hex);
+  }
+  static fromFloats(r, g, b, a = 1) {
+    return this.fromInts(
+      remap(r, 255),
+      remap(g, 255),
+      remap(b, 255),
+      remap(a, 255)
+    );
+  }
+  static fromString(str) {
+    if (str.startsWith("#")) {
+      str = str.slice(1);
+    }
+    if (str.length === 3 || str.length === 4) {
+      str = str.split("").map((c) => c + c).join("");
+    }
+    let r = 0;
+    let g = 0;
+    let b = 0;
+    let a = 255;
+    if (str.length === 6 || str.length === 8) {
+      r = parseInt(str.slice(0, 2), 16);
+      g = parseInt(str.slice(2, 4), 16);
+      b = parseInt(str.slice(4, 6), 16);
+      if (str.length === 8) {
+        a = parseInt(str.slice(6, 8), 16);
+      }
+    } else {
+      throw new Error("Invalid color string format");
+    }
+    if ([r, g, b, a].some((v) => isNaN(v))) {
+      throw new Error("Invalid color string format");
+    }
+    return this.fromInts(r, g, b, a);
+  }
+  /**
+   * The red component of the color in the range [0-255].
+   */
+  get r() {
+    return this.hex >>> 24;
+  }
+  /**
+   * The green component of the color in the range [0-255].
+   */
+  get g() {
+    return this.hex >>> 16 & 255;
+  }
+  /**
+   * The blue component of the color in the range [0-255].
+   */
+  get b() {
+    return this.hex >>> 8 & 255;
+  }
+  /**
+   * The alpha component of the color in the range [0-255].
+   */
+  get a() {
+    return this.hex & 255;
+  }
+};
 class Validation {
   //= ===========================================================================
   // BASIC NUMBER VALIDATIONS
@@ -57841,16 +58001,16 @@ class Validation {
   //= ===========================================================================
   // HANDLE VALIDATIONS
   //= ===========================================================================
-  static isComponentHandle(handle) {
-    if (!this.isPositiveInteger(handle)) return false;
-    if (handle === INVALID_HANDLE) {
-      console.warn(`Invalid handle ${handle}. Aborting operation.`);
+  static isIndex(index2) {
+    if (!this.isPositiveInteger(index2)) return false;
+    if (index2 === INVALID_HANDLE) {
+      console.warn(`Invalid index ${index2}. Aborting operation.`);
       return false;
     }
     return true;
   }
-  static areComponentHandles(handles) {
-    return handles.every((h) => this.isComponentHandle(h));
+  static areIndices(indices) {
+    return indices.every((h) => this.isIndex(h));
   }
   static isMaterialHandle(handle) {
     if (!materialHandles.includes(handle)) {
@@ -57894,23 +58054,6 @@ class Validation {
   static isValidSegment(segment) {
     if (!segment.isValid()) {
       console.warn("Segment is invalid. Origin must be different from target");
-      return false;
-    }
-    return true;
-  }
-  //= ===========================================================================
-  // COLOR VALIDATIONS
-  //= ===========================================================================
-  static isRelativeRGBA(color) {
-    if (color.r < 0 || color.r > 1 || color.g < 0 || color.g > 1 || color.b < 0 || color.b > 1) {
-      console.warn("Invalid value: must be a relative color (0-1, 0-1, 0-1)");
-      return false;
-    }
-    return true;
-  }
-  static isRelativeRGB(color) {
-    if (color.r < 0 || color.r > 1 || color.g < 0 || color.g > 1 || color.b < 0 || color.b > 1) {
-      console.warn("Invalid value: must be a relative color (0-1, 0-1, 0-1)");
       return false;
     }
     return true;
@@ -58001,6 +58144,13 @@ class Validation {
       return 0;
     }
     return value;
+  }
+  static clampColor01(value) {
+    return new Color(
+      this.clamp01(value.r),
+      this.clamp01(value.g),
+      this.clamp01(value.b)
+    );
   }
   static clampRGBA01(value) {
     return new RGBA$1(
@@ -59334,7 +59484,11 @@ class KeyboardHandler extends BaseInputHandler {
    * @param handler Callback invoked on key up.
    */
   registerKeyUp(code, mode, handler) {
-    this.registerKey(this.keyUpHandlers, code, mode, handler);
+    if (Array.isArray(code)) {
+      code.forEach((c) => this.registerKey(this.keyUpHandlers, c, mode, handler));
+    } else {
+      this.registerKey(this.keyUpHandlers, code, mode, handler);
+    }
   }
   registerKey(map, code, mode, callback) {
     mode = map.has(code) ? mode : "replace";
@@ -59379,6 +59533,7 @@ class MouseHandler extends BaseInputHandler {
     __publicField(this, "onClick");
     __publicField(this, "onDoubleClick");
     __publicField(this, "onWheel");
+    __publicField(this, "onContextMenu");
     this._capture = new CaptureHandler(canvas);
     this._dragHandler = new DragHandler((delta, button) => this.onDrag(delta, button));
   }
@@ -59420,6 +59575,7 @@ class MouseHandler extends BaseInputHandler {
       this.handleDoubleClick(event);
     } else {
       this.handleMouseClick(event);
+      this.handleContextMenu(event);
     }
     event.preventDefault();
   }
@@ -59433,6 +59589,16 @@ class MouseHandler extends BaseInputHandler {
     }
     const modif = event.getModifierState("Shift") || event.getModifierState("Control");
     (_a3 = this.onClick) == null ? void 0 : _a3.call(this, pos, modif);
+  }
+  async handleContextMenu(event) {
+    var _a3;
+    if (event.pointerType !== "mouse") return;
+    if (event.button !== 2) return;
+    const pos = this.relativePosition(event);
+    if (!almostEqual(this._lastMouseDownPosition, pos, 0.01)) {
+      return;
+    }
+    (_a3 = this.onContextMenu) == null ? void 0 : _a3.call(this, new Vector2(event.clientX, event.clientY));
   }
   handlePointerMove(event) {
     var _a3;
@@ -59487,13 +59653,19 @@ class DoubleClickHandler {
   constructor() {
     __publicField(this, "_lastClickTime", 0);
     __publicField(this, "_clickDelay", 300);
+    __publicField(this, "_lastClickPosition", null);
+    __publicField(this, "_positionThreshold", 5);
   }
-  // Delay in milliseconds to consider a double click
+  // Max pixel distance between clicks
   checkForDoubleClick(event) {
     const currentTime = Date.now();
+    const currentPosition = new Vector2(event.clientX, event.clientY);
     const timeDiff = currentTime - this._lastClickTime;
+    const isClose = this._lastClickPosition !== null && this._lastClickPosition.distanceTo(currentPosition) < this._positionThreshold;
+    const isWithinTime = timeDiff < this._clickDelay;
     this._lastClickTime = currentTime;
-    return timeDiff < this._clickDelay;
+    this._lastClickPosition = currentPosition;
+    return isClose && isWithinTime;
   }
 }
 class DragHandler {
@@ -59692,23 +59864,15 @@ class InputHandler extends BaseInputHandler {
     this._moveSpeed = settings2.moveSpeed ?? 1;
     this.rotateSpeed = settings2.rotateSpeed ?? 1;
     this.orbitSpeed = settings2.orbitSpeed ?? 1;
-    this.reg(document, "contextmenu", (e) => {
-      this._onContextMenu.dispatch(new Vector2(e.clientX, e.clientY));
-      e.preventDefault();
-    });
     this.keyboard = new KeyboardHandler(canvas);
     this.mouse = new MouseHandler(canvas);
     this.touch = new TouchHandler(canvas);
     this.keyboard.onKeyDown = (key) => adapter.keyDown(key);
     this.keyboard.onKeyUp = (key) => adapter.keyUp(key);
     this.keyboard.registerKeyUp("KeyP", "replace", () => adapter.toggleOrthographic());
-    this.keyboard.registerKeyUp("Equal", "replace", () => this.moveSpeed++);
-    this.keyboard.registerKeyUp("Minus", "replace", () => this.moveSpeed--);
-    this.keyboard.registerKeyUp("Space", "replace", () => {
-      this._pointerActive = this._pointerActive === "orbit" ? "look" : "orbit";
-      this._pointerFallback = this._pointerActive;
-      this._onPointerModeChanged.dispatch();
-    });
+    this.keyboard.registerKeyUp(["Equal", "NumpadAdd"], "replace", () => this.moveSpeed++);
+    this.keyboard.registerKeyUp(["Minus", "NumpadSubtract"], "replace", () => this.moveSpeed--);
+    this.keyboard.registerKeyUp("Space", "replace", () => adapter.toggleCameraOrbitMode());
     this.keyboard.registerKeyUp("Home", "replace", () => adapter.resetCamera());
     this.keyboard.registerKeyUp("Escape", "replace", () => adapter.clearSelection());
     this.keyboard.registerKeyUp("KeyF", "replace", () => {
@@ -59718,18 +59882,28 @@ class InputHandler extends BaseInputHandler {
       const mul = Math.pow(1.25, this._moveSpeed);
       adapter.moveCamera(value.multiplyScalar(mul));
     };
+    this.mouse.onContextMenu = (pos) => this._onContextMenu.dispatch(pos);
     this.mouse.onButtonDown = adapter.mouseDown;
     this.mouse.onMouseMove = adapter.mouseMove;
-    this.mouse.onButtonUp = adapter.mouseUp;
+    this.mouse.onButtonUp = (pos, button) => {
+      this.pointerOverride = void 0;
+      adapter.mouseUp(pos, button);
+    };
     this.mouse.onDrag = (delta, button) => {
       if (button === 0) {
-        if (this._pointerActive === "orbit") adapter.orbitCamera(toRotation(delta, this.orbitSpeed));
-        if (this._pointerActive === "look") adapter.rotateCamera(toRotation(delta, this.rotateSpeed));
-        if (this._pointerActive === "pan") adapter.panCamera(delta);
-        if (this._pointerActive === "zoom") adapter.dollyCamera(delta);
+        if (this.pointerActive === "orbit") adapter.orbitCamera(toRotation(delta, this.orbitSpeed));
+        if (this.pointerActive === "look") adapter.rotateCamera(toRotation(delta, this.rotateSpeed));
+        if (this.pointerActive === "pan") adapter.panCamera(delta);
+        if (this.pointerActive === "zoom") adapter.dollyCamera(delta);
       }
-      if (button === 2) adapter.rotateCamera(toRotation(delta, 1));
-      if (button === 1) adapter.panCamera(delta);
+      if (button === 2) {
+        this.pointerOverride = "look";
+        adapter.rotateCamera(toRotation(delta, 1));
+      }
+      if (button === 1) {
+        this.pointerOverride = "pan";
+        adapter.panCamera(delta);
+      }
     };
     this.mouse.onClick = (pos, modif) => adapter.selectAtPointer(pos, modif);
     this.mouse.onDoubleClick = adapter.frameAtPointer;
@@ -62538,6 +62712,9 @@ function createAdapter$2(viewer) {
     toggleOrthographic: () => {
       viewer.camera.orthographic = !viewer.camera.orthographic;
     },
+    toggleCameraOrbitMode: () => {
+      viewer.inputs.pointerActive = viewer.inputs.pointerActive === PointerMode$1.ORBIT ? PointerMode$1.LOOK : PointerMode$1.ORBIT;
+    },
     resetCamera: () => {
       viewer.camera.lerp(0.75).reset();
     },
@@ -62562,7 +62739,7 @@ function createAdapter$2(viewer) {
     },
     frameAtPointer: async (pos) => {
       const result = await viewer.raycaster.raycastFromScreen(pos);
-      viewer.camera.lerp(0.75).frame(result.object);
+      viewer.camera.lerp(0.75).frame(result.object ?? "all");
     },
     zoom: (value) => {
       viewer.camera.lerp(0.75).zoom(value);
@@ -63764,6 +63941,7 @@ let Renderer$1 = class Renderer {
 };
 let Viewer$3 = class Viewer {
   constructor(settings2) {
+    __publicField(this, "type", "webgl");
     __publicField(this, "settings");
     __publicField(this, "renderer");
     __publicField(this, "viewport");
@@ -64060,155 +64238,6 @@ const index$8 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePrope
   getDefaultVimSettings,
   request: requestVim
 }, Symbol.toStringTag, { value: "Module" }));
-class Segment {
-  constructor(origin = new Vector3(), target = new Vector3()) {
-    __publicField(this, "origin");
-    __publicField(this, "target");
-    this.origin = origin;
-    this.target = target;
-  }
-  static fromArray(array) {
-    return new Segment(
-      new Vector3(array[0], array[1], array[2]),
-      new Vector3(array[3], array[4], array[5])
-    );
-  }
-  toArray() {
-    return [this.origin.x, this.origin.y, this.origin.z, this.target.x, this.target.y, this.target.z];
-  }
-  isValid() {
-    return !this.origin.equals(this.target);
-  }
-  equals(segment) {
-    return this.origin.equals(segment.origin) && this.target.equals(segment.target);
-  }
-}
-let RGBA$1 = class RGBA {
-  constructor(r, g, b, a = 1) {
-    __publicField(this, "r");
-    __publicField(this, "g");
-    __publicField(this, "b");
-    __publicField(this, "a");
-    this.r = r;
-    this.g = g;
-    this.b = b;
-    this.a = a;
-  }
-  clone() {
-    return new RGBA(this.r, this.g, this.b, this.a);
-  }
-  isValid() {
-    return Number.isFinite(this.r) && Number.isFinite(this.g) && Number.isFinite(this.b) && Number.isFinite(this.a);
-  }
-  equals(color) {
-    return this.r === color.r && this.g === color.g && this.b === color.b && this.a === color.a;
-  }
-  static fromString(str) {
-    str = str.trim();
-    if (str.startsWith("(")) {
-      str = str.substring(1);
-    }
-    if (str.endsWith(")")) {
-      str = str.substring(0, str.length - 1);
-    }
-    const parts = str.split(",");
-    if (parts.length < 3 || parts.length > 4) {
-      throw new Error("Invalid color string format. Expected 3 or 4 components.");
-    }
-    const r = parseFloat(parts[0]);
-    const g = parseFloat(parts[1]);
-    const b = parseFloat(parts[2]);
-    const a = parts.length === 4 ? parseFloat(parts[3]) : 1;
-    if ([r, g, b, a].some((n) => isNaN(n))) {
-      throw new Error("Invalid number in color string.");
-    }
-    return new RGBA(r, g, b, a);
-  }
-};
-class RGB {
-  constructor(r, g, b) {
-    __publicField(this, "r");
-    __publicField(this, "g");
-    __publicField(this, "b");
-    this.r = r;
-    this.g = g;
-    this.b = b;
-  }
-}
-let RGBA32$1 = class RGBA32 {
-  constructor(hex) {
-    __publicField(this, "hex");
-    if (!Number.isInteger(hex) || hex < 0 || hex > 4294967295) {
-      throw new Error("Invalid value: must be a 32-bit unsigned integer");
-    }
-    this.hex = hex;
-  }
-  static fromInts(r, g, b, a = 1) {
-    if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255 || a < 0 || a > 255) {
-      throw new Error("Each RGBA component must be in the range 0-255.");
-    }
-    const hex = r * 2 ** 24 + g * 2 ** 16 + b * 2 ** 8 + a;
-    return new RGBA32(hex);
-  }
-  static fromFloats(r, g, b, a = 1) {
-    return this.fromInts(
-      remap(r, 255),
-      remap(g, 255),
-      remap(b, 255),
-      remap(a, 255)
-    );
-  }
-  static fromString(str) {
-    if (str.startsWith("#")) {
-      str = str.slice(1);
-    }
-    if (str.length === 3 || str.length === 4) {
-      str = str.split("").map((c) => c + c).join("");
-    }
-    let r = 0;
-    let g = 0;
-    let b = 0;
-    let a = 255;
-    if (str.length === 6 || str.length === 8) {
-      r = parseInt(str.slice(0, 2), 16);
-      g = parseInt(str.slice(2, 4), 16);
-      b = parseInt(str.slice(4, 6), 16);
-      if (str.length === 8) {
-        a = parseInt(str.slice(6, 8), 16);
-      }
-    } else {
-      throw new Error("Invalid color string format");
-    }
-    if ([r, g, b, a].some((v) => isNaN(v))) {
-      throw new Error("Invalid color string format");
-    }
-    return this.fromInts(r, g, b, a);
-  }
-  /**
-   * The red component of the color in the range [0-255].
-   */
-  get r() {
-    return this.hex >>> 24;
-  }
-  /**
-   * The green component of the color in the range [0-255].
-   */
-  get g() {
-    return this.hex >>> 16 & 255;
-  }
-  /**
-   * The blue component of the color in the range [0-255].
-   */
-  get b() {
-    return this.hex >>> 8 & 255;
-  }
-  /**
-   * The alpha component of the color in the range [0-255].
-   */
-  get a() {
-    return this.hex & 255;
-  }
-};
 class Camera3 {
   /** 
    * Creates a new Camera instance
@@ -64226,14 +64255,14 @@ class Camera3 {
    * @param segment - Optional segment to save as the camera position
    */
   async save(segment) {
-    this._savedPosition = segment ?? await this._rpc.RPCGetCameraPosition();
+    this._savedPosition = segment ?? await this._rpc.RPCGetCameraView();
   }
   /**
    * Resets the camera to the last saved position
    */
   restoreSavedPosition(blendTime = this._defaultBlendTime) {
     if (!this._savedPosition) return;
-    this._rpc.RPCSetCameraPosition(this._savedPosition, blendTime);
+    this._rpc.RPCSetCameraView(this._savedPosition, blendTime);
   }
   /**
    * Restores the camera to its last tracked position
@@ -64243,7 +64272,7 @@ class Camera3 {
     var _a3;
     if ((_a3 = this._lastPosition) == null ? void 0 : _a3.isValid()) {
       console.log("Restoring camera position: ", this._lastPosition);
-      this._rpc.RPCSetCameraPosition(this._lastPosition, blendTime);
+      this._rpc.RPCSetCameraView(this._lastPosition, blendTime);
     }
   }
   /**
@@ -64257,7 +64286,7 @@ class Camera3 {
     this._lastPosition = pose;
   }
   set(position, target, blendTime = this._defaultBlendTime) {
-    this._rpc.RPCSetCameraPosition(new Segment(position, target), blendTime);
+    this._rpc.RPCSetCameraView(new Segment(position, target), blendTime);
   }
   /**
    * Pauses or resumes rendering
@@ -64272,7 +64301,7 @@ class Camera3 {
    * @returns Promise that resolves when the framing animation is complete
    */
   async frameAll(blendTime = this._defaultBlendTime) {
-    const segment = await this._rpc.RPCFrameAll(blendTime);
+    const segment = await this._rpc.RPCFrameScene(blendTime);
     this._savedPosition = this._savedPosition ?? segment;
     return segment;
   }
@@ -64282,29 +64311,29 @@ class Camera3 {
    * @param blendTime - Duration of the camera animation in seconds (defaults to 0.5)
    */
   async frameBox(box, blendTime = this._defaultBlendTime) {
-    const segment = await this._rpc.RPCFrameBox(box, blendTime);
+    const segment = await this._rpc.RPCFrameAABB(box, blendTime);
     this._savedPosition = this._savedPosition ?? segment;
     return segment;
   }
   /**
    * Frames specific nodes of a Vim model in the camera view
    * @param vim - The Vim model containing the nodes to frame
-   * @param nodes - Array of node indices to frame, or 'all' to frame the entire model
+   * @param elements - Array of element indices to frame, or 'all' to frame the entire model
    * @param blendTime - Duration of the camera animation in seconds (defaults to 0.5)
    * @returns Promise that resolves when the framing animation is complete
    */
-  async frameVim(vim, nodes, blendTime = this._defaultBlendTime) {
+  async frameVim(vim, elements, blendTime = this._defaultBlendTime) {
     let segment;
-    if (nodes === "all") {
+    if (elements === "all") {
       segment = await this._rpc.RPCFrameVim(vim.handle, blendTime);
     } else {
-      segment = await this._rpc.RPCFrameInstances(vim.handle, nodes, blendTime);
+      segment = await this._rpc.RPCFrameElements(vim.handle, elements, blendTime);
     }
     this._savedPosition = this._savedPosition ?? segment;
     return segment;
   }
   async frameObject(object, blendTime = this._defaultBlendTime) {
-    const segment = await this._rpc.RPCFrameInstances(object.vim.handle, [object.instance], blendTime);
+    const segment = await this._rpc.RPCFrameElements(object.vim.handle, [object.element], blendTime);
     this._savedPosition = this._savedPosition ?? segment;
     return segment;
   }
@@ -64380,9 +64409,10 @@ class Marshal {
   }
   // -------------------- HitCheckResult -------------------
   writeHitCheckResult(data2) {
-    this.ensureCapacity(4 + 4 + 4 * 3 + 4 * 3);
-    this.writeUInt(data2.vimHandle);
-    this.writeUInt(data2.nodeIndex);
+    this.ensureCapacity(4 + 4 + 4 + 4 * 3 + 4 * 3);
+    this.writeUInt(data2.vimIndex);
+    this.writeUInt(data2.vimElementIndex);
+    this.writeUInt(data2.sceneElementIndex);
     this.writeVector3(data2.worldPosition);
     this.writeVector3(data2.worldNormal);
   }
@@ -64506,6 +64536,12 @@ class ReadMarshal {
     this._offset += 4;
     return value;
   }
+  //TODO: Maybe wrong
+  readUInt64() {
+    const low = this.readUInt();
+    const high = this.readUInt();
+    return BigInt(high) << 32n | BigInt(low);
+  }
   readFloat() {
     const value = this._dataView.getFloat32(this._offset, true);
     this._offset += 4;
@@ -64524,13 +64560,15 @@ class ReadMarshal {
     return textDecoder.decode(stringData);
   }
   readHitCheckResult() {
-    const vimHandle = this.readUInt();
-    const nodeIndex = this.readUInt();
+    const vimIndex = this.readUInt();
+    const vimElementIndex = this.readUInt();
+    const sceneElementIndex = this.readUInt();
     const worldPosition = this.readVector3();
     const worldNormal = this.readVector3();
     return {
-      vimHandle,
-      nodeIndex,
+      vimIndex,
+      vimElementIndex,
+      sceneElementIndex,
       worldPosition,
       worldNormal
     };
@@ -64599,6 +64637,14 @@ class ReadMarshal {
   readArrayOfUInt() {
     return this.readArray(() => this.readUInt());
   }
+  readArrayOfUInt64() {
+    const length = this.readUInt();
+    const array = [];
+    for (let i = 0; i < length; i++) {
+      array.push(this.readUInt64());
+    }
+    return array;
+  }
   readArrayOfFloat() {
     return this.readArray(() => this.readFloat());
   }
@@ -64644,7 +64690,7 @@ const materialHandles = [
 class RpcClient {
   constructor(_socket) {
     __publicField(this, "_socket");
-    __publicField(this, "API_VERSION", "5.1.0");
+    __publicField(this, "API_VERSION", "6.0.0");
     this._socket = _socket;
   }
   get connected() {
@@ -64653,23 +64699,22 @@ class RpcClient {
   get url() {
     return this._socket.url;
   }
-  RPCAddNodeFlags(componentHandle, nodes, flags) {
+  RPCClearMaterialOverridesForElements(vimIndex, elementIndices) {
     const marshal = new Marshal();
-    marshal.writeString("RPCAddNodeFlags");
-    marshal.writeUInt(componentHandle);
-    marshal.writeArrayOfUInt(nodes);
-    marshal.writeUInt(flags);
+    marshal.writeString("RPCClearMaterialOverridesForElements");
+    marshal.writeUInt(vimIndex);
+    marshal.writeArrayOfUInt(elementIndices);
     this._socket.sendRPC(marshal);
   }
-  RPCClearMaterialOverrides(componentHandle) {
+  RPCClearMaterialOverridesForScene() {
     const marshal = new Marshal();
-    marshal.writeString("RPCClearMaterialOverrides");
-    marshal.writeUInt(componentHandle);
+    marshal.writeString("RPCClearMaterialOverridesForScene");
     this._socket.sendRPC(marshal);
   }
-  RPCClearScene() {
+  RPCClearMaterialOverridesForVim(vimIndex) {
     const marshal = new Marshal();
-    marshal.writeString("RPCClearScene");
+    marshal.writeString("RPCClearMaterialOverridesForVim");
+    marshal.writeUInt(vimIndex);
     this._socket.sendRPC(marshal);
   }
   async RPCCreateMaterialInstances(materialHandle, smoothness, colors) {
@@ -64692,10 +64737,10 @@ class RpcClient {
     const ret = returnMarshal.readUInt();
     return ret;
   }
-  RPCDestroyMaterialInstances(materialInstanceHandle) {
+  RPCDestroyMaterialInstances(materialInstanceHandles) {
     const marshal = new Marshal();
     marshal.writeString("RPCDestroyMaterialInstances");
-    marshal.writeArrayOfUInt(materialInstanceHandle);
+    marshal.writeArrayOfUInt(materialInstanceHandles);
     this._socket.sendRPC(marshal);
   }
   RPCDestroyText(componentHandle) {
@@ -64710,40 +64755,64 @@ class RpcClient {
     marshal.writeBoolean(value);
     this._socket.sendRPC(marshal);
   }
-  async RPCFrameAll(blendTime) {
+  async RPCFrameAABB(box, blendTime) {
     const marshal = new Marshal();
-    marshal.writeString("RPCFrameAll");
-    marshal.writeFloat(blendTime);
-    const returnMarshal = await this._socket.sendRPCWithReturn(marshal);
-    const ret = returnMarshal.readSegment();
-    return ret;
-  }
-  async RPCFrameBox(box, blendTime) {
-    const marshal = new Marshal();
-    marshal.writeString("RPCFrameBox");
+    marshal.writeString("RPCFrameAABB");
     marshal.writeBox3(box);
     marshal.writeFloat(blendTime);
     const returnMarshal = await this._socket.sendRPCWithReturn(marshal);
     const ret = returnMarshal.readSegment();
     return ret;
   }
-  async RPCFrameInstances(componentHandle, nodes, blendTime) {
+  async RPCFrameElements(vimIndex, elementIndices, blendTime) {
     const marshal = new Marshal();
-    marshal.writeString("RPCFrameInstances");
-    marshal.writeUInt(componentHandle);
-    marshal.writeArrayOfUInt(nodes);
+    marshal.writeString("RPCFrameElements");
+    marshal.writeUInt(vimIndex);
+    marshal.writeArrayOfUInt(elementIndices);
     marshal.writeFloat(blendTime);
     const returnMarshal = await this._socket.sendRPCWithReturn(marshal);
     const ret = returnMarshal.readSegment();
     return ret;
   }
-  async RPCFrameVim(componentHandle, blendTime) {
+  async RPCFrameScene(blendTime) {
     const marshal = new Marshal();
-    marshal.writeString("RPCFrameVim");
-    marshal.writeUInt(componentHandle);
+    marshal.writeString("RPCFrameScene");
     marshal.writeFloat(blendTime);
     const returnMarshal = await this._socket.sendRPCWithReturn(marshal);
     const ret = returnMarshal.readSegment();
+    return ret;
+  }
+  async RPCFrameVim(vimIndex, blendTime) {
+    const marshal = new Marshal();
+    marshal.writeString("RPCFrameVim");
+    marshal.writeUInt(vimIndex);
+    marshal.writeFloat(blendTime);
+    const returnMarshal = await this._socket.sendRPCWithReturn(marshal);
+    const ret = returnMarshal.readSegment();
+    return ret;
+  }
+  async RPCGetAABBForElements(vimIndex, elementIndices) {
+    const marshal = new Marshal();
+    marshal.writeString("RPCGetAABBForElements");
+    marshal.writeUInt(vimIndex);
+    marshal.writeArrayOfUInt(elementIndices);
+    const returnMarshal = await this._socket.sendRPCWithReturn(marshal);
+    const ret = returnMarshal.readBox3();
+    return ret;
+  }
+  async RPCGetAABBForScene() {
+    const marshal = new Marshal();
+    marshal.writeString("RPCGetAABBForScene");
+    const returnMarshal = await this._socket.sendRPCWithReturn(marshal);
+    const ret = returnMarshal.readBox3();
+    return ret;
+  }
+  async RPCGetAABBForVim(vimIndex) {
+    const marshal = new Marshal();
+    marshal.writeString("RPCGetAABBForVim");
+    marshal.writeUInt(vimIndex);
+    const returnMarshal = await this._socket.sendRPCWithReturn(marshal);
+    const ret = returnMarshal.readBox3();
     return ret;
   }
   async RPCGetAPIVersion() {
@@ -64753,35 +64822,34 @@ class RpcClient {
     const ret = returnMarshal.readString();
     return ret;
   }
-  async RPCGetBoundingBox(componentHandle, nodes) {
+  async RPCGetCameraPose() {
     const marshal = new Marshal();
-    marshal.writeString("RPCGetBoundingBox");
-    marshal.writeUInt(componentHandle);
-    marshal.writeArrayOfUInt(nodes);
-    const returnMarshal = await this._socket.sendRPCWithReturn(marshal);
-    const ret = returnMarshal.readBox3();
-    return ret;
-  }
-  async RPCGetBoundingBoxAll(componentHandle) {
-    const marshal = new Marshal();
-    marshal.writeString("RPCGetBoundingBoxAll");
-    marshal.writeUInt(componentHandle);
-    const returnMarshal = await this._socket.sendRPCWithReturn(marshal);
-    const ret = returnMarshal.readBox3();
-    return ret;
-  }
-  async RPCGetCameraPosition() {
-    const marshal = new Marshal();
-    marshal.writeString("RPCGetCameraPosition");
+    marshal.writeString("RPCGetCameraPose");
     const returnMarshal = await this._socket.sendRPCWithReturn(marshal);
     const ret = returnMarshal.readSegment();
     return ret;
   }
-  async RPCGetIblRotation() {
+  async RPCGetElementCountForScene() {
     const marshal = new Marshal();
-    marshal.writeString("RPCGetIblRotation");
+    marshal.writeString("RPCGetElementCountForScene");
     const returnMarshal = await this._socket.sendRPCWithReturn(marshal);
-    const ret = returnMarshal.readMatrix44();
+    const ret = returnMarshal.readUInt();
+    return ret;
+  }
+  async RPCGetElementCountForVim(vimIndex) {
+    const marshal = new Marshal();
+    marshal.writeString("RPCGetElementCountForVim");
+    marshal.writeUInt(vimIndex);
+    const returnMarshal = await this._socket.sendRPCWithReturn(marshal);
+    const ret = returnMarshal.readUInt();
+    return ret;
+  }
+  async RPCGetElementIds(vimIndex) {
+    const marshal = new Marshal();
+    marshal.writeString("RPCGetElementIds");
+    marshal.writeUInt(vimIndex);
+    const returnMarshal = await this._socket.sendRPCWithReturn(marshal);
+    const ret = returnMarshal.readArrayOfUInt64();
     return ret;
   }
   async RPCGetLastError() {
@@ -64791,11 +64859,12 @@ class RpcClient {
     const ret = returnMarshal.readString();
     return ret;
   }
-  async RPCGetSceneAABB() {
+  async RPCGetRoomElements(vimIndex) {
     const marshal = new Marshal();
-    marshal.writeString("RPCGetSceneAABB");
+    marshal.writeString("RPCGetRoomElements");
+    marshal.writeUInt(vimIndex);
     const returnMarshal = await this._socket.sendRPCWithReturn(marshal);
-    const ret = returnMarshal.readBox3();
+    const ret = returnMarshal.readArrayOfUInt();
     return ret;
   }
   async RPCGetSectionBox() {
@@ -64805,65 +64874,13 @@ class RpcClient {
     const ret = returnMarshal.readSectionBoxState();
     return ret;
   }
-  async RPCGetVimLoadingState(componentHandle) {
+  async RPCGetVimLoadingState(vimIndex) {
     const marshal = new Marshal();
     marshal.writeString("RPCGetVimLoadingState");
-    marshal.writeUInt(componentHandle);
+    marshal.writeUInt(vimIndex);
     const returnMarshal = await this._socket.sendRPCWithReturn(marshal);
     const ret = returnMarshal.readVimStatus();
     return ret;
-  }
-  RPCGhost(componentHandle, nodes) {
-    const marshal = new Marshal();
-    marshal.writeString("RPCGhost");
-    marshal.writeUInt(componentHandle);
-    marshal.writeArrayOfUInt(nodes);
-    this._socket.sendRPC(marshal);
-  }
-  RPCGhostAll(componentHandle) {
-    const marshal = new Marshal();
-    marshal.writeString("RPCGhostAll");
-    marshal.writeUInt(componentHandle);
-    this._socket.sendRPC(marshal);
-  }
-  RPCHide(componentHandle, nodes) {
-    const marshal = new Marshal();
-    marshal.writeString("RPCHide");
-    marshal.writeUInt(componentHandle);
-    marshal.writeArrayOfUInt(nodes);
-    this._socket.sendRPC(marshal);
-  }
-  RPCHideAABBs(componentHandle, nodes) {
-    const marshal = new Marshal();
-    marshal.writeString("RPCHideAABBs");
-    marshal.writeUInt(componentHandle);
-    marshal.writeArrayOfUInt(nodes);
-    this._socket.sendRPC(marshal);
-  }
-  RPCHideAll(componentHandle) {
-    const marshal = new Marshal();
-    marshal.writeString("RPCHideAll");
-    marshal.writeUInt(componentHandle);
-    this._socket.sendRPC(marshal);
-  }
-  RPCHideAllAABBs(componentHandle) {
-    const marshal = new Marshal();
-    marshal.writeString("RPCHideAllAABBs");
-    marshal.writeUInt(componentHandle);
-    this._socket.sendRPC(marshal);
-  }
-  RPCHighlight(componentHandle, nodes) {
-    const marshal = new Marshal();
-    marshal.writeString("RPCHighlight");
-    marshal.writeUInt(componentHandle);
-    marshal.writeArrayOfUInt(nodes);
-    this._socket.sendRPC(marshal);
-  }
-  RPCHighlightAll(componentHandle) {
-    const marshal = new Marshal();
-    marshal.writeString("RPCHighlightAll");
-    marshal.writeUInt(componentHandle);
-    this._socket.sendRPC(marshal);
   }
   RPCKeyEvent(keyCode, down) {
     const marshal = new Marshal();
@@ -64888,12 +64905,6 @@ class RpcClient {
     const returnMarshal = await this._socket.sendRPCWithReturn(marshal);
     const ret = returnMarshal.readUInt();
     return ret;
-  }
-  RPCLockIblRotation(lock) {
-    const marshal = new Marshal();
-    marshal.writeString("RPCLockIblRotation");
-    marshal.writeBoolean(lock);
-    this._socket.sendRPC(marshal);
   }
   RPCMouseButtonEvent(mousePos, mouseButton, down) {
     const marshal = new Marshal();
@@ -64929,16 +64940,6 @@ class RpcClient {
     marshal.writeInt(mouseButton);
     this._socket.sendRPC(marshal);
   }
-  RPCMoveCameraTo(usePosition, useTarget, position, target, blendTime) {
-    const marshal = new Marshal();
-    marshal.writeString("RPCMoveCameraTo");
-    marshal.writeBoolean(usePosition);
-    marshal.writeBoolean(useTarget);
-    marshal.writeVector3(position);
-    marshal.writeVector3(target);
-    marshal.writeFloat(blendTime);
-    this._socket.sendRPC(marshal);
-  }
   RPCPauseRendering(pause) {
     const marshal = new Marshal();
     marshal.writeString("RPCPauseRendering");
@@ -64953,17 +64954,9 @@ class RpcClient {
     const ret = returnMarshal.readHitCheckResult();
     return ret;
   }
-  RPCRemoveNodeFlags(componentHandle, nodes, flags) {
+  RPCSetCameraAspectRatio(width, height) {
     const marshal = new Marshal();
-    marshal.writeString("RPCRemoveNodeFlags");
-    marshal.writeUInt(componentHandle);
-    marshal.writeArrayOfUInt(nodes);
-    marshal.writeUInt(flags);
-    this._socket.sendRPC(marshal);
-  }
-  RPCSetAspectRatio(width, height) {
-    const marshal = new Marshal();
-    marshal.writeString("RPCSetAspectRatio");
+    marshal.writeString("RPCSetCameraAspectRatio");
     marshal.writeUInt(width);
     marshal.writeUInt(height);
     this._socket.sendRPC(marshal);
@@ -64974,10 +64967,30 @@ class RpcClient {
     marshal.writeBoolean(orbit2);
     this._socket.sendRPC(marshal);
   }
-  RPCSetCameraPosition(state, blendTime) {
+  RPCSetCameraPose(state, blendTime) {
+    const marshal = new Marshal();
+    marshal.writeString("RPCSetCameraPose");
+    marshal.writeSegment(state);
+    marshal.writeFloat(blendTime);
+    this._socket.sendRPC(marshal);
+  }
+  RPCSetCameraPosition(position, blendTime) {
     const marshal = new Marshal();
     marshal.writeString("RPCSetCameraPosition");
-    marshal.writeSegment(state);
+    marshal.writeVector3(position);
+    marshal.writeFloat(blendTime);
+    this._socket.sendRPC(marshal);
+  }
+  RPCSetCameraSpeed(speed) {
+    const marshal = new Marshal();
+    marshal.writeString("RPCSetCameraSpeed");
+    marshal.writeFloat(speed);
+    this._socket.sendRPC(marshal);
+  }
+  RPCSetCameraTarget(target, blendTime) {
+    const marshal = new Marshal();
+    marshal.writeString("RPCSetCameraTarget");
+    marshal.writeVector3(target);
     marshal.writeFloat(blendTime);
     this._socket.sendRPC(marshal);
   }
@@ -64985,18 +64998,6 @@ class RpcClient {
     const marshal = new Marshal();
     marshal.writeString("RPCSetGhostColor");
     marshal.writeRGBA(ghostColor);
-    this._socket.sendRPC(marshal);
-  }
-  RPCSetGhostColor2(ghostColor) {
-    const marshal = new Marshal();
-    marshal.writeString("RPCSetGhostColor2");
-    marshal.writeRGBA(ghostColor);
-    this._socket.sendRPC(marshal);
-  }
-  RPCSetIblRotation(transform) {
-    const marshal = new Marshal();
-    marshal.writeString("RPCSetIblRotation");
-    marshal.writeMatrix44(transform);
     this._socket.sendRPC(marshal);
   }
   RPCSetLighting(toneMappingWhitePoint, hdrScale, hdrBackgroundScale, hdrBackgroundSaturation, backgroundBlur, backgroundColor) {
@@ -65010,18 +65011,12 @@ class RpcClient {
     marshal.writeRGBA(backgroundColor);
     this._socket.sendRPC(marshal);
   }
-  RPCSetMaterialOverrides(componentHandle, nodes, materialInstanceHandles) {
+  RPCSetMaterialOverridesForElements(vimIndex, elementIndices, materialInstanceHandles) {
     const marshal = new Marshal();
-    marshal.writeString("RPCSetMaterialOverrides");
-    marshal.writeUInt(componentHandle);
-    marshal.writeArrayOfUInt(nodes);
+    marshal.writeString("RPCSetMaterialOverridesForElements");
+    marshal.writeUInt(vimIndex);
+    marshal.writeArrayOfUInt(elementIndices);
     marshal.writeArrayOfUInt(materialInstanceHandles);
-    this._socket.sendRPC(marshal);
-  }
-  RPCSetMoveSpeed(speed) {
-    const marshal = new Marshal();
-    marshal.writeString("RPCSetMoveSpeed");
-    marshal.writeFloat(speed);
     this._socket.sendRPC(marshal);
   }
   RPCSetSectionBox(state) {
@@ -65030,25 +65025,33 @@ class RpcClient {
     marshal.writeSectionBoxState(state);
     this._socket.sendRPC(marshal);
   }
-  RPCShow(componentHandle, nodes) {
+  RPCSetStateElements(vimIndex, elementIndices, state) {
     const marshal = new Marshal();
-    marshal.writeString("RPCShow");
-    marshal.writeUInt(componentHandle);
-    marshal.writeArrayOfUInt(nodes);
+    marshal.writeString("RPCSetStateElements");
+    marshal.writeUInt(vimIndex);
+    marshal.writeArrayOfUInt(elementIndices);
+    marshal.writeUInt(state);
     this._socket.sendRPC(marshal);
   }
-  RPCShowAABBs(componentHandle, nodes, colors) {
+  RPCSetStateScene(state) {
     const marshal = new Marshal();
-    marshal.writeString("RPCShowAABBs");
-    marshal.writeUInt(componentHandle);
-    marshal.writeArrayOfUInt(nodes);
-    marshal.writeArrayOfRGBA32(colors);
+    marshal.writeString("RPCSetStateScene");
+    marshal.writeUInt(state);
     this._socket.sendRPC(marshal);
   }
-  RPCShowAll(componentHandle) {
+  RPCSetStateVim(vimIndex, state) {
     const marshal = new Marshal();
-    marshal.writeString("RPCShowAll");
-    marshal.writeUInt(componentHandle);
+    marshal.writeString("RPCSetStateVim");
+    marshal.writeUInt(vimIndex);
+    marshal.writeUInt(state);
+    this._socket.sendRPC(marshal);
+  }
+  RPCSetStatesElements(vimIndex, elementIndices, states) {
+    const marshal = new Marshal();
+    marshal.writeString("RPCSetStatesElements");
+    marshal.writeUInt(vimIndex);
+    marshal.writeArrayOfUInt(elementIndices);
+    marshal.writeArrayOfUInt(states);
     this._socket.sendRPC(marshal);
   }
   async RPCStartScene(toneMappingWhitePoint, hdrScale, hdrBackgroundScale, hdrBackgroundSaturation, backgroundBlur, backgroundColor) {
@@ -65069,10 +65072,9 @@ class RpcClient {
     marshal.writeString("RPCTriggerRenderDocCapture");
     this._socket.sendRPC(marshal);
   }
-  RPCUnloadVim(componentHandle) {
+  RPCUnloadAll() {
     const marshal = new Marshal();
-    marshal.writeString("RPCUnloadVim");
-    marshal.writeUInt(componentHandle);
+    marshal.writeString("RPCUnloadAll");
     this._socket.sendRPC(marshal);
   }
 }
@@ -65104,35 +65106,7 @@ class RemoteColor {
    * @returns {number} The color value as a hexadecimal number.
    */
   get hex() {
-    return this.color.hex;
-  }
-  /**
-   * Gets the red component of the color.
-   * @returns {number} The red component value in the range [0-255].
-   */
-  get r() {
-    return this.color.r;
-  }
-  /**
-   * Gets the green component of the color.
-   * @returns {number} The green component value in the range [0-255].
-   */
-  get g() {
-    return this.color.g;
-  }
-  /**
-   * Gets the blue component of the color.
-   * @returns {number} The blue component value in the range [0-255].
-   */
-  get b() {
-    return this.color.b;
-  }
-  /**
-   * Gets the alpha (opacity) component of the color.
-   * @returns {number} The alpha component value in the range [0-255].
-   */
-  get a() {
-    return this.color.a;
+    return this.color.getHex();
   }
   /**
    * Disposes of the color handle and releases associated resources.
@@ -65144,6 +65118,12 @@ class RemoteColor {
     this._manager.destroy(this);
     this._disposed = true;
   }
+}
+function RGBAfromThree(color, opacity = 1) {
+  return new RGBA$1(color.r, color.g, color.b, opacity);
+}
+function RGBA32fromThree(color, opacity = 1) {
+  return RGBA32$1.fromFloats(color.r, color.g, color.b, opacity);
 }
 const MAX_BATCH_SIZE = 3e3;
 class ColorManager {
@@ -65164,39 +65144,48 @@ class ColorManager {
    * @param hex - The RGBA32 color value
    * @returns Promise resolving to a ColorHandle, or undefined if creation fails
    */
-  async getColor(hex) {
-    const colors = await this.getColors([hex]);
+  async getColor(color) {
+    const colors = await this.getColors([color]);
     if (!colors) return void 0;
     return colors[0];
   }
   /**
    * Creates or retrieves cached color instances for multiple hex values.
-   * @param c - Array of RGBA32 color values
+   * @param colors - Array of color values or undefined for no color
    * @returns Promise resolving to an array of ColorHandles in the same order as input, or undefined if creation fails
    * @remarks Duplicate hex values will be mapped to the same color instance for efficiency
    */
-  async getColors(c) {
-    const result = new Array(c.length);
+  async getColors(colors) {
+    const result = new Array(colors.length);
     const hexToIndices = /* @__PURE__ */ new Map();
     const toCreate = [];
-    for (let i = 0; i < c.length; i++) {
-      const color = c[i];
-      if (this._hexToColor.has(color.hex)) {
-        result[i] = this._hexToColor.get(color.hex);
-      } else if (hexToIndices.has(color.hex)) {
-        hexToIndices.get(color.hex).push(i);
-      } else {
-        toCreate.push(color);
-        hexToIndices.set(color.hex, [i]);
-      }
-    }
-    const colors = await this._createColors(toCreate);
-    if (!colors) return void 0;
     for (let i = 0; i < colors.length; i++) {
+      const color = colors[i];
+      if (color === void 0) {
+        result[i] = void 0;
+        continue;
+      }
+      const hex = (color == null ? void 0 : color.getHex()) ?? -1;
+      const remoteColor = this._hexToColor.get(hex);
+      if (remoteColor) {
+        result[i] = remoteColor;
+        continue;
+      }
+      const indices = hexToIndices.get(hex);
+      if (indices) {
+        hexToIndices.get(hex).push(i);
+        continue;
+      }
+      toCreate.push(color);
+      hexToIndices.set(hex, [i]);
+    }
+    const remoteColors = await this._createColors(toCreate);
+    if (!remoteColors) return void 0;
+    for (let i = 0; i < remoteColors.length; i++) {
       const color = toCreate[i];
-      const indices = hexToIndices.get(color.hex);
+      const indices = hexToIndices.get(color.getHex());
       for (const index2 of indices) {
-        result[index2] = colors[i];
+        result[index2] = remoteColors[i];
       }
     }
     return result;
@@ -65239,7 +65228,8 @@ class ColorManager {
     if (colors.length === 0) {
       return result;
     }
-    const instances = await this._rpc.RPCCreateMaterialInstances(MaterialHandles.StandardOpaque, 1, colors);
+    const rpcColors = colors.map((c) => RGBA32fromThree(c));
+    const instances = await this._rpc.RPCCreateMaterialInstances(MaterialHandles.StandardOpaque, 1, rpcColors);
     if (!instances) return void 0;
     for (let i = 0; i < colors.length; i++) {
       const color = this._createColor(colors[i], instances[i]);
@@ -65256,7 +65246,7 @@ class ColorManager {
    */
   _createColor(color, id2) {
     const handle = new RemoteColor(color, id2, this);
-    this._hexToColor.set(color.hex, handle);
+    this._hexToColor.set(color.getHex(), handle);
     this._idToColor.set(handle.id, handle);
     return handle;
   }
@@ -65598,6 +65588,7 @@ class Decoder {
   }
 }
 const CODE_TO_KEYCODE = {
+  "Space": 32,
   "ArrowUp": 38,
   "ArrowDown": 40,
   "ArrowLeft": 37,
@@ -65618,7 +65609,7 @@ function ultraInputAdapter(viewer) {
 function createAdapter$1(viewer) {
   return {
     init: () => {
-      viewer.rpc.RPCSetMoveSpeed(10);
+      viewer.rpc.RPCSetCameraSpeed(10);
     },
     orbitCamera: (value) => {
     },
@@ -65630,6 +65621,9 @@ function createAdapter$1(viewer) {
     },
     toggleOrthographic: () => {
       console.log("toggleOrthographic. Not supported yet");
+    },
+    toggleCameraOrbitMode: () => {
+      viewer.rpc.RPCKeyEvent(CODE_TO_KEYCODE["Space"], true);
     },
     resetCamera: () => {
       viewer.camera.restoreSavedPosition();
@@ -65820,9 +65814,9 @@ class Raycaster3 {
     if (!Validation.isRelativeVector2(position)) return void 0;
     const test2 = await this._rpc.RPCPerformHitTest(position);
     if (!test2) return void 0;
-    const vim = this._vims.getFromHandle(test2.vimHandle);
+    const vim = this._vims.getFromHandle(test2.vimIndex);
     if (!vim) return void 0;
-    const object = vim.getElementFromInstanceIndex(test2.nodeIndex);
+    const object = vim.getElement(test2.vimElementIndex);
     if (!object) return void 0;
     return new UltraRaycastResult(
       object,
@@ -65851,7 +65845,7 @@ const defaultSceneSettings = {
   hdrScale: 1.37,
   hdrBackgroundScale: 1,
   hdrBackgroundSaturation: 1,
-  backGroundBlur: 1,
+  backgroundBlur: 1,
   backgroundColor: new RGBA$1(0.9, 0.9, 0.9, 1)
 };
 var VimLoadingStatus = /* @__PURE__ */ ((VimLoadingStatus2) => {
@@ -65864,15 +65858,26 @@ var VimLoadingStatus = /* @__PURE__ */ ((VimLoadingStatus2) => {
   return VimLoadingStatus2;
 })(VimLoadingStatus || {});
 class RpcSafeClient {
+  /**
+   * Creates a new RpcSafeClient instance.
+   * @param rpc - The underlying RpcClient used for communication
+   * @param batchSize - Maximum size of batched data for operations (default: 10000)
+   */
   constructor(rpc, batchSize = defaultBatchSize) {
     __publicField(this, "rpc");
     __publicField(this, "batchSize");
     this.rpc = rpc;
     this.batchSize = batchSize;
   }
+  /**
+   * The URL used by the underlying RPC connection.
+   */
   get url() {
     return this.rpc.url;
   }
+  /**
+   * Indicates whether the RPC client is currently connected.
+   */
   get connected() {
     return this.rpc.connected;
   }
@@ -65882,9 +65887,10 @@ class RpcSafeClient {
    * and scene-wide settings.
    ******************************************************************************/
   /**
-   * Initializes and starts the scene with specified settings.
+   * Initializes and starts the scene with the given settings.
    * @param settings - Optional partial scene settings to override defaults
-   * @remarks If no settings are provided, default values will be used
+   * @returns Promise resolving to true if the scene started successfully, false otherwise
+   * @remarks Missing values will be filled from {@link defaultSceneSettings}
    */
   async RPCStartScene(settings2) {
     const s = { ...defaultSceneSettings, ...settings2 ?? {} };
@@ -65894,15 +65900,15 @@ class RpcSafeClient {
         Validation.min0(s.hdrScale),
         Validation.clamp01(s.hdrBackgroundScale),
         Validation.clamp01(s.hdrBackgroundSaturation),
-        Validation.clamp01(s.backGroundBlur),
+        Validation.clamp01(s.backgroundBlur),
         Validation.clampRGBA01(s.backgroundColor)
       ),
       false
     );
   }
   /**
-   * Sets the lighting settings for the scene.
-   * @param settings - The lighting settings to apply
+   * Updates the scene’s lighting configuration.
+   * @param settings - The complete lighting and background settings to apply
    */
   RPCSetLighting(settings2) {
     const s = settings2;
@@ -65911,122 +65917,80 @@ class RpcSafeClient {
       Validation.min0(s.hdrScale),
       Validation.clamp01(s.hdrBackgroundScale),
       Validation.clamp01(s.hdrBackgroundSaturation),
-      Validation.clamp01(s.backGroundBlur),
+      Validation.clamp01(s.backgroundBlur),
       Validation.clampRGBA01(s.backgroundColor)
     );
   }
-  RPCLockIblRotation(lock) {
-    this.rpc.RPCLockIblRotation(lock);
-  }
-  RPCGetSceneAABB() {
+  /**
+   * Retrieves the total number of elements across the entire scene.
+   * @returns Promise resolving to the total number of elements (0 on failure).
+   */
+  RPCGetElementCountForScene() {
     return this.safeCall(
-      () => this.rpc.RPCGetSceneAABB(),
-      void 0
+      () => this.rpc.RPCGetElementCountForScene(),
+      0
+    );
+  }
+  /**
+   * Retrieves the number of elements within a specific loaded vim.
+   * @param vimIndex - Index of the loaded vim to query
+   * @returns Promise resolving to the element count (0 on failure)
+   */
+  RPCGetElementCountForVim(vimIndex) {
+    return this.safeCall(
+      () => this.rpc.RPCGetElementCountForVim(vimIndex),
+      0
     );
   }
   /*******************************************************************************
-   * NODE VISIBILITY METHODS
-   * Methods for controlling node visibility, including show/hide, ghosting,
+   * ELEMENTS VISIBILITY METHODS
+   * Methods for controlling element visibility, including show/hide, ghosting,
    * and highlighting functionality.
    ******************************************************************************/
   /**
-   * Hides all nodes in a component, making the entire component invisible.
-   * @param componentHandle - The component to hide entirely
-   * @throws {Error} If the component handle is invalid
+   * Sets a single visibility state for given elements within a loaded vim.
+   * The operation is automatically split into batches if the array is large.
+   *
+   * @param vimIndex - The index of the loaded vim containing the elements
+   * @param vimElementIndices - Array of vim-based element indices to apply the state to
+   * @param state - The visibility state to apply (e.g., VISIBLE, HIDDEN)
    */
-  RPCHideAll(componentHandle) {
-    if (!Validation.isComponentHandle(componentHandle)) return;
-    this.rpc.RPCHideAll(componentHandle);
-  }
-  /**
-   * Shows all nodes in a component, making the entire component visible.
-   * @param componentHandle - The component to show entirely
-   * @throws {Error} If the component handle is invalid
-   */
-  RPCShowAll(componentHandle) {
-    if (!Validation.isComponentHandle(componentHandle)) return;
-    this.rpc.RPCShowAll(componentHandle);
-  }
-  /**
-   * Makes all nodes in a component semi-transparent (ghosted).
-   * @param componentHandle - The component to ghost entirely
-   * @throws {Error} If the component handle is invalid
-   */
-  RPCGhostAll(componentHandle) {
-    if (!Validation.isComponentHandle(componentHandle)) return;
-    this.rpc.RPCGhostAll(componentHandle);
-  }
-  /**
-   * Highlights all nodes in a component.
-   * @param componentHandle - The component to highlight entirely
-   * @throws {Error} If the component handle is invalid
-   */
-  RPCHighlightAll(componentHandle) {
-    if (!Validation.isComponentHandle(componentHandle)) return;
-    this.rpc.RPCHighlightAll(componentHandle);
-  }
-  /**
-   * Hides specified nodes in a component, making them invisible.
-   * Large node arrays are automatically processed in batches.
-   * @param componentHandle - The component containing the nodes
-   * @param nodes - Array of node indices to hide
-   * @throws {Error} If the component handle is invalid or nodes array is invalid
-   */
-  RPCHide(componentHandle, nodes) {
-    if (!Validation.isComponentHandle(componentHandle)) return;
-    if (!Validation.areComponentHandles(nodes)) return;
-    const batches = batchArray(nodes, this.batchSize);
+  RPCSetStateElements(vimIndex, vimElementIndices, state) {
+    if (vimElementIndices.length === 0) return;
+    if (!Validation.isIndex(vimIndex)) return;
+    if (!Validation.areIndices(vimElementIndices)) return;
+    const batches = batchArray(vimElementIndices, this.batchSize);
     for (const batch of batches) {
-      this.rpc.RPCHide(componentHandle, batch);
+      this.rpc.RPCSetStateElements(vimIndex, batch, state);
     }
   }
   /**
-   * Shows specified nodes in a component, making them visible.
-   * Large node arrays are automatically processed in batches.
-   * @param componentHandle - The component containing the nodes
-   * @param nodes - Array of node indices to show
-   * @throws {Error} If the component handle is invalid or nodes array is invalid
+   * Sets individual visibility states for multiple elements in a vim.
+   * Each element receives a corresponding visibility state from the input array.
+   * The operation is automatically split into batches if the array is large.
+   *
+   * @param vimIndex - The index of the loaded vim
+   * @param vimElementIndices - Array of vim-based element indices
+   * @param states - Array of visibility states to apply, one per element
    */
-  RPCShow(componentHandle, nodes) {
-    if (nodes.length === 0) return;
-    if (!Validation.isComponentHandle(componentHandle)) return;
-    if (!Validation.areComponentHandles(nodes)) return;
-    const batches = batchArray(nodes, this.batchSize);
-    for (const batch of batches) {
-      this.rpc.RPCShow(componentHandle, batch);
+  RPCSetStatesElements(vimIndex, vimElementIndices, states) {
+    if (!Validation.isIndex(vimIndex)) return;
+    if (!Validation.areIndices(vimElementIndices)) return;
+    if (!Validation.areSameLength(vimElementIndices, states)) return;
+    const batches = batchArrays(vimElementIndices, states, this.batchSize);
+    for (const [batchedElements, batchedStates] of batches) {
+      this.rpc.RPCSetStatesElements(vimIndex, batchedElements, batchedStates);
     }
   }
   /**
-   * Makes specified nodes semi-transparent (ghosted) in a component.
-   * Large node arrays are automatically processed in batches.
-   * @param componentHandle - The component containing the nodes
-   * @param nodes - Array of node indices to ghost
-   * @throws {Error} If the component handle is invalid or nodes array is invalid
+   * Applies a single visibility state to all elements of a loaded vim.
+   *
+   * @param vimIndex - The index of the loaded vim
+   * @param state - The visibility state to apply (e.g., VISIBLE, HIDDEN)
    */
-  RPCGhost(componentHandle, nodes) {
-    if (nodes.length === 0) return;
-    if (!Validation.isComponentHandle(componentHandle)) return;
-    if (!Validation.areComponentHandles(nodes)) return;
-    const batches = batchArray(nodes, this.batchSize);
-    for (const batch of batches) {
-      this.rpc.RPCGhost(componentHandle, batch);
-    }
-  }
-  /**
-   * Highlights specified nodes in a component.
-   * Large node arrays are automatically processed in batches.
-   * @param componentHandle - The component containing the nodes
-   * @param nodes - Array of node indices to highlight
-   * @throws {Error} If the component handle is invalid or nodes array is invalid
-   */
-  RPCHighlight(componentHandle, nodes) {
-    if (nodes.length === 0) return;
-    if (!Validation.isComponentHandle(componentHandle)) return;
-    if (!Validation.areComponentHandles(nodes)) return;
-    const batches = batchArray(nodes, this.batchSize);
-    for (const batch of batches) {
-      this.rpc.RPCHighlight(componentHandle, batch);
-    }
+  RPCSetStateVim(vimIndex, state) {
+    if (!Validation.isIndex(vimIndex)) return;
+    this.rpc.RPCSetStateVim(vimIndex, state);
   }
   /*******************************************************************************
    * TEXT AND UI METHODS
@@ -66038,7 +66002,6 @@ class RpcSafeClient {
    * @param color - The color of the text
    * @param text - The content to display
    * @returns Promise resolving to the handle of the created text component
-   * @throws {Error} If the text is empty
    */
   async RPCCreateText(position, color, text) {
     if (!Validation.isNonEmptyString(text)) return INVALID_HANDLE;
@@ -66051,19 +66014,26 @@ class RpcSafeClient {
   /**
    * Destroys a text component, removing it from the scene.
    * @param componentHandle - The handle of the text component to destroy
-   * @throws {Error} If the component handle is invalid
    */
   RPCDestroyText(componentHandle) {
-    if (!Validation.isComponentHandle(componentHandle)) return;
+    if (!Validation.isIndex(componentHandle)) return;
     this.rpc.RPCDestroyText(componentHandle);
   }
   /*******************************************************************************
    * SECTION BOX METHODS
    * Methods for controlling section box visibility and position.
    ******************************************************************************/
+  /**
+   * Enables or disables the section box.
+   * @param enable - True to enable the section box, false to disable it
+   */
   RPCEnableSectionBox(enable) {
     this.rpc.RPCEnableSectionBox(enable);
   }
+  /**
+   * Sets the parameters of the section box.
+   * @param state - The new section box state, including visibility and bounding box
+   */
   RPCSetSectionBox(state) {
     this.rpc.RPCSetSectionBox(
       {
@@ -66072,6 +66042,10 @@ class RpcSafeClient {
       }
     );
   }
+  /**
+   * Retrieves the current section box state.
+   * @returns Promise resolving to the section box state or undefined on failure
+   */
   async RPCGetSectionBox() {
     return await this.safeCall(
       () => this.rpc.RPCGetSectionBox(),
@@ -66086,9 +66060,9 @@ class RpcSafeClient {
    * Retrieves the current camera position and orientation.
    * @returns Promise resolving to a segment representing the camera's current position and target
    */
-  async RPCGetCameraPosition() {
+  async RPCGetCameraView() {
     return await this.safeCall(
-      () => this.rpc.RPCGetCameraPosition(),
+      () => this.rpc.RPCGetCameraPose(),
       void 0
     );
   }
@@ -66096,42 +66070,84 @@ class RpcSafeClient {
    * Sets the camera position and orientation.
    * @param segment - The desired camera position and target
    * @param blendTime - Duration of the camera transition in seconds (non-negative)
-   * @throws {Error} If segment is invalid or blendTime is negative
    */
-  RPCSetCameraPosition(segment, blendTime) {
+  RPCSetCameraView(segment, blendTime) {
     if (!Validation.isValidSegment(segment)) return;
     blendTime = Validation.clamp01(blendTime);
-    this.rpc.RPCSetCameraPosition(segment, blendTime);
+    this.rpc.RPCSetCameraPose(segment, blendTime);
   }
-  async RPCGetBoundingBoxAll(componentHandle) {
-    return await this.safeCall(
-      () => this.rpc.RPCGetBoundingBoxAll(componentHandle),
+  /**
+   * Sets the camera's position without changing its target.
+   * The camera will move to the specified position while maintaining its current look-at direction.
+   *
+   * @param position - The new position of the camera in world space
+   * @param blendTime - Duration of the camera transition in seconds (non-negative)
+   */
+  RPCSetCameraPosition(position, blendTime) {
+    if (!Validation.isValidVector3(position)) return;
+    blendTime = Validation.clamp01(blendTime);
+    this.rpc.RPCSetCameraPosition(position, blendTime);
+  }
+  /**
+   * Sets the camera's look-at target without changing its position.
+   * The camera will rotate to face the specified target while remaining at its current position.
+   *
+   * @param target - The new look-at target of the camera in world space
+   * @param blendTime - Duration of the camera transition in seconds (non-negative)
+   */
+  RPCSetCameraTarget(target, blendTime) {
+    if (!Validation.isValidVector3(target)) return;
+    blendTime = Validation.clamp01(blendTime);
+    this.rpc.RPCSetCameraTarget(target, blendTime);
+  }
+  /**
+   * Retrieves the axis-aligned bounding box (AABB) that encompasses the entire scene.
+   * This includes all loaded geometry across all loaded vims.
+   *
+   * @returns Promise resolving to the global AABB of the scene, or undefined on failure
+   */
+  RPCGetAABBForScene() {
+    return this.safeCall(
+      () => this.rpc.RPCGetAABBForScene(),
       void 0
     );
   }
   /**
-   * Calculates the bounding box for specified nodes in a component.
-   * Large node arrays are automatically processed in batches for better performance.
-   * @param componentHandle - The component containing the nodes
-   * @param nodes - Array of node indices to calculate bounds for
-   * @returns Promise resolving to the combined bounding box
-   * @throws {Error} If the component handle is invalid or nodes array is invalid
+   * Retrieves the axis-aligned bounding box (AABB) for a specific loaded vim.
+   * This bounding box represents the spatial bounds of all geometry within the given loaded vim.
+   *
+   * @param vimIndex - The index of the loaded vim to query
+   * @returns Promise resolving to the vim bounding box, or undefined on failure
    */
-  async RPCGetBoundingBox(componentHandle, nodes) {
-    if (!Validation.isComponentHandle(componentHandle)) return;
-    if (!Validation.areComponentHandles(nodes)) return;
+  async RPCGetAABBForVim(vimIndex) {
+    if (!Validation.isIndex(vimIndex)) return void 0;
     return await this.safeCall(
-      () => this.getBoundingBoxBatched(componentHandle, nodes),
+      () => this.rpc.RPCGetAABBForVim(vimIndex),
       void 0
     );
   }
-  async getBoundingBoxBatched(componentHandle, nodes) {
-    if (nodes.length === 0) {
+  /**
+   * Calculates the bounding box for specified elements of a loaded vim.
+   * Large element arrays are automatically processed in batches.
+   * @param vimIndex - The index of the loaded vim
+   * @param vimElementIndices - Array of vim-based element indices to calculate bounds for
+   * @returns Promise resolving to the combined bounding box or undefined on failure
+   */
+  async RPCGetAABBForElements(vimIndex, vimElementIndices) {
+    if (!Validation.isIndex(vimIndex)) return;
+    if (!Validation.areIndices(vimElementIndices)) return;
+    return await this.safeCall(
+      () => this.RPCGetAABBForElementsBatched(vimIndex, vimElementIndices),
+      void 0
+    );
+  }
+  async RPCGetAABBForElementsBatched(vimIndex, vimElementIndices) {
+    if (vimElementIndices.length === 0) {
       return new Box3();
     }
-    const batches = batchArray(nodes, this.batchSize);
+    const batches = batchArray(vimElementIndices, this.batchSize);
     const promises = batches.map(async (batch) => {
-      const aabb = await this.rpc.RPCGetBoundingBox(componentHandle, batch);
+      const aabb = await this.rpc.RPCGetAABBForElements(vimIndex, batch);
       const v1 = new Vector3(aabb.min.x, aabb.min.y, aabb.min.z);
       const v2 = new Vector3(aabb.max.x, aabb.max.y, aabb.max.z);
       return new Box3(v1, v2);
@@ -66142,58 +66158,56 @@ class RpcSafeClient {
     return box;
   }
   /**
-   * Frames the camera to show all components in the scene.
+   * Frames the camera to show all elements in the scene.
    * @param blendTime - Duration of the camera transition in seconds (non-negative)
    * @returns Promise resolving to camera segment representing the final position
    */
-  async RPCFrameAll(blendTime) {
+  async RPCFrameScene(blendTime) {
     blendTime = Validation.clamp01(blendTime);
     return await this.safeCall(
-      () => this.rpc.RPCFrameAll(blendTime),
+      () => this.rpc.RPCFrameScene(blendTime),
       void 0
     );
   }
   /**
-   * Frames a specific VIM component in the scene.
-   * @param componentHandle - The handle of the VIM component to frame
+   * Frames a specific vim in the scene.
+   * @param vimIndex - The index of the loaded vim to frame
    * @param blendTime - Duration of the camera transition in seconds (non-negative)
    * @returns Promise resolving to camera segment representing the final position
-   * @throws {Error} If the component handle is invalid
    */
-  async RPCFrameVim(componentHandle, blendTime) {
-    if (!Validation.isComponentHandle(componentHandle)) return;
+  async RPCFrameVim(vimIndex, blendTime) {
+    if (!Validation.isIndex(vimIndex)) return;
     blendTime = Validation.clamp01(blendTime);
     return await this.safeCall(
-      () => this.rpc.RPCFrameVim(componentHandle, blendTime),
+      () => this.rpc.RPCFrameVim(vimIndex, blendTime),
       void 0
     );
   }
   /**
-   * Frames specific instances within a component. For large numbers of instances,
-   * automatically switches to bounding box framing for better performance.
-   * @param componentHandle - The component containing the instances
-   * @param nodes - Array of node indices to frame
+   * Frames specific elements of a loaded vim.
+   * Automatically batches large arrays of elements.
+   * @param vimIndex - The index of the loaded vim
+   * @param vimElementIndices - Array of vim-based element indices to frame
    * @param blendTime - Duration of the camera transition in seconds (non-negative)
    * @returns Promise resolving to camera segment representing the final position
-   * @throws {Error} If the component handle is invalid or nodes array is empty
    */
-  async RPCFrameInstances(componentHandle, nodes, blendTime) {
-    if (!Validation.isComponentHandle(componentHandle)) return;
-    if (!Validation.areComponentHandles(nodes)) return;
+  async RPCFrameElements(vimIndex, vimElementIndices, blendTime) {
+    if (!Validation.isIndex(vimIndex)) return;
+    if (!Validation.areIndices(vimElementIndices)) return;
     blendTime = Validation.clamp01(blendTime);
-    if (nodes.length < this.batchSize) {
+    if (vimElementIndices.length < this.batchSize) {
       return await this.safeCall(
-        () => this.rpc.RPCFrameInstances(componentHandle, nodes, blendTime),
+        () => this.rpc.RPCFrameElements(vimIndex, vimElementIndices, blendTime),
         void 0
       );
     } else {
       const box = await this.safeCall(
-        () => this.getBoundingBoxBatched(componentHandle, nodes),
+        () => this.RPCGetAABBForElementsBatched(vimIndex, vimElementIndices),
         void 0
       );
       if (!box) return void 0;
       return await this.safeCall(
-        () => this.rpc.RPCFrameBox(box, blendTime),
+        () => this.rpc.RPCFrameAABB(box, blendTime),
         void 0
       );
     }
@@ -66202,13 +66216,12 @@ class RpcSafeClient {
    * Frames the camera to show a specific bounding box.
    * @param box - The bounding box to frame
    * @param blendTime - Duration of the camera transition in seconds (non-negative)
-   * @throws {Error} If the box is invalid (min values must be less than max values)
    */
-  async RPCFrameBox(box, blendTime) {
+  async RPCFrameAABB(box, blendTime) {
     if (!Validation.isValidBox(box)) return;
     blendTime = Validation.clamp01(blendTime);
     return await this.safeCall(
-      () => this.rpc.RPCFrameBox(box, blendTime),
+      () => this.rpc.RPCFrameAABB(box, blendTime),
       void 0
     );
   }
@@ -66219,12 +66232,15 @@ class RpcSafeClient {
   /**
    * Sets the camera movement speed.
    * @param speed - The desired movement speed (must be positive)
-   * @throws {Error} If speed is not positive
    */
-  RPCSetMoveSpeed(speed) {
+  RPCSetCameraSpeed(speed) {
     speed = Validation.min0(speed);
-    this.rpc.RPCSetMoveSpeed(speed);
+    this.rpc.RPCSetCameraSpeed(speed);
   }
+  /**
+   * Sets the camera control mode.
+   * @param mode - The desired input mode (e.g., {@link InputMode.Orbit} or {@link InputMode.Free})
+   */
   RPCSetCameraMode(mode) {
     this.rpc.RPCSetCameraMode(
       mode === "orbit"
@@ -66233,24 +66249,22 @@ class RpcSafeClient {
   }
   /**
    * Sets the viewer's aspect ratio.
-   * @param width - The width component of the aspect ratio
-   * @param height - The height component of the aspect ratio
-   * @throws {Error} If width or height are not positive integers
+   * @param width - The width of the desired aspect ratio
+   * @param height - The height of the desired aspect ratio
    */
-  RPCSetAspectRatio(width, height) {
+  RPCSetCameraAspectRatio(width, height) {
     if (!Validation.isPositiveInteger(width)) return;
     if (!Validation.isPositiveInteger(height)) return;
-    this.rpc.RPCSetAspectRatio(width, height);
+    this.rpc.RPCSetCameraAspectRatio(width, height);
   }
   /*******************************************************************************
    * VIM FILE MANAGEMENT METHODS
-   * Methods for loading, unloading, and managing VIM files and components.
+   * Methods for loading, unloading, and managing VIM files.
    ******************************************************************************/
   /**
    * Loads a VIM file from the local filesystem.
    * @param source - The path to the VIM file (supports file:// protocol)
-   * @returns Promise resolving to the handle of the loaded VIM component
-   * @throws {Error} If the filename is invalid or empty
+   * @returns Promise resolving to the index of the loaded vim
    */
   async RPCLoadVim(source) {
     if (!Validation.isNonEmptyString(source.url)) return INVALID_HANDLE;
@@ -66262,9 +66276,8 @@ class RpcSafeClient {
   }
   /**
    * Loads a VIM file from a remote URL.
-   * @param url - The URL of the VIM file to load
-   * @returns Promise resolving to the handle of the loaded VIM component
-   * @throws {Error} If the URL is invalid
+   * @param source - The URL or file path of the VIM file to load
+   * @returns Promise resolving to the index of the loaded vim
    */
   async RPCLoadVimURL(source) {
     if (!Validation.isURL(source.url)) return INVALID_HANDLE;
@@ -66274,17 +66287,16 @@ class RpcSafeClient {
     );
   }
   /**
-   * Retrieves the current loading state and progress of a VIM component.
-   * @param componentHandle - The handle of the VIM component
+   * Retrieves the current loading state and progress of a vim.
+   * @param vimIndex - The index of the vim being loaded
    * @returns Promise resolving to the current loading state and progress
-   * @throws {Error} If the component handle is invalid
    */
-  async RPCGetVimLoadingState(componentHandle) {
-    if (!Validation.isComponentHandle(componentHandle)) {
+  async RPCGetVimLoadingState(vimIndex) {
+    if (!Validation.isIndex(vimIndex)) {
       return { status: 0, progress: 0 };
     }
     const result = await this.safeCall(
-      () => this.rpc.RPCGetVimLoadingState(componentHandle),
+      () => this.rpc.RPCGetVimLoadingState(vimIndex),
       { status: 0, progress: 0 }
     );
     if (!(result.status in VimLoadingStatus)) {
@@ -66293,19 +66305,10 @@ class RpcSafeClient {
     return result;
   }
   /**
-   * Unloads a VIM component and frees associated resources.
-   * @param componentHandle - The handle of the component to unload
-   * @throws {Error} If the component handle is invalid
+   * Clears the entire scene, unloading all vims and resetting to initial state.
    */
-  RPCUnloadVim(componentHandle) {
-    if (!Validation.isComponentHandle(componentHandle)) return;
-    this.rpc.RPCUnloadVim(componentHandle);
-  }
-  /**
-   * Clears the entire scene, removing all components and resetting to initial state.
-   */
-  RPCClearScene() {
-    this.rpc.RPCClearScene();
+  RPCUnloadAll() {
+    this.rpc.RPCUnloadAll();
   }
   /**
    * Sets the color used for ghosted geometry.
@@ -66313,12 +66316,12 @@ class RpcSafeClient {
    */
   RPCSetGhostColor(ghostColor) {
     const color = Validation.clampRGBA01(ghostColor);
-    this.rpc.RPCSetGhostColor2(color);
+    this.rpc.RPCSetGhostColor(color);
   }
   /**
    * Performs hit testing at a specified screen position.
    * @param pos - Normalized screen coordinates (0-1, 0-1)
-   * @returns Promise resolving to hit test result if something was hit, undefined otherwise
+   * @returns Promise resolving to hit test result if a valid hit was detected, undefined otherwise
    */
   async RPCPerformHitTest(pos) {
     if (!Validation.isRelativeVector2(pos)) return;
@@ -66326,7 +66329,7 @@ class RpcSafeClient {
       () => this.rpc.RPCPerformHitTest(pos),
       void 0
     );
-    if (!result || result.nodeIndex < 0) {
+    if (!result || result.vimIndex === INVALID_HANDLE) {
       return void 0;
     }
     return result;
@@ -66336,7 +66339,6 @@ class RpcSafeClient {
    * @param position - The normalized screen coordinates (0-1, 0-1)
    * @param mouseButton - The mouse button code (0=left, 1=middle, 2=right)
    * @param down - True if button is pressed down, false if released
-   * @throws {Error} If mouseButton is not a valid positive integer
    */
   RPCMouseButtonEvent(position, mouseButton, down) {
     if (!Validation.isPositiveInteger(mouseButton)) return;
@@ -66347,7 +66349,6 @@ class RpcSafeClient {
    * Sends a mouse double-click event to the viewer.
    * @param position - The normalized screen coordinates (0-1, 0-1)
    * @param mouseButton - The mouse button code (0=left, 1=middle, 2=right)
-   * @throws {Error} If mouseButton is not a valid positive integer
    */
   RPCMouseDoubleClickEvent(position, mouseButton) {
     if (!Validation.isPositiveInteger(mouseButton)) return;
@@ -66374,7 +66375,6 @@ class RpcSafeClient {
    * Sends a mouse selection event to the viewer.
    * @param position - The normalized screen coordinates (0-1, 0-1)
    * @param mouseButton - The mouse button code (0=left, 1=middle, 2=right)
-   * @throws {Error} If mouseButton is not a valid positive integer
    */
   RPCMouseSelectEvent(position, mouseButton) {
     if (!Validation.isPositiveInteger(mouseButton)) return;
@@ -66401,7 +66401,6 @@ class RpcSafeClient {
    * @param smoothness - The smoothness value to apply (clamped between 0 and 1)
    * @param colors - Array of colors for each material instance
    * @returns Array of handles for the created material instances
-   * @throws {Error} If the material handle is invalid or smoothness is out of range
    */
   async RPCCreateMaterialInstances(materialHandle, smoothness, colors) {
     if (!Validation.isMaterialHandle(materialHandle)) return;
@@ -66424,46 +66423,56 @@ class RpcSafeClient {
   }
   /**
    * Destroys multiple material instances, freeing associated resources.
-   * @param materialInstanceHandle - Array of handles for material instances to destroy
-   * @throws {Error} If any handle in the array is invalid
+   * @param materialInstanceHandles - Array of handles for material instances to destroy
    */
-  RPCDestroyMaterialInstances(materialInstanceHandle) {
-    if (!Validation.areComponentHandles(materialInstanceHandle)) return;
-    this.rpc.RPCDestroyMaterialInstances(materialInstanceHandle);
+  RPCDestroyMaterialInstances(materialInstanceHandles) {
+    if (!Validation.areIndices(materialInstanceHandles)) return;
+    this.rpc.RPCDestroyMaterialInstances(materialInstanceHandles);
   }
   /**
-   * Sets material overrides for specific nodes in a component.
-   * Large arrays are automatically processed in batches for better performance.
-   * @param componentHandle - The component containing the nodes
-   * @param nodes - Array of node indices to override
-   * @param materialInstanceHandles - Array of material instance handles to apply (must match nodes length)
-   * @throws {Error} If arrays have different lengths or any handle is invalid
+   * Sets material overrides for specific elements in a loaded vim.
+   * Large arrays are automatically processed in batches.
+   * @param vimIndex - The index of the loaded vim
+   * @param vimElementIndices - Array of vim-based element indices to override
+   * @param materialInstanceHandles - Array of material instance handles to apply (must match element length)
    */
-  RPCSetMaterialOverrides(componentHandle, nodes, materialInstanceHandles) {
-    if (!Validation.areSameLength(nodes, materialInstanceHandles)) return;
-    if (!Validation.isComponentHandle(componentHandle)) return;
-    if (!Validation.areComponentHandles(nodes)) return;
+  RPCSetMaterialOverridesForElements(vimIndex, vimElementIndices, materialInstanceHandles) {
+    if (!Validation.areSameLength(vimElementIndices, materialInstanceHandles)) return;
+    if (!Validation.isIndex(vimIndex)) return;
+    if (!Validation.areIndices(vimElementIndices)) return;
     if (!Validation.areIntegers(materialInstanceHandles)) return;
     this.setMaterialOverridesBatched(
-      componentHandle,
-      nodes,
+      vimIndex,
+      vimElementIndices,
       materialInstanceHandles
     );
   }
-  setMaterialOverridesBatched(componentHandle, nodes, materialInstanceHandles) {
-    const batches = batchArrays(nodes, materialInstanceHandles, this.batchSize);
-    for (const [batchedNodes, batchedMaterials] of batches) {
-      this.rpc.RPCSetMaterialOverrides(componentHandle, batchedNodes, batchedMaterials);
+  setMaterialOverridesBatched(vimIndex, vimElementIndices, materialInstanceHandles) {
+    const batches = batchArrays(vimElementIndices, materialInstanceHandles, this.batchSize);
+    for (const [batchedElements, batchedMaterials] of batches) {
+      this.rpc.RPCSetMaterialOverridesForElements(vimIndex, batchedElements, batchedMaterials);
     }
   }
   /**
-   * Clears all material overrides for the specified component, restoring default materials.
-   * @param componentHandle - The unique identifier of the component
-   * @throws {Error} If the component handle is invalid or INVALID_HANDLE
+   * Clears all material overrides for the entire scene.
    */
-  RPCClearMaterialOverrides(componentHandle) {
-    if (!Validation.isComponentHandle(componentHandle)) return;
-    this.rpc.RPCClearMaterialOverrides(componentHandle);
+  RPCClearMaterialOverridesForScene() {
+    this.rpc.RPCClearMaterialOverridesForScene();
+  }
+  /**
+   * Clears all material overrides for a specific loaded vim.
+   * @param vimIndex - The index of the loaded vim
+   */
+  RPCClearMaterialOverridesForVim(vimIndex) {
+    this.rpc.RPCClearMaterialOverridesForVim(vimIndex);
+  }
+  /**
+   * Clears all material overrides for specific elements in a loaded vim.
+   * @param vimIndex - The index of the loaded vim
+   * @param vimElementIndices - Array of vim-based element indices to clear overrides for
+   */
+  RPCClearMaterialOverridesForElements(vimIndex, vimElementIndices) {
+    this.rpc.RPCClearMaterialOverridesForElements(vimIndex, vimElementIndices);
   }
   /*******************************************************************************
    * DEBUG AND UTILITY METHODS
@@ -66509,46 +66518,6 @@ class RpcSafeClient {
   RPCTriggerRenderDocCapture() {
     this.rpc.RPCTriggerRenderDocCapture();
   }
-  /**
-   * Shows axis-aligned bounding boxes (AABBs) for specified nodes with custom colors.
-   * Large arrays are automatically processed in batches for better performance.
-   * @param componentHandle - The component containing the nodes
-   * @param nodes - Array of node indices to show AABBs for
-   * @param colors - Array of colors for each AABB (must match nodes length)
-   * @throws {Error} If arrays have different lengths or component handle is invalid
-   */
-  RPCShowAABBs(componentHandle, nodes, colors) {
-    if (!Validation.isComponentHandle(componentHandle)) return;
-    if (!Validation.areComponentHandles(nodes)) return;
-    const batches = batchArrays(nodes, colors, this.batchSize);
-    for (const [batchedNodes, batchedColors] of batches) {
-      this.rpc.RPCShowAABBs(componentHandle, batchedNodes, batchedColors);
-    }
-  }
-  /**
-   * Hides the axis-aligned bounding boxes (AABBs) for specified nodes.
-   * Large node arrays are automatically processed in batches.
-   * @param componentHandle - The component containing the nodes
-   * @param nodes - Array of node indices whose AABBs should be hidden
-   * @throws {Error} If the component handle is invalid or nodes array is invalid
-   */
-  RPCHideAABBs(componentHandle, nodes) {
-    if (!Validation.isComponentHandle(componentHandle)) return;
-    if (!Validation.areComponentHandles(nodes)) return;
-    const batches = batchArray(nodes, this.batchSize);
-    for (const batch of batches) {
-      this.rpc.RPCHideAABBs(componentHandle, batch);
-    }
-  }
-  /**
-   * Hides all axis-aligned bounding boxes (AABBs) in a component.
-   * @param componentHandle - The component whose AABBs should be hidden
-   * @throws {Error} If the component handle is invalid
-   */
-  RPCHideAllAABBs(componentHandle) {
-    if (!Validation.isComponentHandle(componentHandle)) return;
-    this.rpc.RPCHideAllAABBs(componentHandle);
-  }
   async safeCall(func, defaultValue) {
     try {
       return await func();
@@ -66560,8 +66529,8 @@ class RpcSafeClient {
 }
 const defaultRenderSettings = {
   ...defaultSceneSettings,
-  lockIblRotation: true,
-  ghostColor: new RGBA$1(14 / 255, 14 / 255, 14 / 255, 64 / 255)
+  ghostColor: new Color(14 / 255, 14 / 255, 14 / 255),
+  ghostOpacity: 64 / 255
 };
 class Renderer2 {
   /**
@@ -66576,7 +66545,6 @@ class Renderer2 {
     __publicField(this, "_animationFrame");
     __publicField(this, "_updateLighting", false);
     __publicField(this, "_updateGhostColor", false);
-    __publicField(this, "_updateIblRotation", false);
     __publicField(this, "_onSceneUpdated", new distExports$1.SignalDispatcher());
     this._rpc = rpc;
     this._logger = logger;
@@ -66609,8 +66577,8 @@ class Renderer2 {
    * Sets up initial scene settings, ghost color, and IBL rotation
    */
   onConnect() {
-    this._rpc.RPCSetGhostColor(this._settings.ghostColor);
-    this._rpc.RPCLockIblRotation(this._settings.lockIblRotation);
+    const color = RGBAfromThree(this._settings.ghostColor, this._settings.ghostOpacity);
+    this._rpc.RPCSetGhostColor(color);
   }
   notifySceneUpdated() {
     this._onSceneUpdated.dispatch();
@@ -66618,17 +66586,13 @@ class Renderer2 {
   // Getters
   /**
    * Gets the ghost color used for transparent rendering
-   * @returns Current ghost color as RGBA
+   * @returns Current ghost color as a THREE.Color
    */
   get ghostColor() {
     return this._settings.ghostColor;
   }
-  /**
-   * Gets the IBL rotation lock setting
-   * @returns Whether IBL rotation is locked
-   */
-  get lockIblRotation() {
-    return this._settings.lockIblRotation;
+  get ghostOpacity() {
+    return this._settings.ghostOpacity;
   }
   /**
    * Gets the tone mapping white point value
@@ -66663,35 +66627,31 @@ class Renderer2 {
    * @returns Current background blur
    */
   get backgroundBlur() {
-    return this._settings.backGroundBlur;
+    return this._settings.backgroundBlur;
   }
   /**
    * Gets the background color
    * @returns Current background color as RGBA
    */
   get backgroundColor() {
-    return this._settings.backgroundColor;
+    return this._settings.backgroundColor.toThree();
   }
   // Setters
   /**
    * Updates the ghost color used for transparent rendering
-   * @param value - New ghost color as RGBA
+   * @param value - New ghost color as THREE.Color
    */
   set ghostColor(value) {
-    value = Validation.clampRGBA01(value);
     if (this._settings.ghostColor.equals(value)) return;
     this._settings.ghostColor = value;
     this._updateGhostColor = true;
     this.requestSettingsUpdate();
   }
-  /**
-   * Updates the IBL rotation lock setting
-   * @param value - Whether to lock IBL rotation
-   */
-  set lockIblRotation(value) {
-    if (this._settings.lockIblRotation === value) return;
-    this._settings.lockIblRotation = value;
-    this._updateIblRotation = true;
+  set ghostOpacity(value) {
+    value = Validation.clamp01(value);
+    if (this._settings.ghostOpacity === value) return;
+    this._settings.ghostOpacity = value;
+    this._updateGhostColor = true;
     this.requestSettingsUpdate();
   }
   /**
@@ -66744,24 +66704,24 @@ class Renderer2 {
    */
   set backgroundBlur(value) {
     value = Validation.clamp01(value);
-    if (this._settings.backGroundBlur === value) return;
-    this._settings.backGroundBlur = value;
+    if (this._settings.backgroundBlur === value) return;
+    this._settings.backgroundBlur = value;
     this._updateLighting = true;
     this.requestSettingsUpdate();
   }
   /**
    * Sets the background color
-   * @param value - New background color as RGBA
+   * @param value - New background color as THREE.Color
    */
   set backgroundColor(value) {
-    value = Validation.clampRGBA01(value);
-    if (this._settings.backgroundColor.equals(value)) return;
-    this._settings.backgroundColor = value;
+    const color = RGBAfromThree(value, 1);
+    if (this._settings.backgroundColor.equals(color)) return;
+    this._settings.backgroundColor = color;
     this._updateLighting = true;
     this.requestSettingsUpdate();
   }
   getBoundingBox() {
-    return this._rpc.RPCGetSceneAABB();
+    return this._rpc.RPCGetAABBForScene();
   }
   /**
    * Requests an update to be performed on the next animation frame.
@@ -66776,11 +66736,12 @@ class Renderer2 {
   }
   async applySettings() {
     if (this._updateLighting) await this._rpc.RPCSetLighting(this._settings);
-    if (this._updateGhostColor) await this._rpc.RPCSetGhostColor(this._settings.ghostColor);
-    if (this._updateIblRotation) await this._rpc.RPCLockIblRotation(this._settings.lockIblRotation);
+    if (this._updateGhostColor) {
+      const color = RGBAfromThree(this._settings.ghostColor, this._settings.ghostOpacity);
+      await this._rpc.RPCSetGhostColor(color);
+    }
     this._updateLighting = false;
     this._updateGhostColor = false;
-    this._updateIblRotation = false;
     this._animationFrame = void 0;
   }
   /**
@@ -66877,7 +66838,7 @@ class SectionBox2 {
    * Fits the given box, invalid dimensions will be reversed.
    * @param box - The new bounding box.
    */
-  fitBox(box) {
+  setBox(box) {
     box = safeBox(box);
     this._box = box;
     this.scheduleUpdate();
@@ -66892,14 +66853,16 @@ class SectionBox2 {
     this._onUpdate.clear();
   }
 }
-var NodeState$1$1 = /* @__PURE__ */ ((NodeState2) => {
-  NodeState2["VISIBLE"] = "visible";
-  NodeState2["HIDDEN"] = "hidden";
-  NodeState2["GHOSTED"] = "ghosted";
-  NodeState2["HIGHLIGHTED"] = "highlighted";
-  return NodeState2;
-})(NodeState$1$1 || {});
-class StateSynchronizer {
+var VisibilityState$1 = /* @__PURE__ */ ((VisibilityState2) => {
+  VisibilityState2[VisibilityState2["VISIBLE"] = 0] = "VISIBLE";
+  VisibilityState2[VisibilityState2["HIDDEN"] = 1] = "HIDDEN";
+  VisibilityState2[VisibilityState2["GHOSTED"] = 2] = "GHOSTED";
+  VisibilityState2[VisibilityState2["HIGHLIGHTED"] = 16] = "HIGHLIGHTED";
+  VisibilityState2[VisibilityState2["HIDDEN_HIGHLIGHTED"] = 17] = "HIDDEN_HIGHLIGHTED";
+  VisibilityState2[VisibilityState2["GHOSTED_HIGHLIGHTED"] = 18] = "GHOSTED_HIGHLIGHTED";
+  return VisibilityState2;
+})(VisibilityState$1 || {});
+class VisibilitySynchronizer {
   /**
    * Creates a new StateSynchronizer instance.
    * 
@@ -66907,16 +66870,16 @@ class StateSynchronizer {
    * @param getHandle - Function that returns the current handle identifier
    * @param isConnected - Function that returns whether the connection to the remote system is active
    * @param onUpdate - Callback function invoked when updates are sent to the remote system
-   * @param defaultState - The default state for nodes when not explicitly set (defaults to VISIBLE)
+   * @param defaultState - The default state for elements when not explicitly set (defaults to VISIBLE)
    */
-  constructor(rpc, getHandle, isConnected, onUpdate, defaultState = "visible") {
+  constructor(rpc, getHandle, isConnected, onUpdate, defaultState = 0) {
     __publicField(this, "_tracker");
     __publicField(this, "_rpc");
     __publicField(this, "_getHandle");
     __publicField(this, "_onUpdate");
     __publicField(this, "_isConnected");
     __publicField(this, "_animationFrame");
-    this._tracker = new StateTracker(defaultState);
+    this._tracker = new VisibilityTracker(defaultState);
     this._rpc = rpc;
     this._onUpdate = onUpdate;
     this._getHandle = getHandle;
@@ -66924,34 +66887,34 @@ class StateSynchronizer {
   }
   // --- Getters ---
   /**
-   * Checks if all nodes are in the specified state(s).
+   * Checks if all elements are in the specified state(s).
    * 
    * @param state - A single state or array of states to check against
-   * @returns True if all nodes are in the specified state(s), false otherwise
+   * @returns True if all elements are in the specified state(s), false otherwise
    */
   areAllInState(state) {
     return this._tracker.areAll(state);
   }
   /**
-   * Gets the current state of a specific node.
+   * Gets the current state of a specific element.
    * 
-   * @param node - The node identifier
-   * @returns The current state of the node
+   * @param elementIndex - The element index
+   * @returns The current state of the element
    */
-  getNodeState(node) {
-    return this._tracker.getState(node);
+  getElementState(elementIndex) {
+    return this._tracker.getState(elementIndex);
   }
   /**
-   * Gets all nodes that are currently in the specified state.
+   * Gets all elements that are currently in the specified state.
    * 
    * @param state - The state to query
-   * @returns Either 'all' if all nodes are in this state, or an array of node IDs
+   * @returns Either 'all' if all elements are in this state, or an array of element indices
    */
-  getNodesInState(state) {
+  getElementsInState(state) {
     return this._tracker.getAll(state);
   }
   /**
-   * Gets the default state used for nodes without explicit state settings.
+   * Gets the default state used for elements without explicit state settings.
    * 
    * @returns The current default state
    */
@@ -66960,27 +66923,27 @@ class StateSynchronizer {
   }
   // --- Setters ---
   /**
-   * Sets the state of a specific node.
+   * Sets the state of a specific elements.
    * 
-   * @param nodeId - The identifier of the node
+   * @param elementIndex - The element index to update
    * @param state - The new state to apply
    */
-  setNodeState(nodeId, state) {
-    this._tracker.setState(nodeId, state);
+  setStateForElement(elementIndex, state) {
+    this._tracker.setState(elementIndex, state);
     this.scheduleUpdate();
   }
   /**
-   * Sets the state of all nodes to the specified value.
+   * Sets the state of all elements to the specified value.
    * 
-   * @param state - The state to apply to all nodes
-   * @param clear - If true, clears all node-specific overrides
+   * @param state - The state to apply to all elements
+   * @param clear - If true, clears all elements-specific overrides
    */
-  setAllNodesState(state) {
+  setStateForAll(state) {
     this._tracker.setAll(state);
     this.scheduleUpdate();
   }
   /**
-   * Replaces all nodes in one state (or states) with another state.
+   * Replaces all elements in one state (or states) with another state.
    * 
    * @param fromState - The state(s) to replace
    * @param toState - The new state to apply
@@ -67017,76 +66980,25 @@ class StateSynchronizer {
    * @private
    */
   remoteUpdate() {
-    const [defaultUpdate, nodeUpdates] = this._tracker.getUpdates();
+    const [defaultUpdate, elementUpdates] = this._tracker.getUpdates();
     this._tracker.reset();
-    if (defaultUpdate) {
-      this.callRPCForStateAll(defaultUpdate);
+    if (defaultUpdate !== void 0) {
+      this._rpc.RPCSetStateVim(this._getHandle(), defaultUpdate);
     }
-    for (const [state, nodes] of nodeUpdates.entries()) {
-      if (nodes.length === 0) continue;
-      this.callRPCForStateNodes(state, nodes);
+    for (const [state, elements] of elementUpdates.entries()) {
+      if (elements.length === 0) continue;
+      this._rpc.RPCSetStateElements(this._getHandle(), elements, state);
     }
     this._onUpdate();
   }
-  /**
-   * Calls the appropriate RPC method to update the state of all nodes.
-   * 
-   * @param state - The state to apply to all nodes
-   * @private
-   */
-  callRPCForStateAll(state) {
-    if (!this._isConnected()) {
-      return;
-    }
-    switch (state) {
-      case "visible":
-        this._rpc.RPCShowAll(this._getHandle());
-        break;
-      case "hidden":
-        this._rpc.RPCHideAll(this._getHandle());
-        break;
-      case "ghosted":
-        this._rpc.RPCGhostAll(this._getHandle());
-        break;
-      case "highlighted":
-        this._rpc.RPCHighlightAll(this._getHandle());
-        break;
-    }
-  }
-  /**
-   * Calls the appropriate RPC method to update the state of specific nodes.
-   * 
-   * @param state - The state to apply
-   * @param nodes - Array of node IDs to update
-   * @private
-   */
-  callRPCForStateNodes(state, nodes) {
-    if (!this._isConnected()) {
-      return;
-    }
-    switch (state) {
-      case "visible":
-        this._rpc.RPCShow(this._getHandle(), nodes);
-        break;
-      case "hidden":
-        this._rpc.RPCHide(this._getHandle(), nodes);
-        break;
-      case "ghosted":
-        this._rpc.RPCGhost(this._getHandle(), nodes);
-        break;
-      case "highlighted":
-        this._rpc.RPCHighlight(this._getHandle(), nodes);
-        break;
-    }
-  }
 }
-class StateTracker {
+class VisibilityTracker {
   /**
    * Creates a new StateTracker instance.
    * 
-   * @param defaultState - The default state for nodes when not explicitly set
+   * @param defaultState - The default state for elements when not explicitly set
    */
-  constructor(defaultState = "visible") {
+  constructor(defaultState = 0) {
     __publicField(this, "_state", /* @__PURE__ */ new Map());
     __publicField(this, "_updates", /* @__PURE__ */ new Set());
     __publicField(this, "_default");
@@ -67094,10 +67006,9 @@ class StateTracker {
     this._default = defaultState;
   }
   /**
-   * Sets the default state for all nodes and optionally clears node-specific overrides.
+   * Sets the default state for all elements and optionally clears element-specific overrides.
    * 
    * @param state - The new default state
-   * @param clearNodes - If true, clears all node-specific overrides
    */
   setAll(state) {
     this._default = state;
@@ -67112,30 +67023,30 @@ class StateTracker {
   reapply() {
     this._updates.clear();
     const toRemove = /* @__PURE__ */ new Set();
-    for (const [nodeId, state] of this._state.entries()) {
+    for (const [elementIndex, state] of this._state.entries()) {
       if (state === this._default) {
-        toRemove.add(nodeId);
+        toRemove.add(elementIndex);
       } else {
-        this._updates.add(nodeId);
+        this._updates.add(elementIndex);
       }
     }
-    toRemove.forEach((nodeId) => this._state.delete(nodeId));
+    toRemove.forEach((elementIndex) => this._state.delete(elementIndex));
   }
   /**
-   * Sets the state of a specific node.
+   * Sets the state of a specific element.
    * 
-   * @param nodeId - The node identifier
+   * @param elementIndex - The element index to update
    * @param state - The new state to apply
    */
-  setState(nodeId, state) {
+  setState(elementIndex, state) {
     if (this._default === state) {
-      this._state.delete(nodeId);
+      this._state.delete(elementIndex);
       if (!this._updatedDefault) {
-        this._updates.add(nodeId);
+        this._updates.add(elementIndex);
       }
     } else {
-      this._state.set(nodeId, state);
-      this._updates.add(nodeId);
+      this._state.set(elementIndex, state);
+      this._updates.add(elementIndex);
     }
   }
   /**
@@ -67147,66 +67058,65 @@ class StateTracker {
     return this._default;
   }
   /**
-   * Returns whether every node (override or not) is in the given state(s).
+   * Returns whether every element (override or not) is in the given state(s).
    * 
    * @param state - A single state or array of states to check against
-   * @returns True if all nodes are in the specified state(s), false otherwise
+   * @returns True if all element are in the specified state(s), false otherwise
    */
   areAll(state) {
     if (!matchesState(this._default, state)) {
       return false;
     }
-    for (const nodeState of this._state.values()) {
-      if (!matchesState(nodeState, state)) {
+    for (const currentState of this._state.values()) {
+      if (!matchesState(currentState, state)) {
         return false;
       }
     }
     return true;
   }
   /**
-   * Returns a node's effective state.
+   * Returns an element effective state.
    * 
-   * @param node - The node identifier
-   * @returns The current state of the node (override or default)
+   * @param elementIndex - The element index
+   * @returns The current state of the element (override or default)
    */
-  getState(node) {
-    return this._state.get(node) ?? this._default;
+  getState(elementIndex) {
+    return this._state.get(elementIndex) ?? this._default;
   }
   /**
-   * Returns either 'all' if every node is in the given state, or an array
-   * of node IDs (from the overrides) whose state equals the provided state.
+   * Returns either 'all' if every element is in the given state, or an array
+   * of element index (from the overrides) whose state equals the provided state.
    * 
    * @param state - The state to query
-   * @returns Either 'all' if all nodes are in this state, or an array of node IDs
+   * @returns Either 'all' if all elements are in this state, or an array of element indices
    */
   getAll(state) {
     if (this.areAll(state)) return "all";
-    const nodes = [];
-    for (const [nodeId, nodeState] of this._state.entries()) {
-      if (nodeState === state) {
-        nodes.push(nodeId);
+    const elements = [];
+    for (const [elementIndex, currentState] of this._state.entries()) {
+      if (matchesState(currentState, state)) {
+        elements.push(elementIndex);
       }
     }
-    return nodes;
+    return elements;
   }
   /**
-   * Returns a mapping from state to an array of updated node IDs.
-   * 
-   * @returns A tuple with the updated default state (if any) and a map of states to node IDs
+   * Returns a mapping from state to an array of updated elementIndices.
+   * @returns A tuple with the updated default state (if any) and a map of states to element Indices
    */
   getUpdates() {
-    const nodesByState = /* @__PURE__ */ new Map();
-    Object.values(NodeState$1$1).forEach((state) => {
-      nodesByState.set(state, []);
+    const elementsByState = /* @__PURE__ */ new Map();
+    Object.values(VisibilityState$1).filter((v) => typeof v === "number").forEach((state) => {
+      elementsByState.set(state, []);
     });
-    for (const nodeId of this._updates) {
-      const state = this._state.get(nodeId) ?? this._default;
-      const nodesArray = nodesByState.get(state);
-      if (nodesArray) {
-        nodesArray.push(nodeId);
+    for (const elementIndex of this._updates) {
+      const state = this._state.get(elementIndex) ?? this._default;
+      const elementArray = elementsByState.get(state);
+      if (elementArray) {
+        elementArray.push(elementIndex);
       }
     }
-    return [this._updatedDefault ? this._default : void 0, nodesByState];
+    return [this._updatedDefault ? this._default : void 0, elementsByState];
   }
   /**
    * Checks if the default state has been updated.
@@ -67217,23 +67127,23 @@ class StateTracker {
     return this._updatedDefault;
   }
   /**
-   * Resets the update tracking, clearing the list of nodes that need updates.
+   * Resets the update tracking, clearing the list of elements that need updates.
    */
   reset() {
     this._updates.clear();
     this._updatedDefault = false;
   }
   /**
-   * Returns an iterator over all node overrides.
+   * Returns an iterator over all elements overrides.
    * 
-   * @returns An iterator of [nodeId, state] pairs
+   * @returns An iterator of [elementIndex, state] pairs
    */
   entries() {
     return this._state.entries();
   }
   /**
-   * Replaces all nodes that match the provided state(s) with a new state.
-   * If all nodes are in the given state(s), the default is updated.
+   * Replaces all elements that match the provided state(s) with a new state.
+   * If all elements are in the given state(s), the default is updated.
    * 
    * @param fromState - The state(s) to replace
    * @param toState - The new state to apply
@@ -67246,36 +67156,40 @@ class StateTracker {
       this.reapply();
       return;
     }
-    for (const [nodeId, state] of this._state.entries()) {
+    for (const [elementIndex, state] of this._state.entries()) {
       if (matchesState(state, fromState)) {
-        this._state.set(nodeId, toState);
-        this._updates.add(nodeId);
+        this._state.set(elementIndex, toState);
+        this._updates.add(elementIndex);
       }
     }
   }
   // Clean up redundant overrides
   purge() {
     const toRemove = [];
-    for (const [nodeId, state] of this._state.entries()) {
+    for (const [elementIndex, state] of this._state.entries()) {
       if (state === this._default) {
-        toRemove.push(nodeId);
+        toRemove.push(elementIndex);
       }
     }
-    toRemove.forEach((nodeId) => this._state.delete(nodeId));
+    toRemove.forEach((elementIndex) => this._state.delete(elementIndex));
   }
 }
-function matchesState(nodeState, state) {
-  if (Array.isArray(state)) {
-    return state.includes(nodeState);
+function matchesState(state, targetState) {
+  if (Array.isArray(targetState)) {
+    return targetState.includes(state);
   }
-  return nodeState === state;
+  return state === targetState;
 }
 function createSelection() {
   return new Selection(new SelectionAdapter2());
 }
 class SelectionAdapter2 {
   outline(object, state) {
-    object.state = state ? NodeState$1$1.HIGHLIGHTED : NodeState$1$1.VISIBLE;
+    if (state) {
+      object.state = object.state === VisibilityState$1.VISIBLE ? VisibilityState$1.HIGHLIGHTED : object.state === VisibilityState$1.HIDDEN ? VisibilityState$1.HIDDEN_HIGHLIGHTED : object.state === VisibilityState$1.GHOSTED ? VisibilityState$1.GHOSTED_HIGHLIGHTED : VisibilityState$1.HIGHLIGHTED;
+    } else {
+      object.state = object.state === VisibilityState$1.HIGHLIGHTED ? VisibilityState$1.VISIBLE : object.state === VisibilityState$1.HIDDEN_HIGHLIGHTED ? VisibilityState$1.HIDDEN : object.state === VisibilityState$1.GHOSTED_HIGHLIGHTED ? VisibilityState$1.GHOSTED : VisibilityState$1.VISIBLE;
+    }
   }
 }
 const HEADER_SIZE = 16;
@@ -67666,7 +67580,7 @@ class Viewport2 {
    */
   update() {
     if (this._rpc.connected) {
-      this._rpc.RPCSetAspectRatio(this.canvas.offsetWidth, this.canvas.offsetHeight);
+      this._rpc.RPCSetCameraAspectRatio(this.canvas.offsetWidth, this.canvas.offsetHeight);
     }
   }
   /**
@@ -67681,13 +67595,13 @@ class Element3D2 {
   /**
    * Creates a new `Element3D` instance.
    * @param vim - The parent `Vim` model.
-   * @param instance - The internal instance index.
+   * @param element - The internal instance index.
    */
-  constructor(vim, instance) {
+  constructor(vim, element) {
     __publicField(this, "vim");
-    __publicField(this, "instance");
+    __publicField(this, "element");
     this.vim = vim;
-    this.instance = instance;
+    this.element = element;
   }
   /**
    * The unique handle of the parent `Vim` model.
@@ -67699,19 +67613,19 @@ class Element3D2 {
    * Gets or sets the display state of the element (e.g., visible, hidden).
    */
   get state() {
-    return this.vim.nodeState.getNodeState(this.instance);
+    return this.vim.visibility.getElementState(this.element);
   }
   set state(state) {
-    this.vim.nodeState.setNodeState(this.instance, state);
+    this.vim.visibility.setStateForElement(this.element, state);
   }
   /**
    * Gets or sets the color override of the element.
    */
   get color() {
-    return this.vim.getColor(this.instance);
+    return this.vim.getColor(this.element);
   }
   set color(color) {
-    this.vim.setColor([this.instance], color);
+    this.vim.setColor([this.element], color);
   }
   /**
    * Computes and returns the bounding box of the element.
@@ -67719,11 +67633,12 @@ class Element3D2 {
    * @returns A promise resolving to the element's bounding box.
    */
   async getBoundingBox() {
-    return this.vim.getBoundingBoxNodes([this.instance]);
+    return this.vim.getBoundingBoxForElements([this.element]);
   }
 }
 class Vim2 {
   constructor(rpc, color, renderer, source, logger) {
+    __publicField(this, "type", "ultra");
     __publicField(this, "source");
     __publicField(this, "_handle", -1);
     __publicField(this, "_request");
@@ -67731,44 +67646,50 @@ class Vim2 {
     __publicField(this, "_colors");
     __publicField(this, "_renderer");
     __publicField(this, "_logger");
-    __publicField(this, "nodeState");
-    __publicField(this, "_nodeColors", /* @__PURE__ */ new Map());
+    __publicField(this, "visibility");
+    __publicField(this, "_elementColors", /* @__PURE__ */ new Map());
     __publicField(this, "_updatedColors", /* @__PURE__ */ new Set());
+    __publicField(this, "_removedColors", /* @__PURE__ */ new Set());
     __publicField(this, "_updateScheduled", false);
+    __publicField(this, "_elementCount", 0);
     __publicField(this, "_objects", /* @__PURE__ */ new Map());
     this._rpc = rpc;
     this.source = source;
     this._colors = color;
     this._renderer = renderer;
     this._logger = logger;
-    this.nodeState = new StateSynchronizer(
+    this.visibility = new VisibilitySynchronizer(
       this._rpc,
       () => this._handle,
       () => this.connected,
       () => this._renderer.notifySceneUpdated(),
-      NodeState$1$1.VISIBLE
+      VisibilityState$1.VISIBLE
       // default state
     );
   }
-  getElementFromInstanceIndex(instance) {
-    if (this._objects.has(instance)) {
-      return this._objects.get(instance);
+  //TODO: Rename this to getElementFromNode, prefer using element instead
+  getElement(elementIndex) {
+    if (this._objects.has(elementIndex)) {
+      return this._objects.get(elementIndex);
     }
-    const object = new Element3D2(this, instance);
-    this._objects.set(instance, object);
+    const object = new Element3D2(this, elementIndex);
+    this._objects.set(elementIndex, object);
     return object;
   }
   getElementsFromId(id2) {
     throw new Error("Method not implemented.");
   }
   getElementFromIndex(element) {
-    throw new Error("Method not implemented.");
+    return this.getElement(element);
   }
   getObjectsInBox(box) {
     throw new Error("Method not implemented.");
   }
   getAllElements() {
-    throw new Error("Method not implemented.");
+    for (var i = 0; i < this._elementCount; i++) {
+      this.getElement(i);
+    }
+    return Array.from(this._objects.values());
   }
   get handle() {
     return this._handle;
@@ -67786,7 +67707,7 @@ class Vim2 {
       const result = await request.getResult();
       if (result.isSuccess) {
         this._logger.log("Successfully loaded vim: ", this.source);
-        this.nodeState.reapplyStates();
+        this.visibility.reapplyStates();
         this.reapplyColors();
       } else {
         this._logger.log("Failed to load vim: ", this.source);
@@ -67799,7 +67720,6 @@ class Vim2 {
     (_a3 = this._request) == null ? void 0 : _a3.error("cancelled", "The request was cancelled");
     this._request = void 0;
     if (this.connected) {
-      this._rpc.RPCUnloadVim(this._handle);
       this._handle = -1;
     }
   }
@@ -67821,12 +67741,12 @@ class Vim2 {
           case VimLoadingStatus.FailedToDownload:
           case VimLoadingStatus.FailedToLoad:
           case VimLoadingStatus.Unknown:
-            this._rpc.RPCUnloadVim(handle);
             const details = await this._rpc.RPCGetLastError();
             const error = this.getErrorType(state.status);
             return result.error(error, details);
           case VimLoadingStatus.Done:
             this._handle = handle;
+            this._elementCount = await this._rpc.RPCGetElementCountForVim(handle);
             return result.success(this);
         }
       } catch (e) {
@@ -67866,64 +67786,67 @@ class Vim2 {
     }
     return handle;
   }
-  async getBoundingBoxNodes(nodes) {
-    if (!this.connected || nodes !== "all" && nodes.length === 0) {
+  async getBoundingBoxForElements(elements) {
+    if (!this.connected || elements !== "all" && elements.length === 0) {
       return Promise.resolve(void 0);
     }
-    if (nodes === "all") {
-      return await this._rpc.RPCGetBoundingBoxAll(this._handle);
+    if (elements === "all") {
+      return await this._rpc.RPCGetAABBForVim(this._handle);
     }
-    return await this._rpc.RPCGetBoundingBox(this._handle, nodes);
+    return await this._rpc.RPCGetAABBForElements(this._handle, elements);
   }
   async getBoundingBox() {
     if (!this.connected) {
       return Promise.resolve(void 0);
     }
-    return await this._rpc.RPCGetBoundingBoxAll(this._handle);
+    return await this._rpc.RPCGetAABBForVim(this._handle);
   }
-  getColor(node) {
-    return this._nodeColors.get(node);
+  getColor(elementIndex) {
+    return this._elementColors.get(elementIndex);
   }
-  async setColor(nodes, color) {
-    const colors = new Array(nodes.length).fill(color);
-    this.applyColor(nodes, colors);
+  async setColor(elementIndex, color) {
+    const colors = new Array(elementIndex.length).fill(color);
+    this.applyColor(elementIndex, colors);
   }
-  async setColors(nodes, color) {
-    if (color.length !== nodes.length) {
-      throw new Error("Color and nodes length must be equal");
+  async setColors(elements, color) {
+    if (color.length !== elements.length) {
+      throw new Error("Color and elements length must be equal");
     }
-    this.applyColor(nodes, color);
+    this.applyColor(elements, color);
   }
-  applyColor(nodes, color) {
-    for (let i = 0; i < color.length; i++) {
-      const c = color[i];
-      const n = nodes[i];
-      if (c === void 0) {
-        this._nodeColors.delete(n);
-      } else {
-        this._nodeColors.set(n, c);
+  applyColor(elements, colors) {
+    for (let i = 0; i < colors.length; i++) {
+      const color = colors[i];
+      const element = elements[i];
+      const existingColor = this._elementColors.get(element);
+      if (color === void 0 && existingColor !== void 0) {
+        this._elementColors.delete(element);
+        this._removedColors.add(element);
+      } else if (color !== existingColor) {
+        this._elementColors.set(element, color);
+        this._updatedColors.add(element);
       }
-      this._updatedColors.add(n);
     }
     this.scheduleColorUpdate();
   }
-  clearColor(nodes) {
-    if (nodes === "all") {
-      this._nodeColors.clear();
+  //TODO: Remove and rely on element.color
+  clearColor(elements) {
+    if (elements === "all") {
+      this._elementColors.clear();
     } else {
-      nodes.forEach((n) => this._nodeColors.delete(n));
+      elements.forEach((n) => this._elementColors.delete(n));
     }
     if (!this.connected) return;
-    if (nodes === "all") {
-      this._rpc.RPCClearMaterialOverrides(this._handle);
+    if (elements === "all") {
+      this._rpc.RPCClearMaterialOverridesForVim(this._handle);
     } else {
-      const ids = new Array(nodes.length).fill(MaterialHandles.Invalid);
-      this._rpc.RPCSetMaterialOverrides(this._handle, nodes, ids);
+      this._rpc.RPCClearMaterialOverridesForElements(this._handle, elements);
     }
   }
   reapplyColors() {
     this._updatedColors.clear();
-    this._nodeColors.forEach((c, n) => this._updatedColors.add(n));
+    this._removedColors.clear();
+    this._elementColors.forEach((c, n) => this._updatedColors.add(n));
     this.scheduleColorUpdate();
   }
   scheduleColorUpdate() {
@@ -67939,12 +67862,15 @@ class Vim2 {
     this._renderer.notifySceneUpdated();
   }
   async updateRemoteColors() {
-    const nodes = Array.from(this._updatedColors);
-    const colors = nodes.map((n) => this._nodeColors.get(n));
+    const updatedElement = Array.from(this._updatedColors);
+    const removedElement = Array.from(this._removedColors);
+    const colors = updatedElement.map((n) => this._elementColors.get(n));
     const remoteColors = await this._colors.getColors(colors);
     const colorIds = remoteColors.map((c) => (c == null ? void 0 : c.id) ?? -1);
-    this._rpc.RPCSetMaterialOverrides(this._handle, nodes, colorIds);
+    this._rpc.RPCClearMaterialOverridesForElements(this._handle, removedElement);
+    this._rpc.RPCSetMaterialOverridesForElements(this._handle, updatedElement, colorIds);
     this._updatedColors.clear();
+    this._removedColors.clear();
   }
 }
 function wait(ms) {
@@ -68021,6 +67947,7 @@ let Viewer$2 = class Viewer2 {
    * @param logger - Optional logger for logging messages.
    */
   constructor(canvas, logger) {
+    __publicField(this, "type", "ultra");
     __publicField(this, "_decoder");
     __publicField(this, "_socketClient");
     __publicField(this, "_input");
@@ -68235,6 +68162,9 @@ let Viewer$2 = class Viewer2 {
     this._vims.getAll().forEach((vim) => vim.disconnect());
     this._vims.clear();
   }
+  getElement3Ds() {
+    return this.rpc.RPCGetElementCountForScene();
+  }
   /**
    * Disposes all resources used by the viewer and disconnects from the server.
    */
@@ -68256,13 +68186,10 @@ const index$7 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePrope
   INVALID_HANDLE,
   InputMode,
   MaterialHandles,
-  NodeState: NodeState$1$1,
-  RGB,
-  RGBA: RGBA$1,
-  RGBA32: RGBA32$1,
   Segment,
   Viewer: Viewer$2,
   VimLoadingStatus,
+  VisibilityState: VisibilityState$1,
   materialHandles
 }, Symbol.toStringTag, { value: "Module" }));
 const index$6 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
@@ -80349,16 +80276,19 @@ class ComponentLoader {
   }
 }
 function MessageBox(props) {
+  const [minimized, setMinimized] = React__default.useState(props.value.minimize ?? false);
   const p = props.value;
   if (!p.title || !p.body) return null;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "vim-message-box vc-p-6 vc-max-h-[80%] vc-max-w-[80%] vc-w-[424px] vc-bg-white vc-rounded-md vc-shadow-message vc-shadow-[0px_4px_16px_rgba(33,39,51,0.5)] vc-font-roboto", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "vc-flex vc-justify-between vc-items-center", children: [
+      props.value.icon,
       title(p.title),
-      closeBtn(p.onClose)
+      props.value.canClose && closeBtn(p.onClose),
+      props.value.minimize && minimizeButton(minimized, setMinimized)
     ] }),
-    divider(),
-    body(p.body),
-    footer(p.footer)
+    !minimized && divider(),
+    !minimized && body(p.body),
+    !minimized && footer(p.footer)
   ] });
 }
 function title(title2) {
@@ -80367,6 +80297,9 @@ function title(title2) {
 function closeBtn(onClose) {
   if (!onClose) return null;
   return /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: onClose, className: "vc-text-[#212733] vc-text-xl", children: "×" });
+}
+function minimizeButton(minimized, setMinimized) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: () => setMinimized(!minimized), className: "vc-text-[#212733] vc-text-xl", children: minimized ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "▼" }) : /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "▲" }) });
 }
 function body(content2) {
   if (content2 === void 0) return null;
@@ -80983,7 +80916,7 @@ function createWebglIsolationAdapter(viewer) {
     show: (instances) => {
       for (let i of instances) {
         for (let v of viewer.vims) {
-          const o = v.getElementFromInstanceIndex(i);
+          const o = v.getElement(i);
           o.visible = true;
         }
       }
@@ -80991,7 +80924,7 @@ function createWebglIsolationAdapter(viewer) {
     hide: (instances) => {
       for (let i of instances) {
         for (let v of viewer.vims) {
-          const o = v.getElementFromInstanceIndex(i);
+          const o = v.getElement(i);
           o.visible = false;
         }
       }
@@ -81096,6 +81029,16 @@ function Viewer$1(props) {
     side.setHasBim(((_a3 = viewerState.vim.get()) == null ? void 0 : _a3.bim) !== void 0);
   });
   reactExports.useEffect(() => {
+    sectionBoxRef.showOffsetPanel.onChange.subscribe((show) => {
+      if (show) {
+        isolationRef.showPanel.set(false);
+      }
+    });
+    isolationRef.showPanel.onChange.subscribe((show) => {
+      if (show) {
+        sectionBoxRef.showOffsetPanel.set(false);
+      }
+    });
     if (performanceRef.current) {
       addPerformanceCounter(performanceRef.current);
     }
@@ -81282,7 +81225,7 @@ function useUltraSectionBox(viewer) {
       viewer.sectionBox.interactive = b;
     },
     getBox: () => viewer.sectionBox.getBox(),
-    setBox: (box) => viewer.sectionBox.fitBox(box),
+    setBox: (box) => viewer.sectionBox.setBox(box),
     onSelectionChanged: viewer.selection.onSelectionChanged,
     getSelectionBox: () => viewer.selection.getBoundingBox(),
     getSceneBox: () => viewer.renderer.getBoundingBox()
@@ -81306,7 +81249,7 @@ function useUltraCamera(viewer, section) {
     getSceneBox: () => viewer.renderer.getBoundingBox()
   }, section);
 }
-const NodeState$3 = NodeState$1$1;
+const VisibilityState$2 = VisibilityState$1;
 function useUltraIsolation(viewer) {
   const adapter = createAdapter(viewer);
   return useSharedIsolation(adapter);
@@ -81314,29 +81257,33 @@ function useUltraIsolation(viewer) {
 function createAdapter(viewer) {
   const ghost2 = useStateRef(false);
   const hide = (objects) => {
-    const state = ghost2.get() ? NodeState$3.GHOSTED : NodeState$3.HIDDEN;
+    const state = ghost2.get() ? VisibilityState$2.GHOSTED : VisibilityState$2.HIDDEN;
     if (objects === "all") {
       viewer.vims.getAll().forEach((vim) => {
-        vim.nodeState.setAllNodesState(state);
+        vim.visibility.setStateForAll(state);
       });
       return;
     }
-    objects.forEach((obj) => {
-      obj.state = state;
-    });
+    for (const obj of objects) {
+      if (viewer.selection.has(obj)) {
+        obj.state = state == VisibilityState$2.GHOSTED ? VisibilityState$2.GHOSTED_HIGHLIGHTED : VisibilityState$2.HIDDEN_HIGHLIGHTED;
+      } else {
+        obj.state = state;
+      }
+    }
   };
   return {
     onVisibilityChange: viewer.renderer.onSceneUpdated,
     onSelectionChanged: viewer.selection.onSelectionChanged,
     computeVisibility: () => getVisibilityState(viewer),
     hasSelection: () => viewer.selection.any(),
-    hasVisibleSelection: () => checkSelectionState(viewer, (s) => s === "visible" || s === "highlighted"),
-    hasHiddenSelection: () => checkSelectionState(viewer, (s) => s === "hidden" || s === "ghosted"),
+    hasVisibleSelection: () => checkSelectionState(viewer, (s) => s === VisibilityState$2.VISIBLE || s === VisibilityState$2.HIGHLIGHTED),
+    hasHiddenSelection: () => checkSelectionState(viewer, (s) => s === VisibilityState$2.HIDDEN || s === VisibilityState$2.GHOSTED),
     clearSelection: () => viewer.selection.clear(),
     isolateSelection: () => {
       hide("all");
       for (const obj of viewer.selection.getAll()) {
-        obj.state = NodeState$3.HIGHLIGHTED;
+        obj.state = VisibilityState$2.HIGHLIGHTED;
       }
     },
     hideSelection: () => {
@@ -81345,7 +81292,7 @@ function createAdapter(viewer) {
     },
     showSelection: () => {
       viewer.selection.getAll().forEach((obj) => {
-        obj.state = NodeState$3.VISIBLE;
+        obj.state = VisibilityState$2.VISIBLE;
       });
     },
     hideAll: () => {
@@ -81353,29 +81300,30 @@ function createAdapter(viewer) {
     },
     showAll: () => {
       for (const vim of viewer.vims.getAll()) {
-        vim.nodeState.setAllNodesState(NodeState$3.VISIBLE);
+        vim.visibility.setStateForAll(VisibilityState$2.VISIBLE);
       }
       viewer.selection.getAll().forEach((obj) => {
-        obj.state = NodeState$3.HIGHLIGHTED;
+        obj.state = VisibilityState$2.HIGHLIGHTED;
       });
     },
+    // TODO: Change this api to use elements
     isolate: (instances) => {
       hide("all");
       viewer.selection.getAll().forEach((obj) => {
-        obj.state = NodeState$3.HIGHLIGHTED;
+        obj.state = VisibilityState$2.HIGHLIGHTED;
       });
     },
     show: (instances) => {
       for (const vim of viewer.vims.getAll()) {
         for (const i of instances) {
-          vim.getElementFromInstanceIndex(i).state = NodeState$3.VISIBLE;
+          vim.getElement(i).state = VisibilityState$2.VISIBLE;
         }
       }
     },
     hide: (instances) => {
       for (const vim of viewer.vims.getAll()) {
         for (const i of instances) {
-          const obj = vim.getElementFromInstanceIndex(i);
+          const obj = vim.getElement(i);
           hide([obj]);
         }
       }
@@ -81386,17 +81334,15 @@ function createAdapter(viewer) {
       ghost2.set(show);
       for (const vim of viewer.vims.getAll()) {
         if (show) {
-          vim.nodeState.replaceState(NodeState$3.HIDDEN, NodeState$3.GHOSTED);
+          vim.visibility.replaceState(VisibilityState$2.HIDDEN, VisibilityState$2.GHOSTED);
         } else {
-          vim.nodeState.replaceState(NodeState$3.GHOSTED, NodeState$3.HIDDEN);
+          vim.visibility.replaceState(VisibilityState$2.GHOSTED, VisibilityState$2.HIDDEN);
         }
       }
     },
-    getGhostOpacity: () => viewer.renderer.ghostColor.a,
+    getGhostOpacity: () => viewer.renderer.ghostOpacity,
     setGhostOpacity: (opacity) => {
-      const c = viewer.renderer.ghostColor.clone();
-      c.a = opacity;
-      viewer.renderer.ghostColor = c;
+      viewer.renderer.ghostOpacity = opacity;
     },
     getShowRooms: () => true,
     setShowRooms: (show) => {
@@ -81416,8 +81362,8 @@ function getVisibilityState(viewer) {
   let allButSelectionFlag = true;
   let onlySelectionFlag = true;
   for (let v of viewer.vims.getAll()) {
-    const allVisible = v.nodeState.areAllInState([NodeState$3.VISIBLE, NodeState$3.HIGHLIGHTED]);
-    const allHidden = v.nodeState.areAllInState([NodeState$3.HIDDEN, NodeState$3.GHOSTED]);
+    const allVisible = v.visibility.areAllInState([VisibilityState$2.VISIBLE, VisibilityState$2.HIGHLIGHTED]);
+    const allHidden = v.visibility.areAllInState([VisibilityState$2.HIDDEN, VisibilityState$2.GHOSTED]);
     all = all && allVisible;
     none = none && allHidden;
     onlySelectionFlag = onlySelection();
@@ -81461,18 +81407,28 @@ function createViewer(container2) {
   return controllablePromise.promise;
 }
 function Viewer3(props) {
-  const sectionBox2 = useUltraSectionBox(props.core);
-  const camera2 = useUltraCamera(props.core, sectionBox2);
+  const sectionBoxRef = useUltraSectionBox(props.core);
+  const camera2 = useUltraCamera(props.core, sectionBoxRef);
   const isolationPanelHandle = reactExports.useRef(null);
   const sectionBoxPanelHandle = reactExports.useRef(null);
   const modalHandle = reactExports.useRef(null);
   const side = useSideState(true, 400);
   const [_, setSelectState] = reactExports.useState(0);
   const [controlBarCustom, setControlBarCustom] = reactExports.useState(() => (c) => c);
-  const isolation = useUltraIsolation(props.core);
-  const controlBar = useUltraControlBar(props.core, sectionBox2, isolation, camera2, (_2) => _2);
+  const isolationRef = useUltraIsolation(props.core);
+  const controlBar = useUltraControlBar(props.core, sectionBoxRef, isolationRef, camera2, (_2) => _2);
   useViewerInput(props.core.inputs, camera2);
   reactExports.useEffect(() => {
+    sectionBoxRef.showOffsetPanel.onChange.subscribe((show) => {
+      if (show) {
+        isolationRef.showPanel.set(false);
+      }
+    });
+    isolationRef.showPanel.onChange.subscribe((show) => {
+      if (show) {
+        sectionBoxRef.showOffsetPanel.set(false);
+      }
+    });
     props.core.onStateChanged.subscribe((state) => updateModal(modalHandle, state));
     props.core.selection.onSelectionChanged.subscribe(() => {
       setSelectState((i) => (i + 1) % 2);
@@ -81482,8 +81438,8 @@ function Viewer3(props) {
       get modal() {
         return modalHandle.current;
       },
-      isolation,
-      sectionBox: sectionBox2,
+      isolation: isolationRef,
+      sectionBox: sectionBoxRef,
       camera: camera2,
       get isolationPanel() {
         return isolationPanelHandle.current;
@@ -81511,8 +81467,8 @@ function Viewer3(props) {
             show: true
           }
         ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(SectionBoxPanel$1, { ref: sectionBoxPanelHandle, state: sectionBox2 }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(IsolationPanel$1, { ref: isolationPanelHandle, state: isolation })
+        /* @__PURE__ */ jsxRuntimeExports.jsx(SectionBoxPanel$1, { ref: sectionBoxPanelHandle, state: sectionBoxRef }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(IsolationPanel$1, { ref: isolationPanelHandle, state: isolationRef })
       ] });
     } }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Modal, { ref: modalHandle, canFollowLinks: true }),
@@ -81578,8 +81534,6 @@ function WebglHome() {
   const viewerRef = reactExports.useRef();
   reactExports.useEffect(() => {
     index.Webgl.createViewer(div.current).then((viewer) => {
-      viewer.isolation.autoIsolate.set(true);
-      viewer.isolation.showGhost.set(true);
       viewerRef.current = viewer;
       globalThis.viewer = viewer;
       loadFile$1(viewerRef.current);
@@ -81592,7 +81546,7 @@ function WebglHome() {
   return /* @__PURE__ */ jsxRuntimeExports$1.jsx("div", { ref: div, className: "vc-inset-0 vc-absolute" });
 }
 async function loadFile$1(viewer) {
-  const url = getPathFromUrl$1() ?? residence;
+  const url = getPathFromUrl$1() ?? localResidence;
   const request = viewer.loader.request(
     { url }
   );
@@ -81678,8 +81632,6 @@ function useWebglViewer(div, onReady) {
   const viewerRef = reactExports.useRef();
   reactExports.useEffect(() => {
     Webgl$1.createViewer(div.current).then((viewer) => {
-      viewer.isolation.autoIsolate.set(true);
-      viewer.isolation.showGhost.set(true);
       viewerRef.current = viewer;
       globalThis.viewer = viewer;
       onReady == null ? void 0 : onReady(viewer);
@@ -81706,11 +81658,11 @@ function useWebglViewerWithModel(div, model, onReady) {
   });
 }
 function useWebglViewerWithResidence(div, onReady) {
-  useWebglViewerWithModel(div, residence, onReady);
+  useWebglViewerWithModel(div, localResidence, onReady);
 }
 function WebglViewerWithResidence(onReady) {
   const div = reactExports.useRef(null);
-  useWebglViewerWithModel(div, residence, onReady);
+  useWebglViewerWithModel(div, localResidence, onReady);
   return /* @__PURE__ */ jsxRuntimeExports$1.jsx("div", { ref: div, className: "vc-inset-0 vc-absolute" });
 }
 const THREE$1 = three_module;
@@ -82119,7 +82071,7 @@ function WebglUnload() {
     viewer.loader.remove(vim);
     await new Promise((resolve) => setTimeout(resolve, 1e3));
     const request = viewer.loader.request({
-      url: residence
+      url: localResidence
     });
     const result = await request.getResult();
     if (result.isSuccess()) {
@@ -82210,7 +82162,7 @@ function generateRandomIndices(count, maxValue) {
   }
   return Array.from(randomIndices);
 }
-const NodeState$2 = index$6.Ultra.NodeState;
+const NodeState$1 = index$6.Ultra.VisibilityState;
 function Camera4() {
   const div = reactExports.useRef(null);
   useUltraWithTower(div, (ultra, tower) => {
@@ -82221,7 +82173,7 @@ function Camera4() {
 async function framing(ultra, tower) {
   await new Promise((resolve) => setTimeout(resolve, 2e3));
   for (let i = 0; i < 5; i++) {
-    const indices2 = generateRandomIndices(5, 12e4);
+    const indices2 = generateRandomIndices(5, 4e4);
     highlight(tower, indices2);
     console.log("Framing 5 random indices");
     const position = await ultra.core.camera.frameVim(tower, indices2, 1);
@@ -82243,9 +82195,9 @@ async function framing(ultra, tower) {
   await ultra.core.camera.frameVim(tower, indices, 1);
 }
 function highlight(tower, indices) {
-  tower.nodeState.setAllNodesState(NodeState$2.VISIBLE);
+  tower.visibility.setStateForAll(NodeState$1.VISIBLE);
   indices.forEach((i) => {
-    tower.getElementFromInstanceIndex(i).state = NodeState$2.HIGHLIGHTED;
+    tower.getElement(i).state = NodeState$1.HIGHLIGHTED;
   });
 }
 const RGBA322 = index$6.Ultra.RGBA32;
@@ -82257,12 +82209,11 @@ function Colors() {
   return /* @__PURE__ */ jsxRuntimeExports$1.jsx("div", { ref: div, className: "vc-inset-0 vc-absolute" });
 }
 async function createColors(ultra, tower) {
-  const randomColors = new Array(2e5).fill(0).map(() => Math.floor(Math.random() * 4294967295)).map((i) => new RGBA322(i));
-  randomColors.forEach((c, i) => {
-    tower.getElementFromInstanceIndex(i).color = c;
+  tower.getAllElements().forEach((e) => {
+    e.color = new RGBA322(Math.floor(Math.random() * 4294967295));
   });
 }
-const NodeState$1 = index$6.Ultra.NodeState;
+const NodeState = index$6.Ultra.VisibilityState;
 const RGBA2 = index$6.Ultra.RGBA;
 function GhostColor() {
   const div = reactExports.useRef(null);
@@ -82272,7 +82223,9 @@ function GhostColor() {
   return /* @__PURE__ */ jsxRuntimeExports$1.jsx("div", { ref: div, className: "vc-inset-0 vc-absolute" });
 }
 async function toggleLock$1(ultra, vim) {
-  vim.nodeState.setAllNodesState(NodeState$1.GHOSTED);
+  vim.getAllElements().forEach((e) => {
+    e.state = NodeState.GHOSTED;
+  });
   ultra.core.renderer.ghostColor = new RGBA2(1, 0, 0, 0.25);
   await new Promise((resolve) => setTimeout(resolve, 1e3));
   ultra.core.renderer.ghostColor = new RGBA2(0, 1, 0, 0.25);
@@ -82297,7 +82250,7 @@ function getPathFromUrl() {
   const params = new URLSearchParams(window.location.search);
   return params.get("vim") ?? void 0;
 }
-const NodeState = index$6.Ultra.NodeState;
+const VisibilityState = index$6.Ultra.VisibilityState;
 function NodeEffects() {
   const div = reactExports.useRef(null);
   useUltraWithTower(div, (ultra, tower) => {
@@ -82307,14 +82260,21 @@ function NodeEffects() {
 }
 async function changeState(ultra, tower) {
   while (true) {
-    const indices = Array.from({ length: 2e5 }, (_, i) => i);
-    indices.forEach((i) => tower.getElementFromInstanceIndex(i).state = NodeState.HIGHLIGHTED);
+    tower.getAllElements().forEach((e) => {
+      e.state = VisibilityState.HIGHLIGHTED;
+    });
     await new Promise((resolve) => setTimeout(resolve, 2e3));
-    indices.forEach((i) => tower.getElementFromInstanceIndex(i).state = NodeState.GHOSTED);
+    tower.getAllElements().forEach((e) => {
+      e.state = VisibilityState.GHOSTED;
+    });
     await new Promise((resolve) => setTimeout(resolve, 2e3));
-    indices.forEach((i) => tower.getElementFromInstanceIndex(i).state = NodeState.HIDDEN);
+    tower.getAllElements().forEach((e) => {
+      e.state = VisibilityState.HIDDEN;
+    });
     await new Promise((resolve) => setTimeout(resolve, 2e3));
-    indices.forEach((i) => tower.getElementFromInstanceIndex(i).state = NodeState.VISIBLE);
+    tower.getAllElements().forEach((e) => {
+      e.state = VisibilityState.VISIBLE;
+    });
     await new Promise((resolve) => setTimeout(resolve, 2e3));
   }
 }
