@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import * as VIM  from 'vim-web'
 import { useUltraWithWolford } from '../ultraUtils'
 
-import NodeState = VIM.Core.Ultra.NodeState
+import NodeState = VIM.Core.Ultra.VisibilityState
 import ViewerRef = VIM.React.Ultra.ViewerRef
 import Vim = VIM.Core.Ultra.Vim
 import RGBA = VIM.Core.Ultra.RGBA
@@ -20,7 +20,9 @@ export function GhostColor () {
 }
 
 async function toggleLock (ultra: ViewerRef, vim: Vim) {
-  vim.nodeState.setAllNodesState(NodeState.GHOSTED)
+  vim.getAllElements().forEach(e => {
+    e.state = NodeState.GHOSTED
+  })
   ultra.core.renderer.ghostColor = new RGBA(1, 0, 0, 0.25)
 
   await new Promise(resolve => setTimeout(resolve, 1000))

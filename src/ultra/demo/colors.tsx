@@ -19,12 +19,7 @@ export function Colors () {
 }
 
 async function createColors (ultra: ViewerRef, tower:Vim) {
-  const randomColors = new Array<number>(200000)
-    .fill(0)
-    .map(() => Math.floor(Math.random() * 0xFFFFFFFF))
-    .map(i => new RGBA32(i))
-
-  randomColors.forEach((c, i) => {
-    tower.getElementFromInstanceIndex(i).color = c
+  tower.getAllElements().forEach(e => {
+    e.color = new RGBA32(Math.floor(Math.random() * 0xFFFFFFFF))
   })
 }

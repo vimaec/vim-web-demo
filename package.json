@@ -42,7 +42,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "stats-js": "^1.0.1",
-    "vim-web": "0.4.1-dev.4"
+    "vim-web": "0.5.0-dev.16"
   },
   "keywords": [
     "3d",
