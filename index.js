@@ -77721,7 +77721,7 @@ function scrollToSelection(div) {
     return;
   }
   if (rectElem.top < rectContainer.top || rectElem.top < 0) {
-    selection.scrollIntoView();
+    selection.scrollIntoView({ block: "nearest", inline: "nearest" });
   }
 }
 const isControlKey = (e) => {
@@ -81624,7 +81624,7 @@ function WebglIframe() {
     "iframe",
     {
       style: { border: "none", width: "50%", height: "50%", marginLeft: "25%", marginTop: "25%" },
-      src: "./"
+      src: "./?nosidebar=true"
     }
   ) });
 }
