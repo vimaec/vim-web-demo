@@ -4,6 +4,7 @@ import { WebglHome } from './home';
 import { WebglLocalFile } from './localFile';
 import { WebglIframe } from './iframe';
 import { WebglMarkers } from './markers';
+import { WebglScreenshot } from './screenshot';
 
 import {type Page} from "../../page"
 import { Camera } from './camera';
@@ -75,6 +76,11 @@ export const pages: Page[] = [
     name: 'Markers',
     github: `${root}/markers.tsx`,
     content: () => <WebglMarkers />,
+  },
+  {
+    name: 'Screenshot',
+    github: `${root}/screenshot.tsx`,
+    content: () => <WebglScreenshot />,
   },
   {
     name: 'Accessing BIM',

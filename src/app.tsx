@@ -29,9 +29,15 @@ function parseInitialPage(): "dev" | Page | undefined {
   return allPages.find((p) => getPageSlug(p) === slug);
 }
 
+function shouldHideSidebar(): boolean {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("nosidebar") === "true";
+}
+
 // Main component
 export function App() {
   const parsedPage = parseInitialPage();
+  const hideSidebar = shouldHideSidebar();
 
   const groupedPages = new Map<string, Page[]>(
     parsedPage === "dev"
@@ -67,7 +73,7 @@ export function App() {
           alignItems: "center",
           fontSize: "14px",
           lineHeight: "1.5rem",
-          gap: "0.5rem", // <-- This adds spacing between name and source link
+          gap: "0.5rem",
         }}
         onClick={() => setSelectedPage(page)}
       >
@@ -98,23 +104,24 @@ export function App() {
     <div className="APP" style={{
         display: "flex",
         height: "100vh",
-
       }}>
       {/* Sidebar */}
-      <div
-        className="Menu"
-        style={{
-          width: "200px",
-          borderRight: "1px solid #ccc",
-          padding: "1rem",
-          overflowY: "auto",
-          fontFamily: "'Roboto', sans-serif"
-        }}
-      >
-        {[...groupedPages.entries()].map(([label, pages]) =>
-          renderSection(label, pages)
-        )}
-      </div>
+      {!hideSidebar && (
+        <div
+          className="Menu"
+          style={{
+            width: "200px",
+            borderRight: "1px solid #ccc",
+            padding: "1rem",
+            overflowY: "auto",
+            fontFamily: "'Roboto', sans-serif"
+          }}
+        >
+          {[...groupedPages.entries()].map(([label, pages]) =>
+            renderSection(label, pages)
+          )}
+        </div>
+      )}
 
       {/* Main content */}
       <div style={{ flexGrow: 1, position: "relative" }}>
