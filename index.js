@@ -7059,7 +7059,6 @@ const React__default = /* @__PURE__ */ getDefaultExportFromCjs$1(reactExports);
 const gitRoot = "https://github.com/vimaec/vim-web-demo/blob/main/src";
 const residence = "https://storage.cdn.vimaec.com/samples/residence.v1.2.75.vim";
 const residenceZipped = "https://storage.cdn.vimaec.com/samples/residence.vim";
-const localResidence = "./residence.vim";
 const residenceWithAccessToken = "https://saas-api-v2.vimaec.com/api/public/542c2335-992d-4af0-ffd9-08dd0262dd9c/2024-11-11T15:09:43";
 const medicalTower = "https://storage.cdn.vimaec.com/samples/Medical_Tower.vim";
 const notAVim = "https://storage.cdn.vimaec.com/samples/not_a_vim.vim";
@@ -81534,6 +81533,8 @@ function WebglHome() {
   const viewerRef = reactExports.useRef();
   reactExports.useEffect(() => {
     index.Webgl.createViewer(div.current).then((viewer) => {
+      viewer.isolation.autoIsolate.set(true);
+      viewer.isolation.showGhost.set(true);
       viewerRef.current = viewer;
       globalThis.viewer = viewer;
       loadFile$1(viewerRef.current);
@@ -81546,7 +81547,7 @@ function WebglHome() {
   return /* @__PURE__ */ jsxRuntimeExports$1.jsx("div", { ref: div, className: "vc-inset-0 vc-absolute" });
 }
 async function loadFile$1(viewer) {
-  const url = getPathFromUrl$1() ?? localResidence;
+  const url = getPathFromUrl$1() ?? residence;
   const request = viewer.loader.request(
     { url }
   );
@@ -81632,6 +81633,8 @@ function useWebglViewer(div, onReady) {
   const viewerRef = reactExports.useRef();
   reactExports.useEffect(() => {
     Webgl$1.createViewer(div.current).then((viewer) => {
+      viewer.isolation.autoIsolate.set(true);
+      viewer.isolation.showGhost.set(true);
       viewerRef.current = viewer;
       globalThis.viewer = viewer;
       onReady == null ? void 0 : onReady(viewer);
@@ -81658,11 +81661,11 @@ function useWebglViewerWithModel(div, model, onReady) {
   });
 }
 function useWebglViewerWithResidence(div, onReady) {
-  useWebglViewerWithModel(div, localResidence, onReady);
+  useWebglViewerWithModel(div, residence, onReady);
 }
 function WebglViewerWithResidence(onReady) {
   const div = reactExports.useRef(null);
-  useWebglViewerWithModel(div, localResidence, onReady);
+  useWebglViewerWithModel(div, residence, onReady);
   return /* @__PURE__ */ jsxRuntimeExports$1.jsx("div", { ref: div, className: "vc-inset-0 vc-absolute" });
 }
 const THREE$1 = three_module;
@@ -81703,6 +81706,33 @@ async function RemoveMarker(viewer) {
       viewer.core.gizmos.markers.remove(e);
     }
   });
+}
+function WebglScreenshot() {
+  return WebglViewerWithResidence((viewer, vim) => {
+    viewer.controlBar.customize((bar) => [
+      {
+        id: "Screenshot",
+        buttons: [
+          {
+            // Add button to remove a marker
+            id: "take_screenshot",
+            icon: index.Icons.camera,
+            tip: "Take Screenshot",
+            action: () => TakeScreenshot(viewer)
+          }
+        ]
+      }
+    ]);
+  });
+}
+async function TakeScreenshot(viewer) {
+  viewer.core.renderer.needsUpdate = true;
+  viewer.core.renderer.render();
+  const url = viewer.core.renderer.renderer.domElement.toDataURL("image/png");
+  const link2 = document.createElement("a");
+  link2.href = url;
+  link2.download = "screenshot.png";
+  link2.click();
 }
 function Camera$1() {
   return WebglViewerWithResidence(async (viewer, vim) => {
@@ -81931,6 +81961,11 @@ const pages$3 = [
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(WebglMarkers, {})
   },
   {
+    name: "Screenshot",
+    github: `${root$4}/screenshot.tsx`,
+    content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(WebglScreenshot, {})
+  },
+  {
     name: "Accessing BIM",
     github: `${root$4}/accessingBim.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports$1.jsx(AccessingBim, {})
@@ -82071,7 +82106,7 @@ function WebglUnload() {
     viewer.loader.remove(vim);
     await new Promise((resolve) => setTimeout(resolve, 1e3));
     const request = viewer.loader.request({
-      url: localResidence
+      url: residence
     });
     const result = await request.getResult();
     if (result.isSuccess()) {
@@ -82623,8 +82658,13 @@ function parseInitialPage() {
   if (slug === "dev") return "dev";
   return allPages.find((p) => getPageSlug(p) === slug);
 }
+function shouldHideSidebar() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("nosidebar") === "true";
+}
 function App() {
   const parsedPage = parseInitialPage();
+  const hideSidebar = shouldHideSidebar();
   const groupedPages = new Map(
     parsedPage === "dev" ? [
       ["Webgl", pages$2],
@@ -82652,7 +82692,6 @@ function App() {
           fontSize: "14px",
           lineHeight: "1.5rem",
           gap: "0.5rem"
-          // <-- This adds spacing between name and source link
         },
         onClick: () => setSelectedPage(page),
         children: [
@@ -82681,7 +82720,7 @@ function App() {
     display: "flex",
     height: "100vh"
   }, children: [
-    /* @__PURE__ */ jsxRuntimeExports$1.jsx(
+    !hideSidebar && /* @__PURE__ */ jsxRuntimeExports$1.jsx(
       "div",
       {
         className: "Menu",
