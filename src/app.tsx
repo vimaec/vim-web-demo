@@ -56,9 +56,10 @@ export function App() {
 
   const [selectedPage, setSelectedPage] = useState<Page>(initialPage);
 
-  // Sync URL with selection
+  // Sync URL with selection (preserve query parameters)
   useEffect(() => {
-    window.history.replaceState({}, "", getPageSlug(selectedPage));
+    const query = window.location.search;
+    window.history.replaceState({}, "", getPageSlug(selectedPage) + query);
   }, [selectedPage]);
 
   const renderLink = (page: Page) => {
