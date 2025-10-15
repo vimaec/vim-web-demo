@@ -82677,7 +82677,8 @@ function App() {
   const initialPage = parsedPage === "dev" || parsedPage === void 0 ? home : parsedPage;
   const [selectedPage, setSelectedPage] = reactExports.useState(initialPage);
   reactExports.useEffect(() => {
-    window.history.replaceState({}, "", getPageSlug(selectedPage));
+    const query = window.location.search;
+    window.history.replaceState({}, "", getPageSlug(selectedPage) + query);
   }, [selectedPage]);
   const renderLink = (page) => {
     const isSelected = selectedPage === page;
