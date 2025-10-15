@@ -11,7 +11,7 @@ export function WebglUnload () {
 
     await new Promise(resolve => setTimeout(resolve, 1000))
     const request = viewer.loader.request({
-      url: DevUrls.localResidence
+      url: DevUrls.residence
     })
     const result = await request.getResult()
     if (result.isSuccess()) {

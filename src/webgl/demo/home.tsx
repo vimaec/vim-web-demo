@@ -12,6 +12,8 @@ export function WebglHome () {
   const viewerRef = useRef<ViewerRef>()
   useEffect(() => {
     VIM.React.Webgl.createViewer(div.current).then((viewer) => {
+      viewer.isolation.autoIsolate.set(true)
+      viewer.isolation.showGhost.set(true)
       viewerRef.current = viewer
       globalThis.viewer = viewer // for testing in browser console
       loadFile(viewerRef.current)
@@ -28,7 +30,7 @@ export function WebglHome () {
 }
 
 async function loadFile (viewer: ViewerRef ) {
-  const url = getPathFromUrl() ?? Urls.localResidence
+  const url = getPathFromUrl() ?? Urls.residence
   const request = viewer.loader.request(
     { url }, 
   )

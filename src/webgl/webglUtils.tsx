@@ -16,6 +16,8 @@ export function useWebglViewer (div: RefObject<HTMLDivElement>, onReady?: (viewe
   const viewerRef = useRef<ViewerRef>()
   useEffect(() => {
     Webgl.createViewer(div.current).then((viewer) => {
+      viewer.isolation.autoIsolate.set(true)
+      viewer.isolation.showGhost.set(true)
       viewerRef.current = viewer
       globalThis.viewer = viewer
       onReady?.(viewer)
@@ -49,12 +51,12 @@ export function useWebglViewerWithModel (div: RefObject<HTMLDivElement>, model: 
 }
 
 /**
- * Custom hook to create a WebGL viewer and load the medical tower model into it.
+ * Custom hook to create a WebGL viewer and load the residence model into it.
  * @param div - The div element to attach the viewer to
  * @param onReady - Callback function to be called when the viewer is ready
  */
 export function useWebglViewerWithResidence(div: RefObject<HTMLDivElement>, onReady?: (viewer: ViewerRef, vim : Vim) => void) {
-  useWebglViewerWithModel(div, DevUrls.localResidence, onReady)
+  useWebglViewerWithModel(div, DevUrls.residence, onReady)
 }
 
 /**
@@ -68,13 +70,13 @@ export function useWebglViewerWithTower(div: RefObject<HTMLDivElement>, onReady?
 
 
 /**
- * Custom hook to create a WebGL viewer and load the medical tower model into it.
+ * Custom hook to create a WebGL viewer and load the residence tower model into it.
  * @param div - The div element to attach the viewer to
  * @param onReady - Callback function to be called when the viewer is ready
  */
 export function WebglViewerWithResidence( onReady?: (viewer: ViewerRef, vim : Vim) => void) {
   const div = useRef<HTMLDivElement>(null)
-  useWebglViewerWithModel(div, DevUrls.localResidence, onReady)
+  useWebglViewerWithModel(div, DevUrls.residence, onReady)
   return (
     <div ref={div} className='vc-inset-0 vc-absolute'/>
   )
