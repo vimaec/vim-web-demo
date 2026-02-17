@@ -5,6 +5,7 @@ import * as VIM from 'vim-web'
 
 
 import ViewerRef = VIM.React.Webgl.ViewerRef
+import { useStateRef } from 'vim-web/dist/types/react-viewers/helpers/reactUtils'
 
 export function WebglHome () {
 
@@ -31,12 +32,12 @@ export function WebglHome () {
 
 async function loadFile (viewer: ViewerRef ) {
   const url = getPathFromUrl() ?? Urls.residence
-  const request = viewer.loader.request(
+  const request = viewer.load(
     { url }, 
   )
+
   const result = await request.getResult()
-  if (result.isSuccess()) {
-    viewer.loader.add(result.result)
+  if (result.isSuccess) {
     viewer.camera.frameScene.call()
   }
 }

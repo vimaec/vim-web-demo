@@ -15,15 +15,29 @@ import Vim = VIM.Core.Webgl.Vim
 export function useWebglViewer (div: RefObject<HTMLDivElement>, onReady?: (viewer: ViewerRef) => void) {
   const viewerRef = useRef<ViewerRef>()
   useEffect(() => {
+    // Track disposal to prevent async callbacks from operating on a disposed viewer
+    // when navigating away before the viewer or its onReady callback finishes.
+    let disposed = false
     Webgl.createViewer(div.current).then((viewer) => {
+      if (disposed) {
+        viewer.dispose()
+        return
+      }
       viewer.isolation.autoIsolate.set(true)
       viewer.isolation.showGhost.set(true)
       viewerRef.current = viewer
       globalThis.viewer = viewer
-      onReady?.(viewer)
+      const result = onReady?.(viewer) as any
+      // Swallow errors from async onReady callbacks that fire after disposal.
+      if (result?.catch) {
+        result.catch((e: any) => { if (!disposed) throw e })
+      }
     })
 
-    return () => viewerRef.current?.dispose()
+    return () => {
+      disposed = true
+      viewerRef.current?.dispose()
+    }
   }, [])
 }
 
@@ -36,14 +50,13 @@ export function useWebglViewer (div: RefObject<HTMLDivElement>, onReady?: (viewe
  */
 export function useWebglViewerWithModel (div: RefObject<HTMLDivElement>, model: string, onReady?: (viewer: ViewerRef, vim : Vim) => void) {
   useWebglViewer(div, async (viewer) => {
-    const request = viewer.loader.request(
+    const request = viewer.load(
       { url: model }
     )
     const result = await request.getResult()
-    if (result.isSuccess()) {
-      viewer.loader.add(result.result)
+    if (result.isSuccess) {
       viewer.core.camera.snap().frame('all')
-      onReady?.(viewer, result.result)
+      onReady?.(viewer, result.vim)
       return
     }
     throw new Error('Failed to load model')

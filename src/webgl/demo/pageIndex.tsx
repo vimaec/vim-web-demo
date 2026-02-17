@@ -88,16 +88,10 @@ export const pages: Page[] = [
     content: () => <AccessingBim />,
   },
   {
-    name: 'Custom Markers',
-    github: `${root}/customMarkers.tsx`,
-    content: () => <WebglMarkers />,
-  },
-  {
     name: 'Custom Context',
     github: `${root}/customContext.tsx`,
     content: () => <WebglMarkers />,
   },
-  
   {
     name: 'Custom Inputs',
     github: `${root}/customInputs.tsx`,

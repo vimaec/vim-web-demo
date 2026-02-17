@@ -30,8 +30,9 @@ export function WebglMarkers () {
 // Get the selected elements, add a marker at the center of the selection
 async function AddMarker(viewer: VIM.React.Webgl.ViewerRef) {
   const box = await viewer.core.selection.getBoundingBox()
+  if(!box) return;
   const pos = box.getCenter(new THREE.Vector3())
-  viewer.core.gizmos.markers.add(pos)
+  const marker = viewer.core.gizmos.markers.add(pos)
 }
 
 // Remove all markers from the selection

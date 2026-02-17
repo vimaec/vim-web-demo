@@ -7,15 +7,14 @@ export function WebglUnload () {
 
   useWebglViewerWithResidence(div, async (viewer, vim) =>{
     await new Promise(resolve => setTimeout(resolve, 1000))
-    viewer.loader.remove(vim)
+    viewer.remove(vim)
 
     await new Promise(resolve => setTimeout(resolve, 1000))
-    const request = viewer.loader.request({
+    const request = viewer.load({
       url: DevUrls.residence
     })
     const result = await request.getResult()
-    if (result.isSuccess()) {
-      viewer.loader.add(result.result)
+    if (result.isSuccess) {
       viewer.camera.frameScene.call()
     }
   })

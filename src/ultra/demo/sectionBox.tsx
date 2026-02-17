@@ -14,7 +14,7 @@ export function SectionBox() {
   const [box, setBox] = useState(new VIM.THREE.Box3());
 
   const updateBox = (newBox: VIM.THREE.Box3) => {
-    ref.current?.core.sectionBox.fitBox(newBox);
+    ref.current?.core.sectionBox.setBox(newBox);
     setBox(newBox);
   };
 
@@ -123,7 +123,7 @@ async function createSectionBox(ultra: ViewerRef) {
   if (result.isSuccess) {
     await ultra.core.camera.frameAll(0);
     const box = await ultra.core.renderer.getBoundingBox();
-    if (box) ultra.core.sectionBox.fitBox(box);
+    if (box) ultra.core.sectionBox.setBox(box);
   }
 }
 

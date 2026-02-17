@@ -4,7 +4,6 @@ import { useUltraWithTower } from '../ultraUtils'
 
 import ViewerRef = VIM.React.Ultra.ViewerRef
 import Vim = VIM.Core.Ultra.Vim
-import RGBA32 = VIM.Core.Ultra.RGBA32
 
 export function Colors () {
   const div = useRef<HTMLDivElement>(null)
@@ -20,6 +19,6 @@ export function Colors () {
 
 async function createColors (ultra: ViewerRef, tower:Vim) {
   tower.getAllElements().forEach(e => {
-    e.color = new RGBA32(Math.floor(Math.random() * 0xFFFFFFFF))
+    e.color = new VIM.THREE.Color(Math.floor(Math.random() * 0xFFFFFFFF))
   })
 }
