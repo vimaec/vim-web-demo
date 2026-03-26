@@ -1,26 +1,27 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import * as VIM  from 'vim-web'
-import { useUltraWithWolford } from '../ultraUtils'
+import { useUltraResidence } from '../ultraUtils'
 
-import NodeState = VIM.Core.Ultra.VisibilityState
-import ViewerRef = VIM.React.Ultra.ViewerRef
-import Vim = VIM.Core.Ultra.Vim
+type ViewerApi = VIM.React.Ultra.ViewerApi
+type UltraVim = VIM.Core.Ultra.IUltraVim
 
 export function GhostColor () {
   const div = useRef<HTMLDivElement>(null)
+  const [ultra, vim] = useUltraResidence(div)
 
-  useUltraWithWolford(div, (ultra, _tower) => {
-    void toggleLock(ultra, _tower)
-  })
+  useEffect(() => {
+    if (!ultra || !vim) return
+    void toggleColors(ultra, vim)
+  }, [vim])
 
   return (
     <div ref={div} className='vc-inset-0 vc-absolute'/>
   )
 }
 
-async function toggleLock (ultra: ViewerRef, vim: Vim) {
+async function toggleColors (ultra: ViewerApi, vim: UltraVim) {
   vim.getAllElements().forEach(e => {
-    e.state = NodeState.GHOSTED
+    e.ghosted = true
   })
   ultra.core.renderer.ghostColor = new VIM.THREE.Color(1, 0, 0)
 

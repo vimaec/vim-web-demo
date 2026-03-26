@@ -1,27 +1,27 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import * as VIM  from 'vim-web'
-import { useUltraWithTower } from '../ultraUtils'
+import { useUltraTower } from '../ultraUtils'
 import { generateRandomIndices } from '../testUtils'
 
-import NodeState = VIM.Core.Ultra.VisibilityState
-import ViewerRef = VIM.React.Ultra.ViewerRef
-import Vim = VIM.Core.Ultra.Vim
-
+type ViewerApi = VIM.React.Ultra.ViewerApi
+type UltraVim = VIM.Core.Ultra.IUltraVim
 
 export function Camera () {
   const div = useRef<HTMLDivElement>(null)
+  const [ultra, tower] = useUltraTower(div)
 
-  useUltraWithTower(div, (ultra, tower) => {
+  useEffect(() => {
+    if (!ultra || !tower) return
     void framing(ultra, tower)
-  })
+  }, [tower])
 
   return (
     <div ref={div} className='vc-inset-0 vc-absolute'/>
   )
 }
 
-async function framing (ultra: ViewerRef, tower: Vim)  {
-  
+async function framing (ultra: ViewerApi, tower: UltraVim)  {
+
   // Wait for the user to get ready
   await new Promise(resolve => setTimeout(resolve, 2000))
 
@@ -29,36 +29,47 @@ async function framing (ultra: ViewerRef, tower: Vim)  {
     const indices = generateRandomIndices(5, 40_000)
     highlight(tower, indices)
 
-    // Test frameVim with 5 indices
+    // Test framing with 5 indices
     console.log('Framing 5 random indices')
-    const position = await ultra.core.camera.frameVim(tower, indices, 1)
-    console.log('Saving position')
-    ultra.core.camera.save(position)
+    const box = await tower.scene.getBoundingBoxForElements(indices)
+    const position = box ? await ultra.core.camera.lerp(1).frame(box) : undefined
+    if (position?.isValid()) {
+      console.log('Saving position')
+      ultra.core.camera.save(position)
+    }
     await new Promise(resolve => setTimeout(resolve, 2000))
 
-    // Test frameVim with all
+    // Test framing whole model
     console.log('Framing whole model')
-    await ultra.core.camera.frameVim(tower, 'all', 1)
+    await ultra.core.camera.lerp(1).frame(tower)
     await new Promise(resolve => setTimeout(resolve, 2000))
 
     // Restore the saved camera position
     console.log('Resetting camera to last saved position')
-    ultra.core.camera.restoreSavedPosition()
+    ultra.core.camera.snap().reset()
     await new Promise(resolve => setTimeout(resolve, 2000))
 
     // Test frameAll
     console.log('Framing whole scene')
-    await ultra.core.camera.frameAll(1)
+    await ultra.core.camera.lerp(1).frame('all')
     await new Promise(resolve => setTimeout(resolve, 2000))
   }
 
-  // Test frameVim with a large number of indices
+  // Test framing with a large number of indices
   const indices = generateRandomIndices(80_000, 120_000)
   highlight(tower, indices)
-  await ultra.core.camera.frameVim(tower, indices, 1)
+  const box = await tower.scene.getBoundingBoxForElements(indices)
+  if (box) await ultra.core.camera.lerp(1).frame(box)
 }
 
-function highlight (tower: Vim, indices: number[]) {
-  tower.visibility.setStateForAll(NodeState.VISIBLE)
-  indices.forEach((i) => {tower.getElement(i).state = NodeState.HIGHLIGHTED} )
+function highlight (tower: UltraVim, indices: number[]) {
+  tower.getAllElements().forEach((e) => {
+    e.visible = true
+    e.outline = false
+    e.ghosted = false
+  })
+  indices.forEach((i) => {
+    const e = tower.getElement(i)
+    if (e) e.outline = true
+  })
 }
