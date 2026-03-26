@@ -175,11 +175,7 @@ body {
 }
 canvas:focus {
   outline: none;
-}@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* ============================================================
+}/* ============================================================
    Design Tokens
    ============================================================ */
 :root {
@@ -201,6 +197,7 @@ canvas:focus {
 
   /* Accents */
   --c-lightest-blue: #d9edf9;
+  --c-light-blue: #c8e2f4;
   --c-list-hover: #fff8e5;
   --c-overflow: rgba(5, 12, 26, 0.8);
   --c-focus-ring: rgba(106, 159, 216, 0.2);
@@ -242,6 +239,7 @@ canvas:focus {
   --transition-base: 0.2s;
 
   /* Typography */
+  --font-family: 'Roboto', sans-serif;
   --font-size-xs: 0.7rem;
   --font-size-sm: 0.75rem;
   --font-size-base: 0.875rem;
@@ -268,17 +266,13 @@ canvas:focus {
    Base / Global
    ============================================================ */
 
-/* Removes the shadow arrow that was cutting into tooltip text */
-.__react_component_tooltip::after,
-.__react_component_tooltip::before {
-  content: none !important;
-}
 
 .vim-component {
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
+  cursor: default;
 }
 
 
@@ -757,7 +751,6 @@ details:not([open]) .vim-panel-section-title::after {
 .vim-bim-header-label {
   margin-right: 0.25rem;
   flex-shrink: 0;
-  user-select: none;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -817,7 +810,6 @@ details:not([open]) .vim-panel-section-title::after {
 .vim-bim-body-entry-title {
   width: 33%;
   padding: 0 0.5rem;
-  user-select: none;
   overflow: hidden;
   text-overflow: ellipsis;
   border-right: 1px solid var(--c-light-gray);
@@ -851,7 +843,6 @@ details:not([open]) .vim-panel-section-title::after {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  user-select: none;
 }
 
 .vim-bim-header .vim-panel-entry dd {
@@ -880,7 +871,6 @@ details:not([open]) .vim-panel-section-title::after {
   flex-shrink: 0;
   width: 33%;
   padding: 0 6px;
-  user-select: none;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1074,6 +1064,114 @@ details:not([open]) .vim-panel-section-title::after {
 }
 
 /* ============================================================
+   BIM Tree (headless-tree)
+   ============================================================ */
+.vim-ht-container {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  outline: none;
+}
+
+.vim-ht-item {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-xs);
+  padding-right: 4px;
+  min-width: 0;
+  cursor: pointer;
+  height: 24px;
+}
+
+.vim-ht-item:nth-child(odd)  { background-color: var(--c-white); }
+.vim-ht-item:nth-child(even) { background-color: transparent; }
+
+.vim-ht-item.vim-ht-selected {
+  background-color: var(--c-lightest-blue);
+}
+
+.vim-ht-item:hover {
+  background-color: var(--c-list-hover);
+}
+
+.vim-ht-item.vim-ht-selected:hover {
+  background-color: var(--c-light-blue);
+}
+
+.vim-ht-arrow {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  transition: transform 0.3s;
+}
+
+.vim-ht-arrow-folder {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml,%3Csvg id='Arrow' xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Crect id='frame' width='20' height='20' fill='%238a8d95' opacity='0'/%3E%3Cpath id='icon' d='M100.072,70.536l-3.987,3.987a.938.938,0,0,1-1.6-.663V65.886a.938.938,0,0,1,1.6-.663l3.987,3.987A.937.937,0,0,1,100.072,70.536Z' transform='translate(-87.104 -59.873)' fill='%238a8d95'/%3E%3C/svg%3E%0A");
+}
+
+.vim-ht-arrow-open {
+  transform: rotate(90deg);
+}
+
+.vim-ht-title {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vim-ht-visibility {
+  flex-shrink: 0;
+  background-repeat: no-repeat;
+}
+
+/* Default: visible items hide the icon, hidden items show it */
+.vim-ht-visibility[data-visibility="visible"] {
+  display: none;
+}
+
+.vim-ht-visibility[data-visibility="hidden"] {
+  display: block;
+  background-image: var(--hidden-dark);
+}
+
+/* Hover unselected */
+.vim-ht-item:hover .vim-ht-visibility[data-visibility="visible"] {
+  display: block;
+  background-image: var(--visible-beige);
+}
+
+.vim-ht-item:hover .vim-ht-visibility[data-visibility="hidden"] {
+  background-image: var(--hidden-beige);
+}
+
+/* Hover selected */
+.vim-ht-item.vim-ht-selected:hover .vim-ht-visibility[data-visibility="visible"] {
+  display: block;
+  background-image: var(--visible-light-blue);
+}
+
+.vim-ht-item.vim-ht-selected:hover .vim-ht-visibility[data-visibility="hidden"] {
+  background-image: var(--hidden-light-blue);
+}
+
+/* Hover toggle button directly */
+.vim-ht-item .vim-ht-visibility[data-visibility="visible"]:hover {
+  display: block;
+  background-image: var(--hidden-royal-blue);
+}
+
+.vim-ht-item .vim-ht-visibility[data-visibility="hidden"]:hover {
+  background-image: var(--visible-royal-blue);
+}
+
+/* ============================================================
    Control Bar
    ============================================================ */
 .vim-control-bar {
@@ -1162,7 +1260,6 @@ details:not([open]) .vim-panel-section-title::after {
 .vim-axes-panel,
 .vim-axes-panel-empty {
   position: absolute;
-  overflow: hidden;
   z-index: var(--z-ui);
   display: flex;
   flex-direction: column;
@@ -1179,6 +1276,7 @@ details:not([open]) .vim-panel-section-title::after {
   position: absolute;
   inset: 0;
   order: 1;
+  border-radius: inherit;
   opacity: 0.5;
   filter: saturate(0);
   transition: opacity var(--transition-base), filter var(--transition-base);
@@ -1194,23 +1292,19 @@ details:not([open]) .vim-panel-section-title::after {
   position: absolute;
 }
 
-.vim-axes-panel-bar {
+.vim-axes-panel-buttons {
   position: absolute;
-  top: 75%;  /* bottom quarter of the axes panel, below the 3D gizmo */
+  top: 75%;
   bottom: 0;
   left: 0;
   right: 0;
-}
-
-.vim-axes-panel-buttons {
-  position: absolute;
-  inset: 0;
   pointer-events: auto;
-  order: 2;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   background: var(--c-white);
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
 }
 
 .vim-axes-button {
@@ -1409,6 +1503,16 @@ details:not([open]) .vim-panel-section-title::after {
   display: none;
 }
 
+.vim-side-panel-handle {
+  position: absolute;
+  top: 0;
+  right: -3px;
+  width: 6px;
+  height: 100%;
+  cursor: col-resize;
+  z-index: var(--z-panel);
+}
+
 .vim-side-panel-nav {
   z-index: var(--z-panel);
   position: absolute;
@@ -1466,13 +1570,11 @@ details:not([open]) .vim-panel-section-title::after {
    ============================================================ */
 .vim-performance-div.vim-hidden { display: none; }
 
-/* !important overrides react-tooltip's inline positioning styles.
-   13rem pushes it below the axes panel + control bar stack. */
 .vim-performance {
-  position: absolute !important;
-  right: 1.5rem !important;
-  left: auto !important;
-  top: 13rem !important;
+  position: absolute;
+  right: 1.5rem;
+  left: auto;
+  top: 13rem;
 }
 
 /* ============================================================
@@ -1725,7 +1827,7 @@ details:not([open]) .vim-panel-section-title::after {
   background: var(--c-white);
   border-radius: var(--radius-md);
   box-shadow: 0 4px 16px rgba(33, 39, 51, 0.5);
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--font-family);
   overflow: auto;
   padding: 1.5rem;
 }
@@ -1778,6 +1880,8 @@ details:not([open]) .vim-panel-section-title::after {
   padding: 0.25rem 0;
   color: var(--c-darker-gray);
   box-shadow: var(--shadow-md);
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
 }
 
 .vim-context-menu-item {
@@ -2000,16 +2104,20 @@ details:not([open]) .vim-panel-section-title::after {
 /* ============================================================
    Tooltip
    ============================================================ */
-/* !important throughout: overrides react-tooltip's own inline and default styles */
-.vim-tooltip {
-  max-width: 20rem !important;
-  border: 1px solid var(--c-medium-gray) !important;
-  background: var(--c-white) !important;
-  font-size: var(--font-size-sm) !important;
-  color: var(--c-darker-gray) !important;
-  opacity: 1 !important;
-  box-shadow: 2px 6px 15px rgba(0, 0, 0, 0.3) !important;
-  transition: opacity var(--transition-fast) !important;
+
+/* Portal tooltip — rendered at document.body, never clipped */
+.vim-tooltip-portal {
+  position: fixed;
+  font-family: var(--font-family);
+  padding: 4px 8px;
+  border: 1px solid var(--c-medium-gray);
+  background: var(--c-white);
+  color: var(--c-darker-gray);
+  font-size: var(--font-size-sm);
+  white-space: nowrap;
+  box-shadow: 2px 6px 15px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  z-index: 9999;
 }
 
 /* ============================================================
@@ -2136,7 +2244,7 @@ details:not([open]) .vim-panel-section-title::after {
     height: min(6cqmin, 1.5rem);
   }
 
-  /* --- BIM Tree --- */
+  /* --- BIM Tree (react-complex-tree) --- */
   .vim-bim-tree .rct-tree-item-title-container {
     height: min(10cqmin, 2rem);
   }
@@ -2151,6 +2259,20 @@ details:not([open]) .vim-panel-section-title::after {
     background-size: min(8cqmin, 1rem);
   }
 
+  /* --- BIM Tree (headless-tree) --- */
+  .vim-ht-item {
+    height: min(10cqmin, 2rem);
+  }
+  .vim-ht-visibility {
+    width: min(6cqmin, 1rem);
+    height: min(6cqmin, 1rem);
+  }
+  .vim-ht-arrow {
+    width: min(6cqmin, 1rem);
+    height: min(6cqmin, 1rem);
+    background-size: min(8cqmin, 1rem);
+  }
+
   /* --- Settings Inputs --- */
   .vim-settings-checkbox{
     height: min(8cqmin, 1rem);
@@ -2160,177 +2282,4 @@ details:not([open]) .vim-panel-section-title::after {
     height: min(8cqmin, 24px);
   }
 
-}:root {
-  --rct-color-tree-bg: #f6f8fa;
-  --rct-color-tree-focus-outline: #0366d6;
-
-  --rct-color-focustree-item-selected-bg: #e8eaed;
-  --rct-color-focustree-item-selected-text: inherit;
-  --rct-color-focustree-item-focused-border: #0366d6;
-  --rct-color-focustree-item-draggingover-bg: #ebf0f4;
-  --rct-color-focustree-item-draggingover-color: inherit;
-
-  --rct-color-nonfocustree-item-selected-bg: #e8eaed;
-  --rct-color-nonfocustree-item-selected-text: inherit;
-  --rct-color-nonfocustree-item-focused-border: #dbdbdb;
-
-  --rct-color-search-highlight-bg: #a2aed2;
-  --rct-color-drag-between-line-bg: #0366d6;
-  --rct-color-arrow: #373a3f;
-
-  --rct-item-height: 22px;
-
-  --rct-color-renaming-input-submitbutton-bg: inherit;
-  --rct-color-renaming-input-submitbutton-bg-hover: #0366d6;
-  --rct-color-renaming-input-submitbutton-bg-active: #095fc1;
-
-  --rct-color-renaming-input-submitbutton-text: inherit;
-  --rct-color-renaming-input-submitbutton-text-hover: #ffffff;
-  --rct-color-renaming-input-submitbutton-text-active: #ffffff;
-}
-
-.rct-tree-root {
-  font-family: sans-serif;
-  background-color: var(--rct-color-tree-bg);
-  padding: 4px 0;
-}
-
-.rct-tree-root-focus {
-  outline: 1px solid var(--rct-color-tree-focus-outline);
-}
-
-.rct-tree-item-li {
-  font-size: 0.8rem;
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.rct-tree-item-title-container {
-  display: flex;
-  align-items: center;
-  border-top: 1px solid transparent;
-  border-bottom: 1px solid transparent;
-  padding-left: var(--depthOffset, 0px);
-}
-
-.rct-tree-child-list {
-}
-.rct-tree-item-button {
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
-  background-color: transparent;
-  font-family: inherit;
-  font-size: inherit;
-  border: none;
-  width: 100%;
-  height: var(--rct-item-height);
-  text-align: left;
-  color: inherit;
-  outline: none;
-}
-
-.rct-tree-item-arrow {
-  width: 10px;
-}
-
-.rct-tree-item-arrow svg {
-  width: 10px;
-}
-
-.rct-tree-item-arrow-path {
-  fill: var(--rct-color-arrow);
-}
-
-.rct-tree-items-container {
-  margin: 0;
-  padding: 0;
-}
-
-.rct-tree-root:not(.rct-tree-root-focus) .rct-tree-item-title-container-selected {
-  background-color: var(--rct-color-nonfocustree-item-selected-bg);
-  color: var(--rct-color-nonfocustree-item-selected-text);
-}
-.rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-selected {
-  background-color: var(--rct-color-focustree-item-selected-bg);
-  color: var(--rct-color-focustree-item-selected-text);
-}
-.rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-focused {
-  outline: none;
-  border-color: var(--rct-color-focustree-item-focused-border);
-}
-.rct-tree-root:not(.rct-tree-root-focus) .rct-tree-item-title-container-focused {
-  outline: none;
-  border-color: var(--rct-color-nonfocustree-item-focused-border);
-}
-
-.rct-tree-item-title-container-dragging-over {
-  background-color: var(--rct-color-focustree-item-draggingover-bg);
-  color: var(--rct-color-focustree-item-draggingover-color);
-}
-
-.rct-tree-item-button-search-match {
-  font-style: italic;
-}
-
-.rct-tree-item-search-highlight {
-  background-color: var(--rct-color-search-highlight-bg);
-}
-
-.rct-tree-drag-between-line {
-  position: absolute;
-  right: 0;
-  top: -2px;
-  height: 4px;
-  background-color: var(--rct-color-drag-between-line-bg);
-}
-
-.rct-tree-drag-between-line-top {
-  top: 0;
-}
-
-.rct-tree-drag-between-line-bottom {
-  top: -4px;
-}
-
-.rct-tree-search-input-container {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 120px;
-}
-
-.rct-tree-search-input {
-  position: fixed;
-  width: 120px;
-}
-
-/* TODO see renaming form in multiple tree example, wraps around */
-.rct-tree-item-renaming-form {
-  flex-grow: 1;
-  display: flex;
-}
-.rct-tree-item-renaming-input {
-  flex-grow: 1;
-  background-color: inherit;
-  border: none;
-  color: inherit;
-  outline: none;
-}
-.rct-tree-item-renaming-submit-button {
-  border: none;
-  background-color: var(--rct-color-renaming-input-submitbutton-bg);
-  border-radius: 999px;
-  color: var(--rct-color-renaming-input-submitbutton-text);
-  cursor: pointer;
-}
-.rct-tree-item-renaming-submit-button:hover {
-  background-color: var(--rct-color-renaming-input-submitbutton-bg-hover);
-  color: var(--rct-color-renaming-input-submitbutton-text-hover);
-}
-.rct-tree-item-renaming-submit-button:active {
-  background-color: var(--rct-color-renaming-input-submitbutton-bg-active);
-  color: var(--rct-color-renaming-input-submitbutton-text-active);
-}
+}/*$vite$:1*/
