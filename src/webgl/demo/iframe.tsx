@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function WebglIframe () {
+export function Iframe () {
   
   return (
   <>

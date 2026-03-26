@@ -1,9 +1,13 @@
-import React from 'react';
-import { WebglViewerWithResidence } from '../webglUtils'
+import React, { useEffect, useRef } from 'react'
+import { useWebglResidence } from '../webglUtils'
 import * as VIM from 'vim-web'
 
 export function CustomControlBar () {
-  return WebglViewerWithResidence((viewer, vim) =>{
+  const div = useRef<HTMLDivElement>(null)
+  const [viewer] = useWebglResidence(div)
+
+  useEffect(() => {
+    if (!viewer) return
     viewer.controlBar.customize((bar) => [{
       id:'custom',
       buttons:[{
@@ -13,5 +17,7 @@ export function CustomControlBar () {
         icon:VIM.React.Icons.checkmark
       }]
     }])
-  })
+  }, [viewer])
+
+  return <div ref={div} className='vc-inset-0 vc-absolute'/>
 }

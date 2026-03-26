@@ -1,38 +1,67 @@
-import { WebglViewerWithResidence } from '../webglUtils'
+import React, { useEffect, useRef } from 'react'
+import { useWebglResidence } from '../webglUtils'
+import * as VIM from 'vim-web'
 
 export function AccessingBim () {
+  const div = useRef<HTMLDivElement>(null)
+  const [viewer, vim] = useWebglResidence(div)
 
-  return WebglViewerWithResidence((viewer, vim) =>{
-    viewer.modal.message({title:"Bim Demo", body:"Check console for BIM element info"})
-    setTimeout(() => viewer.modal.message(undefined), 2000)
+  useEffect(() => {
+    if (!viewer || !vim) return
 
-    viewer.core.selection.onSelectionChanged.sub(async () => {
-      const elements = viewer.core.selection.getAll().filter(e => e.type === 'Element3D')
+    // Auto-select an element so the BIM info is immediately visible
+    const element = vim.getElementFromIndex(301)
+    if (element) {
+      viewer.core.selection.select(element)
+      viewer.core.camera.lerp(1).frame(element)
+    }
+
+    const unsub = viewer.core.selection.onSelectionChanged.sub(async () => {
+      const bim = vim.bim
+      if (!bim) return
+
+      const elements = viewer.core.selection.getAll()
+        .filter((e): e is VIM.Core.Webgl.IElement3D => e.type === 'Element3D')
       const first = elements[0]
       const bimElement = await first?.getBimElement()
       if (!bimElement) return
-      console.log("Element Id:", bimElement.id)
-      console.log("Element Name:", bimElement.name)
-      console.log("Element Type:", bimElement.type)
-      
-      // Get the category from the category table
-      // Direct accessors such as element.category are no longer available
-      const category = await vim.bim.category.get(bimElement.categoryIndex)
-      console.log("Element Category:", category.name)
 
-      // Get the level information from the level table
-      // Then back to element, because a level is also an element
-      const level = await vim.bim.level.get(bimElement.levelIndex)
-      const levelElement = await vim.bim.element.get(level.elementIndex)
-      console.log("Element Level:", levelElement.name)
+      // Collect BIM info
+      const lines: string[] = []
+      lines.push(`Id: ${bimElement.id}`)
+      lines.push(`Name: ${bimElement.name}`)
+      lines.push(`Type: ${bimElement.type}`)
 
-      // For family Type, you need to find the family related to the element at hand first
-      // Once you have the family instance, you got to family type, and then back to element to get the name
-      const familyInstances = await vim.bim.familyInstance.getAll()
-      const familyInstance = familyInstances.find(fi => fi.elementIndex === bimElement.index)
-      const familyType = await vim.bim.familyType.get(familyInstance.familyTypeIndex)
-      const familyTypeElement = await vim.bim.element.get(familyType.elementIndex)
-      console.log("Family Type Name:", familyTypeElement.name)
+      if (bimElement.categoryIndex != null && bim.category) {
+        const category = await bim.category.get(bimElement.categoryIndex)
+        lines.push(`Category: ${category.name}`)
+      }
+
+      if (bimElement.levelIndex != null && bim.level && bim.element) {
+        const level = await bim.level.get(bimElement.levelIndex)
+        if (level.elementIndex != null) {
+          const levelElement = await bim.element.get(level.elementIndex)
+          lines.push(`Level: ${levelElement.name}`)
+        }
+      }
+
+      if (bim.familyInstance && bim.familyType && bim.element) {
+        const familyInstances = await bim.familyInstance.getAll()
+        const familyInstance = familyInstances.find(fi => fi.elementIndex === bimElement.index)
+        if (familyInstance && familyInstance.familyTypeIndex != null) {
+          const familyType = await bim.familyType.get(familyInstance.familyTypeIndex)
+          if (familyType.elementIndex != null) {
+            const familyTypeElement = await bim.element.get(familyType.elementIndex)
+            lines.push(`Family Type: ${familyTypeElement.name}`)
+          }
+        }
+      }
+
+      console.log('BIM Element Info:\n' + lines.join('\n'))
     })
-  })
+
+    return () => unsub()
+  }, [vim])
+
+  return <div ref={div} className='vc-inset-0 vc-absolute'/>
 }

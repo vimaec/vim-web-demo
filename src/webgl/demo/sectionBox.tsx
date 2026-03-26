@@ -1,19 +1,29 @@
-import { WebglViewerWithResidence } from '../webglUtils'
+import React, { useEffect, useRef } from 'react'
+import { useWebglResidence } from '../webglUtils'
 
 export function SectionBox () {
-  return WebglViewerWithResidence(async (viewer, vim) =>{
-    
-    const element = vim.getElementFromIndex(301)
-    if(!element) return
+  const div = useRef<HTMLDivElement>(null)
+  const [viewer, vim] = useWebglResidence(div)
 
-    viewer.core.selection.select(element)
+  useEffect(() => {
+    if (!viewer || !vim) return
+    ;(async () => {
+      const element = vim.getElementFromIndex(301)
+      if(!element) return
 
-    const box = await element.getBoundingBox()
-    if (!box) return
+      viewer.core.selection.select(element)
 
-    // Enable the section box and make it fit the element
-    viewer.sectionBox.enable.set(true)
-    viewer.sectionBox.sectionBox.call(box)
+      const box = await element.getBoundingBox()
+      if (!box) return
 
-  })
+      // Enable the section box and make it fit the element
+      viewer.sectionBox.active.set(true)
+      viewer.sectionBox.sectionBox.call(box)
+
+      // Frame the section box area so the clipping is clearly visible
+      viewer.core.camera.lerp(1).frame(element)
+    })()
+  }, [vim])
+
+  return <div ref={div} className='vc-inset-0 vc-absolute'/>
 }

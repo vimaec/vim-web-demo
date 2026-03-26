@@ -1,18 +1,19 @@
-import { WebglViewerWithResidence } from '../webglUtils'
-import * as VIM from 'vim-web'
+import React, { useEffect, useRef } from 'react'
+import { useWebglResidence } from '../webglUtils'
 
 export function Outlines () {
-  return WebglViewerWithResidence(async (viewer, vim) =>{
-    
-    // Selecting an element will automatically show its outline
-    const element = vim.getElementFromIndex(301)
-    viewer.core.selection.select(element)
-    await new Promise(resolve => setTimeout(resolve, 3000))
+  const div = useRef<HTMLDivElement>(null)
+  const [viewer, vim] = useWebglResidence(div)
 
-    // You can also set element outlines directly
-    // This can conflict with the selection outline, so be careful
-    vim.getAllElements().forEach((e,i) => {
+  useEffect(() => {
+    if (!viewer || !vim) return
+
+    // Outline all elements immediately for a clear visual effect
+    vim.getAllElements().forEach((e) => {
       e.outline = true
     })
-  })
+
+  }, [vim])
+
+  return <div ref={div} className='vc-inset-0 vc-absolute'/>
 }

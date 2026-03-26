@@ -3,20 +3,18 @@ import React, { useEffect, useRef } from 'react'
 import * as Urls from '../../urls'
 import * as VIM from 'vim-web'
 
+type ViewerApi = VIM.React.Webgl.ViewerApi
 
-import ViewerRef = VIM.React.Webgl.ViewerRef
-import { useStateRef } from 'vim-web/dist/types/react-viewers/helpers/reactUtils'
-
-export function WebglHome () {
+export function Home () {
 
   const div = useRef<HTMLDivElement>(null)
-  const viewerRef = useRef<ViewerRef>()
+  const viewerRef = useRef<ViewerApi>()
   useEffect(() => {
-    VIM.React.Webgl.createViewer(div.current).then((viewer) => {
+    VIM.React.Webgl.createViewer(div.current ?? undefined).then((viewer) => {
       viewer.isolation.autoIsolate.set(true)
       viewer.isolation.showGhost.set(true)
       viewerRef.current = viewer
-      globalThis.viewer = viewer // for testing in browser console
+      ;(globalThis as any).viewer = viewer // for testing in browser console
       loadFile(viewerRef.current)
     })
 
@@ -30,15 +28,15 @@ export function WebglHome () {
   )
 }
 
-async function loadFile (viewer: ViewerRef ) {
+async function loadFile (viewer: ViewerApi ) {
   const url = getPathFromUrl() ?? Urls.residence
   const request = viewer.load(
-    { url }, 
+    { url },
   )
 
   const result = await request.getResult()
   if (result.isSuccess) {
-    viewer.camera.frameScene.call()
+    viewer.framing.frameScene.call()
   }
 }
 
