@@ -3,7 +3,7 @@ import * as VIM from 'vim-web'
 import { LocalTextBox } from '../utils/localTextBox'
 import * as Urls from '../urls'
 
-type ViewerRef = VIM.React.Webgl.ViewerRef | VIM.React.Ultra.ViewerRef
+type ViewerRef = VIM.React.Webgl.ViewerApi | VIM.React.Ultra.ViewerApi
 
 export function AccessTokenPanel (create: (div: HTMLDivElement, url: string, token: string) => Promise<ViewerRef>) {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -12,7 +12,7 @@ export function AccessTokenPanel (create: (div: HTMLDivElement, url: string, tok
   const viewer = useRef<ViewerRef>()
 
   useEffect(() => {
-    create(containerRef.current, urlInputRef.current.value, tokenInputRef.current.value)
+    create(containerRef.current!, urlInputRef.current!.value, tokenInputRef.current!.value)
       .then(v => viewer.current = v)
     return () => viewer.current?.dispose()
   }, [])
