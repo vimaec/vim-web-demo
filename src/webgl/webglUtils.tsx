@@ -48,8 +48,18 @@ export function useWebglModel (div: RefObject<HTMLDivElement>, model: string): [
   useEffect(() => {
     if (!viewer) return
     let cancelled = false
-    fetchVimBuffer(model).then((buffer) => {
+    viewer.modal.loading({ message: 'Fetching VIM file', progress: 0, mode: 'bytes' })
+    const onProgress = (received: number) => {
       if (cancelled) return
+      viewer.modal.loading({
+        message: 'Fetching VIM file',
+        progress: received,
+        mode: 'bytes',
+      })
+    }
+    fetchVimBuffer(model, onProgress).then((buffer) => {
+      if (cancelled) return
+      viewer.modal.loading(undefined)
       return viewer.load({ buffer }).getVim()
     }).then((v) => {
       if (v && !cancelled) setVim(v)
