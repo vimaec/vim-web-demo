@@ -60216,25 +60216,23 @@ var Element3D$1 = class {
   async getBimParameters() {
     const cache2 = await this._vim.getParameterCache();
     if (!cache2) return import_dist$2.VimHelpers.getElementParameters(this._vim.bim, this.element);
-    const elements = /* @__PURE__ */ new Map();
-    elements.set(this.element, true);
-    (await import_dist$2.VimHelpers.getFamilyElements(this._vim.bim, this.element)).forEach((e) => {
-      if (e !== void 0) elements.set(e, false);
-    });
-    const { elements: paramElements, values, descriptorIndices, descriptorNames, descriptorGroups } = cache2;
+    const related = cache2.familyElements.get(this.element) ?? /* @__PURE__ */ new Map([[this.element, true]]);
+    const { values, descriptorIndices, descriptorNames, descriptorGroups, parametersByElement } = cache2;
     const result = [];
-    for (let i = 0; i < paramElements.length; i++) {
-      if (!elements.has(paramElements[i])) continue;
-      const isInstance = elements.get(paramElements[i]);
-      const descriptor = descriptorIndices[i];
-      const value = values[i];
-      const displayValue = (value == null ? void 0 : value.indexOf("|")) >= 0 ? value.substring(value.indexOf("|") + 1) : value;
-      result.push({
-        name: Number.isInteger(descriptor) ? descriptorNames == null ? void 0 : descriptorNames[descriptor] : void 0,
-        value: displayValue,
-        group: Number.isInteger(descriptor) ? descriptorGroups == null ? void 0 : descriptorGroups[descriptor] : void 0,
-        isInstance
-      });
+    for (const [elementIdx, isInstance] of related) {
+      const rows = parametersByElement.get(elementIdx);
+      if (!rows) continue;
+      for (const i of rows) {
+        const descriptor = descriptorIndices[i];
+        const value = values[i];
+        const displayValue = (value == null ? void 0 : value.indexOf("|")) >= 0 ? value.substring(value.indexOf("|") + 1) : value;
+        result.push({
+          name: Number.isInteger(descriptor) ? descriptorNames == null ? void 0 : descriptorNames[descriptor] : void 0,
+          value: displayValue,
+          group: Number.isInteger(descriptor) ? descriptorGroups == null ? void 0 : descriptorGroups[descriptor] : void 0,
+          isInstance
+        });
+      }
     }
     return result;
   }
@@ -60961,7 +60959,7 @@ var Vim$1 = class {
     __publicField(this, "_factory");
     __publicField(this, "_elementToObject", /* @__PURE__ */ new Map());
     __publicField(this, "_onGeometryLoaded", new import_dist$1.SignalDispatcher());
-    /** @internal Cached parameter table columns — loaded once, shared by all Element3D.getBimParameters() calls. */
+    /** @internal Cached parameter + family table columns — loaded once, shared by all getBimParameters() calls. */
     __publicField(this, "_parameterCache");
     this.header = header;
     this.bim = document2;
@@ -60987,20 +60985,57 @@ var Vim$1 = class {
   async getParameterCache() {
     if (this._parameterCache) return this._parameterCache;
     if (!this.bim) return void 0;
-    const [elements, values, descriptorIndices, descriptorNames, descriptorGroups] = await Promise.all([
+    const [elements, values, descriptorIndices, descriptorNames, descriptorGroups, fiElements, fiFamilyTypes, ftElements, ftFamilies, fElements] = await Promise.all([
       this.bim.parameter.getAllElementIndex(),
       this.bim.parameter.getAllValue(),
       this.bim.parameter.getAllParameterDescriptorIndex(),
       this.bim.parameterDescriptor.getAllName(),
-      this.bim.parameterDescriptor.getAllGroup()
+      this.bim.parameterDescriptor.getAllGroup(),
+      this.bim.familyInstance.getAllElementIndex(),
+      this.bim.familyInstance.getAllFamilyTypeIndex(),
+      this.bim.familyType.getAllElementIndex(),
+      this.bim.familyType.getAllFamilyIndex(),
+      this.bim.family.getAllElementIndex()
     ]);
     if (!elements || !values || !descriptorIndices) return void 0;
+    const familyElements = /* @__PURE__ */ new Map();
+    if (fiElements && fiFamilyTypes && ftElements && ftFamilies && fElements) {
+      const fiByElement = /* @__PURE__ */ new Map();
+      for (let i = 0; i < fiElements.length; i++) fiByElement.set(fiElements[i], i);
+      for (const [element, fi] of fiByElement) {
+        const related = /* @__PURE__ */ new Map();
+        related.set(element, true);
+        const ftIdx = fiFamilyTypes[fi];
+        if (Number.isInteger(ftIdx)) {
+          const ftElement = ftElements[ftIdx];
+          if (ftElement !== void 0) related.set(ftElement, false);
+          const fIdx = ftFamilies[ftIdx];
+          if (Number.isInteger(fIdx)) {
+            const fElement = fElements[fIdx];
+            if (fElement !== void 0) related.set(fElement, false);
+          }
+        }
+        familyElements.set(element, related);
+      }
+    }
+    const parametersByElement = /* @__PURE__ */ new Map();
+    for (let i = 0; i < elements.length; i++) {
+      const el = elements[i];
+      let list = parametersByElement.get(el);
+      if (!list) {
+        list = [];
+        parametersByElement.set(el, list);
+      }
+      list.push(i);
+    }
     this._parameterCache = {
       elements,
       values,
       descriptorIndices,
       descriptorNames,
-      descriptorGroups
+      descriptorGroups,
+      familyElements,
+      parametersByElement
     };
     return this._parameterCache;
   }
@@ -65153,6 +65188,7 @@ var GizmoOrbit = class {
     if (!this._active) return;
     if (!this._gizmos) this.createGizmo();
     clearTimeout(this._timeout);
+    if (this._gizmos.visible === show) return;
     this._gizmos.visible = show;
     this._renderer.requestRender();
     if (show) this._timeout = setTimeout(() => {
@@ -70143,7 +70179,9 @@ var Renderer$1 = class {
       this._composer.camera = this._camera.three;
       this._needsUpdate = true;
     });
-    this._materials.onUpdate.sub(() => this._needsUpdate = true);
+    this._materials.onUpdate.sub(() => {
+      this._needsUpdate = true;
+    });
     this.background = settings2.background.color;
   }
   /**
@@ -79180,7 +79218,7 @@ function SidePanel(props) {
   };
   reactExports.useEffect(() => {
     resizeGfx();
-  });
+  }, [props.side.getWidth(), props.side.getContent()]);
   reactExports.useEffect(() => {
     const obs = new ResizeObserver(() => {
       updateSize();
@@ -81854,13 +81892,56 @@ function Iframe() {
   ) });
 }
 const cache = /* @__PURE__ */ new Map();
-function fetchVimBuffer(url) {
+function fetchVimBuffer(url, onProgress) {
   let entry = cache.get(url);
   if (!entry) {
-    entry = fetch(url).then((r) => r.arrayBuffer());
+    entry = startFetch(url);
     cache.set(url, entry);
   }
-  return entry.then((buf) => buf.slice(0));
+  if (onProgress) {
+    if (entry.done) {
+      onProgress(entry.received, entry.total);
+    } else {
+      entry.listeners.add(onProgress);
+      if (entry.received > 0) onProgress(entry.received, entry.total);
+    }
+  }
+  return entry.promise.then((buf) => buf.slice(0));
+}
+function startFetch(url) {
+  const entry = {
+    promise: void 0,
+    listeners: /* @__PURE__ */ new Set(),
+    received: 0,
+    total: 0,
+    done: false
+  };
+  entry.promise = (async () => {
+    var _a3;
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`Failed to fetch ${url}: ${response.status}`);
+    entry.total = Number(response.headers.get("Content-Length") ?? 0);
+    const reader = (_a3 = response.body) == null ? void 0 : _a3.getReader();
+    if (!reader) return await response.arrayBuffer();
+    const chunks = [];
+    for (; ; ) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      chunks.push(value);
+      entry.received += value.byteLength;
+      for (const cb of entry.listeners) cb(entry.received, entry.total);
+    }
+    const buffer = new Uint8Array(entry.received);
+    let offset = 0;
+    for (const chunk of chunks) {
+      buffer.set(chunk, offset);
+      offset += chunk.byteLength;
+    }
+    entry.done = true;
+    entry.listeners.clear();
+    return buffer.buffer;
+  })();
+  return entry;
 }
 const Webgl$1 = react_viewers_exports.Webgl;
 function useWebglViewer(div) {
@@ -81891,8 +81972,18 @@ function useWebglModel(div, model) {
   reactExports.useEffect(() => {
     if (!viewer) return;
     let cancelled = false;
-    fetchVimBuffer(model).then((buffer) => {
+    viewer.modal.loading({ message: "Fetching VIM file", progress: 0, mode: "bytes" });
+    const onProgress = (received) => {
       if (cancelled) return;
+      viewer.modal.loading({
+        message: "Fetching VIM file",
+        progress: received,
+        mode: "bytes"
+      });
+    };
+    fetchVimBuffer(model, onProgress).then((buffer) => {
+      if (cancelled) return;
+      viewer.modal.loading(void 0);
       return viewer.load({ buffer }).getVim();
     }).then((v) => {
       if (v && !cancelled) setVim(v);
@@ -83074,7 +83165,7 @@ function App() {
         )
       }
     ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { flexGrow: 1, position: "relative" }, children: selectedPage == null ? void 0 : selectedPage.content() })
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { flexGrow: 1, position: "relative", background: "#cfd1d4" }, children: selectedPage == null ? void 0 : selectedPage.content() })
   ] });
 }
 const container = document.getElementById("root");
