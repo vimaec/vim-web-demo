@@ -1,83 +1,78 @@
-import React, { RefObject, useEffect, useRef } from 'react'
+import { RefObject, useEffect, useRef, useState } from 'react'
 import * as VIM from 'vim-web'
 import * as DevUrls from '../urls'
+import { fetchVimBuffer } from '../utils/vimCache'
 
-import ViewerRef = VIM.React.Webgl.ViewerRef
-import Webgl = VIM.React.Webgl
-import Vim = VIM.Core.Webgl.Vim
+type ViewerApi = VIM.React.Webgl.ViewerApi
+const Webgl = VIM.React.Webgl
+type IWebglVim = VIM.Core.Webgl.IWebglVim
 
 
 /**
  * Custom hook to create a WebGL viewer and attach it to a div element.
- * @param div - The div element to attach the viewer to
- * @param onReady - Callback function to be called when the viewer is ready
+ * Returns the viewer as state once ready.
  */
-export function useWebglViewer (div: RefObject<HTMLDivElement>, onReady?: (viewer: ViewerRef) => void) {
-  const viewerRef = useRef<ViewerRef>()
+export function useWebglViewer (div: RefObject<HTMLDivElement>): ViewerApi | undefined {
+  const viewerRef = useRef<ViewerApi>()
+  const [viewer, setViewer] = useState<ViewerApi>()
+
   useEffect(() => {
-    Webgl.createViewer(div.current).then((viewer) => {
-      viewer.isolation.autoIsolate.set(true)
-      viewer.isolation.showGhost.set(true)
-      viewerRef.current = viewer
-      globalThis.viewer = viewer
-      onReady?.(viewer)
+    let disposed = false
+    Webgl.createViewer(div.current ?? undefined).then((v) => {
+      if (disposed) {
+        v.dispose()
+        return
+      }
+      viewerRef.current = v
+      ;(globalThis as any).viewer = v
+      setViewer(v)
     })
 
-    return () => viewerRef.current?.dispose()
-  }, [])
-}
-
-/**
- * Custom hook to create a WebGL viewer and load a model into it.
- * @param div - The div element to attach the viewer to 
- * @param model - The URL of the model to load
- * @param onReady - Callback function to be called when the viewer is ready and the model is loaded
- * @returns {void}
- */
-export function useWebglViewerWithModel (div: RefObject<HTMLDivElement>, model: string, onReady?: (viewer: ViewerRef, vim : Vim) => void) {
-  useWebglViewer(div, async (viewer) => {
-    const request = viewer.loader.request(
-      { url: model }
-    )
-    const result = await request.getResult()
-    if (result.isSuccess()) {
-      viewer.loader.add(result.result)
-      viewer.core.camera.snap().frame('all')
-      onReady?.(viewer, result.result)
-      return
+    return () => {
+      disposed = true
+      viewerRef.current?.dispose()
     }
-    throw new Error('Failed to load model')
-  })
+  }, [])
+
+  return viewer
 }
 
 /**
- * Custom hook to create a WebGL viewer and load the residence model into it.
- * @param div - The div element to attach the viewer to
- * @param onReady - Callback function to be called when the viewer is ready
+ * State-returning hook: creates a WebGL viewer and loads a model.
+ * Returns [viewer, vim] as React state — use useEffect for demo logic.
  */
-export function useWebglViewerWithResidence(div: RefObject<HTMLDivElement>, onReady?: (viewer: ViewerRef, vim : Vim) => void) {
-  useWebglViewerWithModel(div, DevUrls.residence, onReady)
+export function useWebglModel (div: RefObject<HTMLDivElement>, model: string): [ViewerApi | undefined, IWebglVim | undefined] {
+  const viewer = useWebglViewer(div)
+  const [vim, setVim] = useState<IWebglVim>()
+
+  useEffect(() => {
+    if (!viewer) return
+    let cancelled = false
+    viewer.modal.loading({ message: 'Fetching VIM file', progress: 0, mode: 'bytes' })
+    const onProgress = (received: number) => {
+      if (cancelled) return
+      viewer.modal.loading({
+        message: 'Fetching VIM file',
+        progress: received,
+        mode: 'bytes',
+      })
+    }
+    fetchVimBuffer(model, onProgress).then((buffer) => {
+      if (cancelled) return
+      viewer.modal.loading(undefined)
+      return viewer.load({ buffer }).getVim()
+    }).then((v) => {
+      if (v && !cancelled) setVim(v)
+    })
+    return () => { cancelled = true }
+  }, [viewer])
+
+  return [viewer, vim]
 }
 
 /**
- * Custom hook to create a WebGL viewer and load the medical tower model into it.
- * @param div - The div element to attach the viewer to
- * @param onReady - Callback function to be called when the viewer is ready
+ * State-returning hook: creates a WebGL viewer and loads the residence model.
  */
-export function useWebglViewerWithTower(div: RefObject<HTMLDivElement>, onReady?: (viewer: ViewerRef) => void) {
-  useWebglViewerWithModel(div, DevUrls.medicalTower, onReady)
-}
-
-
-/**
- * Custom hook to create a WebGL viewer and load the residence tower model into it.
- * @param div - The div element to attach the viewer to
- * @param onReady - Callback function to be called when the viewer is ready
- */
-export function WebglViewerWithResidence( onReady?: (viewer: ViewerRef, vim : Vim) => void) {
-  const div = useRef<HTMLDivElement>(null)
-  useWebglViewerWithModel(div, DevUrls.residence, onReady)
-  return (
-    <div ref={div} className='vc-inset-0 vc-absolute'/>
-  )
+export function useWebglResidence (div: RefObject<HTMLDivElement>) {
+  return useWebglModel(div, DevUrls.residence)
 }

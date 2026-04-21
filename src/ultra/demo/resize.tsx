@@ -1,9 +1,5 @@
-import React, { RefObject, useRef } from 'react'
-import * as VIM from 'vim-web'
-import { useUltraWithWolford } from '../ultraUtils'
-
-import ViewerRef = VIM.React.Ultra.ViewerRef
-import Vim = VIM.Core.Ultra.Vim
+import React, { RefObject, useEffect, useRef } from 'react'
+import { useUltraResidence } from '../ultraUtils'
 
 // Define resolution table with different aspect ratios and sizes
 const RESOLUTIONS = [
@@ -30,24 +26,26 @@ const RESOLUTIONS = [
 
 export function Resize () {
   const div = useRef<HTMLDivElement>(null)
+  const [viewer] = useUltraResidence(div)
 
-  useUltraWithWolford(div, (ultra, _tower) => {
-    void toggleLock(ultra, _tower, div)
-  })
+  useEffect(() => {
+    if (!viewer) return
+    void cycleResolutions(div)
+  }, [viewer])
 
   return (
     <div ref={div} className='vc-inset-0 vc-absolute'/>
   )
 }
 
-async function toggleLock (ultra: ViewerRef, vim: Vim, div: RefObject<HTMLDivElement>) {
+async function cycleResolutions (div: RefObject<HTMLDivElement>) {
   let index = 0
 
   // eslint-disable-next-line no-constant-condition
   while (true) {
     const resolution = RESOLUTIONS[index]
-    div.current.style.width = `${resolution.width}px`
-    div.current.style.height = `${resolution.height}px`
+    div.current!.style.width = `${resolution.width}px`
+    div.current!.style.height = `${resolution.height}px`
 
     // Move to next resolution, loop back to start if at end
     index = (index + 1) % RESOLUTIONS.length

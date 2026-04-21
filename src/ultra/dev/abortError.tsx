@@ -1,23 +1,21 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useUltra } from '../ultraUtils'
-import * as VIM  from 'vim-web'
 import * as Urls from '../../urls'
-
-import ViewerRef = VIM.React.Ultra.ViewerRef
 
 export function AbortError () {
   const div = useRef<HTMLDivElement>(null)
-  useUltra(div, (ultra) => {
-    void abortLoad(ultra)
-  })
+  const ultra = useUltra(div)
+
+  useEffect(() => {
+    if (!ultra) return
+    ;(async () => {
+      await ultra.core.connect()
+      const request = ultra.load({url:Urls.residence})
+      request.abort()
+    })()
+  }, [ultra])
 
   return (
     <div ref={div} className='vc-inset-0 vc-absolute'/>
   )
-}
-
-async function abortLoad (ultra: ViewerRef) {
-  await ultra.core.connect()
-  const request = ultra.load({url:Urls.residence})
-  request.abort()
 }

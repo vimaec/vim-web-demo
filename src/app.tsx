@@ -125,7 +125,7 @@ export function App() {
       )}
 
       {/* Main content */}
-      <div style={{ flexGrow: 1, position: "relative" }}>
+      <div style={{ flexGrow: 1, position: "relative", background: "#cfd1d4" }}>
         {selectedPage?.content()}
       </div>
     </div>

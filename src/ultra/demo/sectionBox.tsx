@@ -1,34 +1,38 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as VIM from 'vim-web';
-import { useUltraNoModel } from '../ultraUtils';
+import { useUltra } from '../ultraUtils';
 import { residence } from '../../urls';
-import ViewerRef = VIM.React.Ultra.ViewerRef;
+
+type ViewerApi = VIM.React.Ultra.ViewerApi;
 
 export function SectionBox() {
   const div = useRef(null);
-  const ref = useRef<ViewerRef>();
+  const viewer = useUltra(div);
 
   const [visible, setVisible] = useState(false);
   const [interactive, setInteractive] = useState(false);
-  const [clip, setClip] = useState(false);
+  const [active, setActive] = useState(false);
   const [box, setBox] = useState(new VIM.THREE.Box3());
 
   const updateBox = (newBox: VIM.THREE.Box3) => {
-    ref.current?.core.sectionBox.fitBox(newBox);
+    viewer?.core.sectionBox.setBox(newBox);
     setBox(newBox);
   };
 
-  useUltraNoModel(div, (ultra) => {
-    createSectionBox(ultra);
-    ref.current = ultra;
+  useEffect(() => {
+    if (!viewer) return
+    void createSectionBox(viewer)
 
-    ultra.core.sectionBox.onUpdate.subscribe(() => {
-      setVisible(ultra.core.sectionBox.visible);
-      setInteractive(ultra.core.sectionBox.interactive);
-      setClip(ultra.core.sectionBox.clip);
-      setBox(ultra.core.sectionBox.getBox());
+    const unsub = viewer.core.sectionBox.onUpdate.subscribe(() => {
+      setVisible(viewer.core.sectionBox.visible);
+      setInteractive(viewer.core.sectionBox.interactive);
+      setActive(viewer.core.sectionBox.active);
+      const b = viewer.core.sectionBox.getBox();
+      if (b) setBox(b);
     });
-  });
+
+    return unsub
+  }, [viewer]);
 
   return (
     <div className="vc-inset-0 vc-absolute">
@@ -48,7 +52,7 @@ export function SectionBox() {
           checked={visible}
           onChange={(value) => {
             setVisible(value);
-            ref.current!.core.sectionBox.visible = value;
+            if (viewer) viewer.core.sectionBox.visible = value;
           }}
         />
         <br />
@@ -57,16 +61,16 @@ export function SectionBox() {
           checked={interactive}
           onChange={(value) => {
             setInteractive(value);
-            ref.current!.core.sectionBox.interactive = value;
+            if (viewer) viewer.core.sectionBox.interactive = value;
           }}
         />
         <br />
         <Checkbox
           label="Clip"
-          checked={clip}
+          checked={active}
           onChange={(value) => {
-            setClip(value);
-            ref.current!.core.sectionBox.clip = value;
+            setActive(value);
+            if (viewer) viewer.core.sectionBox.active = value;
           }}
         />
         <br />
@@ -114,16 +118,16 @@ export function SectionBox() {
   );
 }
 
-async function createSectionBox(ultra: ViewerRef) {
+async function createSectionBox(ultra: ViewerApi) {
   await ultra.core.connect();
 
   const request = ultra.load({ url: residence });
   const result = await request.getResult();
 
   if (result.isSuccess) {
-    await ultra.core.camera.frameAll(0);
+    await ultra.core.camera.snap().frame('all');
     const box = await ultra.core.renderer.getBoundingBox();
-    if (box) ultra.core.sectionBox.fitBox(box);
+    if (box) ultra.core.sectionBox.setBox(box);
   }
 }
 

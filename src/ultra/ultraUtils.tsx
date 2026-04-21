@@ -1,67 +1,75 @@
 import * as VIM from 'vim-web'
 import * as Urls from '../urls'
-import { useRef, useEffect, RefObject } from 'react'
+import { useRef, useEffect, useState, RefObject } from 'react'
 
-import Ultra = VIM.React.Ultra
-import ViewerRef = VIM.React.Ultra.ViewerRef
-import Vim = VIM.Core.Ultra.Vim
+const Ultra = VIM.React.Ultra
+type ViewerApi = VIM.React.Ultra.ViewerApi
+type UltraVim = VIM.Core.Ultra.IUltraVim
 
+/**
+ * Creates an Ultra viewer and returns it as state once ready.
+ */
+export function useUltra (div: RefObject<HTMLDivElement>): ViewerApi | undefined {
+  const viewerRef = useRef<ViewerApi>()
+  const [viewer, setViewer] = useState<ViewerApi>()
 
-export function useUltra (div: RefObject<HTMLDivElement>, onCreated: (ultra: ViewerRef) => void) {
-  const cmp = useRef<ViewerRef>()
   useEffect(() => {
-    // Create component
-    void Ultra.createViewer(div.current).then((c) => {
-      cmp.current = c
-      onCreated(cmp.current)
-      globalThis.ultra = cmp.current
+    let disposed = false
+    Ultra.createViewer(div.current!).then((v) => {
+      if (disposed) {
+        v.dispose()
+        return
+      }
+      viewerRef.current = v
+      ;(globalThis as any).ultra = v
+      setViewer(v)
     })
 
-    // Clean up
     return () => {
-      cmp.current?.dispose()
+      disposed = true
+      viewerRef.current?.dispose()
     }
   }, [])
+
+  return viewer
 }
 
-export function useUltraWithTower (div: RefObject<HTMLDivElement>, onCreated: (ultra: ViewerRef, towers: Vim) => void) {
-  useUltraWithModel(
-    div,
-    Urls.medicalTower,
-    onCreated
-  )
-}
+/**
+ * Creates an Ultra viewer, connects, and loads a model.
+ * Returns [viewer, vim] as state.
+ */
+export function useUltraModel (div: RefObject<HTMLDivElement>, model: string): [ViewerApi | undefined, UltraVim | undefined] {
+  const viewer = useUltra(div)
+  const [vim, setVim] = useState<UltraVim>()
 
-export function useUltraWithWolford (div: RefObject<HTMLDivElement>, onCreated: (ultra: ViewerRef, towers: Vim) => void) {
-  useUltraWithModel(
-    div,
-    Urls.residence,
-    onCreated
-  )
-}
-
-export function useUltraNoModel(div: RefObject<HTMLDivElement>, onCreated:  (ultra: ViewerRef) => void){
-  useUltra(div, async (ultra) => {
-    await ultra.core.connect()
-    onCreated(ultra)
-    return ultra
-  })
-}
-
-function useUltraWithModel (
-  div: RefObject<HTMLDivElement>,
-  modelUrl: string,
-  onCreated: (ultra: ViewerRef, model: Vim) => void
-) {
-    useUltra(div, async (ultra) => {
-      await ultra.core.connect()
-      const request = ultra.load({url:modelUrl})
-      const result = await request.getResult()
+  useEffect(() => {
+    if (!viewer) return
+    let cancelled = false
+    ;(async () => {
+      await viewer.core.connect()
+      if (cancelled) return
+      const result = await viewer.load({ url: model }).getResult()
+      if (cancelled) return
       if (result.isSuccess) {
-        await ultra.core.camera.frameAll(0)
-        const model = result.vim
-        onCreated(ultra, model)
+        setVim(result.vim)
       }
-    }
-  )
+    })()
+    return () => { cancelled = true }
+  }, [viewer])
+
+  return [viewer, vim]
+}
+
+/**
+ * Creates an Ultra viewer, connects, and loads the medical tower.
+ */
+export function useUltraTower (div: RefObject<HTMLDivElement>) {
+  return useUltraModel(div, Urls.medicalTower)
+}
+
+/**
+ * Creates an Ultra viewer, connects, and loads the residence.
+ */
+export function useUltraResidence (div: RefObject<HTMLDivElement>) {
+  return useUltraModel(div, Urls.residence)
 }

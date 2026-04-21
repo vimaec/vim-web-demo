@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { WebglHome } from './home';
-import { WebglLocalFile } from './localFile';
-import { WebglIframe } from './iframe';
-import { WebglMarkers } from './markers';
-import { WebglScreenshot } from './screenshot';
+import { Home } from './home';
+import { LocalFile } from './localFile';
+import { Iframe } from './iframe';
+import { Markers } from './markers';
+import { Screenshot } from './screenshot';
 
 import {type Page} from "../../page"
 import { Camera } from './camera';
@@ -20,12 +20,12 @@ import { CustomGenericPanel } from './customGenericPanels';
 import { CustomBimPanel } from './customBimPanel';
 import { gitRoot } from '../../urls';
 
-export const root =  gitRoot + '/webgl/demo'; 
+export const root =  gitRoot + '/webgl/demo';
 
 export const home =   {
   name: 'Home',
   github: `${root}/home.tsx`,
-  content: () => <WebglHome />
+  content: () => <Home />
 }
 
 export const pages: Page[] = [
@@ -33,7 +33,7 @@ export const pages: Page[] = [
   {
     name: 'Local File',
     github: `${root}/localFile.tsx`,
-    content: () => <WebglLocalFile />,
+    content: () => <LocalFile />,
   },
   {
     name: 'Camera',
@@ -60,44 +60,26 @@ export const pages: Page[] = [
     github: `${root}/sectionBox.tsx`,
     content: () => <SectionBox />,
   },
-  /*
-  {
-    name: 'Plan View',
-    github: `${root}/planView.tsx`,
-    content: <PlanView />,
-  },
-  */
   {
     name: 'Iframe',
     github: `${root}/iframe.tsx`,
-    content: () => <WebglIframe />,
+    content: () => <Iframe />,
   },
   {
     name: 'Markers',
     github: `${root}/markers.tsx`,
-    content: () => <WebglMarkers />,
+    content: () => <Markers />,
   },
   {
     name: 'Screenshot',
     github: `${root}/screenshot.tsx`,
-    content: () => <WebglScreenshot />,
+    content: () => <Screenshot />,
   },
   {
     name: 'Accessing BIM',
     github: `${root}/accessingBim.tsx`,
     content: () => <AccessingBim />,
   },
-  {
-    name: 'Custom Markers',
-    github: `${root}/customMarkers.tsx`,
-    content: () => <WebglMarkers />,
-  },
-  {
-    name: 'Custom Context',
-    github: `${root}/customContext.tsx`,
-    content: () => <WebglMarkers />,
-  },
-  
   {
     name: 'Custom Inputs',
     github: `${root}/customInputs.tsx`,
@@ -124,4 +106,3 @@ export const pages: Page[] = [
     content: () => <CustomBimPanel />,
   }
 ];
-

@@ -1,7 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./app";
-import 'vim-web/dist/style.css';
+import 'vim-web/style.css';
 
 
 // Get the container div

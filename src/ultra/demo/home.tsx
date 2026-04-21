@@ -1,30 +1,29 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useUltra } from '../ultraUtils'
 import * as Urls from '../../urls'
 import * as VIM from 'vim-web'
 
-import ViewerRef = VIM.React.Ultra.ViewerRef
+type ViewerApi = VIM.React.Ultra.ViewerApi
 
 export function Home () {
   const div = useRef<HTMLDivElement>(null)
-  useUltra(div, (ultra) => {
+  const ultra = useUltra(div)
+
+  useEffect(() => {
+    if (!ultra) return
     void loadFile(ultra)
-  })
+  }, [ultra])
 
   return (
     <div ref={div} className='vc-inset-0 vc-absolute'/>
   )
 }
 
-async function loadFile (viewer: ViewerRef) {
-  
-
-
-  const success = await viewer.core.connect()
+async function loadFile (viewer: ViewerApi) {
+  await viewer.core.connect()
   const request = viewer.load({url:getPathFromUrl() ?? Urls.medicalTower})
-  const load = await request.getResult()
-  await viewer.core.camera.frameAll(0)
-  globalThis.viewer = viewer
+  await request.getResult()
+  await viewer.core.camera.snap().frame('all')
 }
 
 function getPathFromUrl () {

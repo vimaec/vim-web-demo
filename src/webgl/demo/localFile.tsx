@@ -1,12 +1,12 @@
 import React, { ChangeEvent, useEffect, useRef } from 'react';
 import * as VIM from 'vim-web';
 
-import Webgl = VIM.React.Webgl;
-import ViewerRef = VIM.React.Webgl.ViewerRef;
+const Webgl = VIM.React.Webgl;
+type ViewerApi = VIM.React.Webgl.ViewerApi;
 
-export function WebglLocalFile() {
+export function LocalFile() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const viewerRef = useRef<ViewerRef>();
+  const viewerRef = useRef<ViewerApi>();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -26,16 +26,15 @@ export function WebglLocalFile() {
       if (!(content instanceof ArrayBuffer)) return;
 
       const viewer = viewerRef.current!;
-      viewer.modal.loading({ progress: -1, mode: '%', message: 'Loading from Disk' });
+      viewer.modal.loading({ progress: -1, mode: 'percent', message: 'Loading from Disk' });
 
       await delay(1000);
 
       try {
-        const vim = await viewer.loader.open({ buffer: content }, {});
-        viewer.loader.add(vim);
+        await viewer.load({ buffer: content }).getResult();
       } finally {
         viewer.modal.loading(undefined);
-        viewer.camera.frameScene.call();
+        viewer.framing.frameScene.call();
       }
     };
 
@@ -60,13 +59,13 @@ export function WebglLocalFile() {
 
 async function createComponent(
   containerRef: React.RefObject<HTMLDivElement>,
-  viewerRef: React.MutableRefObject<ViewerRef | undefined>
+  viewerRef: React.MutableRefObject<ViewerApi | undefined>
 ) {
   if (!containerRef.current) return;
 
   const viewer = await Webgl.createViewer(containerRef.current);
   viewerRef.current = viewer;
-  globalThis.viewer = viewer;
+  (globalThis as any).viewer = viewer;
 }
 
 function delay(ms: number): Promise<void> {
