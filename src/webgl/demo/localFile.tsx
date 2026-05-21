@@ -44,7 +44,18 @@ export function LocalFile() {
   return (
     <>
       <div ref={containerRef} className="vc-inset-0 vc-absolute" />
-      <div className="navigation vc-fixed vc-top-10 vc-left-1/2 vc--translate-x-1/2 vc-z-50 vc-flex vc-flex-col vc-gap-1">
+      <div
+        style={{
+          position: 'fixed',
+          top: '2.5rem',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 9999,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '0.25rem',
+        }}
+      >
         <input
           ref={fileInputRef}
           name="fileBrowserInput"
