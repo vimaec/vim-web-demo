@@ -81861,16 +81861,31 @@ function LocalFile() {
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { ref: containerRef, className: "vc-inset-0 vc-absolute" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "navigation vc-fixed vc-top-10 vc-left-1/2 vc--translate-x-1/2 vc-z-50 vc-flex vc-flex-col vc-gap-1", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "input",
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "div",
       {
-        ref: fileInputRef,
-        name: "fileBrowserInput",
-        type: "file",
-        accept: ".vim",
-        onChange: handleOpen
+        style: {
+          position: "fixed",
+          top: "2.5rem",
+          left: "50%",
+          transform: "translateX(-50%)",
+          zIndex: 9999,
+          display: "flex",
+          flexDirection: "column",
+          gap: "0.25rem"
+        },
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "input",
+          {
+            ref: fileInputRef,
+            name: "fileBrowserInput",
+            type: "file",
+            accept: ".vim",
+            onChange: handleOpen
+          }
+        )
       }
-    ) })
+    )
   ] });
 }
 async function createComponent$2(containerRef, viewerRef) {
