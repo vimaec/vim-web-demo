@@ -18,6 +18,7 @@ import { CustomContextMenu} from './customContextMenu';
 import { CustomControlBar } from './customControlBar';
 import { CustomGenericPanel } from './customGenericPanels';
 import { CustomBimPanel } from './customBimPanel';
+import { CustomInspector } from './customInspector';
 import { gitRoot } from '../../urls';
 
 export const root =  gitRoot + '/webgl/demo';
@@ -104,5 +105,10 @@ export const pages: Page[] = [
     name: 'Custom Bim Panels',
     github: `${root}/customBimPanel.tsx`,
     content: () => <CustomBimPanel />,
+  },
+  {
+    name: 'Custom Inspector',
+    github: `${root}/customInspector.tsx`,
+    content: () => <CustomInspector />,
   }
 ];

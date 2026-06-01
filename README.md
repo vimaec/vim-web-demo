@@ -111,28 +111,27 @@ The following is a standalone HTML page illustrating the usage of the `vim-web` 
 npm install
 npm run dev
 
-# Open your browser at http://localhost:3000
-# By default, it should load a VIM file from a hard-coded URL.
+# Open your browser at the URL Vite prints (http://localhost:5173 by default).
+# By default, it loads a VIM file from a hard-coded URL.
 ```
 
 ### Tinkering
 
-The entry point of the application is under `src/main.tsx`.
+The entry point of the application is under `src/main.tsx`. Each demo is a
+self-contained component under `src/{webgl,ultra}/{demo,dev}/`, registered in
+that folder's `pageIndex.tsx`.
 
-### Making a Release
+### Available scripts
 
 ```bash
-# Increment the version number
-npm run replace-version
-
-# Build
-npm run build
-
-# Test the dev build
-npm run serve-dev
-
-# Build the release version
-npm run release
-
-# ...commit to your branch, make a PR into the main branch, merge.
+npm run dev          # Start the Vite dev server
+npm run build        # Type-check (tsc --noEmit) and build to dist/
+npm run typecheck    # Type-check only
+npm run deploy       # Build and publish dist/ to the gh-pages branch
 ```
+
+### Deployment
+
+The app is deployed to GitHub Pages. Either run `npm run deploy` locally, or
+trigger the "Deploy to GitHub Pages" GitHub Action manually
+(`.github/workflows/deploy.yml`).
