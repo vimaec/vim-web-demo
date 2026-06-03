@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useMemo, useRef, useState } from 'react'
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import * as VIM from 'vim-web'
 import * as Urls from '../../urls'
 
@@ -7,6 +7,15 @@ type ViewerApi = VIM.React.Webgl.ViewerApi
 type IWebglVim = VIM.Core.Webgl.IWebglVim
 type IElement = VIM.BIM.IElement
 type VimDocument = VIM.BIM.VimDocument
+
+// The renderer's raw-object add/remove (present on the concrete Renderer but not
+// the public IWebglRenderer type). We use it to add our own THREE meshes.
+type RawSceneRenderer = { add(o: VIM.THREE.Object3D): void; remove(o: VIM.THREE.Object3D): void }
+
+// Shape of the internal merged submesh we read geometry from. Reaching into
+// these internals is deliberate — the custom room mesh lives outside the
+// viewer's tracking on purpose.
+type MergedSubmeshLike = { merged: boolean; three: VIM.THREE.Mesh; meshStart: number; meshEnd: number }
 
 /**
  * Custom project inspector.
@@ -22,16 +31,23 @@ type VimDocument = VIM.BIM.VimDocument
  *
  * Each level is just an extractor function over the BIM `IElement` (see LEVELS
  * below) — reorder or swap them to change the hierarchy. Clicking a leaf
- * selects and frames that element in the 3D scene.
- *
- * The "Open local .vim" button (same as the Local File demo) loads a model from
- * disk, replacing the current one and rebuilding the tree.
+ * selects and frames that element in the 3D scene. A single viewer is reused
+ * across loads: each load unloads the previous vim and loads the new one into
+ * the same viewer.
  */
 export function CustomInspector () {
   const viewerDiv = useRef<HTMLDivElement>(null)
-  const viewerRef = useRef<ViewerApi>()
-  const vimRef = useRef<IWebglVim>()
-  const unsubRef = useRef<() => void>()
+  const viewerRef = useRef<ViewerApi | undefined>(undefined)
+  const vimRef = useRef<IWebglVim | undefined>(undefined)
+  const unsubRef = useRef<(() => void) | undefined>(undefined)
+  // Self-owned THREE meshes visualizing selected rooms, keyed by room-volume
+  // element index. We render our own meshes rather than toggling the rooms' VIM
+  // elements because room geometry is opaque-authored and `isRoom` visibility is
+  // owned by the global showRooms flag — so the engine won't let us show rooms
+  // as transparent shells. Standalone meshes sidestep all of that: total control
+  // over material and visibility, untracked by the viewer. Multiple rooms can be
+  // shown at once (one entry per selected room row).
+  const roomMeshesRef = useRef<Map<number, VIM.THREE.Mesh>>(new Map())
   const bimToken = useRef(0) // guards against out-of-order async BIM-info loads
   // True while the inspector is pushing a selection into the viewer. The
   // viewer fires onSelectionChanged in response; this flag lets the listener
@@ -52,67 +68,33 @@ export function CustomInspector () {
     setSelected(next)
   }
 
-  // Expand state lives here (not per-row) so the tree can be flattened and
-  // virtualized — collapsed rows never mount.
-  const [expanded, setExpanded] = useState<ReadonlySet<number>>(() => new Set())
-  const scrollRef = useRef<HTMLDivElement>(null)
-  const [scrollTop, setScrollTop] = useState(0)
-  const [viewportH, setViewportH] = useState(600) // replaced by the measured height on mount
-
-  const toggleExpand = (id: number) => {
-    setExpanded((prev) => {
-      const next = new Set(prev)
-      if (next.has(id)) next.delete(id)
-      else next.add(id)
-      return next
-    })
-  }
-
-  // Visible rows (respecting collapse state) as a flat list, then the window of
-  // rows currently on screen. Only the window is rendered.
-  const rows = useMemo(() => (tree ? flattenTree(tree, expanded) : []), [tree, expanded])
-  const start = Math.max(0, Math.floor(scrollTop / ROW_H) - OVERSCAN)
-  const end = Math.min(rows.length, Math.ceil((scrollTop + viewportH) / ROW_H) + OVERSCAN)
-  const windowRows = rows.slice(start, end)
-
-  // Track the scroll viewport height so the window covers exactly what's shown.
-  useEffect(() => {
-    const el = scrollRef.current
-    if (!el) return
-    const measure = () => setViewportH(el.clientHeight)
-    measure()
-    const ro = new ResizeObserver(measure)
-    ro.observe(el)
-    return () => ro.disconnect()
-  }, [])
-
-  // Disposes any existing viewer and creates a fresh one in the container,
-  // wiring up selection sync and the room-toggle control-bar button.
-  //
-  // We rebuild the viewer for every load rather than reuse one. Reusing it and
-  // loading a second model triggers a library crash: loading builds geometry
-  // via vim.load() → scene.clear() → renderer.removeScene(), which recomputes a
-  // combined bounding box across the renderer's retained scenes and throws on
-  // any whose geometry isn't built ("Cannot read properties of undefined
-  // (reading 'union')"). The renderer's internal scene list isn't fully reset
-  // between loads, so this accumulates. A fresh viewer guarantees a clean one.
-  const makeViewer = async (): Promise<ViewerApi | undefined> => {
-    unsubRef.current?.()
-    unsubRef.current = undefined
-    viewerRef.current?.dispose()
-    viewerRef.current = undefined
-    vimRef.current = undefined
+  // Creates the single, long-lived viewer (once) and wires up selection sync
+  // and the room-toggle control-bar button. Subsequent loads reuse it.
+  const ensureViewer = async (): Promise<ViewerApi | undefined> => {
+    if (viewerRef.current) return viewerRef.current
 
     const div = viewerDiv.current
     if (!div) return undefined
 
     // Hide the built-in BIM tree, its control-bar toggle, and the BIM info
-    // panel so this custom inspector visually replaces the stock UI.
+    // panel so this custom inspector visually replaces the stock UI. Ghost
+    // opacity is dialed down so hidden rooms nearly vanish and only our custom
+    // shells read as room geometry. `autoIsolate` makes selecting an element
+    // (from the tree or the viewport) isolate it — the rest of the model drops
+    // to the (near-invisible) ghost material.
     const viewer = await Webgl.createViewer(div, {
       ui: { panelBimTree: false, miscProjectInspector: false, panelBimInfo: false },
+      isolation: { ghostOpacity: 0.01, autoIsolate: true },
     })
     viewerRef.current = viewer
     ;(globalThis as any).viewer = viewer // for testing in the browser console
+
+    // Force auto-isolate on. The `autoIsolate` passed to createViewer above is
+    // only the *initial* value: a value persisted by the built-in settings
+    // panel (saved to localStorage) takes precedence over it, so on refresh a
+    // previously-stored `false` would win. Writing the StateRef here overrides
+    // that persisted value and guarantees auto-isolate is on for the demo.
+    viewer.isolation.autoIsolate.set(true)
 
     // Sync selections made in the viewport back into the tree highlight. We
     // ignore echoes from our own inspector-driven selections (recursion guard)
@@ -126,6 +108,13 @@ export function CustomInspector () {
       }
       updateSelected(next)
       loadBimInfo(firstOf(next))
+      // A viewport-driven clear (e.g. clicking empty space) zeroes the
+      // selection, so tear down any room shells too — otherwise they linger
+      // detached from the now-empty selection.
+      if (next.size === 0) {
+        clearRoomMeshes(viewer)
+        viewer.core.renderer.requestRender()
+      }
     })
 
     // Append a toggle button to the control bar for room geometry. The
@@ -150,38 +139,37 @@ export function CustomInspector () {
     return viewer
   }
 
-  // Loads a model into a freshly-created viewer, then rebuilds the inspector
-  // tree. `source` is a url or a buffer (RequestSource), matching viewer.load().
+  // Loads a model into the shared viewer, replacing whatever was loaded before,
+  // then rebuilds the inspector tree. `source` is a url or a buffer
+  // (RequestSource), matching viewer.load().
   const loadModel = async (source: Parameters<ViewerApi['load']>[0], message: string) => {
     setTree(undefined)
     updateSelected(new Set())
     setBimInfo(undefined)
     setLoadError(undefined)
-    setExpanded(new Set()) // collapsed by default; also drops stale ids from the old tree
-    setScrollTop(0)
-    if (scrollRef.current) scrollRef.current.scrollTop = 0
 
-    const viewer = await makeViewer()
+    const viewer = await ensureViewer()
     if (!viewer) return
+
+    // Drop our self-owned room meshes (not tied to any vim, so unload won't).
+    clearRoomMeshes(viewer)
+
+    // Unload any previously loaded model so only the new one remains.
+    for (const vim of [...viewer.core.vims]) {
+      viewer.unload(vim)
+    }
+    vimRef.current = undefined
 
     viewer.modal.loading({ progress: -1, mode: 'percent', message })
     try {
       const vim = await viewer.load(source).getVim()
-      if (viewerRef.current !== viewer || !vim) return // superseded / unmounted mid-load
+      if (viewerRef.current !== viewer || !vim) return // unmounted mid-load
       vimRef.current = vim
 
       viewer.framing.frameScene.call()
-      // Set the material directly. The public `isolation.ghostOpacity` StateRef
-      // is persisted to localStorage and its setter no-ops when the value is
-      // unchanged, so once "0.01" has been stored it never re-pushes to the
-      // (independently-defaulted) material. Writing the material guarantees it
-      // applies; the StateRef.set keeps the settings-panel slider in sync.
-      viewer.core.materials.ghostOpacity = 0.01
-      viewer.isolation.ghostOpacity.set(0.01)
       setTree(await buildInspectorTree(vim))
     } catch (err) {
-      // Surface the real underlying error. The library otherwise reports load
-      // failures through a (mislabeled) "VIM Ultra" modal that hides the cause.
+      // Surface the real underlying error.
       const errorMessage = err instanceof Error ? err.message : String(err)
       console.error('Failed to load VIM file:', err)
       setLoadError(errorMessage)
@@ -217,6 +205,7 @@ export function CustomInspector () {
     loadModel({ url: Urls.residence }, 'Loading model…')
     return () => {
       unsubRef.current?.()
+      if (viewerRef.current) clearRoomMeshes(viewerRef.current)
       viewerRef.current?.dispose()
       viewerRef.current = undefined
     }
@@ -240,11 +229,88 @@ export function CustomInspector () {
     input.value = ''
   }
 
-  // Selects every element under a clicked row. A plain click replaces the
-  // selection; ctrl/cmd-click toggles those elements in or out of it.
-  const onSelect = (elements: number[], toggle: boolean) => {
+  // Removes and disposes the room mesh for the given room element, if shown.
+  const removeRoomMesh = (viewer: ViewerApi, roomElement: number) => {
+    const mesh = roomMeshesRef.current.get(roomElement)
+    if (!mesh) return
+    // `add`/`remove` for raw THREE objects exist on the concrete renderer but
+    // aren't on the public IWebglRenderer type — cast to reach them.
+    ;(viewer.core.renderer as unknown as RawSceneRenderer).remove(mesh)
+    mesh.geometry.dispose()
+    ;(mesh.material as VIM.THREE.Material).dispose()
+    roomMeshesRef.current.delete(roomElement)
+  }
+
+  // Removes and disposes every shown room mesh.
+  const clearRoomMeshes = (viewer: ViewerApi) => {
+    for (const roomElement of [...roomMeshesRef.current.keys()]) {
+      removeRoomMesh(viewer, roomElement)
+    }
+  }
+
+  // Visualizes a room as our own transparent THREE mesh, built from the room's
+  // actual geometry and added straight into the render scene. Untracked by the
+  // viewer, so its material and visibility are entirely ours to control. No-op
+  // if the room is already shown.
+  const addRoomMesh = (viewer: ViewerApi, vim: IWebglVim, roomElement: number) => {
+    if (roomMeshesRef.current.has(roomElement)) return
+
+    const el = vim.getElementFromIndex(roomElement)
+    const geometry = el ? buildRoomGeometry(el) : undefined
+    if (!geometry) return
+
+    // Unlit material — the viewer's scene has no THREE lights (it uses custom
+    // shaders), so a lit material would render black. depthWrite off + double
+    // side gives a clean translucent shell you can see the contents through.
+    const material = new VIM.THREE.MeshBasicMaterial({
+      color: 0x4aa3ff,
+      transparent: true,
+      opacity: 0.25,
+      depthWrite: false,
+      side: VIM.THREE.DoubleSide,
+    })
+    const mesh = new VIM.THREE.Mesh(geometry, material)
+    // Align with the model: the extracted positions are in vim-local space; the
+    // vim's world transform lives on vim.scene.matrix.
+    mesh.matrixAutoUpdate = false
+    mesh.matrix.copy(vim.scene.matrix)
+
+    ;(viewer.core.renderer as unknown as RawSceneRenderer).add(mesh)
+    roomMeshesRef.current.set(roomElement, mesh)
+  }
+
+  // Syncs shown room meshes to the selection after a row click. A plain click
+  // replaces the selection, so we clear all shells and show the clicked room (if
+  // any). A ctrl/cmd-click only flips the clicked room row, matching how the
+  // underlying selection toggles — so every selected room row keeps its shell.
+  const updateRoomMeshes = (item: TreeItem, toggle: boolean, next: ReadonlySet<number>) => {
     const viewer = viewerRef.current
     const vim = vimRef.current
+    if (!viewer || !vim) return
+
+    const roomElement = item.kind === 'group' && item.level === 'Room' ? item.roomElement : undefined
+
+    if (toggle) {
+      if (roomElement !== undefined) {
+        const stillSelected = item.elements.every((i) => next.has(i))
+        if (stillSelected) addRoomMesh(viewer, vim, roomElement)
+        else removeRoomMesh(viewer, roomElement)
+      }
+    } else {
+      clearRoomMeshes(viewer)
+      if (roomElement !== undefined) addRoomMesh(viewer, vim, roomElement)
+    }
+
+    viewer.core.renderer.requestRender()
+  }
+
+  // Selects every element under a clicked row. A plain click replaces the
+  // selection; ctrl/cmd-click toggles those elements in or out of it. Selecting
+  // a Room row also reveals that room's (transparent) volume geometry.
+  const onSelect = (item: TreeItem, toggle: boolean) => {
+    const viewer = viewerRef.current
+    const vim = vimRef.current
+    const elements = item.elements
     if (!viewer || !vim || elements.length === 0) return
 
     const objects = elements
@@ -280,6 +346,9 @@ export function CustomInspector () {
     updateSelected(next)
     loadBimInfo(firstOf(next))
 
+    // Show/hide the transparent shells for selected room rows.
+    updateRoomMeshes(item, toggle, next)
+
     // Re-center the orbit pivot on the centroid of the new selection. setTarget
     // moves only the orbit target, not the camera. getBoundingBox reflects the
     // viewer selection we just mutated; its center is the centroid.
@@ -297,7 +366,7 @@ export function CustomInspector () {
       {/* Custom inspector pane: header, tree, then BIM info stacked vertically. */}
       <div style={paneStyle}>
         <div style={{ flex: '0 0 auto', padding: '0.75rem', borderBottom: '1px solid #ddd' }}>
-          <h3 style={{ margin: '0 0 0.5rem' }}>Project Inspector</h3>
+          <h3 style={{ margin: '0 0 0.5rem' }}>Custom Inspector</h3>
           <input ref={fileInputRef} type="file" accept=".vim" onChange={handleFile} style={{ display: 'none' }} />
           <button onClick={() => fileInputRef.current?.click()} style={{ width: '100%', cursor: 'pointer' }}>
             Open local .vim
@@ -309,32 +378,21 @@ export function CustomInspector () {
           )}
         </div>
 
-        {/* Virtualized tree: only the rows in view are mounted, so deep/wide
-            expansions stay fast. Horizontal-only padding keeps row offsets
-            aligned with scrollTop. */}
-        <div
-          ref={scrollRef}
-          style={{ ...sectionStyle, padding: '0 0.75rem' }}
-          onScroll={(e) => setScrollTop(e.currentTarget.scrollTop)}
-        >
-          {loadError && <div style={{ color: '#b00020', whiteSpace: 'pre-wrap', padding: '0.5rem 0' }}>Load failed: {loadError}</div>}
-          {!tree && !loadError && <div style={{ color: '#888', padding: '0.5rem 0' }}>Loading model…</div>}
-          {tree && (
-            <div style={{ height: rows.length * ROW_H, position: 'relative' }}>
-              {windowRows.map((row) => (
-                <div
-                  key={row.node.kind === 'group' ? `g${row.node.id}` : `l${row.node.elements[0]}`}
-                  style={{ position: 'absolute', top: row.index * ROW_H, left: 0, right: 0, height: ROW_H }}
-                >
-                  <TreeRow row={row} expanded={expanded} selected={selected} onToggle={toggleExpand} onSelect={onSelect} />
-                </div>
-              ))}
-            </div>
-          )}
+        {/* Caption describing the tree's grouping hierarchy (see LEVELS). */}
+        <div style={{ flex: '0 0 auto', padding: '0.5rem 0.75rem 0', color: '#555', fontWeight: 'bold' }}>
+          Room &gt; Category &gt; Family &gt; Type
+        </div>
+
+        <div style={sectionStyle}>
+          {loadError && <div style={{ color: '#b00020', whiteSpace: 'pre-wrap', marginBottom: '0.5rem' }}>Load failed: {loadError}</div>}
+          {!tree && !loadError && <div style={{ color: '#888' }}>Loading model…</div>}
+          {tree?.map((item, i) => (
+            <TreeNode key={i} item={item} depth={0} selected={selected} onSelect={onSelect} />
+          ))}
         </div>
 
         <div style={{ ...sectionStyle, borderTop: '1px solid #ddd' }}>
-          <h4 style={{ margin: '0 0 0.5rem' }}>BIM Inspector</h4>
+          <h4 style={{ margin: '0 0 0.5rem' }}>Custom BIM Inspector</h4>
           {bimInfo ? <BimInfoView info={bimInfo} /> : <div style={{ color: '#888' }}>Select an element to inspect.</div>}
         </div>
       </div>
@@ -359,26 +417,15 @@ export function CustomInspector () {
 // `elements` holds every BIM element index under a node, so a click can select
 // the whole hierarchy. For a leaf it's just its own element.
 type Leaf = { kind: 'leaf'; label: string; elements: number[] }
-// `id` is a stable per-group key used to track expand/collapse state (group
-// rows are the only expandable nodes).
-type Group = { kind: 'group'; id: number; label: string; level: string; count: number; children: TreeItem[]; elements: number[] }
-type TreeItem = Group | Leaf
-
-// A flattened, depth-tagged tree node with its position in the visible list.
-type Row = { node: TreeItem; depth: number; index: number }
-
-/** Flattens the tree into the list of currently-visible rows (collapsed subtrees omitted). */
-function flattenTree (items: TreeItem[], expanded: ReadonlySet<number>): Row[] {
-  const out: Row[] = []
-  const walk = (list: TreeItem[], depth: number) => {
-    for (const node of list) {
-      out.push({ node, depth, index: out.length })
-      if (node.kind === 'group' && expanded.has(node.id)) walk(node.children, depth + 1)
-    }
-  }
-  walk(items, 0)
-  return out
+type Group = {
+  kind: 'group'; label: string; level: string; count: number
+  children: TreeItem[]; elements: number[]
+  // For Room-level rows: the element index of the room's own volume geometry
+  // (from the room table), so selecting the row can reveal it. Undefined for
+  // other levels or rooms with no volume element.
+  roomElement?: number
 }
+type TreeItem = Group | Leaf
 
 /** First value of a set, or undefined when empty. */
 function firstOf (set: ReadonlySet<number>): number | undefined {
@@ -387,6 +434,46 @@ function firstOf (set: ReadonlySet<number>): number | undefined {
 
 /** A grouping level: a display name plus how to extract its bucket key from an element. */
 type Level = { name: string; key: (e: IElement) => string }
+
+/**
+ * Builds a standalone THREE.BufferGeometry from an element's merged geometry, in
+ * the vim's local space. Walks each merged submesh's index range
+ * (`meshStart..meshEnd`) and copies only the referenced vertices, remapping
+ * indices so the result is compact. Returns undefined if the element has no
+ * merged geometry (e.g. instanced-only). Reads internal mesh fields by design.
+ */
+function buildRoomGeometry (element: VIM.Core.Webgl.IElement3D): VIM.THREE.BufferGeometry | undefined {
+  const meshes = (element as unknown as { _meshes?: MergedSubmeshLike[] })._meshes
+  if (!meshes?.length) return undefined
+
+  const positions: number[] = []
+  const indices: number[] = []
+  for (const sub of meshes) {
+    if (!sub.merged) continue // instanced submeshes aren't handled here
+    const geom = sub.three.geometry
+    const pos = geom.getAttribute('position')
+    const index = geom.index
+    if (!pos || !index) continue
+
+    const remap = new Map<number, number>()
+    for (let i = sub.meshStart; i < sub.meshEnd; i++) {
+      const v = index.getX(i)
+      let nv = remap.get(v)
+      if (nv === undefined) {
+        nv = positions.length / 3
+        remap.set(v, nv)
+        positions.push(pos.getX(v), pos.getY(v), pos.getZ(v))
+      }
+      indices.push(nv)
+    }
+  }
+  if (indices.length === 0) return undefined
+
+  const geometry = new VIM.THREE.BufferGeometry()
+  geometry.setAttribute('position', new VIM.THREE.Float32BufferAttribute(positions, 3))
+  geometry.setIndex(indices)
+  return geometry
+}
 
 /**
  * Reads the BIM tables off the loaded vim and builds the nested tree.
@@ -408,13 +495,21 @@ async function buildInspectorTree (vim: IWebglVim): Promise<TreeItem[]> {
   const categoryByIndex = new Map(categories.map((c) => [c.index, c]))
   const roomByIndex = new Map(rooms.map((r) => [r.index, r]))
 
-  // A room has no name field of its own — its name is the name of its element.
-  const roomLabel = (e: IElement): string => {
-    if (e.roomIndex === undefined) return 'No Room'
-    const room = roomByIndex.get(e.roomIndex)
-    const roomElement = room?.elementIndex !== undefined ? bimByIndex.get(room.elementIndex) : undefined
-    return roomElement?.name ?? room?.number ?? `Room ${e.roomIndex}`
+  // A room's display label, composed as "{number} - {element name}". A room has
+  // no name field of its own — its name is the name of its element. Either part
+  // may be missing, so we join only the parts present and fall back when both
+  // are absent. Used both as the grouping key and (below) to map each room row
+  // back to its volume element, so the two must format identically.
+  const roomLabelFor = (roomIndex: number): string => {
+    const room = roomByIndex.get(roomIndex)
+    if (!room) return '<unknown>'
+    const element = room.elementIndex !== undefined ? bimByIndex.get(room.elementIndex) : undefined
+    const parts = [room.number, element?.name].filter((s): s is string => !!s && s.length > 0)
+    return parts.length > 0 ? parts.join(' - ') : `Room ${roomIndex}`
   }
+
+  const roomLabel = (e: IElement): string =>
+    e.roomIndex === undefined ? 'No Room' : roomLabelFor(e.roomIndex)
 
   const categoryLabel = (e: IElement): string =>
     (e.categoryIndex !== undefined ? categoryByIndex.get(e.categoryIndex)?.name : undefined) ?? 'Uncategorized'
@@ -438,8 +533,22 @@ async function buildInspectorTree (vim: IWebglVim): Promise<TreeItem[]> {
   const geometryIndices = new Set(vim.getAllElements().map((e) => e.element))
   const elements = bimElements.filter((e) => geometryIndices.has(e.index))
 
-  const idGen = (() => { let n = 0; return () => n++ })()
-  return groupElements(elements, LEVELS, 0, leafLabel, idGen)
+  const tree = groupElements(elements, LEVELS, 0, leafLabel)
+
+  // The top level is the Room level (LEVELS[0]). Attach each room row's own
+  // volume-geometry element (from the room table, keyed by the same label the
+  // grouping used) so selecting the row can reveal that volume.
+  const roomElementByLabel = new Map<string, number>()
+  for (const room of rooms) {
+    if (room.elementIndex === undefined) continue
+    const label = roomLabelFor(room.index)
+    if (!roomElementByLabel.has(label)) roomElementByLabel.set(label, room.elementIndex)
+  }
+  for (const node of tree) {
+    if (node.kind === 'group') node.roomElement = roomElementByLabel.get(node.label)
+  }
+
+  return tree
 }
 
 /**
@@ -477,7 +586,7 @@ async function buildFamilyTypeNameMap (doc: VimDocument): Promise<Map<number, st
 }
 
 /** Recursively groups elements by each level, producing leaves at the bottom. */
-function groupElements (elements: IElement[], levels: Level[], depth: number, leafLabel: (e: IElement) => string, idGen: () => number): TreeItem[] {
+function groupElements (elements: IElement[], levels: Level[], depth: number, leafLabel: (e: IElement) => string): TreeItem[] {
   if (depth === levels.length) {
     return elements
       .map((e): Leaf => ({ kind: 'leaf', label: leafLabel(e), elements: [e.index] }))
@@ -496,10 +605,9 @@ function groupElements (elements: IElement[], levels: Level[], depth: number, le
   return [...buckets.entries()]
     .sort((a, b) => a[0].localeCompare(b[0]))
     .map(([label, els]): Group => {
-      const children = groupElements(els, levels, depth + 1, leafLabel, idGen)
+      const children = groupElements(els, levels, depth + 1, leafLabel)
       return {
         kind: 'group',
-        id: idGen(),
         label,
         level: name,
         count: els.length,
@@ -514,64 +622,62 @@ function groupElements (elements: IElement[], levels: Level[], depth: number, le
 /* ------------------------------------------------------------------ */
 
 const INDENT_PX = 14 // horizontal step per tree level
-const ROW_H = 24     // fixed row height (px) — required for virtualization math
-const OVERSCAN = 8   // extra rows rendered above/below the viewport
 
-/** A single flattened, fixed-height tree row. */
-function TreeRow (props: {
-  row: Row
-  expanded: ReadonlySet<number>
-  selected: ReadonlySet<number>
-  onToggle: (id: number) => void
-  onSelect: (elements: number[], toggle: boolean) => void
-}) {
-  const { row, expanded, selected, onToggle, onSelect } = props
-  const { node, depth } = row
-  const isGroup = node.kind === 'group'
-  const isOpen = isGroup && expanded.has(node.id)
+function TreeNode (props: { item: TreeItem; depth: number; selected: ReadonlySet<number>; onSelect: (item: TreeItem, toggle: boolean) => void }) {
+  const { item, depth, selected, onSelect } = props
+  const [open, setOpen] = useState(false) // collapsed by default
+  const isGroup = item.kind === 'group'
 
   // A row is selected when every element under it is in the selection.
-  const isSelected = node.elements.length > 0 && node.elements.every((i) => selected.has(i))
+  const isSelected = item.elements.length > 0 && item.elements.every((i) => selected.has(i))
 
-  return (
-    <div
-      title={isGroup ? node.level : undefined}
+  const rowStyle: React.CSSProperties = {
+    display: 'flex',
+    alignItems: 'center',
+    paddingLeft: `${depth * INDENT_PX + 4}px`,
+    whiteSpace: 'nowrap',
+    borderRadius: 3,
+    background: isSelected ? '#cde4ff' : undefined,
+    fontWeight: isSelected ? 'bold' : undefined,
+  }
+
+  // Chevron column toggles expansion only — clicking it never selects (its
+  // own handler stops propagation, and selection lives on the sibling region).
+  const chevron = (
+    <span
+      onClick={isGroup ? (e) => { e.stopPropagation(); setOpen((o) => !o) } : undefined}
       style={{
-        display: 'flex',
-        alignItems: 'center',
-        height: ROW_H,
-        paddingLeft: `${depth * INDENT_PX + 4}px`,
-        whiteSpace: 'nowrap',
-        borderRadius: 3,
-        background: isSelected ? '#cde4ff' : undefined,
-        fontWeight: isSelected ? 'bold' : undefined,
+        flexShrink: 0,
+        width: '1.4rem',
+        textAlign: 'center',
+        fontSize: '1.05rem',
+        lineHeight: 1,
+        color: '#666',
+        cursor: isGroup ? 'pointer' : 'default',
+        userSelect: 'none',
       }}
     >
-      {/* Chevron toggles expansion only — its own handler stops propagation, and
-          selection lives on the sibling region to the right. */}
-      <span
-        onClick={isGroup ? (e) => { e.stopPropagation(); onToggle(node.id) } : undefined}
-        style={{
-          flexShrink: 0,
-          width: '1.4rem',
-          textAlign: 'center',
-          fontSize: '1.05rem',
-          lineHeight: 1,
-          color: '#666',
-          cursor: isGroup ? 'pointer' : 'default',
-          userSelect: 'none',
-        }}
-      >
-        {isGroup ? (isOpen ? '▾' : '▸') : ''}
-      </span>
-      <span
-        onClick={(e) => onSelect(node.elements, e.ctrlKey || e.metaKey)}
-        style={{ flex: 1, cursor: 'pointer', overflow: 'hidden', textOverflow: 'ellipsis' }}
-      >
-        {isGroup
-          ? <>{node.label} <span style={{ color: '#999', fontWeight: 'normal' }}>({node.count})</span></>
-          : <>▪ {node.label}</>}
-      </span>
+      {isGroup ? (open ? '▾' : '▸') : ''}
+    </span>
+  )
+
+  return (
+    <div>
+      <div style={rowStyle} title={isGroup ? item.level : undefined}>
+        {chevron}
+        {/* Selection target: everything to the right of the chevron. */}
+        <span
+          onClick={(e) => onSelect(item, e.ctrlKey || e.metaKey)}
+          style={{ flex: 1, cursor: 'pointer', padding: '2px 4px 2px 0' }}
+        >
+          {isGroup
+            ? <>{item.label} <span style={{ color: '#999', fontWeight: 'normal' }}>({item.count})</span></>
+            : <>▪ {item.label}</>}
+        </span>
+      </div>
+      {isGroup && open && item.children.map((child, i) => (
+        <TreeNode key={i} item={child} depth={depth + 1} selected={selected} onSelect={onSelect} />
+      ))}
     </div>
   )
 }
