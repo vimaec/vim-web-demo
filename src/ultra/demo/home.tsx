@@ -21,7 +21,7 @@ export function Home () {
 
 async function loadFile (viewer: ViewerApi) {
   await viewer.core.connect()
-  const request = viewer.load({url:getPathFromUrl() ?? Urls.medicalTower})
+  const request = viewer.load({url:getPathFromUrl() ?? Urls.residence})
   await request.getResult()
   await viewer.core.camera.snap().frame('all')
 }

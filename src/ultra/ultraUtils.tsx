@@ -61,13 +61,6 @@ export function useUltraModel (div: RefObject<HTMLDivElement>, model: string): [
 }
 
 /**
- * Creates an Ultra viewer, connects, and loads the medical tower.
- */
-export function useUltraTower (div: RefObject<HTMLDivElement>) {
-  return useUltraModel(div, Urls.medicalTower)
-}
-
-/**
  * Creates an Ultra viewer, connects, and loads the residence.
  */
 export function useUltraResidence (div: RefObject<HTMLDivElement>) {
