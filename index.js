@@ -7064,7 +7064,6 @@ const gitRoot = "https://github.com/vimaec/vim-web-demo/blob/main/src";
 const residence = "https://storage.cdn.vimaec.com/samples/residence.v1.2.75.vim";
 const residenceZipped = "https://storage.cdn.vimaec.com/samples/residence.vim";
 const residenceWithAccessToken = "https://saas-api-v2.vimaec.com/api/public/542c2335-992d-4af0-ffd9-08dd0262dd9c/2024-11-11T15:09:43";
-const medicalTower = "https://storage.cdn.vimaec.com/samples/Medical_Tower.vim";
 const notAVim = "https://storage.cdn.vimaec.com/samples/not_a_vim.vim";
 var reactDomExports = requireReactDom();
 var __create = Object.create;
@@ -67404,7 +67403,9 @@ var Scene = class {
   * Disposes of all resources.
   */
   dispose() {
+    var _a3;
     this.clear();
+    (_a3 = this._renderer) == null ? void 0 : _a3.remove(this);
     this._renderer = null;
   }
 };
@@ -68609,8 +68610,8 @@ var RenderScene = class {
     const vimIndex = ((_a3 = scene.vim) == null ? void 0 : _a3.vimIndex) ?? 0;
     this._vimScenesById[vimIndex] = void 0;
     for (let i = 0; i < scene.meshes.length; i++) this.threeScene.remove(scene.meshes[i].mesh);
-    const remainingScenes = this._vimScenesById.filter((s) => s !== void 0);
-    this._boundingBox = remainingScenes.length > 0 ? remainingScenes.map((s) => s.getBoundingBox()).reduce((b1, b2) => b1.union(b2)) : void 0;
+    const boxes = this._vimScenesById.filter((s) => s !== void 0).map((s) => s.getBoundingBox()).filter((b) => b !== void 0);
+    this._boundingBox = boxes.length > 0 ? boxes.reduce((b1, b2) => b1.union(b2)) : void 0;
   }
 };
 var Selection = class {
@@ -74744,19 +74745,19 @@ function frameScene({ height = 20, width = 20, fill: fill2 = "currentColor", cla
       }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("path", {
         fill: fill2,
-        d: "M210,204h-42c-6.627,0-12-5.373-12-12h0c0-6.627,5.373-12,12-12h24s0-24,0-24c0-6.627,5.373-12,12-12h0\n           c6.627,0,12,5.373,12,12v42c0,3.314-2.686,6-6,6Z"
+        d: "M210,204h-42c-6.627,0-12-5.373-12-12h0c0-6.627,5.373-12,12-12h24s0-24,0-24c0-6.627,5.373-12,12-12h0\r\n           c6.627,0,12,5.373,12,12v42c0,3.314-2.686,6-6,6Z"
       }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("path", {
         fill: fill2,
-        d: "M40,198v-42c0-6.627,5.373-12,12-12h0c6.627,0,12,5.373,12,12v24s24,0,24,0\n           c6.627,0,12,5.373,12,12h0c0,6.627-5.373,12-12,12H46c-3.314,0-6-2.686-6-6Z"
+        d: "M40,198v-42c0-6.627,5.373-12,12-12h0c6.627,0,12,5.373,12,12v24s24,0,24,0\r\n           c6.627,0,12,5.373,12,12h0c0,6.627-5.373,12-12,12H46c-3.314,0-6-2.686-6-6Z"
       }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("path", {
         fill: fill2,
-        d: "M46,52h42c6.627,0,12,5.373,12,12h0c0,6.627-5.373,12-12,12h-24s0,24,0,24\n           c0,6.627-5.373,12-12,12h0c-6.627,0-12-5.373-12-12V58c0-3.314,2.686-6,6-6Z"
+        d: "M46,52h42c6.627,0,12,5.373,12,12h0c0,6.627-5.373,12-12,12h-24s0,24,0,24\r\n           c0,6.627-5.373,12-12,12h0c-6.627,0-12-5.373-12-12V58c0-3.314,2.686-6,6-6Z"
       }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("path", {
         fill: fill2,
-        d: "M216,58v42c0,6.627-5.373,12-12,12h0c-6.627,0-12-5.373-12-12v-24s-24,0-24,0\n           c-6.627,0-12-5.373-12-12h0c0-6.627,5.373-12,12-12h42c3.314,0,6,2.686,6,6Z"
+        d: "M216,58v42c0,6.627-5.373,12-12,12h0c-6.627,0-12-5.373-12-12v-24s-24,0-24,0\r\n           c-6.627,0-12-5.373-12-12h0c0-6.627,5.373-12,12-12h42c3.314,0,6,2.686,6,6Z"
       })
     ]
   });
@@ -79774,6 +79775,27 @@ function link(url, text) {
 function footer$1() {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, {});
 }
+function webglFileError(url, error2) {
+  return {
+    title: "VIM File Error",
+    body: body$6(url, error2),
+    footer: footer$1(),
+    canClose: true
+  };
+}
+function body$6(url, error2) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    mainText(/* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "We encountered an error loading the VIM file." })),
+    subTitle("Details"),
+    dotList([url ? bullet("Source:", url) : null, error2 ? bullet("Error:", error2) : null]),
+    subTitle("Tips"),
+    numList([
+      "Ensure the source points to a valid VIM file",
+      "Check your network connection and access policies",
+      "Reload the page"
+    ])
+  ] });
+}
 function fileOpeningError(url) {
   return {
     title: "VIM Ultra File Error",
@@ -80021,7 +80043,7 @@ var ComponentLoader = class {
   */
   onError(e) {
     var _a3;
-    (_a3 = this._modal.current) == null ? void 0 : _a3.message(serverFileDownloadingError(e.url));
+    (_a3 = this._modal.current) == null ? void 0 : _a3.message(webglFileError(e.url, e.error));
   }
   /**
   * Opens a vim file without loading geometry.
@@ -80609,6 +80631,7 @@ function useSharedIsolation(adapter) {
   });
   reactExports.useEffect(() => {
     adapter.showGhost(showGhost.get());
+    adapter.setGhostOpacity(ghostOpacity.get());
   }, []);
   useSubscribe(adapter.onVisibilityChange, () => onVisibilityChange.call());
   useSubscribe(adapter.onSelectionChanged, () => {
@@ -80675,6 +80698,11 @@ function useRenderSettings(adapter) {
   };
 }
 function useWebglIsolation(viewer, initialState) {
+  const seeded = reactExports.useRef(false);
+  if (!seeded.current) {
+    seeded.current = true;
+    if ((initialState == null ? void 0 : initialState.ghostOpacity) !== void 0) viewer.materials.ghostOpacity = initialState.ghostOpacity;
+  }
   const { isolationAdapter, renderSettingsAdapter } = createWebglAdapters(viewer, initialState);
   return {
     isolation: useSharedIsolation(isolationAdapter),
@@ -81825,7 +81853,7 @@ function getPathFromUrl$1() {
   const params = new URLSearchParams(window.location.search);
   return params.get("vim") ?? void 0;
 }
-const Webgl$2 = react_viewers_exports.Webgl;
+const Webgl$3 = react_viewers_exports.Webgl;
 function LocalFile() {
   const containerRef = reactExports.useRef(null);
   const viewerRef = reactExports.useRef();
@@ -81890,7 +81918,7 @@ function LocalFile() {
 }
 async function createComponent$2(containerRef, viewerRef) {
   if (!containerRef.current) return;
-  const viewer = await Webgl$2.createViewer(containerRef.current);
+  const viewer = await Webgl$3.createViewer(containerRef.current);
   viewerRef.current = viewer;
   globalThis.viewer = viewer;
 }
@@ -81958,13 +81986,13 @@ function startFetch(url) {
   })();
   return entry;
 }
-const Webgl$1 = react_viewers_exports.Webgl;
+const Webgl$2 = react_viewers_exports.Webgl;
 function useWebglViewer(div) {
   const viewerRef = reactExports.useRef();
   const [viewer, setViewer] = reactExports.useState();
   reactExports.useEffect(() => {
     let disposed = false;
-    Webgl$1.createViewer(div.current ?? void 0).then((v) => {
+    Webgl$2.createViewer(div.current ?? void 0).then((v) => {
       if (disposed) {
         v.dispose();
         return;
@@ -82348,6 +82376,482 @@ function CustomBimPanel() {
   }, [vim]);
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { ref: div, className: "vc-inset-0 vc-absolute" });
 }
+const Webgl$1 = react_viewers_exports.Webgl;
+function CustomInspector() {
+  const viewerDiv = reactExports.useRef(null);
+  const viewerRef = reactExports.useRef(void 0);
+  const vimRef = reactExports.useRef(void 0);
+  const unsubRef = reactExports.useRef(void 0);
+  const roomMeshesRef = reactExports.useRef(/* @__PURE__ */ new Map());
+  const bimToken = reactExports.useRef(0);
+  const applyingSelfRef = reactExports.useRef(false);
+  const fileInputRef = reactExports.useRef(null);
+  const [fileName, setFileName] = reactExports.useState();
+  const [loadError, setLoadError] = reactExports.useState();
+  const [tree, setTree] = reactExports.useState();
+  const [bimInfo, setBimInfo] = reactExports.useState();
+  const [selected, setSelected] = reactExports.useState(() => /* @__PURE__ */ new Set());
+  const selectedRef = reactExports.useRef(selected);
+  const updateSelected = (next) => {
+    selectedRef.current = next;
+    setSelected(next);
+  };
+  const ensureViewer = async () => {
+    if (viewerRef.current) return viewerRef.current;
+    const div = viewerDiv.current;
+    if (!div) return void 0;
+    const viewer = await Webgl$1.createViewer(div, {
+      ui: { panelBimTree: false, miscProjectInspector: false, panelBimInfo: false },
+      isolation: { ghostOpacity: 0.01, autoIsolate: true }
+    });
+    viewerRef.current = viewer;
+    globalThis.viewer = viewer;
+    viewer.isolation.autoIsolate.set(true);
+    const selection = viewer.core.selection;
+    unsubRef.current = selection.onSelectionChanged.sub(() => {
+      if (applyingSelfRef.current) return;
+      const next = /* @__PURE__ */ new Set();
+      for (const s of selection.getAll()) {
+        if (s.type === "Element3D" && s.element !== void 0) next.add(s.element);
+      }
+      updateSelected(next);
+      loadBimInfo(firstOf(next));
+      if (next.size === 0) {
+        clearRoomMeshes(viewer);
+        viewer.core.renderer.requestRender();
+      }
+    });
+    const showRooms = viewer.renderSettings.showRooms;
+    const Icons = react_viewers_exports.Icons;
+    viewer.controlBar.customize((bar) => [
+      ...bar,
+      {
+        id: "custom-rooms",
+        buttons: [{
+          id: "toggle-rooms",
+          tip: () => showRooms.get() ? "Hide rooms" : "Show rooms",
+          isOn: () => showRooms.get(),
+          action: () => showRooms.set(!showRooms.get()),
+          icon: (options) => showRooms.get() ? Icons.visible(options) : Icons.hidden(options)
+        }]
+      }
+    ]);
+    return viewer;
+  };
+  const loadModel = async (source, message) => {
+    setTree(void 0);
+    updateSelected(/* @__PURE__ */ new Set());
+    setBimInfo(void 0);
+    setLoadError(void 0);
+    const viewer = await ensureViewer();
+    if (!viewer) return;
+    clearRoomMeshes(viewer);
+    for (const vim of [...viewer.core.vims]) {
+      viewer.unload(vim);
+    }
+    vimRef.current = void 0;
+    viewer.modal.loading({ progress: -1, mode: "percent", message });
+    try {
+      const vim = await viewer.load(source).getVim();
+      if (viewerRef.current !== viewer || !vim) return;
+      vimRef.current = vim;
+      viewer.framing.frameScene.call();
+      setTree(await buildInspectorTree(vim));
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : String(err);
+      console.error("Failed to load VIM file:", err);
+      setLoadError(errorMessage);
+    } finally {
+      viewer.modal.loading(void 0);
+    }
+  };
+  const loadBimInfo = async (elementIndex) => {
+    const token = ++bimToken.current;
+    const vim = vimRef.current;
+    const element = elementIndex !== void 0 ? vim == null ? void 0 : vim.getElementFromIndex(elementIndex) : void 0;
+    if (!element) {
+      setBimInfo(void 0);
+      return;
+    }
+    const [bimElement, params] = await Promise.all([element.getBimElement(), element.getBimParameters()]);
+    if (token !== bimToken.current) return;
+    const groups = [];
+    const byGroup = /* @__PURE__ */ new Map();
+    for (const p of params) {
+      if (!p.name) continue;
+      const group = p.group && p.group.length > 0 ? p.group : "Other";
+      let rows = byGroup.get(group);
+      if (!rows) {
+        rows = [];
+        byGroup.set(group, rows);
+        groups.push({ group, rows });
+      }
+      rows.push({ name: p.name, value: p.value ?? "" });
+    }
+    const name = bimElement.name && bimElement.name.length > 0 ? bimElement.name : "Element";
+    setBimInfo({ title: `${name} [${bimElement.id ?? elementIndex}]`, groups });
+  };
+  reactExports.useEffect(() => {
+    loadModel({ url: residence }, "Loading model…");
+    return () => {
+      var _a3, _b3;
+      (_a3 = unsubRef.current) == null ? void 0 : _a3.call(unsubRef);
+      if (viewerRef.current) clearRoomMeshes(viewerRef.current);
+      (_b3 = viewerRef.current) == null ? void 0 : _b3.dispose();
+      viewerRef.current = void 0;
+    };
+  }, []);
+  const handleFile = (e) => {
+    var _a3;
+    const input = e.target;
+    const file = (_a3 = input.files) == null ? void 0 : _a3[0];
+    if (!file) return;
+    setFileName(file.name);
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      var _a4;
+      const buffer = (_a4 = event.target) == null ? void 0 : _a4.result;
+      if (buffer instanceof ArrayBuffer) loadModel({ buffer }, "Loading from disk");
+    };
+    reader.readAsArrayBuffer(file);
+    input.value = "";
+  };
+  const removeRoomMesh = (viewer, roomElement) => {
+    const mesh = roomMeshesRef.current.get(roomElement);
+    if (!mesh) return;
+    viewer.core.renderer.remove(mesh);
+    mesh.geometry.dispose();
+    mesh.material.dispose();
+    roomMeshesRef.current.delete(roomElement);
+  };
+  const clearRoomMeshes = (viewer) => {
+    for (const roomElement of [...roomMeshesRef.current.keys()]) {
+      removeRoomMesh(viewer, roomElement);
+    }
+  };
+  const addRoomMesh = (viewer, vim, roomElement) => {
+    if (roomMeshesRef.current.has(roomElement)) return;
+    const el = vim.getElementFromIndex(roomElement);
+    const geometry = el ? buildRoomGeometry(el) : void 0;
+    if (!geometry) return;
+    const material = new three_module_exports.MeshBasicMaterial({
+      color: 4891647,
+      transparent: true,
+      opacity: 0.25,
+      depthWrite: false,
+      side: three_module_exports.DoubleSide
+    });
+    const mesh = new three_module_exports.Mesh(geometry, material);
+    mesh.matrixAutoUpdate = false;
+    mesh.matrix.copy(vim.scene.matrix);
+    viewer.core.renderer.add(mesh);
+    roomMeshesRef.current.set(roomElement, mesh);
+  };
+  const updateRoomMeshes = (item, toggle, next) => {
+    const viewer = viewerRef.current;
+    const vim = vimRef.current;
+    if (!viewer || !vim) return;
+    const roomElement = item.kind === "group" && item.level === "Room" ? item.roomElement : void 0;
+    if (toggle) {
+      if (roomElement !== void 0) {
+        const stillSelected = item.elements.every((i) => next.has(i));
+        if (stillSelected) addRoomMesh(viewer, vim, roomElement);
+        else removeRoomMesh(viewer, roomElement);
+      }
+    } else {
+      clearRoomMeshes(viewer);
+      if (roomElement !== void 0) addRoomMesh(viewer, vim, roomElement);
+    }
+    viewer.core.renderer.requestRender();
+  };
+  const onSelect = (item, toggle) => {
+    const viewer = viewerRef.current;
+    const vim = vimRef.current;
+    const elements = item.elements;
+    if (!viewer || !vim || elements.length === 0) return;
+    const objects = elements.map((i) => vim.getElementFromIndex(i)).filter((e) => !!e);
+    if (objects.length === 0) return;
+    const current = selectedRef.current;
+    const next = new Set(current);
+    applyingSelfRef.current = true;
+    try {
+      if (toggle) {
+        const allSelected = elements.every((i) => current.has(i));
+        if (allSelected) {
+          viewer.core.selection.remove(objects);
+          elements.forEach((i) => next.delete(i));
+        } else {
+          viewer.core.selection.add(objects);
+          elements.forEach((i) => next.add(i));
+        }
+      } else {
+        viewer.core.selection.select(objects);
+        next.clear();
+        elements.forEach((i) => next.add(i));
+      }
+    } finally {
+      applyingSelfRef.current = false;
+    }
+    updateSelected(next);
+    loadBimInfo(firstOf(next));
+    updateRoomMeshes(item, toggle, next);
+    viewer.core.selection.getBoundingBox().then((box) => {
+      if (!box || viewerRef.current !== viewer) return;
+      const centroid = box.min.clone().add(box.max).multiplyScalar(0.5);
+      viewer.core.camera.snap().setTarget(centroid);
+    });
+  };
+  return (
+    // Fill the page's content area. The parent is `position: relative`, so
+    // absolute inset-0 sizes us reliably (a percentage height would collapse).
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", position: "absolute", inset: 0 }, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: paneStyle, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { flex: "0 0 auto", padding: "0.75rem", borderBottom: "1px solid #ddd" }, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { style: { margin: "0 0 0.5rem" }, children: "Custom Inspector" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("input", { ref: fileInputRef, type: "file", accept: ".vim", onChange: handleFile, style: { display: "none" } }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: () => {
+            var _a3;
+            return (_a3 = fileInputRef.current) == null ? void 0 : _a3.click();
+          }, style: { width: "100%", cursor: "pointer" }, children: "Open local .vim" }),
+          fileName && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { marginTop: "0.25rem", color: "#555", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }, title: fileName, children: fileName })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { flex: "0 0 auto", padding: "0.5rem 0.75rem 0", color: "#555", fontWeight: "bold" }, children: "Room > Category > Family > Type" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: sectionStyle, children: [
+          loadError && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { color: "#b00020", whiteSpace: "pre-wrap", marginBottom: "0.5rem" }, children: [
+            "Load failed: ",
+            loadError
+          ] }),
+          !tree && !loadError && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { color: "#888" }, children: "Loading model…" }),
+          tree == null ? void 0 : tree.map((item, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(TreeNode, { item, depth: 0, selected, onSelect }, i))
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { ...sectionStyle, borderTop: "1px solid #ddd" }, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { style: { margin: "0 0 0.5rem" }, children: "Custom BIM Inspector" }),
+          bimInfo ? /* @__PURE__ */ jsxRuntimeExports.jsx(BimInfoView, { info: bimInfo }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { color: "#888" }, children: "Select an element to inspect." })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { flex: 1, position: "relative" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { ref: viewerDiv }) })
+    ] })
+  );
+}
+function firstOf(set) {
+  return set.values().next().value;
+}
+function buildRoomGeometry(element) {
+  const meshes = element._meshes;
+  if (!(meshes == null ? void 0 : meshes.length)) return void 0;
+  const positions = [];
+  const indices = [];
+  for (const sub of meshes) {
+    if (!sub.merged) continue;
+    const geom = sub.three.geometry;
+    const pos = geom.getAttribute("position");
+    const index = geom.index;
+    if (!pos || !index) continue;
+    const remap2 = /* @__PURE__ */ new Map();
+    for (let i = sub.meshStart; i < sub.meshEnd; i++) {
+      const v = index.getX(i);
+      let nv = remap2.get(v);
+      if (nv === void 0) {
+        nv = positions.length / 3;
+        remap2.set(v, nv);
+        positions.push(pos.getX(v), pos.getY(v), pos.getZ(v));
+      }
+      indices.push(nv);
+    }
+  }
+  if (indices.length === 0) return void 0;
+  const geometry = new three_module_exports.BufferGeometry();
+  geometry.setAttribute("position", new three_module_exports.Float32BufferAttribute(positions, 3));
+  geometry.setIndex(indices);
+  return geometry;
+}
+async function buildInspectorTree(vim) {
+  var _a3, _b3;
+  const doc = vim.bim;
+  if (!(doc == null ? void 0 : doc.element)) return [];
+  const [bimElements, categories, rooms, typeNames] = await Promise.all([
+    doc.element.getAll(),
+    ((_a3 = doc.category) == null ? void 0 : _a3.getAll()) ?? Promise.resolve([]),
+    ((_b3 = doc.room) == null ? void 0 : _b3.getAll()) ?? Promise.resolve([]),
+    buildFamilyTypeNameMap(doc)
+  ]);
+  const bimByIndex = new Map(bimElements.map((e) => [e.index, e]));
+  const categoryByIndex = new Map(categories.map((c) => [c.index, c]));
+  const roomByIndex = new Map(rooms.map((r) => [r.index, r]));
+  const roomLabelFor = (roomIndex) => {
+    const room = roomByIndex.get(roomIndex);
+    if (!room) return "<unknown>";
+    const element = room.elementIndex !== void 0 ? bimByIndex.get(room.elementIndex) : void 0;
+    const parts = [room.number, element == null ? void 0 : element.name].filter((s) => !!s && s.length > 0);
+    return parts.length > 0 ? parts.join(" - ") : `Room ${roomIndex}`;
+  };
+  const roomLabel = (e) => e.roomIndex === void 0 ? "No Room" : roomLabelFor(e.roomIndex);
+  const categoryLabel = (e) => {
+    var _a4;
+    return (e.categoryIndex !== void 0 ? (_a4 = categoryByIndex.get(e.categoryIndex)) == null ? void 0 : _a4.name : void 0) ?? "Uncategorized";
+  };
+  const LEVELS2 = [
+    { name: "Room", key: roomLabel },
+    { name: "Category", key: categoryLabel },
+    { name: "Family", key: (e) => e.familyName ?? "(No Family)" },
+    { name: "Type", key: (e) => typeNames.get(e.index) ?? "(No Type)" }
+  ];
+  const leafLabel = (e) => {
+    const name = e.name && e.name.length > 0 ? e.name : "Element";
+    return `${name} [${e.id ?? e.index}]`;
+  };
+  const geometryIndices = new Set(vim.getAllElements().map((e) => e.element));
+  const elements = bimElements.filter((e) => geometryIndices.has(e.index));
+  const tree = groupElements(elements, LEVELS2, 0, leafLabel);
+  const roomElementByLabel = /* @__PURE__ */ new Map();
+  for (const room of rooms) {
+    if (room.elementIndex === void 0) continue;
+    const label = roomLabelFor(room.index);
+    if (!roomElementByLabel.has(label)) roomElementByLabel.set(label, room.elementIndex);
+  }
+  for (const node of tree) {
+    if (node.kind === "group") node.roomElement = roomElementByLabel.get(node.label);
+  }
+  return tree;
+}
+async function buildFamilyTypeNameMap(doc) {
+  const result = /* @__PURE__ */ new Map();
+  const familyInstance = doc.familyInstance;
+  const familyType = doc.familyType;
+  const element = doc.element;
+  if (!familyInstance || !familyType || !element) return result;
+  const [instanceElement, instanceFamilyType, typeElement, names] = await Promise.all([
+    familyInstance.getAllElementIndex(),
+    familyInstance.getAllFamilyTypeIndex(),
+    familyType.getAllElementIndex(),
+    element.getAllName()
+  ]);
+  if (!instanceElement || !instanceFamilyType || !typeElement || !names) return result;
+  for (let i = 0; i < instanceElement.length; i++) {
+    const ftIndex = instanceFamilyType[i];
+    if (ftIndex === void 0 || ftIndex < 0) continue;
+    const typeElementIndex = typeElement[ftIndex];
+    if (typeElementIndex === void 0 || typeElementIndex < 0) continue;
+    const name = names[typeElementIndex];
+    if (name) result.set(instanceElement[i], name);
+  }
+  return result;
+}
+function groupElements(elements, levels, depth, leafLabel) {
+  if (depth === levels.length) {
+    return elements.map((e) => ({ kind: "leaf", label: leafLabel(e), elements: [e.index] })).sort((a, b) => a.label.localeCompare(b.label));
+  }
+  const { name, key } = levels[depth];
+  const buckets = /* @__PURE__ */ new Map();
+  for (const e of elements) {
+    const k = key(e);
+    const bucket = buckets.get(k);
+    if (bucket) bucket.push(e);
+    else buckets.set(k, [e]);
+  }
+  return [...buckets.entries()].sort((a, b) => a[0].localeCompare(b[0])).map(([label, els]) => {
+    const children = groupElements(els, levels, depth + 1, leafLabel);
+    return {
+      kind: "group",
+      label,
+      level: name,
+      count: els.length,
+      children,
+      elements: children.flatMap((c) => c.elements)
+    };
+  });
+}
+const INDENT_PX = 14;
+function TreeNode(props) {
+  const { item, depth, selected, onSelect } = props;
+  const [open, setOpen] = reactExports.useState(false);
+  const isGroup = item.kind === "group";
+  const isSelected = item.elements.length > 0 && item.elements.every((i) => selected.has(i));
+  const rowStyle = {
+    display: "flex",
+    alignItems: "center",
+    paddingLeft: `${depth * INDENT_PX + 4}px`,
+    whiteSpace: "nowrap",
+    borderRadius: 3,
+    background: isSelected ? "#cde4ff" : void 0,
+    fontWeight: isSelected ? "bold" : void 0
+  };
+  const chevron2 = /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "span",
+    {
+      onClick: isGroup ? (e) => {
+        e.stopPropagation();
+        setOpen((o) => !o);
+      } : void 0,
+      style: {
+        flexShrink: 0,
+        width: "1.4rem",
+        textAlign: "center",
+        fontSize: "1.05rem",
+        lineHeight: 1,
+        color: "#666",
+        cursor: isGroup ? "pointer" : "default",
+        userSelect: "none"
+      },
+      children: isGroup ? open ? "▾" : "▸" : ""
+    }
+  );
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: rowStyle, title: isGroup ? item.level : void 0, children: [
+      chevron2,
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "span",
+        {
+          onClick: (e) => onSelect(item, e.ctrlKey || e.metaKey),
+          style: { flex: 1, cursor: "pointer", padding: "2px 4px 2px 0" },
+          children: isGroup ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+            item.label,
+            " ",
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { style: { color: "#999", fontWeight: "normal" }, children: [
+              "(",
+              item.count,
+              ")"
+            ] })
+          ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+            "▪ ",
+            item.label
+          ] })
+        }
+      )
+    ] }),
+    isGroup && open && item.children.map((child, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(TreeNode, { item: child, depth: depth + 1, selected, onSelect }, i))
+  ] });
+}
+function BimInfoView(props) {
+  const { info } = props;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontWeight: "bold", marginBottom: "0.5rem" }, children: info.title }),
+    info.groups.map((g, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { marginBottom: "0.6rem" }, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontWeight: "bold", color: "#555", borderBottom: "1px solid #eee", marginBottom: "2px" }, children: g.group }),
+      g.rows.map((r, j) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", justifyContent: "space-between", gap: "0.75rem" }, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { color: "#666" }, children: r.name }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { textAlign: "right", wordBreak: "break-word" }, children: r.value })
+      ] }, j))
+    ] }, i))
+  ] });
+}
+const paneStyle = {
+  width: "320px",
+  flexShrink: 0,
+  display: "flex",
+  flexDirection: "column",
+  borderRight: "1px solid #ccc",
+  background: "#fff",
+  fontFamily: "'Roboto', sans-serif",
+  fontSize: "13px",
+  lineHeight: "1.4rem"
+};
+const sectionStyle = {
+  flex: "1 1 50%",
+  minHeight: 0,
+  overflow: "auto",
+  padding: "0.5rem 0.75rem"
+};
 const root$4 = gitRoot + "/webgl/demo";
 const home = {
   name: "Home",
@@ -82430,6 +82934,11 @@ const pages$3 = [
     name: "Custom Bim Panels",
     github: `${root$4}/customBimPanel.tsx`,
     content: () => /* @__PURE__ */ jsxRuntimeExports.jsx(CustomBimPanel, {})
+  },
+  {
+    name: "Custom Inspector",
+    github: `${root$4}/customInspector.tsx`,
+    content: () => /* @__PURE__ */ jsxRuntimeExports.jsx(CustomInspector, {})
   }
 ];
 const LocalTextBox = reactExports.forwardRef((props, ref) => {
@@ -82609,9 +83118,6 @@ function useUltraModel(div, model) {
   }, [viewer]);
   return [viewer, vim];
 }
-function useUltraTower(div) {
-  return useUltraModel(div, medicalTower);
-}
 function useUltraResidence(div) {
   return useUltraModel(div, residence);
 }
@@ -82624,20 +83130,20 @@ function generateRandomIndices(count, maxValue) {
 }
 function Camera2() {
   const div = reactExports.useRef(null);
-  const [ultra, tower] = useUltraTower(div);
+  const [ultra, residence2] = useUltraResidence(div);
   reactExports.useEffect(() => {
-    if (!ultra || !tower) return;
-    void framing(ultra, tower);
-  }, [tower]);
+    if (!ultra || !residence2) return;
+    void framing(ultra, residence2);
+  }, [residence2]);
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { ref: div, className: "vc-inset-0 vc-absolute" });
 }
-async function framing(ultra, tower) {
+async function framing(ultra, residence2) {
   await new Promise((resolve) => setTimeout(resolve, 2e3));
   for (let i = 0; i < 5; i++) {
     const indices2 = generateRandomIndices(5, 4e4);
-    highlight(tower, indices2);
+    highlight(residence2, indices2);
     console.log("Framing 5 random indices");
-    const box2 = await tower.scene.getBoundingBoxForElements(indices2);
+    const box2 = await residence2.scene.getBoundingBoxForElements(indices2);
     const position = box2 ? await ultra.core.camera.lerp(1).frame(box2) : void 0;
     if (position == null ? void 0 : position.isValid()) {
       console.log("Saving position");
@@ -82645,7 +83151,7 @@ async function framing(ultra, tower) {
     }
     await new Promise((resolve) => setTimeout(resolve, 2e3));
     console.log("Framing whole model");
-    await ultra.core.camera.lerp(1).frame(tower);
+    await ultra.core.camera.lerp(1).frame(residence2);
     await new Promise((resolve) => setTimeout(resolve, 2e3));
     console.log("Resetting camera to last saved position");
     ultra.core.camera.snap().reset();
@@ -82655,30 +83161,30 @@ async function framing(ultra, tower) {
     await new Promise((resolve) => setTimeout(resolve, 2e3));
   }
   const indices = generateRandomIndices(8e4, 12e4);
-  highlight(tower, indices);
-  const box = await tower.scene.getBoundingBoxForElements(indices);
+  highlight(residence2, indices);
+  const box = await residence2.scene.getBoundingBoxForElements(indices);
   if (box) await ultra.core.camera.lerp(1).frame(box);
 }
-function highlight(tower, indices) {
-  tower.getAllElements().forEach((e) => {
+function highlight(residence2, indices) {
+  residence2.getAllElements().forEach((e) => {
     e.visible = true;
     e.outline = false;
     e.ghosted = false;
   });
   indices.forEach((i) => {
-    const e = tower.getElement(i);
+    const e = residence2.getElement(i);
     if (e) e.outline = true;
   });
 }
 function Colors() {
   const div = reactExports.useRef(null);
-  const [, tower] = useUltraTower(div);
+  const [, residence2] = useUltraResidence(div);
   reactExports.useEffect(() => {
-    if (!tower) return;
-    tower.getAllElements().forEach((e) => {
+    if (!residence2) return;
+    residence2.getAllElements().forEach((e) => {
       e.color = new three_module_exports.Color(Math.floor(Math.random() * 4294967295));
     });
-  }, [tower]);
+  }, [residence2]);
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { ref: div, className: "vc-inset-0 vc-absolute" });
 }
 function GhostColor() {
@@ -82711,7 +83217,7 @@ function Home() {
 }
 async function loadFile(viewer) {
   await viewer.core.connect();
-  const request = viewer.load({ url: getPathFromUrl() ?? medicalTower });
+  const request = viewer.load({ url: getPathFromUrl() ?? residence });
   await request.getResult();
   await viewer.core.camera.snap().frame("all");
 }
@@ -82721,30 +83227,30 @@ function getPathFromUrl() {
 }
 function NodeEffects() {
   const div = reactExports.useRef(null);
-  const [, tower] = useUltraTower(div);
+  const [, residence2] = useUltraResidence(div);
   reactExports.useEffect(() => {
-    if (!tower) return;
-    void changeState(tower);
-  }, [tower]);
+    if (!residence2) return;
+    void changeState(residence2);
+  }, [residence2]);
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { ref: div, className: "vc-inset-0 vc-absolute" });
 }
-async function changeState(tower) {
+async function changeState(residence2) {
   while (true) {
-    tower.getAllElements().forEach((e) => {
+    residence2.getAllElements().forEach((e) => {
       e.outline = true;
     });
     await new Promise((resolve) => setTimeout(resolve, 2e3));
-    tower.getAllElements().forEach((e) => {
+    residence2.getAllElements().forEach((e) => {
       e.outline = false;
       e.ghosted = true;
     });
     await new Promise((resolve) => setTimeout(resolve, 2e3));
-    tower.getAllElements().forEach((e) => {
+    residence2.getAllElements().forEach((e) => {
       e.ghosted = false;
       e.visible = false;
     });
     await new Promise((resolve) => setTimeout(resolve, 2e3));
-    tower.getAllElements().forEach((e) => {
+    residence2.getAllElements().forEach((e) => {
       e.visible = true;
     });
     await new Promise((resolve) => setTimeout(resolve, 2e3));
